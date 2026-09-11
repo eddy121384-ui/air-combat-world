@@ -1,0 +1,9 @@
+# Hero landmark registry — Taipei (v0)
+# Rule: matched footprint is SUPPRESSED in Layer A, replaced here. Never double-stack.
+
+heroes:
+  - id: taipei_101
+    name: "Taipei 101"
+    matcher: { wfs_layer: "taipei_vioc:tp_building_height", note: "match by footprint id/polygon — exact key TBD in task 4" }
+    asset_v0: placeholder_tower   # validates replacement architecture, not art
+    # asset_final: TBD (custom GLB / Godot scene)

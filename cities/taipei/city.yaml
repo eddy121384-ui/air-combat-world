@@ -1,0 +1,36 @@
+# Taipei theater configuration (v0 greybox)
+# Input varies per city; output contract (docs/architecture.md §4) is stable.
+
+city: taipei
+enu_origin: { lon: 121.5654, lat: 25.0330, note: "Xinyi / Taipei 101 area (placeholder origin)" }
+
+airspace:
+  playable_km: [40, 40]
+  detail_core_km: [20, 20]
+  visual_outer_km: [80, 100]
+  vertical_km: [0, 12]
+
+theater_bbox:
+  # Daan + Songshan + Xinyi sample rect (matches Buju sample bbox); expand to citywide in task 8
+  min_lon: 121.5200
+  min_lat: 25.0050
+  max_lon: 121.6350
+  max_lat: 25.0750
+
+providers:
+  buildings: taipei_wfs_tp_building_height   # authoritative; Overture backfill outside coverage
+  transport: overture_transportation + osm_highway_waterway
+  rail: osm_relation_full_pinned
+  runways: osm_aeroway
+  dem: srtm_or_copdem_30m                    # v0; evaluate NLSC DTM later
+  water: osm_waterway + coastline_reconstruct
+
+pins: {}   # filled by build manifest (release/snapshot + sha256 + fetch date)
+
+tiles:
+  size_km: 2
+  core_grid: 10x10   # 20x20 km detail core
+
+budgets:
+  layer_a: white_grey_massing_flat_tops
+  heroes_v0: [taipei_101_placeholder]
