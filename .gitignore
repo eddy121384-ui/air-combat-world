@@ -1,0 +1,19 @@
+# Build outputs are reproducible — keep the repo lean.
+# Committed: scripts, tests, docs, manifests, small sample input (see below).
+# Regenerate everything else via: node tools/smoke_greybox.mjs
+
+# Large/regenerable artifacts (do NOT commit)
+/data/generated/taipei/worldmodel_sample.json
+/data/generated/taipei/*.glb
+/data/generated/taipei/*.report.json
+/godot/greybox/assets/*.glb
+
+# Python noise
+__pycache__/
+*.pyc
+
+# Small sample input IS committed for reviewer convenience:
+#   data/generated/taipei/sample_buildings.geojson (~5 MB)
+#   data/generated/taipei/sample_buildings.manifest.json
+!data/generated/taipei/sample_buildings.geojson
+!data/generated/taipei/sample_buildings.manifest.json
