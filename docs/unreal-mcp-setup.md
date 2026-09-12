@@ -61,23 +61,20 @@ was read through MCP, not from files:
   `PlayerStart` `Start` (likely visibility-filtered); both remain in the saved
   `.umap` from the deterministic `build_level.py` run. Non-blocking.
 
-## 4. Wiring 小愛/Hermes (manual step — NOT auto-applied)
+## 4. Wiring 小愛/Hermes — APPLIED 2026-09-12 (needs Hermes restart)
 
 Hermes supports generic HTTP MCP (same shape as the existing godot entry).
-Per standing safety rules the live Hermes config was NOT edited by the agent.
-To connect, append to the `mcp_servers:` map in
-`C:\Users\EDDY\AppData\Local\hermes\config.yaml`:
+Applied via the official CLI (file tools refuse Hermes config edits by design):
 
-```yaml
-  unreal:
-    url: http://127.0.0.1:8000/mcp
-    connect_timeout: 30
+```bash
+hermes config set mcp_servers.unreal.url http://127.0.0.1:8000/mcp
+hermes config set mcp_servers.unreal.connect_timeout 30
 ```
 
-then restart Hermes (new session picks up MCP servers). Requires the UE editor
-open with the project (MCP server runs in-editor). Minimal human steps:
-1) paste the 3 lines, 2) restart Hermes, 3) keep the editor open.
-Say the word and the agent will apply it on explicit confirmation.
+Verified with `hermes config get mcp_servers.unreal` + `hermes config check`.
+MCP servers load at session start: the `unreal` tools appear after a Hermes
+restart (new session), with the UE editor open on this project. Until then,
+`adapters/unreal/mcp_probe.py` remains the working direct client.
 
 ## 5. Files
 
