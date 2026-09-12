@@ -12,6 +12,12 @@
 __pycache__/
 *.pyc
 
+# UE regenerable junk (never commit)
+unreal/Saved/
+unreal/Intermediate/
+unreal/DerivedDataCache/
+unreal/Binaries/
+
 # Small sample input IS committed for reviewer convenience:
 #   data/generated/taipei/sample_buildings.geojson (~5 MB)
 #   data/generated/taipei/sample_buildings.manifest.json

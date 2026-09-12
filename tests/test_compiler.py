@@ -130,6 +130,30 @@ class TestWorldModel(unittest.TestCase):
 
 
 class TestTile(unittest.TestCase):
+    def test_glb_indices_in_range(self):
+        """Regression: flat-list index base bug once produced out-of-range
+        indices (UE imported an empty LayerA). Every index must address a
+        real vertex; positions/normals/UVs must agree in count."""
+        import struct as _struct
+        (glb,) = needs_artifacts("xinyi_tile_2km.glb")
+        data = glb.read_bytes()
+        jl, _ = _struct.unpack_from("<II", data, 12)
+        doc = json.loads(data[20:20 + jl])
+        blen = data[20 + jl + 8:]
+        for m in doc["meshes"]:
+            for prim in m["primitives"]:
+                acc = doc["accessors"]
+                def buf(ai):
+                    bv = doc["bufferViews"][acc[ai]["bufferView"]]
+                    return blen[bv["byteOffset"]:bv["byteOffset"] + bv["byteLength"]]
+                n = acc[prim["attributes"]["POSITION"]]["count"]
+                self.assertEqual(acc[prim["attributes"]["NORMAL"]]["count"], n)
+                self.assertEqual(acc[prim["attributes"]["TEXCOORD_0"]]["count"], n)
+                ni = acc[prim["indices"]]["count"]
+                idx = _struct.unpack(f"<{ni}I", buf(prim["indices"])[:4 * ni])
+                self.assertLess(max(idx), n, f"{m['name']}: index out of range")
+                self.assertGreater(min(idx), -1)
+
     def test_glb_parses(self):
         (glb,) = needs_artifacts("xinyi_tile_2km.glb")
         sys.path.insert(0, str(SYS_COMPILER))

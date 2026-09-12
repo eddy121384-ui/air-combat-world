@@ -218,16 +218,22 @@ def _norm(a):
     return (a[0] / l, a[1] / l, a[2] / l) if l > 1e-12 else (0.0, 0.0, 1.0)
 
 
+def _tri_area2(p1, p2, p3) -> float:
+    return abs((p2[0] - p1[0]) * (p3[1] - p1[1]) - (p2[1] - p1[1]) * (p3[0] - p1[0]))
+
+
 def extrude(ring: list, tris: list, height: float) -> tuple[list, list, list]:
     """Extrude a triangulated CCW ring to a flat-roof prism.
 
     Returns (positions, normals, indices) with flat shading (duplicated verts).
     Y-up game frame: (x=enu_x, y=height, z=-enu_y) so north = -Z.
+    Degenerate caps (zero area) and zero-length wall edges are skipped:
+    strict engines (UE MeshDescription) reject them.
     """
     pos, nrm, idx = [], [], []
 
     def add_tri(p1, p2, p3):
-        base = len(pos)
+        base = len(pos) // 3  # pos is a flat float list: 3 floats per vertex
         n = _norm(_cross(_sub(p2, p1), _sub(p3, p1)))
         for p in (p1, p2, p3):
             pos.extend(p)
@@ -237,12 +243,16 @@ def extrude(ring: list, tris: list, height: float) -> tuple[list, list, list]:
     # roof (CCW ring in XZ where z=-y flips winding -> emit reversed for +Y normal)
     rp = [(x, height, -y) for x, y in ring]
     for a, b, c in tris:
+        if _tri_area2(ring[a], ring[b], ring[c]) < 1e-12:
+            continue  # degenerate cap: strict importers reject it
         add_tri(rp[a], rp[c], rp[b])
-    # walls
+    # walls (skip zero-length edges)
     n = len(ring)
     for i in range(n):
         x1, y1 = ring[i]
         x2, y2 = ring[(i + 1) % n]
+        if (x2 - x1) ** 2 + (y2 - y1) ** 2 < 1e-18:
+            continue
         p1 = (x1, 0.0, -y1)
         p2 = (x2, 0.0, -y2)
         p3 = (x2, height, -y2)
@@ -252,5 +262,7 @@ def extrude(ring: list, tris: list, height: float) -> tuple[list, list, list]:
     # base skirt (faces down, closes the solid)
     bp = [(x, 0.0, -y) for x, y in ring]
     for a, b, c in tris:
+        if _tri_area2(ring[a], ring[b], ring[c]) < 1e-12:
+            continue
         add_tri(bp[a], bp[b], bp[c])
     return pos, nrm, idx
