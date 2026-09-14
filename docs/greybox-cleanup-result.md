@@ -67,6 +67,32 @@ builder (single source of truth), never hand-edited in the editor.
   restored via `git checkout` — original level is byte-clean in this commit's parent
   and untouched by this commit.
 
+## 4b. GUI persistence failure — post-mortem (follow-up fix, same branch)
+
+GUI validation of the first commit FAILED: fresh GUI open of `L_TaipeiGreybox_Clean`
+showed only 8 actors (Ground/Hero/lights/starts) — the 3 `CityMassing_*` actors
+were missing. Verdict was lowered to NOT READY pending this fix.
+
+- **Root cause** (log-proven): `EditorLevelLibrary.new_level()` on an EXISTING map
+  path only logs `LevelEditorSubsystem: Error: NewLevel. Failed to validate the
+  destination. An asset already exists at this location` and does NOT raise a Python
+  exception. v1 `build_greybox_level.py` therefore printed `GREYBOX_CREATED`, spawned
+  12 actors into the auto-loaded STARTUP map (`L_TaipeiGreybox`), and
+  `save_current_level()` persisted the WRONG map — while `L_TaipeiGreybox_Clean.umap`
+  stayed at the previous 8-actor version (confirmed by binary string scan: zero
+  `CityMassing_*` labels). Same-session spawn logs are NOT persistence proof.
+- **Fix** (`build_greybox_level.py` v2): load-or-create via `does_asset_exist` +
+  `load_level`; assert current world is `L_TaipeiGreybox_Clean` (abort otherwise);
+  wipe-then-respawn for determinism; in-process 11-label gate before saving.
+- **New gate** (`adapters/unreal/verify_greybox_reopen.py`): a SEPARATE fresh
+  `UnrealEditor-Cmd` process loads the saved map and asserts all 11 required labels:
+  `REOPEN_OK 11/11` (run 2026-09-14 21:52 UTC). Umap binary re-scan: 32,589 bytes,
+  all 11 actor labels + 5 mesh refs present. No load errors for the 5 new assets
+  in the reopen run (the single physics warning in that log concerns the OLD v0
+  `layerA_city_massing` at startup, pre-existing and unrelated).
+- Verdict restored to **READY FOR CORE FLIGHT PROTOTYPE** (GUI 1-min confirm still
+  recommended on the new commit).
+
 ## 5. Validation (measured in UE 5.8, not inferred)
 
 | Check | Result |
