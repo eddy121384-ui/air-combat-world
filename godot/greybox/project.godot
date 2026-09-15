@@ -1,0 +1,18 @@
+; Engine control file — Godot 4.x minimal greybox viewer (no gameplay).
+; NOTE: engine binary is NOT installed on the build machine; this project is
+; validated structurally (scene references resolve, GLB parses). In-engine
+; visual check is pending — see docs/taipei-greybox-core-result.md GATE F.
+
+config_version=5
+
+[application]
+
+config/name="Taipei Greybox v0"
+config/description="City Compiler greybox: 2 km Xinyi massing + 101 placeholder."
+run/main_scene="res://scenes/greybox.tscn"
+config/features=PackedStringArray("4.2", "GL Compatibility")
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
