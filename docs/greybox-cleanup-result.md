@@ -2,7 +2,7 @@
 
 > Branch: `feat/ue58-greybox-spike` (from `feat/taipei-greybox-core`, **`main` untouched**).
 > Milestone: gameplay-readable greybox for the first arcade flight prototype.
-> Verdict: **READY FOR CORE FLIGHT PROTOTYPE** (human 1-min GUI visual check still pending).
+> Verdict: **READY FOR CORE FLIGHT PROTOTYPE** (GUI-validated: PASS — UE 5.8 in-editor + Play check, see §§4b–4f/§8).
 > Nothing from the Core Flight Prototype was implemented.
 
 ## 1. Before editing (scene state documented first)
@@ -90,8 +90,7 @@ were missing. Verdict was lowered to NOT READY pending this fix.
   all 11 actor labels + 5 mesh refs present. No load errors for the 5 new assets
   in the reopen run (the single physics warning in that log concerns the OLD v0
   `layerA_city_massing` at startup, pre-existing and unrelated).
-- Verdict restored to **READY FOR CORE FLIGHT PROTOTYPE** (GUI 1-min confirm still
-  recommended on the new commit).
+- Verdict restored to **READY FOR CORE FLIGHT PROTOTYPE** (later GUI-validated: PASS).
 
 ## 4c. Nanite/SM6 GUI blocker — post-mortem (follow-up fix, same branch)
 
@@ -117,10 +116,11 @@ to NOT READY — NANITE/SM6 DEPENDENCY.
 - **Untouched by choice:** v0 `xinyi_tile_2km` meshes also ship Nanite-on (probe
   confirmed) — opening the ORIGINAL level will still raise the SM6 warning.
   Left as-is to preserve the v0 baseline; say the word and it gets the same
-  one-line fixup. No SM6/Nanite/Lumen/VSM was enabled anywhere; renderer config
-  untouched — the project stays SM5/mobile-first.
-- Verdict restored to **READY FOR CORE FLIGHT PROTOTYPE** (GUI re-confirm on the
-  new commit still requested — meshes should now render on the raster path).
+  one-line fixup. `L_TaipeiGreybox_Clean` and its XinyiGreybox assets have no
+  mandatory SM6/Nanite/Lumen/VSM dependency (v0 baseline assets intentionally
+  keep Nanite-on as history); renderer config untouched — the project stays
+  SM5/mobile-first.
+- Verdict restored to **READY FOR CORE FLIGHT PROTOTYPE** (later GUI-validated: PASS).
 
 ## 4d. Lighting-rebuild warning — movable lights, no bake (follow-up fix)
 
@@ -165,7 +165,7 @@ files were restored via checkout.
 | City span | X 209,794 cm = **2.10 km** ✓; Y 214,847 cm = **2.15 km** ✓ |
 | Bucket ceilings | low 20.0 m / mid 59.65 m / high 269.05 m ✓ |
 | Ground | 2600×2600 m @ z = −20 cm ✓; all actors at origin, scale 1, no transform drift |
-| Level | `GREYBOX_OK`, 12/12 actors placed, `GREYBOX_SAVED`; original level untouched |
+| Level | `GREYBOX_OK`, 11/11 actors placed, `GREYBOX_SAVED`; original level untouched |
 | Import | `IMPORT_OK` (5 meshes + 5 MICs) + `IMPORT_SAVED True` (final palette run) |
 | Tests | `pytest tests/test_compiler.py` → **12/12 pass** (no exporter regression) |
 | Readability | top-down schematic reviewed READABLE: city mass / open ground / block structure / corridors / hero all identifiable; histogram confirms bucket split |
@@ -188,9 +188,10 @@ files were restored via checkout.
 
 ## 8. Known limitations / next steps
 
-1. **No in-editor GUI screenshot this round** (headless cannot capture a viewport).
-   Requested follow-up: open `L_TaipeiGreybox_Clean` in UE 5.8 → Play from `Start_Flight` →
-   1-min visual confirm; file any tuning as small follow-up commits.
+1. **GUI validation completed: PASS** — `L_TaipeiGreybox_Clean` opens in the UE 5.8
+   GUI (11 actors), renders daylight Lit view (3-tier city + tan ground + orange
+   101), and Play from `Start_City` shows the solid flyable city. Follow-up
+   fixes from that validation are §§4b–4f above.
 2. Ground is a flat color plane + building gaps only; production road system out of scope.
 3. Lighting is neutral-daylight test values only, not a final lighting pass.
 
