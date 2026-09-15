@@ -142,6 +142,20 @@ Regen + reimport + fresh verify: `REOPEN_OK 11/11` + `REOPEN_NANITE_OK 5/5`.
 Side note: an accidental in-GUI drag of CityMassing actors was discarded via
 close-without-save; committed `.umap` verified clean before this rebuild.
 
+## 4f. Lit pitch black — sun pointed at the sky (follow-up fix, my bug)
+
+GUI Lit mode was pure black while Unlit was perfect. Cause: Sun rotation on
+disk was pitch +30 (shining UP) — nothing received any light. Root cause is
+mine, not the user's drag: `unreal.Rotator(-45, 30, 0)` positionally is a
+no-op/misorder in 5.8 Python (empirically it left rotation at (30,0,-45)),
+so every level build since v1 aimed the sun at the sky. Fix
+(`adapters/unreal/fix_sun_rotation.py` + same pattern patched into
+`build_greybox_level.py`): assign `r.pitch/r.yaw/r.roll` attributes and
+verify the read-back equals (-45,30,0) before saving. Fresh verify after:
+`REOPEN_OK 11/11` + `REOPEN_NANITE_OK 5/5`. The user's accidental building
+drag was never saved (umap verified clean); 4 GUI-touched mesh metadata
+files were restored via checkout.
+
 ## 5. Validation (measured in UE 5.8, not inferred)
 
 | Check | Result |

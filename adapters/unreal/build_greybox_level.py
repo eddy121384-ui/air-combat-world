@@ -113,7 +113,11 @@ def main():
     sun = spawn_class(unreal.DirectionalLight, "Sun", unreal.Vector(0, 0, 40000))
     if sun is not None:
         try:
-            sun.set_actor_rotation(unreal.Rotator(-45, 30, 0), False)
+            # NOTE: Rotator(*args) positional order is NOT (pitch, yaw, roll)
+            # in 5.8 Python (empirically a no-op/misorder) — assign attributes.
+            r = sun.get_actor_rotation()
+            r.pitch, r.yaw, r.roll = -45.0, 30.0, 0.0
+            sun.set_actor_rotation(r, False)
         except Exception:  # noqa: BLE001
             pass
     spawn_class(unreal.SkyLight, "Sky", unreal.Vector(0, 0, 20000))
