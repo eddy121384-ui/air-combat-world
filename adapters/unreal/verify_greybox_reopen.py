@@ -12,9 +12,11 @@ Prints REOPEN_OK (exit path normal) or REOPEN_FAIL + missing list.
 Check the engine log for the REOPEN_ line; the Cmd exit code alone is not
 the signal.
 """
+import os
 import unreal
 
 LEVEL = "/Game/Taipei/L_TaipeiGreybox_Clean"
+SRC_DIR = os.environ.get("ACW_SRC_DIR", "/Game/Taipei/XinyiGreybox")
 REQUIRED = ["CityMassing_Low", "CityMassing_Mid", "CityMassing_High",
             "Ground_Xinyi", "Hero_Taipei101",
             "Sun", "Sky", "Fog", "Atmosphere", "Start_City", "Start_Flight"]
@@ -41,6 +43,32 @@ def main():
         print("REOPEN_FAIL missing=%s" % ",".join(missing))
         return
     print("REOPEN_OK 11/11 required labels persist after fresh reopen")
+
+    # Mobile-first gate: no mesh under SRC_DIR may require Nanite/SM6.
+    lib = unreal.EditorAssetLibrary
+    try:
+        listed = lib.list_assets(SRC_DIR, recursive=True)
+    except Exception as e:  # noqa: BLE001
+        print("REOPEN_NANITE_LIST_FAIL %r" % e)
+        return
+    checked, offenders = 0, []
+    for ap in listed:
+        try:
+            obj = lib.load_asset(ap)
+        except Exception:  # noqa: BLE001
+            continue
+        if obj is None or obj.get_class().get_name() != "StaticMesh":
+            continue
+        checked += 1
+        try:
+            if obj.get_editor_property("nanite_settings").get_editor_property("enabled"):
+                offenders.append(ap)
+        except Exception as e:  # noqa: BLE001
+            offenders.append("%s (unreadable: %r)" % (ap, e))
+    if offenders:
+        print("REOPEN_NANITE_FAIL offenders=%s" % ",".join(offenders))
+        return
+    print("REOPEN_NANITE_OK %d meshes, all Nanite off (SM5 raster safe)" % checked)
 
 
 main()

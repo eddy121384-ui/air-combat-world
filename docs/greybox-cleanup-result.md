@@ -93,6 +93,35 @@ were missing. Verdict was lowered to NOT READY pending this fix.
 - Verdict restored to **READY FOR CORE FLIGHT PROTOTYPE** (GUI 1-min confirm still
   recommended on the new commit).
 
+## 4c. Nanite/SM6 GUI blocker — post-mortem (follow-up fix, same branch)
+
+GUI open of the fixed level warned `Shader Model 6 (SM6) is required to use
+Nanite assets` and the city did not display (11 actors present). Verdict lowered
+to NOT READY — NANITE/SM6 DEPENDENCY.
+
+- **Root cause, two layers.** (1) The Interchange importer enables Nanite on every
+  imported StaticMesh by default — all 5 `XinyiGreybox` meshes had
+  `nanite_settings.enabled=True` (read-only probe proved it). SM5 project +
+  Nanite meshes = SM6 demand + no display. (2) The first two fix attempts
+  "succeeded" in-session but changed nothing on disk: `set_editor_property`
+  alone never dirties the package, `mark_package_dirty()` does not exist in 5.8,
+  and 5.8's `save_asset()` rejects the `only_if_dirty` keyword — while a stale
+  GUI editor (opened earlier for screenshots) held OS file locks on all 5
+  `.uasset` files (`MoveFile was unable to move`), so every save returned False.
+- **Fix** (`import_tile.py` `disable_nanite`, runs on EVERY import incl. future
+  regens): official `StaticMeshEditorSubsystem.set_nanite_settings(obj, ns, True)`
+  + plain `save_asset()`; failures (incl. save-declined) are reported, never
+  silent. Operational rule encoded in comments: never run imports while the GUI
+  editor is open. Full regen cycle proven: reimport (importer re-enables Nanite)
+  → recipe disables → fresh-process `REOPEN_OK 11/11` + `REOPEN_NANITE_OK 5/5`.
+- **Untouched by choice:** v0 `xinyi_tile_2km` meshes also ship Nanite-on (probe
+  confirmed) — opening the ORIGINAL level will still raise the SM6 warning.
+  Left as-is to preserve the v0 baseline; say the word and it gets the same
+  one-line fixup. No SM6/Nanite/Lumen/VSM was enabled anywhere; renderer config
+  untouched — the project stays SM5/mobile-first.
+- Verdict restored to **READY FOR CORE FLIGHT PROTOTYPE** (GUI re-confirm on the
+  new commit still requested — meshes should now render on the raster path).
+
 ## 5. Validation (measured in UE 5.8, not inferred)
 
 | Check | Result |
