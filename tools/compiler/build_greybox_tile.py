@@ -141,14 +141,23 @@ def bucket(height_m: float) -> str:
 
 def ground_quad(cx: float = -100.0, cz: float = -94.0,
                 size: float = 2600.0, y: float = -0.2) -> tuple[list, list, list]:
-    """Single quad, +Y normal, Y-up meters. Center covers LayerA span + margin."""
+    """Single quad at y, DOUBLE-SIDED (up + down triangles).
+
+    Why double-sided: the v1 single-sided quad never rendered from above in
+    UE (winding-convention mismatch somewhere between our writer and
+    Interchange — buildings render, the lone ground quad did not). 4 tris
+    total is zero perf cost and renders from every viewpoint, above or below.
+    Y-up meters. Center covers LayerA span + margin.
+    """
     h = size / 2.0
     x0, x1 = cx - h, cx + h
     z0, z1 = cz - h, cz + h
-    pos = [x0, y, z0, x1, y, z0, x1, y, z1,
-           x0, y, z0, x1, y, z1, x0, y, z1]
-    nrm = [0.0, 1.0, 0.0] * 6
-    return pos, nrm, [0, 1, 2, 3, 4, 5]
+    pos = [x0, y, z0, x1, y, z0, x1, y, z1,   # up face
+           x0, y, z0, x1, y, z1, x0, y, z1,
+           x0, y, z0, x0, y, z1, x1, y, z1,   # down face (reversed)
+           x0, y, z0, x1, y, z1, x1, y, z0]
+    nrm = [0.0, 1.0, 0.0] * 6 + [0.0, -1.0, 0.0] * 6
+    return pos, nrm, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
 
 
 def main() -> None:

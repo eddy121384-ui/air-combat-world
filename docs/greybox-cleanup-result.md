@@ -131,6 +131,17 @@ MOVABLE (fully dynamic) and re-saved — no bake, no lightmap memory, matches
 the mobile direction. Fresh verify after: `REOPEN_OK 11/11` +
 `REOPEN_NANITE_OK 5/5`. Renderer config untouched.
 
+## 4e. Ground plane invisible — double-sided quad (follow-up fix)
+
+GUI (Unlit, solid buildings confirmed) showed pure-black background: the tan
+ground never rendered. Cause: the v1 single-sided quad faced away under
+Interchange's winding convention (buildings rendered, the lone ground quad
+did not). Fix (`build_greybox_tile.py` `ground_quad`): emit up + down faces
+(12 verts / 4 tris, zero perf cost) so it renders from any viewpoint.
+Regen + reimport + fresh verify: `REOPEN_OK 11/11` + `REOPEN_NANITE_OK 5/5`.
+Side note: an accidental in-GUI drag of CityMassing actors was discarded via
+close-without-save; committed `.umap` verified clean before this rebuild.
+
 ## 5. Validation (measured in UE 5.8, not inferred)
 
 | Check | Result |
