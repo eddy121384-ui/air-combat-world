@@ -122,6 +122,15 @@ to NOT READY — NANITE/SM6 DEPENDENCY.
 - Verdict restored to **READY FOR CORE FLIGHT PROTOTYPE** (GUI re-confirm on the
   new commit still requested — meshes should now render on the raster path).
 
+## 4d. Lighting-rebuild warning — movable lights, no bake (follow-up fix)
+
+GUI showed the city but with red `LIGHTING NEEDS TO BE REBUILT (5 unbuilt
+objects)`. Cause: Sun/Sky spawn Static by default, demanding a bake. Fix
+(`adapters/unreal/fix_light_mobility.py`): set both light components to
+MOVABLE (fully dynamic) and re-saved — no bake, no lightmap memory, matches
+the mobile direction. Fresh verify after: `REOPEN_OK 11/11` +
+`REOPEN_NANITE_OK 5/5`. Renderer config untouched.
+
 ## 5. Validation (measured in UE 5.8, not inferred)
 
 | Check | Result |
