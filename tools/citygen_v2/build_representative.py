@@ -17,7 +17,9 @@ from collections import Counter
 from pathlib import Path
 
 import trimesh
-from shapely.geometry import mapping
+import numpy as np
+from shapely import affinity
+from shapely.geometry import mapping, shape
 
 HERE = Path(__file__).resolve().parent
 REPO = HERE.parents[1]
@@ -27,6 +29,7 @@ sys.path.insert(0, str(HERE))
 from geometry import concavity_ratio, extrude_geos_polygon, repair_worldmodel_polygon  # noqa: E402
 from worldmodel import build_worldmodel  # noqa: E402
 from strict_qa import strict_mesh_gate  # noqa: E402
+from serialization_space import prepare_footprint, tile_origin, tile_transform  # noqa: E402
 
 DEFAULT_COUNT = 80
 TILE_SIZE_M = 500.0
@@ -130,8 +133,8 @@ def build(target_count: int, output_glb: Path, output_report: Path) -> dict:
         raise ValueError("strict representative gate is locked to the original 80 source polygon parts")
 
     started = time.perf_counter()
-    if output_glb.exists():
-        raise FileExistsError(f'Refusing to overwrite an existing GLB: {output_glb}')
+    if output_glb.exists() or output_report.exists():
+        raise FileExistsError('Refusing to overwrite existing GLB or report evidence')
     source = REPO / "data/generated/taipei/sample_buildings_epsg3826.geojson"
     city = REPO / "cities/taipei/city.yaml"
     if not source.exists():
@@ -197,33 +200,45 @@ def build(target_count: int, output_glb: Path, output_report: Path) -> dict:
             category_coverage[category] += 1
         cx, cy = c["centroid_enu"]
         tile_coverage[_tile_key(cx, cy)] += 1
+        origin = tile_origin((cx, cy))
+        transform = tile_transform(origin)
 
         part_gates = []
+        footprint_gates = []
         for ri, poly in enumerate(c["_parts"]):
             try:
-                mesh = extrude_geos_polygon(poly, float(c["height_m"]))
-                gate = strict_mesh_gate(mesh, poly, float(c["height_m"]), precision='float64')
+                serial_parts, footprint_gate = prepare_footprint(poly, origin)
             except Exception as exc:
-                gate = {
-                    "pass": False,
-                    "failures": [f"exception:{type(exc).__name__}:{exc}"],
-                    "vertices": 0,
-                    "triangles": 0,
-                }
-                mesh = None
+                serial_parts = []
+                footprint_gate = {'pass':False, 'failures':[f'footprint_exception:{type(exc).__name__}:{exc}']}
+            footprint_gate['repaired_part_index'] = ri
+            footprint_gate['original_footprint_enu'] = mapping(poly)
+            footprint_gates.append(footprint_gate)
+            if not footprint_gate['pass']:
+                continue
+            for si, serial_poly in enumerate(serial_parts):
+                name = f"{c['building_id']}_p{c['polygon_index']}_r{ri}_s{si}"
+                try:
+                    mesh = extrude_geos_polygon(serial_poly, float(c['height_m']))
+                    gate = strict_mesh_gate(mesh, serial_poly, float(c['height_m']), precision='float64')
+                    positions = np.asarray(mesh.vertices)[:,[0,2]]
+                    if not np.array_equal(positions, positions.astype(np.float32).astype(np.float64)):
+                        gate['failures'].append('mesher_introduced_nonserializable_xy')
+                        gate['pass'] = False
+                except Exception as exc:
+                    gate = {'pass':False, 'failures':[f'exception:{type(exc).__name__}:{exc}'],
+                            'vertices':0, 'triangles':0}
+                    mesh = None
+                gate.update(repaired_part_index=ri, serialization_part_index=si, node_name=name,
+                            expected_footprint_local=mapping(serial_poly),
+                            expected_footprint_enu=mapping(affinity.translate(serial_poly, xoff=origin[0], yoff=origin[1])))
+                part_gates.append(gate)
+                total_vertices += int(gate.get('vertices',0))
+                total_triangles += int(gate.get('triangles',0))
+                if mesh is not None:
+                    scene.add_geometry(mesh, geom_name=name, node_name=name, transform=transform)
 
-            gate['repaired_part_index'] = ri
-            gate['node_name'] = f"{c['building_id']}_p{c['polygon_index']}_r{ri}"
-            # Reference geometry travels with the report for independent Blender QA.
-            gate['expected_footprint_enu'] = mapping(poly)
-            part_gates.append(gate)
-            total_vertices += int(gate.get("vertices", 0))
-            total_triangles += int(gate.get("triangles", 0))
-            if mesh is not None:
-                name = f"{c['building_id']}_p{c['polygon_index']}_r{ri}"
-                scene.add_geometry(mesh, geom_name=name, node_name=name)
-
-        passed = bool(part_gates) and all(g["pass"] for g in part_gates)
+        passed = bool(part_gates) and all(g['pass'] for g in footprint_gates+part_gates)
         if not passed:
             failed_selected += 1
         mesh_rows.append({
@@ -233,6 +248,9 @@ def build(target_count: int, output_glb: Path, output_report: Path) -> dict:
             "categories": c["categories"],
             "centroid_enu": c["centroid_enu"],
             "tile_500m": _tile_key(cx, cy),
+            "tile_origin_enu_m":list(origin),
+            "node_transform_gltf":transform.tolist(),
+            "footprint_quantization":footprint_gates,
             "repair_outcome": c["repair_outcome"],
             "mesh_parts": part_gates,
             "pass": passed,
@@ -244,26 +262,44 @@ def build(target_count: int, output_glb: Path, output_report: Path) -> dict:
     if failed_selected == 0:
         glb_bytes = scene.export(file_type='glb')
         reloaded = trimesh.load_scene(io.BytesIO(glb_bytes), file_type='glb', process=False)
-        for c, row in zip(selected, mesh_rows):
-            for poly, gate in zip(c['_parts'], row['mesh_parts']):
+        for row in mesh_rows:
+            for gate in row['mesh_parts']:
                 name = gate['node_name']
                 try:
                     transform, geometry_name = reloaded.graph[name]
                     mesh = reloaded.geometry[geometry_name].copy()
-                    mesh.apply_transform(transform)
-                    recheck = strict_mesh_gate(mesh, poly, float(c['height_m']), precision='float32')
+                    recheck = strict_mesh_gate(mesh, shape(gate['expected_footprint_local']), row['height_m'], precision='float32')
+                    # Verify POSITION, not only reconstructed world coordinates.
+                    original_mesh = scene.geometry[name]
+                    exact_xy = np.array_equal(np.asarray(mesh.vertices)[:,[0,2]], np.asarray(original_mesh.vertices)[:,[0,2]])
+                    exact_faces = np.array_equal(mesh.faces, original_mesh.faces)
+                    exact_transform = np.array_equal(transform, np.asarray(row['node_transform_gltf']))
+                    recheck.update(xy_unchanged_by_serialization=exact_xy, faces_unchanged=exact_faces,
+                                   tile_transform_preserved=exact_transform)
+                    for ok, reason in [(exact_xy,'serialized_xy_changed'),(exact_faces,'serialized_faces_changed'),
+                                       (exact_transform,'tile_transform_changed')]:
+                        if not ok:
+                            recheck['failures'].append(reason)
+                    world = mesh.copy()
+                    world.apply_transform(transform)
+                    recheck['world_enu_gate'] = strict_mesh_gate(world, shape(gate['expected_footprint_enu']), row['height_m'], precision='float32')
+                    if not recheck['world_enu_gate']['pass']:
+                        recheck['failures'].extend('world:'+f for f in recheck['world_enu_gate']['failures'])
+                    recheck['pass'] = not recheck['failures']
                 except Exception as exc:
                     recheck = {'pass':False, 'failures':[f'roundtrip_exception:{type(exc).__name__}:{exc}']}
                 gate['float32_glb_roundtrip'] = recheck
-            row['pass'] = all(g['pass'] and g.get('float32_glb_roundtrip',{}).get('pass',False)
-                              for g in row['mesh_parts'])
+            row['pass'] = all(g['pass'] for g in row['footprint_quantization']) and all(
+                g['pass'] and g.get('float32_glb_roundtrip',{}).get('pass',False) for g in row['mesh_parts'])
         failed_selected = sum(not row['pass'] for row in mesh_rows)
     if failed_selected == 0:
         output_glb.parent.mkdir(parents=True, exist_ok=True)
         output_glb.write_bytes(glb_bytes)
 
     report = {
-        "gate": "Xinyi v2 strict representative numerical gate (float64 AND GLB float32 roundtrip)",
+        "gate": "Xinyi v2 serialization-space representative gate (quantized footprint AND float64 AND actual GLB float32)",
+        "baseline_76_of_80_commit":"3b963a4076b81ff413fcb7152688b2eb6e37f4bb",
+        "pipeline":"GEOS repaired ENU -> 500m tile local -> float32 footprint -> GEOS validity -> earcut/trimesh -> GLB reload",
         "baseline_selection": {k:v for k,v in lock.items() if k != 'selected'},
         "selected_unique_buildings":len({c['building_id'] for c in selected}),
         "same_80_parts_as_baseline":True,
@@ -278,11 +314,17 @@ def build(target_count: int, output_glb: Path, output_report: Path) -> dict:
         "selected_failures": failed_selected,
         "failure_details": [
             {"building_id":row['building_id'], "polygon_index":row['polygon_index'],
-             "repaired_part_index":gate['repaired_part_index'], "stage":stage,
+             "repaired_part_index":gate['repaired_part_index'],
+             "serialization_part_index":gate.get('serialization_part_index'), "stage":stage,
              "failures":check['failures']}
             for row in mesh_rows for gate in row['mesh_parts']
             for stage,check in [('float64',gate),('float32_glb_roundtrip',gate.get('float32_glb_roundtrip'))]
             if check is not None and not check['pass']
+        ] + [
+            {'building_id':row['building_id'], 'polygon_index':row['polygon_index'],
+             'repaired_part_index':gate['repaired_part_index'], 'stage':'footprint_quantization',
+             'failures':gate['failures']}
+            for row in mesh_rows for gate in row['footprint_quantization'] if not gate['pass']
         ],
         "source_accounting": {
             "features": len(wm["buildings"]),
@@ -328,12 +370,12 @@ def main() -> None:
     parser.add_argument(
         "--glb",
         type=Path,
-        default=REPO / "data/generated/taipei/xinyi_v2_representative_80.glb",
+        default=REPO / "data/generated/taipei/xinyi_v2_serialization_80.glb",
     )
     parser.add_argument(
         "--report",
         type=Path,
-        default=REPO / "data/generated/taipei/xinyi_v2_representative.report.json",
+        default=REPO / "data/generated/taipei/xinyi_v2_serialization.report.json",
     )
     args = parser.parse_args()
     report = build(args.count, args.glb, args.report)

@@ -50,7 +50,7 @@ jobs:
       - name: Run compiler and v2 tests
         run: python -m unittest discover -s tests -v
 
-      - name: Build 80-building representative v2 GLB
+      - name: Strict serialization-space gate for locked 80 parts
         run: python tools/citygen_v2/build_representative.py --count 80
 
       - name: Upload numerical and Blender-ready evidence
@@ -65,3 +65,5 @@ jobs:
             data/generated/taipei/sample_buildings_epsg3826.manifest.json
             data/generated/taipei/xinyi_v2_representative.report.json
             data/generated/taipei/xinyi_v2_representative_80.glb
+            data/generated/taipei/xinyi_v2_serialization.report.json
+            data/generated/taipei/xinyi_v2_serialization_80.glb

@@ -18,6 +18,7 @@ from audit_source import audit  # noqa: E402
 from geometry import extrude_geos_polygon, mesh_gate, repair_worldmodel_polygon  # noqa: E402
 from worldmodel import build_worldmodel  # noqa: E402
 from strict_qa import strict_mesh_gate  # noqa: E402
+from serialization_space import prepare_footprint, tile_origin, tile_transform  # noqa: E402
 
 SOURCE = REPO / "data/generated/taipei/sample_buildings.geojson"
 CITY = REPO / "cities/taipei/city.yaml"
@@ -114,6 +115,46 @@ class TestStrictSolidQA(unittest.TestCase):
         self.assertEqual(gate['wrong_roof_triangles'],1)
         self.assertEqual(gate['wrong_base_triangles'],1)
         self.assertIn('roof_overlapping_triangles',gate['failures'])
+
+        # The general policy must mesh the serialized footprint, not cast an
+        # already triangulated global mesh. Keep the old failure above intact.
+        origin = tile_origin((-151., -292.))
+        parts, comparison = prepare_footprint(p, origin)
+        self.assertTrue(comparison['pass'], comparison)
+        serial = extrude_geos_polygon(parts[0],3.5)
+        self.assertTrue(strict_mesh_gate(serial,parts[0],3.5)['pass'])
+        scene = trimesh.Scene()
+        scene.add_geometry(serial, node_name='test',geom_name='test',transform=tile_transform(origin))
+        loaded = trimesh.load_scene(io.BytesIO(scene.export(file_type='glb')),file_type='glb',process=False)
+        matrix, name = loaded.graph['test']
+        np.testing.assert_array_equal(matrix,tile_transform(origin))
+        self.assertTrue(strict_mesh_gate(loaded.geometry[name],parts[0],3.5,precision='float32')['pass'])
+
+    def test_tile_ownership_uses_floor_at_negative_and_boundary_coordinates(self):
+        self.assertEqual(tile_origin((-0.001,499.999)),(-500.,0.))
+        self.assertEqual(tile_origin((-500.,500.)),(-500.,500.))
+        self.assertEqual(tile_origin((-500.001,1000.)),(-1000.,1000.))
+
+    def test_quantization_preserves_courtyard_and_cross_tile_footprint(self):
+        p = Polygon([(498.123456,20.123456),(510.123456,20.123456),
+                     (510.123456,40.123456),(498.123456,40.123456)],
+                    holes=[[(501.111111,25.111111),(507.111111,25.111111),
+                            (507.111111,35.111111),(501.111111,35.111111)]])
+        parts, report = prepare_footprint(p,tile_origin((499.,30.)))
+        self.assertTrue(report['pass'],report)
+        self.assertEqual(report['quantized_holes'],1)
+        self.assertGreater(parts[0].bounds[2],500.)  # Ownership never clips a building.
+        for ring in [parts[0].exterior,*parts[0].interiors]:
+            coords = np.asarray(ring.coords)
+            np.testing.assert_array_equal(coords,coords.astype(np.float32).astype(np.float64))
+
+    def test_quantization_cannot_hide_a_collapsed_courtyard(self):
+        p = Polygon([(400.,400.),(410.,400.),(410.,410.),(400.,410.)],
+                    holes=[[(405.,405.),(405.000001,405.),(405.000001,406.),(405.,406.)]])
+        self.assertTrue(p.is_valid)
+        _, report = prepare_footprint(p,(0.,0.))
+        self.assertFalse(report['pass'])
+        self.assertIn('quantized_courtyard_not_preserved',report['failures'])
 
     def test_shifted_closed_solid_fails_footprint_coverage(self):
         self.mesh.apply_translation([2,0,0])
