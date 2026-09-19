@@ -37,8 +37,10 @@ jobs:
         run: python tools/citygen_v2/audit_source.py
 
       - name: Probe WFS precision in projected CRS
-        continue-on-error: true
         run: node tools/citygen_v2/probe_wfs_precision.mjs
+
+      - name: Fetch projected v2 source
+        run: node tools/citygen_v2/fetch_projected_sample.mjs
 
       - name: Regenerate v0 artifacts for backward-compatibility tests
         run: |
@@ -60,5 +62,6 @@ jobs:
           path: |
             data/generated/taipei/xinyi_v2_source_audit.report.json
             data/generated/taipei/xinyi_v2_wfs_precision_probe.report.json
+            data/generated/taipei/sample_buildings_epsg3826.manifest.json
             data/generated/taipei/xinyi_v2_representative.report.json
             data/generated/taipei/xinyi_v2_representative_80.glb
