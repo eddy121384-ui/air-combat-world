@@ -80,10 +80,24 @@ def _iter_polygons(geom: dict):
         yield from geom["coordinates"]
 
 
-def build_worldmodel(sample_geojson: Path, city_yaml: Path) -> dict:
-    """Normalize sample buildings to WorldModel v0 records."""
+def build_worldmodel(sample_geojson: Path, city_yaml: Path, source_crs: str = "EPSG:4326") -> dict:
+    """Normalize sample buildings to WorldModel v0 records.
+
+    v0 callers remain dependency-free with EPSG:4326 input. v2 may supply a
+    projected CRS; pyproj is imported lazily only for that mature-library path.
+    """
     lon0, lat0 = enu_origin_from_city_yaml(city_yaml)
     fc = json.loads(sample_geojson.read_text(encoding="utf-8"))
+
+    if source_crs.upper() == "EPSG:4326":
+        def to_lonlat(x, y):
+            return float(x), float(y)
+    else:
+        from pyproj import Transformer
+        transformer = Transformer.from_crs(source_crs, "EPSG:4326", always_xy=True)
+        def to_lonlat(x, y):
+            lon, lat = transformer.transform(float(x), float(y))
+            return float(lon), float(lat)
     buildings: list[dict] = []
     for f in fc["features"]:
         props = f.get("properties", {}) or {}
@@ -93,8 +107,13 @@ def build_worldmodel(sample_geojson: Path, city_yaml: Path) -> dict:
         fid = str(f.get("id", f"noid-{len(buildings)}"))
         polys = []
         for polygon_index, poly in enumerate(_iter_polygons(f["geometry"])):
-            outer = poly[0]
-            holes = poly[1:]
+            outer_source = poly[0]
+            holes_source = poly[1:]
+            outer = [to_lonlat(x, y) for x, y in outer_source]
+            holes = [
+                [to_lonlat(x, y) for x, y in hole]
+                for hole in holes_source
+            ]
             enu = [lonlat_to_enu(x, y, lon0, lat0) for x, y in outer]
             holes_enu = [
                 [lonlat_to_enu(x, y, lon0, lat0) for x, y in hole]
@@ -116,6 +135,9 @@ def build_worldmodel(sample_geojson: Path, city_yaml: Path) -> dict:
                 # flattening them away before GEOS sees the polygon.
                 "holes_lonlat": holes,
                 "holes_enu": holes_enu,
+                "footprint_source": outer_source,
+                "holes_source": holes_source,
+                "source_crs": source_crs,
                 "source_geometry_type": f["geometry"]["type"],
                 "source_polygon_index": polygon_index,
                 "area_m2": ring_area_m2_enu(enu),
@@ -157,7 +179,7 @@ def build_worldmodel(sample_geojson: Path, city_yaml: Path) -> dict:
     return {
         "format": "air-combat-worldmodel",
         "version": "0",
-        "crs_in": "EPSG:4326",
+        "crs_in": source_crs,
         "local_frame": {"type": "enu_meters", "origin_lonlat": [lon0, lat0]},
         "hero_match": {
             "rule": (f"suppress all features with min centroid distance to "
