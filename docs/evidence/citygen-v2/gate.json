@@ -1,0 +1,48 @@
+{
+  "verdict": "fail",
+  "source_sha256": "cc70f0b890c66f298ce504840151abc05b457a5346e854f1accf19432268a848",
+  "local_numerical_gate": "fail",
+  "blender_faces": {
+    "accepted": {
+      "base_down": 297,
+      "roof_up": 297,
+      "walls": 918,
+      "zero_area": 4
+    },
+    "failed_diagnostics": {
+      "base_down": 146,
+      "base_wrong": 5,
+      "roof_up": 147,
+      "roof_wrong": 5,
+      "walls": 368,
+      "zero_area": 1
+    }
+  },
+  "full_xinyi": "not_run_sample_gate_failed",
+  "unreal": "not_run_sample_gate_failed",
+  "old_glb_sha256": "392011ccbbf1180784a496a2d9a2a9e21e5769f92785bc6d6053f8c6a2655586",
+  "old_ordinary_faces": {
+    "roof_up": 14272,
+    "walls": 54268,
+    "base_down": 14272,
+    "zero_area": 20,
+    "roof_wrong": 190,
+    "base_wrong": 190
+  },
+  "old_hero_height_m": 508.0,
+  "repeated_glb_bytes_identical": true,
+  "repeated_ledger_bytes_identical": true,
+  "parts_ledger_sha256": "c1f4ff6b3f2497aa6d857feb63dce917a7145369e9b83cd3e29d7f5439c41f18",
+  "screenshots": {
+    "old-lowrise-same-view.png": "93d7fee4024c8a3bde184a2c30c23bf27787829ce61f933ef59ae8b99fa8199a",
+    "v2-complex-footprint.png": "9ff1edd9aec4c181c98a7f36a20a71653bfb5a03c804a7226c19727fff3cbb63",
+    "v2-failed-courtyard.png": "8f3feef1ba6368b44d2d28ad15bd7af4f4b1dac8be510d1de763792fe984c762",
+    "v2-lowrise-elevated.png": "f3cc93ad46459be364f3b0ff1b7df47103b35e8bfd4488a5f13084eabab3ebef",
+    "v2-lowrise-oblique.png": "b8c6b179662dc408e17358ad929e84373c4ad562d2768fa4c5a09be8c866470e"
+  },
+  "tests": {
+    "total": 21,
+    "pass": 21,
+    "skipped": 0
+  }
+}
