@@ -79,20 +79,34 @@ For area-bearing inputs:
 
 No new custom triangulator, hole bridge, or polygon repair is permitted.
 
-## Precision probe
+## Precision probe — resolved
 
-Before declaring the Taipei WFS unsuitable as a footprint source, v2 probes the
-same WFS bbox twice:
+CI probed the same 11,132-feature WFS bbox twice against the same endpoint:
 
-1. GeoJSON output in `EPSG:4326` (current route);
+1. GeoJSON output in `EPSG:4326` (current v0 route);
 2. GeoJSON output reprojected by GeoServer to Taiwan TWD97/TM2
    `EPSG:3826`.
 
-If the projected response preserves additional coordinate precision and turns
-collapsed 4326 features back into area-bearing polygons, the preferred fix is
-to repin Taipei geometry in the higher-precision projected route and transform
-that to theater ENU. If it does not, the project must evaluate a different
-authoritative footprint source/format rather than inventing geometry.
+Result:
+
+- feature count: 11,132 vs 11,132;
+- polygon parts: 11,136 vs 11,136;
+- parts with holes: 715 vs 715;
+- collapsed exterior parts: **5,297 in EPSG:4326 vs 0 in EPSG:3826**;
+- all 5,297 features collapsed in the 4326 response recover area in 3826;
+- no endpoint/projection errors occurred.
+
+The projected output also reports up to four decimal places, but those decimals
+are now in meters rather than degrees. The destructive ~10–11 m geographic
+quantization is therefore avoided.
+
+This materially changes the source decision: the Taipei WFS itself is still a
+viable authoritative footprint+height source. The broken route is specifically
+the v0 `EPSG:4326` GeoJSON geometry response.
+
+v2 therefore uses a separate generated `EPSG:3826` snapshot and transforms it
+with PROJ/pyproj before WorldModel ENU. The pinned v0 4326 sample stays intact
+as forensic/baseline evidence.
 
 The probe is diagnostic and never overwrites the pinned source snapshot.
 
