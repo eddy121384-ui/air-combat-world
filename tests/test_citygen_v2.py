@@ -6,6 +6,9 @@ import unittest
 from pathlib import Path
 
 from shapely.geometry import Polygon
+import numpy as np
+import trimesh
+import io
 
 REPO = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO / "tools/compiler"))
@@ -14,6 +17,7 @@ sys.path.insert(0, str(REPO / "tools/citygen_v2"))
 from audit_source import audit  # noqa: E402
 from geometry import extrude_geos_polygon, mesh_gate, repair_worldmodel_polygon  # noqa: E402
 from worldmodel import build_worldmodel  # noqa: E402
+from strict_qa import strict_mesh_gate  # noqa: E402
 
 SOURCE = REPO / "data/generated/taipei/sample_buildings.geojson"
 CITY = REPO / "cities/taipei/city.yaml"
@@ -72,6 +76,82 @@ class TestMatureExtrusionGate(unittest.TestCase):
         self.assertEqual(gate["zero_area_triangles"], 0)
         self.assertGreater(gate["roof_triangles"], 0)
         self.assertGreater(gate["base_triangles"], 0)
+
+
+class TestStrictSolidQA(unittest.TestCase):
+    def setUp(self):
+        self.poly = Polygon([(100,100),(120,100),(120,108),(112,108),(112,120),(100,120)],
+                            holes=[[(103,103),(108,103),(108,107),(103,107)]])
+        self.height = 18.75
+        self.mesh = extrude_geos_polygon(self.poly, self.height)
+
+    def test_valid_courtyard_survives_real_glb_float32_roundtrip(self):
+        blob = trimesh.Scene(self.mesh).export(file_type='glb')
+        scene = trimesh.load_scene(io.BytesIO(blob),file_type='glb',process=False)
+        mesh = next(iter(scene.geometry.values()))
+        gate = strict_mesh_gate(mesh,self.poly,self.height,precision='float32')
+        self.assertTrue(gate['pass'],gate)
+        self.assertEqual(gate['caps']['roof']['holes'],1)
+        self.assertEqual(gate['wrong_wall_triangles'],0)
+
+    def test_projected_real_lowrise_regression_roundtrip_reverses_caps(self):
+        # Unmodified EPSG:3826 -> WorldModel footprint from PR #6's locked
+        # tp_building_height.269018 part 0. Regression evidence, not a repair rule.
+        p = Polygon([(-154.89226328475928,-293.24782850628304),
+                     (-154.8539740774945,-290.5180084681076),
+                     (-147.6455872215108,-290.57402114769087),
+                     (-147.50756792275445,-290.5751016221337),
+                     (-147.49675819940646,-293.32241321671927)])
+        mesh = extrude_geos_polygon(p,3.5)
+        self.assertTrue(strict_mesh_gate(mesh,p,3.5)['pass'])
+        blob = trimesh.Scene(mesh).export(file_type='glb')
+        loaded = next(iter(trimesh.load_scene(io.BytesIO(blob),file_type='glb',process=False).geometry.values()))
+        gate = strict_mesh_gate(loaded,p,3.5,precision='float32')
+        self.assertTrue(gate['watertight'])
+        self.assertTrue(gate['winding_consistent'])
+        self.assertGreater(gate['volume_m3'],0)
+        self.assertFalse(gate['pass'])
+        self.assertEqual(gate['wrong_roof_triangles'],1)
+        self.assertEqual(gate['wrong_base_triangles'],1)
+        self.assertIn('roof_overlapping_triangles',gate['failures'])
+
+    def test_shifted_closed_solid_fails_footprint_coverage(self):
+        self.mesh.apply_translation([2,0,0])
+        gate = strict_mesh_gate(self.mesh,self.poly,self.height)
+        self.assertTrue(gate['watertight'])
+        self.assertIn('roof_footprint_coverage_mismatch',gate['failures'])
+
+    def test_filled_hole_fails_volume_and_hole_checks(self):
+        filled = extrude_geos_polygon(Polygon(self.poly.exterior),self.height)
+        gate = strict_mesh_gate(filled,self.poly,self.height)
+        self.assertIn('volume_not_footprint_area_times_height',gate['failures'])
+        self.assertIn('roof_courtyard_not_preserved',gate['failures'])
+
+    def test_overlapping_cap_is_reported_even_when_union_coverage_matches(self):
+        i = np.flatnonzero(self.mesh.face_normals[:,1] > .999)[0]
+        self.mesh.faces = np.vstack([self.mesh.faces,self.mesh.faces[i]])
+        gate = strict_mesh_gate(self.mesh,self.poly,self.height)
+        self.assertIn('roof_overlapping_triangles',gate['failures'])
+        self.assertLess(gate['caps']['roof']['symmetric_difference_m2'],1e-8)
+
+    def test_missing_cap_and_wrong_wall_are_detected(self):
+        missing = self.mesh.copy()
+        missing.update_faces(missing.face_normals[:,1] < .999)
+        self.assertIn('missing_roof_cap',strict_mesh_gate(missing,self.poly,self.height)['failures'])
+        wall = np.flatnonzero(abs(self.mesh.face_normals[:,1]) < .1)[0]
+        faces = self.mesh.faces.copy()
+        faces[wall] = faces[wall,::-1]
+        self.mesh.faces = faces
+        self.assertGreater(strict_mesh_gate(self.mesh,self.poly,self.height)['wrong_wall_triangles'],0)
+
+    def test_nonfinite_and_degenerate_faces_are_not_repaired(self):
+        bad = self.mesh.copy()
+        vertices = bad.vertices.copy()
+        vertices[0,0] = np.nan
+        bad.vertices = vertices
+        self.assertEqual(strict_mesh_gate(bad,self.poly,self.height)['nonfinite_vertices'],1)
+        self.mesh.faces = np.vstack([self.mesh.faces,[0,0,1]])
+        self.assertEqual(strict_mesh_gate(self.mesh,self.poly,self.height)['zero_area_triangles'],1)
 
 
 if __name__ == "__main__":

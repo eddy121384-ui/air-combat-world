@@ -1,4 +1,4 @@
-"""Build the 50-100 building Xinyi v2 acceptance sample.
+"""Strict QA of PR #6's locked 80-part Xinyi v2 acceptance sample.
 
 The selection is deterministic and category-balanced. It scans the entire
 committed snapshot for accounting, but only meshes the representative set.
@@ -8,22 +8,25 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import io
+import importlib.metadata
 import json
-import os
 import sys
 import time
 from collections import Counter
 from pathlib import Path
 
 import trimesh
+from shapely.geometry import mapping
 
 HERE = Path(__file__).resolve().parent
 REPO = HERE.parents[1]
 sys.path.insert(0, str(REPO / "tools/compiler"))
 sys.path.insert(0, str(HERE))
 
-from geometry import concavity_ratio, extrude_geos_polygon, mesh_gate, repair_worldmodel_polygon  # noqa: E402
+from geometry import concavity_ratio, extrude_geos_polygon, repair_worldmodel_polygon  # noqa: E402
 from worldmodel import build_worldmodel  # noqa: E402
+from strict_qa import strict_mesh_gate  # noqa: E402
 
 DEFAULT_COUNT = 80
 TILE_SIZE_M = 500.0
@@ -123,10 +126,12 @@ def select_candidates(candidates: list[dict], target: int) -> list[dict]:
 
 
 def build(target_count: int, output_glb: Path, output_report: Path) -> dict:
-    if not 50 <= target_count <= 100:
-        raise ValueError("representative gate must stay between 50 and 100 source polygon parts")
+    if target_count != DEFAULT_COUNT:
+        raise ValueError("strict representative gate is locked to the original 80 source polygon parts")
 
     started = time.perf_counter()
+    if output_glb.exists():
+        raise FileExistsError(f'Refusing to overwrite an existing GLB: {output_glb}')
     source = REPO / "data/generated/taipei/sample_buildings_epsg3826.geojson"
     city = REPO / "cities/taipei/city.yaml"
     if not source.exists():
@@ -173,6 +178,11 @@ def build(target_count: int, output_glb: Path, output_report: Path) -> dict:
     selected = select_candidates(candidates, target_count)
     if len(selected) < target_count:
         raise RuntimeError(f"only {len(selected)} meshable candidates for target {target_count}")
+    lock = json.loads((HERE / 'representative_selection.json').read_text(encoding='utf-8'))
+    identity = [{'building_id':c['building_id'], 'polygon_index':c['polygon_index'],
+                 'height_m':c['height_m']} for c in selected]
+    if source_sha256 != lock['source_sha256'] or identity != lock['selected']:
+        raise RuntimeError('Source or selected 80 parts changed from PR #6 baseline; refusing reselection')
 
     scene = trimesh.Scene()
     mesh_rows: list[dict] = []
@@ -192,7 +202,7 @@ def build(target_count: int, output_glb: Path, output_report: Path) -> dict:
         for ri, poly in enumerate(c["_parts"]):
             try:
                 mesh = extrude_geos_polygon(poly, float(c["height_m"]))
-                gate = mesh_gate(mesh, float(c["height_m"]))
+                gate = strict_mesh_gate(mesh, poly, float(c["height_m"]), precision='float64')
             except Exception as exc:
                 gate = {
                     "pass": False,
@@ -202,6 +212,10 @@ def build(target_count: int, output_glb: Path, output_report: Path) -> dict:
                 }
                 mesh = None
 
+            gate['repaired_part_index'] = ri
+            gate['node_name'] = f"{c['building_id']}_p{c['polygon_index']}_r{ri}"
+            # Reference geometry travels with the report for independent Blender QA.
+            gate['expected_footprint_enu'] = mapping(poly)
             part_gates.append(gate)
             total_vertices += int(gate.get("vertices", 0))
             total_triangles += int(gate.get("triangles", 0))
@@ -224,12 +238,35 @@ def build(target_count: int, output_glb: Path, output_report: Path) -> dict:
             "pass": passed,
         })
 
-    output_glb.parent.mkdir(parents=True, exist_ok=True)
-    glb_bytes = scene.export(file_type="glb")
-    output_glb.write_bytes(glb_bytes)
+    # Serialization is in memory until both stages pass. Failed candidates are
+    # never published as a Blender-ready GLB or allowed into a later city stage.
+    glb_bytes = None
+    if failed_selected == 0:
+        glb_bytes = scene.export(file_type='glb')
+        reloaded = trimesh.load_scene(io.BytesIO(glb_bytes), file_type='glb', process=False)
+        for c, row in zip(selected, mesh_rows):
+            for poly, gate in zip(c['_parts'], row['mesh_parts']):
+                name = gate['node_name']
+                try:
+                    transform, geometry_name = reloaded.graph[name]
+                    mesh = reloaded.geometry[geometry_name].copy()
+                    mesh.apply_transform(transform)
+                    recheck = strict_mesh_gate(mesh, poly, float(c['height_m']), precision='float32')
+                except Exception as exc:
+                    recheck = {'pass':False, 'failures':[f'roundtrip_exception:{type(exc).__name__}:{exc}']}
+                gate['float32_glb_roundtrip'] = recheck
+            row['pass'] = all(g['pass'] and g.get('float32_glb_roundtrip',{}).get('pass',False)
+                              for g in row['mesh_parts'])
+        failed_selected = sum(not row['pass'] for row in mesh_rows)
+    if failed_selected == 0:
+        output_glb.parent.mkdir(parents=True, exist_ok=True)
+        output_glb.write_bytes(glb_bytes)
 
     report = {
-        "gate": "Xinyi Robust Whitebox v2 representative real-building sample",
+        "gate": "Xinyi v2 strict representative numerical gate (float64 AND GLB float32 roundtrip)",
+        "baseline_selection": {k:v for k,v in lock.items() if k != 'selected'},
+        "selected_unique_buildings":len({c['building_id'] for c in selected}),
+        "same_80_parts_as_baseline":True,
         "input": {
             "source": str(source),
             "source_crs": "EPSG:3826",
@@ -239,6 +276,14 @@ def build(target_count: int, output_glb: Path, output_report: Path) -> dict:
         "selected_source_polygon_parts": len(selected),
         "selected_all_pass": failed_selected == 0,
         "selected_failures": failed_selected,
+        "failure_details": [
+            {"building_id":row['building_id'], "polygon_index":row['polygon_index'],
+             "repaired_part_index":gate['repaired_part_index'], "stage":stage,
+             "failures":check['failures']}
+            for row in mesh_rows for gate in row['mesh_parts']
+            for stage,check in [('float64',gate),('float32_glb_roundtrip',gate.get('float32_glb_roundtrip'))]
+            if check is not None and not check['pass']
+        ],
         "source_accounting": {
             "features": len(wm["buildings"]),
             "suppressed_hero_features": suppressed,
@@ -256,16 +301,23 @@ def build(target_count: int, output_glb: Path, output_report: Path) -> dict:
         "performance": {
             "runtime_seconds": time.perf_counter() - started,
             "max_rss_mb": _rss_mb(),
-            "output_glb_bytes": output_glb.stat().st_size,
+            "output_glb_bytes": len(glb_bytes) if failed_selected == 0 else None,
         },
-        "output_glb": str(output_glb),
+        "output_glb": str(output_glb) if failed_selected == 0 else None,
+        "output_glb_sha256":hashlib.sha256(glb_bytes).hexdigest() if failed_selected == 0 else None,
+        "dependencies":{p:importlib.metadata.version(p) for p in
+                        ['numpy','shapely','trimesh','mapbox-earcut','pyproj']},
+        "blender_gate":"pending" if failed_selected == 0 else "not_run_numerical_gate_failed",
+        "full_xinyi":"not_run_out_of_scope",
+        "unreal":"not_run_out_of_scope",
         "tile_strategy_note": (
             "Representative GLB keeps inspectable per-building nodes. Full Xinyi, if gated, "
             "must batch by deterministic 500 m spatial tile rather than one district-wide mesh."
         ),
         "buildings": mesh_rows,
     }
-    output_report.write_text(json.dumps(report, indent=2), encoding="utf-8")
+    output_report.parent.mkdir(parents=True, exist_ok=True)
+    output_report.write_text(json.dumps(report, indent=2, allow_nan=False), encoding="utf-8")
     print(json.dumps({k: v for k, v in report.items() if k != "buildings"}, indent=2))
     return report
 

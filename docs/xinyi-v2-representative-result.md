@@ -1,5 +1,10 @@
 # Xinyi Robust Whitebox v2 — Representative Gate Result
 
+> Superseded for release readiness by the [strict representative gate](xinyi-v2-strict-representative-result.md):
+> float64 80/80, but actual float32 GLB roundtrip **76/80** with four reversed roof/base
+> pairs and overlapping caps. Blender was not run after this failed numerical gate.
+> The report below preserves the earlier, narrower checks as historical evidence.
+
 Date: 2026-09-20  
 Branch: `feat/xinyi-robust-whitebox-v2`  
 Draft PR: #6  
