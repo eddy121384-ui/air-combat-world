@@ -1,0 +1,1409 @@
+{
+  "audit_seconds": 5.770634999964386,
+  "component_checks": [
+    {
+      "base_triangles": 2,
+      "component": 0,
+      "key": "tp_building_height.237255/part-0",
+      "roof_triangles": 2,
+      "triangles": 12,
+      "vertices": 8,
+      "volume_m3": 3157.863447924319
+    },
+    {
+      "base_triangles": 6,
+      "component": 1,
+      "key": "tp_building_height.237255/part-0",
+      "roof_triangles": 6,
+      "triangles": 28,
+      "vertices": 16,
+      "volume_m3": 12631.465932849096
+    },
+    {
+      "base_triangles": 2,
+      "component": 0,
+      "key": "tp_building_height.237262/part-0",
+      "roof_triangles": 2,
+      "triangles": 12,
+      "vertices": 8,
+      "volume_m3": 2107.4921928277713
+    },
+    {
+      "base_triangles": 2,
+      "component": 0,
+      "key": "tp_building_height.237270/part-0",
+      "roof_triangles": 2,
+      "triangles": 12,
+      "vertices": 8,
+      "volume_m3": 955.4998121334866
+    },
+    {
+      "base_triangles": 2,
+      "component": 0,
+      "key": "tp_building_height.237271/part-0",
+      "roof_triangles": 2,
+      "triangles": 12,
+      "vertices": 8,
+      "volume_m3": 2450.5054266676693
+    },
+    {
+      "base_triangles": 1,
+      "component": 0,
+      "key": "tp_building_height.237287/part-0",
+      "roof_triangles": 1,
+      "triangles": 8,
+      "vertices": 6,
+      "volume_m3": 1216.549794503216
+    },
+    {
+      "base_triangles": 2,
+      "component": 0,
+      "key": "tp_building_height.237291/part-0",
+      "roof_triangles": 2,
+      "triangles": 12,
+      "vertices": 8,
+      "volume_m3": 444.6283793420468
+    },
+    {
+      "base_triangles": 2,
+      "component": 0,
+      "key": "tp_building_height.237293/part-0",
+      "roof_triangles": 2,
+      "triangles": 12,
+      "vertices": 8,
+      "volume_m3": 344.6992630678554
+    },
+    {
+      "base_triangles": 2,
+      "component": 0,
+      "key": "tp_building_height.237300/part-0",
+      "roof_triangles": 2,
+      "triangles": 12,
+      "vertices": 8,
+      "volume_m3": 359.2956619671847
+    },
+    {
+      "base_triangles": 3,
+      "component": 0,
+      "key": "tp_building_height.237301/part-0",
+      "roof_triangles": 3,
+      "triangles": 16,
+      "vertices": 10,
+      "volume_m3": 3274.076962806401
+    },
+    {
+      "base_triangles": 2,
+      "component": 0,
+      "key": "tp_building_height.237400/part-0",
+      "roof_triangles": 2,
+      "triangles": 12,
+      "vertices": 8,
+      "volume_m3": 2650.9237374652294
+    },
+    {
+      "base_triangles": 2,
+      "component": 0,
+      "key": "tp_building_height.237865/part-0",
+      "roof_triangles": 2,
+      "triangles": 12,
+      "vertices": 8,
+      "volume_m3": 2451.070048892308
+    },
+    {
+      "base_triangles": 4,
+      "component": 0,
+      "key": "tp_building_height.239359/part-0",
+      "roof_triangles": 4,
+      "triangles": 20,
+      "vertices": 12,
+      "volume_m3": 17880.563431848965
+    },
+    {
+      "base_triangles": 1,
+      "component": 0,
+      "key": "tp_building_height.958/part-0",
+      "roof_triangles": 1,
+      "triangles": 8,
+      "vertices": 6,
+      "volume_m3": 975.1515834709668
+    },
+    {
+      "base_triangles": 4,
+      "component": 0,
+      "key": "tp_building_height.237302/part-0",
+      "roof_triangles": 4,
+      "triangles": 20,
+      "vertices": 12,
+      "volume_m3": 9364.692940753892
+    },
+    {
+      "base_triangles": 2,
+      "component": 0,
+      "key": "tp_building_height.237308/part-0",
+      "roof_triangles": 2,
+      "triangles": 12,
+      "vertices": 8,
+      "volume_m3": 3533.440824189935
+    },
+    {
+      "base_triangles": 1,
+      "component": 0,
+      "key": "tp_building_height.237310/part-0",
+      "roof_triangles": 1,
+      "triangles": 8,
+      "vertices": 6,
+      "volume_m3": 1354.6548088483396
+    },
+    {
+      "base_triangles": 1,
+      "component": 1,
+      "key": "tp_building_height.237310/part-0",
+      "roof_triangles": 1,
+      "triangles": 8,
+      "vertices": 6,
+      "volume_m3": 1354.6553211887974
+    },
+    {
+      "base_triangles": 2,
+      "component": 0,
+      "key": "tp_building_height.237313/part-0",
+      "roof_triangles": 2,
+      "triangles": 12,
+      "vertices": 8,
+      "volume_m3": 2730.643857747806
+    },
+    {
+      "base_triangles": 2,
+      "component": 0,
+      "key": "tp_building_height.237419/part-0",
+      "roof_triangles": 2,
+      "triangles": 12,
+      "vertices": 8,
+      "volume_m3": 4944.799719683629
+    },
+    {
+      "base_triangles": 1,
+      "component": 0,
+      "key": "tp_building_height.237420/part-0",
+      "roof_triangles": 1,
+      "triangles": 8,
+      "vertices": 6,
+      "volume_m3": 1049.2537175613713
+    },
+    {
+      "base_triangles": 2,
+      "component": 0,
+      "key": "tp_building_height.237883/part-0",
+      "roof_triangles": 2,
+      "triangles": 12,
+      "vertices": 8,
+      "volume_m3": 3078.711172998541
+    },
+    {
+      "base_triangles": 2,
+      "component": 0,
+      "key": "tp_building_height.238438/part-0",
+      "roof_triangles": 2,
+      "triangles": 12,
+      "vertices": 8,
+      "volume_m3": 657.959641722881
+    },
+    {
+      "base_triangles": 4,
+      "component": 0,
+      "key": "tp_building_height.238489/part-0",
+      "roof_triangles": 4,
+      "triangles": 20,
+      "vertices": 12,
+      "volume_m3": 2086.156921259724
+    },
+    {
+      "base_triangles": 1,
+      "component": 0,
+      "key": "tp_building_height.238493/part-0",
+      "roof_triangles": 1,
+      "triangles": 8,
+      "vertices": 6,
+      "volume_m3": 196.48951495523215
+    },
+    {
+      "base_triangles": 9,
+      "component": 0,
+      "key": "tp_building_height.238512/part-0",
+      "roof_triangles": 9,
+      "triangles": 40,
+      "vertices": 22,
+      "volume_m3": 11764.110724366808
+    },
+    {
+      "base_triangles": 4,
+      "component": 0,
+      "key": "tp_building_height.238519/part-0",
+      "roof_triangles": 4,
+      "triangles": 20,
+      "vertices": 12,
+      "volume_m3": 4044.8781960175597
+    },
+    {
+      "base_triangles": 1,
+      "component": 0,
+      "key": "tp_building_height.238523/part-0",
+      "roof_triangles": 1,
+      "triangles": 8,
+      "vertices": 6,
+      "volume_m3": 659.0824587112038
+    },
+    {
+      "base_triangles": 1,
+      "component": 0,
+      "key": "tp_building_height.238524/part-0",
+      "roof_triangles": 1,
+      "triangles": 8,
+      "vertices": 6,
+      "volume_m3": 519.8558790738534
+    },
+    {
+      "base_triangles": 2,
+      "component": 0,
+      "key": "tp_building_height.238525/part-0",
+      "roof_triangles": 2,
+      "triangles": 12,
+      "vertices": 8,
+      "volume_m3": 674.8006974346875
+    },
+    {
+      "base_triangles": 1,
+      "component": 0,
+      "key": "tp_building_height.238526/part-0",
+      "roof_triangles": 1,
+      "triangles": 8,
+      "vertices": 6,
+      "volume_m3": 335.1549846877533
+    },
+    {
+      "base_triangles": 1,
+      "component": 0,
+      "key": "tp_building_height.238529/part-0",
+      "roof_triangles": 1,
+      "triangles": 8,
+      "vertices": 6,
+      "volume_m3": 350.31272238507637
+    },
+    {
+      "base_triangles": 1,
+      "component": 0,
+      "key": "tp_building_height.238530/part-0",
+      "roof_triangles": 1,
+      "triangles": 8,
+      "vertices": 6,
+      "volume_m3": 344.6987415974133
+    },
+    {
+      "base_triangles": 1,
+      "component": 0,
+      "key": "tp_building_height.238531/part-0",
+      "roof_triangles": 1,
+      "triangles": 8,
+      "vertices": 6,
+      "volume_m3": 340.76896843083404
+    },
+    {
+      "base_triangles": 1,
+      "component": 0,
+      "key": "tp_building_height.238532/part-0",
+      "roof_triangles": 1,
+      "triangles": 8,
+      "vertices": 6,
+      "volume_m3": 348.0671300700099
+    },
+    {
+      "base_triangles": 1,
+      "component": 0,
+      "key": "tp_building_height.238533/part-0",
+      "roof_triangles": 1,
+      "triangles": 8,
+      "vertices": 6,
+      "volume_m3": 197.6123111127648
+    },
+    {
+      "base_triangles": 1,
+      "component": 0,
+      "key": "tp_building_height.238534/part-0",
+      "roof_triangles": 1,
+      "triangles": 8,
+      "vertices": 6,
+      "volume_m3": 447.9960951687123
+    },
+    {
+      "base_triangles": 2,
+      "component": 0,
+      "key": "tp_building_height.238535/part-0",
+      "roof_triangles": 2,
+      "triangles": 12,
+      "vertices": 8,
+      "volume_m3": 468.20645277387365
+    },
+    {
+      "base_triangles": 1,
+      "component": 0,
+      "key": "tp_building_height.238536/part-0",
+      "roof_triangles": 1,
+      "triangles": 8,
+      "vertices": 6,
+      "volume_m3": 223.43681851637302
+    },
+    {
+      "base_triangles": 2,
+      "component": 0,
+      "key": "tp_building_height.238537/part-0",
+      "roof_triangles": 2,
+      "triangles": 12,
+      "vertices": 8,
+      "volume_m3": 414.31218367315824
+    },
+    {
+      "base_triangles": 1,
+      "component": 0,
+      "key": "tp_building_height.238538/part-0",
+      "roof_triangles": 1,
+      "triangles": 8,
+      "vertices": 6,
+      "volume_m3": 186.38447713651718
+    },
+    {
+      "base_triangles": 1,
+      "component": 0,
+      "key": "tp_building_height.238540/part-0",
+      "roof_triangles": 1,
+      "triangles": 8,
+      "vertices": 6,
+      "volume_m3": 189.7527380100358
+    },
+    {
+      "base_triangles": 1,
+      "component": 0,
+      "key": "tp_building_height.238541/part-0",
+      "roof_triangles": 1,
+      "triangles": 8,
+      "vertices": 6,
+      "volume_m3": 229.05063029325416
+    },
+    {
+      "base_triangles": 4,
+      "component": 0,
+      "key": "tp_building_height.238542/part-0",
+      "roof_triangles": 4,
+      "triangles": 20,
+      "vertices": 12,
+      "volume_m3": 3925.2990073962283
+    },
+    {
+      "base_triangles": 2,
+      "component": 0,
+      "key": "tp_building_height.238544/part-0",
+      "roof_triangles": 2,
+      "triangles": 12,
+      "vertices": 8,
+      "volume_m3": 392.9790299104643
+    },
+    {
+      "base_triangles": 1,
+      "component": 0,
+      "key": "tp_building_height.238583/part-0",
+      "roof_triangles": 1,
+      "triangles": 8,
+      "vertices": 6,
+      "volume_m3": 197.6123111127648
+    },
+    {
+      "base_triangles": 1,
+      "component": 0,
+      "key": "tp_building_height.238584/part-0",
+      "roof_triangles": 1,
+      "triangles": 8,
+      "vertices": 6,
+      "volume_m3": 358.1720767803624
+    },
+    {
+      "base_triangles": 1,
+      "component": 0,
+      "key": "tp_building_height.238585/part-0",
+      "roof_triangles": 1,
+      "triangles": 8,
+      "vertices": 6,
+      "volume_m3": 189.75275149275816
+    },
+    {
+      "base_triangles": 3,
+      "component": 0,
+      "key": "tp_building_height.238589/part-0",
+      "roof_triangles": 3,
+      "triangles": 16,
+      "vertices": 10,
+      "volume_m3": 508.62728150558786
+    },
+    {
+      "base_triangles": 1,
+      "component": 0,
+      "key": "tp_building_height.238590/part-0",
+      "roof_triangles": 1,
+      "triangles": 8,
+      "vertices": 6,
+      "volume_m3": 226.24365328420754
+    },
+    {
+      "base_triangles": 1,
+      "component": 0,
+      "key": "tp_building_height.239239/part-0",
+      "roof_triangles": 1,
+      "triangles": 8,
+      "vertices": 6,
+      "volume_m3": 866.2374850930113
+    },
+    {
+      "base_triangles": 1,
+      "component": 0,
+      "key": "tp_building_height.239338/part-0",
+      "roof_triangles": 1,
+      "triangles": 8,
+      "vertices": 6,
+      "volume_m3": 1242.37320651503
+    },
+    {
+      "base_triangles": 5,
+      "component": 1,
+      "key": "tp_building_height.239338/part-0",
+      "roof_triangles": 5,
+      "triangles": 24,
+      "vertices": 14,
+      "volume_m3": 7454.260090159951
+    },
+    {
+      "base_triangles": 1,
+      "component": 0,
+      "key": "tp_building_height.239369/part-0",
+      "roof_triangles": 1,
+      "triangles": 8,
+      "vertices": 6,
+      "volume_m3": 189.75260796108282
+    },
+    {
+      "base_triangles": 1,
+      "component": 0,
+      "key": "tp_building_height.240210/part-0",
+      "roof_triangles": 1,
+      "triangles": 8,
+      "vertices": 6,
+      "volume_m3": 806.7292492196575
+    },
+    {
+      "base_triangles": 1,
+      "component": 1,
+      "key": "tp_building_height.240210/part-0",
+      "roof_triangles": 1,
+      "triangles": 8,
+      "vertices": 6,
+      "volume_m3": 806.7303550204815
+    },
+    {
+      "base_triangles": 3,
+      "component": 0,
+      "key": "tp_building_height.240313/part-0",
+      "roof_triangles": 3,
+      "triangles": 16,
+      "vertices": 10,
+      "volume_m3": 2477.4544133107725
+    },
+    {
+      "base_triangles": 2,
+      "component": 0,
+      "key": "tp_building_height.242142/part-0",
+      "roof_triangles": 2,
+      "triangles": 12,
+      "vertices": 8,
+      "volume_m3": 1913.2452685821092
+    },
+    {
+      "base_triangles": 2,
+      "component": 0,
+      "key": "tp_building_height.242143/part-0",
+      "roof_triangles": 2,
+      "triangles": 12,
+      "vertices": 8,
+      "volume_m3": 2598.7124552790337
+    },
+    {
+      "base_triangles": 2,
+      "component": 0,
+      "key": "tp_building_height.242179/part-0",
+      "roof_triangles": 2,
+      "triangles": 12,
+      "vertices": 8,
+      "volume_m3": 1648.2658591624738
+    },
+    {
+      "base_triangles": 2,
+      "component": 0,
+      "key": "tp_building_height.242181/part-0",
+      "roof_triangles": 2,
+      "triangles": 12,
+      "vertices": 8,
+      "volume_m3": 2506.0847559894537
+    },
+    {
+      "base_triangles": 1,
+      "component": 0,
+      "key": "tp_building_height.946/part-0",
+      "roof_triangles": 1,
+      "triangles": 8,
+      "vertices": 6,
+      "volume_m3": 1626.3706320166918
+    },
+    {
+      "base_triangles": 1,
+      "component": 0,
+      "key": "tp_building_height.950/part-0",
+      "roof_triangles": 1,
+      "triangles": 8,
+      "vertices": 6,
+      "volume_m3": 678.1699864098215
+    },
+    {
+      "base_triangles": 21,
+      "component": 0,
+      "key": "tp_building_height.268223/part-0",
+      "roof_triangles": 21,
+      "triangles": 88,
+      "vertices": 46,
+      "volume_m3": 17165.329583675357
+    },
+    {
+      "base_triangles": 42,
+      "component": 0,
+      "key": "tp_building_height.271873/part-0",
+      "roof_triangles": 42,
+      "triangles": 172,
+      "vertices": 88,
+      "volume_m3": 526889.5354476348
+    },
+    {
+      "base_triangles": 2,
+      "component": 0,
+      "key": "tp_building_height.272425/part-0",
+      "roof_triangles": 2,
+      "triangles": 12,
+      "vertices": 8,
+      "volume_m3": 53175.670129430946
+    },
+    {
+      "base_triangles": 2,
+      "component": 1,
+      "key": "tp_building_height.272425/part-0",
+      "roof_triangles": 2,
+      "triangles": 12,
+      "vertices": 8,
+      "volume_m3": 31905.41980680637
+    },
+    {
+      "base_triangles": 20,
+      "component": 2,
+      "key": "tp_building_height.272425/part-0",
+      "roof_triangles": 20,
+      "triangles": 84,
+      "vertices": 44,
+      "volume_m3": 263219.7684238322
+    },
+    {
+      "base_triangles": 1,
+      "component": 0,
+      "key": "tp_building_height.293835/part-0",
+      "roof_triangles": 1,
+      "triangles": 8,
+      "vertices": 6,
+      "volume_m3": 188.77069628667718
+    },
+    {
+      "base_triangles": 7,
+      "component": 1,
+      "key": "tp_building_height.293835/part-0",
+      "roof_triangles": 7,
+      "triangles": 32,
+      "vertices": 18,
+      "volume_m3": 9249.746235674416
+    },
+    {
+      "base_triangles": 1,
+      "component": 0,
+      "key": "tp_building_height.293835/part-1",
+      "roof_triangles": 1,
+      "triangles": 8,
+      "vertices": 6,
+      "volume_m3": 755.0817501402053
+    },
+    {
+      "base_triangles": 13,
+      "component": 0,
+      "key": "tp_building_height.294450/part-0",
+      "roof_triangles": 13,
+      "triangles": 56,
+      "vertices": 30,
+      "volume_m3": 16278.316936940542
+    },
+    {
+      "base_triangles": 2,
+      "component": 0,
+      "key": "tp_building_height.1029/part-0",
+      "roof_triangles": 2,
+      "triangles": 12,
+      "vertices": 8,
+      "volume_m3": 1006.0278428002688
+    },
+    {
+      "base_triangles": 2,
+      "component": 0,
+      "key": "tp_building_height.293875/part-0",
+      "roof_triangles": 2,
+      "triangles": 12,
+      "vertices": 8,
+      "volume_m3": 6383.106874685861
+    },
+    {
+      "base_triangles": 4,
+      "component": 1,
+      "key": "tp_building_height.293875/part-0",
+      "roof_triangles": 4,
+      "triangles": 20,
+      "vertices": 12,
+      "volume_m3": 19149.318614671578
+    },
+    {
+      "base_triangles": 25,
+      "component": 2,
+      "key": "tp_building_height.293875/part-0",
+      "roof_triangles": 25,
+      "triangles": 104,
+      "vertices": 54,
+      "volume_m3": 87235.7415645308
+    },
+    {
+      "base_triangles": 28,
+      "component": 0,
+      "key": "tp_building_height.294650/part-0",
+      "roof_triangles": 28,
+      "triangles": 116,
+      "vertices": 60,
+      "volume_m3": 72606.80808251917
+    },
+    {
+      "base_triangles": 1,
+      "component": 0,
+      "key": "tp_building_height.293551/part-1",
+      "roof_triangles": 1,
+      "triangles": 8,
+      "vertices": 6,
+      "volume_m3": 172.91071576741766
+    },
+    {
+      "base_triangles": 1,
+      "component": 1,
+      "key": "tp_building_height.293551/part-1",
+      "roof_triangles": 1,
+      "triangles": 8,
+      "vertices": 6,
+      "volume_m3": 172.91089966973323
+    },
+    {
+      "base_triangles": 4,
+      "component": 2,
+      "key": "tp_building_height.293551/part-1",
+      "roof_triangles": 4,
+      "triangles": 20,
+      "vertices": 12,
+      "volume_m3": 1037.4645070448162
+    }
+  ],
+  "dependencies": {
+    "mapbox-earcut": "2.1.0",
+    "numpy": "2.5.3",
+    "psutil": "7.2.2",
+    "shapely": "2.1.2",
+    "trimesh": "5.1.0"
+  },
+  "diagnostic_file": "FAILED_DIAGNOSTICS_DO_NOT_IMPORT_TO_UE.glb",
+  "elapsed_seconds": 7.2894545999588445,
+  "emitted_parts": 69,
+  "failures": [
+    {
+      "component": 0,
+      "key": "tp_building_height.240743/part-0",
+      "reason": "not_a_closed_outward_solid"
+    },
+    {
+      "component": 0,
+      "key": "tp_building_height.243138/part-0",
+      "reason": "not_a_closed_outward_solid"
+    },
+    {
+      "component": 0,
+      "key": "tp_building_height.240128/part-0",
+      "reason": "not_a_closed_outward_solid"
+    },
+    {
+      "component": 0,
+      "key": "tp_building_height.240228/part-0",
+      "reason": "not_a_closed_outward_solid"
+    },
+    {
+      "component": 0,
+      "key": "tp_building_height.240427/part-0",
+      "reason": "not_a_closed_outward_solid"
+    },
+    {
+      "component": 0,
+      "key": "tp_building_height.241071/part-0",
+      "reason": "not_a_closed_outward_solid"
+    },
+    {
+      "component": 0,
+      "key": "tp_building_height.242213/part-0",
+      "reason": "not_a_closed_outward_solid"
+    },
+    {
+      "component": 1,
+      "key": "tp_building_height.242642/part-0",
+      "reason": "not_a_closed_outward_solid"
+    },
+    {
+      "component": 0,
+      "key": "tp_building_height.246437/part-0",
+      "reason": "not_a_closed_outward_solid"
+    },
+    {
+      "component": 1,
+      "key": "tp_building_height.272088/part-0",
+      "reason": "nonfinite_coordinates_or_zero_area_triangles"
+    },
+    {
+      "component": 0,
+      "key": "tp_building_height.269106/part-0",
+      "reason": "wrong_cap_direction"
+    }
+  ],
+  "geos_version": "3.13.1",
+  "mesh_generation_export_seconds": 0.6576644000015222,
+  "output_bytes": 183128,
+  "peak_working_set_bytes": 173850624,
+  "processed_features": 79,
+  "processed_parts": 80,
+  "raw_geometry_gate": "fail",
+  "sample_selection_and_reporting_seconds": 0.8611564000020735,
+  "selected_parts": [
+    "tp_building_height.1029/part-0",
+    "tp_building_height.237255/part-0",
+    "tp_building_height.237262/part-0",
+    "tp_building_height.237270/part-0",
+    "tp_building_height.237271/part-0",
+    "tp_building_height.237287/part-0",
+    "tp_building_height.237291/part-0",
+    "tp_building_height.237293/part-0",
+    "tp_building_height.237300/part-0",
+    "tp_building_height.237301/part-0",
+    "tp_building_height.237302/part-0",
+    "tp_building_height.237308/part-0",
+    "tp_building_height.237310/part-0",
+    "tp_building_height.237313/part-0",
+    "tp_building_height.237400/part-0",
+    "tp_building_height.237419/part-0",
+    "tp_building_height.237420/part-0",
+    "tp_building_height.237865/part-0",
+    "tp_building_height.237883/part-0",
+    "tp_building_height.238438/part-0",
+    "tp_building_height.238489/part-0",
+    "tp_building_height.238493/part-0",
+    "tp_building_height.238512/part-0",
+    "tp_building_height.238519/part-0",
+    "tp_building_height.238523/part-0",
+    "tp_building_height.238524/part-0",
+    "tp_building_height.238525/part-0",
+    "tp_building_height.238526/part-0",
+    "tp_building_height.238529/part-0",
+    "tp_building_height.238530/part-0",
+    "tp_building_height.238531/part-0",
+    "tp_building_height.238532/part-0",
+    "tp_building_height.238533/part-0",
+    "tp_building_height.238534/part-0",
+    "tp_building_height.238535/part-0",
+    "tp_building_height.238536/part-0",
+    "tp_building_height.238537/part-0",
+    "tp_building_height.238538/part-0",
+    "tp_building_height.238540/part-0",
+    "tp_building_height.238541/part-0",
+    "tp_building_height.238542/part-0",
+    "tp_building_height.238544/part-0",
+    "tp_building_height.238583/part-0",
+    "tp_building_height.238584/part-0",
+    "tp_building_height.238585/part-0",
+    "tp_building_height.238589/part-0",
+    "tp_building_height.238590/part-0",
+    "tp_building_height.239239/part-0",
+    "tp_building_height.239338/part-0",
+    "tp_building_height.239359/part-0",
+    "tp_building_height.239369/part-0",
+    "tp_building_height.240128/part-0",
+    "tp_building_height.240210/part-0",
+    "tp_building_height.240228/part-0",
+    "tp_building_height.240313/part-0",
+    "tp_building_height.240427/part-0",
+    "tp_building_height.240743/part-0",
+    "tp_building_height.241071/part-0",
+    "tp_building_height.242142/part-0",
+    "tp_building_height.242143/part-0",
+    "tp_building_height.242179/part-0",
+    "tp_building_height.242181/part-0",
+    "tp_building_height.242213/part-0",
+    "tp_building_height.242642/part-0",
+    "tp_building_height.243138/part-0",
+    "tp_building_height.246437/part-0",
+    "tp_building_height.268223/part-0",
+    "tp_building_height.269106/part-0",
+    "tp_building_height.271873/part-0",
+    "tp_building_height.272088/part-0",
+    "tp_building_height.272425/part-0",
+    "tp_building_height.293551/part-1",
+    "tp_building_height.293835/part-0",
+    "tp_building_height.293835/part-1",
+    "tp_building_height.293875/part-0",
+    "tp_building_height.294450/part-0",
+    "tp_building_height.294650/part-0",
+    "tp_building_height.946/part-0",
+    "tp_building_height.950/part-0",
+    "tp_building_height.958/part-0"
+  ],
+  "selection_reasons": {
+    "tp_building_height.1029/part-0": [
+      "rectangle"
+    ],
+    "tp_building_height.237255/part-0": [
+      "repaired",
+      "concave"
+    ],
+    "tp_building_height.237262/part-0": [
+      "rectangle"
+    ],
+    "tp_building_height.237270/part-0": [
+      "repaired"
+    ],
+    "tp_building_height.237271/part-0": [
+      "repaired"
+    ],
+    "tp_building_height.237287/part-0": [
+      "repaired"
+    ],
+    "tp_building_height.237291/part-0": [
+      "rectangle"
+    ],
+    "tp_building_height.237293/part-0": [
+      "rectangle"
+    ],
+    "tp_building_height.237300/part-0": [
+      "rectangle"
+    ],
+    "tp_building_height.237301/part-0": [
+      "concave"
+    ],
+    "tp_building_height.237302/part-0": [
+      "repaired"
+    ],
+    "tp_building_height.237308/part-0": [
+      "repaired"
+    ],
+    "tp_building_height.237310/part-0": [
+      "repaired"
+    ],
+    "tp_building_height.237313/part-0": [
+      "rectangle"
+    ],
+    "tp_building_height.237400/part-0": [
+      "repaired"
+    ],
+    "tp_building_height.237419/part-0": [
+      "previous_failure_neighborhood_lowrise"
+    ],
+    "tp_building_height.237420/part-0": [
+      "previous_failure_neighborhood_lowrise"
+    ],
+    "tp_building_height.237865/part-0": [
+      "rectangle"
+    ],
+    "tp_building_height.237883/part-0": [
+      "rectangle"
+    ],
+    "tp_building_height.238438/part-0": [
+      "previous_failure_neighborhood_lowrise"
+    ],
+    "tp_building_height.238489/part-0": [
+      "concave",
+      "previous_failure_neighborhood_lowrise"
+    ],
+    "tp_building_height.238493/part-0": [
+      "previous_failure_neighborhood_lowrise"
+    ],
+    "tp_building_height.238512/part-0": [
+      "concave",
+      "previous_failure_neighborhood_lowrise"
+    ],
+    "tp_building_height.238519/part-0": [
+      "previous_failure_neighborhood_lowrise"
+    ],
+    "tp_building_height.238523/part-0": [
+      "previous_failure_neighborhood_lowrise"
+    ],
+    "tp_building_height.238524/part-0": [
+      "previous_failure_neighborhood_lowrise"
+    ],
+    "tp_building_height.238525/part-0": [
+      "previous_failure_neighborhood_lowrise"
+    ],
+    "tp_building_height.238526/part-0": [
+      "previous_failure_neighborhood_lowrise"
+    ],
+    "tp_building_height.238529/part-0": [
+      "previous_failure_neighborhood_lowrise"
+    ],
+    "tp_building_height.238530/part-0": [
+      "previous_failure_neighborhood_lowrise"
+    ],
+    "tp_building_height.238531/part-0": [
+      "previous_failure_neighborhood_lowrise"
+    ],
+    "tp_building_height.238532/part-0": [
+      "previous_failure_neighborhood_lowrise"
+    ],
+    "tp_building_height.238533/part-0": [
+      "previous_failure_neighborhood_lowrise"
+    ],
+    "tp_building_height.238534/part-0": [
+      "previous_failure_neighborhood_lowrise"
+    ],
+    "tp_building_height.238535/part-0": [
+      "previous_failure_neighborhood_lowrise"
+    ],
+    "tp_building_height.238536/part-0": [
+      "previous_failure_neighborhood_lowrise"
+    ],
+    "tp_building_height.238537/part-0": [
+      "previous_failure_neighborhood_lowrise"
+    ],
+    "tp_building_height.238538/part-0": [
+      "previous_failure_neighborhood_lowrise"
+    ],
+    "tp_building_height.238540/part-0": [
+      "previous_failure_neighborhood_lowrise"
+    ],
+    "tp_building_height.238541/part-0": [
+      "previous_failure_neighborhood_lowrise"
+    ],
+    "tp_building_height.238542/part-0": [
+      "concave",
+      "previous_failure_neighborhood_lowrise"
+    ],
+    "tp_building_height.238544/part-0": [
+      "previous_failure_neighborhood_lowrise"
+    ],
+    "tp_building_height.238583/part-0": [
+      "previous_failure_neighborhood_lowrise"
+    ],
+    "tp_building_height.238584/part-0": [
+      "previous_failure_neighborhood_lowrise"
+    ],
+    "tp_building_height.238585/part-0": [
+      "previous_failure_neighborhood_lowrise"
+    ],
+    "tp_building_height.238589/part-0": [
+      "concave"
+    ],
+    "tp_building_height.238590/part-0": [
+      "previous_failure_neighborhood_lowrise"
+    ],
+    "tp_building_height.239239/part-0": [
+      "previous_failure_neighborhood_lowrise"
+    ],
+    "tp_building_height.239338/part-0": [
+      "concave"
+    ],
+    "tp_building_height.239359/part-0": [
+      "concave"
+    ],
+    "tp_building_height.239369/part-0": [
+      "previous_failure_neighborhood_lowrise"
+    ],
+    "tp_building_height.240128/part-0": [
+      "courtyard"
+    ],
+    "tp_building_height.240210/part-0": [
+      "previous_failure_neighborhood_lowrise"
+    ],
+    "tp_building_height.240228/part-0": [
+      "courtyard"
+    ],
+    "tp_building_height.240313/part-0": [
+      "previous_failure_neighborhood_lowrise"
+    ],
+    "tp_building_height.240427/part-0": [
+      "courtyard"
+    ],
+    "tp_building_height.240743/part-0": [
+      "courtyard"
+    ],
+    "tp_building_height.241071/part-0": [
+      "courtyard"
+    ],
+    "tp_building_height.242142/part-0": [
+      "previous_failure_neighborhood_lowrise"
+    ],
+    "tp_building_height.242143/part-0": [
+      "previous_failure_neighborhood_lowrise"
+    ],
+    "tp_building_height.242179/part-0": [
+      "previous_failure_neighborhood_lowrise"
+    ],
+    "tp_building_height.242181/part-0": [
+      "previous_failure_neighborhood_lowrise"
+    ],
+    "tp_building_height.242213/part-0": [
+      "courtyard"
+    ],
+    "tp_building_height.242642/part-0": [
+      "courtyard"
+    ],
+    "tp_building_height.243138/part-0": [
+      "courtyard"
+    ],
+    "tp_building_height.246437/part-0": [
+      "complex"
+    ],
+    "tp_building_height.268223/part-0": [
+      "complex"
+    ],
+    "tp_building_height.269106/part-0": [
+      "complex"
+    ],
+    "tp_building_height.271873/part-0": [
+      "complex"
+    ],
+    "tp_building_height.272088/part-0": [
+      "complex"
+    ],
+    "tp_building_height.272425/part-0": [
+      "complex"
+    ],
+    "tp_building_height.293551/part-1": [
+      "multipart_source"
+    ],
+    "tp_building_height.293835/part-0": [
+      "multipart_source"
+    ],
+    "tp_building_height.293835/part-1": [
+      "multipart_source"
+    ],
+    "tp_building_height.293875/part-0": [
+      "complex"
+    ],
+    "tp_building_height.294450/part-0": [
+      "multipart_source"
+    ],
+    "tp_building_height.294650/part-0": [
+      "complex"
+    ],
+    "tp_building_height.946/part-0": [
+      "fill"
+    ],
+    "tp_building_height.950/part-0": [
+      "fill"
+    ],
+    "tp_building_height.958/part-0": [
+      "fill"
+    ]
+  },
+  "source_sha256": "cc70f0b890c66f298ce504840151abc05b457a5346e854f1accf19432268a848",
+  "stage": "sample",
+  "tiles": [
+    {
+      "bounds_gltf_m": [
+        [
+          -1149.833740234375,
+          0.0,
+          857.1600799560547
+        ],
+        [
+          -998.5398254394531,
+          45.5,
+          957.3476219177246
+        ]
+      ],
+      "bytes": 21364,
+      "file": "xinyi_v2_-3_-2.glb",
+      "origin_enu_m": [
+        -1500,
+        -1000,
+        0
+      ],
+      "sha256": "6908b27be02a335fab23959f7004ba7673aa52227d1fe509ec19790cb1d85499",
+      "topology_vertices": 116,
+      "triangles": 180,
+      "vertices": 540
+    },
+    {
+      "bounds_gltf_m": [
+        [
+          -1099.4024353027344,
+          0.0,
+          -233.77093505859375
+        ],
+        [
+          -1089.316162109375,
+          17.3700008392334,
+          -222.63897705078125
+        ]
+      ],
+      "bytes": 2472,
+      "file": "xinyi_v2_-3_0.glb",
+      "origin_enu_m": [
+        -1500,
+        0,
+        0
+      ],
+      "sha256": "d52172cb425d44bd089c4cc38d38795e68f566a24dee735a53f024b953b10c28",
+      "topology_vertices": 6,
+      "triangles": 8,
+      "vertices": 24
+    },
+    {
+      "bounds_gltf_m": [
+        [
+          -1008.6260824203491,
+          0.0,
+          823.7642364501953
+        ],
+        [
+          -685.86572265625,
+          28.969999313354492,
+          946.2156715393066
+        ]
+      ],
+      "bytes": 62428,
+      "file": "xinyi_v2_-2_-2.glb",
+      "origin_enu_m": [
+        -1000,
+        -1000,
+        0
+      ],
+      "sha256": "fb4b1222e933a0a8fbcd7859c9a271df8ec86922aa7cc6785a07ead7f288a107",
+      "topology_vertices": 370,
+      "triangles": 548,
+      "vertices": 1644
+    },
+    {
+      "bounds_gltf_m": [
+        [
+          -907.7634735107422,
+          0.0,
+          333.9584655761719
+        ],
+        [
+          -897.6772155761719,
+          12.079999923706055,
+          345.0904235839844
+        ]
+      ],
+      "bytes": 2520,
+      "file": "xinyi_v2_-2_-1.glb",
+      "origin_enu_m": [
+        -1000,
+        -500,
+        0
+      ],
+      "sha256": "3c5b3c639544c0625b9ce04ec7e42a962e29524f4eb20f5b704b8aefd7b39811",
+      "topology_vertices": 6,
+      "triangles": 8,
+      "vertices": 24
+    },
+    {
+      "bounds_gltf_m": [
+        [
+          -322.7603454589844,
+          0.0,
+          890.5559234619141
+        ],
+        [
+          -242.07025146484375,
+          14.5600004196167,
+          957.3476219177246
+        ]
+      ],
+      "bytes": 11076,
+      "file": "xinyi_v2_-1_-2.glb",
+      "origin_enu_m": [
+        -500,
+        -1000,
+        0
+      ],
+      "sha256": "966ce028ca8a817d63bb713d3f6d2e5ce508ad0eddb9212673f04f7d3de7667e",
+      "topology_vertices": 46,
+      "triangles": 88,
+      "vertices": 264
+    },
+    {
+      "bounds_gltf_m": [
+        [
+          -373.191650390625,
+          0.0,
+          -200.3750762939453
+        ],
+        [
+          -242.07025146484375,
+          36.95000076293945,
+          -44.52779769897461
+        ]
+      ],
+      "bytes": 20172,
+      "file": "xinyi_v2_-1_0.glb",
+      "origin_enu_m": [
+        -500,
+        0,
+        0
+      ],
+      "sha256": "34ccbc5afbc61bed448ea17be7c634f2e5cd49880b91189f3b98a62b59f11f00",
+      "topology_vertices": 88,
+      "triangles": 172,
+      "vertices": 516
+    },
+    {
+      "bounds_gltf_m": [
+        [
+          -131.12139892578125,
+          0.0,
+          -601.1252517700195
+        ],
+        [
+          -40.34503173828125,
+          47.36000061035156,
+          -400.7501678466797
+        ]
+      ],
+      "bytes": 13216,
+      "file": "xinyi_v2_-1_1.glb",
+      "origin_enu_m": [
+        -500,
+        500,
+        0
+      ],
+      "sha256": "05bf506189c4e1c9ff6942a80bfddc219a60a5c09d916cfae42d901f03d35b02",
+      "topology_vertices": 60,
+      "triangles": 108,
+      "vertices": 324
+    },
+    {
+      "bounds_gltf_m": [
+        [
+          141.20765686035156,
+          0.0,
+          612.2572021484375
+        ],
+        [
+          453.8817443847656,
+          13.449999809265137,
+          768.1044921875
+        ]
+      ],
+      "bytes": 12880,
+      "file": "xinyi_v2_0_-2.glb",
+      "origin_enu_m": [
+        0,
+        -1000,
+        0
+      ],
+      "sha256": "e5dc00a307e006779c355f36d44c7d2482290cc3ee2f79ce60a2ba599456dc0a",
+      "topology_vertices": 60,
+      "triangles": 104,
+      "vertices": 312
+    },
+    {
+      "bounds_gltf_m": [
+        [
+          141.20765686035156,
+          0.0,
+          300.5626220703125
+        ],
+        [
+          504.31304931640625,
+          18.950000762939453,
+          445.27796173095703
+        ]
+      ],
+      "bytes": 17564,
+      "file": "xinyi_v2_0_-1.glb",
+      "origin_enu_m": [
+        0,
+        -500,
+        0
+      ],
+      "sha256": "545c943c6b3e7922451179f42bbcf01649bb26651d60d594e654616645fc7a40",
+      "topology_vertices": 82,
+      "triangles": 148,
+      "vertices": 444
+    },
+    {
+      "bounds_gltf_m": [
+        [
+          161.3801727294922,
+          0.0,
+          -300.5626220703125
+        ],
+        [
+          211.8114776611328,
+          20.860000610351562,
+          -211.5070343017578
+        ]
+      ],
+      "bytes": 14004,
+      "file": "xinyi_v2_0_0.glb",
+      "origin_enu_m": [
+        0,
+        0,
+        0
+      ],
+      "sha256": "cab3e44b4f47cab5776c0edac47f41c67266cef7c836d5c8409e8e1352b0c784",
+      "topology_vertices": 60,
+      "triangles": 116,
+      "vertices": 348
+    },
+    {
+      "bounds_gltf_m": [
+        [
+          544.6580848693848,
+          0.0,
+          879.4239807128906
+        ],
+        [
+          574.9168701171875,
+          3.0799999237060547,
+          912.81982421875
+        ]
+      ],
+      "bytes": 5432,
+      "file": "xinyi_v2_1_-2.glb",
+      "origin_enu_m": [
+        500,
+        -1000,
+        0
+      ],
+      "sha256": "43733d75dc78131ecb852fa3559970020ea2e0331c2452cd36056765351b910f",
+      "topology_vertices": 24,
+      "triangles": 36,
+      "vertices": 108
+    }
+  ],
+  "triangles": 1516,
+  "vertices": 4548
+}

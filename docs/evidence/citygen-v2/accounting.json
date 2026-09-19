@@ -1,0 +1,67 @@
+{
+  "coordinate_values": 290568,
+  "feature_rejections": [],
+  "geometry_types": {
+    "MultiPolygon": 11132
+  },
+  "grid_step_m": [
+    10.086260827671756,
+    11.131949079301414
+  ],
+  "hero_match": {
+    "hero_point_lonlat": [
+      121.5645,
+      25.0337
+    ],
+    "matched_building_ids": [
+      "tp_building_height.271134",
+      "tp_building_height.271183",
+      "tp_building_height.271185",
+      "tp_building_height.271186",
+      "tp_building_height.271190",
+      "tp_building_height.271675",
+      "tp_building_height.271844",
+      "tp_building_height.271850"
+    ],
+    "matched_count": 8,
+    "matched_max_height_m": 512.43,
+    "rule": "suppress all features with min centroid distance to (121.5645, 25.0337) <= 60.0m AND height_m >= 300.0"
+  },
+  "hero_suppressed_features": 8,
+  "hero_suppressed_parts": 8,
+  "local_frame": {
+    "origin_lonlat": [
+      121.5654,
+      25.033
+    ],
+    "type": "enu_meters"
+  },
+  "outcomes": {
+    "rejected": 5859,
+    "repaired": 2001,
+    "valid_as_is": 3276
+  },
+  "output_holes": 54,
+  "output_polygon_components": 5789,
+  "output_triangle_footprints": 1817,
+  "parts_with_holes": 715,
+  "parts_with_near_zero_input_area": 5903,
+  "parts_with_repeated_vertices": 10783,
+  "polygon_parts": 11136,
+  "rejection_reasons": {
+    "no_polygonal_area_after_GEOS_make_valid": 5859
+  },
+  "repaired_with_collapsed_components": 1591,
+  "source_features": 11132,
+  "source_interior_rings": 1200,
+  "source_sha256": "cc70f0b890c66f298ce504840151abc05b457a5346e854f1accf19432268a848",
+  "validity_reasons": {
+    "Interior is disconnected": 10,
+    "Ring Self-intersection": 931,
+    "Self-intersection": 1195,
+    "Too few points in geometry component": 5724,
+    "Valid Geometry": 3276
+  },
+  "values_on_0_0001_degree_grid": 290568,
+  "worldmodel_features": 11132
+}

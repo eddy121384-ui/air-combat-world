@@ -1,0 +1,581 @@
+{
+  "blender_version": "5.2.0 LTS",
+  "coordinate_frame": "ENU Z-up meters",
+  "source_sha256": "cc70f0b890c66f298ce504840151abc05b457a5346e854f1accf19432268a848",
+  "accepted": [
+    {
+      "name": "xinyi_v2_-3_-2",
+      "vertices": 540,
+      "triangles": 180,
+      "faces": {
+        "base_down": 32,
+        "roof_up": 32,
+        "walls": 116
+      },
+      "nonfinite_vertices": 0,
+      "bounds_m": [
+        [
+          -1149.833740234375,
+          -957.3475952148438,
+          0.0
+        ],
+        [
+          -998.539794921875,
+          -857.1600952148438,
+          45.5
+        ]
+      ]
+    },
+    {
+      "name": "xinyi_v2_-3_0",
+      "vertices": 24,
+      "triangles": 8,
+      "faces": {
+        "base_down": 1,
+        "roof_up": 1,
+        "walls": 6
+      },
+      "nonfinite_vertices": 0,
+      "bounds_m": [
+        [
+          -1099.4024658203125,
+          222.63897705078125,
+          0.0
+        ],
+        [
+          -1089.316162109375,
+          233.77093505859375,
+          17.3700008392334
+        ]
+      ]
+    },
+    {
+      "name": "xinyi_v2_-2_-2",
+      "vertices": 1644,
+      "triangles": 548,
+      "faces": {
+        "base_down": 88,
+        "roof_up": 88,
+        "walls": 370,
+        "zero_area": 2
+      },
+      "nonfinite_vertices": 0,
+      "bounds_m": [
+        [
+          -1008.6260986328125,
+          -946.2156982421875,
+          0.0
+        ],
+        [
+          -685.86572265625,
+          -823.7642211914062,
+          28.969999313354492
+        ]
+      ]
+    },
+    {
+      "name": "xinyi_v2_-2_-1",
+      "vertices": 24,
+      "triangles": 8,
+      "faces": {
+        "base_down": 1,
+        "roof_up": 1,
+        "walls": 6
+      },
+      "nonfinite_vertices": 0,
+      "bounds_m": [
+        [
+          -907.7634887695312,
+          -345.0904235839844,
+          0.0
+        ],
+        [
+          -897.67724609375,
+          -333.9584655761719,
+          12.079999923706055
+        ]
+      ]
+    },
+    {
+      "name": "xinyi_v2_-1_-2",
+      "vertices": 264,
+      "triangles": 88,
+      "faces": {
+        "base_down": 21,
+        "roof_up": 21,
+        "walls": 46
+      },
+      "nonfinite_vertices": 0,
+      "bounds_m": [
+        [
+          -322.7603454589844,
+          -957.3475952148438,
+          0.0
+        ],
+        [
+          -242.07025146484375,
+          -890.555908203125,
+          14.5600004196167
+        ]
+      ]
+    },
+    {
+      "name": "xinyi_v2_-1_0",
+      "vertices": 516,
+      "triangles": 172,
+      "faces": {
+        "base_down": 42,
+        "roof_up": 42,
+        "walls": 88
+      },
+      "nonfinite_vertices": 0,
+      "bounds_m": [
+        [
+          -373.191650390625,
+          44.52779769897461,
+          0.0
+        ],
+        [
+          -242.07025146484375,
+          200.3750762939453,
+          36.95000076293945
+        ]
+      ]
+    },
+    {
+      "name": "xinyi_v2_-1_1",
+      "vertices": 324,
+      "triangles": 108,
+      "faces": {
+        "base_down": 24,
+        "roof_up": 24,
+        "walls": 60
+      },
+      "nonfinite_vertices": 0,
+      "bounds_m": [
+        [
+          -131.12139892578125,
+          400.75018310546875,
+          0.0
+        ],
+        [
+          -40.34503173828125,
+          601.125244140625,
+          47.36000061035156
+        ]
+      ]
+    },
+    {
+      "name": "xinyi_v2_0_-2",
+      "vertices": 312,
+      "triangles": 104,
+      "faces": {
+        "base_down": 21,
+        "roof_up": 21,
+        "walls": 60,
+        "zero_area": 2
+      },
+      "nonfinite_vertices": 0,
+      "bounds_m": [
+        [
+          141.20765686035156,
+          -768.1044921875,
+          0.0
+        ],
+        [
+          453.8817443847656,
+          -612.2572021484375,
+          13.449999809265137
+        ]
+      ]
+    },
+    {
+      "name": "xinyi_v2_0_-1",
+      "vertices": 444,
+      "triangles": 148,
+      "faces": {
+        "base_down": 33,
+        "roof_up": 33,
+        "walls": 82
+      },
+      "nonfinite_vertices": 0,
+      "bounds_m": [
+        [
+          141.20765686035156,
+          -445.2779541015625,
+          0.0
+        ],
+        [
+          504.31304931640625,
+          -300.5626220703125,
+          18.950000762939453
+        ]
+      ]
+    },
+    {
+      "name": "xinyi_v2_0_0",
+      "vertices": 348,
+      "triangles": 116,
+      "faces": {
+        "base_down": 28,
+        "roof_up": 28,
+        "walls": 60
+      },
+      "nonfinite_vertices": 0,
+      "bounds_m": [
+        [
+          161.3801727294922,
+          211.5070343017578,
+          0.0
+        ],
+        [
+          211.8114776611328,
+          300.5626220703125,
+          20.860000610351562
+        ]
+      ]
+    },
+    {
+      "name": "xinyi_v2_1_-2",
+      "vertices": 108,
+      "triangles": 36,
+      "faces": {
+        "base_down": 6,
+        "roof_up": 6,
+        "walls": 24
+      },
+      "nonfinite_vertices": 0,
+      "bounds_m": [
+        [
+          544.6580810546875,
+          -912.81982421875,
+          0.0
+        ],
+        [
+          574.9168701171875,
+          -879.4239501953125,
+          3.0799999237060547
+        ]
+      ]
+    }
+  ],
+  "failed_diagnostics": [
+    {
+      "name": "tp_building_height.240743_part-0",
+      "vertices": 156,
+      "triangles": 52,
+      "faces": {
+        "base_down": 11,
+        "base_wrong": 1,
+        "roof_up": 11,
+        "roof_wrong": 1,
+        "walls": 28
+      },
+      "nonfinite_vertices": 0,
+      "bounds_m": [
+        [
+          -1038.8848876953125,
+          -400.75018310546875,
+          0.0
+        ],
+        [
+          -998.539794921875,
+          -356.22235107421875,
+          12.6899995803833
+        ]
+      ]
+    },
+    {
+      "name": "tp_building_height.243138_part-0",
+      "vertices": 132,
+      "triangles": 44,
+      "faces": {
+        "base_down": 7,
+        "base_wrong": 2,
+        "roof_up": 7,
+        "roof_wrong": 2,
+        "walls": 26
+      },
+      "nonfinite_vertices": 0,
+      "bounds_m": [
+        [
+          -1048.97119140625,
+          77.92364501953125,
+          0.0
+        ],
+        [
+          -998.539794921875,
+          122.4514389038086,
+          22.260000228881836
+        ]
+      ]
+    },
+    {
+      "name": "tp_building_height.240128_part-0",
+      "vertices": 108,
+      "triangles": 36,
+      "faces": {
+        "base_down": 7,
+        "roof_up": 7,
+        "walls": 22
+      },
+      "nonfinite_vertices": 0,
+      "bounds_m": [
+        [
+          -998.539794921875,
+          -634.5211181640625,
+          0.0
+        ],
+        [
+          -968.2810668945312,
+          -612.2572021484375,
+          50.79999923706055
+        ]
+      ]
+    },
+    {
+      "name": "tp_building_height.240228_part-0",
+      "vertices": 168,
+      "triangles": 56,
+      "faces": {
+        "base_down": 12,
+        "roof_up": 12,
+        "walls": 32
+      },
+      "nonfinite_vertices": 0,
+      "bounds_m": [
+        [
+          -907.7634887695312,
+          -612.2572021484375,
+          0.0
+        ],
+        [
+          -857.3321533203125,
+          -567.7293701171875,
+          24.1299991607666
+        ]
+      ]
+    },
+    {
+      "name": "tp_building_height.240427_part-0",
+      "vertices": 180,
+      "triangles": 60,
+      "faces": {
+        "base_down": 14,
+        "roof_up": 14,
+        "walls": 32
+      },
+      "nonfinite_vertices": 0,
+      "bounds_m": [
+        [
+          -887.5909423828125,
+          -723.57666015625,
+          0.0
+        ],
+        [
+          -847.2459106445312,
+          -656.7850341796875,
+          13.989999771118164
+        ]
+      ]
+    },
+    {
+      "name": "tp_building_height.241071_part-0",
+      "vertices": 108,
+      "triangles": 36,
+      "faces": {
+        "base_down": 8,
+        "roof_up": 8,
+        "walls": 20
+      },
+      "nonfinite_vertices": 0,
+      "bounds_m": [
+        [
+          -857.3321533203125,
+          -534.3335571289062,
+          0.0
+        ],
+        [
+          -827.0733642578125,
+          -500.9377136230469,
+          53.689998626708984
+        ]
+      ]
+    },
+    {
+      "name": "tp_building_height.242213_part-0",
+      "vertices": 96,
+      "triangles": 32,
+      "faces": {
+        "base_down": 6,
+        "roof_up": 6,
+        "walls": 20
+      },
+      "nonfinite_vertices": 0,
+      "bounds_m": [
+        [
+          -827.0733642578125,
+          -478.6737976074219,
+          0.0
+        ],
+        [
+          -796.8145751953125,
+          -434.14599609375,
+          43.4900016784668
+        ]
+      ]
+    },
+    {
+      "name": "tp_building_height.242642_part-0",
+      "vertices": 132,
+      "triangles": 44,
+      "faces": {
+        "base_down": 9,
+        "roof_up": 9,
+        "walls": 26
+      },
+      "nonfinite_vertices": 0,
+      "bounds_m": [
+        [
+          -998.539794921875,
+          -244.9028778076172,
+          0.0
+        ],
+        [
+          -958.1947631835938,
+          -200.37509155273438,
+          12.739999771118164
+        ]
+      ]
+    },
+    {
+      "name": "tp_building_height.246437_part-0",
+      "vertices": 336,
+      "triangles": 112,
+      "faces": {
+        "base_down": 27,
+        "roof_up": 27,
+        "walls": 58
+      },
+      "nonfinite_vertices": 0,
+      "bounds_m": [
+        [
+          -736.2969970703125,
+          979.6115112304688,
+          0.0
+        ],
+        [
+          -665.6932373046875,
+          1168.8546142578125,
+          47.20000076293945
+        ]
+      ]
+    },
+    {
+      "name": "tp_building_height.272088_part-0",
+      "vertices": 324,
+      "triangles": 108,
+      "faces": {
+        "base_down": 24,
+        "roof_up": 24,
+        "walls": 56,
+        "base_wrong": 2,
+        "roof_wrong": 2
+      },
+      "nonfinite_vertices": 0,
+      "bounds_m": [
+        [
+          -463.9679870605469,
+          356.2223815917969,
+          0.0
+        ],
+        [
+          -373.191650390625,
+          445.2779541015625,
+          22.899999618530273
+        ]
+      ]
+    },
+    {
+      "name": "tp_building_height.269106_part-0",
+      "vertices": 276,
+      "triangles": 92,
+      "faces": {
+        "base_down": 21,
+        "zero_area": 1,
+        "roof_up": 22,
+        "walls": 48
+      },
+      "nonfinite_vertices": 0,
+      "bounds_m": [
+        [
+          -20.172521591186523,
+          -834.8961791992188,
+          0.0
+        ],
+        [
+          70.60382843017578,
+          -756.9725341796875,
+          15.479999542236328
+        ]
+      ]
+    }
+  ],
+  "old": [
+    {
+      "name": "layerA_city_massing.001",
+      "vertices": 249636,
+      "triangles": 83212,
+      "faces": {
+        "roof_up": 14272,
+        "walls": 54268,
+        "base_down": 14272,
+        "zero_area": 20,
+        "roof_wrong": 190,
+        "base_wrong": 190
+      },
+      "nonfinite_vertices": 0,
+      "bounds_m": [
+        [
+          -1149.833740234375,
+          -979.6115112304688,
+          0.0
+        ],
+        [
+          948.1085205078125,
+          1168.8546142578125,
+          269.04998779296875
+        ]
+      ]
+    },
+    {
+      "name": "hero_taipei101_placeholder.002",
+      "vertices": 108,
+      "triangles": 36,
+      "faces": {
+        "base_wrong": 2,
+        "roof_wrong": 6,
+        "walls": 24,
+        "roof_up": 4
+      },
+      "nonfinite_vertices": 0,
+      "bounds_m": [
+        [
+          -119.06050109863281,
+          49.63949203491211,
+          0.0
+        ],
+        [
+          -62.4921989440918,
+          106.20779418945312,
+          508.0
+        ]
+      ]
+    }
+  ],
+  "scenes": {
+    "accepted": "Xinyi_V2_Accepted_Sample",
+    "failed": "Xinyi_V2_FAILED_Diagnostics",
+    "old": "Xinyi_V2_Compare_Old_PR3"
+  }
+}

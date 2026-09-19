@@ -1,0 +1,5 @@
+numpy==2.5.3
+shapely==2.1.2
+trimesh==5.1.0
+mapbox-earcut==2.1.0
+psutil==7.2.2
