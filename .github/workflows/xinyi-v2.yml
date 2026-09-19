@@ -1,0 +1,64 @@
+name: Xinyi Robust Whitebox v2
+
+on:
+  push:
+    branches:
+      - feat/xinyi-robust-whitebox-v2
+  pull_request:
+    paths:
+      - "tools/citygen_v2/**"
+      - "tools/compiler/worldmodel.py"
+      - "tests/test_citygen_v2.py"
+      - "requirements-citygen-v2.txt"
+      - ".github/workflows/xinyi-v2.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  representative-gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: requirements-citygen-v2.txt
+
+      - name: Install mature geometry stack
+        run: python -m pip install -r requirements-citygen-v2.txt
+
+      - name: Audit pinned Xinyi source
+        run: python tools/citygen_v2/audit_source.py
+
+      - name: Probe WFS precision in projected CRS
+        continue-on-error: true
+        run: node tools/citygen_v2/probe_wfs_precision.mjs
+
+      - name: Regenerate v0 artifacts for backward-compatibility tests
+        run: |
+          python tools/compiler/worldmodel.py
+          python tools/compiler/build_tile.py
+
+      - name: Run compiler and v2 tests
+        run: python -m unittest discover -s tests -v
+
+      - name: Build 80-building representative v2 GLB
+        run: python tools/citygen_v2/build_representative.py --count 80
+
+      - name: Upload numerical and Blender-ready evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: xinyi-v2-representative-evidence
+          if-no-files-found: ignore
+          path: |
+            data/generated/taipei/xinyi_v2_source_audit.report.json
+            data/generated/taipei/xinyi_v2_wfs_precision_probe.report.json
+            data/generated/taipei/xinyi_v2_representative.report.json
+            data/generated/taipei/xinyi_v2_representative_80.glb
