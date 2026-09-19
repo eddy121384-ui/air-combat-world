@@ -4,6 +4,19 @@ Date: 2026-09-20, Asia/Taipei. Issue [#5](https://github.com/eddy121384-ui/air-c
 Branch: `feat/xinyi-robust-whitebox-v2`, independently created from freshly fetched
 remote main `08afe383d1b89a745f78f17d1930a75f045cec7a`.
 
+**Concurrent remote work discovered at publication:** pushing this local commit
+was rejected because the requested remote branch had meanwhile received another
+implementation. At fetched head `b06f0d1e2091188f4b9ae0dfa6bb01b1581eb106`,
+[draft PR #6](https://github.com/eddy121384-ui/air-combat-world/pull/6) reports a
+separate EPSG:3826 WFS snapshot, projected-coordinate recovery of all collapsed
+exteriors, and an 80/80 numerical representative pass; its Blender gate remains
+pending. Those reports were read after this experiment, not independently
+reproduced here. **This document's failure verdict applies only to the original
+pinned EPSG:4326 snapshot and this implementation. It must not be used to reject
+the projected-source route in PR #6.** No force push, merge or replacement of
+that work was attempted. This is supporting forensic evidence, not a competing
+claim about the newer source. The original local experiment commit is `1ed81fb`.
+
 **This spike is not a successful city replacement.** The parallel mature-library
 path, exhaustive input accounting, deterministic representative meshes, and
 official Blender inspection are complete. The representative acceptance gate
@@ -273,7 +286,9 @@ under `unreal/Saved/CitygenV2/`; compact evidence is committed. Reproduction
 commands and official MCP inspection steps are in
 [tools/citygen_v2/README.md](../tools/citygen_v2/README.md).
 
-The next review decision is whether to authorize a precision-preserving source
-investigation and a general mature-backend treatment of the measured seam/contact
-cases. This spike stops here. No facade or visual polish should begin on these
-outputs.
+The independent experiment stops here. The newly discovered PR #6 already
+reports the precision-preserving source investigation proposed by these
+findings; its evidence and official Blender gate should be reviewed before
+duplicating that work. The seam/contact failures recorded here are from the
+quantized snapshot and should not be presumed present in projected-source data.
+No facade or visual polish should begin on this experiment's outputs.
