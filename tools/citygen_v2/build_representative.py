@@ -127,9 +127,14 @@ def build(target_count: int, output_glb: Path, output_report: Path) -> dict:
         raise ValueError("representative gate must stay between 50 and 100 source polygon parts")
 
     started = time.perf_counter()
-    source = REPO / "data/generated/taipei/sample_buildings.geojson"
+    source = REPO / "data/generated/taipei/sample_buildings_epsg3826.geojson"
     city = REPO / "cities/taipei/city.yaml"
-    wm = build_worldmodel(source, city)
+    if not source.exists():
+        raise RuntimeError(
+            "projected v2 source missing; run: node tools/citygen_v2/fetch_projected_sample.mjs"
+        )
+    source_sha256 = hashlib.sha256(source.read_bytes()).hexdigest()
+    wm = build_worldmodel(source, city, source_crs="EPSG:3826")
 
     outcome_counts = Counter()
     rejection_reasons = Counter()
@@ -225,6 +230,11 @@ def build(target_count: int, output_glb: Path, output_report: Path) -> dict:
 
     report = {
         "gate": "Xinyi Robust Whitebox v2 representative real-building sample",
+        "input": {
+            "source": str(source),
+            "source_crs": "EPSG:3826",
+            "sha256": source_sha256,
+        },
         "target_source_polygon_parts": target_count,
         "selected_source_polygon_parts": len(selected),
         "selected_all_pass": failed_selected == 0,
