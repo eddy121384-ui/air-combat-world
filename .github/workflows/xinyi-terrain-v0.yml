@@ -29,7 +29,12 @@ jobs:
       - name: Audit official MOI 2025 20 m DTM catalog
         run: node tools/terrain/audit_nlsc_dtm_source.mjs
 
+      - name: Audit surveyed WFS building ground elevations
+        run: python tools/terrain/audit_building_ground_elevation.py
+
       - name: Download official Taipei 20 m DTM package
+        id: official_dtm_download
+        continue-on-error: true
         run: |
           set -euo pipefail
           mkdir -p data/generated/taipei/terrain/cache
@@ -47,7 +52,26 @@ jobs:
           fi
 
       - name: Inspect official Taipei DTM package
+        if: steps.official_dtm_download.outcome == 'success'
         run: python tools/terrain/fetch_taipei_dtm_2025.py
+
+      - name: Record cloud-download blocker
+        if: steps.official_dtm_download.outcome != 'success'
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path("data/generated/taipei/terrain/official_dtm_cloud_download_blocker.json")
+          p.parent.mkdir(parents=True, exist_ok=True)
+          p.write_text(json.dumps({
+            "status":"BLOCKED_ON_GITHUB_HOSTED_RUNNER",
+            "production_target":"official MOI/TGOS 20m DTM",
+            "tgos_2025_result":"HTTP 403 from GitHub-hosted runner",
+            "legacy_moi_result":"connection timeout from GitHub-hosted runner",
+            "meaning":"network delivery restriction; not a rejection of the official dataset",
+            "next":"continue pipeline prototyping with a separately labeled cloud-readable terrain source; replace source without changing tile/coordinate contract"
+          },indent=2)+"\n")
+          PY
 
       - name: Upload terrain source audit
         if: always()
@@ -59,3 +83,5 @@ jobs:
             data/generated/taipei/terrain/nlsc_dtm_2025_source_audit.json
             data/generated/taipei/terrain/nlsc_dtm_2025_catalog.csv
             data/generated/taipei/terrain/taipei_dtm_2025_package_audit.json
+            data/generated/taipei/terrain/building_ground_elevation_audit.json
+            data/generated/taipei/terrain/official_dtm_cloud_download_blocker.json
