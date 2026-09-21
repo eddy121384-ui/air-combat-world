@@ -1,2 +1,3 @@
 -r requirements-citygen-v2.txt
 rasterio==1.5.1
+Pillow==12.0.0\n
