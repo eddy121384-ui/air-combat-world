@@ -29,29 +29,18 @@ SCHEMA_URL = (
 )
 
 
-def download(url: str, path: Path) -> dict:
-    req = urllib.request.Request(
-        url,
-        headers={"User-Agent": "air-combat-world/xinyi-terrain-v0"},
-    )
+def file_meta(url: str, path: Path) -> dict:
+    if not path.exists() or path.stat().st_size == 0:
+        raise FileNotFoundError(f"Expected workflow-downloaded source package: {path}")
     h = hashlib.sha256()
-    size = 0
-    with urllib.request.urlopen(req, timeout=90) as r, path.open("wb") as f:
-        while True:
-            block = r.read(1024 * 1024)
-            if not block:
-                break
+    with path.open("rb") as f:
+        for block in iter(lambda: f.read(1024 * 1024), b""):
             h.update(block)
-            size += len(block)
-            f.write(block)
-        ctype = r.headers.get("content-type")
-        final_url = r.geturl()
     return {
         "url": url,
-        "final_url": final_url,
+        "local_path": str(path.relative_to(REPO)),
         "sha256": h.hexdigest(),
-        "bytes": size,
-        "content_type": ctype,
+        "bytes": path.stat().st_size,
     }
 
 
@@ -105,8 +94,8 @@ OUT.mkdir(parents=True, exist_ok=True)
 taipei_zip = CACHE / "taipei_20m_dtm_2025.zip"
 schema_zip = CACHE / "schema_hdr.zip"
 
-taipei_meta = download(TAIPEI_URL, taipei_zip)
-schema_meta = download(SCHEMA_URL, schema_zip)
+taipei_meta = file_meta(TAIPEI_URL, taipei_zip)
+schema_meta = file_meta(SCHEMA_URL, schema_zip)
 
 taipei = inspect_zip(taipei_zip)
 schema = inspect_zip(schema_zip)
