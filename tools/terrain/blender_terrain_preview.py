@@ -93,6 +93,22 @@ def main():
     if missing:
         raise RuntimeError(f"missing building Z for {len(missing)} objects; first={missing[:10]}")
 
+    # Regression guard: imported building bases must land on surveyed ground Z.
+    # This catches accidental use of the internal GLB Y-up axis after Blender
+    # has already converted the scene to Z-up.
+    base_z_errors = []
+    for obj in buildings:
+        m = ID_RE.match(obj.name)
+        bid = m.group(1)
+        expected = float(offsets[bid])
+        world_base_z = min((obj.matrix_world @ Vector(corner)).z for corner in obj.bound_box)
+        base_z_errors.append(abs(world_base_z - expected))
+    max_base_z_error = max(base_z_errors, default=0.0)
+    if max_base_z_error > 1.0e-3:
+        raise RuntimeError(
+            f"building base-Z regression: max abs error {max_base_z_error:.6g} m"
+        )
+
     scene = bpy.context.scene
     scene.render.engine = "BLENDER_WORKBENCH"
     scene.render.resolution_x = 1600
@@ -176,6 +192,7 @@ def main():
         "building_objects":len(buildings),
         "building_z_applied":applied,
         "missing_building_z":len(missing),
+        "building_base_z_max_abs_error_m":max_base_z_error,
         "bounds_min":mins,
         "bounds_max":maxs,
         "renders":[p.name for p in sorted(a.out.glob("*.png"))],
