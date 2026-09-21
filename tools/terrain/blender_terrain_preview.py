@@ -19,7 +19,8 @@ ID_RE = re.compile(r"^(tp_building_height\.\d+)")
 
 
 def parse_args():
-    argv = sys.argv\n    argv = argv[argv.index("--")+1:] if "--" in argv else []
+    argv = sys.argv
+    argv = argv[argv.index("--")+1:] if "--" in argv else []
     p = argparse.ArgumentParser()
     p.add_argument("--buildings", type=Path, required=True)
     p.add_argument("--terrain", type=Path, required=True)
