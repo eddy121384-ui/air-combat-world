@@ -6,9 +6,27 @@ The current production-candidate geometry method is documented in:
 
 1. `docs/architecture/xinyi-citygen-v2.md`
 2. `docs/architecture/xinyi-citygen-guardrails.md`
-3. `docs/xinyi-v2-serialization-space-result.md`
+3. `docs/xinyi-v2-full-xinyi-cloud-result.md`
+4. `docs/xinyi-v2-serialization-space-result.md` — historical representative evidence
 
 These documents override older experimental assumptions for city geometry work.
+
+## Current validated status
+
+As of commit `4438d82fe2006710b0fda08e8a06989fba4c09a8`, workflow run
+`35557915078` passed the complete cloud gate:
+
+- locked representative geometry: PASS;
+- full Xinyi numerical/GLB gate: PASS twice with identical deterministic hashes;
+- 11,128 ordinary source polygon parts accounted for and emitted;
+- 8 hero-suppressed source parts;
+- 25 deterministic 500 m tiles;
+- 485,936 triangles;
+- Blender 5.2.0 LTS imported all 25 tiles / 11,130 mesh components: PASS;
+- zero-area, non-manifold, winding, cap-normal, wall, nonfinite, volume and tile-transform errors: all 0.
+
+The next gate is **Unreal XinyiV2 import / performance validation**. Do not restart the geometry
+research unless a source/dependency/policy change invalidates the evidence above.
 
 ## Non-negotiable rules
 
@@ -17,7 +35,8 @@ These documents override older experimental assumptions for city geometry work.
 - Ordinary buildings are owned by deterministic 500 m ENU tiles.
 - Convert repaired footprints to tile-local coordinates and quantize their horizontal coordinates through float32 **before triangulation**.
 - Revalidate the quantized footprint with GEOS before meshing.
-- Use mature geometry libraries: Shapely/GEOS for validity/repair, mapbox-earcut for triangulation, trimesh for extrusion/export.
+- Production cap triangulation uses **GEOS constrained Delaunay triangulation** via Shapely.
+- Trimesh owns extrusion / mesh assembly / GLB export. Mapbox-earcut remains only as a historical regression dependency and must not be silently restored as the production triangulator.
 - Preserve holes / courtyards and multipart provenance.
 - Never add per-building fixes, hidden skips, hand-edited footprints, deleted triangles, or building-ID-specific exceptions to make a gate pass.
 - Never relax a QA tolerance after seeing a failing building unless the tolerance change is independently justified and applied globally.
@@ -37,17 +56,21 @@ projected source
 -> tile-local coordinates
 -> float32 serialization-space quantization
 -> GEOS revalidation
--> earcut / trimesh meshing
+-> GEOS constrained Delaunay triangulation
+-> trimesh extrusion
 -> actual GLB export + reload
 -> strict QA
--> Blender imported-mesh QA / visual review
+-> Blender 5.2 headless imported-mesh QA + overview renders
 -> only then Unreal
 ```
 
-The representative gate at `cc0579962fb5c1af527bad895c6b5a340e6f5753`
-passed 80/80 locked source parts through numerical, actual GLB and Blender imported checks.
-The earlier 76/80 result at `3b963a4` is intentionally preserved as a regression proving why
-post-triangulation float32 casting is unsafe.
+Historical evidence that must remain understandable:
+
+- `3b963a4`: 76/80 after post-triangulation float32 cast — proves serialization-space meshing is required.
+- `cc057996...`: 80/80 representative serialization-space PASS using earcut.
+- Full-Xinyi earcut cloud run: numerical PASS but Blender exposed 5 degenerate sliver triangles.
+- `4438d82...`: production switched to GEOS constrained Delaunay; full numerical + Blender gate PASS.
+- Blender signed volume is accumulated after recentering vertices around a local reference origin. This is a numerically stable, translation-invariant calculation, not a tolerance relaxation.
 
 ## Historical branches / PRs
 
@@ -55,14 +78,15 @@ post-triangulation float32 casting is unsafe.
 - PR #6: Xinyi robust whitebox v2 production-candidate work.
 - PR #7: forensic audit of the coarse pinned EPSG:4326 source. Useful QA evidence, not a production replacement.
 
-When old reports disagree with the serialization-space result, treat the newer validated
-serialization-space method as authoritative unless a newer documented gate supersedes it.
+When old reports disagree with `docs/xinyi-v2-full-xinyi-cloud-result.md`, use the newer full-Xinyi
+validated method unless an even newer documented gate explicitly supersedes it.
 
-## Source drift
+## Source / policy drift
 
 If the WFS response, source hash, CRS, height semantics, dependency versions, tile policy,
-coordinate transform, or triangulation policy changes, do not silently continue full-city
-generation. Re-run the locked representative gate first and record the new evidence.
+coordinate transform, triangulation policy, or strict QA logic changes, do not silently continue
+city expansion. Re-run the locked representative gate and full-Xinyi regression gate before
+trusting the change.
 
 ## Hero buildings
 
@@ -72,13 +96,13 @@ reference must not be silently changed by ordinary city generation.
 
 ## Scope discipline
 
-For city-generation tasks, solve one gate at a time:
+Current sequence:
 
-1. representative geometry
-2. full Xinyi geometry
-3. Blender full-area sample QA
-4. Unreal XinyiV2 import / performance spike
-5. only after that, scale toward Taipei
+1. representative geometry — PASS
+2. full Xinyi numerical / serialization gate — PASS
+3. Blender full-area cloud QA — PASS
+4. Unreal XinyiV2 import / performance spike — NEXT
+5. only after Unreal validation, scale the same tile pipeline toward Taipei
 
-Do not mix facade polish, materials, gameplay, Taipei Basin expansion, or production-tool winner
-decisions into a geometry gate unless the task explicitly asks for them.
+Do not mix facade polish, materials, gameplay, Taipei-wide expansion, or production-tool winner
+decisions into the Unreal import gate unless the task explicitly asks for them.
