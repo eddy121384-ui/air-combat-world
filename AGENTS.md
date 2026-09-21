@@ -84,13 +84,20 @@ It is a visualization layer, not a second production geometry path.
 - Preview workflow: `.github/workflows/xinyi-preview.yml`
 - Preview renderer: `tools/preview/xinyi_blender_preview.py`
 - Preview contract: `docs/architecture/xinyi-whitebox-preview-pipeline.md`
+- Terrain candidate result: `docs/xinyi-terrain-v0-dtm-result.md`
 - Current visible milestone: `docs/xinyi-v2-whitebox-preview-status.md`
 
-The current whitebox does **not** contain terrain. Hillside / mountain silhouettes are therefore
-absent, and sparse southeast coverage must not be "fixed" by changing building XY geometry or
-turning off hero suppression.
+The original building-only whitebox did not contain terrain. Terrain v0 now has a passing
+candidate using a cloud-readable derivative mirror of the official MOI 2025 bare-earth 20 m DTM.
 
-Terrain must be added as an independent elevation layer using
+The earlier Copernicus GLO-30 DSM prototype is rejected as urban ground because its surface sat
+roughly +17 m above surveyed building ground at the median. Do not restore it as production terrain.
+
+The accepted candidate terrain uses the same Xinyi ENU / 500 m tile contract and a single documented
+vertical-datum alignment. Blender-imported building bases are measured in world Z and snapped to
+surveyed WFS `ground_elev_m`, with a fail-closed base-Z regression guard.
+
+See `docs/xinyi-terrain-v0-dtm-result.md` and
 `docs/architecture/xinyi-terrain-integration-plan.md`.
 
 The building meshes remain immutable. Terrain integration may add terrain geometry and a documented
@@ -99,7 +106,7 @@ building-specific Z hacks.
 
 There are now two downstream tracks:
 
-- **world-completeness track:** terrain source audit -> terrain tiles -> building Z anchoring -> terrain + building preview;
+- **world-completeness track:** MOI 2025 bare-earth DTM derivative source audit -> 25 terrain tiles -> surveyed building base-Z anchoring -> terrain + building preview — PASS candidate;
 - **engine track:** isolated Unreal `XinyiV2` import / placement / performance validation.
 
 Do not confuse a preview render failure with a geometry-gate failure, and do not treat an attractive
