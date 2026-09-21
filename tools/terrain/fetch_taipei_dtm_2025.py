@@ -93,12 +93,19 @@ OUT.mkdir(parents=True, exist_ok=True)
 
 taipei_zip = CACHE / "taipei_20m_dtm_2025.zip"
 schema_zip = CACHE / "schema_hdr.zip"
+provider_file = CACHE / "source_provider.txt"
 
+provider = provider_file.read_text(encoding="utf-8").strip() if provider_file.exists() else "unknown"
 taipei_meta = file_meta(TAIPEI_URL, taipei_zip)
-schema_meta = file_meta(SCHEMA_URL, schema_zip)
+taipei_meta["provider_selected"] = provider
 
 taipei = inspect_zip(taipei_zip)
-schema = inspect_zip(schema_zip)
+if schema_zip.exists() and schema_zip.stat().st_size:
+    schema_meta = file_meta(SCHEMA_URL, schema_zip)
+    schema = inspect_zip(schema_zip)
+else:
+    schema_meta = None
+    schema = {"entries": [], "entry_count": 0, "extension_counts": {}, "total_uncompressed_bytes": 0}
 
 # Surface likely DEM and header files first in the log.
 interesting = [
