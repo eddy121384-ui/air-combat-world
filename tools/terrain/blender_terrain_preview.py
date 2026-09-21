@@ -86,7 +86,7 @@ def main():
             missing.append(obj.name)
             continue
         matrix = obj.matrix_world.copy()
-        matrix.translation.z += float(offsets[bid])
+        # GLB/game frame is X=east, Y=up, Z=-north. Elevation must move on Y.\n        matrix.translation.y += float(offsets[bid])
         obj.matrix_world = matrix
         applied += 1
 
