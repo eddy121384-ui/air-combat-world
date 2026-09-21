@@ -2,7 +2,7 @@
 
 Policy:
 - Shapely/GEOS owns polygon validity and repair.
-- mapbox-earcut (through trimesh) owns triangulation.
+- GEOS constrained Delaunay triangulation owns cap triangulation.
 - trimesh owns extrusion and mesh topology checks.
 - No custom triangulator, hole bridge, or polygon repair lives here.
 """
@@ -12,6 +12,7 @@ import math
 from typing import Iterable
 
 import numpy as np
+import shapely
 import trimesh
 from shapely import make_valid
 from shapely.geometry import GeometryCollection, MultiPolygon, Polygon
@@ -164,17 +165,58 @@ def repair_worldmodel_polygon(poly_record: dict) -> tuple[list[Polygon], dict]:
     }
 
 
+def _constrained_delaunay_arrays(poly: Polygon) -> tuple[np.ndarray, np.ndarray]:
+    """Return exact polygon vertices/faces from GEOS constrained Delaunay triangles.
+
+    GEOS owns triangulation. This function only deduplicates identical 2D
+    coordinates into an indexed array for trimesh.extrude_triangulation.
+    """
+    collection = shapely.constrained_delaunay_triangles(poly)
+    triangles = _polygonal_parts(collection)
+    if not triangles:
+        raise ValueError("GEOS constrained Delaunay returned no triangles")
+
+    vertices: list[tuple[float, float]] = []
+    index: dict[tuple[float, float], int] = {}
+    faces: list[list[int]] = []
+
+    for triangle in triangles:
+        coords = [(float(x), float(y)) for x, y in list(triangle.exterior.coords)[:-1]]
+        if len(coords) != 3:
+            raise ValueError("GEOS constrained Delaunay returned a non-triangle polygon")
+
+        # Canonical CCW winding in ENU 2D before extrusion.
+        signed2 = (
+            coords[0][0] * (coords[1][1] - coords[2][1])
+            + coords[1][0] * (coords[2][1] - coords[0][1])
+            + coords[2][0] * (coords[0][1] - coords[1][1])
+        )
+        if signed2 < 0.0:
+            coords[1], coords[2] = coords[2], coords[1]
+
+        face = []
+        for point in coords:
+            if point not in index:
+                index[point] = len(vertices)
+                vertices.append(point)
+            face.append(index[point])
+        faces.append(face)
+
+    return np.asarray(vertices, dtype=np.float64), np.asarray(faces, dtype=np.int64)
+
+
 def extrude_geos_polygon(poly: Polygon, height_m: float) -> trimesh.Trimesh:
-    """Triangulate + extrude one valid Polygon using mature libraries only."""
+    """Constrained-Delaunay triangulate + extrude using mature libraries only."""
     if not math.isfinite(height_m) or height_m <= 0.0:
         raise ValueError(f"invalid building height: {height_m}")
     if poly.is_empty or not poly.is_valid or poly.area <= AREA_EPS_M2:
         raise ValueError("extrude_geos_polygon requires a valid area-bearing Polygon")
 
-    mesh = trimesh.creation.extrude_polygon(
-        poly,
+    vertices_2d, faces_2d = _constrained_delaunay_arrays(poly)
+    mesh = trimesh.creation.extrude_triangulation(
+        vertices=vertices_2d,
+        faces=faces_2d,
         height=float(height_m),
-        engine="earcut",
     )
     mesh.apply_transform(GAME_FROM_ENU_ZUP)
     return mesh
