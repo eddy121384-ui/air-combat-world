@@ -76,6 +76,8 @@ def main():
     offsets = zdata["offsets_m"]
     missing = []
     applied = 0
+    initial_base_rows = []
+
     for obj in buildings:
         m = ID_RE.match(obj.name)
         if not m:
@@ -85,17 +87,30 @@ def main():
         if bid not in offsets:
             missing.append(obj.name)
             continue
+
+        expected = float(offsets[bid])
+        pre_base_z = min((obj.matrix_world @ Vector(corner)).z for corner in obj.bound_box)
+
+        # Blender world space is Z-up after glTF import. Do not assume an
+        # imported mesh base is exactly zero: measure the actual base plane,
+        # then snap that plane to the surveyed WFS ground elevation.
         matrix = obj.matrix_world.copy()
-        # GLB/game frame is X=east, Y=up, Z=-north. Elevation must move on Y.\n        matrix.translation.y += float(offsets[bid])
+        matrix.translation.z += expected - pre_base_z
         obj.matrix_world = matrix
         applied += 1
+
+        if len(initial_base_rows) < 50:
+            initial_base_rows.append({
+                "name": obj.name,
+                "building_id": bid,
+                "initial_world_base_z_m": pre_base_z,
+                "expected_ground_m": expected,
+                "translation_delta_z_m": expected - pre_base_z,
+            })
 
     if missing:
         raise RuntimeError(f"missing building Z for {len(missing)} objects; first={missing[:10]}")
 
-    # Regression guard: imported building bases must land on surveyed ground Z.
-    # This catches accidental use of the internal GLB Y-up axis after Blender
-    # has already converted the scene to Z-up.
     base_z_errors = []
     base_z_rows = []
     for obj in buildings:
@@ -113,6 +128,7 @@ def main():
                 "world_base_z_m": world_base_z,
                 "abs_error_m": err,
             })
+
     max_base_z_error = max(base_z_errors, default=0.0)
     if max_base_z_error > 1.0e-3:
         raise RuntimeError(
@@ -203,6 +219,7 @@ def main():
         "building_z_applied":applied,
         "missing_building_z":len(missing),
         "building_base_z_max_abs_error_m":max_base_z_error,
+        "building_initial_base_preview":initial_base_rows,
         "building_base_z_preview":base_z_rows,
         "bounds_min":mins,
         "bounds_max":maxs,
