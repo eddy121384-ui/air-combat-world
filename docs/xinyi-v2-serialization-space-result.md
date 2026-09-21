@@ -1,5 +1,7 @@
 # Xinyi v2 serialization-space representative gate: PASS
 
+> **Historical representative evidence.** This document records the 80-part serialization-space gate that used mapbox-earcut and was correct for that representative sample. The current full-Xinyi production triangulator is GEOS constrained Delaunay; see `docs/xinyi-v2-full-xinyi-cloud-result.md`. Do not restore earcut as production policy from this older report.
+
 Date: 2026-09-20 Asia/Taipei. Draft PR [#6](https://github.com/eddy121384-ui/air-combat-world/pull/6),
 Issue [#5](https://github.com/eddy121384-ui/air-combat-world/issues/5).
 
