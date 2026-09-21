@@ -97,9 +97,22 @@ def candidate_policy(poly, height, kind, value):
         geom = shapely.set_precision(poly, grid_size=value, mode="valid_output")
     elif kind == "close":
         geom = poly.buffer(value, join_style=2).buffer(-value, join_style=2)
+    elif kind == "open":
+        geom = poly.buffer(-value, join_style=2).buffer(value, join_style=2)
     elif kind == "set_precision_close":
         geom = shapely.set_precision(poly, grid_size=value, mode="valid_output")
         geom = geom.buffer(value, join_style=2).buffer(-value, join_style=2)
+    elif kind == "polygonize":
+        lines=[LineString(poly.exterior.coords)]+[LineString(h.coords) for h in poly.interiors]
+        noded=shapely.unary_union(lines)
+        faces=[p for p in polygonize(noded) if poly.covers(p.representative_point()) and p.area>0]
+        geom=shapely.union_all(faces) if faces else shapely.GeometryCollection()
+    elif kind == "polygonize_open":
+        lines=[LineString(poly.exterior.coords)]+[LineString(h.coords) for h in poly.interiors]
+        noded=shapely.unary_union(lines)
+        faces=[p for p in polygonize(noded) if poly.covers(p.representative_point()) and p.area>0]
+        rebuilt=shapely.union_all(faces) if faces else shapely.GeometryCollection()
+        geom=rebuilt.buffer(-value, join_style=2).buffer(value, join_style=2)
     else:
         raise ValueError(kind)
     parts=[quantize_polygon(p) for p in _polygonal_parts(geom)]
@@ -152,6 +165,13 @@ def run(report_path,out_path):
                         ("close",0.0005),
                         ("close",0.001),
                         ("close",0.002),
+                        ("open",0.00025),
+                        ("open",0.0005),
+                        ("open",0.001),
+                        ("polygonize",0.0),
+                        ("polygonize_open",0.00025),
+                        ("polygonize_open",0.0005),
+                        ("polygonize_open",0.001),
                         ("set_precision_close",0.001),
                         ("set_precision_close",0.002),
                     ]:
