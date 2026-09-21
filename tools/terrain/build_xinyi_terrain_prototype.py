@@ -171,6 +171,69 @@ def robust_vertical_alignment(fc, sampler):
     }
 
 
+def building_surface_mismatch(fc, sampler, vertical_offset):
+    """Quantify how much prototype DSM sits above surveyed building ground.
+
+    This is diagnostic only. Positive values mean the rendered terrain surface
+    would intersect/swallow the building base if the DSM is used directly.
+    """
+    to_lonlat = Transformer.from_crs("EPSG:3826", "EPSG:4326", always_xy=True)
+    deltas = []
+    rows = []
+    for feature in fc["features"]:
+        props = feature.get("properties") or {}
+        ground = props.get("ground_elev_m")
+        if not isinstance(ground, (int, float)) or not math.isfinite(ground):
+            continue
+        geom = shape(feature["geometry"])
+        if geom.is_empty:
+            continue
+        p = geom.representative_point()
+        offsets = (-15.0, 0.0, 15.0)
+        xy = [(p.x+dx, p.y+dy) for dx in offsets for dy in offsets]
+        lonlat = [to_lonlat.transform(x, y) for x, y in xy]
+        vals = sampler.sample_lonlat(
+            np.asarray([q[0] for q in lonlat]),
+            np.asarray([q[1] for q in lonlat]),
+        )
+        terrain_surface = float(np.median(vals) + vertical_offset)
+        delta = terrain_surface - float(ground)
+        if math.isfinite(delta):
+            deltas.append(delta)
+            rows.append({
+                "building_id": str(feature.get("id", "")),
+                "surveyed_ground_elev_m": float(ground),
+                "prototype_terrain_surface_m": terrain_surface,
+                "terrain_minus_ground_m": delta,
+            })
+    if not deltas:
+        raise RuntimeError("no building/terrain vertical mismatch samples")
+    ordered = sorted(deltas)
+    def pct(p):
+        return ordered[int((len(ordered)-1)*p)]
+    return {
+        "count": len(deltas),
+        "min_m": min(deltas),
+        "p05_m": pct(0.05),
+        "median_m": statistics.median(deltas),
+        "p95_m": pct(0.95),
+        "max_m": max(deltas),
+        "terrain_above_ground_gt_1m": sum(d > 1.0 for d in deltas),
+        "terrain_above_ground_gt_3m": sum(d > 3.0 for d in deltas),
+        "terrain_above_ground_gt_5m": sum(d > 5.0 for d in deltas),
+        "terrain_above_ground_gt_10m": sum(d > 10.0 for d in deltas),
+        "method": (
+            "median aligned Copernicus DSM over 3x3 samples spaced 15m around "
+            "building representative point minus surveyed WFS ground_elev_m"
+        ),
+        "meaning": (
+            "positive values indicate DSM surface is above the surveyed building "
+            "base; this is expected over roofs/vegetation and explains visual burial"
+        ),
+        "sample_preview": rows[:50],
+    }
+
+
 def terrain_tile(origin, sampler, lon0, lat0, vertical_offset):
     local = np.linspace(0.0, TILE_SIZE_M, GRID_COUNT, dtype=np.float64)
     gx, gy = np.meshgrid(local + origin[0], local + origin[1])
@@ -236,6 +299,7 @@ def main():
     sampler = BilinearRaster(RASTER)
     try:
         vertical_offset, alignment = robust_vertical_alignment(fc, sampler)
+        surface_mismatch = building_surface_mismatch(fc, sampler, vertical_offset)
 
         tile_rows = []
         edge_cache = {}
@@ -341,6 +405,7 @@ def main():
                 },
             },
             "vertical_alignment": alignment,
+            "building_surface_mismatch": surface_mismatch,
             "building_z": {
                 "source": "WFS ground_elev_m",
                 "count": len(offsets),
@@ -389,6 +454,7 @@ def main():
             "terrain_elevation_min_m": min(r["elevation_min_m"] for r in tile_rows),
             "terrain_elevation_max_m": max(r["elevation_max_m"] for r in tile_rows),
             "vertical_alignment": alignment,
+            "building_surface_mismatch": surface_mismatch,
             "building_z_count": len(offsets),
             "seam_failures": len(seam_errors),
             "manifest_sha256": terrain_hash,
