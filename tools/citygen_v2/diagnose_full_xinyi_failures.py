@@ -4,6 +4,7 @@ import argparse, json, sys
 from pathlib import Path
 import numpy as np
 import shapely
+from shapely.ops import polygonize
 from shapely.geometry import LineString, Point, shape
 import trimesh
 
@@ -42,7 +43,7 @@ def contact_summary(poly):
 def polygonize_candidate(poly):
     lines=[LineString(poly.exterior.coords)]+[LineString(h.coords) for h in poly.interiors]
     noded=shapely.unary_union(lines)
-    faces=list(shapely.get_parts(shapely.polygonize(noded)))
+    faces=list(polygonize(noded))
     kept=[p for p in faces if poly.covers(p.representative_point()) and p.area>0]
     if not kept:
         return {"faces":0,"pass":False,"reason":"no_kept_faces"}
