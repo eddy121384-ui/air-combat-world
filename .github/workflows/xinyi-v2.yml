@@ -117,3 +117,55 @@ jobs:
             unreal/Saved/XinyiV2Full/run-01/full_xinyi.diagnosis.json
             unreal/Saved/XinyiV2Full/run-01/tiles/*.glb
             unreal/Saved/XinyiV2Full/run-02/full_xinyi.report.json
+
+  blender-full-xinyi-gate:
+    needs: full-xinyi-gate
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download full Xinyi geometry evidence
+        uses: actions/download-artifact@v4
+        with:
+          name: xinyi-v2-full-evidence
+          path: unreal/Saved/XinyiV2Full
+
+      - name: Download pinned official Blender 5.2.0
+        run: |
+          set -euo pipefail
+          curl --fail --location --retry 3 \
+            https://download.blender.org/release/Blender5.2/blender-5.2.0-linux-x64.tar.xz \
+            --output blender-5.2.0-linux-x64.tar.xz
+          curl --fail --location --retry 3 \
+            https://download.blender.org/release/Blender5.2/blender-5.2.0.sha256 \
+            --output blender-5.2.0.sha256
+          grep 'blender-5.2.0-linux-x64.tar.xz' blender-5.2.0.sha256 | sha256sum --check -
+          tar -xf blender-5.2.0-linux-x64.tar.xz
+
+      - name: Blender headless audit of all 25 tiles
+        run: |
+          mkdir -p unreal/Saved/XinyiV2Blender/screenshots
+          ./blender-5.2.0-linux-x64/blender \
+            --background \
+            --factory-startup \
+            --python-exit-code 2 \
+            --python tools/citygen_v2/blender_full_xinyi_audit.py \
+            -- \
+            --tiles unreal/Saved/XinyiV2Full/run-01/tiles \
+            --numerical unreal/Saved/XinyiV2Full/run-01/full_xinyi.report.json \
+            --out unreal/Saved/XinyiV2Blender/full_xinyi.blender.report.json \
+            --screenshots unreal/Saved/XinyiV2Blender/screenshots
+
+      - name: Upload Blender full-Xinyi evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: xinyi-v2-blender-evidence
+          if-no-files-found: error
+          compression-level: 6
+          path: |
+            unreal/Saved/XinyiV2Blender/full_xinyi.blender.report.json
+            unreal/Saved/XinyiV2Blender/screenshots/*.png
+
