@@ -29,17 +29,24 @@ jobs:
       - name: Audit official MOI 2025 20 m DTM catalog
         run: node tools/terrain/audit_nlsc_dtm_source.mjs
 
-      - name: Download official Taipei City 2025 DTM package
+      - name: Download official Taipei 20 m DTM package
         run: |
+          set -euo pipefail
           mkdir -p data/generated/taipei/terrain/cache
-          wget --tries=3 --timeout=90 --referer=https://www.tgos.tw/ \
-            -O data/generated/taipei/terrain/cache/taipei_20m_dtm_2025.zip \
-            'https://www.tgos.tw:443/MDE/VirtualDir_TC/Product/60e634ea-7c59-47a4-a967-ac33694e0d05/分幅_臺北市20MDEM(2025).zip'
-          wget --tries=3 --timeout=90 --referer=https://www.tgos.tw/ \
-            -O data/generated/taipei/terrain/cache/schema_hdr.zip \
-            'https://www.tgos.tw:443/MDE/VirtualDir_TC/Product/342505d1-81bc-490a-8e10-9f7e1ec0ed98/schema_hdr.zip'
+          TARGET=data/generated/taipei/terrain/cache/taipei_20m_dtm_2025.zip
+          if wget --tries=1 --timeout=45 --referer=https://www.tgos.tw/ \
+              -O "$TARGET" \
+              'https://www.tgos.tw:443/MDE/VirtualDir_TC/Product/60e634ea-7c59-47a4-a967-ac33694e0d05/分幅_臺北市20MDEM(2025).zip'; then
+            echo 'moi_2025_tgos' > data/generated/taipei/terrain/cache/source_provider.txt
+          else
+            rm -f "$TARGET"
+            wget --tries=2 --timeout=90 \
+              -O "$TARGET" \
+              'https://data.moi.gov.tw/MoiOD/System/DownloadFile.aspx?DATA=988131C6-80C5-46D4-8E2E-96BC3029A830'
+            echo 'moi_legacy_20m_taipei' > data/generated/taipei/terrain/cache/source_provider.txt
+          fi
 
-      - name: Inspect Taipei City 2025 DTM package
+      - name: Inspect official Taipei DTM package
         run: python tools/terrain/fetch_taipei_dtm_2025.py
 
       - name: Upload terrain source audit
