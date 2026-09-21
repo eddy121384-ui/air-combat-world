@@ -15,7 +15,7 @@ sys.path.insert(0, str(REPO / "tools/compiler"))
 sys.path.insert(0, str(REPO / "tools/citygen_v2"))
 
 from audit_source import audit  # noqa: E402
-from geometry import extrude_geos_polygon, mesh_gate, repair_worldmodel_polygon  # noqa: E402
+from geometry import (GAME_FROM_ENU_ZUP, extrude_geos_polygon, mesh_gate,\n                      repair_worldmodel_polygon)  # noqa: E402
 from worldmodel import build_worldmodel  # noqa: E402
 from strict_qa import strict_mesh_gate  # noqa: E402
 from serialization_space import prepare_footprint, tile_origin, tile_transform  # noqa: E402
@@ -103,9 +103,13 @@ class TestStrictSolidQA(unittest.TestCase):
                      (-147.6455872215108,-290.57402114769087),
                      (-147.50756792275445,-290.5751016221337),
                      (-147.49675819940646,-293.32241321671927)])
-        mesh = extrude_geos_polygon(p,3.5)
-        self.assertTrue(strict_mesh_gate(mesh,p,3.5)['pass'])
-        blob = trimesh.Scene(mesh).export(file_type='glb')
+        # Preserve the historical earcut failure explicitly as baseline
+        # evidence. Production triangulation is now GEOS constrained Delaunay,
+        # so this regression must not force the current path to stay broken.
+        baseline = trimesh.creation.extrude_polygon(p, height=3.5, engine='earcut')
+        baseline.apply_transform(GAME_FROM_ENU_ZUP)
+        self.assertTrue(strict_mesh_gate(baseline,p,3.5)['pass'])
+        blob = trimesh.Scene(baseline).export(file_type='glb')
         loaded = next(iter(trimesh.load_scene(io.BytesIO(blob),file_type='glb',process=False).geometry.values()))
         gate = strict_mesh_gate(loaded,p,3.5,precision='float32')
         self.assertTrue(gate['watertight'])
@@ -116,8 +120,15 @@ class TestStrictSolidQA(unittest.TestCase):
         self.assertEqual(gate['wrong_base_triangles'],1)
         self.assertIn('roof_overlapping_triangles',gate['failures'])
 
-        # The general policy must mesh the serialized footprint, not cast an
-        # already triangulated global mesh. Keep the old failure above intact.
+        # The current mature production triangulation should avoid that sliver
+        # without any building-specific rule.
+        production = extrude_geos_polygon(p,3.5)
+        self.assertTrue(strict_mesh_gate(production,p,3.5)['pass'])
+        blob = trimesh.Scene(production).export(file_type='glb')
+        loaded = next(iter(trimesh.load_scene(io.BytesIO(blob),file_type='glb',process=False).geometry.values()))
+        self.assertTrue(strict_mesh_gate(loaded,p,3.5,precision='float32')['pass'])
+
+        # The general serialization-space policy still remains mandatory.
         origin = tile_origin((-151., -292.))
         parts, comparison = prepare_footprint(p, origin)
         self.assertTrue(comparison['pass'], comparison)
