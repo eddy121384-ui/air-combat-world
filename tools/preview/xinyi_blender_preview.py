@@ -72,7 +72,6 @@ def main():
     scene.render.film_transparent = False
 
     # Keep tone mapping simple and bright enough for technical review.
-    scene.view_settings.look = "Medium High Contrast"
     scene.view_settings.exposure = 0.8
 
     world = bpy.data.worlds.new("WhiteboxWorld")
