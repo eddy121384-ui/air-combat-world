@@ -15,7 +15,8 @@ sys.path.insert(0, str(REPO / "tools/compiler"))
 sys.path.insert(0, str(REPO / "tools/citygen_v2"))
 
 from audit_source import audit  # noqa: E402
-from geometry import (GAME_FROM_ENU_ZUP, extrude_geos_polygon, mesh_gate,\n                      repair_worldmodel_polygon)  # noqa: E402
+from geometry import (GAME_FROM_ENU_ZUP, extrude_geos_polygon, mesh_gate,
+                      repair_worldmodel_polygon)  # noqa: E402
 from worldmodel import build_worldmodel  # noqa: E402
 from strict_qa import strict_mesh_gate  # noqa: E402
 from serialization_space import prepare_footprint, tile_origin, tile_transform  # noqa: E402
