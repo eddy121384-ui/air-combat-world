@@ -63,6 +63,9 @@ jobs:
       - name: Fetch cloud-readable Copernicus GLO-30 prototype source
         run: python tools/terrain/fetch_copernicus_prototype.py
 
+      - name: Build deterministic Xinyi terrain prototype tiles
+        run: python tools/terrain/build_xinyi_terrain_prototype.py
+
       - name: Upload terrain source audit
         if: always()
         uses: actions/upload-artifact@v4
@@ -76,3 +79,6 @@ jobs:
             data/generated/taipei/terrain/building_ground_elevation_audit.json
             data/generated/taipei/terrain/official_dtm_cloud_download_blocker.json
             data/generated/taipei/terrain/copernicus_glo30_prototype_source.json
+            unreal/Saved/XinyiTerrainV0/terrain_prototype.report.json
+            unreal/Saved/XinyiTerrainV0/building_z_offsets.json
+            unreal/Saved/XinyiTerrainV0/tiles/*.glb
