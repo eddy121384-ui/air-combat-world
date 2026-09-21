@@ -13,8 +13,8 @@ REPO=HERE.parents[1]
 sys.path.insert(0,str(REPO/"tools/compiler"))
 sys.path.insert(0,str(HERE))
 
-from geometry import extrude_geos_polygon, repair_worldmodel_polygon
-from serialization_space import prepare_footprint, tile_origin
+from geometry import extrude_geos_polygon, repair_worldmodel_polygon, _polygonal_parts
+from serialization_space import prepare_footprint, tile_origin, quantize_polygon
 from strict_qa import strict_mesh_gate
 from worldmodel import build_worldmodel
 
@@ -92,6 +92,42 @@ def adaptive_wall_probe(mesh, poly, gate):
             "minimum_probe_m":float(min(probes)),"xy_error_m":xy_error}
 
 
+def candidate_policy(poly, height, kind, value):
+    if kind == "set_precision":
+        geom = shapely.set_precision(poly, grid_size=value, mode="valid_output")
+    elif kind == "close":
+        geom = poly.buffer(value, join_style=2).buffer(-value, join_style=2)
+    elif kind == "set_precision_close":
+        geom = shapely.set_precision(poly, grid_size=value, mode="valid_output")
+        geom = geom.buffer(value, join_style=2).buffer(-value, join_style=2)
+    else:
+        raise ValueError(kind)
+    parts=[quantize_polygon(p) for p in _polygonal_parts(geom)]
+    if not parts or any(p.is_empty or not p.is_valid or p.area <= 0 for p in parts):
+        return {"pass":False,"reason":"invalid_or_empty","parts":len(parts)}
+    union=shapely.union_all(parts)
+    rows=[]
+    for i,p in enumerate(parts):
+        try:
+            m=extrude_geos_polygon(p,height)
+            g=strict_mesh_gate(m,p,height,precision="float64")
+            rows.append({"part":i,"pass":g["pass"],"failures":g["failures"]})
+        except Exception as exc:
+            rows.append({"part":i,"pass":False,"failures":[f"{type(exc).__name__}:{exc}"]})
+    holes=sum(len(p.interiors) for p in parts)
+    return {
+        "pass":all(r["pass"] for r in rows),
+        "parts":len(parts),
+        "holes":holes,
+        "original_holes":len(poly.interiors),
+        "hole_count_changed":holes != len(poly.interiors),
+        "area_delta_m2":float(union.area-poly.area),
+        "symmetric_difference_m2":float(union.symmetric_difference(poly).area),
+        "bounds_displacement_m":float(np.max(np.abs(np.asarray(union.bounds)-np.asarray(poly.bounds)))),
+        "rows":rows,
+    }
+
+
 def run(report_path,out_path):
     report=json.loads(report_path.read_text())
     target={(f.get("building_id"),f.get("polygon_index")) for f in report["failures"]
@@ -108,15 +144,30 @@ def run(report_path,out_path):
                 for si,q in enumerate(serial):
                     mesh=extrude_geos_polygon(q,float(b["height_m"]))
                     gate=strict_mesh_gate(mesh,q,float(b["height_m"]),precision="float64")
+                    policies={}
+                    for kind,value in [
+                        ("set_precision",0.0005),
+                        ("set_precision",0.001),
+                        ("set_precision",0.002),
+                        ("close",0.0005),
+                        ("close",0.001),
+                        ("close",0.002),
+                        ("set_precision_close",0.001),
+                        ("set_precision_close",0.002),
+                    ]:
+                        key=f"{kind}_{value:g}"
+                        policies[key]=candidate_policy(q,float(b["height_m"]),kind,value)
                     rows.append({
                         "building_id":b["id"],"polygon_index":pi,"repaired_part_index":ri,
                         "serialization_part_index":si,"repair_status":repair["status"],
                         "valid":bool(q.is_valid),"holes":len(q.interiors),
                         "area_m2":float(q.area),"minimum_clearance_m":float(q.minimum_clearance),
+                        "wkt":q.wkt,
                         "strict_failures":gate["failures"],
                         "boundary_contacts":contact_summary(q),
                         "adaptive_wall_probe":adaptive_wall_probe(mesh,q,gate),
                         "polygonize":polygonize_candidate(q),
+                        "candidate_policies":policies,
                     })
     result={
         "failed_source_parts":len(target),
@@ -132,6 +183,10 @@ def run(report_path,out_path):
         "adaptive_wall_all_resolved":sum(
             r["adaptive_wall_probe"]["bad_faces"]>0 and
             not r["adaptive_wall_probe"]["unresolved"] for r in rows),
+        "candidate_policy_pass_counts":{
+            key:sum(r["candidate_policies"][key]["pass"] for r in rows)
+            for key in (rows[0]["candidate_policies"] if rows else {})
+        },
     },indent=2))
 
 
