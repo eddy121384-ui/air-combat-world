@@ -70,7 +70,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: xinyi-terrain-v0-source-audit
+          name: xinyi-terrain-v0-evidence
           if-no-files-found: error
           path: |
             data/generated/taipei/terrain/nlsc_dtm_2025_source_audit.json
@@ -82,3 +82,70 @@ jobs:
             unreal/Saved/XinyiTerrainV0/terrain_prototype.report.json
             unreal/Saved/XinyiTerrainV0/building_z_offsets.json
             unreal/Saved/XinyiTerrainV0/tiles/*.glb
+
+  terrain-preview:
+    needs: source-audit
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download current terrain evidence
+        uses: actions/download-artifact@v4
+        with:
+          name: xinyi-terrain-v0-evidence
+          path: .
+
+      - name: Download validated Full-Xinyi building tiles
+        uses: actions/download-artifact@v4
+        with:
+          name: xinyi-v2-full-evidence
+          path: unreal/Saved/XinyiV2Full
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          repository: ${{ github.repository }}
+          run-id: 35557915078
+
+      - name: Download pinned official Blender 5.2.0
+        run: |
+          set -euo pipefail
+          curl --fail --location --retry 3 \
+            https://download.blender.org/release/Blender5.2/blender-5.2.0-linux-x64.tar.xz \
+            --output blender-5.2.0-linux-x64.tar.xz
+          curl --fail --location --retry 3 \
+            https://download.blender.org/release/Blender5.2/blender-5.2.0.sha256 \
+            --output blender-5.2.0.sha256
+          grep 'blender-5.2.0-linux-x64.tar.xz' blender-5.2.0.sha256 | sha256sum --check -
+          tar -xf blender-5.2.0-linux-x64.tar.xz
+
+      - name: Install headless Mesa / EGL runtime
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends libegl1 libgl1 libgl1-mesa-dri
+
+      - name: Render terrain plus surveyed-Z buildings
+        env:
+          LIBGL_ALWAYS_SOFTWARE: "1"
+          MESA_LOADER_DRIVER_OVERRIDE: llvmpipe
+        run: |
+          mkdir -p unreal/Saved/XinyiTerrainV0/preview
+          ./blender-5.2.0-linux-x64/blender \
+            --background \
+            --factory-startup \
+            --python-exit-code 2 \
+            --python tools/terrain/blender_terrain_preview.py \
+            -- \
+            --buildings unreal/Saved/XinyiV2Full/run-01/tiles \
+            --terrain unreal/Saved/XinyiTerrainV0/tiles \
+            --building-z unreal/Saved/XinyiTerrainV0/building_z_offsets.json \
+            --out unreal/Saved/XinyiTerrainV0/preview
+
+      - name: Upload terrain preview
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: xinyi-terrain-v0-preview
+          if-no-files-found: error
+          path: |
+            unreal/Saved/XinyiTerrainV0/preview/*.png
+            unreal/Saved/XinyiTerrainV0/preview/preview.json
