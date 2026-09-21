@@ -4,12 +4,22 @@ on:
   push:
     branches:
       - feat/xinyi-robust-whitebox-v2
+    paths:
+      - "tools/citygen_v2/**"
+      - "tools/compiler/**"
+      - "tests/test_citygen_v2.py"
+      - "requirements-citygen-v2.txt"
+      - "cities/taipei/**"
+      - "data/generated/taipei/sample_buildings.geojson"
+      - ".github/workflows/xinyi-v2.yml"
   pull_request:
     paths:
       - "tools/citygen_v2/**"
-      - "tools/compiler/worldmodel.py"
+      - "tools/compiler/**"
       - "tests/test_citygen_v2.py"
       - "requirements-citygen-v2.txt"
+      - "cities/taipei/**"
+      - "data/generated/taipei/sample_buildings.geojson"
       - ".github/workflows/xinyi-v2.yml"
   workflow_dispatch:
 
