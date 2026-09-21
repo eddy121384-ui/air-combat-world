@@ -284,6 +284,34 @@ def main():
     if failed_meshes:
         global_failures.append(f"failed_meshes:{failed_meshes}")
 
+    report = {
+        "gate": "Full Xinyi Blender 5.2 headless imported-buffer gate",
+        "blender_version": bpy.app.version_string,
+        "numerical_manifest_sha256": numerical["tile_summary"]["manifest_sha256"],
+        "expected_tiles": expected_tiles,
+        "imported_tiles": len(tile_paths),
+        "expected_mesh_components": expected_meshes,
+        "imported_mesh_components": len(imported),
+        "expected_triangles": expected_triangles,
+        "imported_triangles": imported_triangles,
+        "failed_meshes": failed_meshes,
+        "totals": dict(totals),
+        "tile_glb_sha256": tile_hashes,
+        "geometry_pass": not global_failures,
+        "render": {"status": "pending"},
+        "render_failure": None,
+        "runtime_seconds": time.perf_counter() - started,
+        "max_rss_mb": _rss_mb(),
+        "failures": list(global_failures),
+        "pass": False,
+        "objects": rows,
+    }
+
+    args.out.parent.mkdir(parents=True, exist_ok=True)
+    # Persist imported-buffer evidence before invoking any graphics backend.
+    # A native EGL/driver abort must not erase the geometry diagnosis.
+    args.out.write_text(json.dumps(report, indent=2, allow_nan=False) + "\n", encoding="utf-8")
+
     render_info = {}
     render_failure = None
     try:
