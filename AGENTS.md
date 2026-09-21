@@ -7,7 +7,10 @@ The current production-candidate geometry method is documented in:
 1. `docs/architecture/xinyi-citygen-v2.md`
 2. `docs/architecture/xinyi-citygen-guardrails.md`
 3. `docs/xinyi-v2-full-xinyi-cloud-result.md`
-4. `docs/xinyi-v2-serialization-space-result.md` — historical representative evidence
+4. `docs/architecture/xinyi-whitebox-preview-pipeline.md`
+5. `docs/xinyi-v2-whitebox-preview-status.md`
+6. `docs/architecture/xinyi-terrain-integration-plan.md`
+7. `docs/xinyi-v2-serialization-space-result.md` — historical representative evidence
 
 These documents override older experimental assumptions for city geometry work.
 
@@ -72,6 +75,36 @@ Historical evidence that must remain understandable:
 - `4438d82...`: production switched to GEOS constrained Delaunay; full numerical + Blender gate PASS.
 - Blender signed volume is accumulated after recentering vertices around a local reference origin. This is a numerically stable, translation-invariant calculation, not a tolerance relaxation.
 
+## Whitebox preview and terrain are separate layers
+
+The current district whitebox preview consumes the already validated 25 Full-Xinyi GLB tiles.
+
+It is a visualization layer, not a second production geometry path.
+
+- Preview workflow: `.github/workflows/xinyi-preview.yml`
+- Preview renderer: `tools/preview/xinyi_blender_preview.py`
+- Preview contract: `docs/architecture/xinyi-whitebox-preview-pipeline.md`
+- Current visible milestone: `docs/xinyi-v2-whitebox-preview-status.md`
+
+The current whitebox does **not** contain terrain. Hillside / mountain silhouettes are therefore
+absent, and sparse southeast coverage must not be "fixed" by changing building XY geometry or
+turning off hero suppression.
+
+Terrain must be added as an independent elevation layer using
+`docs/architecture/xinyi-terrain-integration-plan.md`.
+
+The building meshes remain immutable. Terrain integration may add terrain geometry and a documented
+building world-Z offset policy, but it must not remesh ordinary buildings or introduce
+building-specific Z hacks.
+
+There are now two downstream tracks:
+
+- **world-completeness track:** terrain source audit -> terrain tiles -> building Z anchoring -> terrain + building preview;
+- **engine track:** isolated Unreal `XinyiV2` import / placement / performance validation.
+
+Do not confuse a preview render failure with a geometry-gate failure, and do not treat an attractive
+preview as evidence that geometry or Unreal runtime validation has passed.
+
 ## Historical branches / PRs
 
 - PR #3: older custom-geometry experiment. Do not treat it as the production path.
@@ -101,8 +134,10 @@ Current sequence:
 1. representative geometry — PASS
 2. full Xinyi numerical / serialization gate — PASS
 3. Blender full-area cloud QA — PASS
-4. Unreal XinyiV2 import / performance spike — NEXT
-5. only after Unreal validation, scale the same tile pipeline toward Taipei
+4. building-only Xinyi whitebox preview — AVAILABLE
+5. terrain source / tile / building-elevation integration — NEXT WORLD-COMPLETENESS LAYER
+6. Unreal XinyiV2 import / placement / performance spike — NEXT ENGINE GATE
+7. only after these contracts are stable, scale the same tile pipeline toward wider Taipei
 
 Do not mix facade polish, materials, gameplay, Taipei-wide expansion, or production-tool winner
 decisions into the Unreal import gate unless the task explicitly asks for them.
