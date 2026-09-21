@@ -1,0 +1,175 @@
+{
+  "verdict": "PASS",
+  "ready_for_full_xinyi_tiled_generation": true,
+  "baseline": {
+    "commit": "3b963a4076b81ff413fcb7152688b2eb6e37f4bb",
+    "passed": 76,
+    "failed": 4,
+    "evidence_directory": "../xinyi-v2-strict",
+    "modified": false
+  },
+  "source_sha256": "c7ca8da13a4c5baaab0fbd1fcfe5b3799723d49d1998f804cf1593904f70200d",
+  "glb_sha256": "3fc0cdd5c66e515b9a97833f553221762c379acb1ed162a354d2a7cf1e298a33",
+  "same_locked_80_parts": true,
+  "unique_building_ids": 79,
+  "float64_pass": 80,
+  "actual_glb_float32_pass": 80,
+  "failure_ids": [],
+  "numerical_totals": {
+    "zero_area_triangles": 0,
+    "wrong_roof_triangles": 0,
+    "wrong_base_triangles": 0,
+    "wrong_wall_triangles": 0,
+    "nonfinite_vertices": 0
+  },
+  "precision": {
+    "max_abs_area_delta_m2": 0.00046549022215458535,
+    "max_symmetric_difference_m2": 0.002228702307651366,
+    "max_bounds_displacement_m": 2.228683115390595e-05,
+    "holes_before": 29,
+    "holes_after": 29,
+    "quantized_make_valid_count": 0
+  },
+  "blender": {
+    "version": "5.2.0 LTS",
+    "bpy_pass": 80,
+    "strict_imported_buffers_pass": 80,
+    "totals": {
+      "nonfinite_vertices": 0,
+      "nontriangle_faces": 0,
+      "zero_area_triangles": 0,
+      "wrong_roof_triangles": 0,
+      "wrong_base_triangles": 0,
+      "blender_wrong_roof_polygon_normals": 0,
+      "blender_wrong_base_polygon_normals": 0,
+      "nonmanifold_edges": 0,
+      "inconsistent_edges": 0,
+      "nonpositive_volume": 0,
+      "wrong_tile_transforms": 0
+    },
+    "wrong_wall_triangles": 0
+  },
+  "visual": {
+    "verdict": "PASS",
+    "reviewer": "assistant visual inspection of actual Blender screenshots",
+    "scope": "serialization geometry, not independent human sign-off or source height accuracy",
+    "views": [
+      {
+        "screenshot": "screenshots/01-low-rise.png",
+        "sha256": "c5b03181ef931f7abf2cd35fd91ec720e79112180753796d1987079aebb09511",
+        "building_ids": [
+          "tp_building_height.269018"
+        ],
+        "categories": [
+          "low_rise"
+        ],
+        "verdict": "PASS",
+        "observation": "Flat cap and coherent walls, no fold."
+      },
+      {
+        "screenshot": "screenshots/02-courtyard-top.png",
+        "sha256": "eed72bfef00af5d824a60502c0f16f536c477abb08f5ec533c7ffb9cb31626ef",
+        "building_ids": [
+          "tp_building_height.296019"
+        ],
+        "categories": [
+          "courtyard",
+          "complex"
+        ],
+        "verdict": "PASS",
+        "observation": "Three courtyard openings remain visible."
+      },
+      {
+        "screenshot": "screenshots/03-courtyard-oblique.png",
+        "sha256": "509342eaff3aa29dc22b9ce52557d981d824ae983edbf5943f71044b6c16329f",
+        "building_ids": [
+          "tp_building_height.296019"
+        ],
+        "categories": [
+          "courtyard",
+          "concave"
+        ],
+        "verdict": "PASS",
+        "observation": "Inner walls and continuous roof."
+      },
+      {
+        "screenshot": "screenshots/04-complex-six-holes.png",
+        "sha256": "34c7301588b6792c48c39892e6bb566fdd24a1a15eccc8b11f6f86ad9c0ed786",
+        "building_ids": [
+          "tp_building_height.269609"
+        ],
+        "categories": [
+          "complex",
+          "courtyard"
+        ],
+        "verdict": "PASS",
+        "observation": "Six voids retained; no false triangle-shaped fill."
+      },
+      {
+        "screenshot": "screenshots/05-concave.png",
+        "sha256": "c794201bfc321fc3bf97cf23ffc28bde835b186ac1dd2756fbfa2a96b92c28f2",
+        "building_ids": [
+          "tp_building_height.295251"
+        ],
+        "categories": [
+          "concave"
+        ],
+        "verdict": "PASS",
+        "observation": "Recessed outline and flat roof without visible folding."
+      },
+      {
+        "screenshot": "screenshots/06-multipart.png",
+        "sha256": "ef6ea7211ccfcdb7152599fc555d1c677bfe6ec640e6ef134ccf2181ad37387c",
+        "building_ids": [
+          "tp_building_height.293551"
+        ],
+        "categories": [
+          "multipart"
+        ],
+        "verdict": "PASS",
+        "observation": "Parts 0 and 1 remain separate coherent solids."
+      },
+      {
+        "screenshot": "screenshots/07-high-rise.png",
+        "sha256": "d2f83d448e53b5ad8d61f6a851fbaf23b719962160777a2c5870cd1fea32e2a7",
+        "building_ids": [
+          "tp_building_height.294504"
+        ],
+        "categories": [
+          "high_rise"
+        ],
+        "verdict": "PASS",
+        "observation": "Slender 153.81 m flat-topped source prism, no protruding cap spike."
+      },
+      {
+        "screenshot": "screenshots/08-high-rise-second.png",
+        "sha256": "28c9ebdcf36dd8301e75f46f3dfa705945069dc992fba7fe94158d4026f1fe92",
+        "building_ids": [
+          "tp_building_height.295825"
+        ],
+        "categories": [
+          "high_rise"
+        ],
+        "verdict": "PASS",
+        "observation": "Intact 80.73 m flat-topped source prism."
+      },
+      {
+        "screenshot": "screenshots/09-overview.png",
+        "sha256": "30b2247cf9609fb62c600e84edccea6ef628fe29a8060a0a59f2d8cc09ba2a68",
+        "building_ids": [],
+        "categories": [
+          "overview"
+        ],
+        "verdict": "PASS",
+        "observation": "Same sparse 80-part representative set in ENU positions."
+      }
+    ]
+  },
+  "tests": {
+    "passed": 26,
+    "skipped": 0
+  },
+  "full_xinyi": "not_run",
+  "unreal": "not_run",
+  "merged_prs": []
+}

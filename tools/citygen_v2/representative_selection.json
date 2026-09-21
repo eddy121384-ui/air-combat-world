@@ -1,0 +1,409 @@
+{
+  "source_sha256": "c7ca8da13a4c5baaab0fbd1fcfe5b3799723d49d1998f804cf1593904f70200d",
+  "baseline_commit": "b06f0d1e2091188f4b9ae0dfa6bb01b1581eb106",
+  "workflow_run_id": 35472593980,
+  "artifact_id": 10593245819,
+  "baseline_report_sha256": "93188ca4e77882aa93d77b50f62d8ee8e7e43462f808d81c53f40c59d9a75d56",
+  "selected": [
+    {
+      "building_id": "tp_building_height.271159",
+      "polygon_index": 0,
+      "height_m": 49.57
+    },
+    {
+      "building_id": "tp_building_height.269481",
+      "polygon_index": 0,
+      "height_m": 16.22
+    },
+    {
+      "building_id": "tp_building_height.245963",
+      "polygon_index": 0,
+      "height_m": 35.35
+    },
+    {
+      "building_id": "tp_building_height.268920",
+      "polygon_index": 0,
+      "height_m": 32.49
+    },
+    {
+      "building_id": "tp_building_height.270541",
+      "polygon_index": 0,
+      "height_m": 17.89
+    },
+    {
+      "building_id": "tp_building_height.246421",
+      "polygon_index": 0,
+      "height_m": 37.22
+    },
+    {
+      "building_id": "tp_building_height.240173",
+      "polygon_index": 0,
+      "height_m": 11.56
+    },
+    {
+      "building_id": "tp_building_height.272324",
+      "polygon_index": 0,
+      "height_m": 12.11
+    },
+    {
+      "building_id": "tp_building_height.296019",
+      "polygon_index": 0,
+      "height_m": 14.89
+    },
+    {
+      "building_id": "tp_building_height.269609",
+      "polygon_index": 0,
+      "height_m": 14.86
+    },
+    {
+      "building_id": "tp_building_height.245598",
+      "polygon_index": 0,
+      "height_m": 21.17
+    },
+    {
+      "building_id": "tp_building_height.240174",
+      "polygon_index": 0,
+      "height_m": 12.79
+    },
+    {
+      "building_id": "tp_building_height.293551",
+      "polygon_index": 1,
+      "height_m": 3.08
+    },
+    {
+      "building_id": "tp_building_height.294450",
+      "polygon_index": 2,
+      "height_m": 13.18
+    },
+    {
+      "building_id": "tp_building_height.293551",
+      "polygon_index": 0,
+      "height_m": 3.08
+    },
+    {
+      "building_id": "tp_building_height.293835",
+      "polygon_index": 0,
+      "height_m": 13.45
+    },
+    {
+      "building_id": "tp_building_height.243846",
+      "polygon_index": 0,
+      "height_m": 23.05
+    },
+    {
+      "building_id": "tp_building_height.269904",
+      "polygon_index": 0,
+      "height_m": 18.24
+    },
+    {
+      "building_id": "tp_building_height.269552",
+      "polygon_index": 0,
+      "height_m": 28.13
+    },
+    {
+      "building_id": "tp_building_height.269849",
+      "polygon_index": 0,
+      "height_m": 24.35
+    },
+    {
+      "building_id": "tp_building_height.296869",
+      "polygon_index": 0,
+      "height_m": 22.17
+    },
+    {
+      "building_id": "tp_building_height.270906",
+      "polygon_index": 0,
+      "height_m": 8.6
+    },
+    {
+      "building_id": "tp_building_height.270259",
+      "polygon_index": 0,
+      "height_m": 14.05
+    },
+    {
+      "building_id": "tp_building_height.269089",
+      "polygon_index": 0,
+      "height_m": 19.75
+    },
+    {
+      "building_id": "tp_building_height.295811",
+      "polygon_index": 0,
+      "height_m": 7.17
+    },
+    {
+      "building_id": "tp_building_height.243158",
+      "polygon_index": 0,
+      "height_m": 20.38
+    },
+    {
+      "building_id": "tp_building_height.269208",
+      "polygon_index": 0,
+      "height_m": 28.38
+    },
+    {
+      "building_id": "tp_building_height.295638",
+      "polygon_index": 0,
+      "height_m": 39.91
+    },
+    {
+      "building_id": "tp_building_height.269652",
+      "polygon_index": 0,
+      "height_m": 14.72
+    },
+    {
+      "building_id": "tp_building_height.293645",
+      "polygon_index": 0,
+      "height_m": 6.45
+    },
+    {
+      "building_id": "tp_building_height.243310",
+      "polygon_index": 0,
+      "height_m": 26.15
+    },
+    {
+      "building_id": "tp_building_height.240634",
+      "polygon_index": 0,
+      "height_m": 12.17
+    },
+    {
+      "building_id": "tp_building_height.270605",
+      "polygon_index": 0,
+      "height_m": 23.1
+    },
+    {
+      "building_id": "tp_building_height.243249",
+      "polygon_index": 0,
+      "height_m": 27.16
+    },
+    {
+      "building_id": "tp_building_height.296092",
+      "polygon_index": 0,
+      "height_m": 34.88
+    },
+    {
+      "building_id": "tp_building_height.294076",
+      "polygon_index": 0,
+      "height_m": 2.71
+    },
+    {
+      "building_id": "tp_building_height.295251",
+      "polygon_index": 0,
+      "height_m": 15.58
+    },
+    {
+      "building_id": "tp_building_height.295104",
+      "polygon_index": 0,
+      "height_m": 41.95
+    },
+    {
+      "building_id": "tp_building_height.270577",
+      "polygon_index": 0,
+      "height_m": 18.01
+    },
+    {
+      "building_id": "tp_building_height.242365",
+      "polygon_index": 0,
+      "height_m": 51.36
+    },
+    {
+      "building_id": "tp_building_height.245983",
+      "polygon_index": 0,
+      "height_m": 37.14
+    },
+    {
+      "building_id": "tp_building_height.269251",
+      "polygon_index": 0,
+      "height_m": 14.97
+    },
+    {
+      "building_id": "tp_building_height.272080",
+      "polygon_index": 0,
+      "height_m": 43.2
+    },
+    {
+      "building_id": "tp_building_height.240942",
+      "polygon_index": 0,
+      "height_m": 16.04
+    },
+    {
+      "building_id": "tp_building_height.295825",
+      "polygon_index": 0,
+      "height_m": 80.73
+    },
+    {
+      "building_id": "tp_building_height.294496",
+      "polygon_index": 0,
+      "height_m": 71.54
+    },
+    {
+      "building_id": "tp_building_height.271607",
+      "polygon_index": 0,
+      "height_m": 70.74
+    },
+    {
+      "building_id": "tp_building_height.294504",
+      "polygon_index": 0,
+      "height_m": 153.81
+    },
+    {
+      "building_id": "tp_building_height.295113",
+      "polygon_index": 0,
+      "height_m": 127.27
+    },
+    {
+      "building_id": "tp_building_height.293697",
+      "polygon_index": 0,
+      "height_m": 100.75
+    },
+    {
+      "building_id": "tp_building_height.271594",
+      "polygon_index": 0,
+      "height_m": 73.69
+    },
+    {
+      "building_id": "tp_building_height.271649",
+      "polygon_index": 0,
+      "height_m": 137.71
+    },
+    {
+      "building_id": "tp_building_height.294073",
+      "polygon_index": 0,
+      "height_m": 3.5
+    },
+    {
+      "building_id": "tp_building_height.243615",
+      "polygon_index": 0,
+      "height_m": 3.72
+    },
+    {
+      "building_id": "tp_building_height.295568",
+      "polygon_index": 0,
+      "height_m": 3.03
+    },
+    {
+      "building_id": "tp_building_height.271718",
+      "polygon_index": 0,
+      "height_m": 14.62
+    },
+    {
+      "building_id": "tp_building_height.271733",
+      "polygon_index": 0,
+      "height_m": 18.79
+    },
+    {
+      "building_id": "tp_building_height.242677",
+      "polygon_index": 0,
+      "height_m": 12.66
+    },
+    {
+      "building_id": "tp_building_height.240367",
+      "polygon_index": 0,
+      "height_m": 13.11
+    },
+    {
+      "building_id": "tp_building_height.269018",
+      "polygon_index": 0,
+      "height_m": 3.5
+    },
+    {
+      "building_id": "tp_building_height.293760",
+      "polygon_index": 0,
+      "height_m": 19.27
+    },
+    {
+      "building_id": "tp_building_height.294835",
+      "polygon_index": 0,
+      "height_m": 14.39
+    },
+    {
+      "building_id": "tp_building_height.294476",
+      "polygon_index": 0,
+      "height_m": 7.83
+    },
+    {
+      "building_id": "tp_building_height.242418",
+      "polygon_index": 0,
+      "height_m": 3.78
+    },
+    {
+      "building_id": "tp_building_height.292840",
+      "polygon_index": 0,
+      "height_m": 3.48
+    },
+    {
+      "building_id": "tp_building_height.294335",
+      "polygon_index": 0,
+      "height_m": 3.11
+    },
+    {
+      "building_id": "tp_building_height.240080",
+      "polygon_index": 0,
+      "height_m": 8.24
+    },
+    {
+      "building_id": "tp_building_height.271153",
+      "polygon_index": 0,
+      "height_m": 16.33
+    },
+    {
+      "building_id": "tp_building_height.246019",
+      "polygon_index": 0,
+      "height_m": 39.11
+    },
+    {
+      "building_id": "tp_building_height.294644",
+      "polygon_index": 0,
+      "height_m": 31.21
+    },
+    {
+      "building_id": "tp_building_height.270302",
+      "polygon_index": 0,
+      "height_m": 25.92
+    },
+    {
+      "building_id": "tp_building_height.294812",
+      "polygon_index": 0,
+      "height_m": 32.03
+    },
+    {
+      "building_id": "tp_building_height.244773",
+      "polygon_index": 0,
+      "height_m": 29.76
+    },
+    {
+      "building_id": "tp_building_height.245855",
+      "polygon_index": 0,
+      "height_m": 25.51
+    },
+    {
+      "building_id": "tp_building_height.272760",
+      "polygon_index": 0,
+      "height_m": 16.99
+    },
+    {
+      "building_id": "tp_building_height.270440",
+      "polygon_index": 0,
+      "height_m": 3.5
+    },
+    {
+      "building_id": "tp_building_height.271763",
+      "polygon_index": 0,
+      "height_m": 18.84
+    },
+    {
+      "building_id": "tp_building_height.240692",
+      "polygon_index": 0,
+      "height_m": 12.76
+    },
+    {
+      "building_id": "tp_building_height.270949",
+      "polygon_index": 0,
+      "height_m": 4.08
+    },
+    {
+      "building_id": "tp_building_height.243234",
+      "polygon_index": 0,
+      "height_m": 25.59
+    }
+  ]
+}
