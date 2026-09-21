@@ -126,6 +126,16 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y --no-install-recommends libegl1 libgl1 libgl1-mesa-dri
 
+      - name: Probe Blender imported building axes
+        run: |
+          ./blender-5.2.0-linux-x64/blender \
+            --background \
+            --factory-startup \
+            --python-exit-code 2 \
+            --python tools/terrain/blender_import_axis_probe.py \
+            -- \
+            --buildings unreal/Saved/XinyiV2Full/run-01/tiles
+
       - name: Render terrain plus surveyed-Z buildings
         env:
           LIBGL_ALWAYS_SOFTWARE: "1"
