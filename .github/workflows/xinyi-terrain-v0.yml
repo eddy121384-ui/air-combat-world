@@ -60,11 +60,11 @@ jobs:
       - name: Install terrain prototype stack
         run: python -m pip install -r requirements-terrain-v0.txt
 
-      - name: Fetch cloud-readable Copernicus GLO-30 prototype source
-        run: python tools/terrain/fetch_copernicus_prototype.py
+      - name: Fetch cloud-readable MOI 2025 bare-earth DTM mirror
+        run: python tools/terrain/fetch_moi_2025_dtm_mirror.py
 
-      - name: Build deterministic Xinyi terrain prototype tiles
-        run: python tools/terrain/build_xinyi_terrain_prototype.py
+      - name: Build deterministic Xinyi terrain from MOI 2025 DTM
+        run: python tools/terrain/build_xinyi_terrain_dtm.py
 
       - name: Upload terrain source audit
         if: always()
@@ -78,8 +78,11 @@ jobs:
             data/generated/taipei/terrain/taipei_dtm_2025_package_audit.json
             data/generated/taipei/terrain/building_ground_elevation_audit.json
             data/generated/taipei/terrain/official_dtm_cloud_download_blocker.json
-            data/generated/taipei/terrain/copernicus_glo30_prototype_source.json
-            unreal/Saved/XinyiTerrainV0/terrain_prototype.report.json
+            data/generated/taipei/terrain/moi_2025_dtm_mirror_source.json
+            data/generated/taipei/terrain/cache/moi2025_mirror_source-manifest.json
+            data/generated/taipei/terrain/cache/moi2025_mirror_build-summary.json
+            data/generated/taipei/terrain/cache/moi2025_mirror_validation-samples.csv
+            unreal/Saved/XinyiTerrainV0/terrain_dtm.report.json
             unreal/Saved/XinyiTerrainV0/building_z_offsets.json
             unreal/Saved/XinyiTerrainV0/tiles/*.glb
 
