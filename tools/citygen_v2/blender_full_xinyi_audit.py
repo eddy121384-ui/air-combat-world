@@ -48,9 +48,22 @@ def _tri_area(a, b, c):
 
 
 def _signed_volume(vertices, faces):
+    """Translation-invariant signed volume with a local reference origin.
+
+    Blender mathutils stores mesh coordinates at float32 precision. Summing
+    scalar triple products against the world/local origin can catastrophically
+    cancel for very small footprints located tens or hundreds of metres from
+    (0,0,0). A closed mesh has translation-invariant volume, so recenter before
+    accumulation instead of weakening the volume gate.
+    """
+    if not vertices:
+        return 0.0
+    origin = sum(vertices, Vector((0.0, 0.0, 0.0))) / len(vertices)
     total = 0.0
     for i, j, k in faces:
-        a, b, c = vertices[i], vertices[j], vertices[k]
+        a = vertices[i] - origin
+        b = vertices[j] - origin
+        c = vertices[k] - origin
         total += a.dot(b.cross(c)) / 6.0
     return total
 
