@@ -29,6 +29,9 @@ jobs:
       - name: Audit official MOI 2025 20 m DTM catalog
         run: node tools/terrain/audit_nlsc_dtm_source.mjs
 
+      - name: Download and inspect Taipei City 2025 DTM package
+        run: python tools/terrain/fetch_taipei_dtm_2025.py
+
       - name: Upload terrain source audit
         if: always()
         uses: actions/upload-artifact@v4
@@ -38,3 +41,4 @@ jobs:
           path: |
             data/generated/taipei/terrain/nlsc_dtm_2025_source_audit.json
             data/generated/taipei/terrain/nlsc_dtm_2025_catalog.csv
+            data/generated/taipei/terrain/taipei_dtm_2025_package_audit.json
