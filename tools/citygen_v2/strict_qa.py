@@ -9,6 +9,7 @@ import math
 import numpy as np
 import shapely
 from shapely.geometry import Point, Polygon
+from shapely.geometry.polygon import orient
 import trimesh
 
 TRI_AREA_EPS_M2 = 1e-8
@@ -124,16 +125,66 @@ def strict_mesh_gate(mesh, footprint, height_m, *, precision='float64'):
         if holes != len(footprint.interiors) or any(a > AREA_NOISE_M2 for a in hole_fill):
             failures.append(f'{name}_courtyard_not_preserved')
 
+    # Wall direction is checked against the exact oriented footprint boundary,
+    # not by probing a fixed distance on either side. Fixed-distance probes can
+    # cross sub-millimetre notches that are still perfectly representable and
+    # therefore report false reversed walls. Canonical GEOS ring orientation
+    # gives a scale-independent expected outward direction: exterior CCW and
+    # holes CW both place solid interior on the left, so outward is the
+    # right-hand normal of each directed boundary edge.
+    canonical = orient(footprint, sign=1.0)
+    expected_edges = {}
+    ambiguous_edges = set()
+
+    def add_ring(ring):
+        coords = list(ring.coords)
+        for a, b in zip(coords, coords[1:]):
+            a = (float(a[0]), float(a[1]))
+            b = (float(b[0]), float(b[1]))
+            if a == b:
+                continue
+            key = tuple(sorted((a, b)))
+            dx, dy = b[0]-a[0], b[1]-a[1]
+            length = math.hypot(dx, dy)
+            expected = np.asarray([dy/length, -dx/length])
+            if key in expected_edges and np.dot(expected_edges[key], expected) < .999999:
+                ambiguous_edges.add(key)
+            else:
+                expected_edges[key] = expected
+
+    add_ring(canonical.exterior)
+    for ring in canonical.interiors:
+        add_ring(ring)
+
     bad_walls = []
-    probe = max(.001, 8*xy_error)
+    unmatched_walls = []
+    ambiguous_walls = []
     for index in np.flatnonzero(~(roof|base)):
         normal = normals[index]
-        center = tri[index].mean(axis=0)[[0,2]] * [1,-1]
-        outward = normal[[0,2]] * [1,-1]
-        if (abs(normal[1]) > 1e-5 or footprint.contains(Point(center+probe*outward))
-                or not footprint.covers(Point(center-probe*outward))):
+        projected = tri[index][:,[0,2]] * [1,-1]
+        unique = np.unique(projected, axis=0)
+        if len(unique) != 2 or abs(normal[1]) > 1e-5:
             bad_walls.append(int(index))
-    result.update(wall_probe_m=probe, wrong_wall_triangles=len(bad_walls), wrong_wall_face_indices=bad_walls)
+            unmatched_walls.append(int(index))
+            continue
+        key = tuple(sorted((tuple(map(float, unique[0])), tuple(map(float, unique[1])))))
+        if key in ambiguous_edges:
+            bad_walls.append(int(index))
+            ambiguous_walls.append(int(index))
+            continue
+        expected = expected_edges.get(key)
+        horizontal = normal[[0,2]] * [1,-1]
+        hlen = float(np.linalg.norm(horizontal))
+        if expected is None or hlen == 0 or float(np.dot(horizontal / hlen, expected)) <= .999:
+            bad_walls.append(int(index))
+            if expected is None:
+                unmatched_walls.append(int(index))
+
+    result.update(wall_direction_policy='oriented_boundary_edge',
+                  wrong_wall_triangles=len(bad_walls),
+                  wrong_wall_face_indices=bad_walls,
+                  unmatched_wall_face_indices=unmatched_walls,
+                  ambiguous_wall_face_indices=ambiguous_walls)
     if bad_walls:
         failures.append(f'wall_normal_not_outward:{len(bad_walls)}')
     result['pass'] = not failures
