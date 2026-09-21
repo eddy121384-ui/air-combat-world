@@ -144,7 +144,15 @@ jobs:
           grep 'blender-5.2.0-linux-x64.tar.xz' blender-5.2.0.sha256 | sha256sum --check -
           tar -xf blender-5.2.0-linux-x64.tar.xz
 
+      - name: Install headless Mesa / EGL runtime
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends libegl1 libgl1 libgl1-mesa-dri
+
       - name: Blender headless audit of all 25 tiles
+        env:
+          LIBGL_ALWAYS_SOFTWARE: "1"
+          MESA_LOADER_DRIVER_OVERRIDE: llvmpipe
         run: |
           mkdir -p unreal/Saved/XinyiV2Blender/screenshots
           ./blender-5.2.0-linux-x64/blender \
