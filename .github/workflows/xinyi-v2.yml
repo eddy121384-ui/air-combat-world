@@ -91,6 +91,13 @@ jobs:
       - name: Build and strictly validate full Xinyi run 1
         run: python tools/citygen_v2/build_full_xinyi.py --out unreal/Saved/XinyiV2Full/run-01
 
+      - name: Diagnose full Xinyi failures
+        if: always()
+        run: |
+          if [ -f unreal/Saved/XinyiV2Full/run-01/full_xinyi.report.json ]; then
+            python tools/citygen_v2/diagnose_full_xinyi_failures.py --report unreal/Saved/XinyiV2Full/run-01/full_xinyi.report.json --out unreal/Saved/XinyiV2Full/run-01/full_xinyi.diagnosis.json
+          fi
+
       - name: Build and strictly validate full Xinyi run 2
         run: python tools/citygen_v2/build_full_xinyi.py --out unreal/Saved/XinyiV2Full/run-02
 
@@ -107,5 +114,6 @@ jobs:
           path: |
             unreal/Saved/XinyiV2Full/run-01/full_xinyi.report.json
             unreal/Saved/XinyiV2Full/run-01/full_xinyi.ledger.jsonl.gz
+            unreal/Saved/XinyiV2Full/run-01/full_xinyi.diagnosis.json
             unreal/Saved/XinyiV2Full/run-01/tiles/*.glb
             unreal/Saved/XinyiV2Full/run-02/full_xinyi.report.json
