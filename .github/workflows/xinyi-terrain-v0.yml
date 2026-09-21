@@ -11,6 +11,7 @@ on:
       - "tools/citygen_v2/fetch_projected_sample.mjs"
       - "tools/compiler/worldmodel.py"
       - "requirements-citygen-v2.txt"
+      - "requirements-terrain-v0.txt"
   workflow_dispatch:
 
 permissions:
@@ -32,31 +33,7 @@ jobs:
       - name: Audit surveyed WFS building ground elevations
         run: python tools/terrain/audit_building_ground_elevation.py
 
-      - name: Download official Taipei 20 m DTM package
-        id: official_dtm_download
-        continue-on-error: true
-        run: |
-          set -euo pipefail
-          mkdir -p data/generated/taipei/terrain/cache
-          TARGET=data/generated/taipei/terrain/cache/taipei_20m_dtm_2025.zip
-          if wget --tries=1 --timeout=45 --referer=https://www.tgos.tw/ \
-              -O "$TARGET" \
-              'https://www.tgos.tw:443/MDE/VirtualDir_TC/Product/60e634ea-7c59-47a4-a967-ac33694e0d05/分幅_臺北市20MDEM(2025).zip'; then
-            echo 'moi_2025_tgos' > data/generated/taipei/terrain/cache/source_provider.txt
-          else
-            rm -f "$TARGET"
-            wget --tries=2 --timeout=90 \
-              -O "$TARGET" \
-              'https://data.moi.gov.tw/MoiOD/System/DownloadFile.aspx?DATA=988131C6-80C5-46D4-8E2E-96BC3029A830'
-            echo 'moi_legacy_20m_taipei' > data/generated/taipei/terrain/cache/source_provider.txt
-          fi
-
-      - name: Inspect official Taipei DTM package
-        if: steps.official_dtm_download.outcome == 'success'
-        run: python tools/terrain/fetch_taipei_dtm_2025.py
-
-      - name: Record cloud-download blocker
-        if: steps.official_dtm_download.outcome != 'success'
+      - name: Record official DTM cloud-download blocker
         run: |
           python - <<'PY'
           import json
@@ -65,13 +42,26 @@ jobs:
           p.parent.mkdir(parents=True, exist_ok=True)
           p.write_text(json.dumps({
             "status":"BLOCKED_ON_GITHUB_HOSTED_RUNNER",
-            "production_target":"official MOI/TGOS 20m DTM",
+            "production_target":"official MOI/TGOS 2025 Taipei 20m DTM",
             "tgos_2025_result":"HTTP 403 from GitHub-hosted runner",
-            "legacy_moi_result":"connection timeout from GitHub-hosted runner",
-            "meaning":"network delivery restriction; not a rejection of the official dataset",
-            "next":"continue pipeline prototyping with a separately labeled cloud-readable terrain source; replace source without changing tile/coordinate contract"
+            "legacy_moi_result":"TCP/HTTPS connection timeout from GitHub-hosted runner",
+            "meaning":"network delivery restriction; official dataset remains production target",
+            "prototype_policy":"use separately labeled Copernicus GLO-30 DSM only to exercise cloud pipeline"
           },indent=2)+"\n")
           PY
+
+      - name: Set up Python for terrain prototype
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: requirements-terrain-v0.txt
+
+      - name: Install terrain prototype stack
+        run: python -m pip install -r requirements-terrain-v0.txt
+
+      - name: Fetch cloud-readable Copernicus GLO-30 prototype source
+        run: python tools/terrain/fetch_copernicus_prototype.py
 
       - name: Upload terrain source audit
         if: always()
@@ -85,3 +75,4 @@ jobs:
             data/generated/taipei/terrain/taipei_dtm_2025_package_audit.json
             data/generated/taipei/terrain/building_ground_elevation_audit.json
             data/generated/taipei/terrain/official_dtm_cloud_download_blocker.json
+            data/generated/taipei/terrain/copernicus_glo30_prototype_source.json
