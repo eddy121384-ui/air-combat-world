@@ -224,7 +224,7 @@ def main():
         "bounds_min":mins,
         "bounds_max":maxs,
         "renders":[p.name for p in sorted(a.out.glob("*.png"))],
-        "warning":"Terrain surface is Copernicus GLO-30 DSM prototype, not production bare-earth DTM."
+        "terrain_source_note":"Terrain surface is the MOI 2025 bare-earth DTM derivative mirror; provenance and datum agreement are recorded by the terrain source-audit gate."
     }
     (a.out/"preview.json").write_text(json.dumps(report,indent=2)+"\n",encoding="utf-8")
     print(json.dumps(report,indent=2))
