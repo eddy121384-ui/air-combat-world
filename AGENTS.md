@@ -87,6 +87,7 @@ It is a visualization layer, not a second production geometry path.
 - Terrain candidate result: `docs/xinyi-terrain-v0-dtm-result.md`
 - Unreal offline contract result: `docs/xinyi-unreal-v2-contract-result.md`
 - Unreal offline contract design: `docs/architecture/xinyi-unreal-v2-contract.md`
+- Unreal Landscape bridge contract: `docs/architecture/xinyi-unreal-v2-landscape-bridge.md`
 - Current visible milestone: `docs/xinyi-v2-whitebox-preview-status.md`
 
 The original building-only whitebox did not contain terrain. Terrain v0 now has a passing
@@ -119,6 +120,7 @@ preview as evidence that geometry or Unreal runtime validation has passed.
 - PR #3: older custom-geometry experiment. Do not treat it as the production path.
 - PR #6: Xinyi robust whitebox v2 production-candidate work.
 - PR #7: forensic audit of the coarse pinned EPSG:4326 source. Useful QA evidence, not a production replacement.
+- PR #9: current Draft Unreal XinyiV2 runtime-gate implementation. Keep Draft until live UE5.8 Landscape/building persistence and runtime gates pass.
 
 When old reports disagree with `docs/xinyi-v2-full-xinyi-cloud-result.md`, use the newer full-Xinyi
 validated method unless an even newer documented gate explicitly supersedes it.
