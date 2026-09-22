@@ -16,6 +16,10 @@
 		{
 			"Name": "AllToolsets",
 			"Enabled": true
+		},
+		{
+			"Name": "XinyiLandscapeBridge",
+			"Enabled": true
 		}
 	]
 }
