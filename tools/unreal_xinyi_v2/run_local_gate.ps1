@@ -35,7 +35,7 @@ $ProbeOut = Join-Path $Saved "ue58_api_probe.json"
 $ImportReport = Join-Path $Saved "ue_building_import.json"
 $BoundsReport = Join-Path $Saved "ue_building_bounds.json"
 $PlacementSummary = Join-Path $Saved "ue_building_placement_summary.json"
-$PlacementPlan = Join-Path $Saved "ue_building_placement_plan.jsonl.gz"
+$PlacementPlan = Join-Path $Saved "ue_building_placement_plan.jsonl"
 $LandscapeReport = Join-Path $Saved "ue_landscape_create.json"
 $LandscapeReopenReport = Join-Path $Saved "ue_landscape_fresh_reopen.json"
 
