@@ -11,6 +11,8 @@ from tools.unreal_xinyi_v2.build_contract import (
     decode_landscape_height_m,
     encode_landscape_height_m,
     enu_to_ue_cm,
+    game_bounds_to_ue_bounds,
+    canonical_component_key,
     validate_tile_grid,
 )
 
@@ -50,3 +52,19 @@ def test_shared_5x5_tile_grid_contract():
         "min_north_m": -1000.0,
         "max_north_m": 1500.0,
     }
+
+
+def test_game_bounds_to_expected_ue_world_bounds():
+    # game frame is X east, Y up, Z -north. Ground is added only to UE Z.
+    lo, hi = game_bounds_to_ue_bounds(
+        [[10.0, 0.0, -30.0], [20.0, 50.0, -10.0]],
+        ground_m=8.41,
+    )
+    assert np.allclose(lo, [1000.0, -3000.0, 841.0])
+    assert np.allclose(hi, [2000.0, -1000.0, 5841.0])
+
+
+def test_component_key_matches_unreal_safe_spelling():
+    assert canonical_component_key("tp_building_height.946_p0_r0_s0") == (
+        "tp_building_height_946_p0_r0_s0"
+    )
