@@ -14,6 +14,7 @@ $Project = Join-Path $RepoRoot "unreal\AirCombatWorld.uproject"
 $Probe = Join-Path $RepoRoot "adapters\unreal\xinyi_v2_api_probe.py"
 $Import = Join-Path $RepoRoot "adapters\unreal\import_xinyi_v2_buildings.py"
 $Verify = Join-Path $RepoRoot "adapters\unreal\verify_xinyi_v2_building_import.py"
+$BoundsProbe = Join-Path $RepoRoot "adapters\unreal\probe_xinyi_v2_building_bounds.py"
 $BuildLandscape = Join-Path $RepoRoot "adapters\unreal\build_xinyi_v2_landscape.py"
 $VerifyLandscape = Join-Path $RepoRoot "adapters\unreal\verify_xinyi_v2_landscape_reopen.py"
 $BuildBridge = Join-Path $RepoRoot "tools\unreal_xinyi_v2\build_landscape_bridge.ps1"
@@ -31,6 +32,7 @@ $Saved = Join-Path $RepoRoot "unreal\Saved\XinyiUnrealV2"
 New-Item -ItemType Directory -Force -Path $Saved | Out-Null
 $ProbeOut = Join-Path $Saved "ue58_api_probe.json"
 $ImportReport = Join-Path $Saved "ue_building_import.json"
+$BoundsReport = Join-Path $Saved "ue_building_bounds.json"
 $LandscapeReport = Join-Path $Saved "ue_landscape_create.json"
 $LandscapeReopenReport = Join-Path $Saved "ue_landscape_fresh_reopen.json"
 
@@ -86,10 +88,20 @@ if ($importReceipt.status -ne "PASS_ASSET_IMPORT") {
 # Phase C: separate fresh process proves building assets actually persisted.
 Invoke-UEPython -Script $Verify -LogName "03-building-fresh-reopen.log"
 
-# Phase D: materialize the accepted uint16 height contract as a real ALandscape.
+# Phase D: measure the actual Interchange StaticMesh coordinate frame before
+# any building placement policy is written.
+$env:ACW_XINYI_V2_BOUNDS_REPORT = $BoundsReport
+Invoke-UEPython -Script $BoundsProbe -LogName "04-building-bounds-probe.log"
+if (-not (Test-Path $BoundsReport)) { throw "Bounds probe did not write $BoundsReport" }
+$boundsReceipt = Get-Content $BoundsReport -Raw | ConvertFrom-Json
+if ($boundsReceipt.status -ne "PASS_MEASUREMENT") {
+    throw "Building bounds receipt is not PASS_MEASUREMENT"
+}
+
+# Phase E: materialize the accepted uint16 height contract as a real ALandscape.
 $env:ACW_XINYI_V2_CONTRACT_ROOT = $ContractRoot
 $env:ACW_XINYI_V2_LANDSCAPE_REPORT = $LandscapeReport
-Invoke-UEPython -Script $BuildLandscape -LogName "04-landscape-create.log"
+Invoke-UEPython -Script $BuildLandscape -LogName "05-landscape-create.log"
 if (-not (Test-Path $LandscapeReport)) { throw "Landscape build did not write $LandscapeReport" }
 
 $landscapeReceipt = Get-Content $LandscapeReport -Raw | ConvertFrom-Json
@@ -97,9 +109,9 @@ if ($landscapeReceipt.status -ne "PASS_LANDSCAPE_CREATED") {
     throw "Landscape receipt is not PASS_LANDSCAPE_CREATED"
 }
 
-# Phase E: another new process proves .umap + ALandscape components persisted.
+# Phase F: another new process proves .umap + ALandscape components persisted.
 $env:ACW_XINYI_V2_LANDSCAPE_REOPEN_REPORT = $LandscapeReopenReport
-Invoke-UEPython -Script $VerifyLandscape -LogName "05-landscape-fresh-reopen.log"
+Invoke-UEPython -Script $VerifyLandscape -LogName "06-landscape-fresh-reopen.log"
 if (-not (Test-Path $LandscapeReopenReport)) { throw "Landscape reopen did not write $LandscapeReopenReport" }
 
 $reopenReceipt = Get-Content $LandscapeReopenReport -Raw | ConvertFrom-Json
@@ -111,6 +123,8 @@ Write-Host ""
 Write-Host "XINYI_V2_LOCAL_STAGE_OK"
 Write-Host "API probe:              $ProbeOut"
 Write-Host "Building import report: $ImportReport"
+Write-Host "Building bounds:        $BoundsReport"
+Write-Host "Transform mode:         $($boundsReceipt.overall_transform_behavior)"
 Write-Host "Landscape report:       $LandscapeReport"
 Write-Host "Landscape reopen:       $LandscapeReopenReport"
 Write-Host "Logs:                   $Saved"
