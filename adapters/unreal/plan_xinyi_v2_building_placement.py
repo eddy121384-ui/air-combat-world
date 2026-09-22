@@ -20,7 +20,6 @@ Reads:
   ACW_XINYI_V2_PLACEMENT_SUMMARY
   ACW_XINYI_V2_PLACEMENT_PLAN
 """
-import gzip
 import json
 import math
 import os
@@ -52,7 +51,7 @@ def component_identity(text):
 def read_expected(path):
     header = None
     rows = []
-    with gzip.open(path, "rt", encoding="utf-8") as fh:
+    with open(path, "r", encoding="utf-8") as fh:
         for line_no, line in enumerate(fh, 1):
             obj = json.loads(line)
             if line_no == 1:
