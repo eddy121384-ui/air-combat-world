@@ -436,21 +436,35 @@ def main():
             f"component placement count {len(component_rows)} != validated emitted "
             f"component count {expected_components}"
         )
-    with gzip.open(component_path, "wt", encoding="utf-8", newline="\n") as fh:
-        header = {
-            "schema": "xinyi_unreal_v2_building_component_placement_v1",
-            "count": len(component_rows),
-            "coordinate_contract": (
-                "expected bounds are UE world centimetres after surveyed WFS ground Z"
-            ),
-            "placement_rule": (
-                "after validating imported StaticMesh extents, actor translation = "
-                "expected UE bounds origin - imported asset bounds origin"
-            ),
-        }
-        fh.write(json.dumps({"header": header}, separators=(",", ":"), allow_nan=False) + "\n")
-        for row in component_rows:
-            fh.write(json.dumps(row, separators=(",", ":"), allow_nan=False) + "\n")
+    header = {
+        "schema": "xinyi_unreal_v2_building_component_placement_v1",
+        "count": len(component_rows),
+        "coordinate_contract": (
+            "expected bounds are UE world centimetres after surveyed WFS ground Z"
+        ),
+        "placement_rule": (
+            "after validating imported StaticMesh extents, actor translation = "
+            "expected UE bounds origin - imported asset bounds origin"
+        ),
+    }
+    component_lines = [
+        json.dumps({"header": header}, separators=(",", ":"), allow_nan=False)
+    ]
+    component_lines.extend(
+        json.dumps(row, separators=(",", ":"), allow_nan=False)
+        for row in component_rows
+    )
+    component_payload = ("\n".join(component_lines) + "\n").encode("utf-8")
+    # gzip's default header includes wall-clock mtime, which would make the
+    # placement-manifest SHA drift across otherwise identical regenerations.
+    # mtime=0 removes that source of nondeterminism. Python 3.12 may delegate
+    # the gzip header OS byte to zlib, so normalize it as well for cross-OS
+    # artifact identity.
+    component_gzip = bytearray(gzip.compress(component_payload, compresslevel=9, mtime=0))
+    if len(component_gzip) < 10:
+        raise RuntimeError("unexpectedly short gzip placement manifest")
+    component_gzip[9] = 255
+    component_path.write_bytes(component_gzip)
 
     spacing_m = TILE_SIZE_M / COMPONENT_QUADS
     scale_xy_cm = spacing_m * 100.0
