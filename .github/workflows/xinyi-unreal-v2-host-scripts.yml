@@ -1,0 +1,117 @@
+name: Xinyi Unreal V2 Host Scripts
+
+on:
+  push:
+    branches:
+      - feat/xinyi-unreal-v2
+    paths:
+      - "adapters/unreal/*xinyi_v2*.py"
+      - "adapters/unreal/import_xinyi_v2_buildings.py"
+      - "adapters/unreal/verify_xinyi_v2_building_import.py"
+      - "tools/unreal_xinyi_v2/*.ps1"
+      - "unreal/Plugins/XinyiLandscapeBridge/**"
+      - "unreal/AirCombatWorld.uproject"
+      - ".github/workflows/xinyi-unreal-v2-host-scripts.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  static-host-gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Compile XinyiV2 Unreal Python adapters
+        run: |
+          python -m py_compile             adapters/unreal/xinyi_v2_api_probe.py             adapters/unreal/import_xinyi_v2_buildings.py             adapters/unreal/verify_xinyi_v2_building_import.py             adapters/unreal/probe_xinyi_v2_building_bounds.py             adapters/unreal/plan_xinyi_v2_building_placement.py             adapters/unreal/build_xinyi_v2_landscape.py             adapters/unreal/verify_xinyi_v2_landscape_reopen.py
+
+      - name: Parse PowerShell gate scripts without executing them
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = "Stop"
+          $paths = @(
+            "tools/unreal_xinyi_v2/build_landscape_bridge.ps1",
+            "tools/unreal_xinyi_v2/run_local_gate.ps1",
+            "tools/unreal_xinyi_v2/fetch_and_run_local_gate.ps1"
+          )
+          foreach ($path in $paths) {
+            $tokens = $null
+            $errors = $null
+            [void][System.Management.Automation.Language.Parser]::ParseFile(
+              (Resolve-Path $path).Path,
+              [ref]$tokens,
+              [ref]$errors
+            )
+            if ($errors.Count -ne 0) {
+              $errors | ForEach-Object { Write-Error "$path : $($_.Message)" }
+              throw "PowerShell parse failed: $path"
+            }
+            Write-Host "POWERSHELL_PARSE_OK $path"
+          }
+
+      - name: Validate project and plugin descriptors
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          project = json.loads(Path("unreal/AirCombatWorld.uproject").read_text())
+          plugin = json.loads(Path(
+              "unreal/Plugins/XinyiLandscapeBridge/XinyiLandscapeBridge.uplugin"
+          ).read_text())
+
+          enabled = {
+              p["Name"]: bool(p.get("Enabled"))
+              for p in project.get("Plugins", [])
+          }
+          assert enabled.get("XinyiLandscapeBridge") is True
+          modules = plugin.get("Modules", [])
+          assert len(modules) == 1
+          assert modules[0]["Name"] == "XinyiLandscapeBridge"
+          assert modules[0]["Type"] == "Editor"
+          assert plugin.get("CanContainContent") is False
+          print("PLUGIN_DESCRIPTOR_OK")
+          PY
+
+      - name: Static guardrails for the minimal Landscape bridge
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          cpp = Path(
+              "unreal/Plugins/XinyiLandscapeBridge/Source/"
+              "XinyiLandscapeBridge/Private/XinyiLandscapeLibrary.cpp"
+          ).read_text()
+
+          required = [
+              "ALandscape",
+              "Landscape->Import(",
+              "UpdateLayerInfoMap(Landscape, false)",
+              "LandscapeComponents.Num()",
+              "GetLandscapeExtent(",
+              "LoadFileToArray",
+          ]
+          for token in required:
+              assert token in cpp, f"missing bridge guardrail token: {token}"
+
+          forbidden = [
+              "http://",
+              "https://",
+              "rasterio",
+              "GDAL",
+              "ground_elev_m",
+              "make_valid",
+          ]
+          for token in forbidden:
+              assert token not in cpp, f"bridge must not own source/elevation logic: {token}"
+
+          print("LANDSCAPE_BRIDGE_STATIC_GUARDRAILS_OK")
+          PY
