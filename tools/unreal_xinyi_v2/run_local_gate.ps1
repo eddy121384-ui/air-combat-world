@@ -12,6 +12,7 @@ $Project = Join-Path $RepoRoot "unreal\AirCombatWorld.uproject"
 $Probe = Join-Path $RepoRoot "adapters\unreal\xinyi_v2_api_probe.py"
 $Import = Join-Path $RepoRoot "adapters\unreal\import_xinyi_v2_buildings.py"
 $Verify = Join-Path $RepoRoot "adapters\unreal\verify_xinyi_v2_building_import.py"
+$BoundsProbe = Join-Path $RepoRoot "adapters\unreal\probe_xinyi_v2_building_bounds.py"
 
 $InputRoot = (Resolve-Path $InputRoot).Path
 $Contract = Join-Path $InputRoot "unreal\Saved\XinyiUnrealV2Contract\xinyi_unreal_v2_contract.json"
@@ -21,6 +22,7 @@ $Saved = Join-Path $RepoRoot "unreal\Saved\XinyiUnrealV2"
 New-Item -ItemType Directory -Force -Path $Saved | Out-Null
 $ProbeOut = Join-Path $Saved "ue58_api_probe.json"
 $ImportReport = Join-Path $Saved "ue_building_import.json"
+$BoundsReport = Join-Path $Saved "ue_building_bounds.json"
 
 if (-not (Test-Path $UnrealCmd)) { throw "UnrealEditor-Cmd not found: $UnrealCmd" }
 if (-not (Test-Path $Project)) { throw "uproject not found: $Project" }
@@ -65,8 +67,19 @@ if ($importReceipt.status -ne "PASS_ASSET_IMPORT") {
 # Phase C: separate fresh process proves the saved assets actually persisted.
 Invoke-UEPython -Script $Verify -LogName "03-building-fresh-reopen.log"
 
+# Phase D: measure actual imported StaticMesh coordinate-frame behavior before placement.
+$env:ACW_XINYI_V2_BOUNDS_REPORT = $BoundsReport
+Invoke-UEPython -Script $BoundsProbe -LogName "04-building-bounds-probe.log"
+if (-not (Test-Path $BoundsReport)) { throw "Bounds probe did not write $BoundsReport" }
+$boundsReceipt = Get-Content $BoundsReport -Raw | ConvertFrom-Json
+if ($boundsReceipt.status -ne "PASS_MEASUREMENT") {
+    throw "Building bounds receipt is not PASS_MEASUREMENT"
+}
+
 Write-Host ""
 Write-Host "XINYI_V2_LOCAL_STAGE_OK"
 Write-Host "API probe:       $ProbeOut"
 Write-Host "Building report: $ImportReport"
+Write-Host "Bounds report:   $BoundsReport"
+Write-Host "Transform mode:  $($boundsReceipt.overall_transform_behavior)"
 Write-Host "Logs:            $Saved"
