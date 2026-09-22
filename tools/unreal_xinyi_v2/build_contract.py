@@ -20,14 +20,17 @@ This does not increase the semantic/source accuracy of the terrain.
 from __future__ import annotations
 
 import argparse
+import gzip
 import hashlib
 import json
 import math
+import re
 import sys
 from pathlib import Path
 
 import numpy as np
 import rasterio
+import trimesh
 from PIL import Image
 from pyproj import Transformer
 
@@ -44,6 +47,8 @@ TERRAIN_REPORT = REPO / "unreal/Saved/XinyiTerrainV0/terrain_dtm.report.json"
 BUILDING_Z = REPO / "unreal/Saved/XinyiTerrainV0/building_z_offsets.json"
 FULL_REPORT = REPO / "unreal/Saved/XinyiV2Full/run-01/full_xinyi.report.json"
 OUT = REPO / "unreal/Saved/XinyiUnrealV2Contract"
+BUILDING_TILES = REPO / "unreal/Saved/XinyiV2Full/run-01/tiles"
+BUILDING_ID_RE = re.compile(r"^(tp_building_height\.\d+)")
 
 EXPECTED_BUILDING_SOURCE_SHA256 = "c7ca8da13a4c5baaab0fbd1fcfe5b3799723d49d1998f804cf1593904f70200d"
 EXPECTED_BUILDING_MANIFEST_SHA256 = "bfaf5ab05d3a792330fb96597766c41bdf979f68193bdc1447bdfca0fbb06a15"
@@ -79,6 +84,114 @@ def enu_to_lonlat(east_m, north_m, lon0, lat0):
 def enu_to_ue_cm(east_m: float, north_m: float, up_m: float = 0.0):
     """Validated mapping: ENU east/north/up -> UE X/-Y/Z in centimetres."""
     return [east_m * 100.0, -north_m * 100.0, up_m * 100.0]
+
+def game_bounds_to_ue_bounds(bounds_game_m, ground_m: float):
+    """Map validated glTF/game-frame world bounds to expected UE world bounds.
+
+    The validated importer mapping is game (X, Y, Z) -> UE (X, Z, Y), with
+    metres -> centimetres. Game Z already stores -north. The building mesh base
+    is authored at game Y=0, so surveyed WFS ground is added only to UE Z.
+    """
+    b = np.asarray(bounds_game_m, dtype=np.float64)
+    if b.shape != (2, 3) or not np.all(np.isfinite(b)):
+        raise RuntimeError("invalid game-frame bounds")
+    lo, hi = b[0], b[1]
+    ue_min = np.asarray(
+        [lo[0] * 100.0, lo[2] * 100.0, (lo[1] + ground_m) * 100.0],
+        dtype=np.float64,
+    )
+    ue_max = np.asarray(
+        [hi[0] * 100.0, hi[2] * 100.0, (hi[1] + ground_m) * 100.0],
+        dtype=np.float64,
+    )
+    return ue_min, ue_max
+
+
+def canonical_component_key(name: str) -> str:
+    """Package-safe comparison key for GLB node names vs Interchange asset names."""
+    return re.sub(r"[^A-Za-z0-9_]+", "_", str(name)).strip("_").lower()
+
+
+def build_component_placement_manifest(tiles_dir: Path, tile_rows, z_offsets):
+    rows = []
+    failures = []
+    seen_keys = set()
+
+    for tile_row in tile_rows:
+        glb = tiles_dir / tile_row["building_glb"]
+        if not glb.is_file():
+            failures.append({"tile": tile_row["tile"], "reason": "missing_glb", "path": str(glb)})
+            continue
+
+        scene = trimesh.load_scene(glb, file_type="glb", process=False)
+        node_names = sorted(scene.graph.nodes_geometry)
+        if len(node_names) != int(tile_row["building_nodes"]):
+            failures.append({
+                "tile": tile_row["tile"],
+                "reason": "node_count_mismatch",
+                "expected": int(tile_row["building_nodes"]),
+                "actual": len(node_names),
+            })
+            continue
+
+        for node_name in node_names:
+            match = BUILDING_ID_RE.match(str(node_name))
+            if not match:
+                failures.append({
+                    "tile": tile_row["tile"],
+                    "node": str(node_name),
+                    "reason": "building_id_unparseable",
+                })
+                continue
+            building_id = match.group(1)
+            if building_id not in z_offsets:
+                failures.append({
+                    "tile": tile_row["tile"],
+                    "node": str(node_name),
+                    "building_id": building_id,
+                    "reason": "missing_surveyed_ground",
+                })
+                continue
+
+            transform, geometry_name = scene.graph[node_name]
+            mesh = scene.geometry[geometry_name].copy()
+            mesh.apply_transform(transform)
+            bounds = np.asarray(mesh.bounds, dtype=np.float64)
+            ue_min, ue_max = game_bounds_to_ue_bounds(
+                bounds, float(z_offsets[building_id])
+            )
+            ue_origin = (ue_min + ue_max) * 0.5
+            ue_extent = (ue_max - ue_min) * 0.5
+            key = canonical_component_key(node_name)
+            if key in seen_keys:
+                failures.append({
+                    "tile": tile_row["tile"],
+                    "node": str(node_name),
+                    "reason": "canonical_component_key_collision",
+                    "key": key,
+                })
+                continue
+            seen_keys.add(key)
+
+            rows.append({
+                "tile": tile_row["tile"],
+                "node_name": str(node_name),
+                "canonical_key": key,
+                "building_id": building_id,
+                "surveyed_ground_m": float(z_offsets[building_id]),
+                "expected_ue_bounds_min_cm": ue_min.tolist(),
+                "expected_ue_bounds_max_cm": ue_max.tolist(),
+                "expected_ue_bounds_origin_cm": ue_origin.tolist(),
+                "expected_ue_bounds_extent_cm": ue_extent.tolist(),
+            })
+
+    if failures:
+        raise RuntimeError(
+            "component placement manifest failed: "
+            + json.dumps(failures[:10], ensure_ascii=False)
+        )
+    return rows
+
 
 
 def encode_landscape_height_m(height_m, scale_z=LANDSCAPE_SCALE_Z):
@@ -193,6 +306,7 @@ def main():
     p.add_argument("--full-report", type=Path, default=FULL_REPORT)
     p.add_argument("--raster", type=Path, default=RASTER)
     p.add_argument("--terrain-source", type=Path, default=TERRAIN_SOURCE)
+    p.add_argument("--building-tiles-dir", type=Path, default=BUILDING_TILES)
     p.add_argument("--out", type=Path, default=OUT)
     args = p.parse_args()
 
@@ -267,6 +381,7 @@ def main():
     raw = args.out / "xinyi_moi2025_landscape_631.r16"
     report_path = args.out / "xinyi_unreal_v2_contract.json"
     building_path = args.out / "building_ground_ue_cm.json"
+    component_path = args.out / "building_component_placement.jsonl.gz"
 
     Image.fromarray(encoded).save(png)
     # RAW16 fallback/import evidence; Unreal RAW16 convention is little-endian.
@@ -311,6 +426,31 @@ def main():
         json.dumps(building_payload, separators=(",", ":"), allow_nan=False) + "\n",
         encoding="utf-8",
     )
+
+    component_rows = build_component_placement_manifest(
+        args.building_tiles_dir, tile_rows, building_z["offsets_m"]
+    )
+    expected_components = int(full["accounting"]["emitted_serialization_components"])
+    if len(component_rows) != expected_components:
+        raise RuntimeError(
+            f"component placement count {len(component_rows)} != validated emitted "
+            f"component count {expected_components}"
+        )
+    with gzip.open(component_path, "wt", encoding="utf-8", newline="\n") as fh:
+        header = {
+            "schema": "xinyi_unreal_v2_building_component_placement_v1",
+            "count": len(component_rows),
+            "coordinate_contract": (
+                "expected bounds are UE world centimetres after surveyed WFS ground Z"
+            ),
+            "placement_rule": (
+                "after validating imported StaticMesh extents, actor translation = "
+                "expected UE bounds origin - imported asset bounds origin"
+            ),
+        }
+        fh.write(json.dumps({"header": header}, separators=(",", ":"), allow_nan=False) + "\n")
+        for row in component_rows:
+            fh.write(json.dumps(row, separators=(",", ":"), allow_nan=False) + "\n")
 
     spacing_m = TILE_SIZE_M / COMPONENT_QUADS
     scale_xy_cm = spacing_m * 100.0
@@ -386,6 +526,12 @@ def main():
             "surveyed_z_count": len(ue_z),
             "missing": len(building_payload["missing"]),
             "manifest": building_path.name,
+            "component_placement_manifest": component_path.name,
+            "component_placement_count": len(component_rows),
+            "component_placement_rule": (
+                "validate imported extents, then translate each imported mesh actor by "
+                "expected world-bounds origin minus imported asset-bounds origin"
+            ),
         },
         "tiles": tile_rows,
         "outputs": {
@@ -401,6 +547,11 @@ def main():
             "building_ground_ue_cm": {
                 "path": building_path.name,
                 "sha256": sha256_file(building_path),
+            },
+            "building_component_placement": {
+                "path": component_path.name,
+                "sha256": sha256_file(component_path),
+                "count": len(component_rows),
             },
         },
         "next_gate": (
@@ -425,6 +576,7 @@ def main():
         "height_roundtrip_max_error_m": max_roundtrip_error,
         "building_tiles": len(tile_rows),
         "building_z_count": len(ue_z),
+        "building_component_placement_count": len(component_rows),
         "out": str(args.out),
     }, indent=2))
 
