@@ -70,6 +70,8 @@ jobs:
           assert r["landscape"]["component_size_m"] == 500.0
           assert len(r["tiles"]) == 25
           assert r["building_placement"]["missing"] == 0
+          assert r["building_placement"]["component_placement_count"] == 11130
+          assert r["outputs"]["building_component_placement"]["count"] == 11130
           print(json.dumps({
               "status":r["status"],
               "heightmap":r["landscape"]["heightmap_size"],
@@ -77,9 +79,37 @@ jobs:
               "component_size_m":r["landscape"]["component_size_m"],
               "tile_count":len(r["tiles"]),
               "building_z_count":r["building_placement"]["surveyed_z_count"],
+              "building_component_placement_count":r["building_placement"]["component_placement_count"],
               "png_sha256":r["outputs"]["heightmap_png"]["sha256"],
               "r16_sha256":r["outputs"]["heightmap_r16"]["sha256"],
+              "component_placement_sha256":r["outputs"]["building_component_placement"]["sha256"],
           },indent=2))
+          PY
+
+      - name: Rebuild Unreal contract and verify byte determinism
+        run: |
+          python tools/unreal_xinyi_v2/build_contract.py --out unreal/Saved/XinyiUnrealV2ContractRepeat
+          python - <<'PY'
+          import hashlib
+          from pathlib import Path
+
+          a=Path("unreal/Saved/XinyiUnrealV2Contract")
+          b=Path("unreal/Saved/XinyiUnrealV2ContractRepeat")
+          names=[
+              "xinyi_unreal_v2_contract.json",
+              "xinyi_moi2025_landscape_631.png",
+              "xinyi_moi2025_landscape_631.r16",
+              "building_ground_ue_cm.json",
+              "building_component_placement.jsonl.gz",
+          ]
+          def digest(p):
+              return hashlib.sha256(p.read_bytes()).hexdigest()
+          rows={}
+          for name in names:
+              da,db=digest(a/name),digest(b/name)
+              assert da == db, f"nondeterministic output {name}: {da} != {db}"
+              rows[name]=da
+          print("BYTE_DETERMINISM_PASS", rows)
           PY
 
       - name: Upload Unreal XinyiV2 input evidence

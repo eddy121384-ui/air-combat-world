@@ -267,10 +267,18 @@ def main():
 
     if PLAN_PATH and pass_gate:
         os.makedirs(os.path.dirname(os.path.abspath(PLAN_PATH)), exist_ok=True)
-        with gzip.open(PLAN_PATH, "wt", encoding="utf-8", newline="\n") as fh:
-            fh.write(json.dumps({"header": summary}, separators=(",", ":")) + "\n")
-            for row in plan_rows:
-                fh.write(json.dumps(row, separators=(",", ":")) + "\n")
+        lines = [json.dumps({"header": summary}, separators=(",", ":"), allow_nan=False)]
+        lines.extend(
+            json.dumps(row, separators=(",", ":"), allow_nan=False)
+            for row in plan_rows
+        )
+        payload = ("\n".join(lines) + "\n").encode("utf-8")
+        packed = bytearray(gzip.compress(payload, compresslevel=9, mtime=0))
+        if len(packed) < 10:
+            raise RuntimeError("unexpectedly short gzip placement plan")
+        packed[9] = 255
+        with open(PLAN_PATH, "wb") as fh:
+            fh.write(packed)
 
     print("XINYI_V2_PLACEMENT_PLAN_JSON " + json.dumps(summary, separators=(",", ":")))
     if not pass_gate:
