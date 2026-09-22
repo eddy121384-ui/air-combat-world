@@ -134,6 +134,7 @@ def main():
     per_tile = []
     failures = []
     total_meshes = 0
+    expected_total_nodes = sum(int(row["building_nodes"]) for row in rows)
 
     for row in rows:
         tile = row["tile"]
@@ -198,6 +199,8 @@ def main():
             "expected_source_nodes": int(row["building_nodes"]),
             "expected_source_triangles": int(row["triangles"]),
             "static_mesh_assets": len(paths),
+            "asset_count_matches_source_nodes": len(paths) == int(row["building_nodes"]),
+            "source_node_delta": len(paths) - int(row["building_nodes"]),
             "asset_path_sha256": inventory_hash(paths),
             "asset_paths": paths,
             "nanite_disabled_now": fixed,
@@ -211,11 +214,14 @@ def main():
         "root": ROOT,
         "tile_count": len(per_tile),
         "static_mesh_asset_count": total_meshes,
+        "expected_source_node_count": expected_total_nodes,
+        "asset_count_matches_source_nodes": total_meshes == expected_total_nodes,
+        "source_node_delta": total_meshes - expected_total_nodes,
         "elapsed_seconds": time.perf_counter() - started,
         "per_tile": per_tile,
         "failures": failures,
         "next_gate": (
-            "Fresh-process persistence inventory, then actor placement and Landscape import."
+            "Fresh-process persistence + imported-bounds frame measurement; then choose actor/scene placement strategy and Landscape import."
         ),
     }
 
