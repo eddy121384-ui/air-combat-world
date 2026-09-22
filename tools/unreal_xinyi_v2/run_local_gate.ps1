@@ -17,7 +17,7 @@ $Verify = Join-Path $RepoRoot "adapters\unreal\verify_xinyi_v2_building_import.p
 $BoundsProbe = Join-Path $RepoRoot "adapters\unreal\probe_xinyi_v2_building_bounds.py"
 $PlacementPlanner = Join-Path $RepoRoot "adapters\unreal\plan_xinyi_v2_building_placement.py"
 $BuildLandscape = Join-Path $RepoRoot "adapters\unreal\build_xinyi_v2_landscape.py"
-$VerifyLandscape = Join-Path $RepoRoot "adapters\unreal\verify_xinyi_v2_landscape_reopen.py"
+$VerifyLandscape = Join-Path $RepoRoot "adapters\unreal\verify_xinyi_v2_landscape_reopen.py"\n$PlaceSample = Join-Path $RepoRoot "adapters\unreal\place_xinyi_v2_sample_buildings.py"\n$VerifySample = Join-Path $RepoRoot "adapters\unreal\verify_xinyi_v2_sample_reopen.py"
 $BuildBridge = Join-Path $RepoRoot "tools\unreal_xinyi_v2\build_landscape_bridge.ps1"
 
 if (-not $UnrealCmd) {
@@ -37,7 +37,7 @@ $BoundsReport = Join-Path $Saved "ue_building_bounds.json"
 $PlacementSummary = Join-Path $Saved "ue_building_placement_summary.json"
 $PlacementPlan = Join-Path $Saved "ue_building_placement_plan.jsonl.gz"
 $LandscapeReport = Join-Path $Saved "ue_landscape_create.json"
-$LandscapeReopenReport = Join-Path $Saved "ue_landscape_fresh_reopen.json"
+$LandscapeReopenReport = Join-Path $Saved "ue_landscape_fresh_reopen.json"\n$SampleReport = Join-Path $Saved "ue_building_sample_placement.json"\n$SampleReopenReport = Join-Path $Saved "ue_building_sample_fresh_reopen.json"
 
 if (-not (Test-Path $UnrealCmd)) { throw "UnrealEditor-Cmd not found: $UnrealCmd" }
 if (-not (Test-Path $Project)) { throw "uproject not found: $Project" }
@@ -132,6 +132,24 @@ if (-not (Test-Path $LandscapeReopenReport)) { throw "Landscape reopen did not w
 $reopenReceipt = Get-Content $LandscapeReopenReport -Raw | ConvertFrom-Json
 if ($reopenReceipt.status -ne "PASS_LANDSCAPE_FRESH_REOPEN") {
     throw "Landscape fresh-reopen receipt is not PASS_LANDSCAPE_FRESH_REOPEN"
+}
+
+# Phase H: place only a deterministic 50-building sample (low + high per tile).
+$env:ACW_XINYI_V2_SAMPLE_REPORT = $SampleReport
+Invoke-UEPython -Script $PlaceSample -LogName "08-building-sample-place.log"
+if (-not (Test-Path $SampleReport)) { throw "Sample placement did not write $SampleReport" }
+$sampleReceipt = Get-Content $SampleReport -Raw | ConvertFrom-Json
+if ($sampleReceipt.status -ne "PASS_SAMPLE_PLACED") {
+    throw "Building sample placement is not PASS_SAMPLE_PLACED"
+}
+
+# Phase I: fresh process verifies sample locations and mesh references persisted.
+$env:ACW_XINYI_V2_SAMPLE_REOPEN_REPORT = $SampleReopenReport
+Invoke-UEPython -Script $VerifySample -LogName "09-building-sample-fresh-reopen.log"
+if (-not (Test-Path $SampleReopenReport)) { throw "Sample reopen did not write $SampleReopenReport" }
+$sampleReopenReceipt = Get-Content $SampleReopenReport -Raw | ConvertFrom-Json
+if ($sampleReopenReceipt.status -ne "PASS_SAMPLE_FRESH_REOPEN") {
+    throw "Building sample fresh-reopen is not PASS_SAMPLE_FRESH_REOPEN"
 }
 
 Write-Host ""
