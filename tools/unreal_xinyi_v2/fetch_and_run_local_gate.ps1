@@ -3,14 +3,14 @@ param(
     [string]$Branch = "feat/xinyi-unreal-v2",
     [string]$Workflow = "xinyi-unreal-v2-contract.yml",
     [Nullable[long]]$RunId = $null,
-    [string]$EngineRoot = "C:\\Program Files\\Epic Games\\UE_5.8"
+    [string]$EngineRoot = "C:\Program Files\Epic Games\UE_5.8"
 )
 
 $ErrorActionPreference = "Stop"
 
-$RepoRoot = (Resolve-Path (Join-Path $PSScriptRoot "..\\..")).Path
+$RepoRoot = (Resolve-Path (Join-Path $PSScriptRoot "..\..")).Path
 $LocalGate = Join-Path $PSScriptRoot "run_local_gate.ps1"
-$InputsBase = Join-Path $RepoRoot "unreal\\Saved\\XinyiUnrealV2Inputs"
+$InputsBase = Join-Path $RepoRoot "unreal\Saved\XinyiUnrealV2Inputs"
 
 $gh = Get-Command gh -ErrorAction SilentlyContinue
 if (-not $gh) {
@@ -51,8 +51,8 @@ if ($LASTEXITCODE -ne 0) {
     throw "gh run download failed for run $RunId."
 }
 
-$Contract = Join-Path $InputRoot "unreal\\Saved\\XinyiUnrealV2Contract\\xinyi_unreal_v2_contract.json"
-$BuildingDir = Join-Path $InputRoot "unreal\\Saved\\XinyiV2Full\\run-01\\tiles"
+$Contract = Join-Path $InputRoot "unreal\Saved\XinyiUnrealV2Contract\xinyi_unreal_v2_contract.json"
+$BuildingDir = Join-Path $InputRoot "unreal\Saved\XinyiV2Full\run-01\tiles"
 if (-not (Test-Path $Contract)) {
     throw "Downloaded artifact is missing the contract: $Contract"
 }
