@@ -15,6 +15,7 @@ $Probe = Join-Path $RepoRoot "adapters\unreal\xinyi_v2_api_probe.py"
 $Import = Join-Path $RepoRoot "adapters\unreal\import_xinyi_v2_buildings.py"
 $Verify = Join-Path $RepoRoot "adapters\unreal\verify_xinyi_v2_building_import.py"
 $BoundsProbe = Join-Path $RepoRoot "adapters\unreal\probe_xinyi_v2_building_bounds.py"
+$PlacementPlanner = Join-Path $RepoRoot "adapters\unreal\plan_xinyi_v2_building_placement.py"
 $BuildLandscape = Join-Path $RepoRoot "adapters\unreal\build_xinyi_v2_landscape.py"
 $VerifyLandscape = Join-Path $RepoRoot "adapters\unreal\verify_xinyi_v2_landscape_reopen.py"
 $BuildBridge = Join-Path $RepoRoot "tools\unreal_xinyi_v2\build_landscape_bridge.ps1"
@@ -33,6 +34,8 @@ New-Item -ItemType Directory -Force -Path $Saved | Out-Null
 $ProbeOut = Join-Path $Saved "ue58_api_probe.json"
 $ImportReport = Join-Path $Saved "ue_building_import.json"
 $BoundsReport = Join-Path $Saved "ue_building_bounds.json"
+$PlacementSummary = Join-Path $Saved "ue_building_placement_summary.json"
+$PlacementPlan = Join-Path $Saved "ue_building_placement_plan.jsonl.gz"
 $LandscapeReport = Join-Path $Saved "ue_landscape_create.json"
 $LandscapeReopenReport = Join-Path $Saved "ue_landscape_fresh_reopen.json"
 
@@ -98,10 +101,22 @@ if ($boundsReceipt.status -ne "PASS_MEASUREMENT") {
     throw "Building bounds receipt is not PASS_MEASUREMENT"
 }
 
-# Phase E: materialize the accepted uint16 height contract as a real ALandscape.
+# Phase E: join expected per-component world bounds to imported asset bounds.
+# This remains a zero-world-mutation preflight; it must PASS before any actor spawn.
 $env:ACW_XINYI_V2_CONTRACT_ROOT = $ContractRoot
+$env:ACW_XINYI_V2_PLACEMENT_SUMMARY = $PlacementSummary
+$env:ACW_XINYI_V2_PLACEMENT_PLAN = $PlacementPlan
+Invoke-UEPython -Script $PlacementPlanner -LogName "05-building-placement-plan.log"
+if (-not (Test-Path $PlacementSummary)) { throw "Placement planner did not write $PlacementSummary" }
+$placementReceipt = Get-Content $PlacementSummary -Raw | ConvertFrom-Json
+if ($placementReceipt.status -ne "PASS_PLACEMENT_PLAN") {
+    throw "Building placement plan is not PASS_PLACEMENT_PLAN"
+}
+if (-not (Test-Path $PlacementPlan)) { throw "Placement planner did not write $PlacementPlan" }
+
+# Phase F: materialize the accepted uint16 height contract as a real ALandscape.
 $env:ACW_XINYI_V2_LANDSCAPE_REPORT = $LandscapeReport
-Invoke-UEPython -Script $BuildLandscape -LogName "05-landscape-create.log"
+Invoke-UEPython -Script $BuildLandscape -LogName "06-landscape-create.log"
 if (-not (Test-Path $LandscapeReport)) { throw "Landscape build did not write $LandscapeReport" }
 
 $landscapeReceipt = Get-Content $LandscapeReport -Raw | ConvertFrom-Json
@@ -109,9 +124,9 @@ if ($landscapeReceipt.status -ne "PASS_LANDSCAPE_CREATED") {
     throw "Landscape receipt is not PASS_LANDSCAPE_CREATED"
 }
 
-# Phase F: another new process proves .umap + ALandscape components persisted.
+# Phase G: another new process proves .umap + ALandscape components persisted.
 $env:ACW_XINYI_V2_LANDSCAPE_REOPEN_REPORT = $LandscapeReopenReport
-Invoke-UEPython -Script $VerifyLandscape -LogName "06-landscape-fresh-reopen.log"
+Invoke-UEPython -Script $VerifyLandscape -LogName "07-landscape-fresh-reopen.log"
 if (-not (Test-Path $LandscapeReopenReport)) { throw "Landscape reopen did not write $LandscapeReopenReport" }
 
 $reopenReceipt = Get-Content $LandscapeReopenReport -Raw | ConvertFrom-Json
@@ -125,6 +140,8 @@ Write-Host "API probe:              $ProbeOut"
 Write-Host "Building import report: $ImportReport"
 Write-Host "Building bounds:        $BoundsReport"
 Write-Host "Transform mode:         $($boundsReceipt.overall_transform_behavior)"
+Write-Host "Placement summary:      $PlacementSummary"
+Write-Host "Placement plan:         $PlacementPlan"
 Write-Host "Landscape report:       $LandscapeReport"
 Write-Host "Landscape reopen:       $LandscapeReopenReport"
 Write-Host "Logs:                   $Saved"
