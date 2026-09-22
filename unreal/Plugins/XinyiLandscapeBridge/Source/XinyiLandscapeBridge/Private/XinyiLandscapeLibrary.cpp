@@ -224,7 +224,7 @@ FString UXinyiLandscapeLibrary::CreateLandscapeFromRaw16(
 
     if (IsValid(LandscapeInfo))
     {
-        LandscapeInfo->UpdateLayerInfoMap(Landscape);
+        LandscapeInfo->UpdateLayerInfoMap(Landscape, false);
     }
 
     Landscape->PostEditChange();
