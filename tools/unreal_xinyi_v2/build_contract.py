@@ -20,6 +20,7 @@ This does not increase the semantic/source accuracy of the terrain.
 from __future__ import annotations
 
 import argparse
+import gzip
 import hashlib
 import json
 import math
@@ -380,7 +381,7 @@ def main():
     raw = args.out / "xinyi_moi2025_landscape_631.r16"
     report_path = args.out / "xinyi_unreal_v2_contract.json"
     building_path = args.out / "building_ground_ue_cm.json"
-    component_path = args.out / "building_component_placement.jsonl"
+    component_path = args.out / "building_component_placement.jsonl.gz"
 
     Image.fromarray(encoded).save(png)
     # RAW16 fallback/import evidence; Unreal RAW16 convention is little-endian.
