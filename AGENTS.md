@@ -85,6 +85,8 @@ It is a visualization layer, not a second production geometry path.
 - Preview renderer: `tools/preview/xinyi_blender_preview.py`
 - Preview contract: `docs/architecture/xinyi-whitebox-preview-pipeline.md`
 - Terrain candidate result: `docs/xinyi-terrain-v0-dtm-result.md`
+- Unreal offline contract result: `docs/xinyi-unreal-v2-contract-result.md`
+- Unreal offline contract design: `docs/architecture/xinyi-unreal-v2-contract.md`
 - Current visible milestone: `docs/xinyi-v2-whitebox-preview-status.md`
 
 The original building-only whitebox did not contain terrain. Terrain v0 now has a passing
@@ -107,7 +109,7 @@ building-specific Z hacks.
 There are now two downstream tracks:
 
 - **world-completeness track:** MOI 2025 bare-earth DTM derivative source audit -> 25 terrain tiles -> surveyed building base-Z anchoring -> terrain + building preview — PASS candidate;
-- **engine track:** isolated Unreal `XinyiV2` import / placement / performance validation.
+- **engine track:** offline Unreal `XinyiV2` input contract — PASS; actual UE5.8 asset import / Landscape / placement / persistence / performance validation — IN PROGRESS.
 
 Do not confuse a preview render failure with a geometry-gate failure, and do not treat an attractive
 preview as evidence that geometry or Unreal runtime validation has passed.
@@ -142,9 +144,10 @@ Current sequence:
 2. full Xinyi numerical / serialization gate — PASS
 3. Blender full-area cloud QA — PASS
 4. building-only Xinyi whitebox preview — AVAILABLE
-5. terrain source / tile / building-elevation integration — NEXT WORLD-COMPLETENESS LAYER
-6. Unreal XinyiV2 import / placement / performance spike — NEXT ENGINE GATE
-7. only after these contracts are stable, scale the same tile pipeline toward wider Taipei
+5. MOI terrain source / 25-tile / surveyed building-elevation integration — PASS candidate
+6. Unreal XinyiV2 offline input contract (631x631 heightmap, 5x5 x 500m components) — PASS
+7. actual UE5.8 asset import / Landscape / fresh-reopen / streaming / performance gate — CURRENT
+8. only after the engine contract is stable, scale the same tile pipeline toward wider Taipei
 
 Do not mix facade polish, materials, gameplay, Taipei-wide expansion, or production-tool winner
 decisions into the Unreal import gate unless the task explicitly asks for them.
