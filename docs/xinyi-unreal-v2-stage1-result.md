@@ -12,10 +12,12 @@ The first Unreal gate stage now regenerates the already-validated Full-Xinyi
 building set and accepted MOI 2025 DTM, then emits deterministic engine-facing
 inputs without changing building geometry or inventing a second elevation model.
 
-Passing GitHub Actions runs:
+Passing GitHub Actions runs include:
 
-- run #2: `35676287874`
-- run #3: `35676518722`
+- run #2: `35676287874` — initial offline contract PASS
+- run #12: `35677513819` — deterministic 11,130-component placement contract PASS
+- run #14: `35677590649` — latest restored deterministic contract PASS
+- host-script run #1: `35677640767` — Python/PowerShell/plugin static gate PASS
 
 Run #2 evidence artifact:
 
@@ -150,3 +152,88 @@ Once the UE bounds receipt establishes actual importer behavior:
 
 No facades, roads, vegetation, material polish, gameplay, or wider-Taipei expansion
 belongs in this stage.
+
+
+## Strengthened per-component placement contract
+
+The offline engine contract now derives expected Unreal world bounds from the
+actual validated GLB scene graph for **all 11,130 emitted mesh components**.
+
+For every component it records:
+
+- source GLB node identity;
+- building ID / tile;
+- surveyed WFS ground elevation;
+- expected UE world bounds min/max/origin/extent.
+
+This makes the eventual actor placement independent of Interchange's choice of
+asset frame. After import, UE first validates the StaticMesh extents under a
+global 2 cm tolerance. Only then is the deterministic translation computed as:
+
+```text
+actor translation =
+expected UE world-bounds origin
+-
+imported StaticMesh bounds origin
+```
+
+The preflight is zero-mutation. No building actor is spawned unless all expected
+components map uniquely and geometry extents remain consistent.
+
+Latest deterministic output hashes from run #14:
+
+- contract JSON:
+  `5e22ec3f60e66440bf014b99079273e91fa95dbd6d6dc7619daaffa66751b8df`
+- Landscape PNG:
+  `b1abea8620adf8329409e5546e5c75fe534c3060bfd119bfaed9863197bf1376`
+- Landscape R16:
+  `088c1b18c15a0b807348676e3568c99eb83b63444b0e7266078d673938f0594c`
+- surveyed building-ground manifest:
+  `cb624add5dabfde09cd52a59187e17fd9b4ea9b3596a024b4fe773792c42a512`
+- 11,130-component placement manifest:
+  `1af04639671899b3b0ed54092e2e3d74ca6745d1dbe19567852a37b8d5613efc`
+
+The workflow rebuilds the complete contract a second time and requires all five
+files above to be byte-identical.
+
+Run #14 artifact:
+
+- artifact ID: `10673472783`
+- ZIP digest:
+  `sha256:dd83af6b0122b119c1463f9813e2ea222794ab2ac0bceb059bf9f965cf0aeb3b`
+
+## Landscape materialization bridge
+
+Pure Python remains insufficient for reliable from-zero Landscape creation in
+the promoted UE5.8 editor surface, so the branch now contains the editor-only
+`XinyiLandscapeBridge`.
+
+Its boundary is deliberately narrow: it accepts the already validated RAW16,
+topology, location and scale, then calls the engine's `ALandscape::Import`
+path. It owns no terrain source, CRS, sampling, vertical datum, building logic or
+artistic fitting.
+
+See:
+
+`docs/architecture/xinyi-unreal-v2-landscape-bridge.md`
+
+The local gate now stages:
+
+```text
+latest passing contract artifact
+-> bridge build
+-> live UE5.8 API probe
+-> 25-GLB asset import
+-> fresh-process asset persistence
+-> imported mesh-frame measurement
+-> zero-mutation 11,130-component placement plan
+-> real 5x5-component ALandscape creation
+-> save
+-> fresh-process Landscape reinspection
+```
+
+A Draft integration PR tracks the work:
+
+- PR #9 — `Draft: Unreal XinyiV2 validated world runtime gate`
+
+The PR remains Draft until the live UE5.8 engine receipts pass.
