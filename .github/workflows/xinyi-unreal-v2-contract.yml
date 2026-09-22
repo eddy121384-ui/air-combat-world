@@ -5,7 +5,8 @@ on:
     branches:
       - feat/xinyi-unreal-v2
     paths:
-      - "tools/unreal_xinyi_v2/**"
+      - "tools/unreal_xinyi_v2/build_contract.py"
+      - "tools/unreal_xinyi_v2/__init__.py"
       - "tools/terrain/**"
       - "tools/citygen_v2/**"
       - "tools/compiler/**"
