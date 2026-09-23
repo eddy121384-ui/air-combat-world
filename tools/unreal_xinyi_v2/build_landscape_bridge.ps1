@@ -20,7 +20,7 @@ if (Test-Path $Package) {
 Write-Host "Building XinyiLandscapeBridge against installed UE5.8..."
 & $RunUAT BuildPlugin "-Plugin=$Plugin" "-Package=$Package" -TargetPlatforms=Win64 -Rocket
 if ($LASTEXITCODE -ne 0) {
-    throw "BuildPlugin failed with exit code $LASTEXITCODE. A Visual Studio C++ toolchain compatible with UE5.8 is required."
+    throw "BuildPlugin failed with exit code $LASTEXITCODE. The toolchain was found; inspect the compiler error above or the AutomationTool log for the actual cause."
 }
 
 $BuiltBinaries = Join-Path $Package "Binaries"
