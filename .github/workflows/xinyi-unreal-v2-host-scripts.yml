@@ -31,7 +31,7 @@ jobs:
 
       - name: Compile XinyiV2 Unreal Python adapters
         run: |
-          python -m py_compile             adapters/unreal/xinyi_v2_api_probe.py             adapters/unreal/import_xinyi_v2_buildings.py             adapters/unreal/verify_xinyi_v2_building_import.py             adapters/unreal/probe_xinyi_v2_building_bounds.py             adapters/unreal/plan_xinyi_v2_building_placement.py             adapters/unreal/build_xinyi_v2_landscape.py             adapters/unreal/verify_xinyi_v2_landscape_reopen.py
+          python -m py_compile             adapters/unreal/xinyi_v2_api_probe.py             adapters/unreal/import_xinyi_v2_buildings.py             adapters/unreal/verify_xinyi_v2_building_import.py             adapters/unreal/probe_xinyi_v2_building_bounds.py             adapters/unreal/plan_xinyi_v2_building_placement.py             adapters/unreal/build_xinyi_v2_landscape.py             adapters/unreal/verify_xinyi_v2_landscape_reopen.py             adapters/unreal/import_xinyi_v2_runtime_tiles.py             adapters/unreal/verify_xinyi_v2_runtime_tiles_existing.py             adapters/unreal/place_xinyi_v2_runtime_tiles.py             adapters/unreal/verify_xinyi_v2_runtime_world_reopen.py
 
       - name: Parse PowerShell gate scripts without executing them
         shell: pwsh
@@ -40,7 +40,8 @@ jobs:
           $paths = @(
             "tools/unreal_xinyi_v2/build_landscape_bridge.ps1",
             "tools/unreal_xinyi_v2/run_local_gate.ps1",
-            "tools/unreal_xinyi_v2/fetch_and_run_local_gate.ps1"
+            "tools/unreal_xinyi_v2/fetch_and_run_local_gate.ps1",
+            "tools/unreal_xinyi_v2/resume_runtime_world.ps1"
           )
           foreach ($path in $paths) {
             $tokens = $null

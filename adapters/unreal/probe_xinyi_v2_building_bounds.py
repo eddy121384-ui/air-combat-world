@@ -42,7 +42,7 @@ def mesh_bounds(asset_path):
     obj = unreal.EditorAssetLibrary.load_asset(asset_path)
     if obj is None or obj.get_class().get_name() != "StaticMesh":
         raise RuntimeError("not a StaticMesh: %s" % asset_path)
-    b = obj.get_extended_bounds()
+    b = obj.get_bounds()
     origin = xyz(b.origin)
     extent = xyz(b.box_extent)
     return {
