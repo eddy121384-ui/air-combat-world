@@ -3,7 +3,7 @@
 #include "Editor.h"
 #include "EngineUtils.h"
 #include "HAL/FileManager.h"
-#include "Json.h"
+#include "Dom/JsonObject.h"
 #include "Landscape.h"
 #include "LandscapeInfo.h"
 #include "LandscapeProxy.h"
@@ -189,9 +189,11 @@ FString UXinyiLandscapeLibrary::CreateLandscapeFromRaw16(
     }
 
     Landscape->SetActorLabel(ActorLabel);
-    Landscape->bCanHaveLayersContent = false;
     Landscape->SetActorLocation(LocationCm);
     Landscape->SetActorScale3D(ScaleXYZ);
+    Landscape->ComponentSizeQuads = ComponentSizeQuads;
+    Landscape->SubsectionSizeQuads = SubsectionSizeQuads;
+    Landscape->NumSubsections = NumSubsections;
 
     TMap<FGuid, TArray<uint16>> HeightDataPerLayers;
     HeightDataPerLayers.Add(FGuid(), MoveTemp(HeightData));
@@ -211,20 +213,20 @@ FString UXinyiLandscapeLibrary::CreateLandscapeFromRaw16(
         HeightDataPerLayers,
         nullptr,
         MaterialLayerDataPerLayers,
-        ELandscapeImportAlphamapType::Additive,
+        ELandscapeImportAlphamapType::Layered,
         ImportLayers);
 
-    Landscape->RegisterAllComponents();
+    if (Landscape->GetRootComponent() && !Landscape->GetRootComponent()->IsRegistered())
+    {
+        Landscape->RegisterAllComponents();
+    }
 
     ULandscapeInfo* LandscapeInfo = Landscape->GetLandscapeInfo();
     if (!IsValid(LandscapeInfo))
     {
-        LandscapeInfo = Landscape->CreateLandscapeInfo(false, true);
-    }
-
-    if (IsValid(LandscapeInfo))
-    {
-        LandscapeInfo->UpdateLayerInfoMap(Landscape, false);
+        Landscape->Destroy();
+        return JsonString(Failure(
+            TEXT("ALandscape::Import completed without a valid LandscapeInfo")));
     }
 
     Landscape->PostEditChange();
