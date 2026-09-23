@@ -188,6 +188,15 @@ def build_runtime_tile_glbs(tiles_dir: Path, out_dir: Path, tile_rows, z_offsets
                 f"runtime tile GLB bounds invalid: {tile_row['tile']}"
             )
 
+        ue_min = np.asarray(
+            [bounds[0, 0], bounds[0, 2], bounds[0, 1]], dtype=np.float64
+        ) * 100.0
+        ue_max = np.asarray(
+            [bounds[1, 0], bounds[1, 2], bounds[1, 1]], dtype=np.float64
+        ) * 100.0
+        ue_origin = (ue_min + ue_max) * 0.5
+        ue_extent = (ue_max - ue_min) * 0.5
+
         reports.append({
             "tile": tile_row["tile"],
             "path": name,
@@ -197,6 +206,8 @@ def build_runtime_tile_glbs(tiles_dir: Path, out_dir: Path, tile_rows, z_offsets
             "origin_enu_m": list(tile_row["origin_enu_m"]),
             "expected_ue_translation_cm": list(tile_row["expected_ue_translation_cm"]),
             "bounds_tile_local_game_m": bounds.tolist(),
+            "expected_ue_local_bounds_origin_cm": ue_origin.tolist(),
+            "expected_ue_local_bounds_extent_cm": ue_extent.tolist(),
             "representation": (
                 "one tile-local StaticMesh candidate; surveyed WFS ground Z baked "
                 "as per-component placement transform only"
@@ -575,6 +586,12 @@ def main():
         row["runtime_building_glb"] = runtime["path"]
         row["runtime_building_sha256"] = runtime["sha256"]
         row["runtime_triangles"] = runtime["triangles"]
+        row["runtime_expected_ue_local_bounds_origin_cm"] = runtime[
+            "expected_ue_local_bounds_origin_cm"
+        ]
+        row["runtime_expected_ue_local_bounds_extent_cm"] = runtime[
+            "expected_ue_local_bounds_extent_cm"
+        ]
 
     spacing_m = TILE_SIZE_M / COMPONENT_QUADS
     scale_xy_cm = spacing_m * 100.0
