@@ -72,6 +72,8 @@ jobs:
           assert r["building_placement"]["missing"] == 0
           assert r["building_placement"]["component_placement_count"] == 11130
           assert r["outputs"]["building_component_placement"]["count"] == 11130
+          assert r["building_placement"]["runtime_tile_count"] == 25
+          assert r["outputs"]["building_runtime_tiles"]["count"] == 25
           print(json.dumps({
               "status":r["status"],
               "heightmap":r["landscape"]["heightmap_size"],
@@ -83,6 +85,7 @@ jobs:
               "png_sha256":r["outputs"]["heightmap_png"]["sha256"],
               "r16_sha256":r["outputs"]["heightmap_r16"]["sha256"],
               "component_placement_sha256":r["outputs"]["building_component_placement"]["sha256"],
+              "runtime_tile_count":r["outputs"]["building_runtime_tiles"]["count"],
           },indent=2))
           PY
 
