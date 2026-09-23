@@ -58,6 +58,22 @@ jobs:
             Write-Host "POWERSHELL_PARSE_OK $path"
           }
 
+      - name: Validate resume input restoration path
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          text = Path("tools/unreal_xinyi_v2/resume_runtime_world.ps1").read_text()
+          for token in (
+              "Download-InputRun",
+              "gh run download",
+              "RunId",
+              "XINYI_V2_RESUME_INPUT_OK",
+              "runtime_glbs",
+          ):
+              assert token in text, token
+          print("RESUME_INPUT_RESTORE_GUARD_OK")
+          PY
+
       - name: Validate project and plugin descriptors
         run: |
           python - <<'PY'
