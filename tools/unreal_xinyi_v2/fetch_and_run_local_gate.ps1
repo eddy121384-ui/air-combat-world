@@ -53,19 +53,27 @@ if ($LASTEXITCODE -ne 0) {
 
 $Contract = Join-Path $InputRoot "unreal\Saved\XinyiUnrealV2Contract\xinyi_unreal_v2_contract.json"
 $BuildingDir = Join-Path $InputRoot "unreal\Saved\XinyiV2Full\run-01\tiles"
+$RuntimeBuildingDir = Join-Path $InputRoot "unreal\Saved\XinyiUnrealV2Contract\building_runtime_tiles"
 if (-not (Test-Path $Contract)) {
     throw "Downloaded artifact is missing the contract: $Contract"
 }
 if (-not (Test-Path $BuildingDir)) {
-    throw "Downloaded artifact is missing building tiles: $BuildingDir"
+    throw "Downloaded artifact is missing validated source building tiles: $BuildingDir"
+}
+if (-not (Test-Path $RuntimeBuildingDir)) {
+    throw "Downloaded artifact is missing staged runtime building tiles: $RuntimeBuildingDir"
 }
 
 $glbs = @(Get-ChildItem -File -Filter "*.glb" $BuildingDir)
 if ($glbs.Count -ne 25) {
-    throw "Expected 25 validated building GLBs, found $($glbs.Count)."
+    throw "Expected 25 validated source building GLBs, found $($glbs.Count)."
+}
+$runtimeGlbs = @(Get-ChildItem -File -Filter "*.glb" $RuntimeBuildingDir)
+if ($runtimeGlbs.Count -ne 25) {
+    throw "Expected 25 staged runtime building GLBs, found $($runtimeGlbs.Count)."
 }
 
-Write-Host "XINYI_V2_INPUT_DOWNLOAD_OK run=$($RunId.Value) glbs=$($glbs.Count)"
+Write-Host "XINYI_V2_INPUT_DOWNLOAD_OK run=$($RunId.Value) source_glbs=$($glbs.Count) runtime_glbs=$($runtimeGlbs.Count)"
 Write-Host "Starting local UE5.8 gate..."
 
 & $LocalGate -InputRoot $InputRoot -EngineRoot $EngineRoot
