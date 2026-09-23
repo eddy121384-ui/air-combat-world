@@ -112,6 +112,102 @@ def canonical_component_key(name: str) -> str:
     return re.sub(r"[^A-Za-z0-9_]+", "_", str(name)).strip("_").lower()
 
 
+def build_runtime_tile_glbs(tiles_dir: Path, out_dir: Path, tile_rows, z_offsets):
+    """Bake placement-only ground Z into one deterministic mesh per 500 m tile.
+
+    Source building geometry is not edited in place. Each validated component
+    remains tile-local; only its surveyed WFS ground elevation is applied as a
+    downstream Y/up translation before concatenation. The result is a runtime
+    representation with exactly one StaticMesh candidate per city tile.
+    """
+    out_dir.mkdir(parents=True, exist_ok=True)
+    reports = []
+
+    for tile_row in tile_rows:
+        src = tiles_dir / tile_row["building_glb"]
+        if not src.is_file():
+            raise RuntimeError(f"runtime tile source missing: {src}")
+
+        scene = trimesh.load_scene(src, file_type="glb", process=False)
+        meshes = []
+        component_count = 0
+        tri_count = 0
+
+        for node_name in sorted(scene.graph.nodes_geometry):
+            match = BUILDING_ID_RE.match(str(node_name))
+            if not match:
+                raise RuntimeError(
+                    f"runtime tile building id unparseable: {tile_row['tile']} {node_name}"
+                )
+            building_id = match.group(1)
+            if building_id not in z_offsets:
+                raise RuntimeError(
+                    f"runtime tile surveyed ground missing: {tile_row['tile']} {building_id}"
+                )
+
+            _transform, geometry_name = scene.graph[node_name]
+            # The validated source mesh itself is tile-local. The source node
+            # transform stores the shared tile/world translation; do not bake
+            # that into the runtime mesh or float precision regresses.
+            mesh = scene.geometry[geometry_name].copy()
+            mesh.apply_translation([0.0, float(z_offsets[building_id]), 0.0])
+            meshes.append(mesh)
+            component_count += 1
+            tri_count += int(len(mesh.faces))
+
+        if component_count != int(tile_row["building_nodes"]):
+            raise RuntimeError(
+                f"runtime tile component count mismatch {tile_row['tile']}: "
+                f"{component_count} != {tile_row['building_nodes']}"
+            )
+        if tri_count != int(tile_row["triangles"]):
+            raise RuntimeError(
+                f"runtime tile triangle count mismatch {tile_row['tile']}: "
+                f"{tri_count} != {tile_row['triangles']}"
+            )
+
+        combined = trimesh.util.concatenate(meshes)
+        if int(len(combined.faces)) != tri_count:
+            raise RuntimeError(
+                f"runtime tile concatenate changed triangle count: {tile_row['tile']}"
+            )
+
+        name = f"xinyi_runtime_{tile_row['tile']}.glb"
+        dst = out_dir / name
+        payload = combined.export(file_type="glb")
+        dst.write_bytes(payload)
+
+        reopened = trimesh.load(dst, file_type="glb", force="mesh", process=False)
+        if int(len(reopened.faces)) != tri_count:
+            raise RuntimeError(
+                f"runtime tile GLB reload changed triangle count: {tile_row['tile']}"
+            )
+        bounds = np.asarray(reopened.bounds, dtype=np.float64)
+        if bounds.shape != (2, 3) or not np.all(np.isfinite(bounds)):
+            raise RuntimeError(
+                f"runtime tile GLB bounds invalid: {tile_row['tile']}"
+            )
+
+        reports.append({
+            "tile": tile_row["tile"],
+            "path": name,
+            "sha256": sha256_file(dst),
+            "component_count_baked": component_count,
+            "triangles": tri_count,
+            "origin_enu_m": list(tile_row["origin_enu_m"]),
+            "expected_ue_translation_cm": list(tile_row["expected_ue_translation_cm"]),
+            "bounds_tile_local_game_m": bounds.tolist(),
+            "representation": (
+                "one tile-local StaticMesh candidate; surveyed WFS ground Z baked "
+                "as per-component placement transform only"
+            ),
+        })
+
+    if len(reports) != 25:
+        raise RuntimeError(f"expected 25 runtime tile GLBs, built {len(reports)}")
+    return reports
+
+
 def build_component_placement_manifest(tiles_dir: Path, tile_rows, z_offsets):
     rows = []
     failures = []
@@ -382,6 +478,7 @@ def main():
     report_path = args.out / "xinyi_unreal_v2_contract.json"
     building_path = args.out / "building_ground_ue_cm.json"
     component_path = args.out / "building_component_placement.jsonl.gz"
+    runtime_tiles_dir = args.out / "building_runtime_tiles"
 
     Image.fromarray(encoded).save(png)
     # RAW16 fallback/import evidence; Unreal RAW16 convention is little-endian.
@@ -466,6 +563,19 @@ def main():
     component_gzip[9] = 255
     component_path.write_bytes(component_gzip)
 
+    runtime_tiles = build_runtime_tile_glbs(
+        args.building_tiles_dir,
+        runtime_tiles_dir,
+        tile_rows,
+        building_z["offsets_m"],
+    )
+    runtime_by_tile = {row["tile"]: row for row in runtime_tiles}
+    for row in tile_rows:
+        runtime = runtime_by_tile[row["tile"]]
+        row["runtime_building_glb"] = runtime["path"]
+        row["runtime_building_sha256"] = runtime["sha256"]
+        row["runtime_triangles"] = runtime["triangles"]
+
     spacing_m = TILE_SIZE_M / COMPONENT_QUADS
     scale_xy_cm = spacing_m * 100.0
     expected_min_ue = enu_to_ue_cm(
@@ -546,6 +656,11 @@ def main():
                 "validate imported extents, then translate each imported mesh actor by "
                 "expected world-bounds origin minus imported asset-bounds origin"
             ),
+            "runtime_representation": (
+                "25 tile-local StaticMesh candidates; per-building surveyed ground Z "
+                "baked as placement transform, source validated meshes unchanged"
+            ),
+            "runtime_tile_count": len(runtime_tiles),
         },
         "tiles": tile_rows,
         "outputs": {
@@ -566,6 +681,11 @@ def main():
                 "path": component_path.name,
                 "sha256": sha256_file(component_path),
                 "count": len(component_rows),
+            },
+            "building_runtime_tiles": {
+                "directory": runtime_tiles_dir.name,
+                "count": len(runtime_tiles),
+                "manifest": runtime_tiles,
             },
         },
         "next_gate": (
@@ -591,6 +711,7 @@ def main():
         "building_tiles": len(tile_rows),
         "building_z_count": len(ue_z),
         "building_component_placement_count": len(component_rows),
+        "building_runtime_tile_count": len(runtime_tiles),
         "out": str(args.out),
     }, indent=2))
 
