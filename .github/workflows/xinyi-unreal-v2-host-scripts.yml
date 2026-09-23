@@ -94,7 +94,10 @@ jobs:
           required = [
               "ALandscape",
               "Landscape->Import(",
-              "UpdateLayerInfoMap(Landscape, false)",
+              "ELandscapeImportAlphamapType::Layered",
+              "ComponentSizeQuads = ComponentSizeQuads",
+              "SubsectionSizeQuads = SubsectionSizeQuads",
+              "NumSubsections = NumSubsections",
               "LandscapeComponents.Num()",
               "GetLandscapeExtent(",
               "LoadFileToArray",
@@ -109,6 +112,8 @@ jobs:
               "GDAL",
               "ground_elev_m",
               "make_valid",
+              "bCanHaveLayersContent",
+              "CreateLandscapeInfo(",
           ]
           for token in forbidden:
               assert token not in cpp, f"bridge must not own source/elevation logic: {token}"
