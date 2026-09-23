@@ -17,7 +17,9 @@ $Verify = Join-Path $RepoRoot "adapters\unreal\verify_xinyi_v2_building_import.p
 $BoundsProbe = Join-Path $RepoRoot "adapters\unreal\probe_xinyi_v2_building_bounds.py"
 $PlacementPlanner = Join-Path $RepoRoot "adapters\unreal\plan_xinyi_v2_building_placement.py"
 $BuildLandscape = Join-Path $RepoRoot "adapters\unreal\build_xinyi_v2_landscape.py"
-$VerifyLandscape = Join-Path $RepoRoot "adapters\unreal\verify_xinyi_v2_landscape_reopen.py"\n$PlaceSample = Join-Path $RepoRoot "adapters\unreal\place_xinyi_v2_sample_buildings.py"\n$VerifySample = Join-Path $RepoRoot "adapters\unreal\verify_xinyi_v2_sample_reopen.py"
+$VerifyLandscape = Join-Path $RepoRoot "adapters\unreal\verify_xinyi_v2_landscape_reopen.py"
+$PlaceSample = Join-Path $RepoRoot "adapters\unreal\place_xinyi_v2_sample_buildings.py"
+$VerifySample = Join-Path $RepoRoot "adapters\unreal\verify_xinyi_v2_sample_reopen.py"
 $BuildBridge = Join-Path $RepoRoot "tools\unreal_xinyi_v2\build_landscape_bridge.ps1"
 
 if (-not $UnrealCmd) {
@@ -37,7 +39,9 @@ $BoundsReport = Join-Path $Saved "ue_building_bounds.json"
 $PlacementSummary = Join-Path $Saved "ue_building_placement_summary.json"
 $PlacementPlan = Join-Path $Saved "ue_building_placement_plan.jsonl.gz"
 $LandscapeReport = Join-Path $Saved "ue_landscape_create.json"
-$LandscapeReopenReport = Join-Path $Saved "ue_landscape_fresh_reopen.json"\n$SampleReport = Join-Path $Saved "ue_building_sample_placement.json"\n$SampleReopenReport = Join-Path $Saved "ue_building_sample_fresh_reopen.json"
+$LandscapeReopenReport = Join-Path $Saved "ue_landscape_fresh_reopen.json"
+$SampleReport = Join-Path $Saved "ue_building_sample_placement.json"
+$SampleReopenReport = Join-Path $Saved "ue_building_sample_fresh_reopen.json"
 
 if (-not (Test-Path $UnrealCmd)) { throw "UnrealEditor-Cmd not found: $UnrealCmd" }
 if (-not (Test-Path $Project)) { throw "uproject not found: $Project" }
