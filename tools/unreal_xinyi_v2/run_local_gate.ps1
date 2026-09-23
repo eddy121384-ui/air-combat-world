@@ -123,7 +123,10 @@ Invoke-UEPython -Script $RuntimeImport -LogName "04-runtime-tile-import.log"
 if (-not (Test-Path $RuntimeImportReport)) { throw "Runtime tile import did not write $RuntimeImportReport" }
 $runtimeImportReceipt = Get-Content $RuntimeImportReport -Raw | ConvertFrom-Json
 if ($runtimeImportReceipt.status -ne "PASS_RUNTIME_TILE_IMPORT") {
-    throw "Runtime tile import is not PASS_RUNTIME_TILE_IMPORT"
+    Write-Host ""
+    Write-Host "RUNTIME_TILE_IMPORT_FAILURE_RECEIPT"
+    Write-Host ($runtimeImportReceipt | ConvertTo-Json -Depth 8)
+    throw "Runtime tile import is not PASS_RUNTIME_TILE_IMPORT. See $RuntimeImportReport"
 }
 
 # Phase E: place exactly 25 building tile actors over the validated terrain.
