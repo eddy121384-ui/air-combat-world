@@ -74,96 +74,82 @@ function Invoke-UEPython {
     }
 }
 
-# Phase A: record the actual promoted UE5.8 Python surface. This is evidence,
-# even though the C++ bridge is now the expected from-zero Landscape route.
+# Clean disposable XinyiV2 content from interrupted prior local runs before UE starts.
+$LegacyBuildingsDir = Join-Path $RepoRoot "unreal\Content\XinyiV2\Buildings"
+$RuntimeBuildingsDir = Join-Path $RepoRoot "unreal\Content\XinyiV2\RuntimeBuildings"
+if (Test-Path $LegacyBuildingsDir) {
+    Write-Host "Removing interrupted legacy per-component import cache..."
+    Remove-Item -Recurse -Force $LegacyBuildingsDir
+}
+if (Test-Path $RuntimeBuildingsDir) {
+    Remove-Item -Recurse -Force $RuntimeBuildingsDir
+}
+
+# Phase A: record the actual promoted UE5.8 Python surface.
 $env:ACW_XINYI_V2_PROBE_OUT = $ProbeOut
 Invoke-UEPython -Script $Probe -LogName "01-api-probe.log"
 if (-not (Test-Path $ProbeOut)) { throw "API probe did not write $ProbeOut" }
 
-# Phase B: verified-SHA building asset import only. No placement yet.
+# Phase B: materialize accepted MOI terrain first; no building import yet.
 $env:ACW_XINYI_V2_CONTRACT = $Contract
-$env:ACW_XINYI_V2_BUILDING_DIR = $BuildingDir
-$env:ACW_XINYI_V2_IMPORT_REPORT = $ImportReport
-Invoke-UEPython -Script $Import -LogName "02-building-import.log"
-if (-not (Test-Path $ImportReport)) { throw "Building import did not write $ImportReport" }
-
-$importReceipt = Get-Content $ImportReport -Raw | ConvertFrom-Json
-if ($importReceipt.status -ne "PASS_ASSET_IMPORT") {
-    throw "Building import receipt is not PASS_ASSET_IMPORT"
-}
-
-# Phase C: separate fresh process proves building assets actually persisted.
-Invoke-UEPython -Script $Verify -LogName "03-building-fresh-reopen.log"
-
-# Phase D: measure the actual Interchange StaticMesh coordinate frame before
-# any building placement policy is written.
-$env:ACW_XINYI_V2_BOUNDS_REPORT = $BoundsReport
-Invoke-UEPython -Script $BoundsProbe -LogName "04-building-bounds-probe.log"
-if (-not (Test-Path $BoundsReport)) { throw "Bounds probe did not write $BoundsReport" }
-$boundsReceipt = Get-Content $BoundsReport -Raw | ConvertFrom-Json
-if ($boundsReceipt.status -ne "PASS_MEASUREMENT") {
-    throw "Building bounds receipt is not PASS_MEASUREMENT"
-}
-
-# Phase E: join expected per-component world bounds to imported asset bounds.
-# This remains a zero-world-mutation preflight; it must PASS before any actor spawn.
 $env:ACW_XINYI_V2_CONTRACT_ROOT = $ContractRoot
-$env:ACW_XINYI_V2_PLACEMENT_SUMMARY = $PlacementSummary
-$env:ACW_XINYI_V2_PLACEMENT_PLAN = $PlacementPlan
-Invoke-UEPython -Script $PlacementPlanner -LogName "05-building-placement-plan.log"
-if (-not (Test-Path $PlacementSummary)) { throw "Placement planner did not write $PlacementSummary" }
-$placementReceipt = Get-Content $PlacementSummary -Raw | ConvertFrom-Json
-if ($placementReceipt.status -ne "PASS_PLACEMENT_PLAN") {
-    throw "Building placement plan is not PASS_PLACEMENT_PLAN"
-}
-if (-not (Test-Path $PlacementPlan)) { throw "Placement planner did not write $PlacementPlan" }
-
-# Phase F: materialize the accepted uint16 height contract as a real ALandscape.
 $env:ACW_XINYI_V2_LANDSCAPE_REPORT = $LandscapeReport
-Invoke-UEPython -Script $BuildLandscape -LogName "06-landscape-create.log"
+Invoke-UEPython -Script $BuildLandscape -LogName "02-landscape-create.log"
 if (-not (Test-Path $LandscapeReport)) { throw "Landscape build did not write $LandscapeReport" }
-
 $landscapeReceipt = Get-Content $LandscapeReport -Raw | ConvertFrom-Json
 if ($landscapeReceipt.status -ne "PASS_LANDSCAPE_CREATED") {
     throw "Landscape receipt is not PASS_LANDSCAPE_CREATED"
 }
 
-# Phase G: another new process proves .umap + ALandscape components persisted.
+# Phase C: fresh process proves Landscape persistence.
 $env:ACW_XINYI_V2_LANDSCAPE_REOPEN_REPORT = $LandscapeReopenReport
-Invoke-UEPython -Script $VerifyLandscape -LogName "07-landscape-fresh-reopen.log"
+Invoke-UEPython -Script $VerifyLandscape -LogName "03-landscape-fresh-reopen.log"
 if (-not (Test-Path $LandscapeReopenReport)) { throw "Landscape reopen did not write $LandscapeReopenReport" }
-
 $reopenReceipt = Get-Content $LandscapeReopenReport -Raw | ConvertFrom-Json
 if ($reopenReceipt.status -ne "PASS_LANDSCAPE_FRESH_REOPEN") {
     throw "Landscape fresh-reopen receipt is not PASS_LANDSCAPE_FRESH_REOPEN"
 }
 
-# Phase H: place only a deterministic 50-building sample (low + high per tile).
-$env:ACW_XINYI_V2_SAMPLE_REPORT = $SampleReport
-Invoke-UEPython -Script $PlaceSample -LogName "08-building-sample-place.log"
-if (-not (Test-Path $SampleReport)) { throw "Sample placement did not write $SampleReport" }
-$sampleReceipt = Get-Content $SampleReport -Raw | ConvertFrom-Json
-if ($sampleReceipt.status -ne "PASS_SAMPLE_PLACED") {
-    throw "Building sample placement is not PASS_SAMPLE_PLACED"
+# Phase D: import the 25 staged runtime building tiles only.
+$RuntimeImport = Join-Path $RepoRoot "adapters\unreal\import_xinyi_v2_runtime_tiles.py"
+$PlaceRuntime = Join-Path $RepoRoot "adapters\unreal\place_xinyi_v2_runtime_tiles.py"
+$VerifyRuntime = Join-Path $RepoRoot "adapters\unreal\verify_xinyi_v2_runtime_world_reopen.py"
+$RuntimeImportReport = Join-Path $Saved "ue_runtime_tile_import.json"
+$RuntimeWorldReport = Join-Path $Saved "ue_runtime_world.json"
+$RuntimeWorldReopenReport = Join-Path $Saved "ue_runtime_world_fresh_reopen.json"
+
+$env:ACW_XINYI_V2_RUNTIME_IMPORT_REPORT = $RuntimeImportReport
+Invoke-UEPython -Script $RuntimeImport -LogName "04-runtime-tile-import.log"
+if (-not (Test-Path $RuntimeImportReport)) { throw "Runtime tile import did not write $RuntimeImportReport" }
+$runtimeImportReceipt = Get-Content $RuntimeImportReport -Raw | ConvertFrom-Json
+if ($runtimeImportReceipt.status -ne "PASS_RUNTIME_TILE_IMPORT") {
+    throw "Runtime tile import is not PASS_RUNTIME_TILE_IMPORT"
 }
 
-# Phase I: fresh process verifies sample locations and mesh references persisted.
-$env:ACW_XINYI_V2_SAMPLE_REOPEN_REPORT = $SampleReopenReport
-Invoke-UEPython -Script $VerifySample -LogName "09-building-sample-fresh-reopen.log"
-if (-not (Test-Path $SampleReopenReport)) { throw "Sample reopen did not write $SampleReopenReport" }
-$sampleReopenReceipt = Get-Content $SampleReopenReport -Raw | ConvertFrom-Json
-if ($sampleReopenReceipt.status -ne "PASS_SAMPLE_FRESH_REOPEN") {
-    throw "Building sample fresh-reopen is not PASS_SAMPLE_FRESH_REOPEN"
+# Phase E: place exactly 25 building tile actors over the validated terrain.
+$env:ACW_XINYI_V2_WORLD_REPORT = $RuntimeWorldReport
+Invoke-UEPython -Script $PlaceRuntime -LogName "05-runtime-world-place.log"
+if (-not (Test-Path $RuntimeWorldReport)) { throw "Runtime world placement did not write $RuntimeWorldReport" }
+$runtimeWorldReceipt = Get-Content $RuntimeWorldReport -Raw | ConvertFrom-Json
+if ($runtimeWorldReceipt.status -ne "PASS_RUNTIME_WORLD") {
+    throw "Runtime world placement is not PASS_RUNTIME_WORLD"
+}
+
+# Phase F: one more process proves the 25 actors + Landscape persisted.
+$env:ACW_XINYI_V2_WORLD_REOPEN_REPORT = $RuntimeWorldReopenReport
+Invoke-UEPython -Script $VerifyRuntime -LogName "06-runtime-world-fresh-reopen.log"
+if (-not (Test-Path $RuntimeWorldReopenReport)) { throw "Runtime world reopen did not write $RuntimeWorldReopenReport" }
+$runtimeWorldReopenReceipt = Get-Content $RuntimeWorldReopenReport -Raw | ConvertFrom-Json
+if ($runtimeWorldReopenReceipt.status -ne "PASS_RUNTIME_WORLD_FRESH_REOPEN") {
+    throw "Runtime world fresh-reopen is not PASS_RUNTIME_WORLD_FRESH_REOPEN"
 }
 
 Write-Host ""
 Write-Host "XINYI_V2_LOCAL_STAGE_OK"
 Write-Host "API probe:              $ProbeOut"
-Write-Host "Building import report: $ImportReport"
-Write-Host "Building bounds:        $BoundsReport"
-Write-Host "Transform mode:         $($boundsReceipt.overall_transform_behavior)"
-Write-Host "Placement summary:      $PlacementSummary"
-Write-Host "Placement plan:         $PlacementPlan"
 Write-Host "Landscape report:       $LandscapeReport"
 Write-Host "Landscape reopen:       $LandscapeReopenReport"
+Write-Host "Runtime import:         $RuntimeImportReport"
+Write-Host "Runtime world:          $RuntimeWorldReport"
+Write-Host "Runtime world reopen:   $RuntimeWorldReopenReport"
 Write-Host "Logs:                   $Saved"
