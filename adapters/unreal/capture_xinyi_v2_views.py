@@ -1,21 +1,15 @@
-"""Capture four deterministic QA views of the passing XinyiV2 runtime world.
+"""Capture four readable deterministic QA views of the passing XinyiV2 runtime world.
 
-This is a visual-evidence stage only. It does not save or mutate production
-world geometry. Temporary camera/light actors are spawned for capture and the
-editor quits without saving them.
+The persisted geometry contract is read-only here. Capture-only presentation:
+- two QA materials created under /Game/XinyiV2/QA;
+- material overrides applied only to the loaded editor world;
+- temporary SkyAtmosphere / SkyLight / sun / fill / camera actors;
+- no level save after presentation overrides.
 
-Expected persisted world before capture:
+Expected persisted world:
 - /Game/XinyiV2/L_XinyiV2_Contract
 - Terrain_Xinyi_MOI2025
 - exactly 25 XinyiRuntimeTile_* actors
-
-Outputs:
-  unreal/Saved/XinyiUnrealV2/Captures/
-    01-aerial.png
-    02-nw-to-se.png
-    03-sw-to-ne.png
-    04-southeast-to-core.png
-    capture_report.json
 """
 from __future__ import annotations
 
@@ -30,6 +24,9 @@ import unreal
 LEVEL = "/Game/XinyiV2/L_XinyiV2_Contract"
 TERRAIN_LABEL = "Terrain_Xinyi_MOI2025"
 RUNTIME_PREFIX = "XinyiRuntimeTile_"
+
+BUILDING_MATERIAL = "/Game/XinyiV2/QA/M_XinyiV2_BuildingWhitebox"
+TERRAIN_MATERIAL = "/Game/XinyiV2/QA/M_XinyiV2_TerrainWhitebox"
 
 OUT_DIR = Path(
     os.environ.get(
@@ -76,13 +73,15 @@ if ERROR_PATH.exists():
 
 levels = unreal.get_editor_subsystem(unreal.LevelEditorSubsystem)
 actors = unreal.get_editor_subsystem(unreal.EditorActorSubsystem)
+assets = unreal.EditorAssetLibrary
 
 if not levels.load_level(LEVEL):
     raise RuntimeError("failed to load XinyiV2 runtime level: %s" % LEVEL)
 
 all_actors = list(actors.get_all_level_actors())
 labels = {a.get_actor_label(): a for a in all_actors}
-if TERRAIN_LABEL not in labels:
+terrain = labels.get(TERRAIN_LABEL)
+if terrain is None:
     raise RuntimeError("validated terrain actor missing before capture")
 
 runtime_actors = [
@@ -94,26 +93,77 @@ if len(runtime_actors) != 25:
         % len(runtime_actors)
     )
 
+building_mat = assets.load_asset(BUILDING_MATERIAL)
+terrain_mat = assets.load_asset(TERRAIN_MATERIAL)
+if building_mat is None or terrain_mat is None:
+    raise RuntimeError(
+        "whitebox QA materials missing; run prepare_xinyi_v2_whitebox_materials.py first"
+    )
+
+# Presentation overrides are intentionally NOT saved to the level.
+terrain.set_editor_property("landscape_material", terrain_mat)
+
+building_components = 0
+material_slots_overridden = 0
+for actor in runtime_actors:
+    comps = actor.get_components_by_class(unreal.StaticMeshComponent)
+    if len(comps) != 1:
+        raise RuntimeError(
+            "runtime tile %s has %d StaticMeshComponents, expected 1"
+            % (actor.get_actor_label(), len(comps))
+        )
+    comp = comps[0]
+    building_components += 1
+    slots = max(1, int(comp.get_num_materials()))
+    for slot in range(slots):
+        comp.set_material(slot, building_mat)
+        material_slots_overridden += 1
+
 world = unreal.get_editor_subsystem(unreal.UnrealEditorSubsystem).get_editor_world()
 
-# Capture-only lighting. Nothing below is saved to the level.
-key = actors.spawn_actor_from_class(
+# ---------------------------------------------------------------------------
+# Capture-only daylight rig
+# ---------------------------------------------------------------------------
+
+sun = actors.spawn_actor_from_class(
     unreal.DirectionalLight,
-    unreal.Vector(0.0, 0.0, 50000.0),
-    unreal.Rotator(-42.0, -35.0, 0.0),
+    unreal.Vector(0.0, 0.0, 60000.0),
+    unreal.Rotator(-38.0, -32.0, 0.0),
 )
-key.set_actor_label("XinyiCapture_Key")
-key_comp = key.get_component_by_class(unreal.DirectionalLightComponent)
-key_comp.set_intensity(7.5)
+sun.set_actor_label("XinyiCapture_Sun")
+sun_comp = sun.get_component_by_class(unreal.DirectionalLightComponent)
+sun_comp.set_intensity(8.0)
+sun_comp.set_editor_property("atmosphere_sun_light", True)
+try:
+    sun_comp.set_editor_property("light_source_angle", 1.5)
+except Exception:
+    pass
+
+atmosphere = actors.spawn_actor_from_class(
+    unreal.SkyAtmosphere,
+    unreal.Vector(0.0, 0.0, 0.0),
+    unreal.Rotator(0.0, 0.0, 0.0),
+)
+atmosphere.set_actor_label("XinyiCapture_SkyAtmosphere")
+
+sky = actors.spawn_actor_from_class(
+    unreal.SkyLight,
+    unreal.Vector(0.0, 0.0, 50000.0),
+    unreal.Rotator(0.0, 0.0, 0.0),
+)
+sky.set_actor_label("XinyiCapture_SkyLight")
+sky_comp = sky.get_component_by_class(unreal.SkyLightComponent)
+sky_comp.set_editor_property("real_time_capture", True)
+sky_comp.set_editor_property("intensity", 1.35)
 
 fill = actors.spawn_actor_from_class(
     unreal.DirectionalLight,
     unreal.Vector(0.0, 0.0, 40000.0),
-    unreal.Rotator(-20.0, 145.0, 0.0),
+    unreal.Rotator(-18.0, 145.0, 0.0),
 )
 fill.set_actor_label("XinyiCapture_Fill")
 fill_comp = fill.get_component_by_class(unreal.DirectionalLightComponent)
-fill_comp.set_intensity(1.5)
+fill_comp.set_intensity(0.8)
 try:
     fill_comp.set_editor_property("cast_shadows", False)
 except Exception:
@@ -127,11 +177,18 @@ camera = actors.spawn_actor_from_class(
 camera.set_actor_label("XinyiCapture_Camera")
 camera.camera_component.set_field_of_view(55.0)
 
-# Stable visual QA settings. Do not depend on project ray tracing/Nanite.
+# Stable QA rendering; stay within desktop SM5 baseline.
 unreal.SystemLibrary.execute_console_command(world, "r.ScreenPercentage 100")
 unreal.SystemLibrary.execute_console_command(world, "r.MotionBlurQuality 0")
 unreal.SystemLibrary.execute_console_command(world, "r.RayTracing 0")
 unreal.SystemLibrary.execute_console_command(world, "r.HighResScreenshotDelay 16")
+unreal.SystemLibrary.execute_console_command(world, "r.EyeAdaptationQuality 2")
+unreal.SystemLibrary.execute_console_command(world, "r.Tonemapper.Sharpen 0.35")
+
+try:
+    sky_comp.recapture_sky()
+except Exception:
+    pass
 
 state = {
     "index": 0,
@@ -141,7 +198,7 @@ state = {
     "started": time.monotonic(),
     "captures": [],
 }
-TIMEOUT_SECONDS = 300.0
+TIMEOUT_SECONDS = 360.0
 
 
 def vec(values):
@@ -168,9 +225,20 @@ def finish(success=True):
         "level": LEVEL,
         "terrain_label": TERRAIN_LABEL,
         "runtime_tile_actor_count": len(runtime_actors),
+        "runtime_building_component_count": building_components,
+        "material_slots_overridden": material_slots_overridden,
+        "building_material": BUILDING_MATERIAL,
+        "terrain_material": TERRAIN_MATERIAL,
+        "lighting": {
+            "sky_atmosphere": True,
+            "sky_light": True,
+            "sun_intensity": 8.0,
+            "fill_intensity": 0.8,
+        },
         "resolution": [WIDTH, HEIGHT],
         "captures": state["captures"],
         "elapsed_seconds": time.monotonic() - state["started"],
+        "world_saved_after_overrides": False,
     }
     REPORT_PATH.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
     unreal.log("XINYI_V2_CAPTURE_REPORT " + json.dumps(report, separators=(",", ":")))
@@ -189,7 +257,13 @@ def tick(_delta):
             raise RuntimeError("XinyiV2 screenshot sequence timed out")
 
         if state["phase"] == "warmup":
-            if now - state["phase_started"] >= 8.0:
+            # Give simple material shaders + atmosphere + skylight enough time
+            # to settle before the first deterministic frame.
+            if now - state["phase_started"] >= 14.0:
+                try:
+                    sky_comp.recapture_sky()
+                except Exception:
+                    pass
                 state["phase"] = "position"
                 state["phase_started"] = now
             return
@@ -207,7 +281,7 @@ def tick(_delta):
             return
 
         if state["phase"] == "settle":
-            if now - state["phase_started"] < 2.0:
+            if now - state["phase_started"] < 3.0:
                 return
             output = OUT_DIR / (spec["name"] + ".png")
             if output.exists():
@@ -263,4 +337,4 @@ def tick(_delta):
 
 handle = unreal.register_slate_post_tick_callback(tick)
 unreal.EditorPythonScripting.set_keep_python_script_alive(True)
-unreal.log("XINYI_V2_CAPTURE_STARTED " + str(OUT_DIR))
+unreal.log("XINYI_V2_READABLE_WHITEBOX_CAPTURE_STARTED " + str(OUT_DIR))
