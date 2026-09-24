@@ -1,6 +1,5 @@
 param(
     [string]$EngineRoot = "C:\Program Files\Epic Games\UE_5.8",
-    [string]$UnrealEditor = "",
     [string]$UnrealCmd = "",
     [int]$CommandletTimeoutSeconds = 300
 )
@@ -21,14 +20,10 @@ $ConvertedAuditLog = Join-Path $Saved "wp-converted-fresh-audit.log"
 $SourceAuditReport = Join-Path $Saved "ue_world_partition_source_postconvert.json"
 $ConvertedAuditReport = Join-Path $Saved "ue_world_partition_converted.json"
 
-if (-not $UnrealEditor) {
-    $UnrealEditor = Join-Path $EngineRoot "Engine\Binaries\Win64\UnrealEditor.exe"
-}
 if (-not $UnrealCmd) {
     $UnrealCmd = Join-Path $EngineRoot "Engine\Binaries\Win64\UnrealEditor-Cmd.exe"
 }
 
-if (-not (Test-Path $UnrealEditor)) { throw "UnrealEditor not found: $UnrealEditor" }
 if (-not (Test-Path $UnrealCmd)) { throw "UnrealEditor-Cmd not found: $UnrealCmd" }
 if (-not (Test-Path $Project)) { throw "uproject not found: $Project" }
 if (-not (Test-Path $SourceMap)) { throw "source XinyiV2 map not found: $SourceMap" }
@@ -50,8 +45,31 @@ New-Item -ItemType Directory -Force -Path $Saved | Out-Null
 Remove-Item -Force -ErrorAction SilentlyContinue $SourceAuditReport
 Remove-Item -Force -ErrorAction SilentlyContinue $ConvertedAuditReport
 
-Write-Host "=== A. World Partition conversion report-only preflight (non-rendering, timeout $CommandletTimeoutSeconds s) ==="
-$reportQuotedArgs = @(
+function Invoke-UnrealCommandlet {
+    param(
+        [Parameter(Mandatory=$true)][string[]]$ArgumentList,
+        [Parameter(Mandatory=$true)][string]$Name,
+        [Parameter(Mandatory=$true)][string]$LogPath
+    )
+
+    $process = Start-Process -FilePath $UnrealCmd -ArgumentList $ArgumentList -PassThru -NoNewWindow
+    $finished = $process.WaitForExit($CommandletTimeoutSeconds * 1000)
+    if (-not $finished) {
+        try { $process.Kill() } catch {}
+        try { $process.WaitForExit() } catch {}
+        throw "$Name timed out after $CommandletTimeoutSeconds seconds. See $LogPath"
+    }
+
+    $exitCode = $process.ExitCode
+    if ($exitCode -ne 0) {
+        throw "$Name failed ($exitCode). See $LogPath"
+    }
+
+    return $exitCode
+}
+
+Write-Host "=== A. World Partition report-only preflight via UnrealEditor-Cmd (non-rendering, timeout $CommandletTimeoutSeconds s) ==="
+$reportArgs = @(
     ('"{0}"' -f $Project),
     "-run=WorldPartitionConvertCommandlet",
     ('"{0}"' -f $SourceMap),
@@ -60,20 +78,10 @@ $reportQuotedArgs = @(
     "-Verbose",
     ('-abslog="{0}"' -f $ReportOnlyLog)
 )
-$reportProcess = Start-Process -FilePath $UnrealEditor -ArgumentList $reportQuotedArgs -PassThru -NoNewWindow
-Wait-Process -Id $reportProcess.Id -Timeout $CommandletTimeoutSeconds -ErrorAction SilentlyContinue
-$reportProcess.Refresh()
-if (-not $reportProcess.HasExited) {
-    Stop-Process -Id $reportProcess.Id -Force -ErrorAction SilentlyContinue
-    throw "World Partition report-only preflight timed out after $CommandletTimeoutSeconds seconds. See $ReportOnlyLog"
-}
-$reportExitCode = $reportProcess.ExitCode
-if ($reportExitCode -ne 0) {
-    throw "World Partition report-only preflight failed ($reportExitCode). See $ReportOnlyLog"
-}
+[void](Invoke-UnrealCommandlet -ArgumentList $reportArgs -Name "World Partition report-only preflight" -LogPath $ReportOnlyLog)
 
-Write-Host "=== B. Isolated conversion with _WP suffix; source map remains intact ==="
-$convertQuotedArgs = @(
+Write-Host "=== B. Isolated conversion via UnrealEditor-Cmd with _WP suffix; source map remains intact ==="
+$convertArgs = @(
     ('"{0}"' -f $Project),
     "-run=WorldPartitionConvertCommandlet",
     ('"{0}"' -f $SourceMap),
@@ -82,17 +90,8 @@ $convertQuotedArgs = @(
     "-Verbose",
     ('-abslog="{0}"' -f $ConvertLog)
 )
-$convertProcess = Start-Process -FilePath $UnrealEditor -ArgumentList $convertQuotedArgs -PassThru -NoNewWindow
-Wait-Process -Id $convertProcess.Id -Timeout $CommandletTimeoutSeconds -ErrorAction SilentlyContinue
-$convertProcess.Refresh()
-if (-not $convertProcess.HasExited) {
-    Stop-Process -Id $convertProcess.Id -Force -ErrorAction SilentlyContinue
-    throw "World Partition isolated conversion timed out after $CommandletTimeoutSeconds seconds. See $ConvertLog"
-}
-$convertExitCode = $convertProcess.ExitCode
-if ($convertExitCode -ne 0) {
-    throw "World Partition isolated conversion failed ($convertExitCode). See $ConvertLog"
-}
+[void](Invoke-UnrealCommandlet -ArgumentList $convertArgs -Name "World Partition isolated conversion" -LogPath $ConvertLog)
+
 if (-not (Test-Path $ConvertedMap)) {
     throw "Expected converted _WP map was not created: $ConvertedMap"
 }
