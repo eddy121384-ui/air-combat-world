@@ -98,13 +98,13 @@ def rebuild_material(asset_path, rgb, roughness):
 # reads warmer/darker. These are QA separation colors, not art direction.
 building = rebuild_material(
     BUILDING_PATH,
-    (0.72, 0.79, 0.86),
-    0.82,
+    (0.52, 0.60, 0.70),
+    0.86,
 )
 terrain = rebuild_material(
     TERRAIN_PATH,
-    (0.30, 0.38, 0.28),
-    0.92,
+    (0.20, 0.28, 0.18),
+    0.94,
 )
 
 report = {

@@ -75,6 +75,23 @@ jobs:
           print("RESUME_INPUT_RESTORE_GUARD_OK")
           PY
 
+      - name: Guard readable whitebox lighting contract
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          text = Path("adapters/unreal/capture_xinyi_v2_views.py").read_text()
+          required = (
+              "ComponentMobility.MOVABLE",
+              "AEM_MANUAL",
+              "ExponentialHeightFog",
+              "fog_inscattering_color",
+              "world_saved_after_overrides",
+          )
+          for token in required:
+              assert token in text, token
+          print("READABLE_WHITEBOX_LIGHTING_GUARD_OK")
+          PY
+
       - name: Validate project and plugin descriptors
         run: |
           python - <<'PY'

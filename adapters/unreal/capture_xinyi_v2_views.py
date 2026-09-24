@@ -132,7 +132,8 @@ sun = actors.spawn_actor_from_class(
 )
 sun.set_actor_label("XinyiCapture_Sun")
 sun_comp = sun.get_component_by_class(unreal.DirectionalLightComponent)
-sun_comp.set_intensity(8.0)
+sun_comp.set_mobility(unreal.ComponentMobility.MOVABLE)
+sun_comp.set_intensity(6.0)
 sun_comp.set_editor_property("atmosphere_sun_light", True)
 try:
     sun_comp.set_editor_property("light_source_angle", 1.5)
@@ -153,8 +154,9 @@ sky = actors.spawn_actor_from_class(
 )
 sky.set_actor_label("XinyiCapture_SkyLight")
 sky_comp = sky.get_component_by_class(unreal.SkyLightComponent)
+sky_comp.set_mobility(unreal.ComponentMobility.MOVABLE)
 sky_comp.set_editor_property("real_time_capture", True)
-sky_comp.set_editor_property("intensity", 1.35)
+sky_comp.set_editor_property("intensity", 1.1)
 
 fill = actors.spawn_actor_from_class(
     unreal.DirectionalLight,
@@ -163,7 +165,8 @@ fill = actors.spawn_actor_from_class(
 )
 fill.set_actor_label("XinyiCapture_Fill")
 fill_comp = fill.get_component_by_class(unreal.DirectionalLightComponent)
-fill_comp.set_intensity(0.8)
+fill_comp.set_mobility(unreal.ComponentMobility.MOVABLE)
+fill_comp.set_intensity(0.55)
 try:
     fill_comp.set_editor_property("cast_shadows", False)
 except Exception:
@@ -176,6 +179,39 @@ camera = actors.spawn_actor_from_class(
 )
 camera.set_actor_label("XinyiCapture_Camera")
 camera.camera_component.set_field_of_view(55.0)
+
+# Fixed exposure is part of the capture contract. Otherwise the amount of black
+# sky in oblique views changes the whitebox brightness between cameras.
+pp = unreal.PostProcessSettings()
+pp.set_editor_property("override_auto_exposure_method", True)
+pp.set_editor_property("auto_exposure_method", unreal.AutoExposureMethod.AEM_MANUAL)
+pp.set_editor_property("override_auto_exposure_apply_physical_camera_exposure", True)
+pp.set_editor_property("auto_exposure_apply_physical_camera_exposure", False)
+pp.set_editor_property("override_auto_exposure_bias", True)
+pp.set_editor_property("auto_exposure_bias", -0.5)
+pp.set_editor_property("override_motion_blur_amount", True)
+pp.set_editor_property("motion_blur_amount", 0.0)
+pp.set_editor_property("override_bloom_intensity", True)
+pp.set_editor_property("bloom_intensity", 0.0)
+camera.camera_component.set_editor_property("post_process_settings", pp)
+camera.camera_component.set_editor_property("post_process_blend_weight", 1.0)
+
+# Fog is a conservative background fallback. The first readable-whitebox pass
+# showed SkyAtmosphere was not visible in the unattended high-res capture path.
+fog = actors.spawn_actor_from_class(
+    unreal.ExponentialHeightFog,
+    unreal.Vector(0.0, 0.0, 0.0),
+    unreal.Rotator(0.0, 0.0, 0.0),
+)
+fog.set_actor_label("XinyiCapture_FogFallback")
+fog_comp = fog.get_component_by_class(unreal.ExponentialHeightFogComponent)
+fog_comp.set_fog_density(0.006)
+fog_comp.set_fog_height_falloff(0.18)
+fog_comp.set_fog_inscattering_color(unreal.LinearColor(0.62, 0.72, 0.82, 1.0))
+try:
+    fog_comp.set_editor_property("fog_max_opacity", 0.55)
+except Exception:
+    pass
 
 # Stable QA rendering; stay within desktop SM5 baseline.
 unreal.SystemLibrary.execute_console_command(world, "r.ScreenPercentage 100")
@@ -232,8 +268,11 @@ def finish(success=True):
         "lighting": {
             "sky_atmosphere": True,
             "sky_light": True,
-            "sun_intensity": 8.0,
-            "fill_intensity": 0.8,
+            "sun_intensity": 6.0,
+            "fill_intensity": 0.55,
+            "all_capture_lights_movable": True,
+            "fixed_manual_exposure": True,
+            "height_fog_background_fallback": True,
         },
         "resolution": [WIDTH, HEIGHT],
         "captures": state["captures"],
