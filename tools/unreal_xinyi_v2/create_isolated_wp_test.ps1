@@ -50,16 +50,6 @@ Remove-Item -Force -ErrorAction SilentlyContinue $SourceAuditReport
 Remove-Item -Force -ErrorAction SilentlyContinue $ConvertedAuditReport
 
 Write-Host "=== A. World Partition conversion report-only preflight ==="
-$reportArgs = @(
-    $Project,
-    "-run=WorldPartitionConvertCommandlet",
-    $SourceMap,
-    "-ReportOnly",
-    "-SCCProvider=None",
-    "-AllowCommandletRendering",
-    "-Verbose",
-    "-abslog=$ReportOnlyLog"
-)
 $reportQuotedArgs = @(
     ('"{0}"' -f $Project),
     "-run=WorldPartitionConvertCommandlet",
@@ -77,16 +67,6 @@ if ($reportExitCode -ne 0) {
 }
 
 Write-Host "=== B. Isolated conversion with _WP suffix; source map remains intact ==="
-$convertArgs = @(
-    $Project,
-    "-run=WorldPartitionConvertCommandlet",
-    $SourceMap,
-    "-ConversionSuffix",
-    "-SCCProvider=None",
-    "-AllowCommandletRendering",
-    "-Verbose",
-    "-abslog=$ConvertLog"
-)
 $convertQuotedArgs = @(
     ('"{0}"' -f $Project),
     "-run=WorldPartitionConvertCommandlet",
