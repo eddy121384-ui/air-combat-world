@@ -13,7 +13,7 @@ from typing import Any
 
 import unreal
 
-LEVEL = "/Game/XinyiV2/L_XinyiV2_Contract"
+LEVEL = os.environ.get("ACW_XINYI_V2_AUDIT_LEVEL", "/Game/XinyiV2/L_XinyiV2_Contract")
 TERRAIN_LABEL = "Terrain_Xinyi_MOI2025"
 RUNTIME_PREFIX = "XinyiRuntimeTile_"
 REPORT_PATH = Path(
@@ -170,34 +170,69 @@ def main() -> None:
         None,
     )
 
-    failures = []
-    if terrain is None:
-        failures.append({"reason": "terrain_missing"})
-    if len(runtime_actors) != 25:
-        failures.append(
-            {
-                "reason": "runtime_tile_actor_count",
-                "expected": 25,
-                "actual": len(runtime_actors),
-            }
-        )
-
     target_actors = ([terrain] if terrain is not None else []) + runtime_actors
     actor_rows = [_actor_row(actor) for actor in target_actors]
 
+    all_descriptor_rows: list[dict[str, Any]] = []
     descriptor_rows: list[dict[str, Any]] = []
     descriptor_error = ""
     if partitioned:
         try:
-            descs = (
-                unreal.WorldPartitionBlueprintLibrary.get_actor_descs_for_actors(
-                    target_actors
-                )
-                or []
-            )
-            descriptor_rows = [_desc_row(desc) for desc in list(descs)]
+            descs = unreal.WorldPartitionBlueprintLibrary.get_actor_descs() or []
+            all_descriptor_rows = [_desc_row(desc) for desc in list(descs)]
+            descriptor_rows = [
+                row
+                for row in all_descriptor_rows
+                if row["label"] == TERRAIN_LABEL
+                or row["label"].startswith(RUNTIME_PREFIX)
+            ]
         except Exception as exc:  # noqa: BLE001
             descriptor_error = repr(exc)
+
+    failures = []
+    if partitioned:
+        terrain_descs = [
+            row for row in descriptor_rows if row["label"] == TERRAIN_LABEL
+        ]
+        runtime_descs = [
+            row
+            for row in descriptor_rows
+            if row["label"].startswith(RUNTIME_PREFIX)
+        ]
+        if len(terrain_descs) != 1:
+            failures.append(
+                {
+                    "reason": "terrain_actor_descriptor_count",
+                    "expected": 1,
+                    "actual": len(terrain_descs),
+                }
+            )
+        if len(runtime_descs) != 25:
+            failures.append(
+                {
+                    "reason": "runtime_tile_actor_descriptor_count",
+                    "expected": 25,
+                    "actual": len(runtime_descs),
+                }
+            )
+        if descriptor_error:
+            failures.append(
+                {
+                    "reason": "actor_descriptor_read_failed",
+                    "error": descriptor_error,
+                }
+            )
+    else:
+        if terrain is None:
+            failures.append({"reason": "terrain_missing"})
+        if len(runtime_actors) != 25:
+            failures.append(
+                {
+                    "reason": "runtime_tile_actor_count",
+                    "expected": 25,
+                    "actual": len(runtime_actors),
+                }
+            )
 
     class_counts: dict[str, int] = {}
     for actor in actors:
@@ -255,13 +290,24 @@ def main() -> None:
             else "CURRENT_LEVEL_NON_PARTITIONED"
         ),
         "target_counts": {
-            "terrain": 1 if terrain is not None else 0,
-            "runtime_building_tiles": len(runtime_actors),
+            "loaded_terrain": 1 if terrain is not None else 0,
+            "loaded_runtime_building_tiles": len(runtime_actors),
             "all_loaded_level_actors": len(actors),
+            "descriptor_terrain": len(
+                [row for row in descriptor_rows if row["label"] == TERRAIN_LABEL]
+            ),
+            "descriptor_runtime_building_tiles": len(
+                [
+                    row
+                    for row in descriptor_rows
+                    if row["label"].startswith(RUNTIME_PREFIX)
+                ]
+            ),
         },
         "loaded_actor_class_counts": dict(sorted(class_counts.items())),
         "target_actor_outermost_packages": target_packages,
-        "actor_descriptor_count": len(descriptor_rows),
+        "all_actor_descriptor_count": len(all_descriptor_rows),
+        "target_actor_descriptor_count": len(descriptor_rows),
         "actor_descriptor_packages": descriptor_packages,
         "actor_descriptor_error": descriptor_error,
         "targets": actor_rows,
