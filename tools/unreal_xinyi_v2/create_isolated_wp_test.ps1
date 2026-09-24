@@ -1,7 +1,8 @@
 param(
     [string]$EngineRoot = "C:\Program Files\Epic Games\UE_5.8",
     [string]$UnrealEditor = "",
-    [string]$UnrealCmd = ""
+    [string]$UnrealCmd = "",
+    [int]$CommandletTimeoutSeconds = 300
 )
 
 $ErrorActionPreference = "Stop"
@@ -49,18 +50,23 @@ New-Item -ItemType Directory -Force -Path $Saved | Out-Null
 Remove-Item -Force -ErrorAction SilentlyContinue $SourceAuditReport
 Remove-Item -Force -ErrorAction SilentlyContinue $ConvertedAuditReport
 
-Write-Host "=== A. World Partition conversion report-only preflight ==="
+Write-Host "=== A. World Partition conversion report-only preflight (non-rendering, timeout $CommandletTimeoutSeconds s) ==="
 $reportQuotedArgs = @(
     ('"{0}"' -f $Project),
     "-run=WorldPartitionConvertCommandlet",
     ('"{0}"' -f $SourceMap),
     "-ReportOnly",
     "-SCCProvider=None",
-    "-AllowCommandletRendering",
     "-Verbose",
     ('-abslog="{0}"' -f $ReportOnlyLog)
 )
-$reportProcess = Start-Process -FilePath $UnrealEditor -ArgumentList $reportQuotedArgs -Wait -PassThru -NoNewWindow
+$reportProcess = Start-Process -FilePath $UnrealEditor -ArgumentList $reportQuotedArgs -PassThru -NoNewWindow
+Wait-Process -Id $reportProcess.Id -Timeout $CommandletTimeoutSeconds -ErrorAction SilentlyContinue
+$reportProcess.Refresh()
+if (-not $reportProcess.HasExited) {
+    Stop-Process -Id $reportProcess.Id -Force -ErrorAction SilentlyContinue
+    throw "World Partition report-only preflight timed out after $CommandletTimeoutSeconds seconds. See $ReportOnlyLog"
+}
 $reportExitCode = $reportProcess.ExitCode
 if ($reportExitCode -ne 0) {
     throw "World Partition report-only preflight failed ($reportExitCode). See $ReportOnlyLog"
@@ -73,11 +79,16 @@ $convertQuotedArgs = @(
     ('"{0}"' -f $SourceMap),
     "-ConversionSuffix",
     "-SCCProvider=None",
-    "-AllowCommandletRendering",
     "-Verbose",
     ('-abslog="{0}"' -f $ConvertLog)
 )
-$convertProcess = Start-Process -FilePath $UnrealEditor -ArgumentList $convertQuotedArgs -Wait -PassThru -NoNewWindow
+$convertProcess = Start-Process -FilePath $UnrealEditor -ArgumentList $convertQuotedArgs -PassThru -NoNewWindow
+Wait-Process -Id $convertProcess.Id -Timeout $CommandletTimeoutSeconds -ErrorAction SilentlyContinue
+$convertProcess.Refresh()
+if (-not $convertProcess.HasExited) {
+    Stop-Process -Id $convertProcess.Id -Force -ErrorAction SilentlyContinue
+    throw "World Partition isolated conversion timed out after $CommandletTimeoutSeconds seconds. See $ConvertLog"
+}
 $convertExitCode = $convertProcess.ExitCode
 if ($convertExitCode -ne 0) {
     throw "World Partition isolated conversion failed ($convertExitCode). See $ConvertLog"
