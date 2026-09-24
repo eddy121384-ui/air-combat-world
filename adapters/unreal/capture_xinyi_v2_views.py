@@ -214,6 +214,25 @@ except Exception:
     pass
 
 # Stable QA rendering; stay within desktop SM5 baseline.
+# AutomationLibrary screenshots inherit the editor viewport view mode. Make Lit
+# explicit instead of trusting whatever debug/unlit mode the unattended editor
+# happened to start with.
+unreal.AutomationLibrary.set_editor_viewport_view_mode(
+    unreal.ViewModeIndex.VMI_LIT
+)
+unreal.SystemLibrary.execute_console_command(world, "viewmode lit")
+for command in (
+    "showflag.Lighting 1",
+    "showflag.Materials 1",
+    "showflag.DirectLighting 1",
+    "showflag.DynamicShadows 1",
+    "showflag.SkyLighting 1",
+    "showflag.Atmosphere 1",
+    "showflag.Fog 1",
+    "showflag.PostProcessing 1",
+):
+    unreal.SystemLibrary.execute_console_command(world, command)
+
 unreal.SystemLibrary.execute_console_command(world, "r.ScreenPercentage 100")
 unreal.SystemLibrary.execute_console_command(world, "r.MotionBlurQuality 0")
 unreal.SystemLibrary.execute_console_command(world, "r.RayTracing 0")
@@ -242,6 +261,13 @@ def vec(values):
 
 
 def set_view(spec):
+    # Reassert Lit on every camera move because editor automation can restore
+    # viewport state between high-res screenshot tasks.
+    unreal.AutomationLibrary.set_editor_viewport_view_mode(
+        unreal.ViewModeIndex.VMI_LIT
+    )
+    unreal.SystemLibrary.execute_console_command(world, "viewmode lit")
+
     location = vec(spec["location_cm"])
     target = vec(spec["target_cm"])
     rotation = unreal.MathLibrary.find_look_at_rotation(location, target)
@@ -273,6 +299,17 @@ def finish(success=True):
             "all_capture_lights_movable": True,
             "fixed_manual_exposure": True,
             "height_fog_background_fallback": True,
+            "forced_editor_view_mode": "VMI_LIT",
+            "forced_show_flags": [
+                "Lighting",
+                "Materials",
+                "DirectLighting",
+                "DynamicShadows",
+                "SkyLighting",
+                "Atmosphere",
+                "Fog",
+                "PostProcessing",
+            ],
         },
         "resolution": [WIDTH, HEIGHT],
         "captures": state["captures"],

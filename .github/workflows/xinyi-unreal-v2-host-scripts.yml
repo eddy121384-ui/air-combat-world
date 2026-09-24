@@ -85,6 +85,10 @@ jobs:
               "AEM_MANUAL",
               "ExponentialHeightFog",
               "fog_inscattering_color",
+              "set_editor_viewport_view_mode",
+              "ViewModeIndex.VMI_LIT",
+              "viewmode lit",
+              "showflag.DynamicShadows 1",
               "world_saved_after_overrides",
           )
           for token in required:
