@@ -84,15 +84,24 @@ jobs:
               "ComponentMobility.MOVABLE",
               "AEM_MANUAL",
               "ExponentialHeightFog",
-              "fog_inscattering_color",
-              "set_editor_viewport_view_mode",
-              "ViewModeIndex.VMI_LIT",
-              "viewmode lit",
-              "showflag.DynamicShadows 1",
+              "SceneCapture2D",
+              "SceneCaptureComponent2D",
+              "create_render_target2d",
+              "SCS_FINAL_COLOR_LDR",
+              "capture_scene",
+              "export_render_target",
+              "editor_viewport_dependency",
               "world_saved_after_overrides",
           )
           for token in required:
               assert token in text, token
+          forbidden = (
+              "take_high_res_screenshot",
+              "set_editor_viewport_view_mode",
+              "ViewModeIndex.VMI_LIT",
+          )
+          for token in forbidden:
+              assert token not in text, token
           print("READABLE_WHITEBOX_LIGHTING_GUARD_OK")
           PY
 

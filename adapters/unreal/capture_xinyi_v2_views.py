@@ -1,15 +1,13 @@
-"""Capture four readable deterministic QA views of the passing XinyiV2 runtime world.
+"""Capture four readable deterministic QA views using SceneCapture2D.
 
-The persisted geometry contract is read-only here. Capture-only presentation:
-- two QA materials created under /Game/XinyiV2/QA;
-- material overrides applied only to the loaded editor world;
-- temporary SkyAtmosphere / SkyLight / sun / fill / camera actors;
-- no level save after presentation overrides.
+This deliberately avoids editor-viewport / AutomationLibrary screenshot state.
+The previous unattended viewport backend proved unstable and could inherit debug
+view modes. This route owns its renderer explicitly:
 
-Expected persisted world:
-- /Game/XinyiV2/L_XinyiV2_Contract
-- Terrain_Xinyi_MOI2025
-- exactly 25 XinyiRuntimeTile_* actors
+SceneCapture2D -> TextureRenderTarget2D -> FINAL_COLOR_LDR -> PNG
+
+The persisted XinyiV2 geometry contract remains read-only. Presentation overrides
+and lighting actors are transient and the level is never saved.
 """
 from __future__ import annotations
 
@@ -100,7 +98,10 @@ if building_mat is None or terrain_mat is None:
         "whitebox QA materials missing; run prepare_xinyi_v2_whitebox_materials.py first"
     )
 
-# Presentation overrides are intentionally NOT saved to the level.
+# ---------------------------------------------------------------------------
+# In-memory QA presentation only. Never save these overrides to the level.
+# ---------------------------------------------------------------------------
+
 terrain.set_editor_property("landscape_material", terrain_mat)
 
 building_components = 0
@@ -122,21 +123,21 @@ for actor in runtime_actors:
 world = unreal.get_editor_subsystem(unreal.UnrealEditorSubsystem).get_editor_world()
 
 # ---------------------------------------------------------------------------
-# Capture-only daylight rig
+# Capture-only daylight rig.
 # ---------------------------------------------------------------------------
 
 sun = actors.spawn_actor_from_class(
     unreal.DirectionalLight,
     unreal.Vector(0.0, 0.0, 60000.0),
-    unreal.Rotator(-38.0, -32.0, 0.0),
+    unreal.Rotator(0.0, -38.0, -35.0),
 )
 sun.set_actor_label("XinyiCapture_Sun")
 sun_comp = sun.get_component_by_class(unreal.DirectionalLightComponent)
 sun_comp.set_mobility(unreal.ComponentMobility.MOVABLE)
-sun_comp.set_intensity(6.0)
+sun_comp.set_intensity(18.0)
 sun_comp.set_editor_property("atmosphere_sun_light", True)
 try:
-    sun_comp.set_editor_property("light_source_angle", 1.5)
+    sun_comp.set_editor_property("light_source_angle", 1.2)
 except Exception:
     pass
 
@@ -155,125 +156,157 @@ sky = actors.spawn_actor_from_class(
 sky.set_actor_label("XinyiCapture_SkyLight")
 sky_comp = sky.get_component_by_class(unreal.SkyLightComponent)
 sky_comp.set_mobility(unreal.ComponentMobility.MOVABLE)
-sky_comp.set_editor_property("real_time_capture", True)
-sky_comp.set_editor_property("intensity", 1.1)
+sky_comp.set_editor_property("real_time_capture", False)
+sky_comp.set_editor_property("source_type", unreal.SkyLightSourceType.SLS_CAPTURED_SCENE)
+sky_comp.set_editor_property("intensity", 1.25)
 
-fill = actors.spawn_actor_from_class(
-    unreal.DirectionalLight,
-    unreal.Vector(0.0, 0.0, 40000.0),
-    unreal.Rotator(-18.0, 145.0, 0.0),
-)
-fill.set_actor_label("XinyiCapture_Fill")
-fill_comp = fill.get_component_by_class(unreal.DirectionalLightComponent)
-fill_comp.set_mobility(unreal.ComponentMobility.MOVABLE)
-fill_comp.set_intensity(0.55)
-try:
-    fill_comp.set_editor_property("cast_shadows", False)
-except Exception:
-    pass
-
-camera = actors.spawn_actor_from_class(
-    unreal.CameraActor,
-    unreal.Vector(0.0, 0.0, 100000.0),
-    unreal.Rotator(0.0, 0.0, 0.0),
-)
-camera.set_actor_label("XinyiCapture_Camera")
-camera.camera_component.set_field_of_view(55.0)
-
-# Fixed exposure is part of the capture contract. Otherwise the amount of black
-# sky in oblique views changes the whitebox brightness between cameras.
-pp = unreal.PostProcessSettings()
-pp.set_editor_property("override_auto_exposure_method", True)
-pp.set_editor_property("auto_exposure_method", unreal.AutoExposureMethod.AEM_MANUAL)
-pp.set_editor_property("override_auto_exposure_apply_physical_camera_exposure", True)
-pp.set_editor_property("auto_exposure_apply_physical_camera_exposure", False)
-pp.set_editor_property("override_auto_exposure_bias", True)
-pp.set_editor_property("auto_exposure_bias", -0.5)
-pp.set_editor_property("override_motion_blur_amount", True)
-pp.set_editor_property("motion_blur_amount", 0.0)
-pp.set_editor_property("override_bloom_intensity", True)
-pp.set_editor_property("bloom_intensity", 0.0)
-camera.camera_component.set_editor_property("post_process_settings", pp)
-camera.camera_component.set_editor_property("post_process_blend_weight", 1.0)
-
-# Fog is a conservative background fallback. The first readable-whitebox pass
-# showed SkyAtmosphere was not visible in the unattended high-res capture path.
 fog = actors.spawn_actor_from_class(
     unreal.ExponentialHeightFog,
     unreal.Vector(0.0, 0.0, 0.0),
     unreal.Rotator(0.0, 0.0, 0.0),
 )
-fog.set_actor_label("XinyiCapture_FogFallback")
+fog.set_actor_label("XinyiCapture_Fog")
 fog_comp = fog.get_component_by_class(unreal.ExponentialHeightFogComponent)
-fog_comp.set_fog_density(0.006)
-fog_comp.set_fog_height_falloff(0.18)
-fog_comp.set_fog_inscattering_color(unreal.LinearColor(0.62, 0.72, 0.82, 1.0))
+fog_comp.set_fog_density(0.002)
+fog_comp.set_fog_height_falloff(0.16)
+fog_comp.set_fog_inscattering_color(
+    unreal.LinearColor(0.58, 0.68, 0.78, 1.0)
+)
 try:
-    fog_comp.set_editor_property("fog_max_opacity", 0.55)
+    fog_comp.set_editor_property("fog_max_opacity", 0.35)
 except Exception:
     pass
-
-# Stable QA rendering; stay within desktop SM5 baseline.
-# AutomationLibrary screenshots inherit the editor viewport view mode. Make Lit
-# explicit instead of trusting whatever debug/unlit mode the unattended editor
-# happened to start with.
-unreal.AutomationLibrary.set_editor_viewport_view_mode(
-    unreal.ViewModeIndex.VMI_LIT
-)
-unreal.SystemLibrary.execute_console_command(world, "viewmode lit")
-for command in (
-    "showflag.Lighting 1",
-    "showflag.Materials 1",
-    "showflag.DirectLighting 1",
-    "showflag.DynamicShadows 1",
-    "showflag.SkyLighting 1",
-    "showflag.Atmosphere 1",
-    "showflag.Fog 1",
-    "showflag.PostProcessing 1",
-):
-    unreal.SystemLibrary.execute_console_command(world, command)
-
-unreal.SystemLibrary.execute_console_command(world, "r.ScreenPercentage 100")
-unreal.SystemLibrary.execute_console_command(world, "r.MotionBlurQuality 0")
-unreal.SystemLibrary.execute_console_command(world, "r.RayTracing 0")
-unreal.SystemLibrary.execute_console_command(world, "r.HighResScreenshotDelay 16")
-unreal.SystemLibrary.execute_console_command(world, "r.EyeAdaptationQuality 2")
-unreal.SystemLibrary.execute_console_command(world, "r.Tonemapper.Sharpen 0.35")
 
 try:
     sky_comp.recapture_sky()
 except Exception:
     pass
 
+# ---------------------------------------------------------------------------
+# Independent render backend: SceneCapture2D -> RenderTarget2D.
+# ---------------------------------------------------------------------------
+
+render_target = unreal.RenderingLibrary.create_render_target2d(
+    world,
+    WIDTH,
+    HEIGHT,
+    unreal.TextureRenderTargetFormat.RTF_RGBA8,
+    unreal.LinearColor(0.0, 0.0, 0.0, 1.0),
+    False,
+)
+if render_target is None:
+    raise RuntimeError("create_render_target2d returned None")
+
+capture_actor = actors.spawn_actor_from_class(
+    unreal.SceneCapture2D,
+    unreal.Vector(0.0, 0.0, 100000.0),
+    unreal.Rotator(0.0, -90.0, 0.0),
+)
+capture_actor.set_actor_label("XinyiCapture_SceneCapture2D")
+capture = capture_actor.get_component_by_class(unreal.SceneCaptureComponent2D)
+if capture is None:
+    raise RuntimeError("SceneCapture2D actor has no SceneCaptureComponent2D")
+
+capture.set_editor_property("texture_target", render_target)
+capture.set_editor_property(
+    "capture_source", unreal.SceneCaptureSource.SCS_FINAL_COLOR_LDR
+)
+capture.set_editor_property("capture_every_frame", False)
+capture.set_editor_property("capture_on_movement", False)
+capture.set_editor_property("always_persist_rendering_state", True)
+capture.set_editor_property("render_in_main_renderer", False)
+try:
+    capture.set_editor_property("max_view_distance_override", 1000000.0)
+except Exception:
+    pass
+
+pp = unreal.PostProcessSettings()
+pp.set_editor_property("override_auto_exposure_method", True)
+pp.set_editor_property("auto_exposure_method", unreal.AutoExposureMethod.AEM_MANUAL)
+pp.set_editor_property(
+    "override_auto_exposure_apply_physical_camera_exposure", True
+)
+pp.set_editor_property("auto_exposure_apply_physical_camera_exposure", False)
+pp.set_editor_property("override_auto_exposure_bias", True)
+pp.set_editor_property("auto_exposure_bias", 0.0)
+pp.set_editor_property("override_motion_blur_amount", True)
+pp.set_editor_property("motion_blur_amount", 0.0)
+pp.set_editor_property("override_bloom_intensity", True)
+pp.set_editor_property("bloom_intensity", 0.0)
+capture.set_editor_property("post_process_settings", pp)
+capture.set_editor_property("post_process_blend_weight", 1.0)
+
+# Stable renderer knobs. None of these depend on the editor viewport view mode.
+unreal.SystemLibrary.execute_console_command(world, "r.ScreenPercentage 100")
+unreal.SystemLibrary.execute_console_command(world, "r.MotionBlurQuality 0")
+unreal.SystemLibrary.execute_console_command(world, "r.RayTracing 0")
+unreal.SystemLibrary.execute_console_command(world, "r.EyeAdaptationQuality 2")
+unreal.SystemLibrary.execute_console_command(world, "r.Tonemapper.Sharpen 0.25")
+
 state = {
     "index": 0,
-    "task": None,
     "phase": "warmup",
-    "phase_started": time.monotonic(),
+    "warmup_count": 0,
     "started": time.monotonic(),
     "captures": [],
 }
 TIMEOUT_SECONDS = 360.0
+WARMUP_CAPTURES = 24
+PNG_SIGNATURE = b"\x89PNG\r\n\x1a\n"
 
 
 def vec(values):
     return unreal.Vector(float(values[0]), float(values[1]), float(values[2]))
 
 
-def set_view(spec):
-    # Reassert Lit on every camera move because editor automation can restore
-    # viewport state between high-res screenshot tasks.
-    unreal.AutomationLibrary.set_editor_viewport_view_mode(
-        unreal.ViewModeIndex.VMI_LIT
-    )
-    unreal.SystemLibrary.execute_console_command(world, "viewmode lit")
-
+def set_capture_view(spec):
     location = vec(spec["location_cm"])
     target = vec(spec["target_cm"])
     rotation = unreal.MathLibrary.find_look_at_rotation(location, target)
-    camera.set_actor_location(location, False, False)
-    camera.set_actor_rotation(rotation, False)
-    camera.camera_component.set_field_of_view(float(spec["fov"]))
+    capture_actor.set_actor_location_and_rotation(
+        location,
+        rotation,
+        False,
+        True,
+    )
+    capture.set_editor_property("fov_angle", float(spec["fov"]))
+
+
+def export_current(spec):
+    output = OUT_DIR / (spec["name"] + ".png")
+    if output.exists():
+        output.unlink()
+
+    capture.capture_scene()
+    unreal.RenderingLibrary.export_render_target(
+        world,
+        render_target,
+        str(OUT_DIR),
+        output.name,
+    )
+
+    if not output.is_file():
+        raise RuntimeError("render-target export did not create: %s" % output)
+    if output.stat().st_size < 4096:
+        raise RuntimeError("render-target export too small: %s" % output)
+    with output.open("rb") as fh:
+        signature = fh.read(8)
+    if signature != PNG_SIGNATURE:
+        raise RuntimeError(
+            "render-target export is not a PNG: %s signature=%r"
+            % (output, signature)
+        )
+
+    state["captures"].append(
+        {
+            "name": spec["name"],
+            "path": str(output),
+            "bytes": output.stat().st_size,
+            "location_cm": spec["location_cm"],
+            "target_cm": spec["target_cm"],
+            "fov": spec["fov"],
+        }
+    )
 
 
 def finish(success=True):
@@ -284,6 +317,11 @@ def finish(success=True):
 
     report = {
         "status": "PASS_CAPTURE" if success else "FAIL_CAPTURE",
+        "backend": (
+            "SceneCapture2D -> TextureRenderTarget2D(RTF_RGBA8) "
+            "-> SCS_FINAL_COLOR_LDR -> export_render_target"
+        ),
+        "editor_viewport_dependency": False,
         "level": LEVEL,
         "terrain_label": TERRAIN_LABEL,
         "runtime_tile_actor_count": len(runtime_actors),
@@ -294,30 +332,21 @@ def finish(success=True):
         "lighting": {
             "sky_atmosphere": True,
             "sky_light": True,
-            "sun_intensity": 6.0,
-            "fill_intensity": 0.55,
-            "all_capture_lights_movable": True,
-            "fixed_manual_exposure": True,
-            "height_fog_background_fallback": True,
-            "forced_editor_view_mode": "VMI_LIT",
-            "forced_show_flags": [
-                "Lighting",
-                "Materials",
-                "DirectLighting",
-                "DynamicShadows",
-                "SkyLighting",
-                "Atmosphere",
-                "Fog",
-                "PostProcessing",
-            ],
+            "sun_lux": 18.0,
+            "sky_intensity": 1.25,
+            "height_fog": True,
         },
         "resolution": [WIDTH, HEIGHT],
+        "warmup_captures": state["warmup_count"],
         "captures": state["captures"],
         "elapsed_seconds": time.monotonic() - state["started"],
         "world_saved_after_overrides": False,
     }
     REPORT_PATH.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
-    unreal.log("XINYI_V2_CAPTURE_REPORT " + json.dumps(report, separators=(",", ":")))
+    unreal.log(
+        "XINYI_V2_SCENECAPTURE_REPORT "
+        + json.dumps(report, separators=(",", ":"))
+    )
 
     try:
         unreal.EditorPythonScripting.set_keep_python_script_alive(False)
@@ -328,20 +357,17 @@ def finish(success=True):
 
 def tick(_delta):
     try:
-        now = time.monotonic()
-        if now - state["started"] > TIMEOUT_SECONDS:
-            raise RuntimeError("XinyiV2 screenshot sequence timed out")
+        if time.monotonic() - state["started"] > TIMEOUT_SECONDS:
+            raise RuntimeError("XinyiV2 SceneCapture2D sequence timed out")
 
         if state["phase"] == "warmup":
-            # Give simple material shaders + atmosphere + skylight enough time
-            # to settle before the first deterministic frame.
-            if now - state["phase_started"] >= 14.0:
-                try:
-                    sky_comp.recapture_sky()
-                except Exception:
-                    pass
-                state["phase"] = "position"
-                state["phase_started"] = now
+            # Prime shadow maps / atmosphere / sky capture through the same
+            # renderer used for the final frames.
+            set_capture_view(VIEWS[1])
+            capture.capture_scene()
+            state["warmup_count"] += 1
+            if state["warmup_count"] >= WARMUP_CAPTURES:
+                state["phase"] = "capture"
             return
 
         if state["index"] >= len(VIEWS):
@@ -349,62 +375,20 @@ def tick(_delta):
             return
 
         spec = VIEWS[state["index"]]
+        set_capture_view(spec)
 
-        if state["phase"] == "position":
-            set_view(spec)
-            state["phase"] = "settle"
-            state["phase_started"] = now
-            return
+        # Two captures after a camera cut: first primes temporal/render state,
+        # second is the exported deterministic frame.
+        capture.capture_scene()
+        export_current(spec)
 
-        if state["phase"] == "settle":
-            if now - state["phase_started"] < 3.0:
-                return
-            output = OUT_DIR / (spec["name"] + ".png")
-            if output.exists():
-                output.unlink()
-            state["task"] = unreal.AutomationLibrary.take_high_res_screenshot(
-                WIDTH,
-                HEIGHT,
-                str(output),
-                camera=camera,
-                delay=1.0,
-            )
-            state["phase"] = "capture"
-            state["phase_started"] = now
-            unreal.log("XINYI_V2_CAPTURE_REQUEST " + str(output))
-            return
-
-        if state["phase"] == "capture":
-            task = state["task"]
-            if task is None:
-                raise RuntimeError("Automation screenshot task was not created")
-            if not task.is_task_done():
-                return
-
-            output = OUT_DIR / (spec["name"] + ".png")
-            if not output.is_file() or output.stat().st_size < 4096:
-                raise RuntimeError(
-                    "screenshot task completed but PNG is missing/too small: %s" % output
-                )
-            state["captures"].append(
-                {
-                    "name": spec["name"],
-                    "path": str(output),
-                    "bytes": output.stat().st_size,
-                    "location_cm": spec["location_cm"],
-                    "target_cm": spec["target_cm"],
-                    "fov": spec["fov"],
-                }
-            )
-            state["index"] += 1
-            state["task"] = None
-            state["phase"] = "position"
-            state["phase_started"] = now
-            return
+        state["index"] += 1
 
     except Exception:
         ERROR_PATH.write_text(traceback.format_exc(), encoding="utf-8")
-        unreal.log_error("XINYI_V2_CAPTURE_FAILED " + traceback.format_exc())
+        unreal.log_error(
+            "XINYI_V2_SCENECAPTURE_FAILED " + traceback.format_exc()
+        )
         state["captures"].append(
             {"error": traceback.format_exc(), "index": state["index"]}
         )
@@ -413,4 +397,14 @@ def tick(_delta):
 
 handle = unreal.register_slate_post_tick_callback(tick)
 unreal.EditorPythonScripting.set_keep_python_script_alive(True)
-unreal.log("XINYI_V2_READABLE_WHITEBOX_CAPTURE_STARTED " + str(OUT_DIR))
+unreal.log(
+    "XINYI_V2_SCENECAPTURE_STARTED "
+    + json.dumps(
+        {
+            "out": str(OUT_DIR),
+            "resolution": [WIDTH, HEIGHT],
+            "backend": "SceneCapture2D",
+        },
+        separators=(",", ":"),
+    )
+)
