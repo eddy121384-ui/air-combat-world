@@ -167,6 +167,7 @@ jobs:
           forbidden = (
               "Remove-Item -Recurse",
               "DeleteSourceLevels",
+              "AllowCommandletRendering",
           )
           for token in forbidden:
               assert token not in text, token
