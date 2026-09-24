@@ -43,7 +43,8 @@ jobs:
             "tools/unreal_xinyi_v2/fetch_and_run_local_gate.ps1",
             "tools/unreal_xinyi_v2/resume_runtime_world.ps1",
             "tools/unreal_xinyi_v2/capture_views.ps1",
-            "tools/unreal_xinyi_v2/audit_world_partition.ps1"
+            "tools/unreal_xinyi_v2/audit_world_partition.ps1",
+            "tools/unreal_xinyi_v2/create_isolated_wp_test.ps1"
           )
           foreach ($path in $paths) {
             $tokens = $null
@@ -139,6 +140,32 @@ jobs:
           for token in forbidden:
               assert token not in text, token
           print("WORLD_PARTITION_AUDIT_READ_ONLY_GUARD_OK")
+          PY
+
+      - name: Guard isolated World Partition migration
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          text = Path("tools/unreal_xinyi_v2/create_isolated_wp_test.ps1").read_text()
+          required = (
+              "WorldPartitionConvertCommandlet",
+              "-ReportOnly",
+              "-ConversionSuffix",
+              "-SCCProvider=None",
+              "L_XinyiV2_Contract_WP",
+              "XINYI_V2_ISOLATED_WP_MIGRATION_OK",
+              "descriptor_runtime_building_tiles",
+          )
+          for token in required:
+              assert token in text, token
+          forbidden = (
+              "Remove-Item -Recurse",
+              "DeleteSourceLevels",
+          )
+          for token in forbidden:
+              assert token not in text, token
+          print("ISOLATED_WORLD_PARTITION_MIGRATION_GUARD_OK")
           PY
 
       - name: Validate project and plugin descriptors
