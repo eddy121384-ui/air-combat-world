@@ -33,9 +33,12 @@ if (-not (Test-Path $Project)) { throw "uproject not found: $Project" }
 if (-not (Test-Path $SourceMap)) { throw "source XinyiV2 map not found: $SourceMap" }
 if (-not (Test-Path $Audit)) { throw "World Partition audit script not found: $Audit" }
 
-$gui = Get-Process UnrealEditor -ErrorAction SilentlyContinue
-if ($gui) {
-    throw "UnrealEditor GUI is running. Close it before isolated World Partition conversion."
+$editorProcesses = @(
+    Get-Process UnrealEditor, UnrealEditor-Cmd -ErrorAction SilentlyContinue
+)
+if ($editorProcesses.Count -gt 0) {
+    $names = ($editorProcesses | ForEach-Object { "$($_.ProcessName)[$($_.Id)]" }) -join ", "
+    throw "An Unreal process is already running: $names . Close/wait for it before isolated World Partition conversion."
 }
 
 if (Test-Path $ConvertedMap) {
@@ -57,9 +60,20 @@ $reportArgs = @(
     "-Verbose",
     "-abslog=$ReportOnlyLog"
 )
-& $UnrealEditor @reportArgs
-if ($LASTEXITCODE -ne 0) {
-    throw "World Partition report-only preflight failed ($LASTEXITCODE). See $ReportOnlyLog"
+$reportQuotedArgs = @(
+    ('"{0}"' -f $Project),
+    "-run=WorldPartitionConvertCommandlet",
+    ('"{0}"' -f $SourceMap),
+    "-ReportOnly",
+    "-SCCProvider=None",
+    "-AllowCommandletRendering",
+    "-Verbose",
+    ('-abslog="{0}"' -f $ReportOnlyLog)
+)
+$reportProcess = Start-Process -FilePath $UnrealEditor -ArgumentList $reportQuotedArgs -Wait -PassThru -NoNewWindow
+$reportExitCode = $reportProcess.ExitCode
+if ($reportExitCode -ne 0) {
+    throw "World Partition report-only preflight failed ($reportExitCode). See $ReportOnlyLog"
 }
 
 Write-Host "=== B. Isolated conversion with _WP suffix; source map remains intact ==="
@@ -73,9 +87,20 @@ $convertArgs = @(
     "-Verbose",
     "-abslog=$ConvertLog"
 )
-& $UnrealEditor @convertArgs
-if ($LASTEXITCODE -ne 0) {
-    throw "World Partition isolated conversion failed ($LASTEXITCODE). See $ConvertLog"
+$convertQuotedArgs = @(
+    ('"{0}"' -f $Project),
+    "-run=WorldPartitionConvertCommandlet",
+    ('"{0}"' -f $SourceMap),
+    "-ConversionSuffix",
+    "-SCCProvider=None",
+    "-AllowCommandletRendering",
+    "-Verbose",
+    ('-abslog="{0}"' -f $ConvertLog)
+)
+$convertProcess = Start-Process -FilePath $UnrealEditor -ArgumentList $convertQuotedArgs -Wait -PassThru -NoNewWindow
+$convertExitCode = $convertProcess.ExitCode
+if ($convertExitCode -ne 0) {
+    throw "World Partition isolated conversion failed ($convertExitCode). See $ConvertLog"
 }
 if (-not (Test-Path $ConvertedMap)) {
     throw "Expected converted _WP map was not created: $ConvertedMap"
