@@ -11,6 +11,7 @@ The current production-candidate geometry method is documented in:
 5. `docs/xinyi-v2-whitebox-preview-status.md`
 6. `docs/architecture/xinyi-terrain-integration-plan.md`
 7. `docs/xinyi-v2-serialization-space-result.md` — historical representative evidence
+8. `docs/architecture/xinyi-blender-to-unreal-runbook.md` — end-to-end retrospective + repeatable runbook
 
 These documents override older experimental assumptions for city geometry work.
 
@@ -88,6 +89,7 @@ It is a visualization layer, not a second production geometry path.
 - Unreal offline contract result: `docs/xinyi-unreal-v2-contract-result.md`
 - Unreal offline contract design: `docs/architecture/xinyi-unreal-v2-contract.md`
 - Unreal Landscape bridge contract: `docs/architecture/xinyi-unreal-v2-landscape-bridge.md`
+- End-to-end Blender -> Unreal runbook: `docs/architecture/xinyi-blender-to-unreal-runbook.md`
 - Current visible milestone: `docs/xinyi-v2-whitebox-preview-status.md`
 
 The original building-only whitebox did not contain terrain. Terrain v0 now has a passing
@@ -110,7 +112,7 @@ building-specific Z hacks.
 There are now two downstream tracks:
 
 - **world-completeness track:** MOI 2025 bare-earth DTM derivative source audit -> 25 terrain tiles -> surveyed building base-Z anchoring -> terrain + building preview — PASS candidate;
-- **engine track:** offline Unreal `XinyiV2` input contract — PASS; actual UE5.8 asset import / Landscape / placement / persistence / performance validation — IN PROGRESS.
+- **engine track:** offline Unreal `XinyiV2` input contract — PASS; real UE5.8 Landscape + 25 runtime building tiles + fresh-reopen persistence + SceneCapture2D visual QA — PASS candidate; streaming / HLOD / collision / cook / performance — IN PROGRESS.
 
 Do not confuse a preview render failure with a geometry-gate failure, and do not treat an attractive
 preview as evidence that geometry or Unreal runtime validation has passed.
@@ -148,8 +150,9 @@ Current sequence:
 4. building-only Xinyi whitebox preview — AVAILABLE
 5. MOI terrain source / 25-tile / surveyed building-elevation integration — PASS candidate
 6. Unreal XinyiV2 offline input contract (631x631 heightmap, 5x5 x 500m components) — PASS
-7. actual UE5.8 asset import / Landscape / fresh-reopen / streaming / performance gate — CURRENT
-8. only after the engine contract is stable, scale the same tile pipeline toward wider Taipei
+7. actual UE5.8 Landscape + 25-tile runtime world + fresh-reopen + SceneCapture2D visual QA — PASS candidate
+8. World Partition / streaming / HLOD / collision / cook / runtime performance gate — CURRENT
+9. only after the engine runtime contract is stable, scale the same tile pipeline toward wider Taipei
 
 Do not mix facade polish, materials, gameplay, Taipei-wide expansion, or production-tool winner
 decisions into the Unreal import gate unless the task explicitly asks for them.
