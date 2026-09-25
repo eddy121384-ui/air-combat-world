@@ -1,0 +1,131 @@
+name: Xinyi Unreal V2 Contract
+
+on:
+  push:
+    branches:
+      - feat/xinyi-unreal-v2
+    paths:
+      - "tools/unreal_xinyi_v2/build_contract.py"
+      - "tools/unreal_xinyi_v2/__init__.py"
+      - "tools/terrain/**"
+      - "tools/citygen_v2/**"
+      - "tools/compiler/**"
+      - "tests/test_unreal_xinyi_v2_contract.py"
+      - "requirements-citygen-v2.txt"
+      - "requirements-terrain-v0.txt"
+      - "cities/taipei/**"
+      - ".github/workflows/xinyi-unreal-v2-contract.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  contract-gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: requirements-terrain-v0.txt
+
+      - name: Install validated geometry + terrain stack
+        run: |
+          python -m pip install -r requirements-terrain-v0.txt
+          python -m pip install pytest==8.4.2
+
+      - name: Fetch locked projected Xinyi WFS source
+        run: node tools/citygen_v2/fetch_projected_sample.mjs
+
+      - name: Regenerate validated Full-Xinyi building tiles
+        run: python tools/citygen_v2/build_full_xinyi.py
+
+      - name: Fetch MOI 2025 bare-earth DTM derivative mirror
+        run: python tools/terrain/fetch_moi_2025_dtm_mirror.py
+
+      - name: Regenerate accepted terrain + surveyed building Z contract
+        run: python tools/terrain/build_xinyi_terrain_dtm.py
+
+      - name: Run Unreal-contract unit tests
+        run: python -m pytest -q tests/test_unreal_xinyi_v2_contract.py
+
+      - name: Build Unreal XinyiV2 offline input contract
+        run: python tools/unreal_xinyi_v2/build_contract.py
+
+      - name: Verify contract receipt
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path("unreal/Saved/XinyiUnrealV2Contract/xinyi_unreal_v2_contract.json")
+          r=json.loads(p.read_text())
+          assert r["status"] == "PASS_CONTRACT"
+          assert r["landscape"]["heightmap_size"] == [631,631]
+          assert r["landscape"]["components"] == [5,5]
+          assert r["landscape"]["component_size_m"] == 500.0
+          assert len(r["tiles"]) == 25
+          assert r["building_placement"]["missing"] == 0
+          assert r["building_placement"]["component_placement_count"] == 11130
+          assert r["outputs"]["building_component_placement"]["count"] == 11130
+          assert r["building_placement"]["runtime_tile_count"] == 25
+          assert r["outputs"]["building_runtime_tiles"]["count"] == 25
+          print(json.dumps({
+              "status":r["status"],
+              "heightmap":r["landscape"]["heightmap_size"],
+              "components":r["landscape"]["components"],
+              "component_size_m":r["landscape"]["component_size_m"],
+              "tile_count":len(r["tiles"]),
+              "building_z_count":r["building_placement"]["surveyed_z_count"],
+              "building_component_placement_count":r["building_placement"]["component_placement_count"],
+              "png_sha256":r["outputs"]["heightmap_png"]["sha256"],
+              "r16_sha256":r["outputs"]["heightmap_r16"]["sha256"],
+              "component_placement_sha256":r["outputs"]["building_component_placement"]["sha256"],
+              "runtime_tile_count":r["outputs"]["building_runtime_tiles"]["count"],
+          },indent=2))
+          PY
+
+      - name: Rebuild Unreal contract and verify byte determinism
+        run: |
+          python tools/unreal_xinyi_v2/build_contract.py --out unreal/Saved/XinyiUnrealV2ContractRepeat
+          python - <<'PY'
+          import hashlib
+          from pathlib import Path
+
+          a=Path("unreal/Saved/XinyiUnrealV2Contract")
+          b=Path("unreal/Saved/XinyiUnrealV2ContractRepeat")
+          names=[
+              "xinyi_unreal_v2_contract.json",
+              "xinyi_moi2025_landscape_631.png",
+              "xinyi_moi2025_landscape_631.r16",
+              "building_ground_ue_cm.json",
+              "building_component_placement.jsonl.gz",
+          ]
+          def digest(p):
+              return hashlib.sha256(p.read_bytes()).hexdigest()
+          rows={}
+          for name in names:
+              da,db=digest(a/name),digest(b/name)
+              assert da == db, f"nondeterministic output {name}: {da} != {db}"
+              rows[name]=da
+          print("BYTE_DETERMINISM_PASS", rows)
+          PY
+
+      - name: Upload Unreal XinyiV2 input evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: xinyi-unreal-v2-inputs
+          if-no-files-found: error
+          compression-level: 6
+          path: |
+            unreal/Saved/XinyiUnrealV2Contract/*
+            unreal/Saved/XinyiV2Full/run-01/full_xinyi.report.json
+            unreal/Saved/XinyiV2Full/run-01/tiles/*.glb
+            unreal/Saved/XinyiTerrainV0/terrain_dtm.report.json
+            unreal/Saved/XinyiTerrainV0/building_z_offsets.json
+            data/generated/taipei/terrain/moi_2025_dtm_mirror_source.json
