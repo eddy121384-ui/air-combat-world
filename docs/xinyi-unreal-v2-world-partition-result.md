@@ -34,6 +34,7 @@ Local receipts:
 - `unreal/Saved/XinyiUnrealV2/ue_world_partition_converted.json`
 - `unreal/Saved/XinyiUnrealV2/wp-convert-report-only.log`
 - `unreal/Saved/XinyiUnrealV2/wp-convert-isolated.log`
+- `unreal/Saved/XinyiUnrealV2/ue_collision_baseline.json`
 
 ## Host findings
 
@@ -54,10 +55,22 @@ fallback. The editor-only native accessor now reads Unreal's actual
 `CanStream` values. The fresh-process converted-world audit reports all four
 as `true`.
 
+## Collision baseline
+
+A read-only UE5.8 audit loaded all 25 persisted runtime StaticMeshes. The
+import receipt accounts for 485,936 triangles. Each tile asset has the default
+collision trace flag and exactly one simple convex collision shape; no other
+simple shapes were found. The audit status is `PASS_COLLISION_BASELINE`, which
+means the properties were measured, not that building collision is accepted.
+A single convex shape over a tile containing many distinct buildings cannot
+establish per-building contact or preserve gaps between buildings. Collision
+policy and runtime trace tests remain open. The audit changed no assets.
+
 ## Remaining Issue #8 gates
 
 This result establishes partition ownership and saved actor descriptors. It
 does not measure runtime source-driven load/unload. The next gate is a
 deterministic streaming-source traversal that records which building tile
 cells load and unload, without changing the validated source world. HLOD,
-collision, cook, memory, draw-call, and frame-time decisions remain pending.
+collision policy and trace tests, cook, memory, draw-call, and frame-time
+decisions remain pending.
