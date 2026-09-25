@@ -152,6 +152,8 @@ jobs:
               "WorldPartitionConvertCommandlet",
               "-ReportOnly",
               "-ConversionSuffix",
+              "-AllowCommandletRendering",
+              "-NullRHI",
               "Start-Process",
               "-PassThru",
               "WaitForExit",
@@ -162,13 +164,14 @@ jobs:
               "L_XinyiV2_Contract_WP",
               "XINYI_V2_ISOLATED_WP_MIGRATION_OK",
               "descriptor_runtime_building_tiles",
+              "world_partition.enable_streaming",
+              "world_partition.can_stream",
           )
           for token in required:
               assert token in text, token
           forbidden = (
               "Remove-Item -Recurse",
               "DeleteSourceLevels",
-              "AllowCommandletRendering",
           )
           for token in forbidden:
               assert token not in text, token

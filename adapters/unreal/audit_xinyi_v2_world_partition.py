@@ -1,8 +1,7 @@
-"""Read-only UE5.8 audit of XinyiV2 World Partition / streaming ownership.
+"""Read-only UE5.8 audit of a persisted XinyiV2 world and its actor ownership.
 
-This script intentionally does not mutate or save the world. It reads the
-persisted /Game/XinyiV2/L_XinyiV2_Contract state and emits a JSON receipt for
-the runtime-architecture decision gate.
+The selected source or converted map is loaded without mutation. A narrow
+native accessor reports streaming state that UE5.8 does not expose to Python.
 """
 from __future__ import annotations
 
@@ -158,6 +157,9 @@ def main() -> None:
     world_settings = world.get_world_settings()
     world_partition = _prop(world_settings, "world_partition")
     partitioned = world_partition is not None
+    native_partition = json.loads(
+        unreal.XinyiWorldPartitionAuditLibrary.inspect_current_editor_world_partition()
+    )
 
     actor_sub = unreal.get_editor_subsystem(unreal.EditorActorSubsystem)
     actors = list(actor_sub.get_all_level_actors())
@@ -190,6 +192,27 @@ def main() -> None:
             descriptor_error = repr(exc)
 
     failures = []
+    if native_partition.get("status") != "PASS":
+        failures.append(
+            {"reason": "native_partition_inspection_failed", "result": native_partition}
+        )
+    elif native_partition.get("present") != partitioned:
+        failures.append(
+            {"reason": "native_partition_presence_mismatch", "result": native_partition}
+        )
+    if partitioned and any(
+        not isinstance(native_partition.get(key), bool)
+        for key in (
+            "initialized",
+            "supports_streaming",
+            "enable_streaming",
+            "streaming_enabled_in_editor",
+            "can_stream",
+        )
+    ):
+        failures.append(
+            {"reason": "native_partition_streaming_state_missing", "result": native_partition}
+        )
     if partitioned:
         terrain_descs = [
             row for row in descriptor_rows if row["label"] == TERRAIN_LABEL
@@ -239,11 +262,7 @@ def main() -> None:
         name = _class_name(actor)
         class_counts[name] = class_counts.get(name, 0) + 1
 
-    wp_enable_streaming = (
-        bool(_prop(world_partition, "enable_streaming", False))
-        if partitioned
-        else False
-    )
+    wp_enable_streaming = native_partition.get("enable_streaming") if partitioned else False
     wp_default_hlod = (
         _path_name(_prop(world_partition, "default_hlod_layer"))
         if partitioned
@@ -282,6 +301,10 @@ def main() -> None:
             "class": _class_name(world_partition),
             "path": _path_name(world_partition),
             "enable_streaming": wp_enable_streaming,
+            "supports_streaming": native_partition.get("supports_streaming"),
+            "streaming_enabled_in_editor": native_partition.get("streaming_enabled_in_editor"),
+            "can_stream": native_partition.get("can_stream"),
+            "initialized": native_partition.get("initialized"),
             "default_hlod_layer": wp_default_hlod,
         },
         "decision_input": (

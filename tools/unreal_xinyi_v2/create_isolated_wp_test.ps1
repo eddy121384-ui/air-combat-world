@@ -74,6 +74,8 @@ $reportArgs = @(
     "-run=WorldPartitionConvertCommandlet",
     ('"{0}"' -f $SourceMap),
     "-ReportOnly",
+    "-AllowCommandletRendering",
+    "-NullRHI",
     "-SCCProvider=None",
     "-Verbose",
     ('-abslog="{0}"' -f $ReportOnlyLog)
@@ -86,6 +88,8 @@ $convertArgs = @(
     "-run=WorldPartitionConvertCommandlet",
     ('"{0}"' -f $SourceMap),
     "-ConversionSuffix",
+    "-AllowCommandletRendering",
+    "-NullRHI",
     "-SCCProvider=None",
     "-Verbose",
     ('-abslog="{0}"' -f $ConvertLog)
@@ -142,6 +146,9 @@ if ($converted.status -ne "PASS_WORLD_PARTITION_AUDIT") {
 }
 if ($converted.world_partition.present -ne $true) {
     throw "Converted _WP world does not expose World Partition."
+}
+if ($converted.world_partition.enable_streaming -ne $true -or $converted.world_partition.can_stream -ne $true) {
+    throw "Converted _WP world does not have active World Partition streaming."
 }
 if ($converted.target_counts.descriptor_terrain -ne 1) {
     throw "Converted _WP world does not contain exactly one terrain actor descriptor."
