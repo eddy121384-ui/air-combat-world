@@ -141,7 +141,7 @@ jobs:
               "data_layer_assets",
               "hlod_layer",
               "external_data_layer_asset",
-              "get_actor_descs_for_actors",
+              "get_actor_descs()",
               "get_outermost",
               '"audit_is_read_only": True',
               '"world_saved_after_audit": False',
