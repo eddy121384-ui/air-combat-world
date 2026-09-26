@@ -6,15 +6,12 @@
     "dwell_seconds": 5,
     "fail_if_all_tiles_permanently_loaded": true,
     "require_load_and_unload_per_tile": true,
-    "route": [
-      {"id": "outside-west-control", "location_cm": [-450000, 0, 30000], "expected_tile_count": 0},
-      {"id": "row-0-west", "location_cm": [-100000, -100000, 30000]},
-      {"id": "row-0-east", "location_cm": [100000, -100000, 30000]},
-      {"id": "center", "location_cm": [0, 0, 30000]},
-      {"id": "row-4-west", "location_cm": [-100000, 100000, 30000]},
-      {"id": "row-4-east", "location_cm": [100000, 100000, 30000]},
-      {"id": "outside-east-control", "location_cm": [450000, 0, 30000], "expected_tile_count": 0}
-    ]
+    "route_spec": {
+      "order": "north-to-south-serpentine",
+      "tile_center_count": 25,
+      "control_clearance_m": 5000,
+      "source_z_cm": 30000
+    }
   },
   "landscape_ownership": {
     "required": ["root", "streaming_proxies", "components", "heightfield_collision_components", "packages", "actor_descriptors", "runtime_grid"]

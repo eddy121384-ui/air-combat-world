@@ -26,12 +26,15 @@ def main() -> None:
     unreal = repo / "unreal"
     run_id = args.run_id or new_run_id(repo)
     run_root = (args.run_root or unreal / "Saved/XinyiHostGates" / run_id).resolve()
+    contract_name = "xinyi_unreal_v2_contract.json"
+    restored_contracts = files(unreal / "Saved/XinyiUnrealV2Inputs", (contract_name,))
     groups = {
         "source_map": [unreal / "Content/XinyiV2/L_XinyiV2_Contract.umap"],
         "wp_map": [unreal / "Content/XinyiV2/L_XinyiV2_Contract_WP.umap"],
         "external_actors": files(unreal / "Content/__ExternalActors__/XinyiV2"),
         "external_objects": files(unreal / "Content/__ExternalObjects__/XinyiV2"),
         "building_assets": files(unreal / "Content/XinyiV2/RuntimeBuildings", ("*.uasset",)),
+        "offline_contracts": restored_contracts + [unreal / "Saved/XinyiUnrealV2Contract" / contract_name],
         "landscape_packages": files(unreal / "Content/XinyiV2", ("*Landscape*.uasset", "*Terrain*.uasset")),
         "plugin": files(unreal / "Plugins/XinyiLandscapeBridge"),
         "project_config": files(unreal / "Config", ("*.ini",)) + [unreal / "AirCombatWorld.uproject"],

@@ -1,6 +1,14 @@
 name: Xinyi Unreal V2 Host Scripts
 
 on:
+  pull_request:
+    branches:
+      - feat/xinyi-unreal-v2
+    paths:
+      - "adapters/unreal/*xinyi_v2*.py"
+      - "tools/unreal_xinyi_v2/**"
+      - "tests/test_unreal_xinyi_v2_host_gate_contract.py"
+      - ".github/workflows/xinyi-unreal-v2-host-scripts.yml"
   push:
     branches:
       - feat/xinyi-unreal-v2
@@ -29,13 +37,16 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Install contract-test runner
+        run: python -m pip install pytest
+
       - name: Compile XinyiV2 Unreal Python adapters
         run: |
           python -m py_compile             adapters/unreal/xinyi_v2_api_probe.py             adapters/unreal/import_xinyi_v2_buildings.py             adapters/unreal/verify_xinyi_v2_building_import.py             adapters/unreal/probe_xinyi_v2_building_bounds.py             adapters/unreal/plan_xinyi_v2_building_placement.py             adapters/unreal/build_xinyi_v2_landscape.py             adapters/unreal/verify_xinyi_v2_landscape_reopen.py             adapters/unreal/import_xinyi_v2_runtime_tiles.py             adapters/unreal/verify_xinyi_v2_runtime_tiles_existing.py             adapters/unreal/place_xinyi_v2_runtime_tiles.py             adapters/unreal/verify_xinyi_v2_runtime_world_reopen.py             adapters/unreal/prepare_xinyi_v2_whitebox_materials.py             adapters/unreal/capture_xinyi_v2_views.py             adapters/unreal/audit_xinyi_v2_world_partition.py
 
       - name: Validate workstation host-gate contracts
         run: |
-          python -m py_compile tools/unreal_xinyi_v2/host_gate_common.py tools/unreal_xinyi_v2/snapshot_host_state.py tools/unreal_xinyi_v2/validate_host_receipt.py tools/unreal_xinyi_v2/analyze_streaming_observations.py tools/unreal_xinyi_v2/validate_trace_observations.py tools/unreal_xinyi_v2/summarize_performance_capture.py adapters/unreal/audit_xinyi_v2_landscape_ownership.py
+          python -m py_compile tools/unreal_xinyi_v2/host_gate_common.py tools/unreal_xinyi_v2/snapshot_host_state.py tools/unreal_xinyi_v2/prepare_streaming_route.py tools/unreal_xinyi_v2/validate_host_receipt.py tools/unreal_xinyi_v2/analyze_streaming_observations.py tools/unreal_xinyi_v2/validate_trace_observations.py tools/unreal_xinyi_v2/summarize_performance_capture.py adapters/unreal/audit_xinyi_v2_landscape_ownership.py
           python -m pytest -q tests/test_unreal_xinyi_v2_host_gate_contract.py
 
       - name: Parse PowerShell gate scripts without executing them
@@ -51,6 +62,7 @@ jobs:
             "tools/unreal_xinyi_v2/audit_world_partition.ps1",
             "tools/unreal_xinyi_v2/create_isolated_wp_test.ps1",
             "tools/unreal_xinyi_v2/snapshot_host_state.ps1",
+            "tools/unreal_xinyi_v2/prepare_streaming_route.ps1",
             "tools/unreal_xinyi_v2/run_host_gates.ps1",
             "tools/unreal_xinyi_v2/cook_xinyi_wp.ps1"
           )
