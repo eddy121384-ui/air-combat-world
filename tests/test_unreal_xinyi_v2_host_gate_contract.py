@@ -12,6 +12,8 @@ import host_gate_common as common  # noqa: E402
 import validate_host_receipt as validator  # noqa: E402
 import analyze_streaming_observations as streaming  # noqa: E402
 import prepare_streaming_route as route_builder  # noqa: E402
+import snapshot_host_state as snapshotter  # noqa: E402
+import verify_snapshot_unchanged as immutability  # noqa: E402
 
 
 def accepted_contract():
@@ -222,7 +224,97 @@ def test_run_id_is_stable(monkeypatch, tmp_path):
 
 
 def test_powershell_never_deletes_or_mutates_originals():
-    for name in ("snapshot_host_state.ps1", "prepare_streaming_route.ps1", "run_host_gates.ps1", "cook_xinyi_wp.ps1"):
+    for name in ("snapshot_host_state.ps1", "prepare_streaming_route.ps1", "verify_snapshot_unchanged.ps1", "run_host_gates.ps1", "cook_xinyi_wp.ps1"):
         text = (TOOLS / name).read_text()
         for forbidden in ("Remove-Item", "save_current_level", "WorldPartitionConvert"):
             assert forbidden not in text
+
+
+def test_protected_inventory_covers_all_xinyi_content_but_not_generated_plugin_files(tmp_path):
+    content = tmp_path / "unreal/Content/XinyiV2"
+    content.mkdir(parents=True)
+    (content / "unclassified.uasset").write_bytes(b"keep this too")
+    plugin = tmp_path / "unreal/Plugins/XinyiLandscapeBridge"
+    (plugin / "Source").mkdir(parents=True)
+    (plugin / "Binaries").mkdir()
+    (plugin / "Source/Bridge.cpp").write_text("source")
+    (plugin / "Binaries/generated.dll").write_bytes(b"compiled output")
+    groups = snapshotter.inventory_groups(tmp_path, tmp_path / "engine")
+    assert content / "unclassified.uasset" in groups["xinyi_content"]
+    assert plugin / "Source/Bridge.cpp" in groups["plugin"]
+    assert plugin / "Binaries/generated.dll" not in groups["plugin"]
+
+
+def test_immutability_comparison_detects_changed_missing_added_and_git_state(tmp_path):
+    protected = tmp_path / "unreal/Content/XinyiV2"
+    protected.mkdir(parents=True)
+    original = protected / "L_XinyiV2_Contract.umap"
+    original.write_bytes(b"original bytes")
+    baseline = common.file_rows(tmp_path, [original], "xinyi_content")
+    snapshot = {
+        "schema": common.SCHEMA_VERSION, "status": "PASS_SNAPSHOT",
+        "inventory_policy": snapshotter.INVENTORY_POLICY,
+        "requirements": {key: True for key in (
+            "source_map", "wp_map", "building_assets", "engine_version", "external_actor_packages")},
+        "repository": {"head": "abc", "branch": "host"},
+        "protected_git_status": "?? unreal/Content/XinyiV2/L_XinyiV2_Contract.umap",
+        "files": baseline,
+    }
+    status = snapshot["protected_git_status"]
+    assert immutability.compare(snapshot, baseline, "abc", "host", status) == []
+    original.write_bytes(b"changed bytes")
+    changed = common.file_rows(tmp_path, [original], "xinyi_content")
+    assert any(f["reason"] == "file_changed" for f in immutability.compare(snapshot, changed, "abc", "host", status))
+    added = protected / "new_package.uasset"
+    added.write_bytes(b"unexpected")
+    expanded = common.file_rows(tmp_path, [original, added], "xinyi_content")
+    assert any(f["reason"] == "file_added" for f in immutability.compare(snapshot, expanded, "abc", "host", status))
+    assert any(f["reason"] == "file_missing" for f in immutability.compare(snapshot, [], "abc", "host", status))
+    assert any(f["reason"] == "protected_git_status_changed" for f in immutability.compare(snapshot, baseline, "abc", "host", ""))
+    assert any(f["reason"] == "repository_ref_changed" for f in immutability.compare(snapshot, baseline, "def", "host", status))
+
+
+def test_snapshot_then_rehash_cli_detects_mutated_host_package(tmp_path):
+    repo = tmp_path / "repo"
+    repo.mkdir()
+    subprocess.run(["git", "init", "-q", str(repo)], check=True)
+    (repo / "README.md").write_text("temporary test repo")
+    subprocess.run(["git", "-C", str(repo), "add", "README.md"], check=True)
+    subprocess.run(["git", "-C", str(repo), "-c", "user.name=Test",
+                    "-c", "user.email=test@example.invalid", "commit", "-qm", "fixture"], check=True)
+    content = repo / "unreal/Content/XinyiV2"
+    buildings = content / "RuntimeBuildings"
+    buildings.mkdir(parents=True)
+    source = content / "L_XinyiV2_Contract.umap"
+    source.write_bytes(b"original source map")
+    (content / "L_XinyiV2_Contract_WP.umap").write_bytes(b"isolated WP map")
+    for index in range(25):
+        (buildings / f"tile-{index:02d}.uasset").write_bytes(f"mesh-{index}".encode())
+    actors = repo / "unreal/Content/__ExternalActors__/XinyiV2"
+    actors.mkdir(parents=True)
+    (actors / "actor.uasset").write_bytes(b"actor package")
+    engine = tmp_path / "UE_5.8"
+    (engine / "Engine/Build").mkdir(parents=True)
+    (engine / "Engine/Build/Build.version").write_text("5.8")
+    run_id = "20260927T000001Z-abcdef12"
+    run_root = repo / "unreal/Saved/XinyiHostGates" / run_id
+    snapshot_file = run_root / "00-snapshot.json"
+    result = subprocess.run([sys.executable, str(TOOLS / "snapshot_host_state.py"),
+                             "--repo", str(repo), "--engine-root", str(engine),
+                             "--run-id", run_id, "--run-root", str(run_root)], capture_output=True)
+    assert result.returncode == 0, result.stderr.decode()
+    assert json.loads(snapshot_file.read_text())["status"] == "PASS_SNAPSHOT"
+    command = [sys.executable, str(TOOLS / "verify_snapshot_unchanged.py"),
+               "--repo", str(repo), "--engine-root", str(engine), "--snapshot", str(snapshot_file)]
+    good = run_root / "90-source-immutability.json"
+    result = subprocess.run(command + ["--out", str(good)], capture_output=True)
+    assert result.returncode == 0, result.stderr.decode()
+    assert json.loads(good.read_text())["status"] == "PASS_SOURCE_IMMUTABILITY"
+    source.write_bytes(b"changed source map")
+    bad = run_root / "91-source-immutability-after-mutation.json"
+    result = subprocess.run(command + ["--out", str(bad)], capture_output=True)
+    assert result.returncode == 2, result.stderr.decode()
+    receipt = json.loads(bad.read_text())
+    assert receipt["status"] == "FAIL_SOURCE_IMMUTABILITY"
+    assert any(f["reason"] == "file_changed" and f["category"] == "source_map"
+               for f in receipt["failures"])

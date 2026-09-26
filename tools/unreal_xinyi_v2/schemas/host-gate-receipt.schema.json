@@ -24,7 +24,8 @@
         "streaming",
         "landscape_traces",
         "building_traces",
-        "performance"
+        "performance",
+        "source_immutability"
       ]
     },
     "status": {
@@ -102,7 +103,8 @@
             "enum": [
               "snapshot",
               "landscape_ownership",
-              "cook_commandlet"
+            "cook_commandlet",
+            "source_immutability"
             ]
           },
           "status": {

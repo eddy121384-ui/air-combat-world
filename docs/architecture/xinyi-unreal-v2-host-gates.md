@@ -15,6 +15,12 @@ The command creates a new immutable run directory under
 saves, converts, imports, or edits a source package. A repeated run receives a new ID; an explicit
 existing ID fails rather than overwriting evidence.
 
+The snapshot includes all files under `unreal/Content/XinyiV2`, Xinyi external actors/objects,
+the 25 building assets, available offline contracts, project config, the editor bridge's source
+and descriptor, and the engine version file. It also records the protected paths' Git status.
+Generated plugin `Binaries` and `Intermediate` are deliberately excluded: compiling the bridge
+can change those files without changing the accepted source world.
+
 Then prepare the coordinate-checked route using the `run_id` printed by the snapshot command:
 
 ```powershell
@@ -29,6 +35,17 @@ not fabricate positions. It writes `10-streaming-route.json` with two candidate 
 and the 25 tile centers in north-to-south serpentine order, using the accepted ENU-to-UE transform.
 The controls are 5 km beyond the Landscape extent by default. Confirm that distance exceeds the
 actual runtime loading range on the workstation; the controls must record zero building tiles.
+
+After the host tests, with the same branch and engine root, rehash the protected inventory:
+
+```powershell
+tools/unreal_xinyi_v2/verify_snapshot_unchanged.ps1 -RunId "<run_id>" -EngineRoot "C:\Program Files\Epic Games\UE_5.8"
+```
+
+This exclusively creates `90-source-immutability.json` and rejects changed, missing or newly added
+protected files, Git-status drift and branch/HEAD drift. Run it once at the end of the host sequence;
+it cannot overwrite an existing receipt. A PASS establishes that the snapshotted source bytes did
+not change during the run. It does not prove streaming, collision, cook or packaged persistence.
 
 ## Staged execution
 
@@ -85,6 +102,7 @@ are supplied data, so these checks cannot authenticate that either process actua
 ## Receipt status vocabulary
 
 - `PASS_SNAPSHOT`: required files were hashed without source mutation.
+- `PASS_SOURCE_IMMUTABILITY`: protected files and Git state still match the snapshot; not runtime PASS.
 - `NOT_RUN_OWNERSHIP_AUDIT`: partial loaded-actor inventory; descriptor/proxy ownership still open.
 - `PASS_COOK_COMMANDLET`: cook postconditions and manifests passed; not packaged runtime PASS.
 - `NOT_RUN_PACKAGED_STREAMING`: external observation JSON passed partial checks; no runtime provenance.

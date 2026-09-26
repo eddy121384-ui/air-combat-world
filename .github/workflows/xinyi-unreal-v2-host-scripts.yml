@@ -46,7 +46,7 @@ jobs:
 
       - name: Validate workstation host-gate contracts
         run: |
-          python -m py_compile tools/unreal_xinyi_v2/host_gate_common.py tools/unreal_xinyi_v2/snapshot_host_state.py tools/unreal_xinyi_v2/prepare_streaming_route.py tools/unreal_xinyi_v2/validate_host_receipt.py tools/unreal_xinyi_v2/analyze_streaming_observations.py tools/unreal_xinyi_v2/validate_trace_observations.py tools/unreal_xinyi_v2/summarize_performance_capture.py adapters/unreal/audit_xinyi_v2_landscape_ownership.py
+          python -m py_compile tools/unreal_xinyi_v2/host_gate_common.py tools/unreal_xinyi_v2/snapshot_host_state.py tools/unreal_xinyi_v2/verify_snapshot_unchanged.py tools/unreal_xinyi_v2/prepare_streaming_route.py tools/unreal_xinyi_v2/validate_host_receipt.py tools/unreal_xinyi_v2/analyze_streaming_observations.py tools/unreal_xinyi_v2/validate_trace_observations.py tools/unreal_xinyi_v2/summarize_performance_capture.py adapters/unreal/audit_xinyi_v2_landscape_ownership.py
           python -m pytest -q tests/test_unreal_xinyi_v2_host_gate_contract.py
 
       - name: Parse PowerShell gate scripts without executing them
@@ -63,6 +63,7 @@ jobs:
             "tools/unreal_xinyi_v2/create_isolated_wp_test.ps1",
             "tools/unreal_xinyi_v2/snapshot_host_state.ps1",
             "tools/unreal_xinyi_v2/prepare_streaming_route.ps1",
+            "tools/unreal_xinyi_v2/verify_snapshot_unchanged.ps1",
             "tools/unreal_xinyi_v2/run_host_gates.ps1",
             "tools/unreal_xinyi_v2/cook_xinyi_wp.ps1"
           )

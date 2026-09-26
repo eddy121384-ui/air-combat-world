@@ -8,11 +8,50 @@ from pathlib import Path
 
 from host_gate_common import SCHEMA_VERSION, file_rows, git, machine, new_run_id, write_json_new
 
+INVENTORY_POLICY = "xinyi-host-protected-files/v1"
+PROTECTED_GIT_PATHS = (
+    "unreal/Content/XinyiV2",
+    "unreal/Content/__ExternalActors__/XinyiV2",
+    "unreal/Content/__ExternalObjects__/XinyiV2",
+    "unreal/Config",
+    "unreal/AirCombatWorld.uproject",
+)
+
 
 def files(directory: Path, patterns: tuple[str, ...] = ("*",)) -> list[Path]:
     if not directory.exists():
         return []
     return [p for pattern in patterns for p in directory.rglob(pattern) if p.is_file()]
+
+
+def inventory_groups(repo: Path, engine_root: Path) -> dict[str, list[Path]]:
+    unreal = repo / "unreal"
+    contract_name = "xinyi_unreal_v2_contract.json"
+    plugin = unreal / "Plugins/XinyiLandscapeBridge"
+    return {
+        "source_map": [unreal / "Content/XinyiV2/L_XinyiV2_Contract.umap"],
+        "wp_map": [unreal / "Content/XinyiV2/L_XinyiV2_Contract_WP.umap"],
+        "xinyi_content": files(unreal / "Content/XinyiV2"),
+        "external_actors": files(unreal / "Content/__ExternalActors__/XinyiV2"),
+        "external_objects": files(unreal / "Content/__ExternalObjects__/XinyiV2"),
+        "building_assets": files(unreal / "Content/XinyiV2/RuntimeBuildings", ("*.uasset",)),
+        "offline_contracts": files(unreal / "Saved/XinyiUnrealV2Inputs", (contract_name,))
+            + [unreal / "Saved/XinyiUnrealV2Contract" / contract_name],
+        "landscape_packages": files(unreal / "Content/XinyiV2", ("*Landscape*.uasset", "*Terrain*.uasset")),
+        # Generated plugin Binaries/Intermediate may change during a host run.
+        "plugin": files(plugin / "Source") + [plugin / "XinyiLandscapeBridge.uplugin"],
+        "project_config": files(unreal / "Config", ("*.ini",)) + [unreal / "AirCombatWorld.uproject"],
+        "engine_version": [engine_root / "Engine/Build/Build.version"],
+    }
+
+
+def inventory_rows(repo: Path, engine_root: Path) -> list[dict]:
+    return [row for name, paths in inventory_groups(repo, engine_root).items()
+            for row in file_rows(repo, paths, name)]
+
+
+def protected_git_status(repo: Path) -> str:
+    return git(repo, "status", "--porcelain=v1", "--untracked-files=all", "--", *PROTECTED_GIT_PATHS)
 
 
 def main() -> None:
@@ -26,21 +65,8 @@ def main() -> None:
     unreal = repo / "unreal"
     run_id = args.run_id or new_run_id(repo)
     run_root = (args.run_root or unreal / "Saved/XinyiHostGates" / run_id).resolve()
-    contract_name = "xinyi_unreal_v2_contract.json"
-    restored_contracts = files(unreal / "Saved/XinyiUnrealV2Inputs", (contract_name,))
-    groups = {
-        "source_map": [unreal / "Content/XinyiV2/L_XinyiV2_Contract.umap"],
-        "wp_map": [unreal / "Content/XinyiV2/L_XinyiV2_Contract_WP.umap"],
-        "external_actors": files(unreal / "Content/__ExternalActors__/XinyiV2"),
-        "external_objects": files(unreal / "Content/__ExternalObjects__/XinyiV2"),
-        "building_assets": files(unreal / "Content/XinyiV2/RuntimeBuildings", ("*.uasset",)),
-        "offline_contracts": restored_contracts + [unreal / "Saved/XinyiUnrealV2Contract" / contract_name],
-        "landscape_packages": files(unreal / "Content/XinyiV2", ("*Landscape*.uasset", "*Terrain*.uasset")),
-        "plugin": files(unreal / "Plugins/XinyiLandscapeBridge"),
-        "project_config": files(unreal / "Config", ("*.ini",)) + [unreal / "AirCombatWorld.uproject"],
-        "engine_version": [args.engine_root / "Engine/Build/Build.version"],
-    }
-    rows = [row for name, paths in groups.items() for row in file_rows(repo, paths, name)]
+    groups = inventory_groups(repo, args.engine_root)
+    rows = inventory_rows(repo, args.engine_root)
     counts = {name: sum(row["category"] == name for row in rows) for name in groups}
     required = {"source_map": counts["source_map"] == 1, "wp_map": counts["wp_map"] == 1, "building_assets": counts["building_assets"] == 25, "engine_version": counts["engine_version"] == 1, "external_actor_packages": counts["external_actors"] > 0}
     receipt = {
@@ -48,6 +74,8 @@ def main() -> None:
         "status": "PASS_SNAPSHOT" if all(required.values()) else "FAIL_SNAPSHOT",
         "runtime_validation": False, "created_utc": datetime.now(UTC).isoformat(), "run_id": run_id,
         "repository": {"head": git(repo, "rev-parse", "HEAD"), "branch": git(repo, "branch", "--show-current")},
+        "inventory_policy": INVENTORY_POLICY,
+        "protected_git_status": protected_git_status(repo),
         "machine": machine(), "counts": counts, "requirements": required, "files": rows,
         "mutation": {"source_files_written": 0, "receipt_created_exclusively": True},
     }

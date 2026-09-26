@@ -12,7 +12,7 @@ def validate(value: dict) -> None:
     assert RUN_ID_RE.fullmatch(value.get("run_id", ""))
     assert isinstance(value.get("runtime_validation"), bool)
     assert isinstance(value.get("created_utc"), str)
-    static_receipts = {"snapshot", "landscape_ownership", "cook_commandlet"}
+    static_receipts = {"snapshot", "landscape_ownership", "cook_commandlet", "source_immutability"}
     if value["status"].startswith("NOT_RUN_"):
         assert value["runtime_validation"] is False
     if value["status"].startswith("PASS_"):
