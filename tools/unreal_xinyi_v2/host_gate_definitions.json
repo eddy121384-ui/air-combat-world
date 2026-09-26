@@ -1,0 +1,43 @@
+{
+  "schema": "xinyi-host-gate-definitions/v1",
+  "world": "/Game/XinyiV2/L_XinyiV2_Contract_WP",
+  "streaming": {
+    "timeout_seconds": 120,
+    "dwell_seconds": 5,
+    "fail_if_all_tiles_permanently_loaded": true,
+    "require_load_and_unload_per_tile": true,
+    "route": [
+      {"id": "outside-west-control", "location_cm": [-450000, 0, 30000], "expected_tile_count": 0},
+      {"id": "row-0-west", "location_cm": [-100000, -100000, 30000]},
+      {"id": "row-0-east", "location_cm": [100000, -100000, 30000]},
+      {"id": "center", "location_cm": [0, 0, 30000]},
+      {"id": "row-4-west", "location_cm": [-100000, 100000, 30000]},
+      {"id": "row-4-east", "location_cm": [100000, 100000, 30000]},
+      {"id": "outside-east-control", "location_cm": [450000, 0, 30000], "expected_tile_count": 0}
+    ]
+  },
+  "landscape_ownership": {
+    "required": ["root", "streaming_proxies", "components", "heightfield_collision_components", "packages", "actor_descriptors", "runtime_grid"]
+  },
+  "landscape_traces": {
+    "start_z_cm": 30000,
+    "end_z_cm": -10000,
+    "sets": ["25-component-centers", "internal-seams-both-sides", "four-internal-corners", "outside-controls"]
+  },
+  "building_collision": {
+    "required_sets": ["roof-positive", "facade-positive", "street-negative", "courtyard-negative", "gap-negative", "tile-border-pairs", "terrain-only"],
+    "require_low_rise_and_high_rise_tiles": true,
+    "require_separate_terrain_and_building_channels": true
+  },
+  "cook": {
+    "explicit_map": "/Game/XinyiV2/L_XinyiV2_Contract_WP",
+    "required_inventory": ["external_actors", "building_meshes", "landscape_packages"],
+    "forbidden_runtime_modules": ["XinyiLandscapeBridge", "UnrealEd"],
+    "commandlet_success_is_runtime_success": false
+  },
+  "performance": {
+    "labels": ["cold", "warm"],
+    "percentiles": [50, 95, 99],
+    "metrics": ["startup_to_world_ready_ms", "frame_time_ms", "worst_streaming_hitch_ms", "ram_bytes", "gpu_memory_bytes", "mesh_draws", "primitives", "actor_count", "component_count"]
+  }
+}
