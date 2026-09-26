@@ -24,10 +24,10 @@ def main() -> None:
         if row.get("max_error_cm") is not None and row.get("error_cm", 0) > row["max_error_cm"]:
             failures.append({"id": row.get("id"), "reason": "position_error"})
     status_name = "LANDSCAPE_TRACES" if args.kind == "landscape" else "BUILDING_COLLISION"
-    receipt = {"schema": SCHEMA_VERSION, "receipt_type": f"{args.kind}_traces", "status": f"PASS_{status_name}" if not failures and rows else f"FAIL_{status_name}", "runtime_validation": True, "created_utc": datetime.now(UTC).isoformat(), "run_id": snapshot["run_id"], "observation_count": len(rows), "failures": failures}
+    receipt = {"schema": SCHEMA_VERSION, "receipt_type": f"{args.kind}_traces", "status": f"NOT_RUN_{status_name}" if not failures and rows else f"FAIL_{status_name}", "runtime_validation": False, "analysis_only": True, "created_utc": datetime.now(UTC).isoformat(), "run_id": snapshot["run_id"], "observation_count": len(rows), "failures": failures}
     write_json_new(args.out, receipt)
-    if receipt["status"].startswith("FAIL_"):
-        raise SystemExit(2)
+    # JSON trace rows cannot establish provenance from a packaged UE runtime.
+    raise SystemExit(2 if receipt["status"].startswith("FAIL_") else 3)
 
 
 if __name__ == "__main__":

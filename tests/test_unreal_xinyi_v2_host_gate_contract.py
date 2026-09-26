@@ -73,3 +73,28 @@ def test_powershell_never_deletes_or_mutates_originals():
         text = (TOOLS / name).read_text()
         for forbidden in ("Remove-Item", "save_current_level", "WorldPartitionConvert"):
             assert forbidden not in text
+
+
+def test_untrusted_observations_cannot_become_packaged_pass():
+    definitions = json.loads((TOOLS / "host_gate_definitions.json").read_text())
+    route = definitions["streaming"]["route"]
+    ids = [f"tile-{index:02d}" for index in range(25)]
+    sets = [[], ids[:12], ids[12:], ids[:12], ids[12:], ids[:12], []]
+    observations = [{"id": point["id"], "loaded_tile_ids": loaded} for point, loaded in zip(route, sets)]
+    status, failures = streaming.analyze(definitions, observations)
+    assert failures == []
+    assert status == "NOT_RUN_PACKAGED_STREAMING"
+
+
+def test_not_run_receipt_cannot_claim_runtime_validation():
+    value = {
+        "schema": common.SCHEMA_VERSION, "receipt_type": "streaming",
+        "status": "NOT_RUN_PACKAGED_STREAMING", "run_id": "20260926T000001Z-abcdef12",
+        "runtime_validation": True, "created_utc": "2026-09-26T00:00:01+00:00",
+    }
+    try:
+        validator.validate(value)
+    except AssertionError:
+        pass
+    else:
+        raise AssertionError("incomplete receipt must not claim runtime validation")

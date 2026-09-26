@@ -19,14 +19,16 @@ existing ID fails rather than overwriting evidence.
 
 1. **Snapshot:** require the source map, `_WP` map, 25 building assets, external actors and engine
    version; hash plugin, config, external objects and Landscape-named packages when present.
-2. **Ownership:** in a fresh editor process, inventory Landscape roots, streaming proxies,
-   components, heightfield collision components, actor descriptors, packages and runtime grids.
-3. **Cook:** explicitly cook `/Game/XinyiV2/L_XinyiV2_Contract_WP` into a clean staging directory;
-   preserve logs and manifests. Commandlet exit zero is only `PASS_COOK_COMMANDLET`, never packaged
-   runtime PASS. Reject Editor-module runtime references and missing external actor/mesh/Landscape
-   packages.
+2. **Ownership:** the current UE Python adapter inspects loaded Landscape actors and components.
+   It does not enumerate unloaded actor descriptors or prove partition ownership. Its receipt is
+   `NOT_RUN_OWNERSHIP_AUDIT` until a host-verified descriptor/proxy inventory exists.
+3. **Cook:** `cook_xinyi_wp.ps1` is commandlet scaffolding and records an exit code and log.
+   It does not yet isolate cooked output, inventory packages, reject Editor-module runtime
+   references, or prove packaged reachability. A `PASS_COOK_COMMANDLET` receipt is only a
+   commandlet result; keep the Issue #8 cook gate open.
 4. **Packaged streaming:** launch the packaged executable into the explicit map, execute the route in
-   `host_gate_definitions.json`, and record source arrival, streaming-complete/timeout duration,
+   `host_gate_definitions.json` (its seven example points are incomplete; derive all 25 tile
+   centers from the accepted contract), and record source arrival, streaming-complete/timeout duration,
    runtime cell identity, actor GUID/package/tile identity, bounds and load/unload transitions. Both
    outside controls require zero building tiles. Fail if all 25 remain loaded for the full route.
 5. **Landscape traces:** test all component centers, both sides of internal seams, internal corners
@@ -38,26 +40,27 @@ existing ID fails rather than overwriting evidence.
    startup-to-ready, frame-time samples and p50/p95/p99, worst streaming hitch, RAM/GPU memory when
    available, mesh draws/primitives and actor/component counts. There is deliberately no budget yet.
 
-Every stage writes one JSON receipt using `xinyi-host-gate/v1`, inside the same run directory, with
-input receipt hashes. Never edit a completed receipt. Resume at the first missing stage; do not rerun
+The snapshot writes a JSON receipt using `xinyi-host-gate/v1`. Input-receipt hashes and
+end-to-end lineage for later stages are not implemented yet. Never edit a completed receipt.
+Resume at the first missing stage; do not rerun
 an expensive passing stage unless an input, engine build, map/package hash or policy changes.
 The normative envelope is `tools/unreal_xinyi_v2/schemas/host-gate-receipt.schema.json`; the
 dependency-free validator enforces the critical runtime/static distinction in Cloud and on Windows.
 
 ## Current implementation boundary
 
-The snapshot stage is executable and fail-closed. Later stage definitions are deliberately data-only
-until their exact UE5.8 APIs are tested on the accepted workstation world. `run_host_gates.ps1`
-therefore stops after preserving the snapshot rather than manufacturing a green receipt. A script
-that says “not run” is less glamorous than a fake PASS, but considerably more useful.
+The snapshot stage is executable and fail-closed. `run_host_gates.ps1` stops after snapshot.
+The JSON streaming, collision and performance helpers perform diagnostics on supplied data;
+they cannot authenticate its source and now emit `NOT_RUN_*` (or `FAIL_*` on bad data), with
+`runtime_validation=false`. No packaged runtime producer or full-route driver exists yet.
+Do not promote a diagnostic result into an Issue #8 PASS.
 
 ## Receipt status vocabulary
 
 - `PASS_SNAPSHOT`: required files were hashed without source mutation.
-- `PASS_OWNERSHIP_AUDIT`: complete static ownership inventory; not streaming PASS.
+- `NOT_RUN_OWNERSHIP_AUDIT`: partial loaded-actor inventory; descriptor/proxy ownership still open.
 - `PASS_COOK_COMMANDLET`: cook postconditions and manifests passed; not packaged runtime PASS.
-- `PASS_PACKAGED_STREAMING`: packaged route observed required load/unload and controls.
-- `PASS_LANDSCAPE_TRACES`: packaged ownership/seam/boundary traces passed.
-- `PASS_BUILDING_COLLISION`: positive and negative-space packaged trace corpus passed.
-- `PASS_PERFORMANCE_CAPTURE`: required metrics were captured; it does not mean a budget passed.
-- `FAIL_*` / `NOT_RUN`: never promote or reinterpret as success.
+- `NOT_RUN_PACKAGED_STREAMING`: external observation JSON passed partial checks; no runtime provenance.
+- `NOT_RUN_LANDSCAPE_TRACES` / `NOT_RUN_BUILDING_COLLISION`: external trace JSON passed partial checks.
+- `NOT_RUN_PERFORMANCE_CAPTURE`: supplied samples were summarized; no runtime provenance or budget.
+- `FAIL_*` / `NOT_RUN_*`: never promote or reinterpret as success.

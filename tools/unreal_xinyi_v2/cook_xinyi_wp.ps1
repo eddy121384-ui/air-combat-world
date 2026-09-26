@@ -4,17 +4,21 @@ param(
     [string]$TargetPlatform = "Windows"
 )
 $ErrorActionPreference = "Stop"
+if ($RunId -notmatch "^[0-9]{8}T[0-9]{6}Z-[0-9a-f]{8}$") { throw "Invalid RunId." }
 $RepoRoot = (Resolve-Path (Join-Path $PSScriptRoot "..\..")).Path
 $RunRoot = Join-Path $RepoRoot "unreal\Saved\XinyiHostGates\$RunId"
 $Snapshot = Join-Path $RunRoot "00-snapshot.json"
 if (-not (Test-Path $Snapshot)) { throw "Snapshot prerequisite missing: $Snapshot" }
+$snapshotData = Get-Content $Snapshot -Raw | ConvertFrom-Json
+if ($snapshotData.status -ne "PASS_SNAPSHOT" -or $snapshotData.run_id -ne $RunId) { throw "Passing snapshot for this RunId is required." }
 $Out = Join-Path $RunRoot "cook"
 if (Test-Path $Out) { throw "Cook output exists; refusing to overwrite: $Out" }
+$Receipt = Join-Path $RunRoot "20-cook-commandlet.json"
+if (Test-Path $Receipt) { throw "Cook receipt exists; refusing to overwrite: $Receipt" }
 New-Item -ItemType Directory -Path $Out | Out-Null
 $Project = Join-Path $RepoRoot "unreal\AirCombatWorld.uproject"
 $Cmd = Join-Path $EngineRoot "Engine\Binaries\Win64\UnrealEditor-Cmd.exe"
 $Log = Join-Path $Out "cook.log"
-$Receipt = Join-Path $RunRoot "20-cook-commandlet.json"
 if (-not (Test-Path $Cmd)) { throw "UnrealEditor-Cmd not found: $Cmd" }
 $args = @($Project, "/Game/XinyiV2/L_XinyiV2_Contract_WP", "-run=Cook", "-TargetPlatform=$TargetPlatform", "-unattended", "-nopause", "-abslog=$Log")
 $started = (Get-Date).ToUniversalTime()
@@ -25,7 +29,7 @@ $errors = @()
 if (Test-Path $Log) {
     $errors = @(Select-String -Path $Log -Pattern "Missing package|Can't find file|Failed to load|LogCook: Error|Fatal error" | ForEach-Object { $_.Line })
 }
-$status = if ($exitCode -eq 0 -and $errors.Count -eq 0) { "PASS_COOK_COMMANDLET" } else { "FAIL_COOK_COMMANDLET" }
+$status = if ($exitCode -eq 0 -and (Test-Path $Log) -and $errors.Count -eq 0) { "PASS_COOK_COMMANDLET" } else { "FAIL_COOK_COMMANDLET" }
 $value = [ordered]@{
     schema = "xinyi-host-gate/v1"; receipt_type = "cook_commandlet"; status = $status
     runtime_validation = $false; created_utc = $finished.ToString("o"); run_id = $RunId

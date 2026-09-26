@@ -13,8 +13,13 @@ def validate(value: dict) -> None:
     assert isinstance(value.get("runtime_validation"), bool)
     assert isinstance(value.get("created_utc"), str)
     static_receipts = {"snapshot", "landscape_ownership", "cook_commandlet"}
-    if value["status"].startswith("PASS_") and value["receipt_type"] not in static_receipts:
-        assert value["runtime_validation"] is True
+    if value["status"].startswith("NOT_RUN_"):
+        assert value["runtime_validation"] is False
+    if value["status"].startswith("PASS_"):
+        if value["receipt_type"] in static_receipts:
+            assert value["runtime_validation"] is False
+        else:
+            assert value["runtime_validation"] is True
 
 
 def main() -> None:

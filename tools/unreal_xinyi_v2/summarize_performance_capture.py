@@ -30,10 +30,10 @@ def main() -> None:
     summary = {"sample_count": len(frames)}
     if frames:
         summary.update({"mean_ms": statistics.fmean(frames), "p50_ms": percentile(frames, 50), "p95_ms": percentile(frames, 95), "p99_ms": percentile(frames, 99), "max_ms": max(frames)})
-    receipt = {"schema": SCHEMA_VERSION, "receipt_type": "performance", "status": "PASS_PERFORMANCE_CAPTURE" if not missing else "FAIL_PERFORMANCE_CAPTURE", "runtime_validation": True, "budget_evaluated": False, "created_utc": datetime.now(UTC).isoformat(), "run_id": snapshot["run_id"], "label": capture.get("run_label"), "summary": summary, "raw_metrics": {k: v for k, v in capture.items() if k != "frame_time_ms"}, "missing": missing}
+    receipt = {"schema": SCHEMA_VERSION, "receipt_type": "performance", "status": "NOT_RUN_PERFORMANCE_CAPTURE" if not missing else "FAIL_PERFORMANCE_CAPTURE", "runtime_validation": False, "analysis_only": True, "budget_evaluated": False, "created_utc": datetime.now(UTC).isoformat(), "run_id": snapshot["run_id"], "label": capture.get("run_label"), "summary": summary, "raw_metrics": {k: v for k, v in capture.items() if k != "frame_time_ms"}, "missing": missing}
     write_json_new(args.out, receipt)
-    if missing:
-        raise SystemExit(2)
+    # A summary of supplied samples is not evidence of a packaged capture.
+    raise SystemExit(2 if missing else 3)
 
 
 if __name__ == "__main__":

@@ -35,7 +35,9 @@ def analyze(definitions: dict, observations: list[dict]) -> tuple[str, list[str]
         for tile, states in transitions.items():
             if not all(states.values()):
                 failures.append(f"missing_transition:{tile}")
-    return ("PASS_PACKAGED_STREAMING" if not failures else "FAIL_PACKAGED_STREAMING", sorted(set(failures)))
+    # These observations are external JSON. This helper cannot certify that a packaged
+    # UE process emitted them, so a clean diagnostic is never a runtime gate PASS.
+    return ("NOT_RUN_PACKAGED_STREAMING" if not failures else "FAIL_PACKAGED_STREAMING", sorted(set(failures)))
 
 
 def main() -> None:
@@ -49,10 +51,9 @@ def main() -> None:
     observations = json.loads(args.observations.read_text())
     snapshot = json.loads(args.snapshot.read_text())
     status, failures = analyze(definitions, observations)
-    receipt = {"schema": SCHEMA_VERSION, "receipt_type": "streaming", "status": status, "runtime_validation": True, "created_utc": datetime.now(UTC).isoformat(), "run_id": snapshot["run_id"], "world": definitions["world"], "observations": observations, "failures": failures}
+    receipt = {"schema": SCHEMA_VERSION, "receipt_type": "streaming", "status": status, "runtime_validation": False, "analysis_only": True, "created_utc": datetime.now(UTC).isoformat(), "run_id": snapshot["run_id"], "world": definitions["world"], "observations": observations, "failures": failures}
     write_json_new(args.out, receipt)
-    if failures:
-        raise SystemExit(2)
+    raise SystemExit(2 if failures else 3)
 
 
 if __name__ == "__main__":

@@ -51,7 +51,7 @@ def main():
         failures.append({"reason": "landscape_root_count", "actual": len(roots)})
     if landscape_components != 25:
         failures.append({"reason": "landscape_component_count", "actual": landscape_components})
-    receipt = {"schema": "xinyi-host-gate/v1", "receipt_type": "landscape_ownership", "status": "PASS_OWNERSHIP_AUDIT" if not failures else "FAIL_OWNERSHIP_AUDIT", "runtime_validation": False, "created_utc": datetime.now(timezone.utc).isoformat(), "run_id": RUN_ID, "level": LEVEL, "root_count": len(roots), "streaming_proxy_count": len(proxies), "landscape_component_count": landscape_components, "heightfield_collision_component_count": collision_components, "actors": rows, "failures": failures, "audit_is_read_only": True}
+    receipt = {"schema": "xinyi-host-gate/v1", "receipt_type": "landscape_ownership", "status": "NOT_RUN_OWNERSHIP_AUDIT" if not failures else "FAIL_OWNERSHIP_AUDIT", "runtime_validation": False, "created_utc": datetime.now(timezone.utc).isoformat(), "run_id": RUN_ID, "level": LEVEL, "root_count": len(roots), "streaming_proxy_count": len(proxies), "landscape_component_count": landscape_components, "heightfield_collision_component_count": collision_components, "actors": rows, "failures": failures, "audit_is_read_only": True, "loaded_actors_only": True, "descriptor_and_unloaded_proxy_ownership_unverified": True}
     path = Path(OUT)
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("x", encoding="utf-8") as stream:
