@@ -1,0 +1,127 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://air-combat-world.invalid/schemas/xinyi-host-gate-receipt-v1.json",
+  "title": "XinyiV2 host gate receipt",
+  "type": "object",
+  "required": [
+    "schema",
+    "receipt_type",
+    "status",
+    "runtime_validation",
+    "created_utc",
+    "run_id"
+  ],
+  "properties": {
+    "schema": {
+      "const": "xinyi-host-gate/v1"
+    },
+    "receipt_type": {
+      "enum": [
+        "snapshot",
+        "landscape_ownership",
+        "cook_commandlet",
+        "packaged_launch",
+        "streaming",
+        "landscape_traces",
+        "building_traces",
+        "performance"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "pattern": "^(PASS|FAIL|NOT_RUN)_"
+    },
+    "runtime_validation": {
+      "type": "boolean"
+    },
+    "created_utc": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "run_id": {
+      "type": "string",
+      "pattern": "^[0-9]{8}T[0-9]{6}Z-[0-9a-f]{8}$"
+    },
+    "failures": {
+      "type": "array"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "receipt_type": {
+            "enum": [
+              "packaged_launch",
+              "streaming",
+              "landscape_traces",
+              "building_traces",
+              "performance"
+            ]
+          },
+          "status": {
+            "pattern": "^PASS_"
+          }
+        },
+        "required": [
+          "receipt_type",
+          "status"
+        ]
+      },
+      "then": {
+        "properties": {
+          "runtime_validation": {
+            "const": true
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "pattern": "^NOT_RUN_"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "then": {
+        "properties": {
+          "runtime_validation": {
+            "const": false
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "receipt_type": {
+            "enum": [
+              "snapshot",
+              "landscape_ownership",
+              "cook_commandlet"
+            ]
+          },
+          "status": {
+            "pattern": "^PASS_"
+          }
+        },
+        "required": [
+          "receipt_type",
+          "status"
+        ]
+      },
+      "then": {
+        "properties": {
+          "runtime_validation": {
+            "const": false
+          }
+        }
+      }
+    }
+  ],
+  "additionalProperties": true
+}
