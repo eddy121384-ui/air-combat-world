@@ -1,7 +1,9 @@
 """Regression and acceptance tests for Xinyi Robust Whitebox v2."""
 from __future__ import annotations
 
+import json
 import sys
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -20,6 +22,8 @@ from geometry import (GAME_FROM_ENU_ZUP, extrude_geos_polygon, mesh_gate,
 from worldmodel import build_worldmodel  # noqa: E402
 from strict_qa import strict_mesh_gate  # noqa: E402
 from serialization_space import prepare_footprint, tile_origin, tile_transform  # noqa: E402
+from facade_metadata import (PROFILE_MID_RISE, apply_facade_vertex_color,
+                             decode_floor_height, encode_facade_rgba)  # noqa: E402
 
 SOURCE = REPO / "data/generated/taipei/sample_buildings.geojson"
 CITY = REPO / "cities/taipei/city.yaml"
@@ -60,6 +64,95 @@ class TestPinnedXinyiSourceAudit(unittest.TestCase):
                     collapsed_unsuppressed += 1
         # This is the old build report's 5,296 zero_area count exactly.
         self.assertEqual(collapsed_unsuppressed, 5296)
+
+
+class TestFacadeMetadataOfflineCanary(unittest.TestCase):
+    def test_worldmodel_preserves_facade_source_fields(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            source = root / "sample.geojson"
+            city = root / "city.yaml"
+            source.write_text(json.dumps({
+                "type": "FeatureCollection",
+                "features": [{
+                    "type": "Feature",
+                    "id": "canary.1",
+                    "properties": {
+                        "height_m": 32.0,
+                        "height_source": "1_bud_high",
+                        "floors": 10,
+                        "ground_elev_m": 7.25,
+                        "top_elev_m": 39.25,
+                    },
+                    "geometry": {
+                        "type": "Polygon",
+                        "coordinates": [[
+                            [121.5000, 25.0000],
+                            [121.5001, 25.0000],
+                            [121.5001, 25.0001],
+                            [121.5000, 25.0001],
+                            [121.5000, 25.0000],
+                        ]],
+                    },
+                }],
+            }), encoding="utf-8")
+            city.write_text("enu_origin: { lon: 121.5, lat: 25.0 }\n", encoding="utf-8")
+            wm = build_worldmodel(source, city)
+            self.assertEqual(len(wm["buildings"]), 1)
+            b = wm["buildings"][0]
+            self.assertEqual(b["floors"], 10)
+            self.assertEqual(b["ground_elev_m"], 7.25)
+            self.assertEqual(b["top_elev_m"], 39.25)
+
+    def test_rgba_contract_is_deterministic_and_floor_decodes_close(self):
+        b = {
+            "id": "tp_building_height.12345",
+            "height_m": 32.0,
+            "floors": 10,
+            "ground_elev_m": 7.25,
+        }
+        rgba1, meta1 = encode_facade_rgba(b)
+        rgba2, meta2 = encode_facade_rgba(dict(b))
+        self.assertEqual(rgba1, rgba2)
+        self.assertEqual(meta1, meta2)
+        self.assertEqual(rgba1[0], PROFILE_MID_RISE)
+        self.assertAlmostEqual(
+            decode_floor_height(rgba1[2]),
+            3.2,
+            delta=(6.0 - 2.4) / 255.0,
+        )
+        decoded_phase = rgba1[3] / 255.0
+        self.assertAlmostEqual(decoded_phase, meta1["floor_phase"], delta=1.0 / 255.0)
+
+    def test_concatenated_glb_preserves_color_and_geometry(self):
+        a = extrude_geos_polygon(Polygon([(0, 0), (10, 0), (10, 8), (0, 8)]), 12.8)
+        b = extrude_geos_polygon(Polygon([(20, 0), (31, 0), (31, 9), (20, 9)]), 32.0)
+        rgba_a, _ = encode_facade_rgba({
+            "id": "canary.a", "height_m": 12.8, "floors": 4, "ground_elev_m": 3.0,
+        })
+        rgba_b, _ = encode_facade_rgba({
+            "id": "canary.b", "height_m": 32.0, "floors": 10, "ground_elev_m": 7.25,
+        })
+        apply_facade_vertex_color(a, rgba_a)
+        apply_facade_vertex_color(b, rgba_b)
+
+        combined = trimesh.util.concatenate([a, b])
+        vertices_before = np.asarray(combined.vertices).copy()
+        faces_before = np.asarray(combined.faces).copy()
+        bounds_before = np.asarray(combined.bounds).copy()
+
+        blob = combined.export(file_type="glb")
+        loaded = trimesh.load(io.BytesIO(blob), file_type="glb", force="mesh", process=False)
+
+        self.assertEqual(len(loaded.faces), len(faces_before))
+        np.testing.assert_allclose(loaded.bounds, bounds_before, rtol=0, atol=1e-6)
+        np.testing.assert_allclose(loaded.vertices, vertices_before.astype(np.float32), rtol=0, atol=1e-6)
+        np.testing.assert_array_equal(loaded.faces, faces_before)
+
+        colors = np.asarray(loaded.visual.vertex_colors, dtype=np.uint8)[:, :4]
+        unique = {tuple(row) for row in np.unique(colors, axis=0)}
+        self.assertEqual(unique, {tuple(rgba_a), tuple(rgba_b)})
+        self.assertEqual(len(colors), len(vertices_before))
 
 
 class TestMatureExtrusionGate(unittest.TestCase):

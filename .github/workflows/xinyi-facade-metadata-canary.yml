@@ -1,0 +1,61 @@
+name: Xinyi Facade Metadata Canary
+
+on:
+  push:
+    branches:
+      - feat/xinyi-facade-metadata-canary
+    paths:
+      - "tools/citygen_v2/facade_metadata.py"
+      - "tools/citygen_v2/build_facade_real_tile_canary.py"
+      - "tools/compiler/worldmodel.py"
+      - "tests/test_citygen_v2.py"
+      - "docs/architecture/xinyi-facade-metadata-canary.md"
+      - "requirements-citygen-v2.txt"
+      - ".github/workflows/xinyi-facade-metadata-canary.yml"
+  pull_request:
+    paths:
+      - "tools/citygen_v2/facade_metadata.py"
+      - "tools/citygen_v2/build_facade_real_tile_canary.py"
+      - "tools/compiler/worldmodel.py"
+      - "tests/test_citygen_v2.py"
+      - "docs/architecture/xinyi-facade-metadata-canary.md"
+      - "requirements-citygen-v2.txt"
+      - ".github/workflows/xinyi-facade-metadata-canary.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  offline-canary:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: requirements-citygen-v2.txt
+
+      - name: Install geometry stack
+        run: python -m pip install -r requirements-citygen-v2.txt
+
+      - name: Run synthetic facade metadata canary tests
+        run: python tests/test_citygen_v2.py TestFacadeMetadataOfflineCanary -v
+
+      - name: Fetch locked projected Xinyi source
+        run: node tools/citygen_v2/fetch_projected_sample.mjs
+
+      - name: Build real-tile facade metadata canary
+        run: python tools/citygen_v2/build_facade_real_tile_canary.py
+
+      - name: Upload real-tile canary evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: xinyi-facade-real-tile-canary
+          if-no-files-found: ignore
+          path: |
+            unreal/Saved/XinyiFacadeCanary/real-tile/*.json
+            unreal/Saved/XinyiFacadeCanary/real-tile/*.glb
