@@ -1,0 +1,43 @@
+name: Xinyi Facade Metadata Canary
+
+on:
+  push:
+    branches:
+      - feat/xinyi-facade-metadata-canary
+    paths:
+      - "tools/citygen_v2/facade_metadata.py"
+      - "tools/compiler/worldmodel.py"
+      - "tests/test_citygen_v2.py"
+      - "docs/architecture/xinyi-facade-metadata-canary.md"
+      - "requirements-citygen-v2.txt"
+      - ".github/workflows/xinyi-facade-metadata-canary.yml"
+  pull_request:
+    paths:
+      - "tools/citygen_v2/facade_metadata.py"
+      - "tools/compiler/worldmodel.py"
+      - "tests/test_citygen_v2.py"
+      - "docs/architecture/xinyi-facade-metadata-canary.md"
+      - "requirements-citygen-v2.txt"
+      - ".github/workflows/xinyi-facade-metadata-canary.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  offline-canary:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: requirements-citygen-v2.txt
+
+      - name: Install geometry stack
+        run: python -m pip install -r requirements-citygen-v2.txt
+
+      - name: Run facade metadata canary tests
+        run: python tests/test_citygen_v2.py TestFacadeMetadataOfflineCanary -v
