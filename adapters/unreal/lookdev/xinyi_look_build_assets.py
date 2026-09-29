@@ -166,9 +166,8 @@ def build_city_material(mpc, name, hero):
     lit = mpc_param(mat, mpc, "LitFrac", -1200, 480)
     es = mpc_param(mat, mpc, "EmissiveScale", -600, 500)
     node = custom(mat, -700, 0, custom_code(name), [n for n, _ in MATERIALS[name][0]], SURFACE_OUTPUTS, name)
-    for src, pin in ((wp, "WP"), (n, "N"), (uv0, "UV0"), (uv1, "UV1"), (uv2, "UV2"),
-                     (night, "Night"), (lit, "LitFrac")):
-        mel.connect_material_expressions(src, "", node, pin)
+    wire(((wp, "WP"), (n, "N"), (uv0, "UV0"), (uv1, "UV1"), (uv2, "UV2"),
+          (night, "Night"), (lit, "LitFrac")), node)
     finish_surface(mat, node, es, -300, 300)
     save_material(mat, path)
     return mat
@@ -180,41 +179,55 @@ def ground_uv(mat, wp, x, y):
     return c
 
 
-def ground_sample(mat, tex, uv, x, y):
+def ground_sample(mat, tex, uv, x, y, grayscale=False):
     s = expr(mat, unreal.MaterialExpressionTextureSample, x, y)
     s.set_editor_property("texture", tex)
-    s.set_editor_property("sampler_type", unreal.MaterialSamplerType.SAMPLERTYPE_LINEAR_COLOR)
+    s.set_editor_property("sampler_type", unreal.MaterialSamplerType.SAMPLERTYPE_LINEAR_GRAYSCALE if grayscale
+                          else unreal.MaterialSamplerType.SAMPLERTYPE_LINEAR_COLOR)
     mel.connect_material_expressions(uv, "", s, "UVs")
     return s
 
 
-def build_ground_material(mpc, tex):
+def wire(src_pin_pairs, node):
+    """Connect (expression, input pin[, output pin]) tuples into a Custom node.
+
+    Texture samples must be wired from their "RGBA" / "R" outputs explicitly:
+    the default output is RGB, and float3 -> float4 does not compile.
+    """
+    for item in src_pin_pairs:
+        src, pin = item[0], item[1]
+        out = item[2] if len(item) > 2 else ""
+        if not mel.connect_material_expressions(src, out, node, pin):
+            raise RuntimeError("failed to connect %s -> %s" % (out or "default", pin))
+
+
+def build_ground_material(mpc, tex, lamp_tex):
     mat, path = fresh_material("M_XinyiGround")
     wp = world_pos_m(mat, -1400, -200)
     n = expr(mat, unreal.MaterialExpressionVertexNormalWS, -1200, -60)
     uv = ground_uv(mat, wp, -1100, 100)
     gt = ground_sample(mat, tex, uv, -900, 100)
+    lamp = ground_sample(mat, lamp_tex, uv, -900, 260, grayscale=True)
     night = mpc_param(mat, mpc, "Night", -1200, 300)
     es = mpc_param(mat, mpc, "EmissiveScale", -600, 500)
     node = custom(mat, -600, 0, custom_code("M_XinyiGround"), [n for n, _ in MATERIALS["M_XinyiGround"][0]], SURFACE_OUTPUTS, "M_XinyiGround")
-    for src, pin in ((wp, "WP"), (n, "N"), (gt, "GT"), (night, "Night")):
-        mel.connect_material_expressions(src, "", node, pin)
+    wire(((wp, "WP"), (n, "N"), (gt, "GT", "RGBA"), (lamp, "LAMP", "R"), (night, "Night")), node)
     finish_surface(mat, node, es, -300, 300, normal=False)
     save_material(mat, path)
     return mat
 
 
-def build_paint_material(mpc, tex):
+def build_paint_material(mpc, tex, lamp_tex):
     mat, path = fresh_material("M_XinyiRoadPaint")
     wp = world_pos_m(mat, -1400, -200)
     uv2 = texcoord(mat, 2, -1200, -40)
     uv = ground_uv(mat, wp, -1100, 100)
     gt = ground_sample(mat, tex, uv, -900, 100)
+    lamp = ground_sample(mat, lamp_tex, uv, -900, 260, grayscale=True)
     night = mpc_param(mat, mpc, "Night", -1200, 300)
     es = mpc_param(mat, mpc, "EmissiveScale", -600, 500)
     node = custom(mat, -600, 0, custom_code("M_XinyiRoadPaint"), [n for n, _ in MATERIALS["M_XinyiRoadPaint"][0]], SURFACE_OUTPUTS, "M_XinyiRoadPaint")
-    for src, pin in ((wp, "WP"), (uv2, "UV2"), (gt, "GT"), (night, "Night")):
-        mel.connect_material_expressions(src, "", node, pin)
+    wire(((wp, "WP"), (uv2, "UV2"), (gt, "GT", "RGBA"), (lamp, "LAMP", "R"), (night, "Night")), node)
     finish_surface(mat, node, es, -300, 300, normal=False)
     save_material(mat, path)
     return mat
@@ -238,8 +251,7 @@ def build_backdrop_material(mpc, far_tex, far_extent):
     es = mpc_param(mat, mpc, "EmissiveScale", -600, 500)
     node = custom(mat, -600, 0, custom_code("M_XinyiBackdrop"), [n_ for n_, _ in MATERIALS["M_XinyiBackdrop"][0]],
                   SURFACE_OUTPUTS, "M_XinyiBackdrop")
-    for src, pin in ((wp, "WP"), (n, "N"), (uv2, "UV2"), (fc, "FC"), (night, "Night")):
-        mel.connect_material_expressions(src, "", node, pin)
+    wire(((wp, "WP"), (n, "N"), (uv2, "UV2"), (fc, "FC", "RGBA" if far_tex is not None else ""), (night, "Night")), node)
     finish_surface(mat, node, es, -300, 300, normal=False)
     save_material(mat, path)
     return mat
@@ -260,8 +272,7 @@ def build_instanced_material(mpc, name):
     night = mpc_param(mat, mpc, "Night", -1200, 300)
     es = mpc_param(mat, mpc, "EmissiveScale", -600, 500)
     node = custom(mat, -600, 0, custom_code(name), [n for n, _ in MATERIALS[name][0]], SURFACE_OUTPUTS, name)
-    for src, pin in ((wp, "WP"), (n, "N"), (uv2, "UV2"), (var, "Variant"), (night, "Night")):
-        mel.connect_material_expressions(src, "", node, pin)
+    wire(((wp, "WP"), (n, "N"), (uv2, "UV2"), (var, "Variant"), (night, "Night")), node)
     finish_surface(mat, node, es, -300, 300, normal=False)
     save_material(mat, path)
     return mat
@@ -271,7 +282,7 @@ def build_instanced_material(mpc, name):
 # Import helpers
 # ---------------------------------------------------------------------------
 
-def import_texture(png, name):
+def import_texture(png, name, grayscale=False):
     task = unreal.AssetImportTask()
     task.set_editor_property("filename", str(png))
     task.set_editor_property("destination_path", TEX_DIR)
@@ -286,7 +297,8 @@ def import_texture(png, name):
         raise RuntimeError("texture import failed: %s" % png)
     # data texture: linear, lossless (SDF edges + class ids must not be BC-crushed)
     tex.set_editor_property("srgb", False)
-    tex.set_editor_property("compression_settings", unreal.TextureCompressionSettings.TC_VECTOR_DISPLACEMENTMAP)
+    tex.set_editor_property("compression_settings", unreal.TextureCompressionSettings.TC_GRAYSCALE if grayscale
+                            else unreal.TextureCompressionSettings.TC_VECTOR_DISPLACEMENTMAP)
     tex.set_editor_property("address_x", unreal.TextureAddress.TA_CLAMP)
     tex.set_editor_property("address_y", unreal.TextureAddress.TA_CLAMP)
     if not lib.save_asset(path):
@@ -371,16 +383,17 @@ def main():
 
     mpc = build_mpc()
     tex = import_texture(LOOK_OUT / "ground/xinyi_ground_2048.png", "T_XinyiGround")
+    lamp_tex = import_texture(LOOK_OUT / "ground/xinyi_ground_light_1024.png", "T_XinyiGroundLight", grayscale=True)
     m_city = build_city_material(mpc, "M_XinyiCity", hero=False)
     m_hero = build_city_material(mpc, "M_Taipei101", hero=True)
-    m_ground = build_ground_material(mpc, tex)
-    m_paint = build_paint_material(mpc, tex)
+    m_ground = build_ground_material(mpc, tex, lamp_tex)
+    m_paint = build_paint_material(mpc, tex, lamp_tex)
     far_rep_path = LOOK_OUT / "farcity/far_city.report.json"
     far_rep = read_json(far_rep_path) if far_rep_path.is_file() else None
     far_tex = import_texture(LOOK_OUT / "farcity/far_city_1024.png", "T_TaipeiFarCity") if far_rep else None
     m_back = build_backdrop_material(mpc, far_tex, far_rep["texture_extent_enu_m"] if far_rep else None)
     m_tree = build_instanced_material(mpc, "M_XinyiFoliage")
-    m_props = build_instanced_material(mpc, "M_XinyiProps")
+    m_props = build_instanced_material(mpc, "M_XinyiProps")  # also street lamps
     roofs = read_json(LOOK_OUT / "rooftops/rooftops.report.json")
 
     tiles = []
@@ -414,10 +427,16 @@ def main():
          ground["paint_expected_ue_local_bounds"]),
         ("tree", LOOK_OUT / "ground/xinyi_tree.glb", MESH_DIR + "/Tree", m_tree, 3,
          ground["tree_expected_ue_local_bounds"]),
+        ("forest", LOOK_OUT / "ground/xinyi_forest_clump.glb", MESH_DIR + "/Forest", m_tree, 3,
+         ground["forest_expected_ue_local_bounds"]),
+        ("lamp", LOOK_OUT / "ground/xinyi_lamp.glb", MESH_DIR + "/Lamp", None, 3,
+         ground["lamp_expected_ue_local_bounds"]),
     ):
+        if mat is None:
+            mat = m_props
         try:
             path, mesh = import_mesh(glb, dest, mat, uvn)
-            if key == "tree":
+            if key in ("tree", "forest", "lamp"):
                 add_auto_lods(mesh)
                 lib.save_asset(path)
             origin, extent = mesh_bounds(mesh)
@@ -461,7 +480,7 @@ def main():
         except Exception as exc:
             failures.append({"far_city_chunk": row["chunk"], "error": str(exc)})
 
-    status = ("PASS_LOOK_ASSETS" if not failures and len(tiles) == 25 and len(singles) == 5
+    status = ("PASS_LOOK_ASSETS" if not failures and len(tiles) == 25 and len(singles) == 7
               and len(props) == len(roofs["types"]) else "FAIL_LOOK_ASSETS")
     report = {
         "status": status,

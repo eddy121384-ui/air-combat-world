@@ -499,6 +499,83 @@ def main():
 
     global TREE_BOUNDS
     TREE_BOUNDS = write_tree_mesh(OUT / "xinyi_tree.glb")
+
+    # ---- Four Beasts hill forest: 5-crown clumps on real DTM slopes ----------
+    forest = []
+    step = 16.0
+    gx = np.arange(E0 + 8, E1 - 8, step)
+    gy = np.arange(N0 + 8, N1 - 8, step)
+    for yv in gy:
+        for xv in gx:
+            x = xv + rng.uniform(-5, 5)
+            y = yv + rng.uniform(-5, 5)
+            z = float(hf([x], [y])[0])
+            dzx = float(hf([x + 4], [y])[0] - hf([x - 4], [y])[0]) / 8.0
+            dzy = float(hf([x], [y + 4])[0] - hf([x], [y - 4])[0]) / 8.0
+            slope = math.hypot(dzx, dzy)
+            if z < 28.0 or (slope < 0.08 and z < 45.0):
+                continue
+            if bp.contains(Point(x, y)):
+                continue
+            forest.append({"e": round(x, 2), "n": round(y, 2), "z": round(z - 0.3, 2),
+                           "yaw": round(float(rng.uniform(0, 360)), 1),
+                           "s": round(float(rng.uniform(0.9, 1.35)), 3), "v": int(rng.integers(0, 3))})
+    (OUT / "xinyi_forest.json").write_text(json.dumps({"count": len(forest), "instances": forest}) + "\n")
+    forest_bounds = write_forest_clump(OUT / "xinyi_forest_clump.glb")
+
+    # ---- street lamps along real roads (emissive heads, no dynamic lights) ----
+    lamps = []
+    for w in ways:
+        if w["skip"] or w["cls"] < 0.33 or w["base"] == "service":
+            continue
+        ls = LineString(w["pts"])
+        sides = (-1, 1) if (w["width"] >= 10.0 or not w["oneway"]) else (1,)
+        spacing = 30.0 if w["cls"] >= 0.66 else 38.0
+        for side in sides:
+            try:
+                off = ls.offset_curve(side * (w["width"] * 0.5 + 0.6))
+            except Exception:
+                continue
+            if off.is_empty or off.geom_type != "LineString" or off.length < 5:
+                continue
+            pos = rng.uniform(0, spacing)
+            while pos < off.length:
+                a = off.interpolate(pos)
+                b2 = off.interpolate(min(pos + 1.0, off.length))
+                heading = math.degrees(math.atan2(b2.y - a.y, b2.x - a.x))
+                if E0 + 5 < a.x < E1 - 5 and N0 + 5 < a.y < N1 - 5:
+                    z = float(hf([a.x], [a.y])[0])
+                    # arm points toward the carriageway centre
+                    lamps.append({"e": round(a.x, 2), "n": round(a.y, 2), "z": round(z, 2),
+                                  "yaw": round(heading + (90.0 if side < 0 else -90.0), 1),
+                                  "s": 1.0 if w["cls"] >= 0.66 else 0.8,
+                                  "v": 0 if rng.random() < 0.7 else 3})
+                pos += spacing
+    (OUT / "xinyi_lamps.json").write_text(json.dumps({"count": len(lamps), "instances": lamps}) + "\n")
+
+    # baked street-lamp light pools (mobile trick: no dynamic lights at night)
+    LRES = 1024
+    lpx = (E1 - E0) / LRES
+    light = np.zeros((LRES, LRES), np.float64)
+    ker_r = 26.0
+    kr = int(math.ceil(ker_r / lpx))
+    ky, kx = np.mgrid[-kr:kr + 1, -kr:kr + 1]
+    kd = np.hypot(kx, ky) * lpx
+    for lm in lamps:
+        # pool centred ~2 m over the carriageway from the pole
+        yaw = math.radians(lm["yaw"])
+        cx = lm["e"] + math.cos(yaw) * 2.0
+        cy = lm["n"] + math.sin(yaw) * 2.0
+        ix = int((cx - E0) / lpx); iy = int((N1 - cy) / lpx)
+        k = lm["s"] / (1.0 + (kd / (5.0 * lm["s"])) ** 2) ** 1.5 * (kd < ker_r)
+        y0, y1 = max(0, iy - kr), min(LRES, iy + kr + 1)
+        x0, x1 = max(0, ix - kr), min(LRES, ix + kr + 1)
+        if y0 >= y1 or x0 >= x1:
+            continue
+        light[y0:y1, x0:x1] += k[y0 - (iy - kr):y1 - (iy - kr), x0 - (ix - kr):x1 - (ix - kr)]
+    light = np.sqrt(1.0 - np.exp(-light * 0.9))          # soft saturation; sqrt: 8-bit precision in the dark
+    Image.fromarray((light * 255 + 0.5).astype(np.uint8), "L").save(OUT / "xinyi_ground_light_1024.png", optimize=True)
+    lamp_bounds = write_lamp_mesh(OUT / "xinyi_lamp.glb")
     report = {
         "texture": "xinyi_ground_2048.png", "resolution": RES, "metres_per_px": (E1 - E0) / RES,
         "extent_enu_m": [E0, E1, N0, N1], "sdf_range_m": SDF_RANGE_M,
@@ -511,9 +588,83 @@ def main():
         "tree_mesh": "xinyi_tree.glb",
         "tree_expected_ue_local_bounds": TREE_BOUNDS,
         "tree_instances": "xinyi_trees.json",
+        "forest_clumps": len(forest),
+        "forest_mesh": "xinyi_forest_clump.glb",
+        "forest_expected_ue_local_bounds": forest_bounds,
+        "forest_instances": "xinyi_forest.json",
+        "lamps": len(lamps),
+        "lamp_mesh": "xinyi_lamp.glb",
+        "lamp_expected_ue_local_bounds": lamp_bounds,
+        "lamp_instances": "xinyi_lamps.json",
+        "lamp_light_texture": "xinyi_ground_light_1024.png",
     }
     (OUT / "ground.report.json").write_text(json.dumps(report, indent=2) + "\n")
     print(json.dumps(report))
+
+
+def _ico():
+    t = (1 + 5 ** 0.5) / 2
+    v = np.array([[-1, t, 0], [1, t, 0], [-1, -t, 0], [1, -t, 0], [0, -1, t], [0, 1, t], [0, -1, -t], [0, 1, -t],
+                  [t, 0, -1], [t, 0, 1], [-t, 0, -1], [-t, 0, 1]], float)
+    v /= np.linalg.norm(v, axis=1, keepdims=True)
+    f = [[0, 11, 5], [0, 5, 1], [0, 1, 7], [0, 7, 10], [0, 10, 11], [1, 5, 9], [5, 11, 4], [11, 10, 2], [10, 7, 6],
+         [7, 1, 8], [3, 9, 4], [3, 4, 2], [3, 2, 6], [3, 6, 8], [3, 8, 9], [4, 9, 5], [2, 4, 11], [6, 2, 10],
+         [8, 6, 7], [9, 8, 1]]
+    return v, f
+
+
+def _write_tris(path, tris, uv2, name, mesh_name):
+    P = np.concatenate(tris).astype(np.float32)
+    N = []
+    for tri in tris:
+        n = np.cross(tri[1] - tri[0], tri[2] - tri[0]); n /= np.linalg.norm(n) + 1e-9
+        N += [n] * 3
+    idx = np.arange(len(P), dtype=np.uint32).reshape(-1, 3)
+    write_glb(path, [{"name": name, "positions": P, "normals": np.asarray(N, np.float32),
+                      "uv2": uv2(P), "indices": idx}], mesh_name=mesh_name)
+    return ue_local_bounds_cm(P)
+
+
+def write_forest_clump(path):
+    """Five-crown canopy clump (100 tris): one instance per ~16 m of hillside."""
+    v, f = _ico()
+    rng = np.random.default_rng(11)
+    tris = []
+    for k in range(5):
+        a = 2 * math.pi * k / 5 + rng.uniform(-0.3, 0.3)
+        r = 0.0 if k == 0 else rng.uniform(4.0, 6.5)
+        c = np.array([math.cos(a) * r, rng.uniform(5.5, 8.5), math.sin(a) * r])
+        sc = np.array([rng.uniform(3.2, 4.4), rng.uniform(2.6, 3.6), rng.uniform(3.2, 4.4)])
+        vv = v * (1.0 + rng.uniform(-0.15, 0.15, (len(v), 1))) * sc + c
+        tris += [vv[list(t)] for t in f]
+    return _write_tris(path, tris, lambda P: np.column_stack([np.clip(P[:, 1] / 10.0, 0, 1),
+                                                               np.ones(len(P))]).astype(np.float32),
+                       "XinyiTree", "SM_XinyiForestClump")
+
+
+def write_lamp_mesh(path):
+    """Street lamp: pole + arm + emissive head (32 tris). TEXCOORD_2 packed (type 10, part)."""
+    boxes = [((0, 4.5, 0), (0.18, 9.0, 0.18), 0), ((1.1, 8.9, 0), (2.2, 0.12, 0.12), 0),
+             ((2.1, 8.75, 0), (0.7, 0.18, 0.32), 1)]
+    tris, parts = [], []
+    for (cx, cy, cz), (sx, sy, sz), part in boxes:
+        x0, x1, y0, y1, z0, z1 = cx - sx / 2, cx + sx / 2, cy - sy / 2, cy + sy / 2, cz - sz / 2, cz + sz / 2
+        quads = [[(x0, y1, z0), (x0, y1, z1), (x1, y1, z1), (x1, y1, z0)],
+                 [(x0, y0, z0), (x1, y0, z0), (x1, y0, z1), (x0, y0, z1)],
+                 [(x0, y0, z0), (x0, y1, z0), (x1, y1, z0), (x1, y0, z0)],
+                 [(x0, y0, z1), (x1, y0, z1), (x1, y1, z1), (x0, y1, z1)],
+                 [(x0, y0, z0), (x0, y0, z1), (x0, y1, z1), (x0, y1, z0)],
+                 [(x1, y0, z0), (x1, y1, z0), (x1, y1, z1), (x1, y0, z1)]]
+        for q in quads:
+            q = np.asarray(q, float)
+            tris += [q[[0, 1, 2]], q[[0, 2, 3]]]
+            parts += [part, part]
+    part_per_vertex = np.repeat(np.asarray(parts), 3)
+
+    def uv2(P):
+        rgba = np.column_stack([np.full(len(P), 10), part_per_vertex, np.zeros(len(P)), np.full(len(P), 255)])
+        return pack_rgba8(rgba.astype(np.uint8))
+    return _write_tris(path, tris, uv2, "XinyiRoofProp", "SM_XinyiStreetLamp")
 
 
 def write_tree_mesh(path):

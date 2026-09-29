@@ -316,7 +316,7 @@ void xc_wall(float u, float h, float H, float fh, float arch, float variant, flo
     c = lerp(c, float3(0.70, 0.72, 0.72), mull * 0.85);
     c = lerp(c, lerp(xc_glass_palette(frac(seed * 1.37)) * 0.6, float3(0.10, 0.10, 0.11), 0.5), spandrel);
     // arcade: deep shade with shop glow; rolling shutters on some bays
-    float shutter = step(0.7, xc_hash21(float2(signCell, 3.0)));
+    float shutter = step(0.55, xc_hash21(float2(signCell, 3.0)));
     float3 shop = lerp(float3(0.07, 0.065, 0.06), float3(0.42, 0.42, 0.42), shutter);
     c = lerp(c, shop, arcade * 0.92);
     float3 signFace = lerp(signCol, signCol * 0.25 + 0.6, glyph * 0.5);
@@ -369,7 +369,7 @@ void xc_wall(float u, float h, float H, float fh, float arch, float variant, flo
     float3 e = lightCol * winEmis * lerp(0.24, 0.30, isOffice);
     // shopfronts and signs carry the street at night
     float shopLit = arcade * (1.0 - shutter) * step(0.25, signR);
-    e += float3(1.0, 0.85, 0.62) * shopLit * 0.55;
+    e += lerp(float3(1.0, 0.78, 0.5), float3(0.9, 0.95, 1.0), step(0.6, signR)) * shopLit * 0.38;
     float signLit = signBand * hasSign * step(0.2, signR);
     e += signFace * signLit * 1.3;
     // podium LED / logo panels (department stores)
@@ -638,18 +638,10 @@ void xc_backdrop(float3 wpos, float3 N, float4 vc, float4 fc, float night, float
 // ----------------------------------------------------------------------------
 // Xinyi ground (Landscape material). gt = ground data texture sample
 // (tools/lookdev/build_ground.py): r = road SDF (0.5 kerb, +-12 m), g = green,
-// b = road class, a = water. Texture sampling stays outside this function so it
-// remains portable; everything else is ALU.
+// b = road class, a = surface class. lamp = baked street-lamp pool texture
+// (sqrt-encoded). Texture sampling stays outside so this remains portable.
 // ----------------------------------------------------------------------------
-float xc_street_light(float sd, float cls, float2 p)
-{
-    // fake street-light pools: brighter on arterials, uneven along the road
-    float pools = 0.55 + 0.45 * xc_noise1(dot(p, float2(0.061, 0.043)) + xc_noise1(p.x * 0.013));
-    float onRoad = 1.0 - smoothstep(2.0, 6.0, sd);
-    return onRoad * pools * lerp(0.35, 1.0, cls);
-}
-
-void xc_ground(float3 wpos, float3 N, float4 gt, float night, float fwp,
+void xc_ground(float3 wpos, float3 N, float4 gt, float lamp, float night, float fwp,
                out float3 base, out float rough, out float metal, out float spec, out float3 emis)
 {
     float2 p = float2(wpos.x, wpos.y);
@@ -732,14 +724,14 @@ void xc_ground(float3 wpos, float3 N, float4 gt, float night, float fwp,
     metal = 0.0;
     spec = 0.4;
 
-    float sl = xc_street_light(sd, cls, p);
-    float spill = step(3.0, sd) * (1.0 - step(12.0, sd)) * (1.0 - hill) * 0.12;   // shopfront spill near kerbs
-    float3 lampCol = lerp(float3(1.0, 0.55, 0.22), float3(0.90, 0.95, 1.0), step(0.6, cls));
-    emis = c * (lampCol * sl * 1.1 + float3(1.0, 0.85, 0.65) * spill * 0.5) * night;
+    float pool = lamp * lamp;                                   // decode sqrt storage
+    float spill = step(3.0, sd) * (1.0 - step(12.0, sd)) * (1.0 - hill) * 0.05;   // shopfront spill near kerbs
+    float3 lampCol = lerp(float3(1.0, 0.72, 0.45), float3(0.92, 0.96, 1.0), 0.7);
+    emis = c * (lampCol * pool * 1.3 + float3(1.0, 0.85, 0.65) * spill + 0.02) * night;
 }
 
 // Road paint: vc = COLOR_0 (sRGB-ish paint colour). Shares the street-light fill.
-void xc_paint(float3 wpos, float4 vc, float4 gt, float night, float fwp,
+void xc_paint(float3 wpos, float4 vc, float4 gt, float lamp, float night, float fwp,
               out float3 base, out float rough, out float metal, out float spec, out float3 emis)
 {
     float2 p = float2(wpos.x, wpos.y);
@@ -751,10 +743,8 @@ void xc_paint(float3 wpos, float4 vc, float4 gt, float night, float fwp,
     rough = 0.6;
     metal = 0.0;
     spec = 0.5;
-    float sd = (gt.x - 0.5) * 24.0;
-    float sl = xc_street_light(sd, gt.z, p);
-    float3 lampCol = lerp(float3(1.0, 0.62, 0.30), float3(0.95, 0.97, 1.0), step(0.6, gt.z));
-    emis = base * lampCol * sl * 1.1 * night;
+    float3 lampCol = lerp(float3(1.0, 0.72, 0.45), float3(0.92, 0.96, 1.0), 0.7);
+    emis = base * (lampCol * lamp * lamp * 1.3 + 0.02) * night;
 }
 
 // Trees: vc.y = crown flag, vc.z = instance variant (0..1), h = height (m).
@@ -797,6 +787,7 @@ void xc_prop(float3 wpos, float3 N, float4 vc, float variant, float night, float
     float isT7 = 1.0 - step(0.5, abs(t - 7.0));
     float isT8 = 1.0 - step(0.5, abs(t - 8.0));
     float isT9 = 1.0 - step(0.5, abs(t - 9.0));
+    float isT10 = 1.0 - step(0.5, abs(t - 10.0));   // street lamp
     float p1 = step(0.5, part);
 
     // corrugated sheet metal for sheds (ribs run around the walls)
@@ -817,6 +808,7 @@ void xc_prop(float3 wpos, float3 N, float4 vc, float variant, float night, float
                        float3(0.36, 0.37, 0.37), float3(0.50, 0.48, 0.45)), float3(0.30, 0.30, 0.30), p1) * isT7;
     c += lerp(float3(0.70, 0.70, 0.68), float3(0.62, 0.52, 0.18), p1) * isT8;
     c += lerp(float3(0.55, 0.05, 0.03), float3(0.25, 0.25, 0.25), p1) * isT9;
+    c += lerp(float3(0.30, 0.31, 0.32), float3(0.85, 0.85, 0.82), p1) * isT10;
     // soot and rain stains
     float grime = xc_fnoise(float2(wpos.x + wpos.z, wpos.y), 0.9, fwp) * 0.25;
     c *= 1.0 - grime * (1.0 - isT9);
@@ -831,5 +823,8 @@ void xc_prop(float3 wpos, float3 N, float4 vc, float variant, float night, float
     float3 e = float3(1.0, 0.06, 0.02) * isT9 * (1.0 - p1) * lerp(0.15, 2.5, night);
     // a few lit shed windows
     e += float3(1.0, 0.78, 0.5) * isT1 * step(0.8, variant) * (1.0 - p1) * 0.12 * night;
+    // street lamp heads: white LED (most of Taipei) or warm sodium
+    float3 lampCol = lerp(float3(0.92, 0.96, 1.0), float3(1.0, 0.62, 0.25), step(0.5, variant));
+    e += lampCol * isT10 * p1 * 3.0 * night;
     emis = e;
 }

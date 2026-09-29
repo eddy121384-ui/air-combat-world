@@ -35,6 +35,8 @@ if (fs.existsSync(path.join(look, 'hero/landmark_roofs.glb'))) objects.push({ ur
 if (!args.nohero) objects.push({ url: '/unreal/Saved/XinyiLook/hero/taipei101.glb', offset: [hero.anchor.centre_enu_m[0], hero.anchor.centre_enu_m[1], hero.anchor.ground_elev_m], kind: 0 });
 objects.push({ url: '/unreal/Saved/XinyiLook/ground/xinyi_road_paint.glb', offset: [0, 0, 0], kind: 3, castShadow: false });
 objects.push({ url: '/unreal/Saved/XinyiLook/ground/xinyi_tree.glb', offset: [0, 0, 0], kind: 4, instances: '/unreal/Saved/XinyiLook/ground/xinyi_trees.json' });
+objects.push({ url: '/unreal/Saved/XinyiLook/ground/xinyi_forest_clump.glb', offset: [0, 0, 0], kind: 4, instances: '/unreal/Saved/XinyiLook/ground/xinyi_forest.json' });
+objects.push({ url: '/unreal/Saved/XinyiLook/ground/xinyi_lamp.glb', offset: [0, 0, 0], kind: 5, castShadow: false, instances: '/unreal/Saved/XinyiLook/ground/xinyi_lamps.json' });
 for (const t of ['shed', 'tank', 'solar', 'antenna', 'ac', 'cooling', 'machine', 'bmu', 'avlight']) {
   objects.push({ url: `/unreal/Saved/XinyiLook/rooftops/props_${t}.glb`, offset: [0, 0, 0], kind: 5,
     instances: '/unreal/Saved/XinyiLook/rooftops/rooftop_instances.json', instanceKey: t });
@@ -46,7 +48,7 @@ if (fs.existsSync(farRep)) {
   for (const c of fr.chunks) objects.push({ url: `/unreal/Saved/XinyiLook/farcity/${c.path}`, offset: [c.origin_enu_m[0], c.origin_enu_m[1], 0], kind: 0 });
   farExtra = { farCityTexture: '/unreal/Saved/XinyiLook/farcity/far_city_1024.png', farExtent: fr.texture_extent_enu_m };
 }
-const manifest = { ...farExtra, objects, groundTexture: '/unreal/Saved/XinyiLook/ground/xinyi_ground_2048.png' };
+const manifest = { ...farExtra, objects, groundTexture: '/unreal/Saved/XinyiLook/ground/xinyi_ground_2048.png', lampTexture: '/unreal/Saved/XinyiLook/ground/xinyi_ground_light_1024.png' };
 
 const MIME = { '.html': 'text/html', '.js': 'text/javascript', '.json': 'application/json', '.glb': 'model/gltf-binary', '.hlsl': 'text/plain', '.png': 'image/png' };
 const server = http.createServer((req, res) => {

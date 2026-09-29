@@ -103,7 +103,7 @@ async function loadTexture(url) {
   gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
   return t;
 }
-let groundTexture = null; let farCityTexture = null; let farExtent = [0, 1, 0, 1];
+let groundTexture = null; let lampTexture = null; let farCityTexture = null; let farExtent = [0, 1, 0, 1];
 
 // ------------------------------------------------------------ shaders -------
 function compile(type, src) {
@@ -268,6 +268,8 @@ uniform sampler2D uGround;
 out vec4 oColor;
 uniform sampler2D uFarCity; uniform vec4 uFarExtent;
 vec4 farCityTex(vec3 w) { return texture(uFarCity, vec2((w.x - uFarExtent.x) / (uFarExtent.y - uFarExtent.x), (uFarExtent.w - w.y) / (uFarExtent.w - uFarExtent.z))); }
+uniform sampler2D uLamp;
+float lampTex(vec3 w) { return texture(uLamp, vec2((w.x + 1500.0) / 2500.0, (1500.0 - w.y) / 2500.0)).r; }
 vec4 groundTex(vec3 w) { return texture(uGround, vec2((w.x + 1500.0) / 2500.0, (1500.0 - w.y) / 2500.0)); }
 void main() {
   vec3 N = normalize(vN);
@@ -287,10 +289,10 @@ void main() {
     if (vc.w > 0.97) ao = mix(0.6, 1.0, smoothstep(0.0, 60.0, vUv0.y));
     N = Np;
   } else if (uKind == 1) {
-    xc_ground(vW, N, groundTex(vW), uNight, fwp, base, rough, metal, spec, emis);
+    xc_ground(vW, N, groundTex(vW), lampTex(vW), uNight, fwp, base, rough, metal, spec, emis);
     ao = 0.85;
   } else if (uKind == 3) {
-    xc_paint(vW, vc, groundTex(vW), uNight, fwp, base, rough, metal, spec, emis);
+    xc_paint(vW, vc, groundTex(vW), lampTex(vW), uNight, fwp, base, rough, metal, spec, emis);
     ao = 0.85;
   } else if (uKind == 4) {
     xc_foliage(vW, N, vc, vc.x * 10.0, uNight, base, rough, metal, spec, emis);
@@ -351,6 +353,7 @@ void main(){
 
   const manifest = await (await fetch(manifestUrl)).json();
   if (manifest.groundTexture) groundTexture = await loadTexture(manifest.groundTexture);
+  if (manifest.lampTexture) lampTexture = await loadTexture(manifest.lampTexture);
   if (manifest.farCityTexture) { farCityTexture = await loadTexture(manifest.farCityTexture); farExtent = manifest.farExtent; }
   for (const item of manifest.objects) {
     const prims = parseGLB(await fetchBin(item.url));
@@ -531,6 +534,9 @@ async function render(shot, light, W, H, SS) {
     gl.activeTexture(gl.TEXTURE1);
     gl.bindTexture(gl.TEXTURE_2D, groundTexture);
     if (pr.u.uGround) gl.uniform1i(pr.u.uGround, 1);
+    gl.activeTexture(gl.TEXTURE3);
+    gl.bindTexture(gl.TEXTURE_2D, lampTexture);
+    if (pr.u.uLamp) gl.uniform1i(pr.u.uLamp, 3);
     gl.activeTexture(gl.TEXTURE2);
     gl.bindTexture(gl.TEXTURE_2D, farCityTexture);
     if (pr.u.uFarCity) gl.uniform1i(pr.u.uFarCity, 2);

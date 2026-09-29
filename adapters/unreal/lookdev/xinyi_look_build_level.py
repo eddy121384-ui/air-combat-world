@@ -68,13 +68,45 @@ def add_hism(actor, mesh):
     return comp
 
 
+def place_hism(actors, asset_row, items, label, cull, cast_shadow, uniform_key=None):
+    """One holder actor + HISM; per-instance custom data 0 = variant (0..1)."""
+    mesh = lib.load_asset(asset_row["asset_path"])
+    pv = [asset_row["expected_bounds_origin_cm"][i] - asset_row["imported_bounds_origin_cm"][i] for i in range(3)]
+    holder = actors.spawn_actor_from_class(unreal.Actor, unreal.Vector(0.0, 0.0, 0.0))
+    holder.set_actor_label(LOOK_PREFIX + label)
+    h = add_hism(holder, mesh)
+    try:
+        h.set_num_custom_data_floats(1)
+    except Exception:
+        h.set_editor_property("num_custom_data_floats", 1)
+    xf = []
+    for it in items:
+        p = enu_to_ue_cm(it["e"], it["n"], it["z"])
+        if uniform_key:
+            sc = (it[uniform_key],) * 3
+        else:
+            sc = (it["sx"], it["sy"], it["sz"])
+        # ENU yaw (CCW from east) -> UE yaw (UE Y = -north flips handedness)
+        xf.append(unreal.Transform(
+            unreal.Vector(p.x + pv[0] * sc[0], p.y + pv[1] * sc[1], p.z + pv[2] * sc[2]),
+            unreal.Rotator(0.0, 0.0, -float(it["yaw"])),
+            unreal.Vector(sc[0], sc[1], sc[2])))
+    h.add_instances(xf, False, True)
+    for i, it in enumerate(items):
+        h.set_custom_data_value(i, 0, (it["v"] + 0.5) / 4.0, False)
+    h.set_cull_distances(cull[0], cull[1])
+    h.set_collision_enabled(unreal.CollisionEnabled.NO_COLLISION)
+    h.set_cast_shadow(cast_shadow)
+    h.mark_render_state_dirty()
+    return int(h.get_instance_count())
+
+
 def main():
     assets = read_json(REPORT_DIR / "look_assets.report.json")
     if assets.get("status") != "PASS_LOOK_ASSETS":
         raise RuntimeError("run xinyi_look_build_assets.py first (look_assets.report.json not PASS)")
     hero = read_json(LOOK_OUT / "hero/taipei101.anchor.json")
     ground = read_json(LOOK_OUT / "ground/ground.report.json")
-    trees = read_json(LOOK_OUT / "ground" / ground["tree_instances"])["instances"]
 
     duplicate_level()
     levels = unreal.get_editor_subsystem(unreal.LevelEditorSubsystem)
@@ -144,69 +176,34 @@ def main():
     pc.set_collision_enabled(unreal.CollisionEnabled.NO_COLLISION)
     pc.set_editor_property("ld_max_draw_distance", 180000.0)
 
-    # trees: one HISM, per-instance custom data = variant
-    tree_mesh = lib.load_asset(s["tree"]["asset_path"])
-    pivot = [s["tree"]["expected_bounds_origin_cm"][i] - s["tree"]["imported_bounds_origin_cm"][i] for i in range(3)]
-    holder = actors.spawn_actor_from_class(unreal.Actor, unreal.Vector(0.0, 0.0, 0.0))
-    holder.set_actor_label(LOOK_PREFIX + "Trees")
-    hism = add_hism(holder, tree_mesh)
-    try:
-        hism.set_num_custom_data_floats(1)
-    except Exception:
-        hism.set_editor_property("num_custom_data_floats", 1)
-    xforms = []
-    for t in trees:
-        p = enu_to_ue_cm(t["e"], t["n"], t["z"])
-        xforms.append(unreal.Transform(
-            unreal.Vector(p.x + pivot[0] * t["s"], p.y + pivot[1] * t["s"], p.z + pivot[2] * t["s"]),
-            unreal.Rotator(0.0, 0.0, float(t["yaw"])),
-            unreal.Vector(t["s"], t["s"], t["s"])))
-    hism.add_instances(xforms, False, True)
-    for i, t in enumerate(trees):
-        hism.set_custom_data_value(i, 0, (t["v"] + 0.5) / 4.0, False)
-    hism.set_cull_distances(TREE_CULL_START_CM, TREE_CULL_END_CM)
-    hism.set_collision_enabled(unreal.CollisionEnabled.NO_COLLISION)
-    hism.mark_render_state_dirty()
-    tree_count = int(hism.get_instance_count())
-    if tree_count != len(trees):
-        failures.append({"trees": "instance count %d != %d" % (tree_count, len(trees))})
+    # instanced ground layers: street/park trees, hill forest clumps, street lamps
+    tree_count = 0
+    ground_counts = {}
+    for key, inst_file, label, cull, shadow in (
+        ("tree", ground["tree_instances"], "Trees", (TREE_CULL_START_CM, TREE_CULL_END_CM), True),
+        ("forest", ground["forest_instances"], "HillForest", (160000.0, 240000.0), True),
+        ("lamp", ground["lamp_instances"], "StreetLamps", (200000.0, 260000.0), False),
+    ):
+        items = read_json(LOOK_OUT / "ground" / inst_file)["instances"]
+        n = place_hism(actors, s[key], items, label, cull, shadow, uniform_key="s")
+        ground_counts[key] = n
+        if n != len(items):
+            failures.append({key: "instance count %d != %d" % (n, len(items))})
+    tree_count = ground_counts["tree"]
 
-    # rooftop clutter: one holder actor, one HISM per prop type
+    # rooftop clutter: one HISM per prop type
     roof_inst = read_json(LOOK_OUT / "rooftops/rooftop_instances.json")["types"]
-    roof_holder = actors.spawn_actor_from_class(unreal.Actor, unreal.Vector(0.0, 0.0, 0.0))
-    roof_holder.set_actor_label(LOOK_PREFIX + "RooftopProps")
     roof_counts = {}
     for t, row in assets["rooftop_props"].items():
         items = roof_inst.get(t, [])
         if not items:
             continue
-        mesh = lib.load_asset(row["asset_path"])
-        pv = [row["expected_bounds_origin_cm"][i] - row["imported_bounds_origin_cm"][i] for i in range(3)]
-        h = add_hism(roof_holder, mesh)
-        try:
-            h.set_num_custom_data_floats(1)
-        except Exception:
-            h.set_editor_property("num_custom_data_floats", 1)
-        xf = []
-        for it in items:
-            p = enu_to_ue_cm(it["e"], it["n"], it["z"])
-            sc = (it["sx"], it["sy"], it["sz"])
-            # ENU yaw (CCW from east) -> UE yaw (Y = -north flips handedness)
-            xf.append(unreal.Transform(
-                unreal.Vector(p.x + pv[0] * sc[0], p.y + pv[1] * sc[1], p.z + pv[2] * sc[2]),
-                unreal.Rotator(0.0, 0.0, -float(it["yaw"])),
-                unreal.Vector(sc[0], sc[1], sc[2])))
-        h.add_instances(xf, False, True)
-        for i, it in enumerate(items):
-            h.set_custom_data_value(i, 0, (it["v"] + 0.5) / 4.0, False)
-        h.set_cull_distances(60000.0 if t in ("ac", "antenna") else 120000.0,
-                             90000.0 if t in ("ac", "antenna") else 200000.0)
-        h.set_collision_enabled(unreal.CollisionEnabled.NO_COLLISION)
-        h.set_cast_shadow(t not in ("ac", "avlight", "antenna"))
-        h.mark_render_state_dirty()
-        roof_counts[t] = int(h.get_instance_count())
-        if roof_counts[t] != len(items):
-            failures.append({"rooftop": t, "count": roof_counts[t], "expected": len(items)})
+        small = t in ("ac", "antenna", "avlight")
+        n = place_hism(actors, row, items, "Roof_" + t,
+                       (60000.0, 90000.0) if t in ("ac", "antenna") else (120000.0, 200000.0), not small)
+        roof_counts[t] = n
+        if n != len(items):
+            failures.append({"rooftop": t, "count": n, "expected": len(items)})
 
     # far-LOD Taipei basin massing (real WFS statistics), no shadows / collision
     far_n = 0
@@ -234,6 +231,7 @@ def main():
         "tiles_swapped": swapped,
         "hero_location_cm": hero_loc,
         "tree_instances": tree_count,
+        "ground_instances": ground_counts,
         "rooftop_instances": roof_counts,
         "far_city_chunks": far_n,
         "failures": failures,

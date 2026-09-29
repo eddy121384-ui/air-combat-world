@@ -16,14 +16,16 @@ runtime streaming work, or any Issue #8 evidence. Everything lives under
 |---|---|---|
 | Taipei 101 | missing (hero-suppressed hole) | 2.5k-tri hero at the WFS anchor: 25-storey base, 8 flared modules, top tower, pinnacle to 508 m, 26F coins / ruyi, warm floodlit modules at night |
 | Buildings | grey extrusions, smoothed eaves | archetype façades from real data: tiled walkups / 華廈 with iron window cages, AC units, balconies, 騎樓 + signage bands, 頂樓加蓋 sheet metal; tower stone/porcelain; Xinyi curtain walls with per-pane reflection jitter; night windows (cool fluorescent / warm), office floor bands, crown lights |
+| Landmarks | generic boxes | location registry (`tools/lookdev/landmarks.json`, same mechanism as the 101 hero rule): 國父紀念館 yellow glazed hip roof on its 9.8 m surveyed base (to the real 30.4 m), 臺北大巨蛋 white metal roof (WFS top already matches the official 64 m), 臺北市政府 civic stone |
 | Roofs | flat | 29k instanced props on the real roof polygons: sheds, stainless tanks, solar heaters, antennas, condensers, machine rooms, cooling towers, BMU cranes, red aviation lights on ≥ 60 m roofs |
-| Ground | uniform Landscape | OSM road SDF (crisp kerbs at any distance), sidewalks, parked scooters, parks, tracks / courts / lots; opaque paint geometry: lanes, double yellow, red kerbs, zebra crossings, stop lines, 機車停等區; 20.8k street / park trees (台灣欒樹 in late-September bloom) |
+| Ground | uniform Landscape | OSM road SDF (crisp kerbs at any distance), sidewalks, parked scooters, parks, tracks / courts / lots; opaque paint geometry: lanes, double yellow, red kerbs, zebra crossings, stop lines, 機車停等區; 20.4k street / park trees (台灣欒樹 in late-September bloom), 1190 hill-forest clumps on the real DTM slopes, 4913 street lamps with a baked 1024² light-pool texture (no dynamic lights) |
 | Surroundings | black / empty | MOI-DTM mountain ring enclosing the basin; basin floor shaded from real WFS density (no fake street grid); far-LOD massing from the same WFS layer over the Taipei basin (318,327 records → 14,086 mid-rise cells + 6,650 tower records, 43 chunks, 207360 tris) |
 | Light | QA whitebox rig | day / dusk / night presets shared by preview and Unreal (sun, SkyAtmosphere, SkyLight, height fog, manual exposure, MPC `Night` / `LitFrac` / `EmissiveScale`) |
 
 Preview frames (same shader source as Unreal, see below): `docs/evidence/xinyi-look/`
 (象山 view day / dusk / night, 101 close pass, low pass along 信義路 day / night, 松智路
-canyon, rooftops over 吳興街, basin overview, NW skyline at night).
+canyon, rooftops over 吳興街 day / night, basin overview, NW skyline at night,
+國父紀念館 + 大巨蛋).
 
 ## Geometry contract (unchanged truth)
 
@@ -71,9 +73,10 @@ department-store podium 53).
 | Look tile vertices | 263k → 992k (flat shading minimum); 40 B/vertex with full-precision UVs ≈ 40 MB for all 25 tiles, streamed per 500 m cell. Dropping the invisible bottom caps would save ~25 % (not done: keeps the bit-identical claim simple) |
 | Taipei 101 | 2,524 tris, 3 sections |
 | Road paint | 95k tris, opaque, no decals, no transparency, draw distance 1.8 km |
-| Trees | 20,780 × 28 tris, one HISM, LOD1/2, cull 1.5–2.6 km |
-| Rooftop props | 29,461 instances, 9 HISMs (14–72 tris each), LOD1/2, cull 0.6–2.0 km, small props cast no shadows |
-| Ground texture | one 2048² RGBA8 linear data texture (road SDF / green / class / surface) |
+| Trees | 20401 × 28 tris + 1190 forest clumps × 100 tris, HISMs, LOD1/2, cull 1.5–2.6 km |
+| Street lamps | 4913 × 36 tris, emissive heads; ground light pools baked into a 1024² L8 texture |
+| Rooftop props | 29030 instances, 9 HISMs (14–72 tris each), LOD1/2, cull 0.6–2.0 km, small props cast no shadows |
+| Ground textures | 2048² RGBA8 linear data texture (road SDF / green / class / surface) + 1024² L8 lamp pools |
 | Backdrop | 178k tris, no shadows; far-city data texture 1024² |
 | Far city | 207360 tris in 43 × 2.5 km chunks, same material as Xinyi tiles, no shadows / collision; Xinyi source bbox skipped |
 | Lights | 1 movable directional + sky light; night lighting is emissive only (no dynamic lights) |
@@ -110,9 +113,8 @@ Preview in any Linux / Windows box with Node + Chromium:
 
 ## Known limitations / next
 
-- Landmarks other than 101 use generic archetypes (e.g. Sun Yat-sen Memorial Hall reads
-  as a podium). A small landmark registry (look-only, like the 101 hero) is the next
-  identity win.
+- Landmark registry covers 101, 國父紀念館, 大巨蛋, 市政府. Next candidates by aircraft
+  visibility: 松山機場 apron / runway markings, 基隆河 banks, 圓山大飯店 (outside Xinyi).
 - Far city covers Taipei City WFS only (bbox 121.455–121.645 E, 24.975–25.125 N);
   New Taipei falls back to a density mottle. Low-rise fabric (< 20 m p90) is shaded, not
   modelled, beyond the hero tiles.

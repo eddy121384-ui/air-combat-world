@@ -25,13 +25,13 @@ MATERIALS = {
         "",
     ),
     "M_XinyiGround": (
-        [("WP", 3), ("N", 3), ("GT", 4), ("Night", 1)],
-        "xl.xc_ground(WP, N, GT, Night, max(fwidth(WP.x), fwidth(WP.y)), b, r, m, s, e);",
+        [("WP", 3), ("N", 3), ("GT", 4), ("LAMP", 1), ("Night", 1)],
+        "xl.xc_ground(WP, N, GT, LAMP, Night, max(fwidth(WP.x), fwidth(WP.y)), b, r, m, s, e);",
         "",
     ),
     "M_XinyiRoadPaint": (
-        [("WP", 3), ("UV2", 2), ("GT", 4), ("Night", 1)],
-        "xl.xc_paint(WP, xl.xc_unpack(UV2), GT, Night, max(fwidth(WP.x), fwidth(WP.y)), b, r, m, s, e);",
+        [("WP", 3), ("UV2", 2), ("GT", 4), ("LAMP", 1), ("Night", 1)],
+        "xl.xc_paint(WP, xl.xc_unpack(UV2), GT, LAMP, Night, max(fwidth(WP.x), fwidth(WP.y)), b, r, m, s, e);",
         "",
     ),
     "M_XinyiBackdrop": (
