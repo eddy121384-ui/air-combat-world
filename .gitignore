@@ -8,6 +8,8 @@
 /data/generated/taipei/*.report.json
 /data/generated/taipei/sample_buildings_epsg3826.geojson
 /data/generated/taipei/sample_buildings_epsg3826.manifest.json
+/data/generated/taipei/terrain/
+/data/generated/taipei/far_city_raw.ndjson.gz
 /godot/greybox/assets/*.glb
 
 # Python noise
