@@ -168,10 +168,17 @@ def main():
     rng = np.random.default_rng(101)
     mids = (hp >= MID_M) & (cov >= 0.12) & ~in_xinyi(ce, cn)
     for e, n, c, a, b, g in zip(ce[mids], cn[mids], cov[mids], hm[mids], hp[mids], gr[mids]):
-        side = cell * math.sqrt(min(0.85, max(0.25, c * 1.15)))
-        h = max(6.0, round((0.55 * a + 0.45 * b) / 3.0) * 3.0)
+        # footprint area follows the real coverage; aspect / position are
+        # jittered inside the cell so the 50 m lattice does not read as a grid
+        area = cell * cell * min(0.8, max(0.08, c * 1.1))
+        aspect = rng.uniform(0.55, 1.8)
+        w = min(cell * 0.95, math.sqrt(area * aspect))
+        dd = min(cell * 0.95, area / w)
+        ox = rng.uniform(-0.5, 0.5) * (cell - w)
+        oy = rng.uniform(-0.5, 0.5) * (cell - dd)
+        h = max(6.0, round((0.55 * a + 0.45 * b) * rng.uniform(0.85, 1.15) / 3.0) * 3.0)
         arch = ARCH_HUAXIA if h < 40 else ARCH_RESTOWER
-        chunk_for(e, n).box(e, n, side, side * rng.uniform(0.75, 1.0), 0.0, g, h, arch, int(rng.integers(0, 256)))
+        chunk_for(e, n).box(e + ox, n + oy, w, dd, rng.uniform(-4.0, 4.0), g, h, arch, int(rng.integers(0, 256)))
 
     tw = d["towers"]
     te, tn = to_enu(tw[:, 0], tw[:, 1]) if len(tw) else (np.array([]), np.array([]))

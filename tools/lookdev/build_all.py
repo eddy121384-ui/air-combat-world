@@ -6,7 +6,8 @@
 2. Run the *unchanged* accepted pipeline where its outputs are missing:
    build_full_xinyi -> build_xinyi_terrain_dtm -> build_contract.
    Re-checks the accepted tile-manifest and terrain-manifest hashes.
-3. Run the look-dev builders (tiles, Taipei 101, backdrop, ground, rooftops).
+3. Run the look-dev builders (tiles, Taipei 101, backdrop, ground, rooftops,
+   far-LOD city when the far-city cache exists).
 
 Usage: python tools/lookdev/build_all.py [--force-look]
 """
@@ -84,6 +85,8 @@ def main():
     run("tools/lookdev/build_backdrop.py")
     run("tools/lookdev/build_ground.py")
     run("tools/lookdev/build_rooftops.py")
+    if (CACHE / "far_city_generalized.npz").exists():
+        run("tools/lookdev/build_far_city.py")
     print("XINYI_LOOK_OFFLINE_BUILD_OK")
 
 
