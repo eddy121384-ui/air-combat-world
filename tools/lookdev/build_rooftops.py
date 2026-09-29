@@ -109,12 +109,10 @@ def build_meshes():
     m.quad([(-0.52, -0.52, 1.0), (0.52, -0.52, 1.0), (0.52, 0.0, 1.12), (-0.52, 0.0, 1.12)], 1)
     m.quad([(0.52, 0.52, 1.0), (-0.52, 0.52, 1.0), (-0.52, 0.0, 1.12), (0.52, 0.0, 1.12)], 1)
     meshes["shed"] = m
-    # stainless water tank on a steel stand
+    # stainless water tank on a steel stand (36 tris: the stand reads as one frame)
     m = MB(TYPE_ID["tank"])
-    for dx, dy in ((-0.5, -0.5), (0.5, -0.5), (0.5, 0.5), (-0.5, 0.5)):
-        m.box(dx, dy, 0, 0.08, 0.08, 1.2, part=1)
-    m.box(0, 0, 1.15, 1.2, 1.2, 0.08, part=1)
-    m.cyl(0, 0, 1.23, 0.62, 1.5, n=10, part=0)
+    m.box(0, 0, 0, 1.1, 1.1, 1.2, part=1)
+    m.cyl(0, 0, 1.2, 0.62, 1.5, n=8, part=0)
     meshes["tank"] = m
     # solar water heater: tilted collector + horizontal tank
     m = MB(TYPE_ID["solar"])

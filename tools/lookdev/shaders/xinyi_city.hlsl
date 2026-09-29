@@ -664,13 +664,34 @@ void xc_ground(float3 wpos, float3 N, float4 gt, float night, float fwp,
     float fn = xc_fnoise(p, 0.01, fwp) * 0.6 + xc_fnoise(p, 0.08, fwp) * 0.4;
     float3 forest = lerp(float3(0.05, 0.08, 0.04), float3(0.10, 0.14, 0.065), fn);
     float3 waterCol = float3(0.05, 0.08, 0.08);
+    // categorical surfaces from OSM (a: 1 water, .8 track, .6 court,
+    // .4 construction, .3 school yard, .2 surface parking)
+    float surf = gt.w;
+    float isTrack = step(0.7, surf) * (1.0 - step(0.9, surf));
+    float isCourt = step(0.5, surf) * (1.0 - step(0.7, surf));
+    float isBuild = step(0.35, surf) * (1.0 - step(0.5, surf));
+    float isSchool = step(0.25, surf) * (1.0 - step(0.35, surf));
+    float isPark = step(0.12, surf) * (1.0 - step(0.25, surf));
+    float3 track = float3(0.40, 0.15, 0.11);                       // red PU school track
+    float3 court = lerp(float3(0.15, 0.32, 0.24), float3(0.14, 0.24, 0.40), step(0.5, xc_hash21(floor(p / 36.0))));
+    float3 dirt = lerp(float3(0.36, 0.29, 0.21), float3(0.44, 0.38, 0.30), xc_fnoise(p, 0.15, fwp));
+    float3 yard = float3(0.40, 0.39, 0.36);
+    float stall = max(xc_line(frac(p.x / 2.5), 0.05, fwp / 2.5), xc_line(frac(p.y / 5.5), 0.025, fwp / 5.5))
+                  * xc_detail(fwp, 1.5);
+    float3 lot = lerp(float3(0.15, 0.15, 0.155), float3(0.75, 0.75, 0.72), stall * 0.8);
 
     float3 c = plaza;
     c = lerp(c, paver, walk);
     c = lerp(c, grass, saturate(green * 1.2) * (1.0 - road));
     c = lerp(c, forest, hill * (1.0 - road) * (1.0 - green * 0.5));
     c = lerp(c, float3(0.55, 0.55, 0.53), kerb * step(0.2, cls));
+    c = lerp(c, yard, isSchool);
+    c = lerp(c, lot, isPark);
+    c = lerp(c, dirt, isBuild);
+    c = lerp(c, court, isCourt);
+    c = lerp(c, track, isTrack);
     c = lerp(c, asphalt, road);
+    water = step(0.9, surf);
     c = lerp(c, waterCol, water);
     base = c;
     rough = lerp(0.88, 0.75, road);

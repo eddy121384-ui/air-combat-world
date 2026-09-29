@@ -28,7 +28,7 @@ import time
 sys.path.insert(0, os.path.join(os.environ.get("ACW_REPO_ROOT", ""), "adapters", "unreal", "lookdev"))
 sys.path.insert(0, os.path.join(os.environ.get("ACW_REPO_ROOT", ""), "tools", "lookdev"))
 import unreal  # noqa: E402
-from ue_custom_code import MATERIALS, custom_code, ground_uv_code  # noqa: E402
+from ue_custom_code import MATERIALS, custom_code, extent_uv_code, ground_uv_code  # noqa: E402
 from xinyi_look_common import (  # noqa: E402
     CONTRACT_DIR, LOOK_OUT, MAT_DIR, MESH_DIR, MPC_PATH, SHADER, TEX_DIR, E0, E1, N0, N1,  # noqa: F401
     ensure_dir, lib, max_err, mel, mesh_bounds, read_json, tile_key, tools, write_report,
@@ -216,15 +216,25 @@ def build_paint_material(mpc, tex):
     return mat
 
 
-def build_backdrop_material(mpc):
+def build_backdrop_material(mpc, far_tex, far_extent):
     mat, path = fresh_material("M_XinyiBackdrop")
     wp = world_pos_m(mat, -1400, -200)
     n = expr(mat, unreal.MaterialExpressionVertexNormalWS, -1200, -60)
     uv2 = texcoord(mat, 2, -1200, 60)
-    night = mpc_param(mat, mpc, "Night", -1200, 300)
+    if far_tex is not None:
+        e0, e1, n0, n1 = far_extent
+        fuv = custom(mat, -1100, 200, extent_uv_code(e0, e1, n0, n1), ["WP"], [], "FarCityUV",
+                     unreal.CustomMaterialOutputType.CMOT_FLOAT2)
+        mel.connect_material_expressions(wp, "", fuv, "WP")
+        fc = ground_sample(mat, far_tex, fuv, -900, 200)
+    else:
+        fc = expr(mat, unreal.MaterialExpressionConstant4Vector, -900, 200,
+                  constant=unreal.LinearColor(0.0, 0.0, 0.0, 0.0))
+    night = mpc_param(mat, mpc, "Night", -1200, 360)
     es = mpc_param(mat, mpc, "EmissiveScale", -600, 500)
-    node = custom(mat, -600, 0, custom_code("M_XinyiBackdrop"), [n for n, _ in MATERIALS["M_XinyiBackdrop"][0]], SURFACE_OUTPUTS, "M_XinyiBackdrop")
-    for src, pin in ((wp, "WP"), (n, "N"), (uv2, "UV2"), (night, "Night")):
+    node = custom(mat, -600, 0, custom_code("M_XinyiBackdrop"), [n_ for n_, _ in MATERIALS["M_XinyiBackdrop"][0]],
+                  SURFACE_OUTPUTS, "M_XinyiBackdrop")
+    for src, pin in ((wp, "WP"), (n, "N"), (uv2, "UV2"), (fc, "FC"), (night, "Night")):
         mel.connect_material_expressions(src, "", node, pin)
     finish_surface(mat, node, es, -300, 300, normal=False)
     save_material(mat, path)
@@ -279,6 +289,21 @@ def import_texture(png, name):
         raise RuntimeError("failed to save %s" % path)
     created[path] = "Texture2D"
     return tex
+
+
+def add_auto_lods(mesh):
+    """LOD1 50% / LOD2 25% for instanced props and trees (engine reduction)."""
+    sub = unreal.get_editor_subsystem(unreal.StaticMeshEditorSubsystem)
+    opts = unreal.EditorScriptingMeshReductionOptions()
+    settings = []
+    for pct, screen in ((1.0, 1.0), (0.5, 0.12), (0.25, 0.04)):
+        r = unreal.EditorScriptingMeshReductionSettings()
+        r.set_editor_property("percent_triangles", pct)
+        r.set_editor_property("screen_size", screen)
+        settings.append(r)
+    opts.set_editor_property("reduction_settings", settings)
+    opts.set_editor_property("auto_compute_lod_screen_size", False)
+    return int(sub.set_lods(mesh, opts))
 
 
 def import_mesh(glb, dest, material, min_uv_channels):
@@ -345,7 +370,10 @@ def main():
     m_hero = build_city_material(mpc, "M_Taipei101", hero=True)
     m_ground = build_ground_material(mpc, tex)
     m_paint = build_paint_material(mpc, tex)
-    m_back = build_backdrop_material(mpc)
+    far_rep_path = LOOK_OUT / "farcity/far_city.report.json"
+    far_rep = read_json(far_rep_path) if far_rep_path.is_file() else None
+    far_tex = import_texture(LOOK_OUT / "farcity/far_city_1024.png", "T_TaipeiFarCity") if far_rep else None
+    m_back = build_backdrop_material(mpc, far_tex, far_rep["texture_extent_enu_m"] if far_rep else None)
     m_tree = build_instanced_material(mpc, "M_XinyiFoliage")
     m_props = build_instanced_material(mpc, "M_XinyiProps")
     roofs = read_json(LOOK_OUT / "rooftops/rooftops.report.json")
@@ -382,6 +410,9 @@ def main():
     ):
         try:
             path, mesh = import_mesh(glb, dest, mat, uvn)
+            if key == "tree":
+                add_auto_lods(mesh)
+                lib.save_asset(path)
             origin, extent = mesh_bounds(mesh)
             err = max_err(extent, exp["extent_cm"])
             if err > EXTENT_TOLERANCE_CM:
@@ -395,6 +426,9 @@ def main():
     for t, row in roofs["types"].items():
         try:
             path, mesh = import_mesh(LOOK_OUT / "rooftops" / row["mesh"], MESH_DIR + "/Roof/" + t, m_props, 3)
+            if row["triangles"] >= 24:
+                add_auto_lods(mesh)
+                lib.save_asset(path)
             origin, extent = mesh_bounds(mesh)
             err = max_err(extent, row["expected_ue_local_bounds"]["extent_cm"])
             if err > EXTENT_TOLERANCE_CM:
@@ -404,6 +438,21 @@ def main():
                         "instances": row["instances"]}
         except Exception as exc:
             failures.append({"prop": t, "error": str(exc)})
+
+    far = []
+    for row in (far_rep or {}).get("chunks", []):
+        try:
+            key = "c%+03d_%+03d" % tuple(row["chunk"])
+            path, mesh = import_mesh(LOOK_OUT / "farcity" / row["path"], MESH_DIR + "/FarCity/" + key.replace("+", "p").replace("-", "m"), m_city, 3)
+            origin, extent = mesh_bounds(mesh)
+            err = max_err(extent, row["expected_ue_local_bounds"]["extent_cm"])
+            if err > EXTENT_TOLERANCE_CM:
+                raise RuntimeError("extent drift %.3f cm" % err)
+            far.append({"chunk": row["chunk"], "asset_path": path, "imported_bounds_origin_cm": origin,
+                        "expected_bounds_origin_cm": row["expected_ue_local_bounds"]["origin_cm"],
+                        "ue_actor_location_cm": row["ue_actor_location_cm"]})
+        except Exception as exc:
+            failures.append({"far_city_chunk": row["chunk"], "error": str(exc)})
 
     status = ("PASS_LOOK_ASSETS" if not failures and len(tiles) == 25 and len(singles) == 4
               and len(props) == len(roofs["types"]) else "FAIL_LOOK_ASSETS")
@@ -417,6 +466,7 @@ def main():
         "tiles": tiles,
         "singles": singles,
         "rooftop_props": props,
+        "far_city_chunks": far,
         "created": created,
         "failures": failures,
         "elapsed_seconds": time.perf_counter() - t0,

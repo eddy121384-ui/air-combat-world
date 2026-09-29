@@ -206,6 +206,17 @@ def main():
         if roof_counts[t] != len(items):
             failures.append({"rooftop": t, "count": roof_counts[t], "expected": len(items)})
 
+    # far-LOD Taipei basin massing (real WFS statistics), no shadows / collision
+    far_n = 0
+    for row in assets.get("far_city_chunks", []):
+        mesh = lib.load_asset(row["asset_path"])
+        a, _ = spawn_mesh_actor(actors, mesh, row["ue_actor_location_cm"], row["expected_bounds_origin_cm"],
+                                "FarCity_%d_%d" % tuple(row["chunk"]))
+        c = a.get_component_by_class(unreal.StaticMeshComponent)
+        c.set_cast_shadow(False)
+        c.set_collision_enabled(unreal.CollisionEnabled.NO_COLLISION)
+        far_n += 1
+
     spawn_rig(actors)
     world = unreal.get_editor_subsystem(unreal.UnrealEditorSubsystem).get_editor_world()
     apply_tod(world, actors, "day", persist_mpc_defaults=True)
@@ -222,6 +233,7 @@ def main():
         "hero_location_cm": hero_loc,
         "tree_instances": tree_count,
         "rooftop_instances": roof_counts,
+        "far_city_chunks": far_n,
         "failures": failures,
         "contract_level_saved": False,
     }

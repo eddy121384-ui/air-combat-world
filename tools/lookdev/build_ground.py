@@ -11,7 +11,9 @@ Outputs (unreal/Saved/XinyiLook/ground/):
                               (<0.5 inside carriageway)
                           G = vegetation coverage (parks, grass, forest)
                           B = road class (0 none, .33 local, .66 collector, 1 arterial)
-                          A = water coverage
+                          A = surface class (nearest): 1.0 water, 0.8 running
+                              track, 0.6 sports court, 0.4 construction,
+                              0.3 school yard, 0.2 surface parking, 0 none
   xinyi_road_paint.glb    thin opaque paint geometry draped 6 cm above terrain:
                           lane lines, double-yellow centre lines, red kerb lines,
                           zebra crossings, stop lines, scooter waiting boxes
@@ -96,6 +98,7 @@ def load_osm():
         return [lonlat_to_enu(p["lon"], p["lat"], lon0, lat0) for p in g]
 
     ways, polys_green, polys_water, trees = [], [], [], []
+    special = {"track": [], "court": [], "construction": [], "school": [], "parking": []}
     for e in d["elements"]:
         t = e.get("tags", {})
         if e["type"] == "node" and t.get("natural") == "tree":
@@ -105,7 +108,25 @@ def load_osm():
             if len(pts) < 2:
                 continue
             closed = e["nodes"][0] == e["nodes"][-1] and len(pts) >= 4
-            green = (t.get("leisure") in ("park", "garden", "pitch", "playground") or
+            grass_pitch = t.get("leisure") == "pitch" and t.get("surface") in ("grass", "artificial_turf")
+            if closed and not grass_pitch:
+                cls = None
+                if t.get("leisure") == "track":
+                    cls = "track"
+                elif t.get("leisure") in ("pitch", "stadium", "sports_centre"):
+                    cls = "court"
+                elif t.get("landuse") in ("construction", "brownfield"):
+                    cls = "construction"
+                elif t.get("amenity") in ("school", "university", "college", "kindergarten"):
+                    cls = "school"
+                elif t.get("amenity") == "parking" and t.get("parking") in (None, "surface"):
+                    cls = "parking"
+                if cls:
+                    q = Polygon(pts).buffer(0)
+                    if q.is_valid and not q.is_empty:
+                        special[cls].append(q)
+                    continue
+            green = (t.get("leisure") in ("park", "garden", "playground") or grass_pitch or
                      t.get("landuse") in ("grass", "forest", "park", "recreation_ground", "cemetery") or
                      t.get("natural") in ("wood", "scrub"))
             if closed and green:
@@ -120,7 +141,7 @@ def load_osm():
                 outers = [Polygon(enu(m["geometry"])).buffer(0) for m in e["members"]
                           if m.get("role") == "outer" and m.get("geometry") and len(m["geometry"]) >= 4]
                 polys_green += [p for p in outers if p.is_valid]
-    return ways, polys_green, polys_water, trees
+    return ways, polys_green, polys_water, trees, special
 
 
 def way_geometry(w):
@@ -214,7 +235,7 @@ class Paint:
 def main():
     OUT.mkdir(parents=True, exist_ok=True)
     hf = Heightfield()
-    ways, greens, waters, osm_trees = load_osm()
+    ways, greens, waters, osm_trees, special = load_osm()
     extent = box(E0, N0, E1, N1)
 
     # buildings (for tree rejection + paint clipping)
@@ -289,7 +310,19 @@ def main():
         return a.reshape(RES, SUPER, RES, SUPER).mean(axis=(1, 3))
 
     G = coverage(greens)
-    A = coverage(waters)
+    # categorical surface classes: painted in priority order, sampled nearest
+    cat = Image.new("L", (S, S), 0)
+    drc = ImageDraw.Draw(cat)
+    for name, val in (("school", 77), ("parking", 51), ("construction", 102), ("court", 153), ("track", 204)):
+        for g in special[name]:
+            g = g.intersection(extent.buffer(50))
+            if not g.is_empty:
+                fill(drc, g, val)
+    for g in waters:
+        g = g.intersection(extent.buffer(50))
+        if not g.is_empty:
+            fill(drc, g, 255)
+    A = np.asarray(cat, dtype=np.float32)[SUPER // 2::SUPER, SUPER // 2::SUPER] / 255.0
     cls_img = Image.new("L", (S, S), 0)
     dr = ImageDraw.Draw(cls_img)
     for c in sorted(road_by_cls):
@@ -472,6 +505,7 @@ def main():
         "road_ways": sum(1 for w in ways if not w["skip"]), "junctions": len(junctions),
         "crossings": crossings, "paint_triangles": int(len(faces)), "trees": len(inst),
         "road_area_m2": float(roads.area),
+        "surface_classes": {k: len(v) for k, v in special.items()},
         "paint_mesh": "xinyi_road_paint.glb",
         "paint_expected_ue_local_bounds": ue_local_bounds_cm(game),
         "tree_mesh": "xinyi_tree.glb",
@@ -483,7 +517,7 @@ def main():
 
 
 def write_tree_mesh(path):
-    """~120-triangle broadleaf: flattened faceted crown on a hexagonal trunk."""
+    """28-triangle broadleaf: jittered icosahedron crown on a 4-sided trunk."""
     t = (1 + 5 ** 0.5) / 2
     v = np.array([[-1, t, 0], [1, t, 0], [-1, -t, 0], [1, -t, 0], [0, -1, t], [0, 1, t], [0, -1, -t], [0, 1, -t],
                   [t, 0, -1], [t, 0, 1], [-t, 0, -1], [-t, 0, 1]], float)
@@ -491,21 +525,10 @@ def write_tree_mesh(path):
          [7, 1, 8], [3, 9, 4], [3, 4, 2], [3, 2, 6], [3, 6, 8], [3, 8, 9], [4, 9, 5], [2, 4, 11], [6, 2, 10],
          [8, 6, 7], [9, 8, 1]]
     v /= np.linalg.norm(v, axis=1, keepdims=True)
-    # one subdivision
-    mid = {}
+    # no subdivision: 20-face crown keeps 20k street trees affordable on
+    # iPhone-class GPUs; jitter + shading carry the leafy read
     verts = [tuple(x) for x in v]
-
-    def m(a, b):
-        k = tuple(sorted((a, b)))
-        if k not in mid:
-            p = (np.asarray(verts[a]) + np.asarray(verts[b])) / 2
-            p /= np.linalg.norm(p)
-            verts.append(tuple(p)); mid[k] = len(verts) - 1
-        return mid[k]
-    f2 = []
-    for a, b, c in f:
-        ab, bc, ca = m(a, b), m(b, c), m(c, a)
-        f2 += [[a, ab, ca], [b, bc, ab], [c, ca, bc], [ab, bc, ca]]
+    f2 = f
     V = np.asarray(verts)
     rng = np.random.default_rng(7)
     V *= (1.0 + rng.uniform(-0.12, 0.12, (len(V), 1)))
@@ -513,9 +536,9 @@ def write_tree_mesh(path):
     tris = [crown[list(tri)] for tri in f2]
     cols = [(40, 255, 0, 255)] * len(tris)
     # trunk
-    ang = np.linspace(0, 2 * np.pi, 7)[:-1]
-    for i in range(6):
-        a0, a1 = ang[i], ang[(i + 1) % 6]
+    ang = np.linspace(0, 2 * np.pi, 5)[:-1]
+    for i in range(4):
+        a0, a1 = ang[i], ang[(i + 1) % 4]
         p = lambda a, y, r: np.array([np.cos(a) * r, y, np.sin(a) * r])
         q = [p(a0, 0, 0.28), p(a1, 0, 0.28), p(a1, 4.5, 0.2), p(a0, 4.5, 0.2)]
         tris += [np.array([q[0], q[2], q[1]]), np.array([q[0], q[3], q[2]])]
