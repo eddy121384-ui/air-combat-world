@@ -1,0 +1,918 @@
+{
+  "schema": "xinyi-packaged-collision-gate/v1",
+  "run_id": "20260929T013849Z-8170d8c4",
+  "status": "MEASURED",
+  "runtime_status": "ENGINE_COLLISION_ROUTE_COMPLETE",
+  "host": {
+    "run_index": 3,
+    "launch_id": "cb23390b-b6e6-4ba0-b622-20338c20d080",
+    "executable_sha256": "a68f8c2e923aa71d7bca9b5d3837852854510abde17ebb50a4a100ee73ef9b90",
+    "raw_sha256": "4ee4a0c57f01271e22e92d34e5105e952264e892b18c4f7c05ebe47f146a4b6c",
+    "plan_sha256": "b006d10276e955c9c0a2a2ce9ee77f00144c6d95e4b2e8767fc9332e244512ec",
+    "log_sha256": "afb67f521768af51423c541921f5f5a38196fa68cc57b03e3b3ce9bb47284c42",
+    "elapsed_seconds": 35.0145988,
+    "exit_code": 0
+  },
+  "world": "/Game/XinyiV2/L_XinyiV2_Contract_WP",
+  "trace_channel": "ECC_Visibility",
+  "primary_trace_complex": false,
+  "reference_trace_complex": true,
+  "streaming_step_count": 101,
+  "all_steps_streaming_complete": true,
+  "landscape": {
+    "status": "PASS",
+    "sample_count": 59,
+    "inside_count": 55,
+    "outside_count": 4,
+    "sample_kinds": {
+      "component_center": 25,
+      "shared_edge": 8,
+      "shared_edge_flank": 16,
+      "shared_corner": 4,
+      "southeast_slope": 1,
+      "outside_control": 4,
+      "terrain_building_transition": 1
+    },
+    "tolerance_cm_predeclared": 2.0,
+    "max_absolute_z_error_cm": 0.05252361297607422,
+    "in_bounds_misses": [],
+    "z_outliers": [],
+    "out_of_bounds_false_hits": [],
+    "root_actor_count": 1,
+    "proxy_actor_count_observed": 4,
+    "landscape_package_count_observed": 5,
+    "collision_component_count_observed": 25,
+    "root_actors": [
+      "/Game/XinyiV2/L_XinyiV2_Contract_WP.L_XinyiV2_Contract_WP:PersistentLevel.Landscape_0"
+    ],
+    "proxy_actors": [
+      "/Game/XinyiV2/L_XinyiV2_Contract_WP/_Generated_/5W4TDRKJM1HLCTH86X4NC2H9U.L_XinyiV2_Contract_WP:PersistentLevel.LandscapeStreamingProxy_BUJOEHF5GJHM9E3732ADC6SQE_504_0_1_0",
+      "/Game/XinyiV2/L_XinyiV2_Contract_WP/_Generated_/61QHW0WXZNTZ47VAXBC9TMGO0.L_XinyiV2_Contract_WP:PersistentLevel.LandscapeStreamingProxy_BUJOEHF5GJHM9E3732ADC6SQE_504_1_1_0",
+      "/Game/XinyiV2/L_XinyiV2_Contract_WP/_Generated_/66VI5U1BW9L277URCDMHSL149.L_XinyiV2_Contract_WP:PersistentLevel.LandscapeStreamingProxy_BUJOEHF5GJHM9E3732ADC6SQE_504_0_0_0",
+      "/Game/XinyiV2/L_XinyiV2_Contract_WP/_Generated_/8NNNYLND3KTBVITZZH2FLSXKP.L_XinyiV2_Contract_WP:PersistentLevel.LandscapeStreamingProxy_BUJOEHF5GJHM9E3732ADC6SQE_504_1_0_0"
+    ],
+    "ownership_examples": [
+      {
+        "actor": "/Game/XinyiV2/L_XinyiV2_Contract_WP/_Generated_/66VI5U1BW9L277URCDMHSL149.L_XinyiV2_Contract_WP:PersistentLevel.LandscapeStreamingProxy_BUJOEHF5GJHM9E3732ADC6SQE_504_0_0_0",
+        "package": "/Game/XinyiV2/L_XinyiV2_Contract_WP/_Generated_/66VI5U1BW9L277URCDMHSL149",
+        "is_proxy": true,
+        "runtime_ownership_note": "proxy presence and package identity observed; editor-only spatial/grid properties unavailable in packaged AActor API",
+        "render_count": 16,
+        "collision_count": 16,
+        "collision_components": [
+          {
+            "name": "/Game/XinyiV2/L_XinyiV2_Contract_WP/_Generated_/66VI5U1BW9L277URCDMHSL149.L_XinyiV2_Contract_WP:PersistentLevel.LandscapeStreamingProxy_BUJOEHF5GJHM9E3732ADC6SQE_504_0_0_0.LandscapeHeightfieldCollisionComponent_0",
+            "collision_enabled_enum": 3,
+            "visibility_response_enum": 2
+          },
+          {
+            "name": "/Game/XinyiV2/L_XinyiV2_Contract_WP/_Generated_/66VI5U1BW9L277URCDMHSL149.L_XinyiV2_Contract_WP:PersistentLevel.LandscapeStreamingProxy_BUJOEHF5GJHM9E3732ADC6SQE_504_0_0_0.LandscapeHeightfieldCollisionComponent_1",
+            "collision_enabled_enum": 3,
+            "visibility_response_enum": 2
+          },
+          {
+            "name": "/Game/XinyiV2/L_XinyiV2_Contract_WP/_Generated_/66VI5U1BW9L277URCDMHSL149.L_XinyiV2_Contract_WP:PersistentLevel.LandscapeStreamingProxy_BUJOEHF5GJHM9E3732ADC6SQE_504_0_0_0.LandscapeHeightfieldCollisionComponent_10",
+            "collision_enabled_enum": 3,
+            "visibility_response_enum": 2
+          },
+          {
+            "name": "/Game/XinyiV2/L_XinyiV2_Contract_WP/_Generated_/66VI5U1BW9L277URCDMHSL149.L_XinyiV2_Contract_WP:PersistentLevel.LandscapeStreamingProxy_BUJOEHF5GJHM9E3732ADC6SQE_504_0_0_0.LandscapeHeightfieldCollisionComponent_11",
+            "collision_enabled_enum": 3,
+            "visibility_response_enum": 2
+          },
+          {
+            "name": "/Game/XinyiV2/L_XinyiV2_Contract_WP/_Generated_/66VI5U1BW9L277URCDMHSL149.L_XinyiV2_Contract_WP:PersistentLevel.LandscapeStreamingProxy_BUJOEHF5GJHM9E3732ADC6SQE_504_0_0_0.LandscapeHeightfieldCollisionComponent_12",
+            "collision_enabled_enum": 3,
+            "visibility_response_enum": 2
+          },
+          {
+            "name": "/Game/XinyiV2/L_XinyiV2_Contract_WP/_Generated_/66VI5U1BW9L277URCDMHSL149.L_XinyiV2_Contract_WP:PersistentLevel.LandscapeStreamingProxy_BUJOEHF5GJHM9E3732ADC6SQE_504_0_0_0.LandscapeHeightfieldCollisionComponent_13",
+            "collision_enabled_enum": 3,
+            "visibility_response_enum": 2
+          },
+          {
+            "name": "/Game/XinyiV2/L_XinyiV2_Contract_WP/_Generated_/66VI5U1BW9L277URCDMHSL149.L_XinyiV2_Contract_WP:PersistentLevel.LandscapeStreamingProxy_BUJOEHF5GJHM9E3732ADC6SQE_504_0_0_0.LandscapeHeightfieldCollisionComponent_15",
+            "collision_enabled_enum": 3,
+            "visibility_response_enum": 2
+          },
+          {
+            "name": "/Game/XinyiV2/L_XinyiV2_Contract_WP/_Generated_/66VI5U1BW9L277URCDMHSL149.L_XinyiV2_Contract_WP:PersistentLevel.LandscapeStreamingProxy_BUJOEHF5GJHM9E3732ADC6SQE_504_0_0_0.LandscapeHeightfieldCollisionComponent_16",
+            "collision_enabled_enum": 3,
+            "visibility_response_enum": 2
+          },
+          {
+            "name": "/Game/XinyiV2/L_XinyiV2_Contract_WP/_Generated_/66VI5U1BW9L277URCDMHSL149.L_XinyiV2_Contract_WP:PersistentLevel.LandscapeStreamingProxy_BUJOEHF5GJHM9E3732ADC6SQE_504_0_0_0.LandscapeHeightfieldCollisionComponent_17",
+            "collision_enabled_enum": 3,
+            "visibility_response_enum": 2
+          },
+          {
+            "name": "/Game/XinyiV2/L_XinyiV2_Contract_WP/_Generated_/66VI5U1BW9L277URCDMHSL149.L_XinyiV2_Contract_WP:PersistentLevel.LandscapeStreamingProxy_BUJOEHF5GJHM9E3732ADC6SQE_504_0_0_0.LandscapeHeightfieldCollisionComponent_18",
+            "collision_enabled_enum": 3,
+            "visibility_response_enum": 2
+          },
+          {
+            "name": "/Game/XinyiV2/L_XinyiV2_Contract_WP/_Generated_/66VI5U1BW9L277URCDMHSL149.L_XinyiV2_Contract_WP:PersistentLevel.LandscapeStreamingProxy_BUJOEHF5GJHM9E3732ADC6SQE_504_0_0_0.LandscapeHeightfieldCollisionComponent_2",
+            "collision_enabled_enum": 3,
+            "visibility_response_enum": 2
+          },
+          {
+            "name": "/Game/XinyiV2/L_XinyiV2_Contract_WP/_Generated_/66VI5U1BW9L277URCDMHSL149.L_XinyiV2_Contract_WP:PersistentLevel.LandscapeStreamingProxy_BUJOEHF5GJHM9E3732ADC6SQE_504_0_0_0.LandscapeHeightfieldCollisionComponent_3",
+            "collision_enabled_enum": 3,
+            "visibility_response_enum": 2
+          },
+          {
+            "name": "/Game/XinyiV2/L_XinyiV2_Contract_WP/_Generated_/66VI5U1BW9L277URCDMHSL149.L_XinyiV2_Contract_WP:PersistentLevel.LandscapeStreamingProxy_BUJOEHF5GJHM9E3732ADC6SQE_504_0_0_0.LandscapeHeightfieldCollisionComponent_5",
+            "collision_enabled_enum": 3,
+            "visibility_response_enum": 2
+          },
+          {
+            "name": "/Game/XinyiV2/L_XinyiV2_Contract_WP/_Generated_/66VI5U1BW9L277URCDMHSL149.L_XinyiV2_Contract_WP:PersistentLevel.LandscapeStreamingProxy_BUJOEHF5GJHM9E3732ADC6SQE_504_0_0_0.LandscapeHeightfieldCollisionComponent_6",
+            "collision_enabled_enum": 3,
+            "visibility_response_enum": 2
+          },
+          {
+            "name": "/Game/XinyiV2/L_XinyiV2_Contract_WP/_Generated_/66VI5U1BW9L277URCDMHSL149.L_XinyiV2_Contract_WP:PersistentLevel.LandscapeStreamingProxy_BUJOEHF5GJHM9E3732ADC6SQE_504_0_0_0.LandscapeHeightfieldCollisionComponent_7",
+            "collision_enabled_enum": 3,
+            "visibility_response_enum": 2
+          },
+          {
+            "name": "/Game/XinyiV2/L_XinyiV2_Contract_WP/_Generated_/66VI5U1BW9L277URCDMHSL149.L_XinyiV2_Contract_WP:PersistentLevel.LandscapeStreamingProxy_BUJOEHF5GJHM9E3732ADC6SQE_504_0_0_0.LandscapeHeightfieldCollisionComponent_8",
+            "collision_enabled_enum": 3,
+            "visibility_response_enum": 2
+          }
+        ]
+      },
+      {
+        "actor": "/Game/XinyiV2/L_XinyiV2_Contract_WP.L_XinyiV2_Contract_WP:PersistentLevel.Landscape_0",
+        "package": "/Game/XinyiV2/L_XinyiV2_Contract_WP",
+        "is_proxy": false,
+        "runtime_ownership_note": "proxy presence and package identity observed; editor-only spatial/grid properties unavailable in packaged AActor API",
+        "render_count": 0,
+        "collision_count": 0,
+        "collision_components": []
+      },
+      {
+        "actor": "/Game/XinyiV2/L_XinyiV2_Contract_WP/_Generated_/66VI5U1BW9L277URCDMHSL149.L_XinyiV2_Contract_WP:PersistentLevel.LandscapeStreamingProxy_BUJOEHF5GJHM9E3732ADC6SQE_504_0_0_0",
+        "package": "/Game/XinyiV2/L_XinyiV2_Contract_WP/_Generated_/66VI5U1BW9L277URCDMHSL149",
+        "is_proxy": true,
+        "runtime_ownership_note": "proxy presence and package identity observed; editor-only spatial/grid properties unavailable in packaged AActor API",
+        "render_count": 16,
+        "collision_count": 16,
+        "collision_components": [
+          {
+            "name": "/Game/XinyiV2/L_XinyiV2_Contract_WP/_Generated_/66VI5U1BW9L277URCDMHSL149.L_XinyiV2_Contract_WP:PersistentLevel.LandscapeStreamingProxy_BUJOEHF5GJHM9E3732ADC6SQE_504_0_0_0.LandscapeHeightfieldCollisionComponent_0",
+            "collision_enabled_enum": 3,
+            "visibility_response_enum": 2
+          },
+          {
+            "name": "/Game/XinyiV2/L_XinyiV2_Contract_WP/_Generated_/66VI5U1BW9L277URCDMHSL149.L_XinyiV2_Contract_WP:PersistentLevel.LandscapeStreamingProxy_BUJOEHF5GJHM9E3732ADC6SQE_504_0_0_0.LandscapeHeightfieldCollisionComponent_1",
+            "collision_enabled_enum": 3,
+            "visibility_response_enum": 2
+          },
+          {
+            "name": "/Game/XinyiV2/L_XinyiV2_Contract_WP/_Generated_/66VI5U1BW9L277URCDMHSL149.L_XinyiV2_Contract_WP:PersistentLevel.LandscapeStreamingProxy_BUJOEHF5GJHM9E3732ADC6SQE_504_0_0_0.LandscapeHeightfieldCollisionComponent_10",
+            "collision_enabled_enum": 3,
+            "visibility_response_enum": 2
+          },
+          {
+            "name": "/Game/XinyiV2/L_XinyiV2_Contract_WP/_Generated_/66VI5U1BW9L277URCDMHSL149.L_XinyiV2_Contract_WP:PersistentLevel.LandscapeStreamingProxy_BUJOEHF5GJHM9E3732ADC6SQE_504_0_0_0.LandscapeHeightfieldCollisionComponent_11",
+            "collision_enabled_enum": 3,
+            "visibility_response_enum": 2
+          },
+          {
+            "name": "/Game/XinyiV2/L_XinyiV2_Contract_WP/_Generated_/66VI5U1BW9L277URCDMHSL149.L_XinyiV2_Contract_WP:PersistentLevel.LandscapeStreamingProxy_BUJOEHF5GJHM9E3732ADC6SQE_504_0_0_0.LandscapeHeightfieldCollisionComponent_12",
+            "collision_enabled_enum": 3,
+            "visibility_response_enum": 2
+          },
+          {
+            "name": "/Game/XinyiV2/L_XinyiV2_Contract_WP/_Generated_/66VI5U1BW9L277URCDMHSL149.L_XinyiV2_Contract_WP:PersistentLevel.LandscapeStreamingProxy_BUJOEHF5GJHM9E3732ADC6SQE_504_0_0_0.LandscapeHeightfieldCollisionComponent_13",
+            "collision_enabled_enum": 3,
+            "visibility_response_enum": 2
+          },
+          {
+            "name": "/Game/XinyiV2/L_XinyiV2_Contract_WP/_Generated_/66VI5U1BW9L277URCDMHSL149.L_XinyiV2_Contract_WP:PersistentLevel.LandscapeStreamingProxy_BUJOEHF5GJHM9E3732ADC6SQE_504_0_0_0.LandscapeHeightfieldCollisionComponent_15",
+            "collision_enabled_enum": 3,
+            "visibility_response_enum": 2
+          },
+          {
+            "name": "/Game/XinyiV2/L_XinyiV2_Contract_WP/_Generated_/66VI5U1BW9L277URCDMHSL149.L_XinyiV2_Contract_WP:PersistentLevel.LandscapeStreamingProxy_BUJOEHF5GJHM9E3732ADC6SQE_504_0_0_0.LandscapeHeightfieldCollisionComponent_16",
+            "collision_enabled_enum": 3,
+            "visibility_response_enum": 2
+          },
+          {
+            "name": "/Game/XinyiV2/L_XinyiV2_Contract_WP/_Generated_/66VI5U1BW9L277URCDMHSL149.L_XinyiV2_Contract_WP:PersistentLevel.LandscapeStreamingProxy_BUJOEHF5GJHM9E3732ADC6SQE_504_0_0_0.LandscapeHeightfieldCollisionComponent_17",
+            "collision_enabled_enum": 3,
+            "visibility_response_enum": 2
+          },
+          {
+            "name": "/Game/XinyiV2/L_XinyiV2_Contract_WP/_Generated_/66VI5U1BW9L277URCDMHSL149.L_XinyiV2_Contract_WP:PersistentLevel.LandscapeStreamingProxy_BUJOEHF5GJHM9E3732ADC6SQE_504_0_0_0.LandscapeHeightfieldCollisionComponent_18",
+            "collision_enabled_enum": 3,
+            "visibility_response_enum": 2
+          },
+          {
+            "name": "/Game/XinyiV2/L_XinyiV2_Contract_WP/_Generated_/66VI5U1BW9L277URCDMHSL149.L_XinyiV2_Contract_WP:PersistentLevel.LandscapeStreamingProxy_BUJOEHF5GJHM9E3732ADC6SQE_504_0_0_0.LandscapeHeightfieldCollisionComponent_2",
+            "collision_enabled_enum": 3,
+            "visibility_response_enum": 2
+          },
+          {
+            "name": "/Game/XinyiV2/L_XinyiV2_Contract_WP/_Generated_/66VI5U1BW9L277URCDMHSL149.L_XinyiV2_Contract_WP:PersistentLevel.LandscapeStreamingProxy_BUJOEHF5GJHM9E3732ADC6SQE_504_0_0_0.LandscapeHeightfieldCollisionComponent_3",
+            "collision_enabled_enum": 3,
+            "visibility_response_enum": 2
+          },
+          {
+            "name": "/Game/XinyiV2/L_XinyiV2_Contract_WP/_Generated_/66VI5U1BW9L277URCDMHSL149.L_XinyiV2_Contract_WP:PersistentLevel.LandscapeStreamingProxy_BUJOEHF5GJHM9E3732ADC6SQE_504_0_0_0.LandscapeHeightfieldCollisionComponent_5",
+            "collision_enabled_enum": 3,
+            "visibility_response_enum": 2
+          },
+          {
+            "name": "/Game/XinyiV2/L_XinyiV2_Contract_WP/_Generated_/66VI5U1BW9L277URCDMHSL149.L_XinyiV2_Contract_WP:PersistentLevel.LandscapeStreamingProxy_BUJOEHF5GJHM9E3732ADC6SQE_504_0_0_0.LandscapeHeightfieldCollisionComponent_6",
+            "collision_enabled_enum": 3,
+            "visibility_response_enum": 2
+          },
+          {
+            "name": "/Game/XinyiV2/L_XinyiV2_Contract_WP/_Generated_/66VI5U1BW9L277URCDMHSL149.L_XinyiV2_Contract_WP:PersistentLevel.LandscapeStreamingProxy_BUJOEHF5GJHM9E3732ADC6SQE_504_0_0_0.LandscapeHeightfieldCollisionComponent_7",
+            "collision_enabled_enum": 3,
+            "visibility_response_enum": 2
+          },
+          {
+            "name": "/Game/XinyiV2/L_XinyiV2_Contract_WP/_Generated_/66VI5U1BW9L277URCDMHSL149.L_XinyiV2_Contract_WP:PersistentLevel.LandscapeStreamingProxy_BUJOEHF5GJHM9E3732ADC6SQE_504_0_0_0.LandscapeHeightfieldCollisionComponent_8",
+            "collision_enabled_enum": 3,
+            "visibility_response_enum": 2
+          }
+        ]
+      }
+    ]
+  },
+  "building": {
+    "status": "FAIL",
+    "policy_tile_count": 25,
+    "trace_flag_counts": {
+      "1": 25
+    },
+    "visibility_response_counts": {
+      "2": 25
+    },
+    "collision_enabled_counts": {
+      "3": 25
+    },
+    "simple_primitive_totals": {
+      "sphere_count": 0,
+      "box_count": 0,
+      "capsule_count": 0,
+      "tapered_capsule_count": 0,
+      "convex_count": 25
+    },
+    "body_resource_bytes_total": 25169660,
+    "mesh_resource_bytes_total": 0,
+    "cooked_collision_bytes": "not exposed by this packaged runtime API",
+    "positive_count": 15,
+    "positive_failures": [],
+    "certified_negative_count": 27,
+    "negative_blocked_count": 17,
+    "independently_verified_negative_certificate_count": 27,
+    "blocked_certified_negative_samples": [
+      {
+        "id": "open_area_-002_-002",
+        "tile": "-002_-002",
+        "actor_class": "StaticMeshActor",
+        "hit_location_cm": [
+          -75000,
+          75000,
+          7064.099073410034
+        ]
+      },
+      {
+        "id": "open_area_-002_-001",
+        "tile": "-002_-001",
+        "actor_class": "StaticMeshActor",
+        "hit_location_cm": [
+          -75000,
+          27500,
+          11606.101274490356
+        ]
+      },
+      {
+        "id": "open_area_-002_+000",
+        "tile": "-002_+000",
+        "actor_class": "StaticMeshActor",
+        "hit_location_cm": [
+          -80000,
+          -25000,
+          6917.100310325623
+        ]
+      },
+      {
+        "id": "open_area_-002_+001",
+        "tile": "-002_+001",
+        "actor_class": "StaticMeshActor",
+        "hit_location_cm": [
+          -77500,
+          -75000,
+          6825.099587440491
+        ]
+      },
+      {
+        "id": "open_area_-001_-002",
+        "tile": "-001_-002",
+        "actor_class": "StaticMeshActor",
+        "hit_location_cm": [
+          -25000,
+          77500,
+          8498.099088668823
+        ]
+      },
+      {
+        "id": "open_area_-001_-001",
+        "tile": "-001_-001",
+        "actor_class": "StaticMeshActor",
+        "hit_location_cm": [
+          -25000,
+          25000,
+          8998.099446296692
+        ]
+      },
+      {
+        "id": "open_area_-001_+000",
+        "tile": "-001_+000",
+        "actor_class": "StaticMeshActor",
+        "hit_location_cm": [
+          -25000,
+          -30000,
+          15139.099657535553
+        ]
+      },
+      {
+        "id": "open_area_-001_+001",
+        "tile": "-001_+001",
+        "actor_class": "StaticMeshActor",
+        "hit_location_cm": [
+          -25000,
+          -70000,
+          17159.099459648132
+        ]
+      },
+      {
+        "id": "open_area_+000_-002",
+        "tile": "+000_-002",
+        "actor_class": "StaticMeshActor",
+        "hit_location_cm": [
+          22500,
+          82500,
+          7315.099596977234
+        ]
+      },
+      {
+        "id": "open_area_+000_-001",
+        "tile": "+000_-001",
+        "actor_class": "StaticMeshActor",
+        "hit_location_cm": [
+          27500,
+          25000,
+          11054.100036621094
+        ]
+      },
+      {
+        "id": "open_area_+000_+000",
+        "tile": "+000_+000",
+        "actor_class": "StaticMeshActor",
+        "hit_location_cm": [
+          25000,
+          -20000,
+          25000
+        ]
+      },
+      {
+        "id": "gap_between_buildings_+000_+000",
+        "tile": "+000_+000",
+        "actor_class": "StaticMeshActor",
+        "hit_location_cm": [
+          15000,
+          -30000,
+          25000
+        ]
+      },
+      {
+        "id": "open_area_+000_+001",
+        "tile": "+000_+001",
+        "actor_class": "StaticMeshActor",
+        "hit_location_cm": [
+          25000,
+          -80000,
+          21777.099773287773
+        ]
+      },
+      {
+        "id": "open_area_+001_-002",
+        "tile": "+001_-002",
+        "actor_class": "StaticMeshActor",
+        "hit_location_cm": [
+          75000,
+          72500,
+          11803.763508796692
+        ]
+      },
+      {
+        "id": "open_area_+001_-001",
+        "tile": "+001_-001",
+        "actor_class": "StaticMeshActor",
+        "hit_location_cm": [
+          75000,
+          25000,
+          9763.098955154419
+        ]
+      },
+      {
+        "id": "open_area_+001_+000",
+        "tile": "+001_+000",
+        "actor_class": "StaticMeshActor",
+        "hit_location_cm": [
+          75000,
+          -25000,
+          16355.09967803955
+        ]
+      },
+      {
+        "id": "open_area_+001_+001",
+        "tile": "+001_+001",
+        "actor_class": "StaticMeshActor",
+        "hit_location_cm": [
+          75000,
+          -75000,
+          9980.100154876709
+        ]
+      }
+    ],
+    "complex_reference_negative_blocked_count": 0,
+    "complex_reference_positive_failures": [
+      "tile_boundary_mass"
+    ],
+    "policies": [
+      {
+        "tile": "-003_+002",
+        "asset_path": "/Game/XinyiV2/RuntimeBuildings/m003_p002/xinyi_runtime_-003_+002/StaticMeshes/xinyi_runtime_-003_+002.xinyi_runtime_-003_+002",
+        "actor_package": "/Game/XinyiV2/L_XinyiV2_Contract_WP/_Generated_/5LTCG46S0TLOP1PPE1TU1517O",
+        "runtime_ownership_note": "actor observed loaded by World Partition; editor-only spatial/grid properties are not exposed by the packaged AActor API",
+        "component_collision_enabled_enum": 3,
+        "visibility_response_enum": 2,
+        "body_setup": "/Game/XinyiV2/RuntimeBuildings/m003_p002/xinyi_runtime_-003_+002/StaticMeshes/xinyi_runtime_-003_+002.xinyi_runtime_-003_+002:BodySetup_0",
+        "body_guid": "4C453D1E4AB2331912F4159D8AA55130",
+        "trace_flag_enum": 1,
+        "sphere_count": 0,
+        "box_count": 0,
+        "capsule_count": 0,
+        "tapered_capsule_count": 0,
+        "convex_count": 1,
+        "body_resource_bytes": 139675,
+        "mesh_resource_bytes": 0
+      },
+      {
+        "tile": "-001_+001",
+        "asset_path": "/Game/XinyiV2/RuntimeBuildings/m001_p001/xinyi_runtime_-001_+001/StaticMeshes/xinyi_runtime_-001_+001.xinyi_runtime_-001_+001",
+        "actor_package": "/Game/XinyiV2/L_XinyiV2_Contract_WP/_Generated_/6L8JRSYOULDGW8E7CTI39LGAP",
+        "runtime_ownership_note": "actor observed loaded by World Partition; editor-only spatial/grid properties are not exposed by the packaged AActor API",
+        "component_collision_enabled_enum": 3,
+        "visibility_response_enum": 2,
+        "body_setup": "/Game/XinyiV2/RuntimeBuildings/m001_p001/xinyi_runtime_-001_+001/StaticMeshes/xinyi_runtime_-001_+001.xinyi_runtime_-001_+001:BodySetup_0",
+        "body_guid": "A2192BED404C7814A1601B973424F8D0",
+        "trace_flag_enum": 1,
+        "sphere_count": 0,
+        "box_count": 0,
+        "capsule_count": 0,
+        "tapered_capsule_count": 0,
+        "convex_count": 1,
+        "body_resource_bytes": 782111,
+        "mesh_resource_bytes": 0
+      },
+      {
+        "tile": "-002_+000",
+        "asset_path": "/Game/XinyiV2/RuntimeBuildings/m002_p000/xinyi_runtime_-002_+000/StaticMeshes/xinyi_runtime_-002_+000.xinyi_runtime_-002_+000",
+        "actor_package": "/Game/XinyiV2/L_XinyiV2_Contract_WP/_Generated_/6L8JRSYOULDGW8E7CTI39LGAP",
+        "runtime_ownership_note": "actor observed loaded by World Partition; editor-only spatial/grid properties are not exposed by the packaged AActor API",
+        "component_collision_enabled_enum": 3,
+        "visibility_response_enum": 2,
+        "body_setup": "/Game/XinyiV2/RuntimeBuildings/m002_p000/xinyi_runtime_-002_+000/StaticMeshes/xinyi_runtime_-002_+000.xinyi_runtime_-002_+000:BodySetup_0",
+        "body_guid": "E9B23E0C4893B6A0AB26E896D3906094",
+        "trace_flag_enum": 1,
+        "sphere_count": 0,
+        "box_count": 0,
+        "capsule_count": 0,
+        "tapered_capsule_count": 0,
+        "convex_count": 1,
+        "body_resource_bytes": 2247111,
+        "mesh_resource_bytes": 0
+      },
+      {
+        "tile": "-002_+001",
+        "asset_path": "/Game/XinyiV2/RuntimeBuildings/m002_p001/xinyi_runtime_-002_+001/StaticMeshes/xinyi_runtime_-002_+001.xinyi_runtime_-002_+001",
+        "actor_package": "/Game/XinyiV2/L_XinyiV2_Contract_WP/_Generated_/6L8JRSYOULDGW8E7CTI39LGAP",
+        "runtime_ownership_note": "actor observed loaded by World Partition; editor-only spatial/grid properties are not exposed by the packaged AActor API",
+        "component_collision_enabled_enum": 3,
+        "visibility_response_enum": 2,
+        "body_setup": "/Game/XinyiV2/RuntimeBuildings/m002_p001/xinyi_runtime_-002_+001/StaticMeshes/xinyi_runtime_-002_+001.xinyi_runtime_-002_+001:BodySetup_0",
+        "body_guid": "AEF4F25D40BA57A5264CA4B35B74FA21",
+        "trace_flag_enum": 1,
+        "sphere_count": 0,
+        "box_count": 0,
+        "capsule_count": 0,
+        "tapered_capsule_count": 0,
+        "convex_count": 1,
+        "body_resource_bytes": 940495,
+        "mesh_resource_bytes": 0
+      },
+      {
+        "tile": "-002_+002",
+        "asset_path": "/Game/XinyiV2/RuntimeBuildings/m002_p002/xinyi_runtime_-002_+002/StaticMeshes/xinyi_runtime_-002_+002.xinyi_runtime_-002_+002",
+        "actor_package": "/Game/XinyiV2/L_XinyiV2_Contract_WP/_Generated_/E0U2F80TP2F5LEL9T7DWD6424",
+        "runtime_ownership_note": "actor observed loaded by World Partition; editor-only spatial/grid properties are not exposed by the packaged AActor API",
+        "component_collision_enabled_enum": 3,
+        "visibility_response_enum": 2,
+        "body_setup": "/Game/XinyiV2/RuntimeBuildings/m002_p002/xinyi_runtime_-002_+002/StaticMeshes/xinyi_runtime_-002_+002.xinyi_runtime_-002_+002:BodySetup_0",
+        "body_guid": "A9D2A912433D1BAF060718BC4C4275FC",
+        "trace_flag_enum": 1,
+        "sphere_count": 0,
+        "box_count": 0,
+        "capsule_count": 0,
+        "tapered_capsule_count": 0,
+        "convex_count": 1,
+        "body_resource_bytes": 187179,
+        "mesh_resource_bytes": 0
+      },
+      {
+        "tile": "-001_+002",
+        "asset_path": "/Game/XinyiV2/RuntimeBuildings/m001_p002/xinyi_runtime_-001_+002/StaticMeshes/xinyi_runtime_-001_+002.xinyi_runtime_-001_+002",
+        "actor_package": "/Game/XinyiV2/L_XinyiV2_Contract_WP/_Generated_/395YPUC5VEJO4E9MJ1RSCV8FD",
+        "runtime_ownership_note": "actor observed loaded by World Partition; editor-only spatial/grid properties are not exposed by the packaged AActor API",
+        "component_collision_enabled_enum": 3,
+        "visibility_response_enum": 2,
+        "body_setup": "/Game/XinyiV2/RuntimeBuildings/m001_p002/xinyi_runtime_-001_+002/StaticMeshes/xinyi_runtime_-001_+002.xinyi_runtime_-001_+002:BodySetup_0",
+        "body_guid": "D843370A417CCE8911CF559B19DFECD5",
+        "trace_flag_enum": 1,
+        "sphere_count": 0,
+        "box_count": 0,
+        "capsule_count": 0,
+        "tapered_capsule_count": 0,
+        "convex_count": 1,
+        "body_resource_bytes": 285303,
+        "mesh_resource_bytes": 0
+      },
+      {
+        "tile": "+000_+002",
+        "asset_path": "/Game/XinyiV2/RuntimeBuildings/p000_p002/xinyi_runtime_+000_+002/StaticMeshes/xinyi_runtime_+000_+002.xinyi_runtime_+000_+002",
+        "actor_package": "/Game/XinyiV2/L_XinyiV2_Contract_WP/_Generated_/4PUV05NXIRW7X3GB03Z4ADG7K",
+        "runtime_ownership_note": "actor observed loaded by World Partition; editor-only spatial/grid properties are not exposed by the packaged AActor API",
+        "component_collision_enabled_enum": 3,
+        "visibility_response_enum": 2,
+        "body_setup": "/Game/XinyiV2/RuntimeBuildings/p000_p002/xinyi_runtime_+000_+002/StaticMeshes/xinyi_runtime_+000_+002.xinyi_runtime_+000_+002:BodySetup_0",
+        "body_guid": "FBB8250540A26776FAC4DFBDD8BDCAC4",
+        "trace_flag_enum": 1,
+        "sphere_count": 0,
+        "box_count": 0,
+        "capsule_count": 0,
+        "tapered_capsule_count": 0,
+        "convex_count": 1,
+        "body_resource_bytes": 533511,
+        "mesh_resource_bytes": 0
+      },
+      {
+        "tile": "+000_+001",
+        "asset_path": "/Game/XinyiV2/RuntimeBuildings/p000_p001/xinyi_runtime_+000_+001/StaticMeshes/xinyi_runtime_+000_+001.xinyi_runtime_+000_+001",
+        "actor_package": "/Game/XinyiV2/L_XinyiV2_Contract_WP/_Generated_/8R2GZ349VHEQ00WO0HJDD3XEX",
+        "runtime_ownership_note": "actor observed loaded by World Partition; editor-only spatial/grid properties are not exposed by the packaged AActor API",
+        "component_collision_enabled_enum": 3,
+        "visibility_response_enum": 2,
+        "body_setup": "/Game/XinyiV2/RuntimeBuildings/p000_p001/xinyi_runtime_+000_+001/StaticMeshes/xinyi_runtime_+000_+001.xinyi_runtime_+000_+001:BodySetup_0",
+        "body_guid": "C7B3FAB94924F5501B4F399DB86C61AE",
+        "trace_flag_enum": 1,
+        "sphere_count": 0,
+        "box_count": 0,
+        "capsule_count": 0,
+        "tapered_capsule_count": 0,
+        "convex_count": 1,
+        "body_resource_bytes": 950902,
+        "mesh_resource_bytes": 0
+      },
+      {
+        "tile": "+001_+002",
+        "asset_path": "/Game/XinyiV2/RuntimeBuildings/p001_p002/xinyi_runtime_+001_+002/StaticMeshes/xinyi_runtime_+001_+002.xinyi_runtime_+001_+002",
+        "actor_package": "/Game/XinyiV2/L_XinyiV2_Contract_WP/_Generated_/DLWGYYAG8RK0IW1GP49M9GXCV",
+        "runtime_ownership_note": "actor observed loaded by World Partition; editor-only spatial/grid properties are not exposed by the packaged AActor API",
+        "component_collision_enabled_enum": 3,
+        "visibility_response_enum": 2,
+        "body_setup": "/Game/XinyiV2/RuntimeBuildings/p001_p002/xinyi_runtime_+001_+002/StaticMeshes/xinyi_runtime_+001_+002.xinyi_runtime_+001_+002:BodySetup_0",
+        "body_guid": "697E23744ACFDB34CCF9599C705703A4",
+        "trace_flag_enum": 1,
+        "sphere_count": 0,
+        "box_count": 0,
+        "capsule_count": 0,
+        "tapered_capsule_count": 0,
+        "convex_count": 1,
+        "body_resource_bytes": 296003,
+        "mesh_resource_bytes": 0
+      },
+      {
+        "tile": "+001_+001",
+        "asset_path": "/Game/XinyiV2/RuntimeBuildings/p001_p001/xinyi_runtime_+001_+001/StaticMeshes/xinyi_runtime_+001_+001.xinyi_runtime_+001_+001",
+        "actor_package": "/Game/XinyiV2/L_XinyiV2_Contract_WP/_Generated_/3C5BDXS38I89H922H3ICVPDUW",
+        "runtime_ownership_note": "actor observed loaded by World Partition; editor-only spatial/grid properties are not exposed by the packaged AActor API",
+        "component_collision_enabled_enum": 3,
+        "visibility_response_enum": 2,
+        "body_setup": "/Game/XinyiV2/RuntimeBuildings/p001_p001/xinyi_runtime_+001_+001/StaticMeshes/xinyi_runtime_+001_+001.xinyi_runtime_+001_+001:BodySetup_0",
+        "body_guid": "7DC5292C4B13065174CC9BA30B2FD9BA",
+        "trace_flag_enum": 1,
+        "sphere_count": 0,
+        "box_count": 0,
+        "capsule_count": 0,
+        "tapered_capsule_count": 0,
+        "convex_count": 1,
+        "body_resource_bytes": 1534803,
+        "mesh_resource_bytes": 0
+      },
+      {
+        "tile": "-003_+001",
+        "asset_path": "/Game/XinyiV2/RuntimeBuildings/m003_p001/xinyi_runtime_-003_+001/StaticMeshes/xinyi_runtime_-003_+001.xinyi_runtime_-003_+001",
+        "actor_package": "/Game/XinyiV2/L_XinyiV2_Contract_WP/_Generated_/DBIMHZZ7EM4V83JY0J0GQH6XQ",
+        "runtime_ownership_note": "actor observed loaded by World Partition; editor-only spatial/grid properties are not exposed by the packaged AActor API",
+        "component_collision_enabled_enum": 3,
+        "visibility_response_enum": 2,
+        "body_setup": "/Game/XinyiV2/RuntimeBuildings/m003_p001/xinyi_runtime_-003_+001/StaticMeshes/xinyi_runtime_-003_+001.xinyi_runtime_-003_+001:BodySetup_0",
+        "body_guid": "7E01A69842F2BB409BF3BA9E834ED326",
+        "trace_flag_enum": 1,
+        "sphere_count": 0,
+        "box_count": 0,
+        "capsule_count": 0,
+        "tapered_capsule_count": 0,
+        "convex_count": 1,
+        "body_resource_bytes": 491795,
+        "mesh_resource_bytes": 0
+      },
+      {
+        "tile": "-001_+000",
+        "asset_path": "/Game/XinyiV2/RuntimeBuildings/m001_p000/xinyi_runtime_-001_+000/StaticMeshes/xinyi_runtime_-001_+000.xinyi_runtime_-001_+000",
+        "actor_package": "/Game/XinyiV2/L_XinyiV2_Contract_WP/_Generated_/AWXXO6JYDBUG3K828V6NRGNFD",
+        "runtime_ownership_note": "actor observed loaded by World Partition; editor-only spatial/grid properties are not exposed by the packaged AActor API",
+        "component_collision_enabled_enum": 3,
+        "visibility_response_enum": 2,
+        "body_setup": "/Game/XinyiV2/RuntimeBuildings/m001_p000/xinyi_runtime_-001_+000/StaticMeshes/xinyi_runtime_-001_+000.xinyi_runtime_-001_+000:BodySetup_0",
+        "body_guid": "248C039E47FFC73F69DB85834FF40133",
+        "trace_flag_enum": 1,
+        "sphere_count": 0,
+        "box_count": 0,
+        "capsule_count": 0,
+        "tapered_capsule_count": 0,
+        "convex_count": 1,
+        "body_resource_bytes": 772548,
+        "mesh_resource_bytes": 0
+      },
+      {
+        "tile": "+000_+000",
+        "asset_path": "/Game/XinyiV2/RuntimeBuildings/p000_p000/xinyi_runtime_+000_+000/StaticMeshes/xinyi_runtime_+000_+000.xinyi_runtime_+000_+000",
+        "actor_package": "/Game/XinyiV2/L_XinyiV2_Contract_WP/_Generated_/AA0PKG0D1CL5LW998N2SV1196",
+        "runtime_ownership_note": "actor observed loaded by World Partition; editor-only spatial/grid properties are not exposed by the packaged AActor API",
+        "component_collision_enabled_enum": 3,
+        "visibility_response_enum": 2,
+        "body_setup": "/Game/XinyiV2/RuntimeBuildings/p000_p000/xinyi_runtime_+000_+000/StaticMeshes/xinyi_runtime_+000_+000.xinyi_runtime_+000_+000:BodySetup_0",
+        "body_guid": "C01B93C14211B0487188F5B6549C4F69",
+        "trace_flag_enum": 1,
+        "sphere_count": 0,
+        "box_count": 0,
+        "capsule_count": 0,
+        "tapered_capsule_count": 0,
+        "convex_count": 1,
+        "body_resource_bytes": 704859,
+        "mesh_resource_bytes": 0
+      },
+      {
+        "tile": "+001_+000",
+        "asset_path": "/Game/XinyiV2/RuntimeBuildings/p001_p000/xinyi_runtime_+001_+000/StaticMeshes/xinyi_runtime_+001_+000.xinyi_runtime_+001_+000",
+        "actor_package": "/Game/XinyiV2/L_XinyiV2_Contract_WP/_Generated_/8U6U49NICWLW4DD899H5S4P0Z",
+        "runtime_ownership_note": "actor observed loaded by World Partition; editor-only spatial/grid properties are not exposed by the packaged AActor API",
+        "component_collision_enabled_enum": 3,
+        "visibility_response_enum": 2,
+        "body_setup": "/Game/XinyiV2/RuntimeBuildings/p001_p000/xinyi_runtime_+001_+000/StaticMeshes/xinyi_runtime_+001_+000.xinyi_runtime_+001_+000:BodySetup_0",
+        "body_guid": "48BBCBDE4A75EB4F886CC79D0469535C",
+        "trace_flag_enum": 1,
+        "sphere_count": 0,
+        "box_count": 0,
+        "capsule_count": 0,
+        "tapered_capsule_count": 0,
+        "convex_count": 1,
+        "body_resource_bytes": 1419935,
+        "mesh_resource_bytes": 0
+      },
+      {
+        "tile": "-003_+000",
+        "asset_path": "/Game/XinyiV2/RuntimeBuildings/m003_p000/xinyi_runtime_-003_+000/StaticMeshes/xinyi_runtime_-003_+000.xinyi_runtime_-003_+000",
+        "actor_package": "/Game/XinyiV2/L_XinyiV2_Contract_WP/_Generated_/6DJQUMQB8ZYVQI3F1CPYWI488",
+        "runtime_ownership_note": "actor observed loaded by World Partition; editor-only spatial/grid properties are not exposed by the packaged AActor API",
+        "component_collision_enabled_enum": 3,
+        "visibility_response_enum": 2,
+        "body_setup": "/Game/XinyiV2/RuntimeBuildings/m003_p000/xinyi_runtime_-003_+000/StaticMeshes/xinyi_runtime_-003_+000.xinyi_runtime_-003_+000:BodySetup_0",
+        "body_guid": "877DABAF4EE23F3EC94DB995D904A4CF",
+        "trace_flag_enum": 1,
+        "sphere_count": 0,
+        "box_count": 0,
+        "capsule_count": 0,
+        "tapered_capsule_count": 0,
+        "convex_count": 1,
+        "body_resource_bytes": 562703,
+        "mesh_resource_bytes": 0
+      },
+      {
+        "tile": "+000_-001",
+        "asset_path": "/Game/XinyiV2/RuntimeBuildings/p000_m001/xinyi_runtime_+000_-001/StaticMeshes/xinyi_runtime_+000_-001.xinyi_runtime_+000_-001",
+        "actor_package": "/Game/XinyiV2/L_XinyiV2_Contract_WP/_Generated_/ECCBK95341Y4RA3K9EZEOSXRM",
+        "runtime_ownership_note": "actor observed loaded by World Partition; editor-only spatial/grid properties are not exposed by the packaged AActor API",
+        "component_collision_enabled_enum": 3,
+        "visibility_response_enum": 2,
+        "body_setup": "/Game/XinyiV2/RuntimeBuildings/p000_m001/xinyi_runtime_+000_-001/StaticMeshes/xinyi_runtime_+000_-001.xinyi_runtime_+000_-001:BodySetup_0",
+        "body_guid": "76A0BE38481B87E2476AEAB88FEC7DE0",
+        "trace_flag_enum": 1,
+        "sphere_count": 0,
+        "box_count": 0,
+        "capsule_count": 0,
+        "tapered_capsule_count": 0,
+        "convex_count": 1,
+        "body_resource_bytes": 1019663,
+        "mesh_resource_bytes": 0
+      },
+      {
+        "tile": "-003_-001",
+        "asset_path": "/Game/XinyiV2/RuntimeBuildings/m003_m001/xinyi_runtime_-003_-001/StaticMeshes/xinyi_runtime_-003_-001.xinyi_runtime_-003_-001",
+        "actor_package": "/Game/XinyiV2/L_XinyiV2_Contract_WP/_Generated_/7C09121K0OGXMXJFO2VSRQEIR",
+        "runtime_ownership_note": "actor observed loaded by World Partition; editor-only spatial/grid properties are not exposed by the packaged AActor API",
+        "component_collision_enabled_enum": 3,
+        "visibility_response_enum": 2,
+        "body_setup": "/Game/XinyiV2/RuntimeBuildings/m003_m001/xinyi_runtime_-003_-001/StaticMeshes/xinyi_runtime_-003_-001.xinyi_runtime_-003_-001:BodySetup_0",
+        "body_guid": "EAC3BFC9415425A88DEE15A2D2C0ECE7",
+        "trace_flag_enum": 1,
+        "sphere_count": 0,
+        "box_count": 0,
+        "capsule_count": 0,
+        "tapered_capsule_count": 0,
+        "convex_count": 1,
+        "body_resource_bytes": 820191,
+        "mesh_resource_bytes": 0
+      },
+      {
+        "tile": "-002_-001",
+        "asset_path": "/Game/XinyiV2/RuntimeBuildings/m002_m001/xinyi_runtime_-002_-001/StaticMeshes/xinyi_runtime_-002_-001.xinyi_runtime_-002_-001",
+        "actor_package": "/Game/XinyiV2/L_XinyiV2_Contract_WP/_Generated_/EDJZH8KGIWS7MV44OBMFPMZKS",
+        "runtime_ownership_note": "actor observed loaded by World Partition; editor-only spatial/grid properties are not exposed by the packaged AActor API",
+        "component_collision_enabled_enum": 3,
+        "visibility_response_enum": 2,
+        "body_setup": "/Game/XinyiV2/RuntimeBuildings/m002_m001/xinyi_runtime_-002_-001/StaticMeshes/xinyi_runtime_-002_-001.xinyi_runtime_-002_-001:BodySetup_0",
+        "body_guid": "F9CBF9B042BF50D8AEFA3C8D002D3195",
+        "trace_flag_enum": 1,
+        "sphere_count": 0,
+        "box_count": 0,
+        "capsule_count": 0,
+        "tapered_capsule_count": 0,
+        "convex_count": 1,
+        "body_resource_bytes": 2857287,
+        "mesh_resource_bytes": 0
+      },
+      {
+        "tile": "-001_-001",
+        "asset_path": "/Game/XinyiV2/RuntimeBuildings/m001_m001/xinyi_runtime_-001_-001/StaticMeshes/xinyi_runtime_-001_-001.xinyi_runtime_-001_-001",
+        "actor_package": "/Game/XinyiV2/L_XinyiV2_Contract_WP/_Generated_/0U8NQ45V3I4VCW9SZNQ0A31MV",
+        "runtime_ownership_note": "actor observed loaded by World Partition; editor-only spatial/grid properties are not exposed by the packaged AActor API",
+        "component_collision_enabled_enum": 3,
+        "visibility_response_enum": 2,
+        "body_setup": "/Game/XinyiV2/RuntimeBuildings/m001_m001/xinyi_runtime_-001_-001/StaticMeshes/xinyi_runtime_-001_-001.xinyi_runtime_-001_-001:BodySetup_0",
+        "body_guid": "69E479C441E1C3EF032E9ABC0C72DD26",
+        "trace_flag_enum": 1,
+        "sphere_count": 0,
+        "box_count": 0,
+        "capsule_count": 0,
+        "tapered_capsule_count": 0,
+        "convex_count": 1,
+        "body_resource_bytes": 2096687,
+        "mesh_resource_bytes": 0
+      },
+      {
+        "tile": "-002_-002",
+        "asset_path": "/Game/XinyiV2/RuntimeBuildings/m002_m002/xinyi_runtime_-002_-002/StaticMeshes/xinyi_runtime_-002_-002.xinyi_runtime_-002_-002",
+        "actor_package": "/Game/XinyiV2/L_XinyiV2_Contract_WP/_Generated_/6XZZHHUZFM48ZSM3BXW8PFTXI",
+        "runtime_ownership_note": "actor observed loaded by World Partition; editor-only spatial/grid properties are not exposed by the packaged AActor API",
+        "component_collision_enabled_enum": 3,
+        "visibility_response_enum": 2,
+        "body_setup": "/Game/XinyiV2/RuntimeBuildings/m002_m002/xinyi_runtime_-002_-002/StaticMeshes/xinyi_runtime_-002_-002.xinyi_runtime_-002_-002:BodySetup_0",
+        "body_guid": "03D8A9AB43D3F29EEE4A84A47EC5D437",
+        "trace_flag_enum": 1,
+        "sphere_count": 0,
+        "box_count": 0,
+        "capsule_count": 0,
+        "tapered_capsule_count": 0,
+        "convex_count": 1,
+        "body_resource_bytes": 1398911,
+        "mesh_resource_bytes": 0
+      },
+      {
+        "tile": "-001_-002",
+        "asset_path": "/Game/XinyiV2/RuntimeBuildings/m001_m002/xinyi_runtime_-001_-002/StaticMeshes/xinyi_runtime_-001_-002.xinyi_runtime_-001_-002",
+        "actor_package": "/Game/XinyiV2/L_XinyiV2_Contract_WP/_Generated_/B4PKWC7OWHNT8DC1IF9BRHEEL",
+        "runtime_ownership_note": "actor observed loaded by World Partition; editor-only spatial/grid properties are not exposed by the packaged AActor API",
+        "component_collision_enabled_enum": 3,
+        "visibility_response_enum": 2,
+        "body_setup": "/Game/XinyiV2/RuntimeBuildings/m001_m002/xinyi_runtime_-001_-002/StaticMeshes/xinyi_runtime_-001_-002.xinyi_runtime_-001_-002:BodySetup_0",
+        "body_guid": "A0DCC92A452E7CBBEA259DB400F00EB0",
+        "trace_flag_enum": 1,
+        "sphere_count": 0,
+        "box_count": 0,
+        "capsule_count": 0,
+        "tapered_capsule_count": 0,
+        "convex_count": 1,
+        "body_resource_bytes": 1938084,
+        "mesh_resource_bytes": 0
+      },
+      {
+        "tile": "+000_-002",
+        "asset_path": "/Game/XinyiV2/RuntimeBuildings/p000_m002/xinyi_runtime_+000_-002/StaticMeshes/xinyi_runtime_+000_-002.xinyi_runtime_+000_-002",
+        "actor_package": "/Game/XinyiV2/L_XinyiV2_Contract_WP/_Generated_/DTWQT73O2BA41RSIYQVGL81JS",
+        "runtime_ownership_note": "actor observed loaded by World Partition; editor-only spatial/grid properties are not exposed by the packaged AActor API",
+        "component_collision_enabled_enum": 3,
+        "visibility_response_enum": 2,
+        "body_setup": "/Game/XinyiV2/RuntimeBuildings/p000_m002/xinyi_runtime_+000_-002/StaticMeshes/xinyi_runtime_+000_-002.xinyi_runtime_+000_-002:BodySetup_0",
+        "body_guid": "9C0740CF40A54BFC5AB74D811A00C71C",
+        "trace_flag_enum": 1,
+        "sphere_count": 0,
+        "box_count": 0,
+        "capsule_count": 0,
+        "tapered_capsule_count": 0,
+        "convex_count": 1,
+        "body_resource_bytes": 1990367,
+        "mesh_resource_bytes": 0
+      },
+      {
+        "tile": "+001_-001",
+        "asset_path": "/Game/XinyiV2/RuntimeBuildings/p001_m001/xinyi_runtime_+001_-001/StaticMeshes/xinyi_runtime_+001_-001.xinyi_runtime_+001_-001",
+        "actor_package": "/Game/XinyiV2/L_XinyiV2_Contract_WP/_Generated_/DN036Z8DFMUP139BVHBG9RHLV",
+        "runtime_ownership_note": "actor observed loaded by World Partition; editor-only spatial/grid properties are not exposed by the packaged AActor API",
+        "component_collision_enabled_enum": 3,
+        "visibility_response_enum": 2,
+        "body_setup": "/Game/XinyiV2/RuntimeBuildings/p001_m001/xinyi_runtime_+001_-001/StaticMeshes/xinyi_runtime_+001_-001.xinyi_runtime_+001_-001:BodySetup_0",
+        "body_guid": "3E20588148789265DB57E78B1273B9C3",
+        "trace_flag_enum": 1,
+        "sphere_count": 0,
+        "box_count": 0,
+        "capsule_count": 0,
+        "tapered_capsule_count": 0,
+        "convex_count": 1,
+        "body_resource_bytes": 140555,
+        "mesh_resource_bytes": 0
+      },
+      {
+        "tile": "+001_-002",
+        "asset_path": "/Game/XinyiV2/RuntimeBuildings/p001_m002/xinyi_runtime_+001_-002/StaticMeshes/xinyi_runtime_+001_-002.xinyi_runtime_+001_-002",
+        "actor_package": "/Game/XinyiV2/L_XinyiV2_Contract_WP/_Generated_/61QHW0WXZNTZ47VAXBC9TMGO0",
+        "runtime_ownership_note": "actor observed loaded by World Partition; editor-only spatial/grid properties are not exposed by the packaged AActor API",
+        "component_collision_enabled_enum": 3,
+        "visibility_response_enum": 2,
+        "body_setup": "/Game/XinyiV2/RuntimeBuildings/p001_m002/xinyi_runtime_+001_-002/StaticMeshes/xinyi_runtime_+001_-002.xinyi_runtime_+001_-002:BodySetup_0",
+        "body_guid": "2EA57ED24E0AE6C4855ED98970DA3A3A",
+        "trace_flag_enum": 1,
+        "sphere_count": 0,
+        "box_count": 0,
+        "capsule_count": 0,
+        "tapered_capsule_count": 0,
+        "convex_count": 1,
+        "body_resource_bytes": 559999,
+        "mesh_resource_bytes": 0
+      },
+      {
+        "tile": "-003_-002",
+        "asset_path": "/Game/XinyiV2/RuntimeBuildings/m003_m002/xinyi_runtime_-003_-002/StaticMeshes/xinyi_runtime_-003_-002.xinyi_runtime_-003_-002",
+        "actor_package": "/Game/XinyiV2/L_XinyiV2_Contract_WP/_Generated_/5HASELKS0VFRBBB78W17UKFRO",
+        "runtime_ownership_note": "actor observed loaded by World Partition; editor-only spatial/grid properties are not exposed by the packaged AActor API",
+        "component_collision_enabled_enum": 3,
+        "visibility_response_enum": 2,
+        "body_setup": "/Game/XinyiV2/RuntimeBuildings/m003_m002/xinyi_runtime_-003_-002/StaticMeshes/xinyi_runtime_-003_-002.xinyi_runtime_-003_-002:BodySetup_0",
+        "body_guid": "4D9CB6DF44AB7437807A89A2ED7B5345",
+        "trace_flag_enum": 1,
+        "sphere_count": 0,
+        "box_count": 0,
+        "capsule_count": 0,
+        "tapered_capsule_count": 0,
+        "convex_count": 1,
+        "body_resource_bytes": 498983,
+        "mesh_resource_bytes": 0
+      }
+    ]
+  },
+  "identity_isolation": {
+    "terrain_requires_landscape_actor_and_heightfield_component": true,
+    "terrain_queries_ignore_static_mesh_actors": true,
+    "building_queries_ignore_landscape_actors": true,
+    "building_positive_requires_expected_tile_identity": true
+  },
+  "log_diagnostics": {
+    "error_count": 0,
+    "warning_count": 0,
+    "selected_lines": [
+      "LogWindows: Failed to load 'aqProf.dll' (GetLastError=126)",
+      "LogWindows: Failed to load 'VtuneApi.dll' (GetLastError=126)",
+      "LogWindows: Failed to load 'VtuneApi32e.dll' (GetLastError=126)",
+      "LogWindows: Failed to load 'WinPixGpuCapturer.dll' (GetLastError=126)"
+    ]
+  }
+}

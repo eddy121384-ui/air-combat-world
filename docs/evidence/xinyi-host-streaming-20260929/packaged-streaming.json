@@ -1,0 +1,3205 @@
+{
+  "control_clearance_m": 5000.0,
+  "protected_file_rows": 107,
+  "route_plan_sha256": "4f318ca3a5fcda6337818f31c98631fa99887675c718e9d0cae3e1714fa9dd61",
+  "run_id": "20260929T002733Z-44199b81",
+  "runs": [
+    {
+      "control_counts": [
+        0,
+        0
+      ],
+      "executable_sha256": "a856fe1eca061931ed1fccc6f5a1b21df5a18090fd0c8679ae032272ee077855",
+      "launch_id": "53e98173-ccb4-425d-967e-80839927ac37",
+      "log_sha256": "929b007d14aecb138699c99cd8b6eac908781b9a3e893269504d3306fadce82e",
+      "logged_error_count": 0,
+      "logged_warning_count": 0,
+      "max_hitch_ms": 1251.8156990408897,
+      "max_loading_range_cm": 25600,
+      "max_wait_ms": 24404.08119931817,
+      "points": [
+        {
+          "active_cell_names": [
+            "A9EBQVMN87J5BEOL0X0YCLXUV"
+          ],
+          "active_source_count": 1,
+          "errors": [],
+          "expected_tile_id": "",
+          "hitch_ms": 61.99369952082634,
+          "id": "outside-west-control",
+          "kind": "control",
+          "load_delta": [],
+          "loaded_actor_count": 0,
+          "loaded_cell_count": 1,
+          "loaded_cell_names": [
+            "A9EBQVMN87J5BEOL0X0YCLXUV"
+          ],
+          "loaded_tile_ids": [],
+          "location_cm": [
+            -650000,
+            -25000,
+            30000
+          ],
+          "missing_refs": [],
+          "placement_max_error_cm": 0,
+          "requested_state": "Activated",
+          "source_enabled": true,
+          "source_observed": true,
+          "source_registered": true,
+          "streaming_completed": true,
+          "terrain": {
+            "collision_component_count": 0,
+            "loaded_cell_count": 0,
+            "proxy_actor_count": 0,
+            "render_component_count": 0,
+            "root_actor_count": 1
+          },
+          "terrain_cell_names": [],
+          "unload_delta": [],
+          "wait_ms": 5071.302197873592
+        },
+        {
+          "active_cell_names": [
+            "5LTCG46S0TLOP1PPE1TU1517O",
+            "66VI5U1BW9L277URCDMHSL149",
+            "A9EBQVMN87J5BEOL0X0YCLXUV"
+          ],
+          "active_source_count": 1,
+          "errors": [],
+          "expected_tile_id": "-003_+002",
+          "hitch_ms": 15.450999140739441,
+          "id": "tile-00-00",
+          "kind": "tile",
+          "load_delta": [
+            "-003_+002"
+          ],
+          "loaded_actor_count": 1,
+          "loaded_cell_count": 3,
+          "loaded_cell_names": [
+            "5LTCG46S0TLOP1PPE1TU1517O",
+            "66VI5U1BW9L277URCDMHSL149",
+            "A9EBQVMN87J5BEOL0X0YCLXUV"
+          ],
+          "loaded_tile_ids": [
+            "-003_+002"
+          ],
+          "location_cm": [
+            -125000,
+            -125000,
+            30000
+          ],
+          "missing_refs": [],
+          "placement_max_error_cm": 0,
+          "requested_state": "Activated",
+          "source_enabled": true,
+          "source_observed": true,
+          "source_registered": true,
+          "streaming_completed": true,
+          "terrain": {
+            "collision_component_count": 16,
+            "loaded_cell_count": 0,
+            "proxy_actor_count": 1,
+            "render_component_count": 16,
+            "root_actor_count": 1
+          },
+          "terrain_cell_names": [],
+          "unload_delta": [],
+          "wait_ms": 5019.712001085281
+        },
+        {
+          "active_cell_names": [
+            "66VI5U1BW9L277URCDMHSL149",
+            "6L8JRSYOULDGW8E7CTI39LGAP",
+            "A9EBQVMN87J5BEOL0X0YCLXUV",
+            "E0U2F80TP2F5LEL9T7DWD6424"
+          ],
+          "active_source_count": 1,
+          "errors": [],
+          "expected_tile_id": "-002_+002",
+          "hitch_ms": 11.457603424787521,
+          "id": "tile-00-01",
+          "kind": "tile",
+          "load_delta": [
+            "-001_+001",
+            "-002_+000",
+            "-002_+001",
+            "-002_+002"
+          ],
+          "loaded_actor_count": 4,
+          "loaded_cell_count": 4,
+          "loaded_cell_names": [
+            "66VI5U1BW9L277URCDMHSL149",
+            "6L8JRSYOULDGW8E7CTI39LGAP",
+            "A9EBQVMN87J5BEOL0X0YCLXUV",
+            "E0U2F80TP2F5LEL9T7DWD6424"
+          ],
+          "loaded_tile_ids": [
+            "-001_+001",
+            "-002_+000",
+            "-002_+001",
+            "-002_+002"
+          ],
+          "location_cm": [
+            -75000,
+            -125000,
+            30000
+          ],
+          "missing_refs": [],
+          "placement_max_error_cm": 0,
+          "requested_state": "Activated",
+          "source_enabled": true,
+          "source_observed": true,
+          "source_registered": true,
+          "streaming_completed": true,
+          "terrain": {
+            "collision_component_count": 16,
+            "loaded_cell_count": 0,
+            "proxy_actor_count": 1,
+            "render_component_count": 16,
+            "root_actor_count": 1
+          },
+          "terrain_cell_names": [],
+          "unload_delta": [
+            "-003_+002"
+          ],
+          "wait_ms": 5016.742900013924
+        },
+        {
+          "active_cell_names": [
+            "395YPUC5VEJO4E9MJ1RSCV8FD",
+            "66VI5U1BW9L277URCDMHSL149",
+            "6L8JRSYOULDGW8E7CTI39LGAP",
+            "A9EBQVMN87J5BEOL0X0YCLXUV",
+            "E0U2F80TP2F5LEL9T7DWD6424"
+          ],
+          "active_source_count": 1,
+          "errors": [],
+          "expected_tile_id": "-001_+002",
+          "hitch_ms": 13.81710171699524,
+          "id": "tile-00-02",
+          "kind": "tile",
+          "load_delta": [
+            "-001_+002"
+          ],
+          "loaded_actor_count": 5,
+          "loaded_cell_count": 5,
+          "loaded_cell_names": [
+            "395YPUC5VEJO4E9MJ1RSCV8FD",
+            "66VI5U1BW9L277URCDMHSL149",
+            "6L8JRSYOULDGW8E7CTI39LGAP",
+            "A9EBQVMN87J5BEOL0X0YCLXUV",
+            "E0U2F80TP2F5LEL9T7DWD6424"
+          ],
+          "loaded_tile_ids": [
+            "-001_+001",
+            "-001_+002",
+            "-002_+000",
+            "-002_+001",
+            "-002_+002"
+          ],
+          "location_cm": [
+            -25000,
+            -125000,
+            30000
+          ],
+          "missing_refs": [],
+          "placement_max_error_cm": 0,
+          "requested_state": "Activated",
+          "source_enabled": true,
+          "source_observed": true,
+          "source_registered": true,
+          "streaming_completed": true,
+          "terrain": {
+            "collision_component_count": 16,
+            "loaded_cell_count": 0,
+            "proxy_actor_count": 1,
+            "render_component_count": 16,
+            "root_actor_count": 1
+          },
+          "terrain_cell_names": [],
+          "unload_delta": [],
+          "wait_ms": 5016.5706016123295
+        },
+        {
+          "active_cell_names": [
+            "4PUV05NXIRW7X3GB03Z4ADG7K",
+            "66VI5U1BW9L277URCDMHSL149",
+            "8NNNYLND3KTBVITZZH2FLSXKP",
+            "8R2GZ349VHEQ00WO0HJDD3XEX",
+            "A9EBQVMN87J5BEOL0X0YCLXUV"
+          ],
+          "active_source_count": 1,
+          "errors": [],
+          "expected_tile_id": "+000_+002",
+          "hitch_ms": 112.3134009540081,
+          "id": "tile-00-03",
+          "kind": "tile",
+          "load_delta": [
+            "+000_+001",
+            "+000_+002"
+          ],
+          "loaded_actor_count": 2,
+          "loaded_cell_count": 5,
+          "loaded_cell_names": [
+            "4PUV05NXIRW7X3GB03Z4ADG7K",
+            "66VI5U1BW9L277URCDMHSL149",
+            "8NNNYLND3KTBVITZZH2FLSXKP",
+            "8R2GZ349VHEQ00WO0HJDD3XEX",
+            "A9EBQVMN87J5BEOL0X0YCLXUV"
+          ],
+          "loaded_tile_ids": [
+            "+000_+001",
+            "+000_+002"
+          ],
+          "location_cm": [
+            25000,
+            -125000,
+            30000
+          ],
+          "missing_refs": [],
+          "placement_max_error_cm": 0,
+          "requested_state": "Activated",
+          "source_enabled": true,
+          "source_observed": true,
+          "source_registered": true,
+          "streaming_completed": true,
+          "terrain": {
+            "collision_component_count": 20,
+            "loaded_cell_count": 0,
+            "proxy_actor_count": 2,
+            "render_component_count": 20,
+            "root_actor_count": 1
+          },
+          "terrain_cell_names": [],
+          "unload_delta": [
+            "-001_+001",
+            "-001_+002",
+            "-002_+000",
+            "-002_+001",
+            "-002_+002"
+          ],
+          "wait_ms": 5167.569000273943
+        },
+        {
+          "active_cell_names": [
+            "3C5BDXS38I89H922H3ICVPDUW",
+            "66VI5U1BW9L277URCDMHSL149",
+            "8NNNYLND3KTBVITZZH2FLSXKP",
+            "A9EBQVMN87J5BEOL0X0YCLXUV",
+            "DLWGYYAG8RK0IW1GP49M9GXCV"
+          ],
+          "active_source_count": 1,
+          "errors": [],
+          "expected_tile_id": "+001_+002",
+          "hitch_ms": 550.3598004579544,
+          "id": "tile-00-04",
+          "kind": "tile",
+          "load_delta": [
+            "+001_+001",
+            "+001_+002"
+          ],
+          "loaded_actor_count": 2,
+          "loaded_cell_count": 5,
+          "loaded_cell_names": [
+            "3C5BDXS38I89H922H3ICVPDUW",
+            "66VI5U1BW9L277URCDMHSL149",
+            "8NNNYLND3KTBVITZZH2FLSXKP",
+            "A9EBQVMN87J5BEOL0X0YCLXUV",
+            "DLWGYYAG8RK0IW1GP49M9GXCV"
+          ],
+          "loaded_tile_ids": [
+            "+001_+001",
+            "+001_+002"
+          ],
+          "location_cm": [
+            75000,
+            -125000,
+            30000
+          ],
+          "missing_refs": [],
+          "placement_max_error_cm": 0,
+          "requested_state": "Activated",
+          "source_enabled": true,
+          "source_observed": true,
+          "source_registered": true,
+          "streaming_completed": true,
+          "terrain": {
+            "collision_component_count": 20,
+            "loaded_cell_count": 0,
+            "proxy_actor_count": 2,
+            "render_component_count": 20,
+            "root_actor_count": 1
+          },
+          "terrain_cell_names": [],
+          "unload_delta": [
+            "+000_+001",
+            "+000_+002"
+          ],
+          "wait_ms": 7300.4961013793945
+        },
+        {
+          "active_cell_names": [
+            "3C5BDXS38I89H922H3ICVPDUW",
+            "66VI5U1BW9L277URCDMHSL149",
+            "8NNNYLND3KTBVITZZH2FLSXKP",
+            "8R2GZ349VHEQ00WO0HJDD3XEX",
+            "8U6U49NICWLW4DD899H5S4P0Z",
+            "A9EBQVMN87J5BEOL0X0YCLXUV",
+            "DLWGYYAG8RK0IW1GP49M9GXCV"
+          ],
+          "active_source_count": 1,
+          "errors": [],
+          "expected_tile_id": "+001_+001",
+          "hitch_ms": 1251.8156990408897,
+          "id": "tile-01-00",
+          "kind": "tile",
+          "load_delta": [
+            "+000_+001",
+            "+001_+000"
+          ],
+          "loaded_actor_count": 4,
+          "loaded_cell_count": 7,
+          "loaded_cell_names": [
+            "3C5BDXS38I89H922H3ICVPDUW",
+            "66VI5U1BW9L277URCDMHSL149",
+            "8NNNYLND3KTBVITZZH2FLSXKP",
+            "8R2GZ349VHEQ00WO0HJDD3XEX",
+            "8U6U49NICWLW4DD899H5S4P0Z",
+            "A9EBQVMN87J5BEOL0X0YCLXUV",
+            "DLWGYYAG8RK0IW1GP49M9GXCV"
+          ],
+          "loaded_tile_ids": [
+            "+000_+001",
+            "+001_+000",
+            "+001_+001",
+            "+001_+002"
+          ],
+          "location_cm": [
+            75000,
+            -75000,
+            30000
+          ],
+          "missing_refs": [],
+          "placement_max_error_cm": 0,
+          "requested_state": "Activated",
+          "source_enabled": true,
+          "source_observed": true,
+          "source_registered": true,
+          "streaming_completed": true,
+          "terrain": {
+            "collision_component_count": 20,
+            "loaded_cell_count": 0,
+            "proxy_actor_count": 2,
+            "render_component_count": 20,
+            "root_actor_count": 1
+          },
+          "terrain_cell_names": [],
+          "unload_delta": [],
+          "wait_ms": 8037.49829903245
+        },
+        {
+          "active_cell_names": [
+            "3C5BDXS38I89H922H3ICVPDUW",
+            "4PUV05NXIRW7X3GB03Z4ADG7K",
+            "66VI5U1BW9L277URCDMHSL149",
+            "6L8JRSYOULDGW8E7CTI39LGAP",
+            "8NNNYLND3KTBVITZZH2FLSXKP",
+            "8R2GZ349VHEQ00WO0HJDD3XEX",
+            "A9EBQVMN87J5BEOL0X0YCLXUV",
+            "AA0PKG0D1CL5LW998N2SV1196"
+          ],
+          "active_source_count": 1,
+          "errors": [],
+          "expected_tile_id": "+000_+001",
+          "hitch_ms": 504.00859862565994,
+          "id": "tile-01-01",
+          "kind": "tile",
+          "load_delta": [
+            "+000_+000",
+            "+000_+002",
+            "-001_+001",
+            "-002_+000",
+            "-002_+001"
+          ],
+          "loaded_actor_count": 7,
+          "loaded_cell_count": 8,
+          "loaded_cell_names": [
+            "3C5BDXS38I89H922H3ICVPDUW",
+            "4PUV05NXIRW7X3GB03Z4ADG7K",
+            "66VI5U1BW9L277URCDMHSL149",
+            "6L8JRSYOULDGW8E7CTI39LGAP",
+            "8NNNYLND3KTBVITZZH2FLSXKP",
+            "8R2GZ349VHEQ00WO0HJDD3XEX",
+            "A9EBQVMN87J5BEOL0X0YCLXUV",
+            "AA0PKG0D1CL5LW998N2SV1196"
+          ],
+          "loaded_tile_ids": [
+            "+000_+000",
+            "+000_+001",
+            "+000_+002",
+            "+001_+001",
+            "-001_+001",
+            "-002_+000",
+            "-002_+001"
+          ],
+          "location_cm": [
+            25000,
+            -75000,
+            30000
+          ],
+          "missing_refs": [],
+          "placement_max_error_cm": 0,
+          "requested_state": "Activated",
+          "source_enabled": true,
+          "source_observed": true,
+          "source_registered": true,
+          "streaming_completed": true,
+          "terrain": {
+            "collision_component_count": 20,
+            "loaded_cell_count": 0,
+            "proxy_actor_count": 2,
+            "render_component_count": 20,
+            "root_actor_count": 1
+          },
+          "terrain_cell_names": [],
+          "unload_delta": [
+            "+001_+000",
+            "+001_+002"
+          ],
+          "wait_ms": 5033.248499035835
+        },
+        {
+          "active_cell_names": [
+            "395YPUC5VEJO4E9MJ1RSCV8FD",
+            "66VI5U1BW9L277URCDMHSL149",
+            "6L8JRSYOULDGW8E7CTI39LGAP",
+            "8R2GZ349VHEQ00WO0HJDD3XEX",
+            "A9EBQVMN87J5BEOL0X0YCLXUV",
+            "AWXXO6JYDBUG3K828V6NRGNFD"
+          ],
+          "active_source_count": 1,
+          "errors": [],
+          "expected_tile_id": "-001_+001",
+          "hitch_ms": 313.94509971141815,
+          "id": "tile-01-02",
+          "kind": "tile",
+          "load_delta": [
+            "-001_+000",
+            "-001_+002"
+          ],
+          "loaded_actor_count": 6,
+          "loaded_cell_count": 6,
+          "loaded_cell_names": [
+            "395YPUC5VEJO4E9MJ1RSCV8FD",
+            "66VI5U1BW9L277URCDMHSL149",
+            "6L8JRSYOULDGW8E7CTI39LGAP",
+            "8R2GZ349VHEQ00WO0HJDD3XEX",
+            "A9EBQVMN87J5BEOL0X0YCLXUV",
+            "AWXXO6JYDBUG3K828V6NRGNFD"
+          ],
+          "loaded_tile_ids": [
+            "+000_+001",
+            "-001_+000",
+            "-001_+001",
+            "-001_+002",
+            "-002_+000",
+            "-002_+001"
+          ],
+          "location_cm": [
+            -25000,
+            -75000,
+            30000
+          ],
+          "missing_refs": [],
+          "placement_max_error_cm": 0,
+          "requested_state": "Activated",
+          "source_enabled": true,
+          "source_observed": true,
+          "source_registered": true,
+          "streaming_completed": true,
+          "terrain": {
+            "collision_component_count": 16,
+            "loaded_cell_count": 0,
+            "proxy_actor_count": 1,
+            "render_component_count": 16,
+            "root_actor_count": 1
+          },
+          "terrain_cell_names": [],
+          "unload_delta": [
+            "+000_+000",
+            "+000_+002",
+            "+001_+001"
+          ],
+          "wait_ms": 5005.836699157953
+        },
+        {
+          "active_cell_names": [
+            "66VI5U1BW9L277URCDMHSL149",
+            "6L8JRSYOULDGW8E7CTI39LGAP",
+            "A9EBQVMN87J5BEOL0X0YCLXUV",
+            "DBIMHZZ7EM4V83JY0J0GQH6XQ",
+            "E0U2F80TP2F5LEL9T7DWD6424"
+          ],
+          "active_source_count": 1,
+          "errors": [],
+          "expected_tile_id": "-002_+001",
+          "hitch_ms": 410.4005992412567,
+          "id": "tile-01-03",
+          "kind": "tile",
+          "load_delta": [
+            "-002_+002",
+            "-003_+001"
+          ],
+          "loaded_actor_count": 5,
+          "loaded_cell_count": 5,
+          "loaded_cell_names": [
+            "66VI5U1BW9L277URCDMHSL149",
+            "6L8JRSYOULDGW8E7CTI39LGAP",
+            "A9EBQVMN87J5BEOL0X0YCLXUV",
+            "DBIMHZZ7EM4V83JY0J0GQH6XQ",
+            "E0U2F80TP2F5LEL9T7DWD6424"
+          ],
+          "loaded_tile_ids": [
+            "-001_+001",
+            "-002_+000",
+            "-002_+001",
+            "-002_+002",
+            "-003_+001"
+          ],
+          "location_cm": [
+            -75000,
+            -75000,
+            30000
+          ],
+          "missing_refs": [],
+          "placement_max_error_cm": 0,
+          "requested_state": "Activated",
+          "source_enabled": true,
+          "source_observed": true,
+          "source_registered": true,
+          "streaming_completed": true,
+          "terrain": {
+            "collision_component_count": 16,
+            "loaded_cell_count": 0,
+            "proxy_actor_count": 1,
+            "render_component_count": 16,
+            "root_actor_count": 1
+          },
+          "terrain_cell_names": [],
+          "unload_delta": [
+            "+000_+001",
+            "-001_+000",
+            "-001_+002"
+          ],
+          "wait_ms": 6035.302001982927
+        },
+        {
+          "active_cell_names": [
+            "66VI5U1BW9L277URCDMHSL149",
+            "6L8JRSYOULDGW8E7CTI39LGAP",
+            "A9EBQVMN87J5BEOL0X0YCLXUV",
+            "DBIMHZZ7EM4V83JY0J0GQH6XQ"
+          ],
+          "active_source_count": 1,
+          "errors": [],
+          "expected_tile_id": "-003_+001",
+          "hitch_ms": 805.9753999114037,
+          "id": "tile-01-04",
+          "kind": "tile",
+          "load_delta": [],
+          "loaded_actor_count": 4,
+          "loaded_cell_count": 4,
+          "loaded_cell_names": [
+            "66VI5U1BW9L277URCDMHSL149",
+            "6L8JRSYOULDGW8E7CTI39LGAP",
+            "A9EBQVMN87J5BEOL0X0YCLXUV",
+            "DBIMHZZ7EM4V83JY0J0GQH6XQ"
+          ],
+          "loaded_tile_ids": [
+            "-001_+001",
+            "-002_+000",
+            "-002_+001",
+            "-003_+001"
+          ],
+          "location_cm": [
+            -125000,
+            -75000,
+            30000
+          ],
+          "missing_refs": [],
+          "placement_max_error_cm": 0,
+          "requested_state": "Activated",
+          "source_enabled": true,
+          "source_observed": true,
+          "source_registered": true,
+          "streaming_completed": true,
+          "terrain": {
+            "collision_component_count": 16,
+            "loaded_cell_count": 0,
+            "proxy_actor_count": 1,
+            "render_component_count": 16,
+            "root_actor_count": 1
+          },
+          "terrain_cell_names": [],
+          "unload_delta": [
+            "-002_+002"
+          ],
+          "wait_ms": 5239.070497453213
+        },
+        {
+          "active_cell_names": [
+            "66VI5U1BW9L277URCDMHSL149",
+            "6DJQUMQB8ZYVQI3F1CPYWI488",
+            "6L8JRSYOULDGW8E7CTI39LGAP",
+            "A9EBQVMN87J5BEOL0X0YCLXUV"
+          ],
+          "active_source_count": 1,
+          "errors": [],
+          "expected_tile_id": "-003_+000",
+          "hitch_ms": 440.759502351284,
+          "id": "tile-02-00",
+          "kind": "tile",
+          "load_delta": [
+            "-003_+000"
+          ],
+          "loaded_actor_count": 4,
+          "loaded_cell_count": 4,
+          "loaded_cell_names": [
+            "66VI5U1BW9L277URCDMHSL149",
+            "6DJQUMQB8ZYVQI3F1CPYWI488",
+            "6L8JRSYOULDGW8E7CTI39LGAP",
+            "A9EBQVMN87J5BEOL0X0YCLXUV"
+          ],
+          "loaded_tile_ids": [
+            "-001_+001",
+            "-002_+000",
+            "-002_+001",
+            "-003_+000"
+          ],
+          "location_cm": [
+            -125000,
+            -25000,
+            30000
+          ],
+          "missing_refs": [],
+          "placement_max_error_cm": 0,
+          "requested_state": "Activated",
+          "source_enabled": true,
+          "source_observed": true,
+          "source_registered": true,
+          "streaming_completed": true,
+          "terrain": {
+            "collision_component_count": 16,
+            "loaded_cell_count": 0,
+            "proxy_actor_count": 1,
+            "render_component_count": 16,
+            "root_actor_count": 1
+          },
+          "terrain_cell_names": [],
+          "unload_delta": [
+            "-003_+001"
+          ],
+          "wait_ms": 6314.553499221802
+        },
+        {
+          "active_cell_names": [
+            "66VI5U1BW9L277URCDMHSL149",
+            "6DJQUMQB8ZYVQI3F1CPYWI488",
+            "6L8JRSYOULDGW8E7CTI39LGAP",
+            "A9EBQVMN87J5BEOL0X0YCLXUV",
+            "AWXXO6JYDBUG3K828V6NRGNFD"
+          ],
+          "active_source_count": 1,
+          "errors": [],
+          "expected_tile_id": "-002_+000",
+          "hitch_ms": 439.41549956798553,
+          "id": "tile-02-01",
+          "kind": "tile",
+          "load_delta": [
+            "-001_+000"
+          ],
+          "loaded_actor_count": 5,
+          "loaded_cell_count": 5,
+          "loaded_cell_names": [
+            "66VI5U1BW9L277URCDMHSL149",
+            "6DJQUMQB8ZYVQI3F1CPYWI488",
+            "6L8JRSYOULDGW8E7CTI39LGAP",
+            "A9EBQVMN87J5BEOL0X0YCLXUV",
+            "AWXXO6JYDBUG3K828V6NRGNFD"
+          ],
+          "loaded_tile_ids": [
+            "-001_+000",
+            "-001_+001",
+            "-002_+000",
+            "-002_+001",
+            "-003_+000"
+          ],
+          "location_cm": [
+            -75000,
+            -25000,
+            30000
+          ],
+          "missing_refs": [],
+          "placement_max_error_cm": 0,
+          "requested_state": "Activated",
+          "source_enabled": true,
+          "source_observed": true,
+          "source_registered": true,
+          "streaming_completed": true,
+          "terrain": {
+            "collision_component_count": 16,
+            "loaded_cell_count": 0,
+            "proxy_actor_count": 1,
+            "render_component_count": 16,
+            "root_actor_count": 1
+          },
+          "terrain_cell_names": [],
+          "unload_delta": [],
+          "wait_ms": 6295.009199529886
+        },
+        {
+          "active_cell_names": [
+            "66VI5U1BW9L277URCDMHSL149",
+            "6L8JRSYOULDGW8E7CTI39LGAP",
+            "A9EBQVMN87J5BEOL0X0YCLXUV",
+            "AWXXO6JYDBUG3K828V6NRGNFD"
+          ],
+          "active_source_count": 1,
+          "errors": [],
+          "expected_tile_id": "-001_+000",
+          "hitch_ms": 510.0836977362633,
+          "id": "tile-02-02",
+          "kind": "tile",
+          "load_delta": [],
+          "loaded_actor_count": 4,
+          "loaded_cell_count": 4,
+          "loaded_cell_names": [
+            "66VI5U1BW9L277URCDMHSL149",
+            "6L8JRSYOULDGW8E7CTI39LGAP",
+            "A9EBQVMN87J5BEOL0X0YCLXUV",
+            "AWXXO6JYDBUG3K828V6NRGNFD"
+          ],
+          "loaded_tile_ids": [
+            "-001_+000",
+            "-001_+001",
+            "-002_+000",
+            "-002_+001"
+          ],
+          "location_cm": [
+            -25000,
+            -25000,
+            30000
+          ],
+          "missing_refs": [],
+          "placement_max_error_cm": 0,
+          "requested_state": "Activated",
+          "source_enabled": true,
+          "source_observed": true,
+          "source_registered": true,
+          "streaming_completed": true,
+          "terrain": {
+            "collision_component_count": 16,
+            "loaded_cell_count": 0,
+            "proxy_actor_count": 1,
+            "render_component_count": 16,
+            "root_actor_count": 1
+          },
+          "terrain_cell_names": [],
+          "unload_delta": [
+            "-003_+000"
+          ],
+          "wait_ms": 5147.199600934982
+        },
+        {
+          "active_cell_names": [
+            "66VI5U1BW9L277URCDMHSL149",
+            "6L8JRSYOULDGW8E7CTI39LGAP",
+            "8NNNYLND3KTBVITZZH2FLSXKP",
+            "8R2GZ349VHEQ00WO0HJDD3XEX",
+            "8U6U49NICWLW4DD899H5S4P0Z",
+            "A9EBQVMN87J5BEOL0X0YCLXUV",
+            "AA0PKG0D1CL5LW998N2SV1196",
+            "ECCBK95341Y4RA3K9EZEOSXRM"
+          ],
+          "active_source_count": 1,
+          "errors": [],
+          "expected_tile_id": "+000_+000",
+          "hitch_ms": 573.4549015760422,
+          "id": "tile-02-03",
+          "kind": "tile",
+          "load_delta": [
+            "+000_+000",
+            "+000_+001",
+            "+000_-001",
+            "+001_+000"
+          ],
+          "loaded_actor_count": 7,
+          "loaded_cell_count": 8,
+          "loaded_cell_names": [
+            "66VI5U1BW9L277URCDMHSL149",
+            "6L8JRSYOULDGW8E7CTI39LGAP",
+            "8NNNYLND3KTBVITZZH2FLSXKP",
+            "8R2GZ349VHEQ00WO0HJDD3XEX",
+            "8U6U49NICWLW4DD899H5S4P0Z",
+            "A9EBQVMN87J5BEOL0X0YCLXUV",
+            "AA0PKG0D1CL5LW998N2SV1196",
+            "ECCBK95341Y4RA3K9EZEOSXRM"
+          ],
+          "loaded_tile_ids": [
+            "+000_+000",
+            "+000_+001",
+            "+000_-001",
+            "+001_+000",
+            "-001_+001",
+            "-002_+000",
+            "-002_+001"
+          ],
+          "location_cm": [
+            25000,
+            -25000,
+            30000
+          ],
+          "missing_refs": [],
+          "placement_max_error_cm": 0,
+          "requested_state": "Activated",
+          "source_enabled": true,
+          "source_observed": true,
+          "source_registered": true,
+          "streaming_completed": true,
+          "terrain": {
+            "collision_component_count": 20,
+            "loaded_cell_count": 0,
+            "proxy_actor_count": 2,
+            "render_component_count": 20,
+            "root_actor_count": 1
+          },
+          "terrain_cell_names": [],
+          "unload_delta": [
+            "-001_+000"
+          ],
+          "wait_ms": 24404.08119931817
+        },
+        {
+          "active_cell_names": [
+            "3C5BDXS38I89H922H3ICVPDUW",
+            "66VI5U1BW9L277URCDMHSL149",
+            "8NNNYLND3KTBVITZZH2FLSXKP",
+            "8U6U49NICWLW4DD899H5S4P0Z",
+            "A9EBQVMN87J5BEOL0X0YCLXUV",
+            "AA0PKG0D1CL5LW998N2SV1196"
+          ],
+          "active_source_count": 1,
+          "errors": [],
+          "expected_tile_id": "+001_+000",
+          "hitch_ms": 52.58149653673172,
+          "id": "tile-02-04",
+          "kind": "tile",
+          "load_delta": [
+            "+001_+001"
+          ],
+          "loaded_actor_count": 3,
+          "loaded_cell_count": 6,
+          "loaded_cell_names": [
+            "3C5BDXS38I89H922H3ICVPDUW",
+            "66VI5U1BW9L277URCDMHSL149",
+            "8NNNYLND3KTBVITZZH2FLSXKP",
+            "8U6U49NICWLW4DD899H5S4P0Z",
+            "A9EBQVMN87J5BEOL0X0YCLXUV",
+            "AA0PKG0D1CL5LW998N2SV1196"
+          ],
+          "loaded_tile_ids": [
+            "+000_+000",
+            "+001_+000",
+            "+001_+001"
+          ],
+          "location_cm": [
+            75000,
+            -25000,
+            30000
+          ],
+          "missing_refs": [],
+          "placement_max_error_cm": 0,
+          "requested_state": "Activated",
+          "source_enabled": true,
+          "source_observed": true,
+          "source_registered": true,
+          "streaming_completed": true,
+          "terrain": {
+            "collision_component_count": 20,
+            "loaded_cell_count": 0,
+            "proxy_actor_count": 2,
+            "render_component_count": 20,
+            "root_actor_count": 1
+          },
+          "terrain_cell_names": [],
+          "unload_delta": [
+            "+000_+001",
+            "+000_-001",
+            "-001_+001",
+            "-002_+000",
+            "-002_+001"
+          ],
+          "wait_ms": 5512.524399906397
+        },
+        {
+          "active_cell_names": [
+            "61QHW0WXZNTZ47VAXBC9TMGO0",
+            "66VI5U1BW9L277URCDMHSL149",
+            "8NNNYLND3KTBVITZZH2FLSXKP",
+            "8U6U49NICWLW4DD899H5S4P0Z",
+            "A9EBQVMN87J5BEOL0X0YCLXUV",
+            "DN036Z8DFMUP139BVHBG9RHLV",
+            "ECCBK95341Y4RA3K9EZEOSXRM"
+          ],
+          "active_source_count": 1,
+          "errors": [],
+          "expected_tile_id": "+001_-001",
+          "hitch_ms": 48.025600612163544,
+          "id": "tile-03-00",
+          "kind": "tile",
+          "load_delta": [
+            "+000_-001",
+            "+001_-001",
+            "+001_-002"
+          ],
+          "loaded_actor_count": 4,
+          "loaded_cell_count": 7,
+          "loaded_cell_names": [
+            "61QHW0WXZNTZ47VAXBC9TMGO0",
+            "66VI5U1BW9L277URCDMHSL149",
+            "8NNNYLND3KTBVITZZH2FLSXKP",
+            "8U6U49NICWLW4DD899H5S4P0Z",
+            "A9EBQVMN87J5BEOL0X0YCLXUV",
+            "DN036Z8DFMUP139BVHBG9RHLV",
+            "ECCBK95341Y4RA3K9EZEOSXRM"
+          ],
+          "loaded_tile_ids": [
+            "+000_-001",
+            "+001_+000",
+            "+001_-001",
+            "+001_-002"
+          ],
+          "location_cm": [
+            75000,
+            25000,
+            30000
+          ],
+          "missing_refs": [],
+          "placement_max_error_cm": 0,
+          "requested_state": "Activated",
+          "source_enabled": true,
+          "source_observed": true,
+          "source_registered": true,
+          "streaming_completed": true,
+          "terrain": {
+            "collision_component_count": 21,
+            "loaded_cell_count": 0,
+            "proxy_actor_count": 3,
+            "render_component_count": 21,
+            "root_actor_count": 1
+          },
+          "terrain_cell_names": [],
+          "unload_delta": [
+            "+000_+000",
+            "+001_+001"
+          ],
+          "wait_ms": 5138.565301895142
+        },
+        {
+          "active_cell_names": [
+            "0U8NQ45V3I4VCW9SZNQ0A31MV",
+            "5W4TDRKJM1HLCTH86X4NC2H9U",
+            "66VI5U1BW9L277URCDMHSL149",
+            "8NNNYLND3KTBVITZZH2FLSXKP",
+            "A9EBQVMN87J5BEOL0X0YCLXUV",
+            "DN036Z8DFMUP139BVHBG9RHLV",
+            "DTWQT73O2BA41RSIYQVGL81JS",
+            "ECCBK95341Y4RA3K9EZEOSXRM"
+          ],
+          "active_source_count": 1,
+          "errors": [],
+          "expected_tile_id": "+000_-001",
+          "hitch_ms": 52.7832992374897,
+          "id": "tile-03-01",
+          "kind": "tile",
+          "load_delta": [
+            "+000_-002",
+            "-001_-001"
+          ],
+          "loaded_actor_count": 4,
+          "loaded_cell_count": 8,
+          "loaded_cell_names": [
+            "0U8NQ45V3I4VCW9SZNQ0A31MV",
+            "5W4TDRKJM1HLCTH86X4NC2H9U",
+            "66VI5U1BW9L277URCDMHSL149",
+            "8NNNYLND3KTBVITZZH2FLSXKP",
+            "A9EBQVMN87J5BEOL0X0YCLXUV",
+            "DN036Z8DFMUP139BVHBG9RHLV",
+            "DTWQT73O2BA41RSIYQVGL81JS",
+            "ECCBK95341Y4RA3K9EZEOSXRM"
+          ],
+          "loaded_tile_ids": [
+            "+000_-001",
+            "+000_-002",
+            "+001_-001",
+            "-001_-001"
+          ],
+          "location_cm": [
+            25000,
+            25000,
+            30000
+          ],
+          "missing_refs": [],
+          "placement_max_error_cm": 0,
+          "requested_state": "Activated",
+          "source_enabled": true,
+          "source_observed": true,
+          "source_registered": true,
+          "streaming_completed": true,
+          "terrain": {
+            "collision_component_count": 24,
+            "loaded_cell_count": 0,
+            "proxy_actor_count": 3,
+            "render_component_count": 24,
+            "root_actor_count": 1
+          },
+          "terrain_cell_names": [],
+          "unload_delta": [
+            "+001_+000",
+            "+001_-002"
+          ],
+          "wait_ms": 6146.423101425171
+        },
+        {
+          "active_cell_names": [
+            "0U8NQ45V3I4VCW9SZNQ0A31MV",
+            "5W4TDRKJM1HLCTH86X4NC2H9U",
+            "66VI5U1BW9L277URCDMHSL149",
+            "A9EBQVMN87J5BEOL0X0YCLXUV",
+            "B4PKWC7OWHNT8DC1IF9BRHEEL",
+            "ECCBK95341Y4RA3K9EZEOSXRM",
+            "EDJZH8KGIWS7MV44OBMFPMZKS"
+          ],
+          "active_source_count": 1,
+          "errors": [],
+          "expected_tile_id": "-001_-001",
+          "hitch_ms": 72.7497972548008,
+          "id": "tile-03-02",
+          "kind": "tile",
+          "load_delta": [
+            "-001_-002",
+            "-002_-001"
+          ],
+          "loaded_actor_count": 4,
+          "loaded_cell_count": 7,
+          "loaded_cell_names": [
+            "0U8NQ45V3I4VCW9SZNQ0A31MV",
+            "5W4TDRKJM1HLCTH86X4NC2H9U",
+            "66VI5U1BW9L277URCDMHSL149",
+            "A9EBQVMN87J5BEOL0X0YCLXUV",
+            "B4PKWC7OWHNT8DC1IF9BRHEEL",
+            "ECCBK95341Y4RA3K9EZEOSXRM",
+            "EDJZH8KGIWS7MV44OBMFPMZKS"
+          ],
+          "loaded_tile_ids": [
+            "+000_-001",
+            "-001_-001",
+            "-001_-002",
+            "-002_-001"
+          ],
+          "location_cm": [
+            -25000,
+            25000,
+            30000
+          ],
+          "missing_refs": [],
+          "placement_max_error_cm": 0,
+          "requested_state": "Activated",
+          "source_enabled": true,
+          "source_observed": true,
+          "source_registered": true,
+          "streaming_completed": true,
+          "terrain": {
+            "collision_component_count": 20,
+            "loaded_cell_count": 0,
+            "proxy_actor_count": 2,
+            "render_component_count": 20,
+            "root_actor_count": 1
+          },
+          "terrain_cell_names": [],
+          "unload_delta": [
+            "+000_-002",
+            "+001_-001"
+          ],
+          "wait_ms": 6340.875297784805
+        },
+        {
+          "active_cell_names": [
+            "0U8NQ45V3I4VCW9SZNQ0A31MV",
+            "5W4TDRKJM1HLCTH86X4NC2H9U",
+            "66VI5U1BW9L277URCDMHSL149",
+            "6XZZHHUZFM48ZSM3BXW8PFTXI",
+            "7C09121K0OGXMXJFO2VSRQEIR",
+            "A9EBQVMN87J5BEOL0X0YCLXUV",
+            "EDJZH8KGIWS7MV44OBMFPMZKS"
+          ],
+          "active_source_count": 1,
+          "errors": [],
+          "expected_tile_id": "-002_-001",
+          "hitch_ms": 51.000598818063736,
+          "id": "tile-03-03",
+          "kind": "tile",
+          "load_delta": [
+            "-002_-002",
+            "-003_-001"
+          ],
+          "loaded_actor_count": 4,
+          "loaded_cell_count": 7,
+          "loaded_cell_names": [
+            "0U8NQ45V3I4VCW9SZNQ0A31MV",
+            "5W4TDRKJM1HLCTH86X4NC2H9U",
+            "66VI5U1BW9L277URCDMHSL149",
+            "6XZZHHUZFM48ZSM3BXW8PFTXI",
+            "7C09121K0OGXMXJFO2VSRQEIR",
+            "A9EBQVMN87J5BEOL0X0YCLXUV",
+            "EDJZH8KGIWS7MV44OBMFPMZKS"
+          ],
+          "loaded_tile_ids": [
+            "-001_-001",
+            "-002_-001",
+            "-002_-002",
+            "-003_-001"
+          ],
+          "location_cm": [
+            -75000,
+            25000,
+            30000
+          ],
+          "missing_refs": [],
+          "placement_max_error_cm": 0,
+          "requested_state": "Activated",
+          "source_enabled": true,
+          "source_observed": true,
+          "source_registered": true,
+          "streaming_completed": true,
+          "terrain": {
+            "collision_component_count": 20,
+            "loaded_cell_count": 0,
+            "proxy_actor_count": 2,
+            "render_component_count": 20,
+            "root_actor_count": 1
+          },
+          "terrain_cell_names": [],
+          "unload_delta": [
+            "+000_-001",
+            "-001_-002"
+          ],
+          "wait_ms": 5519.856598228216
+        },
+        {
+          "active_cell_names": [
+            "5W4TDRKJM1HLCTH86X4NC2H9U",
+            "66VI5U1BW9L277URCDMHSL149",
+            "7C09121K0OGXMXJFO2VSRQEIR",
+            "A9EBQVMN87J5BEOL0X0YCLXUV",
+            "EDJZH8KGIWS7MV44OBMFPMZKS"
+          ],
+          "active_source_count": 1,
+          "errors": [],
+          "expected_tile_id": "-003_-001",
+          "hitch_ms": 43.19830238819122,
+          "id": "tile-03-04",
+          "kind": "tile",
+          "load_delta": [],
+          "loaded_actor_count": 2,
+          "loaded_cell_count": 5,
+          "loaded_cell_names": [
+            "5W4TDRKJM1HLCTH86X4NC2H9U",
+            "66VI5U1BW9L277URCDMHSL149",
+            "7C09121K0OGXMXJFO2VSRQEIR",
+            "A9EBQVMN87J5BEOL0X0YCLXUV",
+            "EDJZH8KGIWS7MV44OBMFPMZKS"
+          ],
+          "loaded_tile_ids": [
+            "-002_-001",
+            "-003_-001"
+          ],
+          "location_cm": [
+            -125000,
+            25000,
+            30000
+          ],
+          "missing_refs": [],
+          "placement_max_error_cm": 0,
+          "requested_state": "Activated",
+          "source_enabled": true,
+          "source_observed": true,
+          "source_registered": true,
+          "streaming_completed": true,
+          "terrain": {
+            "collision_component_count": 20,
+            "loaded_cell_count": 0,
+            "proxy_actor_count": 2,
+            "render_component_count": 20,
+            "root_actor_count": 1
+          },
+          "terrain_cell_names": [],
+          "unload_delta": [
+            "-001_-001",
+            "-002_-002"
+          ],
+          "wait_ms": 5003.504298627377
+        },
+        {
+          "active_cell_names": [
+            "5HASELKS0VFRBBB78W17UKFRO",
+            "5W4TDRKJM1HLCTH86X4NC2H9U",
+            "66VI5U1BW9L277URCDMHSL149",
+            "6XZZHHUZFM48ZSM3BXW8PFTXI",
+            "A9EBQVMN87J5BEOL0X0YCLXUV"
+          ],
+          "active_source_count": 1,
+          "errors": [],
+          "expected_tile_id": "-003_-002",
+          "hitch_ms": 55.74540048837662,
+          "id": "tile-04-00",
+          "kind": "tile",
+          "load_delta": [
+            "-002_-002",
+            "-003_-002"
+          ],
+          "loaded_actor_count": 2,
+          "loaded_cell_count": 5,
+          "loaded_cell_names": [
+            "5HASELKS0VFRBBB78W17UKFRO",
+            "5W4TDRKJM1HLCTH86X4NC2H9U",
+            "66VI5U1BW9L277URCDMHSL149",
+            "6XZZHHUZFM48ZSM3BXW8PFTXI",
+            "A9EBQVMN87J5BEOL0X0YCLXUV"
+          ],
+          "loaded_tile_ids": [
+            "-002_-002",
+            "-003_-002"
+          ],
+          "location_cm": [
+            -125000,
+            75000,
+            30000
+          ],
+          "missing_refs": [],
+          "placement_max_error_cm": 0,
+          "requested_state": "Activated",
+          "source_enabled": true,
+          "source_observed": true,
+          "source_registered": true,
+          "streaming_completed": true,
+          "terrain": {
+            "collision_component_count": 20,
+            "loaded_cell_count": 0,
+            "proxy_actor_count": 2,
+            "render_component_count": 20,
+            "root_actor_count": 1
+          },
+          "terrain_cell_names": [],
+          "unload_delta": [
+            "-002_-001",
+            "-003_-001"
+          ],
+          "wait_ms": 5149.313699454069
+        },
+        {
+          "active_cell_names": [
+            "5HASELKS0VFRBBB78W17UKFRO",
+            "5W4TDRKJM1HLCTH86X4NC2H9U",
+            "66VI5U1BW9L277URCDMHSL149",
+            "6XZZHHUZFM48ZSM3BXW8PFTXI",
+            "A9EBQVMN87J5BEOL0X0YCLXUV",
+            "B4PKWC7OWHNT8DC1IF9BRHEEL",
+            "EDJZH8KGIWS7MV44OBMFPMZKS"
+          ],
+          "active_source_count": 1,
+          "errors": [],
+          "expected_tile_id": "-002_-002",
+          "hitch_ms": 77.29780301451683,
+          "id": "tile-04-01",
+          "kind": "tile",
+          "load_delta": [
+            "-001_-002",
+            "-002_-001"
+          ],
+          "loaded_actor_count": 4,
+          "loaded_cell_count": 7,
+          "loaded_cell_names": [
+            "5HASELKS0VFRBBB78W17UKFRO",
+            "5W4TDRKJM1HLCTH86X4NC2H9U",
+            "66VI5U1BW9L277URCDMHSL149",
+            "6XZZHHUZFM48ZSM3BXW8PFTXI",
+            "A9EBQVMN87J5BEOL0X0YCLXUV",
+            "B4PKWC7OWHNT8DC1IF9BRHEEL",
+            "EDJZH8KGIWS7MV44OBMFPMZKS"
+          ],
+          "loaded_tile_ids": [
+            "-001_-002",
+            "-002_-001",
+            "-002_-002",
+            "-003_-002"
+          ],
+          "location_cm": [
+            -75000,
+            75000,
+            30000
+          ],
+          "missing_refs": [],
+          "placement_max_error_cm": 0,
+          "requested_state": "Activated",
+          "source_enabled": true,
+          "source_observed": true,
+          "source_registered": true,
+          "streaming_completed": true,
+          "terrain": {
+            "collision_component_count": 20,
+            "loaded_cell_count": 0,
+            "proxy_actor_count": 2,
+            "render_component_count": 20,
+            "root_actor_count": 1
+          },
+          "terrain_cell_names": [],
+          "unload_delta": [],
+          "wait_ms": 5004.708603024483
+        },
+        {
+          "active_cell_names": [
+            "0U8NQ45V3I4VCW9SZNQ0A31MV",
+            "5W4TDRKJM1HLCTH86X4NC2H9U",
+            "66VI5U1BW9L277URCDMHSL149",
+            "6XZZHHUZFM48ZSM3BXW8PFTXI",
+            "A9EBQVMN87J5BEOL0X0YCLXUV",
+            "B4PKWC7OWHNT8DC1IF9BRHEEL",
+            "DTWQT73O2BA41RSIYQVGL81JS"
+          ],
+          "active_source_count": 1,
+          "errors": [],
+          "expected_tile_id": "-001_-002",
+          "hitch_ms": 48.66949841380119,
+          "id": "tile-04-02",
+          "kind": "tile",
+          "load_delta": [
+            "+000_-002",
+            "-001_-001"
+          ],
+          "loaded_actor_count": 4,
+          "loaded_cell_count": 7,
+          "loaded_cell_names": [
+            "0U8NQ45V3I4VCW9SZNQ0A31MV",
+            "5W4TDRKJM1HLCTH86X4NC2H9U",
+            "66VI5U1BW9L277URCDMHSL149",
+            "6XZZHHUZFM48ZSM3BXW8PFTXI",
+            "A9EBQVMN87J5BEOL0X0YCLXUV",
+            "B4PKWC7OWHNT8DC1IF9BRHEEL",
+            "DTWQT73O2BA41RSIYQVGL81JS"
+          ],
+          "loaded_tile_ids": [
+            "+000_-002",
+            "-001_-001",
+            "-001_-002",
+            "-002_-002"
+          ],
+          "location_cm": [
+            -25000,
+            75000,
+            30000
+          ],
+          "missing_refs": [],
+          "placement_max_error_cm": 0,
+          "requested_state": "Activated",
+          "source_enabled": true,
+          "source_observed": true,
+          "source_registered": true,
+          "streaming_completed": true,
+          "terrain": {
+            "collision_component_count": 20,
+            "loaded_cell_count": 0,
+            "proxy_actor_count": 2,
+            "render_component_count": 20,
+            "root_actor_count": 1
+          },
+          "terrain_cell_names": [],
+          "unload_delta": [
+            "-002_-001",
+            "-003_-002"
+          ],
+          "wait_ms": 5699.820201843977
+        },
+        {
+          "active_cell_names": [
+            "5W4TDRKJM1HLCTH86X4NC2H9U",
+            "61QHW0WXZNTZ47VAXBC9TMGO0",
+            "66VI5U1BW9L277URCDMHSL149",
+            "A9EBQVMN87J5BEOL0X0YCLXUV",
+            "B4PKWC7OWHNT8DC1IF9BRHEEL",
+            "DTWQT73O2BA41RSIYQVGL81JS",
+            "ECCBK95341Y4RA3K9EZEOSXRM"
+          ],
+          "active_source_count": 1,
+          "errors": [],
+          "expected_tile_id": "+000_-002",
+          "hitch_ms": 37.452101707458496,
+          "id": "tile-04-03",
+          "kind": "tile",
+          "load_delta": [
+            "+000_-001",
+            "+001_-002"
+          ],
+          "loaded_actor_count": 4,
+          "loaded_cell_count": 7,
+          "loaded_cell_names": [
+            "5W4TDRKJM1HLCTH86X4NC2H9U",
+            "61QHW0WXZNTZ47VAXBC9TMGO0",
+            "66VI5U1BW9L277URCDMHSL149",
+            "A9EBQVMN87J5BEOL0X0YCLXUV",
+            "B4PKWC7OWHNT8DC1IF9BRHEEL",
+            "DTWQT73O2BA41RSIYQVGL81JS",
+            "ECCBK95341Y4RA3K9EZEOSXRM"
+          ],
+          "loaded_tile_ids": [
+            "+000_-001",
+            "+000_-002",
+            "+001_-002",
+            "-001_-002"
+          ],
+          "location_cm": [
+            25000,
+            75000,
+            30000
+          ],
+          "missing_refs": [],
+          "placement_max_error_cm": 0,
+          "requested_state": "Activated",
+          "source_enabled": true,
+          "source_observed": true,
+          "source_registered": true,
+          "streaming_completed": true,
+          "terrain": {
+            "collision_component_count": 21,
+            "loaded_cell_count": 0,
+            "proxy_actor_count": 3,
+            "render_component_count": 21,
+            "root_actor_count": 1
+          },
+          "terrain_cell_names": [],
+          "unload_delta": [
+            "-001_-001",
+            "-002_-002"
+          ],
+          "wait_ms": 5226.385299116373
+        },
+        {
+          "active_cell_names": [
+            "5W4TDRKJM1HLCTH86X4NC2H9U",
+            "61QHW0WXZNTZ47VAXBC9TMGO0",
+            "8NNNYLND3KTBVITZZH2FLSXKP",
+            "A9EBQVMN87J5BEOL0X0YCLXUV",
+            "DTWQT73O2BA41RSIYQVGL81JS"
+          ],
+          "active_source_count": 1,
+          "errors": [],
+          "expected_tile_id": "+001_-002",
+          "hitch_ms": 56.96869641542435,
+          "id": "tile-04-04",
+          "kind": "tile",
+          "load_delta": [],
+          "loaded_actor_count": 2,
+          "loaded_cell_count": 5,
+          "loaded_cell_names": [
+            "5W4TDRKJM1HLCTH86X4NC2H9U",
+            "61QHW0WXZNTZ47VAXBC9TMGO0",
+            "8NNNYLND3KTBVITZZH2FLSXKP",
+            "A9EBQVMN87J5BEOL0X0YCLXUV",
+            "DTWQT73O2BA41RSIYQVGL81JS"
+          ],
+          "loaded_tile_ids": [
+            "+000_-002",
+            "+001_-002"
+          ],
+          "location_cm": [
+            75000,
+            75000,
+            30000
+          ],
+          "missing_refs": [],
+          "placement_max_error_cm": 0,
+          "requested_state": "Activated",
+          "source_enabled": true,
+          "source_observed": true,
+          "source_registered": true,
+          "streaming_completed": true,
+          "terrain": {
+            "collision_component_count": 9,
+            "loaded_cell_count": 0,
+            "proxy_actor_count": 3,
+            "render_component_count": 9,
+            "root_actor_count": 1
+          },
+          "terrain_cell_names": [],
+          "unload_delta": [
+            "+000_-001",
+            "-001_-002"
+          ],
+          "wait_ms": 5014.078799635172
+        },
+        {
+          "active_cell_names": [
+            "A9EBQVMN87J5BEOL0X0YCLXUV"
+          ],
+          "active_source_count": 1,
+          "errors": [],
+          "expected_tile_id": "",
+          "hitch_ms": 37.59929910302162,
+          "id": "outside-east-control",
+          "kind": "control",
+          "load_delta": [],
+          "loaded_actor_count": 0,
+          "loaded_cell_count": 1,
+          "loaded_cell_names": [
+            "A9EBQVMN87J5BEOL0X0YCLXUV"
+          ],
+          "loaded_tile_ids": [],
+          "location_cm": [
+            600000,
+            -25000,
+            30000
+          ],
+          "missing_refs": [],
+          "placement_max_error_cm": 0,
+          "requested_state": "Activated",
+          "source_enabled": true,
+          "source_observed": true,
+          "source_registered": true,
+          "streaming_completed": true,
+          "terrain": {
+            "collision_component_count": 0,
+            "loaded_cell_count": 0,
+            "proxy_actor_count": 0,
+            "render_component_count": 0,
+            "root_actor_count": 1
+          },
+          "terrain_cell_names": [],
+          "unload_delta": [
+            "+000_-002",
+            "+001_-002"
+          ],
+          "wait_ms": 5005.428601056337
+        }
+      ],
+      "process_id": "31804",
+      "raw_sha256": "1a44380e0c0b0890f865c1cc076d8cd58a13b054e29c6e07c6cb63a20e742d43",
+      "run_index": 1,
+      "streaming_performance_changes": [
+        "[2026.09.29-01.00.23:064][536]LogWorldPartition: Streaming performance changed: Good -> Critical",
+        "[2026.09.29-01.00.25:195][755]LogWorldPartition: Streaming performance changed: Critical -> Good"
+      ]
+    },
+    {
+      "control_counts": [
+        0,
+        0
+      ],
+      "executable_sha256": "a856fe1eca061931ed1fccc6f5a1b21df5a18090fd0c8679ae032272ee077855",
+      "launch_id": "7f4621b3-51e5-4b8d-84c0-8e3279b1c286",
+      "log_sha256": "5b470d91a79c716efbb0d61ba38b5a93a019811e59088b1fac68422138081fd3",
+      "logged_error_count": 0,
+      "logged_warning_count": 0,
+      "max_hitch_ms": 2466.961298137903,
+      "max_loading_range_cm": 25600,
+      "max_wait_ms": 10639.17599990964,
+      "points": [
+        {
+          "active_cell_names": [
+            "A9EBQVMN87J5BEOL0X0YCLXUV"
+          ],
+          "active_source_count": 1,
+          "errors": [],
+          "expected_tile_id": "",
+          "hitch_ms": 103.17879915237427,
+          "id": "outside-west-control",
+          "kind": "control",
+          "load_delta": [],
+          "loaded_actor_count": 0,
+          "loaded_cell_count": 1,
+          "loaded_cell_names": [
+            "A9EBQVMN87J5BEOL0X0YCLXUV"
+          ],
+          "loaded_tile_ids": [],
+          "location_cm": [
+            -650000,
+            -25000,
+            30000
+          ],
+          "missing_refs": [],
+          "placement_max_error_cm": 0,
+          "requested_state": "Activated",
+          "source_enabled": true,
+          "source_observed": true,
+          "source_registered": true,
+          "streaming_completed": true,
+          "terrain": {
+            "collision_component_count": 0,
+            "loaded_cell_count": 0,
+            "proxy_actor_count": 0,
+            "render_component_count": 0,
+            "root_actor_count": 1
+          },
+          "terrain_cell_names": [],
+          "unload_delta": [],
+          "wait_ms": 5007.4499025940895
+        },
+        {
+          "active_cell_names": [
+            "5LTCG46S0TLOP1PPE1TU1517O",
+            "66VI5U1BW9L277URCDMHSL149",
+            "A9EBQVMN87J5BEOL0X0YCLXUV"
+          ],
+          "active_source_count": 1,
+          "errors": [],
+          "expected_tile_id": "-003_+002",
+          "hitch_ms": 80.04949986934662,
+          "id": "tile-00-00",
+          "kind": "tile",
+          "load_delta": [
+            "-003_+002"
+          ],
+          "loaded_actor_count": 1,
+          "loaded_cell_count": 3,
+          "loaded_cell_names": [
+            "5LTCG46S0TLOP1PPE1TU1517O",
+            "66VI5U1BW9L277URCDMHSL149",
+            "A9EBQVMN87J5BEOL0X0YCLXUV"
+          ],
+          "loaded_tile_ids": [
+            "-003_+002"
+          ],
+          "location_cm": [
+            -125000,
+            -125000,
+            30000
+          ],
+          "missing_refs": [],
+          "placement_max_error_cm": 0,
+          "requested_state": "Activated",
+          "source_enabled": true,
+          "source_observed": true,
+          "source_registered": true,
+          "streaming_completed": true,
+          "terrain": {
+            "collision_component_count": 16,
+            "loaded_cell_count": 0,
+            "proxy_actor_count": 1,
+            "render_component_count": 16,
+            "root_actor_count": 1
+          },
+          "terrain_cell_names": [],
+          "unload_delta": [],
+          "wait_ms": 5016.0862021148205
+        },
+        {
+          "active_cell_names": [
+            "66VI5U1BW9L277URCDMHSL149",
+            "6L8JRSYOULDGW8E7CTI39LGAP",
+            "A9EBQVMN87J5BEOL0X0YCLXUV",
+            "E0U2F80TP2F5LEL9T7DWD6424"
+          ],
+          "active_source_count": 1,
+          "errors": [],
+          "expected_tile_id": "-002_+002",
+          "hitch_ms": 44.276900589466095,
+          "id": "tile-00-01",
+          "kind": "tile",
+          "load_delta": [
+            "-001_+001",
+            "-002_+000",
+            "-002_+001",
+            "-002_+002"
+          ],
+          "loaded_actor_count": 4,
+          "loaded_cell_count": 4,
+          "loaded_cell_names": [
+            "66VI5U1BW9L277URCDMHSL149",
+            "6L8JRSYOULDGW8E7CTI39LGAP",
+            "A9EBQVMN87J5BEOL0X0YCLXUV",
+            "E0U2F80TP2F5LEL9T7DWD6424"
+          ],
+          "loaded_tile_ids": [
+            "-001_+001",
+            "-002_+000",
+            "-002_+001",
+            "-002_+002"
+          ],
+          "location_cm": [
+            -75000,
+            -125000,
+            30000
+          ],
+          "missing_refs": [],
+          "placement_max_error_cm": 0,
+          "requested_state": "Activated",
+          "source_enabled": true,
+          "source_observed": true,
+          "source_registered": true,
+          "streaming_completed": true,
+          "terrain": {
+            "collision_component_count": 16,
+            "loaded_cell_count": 0,
+            "proxy_actor_count": 1,
+            "render_component_count": 16,
+            "root_actor_count": 1
+          },
+          "terrain_cell_names": [],
+          "unload_delta": [
+            "-003_+002"
+          ],
+          "wait_ms": 5102.520201355219
+        },
+        {
+          "active_cell_names": [
+            "395YPUC5VEJO4E9MJ1RSCV8FD",
+            "66VI5U1BW9L277URCDMHSL149",
+            "6L8JRSYOULDGW8E7CTI39LGAP",
+            "A9EBQVMN87J5BEOL0X0YCLXUV",
+            "E0U2F80TP2F5LEL9T7DWD6424"
+          ],
+          "active_source_count": 1,
+          "errors": [],
+          "expected_tile_id": "-001_+002",
+          "hitch_ms": 24.105500429868698,
+          "id": "tile-00-02",
+          "kind": "tile",
+          "load_delta": [
+            "-001_+002"
+          ],
+          "loaded_actor_count": 5,
+          "loaded_cell_count": 5,
+          "loaded_cell_names": [
+            "395YPUC5VEJO4E9MJ1RSCV8FD",
+            "66VI5U1BW9L277URCDMHSL149",
+            "6L8JRSYOULDGW8E7CTI39LGAP",
+            "A9EBQVMN87J5BEOL0X0YCLXUV",
+            "E0U2F80TP2F5LEL9T7DWD6424"
+          ],
+          "loaded_tile_ids": [
+            "-001_+001",
+            "-001_+002",
+            "-002_+000",
+            "-002_+001",
+            "-002_+002"
+          ],
+          "location_cm": [
+            -25000,
+            -125000,
+            30000
+          ],
+          "missing_refs": [],
+          "placement_max_error_cm": 0,
+          "requested_state": "Activated",
+          "source_enabled": true,
+          "source_observed": true,
+          "source_registered": true,
+          "streaming_completed": true,
+          "terrain": {
+            "collision_component_count": 16,
+            "loaded_cell_count": 0,
+            "proxy_actor_count": 1,
+            "render_component_count": 16,
+            "root_actor_count": 1
+          },
+          "terrain_cell_names": [],
+          "unload_delta": [],
+          "wait_ms": 5010.2978982031345
+        },
+        {
+          "active_cell_names": [
+            "4PUV05NXIRW7X3GB03Z4ADG7K",
+            "66VI5U1BW9L277URCDMHSL149",
+            "8NNNYLND3KTBVITZZH2FLSXKP",
+            "8R2GZ349VHEQ00WO0HJDD3XEX",
+            "A9EBQVMN87J5BEOL0X0YCLXUV"
+          ],
+          "active_source_count": 1,
+          "errors": [],
+          "expected_tile_id": "+000_+002",
+          "hitch_ms": 868.1139014661312,
+          "id": "tile-00-03",
+          "kind": "tile",
+          "load_delta": [
+            "+000_+001",
+            "+000_+002"
+          ],
+          "loaded_actor_count": 2,
+          "loaded_cell_count": 5,
+          "loaded_cell_names": [
+            "4PUV05NXIRW7X3GB03Z4ADG7K",
+            "66VI5U1BW9L277URCDMHSL149",
+            "8NNNYLND3KTBVITZZH2FLSXKP",
+            "8R2GZ349VHEQ00WO0HJDD3XEX",
+            "A9EBQVMN87J5BEOL0X0YCLXUV"
+          ],
+          "loaded_tile_ids": [
+            "+000_+001",
+            "+000_+002"
+          ],
+          "location_cm": [
+            25000,
+            -125000,
+            30000
+          ],
+          "missing_refs": [],
+          "placement_max_error_cm": 0,
+          "requested_state": "Activated",
+          "source_enabled": true,
+          "source_observed": true,
+          "source_registered": true,
+          "streaming_completed": true,
+          "terrain": {
+            "collision_component_count": 20,
+            "loaded_cell_count": 0,
+            "proxy_actor_count": 2,
+            "render_component_count": 20,
+            "root_actor_count": 1
+          },
+          "terrain_cell_names": [],
+          "unload_delta": [
+            "-001_+001",
+            "-001_+002",
+            "-002_+000",
+            "-002_+001",
+            "-002_+002"
+          ],
+          "wait_ms": 5923.771400004625
+        },
+        {
+          "active_cell_names": [
+            "3C5BDXS38I89H922H3ICVPDUW",
+            "66VI5U1BW9L277URCDMHSL149",
+            "8NNNYLND3KTBVITZZH2FLSXKP",
+            "A9EBQVMN87J5BEOL0X0YCLXUV",
+            "DLWGYYAG8RK0IW1GP49M9GXCV"
+          ],
+          "active_source_count": 1,
+          "errors": [],
+          "expected_tile_id": "+001_+002",
+          "hitch_ms": 587.3740985989571,
+          "id": "tile-00-04",
+          "kind": "tile",
+          "load_delta": [
+            "+001_+001",
+            "+001_+002"
+          ],
+          "loaded_actor_count": 2,
+          "loaded_cell_count": 5,
+          "loaded_cell_names": [
+            "3C5BDXS38I89H922H3ICVPDUW",
+            "66VI5U1BW9L277URCDMHSL149",
+            "8NNNYLND3KTBVITZZH2FLSXKP",
+            "A9EBQVMN87J5BEOL0X0YCLXUV",
+            "DLWGYYAG8RK0IW1GP49M9GXCV"
+          ],
+          "loaded_tile_ids": [
+            "+001_+001",
+            "+001_+002"
+          ],
+          "location_cm": [
+            75000,
+            -125000,
+            30000
+          ],
+          "missing_refs": [],
+          "placement_max_error_cm": 0,
+          "requested_state": "Activated",
+          "source_enabled": true,
+          "source_observed": true,
+          "source_registered": true,
+          "streaming_completed": true,
+          "terrain": {
+            "collision_component_count": 20,
+            "loaded_cell_count": 0,
+            "proxy_actor_count": 2,
+            "render_component_count": 20,
+            "root_actor_count": 1
+          },
+          "terrain_cell_names": [],
+          "unload_delta": [
+            "+000_+001",
+            "+000_+002"
+          ],
+          "wait_ms": 6922.155398875475
+        },
+        {
+          "active_cell_names": [
+            "3C5BDXS38I89H922H3ICVPDUW",
+            "66VI5U1BW9L277URCDMHSL149",
+            "8NNNYLND3KTBVITZZH2FLSXKP",
+            "8R2GZ349VHEQ00WO0HJDD3XEX",
+            "8U6U49NICWLW4DD899H5S4P0Z",
+            "A9EBQVMN87J5BEOL0X0YCLXUV",
+            "DLWGYYAG8RK0IW1GP49M9GXCV"
+          ],
+          "active_source_count": 1,
+          "errors": [],
+          "expected_tile_id": "+001_+001",
+          "hitch_ms": 799.862701445818,
+          "id": "tile-01-00",
+          "kind": "tile",
+          "load_delta": [
+            "+000_+001",
+            "+001_+000"
+          ],
+          "loaded_actor_count": 4,
+          "loaded_cell_count": 7,
+          "loaded_cell_names": [
+            "3C5BDXS38I89H922H3ICVPDUW",
+            "66VI5U1BW9L277URCDMHSL149",
+            "8NNNYLND3KTBVITZZH2FLSXKP",
+            "8R2GZ349VHEQ00WO0HJDD3XEX",
+            "8U6U49NICWLW4DD899H5S4P0Z",
+            "A9EBQVMN87J5BEOL0X0YCLXUV",
+            "DLWGYYAG8RK0IW1GP49M9GXCV"
+          ],
+          "loaded_tile_ids": [
+            "+000_+001",
+            "+001_+000",
+            "+001_+001",
+            "+001_+002"
+          ],
+          "location_cm": [
+            75000,
+            -75000,
+            30000
+          ],
+          "missing_refs": [],
+          "placement_max_error_cm": 0,
+          "requested_state": "Activated",
+          "source_enabled": true,
+          "source_observed": true,
+          "source_registered": true,
+          "streaming_completed": true,
+          "terrain": {
+            "collision_component_count": 20,
+            "loaded_cell_count": 0,
+            "proxy_actor_count": 2,
+            "render_component_count": 20,
+            "root_actor_count": 1
+          },
+          "terrain_cell_names": [],
+          "unload_delta": [],
+          "wait_ms": 10639.17599990964
+        },
+        {
+          "active_cell_names": [
+            "3C5BDXS38I89H922H3ICVPDUW",
+            "4PUV05NXIRW7X3GB03Z4ADG7K",
+            "66VI5U1BW9L277URCDMHSL149",
+            "6L8JRSYOULDGW8E7CTI39LGAP",
+            "8NNNYLND3KTBVITZZH2FLSXKP",
+            "8R2GZ349VHEQ00WO0HJDD3XEX",
+            "A9EBQVMN87J5BEOL0X0YCLXUV",
+            "AA0PKG0D1CL5LW998N2SV1196"
+          ],
+          "active_source_count": 1,
+          "errors": [],
+          "expected_tile_id": "+000_+001",
+          "hitch_ms": 492.21159890294075,
+          "id": "tile-01-01",
+          "kind": "tile",
+          "load_delta": [
+            "+000_+000",
+            "+000_+002",
+            "-001_+001",
+            "-002_+000",
+            "-002_+001"
+          ],
+          "loaded_actor_count": 7,
+          "loaded_cell_count": 8,
+          "loaded_cell_names": [
+            "3C5BDXS38I89H922H3ICVPDUW",
+            "4PUV05NXIRW7X3GB03Z4ADG7K",
+            "66VI5U1BW9L277URCDMHSL149",
+            "6L8JRSYOULDGW8E7CTI39LGAP",
+            "8NNNYLND3KTBVITZZH2FLSXKP",
+            "8R2GZ349VHEQ00WO0HJDD3XEX",
+            "A9EBQVMN87J5BEOL0X0YCLXUV",
+            "AA0PKG0D1CL5LW998N2SV1196"
+          ],
+          "loaded_tile_ids": [
+            "+000_+000",
+            "+000_+001",
+            "+000_+002",
+            "+001_+001",
+            "-001_+001",
+            "-002_+000",
+            "-002_+001"
+          ],
+          "location_cm": [
+            25000,
+            -75000,
+            30000
+          ],
+          "missing_refs": [],
+          "placement_max_error_cm": 0,
+          "requested_state": "Activated",
+          "source_enabled": true,
+          "source_observed": true,
+          "source_registered": true,
+          "streaming_completed": true,
+          "terrain": {
+            "collision_component_count": 20,
+            "loaded_cell_count": 0,
+            "proxy_actor_count": 2,
+            "render_component_count": 20,
+            "root_actor_count": 1
+          },
+          "terrain_cell_names": [],
+          "unload_delta": [
+            "+001_+000",
+            "+001_+002"
+          ],
+          "wait_ms": 5404.623199254274
+        },
+        {
+          "active_cell_names": [
+            "395YPUC5VEJO4E9MJ1RSCV8FD",
+            "66VI5U1BW9L277URCDMHSL149",
+            "6L8JRSYOULDGW8E7CTI39LGAP",
+            "8R2GZ349VHEQ00WO0HJDD3XEX",
+            "A9EBQVMN87J5BEOL0X0YCLXUV",
+            "AWXXO6JYDBUG3K828V6NRGNFD"
+          ],
+          "active_source_count": 1,
+          "errors": [],
+          "expected_tile_id": "-001_+001",
+          "hitch_ms": 698.0809010565281,
+          "id": "tile-01-02",
+          "kind": "tile",
+          "load_delta": [
+            "-001_+000",
+            "-001_+002"
+          ],
+          "loaded_actor_count": 6,
+          "loaded_cell_count": 6,
+          "loaded_cell_names": [
+            "395YPUC5VEJO4E9MJ1RSCV8FD",
+            "66VI5U1BW9L277URCDMHSL149",
+            "6L8JRSYOULDGW8E7CTI39LGAP",
+            "8R2GZ349VHEQ00WO0HJDD3XEX",
+            "A9EBQVMN87J5BEOL0X0YCLXUV",
+            "AWXXO6JYDBUG3K828V6NRGNFD"
+          ],
+          "loaded_tile_ids": [
+            "+000_+001",
+            "-001_+000",
+            "-001_+001",
+            "-001_+002",
+            "-002_+000",
+            "-002_+001"
+          ],
+          "location_cm": [
+            -25000,
+            -75000,
+            30000
+          ],
+          "missing_refs": [],
+          "placement_max_error_cm": 0,
+          "requested_state": "Activated",
+          "source_enabled": true,
+          "source_observed": true,
+          "source_registered": true,
+          "streaming_completed": true,
+          "terrain": {
+            "collision_component_count": 16,
+            "loaded_cell_count": 0,
+            "proxy_actor_count": 1,
+            "render_component_count": 16,
+            "root_actor_count": 1
+          },
+          "terrain_cell_names": [],
+          "unload_delta": [
+            "+000_+000",
+            "+000_+002",
+            "+001_+001"
+          ],
+          "wait_ms": 5002.814799547195
+        },
+        {
+          "active_cell_names": [
+            "66VI5U1BW9L277URCDMHSL149",
+            "6L8JRSYOULDGW8E7CTI39LGAP",
+            "A9EBQVMN87J5BEOL0X0YCLXUV",
+            "DBIMHZZ7EM4V83JY0J0GQH6XQ",
+            "E0U2F80TP2F5LEL9T7DWD6424"
+          ],
+          "active_source_count": 1,
+          "errors": [],
+          "expected_tile_id": "-002_+001",
+          "hitch_ms": 1128.3455975353718,
+          "id": "tile-01-03",
+          "kind": "tile",
+          "load_delta": [
+            "-002_+002",
+            "-003_+001"
+          ],
+          "loaded_actor_count": 5,
+          "loaded_cell_count": 5,
+          "loaded_cell_names": [
+            "66VI5U1BW9L277URCDMHSL149",
+            "6L8JRSYOULDGW8E7CTI39LGAP",
+            "A9EBQVMN87J5BEOL0X0YCLXUV",
+            "DBIMHZZ7EM4V83JY0J0GQH6XQ",
+            "E0U2F80TP2F5LEL9T7DWD6424"
+          ],
+          "loaded_tile_ids": [
+            "-001_+001",
+            "-002_+000",
+            "-002_+001",
+            "-002_+002",
+            "-003_+001"
+          ],
+          "location_cm": [
+            -75000,
+            -75000,
+            30000
+          ],
+          "missing_refs": [],
+          "placement_max_error_cm": 0,
+          "requested_state": "Activated",
+          "source_enabled": true,
+          "source_observed": true,
+          "source_registered": true,
+          "streaming_completed": true,
+          "terrain": {
+            "collision_component_count": 16,
+            "loaded_cell_count": 0,
+            "proxy_actor_count": 1,
+            "render_component_count": 16,
+            "root_actor_count": 1
+          },
+          "terrain_cell_names": [],
+          "unload_delta": [
+            "+000_+001",
+            "-001_+000",
+            "-001_+002"
+          ],
+          "wait_ms": 5957.975998520851
+        },
+        {
+          "active_cell_names": [
+            "66VI5U1BW9L277URCDMHSL149",
+            "6L8JRSYOULDGW8E7CTI39LGAP",
+            "A9EBQVMN87J5BEOL0X0YCLXUV",
+            "DBIMHZZ7EM4V83JY0J0GQH6XQ"
+          ],
+          "active_source_count": 1,
+          "errors": [],
+          "expected_tile_id": "-003_+001",
+          "hitch_ms": 778.8182012736797,
+          "id": "tile-01-04",
+          "kind": "tile",
+          "load_delta": [],
+          "loaded_actor_count": 4,
+          "loaded_cell_count": 4,
+          "loaded_cell_names": [
+            "66VI5U1BW9L277URCDMHSL149",
+            "6L8JRSYOULDGW8E7CTI39LGAP",
+            "A9EBQVMN87J5BEOL0X0YCLXUV",
+            "DBIMHZZ7EM4V83JY0J0GQH6XQ"
+          ],
+          "loaded_tile_ids": [
+            "-001_+001",
+            "-002_+000",
+            "-002_+001",
+            "-003_+001"
+          ],
+          "location_cm": [
+            -125000,
+            -75000,
+            30000
+          ],
+          "missing_refs": [],
+          "placement_max_error_cm": 0,
+          "requested_state": "Activated",
+          "source_enabled": true,
+          "source_observed": true,
+          "source_registered": true,
+          "streaming_completed": true,
+          "terrain": {
+            "collision_component_count": 16,
+            "loaded_cell_count": 0,
+            "proxy_actor_count": 1,
+            "render_component_count": 16,
+            "root_actor_count": 1
+          },
+          "terrain_cell_names": [],
+          "unload_delta": [
+            "-002_+002"
+          ],
+          "wait_ms": 5002.03400105238
+        },
+        {
+          "active_cell_names": [
+            "66VI5U1BW9L277URCDMHSL149",
+            "6DJQUMQB8ZYVQI3F1CPYWI488",
+            "6L8JRSYOULDGW8E7CTI39LGAP",
+            "A9EBQVMN87J5BEOL0X0YCLXUV"
+          ],
+          "active_source_count": 1,
+          "errors": [],
+          "expected_tile_id": "-003_+000",
+          "hitch_ms": 2466.961298137903,
+          "id": "tile-02-00",
+          "kind": "tile",
+          "load_delta": [
+            "-003_+000"
+          ],
+          "loaded_actor_count": 4,
+          "loaded_cell_count": 4,
+          "loaded_cell_names": [
+            "66VI5U1BW9L277URCDMHSL149",
+            "6DJQUMQB8ZYVQI3F1CPYWI488",
+            "6L8JRSYOULDGW8E7CTI39LGAP",
+            "A9EBQVMN87J5BEOL0X0YCLXUV"
+          ],
+          "loaded_tile_ids": [
+            "-001_+001",
+            "-002_+000",
+            "-002_+001",
+            "-003_+000"
+          ],
+          "location_cm": [
+            -125000,
+            -25000,
+            30000
+          ],
+          "missing_refs": [],
+          "placement_max_error_cm": 0,
+          "requested_state": "Activated",
+          "source_enabled": true,
+          "source_observed": true,
+          "source_registered": true,
+          "streaming_completed": true,
+          "terrain": {
+            "collision_component_count": 16,
+            "loaded_cell_count": 0,
+            "proxy_actor_count": 1,
+            "render_component_count": 16,
+            "root_actor_count": 1
+          },
+          "terrain_cell_names": [],
+          "unload_delta": [
+            "-003_+001"
+          ],
+          "wait_ms": 8313.04369866848
+        },
+        {
+          "active_cell_names": [
+            "66VI5U1BW9L277URCDMHSL149",
+            "6DJQUMQB8ZYVQI3F1CPYWI488",
+            "6L8JRSYOULDGW8E7CTI39LGAP",
+            "A9EBQVMN87J5BEOL0X0YCLXUV",
+            "AWXXO6JYDBUG3K828V6NRGNFD"
+          ],
+          "active_source_count": 1,
+          "errors": [],
+          "expected_tile_id": "-002_+000",
+          "hitch_ms": 241.1247007548809,
+          "id": "tile-02-01",
+          "kind": "tile",
+          "load_delta": [
+            "-001_+000"
+          ],
+          "loaded_actor_count": 5,
+          "loaded_cell_count": 5,
+          "loaded_cell_names": [
+            "66VI5U1BW9L277URCDMHSL149",
+            "6DJQUMQB8ZYVQI3F1CPYWI488",
+            "6L8JRSYOULDGW8E7CTI39LGAP",
+            "A9EBQVMN87J5BEOL0X0YCLXUV",
+            "AWXXO6JYDBUG3K828V6NRGNFD"
+          ],
+          "loaded_tile_ids": [
+            "-001_+000",
+            "-001_+001",
+            "-002_+000",
+            "-002_+001",
+            "-003_+000"
+          ],
+          "location_cm": [
+            -75000,
+            -25000,
+            30000
+          ],
+          "missing_refs": [],
+          "placement_max_error_cm": 0,
+          "requested_state": "Activated",
+          "source_enabled": true,
+          "source_observed": true,
+          "source_registered": true,
+          "streaming_completed": true,
+          "terrain": {
+            "collision_component_count": 16,
+            "loaded_cell_count": 0,
+            "proxy_actor_count": 1,
+            "render_component_count": 16,
+            "root_actor_count": 1
+          },
+          "terrain_cell_names": [],
+          "unload_delta": [],
+          "wait_ms": 6690.40709733963
+        },
+        {
+          "active_cell_names": [
+            "66VI5U1BW9L277URCDMHSL149",
+            "6L8JRSYOULDGW8E7CTI39LGAP",
+            "A9EBQVMN87J5BEOL0X0YCLXUV",
+            "AWXXO6JYDBUG3K828V6NRGNFD"
+          ],
+          "active_source_count": 1,
+          "errors": [],
+          "expected_tile_id": "-001_+000",
+          "hitch_ms": 20.88009938597679,
+          "id": "tile-02-02",
+          "kind": "tile",
+          "load_delta": [],
+          "loaded_actor_count": 4,
+          "loaded_cell_count": 4,
+          "loaded_cell_names": [
+            "66VI5U1BW9L277URCDMHSL149",
+            "6L8JRSYOULDGW8E7CTI39LGAP",
+            "A9EBQVMN87J5BEOL0X0YCLXUV",
+            "AWXXO6JYDBUG3K828V6NRGNFD"
+          ],
+          "loaded_tile_ids": [
+            "-001_+000",
+            "-001_+001",
+            "-002_+000",
+            "-002_+001"
+          ],
+          "location_cm": [
+            -25000,
+            -25000,
+            30000
+          ],
+          "missing_refs": [],
+          "placement_max_error_cm": 0,
+          "requested_state": "Activated",
+          "source_enabled": true,
+          "source_observed": true,
+          "source_registered": true,
+          "streaming_completed": true,
+          "terrain": {
+            "collision_component_count": 16,
+            "loaded_cell_count": 0,
+            "proxy_actor_count": 1,
+            "render_component_count": 16,
+            "root_actor_count": 1
+          },
+          "terrain_cell_names": [],
+          "unload_delta": [
+            "-003_+000"
+          ],
+          "wait_ms": 5002.30810046196
+        },
+        {
+          "active_cell_names": [
+            "66VI5U1BW9L277URCDMHSL149",
+            "6L8JRSYOULDGW8E7CTI39LGAP",
+            "8NNNYLND3KTBVITZZH2FLSXKP",
+            "8R2GZ349VHEQ00WO0HJDD3XEX",
+            "8U6U49NICWLW4DD899H5S4P0Z",
+            "A9EBQVMN87J5BEOL0X0YCLXUV",
+            "AA0PKG0D1CL5LW998N2SV1196",
+            "ECCBK95341Y4RA3K9EZEOSXRM"
+          ],
+          "active_source_count": 1,
+          "errors": [],
+          "expected_tile_id": "+000_+000",
+          "hitch_ms": 24.782702326774597,
+          "id": "tile-02-03",
+          "kind": "tile",
+          "load_delta": [
+            "+000_+000",
+            "+000_+001",
+            "+000_-001",
+            "+001_+000"
+          ],
+          "loaded_actor_count": 7,
+          "loaded_cell_count": 8,
+          "loaded_cell_names": [
+            "66VI5U1BW9L277URCDMHSL149",
+            "6L8JRSYOULDGW8E7CTI39LGAP",
+            "8NNNYLND3KTBVITZZH2FLSXKP",
+            "8R2GZ349VHEQ00WO0HJDD3XEX",
+            "8U6U49NICWLW4DD899H5S4P0Z",
+            "A9EBQVMN87J5BEOL0X0YCLXUV",
+            "AA0PKG0D1CL5LW998N2SV1196",
+            "ECCBK95341Y4RA3K9EZEOSXRM"
+          ],
+          "loaded_tile_ids": [
+            "+000_+000",
+            "+000_+001",
+            "+000_-001",
+            "+001_+000",
+            "-001_+001",
+            "-002_+000",
+            "-002_+001"
+          ],
+          "location_cm": [
+            25000,
+            -25000,
+            30000
+          ],
+          "missing_refs": [],
+          "placement_max_error_cm": 0,
+          "requested_state": "Activated",
+          "source_enabled": true,
+          "source_observed": true,
+          "source_registered": true,
+          "streaming_completed": true,
+          "terrain": {
+            "collision_component_count": 20,
+            "loaded_cell_count": 0,
+            "proxy_actor_count": 2,
+            "render_component_count": 20,
+            "root_actor_count": 1
+          },
+          "terrain_cell_names": [],
+          "unload_delta": [
+            "-001_+000"
+          ],
+          "wait_ms": 5217.539101839066
+        },
+        {
+          "active_cell_names": [
+            "3C5BDXS38I89H922H3ICVPDUW",
+            "66VI5U1BW9L277URCDMHSL149",
+            "8NNNYLND3KTBVITZZH2FLSXKP",
+            "8U6U49NICWLW4DD899H5S4P0Z",
+            "A9EBQVMN87J5BEOL0X0YCLXUV",
+            "AA0PKG0D1CL5LW998N2SV1196"
+          ],
+          "active_source_count": 1,
+          "errors": [],
+          "expected_tile_id": "+001_+000",
+          "hitch_ms": 8.328501135110855,
+          "id": "tile-02-04",
+          "kind": "tile",
+          "load_delta": [
+            "+001_+001"
+          ],
+          "loaded_actor_count": 3,
+          "loaded_cell_count": 6,
+          "loaded_cell_names": [
+            "3C5BDXS38I89H922H3ICVPDUW",
+            "66VI5U1BW9L277URCDMHSL149",
+            "8NNNYLND3KTBVITZZH2FLSXKP",
+            "8U6U49NICWLW4DD899H5S4P0Z",
+            "A9EBQVMN87J5BEOL0X0YCLXUV",
+            "AA0PKG0D1CL5LW998N2SV1196"
+          ],
+          "loaded_tile_ids": [
+            "+000_+000",
+            "+001_+000",
+            "+001_+001"
+          ],
+          "location_cm": [
+            75000,
+            -25000,
+            30000
+          ],
+          "missing_refs": [],
+          "placement_max_error_cm": 0,
+          "requested_state": "Activated",
+          "source_enabled": true,
+          "source_observed": true,
+          "source_registered": true,
+          "streaming_completed": true,
+          "terrain": {
+            "collision_component_count": 20,
+            "loaded_cell_count": 0,
+            "proxy_actor_count": 2,
+            "render_component_count": 20,
+            "root_actor_count": 1
+          },
+          "terrain_cell_names": [],
+          "unload_delta": [
+            "+000_+001",
+            "+000_-001",
+            "-001_+001",
+            "-002_+000",
+            "-002_+001"
+          ],
+          "wait_ms": 5096.991200000048
+        },
+        {
+          "active_cell_names": [
+            "61QHW0WXZNTZ47VAXBC9TMGO0",
+            "66VI5U1BW9L277URCDMHSL149",
+            "8NNNYLND3KTBVITZZH2FLSXKP",
+            "8U6U49NICWLW4DD899H5S4P0Z",
+            "A9EBQVMN87J5BEOL0X0YCLXUV",
+            "DN036Z8DFMUP139BVHBG9RHLV",
+            "ECCBK95341Y4RA3K9EZEOSXRM"
+          ],
+          "active_source_count": 1,
+          "errors": [],
+          "expected_tile_id": "+001_-001",
+          "hitch_ms": 27.300000190734863,
+          "id": "tile-03-00",
+          "kind": "tile",
+          "load_delta": [
+            "+000_-001",
+            "+001_-001",
+            "+001_-002"
+          ],
+          "loaded_actor_count": 4,
+          "loaded_cell_count": 7,
+          "loaded_cell_names": [
+            "61QHW0WXZNTZ47VAXBC9TMGO0",
+            "66VI5U1BW9L277URCDMHSL149",
+            "8NNNYLND3KTBVITZZH2FLSXKP",
+            "8U6U49NICWLW4DD899H5S4P0Z",
+            "A9EBQVMN87J5BEOL0X0YCLXUV",
+            "DN036Z8DFMUP139BVHBG9RHLV",
+            "ECCBK95341Y4RA3K9EZEOSXRM"
+          ],
+          "loaded_tile_ids": [
+            "+000_-001",
+            "+001_+000",
+            "+001_-001",
+            "+001_-002"
+          ],
+          "location_cm": [
+            75000,
+            25000,
+            30000
+          ],
+          "missing_refs": [],
+          "placement_max_error_cm": 0,
+          "requested_state": "Activated",
+          "source_enabled": true,
+          "source_observed": true,
+          "source_registered": true,
+          "streaming_completed": true,
+          "terrain": {
+            "collision_component_count": 21,
+            "loaded_cell_count": 0,
+            "proxy_actor_count": 3,
+            "render_component_count": 21,
+            "root_actor_count": 1
+          },
+          "terrain_cell_names": [],
+          "unload_delta": [
+            "+000_+000",
+            "+001_+001"
+          ],
+          "wait_ms": 5047.052200883627
+        },
+        {
+          "active_cell_names": [
+            "0U8NQ45V3I4VCW9SZNQ0A31MV",
+            "5W4TDRKJM1HLCTH86X4NC2H9U",
+            "66VI5U1BW9L277URCDMHSL149",
+            "8NNNYLND3KTBVITZZH2FLSXKP",
+            "A9EBQVMN87J5BEOL0X0YCLXUV",
+            "DN036Z8DFMUP139BVHBG9RHLV",
+            "DTWQT73O2BA41RSIYQVGL81JS",
+            "ECCBK95341Y4RA3K9EZEOSXRM"
+          ],
+          "active_source_count": 1,
+          "errors": [],
+          "expected_tile_id": "+000_-001",
+          "hitch_ms": 22.34109863638878,
+          "id": "tile-03-01",
+          "kind": "tile",
+          "load_delta": [
+            "+000_-002",
+            "-001_-001"
+          ],
+          "loaded_actor_count": 4,
+          "loaded_cell_count": 8,
+          "loaded_cell_names": [
+            "0U8NQ45V3I4VCW9SZNQ0A31MV",
+            "5W4TDRKJM1HLCTH86X4NC2H9U",
+            "66VI5U1BW9L277URCDMHSL149",
+            "8NNNYLND3KTBVITZZH2FLSXKP",
+            "A9EBQVMN87J5BEOL0X0YCLXUV",
+            "DN036Z8DFMUP139BVHBG9RHLV",
+            "DTWQT73O2BA41RSIYQVGL81JS",
+            "ECCBK95341Y4RA3K9EZEOSXRM"
+          ],
+          "loaded_tile_ids": [
+            "+000_-001",
+            "+000_-002",
+            "+001_-001",
+            "-001_-001"
+          ],
+          "location_cm": [
+            25000,
+            25000,
+            30000
+          ],
+          "missing_refs": [],
+          "placement_max_error_cm": 0,
+          "requested_state": "Activated",
+          "source_enabled": true,
+          "source_observed": true,
+          "source_registered": true,
+          "streaming_completed": true,
+          "terrain": {
+            "collision_component_count": 24,
+            "loaded_cell_count": 0,
+            "proxy_actor_count": 3,
+            "render_component_count": 24,
+            "root_actor_count": 1
+          },
+          "terrain_cell_names": [],
+          "unload_delta": [
+            "+001_+000",
+            "+001_-002"
+          ],
+          "wait_ms": 5274.8429998755455
+        },
+        {
+          "active_cell_names": [
+            "0U8NQ45V3I4VCW9SZNQ0A31MV",
+            "5W4TDRKJM1HLCTH86X4NC2H9U",
+            "66VI5U1BW9L277URCDMHSL149",
+            "A9EBQVMN87J5BEOL0X0YCLXUV",
+            "B4PKWC7OWHNT8DC1IF9BRHEEL",
+            "ECCBK95341Y4RA3K9EZEOSXRM",
+            "EDJZH8KGIWS7MV44OBMFPMZKS"
+          ],
+          "active_source_count": 1,
+          "errors": [],
+          "expected_tile_id": "-001_-001",
+          "hitch_ms": 14.595597982406616,
+          "id": "tile-03-02",
+          "kind": "tile",
+          "load_delta": [
+            "-001_-002",
+            "-002_-001"
+          ],
+          "loaded_actor_count": 4,
+          "loaded_cell_count": 7,
+          "loaded_cell_names": [
+            "0U8NQ45V3I4VCW9SZNQ0A31MV",
+            "5W4TDRKJM1HLCTH86X4NC2H9U",
+            "66VI5U1BW9L277URCDMHSL149",
+            "A9EBQVMN87J5BEOL0X0YCLXUV",
+            "B4PKWC7OWHNT8DC1IF9BRHEEL",
+            "ECCBK95341Y4RA3K9EZEOSXRM",
+            "EDJZH8KGIWS7MV44OBMFPMZKS"
+          ],
+          "loaded_tile_ids": [
+            "+000_-001",
+            "-001_-001",
+            "-001_-002",
+            "-002_-001"
+          ],
+          "location_cm": [
+            -25000,
+            25000,
+            30000
+          ],
+          "missing_refs": [],
+          "placement_max_error_cm": 0,
+          "requested_state": "Activated",
+          "source_enabled": true,
+          "source_observed": true,
+          "source_registered": true,
+          "streaming_completed": true,
+          "terrain": {
+            "collision_component_count": 20,
+            "loaded_cell_count": 0,
+            "proxy_actor_count": 2,
+            "render_component_count": 20,
+            "root_actor_count": 1
+          },
+          "terrain_cell_names": [],
+          "unload_delta": [
+            "+000_-002",
+            "+001_-001"
+          ],
+          "wait_ms": 5307.794701308012
+        },
+        {
+          "active_cell_names": [
+            "0U8NQ45V3I4VCW9SZNQ0A31MV",
+            "5W4TDRKJM1HLCTH86X4NC2H9U",
+            "66VI5U1BW9L277URCDMHSL149",
+            "6XZZHHUZFM48ZSM3BXW8PFTXI",
+            "7C09121K0OGXMXJFO2VSRQEIR",
+            "A9EBQVMN87J5BEOL0X0YCLXUV",
+            "EDJZH8KGIWS7MV44OBMFPMZKS"
+          ],
+          "active_source_count": 1,
+          "errors": [],
+          "expected_tile_id": "-002_-001",
+          "hitch_ms": 24.235300719738007,
+          "id": "tile-03-03",
+          "kind": "tile",
+          "load_delta": [
+            "-002_-002",
+            "-003_-001"
+          ],
+          "loaded_actor_count": 4,
+          "loaded_cell_count": 7,
+          "loaded_cell_names": [
+            "0U8NQ45V3I4VCW9SZNQ0A31MV",
+            "5W4TDRKJM1HLCTH86X4NC2H9U",
+            "66VI5U1BW9L277URCDMHSL149",
+            "6XZZHHUZFM48ZSM3BXW8PFTXI",
+            "7C09121K0OGXMXJFO2VSRQEIR",
+            "A9EBQVMN87J5BEOL0X0YCLXUV",
+            "EDJZH8KGIWS7MV44OBMFPMZKS"
+          ],
+          "loaded_tile_ids": [
+            "-001_-001",
+            "-002_-001",
+            "-002_-002",
+            "-003_-001"
+          ],
+          "location_cm": [
+            -75000,
+            25000,
+            30000
+          ],
+          "missing_refs": [],
+          "placement_max_error_cm": 0,
+          "requested_state": "Activated",
+          "source_enabled": true,
+          "source_observed": true,
+          "source_registered": true,
+          "streaming_completed": true,
+          "terrain": {
+            "collision_component_count": 20,
+            "loaded_cell_count": 0,
+            "proxy_actor_count": 2,
+            "render_component_count": 20,
+            "root_actor_count": 1
+          },
+          "terrain_cell_names": [],
+          "unload_delta": [
+            "+000_-001",
+            "-001_-002"
+          ],
+          "wait_ms": 5115.968301892281
+        },
+        {
+          "active_cell_names": [
+            "5W4TDRKJM1HLCTH86X4NC2H9U",
+            "66VI5U1BW9L277URCDMHSL149",
+            "7C09121K0OGXMXJFO2VSRQEIR",
+            "A9EBQVMN87J5BEOL0X0YCLXUV",
+            "EDJZH8KGIWS7MV44OBMFPMZKS"
+          ],
+          "active_source_count": 1,
+          "errors": [],
+          "expected_tile_id": "-003_-001",
+          "hitch_ms": 15.254002064466476,
+          "id": "tile-03-04",
+          "kind": "tile",
+          "load_delta": [],
+          "loaded_actor_count": 2,
+          "loaded_cell_count": 5,
+          "loaded_cell_names": [
+            "5W4TDRKJM1HLCTH86X4NC2H9U",
+            "66VI5U1BW9L277URCDMHSL149",
+            "7C09121K0OGXMXJFO2VSRQEIR",
+            "A9EBQVMN87J5BEOL0X0YCLXUV",
+            "EDJZH8KGIWS7MV44OBMFPMZKS"
+          ],
+          "loaded_tile_ids": [
+            "-002_-001",
+            "-003_-001"
+          ],
+          "location_cm": [
+            -125000,
+            25000,
+            30000
+          ],
+          "missing_refs": [],
+          "placement_max_error_cm": 0,
+          "requested_state": "Activated",
+          "source_enabled": true,
+          "source_observed": true,
+          "source_registered": true,
+          "streaming_completed": true,
+          "terrain": {
+            "collision_component_count": 20,
+            "loaded_cell_count": 0,
+            "proxy_actor_count": 2,
+            "render_component_count": 20,
+            "root_actor_count": 1
+          },
+          "terrain_cell_names": [],
+          "unload_delta": [
+            "-001_-001",
+            "-002_-002"
+          ],
+          "wait_ms": 5001.750197261572
+        },
+        {
+          "active_cell_names": [
+            "5HASELKS0VFRBBB78W17UKFRO",
+            "5W4TDRKJM1HLCTH86X4NC2H9U",
+            "66VI5U1BW9L277URCDMHSL149",
+            "6XZZHHUZFM48ZSM3BXW8PFTXI",
+            "A9EBQVMN87J5BEOL0X0YCLXUV"
+          ],
+          "active_source_count": 1,
+          "errors": [],
+          "expected_tile_id": "-003_-002",
+          "hitch_ms": 18.091700971126556,
+          "id": "tile-04-00",
+          "kind": "tile",
+          "load_delta": [
+            "-002_-002",
+            "-003_-002"
+          ],
+          "loaded_actor_count": 2,
+          "loaded_cell_count": 5,
+          "loaded_cell_names": [
+            "5HASELKS0VFRBBB78W17UKFRO",
+            "5W4TDRKJM1HLCTH86X4NC2H9U",
+            "66VI5U1BW9L277URCDMHSL149",
+            "6XZZHHUZFM48ZSM3BXW8PFTXI",
+            "A9EBQVMN87J5BEOL0X0YCLXUV"
+          ],
+          "loaded_tile_ids": [
+            "-002_-002",
+            "-003_-002"
+          ],
+          "location_cm": [
+            -125000,
+            75000,
+            30000
+          ],
+          "missing_refs": [],
+          "placement_max_error_cm": 0,
+          "requested_state": "Activated",
+          "source_enabled": true,
+          "source_observed": true,
+          "source_registered": true,
+          "streaming_completed": true,
+          "terrain": {
+            "collision_component_count": 20,
+            "loaded_cell_count": 0,
+            "proxy_actor_count": 2,
+            "render_component_count": 20,
+            "root_actor_count": 1
+          },
+          "terrain_cell_names": [],
+          "unload_delta": [
+            "-002_-001",
+            "-003_-001"
+          ],
+          "wait_ms": 5024.118099361658
+        },
+        {
+          "active_cell_names": [
+            "5HASELKS0VFRBBB78W17UKFRO",
+            "5W4TDRKJM1HLCTH86X4NC2H9U",
+            "66VI5U1BW9L277URCDMHSL149",
+            "6XZZHHUZFM48ZSM3BXW8PFTXI",
+            "A9EBQVMN87J5BEOL0X0YCLXUV",
+            "B4PKWC7OWHNT8DC1IF9BRHEEL",
+            "EDJZH8KGIWS7MV44OBMFPMZKS"
+          ],
+          "active_source_count": 1,
+          "errors": [],
+          "expected_tile_id": "-002_-002",
+          "hitch_ms": 8.87339934706688,
+          "id": "tile-04-01",
+          "kind": "tile",
+          "load_delta": [
+            "-001_-002",
+            "-002_-001"
+          ],
+          "loaded_actor_count": 4,
+          "loaded_cell_count": 7,
+          "loaded_cell_names": [
+            "5HASELKS0VFRBBB78W17UKFRO",
+            "5W4TDRKJM1HLCTH86X4NC2H9U",
+            "66VI5U1BW9L277URCDMHSL149",
+            "6XZZHHUZFM48ZSM3BXW8PFTXI",
+            "A9EBQVMN87J5BEOL0X0YCLXUV",
+            "B4PKWC7OWHNT8DC1IF9BRHEEL",
+            "EDJZH8KGIWS7MV44OBMFPMZKS"
+          ],
+          "loaded_tile_ids": [
+            "-001_-002",
+            "-002_-001",
+            "-002_-002",
+            "-003_-002"
+          ],
+          "location_cm": [
+            -75000,
+            75000,
+            30000
+          ],
+          "missing_refs": [],
+          "placement_max_error_cm": 0,
+          "requested_state": "Activated",
+          "source_enabled": true,
+          "source_observed": true,
+          "source_registered": true,
+          "streaming_completed": true,
+          "terrain": {
+            "collision_component_count": 20,
+            "loaded_cell_count": 0,
+            "proxy_actor_count": 2,
+            "render_component_count": 20,
+            "root_actor_count": 1
+          },
+          "terrain_cell_names": [],
+          "unload_delta": [],
+          "wait_ms": 5283.711202442646
+        },
+        {
+          "active_cell_names": [
+            "0U8NQ45V3I4VCW9SZNQ0A31MV",
+            "5W4TDRKJM1HLCTH86X4NC2H9U",
+            "66VI5U1BW9L277URCDMHSL149",
+            "6XZZHHUZFM48ZSM3BXW8PFTXI",
+            "A9EBQVMN87J5BEOL0X0YCLXUV",
+            "B4PKWC7OWHNT8DC1IF9BRHEEL",
+            "DTWQT73O2BA41RSIYQVGL81JS"
+          ],
+          "active_source_count": 1,
+          "errors": [],
+          "expected_tile_id": "-001_-002",
+          "hitch_ms": 12.666001915931702,
+          "id": "tile-04-02",
+          "kind": "tile",
+          "load_delta": [
+            "+000_-002",
+            "-001_-001"
+          ],
+          "loaded_actor_count": 4,
+          "loaded_cell_count": 7,
+          "loaded_cell_names": [
+            "0U8NQ45V3I4VCW9SZNQ0A31MV",
+            "5W4TDRKJM1HLCTH86X4NC2H9U",
+            "66VI5U1BW9L277URCDMHSL149",
+            "6XZZHHUZFM48ZSM3BXW8PFTXI",
+            "A9EBQVMN87J5BEOL0X0YCLXUV",
+            "B4PKWC7OWHNT8DC1IF9BRHEEL",
+            "DTWQT73O2BA41RSIYQVGL81JS"
+          ],
+          "loaded_tile_ids": [
+            "+000_-002",
+            "-001_-001",
+            "-001_-002",
+            "-002_-002"
+          ],
+          "location_cm": [
+            -25000,
+            75000,
+            30000
+          ],
+          "missing_refs": [],
+          "placement_max_error_cm": 0,
+          "requested_state": "Activated",
+          "source_enabled": true,
+          "source_observed": true,
+          "source_registered": true,
+          "streaming_completed": true,
+          "terrain": {
+            "collision_component_count": 20,
+            "loaded_cell_count": 0,
+            "proxy_actor_count": 2,
+            "render_component_count": 20,
+            "root_actor_count": 1
+          },
+          "terrain_cell_names": [],
+          "unload_delta": [
+            "-002_-001",
+            "-003_-002"
+          ],
+          "wait_ms": 5173.7634018063545
+        },
+        {
+          "active_cell_names": [
+            "5W4TDRKJM1HLCTH86X4NC2H9U",
+            "61QHW0WXZNTZ47VAXBC9TMGO0",
+            "66VI5U1BW9L277URCDMHSL149",
+            "A9EBQVMN87J5BEOL0X0YCLXUV",
+            "B4PKWC7OWHNT8DC1IF9BRHEEL",
+            "DTWQT73O2BA41RSIYQVGL81JS",
+            "ECCBK95341Y4RA3K9EZEOSXRM"
+          ],
+          "active_source_count": 1,
+          "errors": [],
+          "expected_tile_id": "+000_-002",
+          "hitch_ms": 6.6181980073452,
+          "id": "tile-04-03",
+          "kind": "tile",
+          "load_delta": [
+            "+000_-001",
+            "+001_-002"
+          ],
+          "loaded_actor_count": 4,
+          "loaded_cell_count": 7,
+          "loaded_cell_names": [
+            "5W4TDRKJM1HLCTH86X4NC2H9U",
+            "61QHW0WXZNTZ47VAXBC9TMGO0",
+            "66VI5U1BW9L277URCDMHSL149",
+            "A9EBQVMN87J5BEOL0X0YCLXUV",
+            "B4PKWC7OWHNT8DC1IF9BRHEEL",
+            "DTWQT73O2BA41RSIYQVGL81JS",
+            "ECCBK95341Y4RA3K9EZEOSXRM"
+          ],
+          "loaded_tile_ids": [
+            "+000_-001",
+            "+000_-002",
+            "+001_-002",
+            "-001_-002"
+          ],
+          "location_cm": [
+            25000,
+            75000,
+            30000
+          ],
+          "missing_refs": [],
+          "placement_max_error_cm": 0,
+          "requested_state": "Activated",
+          "source_enabled": true,
+          "source_observed": true,
+          "source_registered": true,
+          "streaming_completed": true,
+          "terrain": {
+            "collision_component_count": 21,
+            "loaded_cell_count": 0,
+            "proxy_actor_count": 3,
+            "render_component_count": 21,
+            "root_actor_count": 1
+          },
+          "terrain_cell_names": [],
+          "unload_delta": [
+            "-001_-001",
+            "-002_-002"
+          ],
+          "wait_ms": 5065.834399312735
+        },
+        {
+          "active_cell_names": [
+            "5W4TDRKJM1HLCTH86X4NC2H9U",
+            "61QHW0WXZNTZ47VAXBC9TMGO0",
+            "8NNNYLND3KTBVITZZH2FLSXKP",
+            "A9EBQVMN87J5BEOL0X0YCLXUV",
+            "DTWQT73O2BA41RSIYQVGL81JS"
+          ],
+          "active_source_count": 1,
+          "errors": [],
+          "expected_tile_id": "+001_-002",
+          "hitch_ms": 14.5253986120224,
+          "id": "tile-04-04",
+          "kind": "tile",
+          "load_delta": [],
+          "loaded_actor_count": 2,
+          "loaded_cell_count": 5,
+          "loaded_cell_names": [
+            "5W4TDRKJM1HLCTH86X4NC2H9U",
+            "61QHW0WXZNTZ47VAXBC9TMGO0",
+            "8NNNYLND3KTBVITZZH2FLSXKP",
+            "A9EBQVMN87J5BEOL0X0YCLXUV",
+            "DTWQT73O2BA41RSIYQVGL81JS"
+          ],
+          "loaded_tile_ids": [
+            "+000_-002",
+            "+001_-002"
+          ],
+          "location_cm": [
+            75000,
+            75000,
+            30000
+          ],
+          "missing_refs": [],
+          "placement_max_error_cm": 0,
+          "requested_state": "Activated",
+          "source_enabled": true,
+          "source_observed": true,
+          "source_registered": true,
+          "streaming_completed": true,
+          "terrain": {
+            "collision_component_count": 9,
+            "loaded_cell_count": 0,
+            "proxy_actor_count": 3,
+            "render_component_count": 9,
+            "root_actor_count": 1
+          },
+          "terrain_cell_names": [],
+          "unload_delta": [
+            "+000_-001",
+            "-001_-002"
+          ],
+          "wait_ms": 5014.39930126071
+        },
+        {
+          "active_cell_names": [
+            "A9EBQVMN87J5BEOL0X0YCLXUV"
+          ],
+          "active_source_count": 1,
+          "errors": [],
+          "expected_tile_id": "",
+          "hitch_ms": 18.997900187969208,
+          "id": "outside-east-control",
+          "kind": "control",
+          "load_delta": [],
+          "loaded_actor_count": 0,
+          "loaded_cell_count": 1,
+          "loaded_cell_names": [
+            "A9EBQVMN87J5BEOL0X0YCLXUV"
+          ],
+          "loaded_tile_ids": [],
+          "location_cm": [
+            600000,
+            -25000,
+            30000
+          ],
+          "missing_refs": [],
+          "placement_max_error_cm": 0,
+          "requested_state": "Activated",
+          "source_enabled": true,
+          "source_observed": true,
+          "source_registered": true,
+          "streaming_completed": true,
+          "terrain": {
+            "collision_component_count": 0,
+            "loaded_cell_count": 0,
+            "proxy_actor_count": 0,
+            "render_component_count": 0,
+            "root_actor_count": 1
+          },
+          "terrain_cell_names": [],
+          "unload_delta": [
+            "+000_-002",
+            "+001_-002"
+          ],
+          "wait_ms": 5004.44919988513
+        }
+      ],
+      "process_id": "28148",
+      "raw_sha256": "7e6d3f43e6bee1c938becc1b0fe1445d6debf62e5f0ce43764621724ab6735cc",
+      "run_index": 2,
+      "streaming_performance_changes": [
+        "[2026.09.29-01.03.23:341][217]LogWorldPartition: Streaming performance changed: Good -> Critical",
+        "[2026.09.29-01.03.23:414][268]LogWorldPartition: Streaming performance changed: Critical -> Good"
+      ]
+    }
+  ],
+  "runtime_validation": true,
+  "schema": "xinyi-packaged-streaming-evidence/v1",
+  "snapshot_sha256": "62b30801d910365c6ceefcc0aca7c4dd04bcd3d96dc0de3f20f4efdf580af712",
+  "source_contract_sha256": "2095d6400eafd611094c35828550191cb4b6b8b9031493d9f420c9ffa6bec89c",
+  "source_immutability_status": "PASS_SOURCE_IMMUTABILITY",
+  "status": "PASS_PACKAGED_STREAMING",
+  "world": "/Game/XinyiV2/L_XinyiV2_Contract_WP"
+}

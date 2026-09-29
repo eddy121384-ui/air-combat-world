@@ -1,0 +1,343 @@
+{
+  "schema": "xinyi-complex-as-simple-gate/v1",
+  "run_id": "20260929T032005Z-93dbf36a",
+  "status": "MEASURED",
+  "candidate_correctness": "FAIL",
+  "certified_negative_count": 27,
+  "sweep_failures": [],
+  "dynamic_simulation_pass": true,
+  "same_executable": true,
+  "baseline": {
+    "process_id": 23316,
+    "launch_id": "f66690be-e0f4-44d8-be5e-8a766fde6d5d",
+    "executable_sha256": "1567fee425193d9032332ce9d8729fe926ea4c27dd26a555c6277b5caad6f692",
+    "elapsed_seconds": 33.7966227,
+    "plan_step_count": 101,
+    "all_streaming_complete": true,
+    "audited_tile_count": 25,
+    "original_trace_flag_counts": {
+      "1": 25
+    },
+    "effective_trace_flag_counts": {
+      "1": 25
+    },
+    "physics_state_recreated_component_count": 0,
+    "body_resource_bytes_total": 25169660,
+    "convex_primitive_count": 25,
+    "positive_count": 15,
+    "positive_building_hit_count": 15,
+    "positive_expected_tile_match_count": 15,
+    "positive_requires_expected_tile_identity": true,
+    "positive_failures": [],
+    "negative_count": 27,
+    "negative_blocked_count": 17,
+    "negative_blocked_ids": [
+      "open_area_-002_-002",
+      "open_area_-002_-001",
+      "open_area_-002_+000",
+      "open_area_-002_+001",
+      "open_area_-001_-002",
+      "open_area_-001_-001",
+      "open_area_-001_+000",
+      "open_area_-001_+001",
+      "open_area_+000_-002",
+      "open_area_+000_-001",
+      "open_area_+000_+000",
+      "gap_between_buildings_+000_+000",
+      "open_area_+000_+001",
+      "open_area_+001_-002",
+      "open_area_+001_-001",
+      "open_area_+001_+000",
+      "open_area_+001_+001"
+    ],
+    "sweeps": [
+      {
+        "sample": "gap_between_buildings_+000_+000",
+        "hit": true,
+        "actor": "/Game/XinyiV2/L_XinyiV2_Contract_WP/_Generated_/AA0PKG0D1CL5LW998N2SV1196.L_XinyiV2_Contract_WP:PersistentLevel.StaticMeshActor_17",
+        "component": "/Game/XinyiV2/L_XinyiV2_Contract_WP/_Generated_/AA0PKG0D1CL5LW998N2SV1196.L_XinyiV2_Contract_WP:PersistentLevel.StaticMeshActor_17.StaticMeshComponent0",
+        "building_tile": "+000_+000",
+        "location_cm": [
+          15000,
+          -30000,
+          25000
+        ],
+        "distance_cm": 0,
+        "shape": "sphere_r50_cm",
+        "trace_complex": false,
+        "query_us": 328.7
+      },
+      {
+        "sample": "gap_between_buildings_+000_+000",
+        "hit": true,
+        "actor": "/Game/XinyiV2/L_XinyiV2_Contract_WP/_Generated_/AA0PKG0D1CL5LW998N2SV1196.L_XinyiV2_Contract_WP:PersistentLevel.StaticMeshActor_17",
+        "component": "/Game/XinyiV2/L_XinyiV2_Contract_WP/_Generated_/AA0PKG0D1CL5LW998N2SV1196.L_XinyiV2_Contract_WP:PersistentLevel.StaticMeshActor_17.StaticMeshComponent0",
+        "building_tile": "+000_+000",
+        "location_cm": [
+          15000,
+          -30000,
+          25000
+        ],
+        "distance_cm": 0,
+        "shape": "box_50_50_100_cm",
+        "trace_complex": false,
+        "query_us": 157.2
+      },
+      {
+        "sample": "low_rise_wall",
+        "hit": true,
+        "actor": "/Game/XinyiV2/L_XinyiV2_Contract_WP/_Generated_/5HASELKS0VFRBBB78W17UKFRO.L_XinyiV2_Contract_WP:PersistentLevel.StaticMeshActor_0",
+        "component": "/Game/XinyiV2/L_XinyiV2_Contract_WP/_Generated_/5HASELKS0VFRBBB78W17UKFRO.L_XinyiV2_Contract_WP:PersistentLevel.StaticMeshActor_0.StaticMeshComponent0",
+        "building_tile": "-003_-002",
+        "location_cm": [
+          -113948.31053764414,
+          67809.26306579655,
+          1491.333293914795
+        ],
+        "distance_cm": 0,
+        "shape": "sphere_r50_cm",
+        "trace_complex": false,
+        "query_us": 38.599999999999994
+      },
+      {
+        "sample": "high_rise_wall",
+        "hit": true,
+        "actor": "/Game/XinyiV2/L_XinyiV2_Contract_WP/_Generated_/8R2GZ349VHEQ00WO0HJDD3XEX.L_XinyiV2_Contract_WP:PersistentLevel.StaticMeshActor_18",
+        "component": "/Game/XinyiV2/L_XinyiV2_Contract_WP/_Generated_/8R2GZ349VHEQ00WO0HJDD3XEX.L_XinyiV2_Contract_WP:PersistentLevel.StaticMeshActor_18.StaticMeshComponent0",
+        "building_tile": "+000_+001",
+        "location_cm": [
+          6645.975266319396,
+          -66674.5856013729,
+          9269.000148773193
+        ],
+        "distance_cm": 0,
+        "shape": "box_50_50_100_cm",
+        "trace_complex": false,
+        "query_us": 48.9
+      }
+    ],
+    "dynamic_simulation": {
+      "object": "simulated_box_80cm_CCD_no_gravity",
+      "simulate_physics": true,
+      "start_cm": [
+        -115534.29521970321,
+        66590.79985819693,
+        1491.333293914795
+      ],
+      "target_cm": [
+        -110776.34117352597,
+        70246.18948099579,
+        1491.333293914795
+      ],
+      "initial_velocity_cm_s": [
+        1585.984682059081,
+        1218.4632075996203,
+        0
+      ],
+      "final_location_cm": [
+        -114810.38825938213,
+        67147.03528929838,
+        1491.333905031206
+      ],
+      "final_velocity_cm_s": [
+        -638.5293579101562,
+        434.1076354980469,
+        -93.19422149658203
+      ],
+      "blocking_hit_observed": true,
+      "expected_tile": "-003_-002",
+      "hit_tile": "-003_-002",
+      "hit_actor": "/Game/XinyiV2/L_XinyiV2_Contract_WP/_Generated_/5HASELKS0VFRBBB78W17UKFRO.L_XinyiV2_Contract_WP:PersistentLevel.StaticMeshActor_0",
+      "hit_component": "/Game/XinyiV2/L_XinyiV2_Contract_WP/_Generated_/5HASELKS0VFRBBB78W17UKFRO.L_XinyiV2_Contract_WP:PersistentLevel.StaticMeshActor_0.StaticMeshComponent0",
+      "hit_location_cm": [
+        -114769.80212901586,
+        67107.8558972532,
+        1451.3333158493042
+      ],
+      "elapsed_ms": 458.79819989204407
+    },
+    "query_timing_us": {
+      "sample_count": 42,
+      "repetitions_per_sample": 64,
+      "median_average": 2.6984375,
+      "p95_average": 3.183515625,
+      "max_average": 7.6234375
+    },
+    "frame_time_ms": {
+      "sample_count": 27501,
+      "p50_ms": 0.9224005043506622,
+      "p95_ms": 1.8528029322624207,
+      "p99_ms": 3.2479017972946167,
+      "max_ms": 45.798301696777344
+    },
+    "max_streaming_wait_ms": 324.25660267472267,
+    "runtime_peak_process_memory_bytes": 298319872,
+    "host_peak_working_set_bytes": 405430272,
+    "host_peak_private_bytes": 293023744,
+    "host_memory_sample_count": 240,
+    "package_total_bytes": 1003507952.0,
+    "pak_bytes": 10705822,
+    "runtime_diagnostic_line_count": 4,
+    "runtime_diagnostic_lines": [
+      "LogWindows: Failed to load 'aqProf.dll' (GetLastError=126)",
+      "LogWindows: Failed to load 'VtuneApi.dll' (GetLastError=126)",
+      "LogWindows: Failed to load 'VtuneApi32e.dll' (GetLastError=126)",
+      "LogWindows: Failed to load 'WinPixGpuCapturer.dll' (GetLastError=126)"
+    ]
+  },
+  "candidate": {
+    "process_id": 37536,
+    "launch_id": "9d0598b9-da0c-4e2b-ba96-0cd97de6f309",
+    "executable_sha256": "1567fee425193d9032332ce9d8729fe926ea4c27dd26a555c6277b5caad6f692",
+    "elapsed_seconds": 30.788285,
+    "plan_step_count": 101,
+    "all_streaming_complete": true,
+    "audited_tile_count": 25,
+    "original_trace_flag_counts": {
+      "1": 25
+    },
+    "effective_trace_flag_counts": {
+      "3": 25
+    },
+    "physics_state_recreated_component_count": 25,
+    "body_resource_bytes_total": 25136009,
+    "convex_primitive_count": 25,
+    "positive_count": 15,
+    "positive_building_hit_count": 15,
+    "positive_expected_tile_match_count": 14,
+    "positive_requires_expected_tile_identity": true,
+    "positive_failures": [
+      "tile_boundary_mass"
+    ],
+    "negative_count": 27,
+    "negative_blocked_count": 0,
+    "negative_blocked_ids": [],
+    "sweeps": [
+      {
+        "sample": "gap_between_buildings_+000_+000",
+        "hit": false,
+        "shape": "sphere_r50_cm",
+        "trace_complex": false,
+        "query_us": 90.99999999999999
+      },
+      {
+        "sample": "gap_between_buildings_+000_+000",
+        "hit": false,
+        "shape": "box_50_50_100_cm",
+        "trace_complex": false,
+        "query_us": 44.6
+      },
+      {
+        "sample": "low_rise_wall",
+        "hit": true,
+        "actor": "/Game/XinyiV2/L_XinyiV2_Contract_WP/_Generated_/5HASELKS0VFRBBB78W17UKFRO.L_XinyiV2_Contract_WP:PersistentLevel.StaticMeshActor_0",
+        "component": "/Game/XinyiV2/L_XinyiV2_Contract_WP/_Generated_/5HASELKS0VFRBBB78W17UKFRO.L_XinyiV2_Contract_WP:PersistentLevel.StaticMeshActor_0.StaticMeshComponent0",
+        "building_tile": "-003_-002",
+        "location_cm": [
+          -113194.96706686285,
+          68388.0336631523,
+          1491.333293914795
+        ],
+        "distance_cm": 950.0009155273438,
+        "shape": "sphere_r50_cm",
+        "trace_complex": false,
+        "query_us": 169.6
+      },
+      {
+        "sample": "high_rise_wall",
+        "hit": true,
+        "actor": "/Game/XinyiV2/L_XinyiV2_Contract_WP/_Generated_/8R2GZ349VHEQ00WO0HJDD3XEX.L_XinyiV2_Contract_WP:PersistentLevel.StaticMeshActor_18",
+        "component": "/Game/XinyiV2/L_XinyiV2_Contract_WP/_Generated_/8R2GZ349VHEQ00WO0HJDD3XEX.L_XinyiV2_Contract_WP:PersistentLevel.StaticMeshActor_18.StaticMeshComponent0",
+        "building_tile": "+000_+001",
+        "location_cm": [
+          6629.568899643674,
+          -65725.58352100721,
+          9269.000148773193
+        ],
+        "distance_cm": 949.1438598632812,
+        "shape": "box_50_50_100_cm",
+        "trace_complex": false,
+        "query_us": 77.3
+      }
+    ],
+    "dynamic_simulation": {
+      "object": "simulated_box_80cm_CCD_no_gravity",
+      "simulate_physics": true,
+      "start_cm": [
+        -115534.29521970321,
+        66590.79985819693,
+        1491.333293914795
+      ],
+      "target_cm": [
+        -110776.34117352597,
+        70246.18948099579,
+        1491.333293914795
+      ],
+      "initial_velocity_cm_s": [
+        1585.984682059081,
+        1218.4632075996203,
+        0
+      ],
+      "final_location_cm": [
+        -113199.76768803253,
+        68384.29675823757,
+        1491.3338739210158
+      ],
+      "final_velocity_cm_s": [
+        -286.2271423339844,
+        -546.4541625976562,
+        25.13555145263672
+      ],
+      "blocking_hit_observed": true,
+      "expected_tile": "-003_-002",
+      "hit_tile": "-003_-002",
+      "hit_actor": "/Game/XinyiV2/L_XinyiV2_Contract_WP/_Generated_/5HASELKS0VFRBBB78W17UKFRO.L_XinyiV2_Contract_WP:PersistentLevel.StaticMeshActor_0",
+      "hit_component": "/Game/XinyiV2/L_XinyiV2_Contract_WP/_Generated_/5HASELKS0VFRBBB78W17UKFRO.L_XinyiV2_Contract_WP:PersistentLevel.StaticMeshActor_0.StaticMeshComponent0",
+      "hit_location_cm": [
+        -113159.63219702072,
+        68424.45040555453,
+        1451.3333158493042
+      ],
+      "elapsed_ms": 1483.543399721384
+    },
+    "query_timing_us": {
+      "sample_count": 42,
+      "repetitions_per_sample": 64,
+      "median_average": 2.28203125,
+      "p95_average": 5.693593749999992,
+      "max_average": 6.7437499999999995
+    },
+    "frame_time_ms": {
+      "sample_count": 27402,
+      "p50_ms": 0.9588003158569336,
+      "p95_ms": 1.94578152149915,
+      "p99_ms": 3.4593963995575896,
+      "max_ms": 54.03690040111542
+    },
+    "max_streaming_wait_ms": 327.51439884305,
+    "runtime_peak_process_memory_bytes": 301772800,
+    "host_peak_working_set_bytes": 389476352,
+    "host_peak_private_bytes": 293466112,
+    "host_memory_sample_count": 247,
+    "package_total_bytes": 1003508191.0,
+    "pak_bytes": 10705822,
+    "runtime_diagnostic_line_count": 4,
+    "runtime_diagnostic_lines": [
+      "LogWindows: Failed to load 'aqProf.dll' (GetLastError=126)",
+      "LogWindows: Failed to load 'VtuneApi.dll' (GetLastError=126)",
+      "LogWindows: Failed to load 'VtuneApi32e.dll' (GetLastError=126)",
+      "LogWindows: Failed to load 'WinPixGpuCapturer.dll' (GetLastError=126)"
+    ]
+  },
+  "candidate_over_baseline_ratios": {
+    "median_query_time": 0.8456861609727853,
+    "p95_query_time": 1.7884610665292373,
+    "frame_p95": 1.0501826652029287,
+    "frame_p99": 1.0651173020191498,
+    "peak_working_set": 0.9606494110040209,
+    "peak_private": 1.001509666056277,
+    "streaming_wait": 1.0100469694108138
+  },
+  "performance_decision": "REQUIRES_EVIDENCE_INTERPRETATION",
+  "verdict": "FAIL"
+}
