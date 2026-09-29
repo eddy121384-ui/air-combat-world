@@ -181,31 +181,31 @@
     0.62
    ],
    "skyZen": [
-    0.09,
-    0.14,
-    0.32
+    0.08,
+    0.13,
+    0.3
    ],
    "skyHor": [
-    0.88,
-    0.55,
-    0.36
+    0.8,
+    0.56,
+    0.4
    ],
    "groundAmb": [
-    0.05,
     0.045,
-    0.05
+    0.045,
+    0.055
    ],
    "fogCol": [
-    0.44,
     0.36,
-    0.36
+    0.37,
+    0.42
    ],
    "fogDen": 9e-05,
    "fogFall": 0.0011,
    "fogBase": 0,
    "night": 0.5,
    "litFrac": 0.35,
-   "exposure": 1.15,
+   "exposure": 1.05,
    "bloom": 0.12,
    "bloomThresh": 1.2
   },
@@ -245,161 +245,6 @@
    "exposure": 1.7,
    "bloom": 0.3,
    "bloomThresh": 0.7
-  },
-  "dbg_noshadow": {
-   "sunAz": 245,
-   "sunEl": 36,
-   "sunRad": [
-    3.7,
-    3.4,
-    3.0
-   ],
-   "skyZen": [
-    0.17,
-    0.31,
-    0.62
-   ],
-   "skyHor": [
-    0.52,
-    0.6,
-    0.7
-   ],
-   "groundAmb": [
-    0.17,
-    0.16,
-    0.14
-   ],
-   "fogCol": [
-    0.5,
-    0.58,
-    0.67
-   ],
-   "fogDen": 0.00011,
-   "fogFall": 0.0011,
-   "fogBase": 0,
-   "night": 0.0,
-   "litFrac": 0.08,
-   "exposure": 0.64,
-   "bloom": 0.04,
-   "bloomThresh": 3.0,
-   "noShadow": true
-  },
-  "dbg_albedo": {
-   "sunAz": 245,
-   "sunEl": 36,
-   "sunRad": [
-    3.7,
-    3.4,
-    3.0
-   ],
-   "skyZen": [
-    0.17,
-    0.31,
-    0.62
-   ],
-   "skyHor": [
-    0.52,
-    0.6,
-    0.7
-   ],
-   "groundAmb": [
-    0.17,
-    0.16,
-    0.14
-   ],
-   "fogCol": [
-    0.5,
-    0.58,
-    0.67
-   ],
-   "fogDen": 0.00011,
-   "fogFall": 0.0011,
-   "fogBase": 0,
-   "night": 0.0,
-   "litFrac": 0.08,
-   "exposure": 1.0,
-   "bloom": 0.04,
-   "bloomThresh": 3.0,
-   "debug": 1,
-   "noShadow": true
-  },
-  "dbg_normal": {
-   "sunAz": 245,
-   "sunEl": 36,
-   "sunRad": [
-    3.7,
-    3.4,
-    3.0
-   ],
-   "skyZen": [
-    0.17,
-    0.31,
-    0.62
-   ],
-   "skyHor": [
-    0.52,
-    0.6,
-    0.7
-   ],
-   "groundAmb": [
-    0.17,
-    0.16,
-    0.14
-   ],
-   "fogCol": [
-    0.5,
-    0.58,
-    0.67
-   ],
-   "fogDen": 0.00011,
-   "fogFall": 0.0011,
-   "fogBase": 0,
-   "night": 0.0,
-   "litFrac": 0.08,
-   "exposure": 1.0,
-   "bloom": 0.04,
-   "bloomThresh": 3.0,
-   "debug": 2,
-   "noShadow": true
-  },
-  "dbg_nofog": {
-   "sunAz": 245,
-   "sunEl": 36,
-   "sunRad": [
-    3.7,
-    3.4,
-    3.0
-   ],
-   "skyZen": [
-    0.17,
-    0.31,
-    0.62
-   ],
-   "skyHor": [
-    0.52,
-    0.6,
-    0.7
-   ],
-   "groundAmb": [
-    0.17,
-    0.16,
-    0.14
-   ],
-   "fogCol": [
-    0.5,
-    0.58,
-    0.67
-   ],
-   "fogDen": 0.00011,
-   "fogFall": 0.0011,
-   "fogBase": 0,
-   "night": 0.0,
-   "litFrac": 0.08,
-   "exposure": 1.0,
-   "bloom": 0.04,
-   "bloomThresh": 3.0,
-   "debug": 3,
-   "noShadow": true
   }
  }
 }

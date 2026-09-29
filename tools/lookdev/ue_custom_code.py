@@ -35,8 +35,8 @@ MATERIALS = {
         "",
     ),
     "M_XinyiBackdrop": (
-        [("WP", 3), ("N", 3), ("UV2", 2), ("Night", 1)],
-        "xl.xc_backdrop(WP, N, float4(UV2.x, UV2.y, 0.5, 1.0), Night, max(fwidth(WP.x), fwidth(WP.y)), b, r, m, s, e);",
+        [("WP", 3), ("N", 3), ("UV2", 2), ("FC", 4), ("Night", 1)],
+        "xl.xc_backdrop(WP, N, float4(UV2.x, UV2.y, 0.5, 1.0), FC, Night, max(fwidth(WP.x), fwidth(WP.y)), b, r, m, s, e);",
         "",
     ),
     "M_XinyiFoliage": (
@@ -65,6 +65,11 @@ def custom_code(material: str) -> str:
         + call + "\n"
         + "Rough = r; Metal = m; Spec = s; Emis = e; NrmWS = n;\nreturn b;\n"
     )
+
+
+def extent_uv_code(e0: float, e1: float, n0: float, n1: float) -> str:
+    """World (UE cm/100) -> 0..1 UV over an ENU extent; UE Y = -north."""
+    return "return float2((WP.x - (%.1f)) / %.1f, (WP.y + (%.1f)) / %.1f);" % (e0, e1 - e0, n1, n1 - n0)
 
 
 def ground_uv_code(e0: float, e1: float, n0: float, n1: float) -> str:

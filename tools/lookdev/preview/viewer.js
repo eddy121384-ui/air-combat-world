@@ -103,7 +103,7 @@ async function loadTexture(url) {
   gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
   return t;
 }
-let groundTexture = null;
+let groundTexture = null; let farCityTexture = null; let farExtent = [0, 1, 0, 1];
 
 // ------------------------------------------------------------ shaders -------
 function compile(type, src) {
@@ -183,7 +183,13 @@ const float PI = 3.14159265;
 
 vec3 skyRad(vec3 d) {
   float h = clamp(d.z, -1.0, 1.0);
-  vec3 c = mix(uSkyHor, uSkyZen, pow(clamp(h, 0.0, 1.0), 0.55));
+  // horizon warms toward the sun and cools away from it (as SkyAtmosphere does)
+  vec2 dh = normalize(d.xy + vec2(1e-5, 0.0));
+  vec2 sh = normalize(uSunDir.xy + vec2(1e-5, 0.0));
+  float toward = dot(dh, sh) * 0.5 + 0.5;
+  float lowSun = 1.0 - smoothstep(0.05, 0.5, uSunDir.z);
+  vec3 hor = mix(uSkyHor * mix(vec3(1.0), vec3(0.55, 0.62, 0.95), lowSun), uSkyHor, pow(toward, 2.0));
+  vec3 c = mix(hor, uSkyZen, pow(clamp(h, 0.0, 1.0), 0.55));
   c = mix(c, uGroundAmb * 0.8, smoothstep(0.0, -0.15, h));
   float mu = max(dot(d, uSunDir), 0.0);
   c += uSunRad * (pow(mu, 8.0) * 0.05 + pow(mu, 64.0) * 0.15) * smoothstep(-0.1, 0.05, h);
@@ -260,6 +266,8 @@ async function init(manifestUrl) {
 in vec3 vW; in vec3 vN; in vec2 vUv0; in vec2 vUv1; in vec4 vCol;
 uniform sampler2D uGround;
 out vec4 oColor;
+uniform sampler2D uFarCity; uniform vec4 uFarExtent;
+vec4 farCityTex(vec3 w) { return texture(uFarCity, vec2((w.x - uFarExtent.x) / (uFarExtent.y - uFarExtent.x), (uFarExtent.w - w.y) / (uFarExtent.w - uFarExtent.z))); }
 vec4 groundTex(vec3 w) { return texture(uGround, vec2((w.x + 1500.0) / 2500.0, (1500.0 - w.y) / 2500.0)); }
 void main() {
   vec3 N = normalize(vN);
@@ -291,7 +299,7 @@ void main() {
   } else if (uKind == 5) {
     xc_prop(vW, N, vc, vc.z, uNight, fwp, base, rough, metal, spec, emis);
   } else {
-    xc_backdrop(vW, N, vc, uNight, fwp, base, rough, metal, spec, emis);
+    xc_backdrop(vW, N, vc, farCityTex(vW), uNight, fwp, base, rough, metal, spec, emis);
   }
   vec3 c = shade(base, rough, metal, spec, emis, N, vW, ao);
   if (uDebug == 1) { oColor = vec4(base, 1.0); return; }
@@ -343,6 +351,7 @@ void main(){
 
   const manifest = await (await fetch(manifestUrl)).json();
   if (manifest.groundTexture) groundTexture = await loadTexture(manifest.groundTexture);
+  if (manifest.farCityTexture) { farCityTexture = await loadTexture(manifest.farCityTexture); farExtent = manifest.farExtent; }
   for (const item of manifest.objects) {
     const prims = parseGLB(await fetchBin(item.url));
     for (const p of prims) {
@@ -522,6 +531,10 @@ async function render(shot, light, W, H, SS) {
     gl.activeTexture(gl.TEXTURE1);
     gl.bindTexture(gl.TEXTURE_2D, groundTexture);
     if (pr.u.uGround) gl.uniform1i(pr.u.uGround, 1);
+    gl.activeTexture(gl.TEXTURE2);
+    gl.bindTexture(gl.TEXTURE_2D, farCityTexture);
+    if (pr.u.uFarCity) gl.uniform1i(pr.u.uFarCity, 2);
+    if (pr.u.uFarExtent) gl.uniform4fv(pr.u.uFarExtent, farExtent);
   };
   gl.cullFace(gl.BACK);
   for (const o of objects) {

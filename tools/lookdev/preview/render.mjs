@@ -38,7 +38,14 @@ for (const t of ['shed', 'tank', 'solar', 'antenna', 'ac', 'cooling', 'machine',
   objects.push({ url: `/unreal/Saved/XinyiLook/rooftops/props_${t}.glb`, offset: [0, 0, 0], kind: 5,
     instances: '/unreal/Saved/XinyiLook/rooftops/rooftop_instances.json', instanceKey: t });
 }
-const manifest = { objects, groundTexture: '/unreal/Saved/XinyiLook/ground/xinyi_ground_2048.png' };
+const farRep = path.join(look, 'farcity/far_city.report.json');
+let farExtra = {};
+if (fs.existsSync(farRep)) {
+  const fr = JSON.parse(fs.readFileSync(farRep, 'utf8'));
+  for (const c of fr.chunks) objects.push({ url: `/unreal/Saved/XinyiLook/farcity/${c.path}`, offset: [c.origin_enu_m[0], c.origin_enu_m[1], 0], kind: 0 });
+  farExtra = { farCityTexture: '/unreal/Saved/XinyiLook/farcity/far_city_1024.png', farExtent: fr.texture_extent_enu_m };
+}
+const manifest = { ...farExtra, objects, groundTexture: '/unreal/Saved/XinyiLook/ground/xinyi_ground_2048.png' };
 
 const MIME = { '.html': 'text/html', '.js': 'text/javascript', '.json': 'application/json', '.glb': 'model/gltf-binary', '.hlsl': 'text/plain', '.png': 'image/png' };
 const server = http.createServer((req, res) => {

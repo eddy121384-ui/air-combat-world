@@ -352,7 +352,7 @@ void xc_wall(float u, float h, float H, float fh, float arch, float variant, flo
     spec = lerp(0.35, 1.0, glassAmt);
 
     // --- night -------------------------------------------------------------------
-    float litP = litFrac * lerp(1.0, 0.8, isOffice);
+    float litP = litFrac * lerp(1.0, 0.6, isOffice);
     litP *= 1.0 - step(0.5, rooftop) * 0.6;
     float floorZone = lerp(xc_hash21(float2(fi, seed * 5.0)), xc_hash31(float3(floor(bi / 8.0), fi, seed * 5.0)), 0.35);   // office floors lit as bands
     float litR = lerp(cellR, floorZone, isOffice);
@@ -363,12 +363,12 @@ void xc_wall(float u, float h, float H, float fh, float arch, float variant, flo
     // far distance: average lit coverage instead of per-window noise
     float litMean = litP * winMean * lerp(0.8, 0.45, isOffice);
     float bandLit = step(1.0 - litP, xc_hash21(float2(fi, seed * 5.0))) * winMean;
-    float farLit = lerp(litMean, bandLit * 0.9, isOffice * dFloor);
+    float farLit = lerp(litMean, bandLit * 0.7, isOffice * dFloor);
     float winEmis = lerp(farLit, lit * winLight * curtain, dBay * dFloor);
     float3 e = lightCol * winEmis * lerp(0.24, 0.30, isOffice);
     // shopfronts and signs carry the street at night
     float shopLit = arcade * (1.0 - shutter) * step(0.25, signR);
-    e += float3(1.0, 0.85, 0.62) * shopLit * 1.2;
+    e += float3(1.0, 0.85, 0.62) * shopLit * 0.55;
     float signLit = signBand * hasSign * step(0.2, signR);
     e += signFace * signLit * 1.3;
     // podium LED / logo panels (department stores)
@@ -544,42 +544,44 @@ void xc_city(float3 wpos, float3 N, float2 uv0, float2 uv1, float4 vc,
 
 // ----------------------------------------------------------------------------
 // Basin backdrop (distant terrain, tools/lookdev/build_backdrop.py).
-// vc.x = urban basin floor weight, vc.y = forest weight (plain TEXCOORD_2
-// floats), vc.z = ridge/exposure hint (0.5 = neutral).
-// The urban floor is a texture-free "city carpet": block/street rhythm by day
-// and a sodium/LED light field at night, so the basin reads as continuous
-// Taipei out to the mountains without any extra geometry.
+// vc.x = urban basin floor weight, vc.y = forest weight (plain TEXCOORD_2).
+// fc = far-city data texture sample (tools/lookdev/build_far_city.py):
+//   r = real WFS building coverage, g = mean height / 100 m,
+//   b = p90 height / 150 m, a = 1 where Taipei WFS data exists.
+// The floor is shaded from real density; there is no procedural street grid.
+// Outside WFS coverage (New Taipei) a band-limited mottled fallback is used.
 // ----------------------------------------------------------------------------
-void xc_backdrop(float3 wpos, float3 N, float4 vc, float night, float fwp,
+void xc_backdrop(float3 wpos, float3 N, float4 vc, float4 fc, float night, float fwp,
                  out float3 base, out float rough, out float metal, out float spec, out float3 emis)
 {
     float2 p = float2(wpos.x, wpos.y);
-    float urban = vc.x;
-    float forest = vc.y;
-    float ridge = vc.z;
-    // forest: subtropical broadleaf, dark and humid, lighter on ridges
+    float has = fc.w;
+    float urban = max(vc.x * (1.0 - has), saturate(fc.x * 3.0) * has);
+    float forest = vc.y * (1.0 - saturate(fc.x * 4.0) * has);
+    // forest: subtropical broadleaf, dark and humid
     float fn = xc_fnoise(p, 0.004, fwp) * 0.6 + xc_fnoise(p, 0.02, fwp) * 0.4;
     float3 forestCol = lerp(float3(0.055, 0.085, 0.045), float3(0.10, 0.14, 0.07), fn);
-    forestCol = lerp(forestCol, float3(0.13, 0.15, 0.10), saturate(ridge * 1.6 - 0.8));
     float steep = smoothstep(0.35, 0.7, 1.0 - N.z);
     forestCol = lerp(forestCol, float3(0.16, 0.16, 0.13), steep * 0.4);
 
-    // city carpet: superblocks (~90 m) split by streets, fine parcels (~14 m)
-    float2 blk = p / 90.0;
-    float2 bi = floor(blk);
-    float2 bf = frac(blk);
-    float streetW = 0.12 + 0.06 * xc_hash21(bi * 1.7);
-    float street = 1.0 - xc_box(bf.x, streetW * 0.5, 1.0 - streetW * 0.5, fwp / 90.0)
-                       * xc_box(bf.y, streetW * 0.5, 1.0 - streetW * 0.5, fwp / 90.0);
+    // density: real coverage where known, mottled estimate elsewhere
+    float fallback = 0.35 + 0.35 * xc_fnoise(p, 0.003, fwp) + 0.15 * xc_fnoise(p, 0.02, fwp);
+    float dens = lerp(fallback, saturate(fc.x * 1.6), has);
+    float hgt = lerp(0.12, fc.y, has);                      // /100 m
+    // parcel texture: 14 m cells, occupied with probability = density
     float2 pc = floor(p / 14.0);
     float pr = xc_hash21(pc);
-    float3 roofs = xc_pick4(pr, float3(0.26, 0.26, 0.25), float3(0.36, 0.355, 0.34),
-                            float3(0.22, 0.25, 0.24), float3(0.31, 0.27, 0.24));
+    float occupied = step(pr, dens);
+    float3 roofs = xc_pick4(frac(pr * 7.31), float3(0.30, 0.30, 0.29), float3(0.40, 0.39, 0.37),
+                            float3(0.25, 0.28, 0.27), float3(0.35, 0.31, 0.27));
+    float3 gaps = float3(0.11, 0.11, 0.11);
     float dParcel = xc_detail(fwp, 14.0);
-    roofs = lerp(float3(0.28, 0.28, 0.27), roofs, dParcel);
-    float3 cityCol = lerp(roofs, float3(0.10, 0.10, 0.10), street * lerp(0.5, 0.85, xc_detail(fwp, 30.0)));
-    // pockets of park / riverside green in the basin
-    float greenPocket = smoothstep(0.72, 0.8, xc_fnoise(p + 5833.0, 0.0012, fwp));
+    float3 near = lerp(gaps, roofs, occupied);
+    float3 farMean = lerp(gaps, float3(0.33, 0.33, 0.31), dens);
+    float3 cityCol = lerp(farMean, near, dParcel);
+    cityCol *= 1.0 - 0.35 * saturate(hgt * 1.6);            // tall fabric = deeper canyons
+    float greenPocket = smoothstep(0.72, 0.8, xc_fnoise(p + 5833.0, 0.0012, fwp)) * (1.0 - has);
+    greenPocket = max(greenPocket, (1.0 - saturate(fc.x * 5.0)) * has * vc.x);   // real open space
     cityCol = lerp(cityCol, float3(0.12, 0.17, 0.09), greenPocket);
 
     float3 lowland = lerp(float3(0.20, 0.24, 0.15), cityCol, urban);
@@ -588,21 +590,15 @@ void xc_backdrop(float3 wpos, float3 N, float4 vc, float night, float fwp,
     metal = 0.0;
     spec = 0.3;
 
-    // night light field: sodium arterials + white LED side streets + windows
-    float lamps = street * lerp(0.5, 1.0, step(0.5, xc_hash21(bi)));
+    // night light field follows real density and height
     float3 sodium = float3(1.0, 0.55, 0.20);
-    float3 led = float3(0.85, 0.92, 1.0);
-    float winSpeck = step(0.62, xc_hash21(floor(p / 5.0) + 3.1)) * (1.0 - street);
-    float3 winCol = lerp(float3(0.8, 0.9, 1.0), float3(1.0, 0.75, 0.45), step(0.5, xc_hash21(floor(p / 5.0))));
-    float3 near = lamps * lerp(led, sodium, step(0.4, xc_hash21(bi + 9.0))) * 0.45 + winSpeck * winCol * 0.25;
-    float3 far = float3(1.0, 0.70, 0.42) * 0.035;                 // mean glow when unresolved
-    float dLamp = xc_detail(fwp, 20.0);
-    float3 glow = lerp(far, near, dLamp);
-    // clustered density: arterial grids and neighbourhood cores, dark gaps
-    float cluster = xc_fnoise(p, 0.0025, fwp) * 0.65 + xc_fnoise(p, 0.011, fwp) * 0.35;
-    glow *= smoothstep(0.30, 0.75, cluster) * 1.8 + 0.1;
-    float spark = step(0.985, xc_hash21(floor(p / 35.0))) * (1.0 - dLamp);   // bright far points
-    glow += float3(1.0, 0.8, 0.55) * spark * 0.25;
+    float3 ledW = float3(0.85, 0.92, 1.0);
+    float speck = step(1.0 - dens * 0.8, xc_hash21(floor(p / 6.0) + 3.1));
+    float3 speckCol = lerp(ledW, lerp(sodium, float3(1.0, 0.75, 0.45), 0.5), step(0.45, xc_hash21(floor(p / 6.0))));
+    float3 nearGlow = speck * speckCol * 0.35;
+    float3 farGlow = float3(1.0, 0.72, 0.45) * dens * 0.055;
+    float3 glow = lerp(farGlow, nearGlow, xc_detail(fwp, 12.0));
+    glow *= 0.7 + 1.2 * saturate(hgt * 2.0);
     emis = glow * urban * (1.0 - greenPocket) * night;
 }
 
@@ -683,7 +679,7 @@ void xc_ground(float3 wpos, float3 N, float4 gt, float night, float fwp,
     spec = 0.4;
 
     float sl = xc_street_light(sd, cls, p);
-    float spill = step(3.0, sd) * (1.0 - hill) * 0.25;           // shopfront spill onto lots
+    float spill = step(3.0, sd) * (1.0 - step(12.0, sd)) * (1.0 - hill) * 0.12;   // shopfront spill near kerbs
     float3 lampCol = lerp(float3(1.0, 0.55, 0.22), float3(0.90, 0.95, 1.0), step(0.6, cls));
     emis = c * (lampCol * sl * 1.1 + float3(1.0, 0.85, 0.65) * spill * 0.5) * night;
 }

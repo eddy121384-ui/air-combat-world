@@ -49,8 +49,7 @@ for (const ep of ENDPOINTS) {
     let start = 0, pages = 0;
     while (true) {
       const gj = JSON.parse(await text(url(ep, { service: "WFS", version: "2.0.0", request: "GetFeature", typeNames: TYPE_NAME,
-        outputFormat: "application/json", srsName: "EPSG:3826", bbox: `${BBOX},EPSG:4326`, startIndex: start, count: PAGE,
-        sortBy: "gid" })));
+        outputFormat: "application/json", srsName: "EPSG:3826", bbox: `${BBOX},EPSG:4326`, startIndex: start, count: PAGE })));
       const feats = gj.features || [];
       pages += 1;
       for (const f of feats) {
