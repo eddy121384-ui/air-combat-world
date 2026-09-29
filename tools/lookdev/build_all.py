@@ -82,6 +82,7 @@ def main():
     if args.force_look or not (LOOK / "look_tiles.report.json").exists():
         run("tools/lookdev/build_look_tiles.py")
     run("tools/lookdev/build_taipei101.py")
+    run("tools/lookdev/build_landmarks.py")
     run("tools/lookdev/build_backdrop.py")
     run("tools/lookdev/build_ground.py")
     run("tools/lookdev/build_rooftops.py")

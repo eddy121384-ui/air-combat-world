@@ -178,7 +178,8 @@ void xc_wall(float u, float h, float H, float fh, float arch, float variant, flo
              out float3 base, out float rough, out float metal, out float spec, out float3 emis)
 {
     float isOffice = step(3.5, arch) * (1.0 - step(4.5, arch));
-    float isPodium = step(4.5, arch);
+    float isCivic = step(5.5, arch);
+    float isPodium = step(4.5, arch) * (1.0 - isCivic);
     float isTower = step(2.5, arch) * (1.0 - step(3.5, arch));
     float isOld = 1.0 - step(2.5, arch);            // low / walkup / huaxia
     float core = frac(floor(flags * 255.0 + 0.5) * 0.5) * 2.0;   // bit0
@@ -378,6 +379,27 @@ void xc_wall(float u, float h, float H, float fh, float arch, float variant, flo
     // tower crowns: a lit band under the parapet on some towers
     float crown = step(H - fh * 0.9, h) * (1.0 - step(H - 0.5, h)) * step(0.78, frac(seed * 8.3)) * (isTower + isOffice);
     e += float3(0.95, 0.95, 1.0) * crown * 0.45;
+    // --- civic landmarks (registry-driven): stone walls, deep piers, tall windows
+    float cbu = u / 4.2;
+    float cfu = frac(cbu);
+    float cfw = fwu / 4.2;
+    float cWin = xc_box(cfu, 0.30, 0.70, cfw) * xc_box(fv, 0.16, 0.86, fwf);
+    float cPier = 1.0 - xc_box(cfu, 0.18, 0.82, cfw);
+    float3 stone = lerp(float3(0.52, 0.50, 0.46), float3(0.70, 0.66, 0.56), step(14.5, variant));
+    float domeV = step(13.5, variant) * (1.0 - step(14.5, variant));      // Taipei Dome: white panels
+    stone = lerp(stone, float3(0.74, 0.75, 0.76), domeV);
+    float3 civ = lerp(stone * 0.55, stone, cPier * 0.6 + 0.4);
+    civ = lerp(civ, float3(0.06, 0.065, 0.07), cWin * dBay);
+    civ = lerp(civ, lerp(stone * 0.55, stone, 0.64) * (1.0 - 0.28 * 0.16), (1.0 - dBay));
+    civ *= 1.0 - grime * 0.2;
+    c = lerp(c, civ, isCivic);
+    rough = lerp(rough, lerp(0.75, 0.2, cWin * dBay), isCivic);
+    metal = lerp(metal, 0.0, isCivic);
+    spec = lerp(spec, 0.5, isCivic);
+    float3 civE = float3(1.0, 0.8, 0.55) * (cWin * 0.25 * step(0.5, cellR) + 0.06) * dBay
+                + float3(1.0, 0.82, 0.6) * 0.05 * (1.0 - dBay);
+    e = lerp(e, civE + stone * 0.10, isCivic);            // warm floodlit stone at night
+
     emis = e * night;
     base = c;
 }
@@ -430,9 +452,20 @@ void xc_roof(float3 wpos, float H, float arch, float variant, float seed, float 
     roofCol = lerp(roofCol, roofCol * 0.55, shadow * has * dCl * (1.0 - box));
     roofCol = lerp(roofCol, equip, box * has * dCl);
 
+    float isCivic = step(5.5, arch);
+    float imperial = isCivic * step(14.5, variant);
+    float tileRows = xc_line(frac(wpos.z / 0.33), 0.25, max(fwidth(wpos.z), 1e-4) / 0.33) * xc_detail(max(fwidth(wpos.z), 1e-4), 0.66);
+    float3 glazed = float3(0.74, 0.52, 0.12) * (1.0 - tileRows * 0.35);
+    roofCol = lerp(roofCol, float3(0.42, 0.41, 0.39), isCivic * (1.0 - imperial));
+    roofCol = lerp(roofCol, glazed, imperial);
+    float domeRoof = isCivic * step(13.5, variant) * (1.0 - step(14.5, variant));
+    float panel = max(xc_line(frac(p.x / 6.0), 0.04, fwp / 6.0), xc_line(frac(p.y / 6.0), 0.04, fwp / 6.0)) * xc_detail(fwp, 12.0);
+    roofCol = lerp(roofCol, float3(0.80, 0.81, 0.82) * (1.0 - panel * 0.25), domeRoof);
     base = roofCol;
     rough = lerp(0.9, 0.5, sheetRoof);
-    metal = sheetRoof * 0.3;
+    rough = lerp(rough, 0.35, imperial);
+    rough = lerp(rough, 0.3, domeRoof);
+    metal = sheetRoof * 0.3 + domeRoof * 0.55;
     spec = 0.35;
     // a few lit rooftop spots (stair lamps) at night
     float lamp = step(0.97, cr) * box;

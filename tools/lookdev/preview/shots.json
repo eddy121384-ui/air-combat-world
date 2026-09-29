@@ -132,6 +132,25 @@
     100
    ],
    "shadowRadius": 600
+  },
+  "h_sys_memorial": {
+   "eye": [
+    -780,
+    1150,
+    160
+   ],
+   "target": [
+    -520,
+    770,
+    20
+   ],
+   "fov": 50,
+   "shadowCenter": [
+    -520,
+    770,
+    20
+   ],
+   "shadowRadius": 500
   }
  },
  "light": {

@@ -31,6 +31,7 @@ const objects = [
   ...(args.nobackdrop ? [] : [{ url: '/unreal/Saved/XinyiLook/backdrop/taipei_basin_backdrop.glb', offset: [0, 0, 0], kind: 2, castShadow: false }]),
   ...rep.tiles.map((t) => ({ url: `/unreal/Saved/XinyiLook/tiles/${t.path}`, offset: [t.origin_enu_m[0], t.origin_enu_m[1], 0], kind: 0 })),
 ];
+if (fs.existsSync(path.join(look, 'hero/landmark_roofs.glb'))) objects.push({ url: '/unreal/Saved/XinyiLook/hero/landmark_roofs.glb', offset: [0, 0, 0], kind: 0 });
 if (!args.nohero) objects.push({ url: '/unreal/Saved/XinyiLook/hero/taipei101.glb', offset: [hero.anchor.centre_enu_m[0], hero.anchor.centre_enu_m[1], hero.anchor.ground_elev_m], kind: 0 });
 objects.push({ url: '/unreal/Saved/XinyiLook/ground/xinyi_road_paint.glb', offset: [0, 0, 0], kind: 3, castShadow: false });
 objects.push({ url: '/unreal/Saved/XinyiLook/ground/xinyi_tree.glb', offset: [0, 0, 0], kind: 4, instances: '/unreal/Saved/XinyiLook/ground/xinyi_trees.json' });

@@ -363,6 +363,7 @@ def main():
     hero = read_json(LOOK_OUT / "hero/taipei101.anchor.json")
     backdrop = read_json(LOOK_OUT / "backdrop/taipei_basin_backdrop.json")
     ground = read_json(LOOK_OUT / "ground/ground.report.json")
+    landmarks = read_json(LOOK_OUT / "hero/landmark_roofs.json")
     contract = read_json(CONTRACT_DIR / "xinyi_unreal_v2_contract.json")
     if look.get("status") != "PASS_LOOK_TILES" or len(look["tiles"]) != 25:
         raise RuntimeError("look tiles report is not PASS_LOOK_TILES with 25 tiles")
@@ -405,6 +406,8 @@ def main():
     singles = {}
     for key, glb, dest, mat, uvn, exp in (
         ("hero", LOOK_OUT / "hero/taipei101.glb", MESH_DIR + "/Hero", m_hero, 3, hero["expected_ue_local_bounds"]),
+        ("landmarks", LOOK_OUT / "hero/landmark_roofs.glb", MESH_DIR + "/Landmarks", m_city, 3,
+         landmarks["expected_ue_local_bounds"]),
         ("backdrop", LOOK_OUT / "backdrop/taipei_basin_backdrop.glb", MESH_DIR + "/Backdrop", m_back, 3,
          backdrop["expected_ue_local_bounds"]),
         ("paint", LOOK_OUT / "ground/xinyi_road_paint.glb", MESH_DIR + "/RoadPaint", m_paint, 3,
@@ -458,7 +461,7 @@ def main():
         except Exception as exc:
             failures.append({"far_city_chunk": row["chunk"], "error": str(exc)})
 
-    status = ("PASS_LOOK_ASSETS" if not failures and len(tiles) == 25 and len(singles) == 4
+    status = ("PASS_LOOK_ASSETS" if not failures and len(tiles) == 25 and len(singles) == 5
               and len(props) == len(roofs["types"]) else "FAIL_LOOK_ASSETS")
     report = {
         "status": status,

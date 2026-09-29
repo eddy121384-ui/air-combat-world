@@ -1,0 +1,48 @@
+{
+  "note": "Look-only landmark art direction, matched by location like the Taipei 101 hero rule. Never edits geometry; overrides archetype / palette of records whose centroid falls inside the radius, and may add a hero roof on top of the surveyed record.",
+  "landmarks": [
+    {
+      "name": "Sun Yat-sen Memorial Hall",
+      "name_zh": "國父紀念館",
+      "lonlat": [
+        121.5602,
+        25.04
+      ],
+      "radius_m": 45.0,
+      "min_area_m2": 2000.0,
+      "archetype": "civic",
+      "variant": 15,
+      "hero_roof": {
+        "type": "hip",
+        "top_m": 30.4,
+        "overhang_m": 3.0,
+        "corner_lift_m": 1.8
+      }
+    },
+    {
+      "name": "Taipei City Hall",
+      "name_zh": "臺北市政府",
+      "lonlat": [
+        121.5645,
+        25.0375
+      ],
+      "radius_m": 75.0,
+      "min_area_m2": 250.0,
+      "archetype": "civic",
+      "variant": 3
+    },
+    {
+      "name": "Taipei Dome",
+      "name_zh": "臺北大巨蛋",
+      "lonlat": [
+        121.5602,
+        25.0424
+      ],
+      "radius_m": 70.0,
+      "min_area_m2": 3000.0,
+      "archetype": "civic",
+      "variant": 14,
+      "note": "WFS top 62.4 m already matches the official 64 m above-ground height; look-only (white metal roof), no hero geometry"
+    }
+  ]
+}

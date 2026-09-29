@@ -63,8 +63,9 @@ Z_OFFSETS = REPO / "unreal/Saved/XinyiTerrainV0/building_z_offsets.json"
 CONTRACT = REPO / "unreal/Saved/XinyiUnrealV2Contract"
 OUT = REPO / "unreal/Saved/XinyiLook"
 
-ARCH_LOW, ARCH_WALKUP, ARCH_HUAXIA, ARCH_RESTOWER, ARCH_OFFICE, ARCH_PODIUM = range(6)
-ARCH_NAMES = ["low", "walkup", "huaxia", "res_tower", "office_glass", "commercial_podium"]
+ARCH_LOW, ARCH_WALKUP, ARCH_HUAXIA, ARCH_RESTOWER, ARCH_OFFICE, ARCH_PODIUM, ARCH_CIVIC = range(7)
+ARCH_NAMES = ["low", "walkup", "huaxia", "res_tower", "office_glass", "commercial_podium", "civic"]
+LANDMARKS = HERE / "landmarks.json"
 
 FLAG_CORE, FLAG_ANCHOR, FLAG_PODIUM, FLAG_ROOFTOP = 1, 2, 4, 8
 
@@ -132,8 +133,16 @@ def classify(wm, props):
     for i in range(len(feats)):
         groups[uf.find(i)].append(i)
 
+    lon0, lat0 = wm["local_frame"]["origin_lonlat"]
+    from worldmodel import lonlat_to_enu
+    marks = []
+    for lm in json.loads(LANDMARKS.read_text(encoding="utf-8"))["landmarks"]:
+        ex, ey = lonlat_to_enu(lm["lonlat"][0], lm["lonlat"][1], lon0, lat0)
+        marks.append((ex, ey, lm))
+
     records = {}
     stats = Counter()
+    landmark_hits = Counter()
     for root, members in groups.items():
         heights = [feats[m]["height_m"] for m in members]
         anchor = members[int(np.argmax([heights[k] * 1e6 + areas[m] for k, m in enumerate(members)]))]
@@ -170,9 +179,19 @@ def classify(wm, props):
         else:
             arch = ARCH_OFFICE if (fh >= 3.55 or (core and total_area >= 700)) else ARCH_RESTOWER
 
+        # Landmark art direction (location registry, look-only)
+        lm_variant = None
+        gc = polys[anchor].centroid          # true centroid: rings / domes match at their centre
+        for ex, ey, lm in marks:
+            if math.dist((gc.x, gc.y), (ex, ey)) <= lm["radius_m"] and total_area >= lm["min_area_m2"]:
+                arch = ARCH_NAMES.index(lm["archetype"])
+                lm_variant = int(lm["variant"])
+                landmark_hits[lm["name"]] += 1
+                break
+
         # Weathering: old stock outside the planned district weathers hardest.
         base_w = {ARCH_LOW: 170, ARCH_WALKUP: 190, ARCH_HUAXIA: 150, ARCH_RESTOWER: 80,
-                  ARCH_OFFICE: 30, ARCH_PODIUM: 70}[arch]
+                  ARCH_OFFICE: 30, ARCH_PODIUM: 70, ARCH_CIVIC: 60}[arch]
         if core:
             base_w = int(base_w * 0.55)
         weather = int(max(0, min(255, base_w + (seed % 64) - 32)))
@@ -190,7 +209,7 @@ def classify(wm, props):
             records[b["id"]] = {
                 "group": gid,
                 "archetype": arch,
-                "variant": sha_byte(b["id"], 1) & 15,
+                "variant": lm_variant if lm_variant is not None else sha_byte(b["id"], 1) & 15,
                 "seed": seed,
                 "weather": weather,
                 "flags": flags,
@@ -199,6 +218,7 @@ def classify(wm, props):
                 "core": bool(core),
                 "d101_m": float(d101),
             }
+    print("landmark groups:", dict(landmark_hits))
     return records, stats, len(groups)
 
 

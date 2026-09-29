@@ -43,7 +43,7 @@ OUT = LOOK / "rooftops"
 
 TYPES = ["shed", "tank", "solar", "antenna", "ac", "cooling", "machine", "bmu", "avlight"]
 TYPE_ID = {t: i + 1 for i, t in enumerate(TYPES)}
-ARCH_LOW, ARCH_WALKUP, ARCH_HUAXIA, ARCH_RESTOWER, ARCH_OFFICE, ARCH_PODIUM = range(6)
+ARCH_LOW, ARCH_WALKUP, ARCH_HUAXIA, ARCH_RESTOWER, ARCH_OFFICE, ARCH_PODIUM, ARCH_CIVIC = range(7)
 FLAG_ROOFTOP = 8
 
 
@@ -186,7 +186,7 @@ def main():
             continue
         rec = look[b["id"]]
         arch = rec["archetype"]
-        if rec["flags"] & FLAG_ROOFTOP:
+        if rec["flags"] & FLAG_ROOFTOP or arch == ARCH_CIVIC:
             continue
         p = props[b["id"]]
         top = float(p["ground_elev_m"]) + float(b["height_m"])

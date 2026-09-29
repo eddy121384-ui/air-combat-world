@@ -130,6 +130,8 @@ def main():
     hero_mesh = lib.load_asset(s["hero"]["asset_path"])
     _, hero_loc = spawn_mesh_actor(actors, hero_mesh, hero["ue_actor_location_cm"],
                                    s["hero"]["expected_bounds_origin_cm"], "Taipei101")
+    lm_mesh = lib.load_asset(s["landmarks"]["asset_path"])
+    spawn_mesh_actor(actors, lm_mesh, [0.0, 0.0, 0.0], s["landmarks"]["expected_bounds_origin_cm"], "LandmarkRoofs")
     back_mesh = lib.load_asset(s["backdrop"]["asset_path"])
     back, _ = spawn_mesh_actor(actors, back_mesh, [0.0, 0.0, 0.0], s["backdrop"]["expected_bounds_origin_cm"],
                                "BasinBackdrop")
