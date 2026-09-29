@@ -31,7 +31,7 @@ HERE = Path(__file__).resolve().parent
 REPO = HERE.parents[1]
 sys.path.insert(0, str(REPO / "tools/compiler"))
 sys.path.insert(0, str(HERE))
-from gltf_writer import pack_rgba8, write_glb  # noqa: E402
+from gltf_writer import pack_rgba8, ue_local_bounds_cm, write_glb  # noqa: E402
 from worldmodel import enu_origin_from_city_yaml, lonlat_to_enu  # noqa: E402
 
 CITY = REPO / "cities/taipei/city.yaml"
@@ -125,6 +125,7 @@ def build_backdrop():
         "sink_m": BACKDROP_SINK_M,
         "role": "distant visual backdrop only; accepted Xinyi Landscape is untouched",
         "ue_actor_location_cm": [0.0, 0.0, 0.0],
+        "expected_ue_local_bounds": ue_local_bounds_cm(pos),
     }
     (out / "taipei_basin_backdrop.json").write_text(json.dumps(rep, indent=2) + "\n")
     print(json.dumps(rep))

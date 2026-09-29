@@ -69,6 +69,19 @@ def pack_rgba8(rgba) -> np.ndarray:
     return np.column_stack([c[:, 0] * 256 + c[:, 1], c[:, 2] * 256 + c[:, 3]]).astype(np.float32)
 
 
+def ue_local_bounds_cm(positions_game) -> dict:
+    """Expected Unreal-local bounds of a game-frame mesh (game X,Y,Z -> UE X,Z,Y, cm).
+
+    Unreal adapters compare these with the imported StaticMesh bounds and
+    correct placement by the difference, instead of assuming how the importer
+    treated the source pivot (same rule as the accepted runtime tiles).
+    """
+    p = np.asarray(positions_game, dtype=np.float64)
+    ue = np.column_stack([p[:, 0], p[:, 2], p[:, 1]]) * 100.0
+    lo, hi = ue.min(axis=0), ue.max(axis=0)
+    return {"origin_cm": ((lo + hi) * 0.5).tolist(), "extent_cm": ((hi - lo) * 0.5).tolist()}
+
+
 def write_glb(path: Path, primitives: list[dict], mesh_name: str = "mesh") -> None:
     buf = _Buf()
     materials, prims = [], []

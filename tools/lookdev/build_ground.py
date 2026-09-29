@@ -39,7 +39,7 @@ HERE = Path(__file__).resolve().parent
 REPO = HERE.parents[1]
 sys.path.insert(0, str(REPO / "tools/compiler"))
 sys.path.insert(0, str(HERE))
-from gltf_writer import pack_rgba8, write_glb  # noqa: E402
+from gltf_writer import pack_rgba8, ue_local_bounds_cm, write_glb  # noqa: E402
 from worldmodel import build_worldmodel, enu_origin_from_city_yaml, lonlat_to_enu  # noqa: E402
 
 CITY = REPO / "cities/taipei/city.yaml"
@@ -49,6 +49,7 @@ CONTRACT = REPO / "unreal/Saved/XinyiUnrealV2Contract"
 OUT = REPO / "unreal/Saved/XinyiLook/ground"
 
 E0, E1, N0, N1 = -1500.0, 1000.0, -1000.0, 1500.0
+TREE_BOUNDS = None
 RES = 2048
 SDF_RANGE_M = 12.0
 SUPER = 4
@@ -463,13 +464,19 @@ def main():
         })
     (OUT / "xinyi_trees.json").write_text(json.dumps({"count": len(inst), "instances": inst}) + "\n")
 
-    write_tree_mesh(OUT / "xinyi_tree.glb")
+    global TREE_BOUNDS
+    TREE_BOUNDS = write_tree_mesh(OUT / "xinyi_tree.glb")
     report = {
         "texture": "xinyi_ground_2048.png", "resolution": RES, "metres_per_px": (E1 - E0) / RES,
         "extent_enu_m": [E0, E1, N0, N1], "sdf_range_m": SDF_RANGE_M,
         "road_ways": sum(1 for w in ways if not w["skip"]), "junctions": len(junctions),
         "crossings": crossings, "paint_triangles": int(len(faces)), "trees": len(inst),
         "road_area_m2": float(roads.area),
+        "paint_mesh": "xinyi_road_paint.glb",
+        "paint_expected_ue_local_bounds": ue_local_bounds_cm(game),
+        "tree_mesh": "xinyi_tree.glb",
+        "tree_expected_ue_local_bounds": TREE_BOUNDS,
+        "tree_instances": "xinyi_trees.json",
     }
     (OUT / "ground.report.json").write_text(json.dumps(report, indent=2) + "\n")
     print(json.dumps(report))
@@ -525,6 +532,7 @@ def write_tree_mesh(path):
     C[:, 0] = np.clip(P[:, 1] / 10.0 * 255.0, 0, 255).astype(np.uint8)   # R = height / 10 m
     write_glb(path, [{"name": "XinyiTree", "positions": P, "normals": N, "uv2": pack_rgba8(C), "indices": idx,
                       "base_color": [0.2, 0.35, 0.15, 1.0]}], mesh_name="SM_XinyiTree")
+    return ue_local_bounds_cm(P)
 
 
 if __name__ == "__main__":

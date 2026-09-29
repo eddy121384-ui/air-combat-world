@@ -305,7 +305,7 @@ def main():
         "T101_Trim": (trim, [0.62, 0.66, 0.64, 1.0]),
         "T101_Ornament": (orn, [0.78, 0.62, 0.30, 1.0]),
     }
-    from gltf_writer import pack_rgba8, write_glb  # local helper
+    from gltf_writer import pack_rgba8, ue_local_bounds_cm, write_glb  # local helper
 
     prims = []
     tri_total = 0
@@ -347,6 +347,7 @@ def main():
             -anchor["centre_enu_m"][1] * 100.0,
             anchor["ground_elev_m"] * 100.0,
         ],
+        "expected_ue_local_bounds": ue_local_bounds_cm(np.concatenate([p["positions"] for p in prims])),
         "frame": "game (X=east, Y=up, Z=-north); local origin = plan centre at surveyed ground",
         "note": "Rotation is baked into the mesh; place the actor with zero rotation.",
     }
