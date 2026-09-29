@@ -1,0 +1,11 @@
+{
+ "role": "FAR_LOD_ONLY",
+ "crs": "EPSG:3826",
+ "cell_m": 50.0,
+ "tower_threshold_m": 50.0,
+ "records": 318327,
+ "cells": 36478,
+ "towers": 8598,
+ "raw_sha256": "9205543a9852b1c61b06b6540bc583bf87b534826e5cc6c8bba4fbcf0d9ee324",
+ "source": "taipei_vioc:tp_building_height (same WFS layer as the accepted Xinyi source)"
+}

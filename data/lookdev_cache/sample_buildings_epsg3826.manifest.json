@@ -9,7 +9,7 @@
   "bbox": "121.5546,25.0247,121.5744,25.0427",
   "bbox_crs": "EPSG:4326",
   "response_crs": "EPSG:3826",
-  "fetched_at": "2026-09-29T08:21:41.012Z",
+  "fetched_at": "2026-09-29T09:33:03.875Z",
   "expected_hits": 11132,
   "feature_count": 11132,
   "dropped_non_polygon": 0,
