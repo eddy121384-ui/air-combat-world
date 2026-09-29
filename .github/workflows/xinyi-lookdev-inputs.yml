@@ -13,6 +13,8 @@ on:
       - feat/opus55-xinyi-visual-quality
     paths:
       - "tools/lookdev/fetch_lookdev_inputs.py"
+      - "tools/lookdev/fetch_far_city.mjs"
+      - "tools/lookdev/generalize_far_city.py"
       - ".github/workflows/xinyi-lookdev-inputs.yml"
   workflow_dispatch:
 
@@ -26,7 +28,7 @@ concurrency:
 jobs:
   snapshot:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 60
     steps:
       - uses: actions/checkout@v4
         with:
@@ -61,6 +63,12 @@ jobs:
 
       - name: Fetch basin backdrop DTM + OSM ground context
         run: python tools/lookdev/fetch_lookdev_inputs.py
+
+      - name: Fetch + generalize basin-wide WFS buildings (far LOD)
+        run: |
+          node tools/lookdev/fetch_far_city.mjs data/generated/taipei/far_city_raw.ndjson.gz
+          mkdir -p data/lookdev_cache
+          python tools/lookdev/generalize_far_city.py data/generated/taipei/far_city_raw.ndjson.gz data/lookdev_cache/far_city_generalized.npz
 
       - name: Stage cache
         run: |

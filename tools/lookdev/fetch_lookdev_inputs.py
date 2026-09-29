@@ -154,6 +154,9 @@ def fetch_osm():
   relation["leisure"="park"]({bbox});
   relation["landuse"~"forest|grass"]({bbox});
   node["natural"="tree"]({bbox});
+  way["amenity"~"school|university|college|kindergarten|parking|hospital"]({bbox});
+  way["leisure"~"track|stadium|sports_centre"]({bbox});
+  way["landuse"~"construction|brownfield|railway|commercial|retail"]({bbox});
 );
 out body geom;
 """
