@@ -29,6 +29,7 @@
 #include "WorldPartition/WorldPartitionSubsystem.h"
 
 void StartXinyiCollisionProbe();
+void StartXinyiComplexCandidateProbe();
 
 namespace XinyiHostProbe
 {
@@ -109,6 +110,12 @@ class FXinyiHostStreamingProbeModule final : public IModuleInterface
 public:
     virtual void StartupModule() override
     {
+        FString ComplexCandidatePlan;
+        if (FParse::Value(FCommandLine::Get(), TEXT("XinyiComplexCandidatePlan="), ComplexCandidatePlan))
+        {
+            StartXinyiComplexCandidateProbe();
+            return;
+        }
         FString CollisionPlan;
         if (FParse::Value(FCommandLine::Get(), TEXT("XinyiCollisionPlan="), CollisionPlan))
         {
