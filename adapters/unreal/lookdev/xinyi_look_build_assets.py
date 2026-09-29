@@ -44,10 +44,13 @@ created = {}
 # ---------------------------------------------------------------------------
 
 def fresh_material(name):
+    """Create, or rebuild in place (keeps references from an existing look level)."""
     path = MAT_DIR + "/" + name
     if lib.does_asset_exist(path):
-        lib.delete_asset(path)
-    mat = tools.create_asset(name, MAT_DIR, unreal.Material, unreal.MaterialFactoryNew())
+        mat = lib.load_asset(path)
+        mel.delete_all_material_expressions(mat)
+    else:
+        mat = tools.create_asset(name, MAT_DIR, unreal.Material, unreal.MaterialFactoryNew())
     if mat is None:
         raise RuntimeError("failed to create material %s" % path)
     # iPhone-class discipline: opaque, full precision for world-space hashing,
@@ -137,9 +140,10 @@ def save_material(mat, path):
 
 def build_mpc():
     if lib.does_asset_exist(MPC_PATH):
-        lib.delete_asset(MPC_PATH)
-    mpc = tools.create_asset("MPC_XinyiLook", MAT_DIR, unreal.MaterialParameterCollection,
-                             unreal.MaterialParameterCollectionFactoryNew())
+        mpc = lib.load_asset(MPC_PATH)          # update in place; materials are rebuilt below
+    else:
+        mpc = tools.create_asset("MPC_XinyiLook", MAT_DIR, unreal.MaterialParameterCollection,
+                                 unreal.MaterialParameterCollectionFactoryNew())
     params = []
     for name, default in (("Night", 0.0), ("LitFrac", 0.08), ("EmissiveScale", 1.0)):
         p = unreal.CollectionScalarParameter()

@@ -1,0 +1,78 @@
+name: Xinyi Lookdev
+
+# Visual-layer checks for XinyiLook. Separate from the Issue #8 runtime gate:
+# nothing here produces or alters runtime evidence.
+#   1. offline build from data/lookdev_cache (accepted source / tile / terrain
+#      hashes re-checked; look tiles must be triangle-soup bit-identical)
+#   2. DXC compile of every Unreal Custom-node body (DXIL + SPIR-V, HLSL 2018/2021)
+#   3. py_compile of the Unreal adapters
+#   4. preview renders (same shader source) uploaded as an artifact
+
+on:
+  push:
+    branches:
+      - feat/opus55-xinyi-visual-quality
+    paths:
+      - "tools/lookdev/**"
+      - "adapters/unreal/lookdev/**"
+      - "data/lookdev_cache/**"
+      - ".github/workflows/xinyi-lookdev.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  lookdev:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: requirements-terrain-v0.txt
+
+      - name: Install validated stack
+        run: python -m pip install -r requirements-terrain-v0.txt "scipy>=1.14"
+
+      - name: Offline look-dev build (fails closed on accepted-hash drift)
+        run: python tools/lookdev/build_all.py
+
+      - name: Compile Unreal Custom-node HLSL with DXC
+        run: |
+          curl -sSL -o dxc.tar.gz https://github.com/microsoft/DirectXShaderCompiler/releases/download/v1.8.2505/linux_dxc_2025_05_24.x86_64.tar.gz
+          mkdir -p dxc && tar xzf dxc.tar.gz -C dxc
+          python tools/lookdev/check_hlsl.py --dxc dxc/bin/dxc --hlsl-version 2018
+          python tools/lookdev/check_hlsl.py --dxc dxc/bin/dxc --hlsl-version 2021
+
+      - name: Compile Unreal adapters
+        run: python -m py_compile adapters/unreal/lookdev/*.py tools/lookdev/*.py
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Preview renders
+        run: |
+          mkdir -p /tmp/pw && cd /tmp/pw && npm init -y >/dev/null && npm i playwright-core@1 >/dev/null
+          npx playwright install chromium
+          CHROMIUM="$(node -e "console.log(require('playwright-core').chromium.executablePath())")"
+          cd "$GITHUB_WORKSPACE"
+          CHROMIUM="$CHROMIUM" PLAYWRIGHT_CORE=/tmp/pw/node_modules/playwright-core \
+            node tools/lookdev/preview/render.mjs --light day,dusk,night --w 1600 --h 900
+
+      - name: Upload look-dev evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: xinyi-lookdev-preview
+          if-no-files-found: ignore
+          path: |
+            unreal/Saved/XinyiLook/preview/renders/*.png
+            unreal/Saved/XinyiLook/*.report.json
+            unreal/Saved/XinyiLook/*/*.report.json
+            unreal/Saved/XinyiLook/hero/taipei101.anchor.json
+            unreal/Saved/XinyiLook/backdrop/taipei_basin_backdrop.json
