@@ -1,0 +1,21 @@
+{
+  "tool": "tools/citygen_v2/fetch_projected_sample.mjs",
+  "type_name": "taipei_vioc:tp_building_height",
+  "endpoint_used": "https://citydashboard.taipei/geo_server/taipei_vioc/ows",
+  "endpoints_tried": [
+    "https://citydashboard.taipei/geo_server/taipei_vioc/ows",
+    "https://citydashboard.taipei/geo_server/ows"
+  ],
+  "bbox": "121.5546,25.0247,121.5744,25.0427",
+  "bbox_crs": "EPSG:4326",
+  "response_crs": "EPSG:3826",
+  "fetched_at": "2026-09-29T08:21:41.012Z",
+  "expected_hits": 11132,
+  "feature_count": 11132,
+  "dropped_non_polygon": 0,
+  "height_source_counts": {
+    "1_bud_high": 11132
+  },
+  "sha256": "c7ca8da13a4c5baaab0fbd1fcfe5b3799723d49d1998f804cf1593904f70200d",
+  "reason": "avoid EPSG:4326 four-decimal footprint collapse observed in v0 snapshot"
+}

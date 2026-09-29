@@ -1,0 +1,168 @@
+{
+  "role": "OFFICIAL_MOI_2025_DTM_DERIVATIVE_MIRROR_CANDIDATE",
+  "official_dataset": {
+    "title": "2025年版全臺灣20公尺網格數值地形模型DTM資料",
+    "data_gov_url": "https://data.gov.tw/dataset/176927",
+    "semantics": "bare-earth 20 m DTM",
+    "license": "政府資料開放授權條款-第1版",
+    "mainland_source_crs": "EPSG:3826"
+  },
+  "mirror": {
+    "repository": "yhzkiki/taiwan-dtm-2025-terrarium-z13",
+    "dataset_card": "https://huggingface.co/datasets/yhzkiki/taiwan-dtm-2025-terrarium-z13",
+    "format": "Terrarium RGB XYZ z13",
+    "decode": "R*256 + G + B/256 - 32768",
+    "repo_commits_from_headers": [],
+    "metadata_files": {
+      "source-manifest.json": {
+        "url": "https://huggingface.co/datasets/yhzkiki/taiwan-dtm-2025-terrarium-z13/resolve/main/source-manifest.json",
+        "bytes": 2638,
+        "sha256": "93a6a15dc6a9ac6726b9f29a68e2956b7e8cb71667d6a9020dbc5d7a594b70c1",
+        "content_type": "text/plain; charset=utf-8",
+        "x_repo_commit": "8ae5c06ae126ca8e01d02928260f512d713a0be8"
+      },
+      "build-summary.json": {
+        "url": "https://huggingface.co/datasets/yhzkiki/taiwan-dtm-2025-terrarium-z13/resolve/main/build-summary.json",
+        "bytes": 488,
+        "sha256": "8b12bf86e85b45d9ed3b33bdc02651de0e3fa7a8ce585d44c9ea2df2617f7831",
+        "content_type": "text/plain; charset=utf-8",
+        "x_repo_commit": "8ae5c06ae126ca8e01d02928260f512d713a0be8"
+      },
+      "validation-samples.csv": {
+        "url": "https://huggingface.co/datasets/yhzkiki/taiwan-dtm-2025-terrarium-z13/resolve/main/validation-samples.csv",
+        "bytes": 615,
+        "sha256": "97bb660e949c048613f4aca26dc32596a7864aef18451adbda06fd5aee8f6e88",
+        "content_type": "text/plain; charset=utf-8",
+        "x_repo_commit": "8ae5c06ae126ca8e01d02928260f512d713a0be8"
+      }
+    }
+  },
+  "xinyi_source_bbox_wgs84": [
+    121.55401915154746,
+    25.024297406313188,
+    121.57479484589027,
+    25.043443354229517
+  ],
+  "tile_range": {
+    "z": 13,
+    "x": [
+      6861,
+      6863
+    ],
+    "y": [
+      3506,
+      3508
+    ]
+  },
+  "tiles": [
+    {
+      "z": 13,
+      "x": 6861,
+      "y": 3506,
+      "url": "https://huggingface.co/datasets/yhzkiki/taiwan-dtm-2025-terrarium-z13/resolve/main/terrain/13/6861/3506.png",
+      "bytes": 92085,
+      "sha256": "c5848040731ac4b0a514c8275b00bab70b038d11c30c654f3e162d7e2e725666",
+      "elevation_min_m": -5.58203125,
+      "elevation_max_m": 150.61328125,
+      "x_repo_commit": null
+    },
+    {
+      "z": 13,
+      "x": 6862,
+      "y": 3506,
+      "url": "https://huggingface.co/datasets/yhzkiki/taiwan-dtm-2025-terrarium-z13/resolve/main/terrain/13/6862/3506.png",
+      "bytes": 95898,
+      "sha256": "9e6623f1b26556d16c6df70ac706e59fd119d6efa72c0bbd2e21caca8c6c78e2",
+      "elevation_min_m": -2.46484375,
+      "elevation_max_m": 104.1015625,
+      "x_repo_commit": null
+    },
+    {
+      "z": 13,
+      "x": 6863,
+      "y": 3506,
+      "url": "https://huggingface.co/datasets/yhzkiki/taiwan-dtm-2025-terrarium-z13/resolve/main/terrain/13/6863/3506.png",
+      "bytes": 114322,
+      "sha256": "b259392c34ff73204e3abc440114be2c99e9c7ddd49613ac297aabd152ac5b9d",
+      "elevation_min_m": -0.19921875,
+      "elevation_max_m": 138.91015625,
+      "x_repo_commit": null
+    },
+    {
+      "z": 13,
+      "x": 6861,
+      "y": 3507,
+      "url": "https://huggingface.co/datasets/yhzkiki/taiwan-dtm-2025-terrarium-z13/resolve/main/terrain/13/6861/3507.png",
+      "bytes": 92620,
+      "sha256": "b21ba4608adeffba2486939bb850123b32278dc4af1684d9944950a78ba28441",
+      "elevation_min_m": -2.6640625,
+      "elevation_max_m": 126.15625,
+      "x_repo_commit": null
+    },
+    {
+      "z": 13,
+      "x": 6862,
+      "y": 3507,
+      "url": "https://huggingface.co/datasets/yhzkiki/taiwan-dtm-2025-terrarium-z13/resolve/main/terrain/13/6862/3507.png",
+      "bytes": 116750,
+      "sha256": "b5394ba6be1abcc2bfa38aaaa850ced6df8ecc139f25e2d7e9280576bb5e7598",
+      "elevation_min_m": -1.109375,
+      "elevation_max_m": 369.71484375,
+      "x_repo_commit": null
+    },
+    {
+      "z": 13,
+      "x": 6863,
+      "y": 3507,
+      "url": "https://huggingface.co/datasets/yhzkiki/taiwan-dtm-2025-terrarium-z13/resolve/main/terrain/13/6863/3507.png",
+      "bytes": 130112,
+      "sha256": "9513dfa74a2ec039feac545637168b5ef0f65f9ae73922e96c069dd2cf62edf1",
+      "elevation_min_m": 7.89453125,
+      "elevation_max_m": 387.0078125,
+      "x_repo_commit": null
+    },
+    {
+      "z": 13,
+      "x": 6861,
+      "y": 3508,
+      "url": "https://huggingface.co/datasets/yhzkiki/taiwan-dtm-2025-terrarium-z13/resolve/main/terrain/13/6861/3508.png",
+      "bytes": 103761,
+      "sha256": "004b6cbb0cadd451cdfbdba12197b7789da8610b8f65b3fefb3d02d2a5b17424",
+      "elevation_min_m": -3.0546875,
+      "elevation_max_m": 200.65234375,
+      "x_repo_commit": null
+    },
+    {
+      "z": 13,
+      "x": 6862,
+      "y": 3508,
+      "url": "https://huggingface.co/datasets/yhzkiki/taiwan-dtm-2025-terrarium-z13/resolve/main/terrain/13/6862/3508.png",
+      "bytes": 124268,
+      "sha256": "b5e03036ce7427152a62201be6deba8bcf5dedae673e79e53f06582052d8c6f5",
+      "elevation_min_m": 6.14453125,
+      "elevation_max_m": 428.703125,
+      "x_repo_commit": null
+    },
+    {
+      "z": 13,
+      "x": 6863,
+      "y": 3508,
+      "url": "https://huggingface.co/datasets/yhzkiki/taiwan-dtm-2025-terrarium-z13/resolve/main/terrain/13/6863/3508.png",
+      "bytes": 132787,
+      "sha256": "8010c88c230e2985c85a589529e3e478a11220919bcce3453559b9b7ada5d41f",
+      "elevation_min_m": 16.75390625,
+      "elevation_max_m": 673.21484375,
+      "x_repo_commit": null
+    }
+  ],
+  "output_raster": {
+    "path": "data/generated/taipei/terrain/cache/moi_2025_dtm_xinyi_mirror.tif",
+    "crs": "EPSG:3857",
+    "width": 768,
+    "height": 768,
+    "elevation_min_m": -5.58203125,
+    "elevation_max_m": 673.21484375,
+    "sha256": "29c89511f842e2d2a15139f675edf4e00aab5fc6a197d709794ae44ab21e36cb"
+  },
+  "acceptance_note": "This is a cloud-readable derivative of the official MOI 2025 bare-earth DTM. Production acceptance still requires cross-checking against WFS surveyed ground elevations and preserving the mirror source manifest / hashes."
+}

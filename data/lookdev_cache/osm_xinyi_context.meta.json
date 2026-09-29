@@ -1,0 +1,14 @@
+{
+ "role": "LOOKDEV_GROUND_CONTEXT_ONLY",
+ "source": "OpenStreetMap via Overpass API",
+ "license": "ODbL 1.0 \u2014 \u00a9 OpenStreetMap contributors",
+ "bbox_swne": [
+  25.0195,
+  121.55,
+  25.048,
+  121.579
+ ],
+ "element_count": 6020,
+ "raw_sha256": "9d263985bc6615188a5814f795227626be9b55baddfd526b7308b3faff13ab2a",
+ "note": "Used only for ground-surface art. Building geometry stays on the WFS contract."
+}
