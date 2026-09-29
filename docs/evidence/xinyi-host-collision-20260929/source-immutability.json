@@ -1,0 +1,12 @@
+{
+  "baseline_file_rows": 107,
+  "created_utc": "2026-09-29T02:17:19.583732+00:00",
+  "current_file_rows": 107,
+  "failures": [],
+  "receipt_type": "source_immutability",
+  "run_id": "20260929T013849Z-8170d8c4",
+  "runtime_validation": false,
+  "schema": "xinyi-host-gate/v1",
+  "snapshot_sha256": "09711f9b5134fc1f2d9132633e4d45389f5f4d1c227bd3829b7b9a4c7c85cb9f",
+  "status": "PASS_SOURCE_IMMUTABILITY"
+}

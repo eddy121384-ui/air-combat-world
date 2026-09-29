@@ -1,0 +1,3056 @@
+{
+  "schema": "xinyi-collision-plan/v1",
+  "status": "PLAN_ONLY",
+  "world": "/Game/XinyiV2/L_XinyiV2_Contract_WP",
+  "sources": {
+    "contract_sha256": "2095d6400eafd611094c35828550191cb4b6b8b9031493d9f420c9ffa6bec89c",
+    "heightmap_sha256": "088c1b18c15a0b807348676e3568c99eb83b63444b0e7266078d673938f0594c",
+    "placement_sha256": "1af04639671899b3b0ed54092e2e3d74ca6745d1dbe19567852a37b8d5613efc"
+  },
+  "terrain_tolerance_cm": 2.0,
+  "terrain_tolerance_rationale": "Exact accepted R16 vertices; quantization half-step is 0.78125 cm; 2 cm allows float/Chaos position rounding, not source DTM accuracy",
+  "steps": [
+    {
+      "id": "terrain_center_0_0",
+      "kind": "component_center",
+      "source_cm": [
+        -125000.0,
+        -125000.0,
+        1745.3125
+      ],
+      "terrain_samples": [
+        {
+          "id": "terrain_center_0_0",
+          "kind": "component_center",
+          "xy_cm": [
+            -125000.0,
+            -125000.0
+          ],
+          "expected_z_cm": 745.3125,
+          "heightmap_row_col": [
+            63,
+            63
+          ],
+          "expect_hit": true
+        }
+      ],
+      "building_samples": []
+    },
+    {
+      "id": "terrain_center_0_1",
+      "kind": "component_center",
+      "source_cm": [
+        -75000.0,
+        -125000.0,
+        1746.875
+      ],
+      "terrain_samples": [
+        {
+          "id": "terrain_center_0_1",
+          "kind": "component_center",
+          "xy_cm": [
+            -75000.0,
+            -125000.0
+          ],
+          "expected_z_cm": 746.875,
+          "heightmap_row_col": [
+            63,
+            189
+          ],
+          "expect_hit": true
+        }
+      ],
+      "building_samples": []
+    },
+    {
+      "id": "terrain_center_0_2",
+      "kind": "component_center",
+      "source_cm": [
+        -25000.0,
+        -125000.0,
+        1640.625
+      ],
+      "terrain_samples": [
+        {
+          "id": "terrain_center_0_2",
+          "kind": "component_center",
+          "xy_cm": [
+            -25000.0,
+            -125000.0
+          ],
+          "expected_z_cm": 640.625,
+          "heightmap_row_col": [
+            63,
+            315
+          ],
+          "expect_hit": true
+        }
+      ],
+      "building_samples": []
+    },
+    {
+      "id": "terrain_center_0_3",
+      "kind": "component_center",
+      "source_cm": [
+        25000.0,
+        -125000.0,
+        1600.0
+      ],
+      "terrain_samples": [
+        {
+          "id": "terrain_center_0_3",
+          "kind": "component_center",
+          "xy_cm": [
+            25000.0,
+            -125000.0
+          ],
+          "expected_z_cm": 600.0,
+          "heightmap_row_col": [
+            63,
+            441
+          ],
+          "expect_hit": true
+        }
+      ],
+      "building_samples": []
+    },
+    {
+      "id": "terrain_center_0_4",
+      "kind": "component_center",
+      "source_cm": [
+        75000.0,
+        -125000.0,
+        1737.5
+      ],
+      "terrain_samples": [
+        {
+          "id": "terrain_center_0_4",
+          "kind": "component_center",
+          "xy_cm": [
+            75000.0,
+            -125000.0
+          ],
+          "expected_z_cm": 737.5,
+          "heightmap_row_col": [
+            63,
+            567
+          ],
+          "expect_hit": true
+        }
+      ],
+      "building_samples": []
+    },
+    {
+      "id": "terrain_center_1_0",
+      "kind": "component_center",
+      "source_cm": [
+        -125000.0,
+        -75000.0,
+        1660.9375
+      ],
+      "terrain_samples": [
+        {
+          "id": "terrain_center_1_0",
+          "kind": "component_center",
+          "xy_cm": [
+            -125000.0,
+            -75000.0
+          ],
+          "expected_z_cm": 660.9375,
+          "heightmap_row_col": [
+            189,
+            63
+          ],
+          "expect_hit": true
+        }
+      ],
+      "building_samples": []
+    },
+    {
+      "id": "terrain_center_1_1",
+      "kind": "component_center",
+      "source_cm": [
+        -75000.0,
+        -75000.0,
+        1789.0625
+      ],
+      "terrain_samples": [
+        {
+          "id": "terrain_center_1_1",
+          "kind": "component_center",
+          "xy_cm": [
+            -75000.0,
+            -75000.0
+          ],
+          "expected_z_cm": 789.0625,
+          "heightmap_row_col": [
+            189,
+            189
+          ],
+          "expect_hit": true
+        }
+      ],
+      "building_samples": []
+    },
+    {
+      "id": "terrain_center_1_2",
+      "kind": "component_center",
+      "source_cm": [
+        -25000.0,
+        -75000.0,
+        1778.125
+      ],
+      "terrain_samples": [
+        {
+          "id": "terrain_center_1_2",
+          "kind": "component_center",
+          "xy_cm": [
+            -25000.0,
+            -75000.0
+          ],
+          "expected_z_cm": 778.125,
+          "heightmap_row_col": [
+            189,
+            315
+          ],
+          "expect_hit": true
+        }
+      ],
+      "building_samples": []
+    },
+    {
+      "id": "terrain_center_1_3",
+      "kind": "component_center",
+      "source_cm": [
+        25000.0,
+        -75000.0,
+        1828.125
+      ],
+      "terrain_samples": [
+        {
+          "id": "terrain_center_1_3",
+          "kind": "component_center",
+          "xy_cm": [
+            25000.0,
+            -75000.0
+          ],
+          "expected_z_cm": 828.125,
+          "heightmap_row_col": [
+            189,
+            441
+          ],
+          "expect_hit": true
+        }
+      ],
+      "building_samples": []
+    },
+    {
+      "id": "terrain_center_1_4",
+      "kind": "component_center",
+      "source_cm": [
+        75000.0,
+        -75000.0,
+        1784.375
+      ],
+      "terrain_samples": [
+        {
+          "id": "terrain_center_1_4",
+          "kind": "component_center",
+          "xy_cm": [
+            75000.0,
+            -75000.0
+          ],
+          "expected_z_cm": 784.375,
+          "heightmap_row_col": [
+            189,
+            567
+          ],
+          "expect_hit": true
+        }
+      ],
+      "building_samples": []
+    },
+    {
+      "id": "terrain_center_2_0",
+      "kind": "component_center",
+      "source_cm": [
+        -125000.0,
+        -25000.0,
+        1709.375
+      ],
+      "terrain_samples": [
+        {
+          "id": "terrain_center_2_0",
+          "kind": "component_center",
+          "xy_cm": [
+            -125000.0,
+            -25000.0
+          ],
+          "expected_z_cm": 709.375,
+          "heightmap_row_col": [
+            315,
+            63
+          ],
+          "expect_hit": true
+        }
+      ],
+      "building_samples": []
+    },
+    {
+      "id": "terrain_center_2_1",
+      "kind": "component_center",
+      "source_cm": [
+        -75000.0,
+        -25000.0,
+        1850.0
+      ],
+      "terrain_samples": [
+        {
+          "id": "terrain_center_2_1",
+          "kind": "component_center",
+          "xy_cm": [
+            -75000.0,
+            -25000.0
+          ],
+          "expected_z_cm": 850.0,
+          "heightmap_row_col": [
+            315,
+            189
+          ],
+          "expect_hit": true
+        }
+      ],
+      "building_samples": []
+    },
+    {
+      "id": "terrain_center_2_2",
+      "kind": "component_center",
+      "source_cm": [
+        -25000.0,
+        -25000.0,
+        1970.3125
+      ],
+      "terrain_samples": [
+        {
+          "id": "terrain_center_2_2",
+          "kind": "component_center",
+          "xy_cm": [
+            -25000.0,
+            -25000.0
+          ],
+          "expected_z_cm": 970.3125,
+          "heightmap_row_col": [
+            315,
+            315
+          ],
+          "expect_hit": true
+        }
+      ],
+      "building_samples": []
+    },
+    {
+      "id": "terrain_center_2_3",
+      "kind": "component_center",
+      "source_cm": [
+        25000.0,
+        -25000.0,
+        1764.0625
+      ],
+      "terrain_samples": [
+        {
+          "id": "terrain_center_2_3",
+          "kind": "component_center",
+          "xy_cm": [
+            25000.0,
+            -25000.0
+          ],
+          "expected_z_cm": 764.0625,
+          "heightmap_row_col": [
+            315,
+            441
+          ],
+          "expect_hit": true
+        }
+      ],
+      "building_samples": []
+    },
+    {
+      "id": "terrain_center_2_4",
+      "kind": "component_center",
+      "source_cm": [
+        75000.0,
+        -25000.0,
+        1890.625
+      ],
+      "terrain_samples": [
+        {
+          "id": "terrain_center_2_4",
+          "kind": "component_center",
+          "xy_cm": [
+            75000.0,
+            -25000.0
+          ],
+          "expected_z_cm": 890.625,
+          "heightmap_row_col": [
+            315,
+            567
+          ],
+          "expect_hit": true
+        }
+      ],
+      "building_samples": []
+    },
+    {
+      "id": "terrain_center_3_0",
+      "kind": "component_center",
+      "source_cm": [
+        -125000.0,
+        25000.0,
+        1750.0
+      ],
+      "terrain_samples": [
+        {
+          "id": "terrain_center_3_0",
+          "kind": "component_center",
+          "xy_cm": [
+            -125000.0,
+            25000.0
+          ],
+          "expected_z_cm": 750.0,
+          "heightmap_row_col": [
+            441,
+            63
+          ],
+          "expect_hit": true
+        }
+      ],
+      "building_samples": []
+    },
+    {
+      "id": "terrain_center_3_1",
+      "kind": "component_center",
+      "source_cm": [
+        -75000.0,
+        25000.0,
+        1956.25
+      ],
+      "terrain_samples": [
+        {
+          "id": "terrain_center_3_1",
+          "kind": "component_center",
+          "xy_cm": [
+            -75000.0,
+            25000.0
+          ],
+          "expected_z_cm": 956.25,
+          "heightmap_row_col": [
+            441,
+            189
+          ],
+          "expect_hit": true
+        }
+      ],
+      "building_samples": []
+    },
+    {
+      "id": "terrain_center_3_2",
+      "kind": "component_center",
+      "source_cm": [
+        -25000.0,
+        25000.0,
+        2007.8125
+      ],
+      "terrain_samples": [
+        {
+          "id": "terrain_center_3_2",
+          "kind": "component_center",
+          "xy_cm": [
+            -25000.0,
+            25000.0
+          ],
+          "expected_z_cm": 1007.8125,
+          "heightmap_row_col": [
+            441,
+            315
+          ],
+          "expect_hit": true
+        }
+      ],
+      "building_samples": []
+    },
+    {
+      "id": "terrain_center_3_3",
+      "kind": "component_center",
+      "source_cm": [
+        25000.0,
+        25000.0,
+        1965.625
+      ],
+      "terrain_samples": [
+        {
+          "id": "terrain_center_3_3",
+          "kind": "component_center",
+          "xy_cm": [
+            25000.0,
+            25000.0
+          ],
+          "expected_z_cm": 965.625,
+          "heightmap_row_col": [
+            441,
+            441
+          ],
+          "expect_hit": true
+        }
+      ],
+      "building_samples": []
+    },
+    {
+      "id": "terrain_center_3_4",
+      "kind": "component_center",
+      "source_cm": [
+        75000.0,
+        25000.0,
+        4220.3125
+      ],
+      "terrain_samples": [
+        {
+          "id": "terrain_center_3_4",
+          "kind": "component_center",
+          "xy_cm": [
+            75000.0,
+            25000.0
+          ],
+          "expected_z_cm": 3220.3125,
+          "heightmap_row_col": [
+            441,
+            567
+          ],
+          "expect_hit": true
+        }
+      ],
+      "building_samples": []
+    },
+    {
+      "id": "terrain_center_4_0",
+      "kind": "component_center",
+      "source_cm": [
+        -125000.0,
+        75000.0,
+        1812.5
+      ],
+      "terrain_samples": [
+        {
+          "id": "terrain_center_4_0",
+          "kind": "component_center",
+          "xy_cm": [
+            -125000.0,
+            75000.0
+          ],
+          "expected_z_cm": 812.5,
+          "heightmap_row_col": [
+            567,
+            63
+          ],
+          "expect_hit": true
+        }
+      ],
+      "building_samples": []
+    },
+    {
+      "id": "terrain_center_4_1",
+      "kind": "component_center",
+      "source_cm": [
+        -75000.0,
+        75000.0,
+        2059.375
+      ],
+      "terrain_samples": [
+        {
+          "id": "terrain_center_4_1",
+          "kind": "component_center",
+          "xy_cm": [
+            -75000.0,
+            75000.0
+          ],
+          "expected_z_cm": 1059.375,
+          "heightmap_row_col": [
+            567,
+            189
+          ],
+          "expect_hit": true
+        }
+      ],
+      "building_samples": []
+    },
+    {
+      "id": "terrain_center_4_2",
+      "kind": "component_center",
+      "source_cm": [
+        -25000.0,
+        75000.0,
+        2035.9375
+      ],
+      "terrain_samples": [
+        {
+          "id": "terrain_center_4_2",
+          "kind": "component_center",
+          "xy_cm": [
+            -25000.0,
+            75000.0
+          ],
+          "expected_z_cm": 1035.9375,
+          "heightmap_row_col": [
+            567,
+            315
+          ],
+          "expect_hit": true
+        }
+      ],
+      "building_samples": []
+    },
+    {
+      "id": "terrain_center_4_3",
+      "kind": "component_center",
+      "source_cm": [
+        25000.0,
+        75000.0,
+        2012.5
+      ],
+      "terrain_samples": [
+        {
+          "id": "terrain_center_4_3",
+          "kind": "component_center",
+          "xy_cm": [
+            25000.0,
+            75000.0
+          ],
+          "expected_z_cm": 1012.5,
+          "heightmap_row_col": [
+            567,
+            441
+          ],
+          "expect_hit": true
+        }
+      ],
+      "building_samples": []
+    },
+    {
+      "id": "terrain_center_4_4",
+      "kind": "component_center",
+      "source_cm": [
+        75000.0,
+        75000.0,
+        8865.625
+      ],
+      "terrain_samples": [
+        {
+          "id": "terrain_center_4_4",
+          "kind": "component_center",
+          "xy_cm": [
+            75000.0,
+            75000.0
+          ],
+          "expected_z_cm": 7865.625,
+          "heightmap_row_col": [
+            567,
+            567
+          ],
+          "expect_hit": true
+        }
+      ],
+      "building_samples": []
+    },
+    {
+      "id": "terrain_edge_x_1_1",
+      "kind": "shared_edge",
+      "source_cm": [
+        -100000.0,
+        -75000.0,
+        1754.6875
+      ],
+      "terrain_samples": [
+        {
+          "id": "terrain_edge_x_1_1",
+          "kind": "shared_edge",
+          "xy_cm": [
+            -100000.0,
+            -75000.0
+          ],
+          "expected_z_cm": 754.6875,
+          "heightmap_row_col": [
+            189,
+            126
+          ],
+          "expect_hit": true
+        }
+      ],
+      "building_samples": []
+    },
+    {
+      "id": "terrain_edge_y_1_1",
+      "kind": "shared_edge",
+      "source_cm": [
+        -75000.0,
+        -100000.0,
+        1796.875
+      ],
+      "terrain_samples": [
+        {
+          "id": "terrain_edge_y_1_1",
+          "kind": "shared_edge",
+          "xy_cm": [
+            -75000.0,
+            -100000.0
+          ],
+          "expected_z_cm": 796.875,
+          "heightmap_row_col": [
+            126,
+            189
+          ],
+          "expect_hit": true
+        }
+      ],
+      "building_samples": []
+    },
+    {
+      "id": "terrain_edge_x_1_1_before",
+      "kind": "shared_edge_flank",
+      "source_cm": [
+        -100396.8253968254,
+        -75000.0,
+        1756.25
+      ],
+      "terrain_samples": [
+        {
+          "id": "terrain_edge_x_1_1_before",
+          "kind": "shared_edge_flank",
+          "xy_cm": [
+            -100396.8253968254,
+            -75000.0
+          ],
+          "expected_z_cm": 756.25,
+          "heightmap_row_col": [
+            189,
+            125
+          ],
+          "expect_hit": true
+        }
+      ],
+      "building_samples": []
+    },
+    {
+      "id": "terrain_edge_y_1_1_before",
+      "kind": "shared_edge_flank",
+      "source_cm": [
+        -75000.0,
+        -100396.8253968254,
+        1796.875
+      ],
+      "terrain_samples": [
+        {
+          "id": "terrain_edge_y_1_1_before",
+          "kind": "shared_edge_flank",
+          "xy_cm": [
+            -75000.0,
+            -100396.8253968254
+          ],
+          "expected_z_cm": 796.875,
+          "heightmap_row_col": [
+            125,
+            189
+          ],
+          "expect_hit": true
+        }
+      ],
+      "building_samples": []
+    },
+    {
+      "id": "terrain_edge_x_1_1_after",
+      "kind": "shared_edge_flank",
+      "source_cm": [
+        -99603.1746031746,
+        -75000.0,
+        1753.125
+      ],
+      "terrain_samples": [
+        {
+          "id": "terrain_edge_x_1_1_after",
+          "kind": "shared_edge_flank",
+          "xy_cm": [
+            -99603.1746031746,
+            -75000.0
+          ],
+          "expected_z_cm": 753.125,
+          "heightmap_row_col": [
+            189,
+            127
+          ],
+          "expect_hit": true
+        }
+      ],
+      "building_samples": []
+    },
+    {
+      "id": "terrain_edge_y_1_1_after",
+      "kind": "shared_edge_flank",
+      "source_cm": [
+        -75000.0,
+        -99603.1746031746,
+        1792.1875
+      ],
+      "terrain_samples": [
+        {
+          "id": "terrain_edge_y_1_1_after",
+          "kind": "shared_edge_flank",
+          "xy_cm": [
+            -75000.0,
+            -99603.1746031746
+          ],
+          "expected_z_cm": 792.1875,
+          "heightmap_row_col": [
+            127,
+            189
+          ],
+          "expect_hit": true
+        }
+      ],
+      "building_samples": []
+    },
+    {
+      "id": "terrain_edge_x_2_2",
+      "kind": "shared_edge",
+      "source_cm": [
+        -50000.0,
+        -25000.0,
+        1890.625
+      ],
+      "terrain_samples": [
+        {
+          "id": "terrain_edge_x_2_2",
+          "kind": "shared_edge",
+          "xy_cm": [
+            -50000.0,
+            -25000.0
+          ],
+          "expected_z_cm": 890.625,
+          "heightmap_row_col": [
+            315,
+            252
+          ],
+          "expect_hit": true
+        }
+      ],
+      "building_samples": []
+    },
+    {
+      "id": "terrain_edge_y_2_2",
+      "kind": "shared_edge",
+      "source_cm": [
+        -25000.0,
+        -50000.0,
+        1875.0
+      ],
+      "terrain_samples": [
+        {
+          "id": "terrain_edge_y_2_2",
+          "kind": "shared_edge",
+          "xy_cm": [
+            -25000.0,
+            -50000.0
+          ],
+          "expected_z_cm": 875.0,
+          "heightmap_row_col": [
+            252,
+            315
+          ],
+          "expect_hit": true
+        }
+      ],
+      "building_samples": []
+    },
+    {
+      "id": "terrain_edge_x_2_2_before",
+      "kind": "shared_edge_flank",
+      "source_cm": [
+        -50396.8253968254,
+        -25000.0,
+        1892.1875
+      ],
+      "terrain_samples": [
+        {
+          "id": "terrain_edge_x_2_2_before",
+          "kind": "shared_edge_flank",
+          "xy_cm": [
+            -50396.8253968254,
+            -25000.0
+          ],
+          "expected_z_cm": 892.1875,
+          "heightmap_row_col": [
+            315,
+            251
+          ],
+          "expect_hit": true
+        }
+      ],
+      "building_samples": []
+    },
+    {
+      "id": "terrain_edge_y_2_2_before",
+      "kind": "shared_edge_flank",
+      "source_cm": [
+        -25000.0,
+        -50396.8253968254,
+        1878.125
+      ],
+      "terrain_samples": [
+        {
+          "id": "terrain_edge_y_2_2_before",
+          "kind": "shared_edge_flank",
+          "xy_cm": [
+            -25000.0,
+            -50396.8253968254
+          ],
+          "expected_z_cm": 878.125,
+          "heightmap_row_col": [
+            251,
+            315
+          ],
+          "expect_hit": true
+        }
+      ],
+      "building_samples": []
+    },
+    {
+      "id": "terrain_edge_x_2_2_after",
+      "kind": "shared_edge_flank",
+      "source_cm": [
+        -49603.1746031746,
+        -25000.0,
+        1889.0625
+      ],
+      "terrain_samples": [
+        {
+          "id": "terrain_edge_x_2_2_after",
+          "kind": "shared_edge_flank",
+          "xy_cm": [
+            -49603.1746031746,
+            -25000.0
+          ],
+          "expected_z_cm": 889.0625,
+          "heightmap_row_col": [
+            315,
+            253
+          ],
+          "expect_hit": true
+        }
+      ],
+      "building_samples": []
+    },
+    {
+      "id": "terrain_edge_y_2_2_after",
+      "kind": "shared_edge_flank",
+      "source_cm": [
+        -25000.0,
+        -49603.1746031746,
+        1876.5625
+      ],
+      "terrain_samples": [
+        {
+          "id": "terrain_edge_y_2_2_after",
+          "kind": "shared_edge_flank",
+          "xy_cm": [
+            -25000.0,
+            -49603.1746031746
+          ],
+          "expected_z_cm": 876.5625,
+          "heightmap_row_col": [
+            253,
+            315
+          ],
+          "expect_hit": true
+        }
+      ],
+      "building_samples": []
+    },
+    {
+      "id": "terrain_edge_x_3_3",
+      "kind": "shared_edge",
+      "source_cm": [
+        0.0,
+        25000.0,
+        1918.75
+      ],
+      "terrain_samples": [
+        {
+          "id": "terrain_edge_x_3_3",
+          "kind": "shared_edge",
+          "xy_cm": [
+            0.0,
+            25000.0
+          ],
+          "expected_z_cm": 918.75,
+          "heightmap_row_col": [
+            441,
+            378
+          ],
+          "expect_hit": true
+        }
+      ],
+      "building_samples": []
+    },
+    {
+      "id": "terrain_edge_y_3_3",
+      "kind": "shared_edge",
+      "source_cm": [
+        25000.0,
+        0.0,
+        1906.25
+      ],
+      "terrain_samples": [
+        {
+          "id": "terrain_edge_y_3_3",
+          "kind": "shared_edge",
+          "xy_cm": [
+            25000.0,
+            0.0
+          ],
+          "expected_z_cm": 906.25,
+          "heightmap_row_col": [
+            378,
+            441
+          ],
+          "expect_hit": true
+        }
+      ],
+      "building_samples": []
+    },
+    {
+      "id": "terrain_edge_x_3_3_before",
+      "kind": "shared_edge_flank",
+      "source_cm": [
+        -396.8253968253968,
+        25000.0,
+        1921.875
+      ],
+      "terrain_samples": [
+        {
+          "id": "terrain_edge_x_3_3_before",
+          "kind": "shared_edge_flank",
+          "xy_cm": [
+            -396.8253968253968,
+            25000.0
+          ],
+          "expected_z_cm": 921.875,
+          "heightmap_row_col": [
+            441,
+            377
+          ],
+          "expect_hit": true
+        }
+      ],
+      "building_samples": []
+    },
+    {
+      "id": "terrain_edge_y_3_3_before",
+      "kind": "shared_edge_flank",
+      "source_cm": [
+        25000.0,
+        -396.8253968253968,
+        1914.0625
+      ],
+      "terrain_samples": [
+        {
+          "id": "terrain_edge_y_3_3_before",
+          "kind": "shared_edge_flank",
+          "xy_cm": [
+            25000.0,
+            -396.8253968253968
+          ],
+          "expected_z_cm": 914.0625,
+          "heightmap_row_col": [
+            377,
+            441
+          ],
+          "expect_hit": true
+        }
+      ],
+      "building_samples": []
+    },
+    {
+      "id": "terrain_edge_x_3_3_after",
+      "kind": "shared_edge_flank",
+      "source_cm": [
+        396.8253968253968,
+        25000.0,
+        1914.0625
+      ],
+      "terrain_samples": [
+        {
+          "id": "terrain_edge_x_3_3_after",
+          "kind": "shared_edge_flank",
+          "xy_cm": [
+            396.8253968253968,
+            25000.0
+          ],
+          "expected_z_cm": 914.0625,
+          "heightmap_row_col": [
+            441,
+            379
+          ],
+          "expect_hit": true
+        }
+      ],
+      "building_samples": []
+    },
+    {
+      "id": "terrain_edge_y_3_3_after",
+      "kind": "shared_edge_flank",
+      "source_cm": [
+        25000.0,
+        396.8253968253968,
+        1896.875
+      ],
+      "terrain_samples": [
+        {
+          "id": "terrain_edge_y_3_3_after",
+          "kind": "shared_edge_flank",
+          "xy_cm": [
+            25000.0,
+            396.8253968253968
+          ],
+          "expected_z_cm": 896.875,
+          "heightmap_row_col": [
+            379,
+            441
+          ],
+          "expect_hit": true
+        }
+      ],
+      "building_samples": []
+    },
+    {
+      "id": "terrain_edge_x_1_3",
+      "kind": "shared_edge",
+      "source_cm": [
+        0.0,
+        -75000.0,
+        1792.1875
+      ],
+      "terrain_samples": [
+        {
+          "id": "terrain_edge_x_1_3",
+          "kind": "shared_edge",
+          "xy_cm": [
+            0.0,
+            -75000.0
+          ],
+          "expected_z_cm": 792.1875,
+          "heightmap_row_col": [
+            189,
+            378
+          ],
+          "expect_hit": true
+        }
+      ],
+      "building_samples": []
+    },
+    {
+      "id": "terrain_edge_y_1_3",
+      "kind": "shared_edge",
+      "source_cm": [
+        25000.0,
+        -100000.0,
+        1704.6875
+      ],
+      "terrain_samples": [
+        {
+          "id": "terrain_edge_y_1_3",
+          "kind": "shared_edge",
+          "xy_cm": [
+            25000.0,
+            -100000.0
+          ],
+          "expected_z_cm": 704.6875,
+          "heightmap_row_col": [
+            126,
+            441
+          ],
+          "expect_hit": true
+        }
+      ],
+      "building_samples": []
+    },
+    {
+      "id": "terrain_edge_x_1_3_before",
+      "kind": "shared_edge_flank",
+      "source_cm": [
+        -396.8253968253968,
+        -75000.0,
+        1801.5625
+      ],
+      "terrain_samples": [
+        {
+          "id": "terrain_edge_x_1_3_before",
+          "kind": "shared_edge_flank",
+          "xy_cm": [
+            -396.8253968253968,
+            -75000.0
+          ],
+          "expected_z_cm": 801.5625,
+          "heightmap_row_col": [
+            189,
+            377
+          ],
+          "expect_hit": true
+        }
+      ],
+      "building_samples": []
+    },
+    {
+      "id": "terrain_edge_y_1_3_before",
+      "kind": "shared_edge_flank",
+      "source_cm": [
+        25000.0,
+        -100396.8253968254,
+        1706.25
+      ],
+      "terrain_samples": [
+        {
+          "id": "terrain_edge_y_1_3_before",
+          "kind": "shared_edge_flank",
+          "xy_cm": [
+            25000.0,
+            -100396.8253968254
+          ],
+          "expected_z_cm": 706.25,
+          "heightmap_row_col": [
+            125,
+            441
+          ],
+          "expect_hit": true
+        }
+      ],
+      "building_samples": []
+    },
+    {
+      "id": "terrain_edge_x_1_3_after",
+      "kind": "shared_edge_flank",
+      "source_cm": [
+        396.8253968253968,
+        -75000.0,
+        1782.8125
+      ],
+      "terrain_samples": [
+        {
+          "id": "terrain_edge_x_1_3_after",
+          "kind": "shared_edge_flank",
+          "xy_cm": [
+            396.8253968253968,
+            -75000.0
+          ],
+          "expected_z_cm": 782.8125,
+          "heightmap_row_col": [
+            189,
+            379
+          ],
+          "expect_hit": true
+        }
+      ],
+      "building_samples": []
+    },
+    {
+      "id": "terrain_edge_y_1_3_after",
+      "kind": "shared_edge_flank",
+      "source_cm": [
+        25000.0,
+        -99603.1746031746,
+        1703.125
+      ],
+      "terrain_samples": [
+        {
+          "id": "terrain_edge_y_1_3_after",
+          "kind": "shared_edge_flank",
+          "xy_cm": [
+            25000.0,
+            -99603.1746031746
+          ],
+          "expected_z_cm": 703.125,
+          "heightmap_row_col": [
+            127,
+            441
+          ],
+          "expect_hit": true
+        }
+      ],
+      "building_samples": []
+    },
+    {
+      "id": "terrain_corner_1_1",
+      "kind": "shared_corner",
+      "source_cm": [
+        -100000.0,
+        -100000.0,
+        1735.9375
+      ],
+      "terrain_samples": [
+        {
+          "id": "terrain_corner_1_1",
+          "kind": "shared_corner",
+          "xy_cm": [
+            -100000.0,
+            -100000.0
+          ],
+          "expected_z_cm": 735.9375,
+          "heightmap_row_col": [
+            126,
+            126
+          ],
+          "expect_hit": true
+        }
+      ],
+      "building_samples": []
+    },
+    {
+      "id": "terrain_corner_2_2",
+      "kind": "shared_corner",
+      "source_cm": [
+        -50000.0,
+        -50000.0,
+        1793.75
+      ],
+      "terrain_samples": [
+        {
+          "id": "terrain_corner_2_2",
+          "kind": "shared_corner",
+          "xy_cm": [
+            -50000.0,
+            -50000.0
+          ],
+          "expected_z_cm": 793.75,
+          "heightmap_row_col": [
+            252,
+            252
+          ],
+          "expect_hit": true
+        }
+      ],
+      "building_samples": []
+    },
+    {
+      "id": "terrain_corner_3_3",
+      "kind": "shared_corner",
+      "source_cm": [
+        0.0,
+        0.0,
+        1912.5
+      ],
+      "terrain_samples": [
+        {
+          "id": "terrain_corner_3_3",
+          "kind": "shared_corner",
+          "xy_cm": [
+            0.0,
+            0.0
+          ],
+          "expected_z_cm": 912.5,
+          "heightmap_row_col": [
+            378,
+            378
+          ],
+          "expect_hit": true
+        }
+      ],
+      "building_samples": []
+    },
+    {
+      "id": "terrain_corner_4_4",
+      "kind": "shared_corner",
+      "source_cm": [
+        50000.0,
+        50000.0,
+        2464.0625
+      ],
+      "terrain_samples": [
+        {
+          "id": "terrain_corner_4_4",
+          "kind": "shared_corner",
+          "xy_cm": [
+            50000.0,
+            50000.0
+          ],
+          "expected_z_cm": 1464.0625,
+          "heightmap_row_col": [
+            504,
+            504
+          ],
+          "expect_hit": true
+        }
+      ],
+      "building_samples": []
+    },
+    {
+      "id": "xiangshan_slope",
+      "kind": "southeast_slope",
+      "source_cm": [
+        75000,
+        75000,
+        8865.625
+      ],
+      "terrain_samples": [
+        {
+          "id": "xiangshan_slope",
+          "kind": "southeast_slope",
+          "xy_cm": [
+            75000,
+            75000
+          ],
+          "expected_z_cm": 7865.625,
+          "heightmap_row_col": [
+            567,
+            567
+          ],
+          "expect_hit": true
+        }
+      ],
+      "building_samples": []
+    },
+    {
+      "id": "west_outside",
+      "kind": "outside_control",
+      "source_cm": [
+        -170000,
+        0,
+        1000
+      ],
+      "terrain_samples": [
+        {
+          "id": "west_outside",
+          "kind": "outside_control",
+          "xy_cm": [
+            -170000,
+            0
+          ],
+          "expect_hit": false
+        }
+      ],
+      "building_samples": []
+    },
+    {
+      "id": "east_outside",
+      "kind": "outside_control",
+      "source_cm": [
+        120000,
+        0,
+        1000
+      ],
+      "terrain_samples": [
+        {
+          "id": "east_outside",
+          "kind": "outside_control",
+          "xy_cm": [
+            120000,
+            0
+          ],
+          "expect_hit": false
+        }
+      ],
+      "building_samples": []
+    },
+    {
+      "id": "north_outside",
+      "kind": "outside_control",
+      "source_cm": [
+        0,
+        -170000,
+        1000
+      ],
+      "terrain_samples": [
+        {
+          "id": "north_outside",
+          "kind": "outside_control",
+          "xy_cm": [
+            0,
+            -170000
+          ],
+          "expect_hit": false
+        }
+      ],
+      "building_samples": []
+    },
+    {
+      "id": "south_outside",
+      "kind": "outside_control",
+      "source_cm": [
+        0,
+        120000,
+        1000
+      ],
+      "terrain_samples": [
+        {
+          "id": "south_outside",
+          "kind": "outside_control",
+          "xy_cm": [
+            0,
+            120000
+          ],
+          "expect_hit": false
+        }
+      ],
+      "building_samples": []
+    },
+    {
+      "id": "open_area_-003_-002",
+      "kind": "open_area",
+      "source_cm": [
+        -125000.0,
+        75000.0,
+        1000
+      ],
+      "terrain_samples": [],
+      "building_samples": [
+        {
+          "id": "open_area_-003_-002",
+          "kind": "open_area",
+          "expected_tile": "-003_-002",
+          "start_cm": [
+            -125000.0,
+            75000.0,
+            25000
+          ],
+          "end_cm": [
+            -125000.0,
+            75000.0,
+            -1000
+          ],
+          "expect_hit": false,
+          "certificate": {
+            "basis": "outside every accepted building component AABB",
+            "manifest_sha256": "1af04639671899b3b0ed54092e2e3d74ca6745d1dbe19567852a37b8d5613efc",
+            "global_component_count": 11130,
+            "minimum_aabb_clearance_cm": 500.0
+          }
+        }
+      ]
+    },
+    {
+      "id": "tile_border_empty_-003_-002",
+      "kind": "tile_border_empty",
+      "source_cm": [
+        -147500.0,
+        52500.0,
+        1000
+      ],
+      "terrain_samples": [],
+      "building_samples": [
+        {
+          "id": "tile_border_empty_-003_-002",
+          "kind": "tile_border_empty",
+          "expected_tile": "-003_-002",
+          "start_cm": [
+            -147500.0,
+            52500.0,
+            25000
+          ],
+          "end_cm": [
+            -147500.0,
+            52500.0,
+            -1000
+          ],
+          "expect_hit": false,
+          "certificate": {
+            "basis": "outside every accepted building component AABB",
+            "manifest_sha256": "1af04639671899b3b0ed54092e2e3d74ca6745d1dbe19567852a37b8d5613efc",
+            "global_component_count": 11130,
+            "minimum_aabb_clearance_cm": 500.0,
+            "distance_to_tile_edge_cm": 2500.0
+          }
+        }
+      ]
+    },
+    {
+      "id": "open_area_-003_-001",
+      "kind": "open_area",
+      "source_cm": [
+        -125000.0,
+        25000.0,
+        1000
+      ],
+      "terrain_samples": [],
+      "building_samples": [
+        {
+          "id": "open_area_-003_-001",
+          "kind": "open_area",
+          "expected_tile": "-003_-001",
+          "start_cm": [
+            -125000.0,
+            25000.0,
+            25000
+          ],
+          "end_cm": [
+            -125000.0,
+            25000.0,
+            -1000
+          ],
+          "expect_hit": false,
+          "certificate": {
+            "basis": "outside every accepted building component AABB",
+            "manifest_sha256": "1af04639671899b3b0ed54092e2e3d74ca6745d1dbe19567852a37b8d5613efc",
+            "global_component_count": 11130,
+            "minimum_aabb_clearance_cm": 500.0
+          }
+        }
+      ]
+    },
+    {
+      "id": "open_area_-003_+000",
+      "kind": "open_area",
+      "source_cm": [
+        -125000.0,
+        -25000.0,
+        1000
+      ],
+      "terrain_samples": [],
+      "building_samples": [
+        {
+          "id": "open_area_-003_+000",
+          "kind": "open_area",
+          "expected_tile": "-003_+000",
+          "start_cm": [
+            -125000.0,
+            -25000.0,
+            25000
+          ],
+          "end_cm": [
+            -125000.0,
+            -25000.0,
+            -1000
+          ],
+          "expect_hit": false,
+          "certificate": {
+            "basis": "outside every accepted building component AABB",
+            "manifest_sha256": "1af04639671899b3b0ed54092e2e3d74ca6745d1dbe19567852a37b8d5613efc",
+            "global_component_count": 11130,
+            "minimum_aabb_clearance_cm": 500.0
+          }
+        }
+      ]
+    },
+    {
+      "id": "open_area_-003_+001",
+      "kind": "open_area",
+      "source_cm": [
+        -125000.0,
+        -75000.0,
+        1000
+      ],
+      "terrain_samples": [],
+      "building_samples": [
+        {
+          "id": "open_area_-003_+001",
+          "kind": "open_area",
+          "expected_tile": "-003_+001",
+          "start_cm": [
+            -125000.0,
+            -75000.0,
+            25000
+          ],
+          "end_cm": [
+            -125000.0,
+            -75000.0,
+            -1000
+          ],
+          "expect_hit": false,
+          "certificate": {
+            "basis": "outside every accepted building component AABB",
+            "manifest_sha256": "1af04639671899b3b0ed54092e2e3d74ca6745d1dbe19567852a37b8d5613efc",
+            "global_component_count": 11130,
+            "minimum_aabb_clearance_cm": 500.0
+          }
+        }
+      ]
+    },
+    {
+      "id": "open_area_-003_+002",
+      "kind": "open_area",
+      "source_cm": [
+        -125000.0,
+        -125000.0,
+        1000
+      ],
+      "terrain_samples": [],
+      "building_samples": [
+        {
+          "id": "open_area_-003_+002",
+          "kind": "open_area",
+          "expected_tile": "-003_+002",
+          "start_cm": [
+            -125000.0,
+            -125000.0,
+            25000
+          ],
+          "end_cm": [
+            -125000.0,
+            -125000.0,
+            -1000
+          ],
+          "expect_hit": false,
+          "certificate": {
+            "basis": "outside every accepted building component AABB",
+            "manifest_sha256": "1af04639671899b3b0ed54092e2e3d74ca6745d1dbe19567852a37b8d5613efc",
+            "global_component_count": 11130,
+            "minimum_aabb_clearance_cm": 500.0
+          }
+        }
+      ]
+    },
+    {
+      "id": "open_area_-002_-002",
+      "kind": "open_area",
+      "source_cm": [
+        -75000.0,
+        75000.0,
+        1000
+      ],
+      "terrain_samples": [],
+      "building_samples": [
+        {
+          "id": "open_area_-002_-002",
+          "kind": "open_area",
+          "expected_tile": "-002_-002",
+          "start_cm": [
+            -75000.0,
+            75000.0,
+            25000
+          ],
+          "end_cm": [
+            -75000.0,
+            75000.0,
+            -1000
+          ],
+          "expect_hit": false,
+          "certificate": {
+            "basis": "outside every accepted building component AABB",
+            "manifest_sha256": "1af04639671899b3b0ed54092e2e3d74ca6745d1dbe19567852a37b8d5613efc",
+            "global_component_count": 11130,
+            "minimum_aabb_clearance_cm": 500.0
+          }
+        }
+      ]
+    },
+    {
+      "id": "open_area_-002_-001",
+      "kind": "open_area",
+      "source_cm": [
+        -75000.0,
+        27500.0,
+        1000
+      ],
+      "terrain_samples": [],
+      "building_samples": [
+        {
+          "id": "open_area_-002_-001",
+          "kind": "open_area",
+          "expected_tile": "-002_-001",
+          "start_cm": [
+            -75000.0,
+            27500.0,
+            25000
+          ],
+          "end_cm": [
+            -75000.0,
+            27500.0,
+            -1000
+          ],
+          "expect_hit": false,
+          "certificate": {
+            "basis": "outside every accepted building component AABB",
+            "manifest_sha256": "1af04639671899b3b0ed54092e2e3d74ca6745d1dbe19567852a37b8d5613efc",
+            "global_component_count": 11130,
+            "minimum_aabb_clearance_cm": 500.0
+          }
+        }
+      ]
+    },
+    {
+      "id": "open_area_-002_+000",
+      "kind": "open_area",
+      "source_cm": [
+        -80000.0,
+        -25000.0,
+        1000
+      ],
+      "terrain_samples": [],
+      "building_samples": [
+        {
+          "id": "open_area_-002_+000",
+          "kind": "open_area",
+          "expected_tile": "-002_+000",
+          "start_cm": [
+            -80000.0,
+            -25000.0,
+            25000
+          ],
+          "end_cm": [
+            -80000.0,
+            -25000.0,
+            -1000
+          ],
+          "expect_hit": false,
+          "certificate": {
+            "basis": "outside every accepted building component AABB",
+            "manifest_sha256": "1af04639671899b3b0ed54092e2e3d74ca6745d1dbe19567852a37b8d5613efc",
+            "global_component_count": 11130,
+            "minimum_aabb_clearance_cm": 500.0
+          }
+        }
+      ]
+    },
+    {
+      "id": "open_area_-002_+001",
+      "kind": "open_area",
+      "source_cm": [
+        -77500.0,
+        -75000.0,
+        1000
+      ],
+      "terrain_samples": [],
+      "building_samples": [
+        {
+          "id": "open_area_-002_+001",
+          "kind": "open_area",
+          "expected_tile": "-002_+001",
+          "start_cm": [
+            -77500.0,
+            -75000.0,
+            25000
+          ],
+          "end_cm": [
+            -77500.0,
+            -75000.0,
+            -1000
+          ],
+          "expect_hit": false,
+          "certificate": {
+            "basis": "outside every accepted building component AABB",
+            "manifest_sha256": "1af04639671899b3b0ed54092e2e3d74ca6745d1dbe19567852a37b8d5613efc",
+            "global_component_count": 11130,
+            "minimum_aabb_clearance_cm": 500.0
+          }
+        }
+      ]
+    },
+    {
+      "id": "open_area_-002_+002",
+      "kind": "open_area",
+      "source_cm": [
+        -75000.0,
+        -125000.0,
+        1000
+      ],
+      "terrain_samples": [],
+      "building_samples": [
+        {
+          "id": "open_area_-002_+002",
+          "kind": "open_area",
+          "expected_tile": "-002_+002",
+          "start_cm": [
+            -75000.0,
+            -125000.0,
+            25000
+          ],
+          "end_cm": [
+            -75000.0,
+            -125000.0,
+            -1000
+          ],
+          "expect_hit": false,
+          "certificate": {
+            "basis": "outside every accepted building component AABB",
+            "manifest_sha256": "1af04639671899b3b0ed54092e2e3d74ca6745d1dbe19567852a37b8d5613efc",
+            "global_component_count": 11130,
+            "minimum_aabb_clearance_cm": 500.0
+          }
+        }
+      ]
+    },
+    {
+      "id": "open_area_-001_-002",
+      "kind": "open_area",
+      "source_cm": [
+        -25000.0,
+        77500.0,
+        1000
+      ],
+      "terrain_samples": [],
+      "building_samples": [
+        {
+          "id": "open_area_-001_-002",
+          "kind": "open_area",
+          "expected_tile": "-001_-002",
+          "start_cm": [
+            -25000.0,
+            77500.0,
+            25000
+          ],
+          "end_cm": [
+            -25000.0,
+            77500.0,
+            -1000
+          ],
+          "expect_hit": false,
+          "certificate": {
+            "basis": "outside every accepted building component AABB",
+            "manifest_sha256": "1af04639671899b3b0ed54092e2e3d74ca6745d1dbe19567852a37b8d5613efc",
+            "global_component_count": 11130,
+            "minimum_aabb_clearance_cm": 500.0
+          }
+        }
+      ]
+    },
+    {
+      "id": "open_area_-001_-001",
+      "kind": "open_area",
+      "source_cm": [
+        -25000.0,
+        25000.0,
+        1000
+      ],
+      "terrain_samples": [],
+      "building_samples": [
+        {
+          "id": "open_area_-001_-001",
+          "kind": "open_area",
+          "expected_tile": "-001_-001",
+          "start_cm": [
+            -25000.0,
+            25000.0,
+            25000
+          ],
+          "end_cm": [
+            -25000.0,
+            25000.0,
+            -1000
+          ],
+          "expect_hit": false,
+          "certificate": {
+            "basis": "outside every accepted building component AABB",
+            "manifest_sha256": "1af04639671899b3b0ed54092e2e3d74ca6745d1dbe19567852a37b8d5613efc",
+            "global_component_count": 11130,
+            "minimum_aabb_clearance_cm": 500.0
+          }
+        }
+      ]
+    },
+    {
+      "id": "open_area_-001_+000",
+      "kind": "open_area",
+      "source_cm": [
+        -25000.0,
+        -30000.0,
+        1000
+      ],
+      "terrain_samples": [],
+      "building_samples": [
+        {
+          "id": "open_area_-001_+000",
+          "kind": "open_area",
+          "expected_tile": "-001_+000",
+          "start_cm": [
+            -25000.0,
+            -30000.0,
+            25000
+          ],
+          "end_cm": [
+            -25000.0,
+            -30000.0,
+            -1000
+          ],
+          "expect_hit": false,
+          "certificate": {
+            "basis": "outside every accepted building component AABB",
+            "manifest_sha256": "1af04639671899b3b0ed54092e2e3d74ca6745d1dbe19567852a37b8d5613efc",
+            "global_component_count": 11130,
+            "minimum_aabb_clearance_cm": 500.0
+          }
+        }
+      ]
+    },
+    {
+      "id": "open_area_-001_+001",
+      "kind": "open_area",
+      "source_cm": [
+        -25000.0,
+        -70000.0,
+        1000
+      ],
+      "terrain_samples": [],
+      "building_samples": [
+        {
+          "id": "open_area_-001_+001",
+          "kind": "open_area",
+          "expected_tile": "-001_+001",
+          "start_cm": [
+            -25000.0,
+            -70000.0,
+            25000
+          ],
+          "end_cm": [
+            -25000.0,
+            -70000.0,
+            -1000
+          ],
+          "expect_hit": false,
+          "certificate": {
+            "basis": "outside every accepted building component AABB",
+            "manifest_sha256": "1af04639671899b3b0ed54092e2e3d74ca6745d1dbe19567852a37b8d5613efc",
+            "global_component_count": 11130,
+            "minimum_aabb_clearance_cm": 500.0
+          }
+        }
+      ]
+    },
+    {
+      "id": "open_area_-001_+002",
+      "kind": "open_area",
+      "source_cm": [
+        -25000.0,
+        -125000.0,
+        1000
+      ],
+      "terrain_samples": [],
+      "building_samples": [
+        {
+          "id": "open_area_-001_+002",
+          "kind": "open_area",
+          "expected_tile": "-001_+002",
+          "start_cm": [
+            -25000.0,
+            -125000.0,
+            25000
+          ],
+          "end_cm": [
+            -25000.0,
+            -125000.0,
+            -1000
+          ],
+          "expect_hit": false,
+          "certificate": {
+            "basis": "outside every accepted building component AABB",
+            "manifest_sha256": "1af04639671899b3b0ed54092e2e3d74ca6745d1dbe19567852a37b8d5613efc",
+            "global_component_count": 11130,
+            "minimum_aabb_clearance_cm": 500.0
+          }
+        }
+      ]
+    },
+    {
+      "id": "open_area_+000_-002",
+      "kind": "open_area",
+      "source_cm": [
+        22500.0,
+        82500.0,
+        1000
+      ],
+      "terrain_samples": [],
+      "building_samples": [
+        {
+          "id": "open_area_+000_-002",
+          "kind": "open_area",
+          "expected_tile": "+000_-002",
+          "start_cm": [
+            22500.0,
+            82500.0,
+            25000
+          ],
+          "end_cm": [
+            22500.0,
+            82500.0,
+            -1000
+          ],
+          "expect_hit": false,
+          "certificate": {
+            "basis": "outside every accepted building component AABB",
+            "manifest_sha256": "1af04639671899b3b0ed54092e2e3d74ca6745d1dbe19567852a37b8d5613efc",
+            "global_component_count": 11130,
+            "minimum_aabb_clearance_cm": 500.0
+          }
+        }
+      ]
+    },
+    {
+      "id": "open_area_+000_-001",
+      "kind": "open_area",
+      "source_cm": [
+        27500.0,
+        25000.0,
+        1000
+      ],
+      "terrain_samples": [],
+      "building_samples": [
+        {
+          "id": "open_area_+000_-001",
+          "kind": "open_area",
+          "expected_tile": "+000_-001",
+          "start_cm": [
+            27500.0,
+            25000.0,
+            25000
+          ],
+          "end_cm": [
+            27500.0,
+            25000.0,
+            -1000
+          ],
+          "expect_hit": false,
+          "certificate": {
+            "basis": "outside every accepted building component AABB",
+            "manifest_sha256": "1af04639671899b3b0ed54092e2e3d74ca6745d1dbe19567852a37b8d5613efc",
+            "global_component_count": 11130,
+            "minimum_aabb_clearance_cm": 500.0
+          }
+        }
+      ]
+    },
+    {
+      "id": "open_area_+000_+000",
+      "kind": "open_area",
+      "source_cm": [
+        25000.0,
+        -20000.0,
+        1000
+      ],
+      "terrain_samples": [],
+      "building_samples": [
+        {
+          "id": "open_area_+000_+000",
+          "kind": "open_area",
+          "expected_tile": "+000_+000",
+          "start_cm": [
+            25000.0,
+            -20000.0,
+            25000
+          ],
+          "end_cm": [
+            25000.0,
+            -20000.0,
+            -1000
+          ],
+          "expect_hit": false,
+          "certificate": {
+            "basis": "outside every accepted building component AABB",
+            "manifest_sha256": "1af04639671899b3b0ed54092e2e3d74ca6745d1dbe19567852a37b8d5613efc",
+            "global_component_count": 11130,
+            "minimum_aabb_clearance_cm": 500.0
+          }
+        }
+      ]
+    },
+    {
+      "id": "gap_between_buildings_+000_+000",
+      "kind": "gap_between_buildings",
+      "source_cm": [
+        15000.0,
+        -30000.0,
+        1000
+      ],
+      "terrain_samples": [],
+      "building_samples": [
+        {
+          "id": "gap_between_buildings_+000_+000",
+          "kind": "gap_between_buildings",
+          "expected_tile": "+000_+000",
+          "start_cm": [
+            15000.0,
+            -30000.0,
+            25000
+          ],
+          "end_cm": [
+            15000.0,
+            -30000.0,
+            -1000
+          ],
+          "expect_hit": false,
+          "certificate": {
+            "basis": "outside every accepted building component AABB",
+            "manifest_sha256": "1af04639671899b3b0ed54092e2e3d74ca6745d1dbe19567852a37b8d5613efc",
+            "global_component_count": 11130,
+            "minimum_aabb_clearance_cm": 500.0,
+            "neighbor_buildings": [
+              {
+                "id": "tp_building_height.294794",
+                "aabb_distance_cm": 534.0225219726562
+              },
+              {
+                "id": "tp_building_height.271046",
+                "aabb_distance_cm": 563.5284423828125
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "open_area_+000_+001",
+      "kind": "open_area",
+      "source_cm": [
+        25000.0,
+        -80000.0,
+        1000
+      ],
+      "terrain_samples": [],
+      "building_samples": [
+        {
+          "id": "open_area_+000_+001",
+          "kind": "open_area",
+          "expected_tile": "+000_+001",
+          "start_cm": [
+            25000.0,
+            -80000.0,
+            25000
+          ],
+          "end_cm": [
+            25000.0,
+            -80000.0,
+            -1000
+          ],
+          "expect_hit": false,
+          "certificate": {
+            "basis": "outside every accepted building component AABB",
+            "manifest_sha256": "1af04639671899b3b0ed54092e2e3d74ca6745d1dbe19567852a37b8d5613efc",
+            "global_component_count": 11130,
+            "minimum_aabb_clearance_cm": 500.0
+          }
+        }
+      ]
+    },
+    {
+      "id": "open_area_+000_+002",
+      "kind": "open_area",
+      "source_cm": [
+        25000.0,
+        -125000.0,
+        1000
+      ],
+      "terrain_samples": [],
+      "building_samples": [
+        {
+          "id": "open_area_+000_+002",
+          "kind": "open_area",
+          "expected_tile": "+000_+002",
+          "start_cm": [
+            25000.0,
+            -125000.0,
+            25000
+          ],
+          "end_cm": [
+            25000.0,
+            -125000.0,
+            -1000
+          ],
+          "expect_hit": false,
+          "certificate": {
+            "basis": "outside every accepted building component AABB",
+            "manifest_sha256": "1af04639671899b3b0ed54092e2e3d74ca6745d1dbe19567852a37b8d5613efc",
+            "global_component_count": 11130,
+            "minimum_aabb_clearance_cm": 500.0
+          }
+        }
+      ]
+    },
+    {
+      "id": "open_area_+001_-002",
+      "kind": "open_area",
+      "source_cm": [
+        75000.0,
+        72500.0,
+        1000
+      ],
+      "terrain_samples": [],
+      "building_samples": [
+        {
+          "id": "open_area_+001_-002",
+          "kind": "open_area",
+          "expected_tile": "+001_-002",
+          "start_cm": [
+            75000.0,
+            72500.0,
+            25000
+          ],
+          "end_cm": [
+            75000.0,
+            72500.0,
+            -1000
+          ],
+          "expect_hit": false,
+          "certificate": {
+            "basis": "outside every accepted building component AABB",
+            "manifest_sha256": "1af04639671899b3b0ed54092e2e3d74ca6745d1dbe19567852a37b8d5613efc",
+            "global_component_count": 11130,
+            "minimum_aabb_clearance_cm": 500.0
+          }
+        }
+      ]
+    },
+    {
+      "id": "open_area_+001_-001",
+      "kind": "open_area",
+      "source_cm": [
+        75000.0,
+        25000.0,
+        1000
+      ],
+      "terrain_samples": [],
+      "building_samples": [
+        {
+          "id": "open_area_+001_-001",
+          "kind": "open_area",
+          "expected_tile": "+001_-001",
+          "start_cm": [
+            75000.0,
+            25000.0,
+            25000
+          ],
+          "end_cm": [
+            75000.0,
+            25000.0,
+            -1000
+          ],
+          "expect_hit": false,
+          "certificate": {
+            "basis": "outside every accepted building component AABB",
+            "manifest_sha256": "1af04639671899b3b0ed54092e2e3d74ca6745d1dbe19567852a37b8d5613efc",
+            "global_component_count": 11130,
+            "minimum_aabb_clearance_cm": 500.0
+          }
+        }
+      ]
+    },
+    {
+      "id": "open_area_+001_+000",
+      "kind": "open_area",
+      "source_cm": [
+        75000.0,
+        -25000.0,
+        1000
+      ],
+      "terrain_samples": [],
+      "building_samples": [
+        {
+          "id": "open_area_+001_+000",
+          "kind": "open_area",
+          "expected_tile": "+001_+000",
+          "start_cm": [
+            75000.0,
+            -25000.0,
+            25000
+          ],
+          "end_cm": [
+            75000.0,
+            -25000.0,
+            -1000
+          ],
+          "expect_hit": false,
+          "certificate": {
+            "basis": "outside every accepted building component AABB",
+            "manifest_sha256": "1af04639671899b3b0ed54092e2e3d74ca6745d1dbe19567852a37b8d5613efc",
+            "global_component_count": 11130,
+            "minimum_aabb_clearance_cm": 500.0
+          }
+        }
+      ]
+    },
+    {
+      "id": "open_area_+001_+001",
+      "kind": "open_area",
+      "source_cm": [
+        75000.0,
+        -75000.0,
+        1000
+      ],
+      "terrain_samples": [],
+      "building_samples": [
+        {
+          "id": "open_area_+001_+001",
+          "kind": "open_area",
+          "expected_tile": "+001_+001",
+          "start_cm": [
+            75000.0,
+            -75000.0,
+            25000
+          ],
+          "end_cm": [
+            75000.0,
+            -75000.0,
+            -1000
+          ],
+          "expect_hit": false,
+          "certificate": {
+            "basis": "outside every accepted building component AABB",
+            "manifest_sha256": "1af04639671899b3b0ed54092e2e3d74ca6745d1dbe19567852a37b8d5613efc",
+            "global_component_count": 11130,
+            "minimum_aabb_clearance_cm": 500.0
+          }
+        }
+      ]
+    },
+    {
+      "id": "open_area_+001_+002",
+      "kind": "open_area",
+      "source_cm": [
+        75000.0,
+        -125000.0,
+        1000
+      ],
+      "terrain_samples": [],
+      "building_samples": [
+        {
+          "id": "open_area_+001_+002",
+          "kind": "open_area",
+          "expected_tile": "+001_+002",
+          "start_cm": [
+            75000.0,
+            -125000.0,
+            25000
+          ],
+          "end_cm": [
+            75000.0,
+            -125000.0,
+            -1000
+          ],
+          "expect_hit": false,
+          "certificate": {
+            "basis": "outside every accepted building component AABB",
+            "manifest_sha256": "1af04639671899b3b0ed54092e2e3d74ca6745d1dbe19567852a37b8d5613efc",
+            "global_component_count": 11130,
+            "minimum_aabb_clearance_cm": 500.0
+          }
+        }
+      ]
+    },
+    {
+      "id": "positive_low_rise_roof",
+      "kind": "building_positive",
+      "source_cm": [
+        -111941.71040852866,
+        68028.21858723958,
+        1000
+      ],
+      "terrain_samples": [],
+      "building_samples": [
+        {
+          "id": "low_rise_roof",
+          "kind": "roof",
+          "expected_tile": "-003_-002",
+          "expect_hit": true,
+          "start_cm": [
+            -111941.71040852866,
+            68028.21858723958,
+            2838.9999389648438
+          ],
+          "end_cm": [
+            -111941.71040852866,
+            68028.21858723958,
+            838.9999389648438
+          ],
+          "certificate": {
+            "source_glb_sha256": "33273d77edbe14f4cadb64ad33aeb31df5365ffa3e8315e227dbe8664472f945",
+            "triangle_center_cm": [
+              -111941.71040852866,
+              68028.21858723958,
+              1838.9999389648438
+            ],
+            "triangle_area_m2_x2": 952.9522876637056,
+            "source_building_id": "tp_building_height.239840",
+            "source_building_height_cm": 1043.0000305175781
+          }
+        }
+      ]
+    },
+    {
+      "id": "positive_low_rise_wall",
+      "kind": "building_positive",
+      "source_cm": [
+        -113155.3181966146,
+        68418.49466959636,
+        1000
+      ],
+      "terrain_samples": [],
+      "building_samples": [
+        {
+          "id": "low_rise_wall",
+          "kind": "wall",
+          "expected_tile": "-003_-002",
+          "expect_hit": true,
+          "start_cm": [
+            -113948.31053764414,
+            67809.26306579655,
+            1491.333293914795
+          ],
+          "end_cm": [
+            -112362.32585558505,
+            69027.72627339617,
+            1491.333293914795
+          ],
+          "certificate": {
+            "source_glb_sha256": "33273d77edbe14f4cadb64ad33aeb31df5365ffa3e8315e227dbe8664472f945",
+            "triangle_center_cm": [
+              -113155.3181966146,
+              68418.49466959636,
+              1491.333293914795
+            ],
+            "triangle_area_m2_x2": 457.2228938534866,
+            "source_building_id": "tp_building_height.239840",
+            "source_building_height_cm": 1043.0000305175781
+          }
+        }
+      ]
+    },
+    {
+      "id": "positive_low_rise_mass",
+      "kind": "building_positive",
+      "source_cm": [
+        -113155.3181966146,
+        68418.49466959636,
+        1000
+      ],
+      "terrain_samples": [],
+      "building_samples": [
+        {
+          "id": "low_rise_mass",
+          "kind": "mass",
+          "expected_tile": "-003_-002",
+          "expect_hit": true,
+          "start_cm": [
+            -115534.29521970321,
+            66590.79985819693,
+            1491.333293914795
+          ],
+          "end_cm": [
+            -110776.34117352597,
+            70246.18948099579,
+            1491.333293914795
+          ],
+          "certificate": {
+            "source_glb_sha256": "33273d77edbe14f4cadb64ad33aeb31df5365ffa3e8315e227dbe8664472f945",
+            "triangle_center_cm": [
+              -113155.3181966146,
+              68418.49466959636,
+              1491.333293914795
+            ],
+            "triangle_area_m2_x2": 457.2228938534866,
+            "source_building_id": "tp_building_height.239840",
+            "source_building_height_cm": 1043.0000305175781
+          }
+        }
+      ]
+    },
+    {
+      "id": "positive_dense_roof",
+      "kind": "building_positive",
+      "source_cm": [
+        18184.23105875651,
+        -17838.80869547526,
+        1000
+      ],
+      "terrain_samples": [],
+      "building_samples": [
+        {
+          "id": "dense_roof",
+          "kind": "roof",
+          "expected_tile": "+000_+000",
+          "expect_hit": true,
+          "start_cm": [
+            18184.23105875651,
+            -17838.80869547526,
+            28765.997314453125
+          ],
+          "end_cm": [
+            18184.23105875651,
+            -17838.80869547526,
+            26765.997314453125
+          ],
+          "certificate": {
+            "source_glb_sha256": "2607a64942edf699a92a7cb5c8d86f43f54a516d6ecf7506e3c61c669aac893a",
+            "triangle_center_cm": [
+              18184.23105875651,
+              -17838.80869547526,
+              27765.997314453125
+            ],
+            "triangle_area_m2_x2": 9.799145728582516,
+            "source_building_id": null,
+            "source_building_height_cm": null
+          }
+        }
+      ]
+    },
+    {
+      "id": "positive_dense_wall",
+      "kind": "building_positive",
+      "source_cm": [
+        16694.1889444987,
+        -16269.139099121094,
+        1000
+      ],
+      "terrain_samples": [],
+      "building_samples": [
+        {
+          "id": "dense_wall",
+          "kind": "wall",
+          "expected_tile": "+000_+000",
+          "expect_hit": true,
+          "start_cm": [
+            17693.946867076316,
+            -16247.136911882402,
+            18797.66486485799
+          ],
+          "end_cm": [
+            15694.431021921082,
+            -16291.141286359785,
+            18797.66486485799
+          ],
+          "certificate": {
+            "source_glb_sha256": "2607a64942edf699a92a7cb5c8d86f43f54a516d6ecf7506e3c61c669aac893a",
+            "triangle_center_cm": [
+              16694.1889444987,
+              -16269.139099121094,
+              18797.66486485799
+            ],
+            "triangle_area_m2_x2": 9723.364669369968,
+            "source_building_id": null,
+            "source_building_height_cm": null
+          }
+        }
+      ]
+    },
+    {
+      "id": "positive_dense_mass",
+      "kind": "building_positive",
+      "source_cm": [
+        16694.1889444987,
+        -16269.139099121094,
+        1000
+      ],
+      "terrain_samples": [],
+      "building_samples": [
+        {
+          "id": "dense_mass",
+          "kind": "mass",
+          "expected_tile": "+000_+000",
+          "expect_hit": true,
+          "start_cm": [
+            19693.46271223155,
+            -16203.13253740502,
+            18797.66486485799
+          ],
+          "end_cm": [
+            13694.915176765846,
+            -16335.145660837168,
+            18797.66486485799
+          ],
+          "certificate": {
+            "source_glb_sha256": "2607a64942edf699a92a7cb5c8d86f43f54a516d6ecf7506e3c61c669aac893a",
+            "triangle_center_cm": [
+              16694.1889444987,
+              -16269.139099121094,
+              18797.66486485799
+            ],
+            "triangle_area_m2_x2": 9723.364669369968,
+            "source_building_id": null,
+            "source_building_height_cm": null
+          }
+        }
+      ]
+    },
+    {
+      "id": "positive_high_rise_roof",
+      "kind": "building_positive",
+      "source_cm": [
+        16509.976196289062,
+        -82345.59224446614,
+        1000
+      ],
+      "terrain_samples": [],
+      "building_samples": [
+        {
+          "id": "high_rise_roof",
+          "kind": "roof",
+          "expected_tile": "+000_+001",
+          "expect_hit": true,
+          "start_cm": [
+            16509.976196289062,
+            -82345.59224446614,
+            22777.000427246094
+          ],
+          "end_cm": [
+            16509.976196289062,
+            -82345.59224446614,
+            20777.000427246094
+          ],
+          "certificate": {
+            "source_glb_sha256": "148f0a0c53630bedd69c1119081815fbfe763fe2f7edaf78845612bc079c1779",
+            "triangle_center_cm": [
+              16509.976196289062,
+              -82345.59224446614,
+              21777.000427246094
+            ],
+            "triangle_area_m2_x2": 22.085172198712826,
+            "source_building_id": null,
+            "source_building_height_cm": null
+          }
+        }
+      ]
+    },
+    {
+      "id": "positive_high_rise_wall",
+      "kind": "building_positive",
+      "source_cm": [
+        6628.689829508464,
+        -65674.73500569661,
+        1000
+      ],
+      "terrain_samples": [],
+      "building_samples": [
+        {
+          "id": "high_rise_wall",
+          "kind": "wall",
+          "expected_tile": "+000_+001",
+          "expect_hit": true,
+          "start_cm": [
+            6645.975266319396,
+            -66674.5856013729,
+            9269.000148773193
+          ],
+          "end_cm": [
+            6611.404392697532,
+            -64674.884410020306,
+            9269.000148773193
+          ],
+          "certificate": {
+            "source_glb_sha256": "148f0a0c53630bedd69c1119081815fbfe763fe2f7edaf78845612bc079c1779",
+            "triangle_center_cm": [
+              6628.689829508464,
+              -65674.73500569661,
+              9269.000148773193
+            ],
+            "triangle_area_m2_x2": 5578.006118218179,
+            "source_building_id": null,
+            "source_building_height_cm": null
+          }
+        }
+      ]
+    },
+    {
+      "id": "positive_high_rise_mass",
+      "kind": "building_positive",
+      "source_cm": [
+        6628.689829508464,
+        -65674.73500569661,
+        1000
+      ],
+      "terrain_samples": [],
+      "building_samples": [
+        {
+          "id": "high_rise_mass",
+          "kind": "mass",
+          "expected_tile": "+000_+001",
+          "expect_hit": true,
+          "start_cm": [
+            6680.546139941261,
+            -68674.28679272551,
+            9269.000148773193
+          ],
+          "end_cm": [
+            6576.833519075667,
+            -62675.183218667706,
+            9269.000148773193
+          ],
+          "certificate": {
+            "source_glb_sha256": "148f0a0c53630bedd69c1119081815fbfe763fe2f7edaf78845612bc079c1779",
+            "triangle_center_cm": [
+              6628.689829508464,
+              -65674.73500569661,
+              9269.000148773193
+            ],
+            "triangle_area_m2_x2": 5578.006118218179,
+            "source_building_id": null,
+            "source_building_height_cm": null
+          }
+        }
+      ]
+    },
+    {
+      "id": "positive_hero_neighborhood_roof",
+      "kind": "building_positive",
+      "source_cm": [
+        18184.23105875651,
+        -17838.80869547526,
+        1000
+      ],
+      "terrain_samples": [],
+      "building_samples": [
+        {
+          "id": "hero_neighborhood_roof",
+          "kind": "roof",
+          "expected_tile": "+000_+000",
+          "expect_hit": true,
+          "start_cm": [
+            18184.23105875651,
+            -17838.80869547526,
+            28765.997314453125
+          ],
+          "end_cm": [
+            18184.23105875651,
+            -17838.80869547526,
+            26765.997314453125
+          ],
+          "certificate": {
+            "source_glb_sha256": "2607a64942edf699a92a7cb5c8d86f43f54a516d6ecf7506e3c61c669aac893a",
+            "triangle_center_cm": [
+              18184.23105875651,
+              -17838.80869547526,
+              27765.997314453125
+            ],
+            "triangle_area_m2_x2": 9.799145728582516,
+            "source_building_id": null,
+            "source_building_height_cm": null
+          }
+        }
+      ]
+    },
+    {
+      "id": "positive_hero_neighborhood_wall",
+      "kind": "building_positive",
+      "source_cm": [
+        16694.1889444987,
+        -16269.139099121094,
+        1000
+      ],
+      "terrain_samples": [],
+      "building_samples": [
+        {
+          "id": "hero_neighborhood_wall",
+          "kind": "wall",
+          "expected_tile": "+000_+000",
+          "expect_hit": true,
+          "start_cm": [
+            17693.946867076316,
+            -16247.136911882402,
+            18797.66486485799
+          ],
+          "end_cm": [
+            15694.431021921082,
+            -16291.141286359785,
+            18797.66486485799
+          ],
+          "certificate": {
+            "source_glb_sha256": "2607a64942edf699a92a7cb5c8d86f43f54a516d6ecf7506e3c61c669aac893a",
+            "triangle_center_cm": [
+              16694.1889444987,
+              -16269.139099121094,
+              18797.66486485799
+            ],
+            "triangle_area_m2_x2": 9723.364669369968,
+            "source_building_id": null,
+            "source_building_height_cm": null
+          }
+        }
+      ]
+    },
+    {
+      "id": "positive_hero_neighborhood_mass",
+      "kind": "building_positive",
+      "source_cm": [
+        16694.1889444987,
+        -16269.139099121094,
+        1000
+      ],
+      "terrain_samples": [],
+      "building_samples": [
+        {
+          "id": "hero_neighborhood_mass",
+          "kind": "mass",
+          "expected_tile": "+000_+000",
+          "expect_hit": true,
+          "start_cm": [
+            19693.46271223155,
+            -16203.13253740502,
+            18797.66486485799
+          ],
+          "end_cm": [
+            13694.915176765846,
+            -16335.145660837168,
+            18797.66486485799
+          ],
+          "certificate": {
+            "source_glb_sha256": "2607a64942edf699a92a7cb5c8d86f43f54a516d6ecf7506e3c61c669aac893a",
+            "triangle_center_cm": [
+              16694.1889444987,
+              -16269.139099121094,
+              18797.66486485799
+            ],
+            "triangle_area_m2_x2": 9723.364669369968,
+            "source_building_id": null,
+            "source_building_height_cm": null
+          }
+        }
+      ]
+    },
+    {
+      "id": "positive_tile_boundary_roof",
+      "kind": "building_positive",
+      "source_cm": [
+        83935.205078125,
+        -13797.86631266276,
+        1000
+      ],
+      "terrain_samples": [],
+      "building_samples": [
+        {
+          "id": "tile_boundary_roof",
+          "kind": "roof",
+          "expected_tile": "+001_+000",
+          "expect_hit": true,
+          "start_cm": [
+            83935.205078125,
+            -13797.86631266276,
+            17355.00030517578
+          ],
+          "end_cm": [
+            83935.205078125,
+            -13797.86631266276,
+            15355.000305175781
+          ],
+          "certificate": {
+            "source_glb_sha256": "9a58c70680ffb4087739e2756a58fc8397d69e2222bb9971856e11c6db715128",
+            "triangle_center_cm": [
+              83935.205078125,
+              -13797.86631266276,
+              16355.000305175781
+            ],
+            "triangle_area_m2_x2": 5.280229188036174,
+            "source_building_id": null,
+            "source_building_height_cm": null
+          }
+        }
+      ]
+    },
+    {
+      "id": "positive_tile_boundary_wall",
+      "kind": "building_positive",
+      "source_cm": [
+        49999.97295091549,
+        -17980.433654785156,
+        1000
+      ],
+      "terrain_samples": [],
+      "building_samples": [
+        {
+          "id": "tile_boundary_wall",
+          "kind": "wall",
+          "expected_tile": "+001_+000",
+          "expect_hit": true,
+          "start_cm": [
+            49483.84731391793,
+            -18836.946542507147,
+            6902.666314442952
+          ],
+          "end_cm": [
+            50516.09858791305,
+            -17123.920767063166,
+            6902.666314442952
+          ],
+          "certificate": {
+            "source_glb_sha256": "9a58c70680ffb4087739e2756a58fc8397d69e2222bb9971856e11c6db715128",
+            "triangle_center_cm": [
+              49999.97295091549,
+              -17980.433654785156,
+              6902.666314442952
+            ],
+            "triangle_area_m2_x2": 34.27804368058503,
+            "source_building_id": null,
+            "source_building_height_cm": null
+          }
+        }
+      ]
+    },
+    {
+      "id": "positive_tile_boundary_mass",
+      "kind": "building_positive",
+      "source_cm": [
+        49999.97295091549,
+        -17980.433654785156,
+        1000
+      ],
+      "terrain_samples": [],
+      "building_samples": [
+        {
+          "id": "tile_boundary_mass",
+          "kind": "mass",
+          "expected_tile": "+001_+000",
+          "expect_hit": true,
+          "start_cm": [
+            48451.59603992281,
+            -20549.972317951127,
+            6902.666314442952
+          ],
+          "end_cm": [
+            51548.34986190817,
+            -15410.894991619185,
+            6902.666314442952
+          ],
+          "certificate": {
+            "source_glb_sha256": "9a58c70680ffb4087739e2756a58fc8397d69e2222bb9971856e11c6db715128",
+            "triangle_center_cm": [
+              49999.97295091549,
+              -17980.433654785156,
+              6902.666314442952
+            ],
+            "triangle_area_m2_x2": 34.27804368058503,
+            "source_building_id": null,
+            "source_building_height_cm": null
+          }
+        }
+      ]
+    },
+    {
+      "id": "terrain_building_transition",
+      "kind": "terrain_building_transition",
+      "source_cm": [
+        -111904.76190476191,
+        67857.14285714284,
+        1823.4375
+      ],
+      "terrain_samples": [
+        {
+          "id": "terrain_building_transition",
+          "kind": "terrain_building_transition",
+          "xy_cm": [
+            -111904.76190476191,
+            67857.14285714284
+          ],
+          "expected_z_cm": 823.4375,
+          "heightmap_row_col": [
+            549,
+            96
+          ],
+          "expect_hit": true
+        }
+      ],
+      "building_samples": []
+    }
+  ],
+  "certified_negative_count": 27,
+  "positive_categories": [
+    "low_rise",
+    "dense",
+    "high_rise",
+    "hero_neighborhood",
+    "tile_boundary"
+  ],
+  "negative_categories": [
+    "gap_between_buildings",
+    "open_area",
+    "tile_border_empty"
+  ],
+  "probe_channel": "ECC_Visibility"
+}

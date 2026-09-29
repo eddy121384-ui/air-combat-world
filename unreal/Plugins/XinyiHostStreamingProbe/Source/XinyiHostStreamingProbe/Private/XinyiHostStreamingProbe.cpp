@@ -28,6 +28,8 @@
 #include "WorldPartition/WorldPartitionRuntimeHash.h"
 #include "WorldPartition/WorldPartitionSubsystem.h"
 
+void StartXinyiCollisionProbe();
+
 namespace XinyiHostProbe
 {
 constexpr TCHAR WorldPath[] = TEXT("/Game/XinyiV2/L_XinyiV2_Contract_WP");
@@ -107,6 +109,12 @@ class FXinyiHostStreamingProbeModule final : public IModuleInterface
 public:
     virtual void StartupModule() override
     {
+        FString CollisionPlan;
+        if (FParse::Value(FCommandLine::Get(), TEXT("XinyiCollisionPlan="), CollisionPlan))
+        {
+            StartXinyiCollisionProbe();
+            return;
+        }
         if (!FParse::Value(FCommandLine::Get(), TEXT("XinyiHostRoute="), RoutePath)) return;
         FParse::Value(FCommandLine::Get(), TEXT("XinyiHostManifest="), ManifestPath);
         FParse::Value(FCommandLine::Get(), TEXT("XinyiHostOutput="), OutputPath);

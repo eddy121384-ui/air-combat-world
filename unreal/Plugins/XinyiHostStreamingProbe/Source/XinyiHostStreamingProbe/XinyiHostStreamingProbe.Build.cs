@@ -6,7 +6,7 @@ public class XinyiHostStreamingProbe : ModuleRules
     {
         PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
         PrivateDependencyModuleNames.AddRange(new[] {
-            "Core", "CoreUObject", "Engine", "Json", "Landscape"
+            "Core", "CoreUObject", "Engine", "Json", "Landscape", "PhysicsCore"
         });
     }
 }
