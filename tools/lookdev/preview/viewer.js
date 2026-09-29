@@ -76,14 +76,14 @@ function upload(prim) {
 
 function addInstances(obj, inst) {
   const n = inst.length;
-  const a = new Float32Array(n * 6);
-  inst.forEach((t, i) => { a.set([t.e, t.n, t.z, t.yaw, t.s, t.v], i * 6); });
+  const a = new Float32Array(n * 8);
+  inst.forEach((t, i) => { a.set([t.e, t.n, t.z, t.yaw, t.sx ?? t.s, t.sy ?? t.s, t.sz ?? t.s, t.v], i * 8); });
   gl.bindVertexArray(obj.vao);
   const b = gl.createBuffer();
   gl.bindBuffer(gl.ARRAY_BUFFER, b);
   gl.bufferData(gl.ARRAY_BUFFER, a, gl.STATIC_DRAW);
-  gl.enableVertexAttribArray(5); gl.vertexAttribPointer(5, 4, gl.FLOAT, false, 24, 0); gl.vertexAttribDivisor(5, 1);
-  gl.enableVertexAttribArray(6); gl.vertexAttribPointer(6, 2, gl.FLOAT, false, 24, 16); gl.vertexAttribDivisor(6, 1);
+  gl.enableVertexAttribArray(5); gl.vertexAttribPointer(5, 4, gl.FLOAT, false, 32, 0); gl.vertexAttribDivisor(5, 1);
+  gl.enableVertexAttribArray(6); gl.vertexAttribPointer(6, 4, gl.FLOAT, false, 32, 16); gl.vertexAttribDivisor(6, 1);
   gl.bindVertexArray(null);
   obj.instances = n;
 }
@@ -144,26 +144,26 @@ void main() {
 }`;
 
 const VS_INST = `
-in vec3 a_POSITION; in vec3 a_NORMAL; in vec2 a_TEXCOORD_2; in vec4 a_INST0; in vec2 a_INST1;
+in vec3 a_POSITION; in vec3 a_NORMAL; in vec2 a_TEXCOORD_2; in vec4 a_INST0; in vec4 a_INST1;
 uniform mat4 uViewProj; uniform vec3 uOffset;
 out vec3 vW; out vec3 vN; out vec2 vUv0; out vec2 vUv1; out vec4 vCol;
 void main() {
   float c = cos(radians(a_INST0.w)), s = sin(radians(a_INST0.w));
-  vec3 p = vec3(a_POSITION.x, -a_POSITION.z, a_POSITION.y) * a_INST1.x;
-  vec3 n = vec3(a_NORMAL.x, -a_NORMAL.z, a_NORMAL.y);
+  vec3 p = vec3(a_POSITION.x, -a_POSITION.z, a_POSITION.y) * a_INST1.xyz;
+  vec3 n = normalize(vec3(a_NORMAL.x, -a_NORMAL.z, a_NORMAL.y) / a_INST1.xyz);
   p = vec3(c * p.x - s * p.y, s * p.x + c * p.y, p.z);
   n = vec3(c * n.x - s * n.y, s * n.x + c * n.y, n.z);
   vec3 w = p + a_INST0.xyz + uOffset;
   vW = w; vN = n; vUv0 = vec2(p.z, 0.0); vUv1 = vec2(0.0);
-  vCol = vec4(a_TEXCOORD_2, (a_INST1.y + 0.5) / 4.0, 1.0);
+  vCol = vec4(a_TEXCOORD_2, (a_INST1.w + 0.5) / 4.0, 1.0);
   gl_Position = uViewProj * vec4(w, 1.0);
 }`;
 const VS_INST_SHADOW = `
-in vec3 a_POSITION; in vec4 a_INST0; in vec2 a_INST1;
+in vec3 a_POSITION; in vec4 a_INST0; in vec4 a_INST1;
 uniform mat4 uViewProj; uniform vec3 uOffset;
 void main() {
   float c = cos(radians(a_INST0.w)), s = sin(radians(a_INST0.w));
-  vec3 p = vec3(a_POSITION.x, -a_POSITION.z, a_POSITION.y) * a_INST1.x;
+  vec3 p = vec3(a_POSITION.x, -a_POSITION.z, a_POSITION.y) * a_INST1.xyz;
   p = vec3(c * p.x - s * p.y, s * p.x + c * p.y, p.z);
   gl_Position = uViewProj * vec4(p + a_INST0.xyz + uOffset, 1.0);
 }`;
@@ -178,7 +178,7 @@ const LIGHTING = `
 uniform vec3 uCam; uniform vec3 uSunDir; uniform vec3 uSunRad; uniform vec3 uSkyZen; uniform vec3 uSkyHor;
 uniform vec3 uGroundAmb; uniform vec3 uFogCol; uniform float uFogDen; uniform float uFogFall; uniform float uFogBase;
 uniform float uNight; uniform float uLitFrac; uniform mat4 uShadowVP; uniform highp sampler2DShadow uShadow;
-uniform int uKind;
+uniform int uKind; uniform float uNoShadow; uniform int uDebug;
 const float PI = 3.14159265;
 
 vec3 skyRad(vec3 d) {
@@ -194,6 +194,7 @@ float shadowAt(vec3 w, vec3 n) {
   vec4 s = uShadowVP * vec4(w + n * 0.6, 1.0);
   vec3 c = s.xyz / s.w * 0.5 + 0.5;
   if (c.x < 0.0 || c.x > 1.0 || c.y < 0.0 || c.y > 1.0) return 1.0;
+  if (uNoShadow > 0.5) return 1.0;
   float sum = 0.0;
   vec2 ts = 1.0 / vec2(textureSize(uShadow, 0));
   for (int y = -1; y <= 1; y++) for (int x = -1; x <= 1; x++)
@@ -206,7 +207,9 @@ vec3 applyFog(vec3 col, vec3 w) {
   float dz = d.z;
   float k = uFogFall;
   float h0 = max(uCam.z - uFogBase, 0.0);
-  float line = abs(k * dz) > 1e-4 ? (1.0 - exp(-k * dz)) / (k * dz) : 1.0;
+  // (1 - e^-x) / x, numerically stable near x = 0 (surfaces at camera altitude)
+  float x = k * dz;
+  float line = abs(x) > 0.02 ? (1.0 - exp(-x)) / x : 1.0 - x * 0.5 + x * x / 6.0;
   float od = uFogDen * exp(-k * h0) * dist * line;
   float f = 1.0 - exp(-od);
   float mu = max(dot(v, uSunDir), 0.0);
@@ -262,6 +265,8 @@ void main() {
   vec3 N = normalize(vN);
   vec4 vc = xc_unpack(vCol.xy);
   if (vCol.w > 0.5) vc.z = vCol.z;   // instanced: variant from per-instance data
+  if (uKind == 2) vc = vec4(vCol.xy, 0.5, 1.0);            // plain floats (not packed)
+  if (uKind == 4) vc = vec4(vCol.xy, vCol.z, 1.0);
   vec3 base; float rough; float metal; float spec; vec3 emis;
   float ao = 1.0;
   float fwp = max(fwidth(vW.x), fwidth(vW.y));
@@ -283,10 +288,15 @@ void main() {
     xc_foliage(vW, N, vc, vc.x * 10.0, uNight, base, rough, metal, spec, emis);
     ao = mix(0.55, 1.0, clamp((vc.x * 10.0 - 3.0) / 5.0, 0.0, 1.0));
     N = normalize(mix(N, vec3(0.0, 0.0, 1.0), 0.35));
+  } else if (uKind == 5) {
+    xc_prop(vW, N, vc, vc.z, uNight, fwp, base, rough, metal, spec, emis);
   } else {
     xc_backdrop(vW, N, vc, uNight, fwp, base, rough, metal, spec, emis);
   }
   vec3 c = shade(base, rough, metal, spec, emis, N, vW, ao);
+  if (uDebug == 1) { oColor = vec4(base, 1.0); return; }
+  if (uDebug == 2) { oColor = vec4(N * 0.5 + 0.5, 1.0); return; }
+  if (uDebug == 3) { oColor = vec4(c, 1.0); return; }
   oColor = vec4(applyFog(c, vW), 1.0);
 }`;
   progMain = program(PRELUDE + VS_WORLD, FS_MAIN);
@@ -338,7 +348,12 @@ void main(){
     for (const p of prims) {
       const g = upload(p);
       const o = { ...g, offset: item.offset, kind: item.kind, castShadow: item.castShadow !== false, name: item.url };
-      if (item.instances) addInstances(o, (await (await fetch(item.instances)).json()).instances);
+      if (item.instances) {
+        const j = await (await fetch(item.instances)).json();
+        const list = item.instanceKey ? j.types[item.instanceKey] : j.instances;
+        if (!list.length) continue;
+        addInstances(o, list);
+      }
       objects.push(o);
     }
   }
@@ -484,6 +499,8 @@ async function render(shot, light, W, H, SS) {
     if (u.uFogBase) gl.uniform1f(u.uFogBase, light.fogBase || 0);
     if (u.uNight) gl.uniform1f(u.uNight, light.night);
     if (u.uLitFrac) gl.uniform1f(u.uLitFrac, light.litFrac);
+    if (u.uNoShadow) gl.uniform1f(u.uNoShadow, light.noShadow ? 1.0 : 0.0);
+    if (u.uDebug) gl.uniform1i(u.uDebug, light.debug || 0);
   };
 
   // sky

@@ -73,6 +73,13 @@ float xc_noise2(float2 p)
     return lerp(lerp(a, b, u.x), lerp(c, d, u.x), u.y);
 }
 
+// Band-limited value noise: fades to its mean (0.5) once the lattice period
+// drops below ~2 pixels, so distant terrain never shows lattice moire.
+float xc_fnoise(float2 p, float freq, float fw)
+{
+    return lerp(0.5, xc_noise2(p * freq), 1.0 - smoothstep(0.2, 0.5, fw * freq));
+}
+
 // Anti-aliased box: 1 inside [a,b] of a periodic coordinate t in [0,1).
 // w = filter width in the same units. Returns coverage (0..1).
 float xc_box(float t, float a, float b, float w)
@@ -404,8 +411,8 @@ void xc_roof(float3 wpos, float H, float arch, float variant, float seed, float 
     roofCol = lerp(roofCol, sheet * (1.0 - ribs * 0.3), sheetRoof);
 
     // ponding stains + soot
-    float stain = xc_noise2(p * 0.35 + seed * 13.0);
-    float stain2 = xc_noise2(p * 1.3 - seed * 7.0);
+    float stain = xc_fnoise(p + seed * 37.0, 0.35, fwp);
+    float stain2 = xc_fnoise(p - seed * 5.4, 1.3, fwp);
     roofCol *= 1.0 - saturate(stain * 0.9 - 0.25) * 0.35 * weather - stain2 * 0.10;
 
     // equipment clutter read (tanks, condensers, solar heaters) on a 3 m grid,
@@ -537,7 +544,8 @@ void xc_city(float3 wpos, float3 N, float2 uv0, float2 uv1, float4 vc,
 
 // ----------------------------------------------------------------------------
 // Basin backdrop (distant terrain, tools/lookdev/build_backdrop.py).
-// vc.x = urban basin floor weight, vc.y = forest weight, vc.z = ridge.
+// vc.x = urban basin floor weight, vc.y = forest weight (plain TEXCOORD_2
+// floats), vc.z = ridge/exposure hint (0.5 = neutral).
 // The urban floor is a texture-free "city carpet": block/street rhythm by day
 // and a sodium/LED light field at night, so the basin reads as continuous
 // Taipei out to the mountains without any extra geometry.
@@ -550,7 +558,7 @@ void xc_backdrop(float3 wpos, float3 N, float4 vc, float night, float fwp,
     float forest = vc.y;
     float ridge = vc.z;
     // forest: subtropical broadleaf, dark and humid, lighter on ridges
-    float fn = xc_noise2(p * 0.004) * 0.6 + xc_noise2(p * 0.02) * 0.4;
+    float fn = xc_fnoise(p, 0.004, fwp) * 0.6 + xc_fnoise(p, 0.02, fwp) * 0.4;
     float3 forestCol = lerp(float3(0.055, 0.085, 0.045), float3(0.10, 0.14, 0.07), fn);
     forestCol = lerp(forestCol, float3(0.13, 0.15, 0.10), saturate(ridge * 1.6 - 0.8));
     float steep = smoothstep(0.35, 0.7, 1.0 - N.z);
@@ -571,7 +579,7 @@ void xc_backdrop(float3 wpos, float3 N, float4 vc, float night, float fwp,
     roofs = lerp(float3(0.28, 0.28, 0.27), roofs, dParcel);
     float3 cityCol = lerp(roofs, float3(0.10, 0.10, 0.10), street * lerp(0.5, 0.85, xc_detail(fwp, 30.0)));
     // pockets of park / riverside green in the basin
-    float greenPocket = smoothstep(0.72, 0.8, xc_noise2(p * 0.0012 + 7.0));
+    float greenPocket = smoothstep(0.72, 0.8, xc_fnoise(p + 5833.0, 0.0012, fwp));
     cityCol = lerp(cityCol, float3(0.12, 0.17, 0.09), greenPocket);
 
     float3 lowland = lerp(float3(0.20, 0.24, 0.15), cityCol, urban);
@@ -591,7 +599,7 @@ void xc_backdrop(float3 wpos, float3 N, float4 vc, float night, float fwp,
     float dLamp = xc_detail(fwp, 20.0);
     float3 glow = lerp(far, near, dLamp);
     // clustered density: arterial grids and neighbourhood cores, dark gaps
-    float cluster = xc_noise2(p * 0.0025) * 0.65 + xc_noise2(p * 0.011) * 0.35;
+    float cluster = xc_fnoise(p, 0.0025, fwp) * 0.65 + xc_fnoise(p, 0.011, fwp) * 0.35;
     glow *= smoothstep(0.30, 0.75, cluster) * 1.8 + 0.1;
     float spark = step(0.985, xc_hash21(floor(p / 35.0))) * (1.0 - dLamp);   // bright far points
     glow += float3(1.0, 0.8, 0.55) * spark * 0.25;
@@ -624,7 +632,7 @@ void xc_ground(float3 wpos, float3 N, float4 gt, float night, float fwp,
 
     float road = 1.0 - smoothstep(-fsd, fsd, sd);
     // asphalt: arterials dark and fresh, lanes grey and patched
-    float patchN = xc_noise2(p * 0.08);
+    float patchN = xc_fnoise(p, 0.08, fwp);
     float patchC = step(0.62, xc_noise2(floor(p / 3.0) * 0.37 + 5.0));
     float3 asphalt = lerp(float3(0.13, 0.13, 0.135), float3(0.085, 0.085, 0.09), cls);
     asphalt *= 0.85 + 0.3 * patchN;
@@ -652,12 +660,12 @@ void xc_ground(float3 wpos, float3 N, float4 gt, float night, float fwp,
     paver = lerp(paver, lerp(paver * 0.8, scooterCol, dS), hasScooter);
 
     // lots / plazas between buildings
-    float n = xc_noise2(p * 0.05);
+    float n = xc_fnoise(p, 0.05, fwp);
     float3 plaza = lerp(float3(0.22, 0.22, 0.215), float3(0.29, 0.285, 0.27), n);
 
-    float3 grass = lerp(float3(0.09, 0.15, 0.06), float3(0.15, 0.21, 0.08), xc_noise2(p * 0.12));
+    float3 grass = lerp(float3(0.09, 0.15, 0.06), float3(0.15, 0.21, 0.08), xc_fnoise(p, 0.12, fwp));
     float hill = saturate(smoothstep(22.0, 45.0, wpos.z) + smoothstep(0.12, 0.25, 1.0 - N.z));
-    float fn = xc_noise2(p * 0.01) * 0.6 + xc_noise2(p * 0.08) * 0.4;
+    float fn = xc_fnoise(p, 0.01, fwp) * 0.6 + xc_fnoise(p, 0.08, fwp) * 0.4;
     float3 forest = lerp(float3(0.05, 0.08, 0.04), float3(0.10, 0.14, 0.065), fn);
     float3 waterCol = float3(0.05, 0.08, 0.08);
 
@@ -687,7 +695,7 @@ void xc_paint(float3 wpos, float4 vc, float4 gt, float night, float fwp,
     float2 p = float2(wpos.x, wpos.y);
     float3 c = vc.xyz * vc.xyz;                       // approx sRGB -> linear
     // worn paint: tyre wear breaks up lines/crossings
-    float wear = xc_noise2(p * 1.7) * 0.6 + xc_noise2(p * 0.23) * 0.4;
+    float wear = xc_fnoise(p, 1.7, fwp) * 0.6 + xc_fnoise(p, 0.23, fwp) * 0.4;
     c = lerp(c, float3(0.12, 0.12, 0.12), saturate(wear - 0.55) * 1.2);
     base = c * 0.85;
     rough = 0.6;
@@ -717,4 +725,61 @@ void xc_foliage(float3 wpos, float3 N, float4 vc, float h, float night,
     spec = 0.25;
     // lit from below by street lamps at night
     emis = base * float3(1.0, 0.75, 0.45) * (1.0 - saturate((h - 3.0) / 5.0)) * 1.0 * night;
+}
+
+// ----------------------------------------------------------------------------
+// Rooftop props (tools/lookdev/build_rooftops.py). vc.x*255 = prop type id,
+// vc.y*255 = part id, variant = per-instance 0..1.
+// types: 1 shed, 2 tank, 3 solar, 4 antenna, 5 ac, 6 cooling, 7 machine,
+//        8 bmu, 9 aviation light
+// ----------------------------------------------------------------------------
+void xc_prop(float3 wpos, float3 N, float4 vc, float variant, float night, float fwp,
+             out float3 base, out float rough, out float metal, out float spec, out float3 emis)
+{
+    float t = floor(vc.x * 255.0 + 0.5);
+    float part = floor(vc.y * 255.0 + 0.5);
+    float isT1 = 1.0 - step(0.5, abs(t - 1.0));
+    float isT2 = 1.0 - step(0.5, abs(t - 2.0));
+    float isT3 = 1.0 - step(0.5, abs(t - 3.0));
+    float isT4 = 1.0 - step(0.5, abs(t - 4.0));
+    float isT5 = 1.0 - step(0.5, abs(t - 5.0));
+    float isT6 = 1.0 - step(0.5, abs(t - 6.0));
+    float isT7 = 1.0 - step(0.5, abs(t - 7.0));
+    float isT8 = 1.0 - step(0.5, abs(t - 8.0));
+    float isT9 = 1.0 - step(0.5, abs(t - 9.0));
+    float p1 = step(0.5, part);
+
+    // corrugated sheet metal for sheds (ribs run around the walls)
+    float ribs = xc_line(frac((wpos.x + wpos.y) / 0.19), 0.3, fwp / 0.19) * xc_detail(fwp, 0.4);
+    float3 sheet = xc_pick4(variant, float3(0.19, 0.31, 0.46), float3(0.64, 0.65, 0.64),
+                            float3(0.33, 0.19, 0.12), float3(0.56, 0.53, 0.44));
+    sheet *= 1.0 - ribs * 0.22;
+    sheet *= lerp(1.0, 1.1, p1);
+    float3 steel = xc_pick4(variant, float3(0.72, 0.73, 0.74), float3(0.70, 0.71, 0.72),
+                            float3(0.78, 0.78, 0.76), float3(0.18, 0.32, 0.58));   // stainless / white PE / blue FRP
+    float3 c = sheet * isT1;
+    c += lerp(steel, float3(0.20, 0.20, 0.21), p1) * isT2;
+    c += lerp(float3(0.04, 0.07, 0.11), float3(0.66, 0.66, 0.64), p1) * isT3;
+    c += float3(0.22, 0.22, 0.23) * isT4;
+    c += lerp(float3(0.70, 0.68, 0.62), float3(0.18, 0.18, 0.18), p1) * isT5;
+    c += lerp(float3(0.42, 0.48, 0.45), float3(0.14, 0.14, 0.15), p1) * isT6;
+    c += lerp(xc_pick4(variant, float3(0.46, 0.46, 0.44), float3(0.55, 0.53, 0.49),
+                       float3(0.36, 0.37, 0.37), float3(0.50, 0.48, 0.45)), float3(0.30, 0.30, 0.30), p1) * isT7;
+    c += lerp(float3(0.70, 0.70, 0.68), float3(0.62, 0.52, 0.18), p1) * isT8;
+    c += lerp(float3(0.55, 0.05, 0.03), float3(0.25, 0.25, 0.25), p1) * isT9;
+    // soot and rain stains
+    float grime = xc_fnoise(float2(wpos.x + wpos.z, wpos.y), 0.9, fwp) * 0.25;
+    c *= 1.0 - grime * (1.0 - isT9);
+
+    base = c;
+    rough = lerp(0.7, 0.45, isT1);
+    rough = lerp(rough, 0.28, isT2 * (1.0 - p1));
+    rough = lerp(rough, 0.08, isT3 * (1.0 - p1));
+    metal = saturate(isT1 * 0.4 + isT2 * (1.0 - p1) * step(variant, 0.49) + isT4 * 0.6 + isT8 * 0.5);
+    spec = lerp(0.4, 1.0, isT3 * (1.0 - p1));
+    // aviation obstruction lights: always faintly visible, bright at night
+    float3 e = float3(1.0, 0.06, 0.02) * isT9 * (1.0 - p1) * lerp(0.15, 2.5, night);
+    // a few lit shed windows
+    e += float3(1.0, 0.78, 0.5) * isT1 * step(0.8, variant) * (1.0 - p1) * 0.12 * night;
+    emis = e;
 }

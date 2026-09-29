@@ -231,20 +231,21 @@ def build_backdrop_material(mpc):
     return mat
 
 
-def build_foliage_material(mpc):
-    mat, path = fresh_material("M_XinyiFoliage")
+def build_instanced_material(mpc, name):
+    """Shared builder for instanced materials (per-instance variant in custom data 0)."""
+    mat, path = fresh_material(name)
     for prop, val in (("two_sided", True), ("used_with_instanced_static_meshes", True)):
         try:
             mat.set_editor_property(prop, val)
         except Exception as exc:
-            unreal.log_warning("foliage material: cannot set %s (%s)" % (prop, exc))
+            unreal.log_warning("%s: cannot set %s (%s)" % (name, prop, exc))
     wp = world_pos_m(mat, -1400, -200)
     n = expr(mat, unreal.MaterialExpressionVertexNormalWS, -1200, -60)
     uv2 = texcoord(mat, 2, -1200, 60)
     var = expr(mat, unreal.MaterialExpressionPerInstanceCustomData, -1200, 180, data_index=0)
     night = mpc_param(mat, mpc, "Night", -1200, 300)
     es = mpc_param(mat, mpc, "EmissiveScale", -600, 500)
-    node = custom(mat, -600, 0, custom_code("M_XinyiFoliage"), [n for n, _ in MATERIALS["M_XinyiFoliage"][0]], SURFACE_OUTPUTS, "M_XinyiFoliage")
+    node = custom(mat, -600, 0, custom_code(name), [n for n, _ in MATERIALS[name][0]], SURFACE_OUTPUTS, name)
     for src, pin in ((wp, "WP"), (n, "N"), (uv2, "UV2"), (var, "Variant"), (night, "Night")):
         mel.connect_material_expressions(src, "", node, pin)
     finish_surface(mat, node, es, -300, 300, normal=False)
@@ -345,7 +346,9 @@ def main():
     m_ground = build_ground_material(mpc, tex)
     m_paint = build_paint_material(mpc, tex)
     m_back = build_backdrop_material(mpc)
-    m_tree = build_foliage_material(mpc)
+    m_tree = build_instanced_material(mpc, "M_XinyiFoliage")
+    m_props = build_instanced_material(mpc, "M_XinyiProps")
+    roofs = read_json(LOOK_OUT / "rooftops/rooftops.report.json")
 
     tiles = []
     for row in look["tiles"]:
@@ -388,15 +391,32 @@ def main():
         except Exception as exc:
             failures.append({"asset": key, "error": str(exc)})
 
-    status = "PASS_LOOK_ASSETS" if not failures and len(tiles) == 25 and len(singles) == 4 else "FAIL_LOOK_ASSETS"
+    props = {}
+    for t, row in roofs["types"].items():
+        try:
+            path, mesh = import_mesh(LOOK_OUT / "rooftops" / row["mesh"], MESH_DIR + "/Roof/" + t, m_props, 3)
+            origin, extent = mesh_bounds(mesh)
+            err = max_err(extent, row["expected_ue_local_bounds"]["extent_cm"])
+            if err > EXTENT_TOLERANCE_CM:
+                raise RuntimeError("extent drift %.3f cm" % err)
+            props[t] = {"asset_path": path, "imported_bounds_origin_cm": origin,
+                        "expected_bounds_origin_cm": row["expected_ue_local_bounds"]["origin_cm"],
+                        "instances": row["instances"]}
+        except Exception as exc:
+            failures.append({"prop": t, "error": str(exc)})
+
+    status = ("PASS_LOOK_ASSETS" if not failures and len(tiles) == 25 and len(singles) == 4
+              and len(props) == len(roofs["types"]) else "FAIL_LOOK_ASSETS")
     report = {
         "status": status,
         "materials": {"city": "M_XinyiCity", "hero": "M_Taipei101", "ground": "M_XinyiGround",
                       "paint": "M_XinyiRoadPaint", "backdrop": "M_XinyiBackdrop", "foliage": "M_XinyiFoliage",
+                      "props": "M_XinyiProps",
                       "mpc": MPC_PATH},
         "shader_source": str(SHADER),
         "tiles": tiles,
         "singles": singles,
+        "rooftop_props": props,
         "created": created,
         "failures": failures,
         "elapsed_seconds": time.perf_counter() - t0,

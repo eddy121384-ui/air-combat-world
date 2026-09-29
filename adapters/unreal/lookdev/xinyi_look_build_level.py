@@ -169,6 +169,43 @@ def main():
     if tree_count != len(trees):
         failures.append({"trees": "instance count %d != %d" % (tree_count, len(trees))})
 
+    # rooftop clutter: one holder actor, one HISM per prop type
+    roof_inst = read_json(LOOK_OUT / "rooftops/rooftop_instances.json")["types"]
+    roof_holder = actors.spawn_actor_from_class(unreal.Actor, unreal.Vector(0.0, 0.0, 0.0))
+    roof_holder.set_actor_label(LOOK_PREFIX + "RooftopProps")
+    roof_counts = {}
+    for t, row in assets["rooftop_props"].items():
+        items = roof_inst.get(t, [])
+        if not items:
+            continue
+        mesh = lib.load_asset(row["asset_path"])
+        pv = [row["expected_bounds_origin_cm"][i] - row["imported_bounds_origin_cm"][i] for i in range(3)]
+        h = add_hism(roof_holder, mesh)
+        try:
+            h.set_num_custom_data_floats(1)
+        except Exception:
+            h.set_editor_property("num_custom_data_floats", 1)
+        xf = []
+        for it in items:
+            p = enu_to_ue_cm(it["e"], it["n"], it["z"])
+            sc = (it["sx"], it["sy"], it["sz"])
+            # ENU yaw (CCW from east) -> UE yaw (Y = -north flips handedness)
+            xf.append(unreal.Transform(
+                unreal.Vector(p.x + pv[0] * sc[0], p.y + pv[1] * sc[1], p.z + pv[2] * sc[2]),
+                unreal.Rotator(0.0, 0.0, -float(it["yaw"])),
+                unreal.Vector(sc[0], sc[1], sc[2])))
+        h.add_instances(xf, False, True)
+        for i, it in enumerate(items):
+            h.set_custom_data_value(i, 0, (it["v"] + 0.5) / 4.0, False)
+        h.set_cull_distances(60000.0 if t in ("ac", "antenna") else 120000.0,
+                             90000.0 if t in ("ac", "antenna") else 200000.0)
+        h.set_collision_enabled(unreal.CollisionEnabled.NO_COLLISION)
+        h.set_cast_shadow(t not in ("ac", "avlight", "antenna"))
+        h.mark_render_state_dirty()
+        roof_counts[t] = int(h.get_instance_count())
+        if roof_counts[t] != len(items):
+            failures.append({"rooftop": t, "count": roof_counts[t], "expected": len(items)})
+
     spawn_rig(actors)
     world = unreal.get_editor_subsystem(unreal.UnrealEditorSubsystem).get_editor_world()
     apply_tod(world, actors, "day", persist_mpc_defaults=True)
@@ -184,6 +221,7 @@ def main():
         "tiles_swapped": swapped,
         "hero_location_cm": hero_loc,
         "tree_instances": tree_count,
+        "rooftop_instances": roof_counts,
         "failures": failures,
         "contract_level_saved": False,
     }

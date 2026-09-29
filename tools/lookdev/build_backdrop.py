@@ -8,8 +8,8 @@ Backdrop (runtime deliverable)
   accepted 2.5 km Xinyi Landscape is cut out of the backdrop so the playable
   terrain contract is untouched.
 
-  TEXCOORD_2 (packed RGBA8): R = urban-floor weight (low, flat basin floor), G = forest weight,
-           B = ridge/exposure (curvature proxy), A = 255.
+  TEXCOORD_2 (plain floats, varies per vertex so NOT packed):
+           x = urban-floor weight (low, flat basin floor), y = forest weight.
   Output: unreal/Saved/XinyiLook/backdrop/taipei_basin_backdrop.glb
           (game frame X=east, Y=up, Z=-north, origin = Xinyi ENU origin)
 
@@ -100,7 +100,6 @@ def build_backdrop():
     ridge = np.clip(lap.ravel()[used] / 25.0 + 0.5, 0, 1)
     urban = np.clip((45.0 - zf) / 25.0, 0, 1) * np.clip((0.06 - slope) / 0.04, 0, 1)
     forest = np.clip((zf - 25.0) / 40.0, 0, 1) * (1.0 - urban)
-    col = np.column_stack([urban * 255, forest * 255, ridge * 255, np.full_like(urban, 255)]).round().astype(np.uint8)
 
     out = OUT / "backdrop"
     out.mkdir(parents=True, exist_ok=True)
@@ -110,7 +109,7 @@ def build_backdrop():
         "positions": pos.astype(np.float32),
         "normals": nrm.astype(np.float32),
         "uv0": np.column_stack([pos[:, 0], -pos[:, 2]]).astype(np.float32),
-        "uv2": pack_rgba8(col),
+        "uv2": np.column_stack([urban, forest]).astype(np.float32),
         "indices": tris.astype(np.uint32),
         "base_color": [0.3, 0.4, 0.3, 1.0],
     }], mesh_name="SM_TaipeiBasinBackdrop")

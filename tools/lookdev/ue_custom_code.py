@@ -36,13 +36,18 @@ MATERIALS = {
     ),
     "M_XinyiBackdrop": (
         [("WP", 3), ("N", 3), ("UV2", 2), ("Night", 1)],
-        "xl.xc_backdrop(WP, N, xl.xc_unpack(UV2), Night, max(fwidth(WP.x), fwidth(WP.y)), b, r, m, s, e);",
+        "xl.xc_backdrop(WP, N, float4(UV2.x, UV2.y, 0.5, 1.0), Night, max(fwidth(WP.x), fwidth(WP.y)), b, r, m, s, e);",
         "",
     ),
     "M_XinyiFoliage": (
         [("WP", 3), ("N", 3), ("UV2", 2), ("Variant", 1), ("Night", 1)],
-        "float4 vc = xl.xc_unpack(UV2); vc.z = Variant;\n"
+        "float4 vc = float4(UV2.x, UV2.y, Variant, 1.0);\n"
         "xl.xc_foliage(WP, N, vc, vc.x * 10.0, Night, b, r, m, s, e);",
+        "",
+    ),
+    "M_XinyiProps": (
+        [("WP", 3), ("N", 3), ("UV2", 2), ("Variant", 1), ("Night", 1)],
+        "xl.xc_prop(WP, N, xl.xc_unpack(UV2), Variant, Night, max(fwidth(WP.x), fwidth(WP.y)), b, r, m, s, e);",
         "",
     ),
 }

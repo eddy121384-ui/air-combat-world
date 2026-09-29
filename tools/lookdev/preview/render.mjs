@@ -28,12 +28,16 @@ const rep = JSON.parse(fs.readFileSync(path.join(look, 'look_tiles.report.json')
 const hero = JSON.parse(fs.readFileSync(path.join(look, 'hero/taipei101.anchor.json'), 'utf8'));
 const objects = [
   { url: '/unreal/Saved/XinyiLook/preview/xinyi_terrain_preview.glb', offset: [0, 0, 0], kind: 1 },
-  { url: '/unreal/Saved/XinyiLook/backdrop/taipei_basin_backdrop.glb', offset: [0, 0, 0], kind: 2, castShadow: false },
+  ...(args.nobackdrop ? [] : [{ url: '/unreal/Saved/XinyiLook/backdrop/taipei_basin_backdrop.glb', offset: [0, 0, 0], kind: 2, castShadow: false }]),
   ...rep.tiles.map((t) => ({ url: `/unreal/Saved/XinyiLook/tiles/${t.path}`, offset: [t.origin_enu_m[0], t.origin_enu_m[1], 0], kind: 0 })),
 ];
 if (!args.nohero) objects.push({ url: '/unreal/Saved/XinyiLook/hero/taipei101.glb', offset: [hero.anchor.centre_enu_m[0], hero.anchor.centre_enu_m[1], hero.anchor.ground_elev_m], kind: 0 });
 objects.push({ url: '/unreal/Saved/XinyiLook/ground/xinyi_road_paint.glb', offset: [0, 0, 0], kind: 3, castShadow: false });
 objects.push({ url: '/unreal/Saved/XinyiLook/ground/xinyi_tree.glb', offset: [0, 0, 0], kind: 4, instances: '/unreal/Saved/XinyiLook/ground/xinyi_trees.json' });
+for (const t of ['shed', 'tank', 'solar', 'antenna', 'ac', 'cooling', 'machine', 'bmu', 'avlight']) {
+  objects.push({ url: `/unreal/Saved/XinyiLook/rooftops/props_${t}.glb`, offset: [0, 0, 0], kind: 5,
+    instances: '/unreal/Saved/XinyiLook/rooftops/rooftop_instances.json', instanceKey: t });
+}
 const manifest = { objects, groundTexture: '/unreal/Saved/XinyiLook/ground/xinyi_ground_2048.png' };
 
 const MIME = { '.html': 'text/html', '.js': 'text/javascript', '.json': 'application/json', '.glb': 'model/gltf-binary', '.hlsl': 'text/plain', '.png': 'image/png' };

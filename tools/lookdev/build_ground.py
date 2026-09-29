@@ -529,8 +529,9 @@ def write_tree_mesh(path):
     N = np.asarray(fn, np.float32)
     C = np.repeat(np.asarray(cols, np.uint8), 3, axis=0)
     idx = np.arange(len(P), dtype=np.uint32).reshape(-1, 3)
-    C[:, 0] = np.clip(P[:, 1] / 10.0 * 255.0, 0, 255).astype(np.uint8)   # R = height / 10 m
-    write_glb(path, [{"name": "XinyiTree", "positions": P, "normals": N, "uv2": pack_rgba8(C), "indices": idx,
+    # plain floats (height varies per vertex): x = height / 10 m, y = crown flag
+    uv2 = np.column_stack([np.clip(P[:, 1] / 10.0, 0, 1), C[:, 1] / 255.0]).astype(np.float32)
+    write_glb(path, [{"name": "XinyiTree", "positions": P, "normals": N, "uv2": uv2, "indices": idx,
                       "base_color": [0.2, 0.35, 0.15, 1.0]}], mesh_name="SM_XinyiTree")
     return ue_local_bounds_cm(P)
 

@@ -61,9 +61,14 @@ class _Buf:
 def pack_rgba8(rgba) -> np.ndarray:
     """Pack uint8 RGBA rows into TEXCOORD-safe floats: (R*256+G, B*256+A).
 
-    Values <= 65535 are exact in float32. XinyiLook uses TEXCOORD_2 for all
+    Values <= 65535 are exact in float32. XinyiLook uses TEXCOORD_2 for
     per-vertex data so the Unreal material never depends on the importer's
     vertex-colour policy. Decode in the shader with xc_unpack().
+
+    Interpolation rule: the rasteriser interpolates the packed float, so only
+    pack data whose high bytes (R, B) are constant across every triangle
+    (per-building / per-part data). Smoothly varying data (terrain weights,
+    tree height) must be written as plain 0..1 floats instead.
     """
     c = np.asarray(rgba, dtype=np.uint32)
     return np.column_stack([c[:, 0] * 256 + c[:, 1], c[:, 2] * 256 + c[:, 3]]).astype(np.float32)
