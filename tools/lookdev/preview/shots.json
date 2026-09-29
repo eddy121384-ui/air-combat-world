@@ -1,0 +1,212 @@
+{
+ "shots": {
+  "a_skyline_nw": {
+   "eye": [
+    -1700,
+    1500,
+    330
+   ],
+   "target": [
+    -80,
+    60,
+    230
+   ],
+   "fov": 40,
+   "shadowCenter": [
+    -200,
+    300,
+    20
+   ],
+   "shadowRadius": 1600
+  },
+  "b_canyon_songzhi": {
+   "eye": [
+    -15,
+    1000,
+    105
+   ],
+   "target": [
+    -45,
+    150,
+    140
+   ],
+   "fov": 58,
+   "shadowCenter": [
+    -30,
+    550,
+    20
+   ],
+   "shadowRadius": 900
+  },
+  "c_elephant_mtn": {
+   "eye": [
+    780,
+    -520,
+    215
+   ],
+   "target": [
+    -60,
+    74,
+    230
+   ],
+   "fov": 44,
+   "shadowCenter": [
+    200,
+    0,
+    20
+   ],
+   "shadowRadius": 1400
+  },
+  "d_overview_sw": {
+   "eye": [
+    -2400,
+    -1900,
+    1150
+   ],
+   "target": [
+    -100,
+    250,
+    40
+   ],
+   "fov": 46,
+   "shadowCenter": [
+    -250,
+    250,
+    20
+   ],
+   "shadowRadius": 1700
+  },
+  "e_lowpass_xinyi_rd": {
+   "eye": [
+    -720,
+    30,
+    75
+   ],
+   "target": [
+    280,
+    110,
+    55
+   ],
+   "fov": 62,
+   "shadowCenter": [
+    -200,
+    100,
+    20
+   ],
+   "shadowRadius": 800
+  }
+ },
+ "light": {
+  "day": {
+   "sunAz": 245,
+   "sunEl": 36,
+   "sunRad": [
+    3.7,
+    3.4,
+    3.0
+   ],
+   "skyZen": [
+    0.17,
+    0.31,
+    0.62
+   ],
+   "skyHor": [
+    0.52,
+    0.6,
+    0.7
+   ],
+   "groundAmb": [
+    0.17,
+    0.16,
+    0.14
+   ],
+   "fogCol": [
+    0.5,
+    0.58,
+    0.67
+   ],
+   "fogDen": 0.00011,
+   "fogFall": 0.0011,
+   "fogBase": 0,
+   "night": 0.0,
+   "litFrac": 0.08,
+   "exposure": 0.64,
+   "bloom": 0.04,
+   "bloomThresh": 3.0
+  },
+  "dusk": {
+   "sunAz": 288,
+   "sunEl": 5,
+   "sunRad": [
+    2.4,
+    1.35,
+    0.62
+   ],
+   "skyZen": [
+    0.09,
+    0.14,
+    0.32
+   ],
+   "skyHor": [
+    0.88,
+    0.55,
+    0.36
+   ],
+   "groundAmb": [
+    0.05,
+    0.045,
+    0.05
+   ],
+   "fogCol": [
+    0.44,
+    0.36,
+    0.36
+   ],
+   "fogDen": 9e-05,
+   "fogFall": 0.0011,
+   "fogBase": 0,
+   "night": 0.5,
+   "litFrac": 0.35,
+   "exposure": 1.15,
+   "bloom": 0.12,
+   "bloomThresh": 1.2
+  },
+  "night": {
+   "sunAz": 300,
+   "sunEl": 25,
+   "sunRad": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "skyZen": [
+    0.003,
+    0.005,
+    0.013
+   ],
+   "skyHor": [
+    0.032,
+    0.032,
+    0.042
+   ],
+   "groundAmb": [
+    0.008,
+    0.008,
+    0.01
+   ],
+   "fogCol": [
+    0.024,
+    0.026,
+    0.034
+   ],
+   "fogDen": 0.00016,
+   "fogFall": 0.0011,
+   "fogBase": 0,
+   "night": 1.0,
+   "litFrac": 0.55,
+   "exposure": 1.7,
+   "bloom": 0.3,
+   "bloomThresh": 0.7
+  }
+ }
+}
