@@ -42,7 +42,9 @@ CITY = REPO / "cities/taipei/city.yaml"
 SRC = REPO / "data/lookdev_cache/far_city_generalized.npz"
 BACKDROP = REPO / "unreal/Saved/XinyiLook/backdrop/taipei_basin_backdrop.json"
 OUT = REPO / "unreal/Saved/XinyiLook/farcity"
+BACKDROP_GLB = REPO / "unreal/Saved/XinyiLook/backdrop/taipei_basin_backdrop.glb"
 XINYI_SOURCE_BBOX_LL = (121.5546, 25.0247, 121.5744, 25.0427)
+BASE_SKIRT_M = 3.0      # push box bases this far under the rendered ground so no gap shows
 MID_M = 20.0
 CHUNK_M = 2500.0
 TEX = 1024
@@ -59,6 +61,54 @@ def enu_fn():
         out = np.array([lonlat_to_enu(float(a), float(b), lon0, lat0) for a, b in zip(lon, lat)])
         return out[:, 0], out[:, 1]
     return f, lon0, lat0
+
+
+def backdrop_ground():
+    """Exact height (ENU m) of the rendered basin backdrop triangles under a box footprint.
+
+    The backdrop is a ~150 m resampled DTM, so on slopes it sits well below the per-building WFS
+    ground; boxes placed on WFS ground alone float above the hills they appear on.
+    """
+    import shapely
+    import trimesh
+
+    sc = trimesh.load(str(BACKDROP_GLB), force="scene")
+    tri = []
+    for T, g in (sc.graph[n] for n in sc.graph.nodes_geometry):
+        m = sc.geometry[g]
+        v = trimesh.transform_points(m.vertices, T)
+        tri.append(np.column_stack([v[:, 0], -v[:, 2], v[:, 1]])[m.faces])  # game (x, up, -n) -> ENU
+    tri = np.concatenate(tri)                                               # (F, 3 corners, e n u)
+    tree = shapely.STRtree(shapely.polygons(tri[:, :, :2]))
+
+    def height(pts):
+        pts = np.asarray(pts, float)
+        z = np.full(len(pts), np.nan)
+        pi, ti = tree.query(shapely.points(pts), predicate="intersects")
+        a, b, c = tri[ti, 0], tri[ti, 1], tri[ti, 2]
+        p = pts[pi]
+        den = (b[:, 1] - c[:, 1]) * (a[:, 0] - c[:, 0]) + (c[:, 0] - b[:, 0]) * (a[:, 1] - c[:, 1])
+        l1 = ((b[:, 1] - c[:, 1]) * (p[:, 0] - c[:, 0]) + (c[:, 0] - b[:, 0]) * (p[:, 1] - c[:, 1])) / den
+        l2 = ((c[:, 1] - a[:, 1]) * (p[:, 0] - c[:, 0]) + (a[:, 0] - c[:, 0]) * (p[:, 1] - c[:, 1])) / den
+        z[pi] = l1 * a[:, 2] + l2 * b[:, 2] + (1.0 - l1 - l2) * c[:, 2]
+        return z
+
+    def ground_under(cx, cy, w, d, ang_deg):
+        a = math.radians(ang_deg)
+        ux, uy, vx, vy = math.cos(a), math.sin(a), -math.sin(a), math.cos(a)
+        pts = [(cx + sx * ux * w / 2 + sy * vx * d / 2, cy + sx * uy * w / 2 + sy * vy * d / 2)
+               for sx, sy in ((-1, -1), (1, -1), (1, 1), (-1, 1))] + [(cx, cy)]
+        z = height(pts)
+        return float(np.nanmin(z)) if np.isfinite(z).any() else None
+    ground_under.height = height
+    return ground_under
+
+
+def seated(ground_under, cx, cy, w, d, ang, g, h):
+    """Keep the surveyed roof (g + h); extend the base down to the rendered backdrop ground."""
+    t = ground_under(cx, cy, w, d, ang)
+    base = min(g, t) - BASE_SKIRT_M if t is not None else g
+    return base, g + h - base
 
 
 class Chunk:
@@ -165,6 +215,7 @@ def main():
             chunks[k] = Chunk(k)
         return chunks[k]
 
+    ground_under = backdrop_ground()
     rng = np.random.default_rng(101)
     mids = (hp >= MID_M) & (cov >= 0.12) & ~in_xinyi(ce, cn)
     for e, n, c, a, b, g in zip(ce[mids], cn[mids], cov[mids], hm[mids], hp[mids], gr[mids]):
@@ -178,7 +229,9 @@ def main():
         oy = rng.uniform(-0.5, 0.5) * (cell - dd)
         h = max(6.0, round((0.55 * a + 0.45 * b) * rng.uniform(0.85, 1.15) / 3.0) * 3.0)
         arch = ARCH_HUAXIA if h < 40 else ARCH_RESTOWER
-        chunk_for(e, n).box(e + ox, n + oy, w, dd, rng.uniform(-4.0, 4.0), g, h, arch, int(rng.integers(0, 256)))
+        ang = rng.uniform(-4.0, 4.0)
+        z0, hz = seated(ground_under, e + ox, n + oy, w, dd, ang, g, h)
+        chunk_for(e, n).box(e + ox, n + oy, w, dd, ang, z0, hz, arch, int(rng.integers(0, 256)))
 
     tw = d["towers"]
     te, tn = to_enu(tw[:, 0], tw[:, 1]) if len(tw) else (np.array([]), np.array([]))
@@ -188,7 +241,8 @@ def main():
             continue
         arch = ARCH_OFFICE if (w * dd > 900 or h > 90) else ARCH_RESTOWER
         # EPSG:3826 grid ~ ENU here (both near-conformal, ~1 deg apart at most)
-        chunk_for(e, n).box(e, n, w, dd, ang, g, h, arch, int(rng.integers(0, 256)))
+        z0, hz = seated(ground_under, e, n, w, dd, ang, g, h)
+        chunk_for(e, n).box(e, n, w, dd, ang, z0, hz, arch, int(rng.integers(0, 256)))
         tower_n += 1
 
     manifest = []

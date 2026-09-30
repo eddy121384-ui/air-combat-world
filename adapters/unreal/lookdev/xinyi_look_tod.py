@@ -29,6 +29,11 @@ RIG = {
 SKY_INTENSITY = {"day": 1.0, "dusk": 0.85, "night": 0.35}
 BLOOM = {"day": 0.15, "dusk": 0.45, "night": 0.8}
 FOG_SCALE = 0.025
+# Host calibration (UE5.8 lit viewport, HighResShot): the preview "exposure" presets are in preview
+# shading units. In UE manual exposure (EV100 0) with the same sun value the sun-lit scene sits
+# ~2 stops low, and the ACES toe crushes the physically dim SkyAtmosphere to near-black. +2.0 EV
+# gives a clear Taipei day sky with no clipping. Night is emissive-lit and calibrated separately.
+UE_EXPOSURE_OFFSET_EV = {"day": 2.0, "dusk": 2.0, "night": 0.0}
 
 
 def presets():
@@ -120,7 +125,7 @@ def apply_tod(world, actors, name, persist_mpc_defaults=False):
         ("override_auto_exposure_apply_physical_camera_exposure", True),
         ("auto_exposure_apply_physical_camera_exposure", False),
         ("override_auto_exposure_bias", True),
-        ("auto_exposure_bias", math.log2(max(1e-3, float(L["exposure"])))),
+        ("auto_exposure_bias", math.log2(max(1e-3, float(L["exposure"]))) + UE_EXPOSURE_OFFSET_EV.get(name, 0.0)),
         ("override_bloom_intensity", True),
         ("bloom_intensity", BLOOM.get(name, 0.3)),
         ("override_motion_blur_amount", True),
