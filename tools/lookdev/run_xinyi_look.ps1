@@ -67,7 +67,36 @@ if (-not $CaptureOnly) {
     Invoke-Stage -Name "assets" -Script "xinyi_look_build_assets.py" -Report "look_assets.report.json" -Pass "PASS_LOOK_ASSETS"
     Invoke-Stage -Name "level" -Script "xinyi_look_build_level.py" -Report "look_level.report.json" -Pass "PASS_LOOK_LEVEL"
 }
-Invoke-Stage -Name "capture" -Script "xinyi_look_capture.py" -Report "look_capture.report.json" -Pass "PASS_LOOK_CAPTURE"
+# Each time-of-day preset is captured in its own fresh Unreal process. Within one process the
+# real-time-capture SkyLight keeps the sky it captured for the first preset, so later presets in the
+# same run were contaminated (DAY -> DUSK -> NIGHT differed from each preset captured alone).
+$todList = @($Tod -split "," | Where-Object { $_ })
+$perPreset = @()
+foreach ($t in $todList) {
+    $env:ACW_XINYI_LOOK_TOD = $t
+    Invoke-Stage -Name "capture-$t" -Script "xinyi_look_capture.py" -Report "look_capture.report.json" -Pass "PASS_LOOK_CAPTURE"
+    $one = Join-Path $Reports "look_capture.$t.report.json"
+    Copy-Item -Force (Join-Path $Reports "look_capture.report.json") $one
+    $perPreset += (Get-Content $one -Raw | ConvertFrom-Json)
+}
+# Combined receipt (same name / status / keys the previous single-process run wrote).
+$first = $perPreset[0]
+$combined = [ordered]@{
+    status = "PASS_LOOK_CAPTURE"
+    reopen = $first.reopen
+    reopen_ok = -not ($perPreset | Where-Object { -not $_.reopen_ok })
+    backend = $first.backend
+    tods = $todList
+    shots = $first.shots
+    captures = @($perPreset | ForEach-Object { $_.captures })
+    isolated_process_per_preset = $true
+    per_preset_receipts = @($todList | ForEach-Object { "look_capture.$_.report.json" })
+    error = $null
+    level_saved = $false
+    elapsed_seconds = ($perPreset | Measure-Object -Property elapsed_seconds -Sum).Sum
+}
+$combined | ConvertTo-Json -Depth 8 | Set-Content -Encoding utf8 (Join-Path $Reports "look_capture.report.json")
+Write-Host "[capture] PASS_LOOK_CAPTURE ($($todList -join ', ') each in a fresh process)"
 
 $caps = Join-Path $Reports "captures"
 Write-Host ""
