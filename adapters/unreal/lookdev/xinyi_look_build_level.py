@@ -32,13 +32,37 @@ TREE_CULL_START_CM = 150000.0
 TREE_CULL_END_CM = 260000.0
 
 
-def duplicate_level():
+def remove_previous_look_level():
+    """Make the build repeatable: replace only the generated look level, nothing else.
+
+    EditorAssetLibrary.delete_asset leaves the .umap on disk in UE5.8, and save_map then refuses with
+    "Unable to overwrite existing package", so the file is removed explicitly. The guard keeps this to
+    the single generated /Game/XinyiLook package; /Game/XinyiV2 and /Game/Taipei are never touched.
+    """
+    if not LOOK_LEVEL.startswith("/Game/XinyiLook/") or LOOK_LEVEL == SOURCE_LEVEL:
+        raise RuntimeError("refusing to replace non-generated level %s" % LOOK_LEVEL)
     if lib.does_asset_exist(LOOK_LEVEL):
         if not lib.delete_asset(LOOK_LEVEL):
             raise RuntimeError("cannot replace previous look level %s" % LOOK_LEVEL)
-    dup = lib.duplicate_asset(SOURCE_LEVEL, LOOK_LEVEL)
-    if dup is None:
-        raise RuntimeError("duplicate_asset failed for %s" % SOURCE_LEVEL)
+    umap = os.path.join(unreal.Paths.project_content_dir(), LOOK_LEVEL[len("/Game/"):] + ".umap")
+    if os.path.isfile(umap):
+        os.remove(umap)
+    unreal.AssetRegistryHelpers.get_asset_registry().scan_paths_synchronous(["/Game/XinyiLook"], True)
+    if os.path.isfile(umap) or lib.does_asset_exist(LOOK_LEVEL):
+        raise RuntimeError("previous look level could not be removed: %s" % umap)
+
+
+def duplicate_level():
+    remove_previous_look_level()
+    # EditorAssetLibrary.duplicate_asset on a World only creates an unsaved in-memory world; loading the
+    # on-disk path afterwards then trips the engine's "old world not cleaned up" fatal. Save-as from the
+    # loaded source writes the real .umap and leaves it current. The source package is not written.
+    levels = unreal.get_editor_subsystem(unreal.LevelEditorSubsystem)
+    if not levels.load_level(SOURCE_LEVEL):
+        raise RuntimeError("cannot load source level %s" % SOURCE_LEVEL)
+    world = unreal.get_editor_subsystem(unreal.UnrealEditorSubsystem).get_editor_world()
+    if not unreal.EditorLoadingAndSavingUtils.save_map(world, LOOK_LEVEL):
+        raise RuntimeError("save_map (save-as) failed for %s" % LOOK_LEVEL)
 
 
 def spawn_mesh_actor(actors, mesh, world_origin_cm, expected_origin, label):
@@ -97,7 +121,10 @@ def place_hism(actors, asset_row, items, label, cull, cast_shadow, uniform_key=N
     h.set_cull_distances(cull[0], cull[1])
     h.set_collision_enabled(unreal.CollisionEnabled.NO_COLLISION)
     h.set_cast_shadow(cast_shadow)
-    h.mark_render_state_dirty()
+    try:  # not exposed to Python on every UE5.x build; a render-refresh hint only
+        h.mark_render_state_dirty()
+    except AttributeError:
+        pass
     return int(h.get_instance_count())
 
 

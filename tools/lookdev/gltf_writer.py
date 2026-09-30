@@ -96,12 +96,15 @@ def write_glb(path: Path, primitives: list[dict], mesh_name: str = "mesh") -> No
         attrs = {"POSITION": buf.add(pos, FLOAT, "VEC3", ARRAY_BUFFER, minmax=True)}
         if p.get("normals") is not None:
             attrs["NORMAL"] = buf.add(np.asarray(p["normals"], np.float32), FLOAT, "VEC3", ARRAY_BUFFER)
-        if p.get("uv0") is not None:
-            attrs["TEXCOORD_0"] = buf.add(np.asarray(p["uv0"], np.float32), FLOAT, "VEC2", ARRAY_BUFFER)
-        if p.get("uv1") is not None:
-            attrs["TEXCOORD_1"] = buf.add(np.asarray(p["uv1"], np.float32), FLOAT, "VEC2", ARRAY_BUFFER)
-        if p.get("uv2") is not None:
-            attrs["TEXCOORD_2"] = buf.add(np.asarray(p["uv2"], np.float32), FLOAT, "VEC2", ARRAY_BUFFER)
+        # UV sets must be contiguous from TEXCOORD_0: Unreal's Interchange importer packs UV channels
+        # densely, so a lone TEXCOORD_2 would land in channel 0 and the material would read the wrong
+        # data. Pad any absent lower set with zeros (contiguous inputs are emitted unchanged).
+        top = max((i for i in range(3) if p.get("uv%d" % i) is not None), default=-1)
+        for i in range(top + 1):
+            uv = p.get("uv%d" % i)
+            if uv is None:
+                uv = np.zeros((len(pos), 2), np.float32)
+            attrs["TEXCOORD_%d" % i] = buf.add(np.asarray(uv, np.float32), FLOAT, "VEC2", ARRAY_BUFFER)
         if p.get("color0") is not None:
             attrs["COLOR_0"] = buf.add(np.asarray(p["color0"], np.uint8), UBYTE, "VEC4", ARRAY_BUFFER, normalized=True)
         ind = buf.add(idx.reshape(-1, 1), UINT, "SCALAR", ELEMENT_ARRAY_BUFFER)

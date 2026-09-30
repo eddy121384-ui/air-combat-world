@@ -130,8 +130,9 @@ def apply_tod(world, actors, name, persist_mpc_defaults=False):
     pp.set_editor_property("settings", s)
 
     mpc = lib.load_asset(MPC_PATH)
-    unreal.KismetMaterialLibrary.set_scalar_parameter_value(world, mpc, "Night", float(L["night"]))
-    unreal.KismetMaterialLibrary.set_scalar_parameter_value(world, mpc, "LitFrac", float(L["litFrac"]))
+    # Python exposes UKismetMaterialLibrary without the Kismet prefix (like SystemLibrary / MathLibrary).
+    unreal.MaterialLibrary.set_scalar_parameter_value(world, mpc, "Night", float(L["night"]))
+    unreal.MaterialLibrary.set_scalar_parameter_value(world, mpc, "LitFrac", float(L["litFrac"]))
     if persist_mpc_defaults:
         params = mpc.get_editor_property("scalar_parameters")
         for p in params:
