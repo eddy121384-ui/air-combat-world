@@ -26,7 +26,7 @@ RIG = {
     "fog": LOOK_PREFIX + "HeightFog",
     "pp": LOOK_PREFIX + "PostProcess",
 }
-SKY_INTENSITY = {"day": 1.0, "dusk": 0.85, "night": 0.35}
+SKY_INTENSITY = {"day": 1.0, "dusk": 0.85, "night": 12.0}
 BLOOM = {"day": 0.15, "dusk": 0.45, "night": 0.8}
 FOG_SCALE = 0.025
 # Host calibration (UE5.8 lit viewport, HighResShot): the preview "exposure" presets are in preview
@@ -34,6 +34,22 @@ FOG_SCALE = 0.025
 # ~2 stops low, and the ACES toe crushes the physically dim SkyAtmosphere to near-black. +2.0 EV
 # gives a clear Taipei day sky with no clipping. Night is emissive-lit and calibrated separately.
 UE_EXPOSURE_OFFSET_EV = {"day": 2.0, "dusk": 2.0, "night": 0.0}
+# Night host calibration (UE-only; the preview's analytic night sky has no UE equivalent). With a
+# 0.03 lux moon the moonlit SkyAtmosphere is ~0.0015 cd/m2, the 0.2 fog falloff leaves no fog above
+# ~200 m, and the SkyLight re-captures that black sky: sky, hills and unlit walls render exactly 0.
+# Taipei's night sky is lit by its own light pollution, so: a plausible bright moon, a warm-tinted
+# SkyAtmosphere luminance factor for the light-pollution dome (darker zenith, brighter horizon), a
+# deeper humid fog layer (haze between ridges), and a strong night SkyLight that re-captures that
+# dome as the stand-in for city bounce off lit streets and neighbours.
+# Headless SceneCapture runs keep the first real-time sky capture for later presets, so night must be
+# captured as the first (or only) preset in its process to show what the editor / game renders.
+NIGHT_MOON_LUX = 0.1
+SKY_LUMINANCE_FACTOR = {"night": (9.0, 7.5, 6.0)}  # warm light-pollution glow; default 1 (day / dusk)
+FOG_FALLOFF = {"night": 0.05}                      # default 0.2 (day / dusk unchanged)
+UE_FOG_INSCATTER = {"night": (0.080, 0.070, 0.062)}  # overrides preset fogCol in UE only
+# City bounce comes from the SkyLight re-capturing the warm glow dome (SKY_INTENSITY night). The
+# SkyLight lower-hemisphere colour is deliberately not used: with real-time capture it stays at the
+# value the proxy was created with and leaked night bounce into later day / dusk captures.
 
 
 def presets():
@@ -95,22 +111,26 @@ def apply_tod(world, actors, name, persist_mpc_defaults=False):
     rad = L["sunRad"]
     inten = max(rad)
     if inten <= 1e-6:
-        # night: faint cool moonlight keeps silhouettes readable
+        # night: cool moonlight keeps silhouettes readable
         sun.set_actor_rotation(sun_rotator(135.0, 55.0), False)
-        sc.set_intensity(0.03)
+        sc.set_intensity(NIGHT_MOON_LUX)
         sc.set_light_color(unreal.LinearColor(0.55, 0.65, 1.0, 1.0))
     else:
         sun.set_actor_rotation(sun_rotator(L["sunAz"], L["sunEl"]), False)
         sc.set_intensity(float(inten))
         sc.set_light_color(unreal.LinearColor(rad[0] / inten, rad[1] / inten, rad[2] / inten, 1.0))
 
+    ac = find(actors, RIG["atmo"]).get_component_by_class(unreal.SkyAtmosphereComponent)
+    f = SKY_LUMINANCE_FACTOR.get(name, (1.0, 1.0, 1.0))
+    ac.set_sky_luminance_factor(unreal.LinearColor(f[0], f[1], f[2], 1.0))
+
     skc = find(actors, RIG["sky"]).get_component_by_class(unreal.SkyLightComponent)
     skc.set_intensity(SKY_INTENSITY.get(name, 1.0))
 
     fc = find(actors, RIG["fog"]).get_component_by_class(unreal.ExponentialHeightFogComponent)
     fc.set_fog_density(float(L["fogDen"]) / FOG_SCALE)
-    fc.set_fog_height_falloff(0.2)
-    c = L["fogCol"]
+    fc.set_fog_height_falloff(FOG_FALLOFF.get(name, 0.2))
+    c = UE_FOG_INSCATTER.get(name, L["fogCol"])
     fc.set_fog_inscattering_color(unreal.LinearColor(c[0], c[1], c[2], 1.0))
     try:
         fc.set_editor_property("fog_max_opacity", 0.92)

@@ -23,6 +23,7 @@ local origin = plan centre at surveyed ground):
 
 Vertex data contract (read by the city shader, HERO path):
   TEXCOORD_0  (perimeter metres, height metres) — facade coordinates
+  TEXCOORD_1  (WFS height 508 m, floor height 4.225 m) — the ordinary city contract
   TEXCOORD_2  packed RGBA8 (see gltf_writer.pack_rgba8):
               R = section id (0 base, 1..8 modules, 9 top, 10 pinnacle, 20 ornament)
               G = height fraction within section (0..255)
@@ -327,6 +328,10 @@ def main():
             "indices": faces.astype(np.uint32),
             "normals": normals.astype(np.float32),
             "uv0": np.asarray(mb.uv, dtype=np.float32),
+            # M_Taipei101 still evaluates the ordinary city wall branch before blending to the hero
+            # branch, and that branch divides by TEXCOORD_1.y (floor height). Without real UV1 data
+            # the padded zeros produce NaN, which blacks out the hero's night emissive.
+            "uv1": np.tile(np.float32([HERO_TOTAL_HEIGHT_M, MODULE_H_M / 8.0]), (len(game), 1)),
             "uv2": pack_rgba8(np.asarray(mb.col, dtype=np.uint8)),
             "base_color": rgba,
         })
