@@ -28,7 +28,7 @@ import time
 sys.path.insert(0, os.path.join(os.environ.get("ACW_REPO_ROOT", ""), "adapters", "unreal", "lookdev"))
 sys.path.insert(0, os.path.join(os.environ.get("ACW_REPO_ROOT", ""), "tools", "lookdev"))
 import unreal  # noqa: E402
-from ue_custom_code import MATERIALS, custom_code, extent_uv_code, ground_uv_code  # noqa: E402
+from ue_custom_code import MATERIALS, custom_code, extent_uv_code, ground_uv_code, source_bbox_defines  # noqa: E402
 from xinyi_look_common import (  # noqa: E402
     CONTRACT_DIR, LOOK_OUT, MAT_DIR, MESH_DIR, MPC_PATH, SHADER, TEX_DIR, E0, E1, N0, N1,  # noqa: F401
     ensure_dir, lib, max_err, mel, mesh_bounds, read_json, tile_key, tools, write_report,
@@ -201,7 +201,7 @@ def wire(src_pin_pairs, node):
             raise RuntimeError("failed to connect %s -> %s" % (out or "default", pin))
 
 
-def build_ground_material(mpc, tex, lamp_tex):
+def build_ground_material(mpc, tex, lamp_tex, src_bbox=None):
     mat, path = fresh_material("M_XinyiGround")
     wp = world_pos_m(mat, -1400, -200)
     n = expr(mat, unreal.MaterialExpressionVertexNormalWS, -1200, -60)
@@ -210,7 +210,8 @@ def build_ground_material(mpc, tex, lamp_tex):
     lamp = ground_sample(mat, lamp_tex, uv, -900, 260, grayscale=True)
     night = mpc_param(mat, mpc, "Night", -1200, 300)
     es = mpc_param(mat, mpc, "EmissiveScale", -600, 500)
-    node = custom(mat, -600, 0, custom_code("M_XinyiGround"), [n for n, _ in MATERIALS["M_XinyiGround"][0]], SURFACE_OUTPUTS, "M_XinyiGround")
+    extra = source_bbox_defines(src_bbox) if src_bbox else ""
+    node = custom(mat, -600, 0, custom_code("M_XinyiGround", extra), [n for n, _ in MATERIALS["M_XinyiGround"][0]], SURFACE_OUTPUTS, "M_XinyiGround")
     wire(((wp, "WP"), (n, "N"), (gt, "GT", "RGBA"), (lamp, "LAMP", "R"), (night, "Night")), node)
     finish_surface(mat, node, es, -300, 300, normal=False)
     save_material(mat, path)
@@ -386,10 +387,10 @@ def main():
     lamp_tex = import_texture(LOOK_OUT / "ground/xinyi_ground_light_1024.png", "T_XinyiGroundLight", grayscale=True)
     m_city = build_city_material(mpc, "M_XinyiCity", hero=False)
     m_hero = build_city_material(mpc, "M_Taipei101", hero=True)
-    m_ground = build_ground_material(mpc, tex, lamp_tex)
-    m_paint = build_paint_material(mpc, tex, lamp_tex)
     far_rep_path = LOOK_OUT / "farcity/far_city.report.json"
     far_rep = read_json(far_rep_path) if far_rep_path.is_file() else None
+    m_ground = build_ground_material(mpc, tex, lamp_tex, far_rep["xinyi_source_bbox_enu_m"] if far_rep else None)
+    m_paint = build_paint_material(mpc, tex, lamp_tex)
     far_tex = import_texture(LOOK_OUT / "farcity/far_city_1024.png", "T_TaipeiFarCity") if far_rep else None
     m_back = build_backdrop_material(mpc, far_tex, far_rep["texture_extent_enu_m"] if far_rep else None)
     m_tree = build_instanced_material(mpc, "M_XinyiFoliage")

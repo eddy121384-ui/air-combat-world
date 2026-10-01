@@ -35,6 +35,11 @@ SKY_INTENSITY = {"day": 2.2, "dusk": 3.0, "night": 12.0}
 DUSK_SUN_EL = 7.0
 DUSK_SUN_TINT = (1.0, 0.93, 0.85)
 DUSK_FOG_INSCATTER = (0.40, 0.31, 0.36)
+# Day haze colour (UE only). Rays below eye level that miss the basin backdrop take full height-fog
+# opacity, so the fog colour itself is visible as a band under the horizon. The preset (0.50, 0.58,
+# 0.67) rendered ~rgb(198,207,214) against a ~rgb(164,169,164) horizon sky: a visible edge. Matched
+# toward the measured horizon (darker, more neutral); distant terrain haze shifts the same way.
+DAY_FOG_INSCATTER = (0.40, 0.44, 0.46)
 SKY_LUMINANCE_FACTOR_DUSK = (1.1, 0.74, 1.05)
 BLOOM = {"day": 0.15, "dusk": 0.45, "night": 0.8}
 FOG_SCALE = 0.025
@@ -55,7 +60,7 @@ UE_EXPOSURE_OFFSET_EV = {"day": 2.0, "dusk": 2.0, "night": 0.0}
 NIGHT_MOON_LUX = 0.1
 SKY_LUMINANCE_FACTOR = {"night": (9.0, 7.5, 6.0)}  # warm light-pollution glow; default 1 (day / dusk)
 FOG_FALLOFF = {"night": 0.05}                      # default 0.2 (day / dusk unchanged)
-UE_FOG_INSCATTER = {"night": (0.080, 0.070, 0.062), "dusk": DUSK_FOG_INSCATTER}  # overrides preset fogCol in UE only
+UE_FOG_INSCATTER = {"night": (0.080, 0.070, 0.062), "dusk": DUSK_FOG_INSCATTER, "day": DAY_FOG_INSCATTER}  # overrides preset fogCol in UE only
 # SkyLight lower hemisphere = the lit city / ground below the horizon. With the default black lower
 # hemisphere every downward reflection vector (lower floors of glass towers, residential windows seen
 # from above) and every down-facing ambient sample read pure black, so glass looked like flat dark

@@ -53,9 +53,10 @@ MATERIALS = {
 }
 
 
-def custom_code(material: str) -> str:
+def custom_code(material: str, extra_defines: str = "") -> str:
     """Body pasted into the Custom node: shared HLSL wrapped in a struct."""
     _, call, defines = MATERIALS[material]
+    defines = extra_defines + defines
     src = SHADER.read_text(encoding="utf-8")
     return (
         defines
@@ -65,6 +66,17 @@ def custom_code(material: str) -> str:
         + call + "\n"
         + "Rough = r; Metal = m; Spec = s; Emis = e; NrmWS = n;\nreturn b;\n"
     )
+
+
+def source_bbox_defines(bbox_enu) -> str:
+    """Xinyi building-source bbox (E0, E1, N0, N1 in ENU m) for the ground material.
+
+    The accepted Landscape (2.5 km) is larger than the WFS building source bbox, and the far city
+    skips the source bbox, so the band between them has buildings from neither layer.
+    """
+    e0, e1, n0, n1 = bbox_enu
+    return ("#define XC_SRC_E0 (%.1f)\n#define XC_SRC_E1 (%.1f)\n"
+            "#define XC_SRC_N0 (%.1f)\n#define XC_SRC_N1 (%.1f)\n" % (e0, e1, n0, n1))
 
 
 def extent_uv_code(e0: float, e1: float, n0: float, n1: float) -> str:

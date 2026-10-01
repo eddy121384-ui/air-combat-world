@@ -22,6 +22,15 @@
 // ============================================================================
 
 // TEXCOORD_2 carries RGBA8 data packed as (R*256+G, B*256+A); returns 0..1.
+// Xinyi WFS building-source bbox (ENU m), injected by the Unreal ground material builder.
+// Defaults put the whole Landscape "inside" (no stand-in band) for the preview renderer.
+#ifndef XC_SRC_E0
+#define XC_SRC_E0 (-1.0e6)
+#define XC_SRC_E1 (1.0e6)
+#define XC_SRC_N0 (-1.0e6)
+#define XC_SRC_N1 (1.0e6)
+#endif
+
 float4 xc_unpack(float2 d)
 {
     float r = floor(d.x / 256.0 + 1e-4);
@@ -370,8 +379,13 @@ void xc_wall(float u, float h, float H, float fh, float arch, float variant, flo
     // short occlusion ramp grounds it into the floor. Gated on a ~4-floor period (on from mid range,
     // where single floors may still resolve) and off up close, so near Xinyi facades are unchanged.
     float farF = 1.0 - xc_detail(fwh, fh * 4.0);
-    float contact = (1.0 - smoothstep(0.0, lerp(4.0, 14.0, farF), h)) * farF;
-    c *= 1.0 - contact * 0.65;
+    // Taller at range (far-city boxes on slopes expose their downhill base) and tinted toward
+    // shaded ground rather than black, so the foot reads as terrain / street shade, not a seam.
+    float contact = (1.0 - smoothstep(0.0, lerp(4.0, 20.0, farF), h)) * farF;
+    // Night keeps the previous short multiply: the real-time SkyLight captures distant geometry as
+    // night ambient, and the deeper tinted base measurably dimmed the night mountain silhouettes.
+    float contactNight = (1.0 - smoothstep(0.0, lerp(4.0, 14.0, farF), h)) * farF;
+    c = lerp(c * (1.0 - contactNight * 0.65), lerp(c, float3(0.085, 0.095, 0.075), contact * 0.7), 1.0 - night);
 
     // --- material response ------------------------------------------------------
     // Glass is dielectric (F0 ~0.06-0.08 via Specular); only coated curtain wall gets a little
@@ -606,6 +620,14 @@ void xc_city(float3 wpos, float3 N, float2 uv0, float2 uv1, float4 vc,
     spec = lerp(sw, sr, isRoof);
     emis = lerp(ew, er, isRoof);
     base = lerp(base, float3(0.2, 0.2, 0.2), isSoffit);
+    // Range variation: at overview distance every block's facade averages to its palette mean and
+    // the far city read as one repeated pale box. Per-building value (+-17 %) and a ~650 m
+    // neighbourhood tone break that up; both are constant per building / low frequency (no shimmer)
+    // and fade out where facade detail resolves (fwp in m / pixel).
+    float rangeF = smoothstep(1.5, 8.0, fwp) * (1.0 - night);   // day / dusk only (see contact note)
+    float bTone = 0.83 + 0.34 * frac(seed * 17.31);
+    float hood = 0.86 + 0.28 * xc_fnoise(float2(wpos.x, wpos.y) + 7919.0, 0.0015, fwp);
+    base *= lerp(1.0, bTone * hood, rangeF);
 
 #ifndef XC_NO_HERO
     float3 bh; float rh; float mh; float sh; float3 eh;
@@ -780,6 +802,21 @@ void xc_ground(float3 wpos, float3 N, float4 gt, float lamp, float night, float 
     float3 lot = lerp(float3(0.15, 0.15, 0.155), float3(0.75, 0.75, 0.72), stall * 0.8);
 
     float3 c = plaza;
+    // Building-less band: the Landscape extends past the WFS source bbox, and the far city skips
+    // that bbox, so between them no layer carries buildings and the ground read as a pale empty
+    // plaza strip from the air. From mid range on, shade it as low-rise roofscape (block-scale
+    // value / rust / green-coat variation over darker street shade), matching the backdrop fabric.
+    float2 en = float2(wpos.x, -wpos.y);
+    float inSrc = smoothstep(XC_SRC_E0 - 40.0, XC_SRC_E0 + 40.0, en.x) * (1.0 - smoothstep(XC_SRC_E1 - 40.0, XC_SRC_E1 + 40.0, en.x))
+                * smoothstep(XC_SRC_N0 - 40.0, XC_SRC_N0 + 40.0, en.y) * (1.0 - smoothstep(XC_SRC_N1 - 40.0, XC_SRC_N1 + 40.0, en.y));
+    float b1 = xc_fnoise(p + 431.0, 0.025, fwp);
+    float b2 = xc_fnoise(p - 1291.0, 0.008, fwp);
+    // roof masses vs street shade (block scale), so it reads as dense fabric rather than open plaza
+    float3 lowrise = lerp(float3(0.075, 0.078, 0.075), float3(0.34, 0.33, 0.30), smoothstep(0.3, 0.7, b1 * 0.7 + b2 * 0.3));
+    lowrise = lerp(lowrise, lowrise * float3(1.15, 0.92, 0.80), smoothstep(0.62, 0.8, xc_fnoise(p + 77.0, 0.04, fwp)) * 0.6);
+    lowrise = lerp(lowrise, lowrise * float3(0.85, 1.12, 0.95), smoothstep(0.62, 0.8, xc_fnoise(p - 53.0, 0.035, fwp)) * 0.6);
+    float band = (1.0 - inSrc) * smoothstep(0.25, 1.0, fwp);
+    c = lerp(c, lowrise, band);
     c = lerp(c, paver, walk);
     c = lerp(c, grass, saturate(green * 1.2) * (1.0 - road));
     c = lerp(c, forest, hill * (1.0 - road) * (1.0 - green * 0.5));
