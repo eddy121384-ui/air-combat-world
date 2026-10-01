@@ -25,6 +25,7 @@ from xinyi_look_common import (  # noqa: E402
     LOOK_LEVEL, LOOK_OUT, LOOK_PREFIX, MPC_PATH, REPORT_DIR, RUNTIME_PREFIX, SOURCE_LEVEL, TERRAIN_LABEL,
     enu_to_ue_cm, finite3, lib, max_err, mesh_bounds, read_json, write_report,
 )
+from xinyi_look_clouds import apply_clouds, spawn_clouds  # noqa: E402
 from xinyi_look_tod import apply_tod, spawn_rig  # noqa: E402
 
 LOC_TOL_CM = 0.5
@@ -246,6 +247,11 @@ def main():
     spawn_rig(actors)
     world = unreal.get_editor_subsystem(unreal.UnrealEditorSubsystem).get_editor_world()
     apply_tod(world, actors, "day", persist_mpc_defaults=True)
+    # Cloud Prototype v0: actor + HIGH material saved, but OFF (hidden, no cloud shadows) so the accepted
+    # city look is cloud-independent; captures opt in with ACW_XINYI_LOOK_CLOUDS=low|high.
+    clouds = None
+    if spawn_clouds(actors) is not None:
+        clouds = apply_clouds(world, actors, "off", "day")
 
     status = "PASS_LOOK_LEVEL" if not failures and len(swapped) == 25 else "FAIL_LOOK_LEVEL"
     if status == "PASS_LOOK_LEVEL":
@@ -261,6 +267,7 @@ def main():
         "ground_instances": ground_counts,
         "rooftop_instances": roof_counts,
         "far_city_chunks": far_n,
+        "clouds": clouds,
         "failures": failures,
         "contract_level_saved": False,
     }

@@ -4,6 +4,8 @@ param(
     [string]$Python = "python",
     [string]$Tod = "day,dusk,night",
     [string]$Shots = "",
+    [ValidateSet("high", "low", "off")][string]$Clouds = "off",
+    [string]$Perf = "",
     [switch]$SkipOffline,
     [switch]$CaptureOnly
 )
@@ -36,6 +38,8 @@ New-Item -ItemType Directory -Force -Path $Reports, $Logs | Out-Null
 $env:ACW_REPO_ROOT = $RepoRoot
 $env:ACW_XINYI_LOOK_TOD = $Tod
 $env:ACW_XINYI_LOOK_SHOTS = $Shots
+$env:ACW_XINYI_LOOK_CLOUDS = $Clouds   # off (default: accepted city suite) | low (weak-GPU / runtime) | high (PC reference)
+$env:ACW_XINYI_LOOK_PERF = $Perf       # optional shots to time after the captures
 
 function Invoke-Stage {
     param([string]$Name, [string]$Script, [string]$Report, [string]$Pass)
@@ -90,6 +94,8 @@ $combined = [ordered]@{
     shots = $first.shots
     captures = @($perPreset | ForEach-Object { $_.captures })
     isolated_process_per_preset = $true
+    clouds = $Clouds
+    perf = @($perPreset | Where-Object { $_.perf } | ForEach-Object { $_.perf })
     per_preset_receipts = @($todList | ForEach-Object { "look_capture.$_.report.json" })
     error = $null
     level_saved = $false

@@ -1,0 +1,11 @@
+{
+  "role": "Cloud review cameras (Xinyi ENU m). Not part of the accepted 8-shot look-dev suite in tools/lookdev/preview/shots.json; captured only when listed explicitly (ACW_XINYI_LOOK_SHOTS).",
+  "shots": {
+    "k_cloud_alt_basin": {"eye": [-9000, -7500, 2300], "target": [1500, 3500, 900], "fov": 62,
+                           "note": "aircraft at 2.3 km inside the cumulus layer, SW of the basin, looking NE over Xinyi toward Yangmingshan"},
+    "l_cloud_low_xinyi": {"eye": [-3200, -2600, 650], "target": [0, 300, 900], "fov": 70,
+                           "note": "low pass under the cloud base toward Taipei 101 with cumulus overhead"},
+    "m_cloud_high_top": {"eye": [-14000, 2000, 4200], "target": [4000, 6000, 1500], "fov": 60,
+                          "note": "above the cloud tops looking east across the basin and the broken layer"}
+  }
+}

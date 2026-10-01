@@ -10,8 +10,14 @@ and light presets are read from tools/lookdev/preview/shots.json, so each
 Unreal frame has a like-for-like preview frame for comparison.
 
 Time-of-day changes are transient; the level is never saved here.
-Env: ACW_XINYI_LOOK_TOD   comma list (default "day,dusk,night")
-     ACW_XINYI_LOOK_SHOTS comma list (default all)
+Env: ACW_XINYI_LOOK_TOD    comma list (default "day,dusk,night")
+     ACW_XINYI_LOOK_SHOTS  comma list (default: the 8 look-dev shots; cloud review shots from
+                           tools/lookdev/clouds/cloud_review_shots.json may be listed too)
+     ACW_XINYI_LOOK_CLOUDS off | low | high (default off: the accepted city suite stays cloud-
+                           independent). low / high frames get a "__clouds-<quality>" suffix.
+     ACW_XINYI_LOOK_PERF   optional comma list of shots to time after the captures: per shot,
+                           PERF_N SceneCapture renders each followed by a 1-pixel readback
+                           (forces a GPU sync), giving a same-view frame-time proxy.
 """
 import json
 import os
@@ -24,6 +30,7 @@ import unreal  # noqa: E402
 from xinyi_look_common import (  # noqa: E402
     LOOK_LEVEL, LOOK_OUT, LOOK_PREFIX, RUNTIME_PREFIX, SHOTS, TERRAIN_LABEL, enu_to_ue_cm, lib, write_report,
 )
+from xinyi_look_clouds import apply_clouds, finish_shaders  # noqa: E402
 from xinyi_look_tod import apply_tod  # noqa: E402
 
 OUT = LOOK_OUT / "unreal" / "captures"
@@ -37,6 +44,15 @@ PNG = b"\x89PNG\r\n\x1a\n"
 cfg = json.loads(SHOTS.read_text(encoding="utf-8"))
 tods = [t for t in os.environ.get("ACW_XINYI_LOOK_TOD", "day,dusk,night").split(",") if t]
 shots = [s for s in os.environ.get("ACW_XINYI_LOOK_SHOTS", ",".join(cfg["shots"])).split(",") if s]
+CLOUD_SHOTS = SHOTS.parent.parent / "clouds" / "cloud_review_shots.json"
+shot_specs = dict(cfg["shots"])
+if CLOUD_SHOTS.is_file():
+    shot_specs.update(json.loads(CLOUD_SHOTS.read_text(encoding="utf-8"))["shots"])
+clouds_q = os.environ.get("ACW_XINYI_LOOK_CLOUDS", "off") or "off"
+suffix = "" if clouds_q == "off" else "__clouds-%s" % clouds_q
+perf_shots = [s for s in os.environ.get("ACW_XINYI_LOOK_PERF", "").split(",") if s]
+PERF_WARM = 16
+PERF_N = 40
 
 levels = unreal.get_editor_subsystem(unreal.LevelEditorSubsystem)
 actors = unreal.get_editor_subsystem(unreal.EditorActorSubsystem)
@@ -86,7 +102,36 @@ for cmd in ("r.ScreenPercentage 100", "r.MotionBlurQuality 0", "r.RayTracing 0")
     unreal.SystemLibrary.execute_console_command(world, cmd)
 
 queue = [(t, s) for t in tods for s in shots]
-state = {"i": 0, "phase": "tod", "n": 0, "t0": time.monotonic(), "captures": [], "tod": None}
+state = {"i": 0, "phase": "tod", "n": 0, "t0": time.monotonic(), "captures": [], "tod": None,
+         "clouds": None, "perf": None}
+
+
+def gpu_sync():
+    """Block until the GPU has finished the last capture (1-pixel readback)."""
+    unreal.RenderingLibrary.read_render_target_pixel(world, rt, 0, 0)
+
+
+def run_perf():
+    """Same-view frame-time proxy: PERF_N SceneCapture renders at W x H, each GPU-synchronised."""
+    out = {}
+    for shot in perf_shots:
+        set_view(shot_specs[shot])
+        for _ in range(PERF_WARM):
+            cap.capture_scene()
+        gpu_sync()
+        ms = []
+        for _ in range(PERF_N):
+            t = time.perf_counter()
+            cap.capture_scene()
+            gpu_sync()
+            ms.append((time.perf_counter() - t) * 1000.0)
+        ms.sort()
+        out[shot] = {"n": PERF_N, "median_ms": round(ms[len(ms) // 2], 2), "p10_ms": round(ms[len(ms) // 10], 2),
+                     "p90_ms": round(ms[(len(ms) * 9) // 10], 2), "min_ms": round(ms[0], 2)}
+    return {"method": "SceneCapture2D %dx%d FINAL_COLOR_LDR, capture_scene + 1px readback per sample "
+                      "(GPU-synchronised wall time; includes a fixed readback / submit overhead)" % (W, H),
+            "gpu": unreal.SystemLibrary.get_rhi_adapter_name() if hasattr(unreal.SystemLibrary, "get_rhi_adapter_name") else None,
+            "clouds": clouds_q, "tod": state["tod"], "shots": out}
 
 
 def set_view(spec):
@@ -123,6 +168,8 @@ def finish(ok, err=None):
         "tods": tods,
         "shots": shots,
         "captures": state["captures"],
+        "clouds": state["clouds"],
+        "perf": state["perf"],
         "error": err,
         "level_saved": False,
         "elapsed_seconds": time.monotonic() - state["t0"],
@@ -139,12 +186,16 @@ def tick(_dt):
         if time.monotonic() - state["t0"] > TIMEOUT:
             raise RuntimeError("capture timed out")
         if state["i"] >= len(queue):
+            if perf_shots:
+                state["perf"] = run_perf()
             finish(True)
             return
         tod, shot = queue[state["i"]]
-        spec = cfg["shots"][shot]
+        spec = shot_specs[shot]
         if state["tod"] != tod:
             apply_tod(world, actors, tod)
+            state["clouds"] = apply_clouds(world, actors, clouds_q, tod)
+            finish_shaders()   # no shader / streaming fallback in the first frames of a preset
             state["tod"] = tod
             state["phase"] = "warm"
             state["n"] = 0
@@ -162,7 +213,7 @@ def tick(_dt):
             if state["n"] >= SETTLE:
                 state["phase"] = "shoot"
             return
-        export("%s__%s" % (shot, tod))
+        export("%s__%s%s" % (shot, tod, suffix))
         state["i"] += 1
         state["phase"] = "settle"
         state["n"] = 0

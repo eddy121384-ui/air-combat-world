@@ -28,7 +28,10 @@ import time
 sys.path.insert(0, os.path.join(os.environ.get("ACW_REPO_ROOT", ""), "adapters", "unreal", "lookdev"))
 sys.path.insert(0, os.path.join(os.environ.get("ACW_REPO_ROOT", ""), "tools", "lookdev"))
 import unreal  # noqa: E402
-from ue_custom_code import MATERIALS, custom_code, extent_uv_code, ground_uv_code, source_bbox_defines  # noqa: E402
+from ue_custom_code import (  # noqa: E402
+    CLOUD_INPUTS, MATERIALS, cloud_custom_code, cloud_weather_uv_code, custom_code, extent_uv_code, ground_uv_code,
+    source_bbox_defines,
+)
 from xinyi_look_common import (  # noqa: E402
     CONTRACT_DIR, LOOK_OUT, MAT_DIR, MESH_DIR, MPC_PATH, SHADER, TEX_DIR, E0, E1, N0, N1,  # noqa: F401
     ensure_dir, lib, max_err, mel, mesh_bounds, read_json, tile_key, tools, write_report,
@@ -258,6 +261,106 @@ def build_backdrop_material(mpc, far_tex, far_extent):
     return mat
 
 
+def scalar_param(mat, name, default, x, y):
+    e = expr(mat, unreal.MaterialExpressionScalarParameter, x, y)
+    e.set_editor_property("parameter_name", name)
+    e.set_editor_property("default_value", default)
+    return e
+
+
+def vector_param(mat, name, default, x, y):
+    e = expr(mat, unreal.MaterialExpressionVectorParameter, x, y)
+    e.set_editor_property("parameter_name", name)
+    e.set_editor_property("default_value", unreal.LinearColor(*default))
+    return e
+
+
+def build_cloud_material(weather, cloud_rep, low):
+    """Cloud Prototype v0 volumetric-cloud material (Volume domain, additive).
+
+    Density comes from tools/lookdev/shaders/xinyi_clouds.hlsl reading the renderer-agnostic
+    weather map; HIGH / LOW differ only in noise octaves and multi-scattering octaves.
+    """
+    name = "M_XinyiClouds_Low" if low else "M_XinyiClouds_High"
+    # Always a brand-new asset: delete_all_material_expressions (fresh_material's in-place rebuild)
+    # does not remove the Volumetric Advanced Output node, so a second rebuild had two of them, failed
+    # to compile ("only one Volumetric Advanced Output node") and silently rendered no clouds.
+    path = MAT_DIR + "/" + name
+    if lib.does_asset_exist(path) and not lib.delete_asset(path):
+        raise RuntimeError("cannot delete %s for a clean rebuild" % path)
+    mat, path = fresh_material(name)
+    # blend first: switching the domain recompiles, and a Volume + Opaque intermediate logs an error
+    mat.set_editor_property("blend_mode", unreal.BlendMode.BLEND_ADDITIVE)
+    # Without this usage flag the cloud compute permutations are never compiled; the cloud renderer
+    # then falls back to the default surface material and asserts (domain == MD_Volume).
+    mat.set_editor_property("used_with_volumetric_cloud", True)
+    mat.set_editor_property("material_domain", unreal.MaterialDomain.MD_VOLUME)
+    wp = world_pos_m(mat, -1500, -200)
+    uv = custom(mat, -1250, 100, cloud_weather_uv_code(cloud_rep["tile_m"]), ["WP"], [], "CloudWeatherUV",
+                unreal.CustomMaterialOutputType.CMOT_FLOAT2)
+    mel.connect_material_expressions(wp, "", uv, "WP")
+    wx = expr(mat, unreal.MaterialExpressionTextureSample, -1000, 100)
+    wx.set_editor_property("texture", weather)
+    wx.set_editor_property("sampler_type", unreal.MaterialSamplerType.SAMPLERTYPE_LINEAR_COLOR)
+    for prop, val in (("mip_value_mode", unreal.TextureMipValueMode.TMVM_MIP_LEVEL), ("const_mip_value", 0)):
+        try:
+            wx.set_editor_property(prop, val)
+        except Exception as exc:
+            unreal.log_warning("%s: cannot set %s (%s)" % (name, prop, exc))
+    mel.connect_material_expressions(uv, "", wx, "UVs")
+    # Per-time-of-day renderer calibration is material-instance parameters (set on a dynamic
+    # instance by xinyi_look_clouds.apply_clouds), NOT the city MPC: the volumetric cloud pass did
+    # not see per-world MPC values (coverage / extinction / dusk fill had no effect).
+    cov = scalar_param(mat, "CloudCoverage", 0.0, -1200, 460)
+    ext = scalar_param(mat, "CloudExtinction", 0.02, -600, 420)
+    node = custom(mat, -750, 0, cloud_custom_code(low, cloud_rep["broken_base_norm"], cloud_rep["renderer_layer_m"][0],
+                                                      cloud_rep["renderer_layer_height_m"]), [n for n, _ in CLOUD_INPUTS],
+                  [("Env", F1), ("AO", F1)], name, unreal.CustomMaterialOutputType.CMOT_FLOAT1)
+    wire(((wp, "WP"), (wx, "WX", "RGBA"), (cov, "COV")), node)
+    mul = expr(mat, unreal.MaterialExpressionMultiply, -400, 200)
+    mel.connect_material_expressions(node, "", mul, "A")
+    mel.connect_material_expressions(ext, "", mul, "B")
+    mel.connect_material_property(mul, "", unreal.MaterialProperty.MP_SUBSURFACE_COLOR)      # extinction
+    albedo = expr(mat, unreal.MaterialExpressionConstant3Vector, -400, -120,
+                  constant=unreal.LinearColor(0.96, 0.96, 0.97, 1.0))
+    mel.connect_material_property(albedo, "", unreal.MaterialProperty.MP_BASE_COLOR)
+    mel.connect_material_property(node, "AO", unreal.MaterialProperty.MP_AMBIENT_OCCLUSION)
+    # Multi-scattering approximation + dual-lobe phase (bright silver lining, soft interiors).
+    adv = expr(mat, unreal.MaterialExpressionVolumetricAdvancedMaterialOutput, -400, 450)
+    for prop, val in (("const_phase_g", 0.6), ("const_phase_g2", -0.3), ("const_phase_blend", 0.35),
+                      ("const_multi_scattering_contribution", 0.75), ("const_multi_scattering_occlusion", 0.3),
+                      ("ground_contribution", True),
+                      ("const_multi_scattering_eccentricity", 0.55),
+                      ("multi_scattering_approximation_octave_count", 1 if low else 2)):
+        try:
+            adv.set_editor_property(prop, val)
+        except Exception as exc:
+            failures.append({"material": name, "property": prop, "error": str(exc)[:120]})
+    if not mel.connect_material_expressions(node, "Env", adv, "ConservativeDensity"):
+        failures.append({"material": name, "error": "ConservativeDensity pin not connected"})
+    # per time-of-day multiple-scattering strength, overrides the constant above
+    ms = scalar_param(mat, "CloudMultiScatter", 0.75, -700, 620)
+    if not mel.connect_material_expressions(ms, "", adv, "MultiScatteringContribution"):
+        failures.append({"material": name, "error": "MultiScatteringContribution pin not connected"})
+    # per time-of-day cool sky fill (black by day): emissive x the underside occlusion so shaded cores
+    # pick up a little sky colour instead of falling to brown
+    amb = vector_param(mat, "CloudAmbient", (0.0, 0.0, 0.0, 0.0), -700, -320)
+    # emission must scale with extinction (density): per-metre emission integrates along the ray, so
+    # a density-independent term filled the whole layer with glow. amb x AO x sigma_t gives a fill
+    # that saturates at ~amb x (1 - transmittance) inside clouds and is zero in clear air.
+    amb_ao = expr(mat, unreal.MaterialExpressionMultiply, -500, -320)
+    mel.connect_material_expressions(amb, "", amb_ao, "A")
+    mel.connect_material_expressions(node, "AO", amb_ao, "B")
+    emis = expr(mat, unreal.MaterialExpressionMultiply, -300, -320)
+    mel.connect_material_expressions(amb_ao, "", emis, "A")
+    mel.connect_material_expressions(mul, "", emis, "B")
+    mel.connect_material_property(emis, "", unreal.MaterialProperty.MP_EMISSIVE_COLOR)
+    save_material(mat, path)
+    if mel.get_statistics(mat).get_editor_property("num_pixel_shader_instructions") <= 0:
+        failures.append({"material": name, "error": "cloud material did not compile"})
+    return mat
+
+
 def build_instanced_material(mpc, name):
     """Shared builder for instanced materials (per-instance variant in custom data 0)."""
     mat, path = fresh_material(name)
@@ -283,7 +386,7 @@ def build_instanced_material(mpc, name):
 # Import helpers
 # ---------------------------------------------------------------------------
 
-def import_texture(png, name, grayscale=False):
+def import_texture(png, name, grayscale=False, address=unreal.TextureAddress.TA_CLAMP):
     task = unreal.AssetImportTask()
     task.set_editor_property("filename", str(png))
     task.set_editor_property("destination_path", TEX_DIR)
@@ -300,8 +403,8 @@ def import_texture(png, name, grayscale=False):
     tex.set_editor_property("srgb", False)
     tex.set_editor_property("compression_settings", unreal.TextureCompressionSettings.TC_GRAYSCALE if grayscale
                             else unreal.TextureCompressionSettings.TC_VECTOR_DISPLACEMENTMAP)
-    tex.set_editor_property("address_x", unreal.TextureAddress.TA_CLAMP)
-    tex.set_editor_property("address_y", unreal.TextureAddress.TA_CLAMP)
+    tex.set_editor_property("address_x", address)
+    tex.set_editor_property("address_y", address)
     if not lib.save_asset(path):
         raise RuntimeError("failed to save %s" % path)
     created[path] = "Texture2D"
@@ -395,6 +498,21 @@ def main():
     m_back = build_backdrop_material(mpc, far_tex, far_rep["texture_extent_enu_m"] if far_rep else None)
     m_tree = build_instanced_material(mpc, "M_XinyiFoliage")
     m_props = build_instanced_material(mpc, "M_XinyiProps")  # also street lamps
+    # Cloud Prototype v0 (renderer layer over the renderer-agnostic cloud state)
+    cloud_rep_path = LOOK_OUT / "clouds/clouds.report.json"
+    cloud_rep = read_json(cloud_rep_path) if cloud_rep_path.is_file() else None
+    clouds = None
+    if cloud_rep:
+        weather = import_texture(LOOK_OUT / "clouds" / cloud_rep["weather_map"], "T_XinyiCloudWeather",
+                                 address=unreal.TextureAddress.TA_WRAP)
+        for low in (False, True):
+            build_cloud_material(weather, cloud_rep, low)
+        try:   # finish the cloud shader maps here so later stages load them from the DDC
+            unreal.AutomationLibrary.finish_loading_before_screenshot()
+        except Exception as exc:
+            unreal.log_warning("finish_loading_before_screenshot: %s" % exc)
+        clouds = {"high": "M_XinyiClouds_High", "low": "M_XinyiClouds_Low", "weather": "T_XinyiCloudWeather",
+                  "weather_sha256": cloud_rep["weather_sha256"]}
     roofs = read_json(LOOK_OUT / "rooftops/rooftops.report.json")
 
     tiles = []
@@ -488,6 +606,7 @@ def main():
         "materials": {"city": "M_XinyiCity", "hero": "M_Taipei101", "ground": "M_XinyiGround",
                       "paint": "M_XinyiRoadPaint", "backdrop": "M_XinyiBackdrop", "foliage": "M_XinyiFoliage",
                       "props": "M_XinyiProps",
+                      "clouds": clouds,
                       "mpc": MPC_PATH},
         "shader_source": str(SHADER),
         "tiles": tiles,

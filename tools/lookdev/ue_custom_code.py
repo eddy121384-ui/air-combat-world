@@ -68,6 +68,43 @@ def custom_code(material: str, extra_defines: str = "") -> str:
     )
 
 
+CLOUD_SHADER = Path(__file__).resolve().parent / "shaders" / "xinyi_clouds.hlsl"
+CLOUD_INPUTS = [("WP", 3), ("WX", 4), ("COV", 1)]
+PLANET_RADIUS_M = 6360000.0   # SkyAtmosphere / VolumetricCloud default; planet top at the world origin
+
+
+def cloud_custom_code(low: bool, broken_base_norm: float, layer_bottom_m: float, layer_height_m: float) -> str:
+    """Cloud Prototype v0 density Custom node (UE volumetric renderer).
+
+    The normalised layer altitude is computed here from the sample position (altitude above the
+    planet sphere whose top sits at the world origin), matching the VolumetricCloud layer set from
+    the same report. Returns density; additional outputs Env (conservative density) and AO.
+    """
+    defines = "#define XCL_BROKEN_BASE (%.5f)\n" % broken_base_norm
+    if low:
+        defines += "#define XCL_LOW 1\n"
+    return (
+        defines
+        + "struct XinyiCloudFns {\n" + CLOUD_SHADER.read_text(encoding="utf-8") + "\n};\n"
+        + "XinyiCloudFns xcl;\n"
+        + "float alt = length(WP + float3(0.0, 0.0, %.1f)) - %.1f;\n" % (PLANET_RADIUS_M, PLANET_RADIUS_M)
+        + "float hn = saturate((alt - %.1f) / %.1f);\n" % (layer_bottom_m, layer_height_m)
+        + "float d; float e; float o;\n"
+        + "xcl.xcl_cloud(WP, WX, hn, COV, d, e, o);\n"
+        + "Env = e; AO = o;\nreturn d;\n"
+    )
+
+
+def cloud_weather_uv_code(tile_m: float) -> str:
+    """Custom node: domain-warped weather-map UV (xcl_weather_uv) from the sample position (m)."""
+    return (
+        "#define XCL_BROKEN_BASE (0.0)\n"
+        + "struct XinyiCloudFns {\n" + CLOUD_SHADER.read_text(encoding="utf-8") + "\n};\n"
+        + "XinyiCloudFns xcl;\n"
+        + "return xcl.xcl_weather_uv(WP, %.1f);\n" % tile_m
+    )
+
+
 def source_bbox_defines(bbox_enu) -> str:
     """Xinyi building-source bbox (E0, E1, N0, N1 in ENU m) for the ground material.
 

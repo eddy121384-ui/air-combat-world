@@ -1,0 +1,60 @@
+{
+  "schema": "acw.cloud_state/0",
+  "role": "Renderer-agnostic cloud / weather state for Cloud Prototype v0. Describes WHERE clouds are and what kind they are; never how they are drawn. tools/lookdev/clouds/build_clouds.py turns it into a cell list (any renderer: volumetric, impostor cards, mobile sprites, in-cloud fog) and a tileable weather map (the UE volumetric renderer's input). Future gameplay / weather simulation should read or write this state, not renderer settings.",
+  "frame": "Xinyi ENU metres (origin = cities/taipei/city.yaml enu_origin; x east, y north, z up above mean sea level)",
+  "seed": 20261001,
+  "tile_m": 64000,
+  "notes": "Northern-Taiwan humid fair-weather day: shallow cumulus with bases ~1.25 km, a few towers to ~3 km, favouring the hills (Yangmingshan, Nangang / Four Beasts) over the basin floor as afternoon orographic cumulus do; a compact broken stratocumulus deck sits over the northern mountains (~21 km N), visible as a distant deck rather than an overcast above Xinyi.",
+  "layers": [
+    {
+      "id": "cumulus_fair",
+      "archetype": "fair_weather_cumulus",
+      "base_m": 1250,
+      "clusters": 150,
+      "cells_per_cluster": [
+        2,
+        7
+      ],
+      "cluster_radius_m": 2600,
+      "radius_m": [
+        420,
+        1250
+      ],
+      "top_m": [
+        1750,
+        3200
+      ],
+      "orographic_weight": 2.4,
+      "target_area_fraction": 0.09
+    },
+    {
+      "id": "broken_layer",
+      "archetype": "broken_layered_cumulus",
+      "base_m": 2050,
+      "thickness_m": [
+        300,
+        620
+      ],
+      "patches": 18,
+      "radius_m": [
+        1200,
+        3200
+      ],
+      "bias_center_en_m": [
+        1500,
+        21000
+      ],
+      "bias_radius_m": 9000,
+      "target_area_fraction": 0.05
+    }
+  ],
+  "omitted_archetypes": {
+    "thin_high_cloud": "not in v0: a cirrus deck at 8-10 km would need its own volumetric layer (cost) or a sky-dome card; deferred",
+    "storm / typhoon / precipitation": "out of scope for v0"
+  },
+  "wind_mps": [
+    2.5,
+    -1.0
+  ],
+  "wind_note": "static in v0 (captures are stills); renderers may advect the map by wind * time"
+}
