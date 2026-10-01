@@ -212,6 +212,21 @@ void xc_wall(float u, float h, float H, float fh, float arch, float variant, flo
     // --- wall material -------------------------------------------------------
     float palR = frac(seed * 3.731 + variant * 0.071);
     float3 wall = xc_tile_palette(palR, arch);
+    // --- facade finish family (per building constant: no shimmer) ------------------
+    // glazed tile (semi-gloss), painted render on ~30 % of old stock (matte, washed pastel),
+    // porcelain / stone panels on towers; plus a muted warm / cool cast and +-9 % value
+    float finR = frac(seed * 6.17 + variant * 0.113);
+    float painted = isOld * step(0.70, finR);
+    float3 paint = xc_pick4(frac(finR * 5.3), float3(0.50, 0.53, 0.49), float3(0.58, 0.55, 0.47),
+                            float3(0.47, 0.51, 0.54), float3(0.56, 0.48, 0.45));
+    wall = lerp(wall, paint * 0.9, painted);
+    float3 cast = lerp(float3(1.035, 1.0, 0.95), float3(0.96, 0.99, 1.04), frac(seed * 4.71));
+    wall *= (0.91 + 0.18 * frac(seed * 13.7)) * cast;
+    float wallRough = lerp(0.58, 0.88, painted);
+    wallRough = lerp(wallRough, 0.50, isTower);
+    float wallSpec = lerp(0.5, 0.32, painted);
+    // office glass family: reflective-coated (tinted mirror) or clear low-E (interior visible)
+    float coated = isOffice * step(0.45, frac(seed * 3.97));
     // two-tone huaxia / tower bases (granite-look first floors)
     float baseFloors = lerp(1.0, 2.0, step(0.5, frac(seed * 5.3)));
     float stoneBase = (1.0 - step(baseFloors * fh, h)) * (1.0 - isOffice) * step(1.5, arch);
@@ -264,6 +279,10 @@ void xc_wall(float u, float h, float H, float fh, float arch, float variant, flo
     float3 glassCol = lerp(resGlass, xc_glass_palette(frac(seed * 1.37)), isOffice + isTower * 0.3);
     // curtains / blinds behind residential glass
     glassCol = lerp(glassCol, float3(0.45, 0.42, 0.36), step(0.72, cellR) * isOld * 0.5);
+    // clear office glass shows the interior: dark floor plate, brighter ceiling band (mean far away)
+    float ceilBand = lerp(0.2, smoothstep(0.72, 0.92, fv), dFloor);
+    float3 interior = lerp(float3(0.045, 0.047, 0.05), float3(0.13, 0.13, 0.125), ceilBand);
+    glassCol = lerp(glassCol, interior, isOffice * (1.0 - coated) * 0.75);
 
     // --- iron window cages (鐵窗) + AC units — the Taipei signature ------------
     float cageP = lerp(0.62, 0.34, step(1.5, arch));            // walkups most caged
@@ -338,7 +357,12 @@ void xc_wall(float u, float h, float H, float fh, float arch, float variant, flo
     float streak = saturate(streakN * 1.4 - 0.35) * (0.4 + 0.6 * underSill);
     float topGrime = smoothstep(H - 2.5 * fh, H, h) * 0.5;
     float splash = 1.0 - smoothstep(0.0, 1.2, h);
-    float grime = saturate((streak * 0.7 + topGrime + splash * 0.6) * weather);
+    // parapet run-off: sparse vertical rain streaks of varying length below the roof line,
+    // a faint average darkening once their ~2 m spacing is sub-pixel
+    float runLen = 3.0 + 16.0 * xc_noise1(u * 0.17 + seed * 7.0);
+    float runoff = saturate(xc_noise1(u * 0.45 + seed * 23.0) * 1.8 - 0.8) * smoothstep(H - runLen, H - 0.6, h);
+    runoff = lerp(0.05, runoff, xc_detail(fwu, 2.2));
+    float grime = saturate((streak * 0.7 + topGrime + splash * 0.6 + runoff * 0.8) * weather);
     grime *= 1.0 - isOffice * 0.8;
     c *= 1.0 - grime * 0.42;
     c = lerp(c, c * float3(0.92, 0.95, 0.92), weather * 0.5 * isOld);   // green-grey humid cast
@@ -350,13 +374,19 @@ void xc_wall(float u, float h, float H, float fh, float arch, float variant, flo
     c *= 1.0 - contact * 0.65;
 
     // --- material response ------------------------------------------------------
+    // Glass is dielectric (F0 ~0.06-0.08 via Specular); only coated curtain wall gets a little
+    // metallic tint. Residential float glass is slightly hazy and varies per pane near the camera.
     float glassAmt = win * (1.0 - cageCover * 0.7) * (1.0 - arcade);
-    rough = lerp(0.82, 0.10, glassAmt);
-    rough = lerp(rough, 0.05, glassAmt * isOffice);
+    float paneRough = lerp(0.13, 0.08 + 0.12 * frac(cellR * 41.0), dBay * dFloor);
+    float glassRough = lerp(paneRough, lerp(0.07, 0.035, coated), isOffice);
+    // low-frequency wear (~7 m blotches, filtered to its mean at distance) and matte grime
+    float wear = xc_fnoise(float2(u, h), 0.15, max(fwu, fwh));
+    float wr = lerp(wallRough, 0.92, grime * 0.5) + (wear - 0.5) * 0.14;
+    rough = lerp(wr, glassRough, glassAmt);
     rough = lerp(rough, 0.55, ac);
     rough = lerp(rough, 0.35, frame);
-    metal = mull * 0.9 + ac * 0.1 + frame * 0.6 + glassAmt * isOffice * 0.35;
-    spec = lerp(0.35, 1.0, glassAmt);
+    metal = mull * 0.9 + ac * 0.1 + frame * 0.6 + glassAmt * coated * 0.3;
+    spec = lerp(wallSpec, lerp(0.75, 1.0, coated), glassAmt);
 
     // --- night -------------------------------------------------------------------
     float litP = litFrac * lerp(1.0, 0.6, isOffice);
@@ -507,12 +537,24 @@ void xc_taipei101(float3 wpos, float2 uv0, float3 vc4rgb, float glassFlag, float
     float3 trim = float3(0.56, 0.60, 0.58);
     float3 gold = float3(0.80, 0.60, 0.26);
     c = lerp(trim, c, glassFlag);
+    // pinnacle housing + spire: darker brushed steel. As light diffuse trim the thin spire caught
+    // the low sun and read near-white at dusk; mostly-specular steel takes the sky colour instead.
+    float isPin = step(9.5, section) * (1.0 - step(10.5, section)) * (1.0 - glassFlag);
+    c = lerp(c, float3(0.40, 0.43, 0.43), isPin);
     c = lerp(c, gold, isOrn);
+    // spandrel band at each slab: opaque fritted glass, a touch lighter and rougher than the vision
+    // glass, so the floor rhythm reads in backlight where the reflection alone goes flat
+    float spandrel = (1.0 - xc_box(fv, 0.16, 0.92, fwh / fh)) * xc_detail(fwh, fh) * glassFlag;
+    c = lerp(c, float3(0.16, 0.22, 0.23), spandrel * 0.7 * (1.0 - isOrn));
     base = c;
-    rough = lerp(0.45, 0.06, glassFlag * (1.0 - saturate(mull + floorLine)));
+    float paneR = 0.055 + 0.03 * xc_hash21(float2(floor(u / 1.4), floor(h / fh))) * xc_detail(fwu, 2.8);
+    rough = lerp(0.45, paneR, glassFlag * (1.0 - saturate(mull + floorLine)));
+    rough = lerp(rough, 0.22, spandrel);
     rough = lerp(rough, 0.35, isOrn);
-    metal = lerp(0.6, 0.1, glassFlag) * (1.0 - isOrn) + isOrn * 0.9;
-    spec = 0.5;
+    rough = lerp(rough, 0.38, isPin);
+    metal = lerp(0.6, 0.12, glassFlag) * (1.0 - isOrn) + isOrn * 0.9;
+    metal = lerp(metal, 0.8, isPin);
+    spec = lerp(0.5, 0.8, glassFlag * (1.0 - isOrn));      // insulated glass F0 ~0.064
     // Night: warm-white floodlit modules brightening toward each flared top,
     // lit corner notches, glowing crown; office floors partially lit inside.
     float band = smoothstep(0.35, 1.0, tsec) * isModule;
@@ -526,7 +568,7 @@ void xc_taipei101(float3 wpos, float2 uv0, float3 vc4rgb, float glassFlag, float
     float3 e = flood * band * band * 0.9 * glassFlag * floodOn;
     e += float3(0.85, 0.93, 1.0) * officeLit * xc_box(fv, 0.2, 0.85, fwh / fh) * 0.08 * (1.0 - band) * xc_detail(fwu, 5.6);
     e += flood * isModule * 0.04 * glassFlag * floodOn;
-    e += flood * step(9.5, section) * (1.0 - step(10.5, section)) * 1.0;   // pinnacle
+    e += flood * step(9.5, section) * (1.0 - step(10.5, section)) * floodOn;   // pinnacle (was near-white at dusk)
     e += gold * isOrn * 0.6 * floodOn;
     emis = e * night;
 }

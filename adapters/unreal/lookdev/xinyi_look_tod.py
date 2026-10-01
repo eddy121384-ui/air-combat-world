@@ -56,9 +56,22 @@ NIGHT_MOON_LUX = 0.1
 SKY_LUMINANCE_FACTOR = {"night": (9.0, 7.5, 6.0)}  # warm light-pollution glow; default 1 (day / dusk)
 FOG_FALLOFF = {"night": 0.05}                      # default 0.2 (day / dusk unchanged)
 UE_FOG_INSCATTER = {"night": (0.080, 0.070, 0.062), "dusk": DUSK_FOG_INSCATTER}  # overrides preset fogCol in UE only
-# City bounce comes from the SkyLight re-capturing the warm glow dome (SKY_INTENSITY night). The
-# SkyLight lower-hemisphere colour is deliberately not used: with real-time capture it stays at the
-# value the proxy was created with and leaked night bounce into later day / dusk captures.
+# SkyLight lower hemisphere = the lit city / ground below the horizon. With the default black lower
+# hemisphere every downward reflection vector (lower floors of glass towers, residential windows seen
+# from above) and every down-facing ambient sample read pure black, so glass looked like flat dark
+# tint and shaded walls crushed. Radiance is in captured-sky units (scaled by SKY_INTENSITY).
+# It previously leaked between presets captured in one process; each preset now runs in a fresh
+# process (run_xinyi_look.ps1) and the value is applied through the setter, which re-creates the
+# render proxy.
+LOWER_HEMISPHERE = {"day": (0.09, 0.087, 0.08), "dusk": (0.032, 0.025, 0.024), "night": (0.0026, 0.0019, 0.0013)}
+NIGHT_MOON_COLOR = (0.68, 0.74, 0.92)   # was (0.55, 0.65, 1.0): the whole night city read blue-cast
+# Atmospheric depth (not "more fog"): SkyAtmosphere aerial perspective at 1x is a dry-air km scale,
+# so ridges 5 km and 20 km away rendered the same saturated green. A larger view-distance scale gives
+# humid-basin layering (cooler, lighter, less saturated with distance), and the height fog starts a
+# few hundred metres out so the foreground keeps full contrast. Night keeps its accepted baseline.
+AERIAL_PERSPECTIVE_SCALE = {"day": 2.4, "dusk": 1.9}
+AERIAL_PERSPECTIVE_START_KM = {"day": 2.5, "dusk": 2.5}   # aircraft-altitude foreground stays clean
+FOG_START_CM = {"day": 50000.0, "dusk": 50000.0}
 
 
 def presets():
@@ -123,7 +136,7 @@ def apply_tod(world, actors, name, persist_mpc_defaults=False):
         # night: cool moonlight keeps silhouettes readable
         sun.set_actor_rotation(sun_rotator(135.0, 55.0), False)
         sc.set_intensity(NIGHT_MOON_LUX)
-        sc.set_light_color(unreal.LinearColor(0.55, 0.65, 1.0, 1.0))
+        sc.set_light_color(unreal.LinearColor(NIGHT_MOON_COLOR[0], NIGHT_MOON_COLOR[1], NIGHT_MOON_COLOR[2], 1.0))
     elif name == "dusk":
         sun.set_actor_rotation(sun_rotator(L["sunAz"], DUSK_SUN_EL), False)
         sc.set_intensity(float(inten))
@@ -138,13 +151,23 @@ def apply_tod(world, actors, name, persist_mpc_defaults=False):
     if name == "dusk":
         f = SKY_LUMINANCE_FACTOR_DUSK
     ac.set_sky_luminance_factor(unreal.LinearColor(f[0], f[1], f[2], 1.0))
+    # (sic) the engine property is spelled AerialPespectiveViewDistanceScale
+    ac.set_aerial_pespective_view_distance_scale(AERIAL_PERSPECTIVE_SCALE.get(name, 1.0))
+    ac.set_editor_property("aerial_perspective_start_depth", AERIAL_PERSPECTIVE_START_KM.get(name, 0.1))
 
     skc = find(actors, RIG["sky"]).get_component_by_class(unreal.SkyLightComponent)
     skc.set_intensity(SKY_INTENSITY.get(name, 1.0))
+    lh = LOWER_HEMISPHERE.get(name)
+    if lh is not None:
+        # True = replace the captured lower hemisphere with LowerHemisphereColor. False would use the
+        # real-time-captured SkyAtmosphere below the horizon (bright haze: washes every shadow out).
+        skc.set_editor_property("lower_hemisphere_is_black", True)
+        skc.set_lower_hemisphere_color(unreal.LinearColor(lh[0], lh[1], lh[2], 1.0))
 
     fc = find(actors, RIG["fog"]).get_component_by_class(unreal.ExponentialHeightFogComponent)
     fc.set_fog_density(float(L["fogDen"]) / FOG_SCALE)
     fc.set_fog_height_falloff(FOG_FALLOFF.get(name, 0.2))
+    fc.set_start_distance(FOG_START_CM.get(name, 0.0))
     c = UE_FOG_INSCATTER.get(name, L["fogCol"])
     fc.set_fog_inscattering_color(unreal.LinearColor(c[0], c[1], c[2], 1.0))
     try:
