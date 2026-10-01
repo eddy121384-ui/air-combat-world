@@ -342,6 +342,12 @@ void xc_wall(float u, float h, float H, float fh, float arch, float variant, flo
     grime *= 1.0 - isOffice * 0.8;
     c *= 1.0 - grime * 0.42;
     c = lerp(c, c * float3(0.92, 0.95, 0.92), weather * 0.5 * isOld);   // green-grey humid cast
+    // distance contact: at aircraft range a block keeps no arcade / splash detail at its foot, so a
+    // short occlusion ramp grounds it into the floor. Gated on a ~4-floor period (on from mid range,
+    // where single floors may still resolve) and off up close, so near Xinyi facades are unchanged.
+    float farF = 1.0 - xc_detail(fwh, fh * 4.0);
+    float contact = (1.0 - smoothstep(0.0, lerp(4.0, 14.0, farF), h)) * farF;
+    c *= 1.0 - contact * 0.65;
 
     // --- material response ------------------------------------------------------
     float glassAmt = win * (1.0 - cageCover * 0.7) * (1.0 - arcade);
@@ -455,7 +461,9 @@ void xc_roof(float3 wpos, float H, float arch, float variant, float seed, float 
     float isCivic = step(5.5, arch);
     float imperial = isCivic * step(14.5, variant);
     float tileRows = xc_line(frac(wpos.z / 0.33), 0.25, max(fwidth(wpos.z), 1e-4) / 0.33) * xc_detail(max(fwidth(wpos.z), 1e-4), 0.66);
-    float3 glazed = float3(0.74, 0.52, 0.12) * (1.0 - tileRows * 0.35);
+    // Sun Yat-sen Memorial Hall glazed tile: weathered golden, not lemon (0.74/0.52/0.12 read as
+    // flat saturated yellow from the air)
+    float3 glazed = float3(0.60, 0.46, 0.21) * (1.0 - tileRows * 0.35);
     roofCol = lerp(roofCol, float3(0.42, 0.41, 0.39), isCivic * (1.0 - imperial));
     roofCol = lerp(roofCol, glazed, imperial);
     float domeRoof = isCivic * step(13.5, variant) * (1.0 - step(14.5, variant));
@@ -463,7 +471,7 @@ void xc_roof(float3 wpos, float H, float arch, float variant, float seed, float 
     roofCol = lerp(roofCol, float3(0.80, 0.81, 0.82) * (1.0 - panel * 0.25), domeRoof);
     base = roofCol;
     rough = lerp(0.9, 0.5, sheetRoof);
-    rough = lerp(rough, 0.35, imperial);
+    rough = lerp(rough, 0.28, imperial);                 // glaze sheen
     rough = lerp(rough, 0.3, domeRoof);
     metal = sheetRoof * 0.3 + domeRoof * 0.55;
     spec = 0.35;
@@ -490,7 +498,8 @@ void xc_taipei101(float3 wpos, float2 uv0, float3 vc4rgb, float glassFlag, float
     // double-glazed blue-green glass, strong vertical mullions every 1.4 m
     float mull = xc_line(frac(u / 1.4), 0.09, fwu / 1.4) * xc_detail(fwu, 1.4);
     float floorLine = xc_line(fv, 0.10, fwh / fh) * xc_detail(fwh, fh) * 0.6;
-    float3 glass = float3(0.10, 0.20, 0.19);
+    // blue-green, not yellow-green: under warm dusk light a green-heavy tint drifts olive
+    float3 glass = float3(0.075, 0.15, 0.20);
     // slight darkening at the foot of each module (under the ledge above)
     glass *= lerp(0.8, 1.05, tsec);
     float3 frame = float3(0.52, 0.58, 0.56);
@@ -509,11 +518,16 @@ void xc_taipei101(float3 wpos, float2 uv0, float3 vc4rgb, float glassFlag, float
     float band = smoothstep(0.35, 1.0, tsec) * isModule;
     float officeLit = step(0.6, xc_hash21(float2(floor(u / 2.8), floor(h / fh)))) * glassFlag;
     float3 flood = float3(1.0, 0.78, 0.45);
-    float3 e = flood * band * band * 0.9 * glassFlag;
+    // Floodlights have a fixed luminance; how bright they read is the exposure's job. Dusk exposes
+    // ~1.3 EV brighter than night, so a flood ramp linear in `night` (0.5 at dusk) put the tier
+    // tops on screen brighter than at night and clipped them cream-white. Ramping the floods as
+    // night^3 overall (night^2 here, x night below) keeps dusk floods ~0.3x their night read.
+    float floodOn = night * night;
+    float3 e = flood * band * band * 0.9 * glassFlag * floodOn;
     e += float3(0.85, 0.93, 1.0) * officeLit * xc_box(fv, 0.2, 0.85, fwh / fh) * 0.08 * (1.0 - band) * xc_detail(fwu, 5.6);
-    e += flood * isModule * 0.04 * glassFlag;
+    e += flood * isModule * 0.04 * glassFlag * floodOn;
     e += flood * step(9.5, section) * (1.0 - step(10.5, section)) * 1.0;   // pinnacle
-    e += gold * isOrn * 0.6;
+    e += gold * isOrn * 0.6 * floodOn;
     emis = e * night;
 }
 
@@ -589,8 +603,15 @@ void xc_backdrop(float3 wpos, float3 N, float4 vc, float4 fc, float night, float
 {
     float2 p = float2(wpos.x, wpos.y);
     float has = fc.w;
-    float urban = max(vc.x * (1.0 - has), saturate(fc.x * 3.0) * has);
-    float forest = vc.y * (1.0 - saturate(fc.x * 4.0) * has);
+    // band-limited fabric noise: block (45 m), neighbourhood (160 m), district (600 m) scale
+    float m1 = xc_fnoise(p + 211.0, 0.022, fwp);
+    float m2 = xc_fnoise(p - 977.0, 0.00625, fwp);
+    float m3 = xc_fnoise(p + 3121.0, 0.0017, fwp);
+    // fc is a ~47 m bilinear texel field; a low-frequency jitter on the coverage keeps its
+    // footprint from reading as soft diamonds where the city meets the hillside forest.
+    float covJ = saturate(fc.x * 3.0 + (m2 - 0.5) * 0.35 + (m1 - 0.5) * 0.12);
+    float urban = max(vc.x * (1.0 - has), smoothstep(-0.1, 1.0, covJ) * has);
+    float forest = vc.y * (1.0 - smoothstep(-0.05, 1.0, covJ) * has);
     // forest: subtropical broadleaf, dark and humid
     float fn = xc_fnoise(p, 0.004, fwp) * 0.6 + xc_fnoise(p, 0.02, fwp) * 0.4;
     float3 forestCol = lerp(float3(0.055, 0.085, 0.045), float3(0.10, 0.14, 0.07), fn);
@@ -601,18 +622,20 @@ void xc_backdrop(float3 wpos, float3 N, float4 vc, float4 fc, float night, float
     float fallback = 0.35 + 0.35 * xc_fnoise(p, 0.003, fwp) + 0.15 * xc_fnoise(p, 0.02, fwp);
     float dens = lerp(fallback, saturate(fc.x * 1.6), has);
     float hgt = lerp(0.12, fc.y, has);                      // /100 m
-    // parcel texture: 14 m cells, occupied with probability = density
-    float2 pc = floor(p / 14.0);
-    float pr = xc_hash21(pc);
-    float occupied = step(pr, dens);
-    float3 roofs = xc_pick4(frac(pr * 7.31), float3(0.30, 0.30, 0.29), float3(0.40, 0.39, 0.37),
-                            float3(0.25, 0.28, 0.27), float3(0.35, 0.31, 0.27));
-    float3 gaps = float3(0.11, 0.11, 0.11);
-    float dParcel = xc_detail(fwp, 14.0);
-    float3 near = lerp(gaps, roofs, occupied);
-    float3 farMean = lerp(gaps, float3(0.33, 0.33, 0.31), dens);
-    float3 cityCol = lerp(farMean, near, dParcel);
-    cityCol *= 1.0 - 0.35 * saturate(hgt * 1.6);            // tall fabric = deeper canyons
+    // Urban floor. Where WFS data exists (has = 1) the real buildings are far-city meshes, so the
+    // ground is only what lies between them: streets, lots, yards and street trees. It is never
+    // painted with fake roofs (the old 14 m binary hash parcels read as a confetti grid next to the
+    // real boxes). Outside WFS coverage (no meshes) a soft mottle stands in for the whole fabric.
+    float3 pave = lerp(float3(0.165, 0.163, 0.155), float3(0.245, 0.238, 0.222), m1 * 0.55 + m2 * 0.45);
+    float yards = smoothstep(0.52, 0.78, m2 * 0.6 + m3 * 0.4) * (1.0 - dens * 0.7);
+    pave = lerp(pave, float3(0.085, 0.115, 0.065), yards * 0.65);
+    float3 fabric = lerp(float3(0.20, 0.20, 0.19), float3(0.34, 0.33, 0.31), m1 * 0.5 + m2 * 0.3 + m3 * 0.2);
+    fabric = lerp(float3(0.13, 0.13, 0.125), fabric, saturate(dens * 1.3));
+    float3 cityCol = lerp(fabric, pave, has);
+    // canyon / contact occlusion: dense, tall clusters sit in their own shade, which grounds the
+    // far-city boxes into the floor instead of standing them on a bright uniform plane
+    cityCol *= 1.0 - 0.3 * saturate(dens * 1.4) * (0.45 + 0.55 * saturate(hgt * 1.6)) * has;
+    cityCol *= 1.0 - 0.3 * saturate(hgt * 1.6) * (1.0 - has);   // tall fabric = deeper canyons
     float greenPocket = smoothstep(0.72, 0.8, xc_fnoise(p + 5833.0, 0.0012, fwp)) * (1.0 - has);
     greenPocket = max(greenPocket, (1.0 - saturate(fc.x * 5.0)) * has * vc.x);   // real open space
     cityCol = lerp(cityCol, float3(0.12, 0.17, 0.09), greenPocket);
@@ -626,13 +649,22 @@ void xc_backdrop(float3 wpos, float3 N, float4 vc, float4 fc, float night, float
     // night light field follows real density and height
     float3 sodium = float3(1.0, 0.55, 0.20);
     float3 ledW = float3(0.85, 0.92, 1.0);
-    float speck = step(1.0 - dens * 0.8, xc_hash21(floor(p / 6.0) + 3.1));
-    float3 speckCol = lerp(ledW, lerp(sodium, float3(1.0, 0.75, 0.45), 0.5), step(0.45, xc_hash21(floor(p / 6.0))));
-    float3 nearGlow = speck * speckCol * 0.35;
+    // Street lights: a sparse set of small anti-aliased lamp points (~1.4 m inside a 6 m cell).
+    // Lighting whole 6 m hash cells (up to ~64 % of them) drew a glowing confetti mat at dusk.
+    float2 lc = floor(p / 6.0);
+    float2 lf = frac(p / 6.0);
+    float lampOn = step(1.0 - dens * 0.3, xc_hash21(lc + 3.1));
+    float speck = lampOn * xc_box(lf.x, 0.38, 0.62, fwp / 6.0) * xc_box(lf.y, 0.38, 0.62, fwp / 6.0);
+    float3 speckCol = lerp(ledW, lerp(sodium, float3(1.0, 0.75, 0.45), 0.5), step(0.45, xc_hash21(lc)));
+    // 3.2 = energy match: mean of the near field (0.3 lit x 0.0576 point area x 3.2) equals the
+    // far-field mean (0.055 x dens), so city light stays continuous across the LOD fade
+    float3 nearGlow = speck * speckCol * 3.2;
     float3 farGlow = float3(1.0, 0.72, 0.45) * dens * 0.055;
     float3 glow = lerp(farGlow, nearGlow, xc_detail(fwp, 12.0));
     glow *= 0.7 + 1.2 * saturate(hgt * 2.0);
-    emis = glow * urban * (1.0 - greenPocket) * night;
+    // same light-on curve as the Taipei 101 floods: night unchanged, dusk (night 0.5, ~1.3 EV
+    // brighter exposure) no longer reads brighter than night
+    emis = glow * urban * (1.0 - greenPocket) * night * night;
 }
 
 // ----------------------------------------------------------------------------

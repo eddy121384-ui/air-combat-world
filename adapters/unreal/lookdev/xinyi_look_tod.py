@@ -26,7 +26,16 @@ RIG = {
     "fog": LOOK_PREFIX + "HeightFog",
     "pp": LOOK_PREFIX + "PostProcess",
 }
-SKY_INTENSITY = {"day": 1.0, "dusk": 0.85, "night": 12.0}
+SKY_INTENSITY = {"day": 2.2, "dusk": 3.0, "night": 12.0}
+# Dusk art pass (UE-only; day / night untouched). The preset's 5 deg saturated-orange sun plus weak
+# sky fill rendered every wall rust-brown with pitch-black shadows and a flat brown sky. Golden hour
+# wants complementary light: a somewhat higher, less saturated amber sun and a strong cool SkyLight
+# fill so shadow sides go blue-violet, a warm-peach horizon over a deeper blue zenith, and a
+# violet-rose haze for depth between ridges.
+DUSK_SUN_EL = 7.0
+DUSK_SUN_TINT = (1.0, 0.93, 0.85)
+DUSK_FOG_INSCATTER = (0.40, 0.31, 0.36)
+SKY_LUMINANCE_FACTOR_DUSK = (1.1, 0.74, 1.05)
 BLOOM = {"day": 0.15, "dusk": 0.45, "night": 0.8}
 FOG_SCALE = 0.025
 # Host calibration (UE5.8 lit viewport, HighResShot): the preview "exposure" presets are in preview
@@ -46,7 +55,7 @@ UE_EXPOSURE_OFFSET_EV = {"day": 2.0, "dusk": 2.0, "night": 0.0}
 NIGHT_MOON_LUX = 0.1
 SKY_LUMINANCE_FACTOR = {"night": (9.0, 7.5, 6.0)}  # warm light-pollution glow; default 1 (day / dusk)
 FOG_FALLOFF = {"night": 0.05}                      # default 0.2 (day / dusk unchanged)
-UE_FOG_INSCATTER = {"night": (0.080, 0.070, 0.062)}  # overrides preset fogCol in UE only
+UE_FOG_INSCATTER = {"night": (0.080, 0.070, 0.062), "dusk": DUSK_FOG_INSCATTER}  # overrides preset fogCol in UE only
 # City bounce comes from the SkyLight re-capturing the warm glow dome (SKY_INTENSITY night). The
 # SkyLight lower-hemisphere colour is deliberately not used: with real-time capture it stays at the
 # value the proxy was created with and leaked night bounce into later day / dusk captures.
@@ -115,6 +124,10 @@ def apply_tod(world, actors, name, persist_mpc_defaults=False):
         sun.set_actor_rotation(sun_rotator(135.0, 55.0), False)
         sc.set_intensity(NIGHT_MOON_LUX)
         sc.set_light_color(unreal.LinearColor(0.55, 0.65, 1.0, 1.0))
+    elif name == "dusk":
+        sun.set_actor_rotation(sun_rotator(L["sunAz"], DUSK_SUN_EL), False)
+        sc.set_intensity(float(inten))
+        sc.set_light_color(unreal.LinearColor(DUSK_SUN_TINT[0], DUSK_SUN_TINT[1], DUSK_SUN_TINT[2], 1.0))
     else:
         sun.set_actor_rotation(sun_rotator(L["sunAz"], L["sunEl"]), False)
         sc.set_intensity(float(inten))
@@ -122,6 +135,8 @@ def apply_tod(world, actors, name, persist_mpc_defaults=False):
 
     ac = find(actors, RIG["atmo"]).get_component_by_class(unreal.SkyAtmosphereComponent)
     f = SKY_LUMINANCE_FACTOR.get(name, (1.0, 1.0, 1.0))
+    if name == "dusk":
+        f = SKY_LUMINANCE_FACTOR_DUSK
     ac.set_sky_luminance_factor(unreal.LinearColor(f[0], f[1], f[2], 1.0))
 
     skc = find(actors, RIG["sky"]).get_component_by_class(unreal.SkyLightComponent)
