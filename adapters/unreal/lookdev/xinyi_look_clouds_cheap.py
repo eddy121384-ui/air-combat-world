@@ -41,9 +41,14 @@ CULL_PAD_M = 600.0
 # pass renders them at QUARTER resolution (480 x 270 at 1080p, bilinear upsample): the cost is mostly
 # per-pixel shading (UHD 770, move phase over OFF: 100 % +4..+39 ms, 50 % +4..+13 ms, 25 % +1..+6 ms)
 # and the soft subject hides the lower resolution. Global renderer setting, applied only in the cheap
-# capture process. At 25 % most of the remaining cost is fixed (v1 probes: proxies drawn with ~0 px
-# already cost +3 .. +4 ms, the cloud shadow light function ~1 ms), not cloud pixel shading.
-CVARS = {"r.SeparateTranslucencyScreenPercentage": 25}
+# capture process. (v1 note "proxies drawn at ~0 px cost +3 .. +4 ms" was the translucency lighting
+# volume below, not per-proxy draw cost; measured flat from 1 to ~100 drawn proxies.)
+# The translucency lighting volume (cascaded volume cleared + lit by the sun's shadow cascades whenever any
+# translucent primitive is visible) only feeds LIT translucent materials; M_XinyiClouds_Cheap is unlit and
+# computes its own lighting, so the volume was pure fixed cost: on the UHD 770 it is ~+1.5 .. +3 ms per
+# frame the moment one proxy is drawn, independent of the proxy count (probes in the v1 scaling pass).
+# Output is bit-identical with it off. Same scope as the other cvar: cheap capture process only.
+CVARS = {"r.SeparateTranslucencyScreenPercentage": 25, "r.TranslucencyLightingVolume": 0}
 
 # Per-time-of-day calibration (material-instance parameters; lighting itself comes from the sky
 # atmosphere sun and the real-time sky light, so DAY / DUSK / NIGHT follow the accepted rig).

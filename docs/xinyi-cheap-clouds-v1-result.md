@@ -19,6 +19,36 @@ Overall (my judgement from the side-by-side sheets, not a metric): far field fro
 ~75 %; whole-image ~70 % of HIGH. HIGH's remaining advantages: thin cloudlet field at the cloud base,
 haze / translucency of distant clouds, sky-light cloud AO, much richer near-field silhouettes.
 
+## Erratum / v1.1 — the fixed overhead was not the proxies
+
+The "proxy / primitive overhead" reading in section 3 (and the "~0 px proxies cost +3 … +4 ms" probe) was
+wrong. A follow-up scaling pass measured it properly (same-session interleaved probes, UHD 770):
+
+* cost is **flat in the number of drawn proxies**: 1–2 drawn proxies cost the same fixed amount as ~100
+  (probe with proxies shrunk to ~0 px: +0.8 … +2.7 ms at ~1 proxy vs +2.0 … +3.0 ms at all of them);
+  hidden / culled proxies cost nothing; 12,016 extra always-culled actors (12.8 k total, 17× the spawned
+  set) changed nothing measurable.
+* the fixed cost is the **translucency lighting volume** (`r.TranslucencyLightingVolume 1`): the
+  cascaded volume is cleared and lit by the sun's shadow cascades as soon as any translucent primitive is
+  visible, and only lit translucent materials read it. `M_XinyiClouds_Cheap` is unlit and does its own
+  lighting. It is now disabled in the cheap capture process (same scope as the translucency screen
+  percentage); output is bit-identical.
+* what is left is pixel shading of the near cells (hiding near cells saves 2–4 ms, hiding far clusters
+  0.5–1.2 ms).
+
+Result, interleaved fresh processes, 3 rounds, move-phase ms over OFF:
+
+| | skyline | low Xinyi | inside | Elephant | high basin | approach |
+|---|---|---|---|---|---|---|
+| CHEAP v1 (volume on) | +7.3 | +5.4 | +5.9 | +4.0 | +4.9 | +7.9 |
+| **CHEAP v1.1 (volume off)** | **+5.4** | **+3.0** | **+3.7** | **+1.4** | **+2.5** | **+5.9** |
+
+(This session's v1 baseline ran 0.5–1.5 ms above the first v1 session; the saving, −1.9 … −2.6 ms, is the
+robust number.) Frames are RGB bit-identical between volume on / off (6 views × s60 + move frames, DAY;
+DUSK likewise), so cloud shapes, shadows and motion are unchanged. A camera-relative active set was **not**
+built: the engine's frustum + distance culling already is one, the active count per view is 37–100, and the
+count does not drive cost.
+
 ## 1. Far field
 
 ### Root cause (measured)
