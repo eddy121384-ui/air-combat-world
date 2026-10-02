@@ -88,7 +88,10 @@ float xcl_broken(float4 wx, float hn, float covBias, float lump, out float bh)
     return saturate(wx.z * 1.1 + covBias + lump - abs(bh - 0.45) * 1.5) * saturate(bh * 10.0) * saturate((1.0 - bh) * 6.0);
 }
 
-void xcl_cloud(float3 p, float4 wx, float hn, float covBias, out float dens, out float env, out float ao)
+// gain = density contrast (edge sharpness); fine = weight of the ~320 m lobes. HIGH keeps 2.2 / 0.45;
+// LOW softens both: at LOW view-sample counts the sharp, fine density aliases into per-pixel grain.
+void xcl_cloud(float3 p, float4 wx, float hn, float covBias, float gain, float fine,
+               out float dens, out float env, out float ao)
 {
     // conservative envelope: the largest possible billow offset (+0.6), lets the engine skip
     // empty space before any noise is evaluated
@@ -107,7 +110,7 @@ void xcl_cloud(float3 p, float4 wx, float hn, float covBias, out float dens, out
         float3 q = float3(dot(q0, float3(0.80, 0.36, 0.48)), dot(q0, float3(-0.60, 0.48, 0.64)), dot(q0, float3(0.0, -0.80, 0.60)));
         float n1 = xcl_noise(q / 900.0);
         float n2 = xcl_noise(q / 320.0 + 17.3);
-        float lump = (n1 - 0.5) * 0.7 + (n2 - 0.5) * 0.45;
+        float lump = (n1 - 0.5) * 0.7 + (n2 - 0.5) * fine;
         // tower tops vary with the large billow (0.8 .. 1.25 x the cell top) so neighbours differ
         float shape = max(xcl_cumulus(wx, hn, covBias, lump, 0.8 + 0.45 * n1, hc), xcl_broken(wx, hn, covBias, lump * 0.8, bh));
 #ifdef XCL_LOW
@@ -116,7 +119,7 @@ void xcl_cloud(float3 p, float4 wx, float hn, float covBias, out float dens, out
         // fine edge detail (~140 m), HIGH only; strongest on the upper, sunlit parts
         float erode = (1.0 - xcl_noise(q / 140.0 + 41.7)) * 0.16 * saturate(hc + 0.3);
 #endif
-        dens = saturate((shape - erode) * 2.2);
+        dens = saturate((shape - erode) * gain);
         // sky-light occlusion: grey-blue undersides, bright tops (never black)
         float hv = max(saturate(hc), saturate(bh) * step(0.001, wx.z));
         ao = lerp(0.6, 1.0, saturate(hv * 1.2));

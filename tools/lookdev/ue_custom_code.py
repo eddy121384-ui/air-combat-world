@@ -69,7 +69,7 @@ def custom_code(material: str, extra_defines: str = "") -> str:
 
 
 CLOUD_SHADER = Path(__file__).resolve().parent / "shaders" / "xinyi_clouds.hlsl"
-CLOUD_INPUTS = [("WP", 3), ("WX", 4), ("COV", 1)]
+CLOUD_INPUTS = [("WP", 3), ("WX", 4), ("COV", 1), ("GAIN", 1), ("FINE", 1)]
 PLANET_RADIUS_M = 6360000.0   # SkyAtmosphere / VolumetricCloud default; planet top at the world origin
 
 
@@ -90,7 +90,7 @@ def cloud_custom_code(low: bool, broken_base_norm: float, layer_bottom_m: float,
         + "float alt = length(WP + float3(0.0, 0.0, %.1f)) - %.1f;\n" % (PLANET_RADIUS_M, PLANET_RADIUS_M)
         + "float hn = saturate((alt - %.1f) / %.1f);\n" % (layer_bottom_m, layer_height_m)
         + "float d; float e; float o;\n"
-        + "xcl.xcl_cloud(WP, WX, hn, COV, d, e, o);\n"
+        + "xcl.xcl_cloud(WP, WX, hn, COV, GAIN, FINE, d, e, o);\n"
         + "Env = e; AO = o;\nreturn d;\n"
     )
 

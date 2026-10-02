@@ -11,9 +11,10 @@ Separation of concerns:
 Quality profiles (ACW_XINYI_LOOK_CLOUDS = off | low | high; default off everywhere):
   off   cloud actor hidden, cloud shadows off: the accepted, cloud-independent city look. The saved
         look level is in this state.
-  low   weak-GPU / runtime test path (UHD 770 class): 2-octave density, 1 multi-scattering octave,
-        half view and shadow sample rate, low-resolution trace (render-target mode 2), small cloud
-        shadow map, no sky AO. Keeps silhouette, depth and the main cloud-shadow cue.
+  low   weak-GPU / runtime test path (UHD 770 class): 2-octave, softened density, 1 multi-scattering
+        octave, 0.75x view / 0.5x shadow sampling, quarter-res trace with half-res temporal
+        reconstruction and bilateral upsampling (render-target mode 0), small cloud shadow map at
+        reduced strength, no sky AO. Same weather and shapes as HIGH, cheaper rendering.
   high  PC visual reference: 3-octave density, 2 multi-scattering octaves, 1.5x view / 2x shadow
         sampling, full-resolution trace, cloud shadows + sky-light cloud AO.
 Per-time-of-day calibration (extinction, coverage bias, multi-scattering, dusk sky fill) is set on a
@@ -53,6 +54,8 @@ PROFILES = {
         "sun_cloud_shadow_res_scale": 1.0,
         "sun_cloud_shadow_ray_scale": 1.0,
         "sky_cloud_ao": True,
+        "sun_cloud_shadow_strength": 0.55,
+        "material": {},          # material defaults (CloudDensityGain 2.2, CloudFineLump 0.45)
         "cvars": {
             # full-resolution trace (cinematic path). Half-res temporal reconstruction (mode 1) does not
             # converge in SceneCapture stills, which then show blotchy trace noise.
@@ -68,8 +71,18 @@ PROFILES = {
             "r.VolumetricCloud.HighQualityAerialPerspective": 0,
         },
     },
+    # LOW optimization (continuous 30 Hz flight test on the UHD 770, see the pass report):
+    # - Grain was view-ray undersampling of a sharp, fine density. Mode 2 forces nearest-neighbour
+    #   upsampling of its quarter-res trace, so a static camera converged to a frozen speckle.
+    #   Softer density (gain 2.2 -> 1.1, 320 m lobe weight 0.45 -> 0.1) cuts the variance at the
+    #   source for free; mode 0 + bilateral upsampling with 0.75x view samples reconstructs it
+    #   cleanly with lower frame-to-frame flicker than HIGH.
+    # - Soft density widens the fringe halo that sparkles in clear sky; coverage -0.12 trims it back
+    #   to the HIGH silhouette.
+    # - The whole-frame darker / cooler shift was over-strong sun cloud shadow from the coarse LOW
+    #   shadow map (sunlight loss ~2x HIGH): strength 0.55 -> 0.35.
     "low": {
-        "view_sample_count_scale": 0.5,
+        "view_sample_count_scale": 0.75,
         "shadow_view_sample_count_scale": 0.5,
         "reflection_view_sample_count_scale": 0.25,
         "shadow_reflection_view_sample_count_scale": 0.25,
@@ -77,11 +90,12 @@ PROFILES = {
         "sun_cloud_shadow_res_scale": 0.25,
         "sun_cloud_shadow_ray_scale": 0.5,
         "sky_cloud_ao": False,
+        "sun_cloud_shadow_strength": 0.35,
+        "material": {"CloudDensityGain": 1.1, "CloudFineLump": 0.1, "CloudCoverage": -0.12},
         "cvars": {
-            # Mode 2: cheapest trace with the most stable reconstruction under motion on the UHD 770
-            # (continuous 30 Hz flight test: same cost as mode 0, clearly less moving grain)
-            "r.VolumetricRenderTarget.Mode": 2,
-            "r.VolumetricCloud.ViewRaySampleMaxCount": 128,
+            "r.VolumetricRenderTarget.Mode": 0,
+            "r.VolumetricRenderTarget.UpsamplingMode": 4,
+            "r.VolumetricCloud.ViewRaySampleMaxCount": 160,
             "r.VolumetricCloud.Shadow.ViewRaySampleMaxCount": 16,
             "r.VolumetricCloud.ShadowMap.MaxResolution": 512,
             "r.VolumetricCloud.ShadowMap.RaySampleMaxCount": 24,
@@ -175,7 +189,7 @@ def apply_clouds(world, actors, quality, tod):
     c.set_shadow_tracing_distance(p["shadow_tracing_distance"])
     sc = SUN_ON_CLOUDS.get(tod, (1.0, 1.0, 1.0))
     for prop, val in (("cloud_scattered_luminance_scale", unreal.LinearColor(sc[0], sc[1], sc[2], 1.0)),
-                      ("cast_cloud_shadows", True), ("cloud_shadow_strength", 0.55),
+                      ("cast_cloud_shadows", True), ("cloud_shadow_strength", p["sun_cloud_shadow_strength"]),
                       ("cloud_shadow_on_surface_strength", 1.0), ("cloud_shadow_on_atmosphere_strength", 0.1),
                       ("cloud_shadow_extent", 120.0),
                       ("cloud_shadow_map_resolution_scale", p["sun_cloud_shadow_res_scale"]),
@@ -190,6 +204,9 @@ def apply_clouds(world, actors, quality, tod):
     a = CLOUD_AMBIENT.get(tod, (0.0, 0.0, 0.0))
     params = {"CloudExtinction": EXTINCTION.get(tod, 0.02), "CloudCoverage": COVERAGE_BIAS,
               "CloudMultiScatter": MULTI_SCATTER.get(tod, 0.75)}
+    # profile material values (LOW density softening); coverage adds to the per-ToD bias
+    for n, v in p["material"].items():
+        params[n] = params.get(n, 0.0) + v if n == "CloudCoverage" else v
     for n, v in params.items():
         mid.set_scalar_parameter_value(n, v)
     mid.set_vector_parameter_value("CloudAmbient", unreal.LinearColor(a[0], a[1], a[2], 0.0))

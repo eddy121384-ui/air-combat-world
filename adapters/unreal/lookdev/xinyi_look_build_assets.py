@@ -312,11 +312,14 @@ def build_cloud_material(weather, cloud_rep, low):
     # instance by xinyi_look_clouds.apply_clouds), NOT the city MPC: the volumetric cloud pass did
     # not see per-world MPC values (coverage / extinction / dusk fill had no effect).
     cov = scalar_param(mat, "CloudCoverage", 0.0, -1200, 460)
+    # density contrast + fine-lobe weight: defaults are the HIGH look; LOW softens them per profile
+    gain = scalar_param(mat, "CloudDensityGain", 2.2, -1200, 560)
+    fine = scalar_param(mat, "CloudFineLump", 0.45, -1200, 660)
     ext = scalar_param(mat, "CloudExtinction", 0.02, -600, 420)
     node = custom(mat, -750, 0, cloud_custom_code(low, cloud_rep["broken_base_norm"], cloud_rep["renderer_layer_m"][0],
                                                       cloud_rep["renderer_layer_height_m"]), [n for n, _ in CLOUD_INPUTS],
                   [("Env", F1), ("AO", F1)], name, unreal.CustomMaterialOutputType.CMOT_FLOAT1)
-    wire(((wp, "WP"), (wx, "WX", "RGBA"), (cov, "COV")), node)
+    wire(((wp, "WP"), (wx, "WX", "RGBA"), (cov, "COV"), (gain, "GAIN"), (fine, "FINE")), node)
     mul = expr(mat, unreal.MaterialExpressionMultiply, -400, 200)
     mel.connect_material_expressions(node, "", mul, "A")
     mel.connect_material_expressions(ext, "", mul, "B")
