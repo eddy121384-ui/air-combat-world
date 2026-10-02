@@ -1,11 +1,14 @@
 // ============================================================================
-// XinyiLook Cheap Cloud Renderer v0 (EXPERIMENTAL) - analytic lobe impostor.
+// XinyiLook Cheap Cloud Renderer v1 (EXPERIMENTAL) - analytic lobe impostor.
 //
 // One renderer of the renderer-agnostic cloud state (cloud_state_v0.json ->
-// build_clouds.py cells -> build_cloud_cheap.py). Each cloud cell is drawn as
-// ONE translucent proxy box (inward-facing: its far side rasterises once per
-// pixel, also with the camera inside). The pixel shader intersects the view
-// ray analytically with the cell's <= 8 ellipsoid lobes:
+// build_clouds.py cells -> build_cloud_cheap.py). Near, each cloud cell is drawn
+// as ONE translucent proxy box (inward-facing: its far side rasterises once per
+// pixel, also with the camera inside); far away, one proxy per cluster of
+// neighbouring cells draws their merged, flatter far-field mass. The two hand
+// over by camera distance in optical depth (continuous, no popping).
+// The pixel shader intersects the view ray analytically with the proxy's <= 8
+// ellipsoid lobes (per-lobe vertical squash):
 //   * optical depth = sum of closed-form chord integrals of a (1 - r^2)^2
 //     density profile  -> order-independent inside a cell (no lobe sorting),
 //     rotation-invariant (no billboard swing), true parallax, soft edges;
@@ -52,14 +55,15 @@ float xcc_hg(float c, float g)
 }
 
 // sun optical depth (without sigma) from box-relative point p along unit direction l
-float xcc_sun_depth(float4 L[8], float3 sq, float3 p, float3 l)
+// L[i] = (centre, radius), S3[i] = per-lobe normalising scale (1, 1, 1 / squash) / radius
+float xcc_sun_depth(float4 L[8], float3 S3[8], float3 p, float3 l)
 {
     float acc = 0.0;
     [unroll] for (int i = 0; i < 8; i++)
     {
         if (L[i].w > 0.0)
         {
-            float3 s3 = sq / L[i].w;
+            float3 s3 = S3[i];
             float3 oo = (p - L[i].xyz) * s3;
             float3 dd = l * s3;
             float a = dot(dd, dd);
@@ -93,22 +97,34 @@ float2 xcc_base_clip(float3 o, float3 d, float baseZ, float tLo, float tHi)
     return float2(tLo, tHi);
 }
 
+
 // wp  far-side proxy pixel (world m)     cam camera (world m)     obj proxy box centre (world m)
-// l0..l7 lobes (box-relative centre m, radius m)
-// prm = (base z rel, vertical squash, variation seed, bounding-sphere radius m)
+// l0..l7 lobes (box-relative centre m, w = whole-metre radius + vertical squash / 2; w = 0: unused)
+// prm = (base z rel, role: +1 near cell / -1 far cluster, variation seed, bounding-sphere radius m)
 // sunDir unit vector toward the sun, sunE sun illuminance at the cloud, skyUp / skyDown sky-light radiance
 // sceneDepth / pixelDepth view-space depths (any common unit) of the opaque scene and of this pixel
 // k1 = (sigma 1/m, erosion, density noise, ambient scale)   k2 = (sun scale, silver, fade end m, MS floor)
+// k3 = near -> far hand-over (start m, end m), far fade-out (start m, end m), camera to proxy centre
 // glow = city glow on cloud bases (night)
 void xcc_cloud(float3 wp, float3 cam, float3 obj,
                float4 l0, float4 l1, float4 l2, float4 l3, float4 l4, float4 l5, float4 l6, float4 l7,
                float4 prm, float3 sunDir, float3 sunE, float3 skyUp, float3 skyDown,
                float sceneDepth, float pixelDepth, Texture2D nt, SamplerState ns,
-               float4 k1, float4 k2, float3 glow, out float3 color, out float alpha)
+               float4 k1, float4 k2, float4 k3, float3 glow, out float3 color, out float alpha)
 {
     color = float3(0.0, 0.0, 0.0);
     alpha = 0.0;
     float3 o = cam - obj;
+    // representation weight by camera distance to the proxy: near cells hand over to far clusters by
+    // scaling optical depth (near x (1 - w), far x w), so the summed transmittance interpolates
+    // continuously (no alpha pop); the far clusters fade out at the far end. The proxies are culled by
+    // the engine just outside the band where their weight reaches zero.
+    float far = prm.y < 0.0 ? 1.0 : 0.0;
+    float dc = length(o);
+    float hand = smoothstep(k3.x, k3.y, dc);
+    float lodW = lerp(1.0 - hand, hand * (1.0 - smoothstep(k3.z, k3.w, dc)), far);
+    if (lodW <= 0.0)
+        return;
     float3 dv = wp - cam;
     float dlen = max(length(dv), 1e-3);
     float3 d = dv / dlen;
@@ -133,20 +149,27 @@ void xcc_cloud(float3 wp, float3 cam, float3 obj,
     if (tHi <= tLo)
         return;
 
+    // decode lobes: radius = whole metres, per-lobe vertical squash in the fraction
     float4 L[8] = { l0, l1, l2, l3, l4, l5, l6, l7 };
-    float k = max(prm.y, 0.05);
-    float3 sq = float3(1.0, 1.0, 1.0 / k);
+    float3 S3[8];
+    [unroll] for (int u = 0; u < 8; u++)
+    {
+        float rr = floor(L[u].w);
+        float kk = max(frac(L[u].w) * 2.0, 0.05);
+        L[u].w = rr;
+        S3[u] = float3(1.0, 1.0, 1.0 / kk) / max(rr, 1.0);
+    }
 
     // pass 1: closest approach per lobe (normalised squared miss distance h2, metres per unit scl)
     float tc[8]; float h2[8]; float scl[8];
     float tW = 0.0;
     float wSum = 0.0;
+    float topW = 0.0;
     float dcam = 0.0;
     float top = baseZ;
     [unroll] for (int i = 0; i < 8; i++)
     {
-        float rho = max(L[i].w, 1e-3);
-        float3 s3 = sq / rho;
+        float3 s3 = S3[i];
         float3 oo = (o - L[i].xyz) * s3;
         float3 dd = d * s3;
         float a = dot(dd, dd);
@@ -162,7 +185,8 @@ void xcc_cloud(float3 wp, float3 cam, float3 obj,
         wl *= wl;
         tW += wl * tc[i];
         wSum += wl;
-        top = max(top, L[i].z + L[i].w * k);
+        topW += wl * (L[i].z + 1.0 / S3[i].z);
+        top = L[i].w > 0.0 ? max(top, L[i].z + 1.0 / S3[i].z) : top;   // lobe top = z + radius * squash
     }
     if (wSum <= 0.0)
         return;
@@ -181,9 +205,14 @@ void xcc_cloud(float3 wp, float3 cam, float3 obj,
     [branch] if (nearF > 0.0)
         n3 = lerp(0.5, xcc_n3(nt, ns, pn * (1.0 / 19.0) + 11.3), nearF);
     float fbm = n0 * 0.3 + n1 * 0.35 + n2 * 0.22 + n3 * 0.13;
+    // far clusters: an extra ~2.4 km octave (domain-scale irregularity) breaks the merged lobes into
+    // ragged, asymmetric masses instead of smooth ellipsoid outlines
+    float nB = 0.5;
+    [branch] if (far > 0.0)
+        nB = lerp(0.5, xcc_n3(nt, ns, pn * (1.0 / 2400.0) + prm.z * 7.0), 1.6);
     // erosion acts on the outer shell only (E * h2): cores stay solid, edges billow; E >= -0.15
     // bounds the growth to ~8.5 % of a lobe radius (inside the proxy pad)
-    float E = clamp((fbm - 0.45) * 4.0 * k1.y, -0.15, 3.0);
+    float E = clamp((fbm - 0.45) * 4.0 * k1.y + (nB - 0.5) * 2.2, -0.15, 3.0);
     // denser up close: the soft (1 - r^2)^2 edge band is ~0.3 lobe radii, which near the camera spans
     // hundreds of pixels and reads out of focus; a higher sigma narrows it so the fine erosion shows
     float sigma = k1.x * (1.0 + k1.z * (fbm - 0.5) * 2.0) * lerp(2.5, 1.0, saturate((tN - 1500.0) / 8000.0));
@@ -220,6 +249,7 @@ void xcc_cloud(float3 wp, float3 cam, float3 obj,
             }
         }
     }
+    tau *= lodW;
     if (tau * sigma < 1e-3)
         return;
     // lighting point: about one mean free path behind a soft minimum of the lobe entries, weighted by
@@ -230,7 +260,10 @@ void xcc_cloud(float3 wp, float3 cam, float3 obj,
     float tP = min(tE + min(1.0 / max(sigma, 1e-4), 120.0), tHi);
     tau *= sigma;
     float3 P = o + d * tP;
-    float hf = saturate((P.z - baseZ) / max(top - baseZ, 1.0));
+    // height in the cloud for lighting: v0 cells use the whole cell; a far cluster uses the tops of the
+    // lobes around the ray (a low deck between towers is lit like a cloud top, not like a tower's base)
+    float topL = lerp(top, topW / wSum, far);
+    float hf = saturate((P.z - baseZ) / max(topL - baseZ, 1.0));
 
     // smooth-union lobe normal (weights fall to zero at 1.26 radii); fades to "up" far away
     float nearW = saturate((18000.0 - tIn) / 6000.0);
@@ -242,9 +275,9 @@ void xcc_cloud(float3 wp, float3 cam, float3 obj,
         {
             if (L[m].w > 0.0)
             {
-                float3 q = (P - L[m].xyz) * sq / L[m].w;
+                float3 q = (P - L[m].xyz) * S3[m];
                 float wgt = max(0.0, 1.6 - dot(q, q));
-                g += wgt * wgt * q * sq;
+                g += wgt * wgt * q * S3[m] * L[m].w;
             }
         }
         nrm = normalize(lerp(float3(0.0, 0.0, 1.0), normalize(g), nearW));
@@ -254,16 +287,21 @@ void xcc_cloud(float3 wp, float3 cam, float3 obj,
     // height-based approximation (tops lit, bases shaded) replaces the lobe pass
     // inside the cloud the light is mostly multiply scattered: a much higher floor keeps the mist a
     // bright, diffuse grey-white instead of darkening with depth
-    float msFloor = lerp(k2.w, 0.6, saturate(1.0 - tIn / 200.0));
-    float Tfar = lerp(msFloor, 1.0, hf * hf);
+    float msFloor = lerp(k2.w, 0.6, saturate(1.0 - tIn / 200.0) * (1.0 - far));
+    // far clusters are broad, flat masses: a sun ray through a whole deck is long, but their light is
+    // mostly multiply scattered - a higher floor keeps distant decks from reading as grey slabs
+    msFloor *= lerp(1.0, 2.2, far);
+    float cosT = dot(d, sunDir);
+    // height-based far approximation: tops lit; sides lit when the sun is behind the viewer (we see the
+    // sunlit faces), shaded when looking toward the sun
+    float Tfar = lerp(msFloor, 1.0, saturate(hf * hf + (1.0 - hf * hf) * 0.75 * saturate(0.5 - 0.5 * cosT) * far));
     float sunW = saturate((30000.0 - tIn) / 8000.0);
     float Ts = Tfar;
     [branch] if (sunW > 0.0)
     {
-        float tauS = sigma * xcc_sun_depth(L, sq, P, sunDir);
-        Ts = lerp(Tfar, max(exp(-tauS), msFloor * exp(-tauS * 0.08)), sunW);
+        float tauS = sigma * xcc_sun_depth(L, S3, P, sunDir);
+        Ts = lerp(Tfar, max(exp(-tauS), msFloor * exp(-tauS * lerp(0.08, 0.03, far))), sunW);
     }
-    float cosT = dot(d, sunDir);
     float edge = exp(-tau * 0.5);
     float ph = lerp(1.0, lerp(xcc_hg(cosT, 0.6), xcc_hg(cosT, -0.2), 0.35), edge * k2.y);
     float lam = lerp(0.72, 1.0, saturate(dot(nrm, sunDir) * 0.5 + 0.5));
@@ -282,7 +320,7 @@ void xcc_cloud(float3 wp, float3 cam, float3 obj,
 
     // sky ambient: lit tops, darker grey-blue bases
     float3 amb = skyUp * saturate(0.62 + 0.38 * nrm.z) + skyDown * saturate(0.38 - 0.38 * nrm.z);
-    amb *= lerp(0.5, 1.0, hf) * k1.w * albedo * detail;
+    amb *= lerp(lerp(0.5, 0.75, far), 1.0, hf) * k1.w * albedo * detail;   // far bases lighter (no dark seams)
     float3 gl = glow * (1.0 - hf) * saturate(0.5 - 0.5 * nrm.z);
 
     color = sunL + amb + gl;
@@ -290,7 +328,8 @@ void xcc_cloud(float3 wp, float3 cam, float3 obj,
 
     // local fog with the camera inside the cloud: the density at the camera fades in a uniform, lit
     // mist (diffuse multiple-scattering light, no lobe normal), so lobe structure dissolves into fog
-    float mistA = saturate(dcam * 2.0);
+    // (near cells only: far clusters are never drawn around the camera)
+    float mistA = saturate(dcam * 2.0) * lodW * (1.0 - far);
     [branch] if (mistA > 0.0)
     {
         float3 mist = sunE * (k2.x * albedo / 3.14159265) * lerp(0.55, 0.9, hf)
@@ -298,4 +337,31 @@ void xcc_cloud(float3 wp, float3 cam, float3 obj,
         color = lerp(color, mist, mistA);
         alpha = max(alpha, mistA);
     }
+}
+
+// ----------------------------------------------------------------------------
+// Cheap cloud shadow (sun light function). The offline bake integrates the near
+// lobes' optical depth over three height bands into a tileable texture (R / G / B
+// = band tau / tauMax, uv = UE xy / tile like the weather map). Each band is
+// sampled where the sun ray from the shaded point crosses the band's middle, so
+// low suns stretch shadows along the sun azimuth. World-anchored: no swimming.
+// wp shaded point (world m)  sunDir unit vector toward the sun
+// shp = (strength 0..1, tau scale, tile m, tauMax)   bandZ = band mid heights (m)
+// ----------------------------------------------------------------------------
+float xcc_shadow(float3 wp, float3 sunDir, Texture2D st, SamplerState ss, float4 shp, float3 bandZ)
+{
+    float sz = max(sunDir.z, 0.04);
+    float tau = 0.0;
+    [unroll] for (int b = 0; b < 3; b++)
+    {
+        float h = b == 0 ? bandZ.x : (b == 1 ? bandZ.y : bandZ.z);
+        float t = (h - wp.z) / sz;
+        if (t > 0.0)
+        {
+            float2 uv = (wp.xy + sunDir.xy * t) / shp.z;
+            float4 v = st.SampleLevel(ss, uv, 0.0);
+            tau += b == 0 ? v.x : (b == 1 ? v.y : v.z);
+        }
+    }
+    return lerp(1.0, exp(-tau * shp.w * shp.y), shp.x);
 }

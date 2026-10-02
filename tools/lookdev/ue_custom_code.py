@@ -106,20 +106,31 @@ def cloud_weather_uv_code(tile_m: float) -> str:
 
 
 CHEAP_CLOUD_SHADER = Path(__file__).resolve().parent / "shaders" / "xinyi_clouds_cheap.hlsl"
-# Cheap Cloud Renderer v0 (experimental) Custom-node inputs; NT is a Texture Object (NT + NTSampler)
+# Cheap Cloud Renderer v1 (experimental) Custom-node inputs; NT is a Texture Object (NT + NTSampler)
 CHEAP_CLOUD_INPUTS = (["WP", "CAM", "OBJ"] + ["L%d" % i for i in range(8)]
-                      + ["PRM", "SUND", "SUNE", "SKYU", "SKYD", "SD", "PD", "NT", "K1", "K2", "GLOW"])
+                      + ["PRM", "SUND", "SUNE", "SKYU", "SKYD", "SD", "PD", "NT", "K1", "K2", "K3", "GLOW"])
+# Cheap cloud shadow light function inputs; ST is a Texture Object (ST + STSampler)
+CHEAP_SHADOW_INPUTS = ["WP", "SUNV", "ST", "SHP", "BANDZ"]
 
 
 def cheap_cloud_custom_code() -> str:
-    """Cheap Cloud Renderer v0: analytic lobe impostor. Returns emissive colour; output Alpha = opacity."""
+    """Cheap Cloud Renderer v1: analytic lobe impostor. Returns emissive colour; output Alpha = opacity."""
     return (
         "struct XinyiCheapCloudFns {\n" + CHEAP_CLOUD_SHADER.read_text(encoding="utf-8") + "\n};\n"
         + "XinyiCheapCloudFns xcc;\n"
         + "float3 c; float a;\n"
         + "xcc.xcc_cloud(WP, CAM, OBJ, L0, L1, L2, L3, L4, L5, L6, L7, PRM, SUND, SUNE, SKYU, SKYD, SD, PD,"
-        + " NT, NTSampler, K1, K2, GLOW, c, a);\n"
+        + " NT, NTSampler, K1, K2, K3, GLOW, c, a);\n"
         + "Alpha = a;\nreturn c;\n"
+    )
+
+
+def cheap_shadow_custom_code() -> str:
+    """Cheap cloud shadow light function: returns the sun light multiplier (float3, grey)."""
+    return (
+        "struct XinyiCheapCloudFns {\n" + CHEAP_CLOUD_SHADER.read_text(encoding="utf-8") + "\n};\n"
+        + "XinyiCheapCloudFns xcc;\n"
+        + "return xcc.xcc_shadow(WP, SUNV, ST, STSampler, SHP, BANDZ).xxx;\n"
     )
 
 

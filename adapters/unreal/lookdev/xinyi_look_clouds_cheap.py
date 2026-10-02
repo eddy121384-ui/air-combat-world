@@ -1,4 +1,4 @@
-"""Cheap Cloud Renderer v0 (EXPERIMENTAL) - UE5.8 adapter (editor Python).
+"""Cheap Cloud Renderer v1 (EXPERIMENTAL) - UE5.8 adapter (editor Python).
 
 A third cloud renderer next to the volumetric HIGH / LOW profiles in xinyi_look_clouds.py, built on
 the SAME renderer-agnostic cloud state:
@@ -6,9 +6,13 @@ the SAME renderer-agnostic cloud state:
   cloud_state_v0.json -> build_clouds.py -> clouds_v0.cells.json      (state: where / what kind)
                       -> build_cloud_cheap.py -> clouds_v0.cheap.json (CHEAP renderer detail: lobes)
 
-Every cell is one StaticMeshActor holding an inward-facing unit proxy box scaled to the cell's lobe
-bounds; its 8 lobes + base plane + squash + variation seed + bounding radius travel in the 36
-custom-primitive-data floats.
+Every cell (near) and every cluster of neighbouring cells (far) is one StaticMeshActor holding an
+inward-facing unit proxy box scaled to its lobe bounds; its 8 lobes (per-lobe squash packed in the
+radius fraction) + base plane + role + variation seed + bounding radius travel in the 36
+custom-primitive-data floats. Near cells hand over to far clusters by camera distance (K3); each proxy
+is distance-culled by the engine just outside the band where the shader has faded it to zero.
+Cloud shadows: M_XinyiCloudShadow_Cheap, a sun light function over the baked band optical depth
+(T_XinyiCloudShadow), set on the sun only in the cheap capture process.
 M_XinyiClouds_Cheap (translucent, unlit, no depth test) intersects the view ray analytically with
 the lobes (tools/lookdev/shaders/xinyi_clouds_cheap.hlsl). One primitive per cell keeps the engine's
 per-primitive translucency sort between cells; inside a cell the optical depth is order-independent.
@@ -24,14 +28,21 @@ from xinyi_look_common import LOOK_OUT, LOOK_PREFIX, MAT_DIR, MESH_DIR, REPO, TE
 CHEAP_DIR = LOOK_OUT / "clouds" / "cheap"
 MATERIAL = MAT_DIR + "/M_XinyiClouds_Cheap"
 NOISE = TEX_DIR + "/T_XinyiCloudNoise"
+SHADOW_MATERIAL = MAT_DIR + "/M_XinyiCloudShadow_Cheap"
+SHADOW_TEX = TEX_DIR + "/T_XinyiCloudShadow"
 BOX_DIR = MESH_DIR + "/CloudCheapBox"
 LABEL = LOOK_PREFIX + "CheapCloud_"
-CULL_CM = 4.9e6          # proxy boxes beyond ~49 km are culled; the shader fades them out from ~38 km
+# Representation bands (m, camera to proxy centre): near cells full to 12 km, handed over to the far
+# clusters by 22 km; far clusters fade out 50 -> 60 km. Engine culling sits CULL_PAD_M outside each
+# zero-weight edge, so a proxy is only culled once the shader has already faded it out.
+BANDS = (12000.0, 22000.0, 50000.0, 60000.0)
+CULL_PAD_M = 600.0
 # The impostors are the only translucency in the look scene, so the separate (after-DOF) translucency
 # pass renders them at QUARTER resolution (480 x 270 at 1080p, bilinear upsample): the cost is mostly
 # per-pixel shading (UHD 770, move phase over OFF: 100 % +4..+39 ms, 50 % +4..+13 ms, 25 % +1..+6 ms)
 # and the soft subject hides the lower resolution. Global renderer setting, applied only in the cheap
-# capture process.
+# capture process. At 25 % most of the remaining cost is fixed (v1 probes: proxies drawn with ~0 px
+# already cost +3 .. +4 ms, the cloud shadow light function ~1 ms), not cloud pixel shading.
 CVARS = {"r.SeparateTranslucencyScreenPercentage": 25}
 
 # Per-time-of-day calibration (material-instance parameters; lighting itself comes from the sky
@@ -41,10 +52,12 @@ CVARS = {"r.SeparateTranslucencyScreenPercentage": 25}
 #   GLOW = city light on cloud bases (night only)
 # Dusk: as in the volumetric renderer, multiply-scattered orange sun flooding the shaded volumes gives
 # flat ochre cotton balls; a low MS floor + double sky fill keeps warm tops / edges over cool bodies.
+# K2.z (v0's tIn alpha fade end) now sits beyond the far band; distance fading is K3's job.
+#   SHADOW = cloud-shadow strength on the sun (0 = none, 1 = full band transmittance)
 TOD = {
-    "day": {"K1": (0.03, 1.0, 0.45, 0.75), "K2": (1.0, 1.0, 46000.0, 0.2), "GLOW": (0.0, 0.0, 0.0)},
-    "dusk": {"K1": (0.03, 1.0, 0.45, 1.5), "K2": (0.9, 1.0, 46000.0, 0.08), "GLOW": (0.0, 0.0, 0.0)},
-    "night": {"K1": (0.03, 1.0, 0.45, 0.75), "K2": (1.0, 0.6, 46000.0, 0.2), "GLOW": (0.02, 0.014, 0.008)},
+    "day": {"K1": (0.03, 1.0, 0.45, 0.75), "K2": (1.0, 1.0, 68000.0, 0.2), "GLOW": (0.0, 0.0, 0.0), "SHADOW": 0.8},
+    "dusk": {"K1": (0.03, 1.0, 0.45, 1.5), "K2": (0.9, 1.0, 68000.0, 0.08), "GLOW": (0.0, 0.0, 0.0), "SHADOW": 0.6},
+    "night": {"K1": (0.03, 1.0, 0.45, 0.75), "K2": (1.0, 0.6, 68000.0, 0.2), "GLOW": (0.02, 0.014, 0.008), "SHADOW": 0.4},
 }
 
 
@@ -64,19 +77,19 @@ def _connect(src, out, dst, pin, failures):
         failures.append("connect %s.%s -> %s" % (src.get_class().get_name(), out or "default", pin))
 
 
-def _import_noise():
+def _import_data_texture(png, name, path):
     task = unreal.AssetImportTask()
-    task.set_editor_property("filename", str(CHEAP_DIR / "cloud_cheap_noise_256.png"))
+    task.set_editor_property("filename", str(CHEAP_DIR / png))
     task.set_editor_property("destination_path", TEX_DIR)
-    task.set_editor_property("destination_name", "T_XinyiCloudNoise")
+    task.set_editor_property("destination_name", name)
     task.set_editor_property("automated", True)
     task.set_editor_property("replace_existing", True)
     task.set_editor_property("save", False)
     tools.import_asset_tasks([task])
-    tex = lib.load_asset(NOISE)
+    tex = lib.load_asset(path)
     if tex is None:
-        raise RuntimeError("noise texture import failed")
-    # lattice data: linear, uncompressed, bilinear (the shader relies on hardware interpolation), wrap
+        raise RuntimeError("%s import failed" % name)
+    # data: linear, uncompressed, bilinear (the shaders rely on hardware interpolation), wrap
     for prop, val in (("srgb", False),
                       ("compression_settings", unreal.TextureCompressionSettings.TC_VECTOR_DISPLACEMENTMAP),
                       ("mip_gen_settings", unreal.TextureMipGenSettings.TMGS_NO_MIPMAPS),
@@ -84,9 +97,56 @@ def _import_noise():
                       ("address_x", unreal.TextureAddress.TA_WRAP), ("address_y", unreal.TextureAddress.TA_WRAP),
                       ("never_stream", True)):
         tex.set_editor_property(prop, val)
-    if not lib.save_asset(NOISE):
-        raise RuntimeError("failed to save %s" % NOISE)
+    if not lib.save_asset(path):
+        raise RuntimeError("failed to save %s" % path)
     return tex
+
+
+def _import_noise():
+    return _import_data_texture("cloud_cheap_noise_256.png", "T_XinyiCloudNoise", NOISE)
+
+
+def build_shadow_material(tex):
+    """M_XinyiCloudShadow_Cheap: sun light function (grey multiplier) over the baked band optical depth."""
+    import sys
+    sys.path.insert(0, str(REPO / "tools" / "lookdev"))
+    from ue_custom_code import CHEAP_SHADOW_INPUTS, cheap_shadow_custom_code
+    failures = []
+    if lib.does_asset_exist(SHADOW_MATERIAL) and not lib.delete_asset(SHADOW_MATERIAL):
+        raise RuntimeError("cannot delete %s for a clean rebuild" % SHADOW_MATERIAL)
+    mat = tools.create_asset("M_XinyiCloudShadow_Cheap", MAT_DIR, unreal.Material, unreal.MaterialFactoryNew())
+    mat.set_editor_property("material_domain", unreal.MaterialDomain.MD_LIGHT_FUNCTION)
+    mat.set_editor_property("float_precision_mode", unreal.MaterialFloatPrecisionMode.MFPM_FULL)
+    wp = _expr(mat, unreal.MaterialExpressionWorldPosition, -1200, -200)
+    wpm = _expr(mat, unreal.MaterialExpressionDivide, -1000, -200, const_b=100.0)
+    _connect(wp, "", wpm, "A", failures)
+    node = _expr(mat, unreal.MaterialExpressionCustom, -500, 0)
+    node.set_editor_property("code", cheap_shadow_custom_code())
+    node.set_editor_property("description", "M_XinyiCloudShadow_Cheap")
+    node.set_editor_property("output_type", unreal.CustomMaterialOutputType.CMOT_FLOAT3)
+    ins = []
+    for n in CHEAP_SHADOW_INPUTS:
+        ci = unreal.CustomInput()
+        ci.set_editor_property("input_name", n)
+        ins.append(ci)
+    node.set_editor_property("inputs", ins)
+    _connect(wpm, "", node, "WP", failures)
+    tobj = _expr(mat, unreal.MaterialExpressionTextureObject, -1000, 100)
+    tobj.set_editor_property("texture", tex)
+    tobj.set_editor_property("sampler_type", unreal.MaterialSamplerType.SAMPLERTYPE_LINEAR_COLOR)
+    _connect(tobj, "", node, "ST", failures)
+    for k, (pin, v) in enumerate((("SUNV", (0.0, 0.0, 1.0, 0.0)), ("SHP", (0.0, 1.0, 64000.0, 6.0)),
+                                  ("BANDZ", (1500.0, 2075.0, 2900.0, 0.0)))):
+        p = _expr(mat, unreal.MaterialExpressionVectorParameter, -1000, 200 + k * 90)
+        p.set_editor_property("parameter_name", "CheapShadow" + pin)
+        p.set_editor_property("default_value", unreal.LinearColor(*v))
+        _connect(p, "RGBA" if pin == "SHP" else "", node, pin, failures)
+    if not mel.connect_material_property(node, "", unreal.MaterialProperty.MP_EMISSIVE_COLOR):
+        failures.append("shadow emissive pin")
+    mel.recompile_material(mat)
+    if not lib.save_asset(SHADOW_MATERIAL):
+        raise RuntimeError("failed to save %s" % SHADOW_MATERIAL)
+    return mat, failures
 
 
 def _import_box(mat):
@@ -189,7 +249,7 @@ def build_material(noise):
     tobj.set_editor_property("sampler_type", unreal.MaterialSamplerType.SAMPLERTYPE_LINEAR_COLOR)
     _connect(tobj, "", node, "NT", failures)
     day = TOD["day"]
-    for k, (pin, v) in enumerate((("K1", day["K1"]), ("K2", day["K2"]), ("GLOW", day["GLOW"] + (0.0,)))):
+    for k, (pin, v) in enumerate((("K1", day["K1"]), ("K2", day["K2"]), ("K3", BANDS), ("GLOW", day["GLOW"] + (0.0,)))):
         p = _expr(mat, unreal.MaterialExpressionVectorParameter, -1300, 1320 + k * 90)
         p.set_editor_property("parameter_name", "CheapCloud" + pin)
         p.set_editor_property("default_value", unreal.LinearColor(*v))
@@ -221,10 +281,15 @@ def build_cheap_assets():
     noise = _import_noise()
     mat, n_ps, failures = build_material(noise)
     box = _import_box(mat)
+    shadow_tex = _import_data_texture("cloud_cheap_shadow_1024.png", "T_XinyiCloudShadow", SHADOW_TEX)
+    _, shadow_fail = build_shadow_material(shadow_tex)
+    failures += shadow_fail
     if failures:
         raise RuntimeError("cheap cloud material: %s" % "; ".join(failures))
+    r = json.loads(rep.read_text(encoding="utf-8"))
     return {"material": MATERIAL, "noise": NOISE, "proxy_box": box, "pixel_shader_instructions": n_ps,
-            "cheap_json_sha256": json.loads(rep.read_text(encoding="utf-8"))["cheap_json_sha256"]}
+            "shadow_material": SHADOW_MATERIAL, "shadow_texture": SHADOW_TEX,
+            "cheap_json_sha256": r["cheap_json_sha256"], "shadow_sha256": r.get("shadow_sha256")}
 
 
 # ---------------------------------------------------------------------------------------------
@@ -255,7 +320,11 @@ def spawn_cheap(actors):
         c = a.get_component_by_class(unreal.StaticMeshComponent)
         c.set_cast_shadow(False)
         c.set_collision_enabled(unreal.CollisionEnabled.NO_COLLISION)
-        c.set_editor_property("ld_max_draw_distance", CULL_CM)
+        if it["role"] == "near":
+            c.set_editor_property("ld_max_draw_distance", (BANDS[1] + CULL_PAD_M) * 100.0)
+        else:
+            c.set_editor_property("min_draw_distance", (BANDS[0] - CULL_PAD_M) * 100.0)
+            c.set_editor_property("ld_max_draw_distance", (BANDS[3] + CULL_PAD_M) * 100.0)
         c.set_custom_primitive_data_float_array(0, [float(v) for v in it["cpd"]])
         out.append(a)
     return out
@@ -271,6 +340,7 @@ def apply_cheap(world, actors, tod):
     cal = TOD.get(tod, TOD["day"])
     for n in ("K1", "K2"):
         mid.set_vector_parameter_value("CheapCloud" + n, unreal.LinearColor(*cal[n]))
+    mid.set_vector_parameter_value("CheapCloudK3", unreal.LinearColor(*BANDS))
     g = cal["GLOW"]
     mid.set_vector_parameter_value("CheapCloudGLOW", unreal.LinearColor(g[0], g[1], g[2], 0.0))
     for a in spawned:
@@ -279,4 +349,38 @@ def apply_cheap(world, actors, tod):
         c.set_visibility(True)
     for k, v in CVARS.items():
         unreal.SystemLibrary.execute_console_command(world, "%s %s" % (k, v))
-    return {"quality": "cheap", "material": MATERIAL, "instances": len(spawned), "params": cal, "cvars": CVARS}
+    shadow = apply_cheap_shadow(world, actors, cal["SHADOW"])
+    roles = {}
+    for a in spawned:
+        r = "far" if a.get_component_by_class(unreal.StaticMeshComponent).get_editor_property("min_draw_distance") > 0 else "near"
+        roles[r] = roles.get(r, 0) + 1
+    return {"quality": "cheap", "material": MATERIAL, "instances": len(spawned), "roles": roles, "bands_m": BANDS,
+            "params": cal, "cvars": CVARS, "shadow": shadow}
+
+
+def apply_cheap_shadow(world, actors, strength):
+    """Cloud shadows: the baked band optical depth as a light function on the sun (cheap path only).
+    The volumetric cloud shadow stays off (apply_clouds 'off'); the saved level never carries this."""
+    rep = json.loads((CHEAP_DIR / "cloud_cheap.report.json").read_text(encoding="utf-8"))
+    mat = lib.load_asset(SHADOW_MATERIAL)
+    if mat is None or "shadow" not in rep:
+        raise RuntimeError("cheap cloud shadow missing (run the offline build + asset stage)")
+    sun = None
+    for a in actors.get_all_level_actors():
+        if a.get_actor_label() == LOOK_PREFIX + "Sun":
+            sun = a
+    sc = sun.get_component_by_class(unreal.DirectionalLightComponent)
+    fwd = sun.get_actor_forward_vector()          # light travel direction (UE axes)
+    to_sun = (-fwd.x, -fwd.y, -fwd.z)
+    sh = rep["shadow"]
+    bandz = [0.5 * (z0 + z1) for z0, z1 in sh["bands_m"]]
+    mid = unreal.MaterialLibrary.create_dynamic_material_instance(world, mat)
+    mid.set_vector_parameter_value("CheapShadowSUNV", unreal.LinearColor(to_sun[0], to_sun[1], to_sun[2], 0.0))
+    mid.set_vector_parameter_value("CheapShadowSHP", unreal.LinearColor(float(strength), 1.0, float(rep.get("tile_m", 64000.0)),
+                                                                        float(sh["tau_max"])))
+    mid.set_vector_parameter_value("CheapShadowBANDZ", unreal.LinearColor(bandz[0], bandz[1], bandz[2], 0.0))
+    sc.set_light_function_material(mid)
+    for prop, val in (("light_function_fade_distance", 1.0e7), ("disabled_brightness", 1.0)):
+        sc.set_editor_property(prop, val)
+    return {"material": SHADOW_MATERIAL, "strength": strength, "to_sun": [round(v, 4) for v in to_sun],
+            "band_mid_m": bandz, "fade_distance_cm": 1.0e7}
