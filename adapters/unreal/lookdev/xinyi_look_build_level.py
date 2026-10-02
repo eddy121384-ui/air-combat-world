@@ -93,8 +93,8 @@ def add_hism(actor, mesh):
     return comp
 
 
-def place_hism(actors, asset_row, items, label, cull, cast_shadow, uniform_key=None):
-    """One holder actor + HISM; per-instance custom data 0 = variant (0..1)."""
+def place_hism(actors, asset_row, items, label, cull, cast_shadow, uniform_key=None, variants=4):
+    """One holder actor + HISM; per-instance custom data 0 = variant (0..1) = (v + 0.5) / variants."""
     mesh = lib.load_asset(asset_row["asset_path"])
     pv = [asset_row["expected_bounds_origin_cm"][i] - asset_row["imported_bounds_origin_cm"][i] for i in range(3)]
     holder = actors.spawn_actor_from_class(unreal.Actor, unreal.Vector(0.0, 0.0, 0.0))
@@ -118,7 +118,7 @@ def place_hism(actors, asset_row, items, label, cull, cast_shadow, uniform_key=N
             unreal.Vector(sc[0], sc[1], sc[2])))
     h.add_instances(xf, False, True)
     for i, it in enumerate(items):
-        h.set_custom_data_value(i, 0, (it["v"] + 0.5) / 4.0, False)
+        h.set_custom_data_value(i, 0, (it["v"] + 0.5) / float(variants), False)
     h.set_cull_distances(cull[0], cull[1])
     h.set_collision_enabled(unreal.CollisionEnabled.NO_COLLISION)
     h.set_cast_shadow(cast_shadow)
@@ -219,16 +219,22 @@ def main():
             failures.append({key: "instance count %d != %d" % (n, len(items))})
     tree_count = ground_counts["tree"]
 
-    # rooftop clutter: one HISM per prop type
-    roof_inst = read_json(LOOK_OUT / "rooftops/rooftop_instances.json")["types"]
+    # rooftop clutter: one HISM per prop type. Rooftop rooms / bulkheads carry the aerial read (medium-
+    # scale massing + sheet colour patches) and stay to 4.5 km; small clutter fades out much earlier.
+    roof_doc = read_json(LOOK_OUT / "rooftops/rooftop_instances.json")
+    roof_inst = roof_doc["types"]
+    roof_variants = int(roof_doc.get("variants", 4))
+    roof_cull = {"ac": (60000.0, 90000.0), "antenna": (60000.0, 90000.0),
+                 "addition": (350000.0, 450000.0), "barrel": (350000.0, 450000.0), "shed": (350000.0, 450000.0),
+                 "leanto": (200000.0, 260000.0), "bulkhead": (300000.0, 400000.0)}
     roof_counts = {}
     for t, row in assets["rooftop_props"].items():
         items = roof_inst.get(t, [])
         if not items:
             continue
         small = t in ("ac", "antenna", "avlight")
-        n = place_hism(actors, row, items, "Roof_" + t,
-                       (60000.0, 90000.0) if t in ("ac", "antenna") else (120000.0, 200000.0), not small)
+        n = place_hism(actors, row, items, "Roof_" + t, roof_cull.get(t, (120000.0, 200000.0)), not small,
+                       variants=roof_variants)
         roof_counts[t] = n
         if n != len(items):
             failures.append({"rooftop": t, "count": n, "expected": len(items)})

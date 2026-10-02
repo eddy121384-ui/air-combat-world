@@ -127,6 +127,57 @@ float3 xc_pick6(float r, float3 a, float3 b, float3 c, float3 d, float3 e, float
     return lerp(x, f, step(0.8333, r));
 }
 
+// Taipei rooftop sheet-metal palette (index 0..15, tools/lookdev/build_rooftops.py SHEET_NAMES; the
+// builder draws indices with district weights). Sun-faded, oxidised, matte: blue-greys, oxidised /
+// brick reds, faded and teal greens, galvanised, off-white / beige. No saturated toy colours.
+// Painted whole-roof sheet colour index (no instance data): uniform hash with half of the warm picks
+// moved to blue / galvanised, so painted roofs (old roofs, surveyed rooftop records, far city) follow
+// the observed mix instead of a red carpet.
+float xc_sheet_paint_index(float r, float r2)
+{
+    float i = floor(r * 16.0);
+    float warm = step(2.5, i) * (1.0 - step(5.5, i)) + step(14.5, i);
+    return lerp(i, lerp(1.0, 9.0, step(0.5, frac(r2 * 3.1))), warm * step(0.5, r2));
+}
+
+float3 xc_sheet16(float i)
+{
+    float3 c = float3(0.18, 0.28, 0.40);                                  // 0 blue-grey
+    c = lerp(c, float3(0.13, 0.27, 0.48), step(0.5, i));                  // 1 faded blue (the signature 鐵皮 blue)
+    c = lerp(c, float3(0.30, 0.42, 0.54), step(1.5, i));                  // 2 light blue
+    c = lerp(c, float3(0.31, 0.105, 0.065), step(2.5, i));                // 3 brick red
+    c = lerp(c, float3(0.36, 0.155, 0.085), step(3.5, i));                // 4 oxidised rust red
+    c = lerp(c, float3(0.27, 0.13, 0.085), step(4.5, i));                 // 5 red-brown
+    c = lerp(c, float3(0.18, 0.34, 0.20), step(5.5, i));                  // 6 faded green
+    c = lerp(c, float3(0.13, 0.31, 0.29), step(6.5, i));                  // 7 teal green
+    c = lerp(c, float3(0.26, 0.36, 0.29), step(7.5, i));                  // 8 green-grey
+    c = lerp(c, float3(0.46, 0.47, 0.47), step(8.5, i));                  // 9 galvanised
+    c = lerp(c, float3(0.32, 0.33, 0.33), step(9.5, i));                  // 10 weathered galvanised
+    c = lerp(c, float3(0.62, 0.62, 0.59), step(10.5, i));                 // 11 off-white
+    c = lerp(c, float3(0.55, 0.49, 0.38), step(11.5, i));                 // 12 beige
+    c = lerp(c, float3(0.66, 0.64, 0.58), step(12.5, i));                 // 13 cream
+    c = lerp(c, float3(0.20, 0.40, 0.42), step(13.5, i));                 // 14 faded teal
+    return lerp(c, float3(0.38, 0.28, 0.20), step(14.5, i));              // 15 rusting galvanised
+}
+
+// Weathering of a sheet-metal colour: sun fade on up-facing sheets, rust bloom / soot streaks, and
+// mismatched patch panels (re-roofed strips) on roofs. p = world xy (m), up = N.z, seed per instance.
+float3 xc_sheet_weather(float3 c, float2 p, float z, float up, float seed, float fwp)
+{
+    float lum = dot(c, float3(0.3, 0.59, 0.11));
+    c = lerp(c, lum.xxx * 1.08, saturate(up) * 0.12);                     // UV-faded tops
+    float rust = saturate(xc_fnoise(p * 0.9 + seed * 17.0 + z * 0.3, 1.1, fwp) * 1.6 - 0.55);
+    c = lerp(c, c * float3(0.92, 0.72, 0.58) + float3(0.03, 0.01, 0.0), rust * 0.3);
+    float soot = xc_fnoise(float2(p.x + p.y, z * 3.0) + seed * 5.0, 0.6, fwp);
+    c *= 1.0 - soot * 0.12 * (1.0 - saturate(up));                        // streaky walls
+    // patch panels: 0.9 m strips, a few replaced in galvanised or another faded colour
+    float2 pc = float2(floor((p.x + p.y) / 0.9), floor((p.x - p.y) / 2.4));
+    float ph = xc_hash21(pc + seed * 13.0);
+    float patch = step(0.9, ph) * saturate(up * 2.0 - 0.6) * xc_detail(fwp, 1.0);
+    float3 pcol = lerp(float3(0.45, 0.46, 0.46), xc_sheet16(floor(frac(ph * 7.3) * 16.0)) * 0.95, step(0.95, ph));
+    return lerp(c, pcol, patch * 0.85);
+}
+
 // Tile / cladding colour families that actually dominate Taipei streets.
 float3 xc_tile_palette(float r, float arch)
 {
@@ -352,9 +403,13 @@ void xc_wall(float u, float h, float H, float fh, float arch, float variant, flo
 
     // metal-sheet rooftop additions (頂樓加蓋) on small rooftop records
     float ribs = xc_line(frac(u / 0.2), 0.3, fwu / 0.2) * xc_detail(fwu, 0.4);
-    float3 sheet = xc_pick4(frac(seed * 2.9 + variant * 0.13),
-        float3(0.22, 0.34, 0.48), float3(0.70, 0.71, 0.70), float3(0.36, 0.22, 0.14), float3(0.60, 0.58, 0.50));
-    c = lerp(c, sheet * (1.0 - ribs * 0.25), rooftop * isOld);
+    // only surveyed rooftop records pay for the palette / weathering (branch: most wall pixels skip it)
+    [branch] if (rooftop * isOld > 0.0)
+    {
+        float3 sheet = xc_sheet16(xc_sheet_paint_index(frac(seed * 2.9 + variant * 0.13), frac(seed * 4.7)));
+        sheet = xc_sheet_weather(sheet, wpos.xy, wpos.z, 0.0, seed, max(fwu, fwh));
+        c = lerp(c, sheet * (1.0 - ribs * 0.25), rooftop * isOld);
+    }
 
     // parapet cap: light concrete band at the roof line
     float parapet = step(H - 0.45, h) * (1.0 - isOffice);
@@ -476,11 +531,16 @@ void xc_roof(float3 wpos, float H, float arch, float variant, float seed, float 
     float3 roofCol = xc_pick4(r, concrete, greenCoat, greyCoat, lerp(concrete, paver, 0.5));
     roofCol = lerp(roofCol, float3(0.30, 0.31, 0.32), isOffice * 0.7);  // tower roofs: dark membrane
 
-    float3 sheet = xc_pick4(frac(seed * 2.9 + variant * 0.13),
-        float3(0.22, 0.34, 0.48), float3(0.70, 0.71, 0.70), float3(0.36, 0.22, 0.14), float3(0.60, 0.58, 0.50));
+    // painted sheet roofs (surveyed rooftop records, some old roofs): the shared rooftop palette, so the
+    // far read matches the instanced 頂樓加蓋 rooms
     float sheetRoof = max(rooftop, step(0.72, frac(seed * 1.9)) * isOld);
-    float ribs = xc_line(frac(p.x / 0.25), 0.3, fwp / 0.25) * xc_detail(fwp, 0.5);
-    roofCol = lerp(roofCol, sheet * (1.0 - ribs * 0.3), sheetRoof);
+    [branch] if (sheetRoof > 0.0)        // per-building constant: coherent branch
+    {
+        float3 sheet = xc_sheet16(xc_sheet_paint_index(frac(seed * 2.9 + variant * 0.13), frac(seed * 4.7)));
+        sheet = xc_sheet_weather(sheet, p, wpos.z, 1.0, seed, fwp);
+        float ribs = xc_line(frac(p.x / 0.25), 0.3, fwp / 0.25) * xc_detail(fwp, 0.5);
+        roofCol = lerp(roofCol, sheet * (1.0 - ribs * 0.3), sheetRoof);
+    }
 
     // ponding stains + soot
     float stain = xc_fnoise(p + seed * 37.0, 0.35, fwp);
@@ -899,17 +959,33 @@ void xc_prop(float3 wpos, float3 N, float4 vc, float variant, float night, float
     float isT8 = 1.0 - step(0.5, abs(t - 8.0));
     float isT9 = 1.0 - step(0.5, abs(t - 9.0));
     float isT10 = 1.0 - step(0.5, abs(t - 10.0));   // street lamp
+    // rooftop identity v0: 11 gable addition room, 12 barrel-roof room, 13 open lean-to, 14 stair bulkhead
+    float isT11 = 1.0 - step(0.5, abs(t - 11.0));
+    float isT12 = 1.0 - step(0.5, abs(t - 12.0));
+    float isT13 = 1.0 - step(0.5, abs(t - 13.0));
+    float isT14 = 1.0 - step(0.5, abs(t - 14.0));
     float p1 = step(0.5, part);
+    float p2 = step(1.5, part) * (1.0 - step(2.5, part));
+    float p3 = step(2.5, part);
 
-    // corrugated sheet metal for sheds (ribs run around the walls)
+    // sheet-metal rooms (1 shed, 11-13): variant = (roof colour * 16 + wall colour + 0.5) / 256;
+    // part 0 = walls (wall colour), part 1 = roof (roof colour), part 2 = steel posts
+    float isSheet = isT1 + isT11 + isT12 + isT13;
+    float roofIdx = floor(variant * 16.0);
+    float wallIdx = floor(frac(variant * 16.0) * 16.0);
     float ribs = xc_line(frac((wpos.x + wpos.y) / 0.19), 0.3, fwp / 0.19) * xc_detail(fwp, 0.4);
-    float3 sheet = xc_pick4(variant, float3(0.19, 0.31, 0.46), float3(0.64, 0.65, 0.64),
-                            float3(0.33, 0.19, 0.12), float3(0.56, 0.53, 0.44));
-    sheet *= 1.0 - ribs * 0.22;
-    sheet *= lerp(1.0, 1.1, p1);
+    float3 sheet = xc_sheet16(lerp(wallIdx, roofIdx, p1));
+    sheet = xc_sheet_weather(sheet, wpos.xy, wpos.z, N.z, roofIdx * 0.37 + wallIdx * 0.11, fwp);
+    sheet *= 1.0 - ribs * lerp(0.22, 0.16, p1);
+    sheet = lerp(sheet, float3(0.16, 0.16, 0.17), p2);                    // painted steel posts
+    // stair bulkhead: painted / tiled concrete (light wall palette, greyed), slab cap, dark door
+    float3 bulk = lerp(xc_sheet16(wallIdx), float3(0.55, 0.54, 0.51), 0.55);
+    bulk *= 1.0 - xc_fnoise(float2(wpos.x + wpos.y, wpos.z * 2.0), 0.7, fwp) * 0.22;
+    bulk = lerp(bulk, float3(0.47, 0.46, 0.44), p3);
+    bulk = lerp(bulk, lerp(float3(0.14, 0.20, 0.17), float3(0.30, 0.17, 0.11), step(8.0, roofIdx)), p2);
     float3 steel = xc_pick4(variant, float3(0.72, 0.73, 0.74), float3(0.70, 0.71, 0.72),
                             float3(0.78, 0.78, 0.76), float3(0.18, 0.32, 0.58));   // stainless / white PE / blue FRP
-    float3 c = sheet * isT1;
+    float3 c = sheet * isSheet + bulk * isT14;
     c += lerp(steel, float3(0.20, 0.20, 0.21), p1) * isT2;
     c += lerp(float3(0.04, 0.07, 0.11), float3(0.66, 0.66, 0.64), p1) * isT3;
     c += float3(0.22, 0.22, 0.23) * isT4;
@@ -922,18 +998,20 @@ void xc_prop(float3 wpos, float3 N, float4 vc, float variant, float night, float
     c += lerp(float3(0.30, 0.31, 0.32), float3(0.85, 0.85, 0.82), p1) * isT10;
     // soot and rain stains
     float grime = xc_fnoise(float2(wpos.x + wpos.z, wpos.y), 0.9, fwp) * 0.25;
-    c *= 1.0 - grime * (1.0 - isT9);
+    c *= 1.0 - grime * (1.0 - isT9) * (1.0 - isSheet * 0.6);
 
     base = c;
-    rough = lerp(0.7, 0.45, isT1);
+    rough = lerp(0.7, 0.62, isSheet);                    // matte, weathered sheet (no toy gloss)
+    rough = lerp(rough, 0.85, isT14);
     rough = lerp(rough, 0.28, isT2 * (1.0 - p1));
     rough = lerp(rough, 0.08, isT3 * (1.0 - p1));
-    metal = saturate(isT1 * 0.4 + isT2 * (1.0 - p1) * step(variant, 0.49) + isT4 * 0.6 + isT8 * 0.5);
+    metal = saturate(isSheet * lerp(0.18, 0.35, step(8.5, roofIdx) * (1.0 - step(10.5, roofIdx)))
+                     + isT2 * (1.0 - p1) * step(variant, 0.49) + isT4 * 0.6 + isT8 * 0.5);
     spec = lerp(0.4, 1.0, isT3 * (1.0 - p1));
     // aviation obstruction lights: always faintly visible, bright at night
     float3 e = float3(1.0, 0.06, 0.02) * isT9 * (1.0 - p1) * lerp(0.15, 2.5, night);
     // a few lit shed windows
-    e += float3(1.0, 0.78, 0.5) * isT1 * step(0.8, variant) * (1.0 - p1) * 0.12 * night;
+    e += float3(1.0, 0.78, 0.5) * (isT1 + isT11 + isT12) * step(0.85, frac(variant * 37.0)) * (1.0 - p1) * 0.12 * night;
     // street lamp heads: white LED (most of Taipei) or warm sodium
     float3 lampCol = lerp(float3(0.92, 0.96, 1.0), float3(1.0, 0.62, 0.25), step(0.5, variant));
     e += lampCol * isT10 * p1 * 3.0 * night;
