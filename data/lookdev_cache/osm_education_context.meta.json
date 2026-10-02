@@ -1,0 +1,31 @@
+{
+ "role": "LOOKDEV_EDUCATION_CONTEXT_ONLY (not consumed by any renderer-facing stage yet)",
+ "source": "OpenStreetMap via Overpass API",
+ "license": "ODbL 1.0 — © OpenStreetMap contributors",
+ "bbox_swne": [
+  25.0195,
+  121.55,
+  25.048,
+  121.579
+ ],
+ "osm_base_timestamp": "2026-05-31T22:37:44Z",
+ "element_count": 243,
+ "kinds": {
+  "relation:school": 19,
+  "relation:university": 1,
+  "way:college": 1,
+  "way:conference_centre": 1,
+  "way:kindergarten": 6,
+  "way:pitch": 48,
+  "way:playground": 22,
+  "way:public": 1,
+  "way:restaurant": 1,
+  "way:school": 124,
+  "way:shelter": 1,
+  "way:swimming_pool": 5,
+  "way:university": 12,
+  "way:yes": 1
+ },
+ "raw_sha256": "2f7df33920a8e41317316d1e54bbfc7dce06c5b0f92ee1903b87d8060ac51c1c",
+ "note": "Building geometry stays on the WFS contract; this only classifies campuses / school buildings / sports surfaces for the future school identity layer."
+}
