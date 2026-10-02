@@ -13,8 +13,9 @@ Time-of-day changes are transient; the level is never saved here.
 Env: ACW_XINYI_LOOK_TOD    comma list (default "day,dusk,night")
      ACW_XINYI_LOOK_SHOTS  comma list (default: the 8 look-dev shots; cloud review shots from
                            tools/lookdev/clouds/cloud_review_shots.json may be listed too)
-     ACW_XINYI_LOOK_CLOUDS off | low | high (default off: the accepted city suite stays cloud-
-                           independent). low / high frames get a "__clouds-<quality>" suffix.
+     ACW_XINYI_LOOK_CLOUDS off | low | high | cheap (default off: the accepted city suite stays cloud-
+                           independent). low / high / cheap frames get a "__clouds-<quality>" suffix;
+                           cheap is the experimental impostor renderer (xinyi_look_clouds_cheap.py).
      ACW_XINYI_LOOK_PERF   optional comma list of shots to time after the captures: per shot,
                            PERF_N SceneCapture renders each followed by a 1-pixel readback
                            (forces a GPU sync), giving a same-view frame-time proxy.

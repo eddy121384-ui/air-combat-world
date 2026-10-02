@@ -105,6 +105,24 @@ def cloud_weather_uv_code(tile_m: float) -> str:
     )
 
 
+CHEAP_CLOUD_SHADER = Path(__file__).resolve().parent / "shaders" / "xinyi_clouds_cheap.hlsl"
+# Cheap Cloud Renderer v0 (experimental) Custom-node inputs; NT is a Texture Object (NT + NTSampler)
+CHEAP_CLOUD_INPUTS = (["WP", "CAM", "OBJ"] + ["L%d" % i for i in range(8)]
+                      + ["PRM", "SUND", "SUNE", "SKYU", "SKYD", "SD", "PD", "NT", "K1", "K2", "GLOW"])
+
+
+def cheap_cloud_custom_code() -> str:
+    """Cheap Cloud Renderer v0: analytic lobe impostor. Returns emissive colour; output Alpha = opacity."""
+    return (
+        "struct XinyiCheapCloudFns {\n" + CHEAP_CLOUD_SHADER.read_text(encoding="utf-8") + "\n};\n"
+        + "XinyiCheapCloudFns xcc;\n"
+        + "float3 c; float a;\n"
+        + "xcc.xcc_cloud(WP, CAM, OBJ, L0, L1, L2, L3, L4, L5, L6, L7, PRM, SUND, SUNE, SKYU, SKYD, SD, PD,"
+        + " NT, NTSampler, K1, K2, GLOW, c, a);\n"
+        + "Alpha = a;\nreturn c;\n"
+    )
+
+
 def source_bbox_defines(bbox_enu) -> str:
     """Xinyi building-source bbox (E0, E1, N0, N1 in ENU m) for the ground material.
 

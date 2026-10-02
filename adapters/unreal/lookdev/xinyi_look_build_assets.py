@@ -32,6 +32,7 @@ from ue_custom_code import (  # noqa: E402
     CLOUD_INPUTS, MATERIALS, cloud_custom_code, cloud_weather_uv_code, custom_code, extent_uv_code, ground_uv_code,
     source_bbox_defines,
 )
+from xinyi_look_clouds_cheap import build_cheap_assets  # noqa: E402
 from xinyi_look_common import (  # noqa: E402
     CONTRACT_DIR, LOOK_OUT, MAT_DIR, MESH_DIR, MPC_PATH, SHADER, TEX_DIR, E0, E1, N0, N1,  # noqa: F401
     ensure_dir, lib, max_err, mel, mesh_bounds, read_json, tile_key, tools, write_report,
@@ -516,6 +517,11 @@ def main():
             unreal.log_warning("finish_loading_before_screenshot: %s" % exc)
         clouds = {"high": "M_XinyiClouds_High", "low": "M_XinyiClouds_Low", "weather": "T_XinyiCloudWeather",
                   "weather_sha256": cloud_rep["weather_sha256"]}
+        # Cheap Cloud Renderer v0 (experimental, opt-in only; nothing is placed in the level)
+        try:
+            clouds["cheap"] = build_cheap_assets()
+        except Exception as exc:
+            failures.append({"cheap_clouds": str(exc)[:400]})
     roofs = read_json(LOOK_OUT / "rooftops/rooftops.report.json")
 
     tiles = []

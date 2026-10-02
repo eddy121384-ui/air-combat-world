@@ -89,6 +89,7 @@ def main():
     if (CACHE / "far_city_generalized.npz").exists():
         run("tools/lookdev/build_far_city.py")
     run("tools/lookdev/clouds/build_clouds.py")   # Cloud Prototype v0 state -> cells + weather map
+    run("tools/lookdev/clouds/build_cloud_cheap.py")   # experimental cheap renderer inputs from those cells
     print("XINYI_LOOK_OFFLINE_BUILD_OK")
 
 

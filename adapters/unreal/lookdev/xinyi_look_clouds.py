@@ -8,7 +8,7 @@ Separation of concerns:
                          (tools/lookdev/shaders/xinyi_clouds.hlsl reading the weather map)
                          + quality profiles. Nothing here decides where clouds are.
 
-Quality profiles (ACW_XINYI_LOOK_CLOUDS = off | low | high; default off everywhere):
+Quality profiles (ACW_XINYI_LOOK_CLOUDS = off | low | high | cheap; default off everywhere):
   off   cloud actor hidden, cloud shadows off: the accepted, cloud-independent city look. The saved
         look level is in this state.
   low   weak-GPU / runtime test path (UHD 770 class): 2-octave, softened density, 1 multi-scattering
@@ -17,6 +17,8 @@ Quality profiles (ACW_XINYI_LOOK_CLOUDS = off | low | high; default off everywhe
         reduced strength, no sky AO. Same weather and shapes as HIGH, cheaper rendering.
   high  PC visual reference: 3-octave density, 2 multi-scattering octaves, 1.5x view / 2x shadow
         sampling, full-resolution trace, cloud shadows + sky-light cloud AO.
+  cheap EXPERIMENTAL non-volumetric renderer (xinyi_look_clouds_cheap.py): volumetric actor as OFF,
+        plus transient per-cell analytic lobe impostors built from the same cloud cells.
 Per-time-of-day calibration (extinction, coverage bias, multi-scattering, dusk sky fill) is set on a
 dynamic instance of the cloud material, not on the city MPC.
 """
@@ -155,6 +157,14 @@ def _set(obj, prop, val, notes):
 
 def apply_clouds(world, actors, quality, tod):
     """Apply a renderer quality profile. Returns a small dict for capture receipts."""
+    if quality == "cheap":
+        # EXPERIMENTAL third renderer (xinyi_look_clouds_cheap.py): the volumetric actor is exactly as
+        # OFF (hidden, no cloud shadows), then transient analytic impostors over the same cloud state.
+        from xinyi_look_clouds_cheap import apply_cheap
+        off = apply_clouds(world, actors, "off", tod)
+        r = apply_cheap(world, actors, tod)
+        r["volumetric"] = off
+        return r
     notes = []
     a = _find(actors, CLOUD_LABEL)
     if a is None:
