@@ -9,6 +9,7 @@ Creates, under /Game/XinyiLook:
   Materials/M_XinyiBackdrop     basin mountain ring
   Materials/M_XinyiFoliage      instanced street / park trees
   Textures/T_XinyiGround        2048^2 road SDF / green / class / water (linear)
+  Textures/T_XinyiCampus        2048^2 Grade-A campus / court signed distance + surface id (linear, box mips)
   Meshes/Tiles/<tile>/...       25 look tiles (triangle soup = accepted tiles)
   Meshes/Hero, Backdrop, Paint, Tree
 
@@ -205,18 +206,19 @@ def wire(src_pin_pairs, node):
             raise RuntimeError("failed to connect %s -> %s" % (out or "default", pin))
 
 
-def build_ground_material(mpc, tex, lamp_tex, src_bbox=None):
+def build_ground_material(mpc, tex, lamp_tex, campus_tex, src_bbox=None):
     mat, path = fresh_material("M_XinyiGround")
     wp = world_pos_m(mat, -1400, -200)
     n = expr(mat, unreal.MaterialExpressionVertexNormalWS, -1200, -60)
     uv = ground_uv(mat, wp, -1100, 100)
     gt = ground_sample(mat, tex, uv, -900, 100)
+    ct = ground_sample(mat, campus_tex, uv, -900, 180)
     lamp = ground_sample(mat, lamp_tex, uv, -900, 260, grayscale=True)
     night = mpc_param(mat, mpc, "Night", -1200, 300)
     es = mpc_param(mat, mpc, "EmissiveScale", -600, 500)
     extra = source_bbox_defines(src_bbox) if src_bbox else ""
     node = custom(mat, -600, 0, custom_code("M_XinyiGround", extra), [n for n, _ in MATERIALS["M_XinyiGround"][0]], SURFACE_OUTPUTS, "M_XinyiGround")
-    wire(((wp, "WP"), (n, "N"), (gt, "GT", "RGBA"), (lamp, "LAMP", "R"), (night, "Night")), node)
+    wire(((wp, "WP"), (n, "N"), (gt, "GT", "RGBA"), (ct, "CT", "RGBA"), (lamp, "LAMP", "R"), (night, "Night")), node)
     finish_surface(mat, node, es, -300, 300, normal=False)
     save_material(mat, path)
     return mat
@@ -390,7 +392,7 @@ def build_instanced_material(mpc, name):
 # Import helpers
 # ---------------------------------------------------------------------------
 
-def import_texture(png, name, grayscale=False, address=unreal.TextureAddress.TA_CLAMP):
+def import_texture(png, name, grayscale=False, address=unreal.TextureAddress.TA_CLAMP, box_mips=False):
     task = unreal.AssetImportTask()
     task.set_editor_property("filename", str(png))
     task.set_editor_property("destination_path", TEX_DIR)
@@ -409,6 +411,10 @@ def import_texture(png, name, grayscale=False, address=unreal.TextureAddress.TA_
                             else unreal.TextureCompressionSettings.TC_VECTOR_DISPLACEMENTMAP)
     tex.set_editor_property("address_x", address)
     tex.set_editor_property("address_y", address)
+    if box_mips:
+        # signed-distance masks: plain box-filtered mips (no sharpening lobes), so a mip average of the
+        # 1-Lipschitz field moves by at most ~half its footprint (the shader insets by that)
+        tex.set_editor_property("mip_gen_settings", unreal.TextureMipGenSettings.TMGS_SIMPLE_AVERAGE)
     if not lib.save_asset(path):
         raise RuntimeError("failed to save %s" % path)
     created[path] = "Texture2D"
@@ -496,7 +502,9 @@ def main():
     m_hero = build_city_material(mpc, "M_Taipei101", hero=True)
     far_rep_path = LOOK_OUT / "farcity/far_city.report.json"
     far_rep = read_json(far_rep_path) if far_rep_path.is_file() else None
-    m_ground = build_ground_material(mpc, tex, lamp_tex, far_rep["xinyi_source_bbox_enu_m"] if far_rep else None)
+    campus_tex = import_texture(LOOK_OUT / "ground" / ground["campus"]["texture"], "T_XinyiCampus", box_mips=True)
+    m_ground = build_ground_material(mpc, tex, lamp_tex, campus_tex,
+                                     far_rep["xinyi_source_bbox_enu_m"] if far_rep else None)
     m_paint = build_paint_material(mpc, tex, lamp_tex)
     far_tex = import_texture(LOOK_OUT / "farcity/far_city_1024.png", "T_TaipeiFarCity") if far_rep else None
     m_back = build_backdrop_material(mpc, far_tex, far_rep["texture_extent_enu_m"] if far_rep else None)
@@ -553,6 +561,8 @@ def main():
          backdrop["expected_ue_local_bounds"]),
         ("paint", LOOK_OUT / "ground/xinyi_road_paint.glb", MESH_DIR + "/RoadPaint", m_paint, 3,
          ground["paint_expected_ue_local_bounds"]),
+        ("campus_paint", LOOK_OUT / "ground" / ground["campus"]["paint_mesh"], MESH_DIR + "/CampusPaint", m_paint, 3,
+         ground["campus"]["paint_expected_ue_local_bounds"]),
         ("tree", LOOK_OUT / "ground/xinyi_tree.glb", MESH_DIR + "/Tree", m_tree, 3,
          ground["tree_expected_ue_local_bounds"]),
         ("forest", LOOK_OUT / "ground/xinyi_forest_clump.glb", MESH_DIR + "/Forest", m_tree, 3,
@@ -608,7 +618,7 @@ def main():
         except Exception as exc:
             failures.append({"far_city_chunk": row["chunk"], "error": str(exc)})
 
-    status = ("PASS_LOOK_ASSETS" if not failures and len(tiles) == 25 and len(singles) == 7
+    status = ("PASS_LOOK_ASSETS" if not failures and len(tiles) == 25 and len(singles) == 8
               and len(props) == len(roofs["types"]) else "FAIL_LOOK_ASSETS")
     report = {
         "status": status,

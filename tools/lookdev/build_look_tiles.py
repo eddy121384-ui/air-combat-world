@@ -24,13 +24,23 @@ What changes is vertex *sharing* and vertex *attributes*:
               G = appearance seed (per building group)
               B = weathering 0..255
               A = flags (bit0 core district, bit1 group anchor, bit2 podium part,
-                         bit3 rooftop structure)
+                         bit3 rooftop structure, bit4 school wall facing the
+                         schoolyard = open corridor side; bits 5-6 free,
+                         >= 248 reserved for the hero tag)
 
 Building groups
 ---------------
 The WFS models one real building as several height-zone records. Records are
 grouped (union-find) so a tower and its podium / stair cores share one
 archetype, palette and floor rhythm. Equal-sized row houses stay separate.
+
+Schools
+-------
+Building groups accepted by the Grade-A campus membership rules
+(campus_identity.py) get ARCH_SCHOOL (7): classroom-wing facade / roof grammar
+instead of the shop-house / residential grammar. Wall triangles of school
+buildings whose outward normal faces the open schoolyard carry flag bit4 (open
+corridor side). The audit is written to campus/campus_membership.json.
 """
 from __future__ import annotations
 
@@ -53,6 +63,7 @@ REPO = HERE.parents[1]
 sys.path.insert(0, str(REPO / "tools/compiler"))
 sys.path.insert(0, str(HERE))
 
+import campus_identity as campus_id  # noqa: E402
 from gltf_writer import pack_rgba8, read_glb_primitives, write_glb  # noqa: E402
 from worldmodel import build_worldmodel  # noqa: E402
 
@@ -63,11 +74,13 @@ Z_OFFSETS = REPO / "unreal/Saved/XinyiTerrainV0/building_z_offsets.json"
 CONTRACT = REPO / "unreal/Saved/XinyiUnrealV2Contract"
 OUT = REPO / "unreal/Saved/XinyiLook"
 
-ARCH_LOW, ARCH_WALKUP, ARCH_HUAXIA, ARCH_RESTOWER, ARCH_OFFICE, ARCH_PODIUM, ARCH_CIVIC = range(7)
-ARCH_NAMES = ["low", "walkup", "huaxia", "res_tower", "office_glass", "commercial_podium", "civic"]
+ARCH_LOW, ARCH_WALKUP, ARCH_HUAXIA, ARCH_RESTOWER, ARCH_OFFICE, ARCH_PODIUM, ARCH_CIVIC, ARCH_SCHOOL = range(8)
+ARCH_NAMES = ["low", "walkup", "huaxia", "res_tower", "office_glass", "commercial_podium", "civic", "school"]
+assert ARCH_SCHOOL == campus_id.ARCH_SCHOOL
 LANDMARKS = HERE / "landmarks.json"
 
-FLAG_CORE, FLAG_ANCHOR, FLAG_PODIUM, FLAG_ROOFTOP = 1, 2, 4, 8
+FLAG_CORE, FLAG_ANCHOR, FLAG_PODIUM, FLAG_ROOFTOP, FLAG_CORRIDOR = 1, 2, 4, 8, 16
+CORRIDOR_MIN_WALL_M = 6.0
 
 # Xinyi Special District (信義計畫區), from OSM boundary roads in Xinyi ENU:
 # 基隆路 (W, diagonal) / 忠孝東路 (N) / 松德路 (E) / 信義路 (S).
@@ -134,6 +147,14 @@ def classify(wm, props):
         groups[uf.find(i)].append(i)
 
     lon0, lat0 = wm["local_frame"]["origin_lonlat"]
+    # Grade-A campus membership (group level; rules in campus_identity.py)
+    bb = np.array([q.bounds for q in polys if not q.is_empty])
+    src_bbox = Polygon.from_bounds(bb[:, 0].min(), bb[:, 1].min(), bb[:, 2].max(), bb[:, 3].max())
+    edu = campus_id.edu_features(lon0, lat0)
+    campuses = campus_id.grade_a_campuses(edu, src_bbox)
+    group_geom = {min(feats[m]["id"] for m in members): _union([polys[m] for m in members])
+                  for members in groups.values()}
+    school_of, decisions = campus_id.assign_groups(campuses, group_geom, campus_id.school_building_union(edu))
     from worldmodel import lonlat_to_enu
     marks = []
     for lm in json.loads(LANDMARKS.read_text(encoding="utf-8"))["landmarks"]:
@@ -179,6 +200,10 @@ def classify(wm, props):
         else:
             arch = ARCH_OFFICE if (fh >= 3.55 or (core and total_area >= 700)) else ARCH_RESTOWER
 
+        campus = school_of.get(gid)
+        if campus is not None:
+            arch = ARCH_SCHOOL
+
         # Landmark art direction (location registry, look-only)
         lm_variant = None
         gc = polys[anchor].centroid          # true centroid: rings / domes match at their centre
@@ -187,11 +212,14 @@ def classify(wm, props):
                 arch = ARCH_NAMES.index(lm["archetype"])
                 lm_variant = int(lm["variant"])
                 landmark_hits[lm["name"]] += 1
+                if campus is not None:      # a registry landmark keeps its art direction
+                    landmark_hits["school_overridden_by_landmark"] += 1
+                    campus = None
                 break
 
         # Weathering: old stock outside the planned district weathers hardest.
         base_w = {ARCH_LOW: 170, ARCH_WALKUP: 190, ARCH_HUAXIA: 150, ARCH_RESTOWER: 80,
-                  ARCH_OFFICE: 30, ARCH_PODIUM: 70, ARCH_CIVIC: 60}[arch]
+                  ARCH_OFFICE: 30, ARCH_PODIUM: 70, ARCH_CIVIC: 60, ARCH_SCHOOL: 120}[arch]
         if core:
             base_w = int(base_w * 0.55)
         weather = int(max(0, min(255, base_w + (seed % 64) - 32)))
@@ -209,7 +237,9 @@ def classify(wm, props):
             records[b["id"]] = {
                 "group": gid,
                 "archetype": arch,
-                "variant": lm_variant if lm_variant is not None else sha_byte(b["id"], 1) & 15,
+                # schools: one palette per campus (all wings of a campus share tile / accent colours)
+                "variant": (lm_variant if lm_variant is not None else
+                            sha_byte(campus) & 15 if campus is not None else sha_byte(b["id"], 1) & 15),
                 "seed": seed,
                 "weather": weather,
                 "flags": flags,
@@ -218,8 +248,12 @@ def classify(wm, props):
                 "core": bool(core),
                 "d101_m": float(d101),
             }
+            if campus is not None:
+                records[b["id"]]["campus"] = campus
     print("landmark groups:", dict(landmark_hits))
-    return records, stats, len(groups)
+    membership = {"campuses": [{k: c[k] for k in ("id", "name", "level", "bbox_coverage")} for c in campuses],
+                  "decisions": decisions, "landmark_conflicts": landmark_hits.get("school_overridden_by_landmark", 0)}
+    return records, stats, len(groups), membership, campuses
 
 
 def _union(parts):
@@ -269,7 +303,38 @@ def ring_params(mesh_v: np.ndarray, faces: np.ndarray, up: np.ndarray):
     return params
 
 
-def component_attributes(mesh: trimesh.Trimesh, ground_offset: float, rec: dict, tile_origin):
+def corridor_walls(p, fn, wall, tile_origin, probe):
+    """Wall triangles of one school component that face the schoolyard (open corridor side).
+
+    Triangles are grouped per wall plane so both halves of a wall quad agree; the plane's horizontal
+    extent is probed along its outward normal (campus_identity.YardProbe)."""
+    out = np.zeros(len(p), dtype=bool)
+    ox, oy = float(tile_origin[0]), float(tile_origin[1])
+    planes = defaultdict(list)
+    for t in np.nonzero(wall)[0]:
+        n2 = np.array([fn[t, 0], -fn[t, 2]])
+        ln = float(np.hypot(*n2))
+        if ln < 0.9:
+            continue
+        n2 /= ln
+        q = np.column_stack([p[t, :, 0] + ox, -p[t, :, 2] + oy])
+        d = float(np.mean(q @ n2))
+        planes[(int(round(n2[0] * 200)), int(round(n2[1] * 200)), int(round(d * 4)))].append((t, n2, q))
+    for tris in planes.values():
+        n2 = tris[0][1]
+        tg = np.array([-n2[1], n2[0]])
+        pts = np.concatenate([q for _t, _n, q in tris])
+        s = pts @ tg
+        if s.max() - s.min() < CORRIDOR_MIN_WALL_M:
+            continue
+        base = pts[0] - tg * s[0]
+        if probe.faces_yard(base + tg * s.min(), base + tg * s.max(), n2):
+            for t, _n, _q in tris:
+                out[t] = True
+    return out
+
+
+def component_attributes(mesh: trimesh.Trimesh, ground_offset: float, rec: dict, tile_origin, probe=None):
     """Return per-corner arrays (T*3 rows) for one validated component mesh."""
     v = np.asarray(mesh.vertices, dtype=np.float64)
     f = np.asarray(mesh.faces, dtype=np.int64)
@@ -319,6 +384,8 @@ def component_attributes(mesh: trimesh.Trimesh, ground_offset: float, rec: dict,
     uv1[:, :, 1] = rec["floor_h"]
     col = np.empty((T, 3, 4), dtype=np.uint8)
     col[:, :] = (rec["archetype"] * 16 + rec["variant"], rec["seed"], rec["weather"], rec["flags"])
+    if probe is not None and rec["archetype"] == ARCH_SCHOOL:
+        col[corridor_walls(p, fn, wall, tile_origin, probe), :, 3] |= FLAG_CORRIDOR
     normals = np.repeat(fn[:, None, :], 3, axis=1)
     return normals, uv0, uv1, col
 
@@ -351,7 +418,11 @@ def build(out_dir: Path):
     src = json.loads(SOURCE.read_text(encoding="utf-8"))
     props = {f["id"]: f["properties"] for f in src["features"]}
     wm = build_worldmodel(SOURCE, CITY, source_crs="EPSG:3826")
-    records, arch_stats, group_count = classify(wm, props)
+    records, arch_stats, group_count, membership, campuses = classify(wm, props)
+    all_polys = [Polygon(pt["footprint_enu"], pt.get("holes_enu") or []).buffer(0)
+                 for b in wm["buildings"] if not b["suppressed"] for pt in b["polygons"]]
+    probes = {c["id"]: campus_id.YardProbe(c["geom"], all_polys) for c in campuses}
+    corridor_tris = 0
 
     tiles_out = out_dir / "tiles"
     tiles_out.mkdir(parents=True, exist_ok=True)
@@ -370,7 +441,9 @@ def build(out_dir: Path):
             _, gname = scene.graph[node]
             mesh = scene.geometry[gname]
             rec = records[bid]
-            nrm, uv0, uv1, col = component_attributes(mesh, float(z_offsets[bid]), rec, row["origin_enu_m"])
+            nrm, uv0, uv1, col = component_attributes(mesh, float(z_offsets[bid]), rec, row["origin_enu_m"],
+                                                      probes.get(rec.get("campus")))
+            corridor_tris += int(np.count_nonzero(col[:, 0, 3] & FLAG_CORRIDOR))
             m2 = mesh.copy()
             m2.apply_translation([0.0, float(z_offsets[bid]), 0.0])
             corners = np.asarray(m2.vertices, dtype=np.float64)[np.asarray(m2.faces)]
@@ -421,7 +494,8 @@ def build(out_dir: Path):
     for bid, rec in sorted(records.items()):
         sidecar.append({"building_id": bid, **{k: rec[k] for k in ("group", "archetype", "variant", "seed",
                                                                    "weather", "flags", "floor_h")},
-                        "archetype_name": ARCH_NAMES[rec["archetype"]]})
+                        "archetype_name": ARCH_NAMES[rec["archetype"]],
+                        **({"campus": rec["campus"]} if "campus" in rec else {})})
     with gzip.open(out_dir / "look_buildings.jsonl.gz", "wt", encoding="utf-8", compresslevel=9) as fh:
         for r in sidecar:
             fh.write(json.dumps(r, sort_keys=True) + "\n")
@@ -439,6 +513,17 @@ def build(out_dir: Path):
         "contract": "triangle soup bit-identical to accepted runtime tiles; attributes are look-dev only",
     }
     (out_dir / "look_tiles.report.json").write_text(json.dumps(report, indent=2) + "\n")
+    school_groups = sorted({r["group"] for r in records.values() if r["archetype"] == ARCH_SCHOOL})
+    membership.update({"schema": "acw.campus_membership/0", "rules": {
+        "inside_min": campus_id.INSIDE_MIN, "inside_min_tagged": campus_id.INSIDE_MIN_TAGGED,
+        "osm_cover_min": campus_id.OSM_COVER_MIN, "attach_gap_m": campus_id.ATTACH_GAP_M,
+        "grade_a_levels": list(campus_id.GRADE_A_LEVELS), "grade_a_min_coverage": campus_id.GRADE_A_MIN_COVERAGE},
+        "school_groups": len(school_groups),
+        "school_records": sum(1 for r in records.values() if r["archetype"] == ARCH_SCHOOL),
+        "corridor_wall_triangles": corridor_tris})
+    (out_dir / "campus").mkdir(parents=True, exist_ok=True)
+    (out_dir / "campus/campus_membership.json").write_text(json.dumps(membership, indent=1, ensure_ascii=False) + "\n",
+                                                           encoding="utf-8")
     print(json.dumps({k: report[k] for k in ("building_groups", "archetype_group_counts", "totals")}, indent=1))
 
 

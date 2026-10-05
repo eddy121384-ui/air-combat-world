@@ -20,6 +20,18 @@ Outputs (unreal/Saved/XinyiLook/ground/):
                           (機車停等區). TEXCOORD_2 = packed RGBA8 paint colour.
   xinyi_trees.json        tree instances (street trees, median trees, parks)
   xinyi_tree.glb          one low-poly broadleaf tree (crown + trunk)
+  xinyi_campus_2048.png   School & Campus Identity v0A data texture over the same extent, sampled
+                          bilinear without mips (exact masks at every distance):
+                          R = Grade-A campus signed distance, 0.5 + d / 32 (+-16 m, > 0.5 inside)
+                          G = tagged court / playground signed distance, 0.5 + d / 16 (+-8 m)
+                          B = surface palette id * 32 (nearest surface; xc_court_surface)
+                          A = 0. Everything outside the campus polygons decodes to "outside".
+                          Box-filtered mips; the shader insets the masks by the pixel footprint.
+  xinyi_campus_paint.glb  court markings as paint geometry (6 cm above terrain); TEXCOORD_2 R byte =
+                          surface id 1..5 (road paint R >= 190; xc_paint court branch)
+  campus_ground.json      campuses / surfaces / markings used (audit). No running track is ever
+                          produced: OSM has none here and inferred tracks are not render input.
+The accepted ground outputs above are written first and are unchanged by the campus layer.
 """
 from __future__ import annotations
 
@@ -43,6 +55,7 @@ sys.path.insert(0, str(REPO / "tools/compiler"))
 sys.path.insert(0, str(HERE))
 from gltf_writer import pack_rgba8, ue_local_bounds_cm, write_glb  # noqa: E402
 from worldmodel import build_worldmodel, enu_origin_from_city_yaml, lonlat_to_enu  # noqa: E402
+import campus_identity as campus_id  # noqa: E402
 
 CITY = REPO / "cities/taipei/city.yaml"
 OSM = REPO / "data/lookdev_cache/osm_xinyi_context.json.gz"
@@ -576,6 +589,7 @@ def main():
     light = np.sqrt(1.0 - np.exp(-light * 0.9))          # soft saturation; sqrt: 8-bit precision in the dark
     Image.fromarray((light * 255 + 0.5).astype(np.uint8), "L").save(OUT / "xinyi_ground_light_1024.png", optimize=True)
     lamp_bounds = write_lamp_mesh(OUT / "xinyi_lamp.glb")
+    campus = build_campus_layer(hf, bpolys)
     report = {
         "texture": "xinyi_ground_2048.png", "resolution": RES, "metres_per_px": (E1 - E0) / RES,
         "extent_enu_m": [E0, E1, N0, N1], "sdf_range_m": SDF_RANGE_M,
@@ -597,9 +611,159 @@ def main():
         "lamp_expected_ue_local_bounds": lamp_bounds,
         "lamp_instances": "xinyi_lamps.json",
         "lamp_light_texture": "xinyi_ground_light_1024.png",
+        "campus": campus,
     }
     (OUT / "ground.report.json").write_text(json.dumps(report, indent=2) + "\n")
     print(json.dumps(report))
+
+
+# ------------------------------------------------------------------ campus ---
+COURT_LINE_W = 0.15          # real lines are 5 cm; 15 cm keeps them readable at low-flight range (xc_paint)
+# standard court markings in court-local metres (x along the long axis, y across):
+# (length, width, [polylines]); lines are mirrored for both halves where the sport is symmetric
+STANDARD_COURTS = {"basketball": (28.0, 15.0), "volleyball": (18.0, 9.0), "tennis": (23.77, 10.97),
+                   "badminton": (13.4, 6.1)}
+SPORT_ALIAS = {"multi": "basketball"}     # Taiwanese 綜合球場: basketball markings
+
+
+def _arc(cx, cy, r, a0, a1, n=20):
+    return [(cx + r * math.cos(a0 + (a1 - a0) * k / n), cy + r * math.sin(a0 + (a1 - a0) * k / n)) for k in range(n + 1)]
+
+
+def _rect(hl, hw):
+    return [(-hl, -hw), (hl, -hw), (hl, hw), (-hl, hw), (-hl, -hw)]
+
+
+def court_markings(sport):
+    """Polylines of a standard court of `sport` centred at the origin (court-local metres)."""
+    L, W = STANDARD_COURTS[sport]
+    hl, hw = L / 2, W / 2
+    lines = [_rect(hl, hw), [(0.0, -hw), (0.0, hw)]]
+    if sport == "basketball":
+        lines.append(_arc(0, 0, 1.8, 0, 2 * math.pi, 32))
+        for sgn in (-1, 1):
+            bx = sgn * (hl - 1.575)
+            lines.append([(sgn * hl, -2.45), (sgn * (hl - 5.8), -2.45), (sgn * (hl - 5.8), 2.45), (sgn * hl, 2.45)])
+            ftx = sgn * (hl - 5.8)       # free-throw semicircle on the court side
+            lines.append([(ftx - sgn * 1.8 * math.cos(t), 1.8 * math.sin(t))
+                          for t in np.linspace(-math.pi / 2, math.pi / 2, 17)])
+            # 3-point line: corner straights 6.6 m off the axis, arc r 6.75 m around the basket
+            phi = math.acos(math.sqrt(6.75 ** 2 - 6.6 ** 2) / 6.75)
+            arc = [(bx - sgn * 6.75 * math.cos(t), 6.75 * math.sin(t)) for t in np.linspace(-phi, phi, 29)]
+            lines.append([(sgn * hl, -6.6)] + arc + [(sgn * hl, 6.6)])
+    elif sport == "volleyball":
+        lines += [[(-3.0, -hw), (-3.0, hw)], [(3.0, -hw), (3.0, hw)]]
+    elif sport == "tennis":
+        s_ = 4.115
+        lines += [[(-hl, -s_), (hl, -s_)], [(-hl, s_), (hl, s_)], [(-6.40, -s_), (-6.40, s_)], [(6.40, -s_), (6.40, s_)],
+                  [(-6.40, 0.0), (6.40, 0.0)]]
+    elif sport == "badminton":
+        s_ = 2.53
+        lines += [[(-hl, -s_), (hl, -s_)], [(-hl, s_), (hl, s_)], [(-1.98, -hw), (-1.98, hw)], [(1.98, -hw), (1.98, hw)],
+                  [(-hl + 0.76, -hw), (-hl + 0.76, hw)], [(hl - 0.76, -hw), (hl - 0.76, hw)],
+                  [(-hl, 0.0), (-1.98, 0.0)], [(1.98, 0.0), (hl, 0.0)]]
+    return lines
+
+
+def plan_markings(rec):
+    """Marking plan for one tagged surface, from its real rectangle (no inferred sport / layout).
+
+    Standard markings only when the sport is tagged, the pitch is clearly elongated (long / short >= 1.3,
+    so the long axis is unambiguous) and the standard court fits at >= 85 % scale; otherwise only the
+    real pitch boundary is drawn (the outline itself is drawn analytically by the ground shader from the
+    court signed distance, for every surface)."""
+    sport = SPORT_ALIAS.get(rec["sport"], rec["sport"])
+    L, W = rec["length_m"], rec["width_m"]
+    if rec["kind"] != "pitch":
+        return {"mode": "none", "reason": "playground: surface only"}
+    if sport in STANDARD_COURTS and L / max(W, 1e-6) >= 1.3:
+        Ls, Ws = STANDARD_COURTS[sport]
+        f = min(1.0, (L - 0.4) / Ls, (W - 0.4) / Ws)
+        if f >= 0.85:
+            return {"mode": "standard", "sport": sport, "scale": round(f, 4)}
+        return {"mode": "boundary", "reason": "standard %s court does not fit (scale %.2f)" % (sport, f)}
+    if sport in STANDARD_COURTS:
+        return {"mode": "boundary", "reason": "near-square pitch (%.1f x %.1f m): court axis ambiguous" % (L, W)}
+    return {"mode": "boundary", "reason": "sport not tagged" if not rec["sport"] else "no standard markings for %s" % sport}
+
+
+def build_campus_layer(hf, wfs_polys):
+    """Grade-A campus yard / court data texture + court marking paint (see module docstring)."""
+    lon0, lat0 = enu_origin_from_city_yaml(CITY)
+    edu = campus_id.edu_features(lon0, lat0)
+    wm_b = unary_union(wfs_polys)
+    src_bbox = box(*wm_b.bounds)
+    campuses = campus_id.grade_a_campuses(edu, src_bbox)
+    surfaces, rejected = campus_id.sports_surfaces(campuses, edu, wfs_polys)
+    # tracks are never drawn here (only a future curated, cited override may add one); count what is ignored
+    osm_tracks = sum(1 for f in edu if f["tags"].get("leisure") == "track"
+                     or any(k in str(f["tags"].get("sport", "")) for k in ("athletics", "running")))
+    import shapely
+    px = (E1 - E0) / RES
+    img = np.zeros((RES, RES, 4), np.uint8)
+    for c in campuses:
+        g = c["geom"]
+        x0, y0, x1, y1 = g.buffer(20.0).bounds
+        i0, i1 = max(0, int((x0 - E0) / px)), min(RES, int(math.ceil((x1 - E0) / px)))
+        j0, j1 = max(0, int((N1 - y1) / px)), min(RES, int(math.ceil((N1 - y0) / px)))
+        ii, jj = np.meshgrid(np.arange(i0, i1), np.arange(j0, j1))
+        xs, ys = E0 + (ii + 0.5) * px, N1 - (jj + 0.5) * px
+        inside = shapely.contains_xy(g, xs, ys)
+        d = shapely.distance(g.boundary, shapely.points(xs, ys))
+        d = np.where(inside, d, -d)
+        val = np.clip(np.floor((0.5 + np.clip(d, -16.0, 16.0) / 32.0) * 255.0 + 0.5), 0, 255).astype(np.uint8)
+        img[j0:j1, i0:i1, 0] = np.maximum(img[j0:j1, i0:i1, 0], val)
+        mine = [sf for sf in surfaces if sf["campus"] == c["id"]]
+        if mine:
+            dd = np.full(xs.shape, -1e9)
+            near = np.full(xs.shape, 1e9)
+            sid = np.zeros(xs.shape, np.uint8)
+            for sf in mine:
+                sg = sf["geom"]
+                ins = shapely.contains_xy(sg, xs, ys)
+                ds = shapely.distance(sg.boundary, shapely.points(xs, ys))
+                sd = np.where(ins, ds, -ds)
+                dd = np.maximum(dd, sd)
+                closer = np.abs(np.minimum(sd, 0.0)) < near
+                sid = np.where(closer, sf["surface_id"], sid)
+                near = np.minimum(near, np.abs(np.minimum(sd, 0.0)))
+            gv = np.clip(np.floor((0.5 + np.clip(dd, -8.0, 8.0) / 16.0) * 255.0 + 0.5), 0, 255).astype(np.uint8)
+            img[j0:j1, i0:i1, 1] = np.maximum(img[j0:j1, i0:i1, 1], np.where(inside, gv, 0))
+            img[j0:j1, i0:i1, 2] = np.where(inside, sid * 32, img[j0:j1, i0:i1, 2])
+    Image.fromarray(img, "RGBA").save(OUT / "xinyi_campus_2048.png", optimize=True)
+
+    # court markings as paint geometry, laid on the real pitch rectangle
+    paint = Paint(hf)
+    plans = []
+    for sf in surfaces:
+        plan = plan_markings(sf)
+        g = sf["geom"]
+        cx, cy = sf["centre"]
+        ax = np.array(sf["axis"])
+        ay = np.array([-ax[1], ax[0]])
+        color = (sf["surface_id"], 0, 0, 255)       # R = surface id (xc_paint court branch)
+
+        def world(pts, f=1.0):
+            return [(cx + ax[0] * x * f + ay[0] * y * f, cy + ax[1] * x * f + ay[1] * y * f) for x, y in pts]
+        if plan["mode"] == "standard":
+            for ln in court_markings(plan["sport"]):
+                paint.polyline(world(ln, plan["scale"]), 0.0, COURT_LINE_W, color)
+        plans.append({k: v for k, v in sf.items() if k != "geom"} | {"markings": plan})
+    game, colr, faces = paint.arrays()
+    write_glb(OUT / "xinyi_campus_paint.glb", [{
+        "name": "XinyiRoadPaint", "positions": game,
+        "normals": np.tile(np.array([[0, 1, 0]], np.float32), (len(game), 1)),
+        "uv2": pack_rgba8(colr), "indices": faces, "base_color": [0.9, 0.9, 0.9, 1.0],
+    }], mesh_name="SM_XinyiCampusPaint")
+    doc = {"schema": "acw.campus_ground/0", "campuses": [{k: c[k] for k in ("id", "name", "level", "bbox_coverage")}
+                                                         for c in campuses],
+           "surfaces": plans, "rejected_surfaces": rejected, "running_tracks": 0, "osm_track_features_ignored": osm_tracks,
+           "track_policy": "no leisure=track / sport=athletics in the source; inferred tracks are never drawn"}
+    (OUT / "campus_ground.json").write_text(json.dumps(doc, indent=1, ensure_ascii=False) + "\n", encoding="utf-8")
+    return {"texture": "xinyi_campus_2048.png", "paint_mesh": "xinyi_campus_paint.glb",
+            "paint_expected_ue_local_bounds": ue_local_bounds_cm(game), "paint_triangles": int(len(faces)),
+            "campuses": len(campuses), "surfaces": len(surfaces), "rejected_surfaces": len(rejected),
+            "running_tracks": 0, "audit": "campus_ground.json"}
 
 
 def _ico():

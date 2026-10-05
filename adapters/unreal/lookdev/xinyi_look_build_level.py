@@ -259,6 +259,16 @@ def main():
     if spawn_clouds(actors) is not None:
         clouds = apply_clouds(world, actors, "off", "day")
 
+    # School & Campus Identity v0A court markings: low-flight detail; beyond ~0.9 km the courts read from
+    # the ground colour.
+    cp_mesh = lib.load_asset(s["campus_paint"]["asset_path"])
+    cpaint, _ = spawn_mesh_actor(actors, cp_mesh, [0.0, 0.0, 0.0], s["campus_paint"]["expected_bounds_origin_cm"],
+                                 "CampusPaint")
+    cpc = cpaint.get_component_by_class(unreal.StaticMeshComponent)
+    cpc.set_cast_shadow(False)
+    cpc.set_collision_enabled(unreal.CollisionEnabled.NO_COLLISION)
+    cpc.set_editor_property("ld_max_draw_distance", 90000.0)
+
     status = "PASS_LOOK_LEVEL" if not failures and len(swapped) == 25 else "FAIL_LOOK_LEVEL"
     if status == "PASS_LOOK_LEVEL":
         if not levels.save_current_level():

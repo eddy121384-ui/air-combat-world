@@ -15,6 +15,12 @@
 //   uv1   (record height m, visual floor height m)
 //   vc    xc_unpack(TEXCOORD_2): r = (archetype*16+variant)/255, g = seed/255,
 //         b = weathering, a = flags/255
+//   archetypes 0 low, 1 walkup, 2 huaxia, 3 res_tower, 4 office_glass, 5 commercial_podium,
+//         6 civic, 7 school. The accepted wall / roof functions only know 0..6 (open-ended tests such as
+//         step(5.5, arch) would treat 7 as civic): school pixels are routed explicitly in xc_city to
+//         xc_school_wall / xc_school_roof, which replace every output, so no accepted branch (civic,
+//         podium, tower, shop-house, landmark roof) ever reaches a school pixel. The accepted functions are
+//         kept text-identical so every non-school pixel compiles and computes exactly as before.
 //
 // Cost discipline (iPhone 11 Pro-class lower bound): ALU only, no textures,
 // no loops, every high-frequency pattern is fwidth-filtered toward its mean
@@ -227,6 +233,122 @@ float3 xc_window_light(float r, float warmBias)
     float3 c = lerp(cool, neutral, step(0.45 - warmBias * 0.3, r));
     c = lerp(c, warm, step(0.72 - warmBias * 0.3, r));
     return lerp(c, tv, step(0.95, r));
+}
+
+// ----------------------------------------------------------------------------
+// Schools (ARCH_SCHOOL = 7, School & Campus Identity v0A): Taiwanese reinforced-concrete classroom
+// wings. variant = campus palette (one per campus), seed = building group, flags bit4 = wall that faces
+// the schoolyard (open-corridor side, baked by build_look_tiles.py). Pale tile / render, restrained
+// brick-red / ochre accents, strong floor bands, a regular classroom bay rhythm; the corridor side is a
+// parapet, a dark recessed corridor strip and columns. No shop signs, arcades, iron cages, AC rows or
+// sheet-metal additions. Every pattern converges to its mean once unresolved (no shimmer).
+// ----------------------------------------------------------------------------
+void xc_school_wall(float u, float h, float H, float fh, float variant, float seed, float weather, float flags,
+                    float night, float litFrac, float fwu, float fwh,
+                    out float3 base, out float rough, out float metal, out float spec, out float3 emis)
+{
+    float corridor = step(0.5, frac(floor(flags * 255.0 / 16.0 + 0.001) * 0.5));   // bit4
+    float pal = (variant + 0.5) / 16.0;                                             // campus constant
+    float3 wall = xc_pick4(pal, float3(0.63, 0.59, 0.49), float3(0.64, 0.63, 0.59),
+                           float3(0.57, 0.58, 0.57), float3(0.63, 0.58, 0.49));
+    wall *= 0.95 + 0.08 * frac(seed * 13.7);                       // wing-to-wing tile batch
+    float3 accent = xc_pick4(frac(pal * 3.0 + 0.4), float3(0.42, 0.175, 0.125), float3(0.56, 0.39, 0.18),
+                             float3(0.47, 0.24, 0.16), float3(0.52, 0.35, 0.19));
+    float3 lightC = wall * 1.08 + 0.03;                            // beams / slab edges
+    float3 glass = float3(0.22, 0.265, 0.28);                       // classroom glazing: pale, sky-tinted
+    float fi = floor(h / fh);
+    float fv = frac(h / fh);
+    float fwf = fwh / fh;
+    float bw = 4.5 * (0.95 + 0.1 * frac(pal * 7.1));               // classroom bay (2 per classroom)
+    float bu = u / bw;
+    float bi = floor(bu);
+    float fu = frac(bu);
+    float fwb = fwu / bw;
+    float fu2 = frac(bu * 0.5);                                     // classroom (2 bays): corridor columns
+    float dFloor = xc_detail(fwh, fh);
+    float dBay = xc_detail(fwu, bw);
+    float dRoom = xc_detail(fwu, bw * 2.0);
+    float upper = step(0.5, fi);
+    // floor band: beam + slab edge, the strong horizontal line of a classroom wing
+    float band = max(xc_box(fv, 0.86, 1.0, fwf), xc_box(fv, 0.0, 0.035, fwf));
+    // --- window side: enclosed classroom wall. Accent sill stripe, one window bay per structural bay
+    // between solid piers, a centre mullion, pale glazing (reads lighter than the corridor recess)
+    float col = lerp(0.26, 1.0 - xc_box(fu, 0.10, 0.90, fwb), dBay);
+    float sill = xc_box(fv, 0.12, 0.25, fwf);
+    float winV = xc_box(fv, 0.32, 0.80, fwf);
+    float win = winV * lerp(0.74, xc_box(fu, 0.10, 0.90, fwb) * (1.0 - xc_box(fu, 0.475, 0.525, fwb)), dBay);
+    float frames = max(xc_line(frac(fu * 4.0), 0.06, fwb * 4.0), xc_box(fv, 0.62, 0.645, fwf)) * win * dBay;
+    float3 cw = wall;
+    cw = lerp(cw, accent, sill);
+    cw = lerp(cw, glass, win);
+    cw = lerp(cw, float3(0.60, 0.61, 0.60), frames * 0.85);       // aluminium frames / transom
+    cw = lerp(cw, lightC, col * winV * (1.0 - band) * 0.8);       // piers
+    cw = lerp(cw, lightC, band);
+    float3 mW = lightC * 0.25 + accent * 0.13 + glass * 0.355 + wall * 0.26;
+    // --- corridor side: continuous parapet with an accent cap over a deep, dark recessed corridor; one
+    // slender column per classroom (not per bay), so the recess reads as an unbroken horizontal band
+    float par = xc_box(fv, 0.0, 0.34, fwf) * upper;
+    float cap = xc_box(fv, 0.25, 0.34, fwf) * upper;
+    float rec = xc_box(fv, 0.0, 0.86, fwf) * (1.0 - par);
+    float ccol = lerp(0.05, 1.0 - xc_box(fu2, 0.025, 0.975, fwb * 0.5), dRoom);
+    float backWin = xc_box(fu, 0.20, 0.64, fwb) * xc_box(fv, 0.44, 0.78, fwf) * dBay;
+    float3 shade = lerp(wall * 0.085, wall * 0.17 + 0.01, backWin * 0.45) * lerp(0.6, 1.0, smoothstep(0.30, 0.80, 1.0 - fv));   // darker under the slab
+    float3 cc = wall;
+    cc = lerp(cc, shade, rec * (1.0 - ccol));
+    cc = lerp(cc, accent, cap);
+    cc = lerp(cc, lightC, band);
+    float3 mC = lightC * 0.175 + (wall * 0.215 + accent * 0.09) * upper
+              + wall * 0.115 * lerp(0.825, 0.525, upper);
+    float3 c = lerp(lerp(mW, mC, corridor), lerp(cw, cc, corridor), dFloor);
+    // roof parapet: light render with an accent coping, no sheet / signage
+    c = lerp(c, lerp(lightC * 0.96, accent, 0.5), step(H - 0.95, h));
+    float glassAmt = lerp(0.355, win, dFloor) * (1.0 - corridor);
+    // night: schools are mostly dark; a few classrooms / offices and corridor runs stay lit
+    float cellR = xc_hash31(float3(floor(bi / 2.0), fi, seed * 97.0));
+    float3 fl = float3(0.82, 0.92, 1.0);
+    float litW = step(1.0 - litFrac * 0.2, cellR);
+    float corrR = xc_hash21(float2(floor(bi / 4.0), fi + seed * 7.0));
+    float litC = step(0.86, corrR);
+    float3 eN = fl * (win * litW * 0.22 * (1.0 - corridor) + rec * (1.0 - ccol) * litC * 0.12 * corridor);
+    float3 eF = fl * lerp(0.355 * litFrac * 0.2 * 0.22, 0.50 * 0.14 * 0.12, corridor);
+    // humid weathering: parapet run-off, top grime, splash at the base (no window-sill streaks of the
+    // shop-house grid), then the same distance contact ramp as the accepted walls
+    float runLen = 3.0 + 16.0 * xc_noise1(u * 0.17 + seed * 7.0);
+    float runoff = saturate(xc_noise1(u * 0.45 + seed * 23.0) * 1.8 - 0.8) * smoothstep(H - runLen, H - 0.6, h);
+    runoff = lerp(0.05, runoff, xc_detail(fwu, 2.2));
+    float streak = saturate(xc_noise1(u * 1.9 + seed * 17.0) * 1.4 - 0.35) * 0.4;
+    float grime = saturate((streak * 0.7 + smoothstep(H - 2.5 * fh, H, h) * 0.5
+                            + (1.0 - smoothstep(0.0, 1.2, h)) * 0.6 + runoff * 0.8) * weather);
+    c *= 1.0 - grime * 0.42;
+    float farF = 1.0 - xc_detail(fwh, fh * 4.0);
+    float contact = (1.0 - smoothstep(0.0, lerp(4.0, 20.0, farF), h)) * farF;
+    float contactNight = (1.0 - smoothstep(0.0, lerp(4.0, 14.0, farF), h)) * farF;
+    c = lerp(c * (1.0 - contactNight * 0.65), lerp(c, float3(0.085, 0.095, 0.075), contact * 0.7), 1.0 - night);
+    float wear = xc_fnoise(float2(u, h), 0.15, max(fwu, fwh));
+    rough = lerp(lerp(0.80, 0.92, grime * 0.5) + (wear - 0.5) * 0.14, 0.12, glassAmt);
+    metal = 0.0;
+    spec = lerp(0.42, 0.75, glassAmt);
+    emis = lerp(eF, eN, dFloor * dBay) * night;
+    base = c;
+}
+
+// School roofs: bare concrete or green / grey PU waterproofing per wing, ponding stains; never sheet
+// metal, no painted equipment grid (real tank / bulkhead props from build_rooftops.py)
+void xc_school_roof(float3 wpos, float seed, float weather, float fwp,
+                    out float3 base, out float rough, out float metal, out float spec, out float3 emis)
+{
+    float2 p = float2(wpos.x, wpos.y);
+    float rs = frac(seed * 3.31 + 0.27);
+    float3 roofCol = lerp(float3(0.44, 0.43, 0.41), float3(0.25, 0.37, 0.30), step(0.45, rs));
+    roofCol = lerp(roofCol, float3(0.39, 0.42, 0.41), step(0.85, rs));
+    float stain = xc_fnoise(p + seed * 37.0, 0.35, fwp);
+    float stain2 = xc_fnoise(p - seed * 5.4, 1.3, fwp);
+    roofCol *= 1.0 - saturate(stain * 0.9 - 0.25) * 0.35 * weather - stain2 * 0.10;
+    base = roofCol;
+    rough = 0.9;
+    metal = 0.0;
+    spec = 0.35;
+    emis = float3(0.0, 0.0, 0.0);
 }
 
 // ----------------------------------------------------------------------------
@@ -672,6 +794,14 @@ void xc_city(float3 wpos, float3 N, float2 uv0, float2 uv1, float4 vc,
     xc_wall(uv0.x, uv0.y, uv1.x, uv1.y, arch, variant, seed, weather, flags, wpos,
             night, litFrac, fwu, fwh, bw, rw, mw, sw, ew);
     xc_roof(wpos, uv1.x, arch, variant, seed, weather, flags, night, fwp, br, rr, mr, sr, er);
+    // schools (ARCH_SCHOOL = 7): explicit route, replaces every wall / roof output (per-building constant:
+    // coherent branch; non-school pixels keep the accepted results above untouched)
+    [branch] if (abs(arch - 7.0) < 0.5)
+    {
+        xc_school_wall(uv0.x, uv0.y, uv1.x, uv1.y, variant, seed, weather, flags, night, litFrac, fwu, fwh,
+                       bw, rw, mw, sw, ew);
+        xc_school_roof(wpos, seed, weather, fwp, br, rr, mr, sr, er);
+    }
     float isRoof = smoothstep(0.55, 0.75, N.z);
     float isSoffit = step(N.z, -0.7);
     base = lerp(bw, br, isRoof);
@@ -791,13 +921,30 @@ void xc_backdrop(float3 wpos, float3 N, float4 vc, float4 fc, float night, float
     emis = glow * urban * (1.0 - greenPocket) * night * night;
 }
 
+// Sports-surface palette for tagged school courts / playgrounds (campus_identity.py SURF_*): restrained,
+// matte acrylic / PU tones, never a track red. 1 green, 2 blue, 3 grey-green, 4 concrete, 5 playground.
+float3 xc_court_surface(float k)
+{
+    float3 c = float3(0.16, 0.29, 0.20);
+    c = lerp(c, float3(0.14, 0.22, 0.32), step(1.5, k));
+    c = lerp(c, float3(0.23, 0.30, 0.26), step(2.5, k));
+    c = lerp(c, float3(0.41, 0.40, 0.38), step(3.5, k));
+    return lerp(c, float3(0.21, 0.28, 0.29), step(4.5, k));
+}
+
 // ----------------------------------------------------------------------------
 // Xinyi ground (Landscape material). gt = ground data texture sample
 // (tools/lookdev/build_ground.py): r = road SDF (0.5 kerb, +-12 m), g = green,
 // b = road class, a = surface class. lamp = baked street-lamp pool texture
 // (sqrt-encoded). Texture sampling stays outside so this remains portable.
+// ct = campus data texture (School & Campus Identity v0A, box-filtered mips):
+//   r = Grade-A campus signed distance (+-16 m, > 0 inside), g = court / playground signed distance
+//   (+-8 m), b = surface palette id * 32 / 255 (nearest-surface fill), a = 0. The campus layer is a
+//   [branch] override after the accepted composite; its mask is exactly 0 outside the campus polygons,
+//   so every other ground pixel is the accepted result. Pass float4(0, 0, 0, 0) where no campus texture
+//   exists (preview).
 // ----------------------------------------------------------------------------
-void xc_ground(float3 wpos, float3 N, float4 gt, float lamp, float night, float fwp,
+void xc_ground(float3 wpos, float3 N, float4 gt, float4 ct, float lamp, float night, float fwp,
                out float3 base, out float rough, out float metal, out float spec, out float3 emis)
 {
     float2 p = float2(wpos.x, wpos.y);
@@ -889,6 +1036,40 @@ void xc_ground(float3 wpos, float3 N, float4 gt, float lamp, float night, float 
     c = lerp(c, asphalt, road);
     water = step(0.9, surf);
     c = lerp(c, waterCol, water);
+
+    // ---- School & Campus Identity v0A campus layer (Grade-A campuses only) -------------------------
+    // Inset: bilinear overshoot at reflex corners + 8-bit steps stay < 0.35 m at mip 0 (offline leak gate);
+    // a mip / anisotropic average of a 1-Lipschitz field moves by at most ~half its footprint, so the inset
+    // grows with the pixel footprint once that exceeds a texel. Outside the polygons the mask is exactly 0.
+    float dC = (ct.x - 0.5) * 32.0;
+    float campusIn = saturate((dC - 0.5 - 0.6 * max(fwp - 1.0, 0.0)) / max(fwidth(dC), 0.02));
+    float dK = (ct.y - 0.5) * 16.0;
+    float fK = max(fwidth(dK), 0.01);
+    [branch] if (campusIn > 0.0)
+    {
+        // schoolyard: neutral grey paved concrete, low-frequency patching and stains; sidewalks, greens,
+        // kerbs, roads and water keep their mapped surfaces on top. No generic categorical class (and so no
+        // track) is drawn inside a campus.
+        float3 yardC = float3(0.30, 0.297, 0.285) * (0.965 + 0.07 * xc_fnoise(p + 913.0, 0.06, fwp));
+        yardC *= 1.0 - saturate(xc_fnoise(p - 377.0, 0.21, fwp) * 1.4 - 0.75) * 0.10;
+        float3 cc = lerp(yardC, paver, walk);
+        cc = lerp(cc, grass, saturate(green * 1.2) * (1.0 - road));
+        cc = lerp(cc, forest, hill * (1.0 - road) * (1.0 - green * 0.5));
+        cc = lerp(cc, float3(0.55, 0.55, 0.53), kerb * step(0.2, cls));
+        // tagged courts / playground with an analytic painted outline 0.35 m inside the real edge: a 12 cm
+        // line converges to its coverage mean instead of breaking into dots at grazing angles. Past ~0.2 m
+        // per pixel the outer rectangle widens inward with the footprint (max 0.8 m) so the court still reads
+        // as a court at mid range; it never leaves the court polygon.
+        float courtIn = saturate(dK / fK);
+        float3 courtC = xc_court_surface(floor(ct.z * 255.0 / 32.0 + 0.5)) * (0.94 + 0.1 * xc_fnoise(p + 71.0, 0.25, fwp));
+        cc = lerp(cc, courtC, courtIn);
+        float lwK = clamp(fK * 0.85, 0.12, 0.8);
+        float courtLine = saturate(lwK / fK) * (1.0 - smoothstep(lwK * 0.5 - fK * 0.5, lwK * 0.5 + fK * 0.5, abs(dK - 0.35 - lwK * 0.5))) * courtIn;
+        cc = lerp(cc, float3(0.70, 0.70, 0.67), courtLine);
+        cc = lerp(cc, asphalt, road);
+        cc = lerp(cc, waterCol, water);
+        c = lerp(c, cc, campusIn);
+    }
     base = c;
     rough = lerp(0.88, 0.75, road);
     rough = lerp(rough, 0.05, water);
@@ -911,6 +1092,15 @@ void xc_paint(float3 wpos, float4 vc, float4 gt, float lamp, float night, float 
     float wear = xc_fnoise(p, 1.7, fwp) * 0.6 + xc_fnoise(p, 0.23, fwp) * 0.4;
     c = lerp(c, float3(0.12, 0.12, 0.12), saturate(wear - 0.55) * 1.2);
     base = c * 0.85;
+    // school court markings (build_ground.py campus paint): R byte = court surface id 1..5 (road paint
+    // colours all have R >= 190; small values survive the half-precision UV packing exactly). A 15 cm line
+    // converges to its coverage-weighted mix with the court surface once it is sub-pixel.
+    [branch] if (vc.x < 0.03)
+    {
+        float3 surf = xc_court_surface(floor(vc.x * 255.0 + 0.5)) * (0.94 + 0.1 * xc_fnoise(p + 71.0, 0.25, fwp));
+        float3 lineC = lerp(float3(0.74, 0.74, 0.71), surf, saturate(wear - 0.6) * 0.8);
+        base = lerp(surf, lineC, saturate(0.21 / max(fwp, 1e-4)));
+    }
     rough = 0.6;
     metal = 0.0;
     spec = 0.5;

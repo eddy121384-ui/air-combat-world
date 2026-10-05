@@ -64,7 +64,7 @@ LOOK = REPO / "unreal/Saved/XinyiLook"
 EDU = REPO / "data/lookdev_cache/osm_education_context.json.gz"
 OUT = LOOK / "urban_identity"
 
-ARCH_NAMES = ["low", "walkup", "huaxia", "res_tower", "office_glass", "commercial_podium", "civic"]
+ARCH_NAMES = ["low", "walkup", "huaxia", "res_tower", "office_glass", "commercial_podium", "civic", "school"]
 ROAD_SEARCH_M = 45.0        # candidate road search radius around an edge midpoint
 MAX_SETBACK_M = 16.0        # curb distance beyond which an edge is not street frontage
 MIN_EDGE_M = 1.5

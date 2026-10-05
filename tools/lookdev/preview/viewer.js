@@ -289,7 +289,7 @@ void main() {
     if (vc.w > 0.97) ao = mix(0.6, 1.0, smoothstep(0.0, 60.0, vUv0.y));
     N = Np;
   } else if (uKind == 1) {
-    xc_ground(vW, N, groundTex(vW), lampTex(vW), uNight, fwp, base, rough, metal, spec, emis);
+    xc_ground(vW, N, groundTex(vW), vec4(0.0), lampTex(vW), uNight, fwp, base, rough, metal, spec, emis);   // no campus texture in the preview
     ao = 0.85;
   } else if (uKind == 3) {
     xc_paint(vW, vc, groundTex(vW), lampTex(vW), uNight, fwp, base, rough, metal, spec, emis);
