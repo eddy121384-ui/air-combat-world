@@ -24,9 +24,12 @@ What changes is vertex *sharing* and vertex *attributes*:
               G = appearance seed (per building group)
               B = weathering 0..255
               A = flags (bit0 core district, bit1 group anchor, bit2 podium part,
-                         bit3 rooftop structure, bit4 school wall facing the
-                         schoolyard = open corridor side; bits 5-6 free,
-                         >= 248 reserved for the hero tag)
+                         bit3 rooftop structure,
+                         bits 4-6 per wall:  school records: bit4 = wall facing the
+                                             schoolyard (open corridor side);
+                                             other records: frontage role FRONT_*
+                                             (0 on roofs / rooftop-structure records),
+                         >= 248 reserved for the hero tag; max baked value 127)
 
 Building groups
 ---------------
@@ -41,6 +44,28 @@ Building groups accepted by the Grade-A campus membership rules
 instead of the shop-house / residential grammar. Wall triangles of school
 buildings whose outward normal faces the open schoolyard carry flag bit4 (open
 corridor side). The audit is written to campus/campus_membership.json.
+
+Street frontage
+---------------
+Every wall of an ordinary (non-school, non-rooftop-structure) record carries a
+frontage role in flag bits 4-6 so the facade grammar can respond to the street:
+
+  1 rear / side / party wall (no street frontage)   2 service alley only
+  3 street, local          4 street, collector / arterial   (non-commercial building)
+  5 commercial corner, secondary frontage (side street)
+  6 commercial primary frontage, local   7 commercial primary frontage, major road
+  0 no frontage contract: roofs, rooftop-structure records, schools (bit4 = corridor),
+    and every mesh outside the 25 tiles (far city, landmarks) -> accepted behaviour
+
+Roles come from the acw.frontage/0 rules (build_urban_identity.build_frontage,
+run here on the in-memory records so archetypes are never stale): per ring
+edge road class, corner flag and commercial-candidate flag. A commercial
+building's primary frontage is its highest-class street edge plus every street
+edge within PRIMARY_DEG of it; other street edges are a secondary frontage only
+on metadata corners, otherwise plain street walls. Walls are matched to ring
+edges geometrically (normal, plane offset, position along the edge); the
+match coverage is audited in urban_identity/frontage_bake.json and fails
+closed below FRONT_MIN_COVERAGE.
 """
 from __future__ import annotations
 
@@ -63,6 +88,7 @@ REPO = HERE.parents[1]
 sys.path.insert(0, str(REPO / "tools/compiler"))
 sys.path.insert(0, str(HERE))
 
+import build_urban_identity as urban  # noqa: E402  (acw.frontage/0 rules)
 import campus_identity as campus_id  # noqa: E402
 from gltf_writer import pack_rgba8, read_glb_primitives, write_glb  # noqa: E402
 from worldmodel import build_worldmodel  # noqa: E402
@@ -81,6 +107,18 @@ LANDMARKS = HERE / "landmarks.json"
 
 FLAG_CORE, FLAG_ANCHOR, FLAG_PODIUM, FLAG_ROOFTOP, FLAG_CORRIDOR = 1, 2, 4, 8, 16
 CORRIDOR_MIN_WALL_M = 6.0
+
+# street frontage role per wall, flag bits 4-6 of non-school records (see module docstring)
+FRONT_SHIFT = 4
+(FRONT_NONE, FRONT_REAR, FRONT_ALLEY, FRONT_STREET, FRONT_STREET_MAJOR,
+ FRONT_COMM_SIDE, FRONT_COMM, FRONT_COMM_MAJOR) = range(8)
+FRONT_NAMES = ["none", "rear", "alley", "street", "street_major", "commercial_side", "commercial",
+               "commercial_major"]
+PRIMARY_DEG = 50.0          # street edges this close in bearing to the best one share the primary frontage
+FRONT_MATCH_COS = math.cos(math.radians(15.0))
+FRONT_MATCH_OFFSET_M = 0.5  # wall plane vs ring edge line
+FRONT_MATCH_PAD_M = 0.25    # wall midpoint may sit this far past an edge end
+FRONT_MIN_COVERAGE = 0.995  # share of frontage edge length that must land on wall triangles
 
 # Xinyi Special District (信義計畫區), from OSM boundary roads in Xinyi ENU:
 # 基隆路 (W, diagonal) / 忠孝東路 (N) / 松德路 (E) / 信義路 (S).
@@ -334,7 +372,88 @@ def corridor_walls(p, fn, wall, tile_origin, probe):
     return out
 
 
-def component_attributes(mesh: trimesh.Trimesh, ground_offset: float, rec: dict, tile_origin, probe=None):
+def _bearing_diff(a: float, b: float) -> float:
+    return abs((a - b + 180.0) % 360.0 - 180.0)
+
+
+def frontage_roles(wm, records):
+    """Frontage edges per building id as (p0, p1, outward unit normal, role, edge key) in ENU m.
+
+    Runs the acw.frontage/0 generator on the in-memory records (schools and rooftop-structure records
+    are handled by its own rules: never commercial / skipped)."""
+    look = {bid: {"group": r["group"], "archetype": r["archetype"], "flags": r["flags"]} for bid, r in records.items()}
+    frontage, _parts = urban.build_frontage(wm, look, urban.load_roads())
+    roles = {}
+    summary = Counter()
+    school_edges = 0
+    for b in frontage:
+        edges = b["edges"]
+        if records[b["building_id"]]["archetype"] == ARCH_SCHOOL:     # schools keep their own grammar (bit4)
+            school_edges += len(edges)
+            continue
+        street = [e for e in edges if e["front"] >= 2]
+        best = max(street, key=lambda e: (e["front"], e["len"]), default=None)
+        out = []
+        for e in edges:
+            major = e["front"] >= 3
+            if e["front"] == 1:
+                role = FRONT_ALLEY
+            elif not b["commercial_candidate"]:
+                role = FRONT_STREET_MAJOR if major else FRONT_STREET
+            elif _bearing_diff(e["normal_deg"], best["normal_deg"]) <= PRIMARY_DEG:
+                role = FRONT_COMM_MAJOR if major else FRONT_COMM
+            elif b["corner"]:
+                role = FRONT_COMM_SIDE
+            else:
+                role = FRONT_STREET_MAJOR if major else FRONT_STREET
+            a = math.radians(e["normal_deg"])
+            out.append((np.array(e["p0"], float), np.array(e["p1"], float), np.array([math.cos(a), math.sin(a)]),
+                        role, (b["building_id"], e["part"], e["edge"])))
+            summary[FRONT_NAMES[role]] += 1
+        roles[b["building_id"]] = out
+    stats = {"buildings_with_frontage": len(roles), "school_frontage_edges_not_baked": school_edges,
+             "commercial_candidates": sum(1 for b in frontage if b["commercial_candidate"]),
+             "corners": sum(1 for b in frontage if b["corner"] and b["building_id"] in roles),
+             "frontage_edges_by_role": dict(sorted(summary.items()))}
+    return roles, stats
+
+
+def wall_roles(p, fn, wall, tile_origin, fronts, coverage):
+    """Frontage role per triangle: FRONT_REAR for every wall, raised to the role of the frontage ring edge the
+    wall lies on (normal within 15 degrees, plane within FRONT_MATCH_OFFSET_M, midpoint on the edge).
+    `coverage[edge key]` collects the matched (t0, t1) intervals along each edge for the audit."""
+    role = np.zeros(len(p), dtype=np.uint8)
+    role[wall] = FRONT_REAR
+    if not fronts:
+        return role
+    idx = np.nonzero(wall)[0]
+    ox, oy = float(tile_origin[0]), float(tile_origin[1])
+    n2 = np.column_stack([fn[idx, 0], -fn[idx, 2]])
+    ln = np.hypot(n2[:, 0], n2[:, 1])
+    ok = ln > 0.9
+    n2 = n2 / np.maximum(ln, 1e-9)[:, None]
+    q = np.stack([p[idx, :, 0] + ox, -p[idx, :, 2] + oy], axis=-1)            # (k, 3, 2) ENU
+    tg = np.column_stack([-n2[:, 1], n2[:, 0]])
+    s = np.einsum("kcj,kj->kc", q, tg)
+    d = np.einsum("kcj,kj->kc", q, n2).mean(axis=1)
+    mid = n2 * d[:, None] + tg * ((s.min(axis=1) + s.max(axis=1)) * 0.5)[:, None]
+    half = (s.max(axis=1) - s.min(axis=1)) * 0.5
+    for p0, p1, ne, r, key in fronts:
+        L = float(np.hypot(*(p1 - p0)))
+        ue = (p1 - p0) / L
+        rel = mid - p0
+        t = rel @ ue
+        m = (ok & (n2 @ ne >= FRONT_MATCH_COS) & (np.abs(rel @ ne) <= FRONT_MATCH_OFFSET_M)
+             & (t >= -FRONT_MATCH_PAD_M) & (t <= L + FRONT_MATCH_PAD_M))
+        if not m.any():
+            continue
+        role[idx[m]] = np.maximum(role[idx[m]], r)
+        coverage[key].extend(zip(np.clip(t[m] - half[m], 0.0, L), np.clip(t[m] + half[m], 0.0, L)))
+    return role
+
+
+def component_attributes(mesh: trimesh.Trimesh, ground_offset: float, rec: dict, tile_origin, probe=None,
+                         fronts=None, coverage=None):
     """Return per-corner arrays (T*3 rows) for one validated component mesh."""
     v = np.asarray(mesh.vertices, dtype=np.float64)
     f = np.asarray(mesh.faces, dtype=np.int64)
@@ -386,8 +505,12 @@ def component_attributes(mesh: trimesh.Trimesh, ground_offset: float, rec: dict,
     col[:, :] = (rec["archetype"] * 16 + rec["variant"], rec["seed"], rec["weather"], rec["flags"])
     if probe is not None and rec["archetype"] == ARCH_SCHOOL:
         col[corridor_walls(p, fn, wall, tile_origin, probe), :, 3] |= FLAG_CORRIDOR
+    role = None
+    if rec["archetype"] != ARCH_SCHOOL and not rec["flags"] & FLAG_ROOFTOP:
+        role = wall_roles(p, fn, wall, tile_origin, fronts, coverage)
+        col[:, :, 3] |= (role << FRONT_SHIFT)[:, None]
     normals = np.repeat(fn[:, None, :], 3, axis=1)
-    return normals, uv0, uv1, col
+    return normals, uv0, uv1, col, role
 
 
 def weld(pos, nrm, uv0, uv1, col):
@@ -423,6 +546,9 @@ def build(out_dir: Path):
                  for b in wm["buildings"] if not b["suppressed"] for pt in b["polygons"]]
     probes = {c["id"]: campus_id.YardProbe(c["geom"], all_polys) for c in campuses}
     corridor_tris = 0
+    fronts, front_stats = frontage_roles(wm, records)
+    coverage = defaultdict(list)
+    role_area = defaultdict(Counter)        # archetype name -> role name -> wall m2
 
     tiles_out = out_dir / "tiles"
     tiles_out.mkdir(parents=True, exist_ok=True)
@@ -441,9 +567,15 @@ def build(out_dir: Path):
             _, gname = scene.graph[node]
             mesh = scene.geometry[gname]
             rec = records[bid]
-            nrm, uv0, uv1, col = component_attributes(mesh, float(z_offsets[bid]), rec, row["origin_enu_m"],
-                                                      probes.get(rec.get("campus")))
-            corridor_tris += int(np.count_nonzero(col[:, 0, 3] & FLAG_CORRIDOR))
+            nrm, uv0, uv1, col, role = component_attributes(mesh, float(z_offsets[bid]), rec, row["origin_enu_m"],
+                                                            probes.get(rec.get("campus")), fronts.get(bid), coverage)
+            if rec["archetype"] == ARCH_SCHOOL:
+                corridor_tris += int(np.count_nonzero(col[:, 0, 3] & FLAG_CORRIDOR))
+            if role is not None:
+                tri = np.asarray(mesh.vertices, dtype=np.float64)[np.asarray(mesh.faces)]
+                area = 0.5 * np.linalg.norm(np.cross(tri[:, 1] - tri[:, 0], tri[:, 2] - tri[:, 0]), axis=1)
+                for r in np.unique(role[role > 0]):
+                    role_area[ARCH_NAMES[rec["archetype"]]][FRONT_NAMES[r]] += float(area[role == r].sum())
             m2 = mesh.copy()
             m2.apply_translation([0.0, float(z_offsets[bid]), 0.0])
             corners = np.asarray(m2.vertices, dtype=np.float64)[np.asarray(m2.faces)]
@@ -491,6 +623,43 @@ def build(out_dir: Path):
         })
         print(f"{tile}: {len(idx)} tris, verts {len(ref['position'])} -> {len(wpos)}", flush=True)
 
+    # ---- frontage bake audit (fail closed on poor wall <-> ring-edge matching)
+    total_len = matched_len = 0.0
+    unmatched = []
+    for bid, rows in fronts.items():
+        for p0, p1, _ne, r, key in rows:
+            L = float(np.hypot(*(p1 - p0)))
+            iv = sorted(coverage.get(key, []))
+            got, end = 0.0, 0.0
+            for a, b in iv:
+                a = max(a, end)
+                if b > a:
+                    got += b - a
+                    end = b
+            total_len += L
+            matched_len += min(got, L)
+            if got < 0.5 * L:
+                unmatched.append({"edge": list(key), "len": round(L, 2), "matched": round(got, 2),
+                                  "role": FRONT_NAMES[r]})
+    share = matched_len / max(total_len, 1e-9)
+    bake = {"schema": "acw.frontage_bake/0",
+            "encoding": "flags bits 4-6 of non-school, non-rooftop-structure walls; 0 = no frontage contract",
+            "roles": {str(i): n for i, n in enumerate(FRONT_NAMES)},
+            "rules": {"primary_deg": PRIMARY_DEG, "match_normal_deg": 15.0, "match_offset_m": FRONT_MATCH_OFFSET_M,
+                      "match_pad_m": FRONT_MATCH_PAD_M, "min_coverage": FRONT_MIN_COVERAGE},
+            **front_stats,
+            "frontage_edge_length_m": round(total_len, 1), "matched_length_m": round(matched_len, 1),
+            "matched_share": round(share, 4), "edges_mostly_unmatched": len(unmatched),
+            "unmatched_sample": unmatched[:40],
+            "wall_area_m2_by_archetype_role": {a: {k: round(v) for k, v in sorted(c.items())}
+                                               for a, c in sorted(role_area.items())}}
+    (out_dir / "urban_identity").mkdir(parents=True, exist_ok=True)
+    (out_dir / "urban_identity/frontage_bake.json").write_text(json.dumps(bake, indent=1) + "\n", encoding="utf-8")
+    print(f"frontage bake: {share:.4f} of {total_len:.0f} m frontage matched to walls, "
+          f"{len(unmatched)} edges mostly unmatched", flush=True)
+    if share < FRONT_MIN_COVERAGE:
+        raise RuntimeError(f"frontage wall matching covers {share:.4f} < {FRONT_MIN_COVERAGE} of frontage length")
+
     for bid, rec in sorted(records.items()):
         sidecar.append({"building_id": bid, **{k: rec[k] for k in ("group", "archetype", "variant", "seed",
                                                                    "weather", "flags", "floor_h")},
@@ -511,6 +680,8 @@ def build(out_dir: Path):
             "vertices_look": int(sum(t["vertices_look"] for t in manifest)),
         },
         "contract": "triangle soup bit-identical to accepted runtime tiles; attributes are look-dev only",
+        "frontage": {k: bake[k] for k in ("buildings_with_frontage", "commercial_candidates", "corners",
+                                          "frontage_edges_by_role", "matched_share")},
     }
     (out_dir / "look_tiles.report.json").write_text(json.dumps(report, indent=2) + "\n")
     school_groups = sorted({r["group"] for r in records.values() if r["archetype"] == ARCH_SCHOOL})

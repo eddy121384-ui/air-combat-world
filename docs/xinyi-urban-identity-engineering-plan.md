@@ -134,7 +134,8 @@ Generated now (`urban_identity/`):
 
 Still missing / to add in the art pass (designed here, not built):
 
-1. **Frontage → vertex**: bake `front class` (0–4) into **flags bits 4–6** in `build_look_tiles.py`
+1. **Frontage → vertex** (*implemented as a per-wall frontage role, see `docs/xinyi-street-facade-identity-v0a.md`*):
+   bake `front class` (0–4) into **flags bits 4–6** in `build_look_tiles.py`
    (match each wall triangle's bottom-edge midpoint to a frontage edge). Zero new channels, hero tag
    untouched (max value 127 < 248). A second per-wall bit (corner) needs either a UV3 channel (writer +
    material input change, +8 B/vertex ≈ +8 MB) or archetype-style per-building data; start with bits 4–6.

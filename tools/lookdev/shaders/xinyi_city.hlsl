@@ -14,7 +14,9 @@
 //         roofs: tile-local (east, north) m
 //   uv1   (record height m, visual floor height m)
 //   vc    xc_unpack(TEXCOORD_2): r = (archetype*16+variant)/255, g = seed/255,
-//         b = weathering, a = flags/255
+//         b = weathering, a = flags/255 (bit0 core, bit1 anchor, bit2 podium part, bit3 rooftop
+//         structure; bits 4-6: school walls bit4 = corridor side, other walls = street frontage role,
+//         0 = no frontage contract -> accepted grammar; see xc_wall)
 //   archetypes 0 low, 1 walkup, 2 huaxia, 3 res_tower, 4 office_glass, 5 commercial_podium,
 //         6 civic, 7 school. The accepted wall / roof functions only know 0..6 (open-ended tests such as
 //         step(5.5, arch) would treat 7 as civic): school pixels are routed explicitly in xc_city to
@@ -367,6 +369,19 @@ void xc_wall(float u, float h, float H, float fh, float arch, float variant, flo
     float core = frac(floor(flags * 255.0 + 0.5) * 0.5) * 2.0;   // bit0
     float podiumPart = step(0.5, frac(floor(flags * 255.0 / 4.0 + 0.001) * 0.5));  // bit2
     float rooftop = step(0.5, frac(floor(flags * 255.0 / 8.0 + 0.001) * 0.5));     // bit3
+    // street frontage role (bits 4-6, build_look_tiles.py FRONT_*): 1 rear / side, 2 service alley,
+    // 3 / 4 street (local / major road), 5 commercial corner side street, 6 / 7 commercial frontage (local / major).
+    // 0 = no frontage contract (far city, landmarks, rooftop-structure records): every frontage term below then
+    // reduces exactly to the accepted grammar (lerp(x, y, 0) == x).
+    float fA = floor(flags * 255.0 + 0.5);
+    float front = floor(fA / 16.0 + 0.001) - 8.0 * floor(fA / 128.0 + 0.001);
+    float known = step(0.5, front);
+    float fRear = known * (1.0 - step(1.5, front));
+    float fStreet = step(2.5, front);                // local+ street (any building)
+    float fComm = step(4.5, front);                  // commercial frontage (primary or corner side)
+    float fPrim = step(5.5, front);
+    float fMajor = step(3.5, front) * (1.0 - step(4.5, front)) + step(6.5, front);
+    float isHuaxia = step(1.5, arch) * (1.0 - step(2.5, arch));
 
     float floorsTotal = max(1.0, floor(H / fh + 0.5));
     float fi = floor(h / fh);
@@ -470,6 +485,7 @@ void xc_wall(float u, float h, float H, float fh, float arch, float variant, flo
     float cageP = lerp(0.62, 0.34, step(1.5, arch));            // walkups most caged
     cageP *= lerp(1.0, 0.45, step(4.0, fi));                     // fewer high up
     cageP *= isOld * (1.0 - core * 0.7);
+    cageP *= 1.0 - fRear * 0.2;                                  // rear / side walls: a little less clutter
     float caged = step(1.0 - cageP, frac(cellR * 7.1));
     float barsV = xc_line(frac(u / 0.13), 0.22, fwu / 0.13);
     float barsH = xc_line(frac(h / 0.42), 0.12, fwh / 0.42);
@@ -480,8 +496,14 @@ void xc_wall(float u, float h, float H, float fh, float arch, float variant, flo
     float cageCover = lerp(0.45, cageBars, xc_detail(fwu, 0.26)) * cageMask * (1.0 - tPier);
 
     float acP = lerp(0.55, 0.35, step(1.5, arch)) * (isOld + isTower * 0.5) * (1.0 - isOffice);
-    float hasAC = step(1.0 - acP, frac(cellR * 3.7)) * step(0.5, fi);
-    float acLeft = step(0.5, frac(cellR * 5.9));
+    // street / alley walls: condensers hang in fixed columns (same side of the window, a few floors skipped), the
+    // regular stacks of a Taipei street front; rear / side walls keep the unorganised scatter at 70 % density
+    float acColR = xc_hash21(float2(slot, seed * 37.0));
+    float acStackW = known * (1.0 - fRear);
+    float acScatter = step(1.0 - acP * (1.0 - fRear * 0.3), frac(cellR * 3.7));
+    float acStack = step(1.0 - acP * 1.35, acColR) * step(0.22, frac(cellR * 3.7));
+    float hasAC = lerp(acScatter, acStack, acStackW) * step(0.5, fi);
+    float acLeft = lerp(step(0.5, frac(cellR * 5.9)), step(0.5, frac(acColR * 5.9)), acStackW);
     float acx0 = lerp(0.60, 0.06, acLeft);
     float ac = hasAC * xc_box(fu, acx0, acx0 + 0.24, fwb) * xc_box(fv, 0.05, 0.25, fwf) * dBay;
     float acGrille = xc_line(frac(u / 0.05), 0.3, fwu / 0.05) * xc_detail(fwu, 0.1);
@@ -493,15 +515,38 @@ void xc_wall(float u, float h, float H, float fh, float arch, float variant, flo
     float spandrel = (1.0 - xc_box(fv, 0.14, 0.97, fwf)) * isOffice * dFloor;
 
     // --- street level: 騎樓 arcade + shopfronts + signage band ------------------
+    // Frontage-aware: shopfronts only on commercial frontage (primary + corner side street); sign density follows
+    // the role (major commercial road > local > corner side > plain street > alley > none on rear / side walls),
+    // huaxia answers a step weaker than walk-up / low shop-houses.
     float street = (1.0 - step(fh * 1.05, h)) * (1.0 - podiumPart * 0.0);
-    float arcade = street * isOld * (1.0 - core * 0.6);
-    float signBand = step(fh * 1.02, h) * (1.0 - step(fh * 1.55, h)) * isOld * (1.0 - core * 0.8);
-    float signCell = floor(u / (bw * (0.8 + 0.8 * colR)));
+    float arcade = street * isOld * (1.0 - core * 0.6) * lerp(1.0, fComm, known);
+    float signTop = lerp(1.55, 1.72, known * fPrim * fMajor);     // taller sign boards on major commercial roads
+    float signBand = step(fh * 1.02, h) * (1.0 - step(fh * signTop, h)) * isOld * (1.0 - core * 0.8);
+    float signW = bw * (0.8 + 0.8 * colR);
+    float signCell = floor(u / signW);
     float signR = xc_hash21(float2(signCell, seed * 29.0));
-    float hasSign = step(0.35, signR);
+    float signThr = 1.01;                                         // rear / side: none
+    signThr = lerp(signThr, 0.92, step(1.5, front));             // service alley
+    signThr = lerp(signThr, 0.85, fStreet);                       // street wall of a non-commercial building
+    signThr = lerp(signThr, 0.60, fComm);                         // corner side street
+    signThr = lerp(signThr, 0.35, fPrim);                         // commercial frontage
+    signThr = lerp(signThr, 0.22, fPrim * fMajor);                // ... on a collector / arterial
+    signThr += 0.1 * isHuaxia * fComm;
+    float hasSign = step(lerp(0.35, signThr, known), signR);
     float3 signCol = xc_sign_palette(frac(signR * 9.7));
     // pseudo-lettering: blocky glyph rhythm on signs (near only)
     float glyph = step(0.45, xc_hash21(floor(float2(u / 0.55, h / 0.5)) + signCell)) * xc_detail(fwu, 0.8);
+    // frontage walls: one row of character blocks (2 x 3 stroke clusters each) with word gaps and a dark board
+    // edge, so a shop sign reads as a lettered board rather than noise; text contrasts with the board colour
+    float bandH = max((signTop - 1.02) * fh, 0.3);
+    float sv = (h - fh * 1.02) / bandH;
+    float cu = u / 0.62;
+    float chrBox = xc_box(frac(cu), 0.13, 0.87, fwu / 0.62) * xc_box(sv, 0.20, 0.80, fwh / bandH);
+    float stroke = step(0.32, xc_hash21(floor(float2(cu * 2.0, sv * 3.0)) + signCell * 3.1 + seed));
+    float word = step(0.2, xc_hash21(float2(floor(cu / 4.0), signCell + seed * 3.0)));
+    float glyph2 = chrBox * lerp(0.7, stroke, xc_detail(fwu, 0.31)) * word * xc_detail(fwu, 0.8);
+    float boardEdge = (1.0 - xc_box(frac(u / signW), 0.012, 0.988, fwu / signW)) * xc_detail(fwu, 0.5);
+    glyph = lerp(glyph, glyph2, known);
 
     // --- compose base colour ------------------------------------------------------
     float3 c = wall;
@@ -517,11 +562,55 @@ void xc_wall(float u, float h, float H, float fh, float arch, float variant, flo
     c = lerp(c, float3(0.70, 0.72, 0.72), mull * 0.85);
     c = lerp(c, lerp(xc_glass_palette(frac(seed * 1.37)) * 0.6, float3(0.10, 0.10, 0.11), 0.5), spandrel);
     // arcade: deep shade with shop glow; rolling shutters on some bays
-    float shutter = step(0.55, xc_hash21(float2(signCell, 3.0)));
-    float3 shop = lerp(float3(0.07, 0.065, 0.06), float3(0.42, 0.42, 0.42), shutter);
+    // commercial frontage: fewer closed shutters on the primary front, a faintly lit shop interior and a tiled
+    // 騎樓 pier at every bay line
+    float shutter = step(lerp(0.55, lerp(0.55, 0.72, fPrim), known), xc_hash21(float2(signCell, 3.0)));
+    float3 shop = lerp(lerp(float3(0.07, 0.065, 0.06), float3(0.15, 0.135, 0.11), known * fComm),
+                       float3(0.42, 0.42, 0.42), shutter);
+    shop = lerp(shop, wall * 0.9, (1.0 - xc_box(fu, 0.06, 0.94, fwb)) * dBay * known);
     c = lerp(c, shop, arcade * 0.92);
-    float3 signFace = lerp(signCol, signCol * 0.25 + 0.6, glyph * 0.5);
+    float3 txt = lerp(float3(0.93, 0.93, 0.90), float3(0.10, 0.08, 0.07),
+                      step(0.55, dot(signCol, float3(0.3, 0.59, 0.11))));
+    float3 signFace = lerp(lerp(signCol, signCol * 0.25 + 0.6, glyph * 0.5),
+                           lerp(lerp(signCol, txt, glyph * 0.85), float3(0.12, 0.12, 0.12), boardEdge * 0.8), known);
     c = lerp(c, signFace, signBand * hasSign);
+
+    // quiet ground floor: old stock on a known non-commercial wall (rear / side, alley, residential street) gets
+    // scooter-garage roll-up shutters and steel doors toward the street / alley, small high barred windows and a rare
+    // back door on rear / side walls, over a darker tiled plinth. Per-building-coherent branch (ground floor only).
+    float gfQuiet = street * isOld * known * (1.0 - fComm);
+    [branch] if (gfQuiet > 0.0)
+    {
+        float gR = xc_hash21(float2(bi, seed * 41.0));
+        float onSt = 1.0 - fRear;
+        float roll = step(gR, 0.40) * onSt;
+        float door = step(lerp(0.88, 0.40, onSt), gR) * step(gR, lerp(1.01, 0.62, onSt));
+        float rollM = roll * xc_box(fu, 0.07, 0.93, fwb) * xc_box(fv, 0.0, 0.82, fwf);
+        float doorM = door * xc_box(fu, 0.30, 0.64, fwb) * xc_box(fv, 0.0, 0.74, fwf);
+        float winM = (1.0 - roll) * (1.0 - door) * xc_box(fu, 0.30, 0.70, fwb) * xc_box(fv, 0.50, 0.80, fwf);
+        float gRib = xc_line(frac(h / 0.09), 0.35, fwh / 0.09) * xc_detail(fwh, 0.18);
+        float3 rollC = lerp(float3(0.50, 0.51, 0.50), float3(0.36, 0.37, 0.37), gRib * 0.5) * (0.8 + 0.2 * frac(gR * 7.3));
+        float3 doorC = lerp(float3(0.17, 0.16, 0.15), float3(0.30, 0.13, 0.10), step(0.5, frac(gR * 13.1)));
+        float3 gq = wall * lerp(0.84, 1.0, step(0.12, fv));
+        gq = lerp(gq, rollC, rollM);
+        gq = lerp(gq, doorC, doorM);
+        gq = lerp(gq, lerp(glassCol * 0.7, cageCol, cageBars * 0.8), winM);
+        // far: area-weighted mean of the same features (no shimmer)
+        float rc = 0.28 * onSt;
+        float dc = lerp(0.03, 0.055, onSt);
+        float wc = lerp(0.106, 0.046, onSt);
+        float3 gMean = wall * 0.95 * (1.0 - rc - dc - wc) + float3(0.43, 0.44, 0.43) * rc
+                     + float3(0.22, 0.15, 0.13) * dc + glassCol * 0.6 * wc;
+        c = lerp(c, lerp(gMean, gq, dBay * dFloor), gfQuiet);
+    }
+    // residential towers on a street: a glazed entrance lobby across the ground floor (rear / side walls keep the
+    // accepted stone base); office / civic / podium facades get no street treatment here
+    float lobby = isTower * fStreet * street;
+    float lobGlass = lerp(0.62, xc_box(fu, 0.10, 0.90, fwb) * xc_box(fv, 0.06, 0.88, fwf), dBay * dFloor) * lobby;
+    c = lerp(c, float3(0.085, 0.09, 0.09), lobGlass);
+    // the replaced ground floors carry no residential window frames into the material response / sill streaks
+    float gfMask = 1.0 - max(gfQuiet, lobby);
+    frame *= gfMask;
 
     // metal-sheet rooftop additions (頂樓加蓋) on small rooftop records
     float ribs = xc_line(frac(u / 0.2), 0.3, fwu / 0.2) * xc_detail(fwu, 0.4);
@@ -539,7 +628,7 @@ void xc_wall(float u, float h, float H, float fh, float arch, float variant, flo
 
     // --- humid weathering: sill streaks, top grime, splash at the base -------
     float streakN = xc_noise1(u * 1.9 + seed * 17.0);
-    float underSill = (1.0 - smoothstep(0.0, wy0, fv)) * xc_box(fu, wx0, wx1, fwb) * dBay;
+    float underSill = (1.0 - smoothstep(0.0, wy0, fv)) * xc_box(fu, wx0, wx1, fwb) * dBay * gfMask;
     float streak = saturate(streakN * 1.4 - 0.35) * (0.4 + 0.6 * underSill);
     float topGrime = smoothstep(H - 2.5 * fh, H, h) * 0.5;
     float splash = 1.0 - smoothstep(0.0, 1.2, h);
@@ -548,10 +637,12 @@ void xc_wall(float u, float h, float H, float fh, float arch, float variant, flo
     float runLen = 3.0 + 16.0 * xc_noise1(u * 0.17 + seed * 7.0);
     float runoff = saturate(xc_noise1(u * 0.45 + seed * 23.0) * 1.8 - 0.8) * smoothstep(H - runLen, H - 0.6, h);
     runoff = lerp(0.05, runoff, xc_detail(fwu, 2.2));
-    float grime = saturate((streak * 0.7 + topGrime + splash * 0.6 + runoff * 0.8) * weather);
+    // rear / side / alley walls are the unmaintained back of house: heavier streaks and humid cast
+    float backW = known * (1.0 - fStreet);
+    float grime = saturate((streak * 0.7 + topGrime + splash * 0.6 + runoff * 0.8) * weather * (1.0 + 0.18 * backW));
     grime *= 1.0 - isOffice * 0.8;
     c *= 1.0 - grime * 0.42;
-    c = lerp(c, c * float3(0.92, 0.95, 0.92), weather * 0.5 * isOld);   // green-grey humid cast
+    c = lerp(c, c * float3(0.92, 0.95, 0.92), weather * 0.5 * isOld * (1.0 + 0.6 * backW));   // green-grey humid cast
     // distance contact: at aircraft range a block keeps no arcade / splash detail at its foot, so a
     // short occlusion ramp grounds it into the floor. Gated on a ~4-floor period (on from mid range,
     // where single floors may still resolve) and off up close, so near Xinyi facades are unchanged.
@@ -567,7 +658,8 @@ void xc_wall(float u, float h, float H, float fh, float arch, float variant, flo
     // --- material response ------------------------------------------------------
     // Glass is dielectric (F0 ~0.06-0.08 via Specular); only coated curtain wall gets a little
     // metallic tint. Residential float glass is slightly hazy and varies per pane near the camera.
-    float glassAmt = win * (1.0 - cageCover * 0.7) * (1.0 - arcade);
+    float glassAmt = win * (1.0 - cageCover * 0.7) * (1.0 - arcade) * (1.0 - gfQuiet);
+    glassAmt = lerp(glassAmt, 1.0, lobGlass);
     float paneRough = lerp(0.13, 0.08 + 0.12 * frac(cellR * 41.0), dBay * dFloor);
     float glassRough = lerp(paneRough, lerp(0.07, 0.035, coated), isOffice);
     // low-frequency wear (~7 m blotches, filtered to its mean at distance) and matte grime
@@ -587,7 +679,7 @@ void xc_wall(float u, float h, float H, float fh, float arch, float variant, flo
     float lit = step(1.0 - litP, litR);
     float curtain = lerp(0.55 + 0.45 * frac(cellR * 23.0), 0.15 + 0.85 * frac(cellR * 31.0), step(0.5, isOld + isTower));
     float3 lightCol = xc_window_light(frac(cellR * 17.3), isOffice * 0.2 + isPodium);
-    float winLight = win * (1.0 - cageCover * 0.5) * (1.0 - arcade) * (1.0 - balc * 0.5);
+    float winLight = win * (1.0 - cageCover * 0.5) * (1.0 - arcade) * (1.0 - balc * 0.5) * (1.0 - gfQuiet) * (1.0 - lobby);
     // far distance: average lit coverage instead of per-window noise
     float litMean = litP * winMean * lerp(0.8, 0.45, isOffice);
     float bandLit = step(1.0 - litP, xc_hash21(float2(fi, seed * 5.0))) * winMean;
@@ -601,8 +693,9 @@ void xc_wall(float u, float h, float H, float fh, float arch, float variant, flo
     e += signFace * signLit * 1.3;
     // podium LED / logo panels (department stores)
     float led = isPodium * step(0.7, xc_hash21(float2(floor(u / 18.0), seed * 3.0))) * xc_box(fv, 0.15, 0.9, fwf)
-              * step(fh * 1.5, h);
+              * step(fh * 1.5, h) * lerp(1.0, fStreet, known);           // street-facing walls only
     e += xc_sign_palette(frac(seed * 4.1 + floor(u / 18.0) * 0.37)) * led * 0.9;
+    e += float3(1.0, 0.86, 0.64) * lobGlass * 0.3;                          // lit tower lobbies
     // tower crowns: a lit band under the parapet on some towers
     float crown = step(H - fh * 0.9, h) * (1.0 - step(H - 0.5, h)) * step(0.78, frac(seed * 8.3)) * (isTower + isOffice);
     e += float3(0.95, 0.95, 1.0) * crown * 0.45;

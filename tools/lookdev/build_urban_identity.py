@@ -1,8 +1,9 @@
-"""Urban-identity metadata (read-only foundation for the Taipei Urban Identity pass).
+"""Urban-identity metadata (foundation for the Taipei Urban Identity pass).
 
-Nothing here is consumed by Unreal yet: no tile, material, ground texture or level changes. It derives
-the two data contracts the future street / facade and school / campus layers need and the accepted
-look does not carry (see docs/xinyi-urban-identity-engineering-plan.md):
+This script writes metadata only (no tile, material, ground texture or level change). Its frontage rules
+(`build_frontage`) are also run by build_look_tiles.py, which bakes a per-wall frontage role into the look
+tiles (Street & Facade Identity v0A). It derives the two data contracts the street / facade and school /
+campus layers need and the accepted look does not carry (see docs/xinyi-urban-identity-engineering-plan.md):
 
 1. FRONTAGE  per building ring edge: which edges face a drivable road, which road class / width /
              curb distance, whether the view to the road is open (not blocked by another building),
@@ -521,7 +522,7 @@ def main():
     h = {f: hashlib.sha256((OUT / f).read_bytes()).hexdigest() for f in ("frontage.json.gz", "campuses.json")}
     rep = {
         "status": "PASS_URBAN_IDENTITY_METADATA",
-        "role": "read-only metadata; nothing consumes it yet (no visual change)",
+        "role": "metadata; the same frontage rules are baked per wall by build_look_tiles.py",
         "buildings_considered": n_build, "building_parts": len(parts),
         "roads": {"ways": len(roads), "by_class": dict(Counter(FRONT_CLASS.get(r["cls"], 2) for r in roads))},
         "frontage": {"buildings_with_frontage": len(frontage), "share": rnd(len(frontage) / max(n_build, 1), 3),
