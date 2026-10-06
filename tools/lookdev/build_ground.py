@@ -17,7 +17,9 @@ Outputs (unreal/Saved/XinyiLook/ground/):
   xinyi_road_paint.glb    thin opaque paint geometry draped 6 cm above terrain:
                           lane lines, double-yellow centre lines, red kerb lines,
                           zebra crossings, stop lines, scooter waiting boxes
-                          (機車停等區). TEXCOORD_2 = packed RGBA8 paint colour.
+                          (機車停等區), scooter stall rows (機車停車格, v0C curb layer:
+                          white bay outlines over a darker oil-stained fill).
+                          TEXCOORD_2 = packed RGBA8 paint colour.
   xinyi_trees.json        tree instances (street trees, median trees, parks)
   xinyi_tree.glb          one low-poly broadleaf tree (crown + trunk)
   xinyi_campus_2048.png   School & Campus Identity v0A data texture over the same extent, sampled
@@ -25,13 +27,18 @@ Outputs (unreal/Saved/XinyiLook/ground/):
                           R = Grade-A campus signed distance, 0.5 + d / 32 (+-16 m, > 0.5 inside)
                           G = tagged court / playground signed distance, 0.5 + d / 16 (+-8 m)
                           B = surface palette id * 32 (nearest surface; xc_court_surface)
-                          A = 0. Everything outside the campus polygons decodes to "outside".
+                          A = road-edge pedestrian class of the nearest road side (Taipei Street
+                              Reality v0C, curb_zone.py): 0 no formal sidewalk, 0.5 arcade apron,
+                              1 raised sidewalk. Everything outside the campus polygons decodes to
+                              "outside" in R / G.
                           Box-filtered mips; the shader insets the masks by the pixel footprint.
   xinyi_campus_paint.glb  court markings as paint geometry (6 cm above terrain); TEXCOORD_2 R byte =
                           surface id 1..5 (road paint R >= 190; xc_paint court branch)
   campus_ground.json      campuses / surfaces / markings used (audit). No running track is ever
                           produced: OSM has none here and inferred tracks are not render input.
-The accepted ground outputs above are written first and are unchanged by the campus layer.
+  ../urban_identity/curb_segments.json.gz  road-side classes, curb segments, stall rows and bays
+                          (acw.curb_segments/0; scooters in build_street_identity.py read the bays)
+The ground data texture, trees, forest and lamps are unchanged by the campus and curb layers.
 """
 from __future__ import annotations
 
@@ -56,12 +63,14 @@ sys.path.insert(0, str(HERE))
 from gltf_writer import pack_rgba8, ue_local_bounds_cm, write_glb  # noqa: E402
 from worldmodel import build_worldmodel, enu_origin_from_city_yaml, lonlat_to_enu  # noqa: E402
 import campus_identity as campus_id  # noqa: E402
+import curb_zone  # noqa: E402
 
 CITY = REPO / "cities/taipei/city.yaml"
 OSM = REPO / "data/lookdev_cache/osm_xinyi_context.json.gz"
 SOURCE = REPO / "data/generated/taipei/sample_buildings_epsg3826.geojson"
 CONTRACT = REPO / "unreal/Saved/XinyiUnrealV2Contract"
 OUT = REPO / "unreal/Saved/XinyiLook/ground"
+LOOK = REPO / "unreal/Saved/XinyiLook"
 
 E0, E1, N0, N1 = -1500.0, 1000.0, -1000.0, 1500.0
 TREE_BOUNDS = None
@@ -197,8 +206,10 @@ class Paint:
         self.hf = hf
         self.v, self.c, self.f = [], [], []
 
-    def quad_strip(self, a, b, w, color):
-        """Rectangle centred on segment a->b with width w."""
+    STALL_FILL = (80, 80, 82, 255)
+
+    def quad_strip(self, a, b, w, color, lift=0.06):
+        """Rectangle centred on segment a->b with width w, draped `lift` m above the terrain."""
         a = np.asarray(a, float); b = np.asarray(b, float)
         d = b - a
         L = np.linalg.norm(d)
@@ -207,7 +218,7 @@ class Paint:
         n = np.array([-d[1], d[0]]) / L * (w * 0.5)
         pts = [a - n, b - n, b + n, a + n]
         base = len(self.v)
-        z = self.hf([p[0] for p in pts], [p[1] for p in pts]) + 0.06
+        z = self.hf([p[0] for p in pts], [p[1] for p in pts]) + lift
         for p, zz in zip(pts, z):
             self.v.append((p[0], p[1], zz))
             self.c.append(color)
@@ -346,93 +357,6 @@ def main():
 
     rgba = np.stack([R, G, B, A], axis=-1)
     Image.fromarray((rgba * 255 + 0.5).astype(np.uint8), "RGBA").save(OUT / "xinyi_ground_2048.png", optimize=True)
-
-    # ----------------------------------------------------------- paint --------
-    paint = Paint(hf)
-    for w in ways:
-        if w["skip"] or w["base"] in ("service",):
-            continue
-        pts = w["pts"]
-        W, lanes = w["width"], w["lanes"]
-        # keep lines out of junction boxes
-        jclip = unary_union([Point(node_pos[n]).buffer(max(6.0, W * 0.9))
-                             for n in (w["nodes"][0], w["nodes"][-1]) if n in junctions] or [Point(1e9, 1e9)])
-        if w["oneway"]:
-            for k in range(1, lanes):
-                off = -W * 0.5 + 0.5 + k * ((W - 1.0) / lanes)
-                paint.polyline(pts, off, 0.15, Paint.WHITE, dash=4.0, gap=6.0, clip=jclip)
-            if w["cls"] >= 0.66:
-                paint.polyline(pts, W * 0.5 - 0.35, 0.15, Paint.WHITE, clip=jclip)
-                paint.polyline(pts, -W * 0.5 + 0.35, 0.15, Paint.YELLOW, clip=jclip)
-        else:
-            if w["cls"] >= 0.33 and W >= 6.0:
-                paint.polyline(pts, 0.12, 0.12, Paint.YELLOW, clip=jclip)
-                paint.polyline(pts, -0.12, 0.12, Paint.YELLOW, clip=jclip)
-            if lanes >= 4:
-                for side in (-1, 1):
-                    paint.polyline(pts, side * W * 0.25, 0.15, Paint.WHITE, dash=4.0, gap=6.0, clip=jclip)
-        # red kerb lines (紅線, no stopping) on most urban roads
-        if w["cls"] <= 0.66 and (w["id"] % 3) != 0:
-            for side in (-1, 1):
-                if w["oneway"] and side < 0 and w["cls"] >= 0.66:
-                    continue
-                paint.polyline(pts, side * (W * 0.5 - 0.2), 0.12, Paint.RED, clip=jclip)
-
-    # zebra crossings + stop lines + scooter waiting boxes at junctions
-    crossings = 0
-    for nid, lst in junctions.items():
-        if len({id(w) for w, _ in lst}) < 2:
-            continue
-        J = np.asarray(node_pos[nid])
-        widths = [w["width"] for w, _ in lst]
-        for w, i in lst:
-            if w["cls"] < 0.33 or w["base"] == "service":
-                continue
-            pts = w["pts"]
-            for step in (-1, 1):
-                j = i + step
-                if j < 0 or j >= len(pts):
-                    continue
-                d = np.asarray(pts[j]) - J
-                L = np.linalg.norm(d)
-                if L < 8.0:
-                    continue
-                d /= L
-                others = [ow for (ow, _), wd in zip(lst, widths) if ow is not w] or [w]
-                r0 = max(o["width"] for o in others) * 0.5 + 2.5
-                if r0 + 5.0 > L:
-                    continue
-                n = np.array([-d[1], d[0]])
-                W = w["width"]
-                cw_len = 4.0 if w["cls"] >= 0.66 else 3.0
-                c0 = J + d * r0
-                # stripes parallel to traffic, repeated across the carriageway
-                k = -W * 0.5 + 0.5
-                while k < W * 0.5 - 0.4:
-                    a = c0 + n * (k + 0.2)
-                    paint.quad_strip(a, a + d * cw_len, 0.45, Paint.WHITE)
-                    k += 1.0
-                crossings += 1
-                # traffic approaching the junction on this side
-                approaching = (not w["oneway"]) or (step == -1)
-                if approaching:
-                    sl = c0 + d * (cw_len + 1.5)
-                    half = W * 0.5 if w["oneway"] else 0.0
-                    lo = -W * 0.5 if w["oneway"] else (0.0 if step == -1 else -W * 0.5)
-                    hi = W * 0.5 if w["oneway"] else (W * 0.5 if step == -1 else 0.0)
-                    paint.quad_strip(sl + n * lo, sl + n * hi, 0.4, Paint.WHITE)
-                    if w["cls"] >= 0.66:
-                        box_far = sl + d * 3.5
-                        paint.quad_strip(box_far + n * lo, box_far + n * hi, 0.15, Paint.WHITE)
-                        paint.quad_strip(sl + n * lo, box_far + n * lo, 0.15, Paint.WHITE)
-                        paint.quad_strip(sl + n * hi, box_far + n * hi, 0.15, Paint.WHITE)
-
-    game, colr, faces = paint.arrays()
-    write_glb(OUT / "xinyi_road_paint.glb", [{
-        "name": "XinyiRoadPaint", "positions": game,
-        "normals": np.tile(np.array([[0, 1, 0]], np.float32), (len(game), 1)),
-        "uv2": pack_rgba8(colr), "indices": faces, "base_color": [0.9, 0.9, 0.9, 1.0],
-    }], mesh_name="SM_XinyiRoadPaint")
 
     # ----------------------------------------------------------- trees --------
     rng = np.random.default_rng(20260929)
@@ -589,12 +513,131 @@ def main():
     light = np.sqrt(1.0 - np.exp(-light * 0.9))          # soft saturation; sqrt: 8-bit precision in the dark
     Image.fromarray((light * 255 + 0.5).astype(np.uint8), "L").save(OUT / "xinyi_ground_light_1024.png", optimize=True)
     lamp_bounds = write_lamp_mesh(OUT / "xinyi_lamp.glb")
-    campus = build_campus_layer(hf, bpolys)
+
+    # ---- Taipei Street Reality v0C curb layer: road-side pedestrian class + scooter stall rows --------------
+    lon0, lat0 = enu_origin_from_city_yaml(CITY)
+    edu = campus_id.edu_features(lon0, lat0)
+    campuses = campus_id.grade_a_campuses(edu, box(*unary_union(bpolys).bounds))
+    roles_path = LOOK / "urban_identity/frontage_roles.json.gz"
+    if not roles_path.is_file():
+        raise SystemExit("curb layer needs %s (run build_look_tiles.py first)" % roles_path)
+    roles = json.loads(gzip.decompress(roles_path.read_bytes()))
+    look = {}
+    with gzip.open(LOOK / "look_buildings.jsonl.gz", "rt", encoding="utf-8") as fh:
+        for line in fh:
+            r = json.loads(line)
+            look[r["building_id"]] = r
+    # every non-suppressed footprint, repaired (bpolys above skips invalid rings and holes; kept for the trees)
+    curb_bpolys = []
+    for b in wm["buildings"]:
+        if b["suppressed"]:
+            continue
+        for p in b["polygons"]:
+            q = Polygon(p["footprint_enu"], p.get("holes_enu") or []).buffer(0)
+            if not q.is_empty:
+                curb_bpolys.append(q)
+    paint = Paint(hf)
+    ped_alpha, curb_doc, row_clip, curb_report = curb_zone.build(
+        ways, junctions, node_pos, curb_bpolys, json.loads(gzip.decompress(OSM.read_bytes())),
+        lambda g: [lonlat_to_enu(p["lon"], p["lat"], lon0, lat0) for p in g], roles, look, special,
+        [c["geom"] for c in campuses], uniq, lamps, (E0, E1, N0, N1), RES, paint, (Paint.WHITE, Paint.STALL_FILL))
+    curb_report["sha256"] = curb_zone.write_doc(LOOK / "urban_identity/curb_segments.json.gz", curb_doc)
+
+    # ----------------------------------------------------------- paint --------
+    for w in ways:
+        if w["skip"] or w["base"] in ("service",):
+            continue
+        pts = w["pts"]
+        W, lanes = w["width"], w["lanes"]
+        # keep lines out of junction boxes
+        jclip = unary_union([Point(node_pos[n]).buffer(max(6.0, W * 0.9))
+                             for n in (w["nodes"][0], w["nodes"][-1]) if n in junctions] or [Point(1e9, 1e9)])
+        if w["oneway"]:
+            for k in range(1, lanes):
+                off = -W * 0.5 + 0.5 + k * ((W - 1.0) / lanes)
+                paint.polyline(pts, off, 0.15, Paint.WHITE, dash=4.0, gap=6.0, clip=jclip)
+            if w["cls"] >= 0.66:
+                paint.polyline(pts, W * 0.5 - 0.35, 0.15, Paint.WHITE, clip=jclip)
+                paint.polyline(pts, -W * 0.5 + 0.35, 0.15, Paint.YELLOW, clip=jclip)
+        else:
+            if w["cls"] >= 0.33 and W >= 6.0:
+                paint.polyline(pts, 0.12, 0.12, Paint.YELLOW, clip=jclip)
+                paint.polyline(pts, -0.12, 0.12, Paint.YELLOW, clip=jclip)
+            if lanes >= 4:
+                for side in (-1, 1):
+                    paint.polyline(pts, side * W * 0.25, 0.15, Paint.WHITE, dash=4.0, gap=6.0, clip=jclip)
+        # red kerb lines (紅線, no stopping) on most urban roads; a scooter stall row claims its stretch of curb
+        if w["cls"] <= 0.66 and (w["id"] % 3) != 0:
+            for side in (-1, 1):
+                if w["oneway"] and side < 0 and w["cls"] >= 0.66:
+                    continue
+                rc = row_clip.get((w["id"], side))        # offset_curve + = left = curb side +1
+                paint.polyline(pts, side * (W * 0.5 - 0.2), 0.12, Paint.RED,
+                               clip=jclip if rc is None else jclip.union(rc))
+
+    # zebra crossings + stop lines + scooter waiting boxes at junctions
+    crossings = 0
+    for nid, lst in junctions.items():
+        if len({id(w) for w, _ in lst}) < 2:
+            continue
+        J = np.asarray(node_pos[nid])
+        widths = [w["width"] for w, _ in lst]
+        for w, i in lst:
+            if w["cls"] < 0.33 or w["base"] == "service":
+                continue
+            pts = w["pts"]
+            for step in (-1, 1):
+                j = i + step
+                if j < 0 or j >= len(pts):
+                    continue
+                d = np.asarray(pts[j]) - J
+                L = np.linalg.norm(d)
+                if L < 8.0:
+                    continue
+                d /= L
+                others = [ow for (ow, _), wd in zip(lst, widths) if ow is not w] or [w]
+                r0 = max(o["width"] for o in others) * 0.5 + 2.5
+                if r0 + 5.0 > L:
+                    continue
+                n = np.array([-d[1], d[0]])
+                W = w["width"]
+                cw_len = 4.0 if w["cls"] >= 0.66 else 3.0
+                c0 = J + d * r0
+                # stripes parallel to traffic, repeated across the carriageway
+                k = -W * 0.5 + 0.5
+                while k < W * 0.5 - 0.4:
+                    a = c0 + n * (k + 0.2)
+                    paint.quad_strip(a, a + d * cw_len, 0.45, Paint.WHITE)
+                    k += 1.0
+                crossings += 1
+                # traffic approaching the junction on this side
+                approaching = (not w["oneway"]) or (step == -1)
+                if approaching:
+                    sl = c0 + d * (cw_len + 1.5)
+                    half = W * 0.5 if w["oneway"] else 0.0
+                    lo = -W * 0.5 if w["oneway"] else (0.0 if step == -1 else -W * 0.5)
+                    hi = W * 0.5 if w["oneway"] else (W * 0.5 if step == -1 else 0.0)
+                    paint.quad_strip(sl + n * lo, sl + n * hi, 0.4, Paint.WHITE)
+                    if w["cls"] >= 0.66:
+                        box_far = sl + d * 3.5
+                        paint.quad_strip(box_far + n * lo, box_far + n * hi, 0.15, Paint.WHITE)
+                        paint.quad_strip(sl + n * lo, box_far + n * lo, 0.15, Paint.WHITE)
+                        paint.quad_strip(sl + n * hi, box_far + n * hi, 0.15, Paint.WHITE)
+
+    game, colr, faces = paint.arrays()
+    write_glb(OUT / "xinyi_road_paint.glb", [{
+        "name": "XinyiRoadPaint", "positions": game,
+        "normals": np.tile(np.array([[0, 1, 0]], np.float32), (len(game), 1)),
+        "uv2": pack_rgba8(colr), "indices": faces, "base_color": [0.9, 0.9, 0.9, 1.0],
+    }], mesh_name="SM_XinyiRoadPaint")
+
+    campus = build_campus_layer(hf, bpolys, ped_alpha)
     report = {
         "texture": "xinyi_ground_2048.png", "resolution": RES, "metres_per_px": (E1 - E0) / RES,
         "extent_enu_m": [E0, E1, N0, N1], "sdf_range_m": SDF_RANGE_M,
         "road_ways": sum(1 for w in ways if not w["skip"]), "junctions": len(junctions),
         "crossings": crossings, "paint_triangles": int(len(faces)), "trees": len(inst),
+        "curb": curb_report,
         "road_area_m2": float(roads.area),
         "surface_classes": {k: len(v) for k, v in special.items()},
         "paint_mesh": "xinyi_road_paint.glb",
@@ -687,8 +730,9 @@ def plan_markings(rec):
     return {"mode": "boundary", "reason": "sport not tagged" if not rec["sport"] else "no standard markings for %s" % sport}
 
 
-def build_campus_layer(hf, wfs_polys):
-    """Grade-A campus yard / court data texture + court marking paint (see module docstring)."""
+def build_campus_layer(hf, wfs_polys, ped_alpha):
+    """Grade-A campus yard / court data texture + court marking paint (see module docstring); alpha = the
+    v0C road-edge pedestrian class (curb_zone.py)."""
     lon0, lat0 = enu_origin_from_city_yaml(CITY)
     edu = campus_id.edu_features(lon0, lat0)
     wm_b = unary_union(wfs_polys)
@@ -730,6 +774,7 @@ def build_campus_layer(hf, wfs_polys):
             gv = np.clip(np.floor((0.5 + np.clip(dd, -8.0, 8.0) / 16.0) * 255.0 + 0.5), 0, 255).astype(np.uint8)
             img[j0:j1, i0:i1, 1] = np.maximum(img[j0:j1, i0:i1, 1], np.where(inside, gv, 0))
             img[j0:j1, i0:i1, 2] = np.where(inside, sid * 32, img[j0:j1, i0:i1, 2])
+    img[:, :, 3] = ped_alpha
     Image.fromarray(img, "RGBA").save(OUT / "xinyi_campus_2048.png", optimize=True)
 
     # court markings as paint geometry, laid on the real pitch rectangle

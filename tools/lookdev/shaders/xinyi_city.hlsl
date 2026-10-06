@@ -534,19 +534,13 @@ void xc_wall(float u, float h, float H, float fh, float arch, float variant, flo
     signThr += 0.1 * isHuaxia * fComm;
     float hasSign = step(lerp(0.35, signThr, known), signR);
     float3 signCol = xc_sign_palette(frac(signR * 9.7));
-    // pseudo-lettering: blocky glyph rhythm on signs (near only)
-    float glyph = step(0.45, xc_hash21(floor(float2(u / 0.55, h / 0.5)) + signCell)) * xc_detail(fwu, 0.8);
-    // frontage walls: one row of character blocks (2 x 3 stroke clusters each) with word gaps and a dark board
-    // edge, so a shop sign reads as a lettered board rather than noise; text contrasts with the board colour
+    // horizontal shop boards (Taipei Street Reality v0C): plain colour panels with a dark board edge and a little
+    // grime toward the bottom. No pseudo-lettering: random stroke grids read as Hangul next to the real
+    // Traditional-Chinese blade signs; real horizontal board text belongs to the v0D atlas.
     float bandH = max((signTop - 1.02) * fh, 0.3);
     float sv = (h - fh * 1.02) / bandH;
-    float cu = u / 0.62;
-    float chrBox = xc_box(frac(cu), 0.13, 0.87, fwu / 0.62) * xc_box(sv, 0.20, 0.80, fwh / bandH);
-    float stroke = step(0.32, xc_hash21(floor(float2(cu * 2.0, sv * 3.0)) + signCell * 3.1 + seed));
-    float word = step(0.2, xc_hash21(float2(floor(cu / 4.0), signCell + seed * 3.0)));
-    float glyph2 = chrBox * lerp(0.7, stroke, xc_detail(fwu, 0.31)) * word * xc_detail(fwu, 0.8);
     float boardEdge = (1.0 - xc_box(frac(u / signW), 0.012, 0.988, fwu / signW)) * xc_detail(fwu, 0.5);
-    glyph = lerp(glyph, glyph2, known);
+    float boardGrime = saturate(1.0 - sv) * frac(signR * 5.3) * 0.14 * xc_detail(fwh, 0.4);
 
     // --- compose base colour ------------------------------------------------------
     float3 c = wall;
@@ -569,10 +563,7 @@ void xc_wall(float u, float h, float H, float fh, float arch, float variant, flo
                        float3(0.42, 0.42, 0.42), shutter);
     shop = lerp(shop, wall * 0.9, (1.0 - xc_box(fu, 0.06, 0.94, fwb)) * dBay * known);
     c = lerp(c, shop, arcade * 0.92);
-    float3 txt = lerp(float3(0.93, 0.93, 0.90), float3(0.10, 0.08, 0.07),
-                      step(0.55, dot(signCol, float3(0.3, 0.59, 0.11))));
-    float3 signFace = lerp(lerp(signCol, signCol * 0.25 + 0.6, glyph * 0.5),
-                           lerp(lerp(signCol, txt, glyph * 0.85), float3(0.12, 0.12, 0.12), boardEdge * 0.8), known);
+    float3 signFace = lerp(signCol * (1.0 - boardGrime), float3(0.12, 0.12, 0.12), boardEdge * 0.8 * known);
     c = lerp(c, signFace, signBand * hasSign);
 
     // quiet ground floor: old stock on a known non-commercial wall (rear / side, alley, residential street) gets
@@ -1057,24 +1048,33 @@ void xc_ground(float3 wpos, float3 N, float4 gt, float4 ct, float lamp, float ni
     float gutter = (1.0 - smoothstep(-0.7, -0.1, sd)) * smoothstep(-1.2, -0.7, sd);
     asphalt *= 1.0 - gutter * 0.25;
 
-    // kerb + sidewalk pavers + scooter rows
-    float kerb = xc_box(sd, 0.0, 0.22, fsd);
-    float walk = step(0.22, sd) * (1.0 - smoothstep(3.5, 5.0, sd)) * step(0.2, cls);
+    // road edge (Taipei Street Reality v0C): ct.w = pedestrian class of the nearest road side, from mapped
+    // sidewalks / sidewalk tags / road class / arcade frontage (build_ground.py curb layer): ~1 raised sidewalk,
+    // ~0.5 arcade apron (no sidewalk, old shop-house arcade behind), ~0 no formal sidewalk (lane asphalt runs on
+    // to the building line). Parked scooters are instanced meshes in painted road-edge bays, not ground colour.
+    float ped = ct.w;
+    float isSw = smoothstep(0.70, 0.85, ped);
+    float isAp = smoothstep(0.30, 0.42, ped) * (1.0 - isSw);
+    float isLn = 1.0 - isSw - isAp;
+    float kerb = xc_box(sd, 0.0, 0.22, fsd) * isSw;
+    float walk = step(0.22, sd) * (1.0 - smoothstep(3.5, 5.0, sd)) * step(0.2, cls) * isSw;
+    // municipal high-pressure concrete pavers: grey / beige-grey by stretch, value-only variation, darker repairs
     float2 pv = frac(p / 0.3);
     float paverLine = max(xc_line(pv.x, 0.12, fwp / 0.3), xc_line(pv.y, 0.12, fwp / 0.3)) * xc_detail(fwp, 0.6);
-    float paverR = xc_hash21(floor(p / 60.0));
-    float3 paver = lerp(float3(0.31, 0.25, 0.22), float3(0.33, 0.33, 0.31), step(0.5, paverR));
+    float3 paver = lerp(float3(0.29, 0.285, 0.275), float3(0.31, 0.30, 0.28),
+                        smoothstep(0.42, 0.58, xc_fnoise(p + 311.0, 0.012, fwp)));
+    paver *= 0.93 + 0.14 * xc_fnoise(p - 97.0, 0.02, fwp);
+    float repair = step(0.8, xc_noise2(p * 0.42 + 31.0)) * xc_detail(fwp, 2.0);
+    paver = lerp(paver, paver * float3(0.80, 0.81, 0.83), repair);
     paver *= 1.0 - paverLine * 0.2;
-    // parked scooters (機車) along the kerb: coloured blobs, resolved only near
-    float2 sc = float2(dot(p, float2(1.0, 0.0)), dot(p, float2(0.0, 1.0)));
-    float2 cellS = floor(sc / float2(0.75, 0.75));
-    float sr = xc_hash21(cellS);
-    float scooterZone = step(0.45, sd) * (1.0 - step(2.3, sd)) * step(0.2, cls) * (1.0 - step(0.9, cls));
-    float hasScooter = step(0.45, sr) * scooterZone;
-    float3 scooterCol = xc_pick6(frac(sr * 7.3), float3(0.8, 0.8, 0.78), float3(0.05, 0.05, 0.06),
-        float3(0.55, 0.56, 0.58), float3(0.6, 0.08, 0.06), float3(0.1, 0.2, 0.5), float3(0.75, 0.6, 0.1));
-    float dS = xc_detail(fwp, 0.75);
-    paver = lerp(paver, lerp(paver * 0.8, scooterCol, dS), hasScooter);
+    // arcade apron: drain-cover strip at the carriageway edge, then owner-built concrete / tile, mismatched by shop
+    float apron = isAp * step(0.0, sd) * (1.0 - smoothstep(3.6, 5.0, sd));
+    float3 apronC = float3(0.275, 0.266, 0.25) * (0.88 + 0.2 * xc_fnoise(p + 57.0, 0.25, fwp));
+    apronC = lerp(apronC, float3(0.17, 0.17, 0.168), xc_box(sd, 0.0, 0.45, fsd));
+    // no formal sidewalk: older, lighter, more patched lane asphalt continues toward the building line
+    float laneEdge = isLn * step(0.0, sd) * (1.0 - smoothstep(2.6, 3.6, sd));
+    float3 laneA = float3(0.135, 0.135, 0.14) * (0.88 + 0.3 * patchN);
+    laneA = lerp(laneA, laneA * 1.3, step(0.55, xc_noise2(floor(p / 2.4) * 0.41 + 9.0)) * xc_detail(fwp, 2.4) * 0.5);
 
     // lots / plazas between buildings
     float n = xc_fnoise(p, 0.05, fwp);
@@ -1118,6 +1118,8 @@ void xc_ground(float3 wpos, float3 N, float4 gt, float4 ct, float lamp, float ni
     float band = (1.0 - inSrc) * smoothstep(0.25, 1.0, fwp);
     c = lerp(c, lowrise, band);
     c = lerp(c, paver, walk);
+    c = lerp(c, apronC, apron);
+    c = lerp(c, laneA, laneEdge);
     c = lerp(c, grass, saturate(green * 1.2) * (1.0 - road));
     c = lerp(c, forest, hill * (1.0 - road) * (1.0 - green * 0.5));
     c = lerp(c, float3(0.55, 0.55, 0.53), kerb * step(0.2, cls));
@@ -1303,7 +1305,8 @@ void xc_prop(float3 wpos, float3 N, float4 vc, float variant, float night, float
 
 // ----------------------------------------------------------------------------
 // Street identity v0B: projecting signs + rain awnings (tools/lookdev/build_street_identity.py), one opaque
-// instanced material. vc.x = type (15 sign / box, 16 awning), vc.y = part. variant = (v + 0.5) / 512 for signs
+// instanced material; v0C adds parked scooters on the same material. vc.x = type (15 sign / box, 16 awning,
+// 17 scooter), vc.y = part. variant = (v + 0.5) / 512 for signs
 // (v = atlas cell + 64 * lit + 128 * fade), (v + 0.5) / 64 for awnings (v = colour + 8 * fade + 32 * style).
 // Atlas (tools/lookdev/build_sign_atlas.py, 2048^2, power-of-two aligned bins so mips never mix cells):
 //   cells  0..31  128 x 512 at y 0     (16 per row)     cells 32..39  256 x 512 at y 1024
@@ -1333,6 +1336,32 @@ void xc_street(float3 wpos, float3 N, float2 uv0, float4 vc, float variant, floa
 {
     float t = floor(vc.x * 255.0 + 0.5);
     float part = floor(vc.y * 255.0 + 0.5);
+    // --- parked scooters (Taipei Street Reality v0C, type 17): vc.y = part (0 body, 1 seat, 2 tyre, 3 dark trim /
+    // screen, 4 top box, 5 floorboard); variant = (v + 0.5) / 64, v = body colour (0..7) + 8 * grime (0..3)
+    // + 32 * top-box colour (0..1). Muted fleet colours, no brands, no lights (night: a flat street-level spill only);
+    // the atlas sample is unused.
+    [branch] if (t > 16.5)
+    {
+        float sv = floor(variant * 64.0);
+        float bc = sv - 8.0 * floor(sv / 8.0);
+        float grime = (floor(sv / 8.0) - 4.0 * floor(sv / 32.0)) / 3.0;
+        float3 body = xc_pick4(bc / 4.0, float3(0.60, 0.60, 0.58), float3(0.035, 0.035, 0.04),
+                               float3(0.34, 0.35, 0.36), float3(0.10, 0.10, 0.11));
+        body = lerp(body, xc_pick4((bc - 4.0) / 4.0, float3(0.05, 0.08, 0.16), float3(0.20, 0.035, 0.03),
+                                   float3(0.45, 0.40, 0.31), float3(0.13, 0.17, 0.13)), step(3.5, bc));
+        body = lerp(body, float3(0.21, 0.20, 0.18), grime * 0.15);
+        float3 boxC = lerp(float3(0.52, 0.52, 0.50), float3(0.04, 0.04, 0.045), step(31.5, sv));
+        float pBody = 1.0 - step(0.5, part);
+        float3 kc = lerp(float3(0.025, 0.025, 0.027), float3(0.06, 0.06, 0.065), step(2.5, part));
+        kc = lerp(kc, boxC, step(3.5, part) * (1.0 - step(4.5, part)));
+        kc = lerp(kc, float3(0.07, 0.07, 0.07), step(4.5, part));
+        base = lerp(kc, body, pBody);
+        rough = lerp(0.72, 0.42, pBody);
+        metal = 0.0;
+        spec = 0.5;
+        emis = base * 0.12 * night;                     // street-level spill (lamps, shopfronts): no black holes
+        return;
+    }
     float isAwn = step(15.5, t);
     // --- signs: atlas face, steel brackets, board rim; per-instance age and lit flag
     float v = floor(variant * 512.0);

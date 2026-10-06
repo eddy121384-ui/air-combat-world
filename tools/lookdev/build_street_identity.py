@@ -19,15 +19,24 @@ Every prop footprint is tested against all building footprints (no sign / awning
 neighbour or the building's own wing) and against already placed props (min spacing). Deterministic:
 per-edge seeded RNG (sha256 of the edge id), no global random state.
 
+Taipei Street Reality v0C adds parked scooters: one per occupied painted bay of the curb layer
+(urban_identity/curb_segments.json.gz, build_ground.py / curb_zone.py), never anywhere else. Row fill 55-98 %
+(per row, so some rows are packed and some sparse), nose toward the carriageway 70 %, yaw +-8 deg, +-0.15 m along
+the kerb; a scooter whose footprint would touch a building is dropped. Four silhouettes (step-through, maxi,
+step-through with delivery top box, compact e-scooter), 40-50 triangles each, one HISM per silhouette.
+
 Instances (per-instance custom data 0 = (v + 0.5) / variants, decoded in xinyi_city.hlsl xc_street):
   sign / box  v = atlas cell + 64 * lit + 128 * fade(0..3)        (variants 512)
   awning      v = colour(0..7) + 8 * fade(0..3) + 32 * style(0..1) (variants 64)
+  scooter_*   v = body colour(0..7) + 8 * grime(0..3) + 32 * top-box colour(0..1) (variants 64)
 
 Outputs (unreal/Saved/XinyiLook/street/):
   street_sign.glb     unit blade: brackets x 0..0.25, panel x 0.25..1.25 (scaled by panel width), y +-0.5
                       (thickness), z 0..1 (height); TEXCOORD_0 = panel UV (both faces read correctly),
                       TEXCOORD_2 = (type 15, part: 0 face / 1 bracket / 2 edge)
   street_awning.glb   unit sloped canopy: x 0..1 projection, y +-0.5 width, z drop; type 16
+  street_scooter_{a,b,c,d}.glb  parked scooters at true size, x = nose direction, origin on the ground at the
+                      wheelbase centre; type 17, parts 0 body / 1 seat / 2 tyre / 3 trim / 4 top box / 5 floor
   street_instances.json, street.report.json
 """
 from __future__ import annotations
@@ -62,8 +71,14 @@ ATLAS = OUT / "sign_atlas.json"
 
 ARCH_LOW, ARCH_WALKUP, ARCH_HUAXIA, ARCH_RESTOWER, ARCH_OFFICE, ARCH_PODIUM, ARCH_CIVIC, ARCH_SCHOOL = range(8)
 OLD = {ARCH_LOW, ARCH_WALKUP, ARCH_HUAXIA}
-TYPE_SIGN, TYPE_AWNING = 15, 16
-SIGN_VARIANTS, AWNING_VARIANTS = 512, 64
+TYPE_SIGN, TYPE_AWNING, TYPE_SCOOTER = 15, 16, 17
+SIGN_VARIANTS, AWNING_VARIANTS, SCOOTER_VARIANTS = 512, 64, 64
+CURB = LOOK / "urban_identity/curb_segments.json.gz"
+SCOOTER_KINDS = ("scooter_a", "scooter_b", "scooter_c", "scooter_d")
+SCOOTER_KIND_W = (0.45, 0.15, 0.25, 0.15)      # step-through, maxi, with delivery top box, compact e-scooter
+SCOOTER_COLOUR_W = (25, 20, 20, 10, 7, 6, 6, 6)  # white, black, silver, dark grey, dark blue, dark red, beige, green
+ROLE_FILL = {7: 1.0, 6: 1.0, 5: 0.95, 4: 0.9, 3: 0.9, 2: 0.9}
+NOSE_OUT_P = 0.7                                # nose toward the carriageway
 
 # vertical blades: mean spacing (m) along the frontage per role; awnings: probability per shop unit
 BLADE_SPACING = {7: 6.5, 6: 10.0, 5: 22.0}
@@ -166,6 +181,60 @@ def awning_mesh():
         a0, a1 = (0.0, -0.75), (0.82, -d * 0.82 - 0.02)
         m.quad([(a0[0], y - w, a0[1]), (a1[0], y - w, a1[1]), (a1[0], y + w, a1[1]), (a0[0], y + w, a0[1])], uv, 3)
         m.quad([(a0[0], y, a0[1] - 0.02), (a1[0], y, a1[1] - 0.02), (a1[0], y, a1[1] + 0.02), (a0[0], y, a0[1] + 0.02)], uv, 3)
+    return m
+
+
+def prism(m, bot, top, part_side, part_top, faces=("top", "front", "back", "left", "right")):
+    """Tapered box without a bottom: bot / top = (x0, x1, half width, z). Faces wound outward."""
+    (x0, x1, hb, z0), (u0, u1, ht, z1) = bot, top
+    B = [(x0, -hb, z0), (x1, -hb, z0), (x1, hb, z0), (x0, hb, z0)]
+    T = [(u0, -ht, z1), (u1, -ht, z1), (u1, ht, z1), (u0, ht, z1)]
+    c = np.mean(np.array(B + T, float), axis=0)
+    quads = {"top": (T[0], T[1], T[2], T[3]), "front": (B[1], B[2], T[2], T[1]), "back": (B[3], B[0], T[0], T[3]),
+             "right": (B[0], B[1], T[1], T[0]), "left": (B[2], B[3], T[3], T[2])}
+    for f in faces:
+        q = [np.array(v, float) for v in quads[f]]
+        nrm = np.cross(q[1] - q[0], q[2] - q[0])
+        if float(np.dot(nrm, np.mean(q, axis=0) - c)) < 0:
+            q = q[::-1]
+        m.quad([tuple(v) for v in q], [(0.0, 0.0)] * 4, part_top if f == "top" else part_side)
+
+
+def wheel(m, cx, r):
+    """Hexagonal tyre card in the x-z plane (two-sided material), 4 triangles."""
+    v = [(cx + r * math.cos(a), 0.0, r + r * math.sin(a)) for a in np.linspace(0, 2 * math.pi, 7)[:-1]]
+    for k in range(1, 5):
+        m.tri([v[0], v[k], v[k + 1]], [(0.0, 0.0)] * 3, 2)
+
+
+def scooter_mesh(kind):
+    """Parked scooter at true size (m): x = nose direction, y lateral, z up, origin on the ground at the wheelbase
+    centre. Silhouette only: body + seat, floorboard, leg shield / steering column, handlebar, two tyre cards."""
+    m = Mesh(TYPE_SCOOTER)
+    if kind == "scooter_b":            # maxi scooter: longer, wider, taller screen
+        wheel(m, -0.66, 0.23)
+        wheel(m, 0.68, 0.23)
+        prism(m, (-0.98, 0.0, 0.21, 0.28), (-0.92, -0.04, 0.18, 0.84), 0, 1)
+        prism(m, (0.0, 0.42, 0.20, 0.24), (0.0, 0.42, 0.20, 0.36), 0, 5, ("top", "left", "right"))
+        prism(m, (0.38, 0.66, 0.24, 0.28), (0.54, 0.78, 0.17, 1.0), 0, 0)
+        prism(m, (0.62, 0.74, 0.36, 0.98), (0.62, 0.74, 0.36, 1.06), 3, 3, ("top", "front", "back"))
+        m.quad([(0.70, -0.16, 1.0), (0.70, 0.16, 1.0), (0.58, 0.14, 1.30), (0.58, -0.14, 1.30)], [(0.0, 0.0)] * 4, 3)
+    elif kind == "scooter_d":          # compact e-scooter: short, flat, tall narrow shield
+        wheel(m, -0.50, 0.20)
+        wheel(m, 0.54, 0.20)
+        prism(m, (-0.78, 0.0, 0.16, 0.26), (-0.74, -0.04, 0.15, 0.76), 0, 1)
+        prism(m, (0.0, 0.36, 0.16, 0.22), (0.0, 0.36, 0.16, 0.33), 0, 5, ("top", "left", "right"))
+        prism(m, (0.33, 0.55, 0.18, 0.26), (0.46, 0.62, 0.13, 1.0), 0, 0)
+        prism(m, (0.52, 0.62, 0.32, 0.98), (0.52, 0.62, 0.32, 1.05), 3, 3, ("top", "front", "back"))
+    else:                              # 125 cc step-through (a); the same with a delivery top box (c)
+        wheel(m, -0.56, 0.21)
+        wheel(m, 0.60, 0.21)
+        prism(m, (-0.86, 0.02, 0.17, 0.26), (-0.80, -0.02, 0.15, 0.80), 0, 1)
+        prism(m, (0.0, 0.40, 0.17, 0.22), (0.0, 0.40, 0.17, 0.34), 0, 5, ("top", "left", "right"))
+        prism(m, (0.36, 0.60, 0.21, 0.26), (0.50, 0.70, 0.15, 0.98), 0, 0)
+        prism(m, (0.58, 0.70, 0.34, 0.96), (0.58, 0.70, 0.34, 1.04), 3, 3, ("top", "front", "back"))
+        if kind == "scooter_c":
+            prism(m, (-0.88, -0.48, 0.19, 0.80), (-0.86, -0.50, 0.18, 1.12), 4, 4)
     return m
 
 
@@ -365,11 +434,75 @@ def main():
                                      rec, 2)
                     t += LANE_BOX_SPACING * rng.uniform(0.7, 1.3)
 
+    # ---- parked scooters: only in the painted bays of the curb layer (Taipei Street Reality v0C)
+    curb = json.loads(gzip.decompress(CURB.read_bytes()))
+    hf = bg.Heightfield()
+    from PIL import Image
+    gtex = np.asarray(Image.open(LOOK / "ground/xinyi_ground_2048.png")).astype(np.float32) / 255.0
+    ctex = np.asarray(Image.open(LOOK / "ground/xinyi_campus_2048.png")).astype(np.float32) / 255.0
+
+    def on_sidewalk(pts):
+        """Any point on raised-sidewalk ground as the ground shader sees it (sd > 0.1 m on a sidewalk side)."""
+        res = gtex.shape[0]
+        for e, n in pts:
+            fx = (e - bg.E0) / (bg.E1 - bg.E0) * res - 0.5
+            fy = (bg.N1 - n) / (bg.N1 - bg.N0) * res - 0.5
+            x0, y0 = int(math.floor(fx)), int(math.floor(fy))
+            tx, ty = fx - x0, fy - y0
+            w = ((y0, x0, (1 - tx) * (1 - ty)), (y0, x0 + 1, tx * (1 - ty)), (y0 + 1, x0, (1 - tx) * ty),
+                 (y0 + 1, x0 + 1, tx * ty))
+            sd = (sum(gtex[y, x, 0] * k for y, x, k in w) - 0.5) * 24.0
+            if sd > 0.1 and sum(ctex[y, x, 3] * k for y, x, k in w) > 0.85:
+                return True
+        return False
+    for k in SCOOTER_KINDS:
+        inst[k] = []
+    rows = curb["rows"]
+    for bay in curb["bays"]:
+        row = rows[bay["row"]]
+        rng = edge_rng("scooter", row["id"], bay["k"])
+        if rng.random() >= row["fill"] * ROLE_FILL.get(row["role"], 0.9):
+            stats["scooter_bay_empty"] += 1
+            continue
+        kind = rng.choices(SCOOTER_KINDS, SCOOTER_KIND_W)[0]
+        ax = math.radians(bay["yaw"])
+        a_dir = np.array([math.cos(ax), math.sin(ax)])        # bay axis, kerb -> carriageway
+        t_dir = np.array([-a_dir[1], a_dir[0]])
+        c = np.array([bay["e"], bay["n"]]) + t_dir * rng.uniform(-0.15, 0.15) + a_dir * rng.uniform(-0.08, 0.08)
+        yaw = bay["yaw"] + (0.0 if rng.random() < NOSE_OUT_P else 180.0) + rng.uniform(-8.0, 8.0)
+        sc = rng.uniform(0.97, 1.0)
+        half_len, half_w = (1.0 if kind == "scooter_b" else 0.9) * sc, 0.36 * sc
+        yr = math.radians(yaw)
+        fx, fy = np.array([math.cos(yr), math.sin(yr)]), np.array([-math.sin(yr), math.cos(yr)])
+        corners = lambda c: [tuple(c + fx * dx * half_len + fy * dy * half_w) for dx, dy in ((-1, -1), (1, -1), (1, 1), (-1, 1))]
+        if on_sidewalk(corners(c)):
+            c = c + a_dir * 0.1                                # nudge toward the carriageway
+            if on_sidewalk(corners(c)):
+                reject["scooter_on_raised_sidewalk"] += 1
+                continue
+        fp = Polygon(corners(c))
+        if not clear(fp):
+            reject["scooter_collides_building"] += 1
+            continue
+        colour = rng.choices(range(8), SCOOTER_COLOUR_W)[0]
+        v = colour + 8 * rng.randint(0, 3) + 32 * (1 if rng.random() < 0.6 else 0)
+        inst[kind].append({"e": round(float(c[0]), 3), "n": round(float(c[1]), 3),
+                           "z": round(float(hf([c[0]], [c[1]])[0]), 3), "yaw": round(yaw, 2),
+                           "sx": round(sc, 3), "sy": round(sc, 3), "sz": round(sc, 3), "v": int(v)})
+        stats[f"scooter_role{row['role']}"] += 1
+        stats[f"scooter_class_{row['class']}"] += 1
+
     sm, am = sign_mesh(), awning_mesh()
     sb, st = sm.write(OUT / "street_sign.glb", "SM_XinyiStreetSign")
     ab, at = am.write(OUT / "street_awning.glb", "SM_XinyiStreetAwning")
+    scooter_meshes = {}
+    for k in SCOOTER_KINDS:
+        bnd, tri = scooter_mesh(k).write(OUT / ("street_%s.glb" % k), "SM_XinyiStreet" + k.title().replace("_", ""))
+        scooter_meshes[k] = {"mesh": "street_%s.glb" % k, "triangles": tri, "expected_ue_local_bounds": bnd,
+                             "used_by": [k]}
     doc = {"schema": "acw.street_instances/0", "variants": {"sign": SIGN_VARIANTS, "box": SIGN_VARIANTS,
-                                                            "awning": AWNING_VARIANTS},
+                                                            "awning": AWNING_VARIANTS,
+                                                            **{k: SCOOTER_VARIANTS for k in SCOOTER_KINDS}},
            "types": inst}
     (OUT / "street_instances.json").write_text(json.dumps(doc, separators=(",", ":"), sort_keys=True) + "\n")
     report = {
@@ -377,10 +510,13 @@ def main():
         "meshes": {"sign": {"mesh": "street_sign.glb", "triangles": st, "expected_ue_local_bounds": sb,
                             "used_by": ["sign", "box"]},
                    "awning": {"mesh": "street_awning.glb", "triangles": at, "expected_ue_local_bounds": ab,
-                              "used_by": ["awning"]}},
+                              "used_by": ["awning"]},
+                   **scooter_meshes},
         "instances": {k: len(v) for k, v in inst.items()},
         "instance_triangles": {"sign": len(inst["sign"]) * st, "box": len(inst["box"]) * st,
-                               "awning": len(inst["awning"]) * at},
+                               "awning": len(inst["awning"]) * at,
+                               **{k: len(inst[k]) * scooter_meshes[k]["triangles"] for k in SCOOTER_KINDS}},
+        "curb_segments_sha256": hashlib.sha256(gzip.decompress(CURB.read_bytes())).hexdigest(),
         "stats": dict(sorted(stats.items())), "rejected": dict(sorted(reject.items())),
         "rules": {"blade_spacing_m": BLADE_SPACING, "box_spacing_m": BOX_SPACING, "awning_p": AWNING_P,
                   "arch_weight": {str(k): v for k, v in ARCH_W.items()}, "core_weight": CORE_W, "lit_p": LIT_P,

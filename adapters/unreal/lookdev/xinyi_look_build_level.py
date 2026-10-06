@@ -35,6 +35,10 @@ TREE_CULL_END_CM = 260000.0
 # awnings fade much earlier; boxes cast no shadow (sub-metre, near only).
 STREET_HISM = {"sign": ((50000.0, 70000.0), True), "box": ((22000.0, 32000.0), False),
                "awning": ((28000.0, 40000.0), True)}
+# Taipei Street Reality v0C: parked scooters in painted road-edge bays, one HISM per silhouette. Gone by
+# ~220 m (a scooter is ~4 x 8 px there and the painted bay rows carry the read); no shadows (the darker bay
+# fill reads as the contact shadow).
+STREET_HISM.update({k: ((16000.0, 22000.0), False) for k in ("scooter_a", "scooter_b", "scooter_c", "scooter_d")})
 
 
 def remove_previous_look_level():

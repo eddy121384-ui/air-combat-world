@@ -9,10 +9,12 @@ Creates, under /Game/XinyiLook:
   Materials/M_XinyiBackdrop     basin mountain ring
   Materials/M_XinyiFoliage      instanced street / park trees
   Textures/T_XinyiGround        2048^2 road SDF / green / class / water (linear)
-  Textures/T_XinyiCampus        2048^2 Grade-A campus / court signed distance + surface id (linear, box mips)
+  Textures/T_XinyiCampus        2048^2 Grade-A campus / court signed distance + surface id; A = v0C road-edge
+                                pedestrian class (linear, box mips)
   Textures/T_XinyiSignAtlas     2048^2 street sign atlas (sRGB face + emissive mask in A, BC7, box mips)
   Materials/M_XinyiStreet       projecting signs + awnings (atlas lookup + shared HLSL, instanced)
   Meshes/Street/Sign, Awning    unit street props (Street & Facade Identity v0B)
+  Meshes/Street/scooter_a..d    parked scooters (Taipei Street Reality v0C, same material)
   Meshes/Tiles/<tile>/...       25 look tiles (triangle soup = accepted tiles)
   Meshes/Hero, Backdrop, Paint, Tree
 
