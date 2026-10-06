@@ -7,7 +7,7 @@
    build_full_xinyi -> build_xinyi_terrain_dtm -> build_contract.
    Re-checks the accepted tile-manifest and terrain-manifest hashes.
 3. Run the look-dev builders (tiles, Taipei 101, backdrop, ground, rooftops,
-   far-LOD city when the far-city cache exists).
+   sign atlas + street signs / awnings, far-LOD city when the far-city cache exists).
 
 Usage: python tools/lookdev/build_all.py [--force-look]
 """
@@ -86,6 +86,10 @@ def main():
     run("tools/lookdev/build_backdrop.py")
     run("tools/lookdev/build_ground.py")
     run("tools/lookdev/build_rooftops.py")
+    # Street & Facade Identity v0B: sign atlas + projecting signs / awnings from the baked frontage roles
+    # (urban_identity/frontage_roles.json.gz, written by build_look_tiles.py)
+    run("tools/lookdev/build_sign_atlas.py")
+    run("tools/lookdev/build_street_identity.py")
     if (CACHE / "far_city_generalized.npz").exists():
         run("tools/lookdev/build_far_city.py")
     run("tools/lookdev/clouds/build_clouds.py")   # Cloud Prototype v0 state -> cells + weather map

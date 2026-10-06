@@ -31,6 +31,10 @@ from xinyi_look_tod import apply_tod, spawn_rig  # noqa: E402
 LOC_TOL_CM = 0.5
 TREE_CULL_START_CM = 150000.0
 TREE_CULL_END_CM = 260000.0
+# Street identity v0B: low-flight layer. Blades keep the street silhouette to ~0.7 km, small boxes and
+# awnings fade much earlier; boxes cast no shadow (sub-metre, near only).
+STREET_HISM = {"sign": ((50000.0, 70000.0), True), "box": ((22000.0, 32000.0), False),
+               "awning": ((28000.0, 40000.0), True)}
 
 
 def remove_previous_look_level():
@@ -239,6 +243,21 @@ def main():
         if n != len(items):
             failures.append({"rooftop": t, "count": n, "expected": len(items)})
 
+    # Street identity v0B: projecting signs + awnings on baked commercial frontage (one HISM per type)
+    street_counts = {}
+    street_doc = LOOK_OUT / "street/street_instances.json"
+    if assets.get("street_props") and street_doc.is_file():
+        sdoc = read_json(street_doc)
+        mesh_of = {u: row for row in assets["street_props"].values() for u in row["used_by"]}
+        for t, (cull, shadow) in STREET_HISM.items():
+            items = sdoc["types"].get(t, [])
+            if not items:
+                continue
+            n = place_hism(actors, mesh_of[t], items, "Street_" + t, cull, shadow, variants=sdoc["variants"][t])
+            street_counts[t] = n
+            if n != len(items):
+                failures.append({"street": t, "count": n, "expected": len(items)})
+
     # far-LOD Taipei basin massing (real WFS statistics), no shadows / collision
     far_n = 0
     for row in assets.get("far_city_chunks", []):
@@ -282,6 +301,7 @@ def main():
         "tree_instances": tree_count,
         "ground_instances": ground_counts,
         "rooftop_instances": roof_counts,
+        "street_instances": street_counts,
         "far_city_chunks": far_n,
         "clouds": clouds,
         "failures": failures,

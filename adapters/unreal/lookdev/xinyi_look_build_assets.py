@@ -10,6 +10,9 @@ Creates, under /Game/XinyiLook:
   Materials/M_XinyiFoliage      instanced street / park trees
   Textures/T_XinyiGround        2048^2 road SDF / green / class / water (linear)
   Textures/T_XinyiCampus        2048^2 Grade-A campus / court signed distance + surface id (linear, box mips)
+  Textures/T_XinyiSignAtlas     2048^2 street sign atlas (sRGB face + emissive mask in A, BC7, box mips)
+  Materials/M_XinyiStreet       projecting signs + awnings (atlas lookup + shared HLSL, instanced)
+  Meshes/Street/Sign, Awning    unit street props (Street & Facade Identity v0B)
   Meshes/Tiles/<tile>/...       25 look tiles (triangle soup = accepted tiles)
   Meshes/Hero, Backdrop, Paint, Tree
 
@@ -31,7 +34,7 @@ sys.path.insert(0, os.path.join(os.environ.get("ACW_REPO_ROOT", ""), "tools", "l
 import unreal  # noqa: E402
 from ue_custom_code import (  # noqa: E402
     CLOUD_INPUTS, MATERIALS, cloud_custom_code, cloud_weather_uv_code, custom_code, extent_uv_code, ground_uv_code,
-    source_bbox_defines,
+    source_bbox_defines, street_uv_code,
 )
 from xinyi_look_clouds_cheap import build_cheap_assets  # noqa: E402
 from xinyi_look_common import (  # noqa: E402
@@ -388,6 +391,60 @@ def build_instanced_material(mpc, name):
     return mat
 
 
+def build_street_material(mpc, atlas):
+    """Street identity v0B: instanced signs + awnings. A small Custom node turns the panel UV0 + per-instance
+    variant into the sign-atlas UV (xc_street_uv); one colour sample feeds the shared xc_street shading."""
+    name = "M_XinyiStreet"
+    mat, path = fresh_material(name)
+    for prop, val in (("two_sided", True), ("used_with_instanced_static_meshes", True)):
+        mat.set_editor_property(prop, val)
+    wp = world_pos_m(mat, -1400, -200)
+    n = expr(mat, unreal.MaterialExpressionVertexNormalWS, -1200, -60)
+    uv0 = texcoord(mat, 0, -1400, 40)
+    uv2 = texcoord(mat, 2, -1200, 60)
+    var = expr(mat, unreal.MaterialExpressionPerInstanceCustomData, -1400, 180, data_index=0)
+    suv = custom(mat, -1150, 160, street_uv_code(), ["UV0", "Variant"], [], "XinyiStreetUV",
+                 unreal.CustomMaterialOutputType.CMOT_FLOAT2)
+    wire(((uv0, "UV0"), (var, "Variant")), suv)
+    tx = expr(mat, unreal.MaterialExpressionTextureSample, -900, 160)
+    tx.set_editor_property("texture", atlas)
+    tx.set_editor_property("sampler_type", unreal.MaterialSamplerType.SAMPLERTYPE_COLOR)
+    mel.connect_material_expressions(suv, "", tx, "UVs")
+    night = mpc_param(mat, mpc, "Night", -1200, 300)
+    es = mpc_param(mat, mpc, "EmissiveScale", -600, 500)
+    node = custom(mat, -600, 0, custom_code(name), [n_ for n_, _ in MATERIALS[name][0]], SURFACE_OUTPUTS, name)
+    wire(((wp, "WP"), (n, "N"), (uv0, "UV0"), (uv2, "UV2"), (var, "Variant"), (tx, "TX", "RGBA"), (night, "Night")),
+         node)
+    finish_surface(mat, node, es, -300, 300, normal=False)
+    save_material(mat, path)
+    return mat
+
+
+def import_color_texture(png, name):
+    """sRGB colour texture with an alpha mask (BC7), box-filtered mips (atlas cells are power-of-two aligned)."""
+    task = unreal.AssetImportTask()
+    task.set_editor_property("filename", str(png))
+    task.set_editor_property("destination_path", TEX_DIR)
+    task.set_editor_property("destination_name", name)
+    task.set_editor_property("automated", True)
+    task.set_editor_property("replace_existing", True)
+    task.set_editor_property("save", False)
+    tools.import_asset_tasks([task])
+    path = TEX_DIR + "/" + name
+    tex = lib.load_asset(path)
+    if tex is None:
+        raise RuntimeError("texture import failed: %s" % png)
+    tex.set_editor_property("srgb", True)
+    tex.set_editor_property("compression_settings", unreal.TextureCompressionSettings.TC_BC7)
+    tex.set_editor_property("mip_gen_settings", unreal.TextureMipGenSettings.TMGS_SIMPLE_AVERAGE)
+    tex.set_editor_property("address_x", unreal.TextureAddress.TA_CLAMP)
+    tex.set_editor_property("address_y", unreal.TextureAddress.TA_CLAMP)
+    if not lib.save_asset(path):
+        raise RuntimeError("failed to save %s" % path)
+    created[path] = "Texture2D"
+    return tex
+
+
 # ---------------------------------------------------------------------------
 # Import helpers
 # ---------------------------------------------------------------------------
@@ -603,6 +660,26 @@ def main():
         except Exception as exc:
             failures.append({"prop": t, "error": str(exc)})
 
+    # Street identity v0B: sign atlas + street prop meshes (optional layer: absent report = not built)
+    street = {}
+    street_rep_path = LOOK_OUT / "street/street.report.json"
+    street_rep = read_json(street_rep_path) if street_rep_path.is_file() else None
+    if street_rep:
+        try:
+            atlas = import_color_texture(LOOK_OUT / "street/sign_atlas.png", "T_XinyiSignAtlas")
+            m_street = build_street_material(mpc, atlas)
+            for key, row in street_rep["meshes"].items():
+                path, mesh = import_mesh(LOOK_OUT / "street" / row["mesh"], MESH_DIR + "/Street/" + key, m_street, 3)
+                origin, extent = mesh_bounds(mesh)
+                err = max_err(extent, row["expected_ue_local_bounds"]["extent_cm"])
+                if err > EXTENT_TOLERANCE_CM:
+                    raise RuntimeError("extent drift %.3f cm" % err)
+                street[key] = {"asset_path": path, "imported_bounds_origin_cm": origin,
+                               "expected_bounds_origin_cm": row["expected_ue_local_bounds"]["origin_cm"],
+                               "used_by": row["used_by"], "triangles": row["triangles"]}
+        except Exception as exc:
+            failures.append({"street": str(exc)[:400]})
+
     far = []
     for row in (far_rep or {}).get("chunks", []):
         try:
@@ -631,6 +708,7 @@ def main():
         "tiles": tiles,
         "singles": singles,
         "rooftop_props": props,
+        "street_props": street,
         "far_city_chunks": far,
         "created": created,
         "failures": failures,

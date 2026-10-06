@@ -50,6 +50,12 @@ MATERIALS = {
         "xl.xc_prop(WP, N, xl.xc_unpack(UV2), Variant, Night, max(fwidth(WP.x), fwidth(WP.y)), b, r, m, s, e);",
         "",
     ),
+    # Street identity v0B: projecting signs + awnings; TX = sign atlas sampled at street_uv_code()
+    "M_XinyiStreet": (
+        [("WP", 3), ("N", 3), ("UV0", 2), ("UV2", 2), ("Variant", 1), ("TX", 4), ("Night", 1)],
+        "xl.xc_street(WP, N, UV0, xl.xc_unpack(UV2), Variant, TX, Night, max(fwidth(WP.x), fwidth(WP.y)), b, r, m, s, e);",
+        "",
+    ),
 }
 
 
@@ -66,6 +72,12 @@ def custom_code(material: str, extra_defines: str = "") -> str:
         + call + "\n"
         + "Rough = r; Metal = m; Spec = s; Emis = e; NrmWS = n;\nreturn b;\n"
     )
+
+
+def street_uv_code() -> str:
+    """Custom node: sign-atlas UV of a street prop pixel (xc_street_uv) from its panel UV0 and variant."""
+    return ("struct XinyiLookFns {\n" + SHADER.read_text(encoding="utf-8") + "\n};\n"
+            + "XinyiLookFns xl;\nreturn xl.xc_street_uv(UV0, Variant);\n")
 
 
 CLOUD_SHADER = Path(__file__).resolve().parent / "shaders" / "xinyi_clouds.hlsl"

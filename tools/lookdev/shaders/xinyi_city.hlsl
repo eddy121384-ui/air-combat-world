@@ -1300,3 +1300,83 @@ void xc_prop(float3 wpos, float3 N, float4 vc, float variant, float night, float
     e += lampCol * isT10 * p1 * 3.0 * night;
     emis = e;
 }
+
+// ----------------------------------------------------------------------------
+// Street identity v0B: projecting signs + rain awnings (tools/lookdev/build_street_identity.py), one opaque
+// instanced material. vc.x = type (15 sign / box, 16 awning), vc.y = part. variant = (v + 0.5) / 512 for signs
+// (v = atlas cell + 64 * lit + 128 * fade), (v + 0.5) / 64 for awnings (v = colour + 8 * fade + 32 * style).
+// Atlas (tools/lookdev/build_sign_atlas.py, 2048^2, power-of-two aligned bins so mips never mix cells):
+//   cells  0..31  128 x 512 at y 0     (16 per row)     cells 32..39  256 x 512 at y 1024
+//   cells 40..55  256 x 256 at y 1536  (8 per row)
+// ----------------------------------------------------------------------------
+float2 xc_street_uv(float2 uv0, float variant)
+{
+    float v = floor(variant * 512.0);
+    float cell = v - 64.0 * floor(v / 64.0);
+    float isV2 = step(31.5, cell) * (1.0 - step(39.5, cell));
+    float isSq = step(39.5, cell);
+    float k = cell - 32.0 * isV2 - 40.0 * isSq;
+    float cols = lerp(16.0, 8.0, max(isV2, isSq));
+    float2 size = lerp(float2(128.0, 512.0), float2(256.0, 512.0), isV2);
+    size = lerp(size, float2(256.0, 256.0), isSq);
+    float row = floor(k / cols);
+    float2 org = float2((k - row * cols) * size.x, lerp(0.0, lerp(1024.0, 1536.0, isSq), max(isV2, isSq)) + row * size.y);
+    // inset by half a texel of the sampled mip so bilinear filtering never reaches the neighbour cell
+    float2 fw = max(fwidth(uv0 * size), float2(1.0, 1.0));
+    float2 inset = 0.5 * fw / size;
+    float2 uv = clamp(uv0, inset, 1.0 - inset);
+    return (org + uv * size) / 2048.0;
+}
+
+void xc_street(float3 wpos, float3 N, float2 uv0, float4 vc, float variant, float4 tx, float night, float fwp,
+               out float3 base, out float rough, out float metal, out float spec, out float3 emis)
+{
+    float t = floor(vc.x * 255.0 + 0.5);
+    float part = floor(vc.y * 255.0 + 0.5);
+    float isAwn = step(15.5, t);
+    // --- signs: atlas face, steel brackets, board rim; per-instance age and lit flag
+    float v = floor(variant * 512.0);
+    float lit = step(0.5, frac(floor(v / 64.0) * 0.5));
+    float age = floor(v / 128.0) / 3.0;
+    float3 face = tx.rgb;
+    float lum = dot(face, float3(0.3, 0.59, 0.11));
+    face = lerp(face, lum * float3(1.04, 1.0, 0.9), age * 0.45);              // sun-faded, yellowed acrylic
+    face *= 1.0 - age * 0.2;
+    float streak = xc_fnoise(float2(uv0.x * 5.0 + variant * 91.0, uv0.y * 0.7), 1.0, fwidth(uv0.x) * 5.0);
+    face *= 1.0 - saturate(streak * 1.6 - 0.5) * age * 0.35 * (1.0 - uv0.y * 0.5);   // rain streaks from the top
+    float isBracket = step(0.5, part) * (1.0 - step(1.5, part));
+    float isRim = step(1.5, part);
+    float3 sc = lerp(face, face * 0.72, isRim);
+    sc = lerp(sc, float3(0.17, 0.17, 0.18), isBracket);
+    // night: only lit instances glow, through the atlas emissive mask (light-box panel or letters), a little
+    // under their daylight colour so streets stay restrained; unlit boards stay dark
+    float3 se = face * tx.a * lit * (1.0 - isBracket) * lerp(0.75, 1.0, isRim) * 2.4 * night;
+    // --- awnings: corrugated sheet or polycarbonate / canvas, sun-bleached with age, darker dirty lip
+    float av = floor(variant * 64.0);
+    float ac = av - 8.0 * floor(av / 8.0);
+    float afade = floor(av / 8.0) - 4.0 * floor(av / 32.0);
+    float astyle = step(31.5, av);
+    float3 col = xc_pick4(ac / 8.0 * 2.0, float3(0.19, 0.34, 0.24), float3(0.17, 0.27, 0.40),
+                          float3(0.64, 0.63, 0.58), float3(0.42, 0.43, 0.43));
+    col = lerp(col, xc_pick4((ac - 4.0) / 4.0, float3(0.50, 0.56, 0.60), float3(0.44, 0.14, 0.11),
+                             float3(0.54, 0.40, 0.17), float3(0.15, 0.35, 0.37)), step(3.5, ac));
+    float alum = dot(col, float3(0.3, 0.59, 0.11));
+    col = lerp(col, alum * 1.08 + 0.03, afade / 3.0 * 0.3);
+    float3 T = normalize(cross(N, float3(0.0, 0.0, 1.0)) + float3(1e-4, 0.0, 0.0));
+    float rc = dot(wpos, T) / 0.12;
+    float ribs = xc_line(frac(rc), 0.35, fwp / 0.12) * xc_detail(fwp, 0.24) * (1.0 - astyle);
+    col *= 1.0 - ribs * 0.22;
+    float lip = step(0.5, part) * (1.0 - step(1.5, part));
+    col = lerp(col, col * 0.78, lip);
+    col *= 1.0 - xc_fnoise(float2(dot(wpos, T), wpos.z * 3.0), 0.8, fwp) * 0.18 * (afade / 3.0 + 0.3);
+    float strut = step(2.5, part);
+    col = lerp(col, float3(0.16, 0.16, 0.17), strut);                        // painted steel struts
+    base = lerp(sc, col, isAwn);
+    rough = lerp(lerp(0.42, 0.6, isRim + isBracket), lerp(0.62, 0.5, astyle), isAwn);
+    metal = lerp(isBracket * 0.6, lerp(0.15 * (1.0 - astyle), 0.5, strut), isAwn);
+    spec = 0.45;
+    // awnings at night: the drip lip of ~60 % of canopies catches the light of the shop underneath
+    float shopOn = step(0.4, frac(variant * 37.3));
+    float3 ae = float3(1.0, 0.82, 0.58) * lip * shopOn * 0.35 * night;
+    emis = lerp(se, ae, isAwn);
+}

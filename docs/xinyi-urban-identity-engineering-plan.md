@@ -282,7 +282,8 @@ Ranked by (aerial + low-flight value) ÷ cost:
 2. **Frontage bake + street-aware shader** (no new geometry): flags bits 4–6 in `build_look_tiles.py`,
    then gate / weight cages, ACs, arcade and sign band by frontage class and corner; interior walls get
    back-of-house density. Biggest plausibility gain per ms; regression = intended visual change only.
-3. **Awnings + vertical signs** (HISM + atlas) on commercial candidates; build `build_sign_atlas.py` and
+3. **Awnings + vertical signs** (*implemented, see `docs/xinyi-street-facade-identity-v0b.md`*) (HISM + atlas)
+   on commercial candidates; build `build_sign_atlas.py` and
    the atlas metadata contract first with ~40 cells.
 4. **Storefront atlas on the sign band** (shader) and banners.
 5. **Near-only AC geometry** + cage relief.

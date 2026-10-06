@@ -380,10 +380,13 @@ def frontage_roles(wm, records):
     """Frontage edges per building id as (p0, p1, outward unit normal, role, edge key) in ENU m.
 
     Runs the acw.frontage/0 generator on the in-memory records (schools and rooftop-structure records
-    are handled by its own rules: never commercial / skipped)."""
+    are handled by its own rules: never commercial / skipped). Also returns the baked role table
+    (acw.frontage_roles/0, written to urban_identity/frontage_roles.json.gz) that street-level layers
+    (build_street_identity.py) place from, so wall shading and street props share one contract."""
     look = {bid: {"group": r["group"], "archetype": r["archetype"], "flags": r["flags"]} for bid, r in records.items()}
     frontage, _parts = urban.build_frontage(wm, look, urban.load_roads())
     roles = {}
+    export = []
     summary = Counter()
     school_edges = 0
     for b in frontage:
@@ -394,6 +397,7 @@ def frontage_roles(wm, records):
         street = [e for e in edges if e["front"] >= 2]
         best = max(street, key=lambda e: (e["front"], e["len"]), default=None)
         out = []
+        exp_edges = []
         for e in edges:
             major = e["front"] >= 3
             if e["front"] == 1:
@@ -410,12 +414,16 @@ def frontage_roles(wm, records):
             out.append((np.array(e["p0"], float), np.array(e["p1"], float), np.array([math.cos(a), math.sin(a)]),
                         role, (b["building_id"], e["part"], e["edge"])))
             summary[FRONT_NAMES[role]] += 1
+            exp_edges.append({k: e[k] for k in ("part", "edge", "p0", "p1", "len", "normal_deg", "road_id", "road_hw",
+                                                "road_width", "curb_m")} | {"role": role})
         roles[b["building_id"]] = out
+        export.append({"building_id": b["building_id"], "commercial": b["commercial_candidate"],
+                       "corner": b["corner"], "edges": exp_edges})
     stats = {"buildings_with_frontage": len(roles), "school_frontage_edges_not_baked": school_edges,
              "commercial_candidates": sum(1 for b in frontage if b["commercial_candidate"]),
              "corners": sum(1 for b in frontage if b["corner"] and b["building_id"] in roles),
              "frontage_edges_by_role": dict(sorted(summary.items()))}
-    return roles, stats
+    return roles, stats, export
 
 
 def wall_roles(p, fn, wall, tile_origin, fronts, coverage):
@@ -546,7 +554,7 @@ def build(out_dir: Path):
                  for b in wm["buildings"] if not b["suppressed"] for pt in b["polygons"]]
     probes = {c["id"]: campus_id.YardProbe(c["geom"], all_polys) for c in campuses}
     corridor_tris = 0
-    fronts, front_stats = frontage_roles(wm, records)
+    fronts, front_stats, role_table = frontage_roles(wm, records)
     coverage = defaultdict(list)
     role_area = defaultdict(Counter)        # archetype name -> role name -> wall m2
 
@@ -655,6 +663,10 @@ def build(out_dir: Path):
                                                for a, c in sorted(role_area.items())}}
     (out_dir / "urban_identity").mkdir(parents=True, exist_ok=True)
     (out_dir / "urban_identity/frontage_bake.json").write_text(json.dumps(bake, indent=1) + "\n", encoding="utf-8")
+    (out_dir / "urban_identity/frontage_roles.json.gz").write_bytes(gzip.compress(json.dumps(
+        {"schema": "acw.frontage_roles/0", "roles": {str(i): n for i, n in enumerate(FRONT_NAMES)},
+         "note": "per frontage ring edge, the role baked into the look tiles (flags bits 4-6); schools excluded",
+         "buildings": role_table}, separators=(",", ":"), sort_keys=True).encode("utf-8"), 9, mtime=0))
     print(f"frontage bake: {share:.4f} of {total_len:.0f} m frontage matched to walls, "
           f"{len(unmatched)} edges mostly unmatched", flush=True)
     if share < FRONT_MIN_COVERAGE:
