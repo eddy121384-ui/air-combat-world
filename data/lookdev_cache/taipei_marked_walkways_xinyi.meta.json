@@ -1,0 +1,29 @@
+{
+ "schema": "acw.marked_walkways_meta/0",
+ "title": "臺北市標線型人行道 (Taipei painted pedestrian walkways)",
+ "publisher": "臺北市政府交通局交通管制工程處 (Taipei Traffic Engineering Office)",
+ "licence": "Open Government Data License, version 1.0 (Taiwan); attribution required",
+ "dataset": "https://data.gov.tw/dataset/145867",
+ "source_url": "https://data.taipei/api/dataset/d647b3af-4bbd-4e8f-b420-8f6c1bc1b597/resource/2d82d5f1-8f97-45db-89df-162ba161dedb/download",
+ "zip_files": [
+  "標線型人行道/grapline_21_15.cpg",
+  "標線型人行道/grapline_21_15.dbf",
+  "標線型人行道/grapline_21_15.prj",
+  "標線型人行道/grapline_21_15.shp",
+  "標線型人行道/grapline_21_15.shx"
+ ],
+ "zip_sha256": "cccd6c903ab9226b34ad807058e129fd27b4b43a9f313eefc67f29d1c0792dd2",
+ "zip_bytes": 362361,
+ "records_citywide": 3526,
+ "records_in_extent": 509,
+ "extent_enu_m": [
+  -1500.0,
+  1000.0,
+  -1000.0,
+  1500.0
+ ],
+ "margin_m": 100.0,
+ "crs": "EPSG:3826 (TWD97 TM2), kept projected; transformed like the WFS buildings",
+ "use": "evidence of where a walkway is painted (Taipei Street Reality v0D); geometry regenerated",
+ "cache_sha256": "90a2b925f3fbb48a484c3a164d25a60f8f3643930d10743cf348aa5b261c9138"
+}

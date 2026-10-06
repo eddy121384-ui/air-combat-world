@@ -519,12 +519,24 @@ void xc_wall(float u, float h, float H, float fh, float arch, float variant, flo
     // the role (major commercial road > local > corner side > plain street > alley > none on rear / side walls),
     // huaxia answers a step weaker than walk-up / low shop-houses.
     float street = (1.0 - step(fh * 1.05, h)) * (1.0 - podiumPart * 0.0);
-    float arcade = street * isOld * (1.0 - core * 0.6) * lerp(1.0, fComm, known);
+    float arcade = 0.0;
+    float signBand = 0.0;
+    float hasSign = 0.0;
+    float signR = 1.0;
+    float signCell = 0.0;
+    float shutter = 1.0;
+    float3 shop = float3(0.0, 0.0, 0.0);
+    float3 signFace = float3(0.0, 0.0, 0.0);
+    // Everything shopfront / arcade / sign-board lives in the bottom 1.72 floors (signTop <= 1.72): above that every
+    // mask below is exactly 0, so those pixels skip the work (coherent per floor band).
+    [branch] if (h < fh * 1.72)
+    {
+    arcade = street * isOld * (1.0 - core * 0.6) * lerp(1.0, fComm, known);
     float signTop = lerp(1.55, 1.72, known * fPrim * fMajor);     // taller sign boards on major commercial roads
-    float signBand = step(fh * 1.02, h) * (1.0 - step(fh * signTop, h)) * isOld * (1.0 - core * 0.8);
+    signBand = step(fh * 1.02, h) * (1.0 - step(fh * signTop, h)) * isOld * (1.0 - core * 0.8);
     float signW = bw * (0.8 + 0.8 * colR);
-    float signCell = floor(u / signW);
-    float signR = xc_hash21(float2(signCell, seed * 29.0));
+    signCell = floor(u / signW);
+    signR = xc_hash21(float2(signCell, seed * 29.0));
     float signThr = 1.01;                                         // rear / side: none
     signThr = lerp(signThr, 0.92, step(1.5, front));             // service alley
     signThr = lerp(signThr, 0.85, fStreet);                       // street wall of a non-commercial building
@@ -532,7 +544,7 @@ void xc_wall(float u, float h, float H, float fh, float arch, float variant, flo
     signThr = lerp(signThr, 0.35, fPrim);                         // commercial frontage
     signThr = lerp(signThr, 0.22, fPrim * fMajor);                // ... on a collector / arterial
     signThr += 0.1 * isHuaxia * fComm;
-    float hasSign = step(lerp(0.35, signThr, known), signR);
+    hasSign = step(lerp(0.35, signThr, known), signR);
     float3 signCol = xc_sign_palette(frac(signR * 9.7));
     // horizontal shop boards (Taipei Street Reality v0C): plain colour panels with a dark board edge and a little
     // grime toward the bottom. No pseudo-lettering: random stroke grids read as Hangul next to the real
@@ -541,6 +553,13 @@ void xc_wall(float u, float h, float H, float fh, float arch, float variant, flo
     float sv = (h - fh * 1.02) / bandH;
     float boardEdge = (1.0 - xc_box(frac(u / signW), 0.012, 0.988, fwu / signW)) * xc_detail(fwu, 0.5);
     float boardGrime = saturate(1.0 - sv) * frac(signR * 5.3) * 0.14 * xc_detail(fwh, 0.4);
+
+    shutter = step(lerp(0.55, lerp(0.55, 0.72, fPrim), known), xc_hash21(float2(signCell, 3.0)));
+    shop = lerp(lerp(float3(0.07, 0.065, 0.06), float3(0.15, 0.135, 0.11), known * fComm),
+                       float3(0.42, 0.42, 0.42), shutter);
+    shop = lerp(shop, wall * 0.9, (1.0 - xc_box(fu, 0.06, 0.94, fwb)) * dBay * known);
+    signFace = lerp(signCol * (1.0 - boardGrime), float3(0.12, 0.12, 0.12), boardEdge * 0.8 * known);
+    }
 
     // --- compose base colour ------------------------------------------------------
     float3 c = wall;
@@ -558,12 +577,7 @@ void xc_wall(float u, float h, float H, float fh, float arch, float variant, flo
     // arcade: deep shade with shop glow; rolling shutters on some bays
     // commercial frontage: fewer closed shutters on the primary front, a faintly lit shop interior and a tiled
     // 騎樓 pier at every bay line
-    float shutter = step(lerp(0.55, lerp(0.55, 0.72, fPrim), known), xc_hash21(float2(signCell, 3.0)));
-    float3 shop = lerp(lerp(float3(0.07, 0.065, 0.06), float3(0.15, 0.135, 0.11), known * fComm),
-                       float3(0.42, 0.42, 0.42), shutter);
-    shop = lerp(shop, wall * 0.9, (1.0 - xc_box(fu, 0.06, 0.94, fwb)) * dBay * known);
     c = lerp(c, shop, arcade * 0.92);
-    float3 signFace = lerp(signCol * (1.0 - boardGrime), float3(0.12, 0.12, 0.12), boardEdge * 0.8 * known);
     c = lerp(c, signFace, signBand * hasSign);
 
     // quiet ground floor: old stock on a known non-commercial wall (rear / side, alley, residential street) gets
@@ -663,6 +677,10 @@ void xc_wall(float u, float h, float H, float fh, float arch, float variant, flo
     spec = lerp(wallSpec, lerp(0.75, 1.0, coated), glassAmt);
 
     // --- night -------------------------------------------------------------------
+    // Night == 0 is a global (material parameter collection) value: the whole emissive block is skipped by day
+    float3 e = float3(0.0, 0.0, 0.0);
+    [branch] if (night > 0.0)
+    {
     float litP = litFrac * lerp(1.0, 0.6, isOffice);
     litP *= 1.0 - step(0.5, rooftop) * 0.6;
     float floorZone = lerp(xc_hash21(float2(fi, seed * 5.0)), xc_hash31(float3(floor(bi / 8.0), fi, seed * 5.0)), 0.35);   // office floors lit as bands
@@ -676,7 +694,7 @@ void xc_wall(float u, float h, float H, float fh, float arch, float variant, flo
     float bandLit = step(1.0 - litP, xc_hash21(float2(fi, seed * 5.0))) * winMean;
     float farLit = lerp(litMean, bandLit * 0.7, isOffice * dFloor);
     float winEmis = lerp(farLit, lit * winLight * curtain, dBay * dFloor);
-    float3 e = lightCol * winEmis * lerp(0.24, 0.30, isOffice);
+    e = lightCol * winEmis * lerp(0.24, 0.30, isOffice);
     // shopfronts and signs carry the street at night
     float shopLit = arcade * (1.0 - shutter) * step(0.25, signR);
     e += lerp(float3(1.0, 0.78, 0.5), float3(0.9, 0.95, 1.0), step(0.6, signR)) * shopLit * 0.38;
@@ -690,6 +708,7 @@ void xc_wall(float u, float h, float H, float fh, float arch, float variant, flo
     // tower crowns: a lit band under the parapet on some towers
     float crown = step(H - fh * 0.9, h) * (1.0 - step(H - 0.5, h)) * step(0.78, frac(seed * 8.3)) * (isTower + isOffice);
     e += float3(0.95, 0.95, 1.0) * crown * 0.45;
+    }
     // --- civic landmarks (registry-driven): stone walls, deep piers, tall windows
     float cbu = u / 4.2;
     float cfu = frac(cbu);
@@ -873,21 +892,31 @@ void xc_city(float3 wpos, float3 N, float2 uv0, float2 uv1, float4 vc,
     float flags = vc.w;
     float hero = step(0.97, vc.w);   // Taipei 101 tags A = 250
 
-    float3 bw; float rw; float mw; float sw; float3 ew;
-    float3 br; float rr; float mr; float sr; float3 er;
-    xc_wall(uv0.x, uv0.y, uv1.x, uv1.y, arch, variant, seed, weather, flags, wpos,
-            night, litFrac, fwu, fwh, bw, rw, mw, sw, ew);
-    xc_roof(wpos, uv1.x, arch, variant, seed, weather, flags, night, fwp, br, rr, mr, sr, er);
-    // schools (ARCH_SCHOOL = 7): explicit route, replaces every wall / roof output (per-building constant:
-    // coherent branch; non-school pixels keep the accepted results above untouched)
+    float isRoof = smoothstep(0.55, 0.75, N.z);
+    float isSoffit = step(N.z, -0.7);
+    float3 bw = float3(0.0, 0.0, 0.0); float rw = 0.0; float mw = 0.0; float sw = 0.0; float3 ew = float3(0.0, 0.0, 0.0);
+    float3 br = float3(0.0, 0.0, 0.0); float rr = 0.0; float mr = 0.0; float sr = 0.0; float3 er = float3(0.0, 0.0, 0.0);
+    // Wall XOR roof: the facade grammar is not evaluated on roof pixels and the roof finish is not evaluated on
+    // wall pixels (isRoof is exactly 0 / 1 on building meshes: vertical walls, flat roofs). Schools (ARCH_SCHOOL = 7)
+    // use only their own wall / roof, which replace every output of the generic path.
     [branch] if (abs(arch - 7.0) < 0.5)
     {
         xc_school_wall(uv0.x, uv0.y, uv1.x, uv1.y, variant, seed, weather, flags, night, litFrac, fwu, fwh,
                        bw, rw, mw, sw, ew);
         xc_school_roof(wpos, seed, weather, fwp, br, rr, mr, sr, er);
     }
-    float isRoof = smoothstep(0.55, 0.75, N.z);
-    float isSoffit = step(N.z, -0.7);
+    else
+    {
+        [branch] if (isRoof < 1.0)
+        {
+            xc_wall(uv0.x, uv0.y, uv1.x, uv1.y, arch, variant, seed, weather, flags, wpos,
+                    night, litFrac, fwu, fwh, bw, rw, mw, sw, ew);
+        }
+        [branch] if (isRoof > 0.0)
+        {
+            xc_roof(wpos, uv1.x, arch, variant, seed, weather, flags, night, fwp, br, rr, mr, sr, er);
+        }
+    }
     base = lerp(bw, br, isRoof);
     rough = lerp(rw, rr, isRoof);
     metal = lerp(mw, mr, isRoof);

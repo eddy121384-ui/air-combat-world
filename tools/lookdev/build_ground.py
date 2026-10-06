@@ -18,9 +18,14 @@ Outputs (unreal/Saved/XinyiLook/ground/):
                           lane lines, double-yellow centre lines, red kerb lines,
                           zebra crossings, stop lines, scooter waiting boxes
                           (機車停等區), scooter stall rows (機車停車格, v0C curb layer:
-                          white bay outlines over a darker oil-stained fill).
+                          white bay outlines over a darker oil-stained fill), painted pedestrian
+                          walkways (標線型人行道, v0D: municipal-green ribbon + white edge line + abutting
+                          red line, only where the city maps one; see curb_zone.py §3).
                           TEXCOORD_2 = packed RGBA8 paint colour.
-  xinyi_trees.json        tree instances (street trees, median trees, parks)
+  xinyi_trees.json        tree instances (street trees, median trees, parks). v0D: generated street trees
+                          are kept only on raised-sidewalk ground clear of bay rows / walkways / crossings
+                          (a filter after generation: survivors keep position, order and attributes;
+                          park and OSM-mapped trees are never dropped)
   xinyi_tree.glb          one low-poly broadleaf tree (crown + trunk)
   xinyi_campus_2048.png   School & Campus Identity v0A data texture over the same extent, sampled
                           bilinear without mips (exact masks at every distance):
@@ -38,7 +43,8 @@ Outputs (unreal/Saved/XinyiLook/ground/):
                           produced: OSM has none here and inferred tracks are not render input.
   ../urban_identity/curb_segments.json.gz  road-side classes, curb segments, stall rows and bays
                           (acw.curb_segments/0; scooters in build_street_identity.py read the bays)
-The ground data texture, trees, forest and lamps are unchanged by the campus and curb layers.
+  ../urban_identity/ped_lanes.json.gz  painted walkway runs (acw.ped_lanes/0)
+The ground data texture, forest and lamps are unchanged by the campus and curb layers.
 """
 from __future__ import annotations
 
@@ -67,6 +73,7 @@ import curb_zone  # noqa: E402
 
 CITY = REPO / "cities/taipei/city.yaml"
 OSM = REPO / "data/lookdev_cache/osm_xinyi_context.json.gz"
+WALKWAYS = REPO / "data/lookdev_cache/taipei_marked_walkways_xinyi.json.gz"
 SOURCE = REPO / "data/generated/taipei/sample_buildings_epsg3826.geojson"
 CONTRACT = REPO / "unreal/Saved/XinyiUnrealV2Contract"
 OUT = REPO / "unreal/Saved/XinyiLook/ground"
@@ -166,6 +173,27 @@ def load_osm():
     return ways, polys_green, polys_water, trees, special
 
 
+def load_walkways():
+    """City-mapped painted walkways (fetch_ped_walkways.py snapshot), EPSG:3826 -> pyproj -> lon/lat -> ENU,
+    as the WFS buildings (worldmodel.build_worldmodel). Missing snapshot -> no walkways."""
+    if not WALKWAYS.is_file():
+        return []
+    from pyproj import Transformer
+    tr = Transformer.from_crs("EPSG:3826", "EPSG:4326", always_xy=True)
+    lon0, lat0 = enu_origin_from_city_yaml(CITY)
+    doc = json.loads(gzip.decompress(WALKWAYS.read_bytes()))
+    out = []
+    for f in doc["features"]:
+        rings = [[lonlat_to_enu(*tr.transform(x, y), lon0, lat0) for x, y in r] for r in f["rings_epsg3826"]]
+        if len(rings[0]) < 4:
+            continue
+        q = Polygon(rings[0], rings[1:]).buffer(0)
+        if q.is_empty or q.area < 0.2:
+            continue
+        out.append({"poly": q, "props": f["props"]})
+    return out
+
+
 def way_geometry(w):
     t = w["tags"]
     hw = t["highway"]
@@ -223,6 +251,34 @@ class Paint:
             self.v.append((p[0], p[1], zz))
             self.c.append(color)
         self.f += [(base, base + 1, base + 2), (base, base + 2, base + 3)]
+
+    # painted pedestrian walkway (標線型人行道, v0D): municipal green, fresher / older by the city install year
+    WALK_GREEN_NEW = (80, 114, 90, 255)
+    WALK_GREEN_OLD = (90, 111, 95, 255)
+
+    def ribbon(self, left, right, color, lift=0.06):
+        """Quad ribbon between two equal-length 2D point lists (no gaps / overlaps at bends), draped `lift` m.
+        `color` is one RGBA, or one per quad (then each quad gets its own vertices: packed colours must be
+        constant across a triangle, see gltf_writer.pack_rgba8)."""
+        n = len(left)
+        if n < 2:
+            return
+        if isinstance(color, list):
+            for i, c in enumerate(color):
+                self.ribbon(left[i:i + 2], right[i:i + 2], c, lift)
+            return
+        l0, l1, r1 = left[0], left[1], right[1]
+        if (l1[0] - l0[0]) * (r1[1] - l0[1]) - (l1[1] - l0[1]) * (r1[0] - l0[0]) < 0:
+            left, right = right, left                     # counter-clockwise from above, as quad_strip
+        pts = list(left) + list(right)
+        z = self.hf([p[0] for p in pts], [p[1] for p in pts]) + lift
+        base = len(self.v)
+        for p, zz in zip(pts, z):
+            self.v.append((float(p[0]), float(p[1]), zz))
+            self.c.append(color)
+        for i in range(n - 1):
+            a, b, c, d = base + i, base + i + 1, base + n + i + 1, base + n + i
+            self.f += [(a, b, c), (a, c, d)]
 
     def polyline(self, pts, offset, w, color, dash=None, gap=None, clip=None):
         line = LineString(pts)
@@ -432,7 +488,8 @@ def main():
             "s": round(float(rng.uniform(0.8, 1.25) * (1.15 if k == 1 else 1.0)), 3),
             "v": int(rng.integers(0, 4)), "kind": k,
         })
-    (OUT / "xinyi_trees.json").write_text(json.dumps({"count": len(inst), "instances": inst}) + "\n")
+    # xinyi_trees.json is written after the curb layer (v0D street-tree filter); the RNG stream above is
+    # consumed for every candidate, so forest / lamps and the surviving trees' attributes are unchanged
 
     global TREE_BOUNDS
     TREE_BOUNDS = write_tree_mesh(OUT / "xinyi_tree.glb")
@@ -537,11 +594,65 @@ def main():
             if not q.is_empty:
                 curb_bpolys.append(q)
     paint = Paint(hf)
-    ped_alpha, curb_doc, row_clip, curb_report = curb_zone.build(
-        ways, junctions, node_pos, curb_bpolys, json.loads(gzip.decompress(OSM.read_bytes())),
-        lambda g: [lonlat_to_enu(p["lon"], p["lat"], lon0, lat0) for p in g], roles, look, special,
-        [c["geom"] for c in campuses], uniq, lamps, (E0, E1, N0, N1), RES, paint, (Paint.WHITE, Paint.STALL_FILL))
+    osm_doc = json.loads(gzip.decompress(OSM.read_bytes()))
+    osm_enu = lambda g: [lonlat_to_enu(p["lon"], p["lat"], lon0, lat0) for p in g]  # noqa: E731
+    ped_alpha, curb_doc, row_clip, curb_report, walk = curb_zone.build(
+        ways, junctions, node_pos, curb_bpolys, osm_doc, osm_enu, roles, look, special,
+        [c["geom"] for c in campuses], uniq, lamps, (E0, E1, N0, N1), RES, paint, (Paint.WHITE, Paint.STALL_FILL),
+        walkways=load_walkways(),
+        walk_colours=(Paint.WALK_GREEN_NEW, Paint.WALK_GREEN_OLD, Paint.WHITE, Paint.RED))
     curb_report["sha256"] = curb_zone.write_doc(LOOK / "urban_identity/curb_segments.json.gz", curb_doc)
+    lane_doc, lane_clip, lane_bands, walk_report = walk
+    walk_report["sha256"] = curb_zone.write_doc(LOOK / "urban_identity/ped_lanes.json.gz", lane_doc)
+
+    # ---- Taipei Street Reality v0D: street-tree reality filter (a correction layer, not a generator) ------------
+    # Generated street trees (kind 0) were laid on every road side at kerb + 1.8 m. Keep one only where the ground
+    # shader draws a raised sidewalk under it (the curb class it samples, ped_alpha) and it is clear of scooter bay
+    # rows, painted walkways and mapped crossings. Park (1) and OSM-mapped (2) trees are never moved or dropped
+    # (bays and walkways already yield to them). Survivors keep position, order and attributes.
+    _sw, osm_crossings = curb_zone.load_osm_lines(osm_doc, osm_enu)
+    keep_out = list(row_clip.values()) + [b.buffer(0.5) for b in lane_bands] + [c.buffer(2.0) for c in osm_crossings]
+    ko_tree = STRtree(keep_out) if keep_out else None
+    apx = (E1 - E0) / RES
+    ped_f = ped_alpha.astype(np.float32) / 255.0
+
+    def ped_class_at(x, y):
+        fx = min(max((x - E0) / apx - 0.5, 0.0), RES - 1.001)
+        fy = min(max((N1 - y) / apx - 0.5, 0.0), RES - 1.001)
+        i, j = int(fx), int(fy)
+        tx, ty = fx - i, fy - j
+        a = ped_f
+        return (a[j, i] * (1 - tx) + a[j, i + 1] * tx) * (1 - ty) + (a[j + 1, i] * (1 - tx) + a[j + 1, i + 1] * tx) * ty
+
+    kept, tree_filter = [], defaultdict(int)
+    for t in inst:
+        tree_filter["candidates_kind%d" % t["kind"]] += 1
+        p = Point(t["e"], t["n"])
+        why = None
+        if ko_tree is not None:
+            for i in ko_tree.query(p):
+                i = int(i)
+                if keep_out[i].contains(p):
+                    why = ("scooter_row" if i < len(row_clip) else
+                           "walkway" if i < len(row_clip) + len(lane_bands) else "crossing")
+                    if why == "crossing" and t["kind"] != 0:
+                        why = None                 # crossing clearance is a street-tree rule only
+                        continue
+                    break
+        if t["kind"] == 0 and why is None:
+            c = ped_class_at(t["e"], t["n"])
+            if c < 0.9:
+                why = "asphalt_edge" if c < 0.25 else "arcade_apron" if c < 0.75 else "class_boundary"
+        if why is None:
+            kept.append(t)
+        else:
+            tree_filter["suppressed_kind%d_%s" % (t["kind"], why)] += 1
+    if any(k.startswith("suppressed_kind1") or k.startswith("suppressed_kind2") for k in tree_filter):
+        raise SystemExit("tree filter would drop park / mapped trees: %s" % dict(tree_filter))
+    tree_filter = dict(sorted(tree_filter.items()))
+    tree_filter.update({"before": len(inst), "after": len(kept), "suppressed": len(inst) - len(kept)})
+    inst = kept
+    (OUT / "xinyi_trees.json").write_text(json.dumps({"count": len(inst), "instances": inst}) + "\n")
 
     # ----------------------------------------------------------- paint --------
     for w in ways:
@@ -572,8 +683,11 @@ def main():
                 if w["oneway"] and side < 0 and w["cls"] >= 0.66:
                     continue
                 rc = row_clip.get((w["id"], side))        # offset_curve + = left = curb side +1
-                paint.polyline(pts, side * (W * 0.5 - 0.2), 0.12, Paint.RED,
-                               clip=jclip if rc is None else jclip.union(rc))
+                lc = lane_clip.get((w["id"], side))       # a painted walkway draws its own abutting red line
+                clip = jclip if rc is None else jclip.union(rc)
+                if lc is not None:
+                    clip = clip.union(lc)
+                paint.polyline(pts, side * (W * 0.5 - 0.2), 0.12, Paint.RED, clip=clip)
 
     # zebra crossings + stop lines + scooter waiting boxes at junctions
     crossings = 0
@@ -637,7 +751,9 @@ def main():
         "extent_enu_m": [E0, E1, N0, N1], "sdf_range_m": SDF_RANGE_M,
         "road_ways": sum(1 for w in ways if not w["skip"]), "junctions": len(junctions),
         "crossings": crossings, "paint_triangles": int(len(faces)), "trees": len(inst),
+        "tree_filter": tree_filter,
         "curb": curb_report,
+        "walkways": walk_report,
         "road_area_m2": float(roads.area),
         "surface_classes": {k: len(v) for k, v in special.items()},
         "paint_mesh": "xinyi_road_paint.glb",

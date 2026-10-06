@@ -35,8 +35,23 @@ look tiles (urban_identity/frontage_roles.json.gz) and look_buildings.jsonl.gz (
    building line (keeps >= 0.7 m from the wall, <= 1.6 m past the carriageway edge).
    Per-row RNG seeded by the sha256 of the curb segment id; no global random state.
 
+3. Painted pedestrian walkways (標線型人行道, Taipei Street Reality v0D), placed only where the Taipei Traffic
+   Engineering Office maps one (data/lookdev_cache/taipei_marked_walkways_xinyi.json.gz, fetch_ped_walkways.py).
+   The city polygons are schematic (drawn ~1.26 m wide and often shorter than the recorded length; the
+   recorded area / length is 1.5 m), so they are used as evidence of *where* a walkway is painted: each is
+   assigned to the parallel road side whose kerb is nearest, and the paint is regenerated road-aligned:
+   a 1.5 m green ribbon, a 15 cm white edge line (路面邊線) on the carriageway side, and the red no-stopping
+   line abutting it with no gap (Taipei marking note). Curb priority, highest first:
+     junction / lane mouth / driveway / mapped crossing clearance  >  raised sidewalk (the side class)  >
+     special ground (school / campus / court / parking / construction)  >  v0C scooter bay rows (locked)  >
+     painted walkway  >  ordinary road edge.
+   A walkway piece is also dropped on a building, another road's carriageway, a mapped sidewalk line, a
+   mapped / park tree, on trunk / primary / secondary roads, or where it would leave less than the v0C
+   carriageway clearance (bays on the opposite side counted). Runs shorter than 8 m are dropped.
+
 Outputs: urban_identity/curb_segments.json.gz (acw.curb_segments/0: side classes, segments, rows, bays);
-the bays feed the scooter instances in build_street_identity.py.
+the bays feed the scooter instances in build_street_identity.py. urban_identity/ped_lanes.json.gz
+(acw.ped_lanes/0: painted walkway runs, evidence, rejections).
 """
 from __future__ import annotations
 
@@ -76,6 +91,24 @@ LANE_MOUTH_CLEAR = 4.0
 ACCESS_CLEAR = 2.0
 CROSSING_CLEAR = 4.0
 
+# painted pedestrian walkway (v0D)
+WALK_W = 1.5                         # recorded city width (area / length), regulation >= 1.5 m
+WALK_EDGE_W = 0.15                   # 路面邊線: white solid, 15 cm
+WALK_RED_W = 0.12                    # no-stopping line abutting the edge line (same width as the kerb lines)
+WALK_STEP = 1.0                      # eligibility piece length
+WALK_MIN_RUN = 8.0
+WALK_QUAD_M = 4.0                    # ribbon quad length on straight stretches (DTM is 20 m; colour knots 6 m)
+WALK_KNOT_M = 6.0                    # colour variation knots along a run
+WALK_VALUE_VAR = 0.06
+WALK_FADE = 0.35                     # max fade toward weathered road grey
+WALK_FADE_GREY = (104, 106, 102)
+WALK_MAX_SHIFT = 0.8                 # inward shift (per run) to clear footprints that include the arcade floor
+WALK_MERGE_GAP = 3.0                 # schematic gaps between consecutive city patches
+WALK_NO = {"trunk", "primary", "secondary", "motorway"}   # walkways only on service / collector / lanes
+WALK_JUNCTION_CLEAR = 7.0            # beyond the cross road's edge: clears the painted zebra (+2.5 .. +6.5 m) + stop line
+WALK_LANE_CLEAR = 1.0
+WALK_ACCESS_CLEAR = 0.5
+WALK_CROSSING_CLEAR = 2.0
 
 def seeded(*key):
     return random.Random(int.from_bytes(hashlib.sha256("|".join(map(str, key)).encode()).digest()[:8], "big"))
@@ -354,8 +387,9 @@ def merge_segments(contribs, gap=4.0):
 
 
 def build(ways, junctions, node_pos, bpolys, osm_doc, enu, roles, look, special, campus_polys, trees, lamps,
-          extent, res, paint, paint_colours):
-    """Compute the curb layer; adds stall paint to `paint`; returns (alpha, doc, row_clip, report)."""
+          extent, res, paint, paint_colours, walkways=(), walk_colours=None):
+    """Compute the curb layer; adds stall + walkway paint to `paint`;
+    returns (alpha, doc, row_clip, report, walk) with walk = (lane doc, lane_clip, lane band polygons, report)."""
     ways_ok = [w for w in ways if not w["skip"]]
     by_id = {w["id"]: w for w in ways_ok}
     sidewalks, crossings = load_osm_lines(osm_doc, enu)
@@ -377,7 +411,7 @@ def build(ways, junctions, node_pos, bpolys, osm_doc, enu, roles, look, special,
     poletree = STRtree(pole_pts) if pole_pts else None
     ctree = STRtree(crossings) if crossings else None
 
-    def forbidden(w, side):
+    def forbidden(w, side, jc=JUNCTION_CLEAR, lc=LANE_MOUTH_CLEAR, ac=ACCESS_CLEAR, cc=CROSSING_CLEAR):
         """Arc-length intervals of a way side where no bay may start / end, + real junction nodes (on a curved
         road the straight-line distance to the junction is shorter than the arc length, so both are checked)."""
         line = LineString(w["pts"])
@@ -394,12 +428,12 @@ def build(ways, junctions, node_pos, bpolys, osm_doc, enu, roles, look, special,
                 if ow is w:
                     continue
                 if ow["base"] != "service" and ow["cls"] >= 0.33:
-                    c, both = ow["width"] / 2 + JUNCTION_CLEAR, True
+                    c, both = ow["width"] / 2 + jc, True
                     majors.append((Point(node_pos[nid]), c))
                 elif is_lane(ow):
-                    c, both = ow["width"] / 2 + LANE_MOUTH_CLEAR, True
+                    c, both = ow["width"] / 2 + lc, True
                 else:
-                    c, both = ow["width"] / 2 + ACCESS_CLEAR, False
+                    c, both = ow["width"] / 2 + ac, False
                 if not both:
                     # which side of this way does the access way leave on?
                     j = oi + 1 if oi + 1 < len(ow["pts"]) else oi - 1
@@ -415,7 +449,7 @@ def build(ways, junctions, node_pos, bpolys, osm_doc, enu, roles, look, special,
                 pts = [x] if x.geom_type == "Point" else [g for g in getattr(x, "geoms", []) if g.geom_type == "Point"]
                 for q in pts:
                     s = line.project(q)
-                    iv.append((s - CROSSING_CLEAR, s + CROSSING_CLEAR))
+                    iv.append((s - cc, s + cc))
         return iv, majors
 
     def clear_of(poly, own):
@@ -559,8 +593,14 @@ def build(ways, junctions, node_pos, bpolys, osm_doc, enu, roles, look, special,
                         intrusion[(w["id"], side)][b] = 0.0
             s += rng.uniform(*RUN_GAP_M)
 
+    walk = place_walkways(ways_ok, by_id, runs, walkways, wtree_lines=STRtree([LineString(w["pts"]) for w in ways_ok]),
+                          forbidden=forbidden, bpolys=bpolys, btree=btree, road_polys=road_polys, road_idx=road_idx,
+                          rtree=rtree, sp_list=sp_list, sptree=sptree, sidewalks=sidewalks, swtree=swtree,
+                          trees=trees, bay_grid=bay_grid, intrusion=intrusion, paint=paint, colours=walk_colours,
+                          crossings=crossings, ped_alpha=alpha, extent=extent)
+
     row_clip = {k: unary_union(v).buffer(0.3) for k, v in row_polys.items()}
-    side_doc = [{"road_id": wid, "side": side, "runs": [[round(a, 2), round(b, 2), CLASS_NAME[c]] for a, b, c in rr]}
+    side_doc =[{"road_id": wid, "side": side, "runs": [[round(a, 2), round(b, 2), CLASS_NAME[c]] for a, b, c in rr]}
                 for (wid, side), rr in sorted(runs.items())]
     km = Counter()
     for w in ways_ok:
@@ -581,7 +621,288 @@ def build(ways, junctions, node_pos, bpolys, osm_doc, enu, roles, look, special,
               "rows": len(rows), "bays": len(bays), "bays_by_role": dict(Counter(str(r["role"]) for r in rows for _ in range(r["bays"]))),
               "bays_by_class": dict(Counter(r["class"] for r in rows for _ in range(r["bays"]))),
               "rejected_bays": dict(sorted(reject.items()))}
-    return alpha, doc, row_clip, report
+    return alpha, doc, row_clip, report, walk
+
+
+def place_walkways(ways, by_id, runs, walkways, wtree_lines, forbidden, bpolys, btree, road_polys, road_idx, rtree,
+                   sp_list, sptree, sidewalks, swtree, trees, bay_grid, intrusion, paint, colours, crossings=(),
+                   ped_alpha=None, extent=None):
+    """Painted walkways on city-mapped road sides (module docstring §3). Returns (doc, lane_clip, bands, report)."""
+    report = {"city_polygons": len(walkways), "assigned": 0, "unassigned": Counter(), "evidence_m": Counter(),
+              "rejected_m": Counter(), "runs": 0, "length_m": 0.0, "length_by_class_m": Counter(),
+              "length_by_road_m": Counter()}
+    if not walkways or colours is None:
+        return {"schema": "acw.ped_lanes/0", "runs": []}, {}, [], report
+    wlines = [LineString(w["pts"]) for w in ways]
+
+    # 1. evidence: each city polygon -> the parallel road side whose kerb is nearest -> arc-length interval
+    ev = defaultdict(list)                                   # (way id, side) -> [(s0, s1, offset, date)]
+    for wk in walkways:
+        poly = wk["poly"]
+        c = poly.centroid
+        mrr = list(poly.minimum_rotated_rectangle.exterior.coords)
+        e01 = np.subtract(mrr[1], mrr[0])
+        e12 = np.subtract(mrr[2], mrr[1])
+        axis = e01 if np.linalg.norm(e01) >= np.linalg.norm(e12) else e12
+        drawn = float(np.linalg.norm(axis))
+        axis = axis / max(drawn, 1e-9)
+        best = None
+        for i in wtree_lines.query(c.buffer(14.0)):
+            i = int(i)
+            w = ways[i]
+            ln = wlines[i]
+            s = ln.project(c)
+            q = ln.interpolate(s)
+            a = ln.interpolate(max(0.0, s - 1.5))
+            b = ln.interpolate(min(ln.length, s + 1.5))
+            t = np.array([b.x - a.x, b.y - a.y])
+            t /= max(np.linalg.norm(t), 1e-9)
+            off = ln.distance(c) - w["width"] / 2
+            if not -2.5 <= off <= 5.0:
+                continue
+            if drawn >= 2.5 and abs(float(np.dot(t, axis))) < 0.8:
+                continue
+            score = abs(off - 0.75)
+            if best is None or score < best[0]:
+                side = 1 if (t[0] * (c.y - q.y) - t[1] * (c.x - q.x)) > 0 else -1
+                best = (score, i, side, off)
+        if best is None:
+            report["unassigned"]["no_parallel_road_side"] += 1
+            continue
+        _, i, side, off = best
+        w = ways[i]
+        ln = wlines[i]
+        ss = [ln.project(Point(p)) for p in poly.exterior.coords]
+        s0, s1 = min(ss), max(ss)
+        rec = wk["props"]
+        try:
+            ext = min(3.0, max(0.0, (float(rec.get("rdlblg") or 0) - drawn) / 2)) if float(rec.get("rdlblg") or 0) > 1 else 0.0
+        except ValueError:
+            ext = 0.0
+        ev[(w["id"], side)].append((max(0.0, s0 - ext), min(ln.length, s1 + ext), off, rec.get("rddate") or ""))
+        report["assigned"] += 1
+
+    # 2. per road side: merge evidence, then test 1 m pieces against the curb priorities
+    lane_doc, lane_clip, bands = [], {}, []
+    pole_trees = [Point(x, y).buffer(0.6) for x, y, k in trees if k in (1, 2)]   # parks / mapped trees (kept)
+    ttree = STRtree(pole_trees) if pole_trees else None
+
+    ctree = STRtree(crossings) if crossings else None
+    E0, E1, N0, N1 = extent if extent is not None else (0.0, 1.0, 0.0, 1.0)
+
+    def ground_class(x, y):
+        """Pedestrian class the ground shader draws at (x, y): nearest half-carriageway, bilinear (0 / .5 / 1)."""
+        if ped_alpha is None:
+            return 0.0
+        res = ped_alpha.shape[0]
+        px = (E1 - E0) / res
+        fx = min(max((x - E0) / px - 0.5, 0.0), res - 1.001)
+        fy = min(max((N1 - y) / px - 0.5, 0.0), res - 1.001)
+        i, j = int(fx), int(fy)
+        tx, ty = fx - i, fy - j
+        a = ped_alpha
+        return float((a[j, i] * (1 - tx) + a[j, i + 1] * tx) * (1 - ty) + (a[j + 1, i] * (1 - tx) + a[j + 1, i + 1] * tx) * ty) / 255.0
+
+    def bay_hit(poly):
+        x0, y0, x1, y1 = poly.bounds
+        for gx in range(int(math.floor(x0 / 5.0)), int(math.floor(x1 / 5.0)) + 1):
+            for gy in range(int(math.floor(y0 / 5.0)), int(math.floor(y1 / 5.0)) + 1):
+                if any(q.distance(poly) < 0.3 for q in bay_grid.get((gx, gy), ())):
+                    return True
+        return False
+
+    for key in sorted(ev):
+        wid, side = key
+        w = by_id[wid]
+        fr = WayFrame(w["pts"])
+        W = w["width"]
+        lane = w["base"] == "service"
+        clear_min = MIN_CLEAR["lane"] if lane else MIN_CLEAR["one_way" if w["oneway"] else "two_way"]
+        items = sorted(ev[key])
+        merged = []
+        for s0, s1, off, date in items:
+            if merged and s0 - merged[-1]["s1"] <= WALK_MERGE_GAP:
+                m = merged[-1]
+                m["s1"] = max(m["s1"], s1)
+                m["offs"].append(off)
+                m["dates"].append(date)
+            else:
+                merged.append({"s0": s0, "s1": s1, "offs": [off], "dates": [date]})
+        sruns = runs.get(key, ())
+        fb, majors = forbidden(w, side, WALK_JUNCTION_CLEAR, WALK_LANE_CLEAR, WALK_ACCESS_CLEAR, WALK_CROSSING_CLEAR)
+        for m in merged:
+            o_in0 = W / 2 + min(1.0, max(-0.5, float(np.median(m["offs"])) - WALK_W / 2))
+
+            def piece_at(s, o_in):
+                p0, _t0, n0 = fr.at(s)
+                p1, _t1, n1 = fr.at(s + WALK_STEP)
+                o_red, o_out = o_in - WALK_EDGE_W / 2 - WALK_RED_W, o_in + WALK_W
+                return Polygon([tuple(p0 + n0 * side * o_red), tuple(p1 + n1 * side * o_red),
+                                tuple(p1 + n1 * side * o_out), tuple(p0 + n0 * side * o_out)])
+
+            def hits_building(piece):
+                return any(bpolys[int(i)].intersects(piece) for i in btree.query(piece))
+
+            # pass 1: non-geometric priorities per piece
+            pieces = []
+            s = m["s0"]
+            while s + WALK_STEP <= m["s1"] + 1e-6:
+                sc = s + WALK_STEP / 2
+                cls = NONE
+                for a, b, c in sruns:
+                    if a <= sc <= b:
+                        cls = c
+                report["evidence_m"][CLASS_NAME[cls]] += WALK_STEP
+                why = None
+                if w["base"] in WALK_NO:
+                    why = "arterial"
+                elif cls == SIDEWALK:
+                    why = "raised_sidewalk"
+                elif any(a <= s + WALK_STEP and s <= b for a, b in fb) or s < 0.5 or s + WALK_STEP > fr.L - 0.5:
+                    why = "junction_driveway_crossing"
+                else:
+                    pc = fr.line.interpolate(sc)
+                    if any(q.distance(pc) < c for q, c in majors):
+                        why = "junction_driveway_crossing"
+                pieces.append([s, why])
+                s += WALK_STEP
+            # one inward shift per evidence run (a straight ribbon) that clears the building footprints, which
+            # include the arcade floor: the walkway hugs the wall line; pieces needing more are dropped
+            shift = 0.0
+            for pc in pieces:
+                if pc[1] is None:
+                    for k in range(int(round(WALK_MAX_SHIFT / 0.1)) + 1):
+                        if not hits_building(piece_at(pc[0], o_in0 - 0.1 * k)):
+                            shift = max(shift, 0.1 * k)
+                            break
+            o_in = o_in0 - shift
+            o_out = o_in + WALK_W
+            intr = max(0.0, W / 2 - (o_in - WALK_EDGE_W / 2 - WALK_RED_W))
+            # pass 2: geometric priorities on the shifted ribbon
+            ok = []
+            for s, why in pieces:
+                if why is None:
+                    piece = piece_at(s, o_in)
+                    pm, _tm, nm = fr.at(s + WALK_STEP / 2)
+                    if not piece.is_valid or piece.area < 1e-3:
+                        why = "degenerate"
+                    elif max(ground_class(*(pm + nm * side * o)) for o in (o_in, o_in + WALK_W / 2, o_in + WALK_W)) >= 0.7:
+                        why = "raised_sidewalk"           # another road's sidewalk is the nearest kerb here
+                    elif ctree is not None and any(crossings[int(i)].distance(piece) < WALK_CROSSING_CLEAR
+                                                   for i in ctree.query(piece.buffer(WALK_CROSSING_CLEAR))):
+                        why = "junction_driveway_crossing"
+                    elif sptree is not None and any(sp_list[int(i)].intersects(piece) for i in sptree.query(piece)):
+                        why = "special_ground"
+                    elif bay_hit(piece):
+                        why = "scooter_row"
+                    elif hits_building(piece):
+                        why = "building"
+                    elif any(int(i) != road_idx[wid] and road_polys[int(i)].intersection(piece).area > 0.05
+                             for i in rtree.query(piece)):
+                        why = "other_road"
+                    elif swtree is not None and any(sidewalks[int(i)].distance(piece) < 0.3 for i in swtree.query(piece.buffer(0.3))):
+                        why = "mapped_sidewalk"
+                    elif ttree is not None and any(pole_trees[int(i)].intersects(piece) for i in ttree.query(piece)):
+                        why = "tree"
+                    else:
+                        bins = range(int(math.floor(s)), int(math.ceil(s + WALK_STEP)))
+                        opp = max((intrusion[(wid, -side)][b] for b in bins), default=0.0)
+                        if W - intr - opp < clear_min:
+                            why = "carriageway_clearance"
+                if why is None:
+                    ok.append((s, piece))
+                else:
+                    report["rejected_m"][why] += WALK_STEP
+            # contiguous runs of accepted pieces
+            groups = []
+            for s, piece in ok:
+                if groups and abs(s - groups[-1][-1][0] - WALK_STEP) < 1e-6:
+                    groups[-1].append((s, piece))
+                else:
+                    groups.append([(s, piece)])
+            for g in groups:
+                L = len(g) * WALK_STEP
+                if L < WALK_MIN_RUN:
+                    report["rejected_m"]["run_too_short"] += L
+                    continue
+                r0, r1 = g[0][0], g[-1][0] + WALK_STEP
+                for s, _piece in g:
+                    for b in range(int(math.floor(s)), int(math.ceil(s + WALK_STEP))):
+                        intrusion[(wid, side)][b] = max(intrusion[(wid, side)][b], intr)
+                year = max((d[:4] for d in m["dates"] if d[:4].isdigit() and d[:4] > "1900"), default="")
+                rid = "%d|%+d|%.1f" % (wid, side, r0)
+                draw_walkway(paint, fr, side, r0, r1, o_in, o_out, colours, seeded("walk", rid), year)
+                band = unary_union([p for _s, p in g])
+                bands.append(band)
+                lane_clip.setdefault(key, []).append(band.buffer(0.4))
+                cls_m = Counter()
+                for s, _p in g:
+                    for a, b, c in sruns:
+                        if a <= s + WALK_STEP / 2 <= b:
+                            cls_m[CLASS_NAME[c]] += WALK_STEP
+                for k, v in cls_m.items():
+                    report["length_by_class_m"][k] += v
+                report["length_by_road_m"]["service_lane" if is_lane(w) else w["base"]] += L
+                report["runs"] += 1
+                report["length_m"] += L
+                lane_doc.append({"id": rid, "road_id": wid, "side": side, "s0": round(r0, 2), "s1": round(r1, 2),
+                                 "o_in": round(o_in, 3), "o_out": round(o_out, 3), "shift": round(shift, 2), "year": year,
+                                 "class": cls_m.most_common(1)[0][0]})
+    lane_clip = {k: unary_union(v) for k, v in lane_clip.items()}
+    for k in ("unassigned", "evidence_m", "rejected_m", "length_by_class_m", "length_by_road_m"):
+        report[k] = {a: round(b, 1) for a, b in sorted(report[k].items()) if b}
+    report["length_m"] = round(report["length_m"], 1)
+    doc = {"schema": "acw.ped_lanes/0",
+           "rules": {"width_m": WALK_W, "edge_line_m": WALK_EDGE_W, "red_line_m": WALK_RED_W, "min_run_m": WALK_MIN_RUN,
+                     "merge_gap_m": WALK_MERGE_GAP, "max_inward_shift_m": WALK_MAX_SHIFT, "junction_clear_m": WALK_JUNCTION_CLEAR,
+                     "lane_mouth_clear_m": WALK_LANE_CLEAR, "access_clear_m": WALK_ACCESS_CLEAR,
+                     "crossing_clear_m": WALK_CROSSING_CLEAR, "no_walkway_on": sorted(WALK_NO)},
+           "runs": lane_doc}
+    return doc, lane_clip, bands, report
+
+
+def draw_walkway(paint, fr, side, s0, s1, o_in, o_out, colours, rng, year):
+    """Green ribbon + white edge line (carriageway side) + red no-stopping line abutting it, road-aligned.
+    Older walkways (city install year) are a little more faded; per-run jitter is seeded by the run id."""
+    green_new, green_old, white, red = colours
+    age = 1.0 if not year else min(1.0, max(0.0, (2024 - int(year)) / 6.0))
+    j = rng.uniform(-1.0, 1.0)
+    g = [a + (b - a) * age + j * 3.0 for a, b in zip(green_new[:3], green_old[:3])]
+    # patchy wear / repaint along the run: value +-6 % and a fade toward road grey, smooth over ~6 m knots
+    knots = [(rng.uniform(-1.0, 1.0), rng.uniform(0.0, 1.0)) for _ in range(int((s1 - s0) / WALK_KNOT_M) + 2)]
+
+    def quad_colour(s):
+        u = (s - s0) / WALK_KNOT_M
+        k = min(int(u), len(knots) - 2)
+        f = u - k
+        v = knots[k][0] * (1 - f) + knots[k + 1][0] * f
+        fade = knots[k][1] * (1 - f) + knots[k + 1][1] * f
+        c = [(a + (q - a) * WALK_FADE * fade) * (1.0 + WALK_VALUE_VAR * v) for a, q in zip(g, WALK_FADE_GREY)]
+        return tuple(int(round(min(255.0, max(0.0, x)))) for x in c) + (255,)
+    ss = [s0]
+    # way vertices inside the run keep the ribbon on the centreline's bends; plus a sample every WALK_QUAD_M
+    cum = 0.0
+    verts = []
+    coords = list(fr.line.coords)
+    for a, b in zip(coords[:-1], coords[1:]):
+        cum += math.hypot(b[0] - a[0], b[1] - a[1])
+        verts.append(cum)
+    while ss[-1] < s1 - 1e-6:
+        nxt = min(s1, ss[-1] + WALK_QUAD_M)
+        for v in verts:
+            if ss[-1] + 0.05 < v < nxt - 0.05:
+                nxt = v
+                break
+        ss.append(nxt)
+    frames = [fr.at(s) for s in ss]
+    o_red = o_in - WALK_EDGE_W / 2 - WALK_RED_W / 2
+
+    def edge(o):
+        return [p + n * side * o for p, _t, n in frames]
+    paint.ribbon(edge(o_in + WALK_EDGE_W / 2), edge(o_out), [quad_colour((a + b) / 2) for a, b in zip(ss[:-1], ss[1:])],
+                 lift=0.05)
+    paint.ribbon(edge(o_in - WALK_EDGE_W / 2), edge(o_in + WALK_EDGE_W / 2), white, lift=0.06)
+    paint.ribbon(edge(o_red - WALK_RED_W / 2), edge(o_red + WALK_RED_W / 2), red, lift=0.06)
 
 
 def draw_row(paint, placed, colours):
