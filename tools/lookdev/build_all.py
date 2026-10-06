@@ -90,6 +90,9 @@ def main():
     # (urban_identity/frontage_roles.json.gz, written by build_look_tiles.py)
     run("tools/lookdev/build_sign_atlas.py")
     run("tools/lookdev/build_street_identity.py")
+    # Taipei Street Reality v0E: horizontal storefront atlas + storefront plan (shop units on commercial frontage)
+    run("tools/lookdev/build_shop_atlas.py")
+    run("tools/lookdev/build_storefronts.py")
     if (CACHE / "far_city_generalized.npz").exists():
         run("tools/lookdev/build_far_city.py")
     run("tools/lookdev/clouds/build_clouds.py")   # Cloud Prototype v0 state -> cells + weather map

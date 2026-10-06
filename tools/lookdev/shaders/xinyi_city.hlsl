@@ -32,6 +32,14 @@
 // TEXCOORD_2 carries RGBA8 data packed as (R*256+G, B*256+A); returns 0..1.
 // Xinyi WFS building-source bbox (ENU m), injected by the Unreal ground material builder.
 // Defaults put the whole Landscape "inside" (no stand-in band) for the preview renderer.
+// Taipei Street Reality v0E storefront plan texture (tools/lookdev/build_storefronts.py): 2048^2 over the
+// ground extent (east -1500..1000 m, north -1000..1500 m), read with Texture.Load in xc_wall.
+#ifndef XC_PLAN_E0
+#define XC_PLAN_E0 (-1500.0)
+#define XC_PLAN_N1 (1500.0)
+#define XC_PLAN_PX (1.220703125)
+#define XC_PLAN_RES 2048
+#endif
 #ifndef XC_SRC_E0
 #define XC_SRC_E0 (-1.0e6)
 #define XC_SRC_E1 (1.0e6)
@@ -356,9 +364,67 @@ void xc_school_roof(float3 wpos, float seed, float weather, float fwp,
 // ----------------------------------------------------------------------------
 // Walls
 // ----------------------------------------------------------------------------
+// ----------------------------------------------------------------------------
+// Taipei Street Reality v0E storefront atlas (tools/lookdev/build_shop_atlas.py, 2048^2, sRGB + emissive A):
+//   h4 cells 512 x 128 at y 0..1024 (4 per row): 0-3 convenience, 4-5 breakfast, 6-7 breakfast menu strip,
+//      8-13 food, 14-16 beverage, 17-21 pharmacy / clinic, 22-31 neighbourhood retail
+//   h2 cells 512 x 256 at y 1024..2048 (4 per row): 0-3 breakfast, 4-5 food, 6-7 pharmacy / clinic, 8-15 retail
+// cat: 1 convenience, 2 breakfast, 3 food, 4 beverage, 5 medical, 6 / 7 retail / ordinary, 8 menu strip.
+// Returns (origin x, origin y, width, height) in texels; tall = 1 picks h2 where the category has h2 cells.
+// ----------------------------------------------------------------------------
+float xc_eq(float a, float b)
+{
+    return 1.0 - step(0.5, abs(a - b));
+}
+
+float4 xc_shop_cell(float cat, float sd, float tall)
+{
+    tall *= 1.0 - xc_eq(cat, 1.0) - xc_eq(cat, 4.0) - xc_eq(cat, 8.0);
+    float f4 = 22.0;
+    float n4 = 10.0;
+    f4 = lerp(f4, 0.0, xc_eq(cat, 1.0));  n4 = lerp(n4, 4.0, xc_eq(cat, 1.0));
+    f4 = lerp(f4, 4.0, xc_eq(cat, 2.0));  n4 = lerp(n4, 2.0, xc_eq(cat, 2.0));
+    f4 = lerp(f4, 6.0, xc_eq(cat, 8.0));  n4 = lerp(n4, 2.0, xc_eq(cat, 8.0));
+    f4 = lerp(f4, 8.0, xc_eq(cat, 3.0));  n4 = lerp(n4, 6.0, xc_eq(cat, 3.0));
+    f4 = lerp(f4, 14.0, xc_eq(cat, 4.0)); n4 = lerp(n4, 3.0, xc_eq(cat, 4.0));
+    f4 = lerp(f4, 17.0, xc_eq(cat, 5.0)); n4 = lerp(n4, 5.0, xc_eq(cat, 5.0));
+    float f2 = 8.0;
+    float n2 = 8.0;
+    f2 = lerp(f2, 0.0, xc_eq(cat, 2.0));  n2 = lerp(n2, 4.0, xc_eq(cat, 2.0));
+    f2 = lerp(f2, 4.0, xc_eq(cat, 3.0));  n2 = lerp(n2, 2.0, xc_eq(cat, 3.0));
+    f2 = lerp(f2, 6.0, xc_eq(cat, 5.0));  n2 = lerp(n2, 2.0, xc_eq(cat, 5.0));
+    float f = lerp(f4, f2, tall);
+    float n = lerp(n4, n2, tall);
+    float idx = f + sd - n * floor(sd / n);
+    float row = floor(idx / 4.0);
+    float col = idx - row * 4.0;
+    return float4(col * 512.0, lerp(row * 128.0, 1024.0 + row * 256.0, tall), 512.0, lerp(128.0, 256.0, tall));
+}
+
+// One atlas cell fitted into a rectangle (lp: x 0..1 left to right, y 0..1 bottom to top; aspect = width / height).
+// The cell keeps its aspect (letterboxed); outside it the board continues in the cell's own margin colour (same
+// row, so rims stay continuous). blank = 1 shows only that margin (an empty stretch of a continuous fascia).
+// dxy = d(lp.x)/dx, d(lp.x)/dy, d(lp.y)/dx, d(lp.y)/dy: explicit gradients, so this may run inside a branch.
+float4 xc_shop_sample(Texture2D tx, SamplerState ss, float4 cell, float2 lp, float aspect, float4 dxy, float blank)
+{
+    float k = aspect * cell.w / cell.z;
+    float kx = max(k, 1.0);
+    float ky = max(1.0 / k, 1.0);
+    float2 c = float2(0.5 + (lp.x - 0.5) * kx, 0.5 - (lp.y - 0.5) * ky);
+    float outX = max(step(c.x, 0.0), step(1.0, c.x));
+    float outY = max(step(c.y, 0.0), step(1.0, c.y));
+    c.x = lerp(c.x, 0.05, max(outX, blank));
+    c = lerp(c, float2(0.05, 0.5), outY);
+    float2 uv = (cell.xy + c * cell.zw) / 2048.0;
+    float2 gx = float2(dxy.x * kx, -dxy.z * ky) * cell.zw / 2048.0;
+    float2 gy = float2(dxy.y * kx, -dxy.w * ky) * cell.zw / 2048.0;
+    return tx.SampleGrad(ss, uv, gx, gy);
+}
+
 void xc_wall(float u, float h, float H, float fh, float arch, float variant, float seed,
              float weather, float flags, float3 wpos, float night, float litFrac,
-             float fwu, float fwh,
+             float fwu, float fwh, float4 dUH, float2 tW, float2 nH,
+             Texture2D shopTx, SamplerState shopS, Texture2D planTx,
              out float3 base, out float rough, out float metal, out float spec, out float3 emis)
 {
     float isOffice = step(3.5, arch) * (1.0 - step(4.5, arch));
@@ -527,6 +593,9 @@ void xc_wall(float u, float h, float H, float fh, float arch, float variant, flo
     float shutter = 1.0;
     float3 shop = float3(0.0, 0.0, 0.0);
     float3 signFace = float3(0.0, 0.0, 0.0);
+    float3 storeE = float3(0.0, 0.0, 0.0);      // night glow of the shopfront (x arcade in the night block)
+    float3 signE = float3(0.0, 0.0, 0.0);       // night glow of the board (x signBand * hasSign)
+    float3 dayE = float3(0.0, 0.0, 0.0);        // daytime interior glow (convenience store / clinic, x arcade)
     // Everything shopfront / arcade / sign-board lives in the bottom 1.72 floors (signTop <= 1.72): above that every
     // mask below is exactly 0, so those pixels skip the work (coherent per floor band).
     [branch] if (h < fh * 1.72)
@@ -534,7 +603,8 @@ void xc_wall(float u, float h, float H, float fh, float arch, float variant, flo
     arcade = street * isOld * (1.0 - core * 0.6) * lerp(1.0, fComm, known);
     float signTop = lerp(1.55, 1.72, known * fPrim * fMajor);     // taller sign boards on major commercial roads
     signBand = step(fh * 1.02, h) * (1.0 - step(fh * signTop, h)) * isOld * (1.0 - core * 0.8);
-    float signW = bw * (0.8 + 0.8 * colR);
+    // one board grid per building (3.1-6.2 m boards, Taipei Street Reality v0E): atlas text never jumps at a bay line
+    float signW = bw * lerp(1.0, 1.6, frac(seed * 5.71));
     signCell = floor(u / signW);
     signR = xc_hash21(float2(signCell, seed * 29.0));
     float signThr = 1.01;                                         // rear / side: none
@@ -545,20 +615,146 @@ void xc_wall(float u, float h, float H, float fh, float arch, float variant, flo
     signThr = lerp(signThr, 0.22, fPrim * fMajor);                // ... on a collector / arterial
     signThr += 0.1 * isHuaxia * fComm;
     hasSign = step(lerp(0.35, signThr, known), signR);
-    float3 signCol = xc_sign_palette(frac(signR * 9.7));
-    // horizontal shop boards (Taipei Street Reality v0C): plain colour panels with a dark board edge and a little
-    // grime toward the bottom. No pseudo-lettering: random stroke grids read as Hangul next to the real
-    // Traditional-Chinese blade signs; real horizontal board text belongs to the v0D atlas.
     float bandH = max((signTop - 1.02) * fh, 0.3);
     float sv = (h - fh * 1.02) / bandH;
-    float boardEdge = (1.0 - xc_box(frac(u / signW), 0.012, 0.988, fwu / signW)) * xc_detail(fwu, 0.5);
+    float bx = frac(u / signW);
+    float boardEdge = (1.0 - xc_box(bx, 0.012, 0.988, fwu / signW)) * xc_detail(fwu, 0.5);
     float boardGrime = saturate(1.0 - sv) * frac(signR * 5.3) * 0.14 * xc_detail(fwh, 0.4);
 
+    // storefront plan (build_storefronts.py): one texel fetch at this board's centre, 1.4 m out from the wall, on
+    // old-stock commercial frontage only. 0 = no plan (boards there show neighbourhood-retail atlas cells).
+    float pv = 0.0;
+    [branch] if (isOld * known * fComm > 0.0)
+    {
+        float2 pc = wpos.xy + tW * ((signCell + 0.5) * signW - u) + nH * 1.4;
+        int2 tp = int2(floor((pc.x - XC_PLAN_E0) / XC_PLAN_PX), floor((pc.y + XC_PLAN_N1) / XC_PLAN_PX));
+        if (tp.x >= 0 && tp.y >= 0 && tp.x < XC_PLAN_RES && tp.y < XC_PLAN_RES)
+            pv = floor(planTx.Load(int3(tp, 0)).r * 255.0 + 0.5);
+    }
+    float cat = floor(pv / 32.0);
+    float plan = step(0.5, cat);
+    float plit = step(0.5, frac(floor(pv / 16.0) * 0.5));
+    float pseed = pv - 16.0 * floor(pv / 16.0);
+    float isCvs = xc_eq(cat, 1.0);
+    float isBf = xc_eq(cat, 2.0);
+    float isFood = xc_eq(cat, 3.0);
+    float isBev = xc_eq(cat, 4.0);
+    float isMed = xc_eq(cat, 5.0);
+    float special = isCvs + isBf + isFood + isBev + isMed;
+    hasSign = max(hasSign, special);
+    hasSign *= 1.0 - isCvs * step(0.55, sv);                    // convenience store: a ~1 m fascia, wall above
+    float sCat = lerp(6.0, cat, plan);
+    float sSeed = lerp(floor(signR * 16.0), pseed, plan);
+    float gv = h / (fh * 1.05);
+    float inMenu = isBf * street * step(0.60, gv) * (1.0 - step(0.80, gv)) * (1.0 - step(0.5, night));
+    // light-box boards: most are lit at night even where the shop below has its shutter down
+    float boardLit = lerp(step(0.2, signR), max(plit, step(0.35, frac(signR * 3.3))), plan);
+
+    // one atlas sample: the shop board in the sign band, or the breakfast menu strip above the counter
+    float4 stx = float4(0.0, 0.0, 0.0, 0.0);
+    [branch] if (signBand * hasSign + inMenu > 0.0)
+    {
+        float4 sCell = xc_shop_cell(lerp(sCat, 8.0, inMenu), sSeed, step(signW / bandH, 2.8));
+        float rectH = lerp(bandH * lerp(1.0, 0.55, isCvs), 0.20 * fh * 1.05, inMenu);
+        float ly = lerp(sv / lerp(1.0, 0.55, isCvs), (gv - 0.60) / 0.20, inMenu);
+        float blank = isCvs * step(0.5, xc_hash21(float2(signCell, seed * 17.0))) * (1.0 - inMenu);
+        stx = xc_shop_sample(shopTx, shopS, sCell, float2(bx, ly), signW / rectH,
+                             float4(dUH.x / signW, dUH.y / signW, dUH.z / rectH, dUH.w / rectH), blank);
+    }
+    // board face: atlas, sun-faded / yellowed with age, grime toward the bottom, dark rim (convenience stores: one
+    // continuous fascia, no rim between boards)
+    float sAge = frac(signR * 7.7) * (1.0 - isCvs * 0.7);
+    float3 face = stx.rgb;
+    face = lerp(face, dot(face, float3(0.3, 0.59, 0.11)) * float3(1.04, 1.0, 0.9), sAge * 0.35) * (1.0 - sAge * 0.15);
+    face *= 1.0 - boardGrime;
+    signFace = lerp(face, float3(0.12, 0.12, 0.12), boardEdge * 0.8 * known * (1.0 - isCvs));
+    signE = face * stx.a * boardLit * lerp(2.0, 1.1, isCvs);
+
+    // shopfront behind the arcade, per category. Open shops show a lived-in interior (goods on shelves, a lit ceiling
+    // strip, dark floor) that averages to its mean once the 0.5 m cells are sub-pixel; closed ones a rolling shutter.
     shutter = step(lerp(0.55, lerp(0.55, 0.72, fPrim), known), xc_hash21(float2(signCell, 3.0)));
-    shop = lerp(lerp(float3(0.07, 0.065, 0.06), float3(0.15, 0.135, 0.11), known * fComm),
-                       float3(0.42, 0.42, 0.42), shutter);
+    float bfClosed = isBf * step(0.5, night);                   // breakfast shops close by early afternoon
+    shutter = lerp(shutter, bfClosed, special);
+    float fgv = fwh / (fh * 1.05);
+    float dGoods = xc_detail(fwu, 0.55);
+    float gq = xc_hash21(float2(floor(u / 0.55), floor(gv / 0.16) + seed * 3.0));
+    float3 goodsC = xc_pick4(gq, float3(0.52, 0.20, 0.15), float3(0.20, 0.30, 0.48), float3(0.58, 0.50, 0.30),
+                             float3(0.28, 0.42, 0.28)) * 0.6 + 0.12;
+    goodsC = lerp(float3(0.33, 0.28, 0.22), goodsC, dGoods);
+    float shelf = xc_line(frac(gv / 0.16), 0.20, fgv / 0.16) * step(0.10, gv) * (1.0 - step(0.76, gv)) * dGoods;
+    float3 inter = lerp(goodsC, float3(0.20, 0.19, 0.18), shelf);
+    inter = lerp(inter, float3(0.66, 0.64, 0.58), step(0.82, gv));                     // lit ceiling strip
+    inter = lerp(inter, float3(0.14, 0.13, 0.12), 1.0 - step(0.08, gv));              // floor / threshold
+    float3 rollC = float3(0.42, 0.42, 0.42) * (1.0 - xc_line(frac(gv / 0.035), 0.3, fgv / 0.035) * xc_detail(fwh, 0.07) * 0.25);
+    float openLit = lerp(step(0.25, signR), plit, plan);
+    // ordinary / retail: dim interior seen from the street (commercial front a little brighter)
+    shop = lerp(inter * lerp(0.45, 0.62, known * fComm), rollC, shutter);
+    float3 warmL = lerp(float3(1.0, 0.80, 0.55), float3(0.92, 0.96, 1.0), step(0.6, signR));
+    storeE = warmL * (inter * 0.9 + 0.12) * (1.0 - shutter) * openLit;
+    float3 storeDay = float3(0.0, 0.0, 0.0);
+    [branch] if (special * (1.0 - bfClosed) > 0.0)
+    {
+        // one category per unit: only its own grammar is evaluated
+        float3 sp;
+        float3 eC;
+        [branch] if (isCvs > 0.5)
+        {
+            // convenience store: bright cool interior, goods on shelves, lit ceiling, a few posters on the glass,
+            // dark aluminium mullions every 1.5 m, kick plate
+            float sMull = xc_line(frac(u / 1.5), 0.035, fwu / 1.5);
+            sp = lerp(float3(0.60, 0.62, 0.62), inter * 1.25 + 0.08, step(0.10, gv) * (1.0 - step(0.76, gv)));
+            sp = lerp(sp, float3(0.88, 0.89, 0.88), step(0.82, gv));
+            float pU = floor(u / 3.0);
+            float poster = xc_box(frac(u / 3.0), 0.12, 0.42, fwu / 3.0) * xc_box(gv, 0.52, 0.74, fgv)
+                         * step(0.55, xc_hash21(float2(pU, seed * 3.0)));
+            sp = lerp(sp, xc_pick4(xc_hash21(float2(pU, seed * 5.0)), float3(0.50, 0.10, 0.08), float3(0.08, 0.20, 0.45),
+                                   float3(0.62, 0.48, 0.10), float3(0.10, 0.38, 0.22)), poster);
+            sp = lerp(sp, float3(0.10, 0.11, 0.12), max(sMull * xc_detail(fwu, 0.4), 1.0 - step(0.05, gv)) * 0.9);
+            eC = float3(0.92, 0.97, 1.0) * 0.85;
+        }
+        else if (isBf > 0.5)
+        {
+            // breakfast: warm interior, stainless counter with the griddle edge, menu strip (atlas) above the counter
+            sp = lerp(float3(0.42, 0.36, 0.27), inter * 1.1, 0.35);
+            sp = lerp(sp, float3(0.52, 0.53, 0.54), 1.0 - step(0.32, gv));
+            sp = lerp(sp, float3(0.10, 0.10, 0.10), xc_box(gv, 0.30, 0.335, fgv));
+            sp = lerp(sp, stx.rgb, inMenu);
+            sp = lerp(sp, float3(0.30, 0.28, 0.25), step(0.86, gv));
+            eC = float3(0.0, 0.0, 0.0);
+        }
+        else if (isFood > 0.5)
+        {
+            // noodle / bento / local food: darker warm interior, stainless counter, white tile wall with red menu tags
+            sp = float3(0.30, 0.23, 0.16);
+            sp = lerp(sp, float3(0.58, 0.57, 0.53), step(0.55, gv) * (1.0 - step(0.92, gv)));
+            sp = lerp(sp, float3(0.45, 0.08, 0.06), xc_box(frac(u / 0.7), 0.1, 0.9, fwu / 0.7) * xc_box(gv, 0.68, 0.80, fgv));
+            sp = lerp(sp, float3(0.50, 0.51, 0.52), 1.0 - step(0.30, gv));
+            eC = float3(1.0, 0.75, 0.45) * 0.6;
+        }
+        else if (isBev > 0.5)
+        {
+            // beverage: bright counter, colourful menu panel band
+            sp = inter * 0.9;
+            sp = lerp(sp, xc_pick4(frac(floor(u / 0.9) * 0.37 + seed), float3(0.10, 0.45, 0.45), float3(0.70, 0.35, 0.10),
+                                   float3(0.20, 0.50, 0.20), float3(0.70, 0.30, 0.40)),
+                      xc_box(gv, 0.62, 0.85, fgv) * xc_box(frac(u / 0.9), 0.06, 0.94, fwu / 0.9));
+            sp = lerp(sp, float3(0.62, 0.62, 0.58), 1.0 - step(0.38, gv));
+            eC = float3(1.0, 0.90, 0.75) * 0.65;
+        }
+        else
+        {
+            // pharmacy / clinic: enclosed clean glazing, frosted lower film, aluminium mullions
+            sp = lerp(float3(0.55, 0.58, 0.58), inter * 1.1 + 0.1, 0.3);
+            sp = lerp(sp, float3(0.70, 0.72, 0.72), 1.0 - step(0.35, gv));
+            sp = lerp(sp, float3(0.30, 0.31, 0.32), xc_line(frac(u / 1.2), 0.04, fwu / 1.2) * xc_detail(fwu, 0.3));
+            eC = float3(0.88, 0.95, 1.0) * 0.6;
+        }
+        shop = sp;
+        storeE = eC * lerp(plit, 1.0, isCvs) * shop;
+        storeDay = shop * float3(0.92, 0.97, 1.0) * (0.30 * isCvs + 0.10 * isMed);       // lit interior by day
+    }
     shop = lerp(shop, wall * 0.9, (1.0 - xc_box(fu, 0.06, 0.94, fwb)) * dBay * known);
-    signFace = lerp(signCol * (1.0 - boardGrime), float3(0.12, 0.12, 0.12), boardEdge * 0.8 * known);
+    dayE = storeDay;
     }
 
     // --- compose base colour ------------------------------------------------------
@@ -696,10 +892,9 @@ void xc_wall(float u, float h, float H, float fh, float arch, float variant, flo
     float winEmis = lerp(farLit, lit * winLight * curtain, dBay * dFloor);
     e = lightCol * winEmis * lerp(0.24, 0.30, isOffice);
     // shopfronts and signs carry the street at night
-    float shopLit = arcade * (1.0 - shutter) * step(0.25, signR);
-    e += lerp(float3(1.0, 0.78, 0.5), float3(0.9, 0.95, 1.0), step(0.6, signR)) * shopLit * 0.38;
-    float signLit = signBand * hasSign * step(0.2, signR);
-    e += signFace * signLit * 1.3;
+    // shopfronts and shop boards (v0E storefront plan): per-category glow from the street band; many stay dark
+    e += storeE * arcade;
+    e += signE * signBand * hasSign;
     // podium LED / logo panels (department stores)
     float led = isPodium * step(0.7, xc_hash21(float2(floor(u / 18.0), seed * 3.0))) * xc_box(fv, 0.15, 0.9, fwf)
               * step(fh * 1.5, h) * lerp(1.0, fStreet, known);           // street-facing walls only
@@ -730,7 +925,7 @@ void xc_wall(float u, float h, float H, float fh, float arch, float variant, flo
                 + float3(1.0, 0.82, 0.6) * 0.05 * (1.0 - dBay);
     e = lerp(e, civE + stone * 0.10, isCivic);            // warm floodlit stone at night
 
-    emis = e * night;
+    emis = e * night + dayE * arcade * (1.0 - night);
     base = c;
 }
 
@@ -877,13 +1072,19 @@ void xc_taipei101(float3 wpos, float2 uv0, float3 vc4rgb, float glassFlag, float
 // vc = COLOR_0 normalised. N = world normal (Z up). fw* = fwidth of coords.
 // ----------------------------------------------------------------------------
 void xc_city(float3 wpos, float3 N, float2 uv0, float2 uv1, float4 vc,
-             float night, float litFrac,
+             float night, float litFrac, Texture2D shopTx, SamplerState shopS, Texture2D planTx,
              out float3 base, out float rough, out float metal, out float spec, out float3 emis,
              out float3 nrm)
 {
     float fwu = fwidth(uv0.x);
     float fwh = fwidth(uv0.y);
     float fwp = max(fwidth(wpos.x), fwidth(wpos.y));
+    // wall frame for the storefront layer (screen derivatives must be taken outside the wall / roof branches):
+    // dUH = d(u, h) / d(screen x, y); tW = horizontal world direction of +u along this wall; nH = outward normal
+    float4 dUH = float4(ddx(uv0.x), ddy(uv0.x), ddx(uv0.y), ddy(uv0.y));
+    float2 nH = normalize(N.xy + float2(1e-5, 0.0));
+    float2 tH = float2(-nH.y, nH.x);
+    float2 tW = tH * ((dot(ddx(wpos.xy), tH) * dUH.x + dot(ddy(wpos.xy), tH) * dUH.y) < 0.0 ? -1.0 : 1.0);
     float code = floor(vc.x * 255.0 + 0.5);
     float arch = floor(code / 16.0);
     float variant = code - arch * 16.0;
@@ -910,7 +1111,7 @@ void xc_city(float3 wpos, float3 N, float2 uv0, float2 uv1, float4 vc,
         [branch] if (isRoof < 1.0)
         {
             xc_wall(uv0.x, uv0.y, uv1.x, uv1.y, arch, variant, seed, weather, flags, wpos,
-                    night, litFrac, fwu, fwh, bw, rw, mw, sw, ew);
+                    night, litFrac, fwu, fwh, dUH, tW, nH, shopTx, shopS, planTx, bw, rw, mw, sw, ew);
         }
         [branch] if (isRoof > 0.0)
         {

@@ -25,13 +25,17 @@ TYPES = {1: "float", 2: "float2", 3: "float3", 4: "float4"}
 def wrapper(material: str) -> str:
     inputs, _, _ = MATERIALS[material]
     params = ["FMaterialPixelParameters Parameters"]
-    params += ["%s %s" % (TYPES[c], n) for n, c in inputs]
+    # texture-object inputs (components 0) arrive as <name> + <name>Sampler, as Unreal emits them
+    params += ["Texture2D %s, SamplerState %sSampler" % (n, n) if c == 0 else "%s %s" % (TYPES[c], n)
+               for n, c in inputs]
     params += ["inout %s %s" % (TYPES[c], n) for n, c in SURFACE_OUTPUTS]
-    args = ["Parameters"] + ["In%d.%s" % (i, "xyzw"[:c]) if c > 1 else "In%d.x" % i
-                             for i, (n, c) in enumerate(inputs)]
-    decl_in = "".join("float4 In%d : TEXCOORD%d, " % (i, i) for i in range(len(inputs)))
+    args = ["Parameters"]
+    for i, (n, c) in enumerate(inputs):
+        args.append("G_%s, G_%sSampler" % (n, n) if c == 0 else "In%d.%s" % (i, "xyzw"[:c]) if c > 1 else "In%d.x" % i)
+    decl_in = "".join("float4 In%d : TEXCOORD%d, " % (i, i) for i, (n, c) in enumerate(inputs) if c)
+    resources = "".join("Texture2D G_%s; SamplerState G_%sSampler;\n" % (n, n) for n, c in inputs if c == 0)
     return (
-        "struct FMaterialPixelParameters { float4 SvPosition; };\n"
+        "struct FMaterialPixelParameters { float4 SvPosition; };\n" + resources +
         "float3 CustomExpression0(" + ", ".join(params) + ")\n{\n" + custom_code(material) + "}\n"
         "float4 main(" + decl_in + "float4 Pos : SV_Position) : SV_Target\n{\n"
         "  FMaterialPixelParameters Parameters; Parameters.SvPosition = Pos;\n"

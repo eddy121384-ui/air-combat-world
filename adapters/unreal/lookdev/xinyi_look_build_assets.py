@@ -167,7 +167,16 @@ def build_mpc():
     return mpc
 
 
-def build_city_material(mpc, name, hero):
+def texture_object(mat, tex, x, y, sampler):
+    t = expr(mat, unreal.MaterialExpressionTextureObject, x, y)
+    t.set_editor_property("texture", tex)
+    t.set_editor_property("sampler_type", sampler)
+    return t
+
+
+def build_city_material(mpc, name, hero, shop_atlas, plan):
+    """Buildings. v0E: the storefront atlas (colour, sampled with explicit gradients inside the street-band branch)
+    and the storefront plan (L8 data, Texture.Load) are texture-object inputs of the Custom node."""
     mat, path = fresh_material(name)
     wp = world_pos_m(mat, -1200, -300)
     n = expr(mat, unreal.MaterialExpressionVertexNormalWS, -1200, -150)
@@ -175,9 +184,11 @@ def build_city_material(mpc, name, hero):
     night = mpc_param(mat, mpc, "Night", -1200, 360)
     lit = mpc_param(mat, mpc, "LitFrac", -1200, 480)
     es = mpc_param(mat, mpc, "EmissiveScale", -600, 500)
+    stx = texture_object(mat, shop_atlas, -1200, 600, unreal.MaterialSamplerType.SAMPLERTYPE_COLOR)
+    ptx = texture_object(mat, plan, -1200, 720, unreal.MaterialSamplerType.SAMPLERTYPE_LINEAR_GRAYSCALE)
     node = custom(mat, -700, 0, custom_code(name), [n for n, _ in MATERIALS[name][0]], SURFACE_OUTPUTS, name)
     wire(((wp, "WP"), (n, "N"), (uv0, "UV0"), (uv1, "UV1"), (uv2, "UV2"),
-          (night, "Night"), (lit, "LitFrac")), node)
+          (night, "Night"), (lit, "LitFrac"), (stx, "ShopTX"), (ptx, "PlanTX")), node)
     finish_surface(mat, node, es, -300, 300)
     save_material(mat, path)
     return mat
@@ -422,6 +433,31 @@ def build_street_material(mpc, atlas):
     return mat
 
 
+def import_plan_texture(png, name):
+    """Categorical L8 data read with Texture.Load: uncompressed G8, linear, no mips, nearest, never streamed."""
+    task = unreal.AssetImportTask()
+    task.set_editor_property("filename", str(png))
+    task.set_editor_property("destination_path", TEX_DIR)
+    task.set_editor_property("destination_name", name)
+    task.set_editor_property("automated", True)
+    task.set_editor_property("replace_existing", True)
+    task.set_editor_property("save", False)
+    tools.import_asset_tasks([task])
+    path = TEX_DIR + "/" + name
+    tex = lib.load_asset(path)
+    if tex is None:
+        raise RuntimeError("texture import failed: %s" % png)
+    for prop, val in (("srgb", False), ("compression_settings", unreal.TextureCompressionSettings.TC_GRAYSCALE),
+                      ("mip_gen_settings", unreal.TextureMipGenSettings.TMGS_NO_MIPMAPS),
+                      ("filter", unreal.TextureFilter.TF_NEAREST), ("never_stream", True),
+                      ("address_x", unreal.TextureAddress.TA_CLAMP), ("address_y", unreal.TextureAddress.TA_CLAMP)):
+        tex.set_editor_property(prop, val)
+    if not lib.save_asset(path):
+        raise RuntimeError("failed to save %s" % path)
+    created[path] = "Texture2D"
+    return tex
+
+
 def import_color_texture(png, name):
     """sRGB colour texture with an alpha mask (BC7), box-filtered mips (atlas cells are power-of-two aligned)."""
     task = unreal.AssetImportTask()
@@ -557,8 +593,11 @@ def main():
     mpc = build_mpc()
     tex = import_texture(LOOK_OUT / "ground/xinyi_ground_2048.png", "T_XinyiGround")
     lamp_tex = import_texture(LOOK_OUT / "ground/xinyi_ground_light_1024.png", "T_XinyiGroundLight", grayscale=True)
-    m_city = build_city_material(mpc, "M_XinyiCity", hero=False)
-    m_hero = build_city_material(mpc, "M_Taipei101", hero=True)
+    # Taipei Street Reality v0E: storefront atlas + plan (built by build_shop_atlas.py / build_storefronts.py)
+    shop_atlas = import_color_texture(LOOK_OUT / "street/shop_atlas.png", "T_XinyiShopAtlas")
+    plan = import_plan_texture(LOOK_OUT / "street/storefront_plan_2048.png", "T_XinyiStorefrontPlan")
+    m_city = build_city_material(mpc, "M_XinyiCity", hero=False, shop_atlas=shop_atlas, plan=plan)
+    m_hero = build_city_material(mpc, "M_Taipei101", hero=True, shop_atlas=shop_atlas, plan=plan)
     far_rep_path = LOOK_OUT / "farcity/far_city.report.json"
     far_rep = read_json(far_rep_path) if far_rep_path.is_file() else None
     campus_tex = import_texture(LOOK_OUT / "ground" / ground["campus"]["texture"], "T_XinyiCampus", box_mips=True)

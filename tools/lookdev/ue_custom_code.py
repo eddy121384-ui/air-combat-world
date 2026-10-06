@@ -12,16 +12,20 @@ SHADER = Path(__file__).resolve().parent / "shaders" / "xinyi_city.hlsl"
 
 SURFACE_OUTPUTS = [("Rough", 1), ("Metal", 1), ("Spec", 1), ("Emis", 3), ("NrmWS", 3)]
 
-# name -> (inputs [(name, components)], call, defines)
+# name -> (inputs [(name, components; 0 = texture object -> <name> + <name>Sampler)], call, defines)
 MATERIALS = {
     "M_XinyiCity": (
-        [("WP", 3), ("N", 3), ("UV0", 2), ("UV1", 2), ("UV2", 2), ("Night", 1), ("LitFrac", 1)],
-        "xl.xc_city(WP, N, UV0, UV1, xl.xc_unpack(UV2), Night, LitFrac, b, r, m, s, e, n);",
+        [("WP", 3), ("N", 3), ("UV0", 2), ("UV1", 2), ("UV2", 2), ("Night", 1), ("LitFrac", 1),
+         ("ShopTX", 0), ("PlanTX", 0)],
+        "xl.xc_city(WP, N, UV0, UV1, xl.xc_unpack(UV2), Night, LitFrac, ShopTX, ShopTXSampler, PlanTX, "
+        "b, r, m, s, e, n);",
         "#define XC_NO_HERO 1\n",
     ),
     "M_Taipei101": (
-        [("WP", 3), ("N", 3), ("UV0", 2), ("UV1", 2), ("UV2", 2), ("Night", 1), ("LitFrac", 1)],
-        "xl.xc_city(WP, N, UV0, UV1, xl.xc_unpack(UV2), Night, LitFrac, b, r, m, s, e, n);",
+        [("WP", 3), ("N", 3), ("UV0", 2), ("UV1", 2), ("UV2", 2), ("Night", 1), ("LitFrac", 1),
+         ("ShopTX", 0), ("PlanTX", 0)],
+        "xl.xc_city(WP, N, UV0, UV1, xl.xc_unpack(UV2), Night, LitFrac, ShopTX, ShopTXSampler, PlanTX, "
+        "b, r, m, s, e, n);",
         "",
     ),
     "M_XinyiGround": (
