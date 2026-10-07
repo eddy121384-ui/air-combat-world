@@ -60,15 +60,17 @@ TYPE_ID = {"shed": 1, "tank": 2, "solar": 3, "antenna": 4, "ac": 5, "cooling": 6
            "avlight": 9, "addition": 11, "barrel": 12, "leanto": 13, "bulkhead": 14}
 ID_TYPE = {v: k for k, v in TYPE_ID.items()}
 VARIANTS = 256
-# Taipei sheet-metal palette (index -> name; colours live in xinyi_city.hlsl xc_sheet16). Weights follow
-# aerial photos of old Taipei fabric: blue-grey and galvanised dominate, then oxidised red, faded / teal
-# green and off-white; saturated colours are rare. Planned-core roofs skew neutral.
+# Taipei sheet-metal palette (index -> name; colours live in xinyi_city.hlsl xc_sheet16). Roofscape v2 step 0:
+# weights follow the 12-district orthophoto sample (docs/taipei-urban-visual-language-research-v0.md s17,
+# n = 348): pale green-grey ~37 %, white / neutral grey ~38 %, muted maroon / faded red ~20 %, blue a trace
+# (1-4 %). Planned-core roofs skew neutral. Slot families: blue 0-2, red 3-5, green-grey 6-8 + 14,
+# neutral 9-13, rust 15. Keep xc_sheet_paint_index (shader) on the OLD weights.
 SHEET_NAMES = ["bluegrey", "fadedblue", "lightbluegrey", "brickred", "rustred", "redbrown", "fadedgreen",
                "tealgreen", "greengrey", "galvanised", "galvdark", "offwhite", "beige", "cream", "fadedteal",
                "rustgalv"]
-SHEET_W_OLD = [8, 10, 7, 7, 7, 4, 6, 6, 3, 8, 4, 8, 4, 4, 5, 3]
-SHEET_W_CORE = [8, 4, 8, 2, 1, 1, 3, 2, 4, 16, 8, 12, 7, 8, 3, 1]
-WALL_W = [4, 2, 4, 1, 1, 1, 2, 1, 2, 12, 6, 16, 10, 12, 2, 2]       # walls: mostly light / neutral
+SHEET_W_OLD = [1, 1, 1, 7, 7, 6, 13, 3, 16, 12, 6, 13, 4, 3, 5, 2]
+SHEET_W_CORE = [1, 0, 1, 4, 2, 3, 8, 2, 14, 20, 8, 20, 6, 5, 6, 0]
+WALL_W = [1, 0, 1, 1, 1, 1, 3, 1, 3, 12, 6, 16, 10, 12, 3, 2]       # walls: mostly light / neutral
 ARCH_LOW, ARCH_WALKUP, ARCH_HUAXIA, ARCH_RESTOWER, ARCH_OFFICE, ARCH_PODIUM, ARCH_CIVIC, ARCH_SCHOOL = range(8)
 FLAG_ROOFTOP = 8
 # School roofs (School & Campus Identity v0A) emit only these prop types, into the ordinary HISMs

@@ -144,35 +144,38 @@ float3 xc_pick6(float r, float3 a, float3 b, float3 c, float3 d, float3 e, float
 }
 
 // Taipei rooftop sheet-metal palette (index 0..15, tools/lookdev/build_rooftops.py SHEET_NAMES; the
-// builder draws indices with district weights). Sun-faded, oxidised, matte: blue-greys, oxidised /
-// brick reds, faded and teal greens, galvanised, off-white / beige. No saturated toy colours.
-// Painted whole-roof sheet colour index (no instance data): uniform hash with half of the warm picks
-// moved to blue / galvanised, so painted roofs (old roofs, surveyed rooftop records, far city) follow
-// the observed mix instead of a red carpet.
+// builder draws indices with district weights). Sun-faded, oxidised, matte: pale desaturated green-greys,
+// off-white / neutral greys, muted maroon / faded reds; blue-greys are a rare accent (Roofscape v2 step 0:
+// blue was ~25 % of the mix, the orthophoto sample says 1-4 %). No saturated toy colours.
+// Painted whole-roof sheet colour index (no instance data): r is mapped through the cumulative SHEET_W_OLD
+// weights (build_rooftops.py), so painted roofs (old roofs, surveyed rooftop records, far city) follow the
+// same mix as the instanced rooms. r2 is unused (kept for the call sites).
 float xc_sheet_paint_index(float r, float r2)
 {
-    float i = floor(r * 16.0);
-    float warm = step(2.5, i) * (1.0 - step(5.5, i)) + step(14.5, i);
-    return lerp(i, lerp(1.0, 9.0, step(0.5, frac(r2 * 3.1))), warm * step(0.5, r2));
+    // cumulative SHEET_W_OLD / 100 for slots 0..14: [1 2 3 10 17 23 36 39 55 67 73 86 90 93 98]
+    float i = step(0.01, r) + step(0.02, r) + step(0.03, r) + step(0.10, r) + step(0.17, r) + step(0.23, r)
+            + step(0.36, r) + step(0.39, r) + step(0.55, r) + step(0.67, r) + step(0.73, r) + step(0.86, r)
+            + step(0.90, r) + step(0.93, r) + step(0.98, r);
+    return i;
 }
 
 float3 xc_sheet16(float i)
 {
-    float3 c = float3(0.18, 0.28, 0.40);                                  // 0 blue-grey
-    c = lerp(c, float3(0.13, 0.27, 0.48), step(0.5, i));                  // 1 faded blue (the signature 鐵皮 blue)
-    c = lerp(c, float3(0.30, 0.42, 0.54), step(1.5, i));                  // 2 light blue
-    c = lerp(c, float3(0.31, 0.105, 0.065), step(2.5, i));                // 3 brick red
-    c = lerp(c, float3(0.36, 0.155, 0.085), step(3.5, i));                // 4 oxidised rust red
-    c = lerp(c, float3(0.27, 0.13, 0.085), step(4.5, i));                 // 5 red-brown
-    c = lerp(c, float3(0.18, 0.34, 0.20), step(5.5, i));                  // 6 faded green
-    c = lerp(c, float3(0.13, 0.31, 0.29), step(6.5, i));                  // 7 teal green
-    c = lerp(c, float3(0.26, 0.36, 0.29), step(7.5, i));                  // 8 green-grey
+    float3 c = float3(0.26, 0.31, 0.37);                                  // 0 slate blue-grey (rare)
+    c = lerp(c, float3(0.20, 0.28, 0.40), step(0.5, i));                  // 1 faded blue (rare accent, subdued)
+    c = lerp(c, float3(0.38, 0.45, 0.52), step(1.5, i));                  // 2 light blue-grey
+    c = lerp(c, float3(0.30, 0.13, 0.10), step(2.5, i));                   // 3 muted brick / maroon
+    c = lerp(c, float3(0.34, 0.17, 0.12), step(3.5, i));                   // 4 oxidised faded red
+    c = lerp(c, float3(0.26, 0.14, 0.11), step(4.5, i));                   // 5 red-brown
+    c = lerp(c, float3(0.27, 0.37, 0.28), step(5.5, i));                  // 6 pale sage green
+    c = lerp(c, float3(0.22, 0.33, 0.30), step(6.5, i));                  // 7 grey-teal (desaturated)
+    c = lerp(c, float3(0.36, 0.44, 0.37), step(7.5, i));                  // 8 pale green-grey
     c = lerp(c, float3(0.46, 0.47, 0.47), step(8.5, i));                  // 9 galvanised
     c = lerp(c, float3(0.32, 0.33, 0.33), step(9.5, i));                  // 10 weathered galvanised
     c = lerp(c, float3(0.62, 0.62, 0.59), step(10.5, i));                 // 11 off-white
     c = lerp(c, float3(0.55, 0.49, 0.38), step(11.5, i));                 // 12 beige
     c = lerp(c, float3(0.66, 0.64, 0.58), step(12.5, i));                 // 13 cream
-    c = lerp(c, float3(0.20, 0.40, 0.42), step(13.5, i));                 // 14 faded teal
+    c = lerp(c, float3(0.30, 0.41, 0.39), step(13.5, i));                 // 14 pale grey-teal
     return lerp(c, float3(0.38, 0.28, 0.20), step(14.5, i));              // 15 rusting galvanised
 }
 
