@@ -18,6 +18,14 @@ Schools (ARCH_SCHOOL, School & Campus Identity v0A) get tanks, an occasional sta
 heater and no additions; every archetype is routed explicitly (unknown ones fail closed).
 Archetype + planned-core flag + weathering (age proxy) + roof size drive the rules.
 
+Roofscape v2 step 1 (lot-filling covers): old low-rise fabric (low / walk-up / huaxia) no longer gets 1-3
+rooms in a row. Each roof part is cut into lot cells in its own roof frame (rows of narrow frontages across the
+long axis on deep parts, back-to-back rows on very deep ones, one long lot on shallow ones; a geometric
+heuristic, not cadastral), and each lot is either a SHEET COVER filling the lot's inscribed rectangle (reused
+addition / barrel / shed / leanto meshes, ridge along the lot's long axis, height step and colour change vs the
+previous lot) or stays FLAT CONCRETE with the existing bulkhead / tank / AC clutter. Residential towers keep the
+v0 room path unchanged.
+
 Outputs (unreal/Saved/XinyiLook/rooftops/):
   props_<type>.glb          one small mesh per prop type (TEXCOORD_2 packed data:
                             R = prop type id, G = part id)
@@ -279,16 +287,111 @@ def pick(rng, w):
     return int(rng.choice(len(w), p=w / w.sum()))
 
 
-# 頂樓加蓋 rules by archetype: base probability (x0.45 in the planned core, x0.7 .. 1.3 with age), share
-# of the roof's long axis the rooms cover, room typology weights (gable addition, barrel, flat shed,
-# open lean-to)
+# 頂樓加蓋 rooms on residential towers (v0 path): base probability (x0.45 in the planned core, x0.7 .. 1.3
+# with age), share of the roof's long axis the rooms cover, room typology weights (gable addition, barrel,
+# flat shed, open lean-to)
 ADD_RULES = {
-    ARCH_WALKUP: {"p": 0.80, "cover": (0.55, 0.95), "w": [0.42, 0.24, 0.22, 0.12]},
-    ARCH_LOW: {"p": 0.42, "cover": (0.40, 0.85), "w": [0.30, 0.15, 0.30, 0.25]},
-    ARCH_HUAXIA: {"p": 0.42, "cover": (0.30, 0.65), "w": [0.40, 0.18, 0.30, 0.12]},
     ARCH_RESTOWER: {"p": 0.12, "cover": (0.15, 0.35), "w": [0.30, 0.05, 0.55, 0.10]},
 }
 SEG_TYPES = ["addition", "barrel", "shed", "leanto"]
+
+# Lot-filling sheet covers on old low-rise fabric (roofscape v2 step 1): per-lot cover probability (x0.45 in
+# the planned core, x0.7 .. 1.3 with age, x0.6 .. 1.25 per roof part), lot frontage range (m) on rows of lots,
+# cover typology weights over SEG_TYPES. Orthophoto target: ~2/3 of old low-rise roof area under sheet covers,
+# ~1/3 flat concrete (docs/taipei-urban-visual-language-research-v0.md s17).
+LOT_RULES = {
+    ARCH_WALKUP: {"p": 0.80, "lot": (5.0, 7.5), "w": [0.50, 0.17, 0.20, 0.13]},
+    ARCH_LOW: {"p": 0.62, "lot": (5.0, 8.0), "w": [0.38, 0.12, 0.25, 0.25]},
+    ARCH_HUAXIA: {"p": 0.48, "lot": (6.5, 10.0), "w": [0.45, 0.15, 0.30, 0.10]},
+}
+COVER_SETBACK = 0.35   # covers sit almost to the roof edge (no parapet geometry); clutter keeps the 0.8 m inset
+LOT_DEEP = 7.5         # a roof at least this deep (short axis) is a row of lots cut across its long axis
+ROW_SPLIT = 22.0       # deeper than this: back-to-back lot rows, ~13 m each
+COVER_MIN = 3.0        # smallest cover side (m); thinner strips read as slats from the air
+# eaves extent of each unit mesh along its ridge (x) / across it (y): covers are scaled so the eaves end at 98 %
+# of the lot rectangle, leaving a thin seam between neighbouring lots
+EAVE = {"addition": (1.12, 1.12), "barrel": (1.08, 1.10), "shed": (1.04, 1.04), "leanto": (1.04, 1.04)}
+
+
+def _cuts(a, b, n, rng):
+    """[a, b] cut into n parts with deterministic jittered widths (about +-25 %)."""
+    if n <= 1:
+        return [a, b]
+    w = rng.dirichlet([14.0] * n) * (b - a)
+    return [a] + [a + float(s) for s in np.cumsum(w)[:-1]] + [b]
+
+
+def lot_cells(R, rule, rng):
+    """Lot cells of the cover-usable roof R (roof frame, x = the part's long axis), in cutting order.
+    Deep parts are rows of narrow lots cut across the long axis at the archetype's frontage (very deep ones hold
+    back-to-back rows); shallow parts are one long lot, split only when very long."""
+    minx, miny, maxx, maxy = R.bounds
+    Lr, Wr = maxx - minx, maxy - miny
+    nrow = 1 if Wr <= ROW_SPLIT else int(round(Wr / 13.0))
+    vc = _cuts(miny, maxy, nrow, rng)
+    cells = []
+    for j in range(nrow):
+        front = rng.uniform(*rule["lot"]) if vc[j + 1] - vc[j] >= LOT_DEEP else rng.uniform(8.0, 12.0)
+        n = max(1, int(round(Lr / front)))
+        uc = _cuts(minx, maxx, n, rng)
+        for i in range(n):
+            c = R.intersection(box(uc[i], vc[j], uc[i + 1], vc[j + 1]))
+            pieces = [g for g in getattr(c, "geoms", [c]) if g.geom_type == "Polygon" and g.area >= 7.0]
+            if pieces:
+                cells.append(max(pieces, key=lambda g: g.area))
+    return cells
+
+
+def _rect_ok(r, min_area):
+    return r is not None and min(r[1] - r[0], r[3] - r[2]) >= COVER_MIN and (r[1] - r[0]) * (r[3] - r[2]) >= min_area
+
+
+def lot_covers(R, rule, p_lot, sheet_w, rng, h_prev):
+    """Sheet covers for one roof piece R (roof frame). Each lot cell is covered with probability p_lot by the
+    cell's largest inscribed rectangle (+ one lower annex rectangle when that leaves a large remainder).
+    Returns ([(t, (u0, u1, v0, v1), ridge_along_u, h, rc, wc)], lots, covered lots, h_prev)."""
+    out, prev_c, n_lots, n_cov = [], -1, 0, 0
+    for cell in lot_cells(R, rule, rng):
+        n_lots += 1
+        if rng.random() >= p_lot:
+            prev_c = -1                    # a flat lot breaks the colour run
+            continue
+        r1 = max_rect(cell, 0.0, (0.0, 0.0))
+        if not _rect_ok(r1, 7.0):
+            continue
+        rects = [r1]
+        if (r1[1] - r1[0]) * (r1[3] - r1[2]) < 0.72 * cell.area:
+            rem = cell.difference(box(r1[0], r1[2], r1[1], r1[3]).buffer(0.05, join_style="mitre"))
+            rem = [g for g in getattr(rem, "geoms", [rem]) if g.geom_type == "Polygon"]
+            if rem:
+                r2 = max_rect(max(rem, key=lambda g: g.area), 0.0, (0.0, 0.0))
+                if _rect_ok(r2, 9.0):
+                    rects.append(r2)
+        n_cov += 1
+        t = SEG_TYPES[pick(rng, rule["w"])]
+        du, dv = r1[1] - r1[0], r1[3] - r1[2]
+        if t == "leanto" and du * dv > 80.0:
+            t = "addition"             # big open awnings read as a floating slab
+        # height: a 0.2 .. 0.5 m step against the previous lot, so equal neighbours never merge into one slab
+        s = rng.uniform(0.2, 0.5) * (1.0 if rng.random() < 0.5 else -1.0)
+        h = h_prev + s if 2.3 <= h_prev + s <= 3.4 else h_prev - s
+        h_prev = h
+        if t == "leanto":
+            h = rng.uniform(2.2, 2.6)
+        rc = pick(rng, sheet_w)
+        if rc == prev_c and rng.random() < 0.7:
+            for _ in range(4):
+                rc = pick(rng, sheet_w)
+                if rc != prev_c:
+                    break
+        prev_c = rc
+        wc = rc if (t == "leanto" or rng.random() < 0.55) else pick(rng, WALL_W)
+        for k, r in enumerate(rects):
+            a, b = r[1] - r[0], r[3] - r[2]
+            ridge_u = a >= b if max(a, b) >= 1.2 * min(a, b) else rng.random() < 0.5
+            out.append((t if k == 0 else ("shed" if t == "leanto" else t), r, ridge_u,
+                        h if k == 0 else max(2.2, h - rng.uniform(0.2, 0.5)), rc, wc))
+    return out, n_lots, n_cov, h_prev
 
 
 def main():
@@ -302,7 +405,8 @@ def main():
             look[r["building_id"]] = r
     wm = build_worldmodel(SOURCE, CITY, source_crs="EPSG:3826")
     inst = {t: [] for t in TYPES}
-    stats = {"old_roof_parts": 0, "roof_parts_with_additions": 0, "additions_by_arch": {}, "core_additions": 0}
+    stats = {"old_roof_parts": 0, "roof_parts_with_additions": 0, "additions_by_arch": {}, "core_additions": 0,
+             "lots": {}}
     sheet_use = [0] * 16
 
     school_roof = {"on": False}
@@ -401,10 +505,55 @@ def main():
                 if arch in (ARCH_LOW, ARCH_WALKUP, ARCH_HUAXIA, ARCH_RESTOWER):
                     if arch != ARCH_RESTOWER:
                         stats["old_roof_parts"] += 1
-                    rule = ADD_RULES[arch]
-                    p_add = rule["p"] * (0.45 if core else 1.0) * (0.7 + 0.6 * age)
                     covered = 0.0
-                    if area > 12 and rng.random() < p_add:
+                    if arch != ARCH_RESTOWER:
+                        # lot-filling sheet covers (roofscape v2 step 1); the rest of the roof stays flat concrete
+                        rule = LOT_RULES[arch]
+                        p_lot = min(0.95, rule["p"] * (0.45 if core else 1.0) * (0.7 + 0.6 * age) * rng.uniform(0.6, 1.25))
+                        cin = poly.buffer(-COVER_SETBACK, join_style="mitre", mitre_limit=2.0)
+                        ca, sa = math.cos(math.radians(ang)), math.sin(math.radians(ang))
+                        h_prev = rng.uniform(2.5, 3.0)
+                        key = ["low", "walkup", "huaxia"][arch]
+                        ls = stats["lots"].setdefault(key + ("_core" if core else ""), {
+                            "parts": 0, "lots": 0, "covered_lots": 0, "covers": 0, "roof_m2": 0.0, "cover_m2": 0.0})
+                        ls["parts"] += 1
+                        ls["roof_m2"] += poly.area
+                        for piece in [g for g in getattr(cin, "geoms", [cin]) if g.geom_type == "Polygon" and g.area >= 7.0]:
+                            R = affinity.rotate(piece, -ang, origin=tuple(mc))
+                            covers, nl, nc, h_prev = lot_covers(R, rule, p_lot, sheet_w, rng, h_prev)
+                            ls["lots"] += nl
+                            ls["covered_lots"] += nc
+                            for t, (u0, u1, v0, v1), ridge_u, h, rc, wc in covers:
+                                fu, fv = (u0 + u1) / 2, (v0 + v1) / 2
+                                ccx = mc[0] + (fu - mc[0]) * ca - (fv - mc[1]) * sa
+                                ccy = mc[1] + (fu - mc[0]) * sa + (fv - mc[1]) * ca
+                                a_, b_, yaw = (u1 - u0, v1 - v0, ang) if ridge_u else (v1 - v0, u1 - u0, ang + 90.0)
+                                ex, ey = EAVE[t]
+                                sheet_use[rc] += 1
+                                add(t, ccx, ccy, top, yaw, a_ * 0.98 / ex, b_ * 0.98 / ey, h, v=rc * 16 + wc)
+                                blocks.append(affinity.rotate(box(ccx - a_ / 2, ccy - b_ / 2, ccx + a_ / 2, ccy + b_ / 2),
+                                                              yaw, origin=(ccx, ccy)))
+                                covered += a_ * b_
+                                ls["covers"] += 1
+                                ls["cover_m2"] += a_ * b_
+                                ry = math.radians(yaw)
+                                # tanks on the cover's ridge end (the stand pokes through the low-pitch sheet)
+                                if t != "leanto" and a_ >= 4.0 and rng.random() < (0.30 if arch == ARCH_WALKUP else 0.22):
+                                    d = (a_ / 2 - 1.0) * (1.0 if rng.random() < 0.5 else -1.0)
+                                    tank_cluster(1 + int(rng.random() < 0.35), top + h, ccx + d * math.cos(ry),
+                                                 ccy + d * math.sin(ry), 0.1)
+                                # an occasional second, smaller storey (mixed roof heights)
+                                if arch == ARCH_WALKUP and t in ("addition", "shed") and a_ > 5 and rng.random() < 0.06:
+                                    rc2 = rc if rng.random() < 0.5 else pick(rng, sheet_w)
+                                    add("shed", ccx, ccy, top + h + 0.1, yaw, a_ * rng.uniform(0.35, 0.55),
+                                        b_ * rng.uniform(0.5, 0.8), rng.uniform(2.2, 2.6), v=rc2 * 16 + wc)
+                        if covered > 0:
+                            stats["roof_parts_with_additions"] += 1
+                            stats["additions_by_arch"][key] = stats["additions_by_arch"].get(key, 0) + 1
+                            stats["core_additions"] += int(core)
+                    rule = ADD_RULES.get(arch)
+                    p_add = rule["p"] * (0.45 if core else 1.0) * (0.7 + 0.6 * age) if rule else 0.0
+                    if arch == ARCH_RESTOWER and area > 12 and rng.random() < p_add:
                         # 頂樓加蓋: 1-3 rooms in a row inside the roof's largest inscribed rectangle (roof frame:
                         # x along the long axis), starting at one end; fits irregular footprints by construction
                         mr = max_rect(inner, ang, mc)
