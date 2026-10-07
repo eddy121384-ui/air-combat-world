@@ -1,4 +1,4 @@
-"""Fetch + compact Taipei's historical use-permit summaries (臺北市歷年使用執照摘要) for era metadata.
+"""Taipei adapter: fetch + compact the historical use-permit summaries (臺北市歷年使用執照摘要).
 
 Source: Taipei Building Management and Engineering Office, data.gov.tw dataset 128203 (data.taipei resource
 0f3f9675-...), XML ~68 MB, permits issued ROC 90-114 (2001-2025).
@@ -10,7 +10,7 @@ The raw XML is NOT committed. This script keeps only what era metadata needs, fo
   data/lookdev_cache/taipei_use_permits_new_build.meta.json provenance: URL, licence, retrieval time, raw sha256
 
 Normal builds read only the compact cache (no network). Run:
-  python tools/building_era/taipei_use_permits.py [--force] [--xml PATH]
+  python tools/building_era/adapters/taipei/use_permits.py [--force] [--xml PATH]
 `--xml` re-derives the cache from a previously downloaded file (the raw sha256 is recorded either way).
 """
 from __future__ import annotations
@@ -26,7 +26,7 @@ import urllib.request
 import xml.etree.ElementTree as ET
 from pathlib import Path
 
-REPO = Path(__file__).resolve().parents[2]
+REPO = Path(__file__).resolve().parents[4]
 CACHE = REPO / "data/lookdev_cache"
 OUT = CACHE / "taipei_use_permits_new_build.json.gz"
 META = CACHE / "taipei_use_permits_new_build.meta.json"

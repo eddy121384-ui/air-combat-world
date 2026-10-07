@@ -14,9 +14,11 @@ from shapely.geometry import box, mapping
 REPO = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO / "tools/building_era"))
 
-import build_era_metadata as bem  # noqa: E402
 import era_schema as es  # noqa: E402
-import taipei_use_permits as tup  # noqa: E402
+import pipeline  # noqa: E402
+from adapters import parcel_permit  # noqa: E402
+from adapters.taipei import build_xinyi as bem  # noqa: E402  (Taipei regional adapter; tests only)
+from adapters.taipei import use_permits as tup  # noqa: E402
 
 
 class TestBuckets(unittest.TestCase):
@@ -166,6 +168,13 @@ class TestPermitParsing(unittest.TestCase):
         self.assertEqual((out[0]["year"], out[0]["height_m"], out[0]["parcels"]), (2002, 18.0, ["寶清段四小段|05470000"]))
 
 
+def _join(fps, permits, parcels):
+    """Generic pipeline + generic parcel-permit adapter -> (records, adapter stats)."""
+    ad = parcel_permit.ParcelPermitAdapter("t", permits, parcels)
+    recs, st = pipeline.build_records(fps, [ad])
+    return recs, st["adapters"]["t"]
+
+
 def _fp(geom, h):
     return {"geom": geom, "height_m": h, "floors": None}
 
@@ -185,7 +194,7 @@ class TestJoin(unittest.TestCase):
                         {"permit_no": "B", "year": 2011, "height_m": 18.0, "parcels": ["S|00020000"]}]
 
     def test_basic_exact_and_unmatched(self):
-        recs, st = bem.join(self.fps, self.permits, self.parcels)
+        recs, st = _join(self.fps, self.permits, self.parcels)
         self.assertEqual(recs["b1"].construction_year, 2004)
         self.assertEqual(recs["b2"].construction_year, 2011)
         self.assertEqual(recs["b3"], es.UNKNOWN)          # below MIN_OVERLAP: never guessed
@@ -194,32 +203,134 @@ class TestJoin(unittest.TestCase):
 
     def test_competing_permits_same_parcel(self):
         permits = self.permits + [{"permit_no": "C", "year": 2018, "height_m": 18.0, "parcels": ["S|00010000"]}]
-        recs, _ = bem.join(self.fps, permits, self.parcels)
+        recs, _ = _join(self.fps, permits, self.parcels)
         self.assertTrue(recs["b1"].era_ambiguous)         # 2004 vs 2018: different buckets
         self.assertEqual(recs["b1"].era_evidence, ("A", "C"))
 
     def test_height_conflict_rejected(self):
         permits = [{"permit_no": "A", "year": 2004, "height_m": 3.0, "parcels": ["S|00010000"]}]
-        recs, st = bem.join(self.fps, permits, self.parcels)
+        recs, st = _join(self.fps, permits, self.parcels)
         self.assertEqual(recs["b1"], es.UNKNOWN)
         self.assertEqual(st["candidates_rejected_height_conflict"], 1)
 
     def test_permit_outside_extent_counted(self):
         permits = [{"permit_no": "Z", "year": 2004, "height_m": 18.0, "parcels": ["Other|00010000"]}]
-        _, st = bem.join(self.fps, permits, self.parcels)
+        _, st = _join(self.fps, permits, self.parcels)
         self.assertEqual(st["permits_without_parcel_in_extent"], 1)
 
     def test_input_order_independent(self):
         permits = self.permits + [{"permit_no": "C", "year": 2018, "height_m": 18.0, "parcels": ["S|00010000"]}]
-        want, _ = bem.join(self.fps, permits, self.parcels)
+        want, _ = _join(self.fps, permits, self.parcels)
         rng = random.Random(3)
         for _ in range(10):
             p, q = permits[:], self.parcels[:]
             rng.shuffle(p)
             rng.shuffle(q)
             fps = dict(reversed(list(self.fps.items())))
-            got, _ = bem.join(fps, p, q)
+            got, _ = _join(fps, p, q)
             self.assertEqual(got, want)
+
+
+class TestRegionalPortability(unittest.TestCase):
+    """Generic era pipeline must run with exact data, partial data, no parcels, or no age data at all."""
+
+    FPS = {"a": _fp(box(0, 0, 10, 10), 12.0), "b": _fp(box(20, 0, 30, 10), 30.0)}
+
+    def test_no_adapters_no_inferer_is_all_unknown(self):
+        recs, st = pipeline.build_records(self.FPS)
+        self.assertTrue(all(r == es.UNKNOWN for r in recs.values()))
+        self.assertEqual((st["footprints_unknown"], st["footprints_total"]), (2, 2))
+
+    def test_adapter_with_no_data(self):
+        ad = parcel_permit.ParcelPermitAdapter("empty", [], [])
+        recs, _ = pipeline.build_records(self.FPS, [ad])
+        self.assertTrue(all(r == es.UNKNOWN for r in recs.values()))
+
+    def test_permits_without_parcels_degrade_gracefully(self):
+        ad = parcel_permit.ParcelPermitAdapter("p", [{"permit_no": "X", "year": 2005, "height_m": 15.0,
+                                                      "parcels": ["k"]}], [])
+        recs, st = pipeline.build_records(self.FPS, [ad])
+        self.assertTrue(all(r == es.UNKNOWN for r in recs.values()))
+        self.assertEqual(st["adapters"]["p"]["permits_without_parcel_in_extent"], 1)
+
+    def test_custom_exact_year_adapter_needs_no_parcels(self):
+        class ExactYears:           # a region that ships a per-building year attribute directly
+            name, source, join = "attr", es.SRC_USE_PERMIT, "attribute"
+
+            def observe(self, fps):
+                return {"a": [("rec-a", 1985)]}, {}
+        recs, _ = pipeline.build_records(self.FPS, [ExactYears()])
+        self.assertEqual((recs["a"].construction_year, recs["a"].era_bucket, recs["a"].era_join),
+                         (1985, "1980_1999", "attribute"))
+        self.assertEqual(recs["b"], es.UNKNOWN)
+
+    def test_adapter_priority_and_ambiguity_fallthrough(self):
+        class A:
+            name, source, join = "a1", es.SRC_USE_PERMIT, "j1"
+
+            def observe(self, fps):
+                return {"a": [("p1", 2003), ("p2", 2013)], "b": [("p3", 1990)]}, {}
+
+        class B:
+            name, source, join = "a2", es.SRC_USE_PERMIT, "j2"
+
+            def observe(self, fps):
+                return {"a": [("q1", 2016)], "b": [("q2", 2020)]}, {}
+        recs, _ = pipeline.build_records(self.FPS, [A(), B()])
+        self.assertEqual((recs["a"].construction_year, recs["a"].era_join), (2016, "j2"))   # ambiguity yields
+        self.assertEqual((recs["b"].construction_year, recs["b"].era_join), (1990, "j1"))   # first adapter wins
+
+    def test_inference_only_when_rules_cover_and_is_labelled(self):
+        inf = pipeline.ProfileEraInferer([{"when": {"floors": [10, 40]}, "distribution": {"2010_2019": 1.0}}])
+        fps = {"t": dict(_fp(box(0, 0, 5, 5), 40.0), floors=20), "s": dict(_fp(box(9, 9, 12, 12), 5.0), floors=2)}
+        recs, st = pipeline.build_records(fps, [], inf)
+        self.assertEqual((recs["t"].era_source, recs["t"].era_confidence, recs["t"].era_bucket),
+                         ("profile_inference", "inferred", "2010_2019"))
+        self.assertIsNone(recs["t"].construction_year)
+        self.assertEqual(recs["s"], es.UNKNOWN)          # uncovered -> unknown, not guessed
+        self.assertEqual(st["footprints_inferred"], 1)
+
+    def test_inference_deterministic_and_order_independent(self):
+        inf = pipeline.ProfileEraInferer([{"when": {"floors": [1, 99]},
+                                           "distribution": {"pre_1980": 1, "1980_1999": 1, "2000_2009": 1}}])
+        fps = {("b%d" % i): dict(_fp(box(i, 0, i + 1, 1), 10.0), floors=5) for i in range(200)}
+        r1, _ = pipeline.build_records(fps, [], inf)
+        r2, _ = pipeline.build_records(dict(reversed(list(fps.items()))), [], inf)
+        self.assertEqual(r1, r2)
+        self.assertEqual({r.era_bucket for r in r1.values()}, {"pre_1980", "1980_1999", "2000_2009"})
+
+    def test_observed_beats_inference_in_pipeline(self):
+        class A:
+            name, source, join = "a", es.SRC_USE_PERMIT, "j"
+
+            def observe(self, fps):
+                return {"t": [("p", 2022)]}, {}
+        inf = pipeline.ProfileEraInferer([{"when": {"floors": [1, 99]}, "distribution": {"pre_1980": 1}}])
+        fps = {"t": dict(_fp(box(0, 0, 5, 5), 40.0), floors=20)}
+        self.assertEqual(pipeline.build_records(fps, [A()], inf)[0]["t"].construction_year, 2022)
+
+    def test_invalid_rules_rejected(self):
+        for bad in ({"when": {}, "distribution": {"pre_1980": 1}},
+                    {"when": {"floors": 3}, "distribution": {"unknown": 1}},
+                    {"when": {"floors": 3}, "distribution": {}}):
+            with self.assertRaises(ValueError):
+                pipeline.ProfileEraInferer([bad])
+
+    def test_generic_modules_are_jurisdiction_free(self):
+        """Taipei (permit XML, parcel keys, WFS, districts) must not leak into the generic contract."""
+        generic = [REPO / "tools/building_era" / n for n in ("era_schema.py", "pipeline.py",
+                                                              "adapters/parcel_permit.py")]
+        for p in generic:
+            text = p.read_text(encoding="utf-8").lower()
+            for word in ("taipei", "xinyi", "citydashboard", "wfs", "data.taipei", "段"):
+                self.assertFalse(word in text.replace("citydashboard_building_age", ""), f"{p.name} mentions {word!r}")
+            self.assertNotIn("adapters.taipei", text)
+
+    def test_nothing_outside_taipei_package_imports_taipei_adapter(self):
+        for p in (REPO / "tools").rglob("*.py"):
+            if "tools/building_era/adapters/taipei" in p.as_posix():
+                continue
+            self.assertNotIn("adapters.taipei", p.read_text(encoding="utf-8", errors="ignore"), p)
 
 
 class TestCommittedCache(unittest.TestCase):
@@ -248,16 +359,16 @@ class TestCommittedCache(unittest.TestCase):
 
     @unittest.skipUnless(bem.PARCEL_CACHE.exists(), "parcel join geometry not cached locally")
     def test_rebuild_is_byte_identical(self):
-        recs, stats = bem.join(bem.load_footprints(), tup.load(), bem.load_parcels())
+        recs, stats = pipeline.build_records(bem.load_footprints(), [bem.make_adapter()])
         self.assertEqual(recs, self.records)
-        self.assertEqual(stats, self.meta["stats"])
+        self.assertEqual(bem._flat_stats(stats), self.meta["stats"])
 
 
 class TestLicenceGate(unittest.TestCase):
     """The City Dashboard `building_age` layer is research-only: it must never become a production input."""
 
     def test_no_building_age_dependency_in_era_tools(self):
-        for p in (REPO / "tools/building_era").glob("*.py"):
+        for p in (REPO / "tools/building_era").rglob("*.py"):
             text = p.read_text(encoding="utf-8")
             for line in text.splitlines():
                 if "building_age" in line:

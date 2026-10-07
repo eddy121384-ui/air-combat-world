@@ -3,7 +3,28 @@
 Status: **data / engineering foundation only.** No render, shader, geometry, rooftop or Unreal asset consumes it.
 Code: `tools/building_era/` · Tests: `tests/test_building_era.py` · Caches: `data/lookdev_cache/`.
 
-## 1. Schema (`acw.building_era/0`, `tools/building_era/era_schema.py`)
+## 0. Architecture: generic core, optional regional adapters
+
+The skyfront map will span other jurisdictions (New Taipei, Taoyuan, Hsinchu, later other countries), so Taipei
+permit + cadastral matching is an **optional enrichment adapter**, not a dependency of the era system.
+
+```
+era_schema.py      generic BuildingEra record, buckets, provenance validator, EraInferer hook
+pipeline.py        build_records(footprints, adapters=(), inferer=None); ProfileEraInferer; cache IO; group aggregation
+adapters/parcel_permit.py   generic "permit with parcel list + parcel geometry" adapter (opaque parcel keys)
+adapters/taipei/            ALL Taipei specifics: permit XML, 段小段+地號 keys, Dashboard cadastral WFS, Xinyi caches
+```
+
+Flow: `generic schema -> optional regional adapters (priority order) -> observed ages where available ->
+deterministic CityProfile/morphology inference -> unknown`. The pipeline runs with exact per-building years (custom
+adapter), partial permits, permits without parcels, or no age data at all (all `unknown`); each case is tested.
+The generic modules are tested to contain no Taipei vocabulary, and nothing outside `adapters/taipei/` may import it.
+Adapters only emit `(evidence_id, year)` candidates; the first adapter that resolves a concrete era wins, an
+ambiguous result is kept only if no later adapter resolves one. `ProfileEraInferer` takes a CityProfile rule table
+(morphology -> bucket distribution, sampled deterministically from a hash of the building id); Taipei ships **no**
+rules, so unmatched buildings stay unknown.
+
+## 1. Schema (`acw.building_era/0`, `tools/building_era/era_schema.py`, region-neutral)
 
 Per footprint (WFS `tp_building_height` feature id) — no parallel building database; the record is keyed by the
 existing footprint id and aggregated to the existing look-dev building *group* on demand (`aggregate_group`).
@@ -35,8 +56,8 @@ construction grammar will plausibly art-direct, and none of it is Taipei-specifi
 | accepted EPSG:3826 footprints (`sample_buildings_epsg3826.geojson.gz`) | as already accepted | targets of the join |
 | Dashboard WFS `building_cadastralmap` parcel polygons | **UNVERIFIED** (same WFS family as the accepted footprint source) | **join geometry only** — fetched to the gitignored `data/generated/taipei/era/`, never committed, never emitted |
 
-Raw permit XML (68 MB, sha256 in the meta) is not committed. `taipei_use_permits.py` reduces it to a 271 KB compact
-cache of 7,799 new-build permits; `build_era_metadata.py` reads only caches (no network) unless `--fetch-parcels`.
+Raw permit XML (68 MB, sha256 in the meta) is not committed. `adapters/taipei/use_permits.py` reduces it to a 271 KB compact
+cache of 7,799 new-build permits; `adapters/taipei/build_xinyi.py` reads only caches (no network) unless `--fetch-parcels`.
 Retrieval date, URL, licence, raw hash and cache hash are in `taipei_use_permits_new_build.meta.json`.
 
 ## 3. Licence status
@@ -93,21 +114,21 @@ buckets becomes ambiguous/unknown.
 
 ## 7. Unknown / fallback
 
-`EraInferer` (`era_schema.py`) is the CityProfile hook: it may return only `profile_inference`/`inferred` records,
+`EraInferer` (`era_schema.py`) with `ProfileEraInferer` (`pipeline.py`) is the CityProfile hook: it may return only `profile_inference`/`inferred` records,
 sees only licensed attributes (district, floors, height, class, morphology), and is consulted only for unknown,
 non-ambiguous buildings. v0 ships `NullInferer`: there is not yet enough licensed evidence for trustworthy priors,
-so older buildings stay **unknown** rather than getting fake precision. (The priors that the research doc derived
+so older buildings stay **unknown** (an empty rule table means "no trustworthy priors", never a guess) rather than getting fake precision. (The priors that the research doc derived
 from `building_age` were not reused.)
 
 ## 8. Determinism
 
-Outputs are gzip-`mtime=0`, sorted keys. Rebuilding three times gave sha256 `2332a914…159b` each time. Tests cover
+Outputs are gzip-`mtime=0`, sorted keys. Rebuilding three times gave the same sha256 each time (`77f7e1df…2a87` after the adapter refactor; the per-building records are identical to the pre-refactor cache, only a descriptive header string changed). Tests cover
 repeated rebuild, shuffled permit/parcel/footprint order, ambiguous-match resolution, exact bucket boundaries
 (1979/1980, 1999/2000, 2009/2010, 2019/2020), provenance labels, missing data, and the cache hash vs. its meta.
 
 ## 9. Future integration points
 
-`load_records()` → per-footprint `EraRecord`; `aggregate_group()` → per look-dev group (`classify` records carry the
+`pipeline.load_records()` → per-footprint `EraRecord`; `aggregate_group()` → per look-dev group (`classify` records carry the
 group id). A later pass may add `era_bucket` as a look-dev record field feeding facade/roof/construction grammar;
 construction-site work can add `open_construction_permit` (source constant reserved) for permits without a use
 permit. Nothing is wired now.
@@ -119,7 +140,7 @@ See §3. No `building_age` response was requested, stored, or used for matching,
 ## Reproduce
 
 ```
-python tools/building_era/taipei_use_permits.py --force      # network; or --xml PATH
-python tools/building_era/build_era_metadata.py --groups     # offline except missing parcel cache
+python tools/building_era/adapters/taipei/use_permits.py --force   # network; or --xml PATH
+python tools/building_era/adapters/taipei/build_xinyi.py --groups  # offline; without the parcel cache the Taipei adapter is skipped
 python -m unittest tests.test_building_era
 ```

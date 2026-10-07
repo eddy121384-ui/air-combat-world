@@ -27,12 +27,10 @@ from typing import Iterable, Optional, Protocol, Sequence
 
 SCHEMA = "acw.building_era/0"
 
-# Broad bands sized for facade / roof / construction grammar, not for demographics.
-#   pre_1980    walk-ups, tiled shop-houses, pre-code stock
-#   1980_1999   the bulk of Taipei's mid-rise / tiled towers; ends at the 1999 earthquake / code change
-#   2000_2009   post-quake code, first glass-curtain and tile-lite towers
-#   2010_2019   contemporary residential towers, premium glass
-#   2020_plus   newest stock
+# Broad, region-neutral bands sized for facade / roof / construction grammar, not for demographics.
+# Round-number boundaries keep them reusable across jurisdictions; a region may map its own evidence into
+# them but must not add regional buckets. Upper bounds are inclusive years.
+#   pre_1980   1980_1999   2000_2009   2010_2019   2020_plus   (+ unknown)
 ERA_BUCKETS = ("pre_1980", "1980_1999", "2000_2009", "2010_2019", "2020_plus", "unknown")
 _BUCKET_UPPER = (("pre_1980", 1979), ("1980_1999", 1999), ("2000_2009", 2009), ("2010_2019", 2019))
 _BUCKET_RANGE = {"pre_1980": (-10_000, 1979), "1980_1999": (1980, 1999), "2000_2009": (2000, 2009),

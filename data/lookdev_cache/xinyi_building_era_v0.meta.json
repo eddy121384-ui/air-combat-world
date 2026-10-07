@@ -5,7 +5,7 @@
   "2020_plus": 34,
   "unknown": 9586
  },
- "cache_sha256": "2332a9145543e5d18b7dd74c3afaf047e386039cb7bfd131943f9dfdfbe4159b",
+ "cache_sha256": "77f7e1df08206b207a19e795086a571a52bd71d111c5fedb6efb39c2fda22a87",
  "group_stats": {
   "building_groups": 4137,
   "group_bucket_counts": {
@@ -52,7 +52,7 @@
    "layer": "taipei_vioc:building_cadastralmap",
    "licence": "UNVERIFIED (same Dashboard WFS family as the accepted footprint source)",
    "n_parcels": 15028,
-   "role": "join geometry only; not committed, not emitted"
+   "role": "optional join geometry only; not committed, not emitted"
   },
   "permits_cache_sha256": "5d70c54b5c0343c829b115745c04c9b9858ee30fdab4922eb1ae32a8cc6c83e4",
   "permits_meta": {
@@ -81,6 +81,9 @@
   "method": "parcel_overlap",
   "min_overlap": 0.6
  },
+ "region_adapters": [
+  "taipei_use_permit_parcel"
+ ],
  "research_only_not_used": [
   "citydashboard_building_age"
  ],
