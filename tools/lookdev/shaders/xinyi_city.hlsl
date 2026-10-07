@@ -181,7 +181,9 @@ float3 xc_sheet16(float i)
 
 // Weathering of a sheet-metal colour: sun fade on up-facing sheets, rust bloom / soot streaks, and
 // mismatched patch panels (re-roofed strips) on roofs. p = world xy (m), up = N.z, seed per instance.
-float3 xc_sheet_weather(float3 c, float2 p, float z, float up, float seed, float fwp)
+// q = patch-strip coordinates (m): (across-strip, along-strip). Painted roofs / walls pass the legacy diagonal
+// world frame (x + y, x - y); instanced covers pass their own ridge frame (roofscape v2 step 2).
+float3 xc_sheet_weather(float3 c, float2 p, float2 q, float z, float up, float seed, float fwp)
 {
     float lum = dot(c, float3(0.3, 0.59, 0.11));
     c = lerp(c, lum.xxx * 1.08, saturate(up) * 0.12);                     // UV-faded tops
@@ -190,7 +192,7 @@ float3 xc_sheet_weather(float3 c, float2 p, float z, float up, float seed, float
     float soot = xc_fnoise(float2(p.x + p.y, z * 3.0) + seed * 5.0, 0.6, fwp);
     c *= 1.0 - soot * 0.12 * (1.0 - saturate(up));                        // streaky walls
     // patch panels: 0.9 m strips, a few replaced in galvanised or another faded colour
-    float2 pc = float2(floor((p.x + p.y) / 0.9), floor((p.x - p.y) / 2.4));
+    float2 pc = float2(floor(q.x / 0.9), floor(q.y / 2.4));
     float ph = xc_hash21(pc + seed * 13.0);
     float patch = step(0.9, ph) * saturate(up * 2.0 - 0.6) * xc_detail(fwp, 1.0);
     float3 pcol = lerp(float3(0.45, 0.46, 0.46), xc_sheet16(floor(frac(ph * 7.3) * 16.0)) * 0.95, step(0.95, ph));
@@ -822,7 +824,7 @@ void xc_wall(float u, float h, float H, float fh, float arch, float variant, flo
     [branch] if (rooftop * isOld > 0.0)
     {
         float3 sheet = xc_sheet16(xc_sheet_paint_index(frac(seed * 2.9 + variant * 0.13), frac(seed * 4.7)));
-        sheet = xc_sheet_weather(sheet, wpos.xy, wpos.z, 0.0, seed, max(fwu, fwh));
+        sheet = xc_sheet_weather(sheet, wpos.xy, float2(wpos.x + wpos.y, wpos.x - wpos.y), wpos.z, 0.0, seed, max(fwu, fwh));
         c = lerp(c, sheet * (1.0 - ribs * 0.25), rooftop * isOld);
     }
 
@@ -960,7 +962,7 @@ void xc_roof(float3 wpos, float H, float arch, float variant, float seed, float 
     [branch] if (sheetRoof > 0.0)        // per-building constant: coherent branch
     {
         float3 sheet = xc_sheet16(xc_sheet_paint_index(frac(seed * 2.9 + variant * 0.13), frac(seed * 4.7)));
-        sheet = xc_sheet_weather(sheet, p, wpos.z, 1.0, seed, fwp);
+        sheet = xc_sheet_weather(sheet, p, float2(p.x + p.y, p.x - p.y), wpos.z, 1.0, seed, fwp);
         float ribs = xc_line(frac(p.x / 0.25), 0.3, fwp / 0.25) * xc_detail(fwp, 0.5);
         roofCol = lerp(roofCol, sheet * (1.0 - ribs * 0.3), sheetRoof);
     }
@@ -970,16 +972,35 @@ void xc_roof(float3 wpos, float H, float arch, float variant, float seed, float 
     float stain2 = xc_fnoise(p - seed * 5.4, 1.3, fwp);
     roofCol *= 1.0 - saturate(stain * 0.9 - 0.25) * 0.35 * weather - stain2 * 0.10;
 
-    // equipment clutter read (tanks, condensers, solar heaters) on a 3 m grid,
+    // per-building rotated frame: no world-axis alignment on flat roofs
+    float ra = frac(seed * 7.13) * 1.5708;
+    float2 rp = float2(p.x * cos(ra) + p.y * sin(ra), -p.x * sin(ra) + p.y * cos(ra));
+
+    // flat concrete: a few large resurfacing / repair patches (11 m cells, ~1 in 4 holds one) and a broad stain.
+    // Mid-frequency only (4-8 m shapes, 9 m fade scale), so it survives ~150-800 m and dissolves with distance.
+    float2 pcell = floor(rp / 11.0);
+    float2 pf = frac(rp / 11.0);
+    float ph1 = xc_hash21(pcell + seed * 3.7);
+    float ph2 = xc_hash21(pcell + seed * 9.1 + 41.0);
+    float2 pa = 0.08 + 0.22 * float2(frac(ph1 * 17.0), frac(ph1 * 29.0));
+    float2 pb = pa + 0.42 + 0.30 * float2(frac(ph2 * 13.0), frac(ph2 * 31.0));
+    float patchBox = xc_box(pf.x, pa.x, min(pb.x, 0.97), fwp / 11.0) * xc_box(pf.y, pa.y, min(pb.y, 0.97), fwp / 11.0);
+    float cw = (1.0 - sheetRoof) * (1.0 - isOffice) * xc_detail(fwp, 9.0);
+    float patchOn = step(0.76, ph1) * patchBox * cw;
+    roofCol = lerp(roofCol, roofCol * lerp(0.84, 1.14, step(0.5, ph2)) + lerp(0.0, 0.01, step(0.5, ph2)), patchOn * 0.8);
+    float broad = xc_fnoise(rp + seed * 11.0, 7.0, fwp);
+    roofCol *= 1.0 - saturate(broad * 1.2 - 0.4) * 0.16 * weather * cw;
+
+    // equipment clutter read (tanks, condensers, solar heaters) on a sparse rotated 4 m grid,
     // with a fake sun-side shadow; resolves only when close enough
-    float2 cell = floor(p / 3.0);
-    float2 fp = frac(p / 3.0);
+    float2 cell = floor(rp / 4.0);
+    float2 fp = frac(rp / 4.0);
     float cr = xc_hash21(cell + seed * 3.0);
-    float has = step(0.62, cr) * (1.0 - sheetRoof * 0.6);
-    float2 cc = float2(0.3 + 0.4 * frac(cr * 7.0), 0.3 + 0.4 * frac(cr * 13.0));
-    float box = xc_box(fp.x, cc.x - 0.16, cc.x + 0.16, fwp / 3.0) * xc_box(fp.y, cc.y - 0.12, cc.y + 0.12, fwp / 3.0);
-    float2 sh = fp - float2(0.07, -0.07);
-    float shadow = xc_box(sh.x, cc.x - 0.16, cc.x + 0.16, fwp / 3.0) * xc_box(sh.y, cc.y - 0.12, cc.y + 0.12, fwp / 3.0);
+    float has = step(0.88, cr) * (1.0 - sheetRoof * 0.6);
+    float2 cc = float2(0.25 + 0.5 * frac(cr * 7.0), 0.25 + 0.5 * frac(cr * 13.0));
+    float box = xc_box(fp.x, cc.x - 0.12, cc.x + 0.12, fwp / 4.0) * xc_box(fp.y, cc.y - 0.09, cc.y + 0.09, fwp / 4.0);
+    float2 sh = fp - float2(0.05, -0.05);
+    float shadow = xc_box(sh.x, cc.x - 0.12, cc.x + 0.12, fwp / 4.0) * xc_box(sh.y, cc.y - 0.09, cc.y + 0.09, fwp / 4.0);
     float dCl = xc_detail(fwp, 1.0);
     float3 equip = lerp(float3(0.72, 0.72, 0.70), float3(0.55, 0.57, 0.60), step(0.8, cr));
     roofCol = lerp(roofCol, roofCol * 0.55, shadow * has * dCl * (1.0 - box));
@@ -1462,7 +1483,7 @@ void xc_foliage(float3 wpos, float3 N, float4 vc, float h, float night,
 // types: 1 shed, 2 tank, 3 solar, 4 antenna, 5 ac, 6 cooling, 7 machine,
 //        8 bmu, 9 aviation light
 // ----------------------------------------------------------------------------
-void xc_prop(float3 wpos, float3 N, float4 vc, float variant, float night, float fwp,
+void xc_prop(float3 wpos, float3 N, float4 vc, float variant, float yawN, float night, float fwp,
              out float3 base, out float rough, out float metal, out float spec, out float3 emis)
 {
     float t = floor(vc.x * 255.0 + 0.5);
@@ -1491,9 +1512,15 @@ void xc_prop(float3 wpos, float3 N, float4 vc, float variant, float night, float
     float isSheet = isT1 + isT11 + isT12 + isT13;
     float roofIdx = floor(variant * 16.0);
     float wallIdx = floor(frac(variant * 16.0) * 16.0);
-    float ribs = xc_line(frac((wpos.x + wpos.y) / 0.19), 0.3, fwp / 0.19) * xc_detail(fwp, 0.4);
+    // ridge frame (roofscape v2 step 2): yawN = per-instance custom data 1 = (ENU yaw mod 180) / 180. The unit
+    // meshes run their ridge along local x, so seams / panel strips run down the slope across it. World xy is
+    // UE x = east, y = -north, so the ridge direction is (cos yaw, -sin yaw).
+    float ya = yawN * 3.14159265;
+    float2 ru = float2(cos(ya), -sin(ya));
+    float2 rq = float2(dot(wpos.xy, ru), dot(wpos.xy, float2(-ru.y, ru.x)));
+    float ribs = xc_line(frac(rq.x / 0.7), 0.3, fwp / 0.7) * xc_detail(fwp, 0.7);   // broad seam rhythm, fades by ~400 m
     float3 sheet = xc_sheet16(lerp(wallIdx, roofIdx, p1));
-    sheet = xc_sheet_weather(sheet, wpos.xy, wpos.z, N.z, roofIdx * 0.37 + wallIdx * 0.11, fwp);
+    sheet = xc_sheet_weather(sheet, wpos.xy, rq, wpos.z, N.z, roofIdx * 0.37 + wallIdx * 0.11, fwp);
     sheet *= 1.0 - ribs * lerp(0.22, 0.16, p1);
     sheet = lerp(sheet, float3(0.16, 0.16, 0.17), p2);                    // painted steel posts
     // stair bulkhead: painted / tiled concrete (light wall palette, greyed), slab cap, dark door

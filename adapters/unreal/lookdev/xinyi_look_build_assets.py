@@ -398,7 +398,11 @@ def build_instanced_material(mpc, name):
     night = mpc_param(mat, mpc, "Night", -1200, 300)
     es = mpc_param(mat, mpc, "EmissiveScale", -600, 500)
     node = custom(mat, -600, 0, custom_code(name), [n for n, _ in MATERIALS[name][0]], SURFACE_OUTPUTS, name)
-    wire(((wp, "WP"), (n, "N"), (uv2, "UV2"), (var, "Variant"), (night, "Night")), node)
+    pins = [(wp, "WP"), (n, "N"), (uv2, "UV2"), (var, "Variant"), (night, "Night")]
+    if any(nm == "Yaw" for nm, _ in MATERIALS[name][0]):
+        # roofscape v2 step 2: per-instance custom data 1 = ridge yaw (cover seams / strips follow the cover)
+        pins.append((expr(mat, unreal.MaterialExpressionPerInstanceCustomData, -1200, 240, data_index=1), "Yaw"))
+    wire(pins, node)
     finish_surface(mat, node, es, -300, 300, normal=False)
     save_material(mat, path)
     return mat

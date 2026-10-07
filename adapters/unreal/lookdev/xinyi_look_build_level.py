@@ -101,17 +101,18 @@ def add_hism(actor, mesh):
     return comp
 
 
-def place_hism(actors, asset_row, items, label, cull, cast_shadow, uniform_key=None, variants=4):
+def place_hism(actors, asset_row, items, label, cull, cast_shadow, uniform_key=None, variants=4, yaw_data=False):
     """One holder actor + HISM; per-instance custom data 0 = variant (0..1) = (v + 0.5) / variants."""
     mesh = lib.load_asset(asset_row["asset_path"])
     pv = [asset_row["expected_bounds_origin_cm"][i] - asset_row["imported_bounds_origin_cm"][i] for i in range(3)]
     holder = actors.spawn_actor_from_class(unreal.Actor, unreal.Vector(0.0, 0.0, 0.0))
     holder.set_actor_label(LOOK_PREFIX + label)
     h = add_hism(holder, mesh)
+    nfl = 2 if yaw_data else 1
     try:
-        h.set_num_custom_data_floats(1)
+        h.set_num_custom_data_floats(nfl)
     except Exception:
-        h.set_editor_property("num_custom_data_floats", 1)
+        h.set_editor_property("num_custom_data_floats", nfl)
     xf = []
     for it in items:
         p = enu_to_ue_cm(it["e"], it["n"], it["z"])
@@ -127,6 +128,8 @@ def place_hism(actors, asset_row, items, label, cull, cast_shadow, uniform_key=N
     h.add_instances(xf, False, True)
     for i, it in enumerate(items):
         h.set_custom_data_value(i, 0, (it["v"] + 0.5) / float(variants), False)
+        if yaw_data:      # ridge direction is undirected: (ENU yaw mod 180) / 180 in 0..1
+            h.set_custom_data_value(i, 1, (float(it["yaw"]) % 180.0) / 180.0, False)
     h.set_cull_distances(cull[0], cull[1])
     h.set_collision_enabled(unreal.CollisionEnabled.NO_COLLISION)
     h.set_cast_shadow(cast_shadow)
@@ -242,7 +245,7 @@ def main():
             continue
         small = t in ("ac", "antenna", "avlight")
         n = place_hism(actors, row, items, "Roof_" + t, roof_cull.get(t, (120000.0, 200000.0)), not small,
-                       variants=roof_variants)
+                       variants=roof_variants, yaw_data=t in ("shed", "addition", "barrel", "leanto"))
         roof_counts[t] = n
         if n != len(items):
             failures.append({"rooftop": t, "count": n, "expected": len(items)})

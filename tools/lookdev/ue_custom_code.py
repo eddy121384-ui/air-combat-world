@@ -50,8 +50,8 @@ MATERIALS = {
         "",
     ),
     "M_XinyiProps": (
-        [("WP", 3), ("N", 3), ("UV2", 2), ("Variant", 1), ("Night", 1)],
-        "xl.xc_prop(WP, N, xl.xc_unpack(UV2), Variant, Night, max(fwidth(WP.x), fwidth(WP.y)), b, r, m, s, e);",
+        [("WP", 3), ("N", 3), ("UV2", 2), ("Variant", 1), ("Yaw", 1), ("Night", 1)],
+        "xl.xc_prop(WP, N, xl.xc_unpack(UV2), Variant, Yaw, Night, max(fwidth(WP.x), fwidth(WP.y)), b, r, m, s, e);",
         "",
     ),
     # Street identity v0B: projecting signs + awnings; TX = sign atlas sampled at street_uv_code()
