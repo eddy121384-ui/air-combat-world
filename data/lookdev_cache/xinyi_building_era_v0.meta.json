@@ -1,0 +1,104 @@
+{
+ "bucket_counts": {
+  "2000_2009": 1180,
+  "2010_2019": 332,
+  "2020_plus": 34,
+  "unknown": 9586
+ },
+ "cache_sha256": "2332a9145543e5d18b7dd74c3afaf047e386039cb7bfd131943f9dfdfbe4159b",
+ "group_stats": {
+  "building_groups": 4137,
+  "group_bucket_counts": {
+   "2000_2009": 479,
+   "2010_2019": 167,
+   "2020_plus": 19,
+   "unknown": 3472
+  },
+  "group_source_counts": {
+   "open_use_permit": 665,
+   "unknown": 3472
+  },
+  "groups_ambiguous": 0,
+  "groups_era_known": 665,
+  "groups_exact": 520,
+  "groups_range": 145,
+  "groups_unknown": 3472
+ },
+ "inputs": {
+  "footprints_manifest": {
+   "bbox": "121.5546,25.0247,121.5744,25.0427",
+   "bbox_crs": "EPSG:4326",
+   "dropped_non_polygon": 0,
+   "endpoint_used": "https://citydashboard.taipei/geo_server/taipei_vioc/ows",
+   "endpoints_tried": [
+    "https://citydashboard.taipei/geo_server/taipei_vioc/ows",
+    "https://citydashboard.taipei/geo_server/ows"
+   ],
+   "expected_hits": 11132,
+   "feature_count": 11132,
+   "fetched_at": "2026-09-29T09:33:03.875Z",
+   "height_source_counts": {
+    "1_bud_high": 11132
+   },
+   "reason": "avoid EPSG:4326 four-decimal footprint collapse observed in v0 snapshot",
+   "response_crs": "EPSG:3826",
+   "sha256": "c7ca8da13a4c5baaab0fbd1fcfe5b3799723d49d1998f804cf1593904f70200d",
+   "tool": "tools/citygen_v2/fetch_projected_sample.mjs",
+   "type_name": "taipei_vioc:tp_building_height"
+  },
+  "footprints_sha256": "27ca2017384d286d5ccbda1a8d6e5a1474b5141ded208547a6f8c5f163785885",
+  "parcel_geometry": {
+   "endpoint": "https://citydashboard.taipei/geo_server/taipei_vioc/ows",
+   "layer": "taipei_vioc:building_cadastralmap",
+   "licence": "UNVERIFIED (same Dashboard WFS family as the accepted footprint source)",
+   "n_parcels": 15028,
+   "role": "join geometry only; not committed, not emitted"
+  },
+  "permits_cache_sha256": "5d70c54b5c0343c829b115745c04c9b9858ee30fdab4922eb1ae32a8cc6c83e4",
+  "permits_meta": {
+   "cache_sha256": "5d70c54b5c0343c829b115745c04c9b9858ee30fdab4922eb1ae32a8cc6c83e4",
+   "dataset": "https://data.gov.tw/dataset/128203",
+   "kept": "建造類別 == 新建 with a usable year and >=1 parcel key",
+   "licence": "Government Open Data License, version 1.0 (Taiwan); attribution required",
+   "permits_kept": 7799,
+   "publisher": "臺北市政府都市發展局建築管理工程處 (Taipei Building Management and Engineering Office)",
+   "raw_xml_bytes": 68417812,
+   "raw_xml_sha256": "a20261e87ca0080842b9cb75868144f0d3e7b73c8338b0ee5b9f56e98f0e41c8",
+   "retrieved_at": "2026-10-07T02:10:23Z",
+   "schema": "acw.use_permits_meta/0",
+   "source_url": "https://data.taipei/api/dataset/c876ff02-af2e-4eb8-bd33-d444f5052733/resource/0f3f9675-8356-4f1a-9908-1ce8892012fa/download",
+   "title": "臺北市歷年使用執照摘要 (new-build permits only, compacted)",
+   "year_range": [
+    2000,
+    2025
+   ],
+   "year_rule": "completion year if within 2 y of the issue year, else issue year"
+  }
+ },
+ "join": {
+  "height_slack_m": 3.0,
+  "height_slack_rel": 0.25,
+  "method": "parcel_overlap",
+  "min_overlap": 0.6
+ },
+ "research_only_not_used": [
+  "citydashboard_building_age"
+ ],
+ "schema": "acw.building_era_meta/0",
+ "sources_used": [
+  "open_use_permit",
+  "unknown"
+ ],
+ "stats": {
+  "candidates_rejected_height_conflict": 842,
+  "footprints_ambiguous": 241,
+  "footprints_exact": 1214,
+  "footprints_range": 332,
+  "footprints_total": 11132,
+  "footprints_unmatched": 9345,
+  "permits_in_extent_no_footprint": 43,
+  "permits_matched_to_footprint": 225,
+  "permits_total": 7799,
+  "permits_without_parcel_in_extent": 7531
+ }
+}

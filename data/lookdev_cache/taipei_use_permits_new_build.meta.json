@@ -1,0 +1,19 @@
+{
+ "schema": "acw.use_permits_meta/0",
+ "title": "臺北市歷年使用執照摘要 (new-build permits only, compacted)",
+ "publisher": "臺北市政府都市發展局建築管理工程處 (Taipei Building Management and Engineering Office)",
+ "licence": "Government Open Data License, version 1.0 (Taiwan); attribution required",
+ "dataset": "https://data.gov.tw/dataset/128203",
+ "source_url": "https://data.taipei/api/dataset/c876ff02-af2e-4eb8-bd33-d444f5052733/resource/0f3f9675-8356-4f1a-9908-1ce8892012fa/download",
+ "retrieved_at": "2026-10-07T02:10:23Z",
+ "raw_xml_bytes": 68417812,
+ "raw_xml_sha256": "a20261e87ca0080842b9cb75868144f0d3e7b73c8338b0ee5b9f56e98f0e41c8",
+ "kept": "建造類別 == 新建 with a usable year and >=1 parcel key",
+ "year_rule": "completion year if within 2 y of the issue year, else issue year",
+ "permits_kept": 7799,
+ "year_range": [
+  2000,
+  2025
+ ],
+ "cache_sha256": "5d70c54b5c0343c829b115745c04c9b9858ee30fdab4922eb1ae32a8cc6c83e4"
+}
