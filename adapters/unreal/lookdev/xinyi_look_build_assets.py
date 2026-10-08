@@ -15,6 +15,10 @@ Creates, under /Game/XinyiLook:
   Materials/M_XinyiStreet       projecting signs + awnings (atlas lookup + shared HLSL, instanced)
   Meshes/Street/Sign, Awning    unit street props (Street & Facade Identity v0B)
   Meshes/Street/scooter_a..d    parked scooters (Taipei Street Reality v0C, same material)
+  Textures/T_XinyiWallAdAtlas   2048^2 large wall-ad atlas (sRGB face + night wash mask in A, BC7, box mips)
+  Materials/M_XinyiWallAds      large wall ads v0: own material + own HLSL (xinyi_wall_ads.hlsl), opaque,
+                                one-sided, instanced; nothing is added to M_XinyiCity
+  Meshes/WallAds                unit board plane (2 triangles); optional layer, ACW_XINYI_WALL_ADS=off skips it
   Meshes/Tiles/<tile>/...       25 look tiles (triangle soup = accepted tiles)
   Meshes/Hero, Backdrop, Paint, Tree
 
@@ -36,7 +40,7 @@ sys.path.insert(0, os.path.join(os.environ.get("ACW_REPO_ROOT", ""), "tools", "l
 import unreal  # noqa: E402
 from ue_custom_code import (  # noqa: E402
     CLOUD_INPUTS, MATERIALS, cloud_custom_code, cloud_weather_uv_code, custom_code, extent_uv_code, ground_uv_code,
-    source_bbox_defines, street_uv_code,
+    source_bbox_defines, street_uv_code, wallads_custom_code, wallads_uv_code,
 )
 from xinyi_look_clouds_cheap import build_cheap_assets  # noqa: E402
 from xinyi_look_common import (  # noqa: E402
@@ -437,6 +441,30 @@ def build_street_material(mpc, atlas):
     return mat
 
 
+def build_wallads_material(mpc, atlas):
+    """Taipei large wall ads v0: instanced thin opaque boards. A small Custom node turns the plane UV0 + per-instance
+    variant into the atlas UV (wa_uv); one colour sample feeds wa_shade. Isolated from every facade material."""
+    name = "M_XinyiWallAds"
+    mat, path = fresh_material(name)
+    mat.set_editor_property("used_with_instanced_static_meshes", True)
+    uv0 = texcoord(mat, 0, -1400, 40)
+    var = expr(mat, unreal.MaterialExpressionPerInstanceCustomData, -1400, 180, data_index=0)
+    auv = custom(mat, -1150, 160, wallads_uv_code(), ["UV0", "Variant"], [], "XinyiWallAdUV",
+                 unreal.CustomMaterialOutputType.CMOT_FLOAT2)
+    wire(((uv0, "UV0"), (var, "Variant")), auv)
+    tx = expr(mat, unreal.MaterialExpressionTextureSample, -900, 160)
+    tx.set_editor_property("texture", atlas)
+    tx.set_editor_property("sampler_type", unreal.MaterialSamplerType.SAMPLERTYPE_COLOR)
+    mel.connect_material_expressions(auv, "", tx, "UVs")
+    night = mpc_param(mat, mpc, "Night", -1200, 300)
+    es = mpc_param(mat, mpc, "EmissiveScale", -600, 500)
+    node = custom(mat, -600, 0, wallads_custom_code(), ["UV0", "Variant", "TX", "Night"], SURFACE_OUTPUTS, name)
+    wire(((uv0, "UV0"), (var, "Variant"), (tx, "TX", "RGBA"), (night, "Night")), node)
+    finish_surface(mat, node, es, -300, 300, normal=False)
+    save_material(mat, path)
+    return mat
+
+
 def import_plan_texture(png, name):
     """Categorical L8 data read with Texture.Load: uncompressed G8, linear, no mips, nearest, never streamed."""
     task = unreal.AssetImportTask()
@@ -725,6 +753,29 @@ def main():
         except Exception as exc:
             failures.append({"street": str(exc)[:400]})
 
+    # Taipei large wall ads v0 (optional layer: absent report or ACW_XINYI_WALL_ADS=off = not built)
+    wall_ads = {}
+    wa_rep_path = LOOK_OUT / "wall_ads/wall_ads.report.json"
+    wa_rep = read_json(wa_rep_path) if wa_rep_path.is_file() else None
+    if wa_rep and os.environ.get("ACW_XINYI_WALL_ADS", "on").lower() != "off":
+        try:
+            if wa_rep.get("status") != "PASS_WALL_ADS":
+                raise RuntimeError("wall_ads.report.json is not PASS_WALL_ADS")
+            wa_atlas = import_color_texture(LOOK_OUT / "wall_ads/wall_ad_atlas.png", "T_XinyiWallAdAtlas")
+            m_wa = build_wallads_material(mpc, wa_atlas)
+            row = wa_rep["mesh"]
+            path, mesh = import_mesh(LOOK_OUT / "wall_ads" / row["mesh"], MESH_DIR + "/WallAds", m_wa, 1)
+            origin, extent = mesh_bounds(mesh)
+            err = max_err(extent, row["expected_ue_local_bounds"]["extent_cm"])
+            if err > EXTENT_TOLERANCE_CM:
+                raise RuntimeError("extent drift %.3f cm" % err)
+            wall_ads = {"asset_path": path, "imported_bounds_origin_cm": origin,
+                        "expected_bounds_origin_cm": row["expected_ue_local_bounds"]["origin_cm"],
+                        "triangles": row["triangles"], "material": "M_XinyiWallAds", "atlas": "T_XinyiWallAdAtlas",
+                        "atlas_sha256": wa_rep["atlas_sha256"], "instances_sha256": wa_rep["sha256"]}
+        except Exception as exc:
+            failures.append({"wall_ads": str(exc)[:400]})
+
     far = []
     for row in (far_rep or {}).get("chunks", []):
         try:
@@ -754,6 +805,7 @@ def main():
         "singles": singles,
         "rooftop_props": props,
         "street_props": street,
+        "wall_ads": wall_ads,
         "far_city_chunks": far,
         "created": created,
         "failures": failures,

@@ -7,7 +7,8 @@
    build_full_xinyi -> build_xinyi_terrain_dtm -> build_contract.
    Re-checks the accepted tile-manifest and terrain-manifest hashes.
 3. Run the look-dev builders (tiles, Taipei 101, backdrop, ground, rooftops,
-   sign atlas + street signs / awnings, far-LOD city when the far-city cache exists).
+   sign atlas + street signs / awnings, storefronts, wall-ad atlas + plan, far-LOD city when the far-city
+   cache exists).
 
 Usage: python tools/lookdev/build_all.py [--force-look]
 """
@@ -93,6 +94,10 @@ def main():
     # Taipei Street Reality v0E: horizontal storefront atlas + storefront plan (shop units on commercial frontage)
     run("tools/lookdev/build_shop_atlas.py")
     run("tools/lookdev/build_storefronts.py")
+    # Taipei large wall ads v0: authored atlas + Gate 0 blank-wall audit + placement plan (optional layer;
+    # the UE stages skip it with ACW_XINYI_WALL_ADS=off)
+    run("tools/lookdev/build_wall_ad_atlas.py")
+    run("tools/lookdev/build_wall_ads.py")
     if (CACHE / "far_city_generalized.npz").exists():
         run("tools/lookdev/build_far_city.py")
     run("tools/lookdev/clouds/build_clouds.py")   # Cloud Prototype v0 state -> cells + weather map

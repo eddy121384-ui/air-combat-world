@@ -87,6 +87,26 @@ def street_uv_code() -> str:
             + "XinyiLookFns xl;\nreturn xl.xc_street_uv(UV0, Variant);\n")
 
 
+WALLADS_SHADER = Path(__file__).resolve().parent / "shaders" / "xinyi_wall_ads.hlsl"
+# Taipei large wall ads v0 (M_XinyiWallAds): own shader file, never pasted into the city / street materials.
+WALLADS_INPUTS = [("UV0", 2), ("Variant", 1), ("TX", 4), ("Night", 1)]
+
+
+def wallads_uv_code() -> str:
+    """Custom node: wall-ad atlas UV (wa_uv) from the plane UV0 and the per-instance variant."""
+    return ("struct XinyiWallAdFns {\n" + WALLADS_SHADER.read_text(encoding="utf-8") + "\n};\n"
+            + "XinyiWallAdFns wa;\nreturn wa.wa_uv(UV0, Variant);\n")
+
+
+def wallads_custom_code() -> str:
+    """Custom node: wall-ad surface (wa_shade). Returns base colour; outputs Rough / Metal / Spec / Emis / NrmWS."""
+    return ("struct XinyiWallAdFns {\n" + WALLADS_SHADER.read_text(encoding="utf-8") + "\n};\n"
+            + "XinyiWallAdFns wa;\n"
+            + "float3 b; float r; float m; float s; float3 e;\n"
+            + "wa.wa_shade(UV0, Variant, TX, Night, b, r, m, s, e);\n"
+            + "Rough = r; Metal = m; Spec = s; Emis = e; NrmWS = float3(0.0, 0.0, 1.0);\nreturn b;\n")
+
+
 CLOUD_SHADER = Path(__file__).resolve().parent / "shaders" / "xinyi_clouds.hlsl"
 CLOUD_INPUTS = [("WP", 3), ("WX", 4), ("COV", 1), ("GAIN", 1), ("FINE", 1)]
 PLANET_RADIUS_M = 6360000.0   # SkyAtmosphere / VolumetricCloud default; planet top at the world origin

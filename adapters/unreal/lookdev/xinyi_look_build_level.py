@@ -39,6 +39,11 @@ STREET_HISM = {"sign": ((50000.0, 70000.0), True), "box": ((22000.0, 32000.0), F
 # ~220 m (a scooter is ~4 x 8 px there and the painted bay rows carry the read); no shadows (the darker bay
 # fill reads as the contact shadow).
 STREET_HISM.update({k: ((16000.0, 22000.0), False) for k in ("scooter_a", "scooter_b", "scooter_c", "scooter_d")})
+# Taipei large wall ads v0: one HISM of thin opaque boards; no shadows (a 0.04-0.15 m offset casts nothing
+# readable), no collision. Cull beyond the district (3.5 km): a hard cut at 0.9 or 1.6 km visibly popped a white
+# board off a dark tower in the approach sequences (docs/xinyi-wall-ads-v0-result.md §6), while 27 two-triangle
+# instances cost nothing measurable to keep; the atlas mips carry the far read.
+WALL_ADS_CULL = (330000.0, 350000.0)
 
 
 def remove_previous_look_level():
@@ -265,6 +270,17 @@ def main():
             if n != len(items):
                 failures.append({"street": t, "count": n, "expected": len(items)})
 
+    # Taipei large wall ads v0 (optional; ACW_XINYI_WALL_ADS=off or no asset row = the previous level exactly)
+    wall_ad_count = 0
+    wa_doc = LOOK_OUT / "wall_ads/wall_ads.json"
+    if assets.get("wall_ads") and wa_doc.is_file() and os.environ.get("ACW_XINYI_WALL_ADS", "on").lower() != "off":
+        wdoc = read_json(wa_doc)
+        items = wdoc["instances"]
+        wall_ad_count = place_hism(actors, assets["wall_ads"], items, "WallAds", WALL_ADS_CULL, False,
+                                   variants=wdoc["variants"])
+        if wall_ad_count != len(items):
+            failures.append({"wall_ads": wall_ad_count, "expected": len(items)})
+
     # far-LOD Taipei basin massing (real WFS statistics), no shadows / collision
     far_n = 0
     for row in assets.get("far_city_chunks", []):
@@ -309,6 +325,7 @@ def main():
         "ground_instances": ground_counts,
         "rooftop_instances": roof_counts,
         "street_instances": street_counts,
+        "wall_ad_instances": wall_ad_count,
         "far_city_chunks": far_n,
         "clouds": clouds,
         "failures": failures,

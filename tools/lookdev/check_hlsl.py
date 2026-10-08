@@ -16,7 +16,9 @@ import tempfile
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from ue_custom_code import MATERIALS, SURFACE_OUTPUTS, custom_code  # noqa: E402
+from ue_custom_code import (  # noqa: E402
+    MATERIALS, SURFACE_OUTPUTS, WALLADS_INPUTS, custom_code, wallads_custom_code, wallads_uv_code,
+)
 
 HV = "2018"
 TYPES = {1: "float", 2: "float2", 3: "float3", 4: "float4"}
@@ -45,6 +47,26 @@ def wrapper(material: str) -> str:
     )
 
 
+def wallads_wrappers() -> dict:
+    """M_XinyiWallAds: the UV node (float2 return) and the surface node, same UE-shaped wrapper."""
+    params = ["FMaterialPixelParameters Parameters"] + ["%s %s" % (TYPES[c], n) for n, c in WALLADS_INPUTS]
+    args = ["Parameters"] + ["In%d.%s" % (i, "xyzw"[:c]) if c > 1 else "In%d.x" % i
+                             for i, (n, c) in enumerate(WALLADS_INPUTS)]
+    decl_in = "".join("float4 In%d : TEXCOORD%d, " % (i, i) for i in range(len(WALLADS_INPUTS)))
+    head = "struct FMaterialPixelParameters { float4 SvPosition; };\n"
+    main_open = ("float4 main(" + decl_in + "float4 Pos : SV_Position) : SV_Target\n{\n"
+                 "  FMaterialPixelParameters Parameters; Parameters.SvPosition = Pos;\n")
+    uv = (head + "float2 CustomExpression0(" + ", ".join(params) + ")\n{\n" + wallads_uv_code() + "}\n"
+          + main_open + "  return float4(CustomExpression0(" + ", ".join(args) + "), 0, 1);\n}\n")
+    surf_params = params + ["inout %s %s" % (TYPES[c], n) for n, c in SURFACE_OUTPUTS]
+    surf = (head + "float3 CustomExpression0(" + ", ".join(surf_params) + ")\n{\n" + wallads_custom_code() + "}\n"
+            + main_open + "  float Rough = 0; float Metal = 0; float Spec = 0; float3 Emis = 0; float3 NrmWS = 0;\n"
+            "  float3 b = CustomExpression0(" + ", ".join(args + ["Rough", "Metal", "Spec", "Emis", "NrmWS"]) + ");\n"
+            "  return float4(b + Emis + NrmWS * 0.001, Rough + Metal + Spec);\n}\n")
+    return {"M_XinyiWallAds_UV": uv, "M_XinyiWallAds": surf}
+    return {"M_XinyiWallAds_UV": uv, "M_XinyiWallAds": surf}
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--dxc", default="dxc")
@@ -54,9 +76,11 @@ def main():
     HV = args.hlsl_version
     bad = 0
     with tempfile.TemporaryDirectory() as td:
-        for mat in MATERIALS:
+        units = {mat: wrapper(mat) for mat in MATERIALS}
+        units.update(wallads_wrappers())
+        for mat, text in units.items():
             src = Path(td) / (mat + ".hlsl")
-            src.write_text(wrapper(mat))
+            src.write_text(text)
             for target in (["-T", "ps_6_0"], ["-T", "ps_6_0", "-spirv"]):
                 r = subprocess.run([args.dxc, *target, "-E", "main", "-HV", HV, "-WX",
                                     "-Wno-conversion", "-Fo", str(Path(td) / "out.bin"), str(src)],
