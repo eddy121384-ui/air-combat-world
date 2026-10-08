@@ -2,6 +2,8 @@
 
 Status: **research and spec only.** No shader, builder, asset or Unreal change. Branch
 `feat/opus55-xinyi-visual-quality`, on top of `5d3c49d` (Facade Grammar v0A).
+**v0.1:** a 14-window street-level verification survey (§K) broadly supports the design. Its revised production
+recommendation (§K.7) supersedes the numbers in §D.4 and §G where they differ.
 
 Inputs: `docs/taipei-urban-visual-language-research-v0.md` (§3.3, §7, §11, §12, §20), `docs/xinyi-taipei-street-reality-v0e.md`
 (storefront layer), `docs/xinyi-facade-grammar-v0a.md` (generation classes, register-pressure lessons),
@@ -322,12 +324,133 @@ construction kit**, because their geometry belongs to the site.
 
 ---
 
+## K. Reality verification survey (v0.1)
+
+### K.1 Method
+
+* **14 windows**, Google Street View, viewed in the browser only (no image saved or committed). Each window is one
+  official panorama seen in four headings with the camera pitched ~18° up; ambiguous boards were enlarged. Imagery dates
+  are not shown in the thumbnails; one frame carried a 2025 credit.
+* Panoramas were resolved from geocoded road points (OpenStreetMap Nominatim) so that most windows sit on a road, not in
+  a lane. Mix: older western fabric (Wanhua x 2, Datong), ordinary lanes (Zhongshan, Shida), Daan (Fuxing S. Rd),
+  Songshan (Bade Rd), Xinyi edge (Wuxing St, Keelung Rd), Shilin, Wenshan / Jingmei, newer Neihu, the new Nangang
+  district, and one major construction site (the Taipei Main Station twin-tower site).
+* "Exposed wall" = a side / blank or corner flank of >= ~4 floors whose face is clearly visible from the road; windowed
+  flanks count. Counts are approximate.
+* **Bias:** road-centred viewpoints at intersections over-sample exactly the walls ads prefer; 14 windows give
+  direction, not statistics. Unreadable content is recorded as unreadable.
+
+### K.2 Window log
+
+| # | window | context | exposed walls | large ads | what [O] |
+|---|---|---|---|---|---|
+| 1 | Wanhua, Xiyuan Rd sec. 1 | old mixed street, corners | ~5 | **2** | two **painted, faded** Chinese-medicine clinic ads (中醫, with pre-1995 公保 / 勞保 wording [I]) on side walls of legacy walk-ups, above a low neighbour / at a corner |
+| 2 | Datong, Chongqing N. Rd x Minquan W. Rd | major road under a flyover | ~3 | 0 | upper floors carry tall vertical blade signs, not wall ads |
+| 3 | Zhongshan, lane off Minquan E. Rd | narrow lane, walk-ups | ~1 | 0 | rear / AC walls only |
+| 4 | Daan, Shida Rd lane | parking lot + park edge | ~10 | 0 | many fully exposed flanks, all **windowed**, none advertised |
+| 5 | Daan, Fuxing S. Rd sec. 2 | major road | ~4 | **1** | **real-estate pre-sale vinyl** (~7 floors tall, unit sizes in 坪, phone number) on the side wall of an older tower, **off-site** |
+| 6 | Songshan, Bade Rd sec. 4 | major road | ~2 | **1** + site | on-premise photo banner for an upper-floor spa (front wall, ~2 floors) on a walk-up; adjacent construction fully wrapped in **blue** netting, no graphics |
+| 7 | Xinyi edge, Wuxing St | local commercial | ~3 | 0 | dense v0E-type boards and vertical blades only |
+| 8 | Xinyi edge, Keelung Rd sec. 2 | wide arterial | ~4 | 0 | clean corridor |
+| 9 | Wanhua, Huanhe S. Rd sec. 2 | legacy rows | ~2 | 0 | one blank white-tile corner flank, bare |
+| 10 | Shilin, Wenlin Rd | major road + vacant lot | ~5 | **2** | framed photo board with readable 眼鏡 (optical retail) on a corner building; portrait board (content unreadable) on an upper side wall; an **empty rooftop billboard frame**; a mobile crane |
+| 11 | Wenshan, Roosevelt Rd sec. 6 | major road, corner | ~4 | **1** | framed board pair wrapping a legacy corner, readable 全美語 (English cram school / kindergarten) |
+| 12 | Neihu, Chenggong Rd sec. 2 | newer mixed + vacant lot | ~5 | 0 | one large windowless flank, bare; new towers bare |
+| 13 | Nangang, Jingmao 2nd Rd | new district, offices / mall | ~3 | **1** | large promotional banner on a **new commercial podium** (event banner) |
+| 14 | Zhongzheng, Zhengzhou Rd (twin-tower site) | mega construction | ~2 | 0 + site | site hoarding with **decorative graphic panels** (no readable text), steel frame behind |
+
+Totals: ~53 exposed walls, **8 large-format ads** (6 on exposed side / corner walls of permanent buildings, 1 on-premise
+front banner, 1 commercial-podium banner), 2 construction contexts plus 1 crane.
+
+### K.3 Answers
+
+**A. Placement rate — plausible, keep 8-12 %, but concentrate it.** [O] about 6 side / corner wall ads on ~53 exposed
+walls (~11 %) in road-centred views; [I] the true area-wide rate on our prime pool is likely lower (pool includes
+interior flanks). [R] **zero** ads in lanes (W3), park / lot-facing quiet flanks (W4) and two clean arterials (W2, W8).
+Recommendation: global **6-10 % of the prime pool**, carried almost entirely by road-facing and corner walls (see C).
+
+**B. Generation — the hypothesis holds, with one class exception.** [O] every permanent-building wall ad sat on legacy
+walk-ups or older (1980s-90s) towers. [O] no ad on modern or premium residential (new towers in W4, W5, W12, W13 bare).
+[O] one large banner on a **new commercial podium** (W13). Recommendation: residential modern **near zero but not banned**
+(weight 0.05, major-road party walls only); premium residential **0**; commercial podium promotional banners a **separate
+rare class** (W9, core / new districts, very low cap).
+
+**C. Road / exposure — strong correlation, but not sufficient on its own.** [R] all observed ads face a road; 3 of 6
+side-wall ads are at **corners** (W1, W10, W11); [O] exposure above a lower neighbour (W1) and road-facing tower flanks
+(W5) carry them. [O] Major roads without old exposed flanks (W2, W8) had none. Recommendation: raise corner gain to
+**1.5**, require road frontage (role >= street) for 90 % of placements, keep open-flank class C at most ~10 % of ads.
+
+**D. Category mix (do not overfit).**
+
+| level | categories |
+|---|---|
+| common | **medical / clinic** (incl. old painted, faded); **real-estate pre-sale** (on rented walls off-site) |
+| occasional | **education / cram school**; **retail / service** on-premise upper-floor banners (optical, spa) |
+| rare | commercial-podium promotion; leasing (not observed, kept as cheap filler); telecom / 3C (not observed) |
+| present as remnants | faded / ghost painted ads (2 of 7 permanent ads); **empty rooftop billboard frames** |
+
+**E. Construction — separate grammar.** [O] the observed site wraps were **netting (blue) with no graphics** (W6) and
+**decorative hoarding panels** without readable text (W14). Pre-sale advertising was observed **off-site** on an existing
+tower flank (W5), not on the site wrap. [I] construction needs its own placement grammar (per site, hoarding line +
+net colour + optional project banner), sharing only the atlas; pre-sale banners on permanent walls stay in the main
+grammar. Net colour: blue observed here, green in earlier research (P12): both.
+
+### K.4 What changed in the spec
+
+* Placement weights: corner gain 1.25 -> **1.5**; open-flank (class C) capped at ~10 % of ads; road frontage required for
+  ~90 % of ads; quiet / park / lane walls stay excluded.
+* Generation: modern residential weight 0 -> **0.05** (major-road party walls only); premium stays 0; W9 podium banner
+  stays a separate rare class (<= 3 in Xinyi).
+* New sub-family **W10 on-premise upper-floor banner** (front wall of a commercial-frontage legacy building, floors 2-4,
+  4-8 m wide): occasional, P2, uses the same plane system.
+* **Rooftop billboard frames** (empty steel lattice): observed once; noted as an optional P3 silhouette prop for a later
+  rooftop pass, not part of this layer.
+* Construction: separate grammar; hoarding gets **non-text decorative graphic bands**; net colour blue and green.
+* Many exposed flanks are **windowed**, not blank [O W4]: the plane covers windows only where the wall is a true party
+  wall or the flank faces a road; do not treat every exposed wall as a blank canvas.
+
+### K.5 Evidence limits
+
+14 windows, road-biased, single time slice; categories read from 7 legible boards. Rates are directional. A Xinyi-only
+follow-up (6 windows around Wuxing / Songren / Zhuangjing) would tighten the in-area rate but is not required for v0.
+
+### K.6 Implementation gate
+
+The survey **broadly supports** the design. Recommended v0 scope (not implemented): permanent-building wall ads on
+legacy / huaxia road-facing and corner walls with the plane + atlas system of §F, one material, no construction wraps
+yet (they ship with the construction kit), no podium banners in the first visual test.
+
+### K.7 Revised production recommendation
+
+1. **Placement rate:** 6-10 % of the prime pool (default 8 %), concentrated on corner and road-facing walls.
+2. **Eligible wall classes:** A stepped party walls and B road flanks (role >= street, corners first); C open flanks
+   only as a minority (<= 10 % of ads); W10 on-premise front banners on commercial frontage of legacy buildings.
+3. **Hard exclusions:** lanes / rear / alley walls, park / plaza / school-yard facing walls, schools, civic, landmarks,
+   Taipei 101, offices, premium residential, rooftop-structure records, real brands, political content.
+4. **Low-probability exceptions:** modern residential party walls on major roads (weight 0.05); commercial-podium
+   promotional banners in the core / new districts (<= 3 in Xinyi).
+5. **Category priority:** medical / clinic and real-estate pre-sale first; education and retail / service second; faded /
+   ghost painted ads >= 20 %; leasing as cheap filler; telecom / 3C minimal.
+6. **Permanent vs construction:** separate grammars sharing the atlas. Permanent: walls of existing buildings (incl.
+   off-site pre-sale banners). Construction: per site — hoarding band (decorative graphics, optional project panel),
+   blue / green net wrap without graphics by default, an occasional project banner; built with the construction kit.
+7. **Recommended Xinyi instance count:** **~70-100 permanent ads** (default ~85 on the 1,090-wall pool), plus 2-3
+   podium banners, plus construction per site (~6 panels per active site).
+8. **40-cell atlas:** still makes sense, re-weighted: W1 pre-sale 8 -> 6, W2 medical 4 -> 6 (2 of them painted-faded
+   variants), W3 education 4, W4 leasing 3 -> 2, W6 / W7 telecom-services 3 -> 1, **W10 on-premise banner 3 (new)**,
+   W5 ghost 6, W8 construction 8 (incl. 2 non-text decorative hoarding bands), W9 podium 2. Total ~38-40 cells, one
+   2048² atlas.
+
+---
+
 ## Sources
 
 * 臺北市廣告物管理自治條例 (2016): https://laws.gov.taipei/law/LawSearch/LawExport/FL079873?type=0
 * 臺北市建築工程樣品屋及臨時廣告管理辦法 (2014): https://laws.gov.taipei/law/LawSearch/LawExport/FL073637?type=0
 * CNA, Taipei new-project and pre-sale counts, 2020-10-08: https://www.cna.com.tw/news/afe/202010080099.aspx
 * AFP 2010 photo caption (not opened): https://nbr.org/?p=111283
+* §K survey: Google Street View panoramas (viewed only, nothing saved); road points geocoded with OpenStreetMap
+  Nominatim (https://nominatim.openstreetmap.org, ODbL)
 * JLL, Dunnan Taipei Office Tower listing: https://invest.jll.com/be/en/listings/office/dunnan-taipei-office-tower
 * Commons "Taiwan Life" category (titles only): https://download.osmand.net/wiki/Category:Taiwan_Life
 * The News Lens, hand-painted cinema boards (search result, article not verified): https://www.thenewslens.com/article/56166
