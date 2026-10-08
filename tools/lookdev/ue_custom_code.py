@@ -17,7 +17,9 @@ MATERIALS = {
     "M_XinyiCity": (
         [("WP", 3), ("N", 3), ("UV0", 2), ("UV1", 2), ("UV2", 2), ("Night", 1), ("LitFrac", 1),
          ("ShopTX", 0), ("PlanTX", 0)],
-        "xl.xc_city(WP, N, UV0, UV1, xl.xc_unpack(UV2), Night, LitFrac, ShopTX, ShopTXSampler, PlanTX, "
+        # facade generation payload (TEXCOORD_2.x bits 15-17) is stripped here and not consumed yet
+        "float fgen;\n"
+        "xl.xc_city(WP, N, UV0, UV1, xl.xc_unpack_tile(UV2, fgen), Night, LitFrac, ShopTX, ShopTXSampler, PlanTX, "
         "b, r, m, s, e, n);",
         "#define XC_NO_HERO 1\n",
     ),

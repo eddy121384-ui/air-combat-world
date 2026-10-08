@@ -13,7 +13,7 @@
 //   uv0   walls: (perimeter m, height above surveyed ground m)
 //         roofs: tile-local (east, north) m
 //   uv1   (record height m, visual floor height m)
-//   vc    xc_unpack(TEXCOORD_2): r = (archetype*16+variant)/255, g = seed/255,
+//   vc    xc_unpack / xc_unpack_tile(TEXCOORD_2): r = (archetype*16+variant)/255, g = seed/255,
 //         b = weathering, a = flags/255 (bit0 core, bit1 anchor, bit2 podium part, bit3 rooftop
 //         structure; bits 4-6: school walls bit4 = corridor side, other walls = street frontage role,
 //         0 = no frontage contract -> accepted grammar; see xc_wall)
@@ -51,6 +51,22 @@ float4 xc_unpack(float2 d)
 {
     float r = floor(d.x / 256.0 + 1e-4);
     float g = d.x - r * 256.0;
+    float b = floor(d.y / 256.0 + 1e-4);
+    float a = d.y - b * 256.0;
+    return float4(r, g, b, a) / 255.0;
+}
+
+// Look-tile variant of xc_unpack: TEXCOORD_2.x may carry the facade generation payload in bits 15-17
+// (x = gen * 32768 + R*256 + G, R <= 127; tools/lookdev/facade_generation.py). The payload is split off
+// first and the remaining integer is rounded (interpolated constants can land a few ulp off at ~2^17), then
+// decoded exactly like xc_unpack. With gen == 0 the result equals xc_unpack. `gen` (0..4) is not consumed by
+// any visual code yet. Only M_XinyiCity uses this; every other material keeps xc_unpack.
+float4 xc_unpack_tile(float2 d, out float gen)
+{
+    gen = floor((d.x + 0.5) / 32768.0);
+    float x = floor(d.x - gen * 32768.0 + 0.5);
+    float r = floor(x / 256.0 + 1e-4);
+    float g = x - r * 256.0;
     float b = floor(d.y / 256.0 + 1e-4);
     float a = d.y - b * 256.0;
     return float4(r, g, b, a) / 255.0;

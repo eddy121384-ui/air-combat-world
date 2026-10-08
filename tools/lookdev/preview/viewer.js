@@ -273,7 +273,8 @@ float lampTex(vec3 w) { return texture(uLamp, vec2((w.x + 1500.0) / 2500.0, (150
 vec4 groundTex(vec3 w) { return texture(uGround, vec2((w.x + 1500.0) / 2500.0, (1500.0 - w.y) / 2500.0)); }
 void main() {
   vec3 N = normalize(vN);
-  vec4 vc = xc_unpack(vCol.xy);
+  float fgen = 0.0;
+  vec4 vc = (uKind == 0) ? xc_unpack_tile(vCol.xy, fgen) : xc_unpack(vCol.xy);   // look tiles may carry the facade-generation payload
   if (vCol.w > 0.5) vc.z = vCol.z;   // instanced: variant from per-instance data
   if (uKind == 2) vc = vec4(vCol.xy, 0.5, 1.0);            // plain floats (not packed)
   if (uKind == 4) vc = vec4(vCol.xy, vCol.z, 1.0);

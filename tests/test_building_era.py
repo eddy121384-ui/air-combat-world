@@ -399,14 +399,27 @@ class TestLicenceGate(unittest.TestCase):
 
 
 class TestNoVisualWiring(unittest.TestCase):
-    """v0 is data-only: nothing in the render / look-dev pipeline may consume era metadata yet."""
+    """Era metadata never reaches rendering code. The only look-dev consumers are the offline facade generation
+    payload producers (facade_generation.py classifier, build_look_tiles.py bake); shaders, Unreal material code
+    and the preview viewer must stay era-free (they only see the opaque generation code)."""
+
+    OFFLINE_PAYLOAD_PRODUCERS = {"facade_generation.py", "build_look_tiles.py"}
 
     def test_lookdev_and_shaders_do_not_reference_era(self):
-        for p in list((REPO / "tools/lookdev").rglob("*.py")) + list((REPO / "tools/lookdev/shaders").rglob("*")):
-            if p.is_file():
-                text = p.read_text(encoding="utf-8", errors="ignore")
-                self.assertNotIn("building_era", text, p)
-                self.assertNotIn("era_bucket", text, p)
+        lookdev = REPO / "tools/lookdev"
+        files = [p for p in list(lookdev.rglob("*.py")) + list(lookdev.rglob("*.hlsl")) + list(lookdev.rglob("*.js"))
+                 if p.is_file() and p.name not in self.OFFLINE_PAYLOAD_PRODUCERS]
+        files += [p for p in (lookdev / "shaders").rglob("*") if p.is_file()]
+        for p in files:
+            text = p.read_text(encoding="utf-8", errors="ignore")
+            self.assertNotIn("building_era", text, p)
+            self.assertNotIn("era_bucket", text, p)
+
+    def test_payload_producers_do_not_import_regional_adapters(self):
+        for name in self.OFFLINE_PAYLOAD_PRODUCERS:
+            text = (REPO / "tools/lookdev" / name).read_text(encoding="utf-8")
+            self.assertNotIn("adapters.taipei", text, name)
+            self.assertNotIn("use_permits", text, name)
 
 
 if __name__ == "__main__":

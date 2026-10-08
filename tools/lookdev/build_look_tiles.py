@@ -30,6 +30,10 @@ What changes is vertex *sharing* and vertex *attributes*:
                                              other records: frontage role FRONT_*
                                              (0 on roofs / rooftop-structure records),
                          >= 248 reserved for the hero tag; max baked value 127)
+              x is additionally offset by facade_generation.PAYLOAD_UNIT * generation code (bits 15-17 of the first
+              float; 0 unknown, 1 legacy, 2 huaxia, 3 modern, 4 premium). R <= 127 always, so this is pure
+              headroom: no extra vertex bytes. Decode with xc_unpack_tile(); not consumed visually yet
+              (docs/xinyi-facade-metadata-payload-v0.md).
 
 Building groups
 ---------------
@@ -87,9 +91,12 @@ HERE = Path(__file__).resolve().parent
 REPO = HERE.parents[1]
 sys.path.insert(0, str(REPO / "tools/compiler"))
 sys.path.insert(0, str(HERE))
+sys.path.insert(0, str(REPO / "tools/building_era"))
 
 import build_urban_identity as urban  # noqa: E402  (acw.frontage/0 rules)
 import campus_identity as campus_id  # noqa: E402
+import era_schema as es  # noqa: E402  (generic building-era record; the Taipei adapter is never imported)
+import facade_generation as fg  # noqa: E402
 from gltf_writer import pack_rgba8, read_glb_primitives, write_glb  # noqa: E402
 from worldmodel import build_worldmodel  # noqa: E402
 
@@ -103,6 +110,10 @@ OUT = REPO / "unreal/Saved/XinyiLook"
 ARCH_LOW, ARCH_WALKUP, ARCH_HUAXIA, ARCH_RESTOWER, ARCH_OFFICE, ARCH_PODIUM, ARCH_CIVIC, ARCH_SCHOOL = range(8)
 ARCH_NAMES = ["low", "walkup", "huaxia", "res_tower", "office_glass", "commercial_podium", "civic", "school"]
 assert ARCH_SCHOOL == campus_id.ARCH_SCHOOL
+assert (ARCH_LOW, ARCH_WALKUP, ARCH_HUAXIA, ARCH_RESTOWER, ARCH_OFFICE, ARCH_PODIUM, ARCH_CIVIC, ARCH_SCHOOL) == (
+    fg.ARCH_LOW, fg.ARCH_WALKUP, fg.ARCH_HUAXIA, fg.ARCH_RESTOWER, fg.ARCH_OFFICE, fg.ARCH_PODIUM, fg.ARCH_CIVIC,
+    fg.ARCH_SCHOOL)
+ERA_CACHE = REPO / "data/lookdev_cache/xinyi_building_era_v0.json.gz"   # optional input; never required
 LANDMARKS = HERE / "landmarks.json"
 
 FLAG_CORE, FLAG_ANCHOR, FLAG_PODIUM, FLAG_ROOFTOP, FLAG_CORRIDOR = 1, 2, 4, 8, 16
@@ -150,7 +161,8 @@ class UF:
             self.p[a] = b
 
 
-def classify(wm, props):
+def classify(wm, props, era_records=None):
+    """era_records: optional {footprint id: es.EraRecord}; None / missing ids = unknown (never required)."""
     feats = [b for b in wm["buildings"] if not b["suppressed"]]
     polys = []
     for b in feats:
@@ -263,6 +275,10 @@ def classify(wm, props):
         weather = int(max(0, min(255, base_w + (seed % 64) - 32)))
         stats[ARCH_NAMES[arch]] += 1
 
+        era = es.aggregate_group([(feats[m]["id"], float(areas[m]), era_records.get(feats[m]["id"], es.UNKNOWN))
+                                  for m in members]) if era_records else None
+        gen, gen_basis = fg.classify(arch, floors, height, fh, bool(core), era, landmark=lm_variant is not None)
+
         for m in members:
             b = feats[m]
             flags = (FLAG_CORE if core else 0)
@@ -285,6 +301,9 @@ def classify(wm, props):
                 "floor_h": float(fh),
                 "core": bool(core),
                 "d101_m": float(d101),
+                "facade_gen": gen,
+                "facade_basis": gen_basis,
+                "era_bucket": era.era_bucket if era is not None else "unknown",
             }
             if campus is not None:
                 records[b["id"]]["campus"] = campus
@@ -542,14 +561,23 @@ def weld(pos, nrm, uv0, uv1, col):
 
 # --------------------------------------------------------------------------
 
-def build(out_dir: Path):
+def load_era(path: Path | None):
+    """Optional era records through the generic loader; a missing file is not an error."""
+    if path is None or not path.exists():
+        return None
+    import pipeline as era_pipeline
+    return era_pipeline.load_records(path)
+
+
+def build(out_dir: Path, era_path: Path | None = None, payload_on: bool = True):
     contract = json.loads((CONTRACT / "xinyi_unreal_v2_contract.json").read_text())
     z_offsets = json.loads(Z_OFFSETS.read_text())
     z_offsets = z_offsets["offsets_m"]
     src = json.loads(SOURCE.read_text(encoding="utf-8"))
     props = {f["id"]: f["properties"] for f in src["features"]}
     wm = build_worldmodel(SOURCE, CITY, source_crs="EPSG:3826")
-    records, arch_stats, group_count, membership, campuses = classify(wm, props)
+    era_records = load_era(era_path)
+    records, arch_stats, group_count, membership, campuses = classify(wm, props, era_records)
     all_polys = [Polygon(pt["footprint_enu"], pt.get("holes_enu") or []).buffer(0)
                  for b in wm["buildings"] if not b["suppressed"] for pt in b["polygons"]]
     probes = {c["id"]: campus_id.YardProbe(c["geom"], all_polys) for c in campuses}
@@ -591,7 +619,8 @@ def build(out_dir: Path):
             N.append(nrm.reshape(-1, 3))
             U0.append(uv0.reshape(-1, 2))
             U1.append(uv1.reshape(-1, 2))
-            C.append(col.reshape(-1, 4))
+            C.append(np.concatenate([col, np.full((len(col), 3, 1), rec["facade_gen"] if payload_on else 0,
+                                                  dtype=np.uint8)], axis=2).reshape(-1, 5))
             comp += 1
         # float32 exactly as the accepted runtime GLB serialises it
         pos = np.concatenate(P).astype(np.float32)
@@ -613,7 +642,7 @@ def build(out_dir: Path):
         name = f"xinyi_look_{tile}.glb"
         write_glb(tiles_out / name, [{
             "name": "XinyiCity",
-            "positions": wpos, "normals": wnrm, "uv0": wuv0, "uv1": wuv1, "uv2": pack_rgba8(wcol),
+            "positions": wpos, "normals": wnrm, "uv0": wuv0, "uv1": wuv1, "uv2": pack_rgba8(wcol[:, :4], payload=wcol[:, 4]),
             "indices": idx, "base_color": [0.7, 0.7, 0.7, 1.0],
         }], mesh_name=f"SM_XinyiLook_{tile}")
         manifest.append({
@@ -676,11 +705,22 @@ def build(out_dir: Path):
         sidecar.append({"building_id": bid, **{k: rec[k] for k in ("group", "archetype", "variant", "seed",
                                                                    "weather", "flags", "floor_h")},
                         "archetype_name": ARCH_NAMES[rec["archetype"]],
+                        "facade_generation": fg.GEN_NAMES[rec["facade_gen"]],
+                        "facade_basis": rec["facade_basis"], "era_bucket": rec["era_bucket"],
                         **({"campus": rec["campus"]} if "campus" in rec else {})})
     with gzip.open(out_dir / "look_buildings.jsonl.gz", "wt", encoding="utf-8", compresslevel=9) as fh:
         for r in sidecar:
             fh.write(json.dumps(r, sort_keys=True) + "\n")
 
+    facade_summary = {
+        "payload_written": payload_on, "era_input": str(era_path.name) if era_records is not None else None,
+        "records_by_generation": dict(sorted(Counter(fg.GEN_NAMES[r["facade_gen"]] for r in records.values()).items())),
+        "records_by_basis": dict(sorted(Counter(r["facade_basis"] for r in records.values()).items())),
+        "groups_by_generation": dict(sorted(Counter(
+            fg.GEN_NAMES[g["facade_gen"]] for g in {r["group"]: r for r in records.values()}.values()).items())),
+        "groups_by_basis": dict(sorted(Counter(
+            g["facade_basis"] for g in {r["group"]: r for r in records.values()}.values()).items())),
+    }
     report = {
         "status": "PASS_LOOK_TILES",
         "tiles": manifest,
@@ -691,6 +731,7 @@ def build(out_dir: Path):
             "vertices_accepted": int(sum(t["vertices_accepted"] for t in manifest)),
             "vertices_look": int(sum(t["vertices_look"] for t in manifest)),
         },
+        "facade_generation": facade_summary,
         "contract": "triangle soup bit-identical to accepted runtime tiles; attributes are look-dev only",
         "frontage": {k: bake[k] for k in ("buildings_with_frontage", "commercial_candidates", "corners",
                                           "frontage_edges_by_role", "matched_share")},
@@ -713,8 +754,13 @@ def build(out_dir: Path):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--out", type=Path, default=OUT)
+    ap.add_argument("--era-cache", type=Path, default=ERA_CACHE,
+                    help="optional generic acw.building_era/0 cache; skipped when absent")
+    ap.add_argument("--no-era", action="store_true", help="ignore any era cache (morphology only)")
+    ap.add_argument("--no-facade-payload", action="store_true",
+                    help="write generation 0 everywhere (output identical to the pre-payload tiles)")
     args = ap.parse_args()
-    build(args.out)
+    build(args.out, None if args.no_era else args.era_cache, not args.no_facade_payload)
 
 
 if __name__ == "__main__":

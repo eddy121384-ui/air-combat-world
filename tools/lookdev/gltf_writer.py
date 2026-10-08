@@ -58,7 +58,7 @@ class _Buf:
         return len(self.accessors) - 1
 
 
-def pack_rgba8(rgba) -> np.ndarray:
+def pack_rgba8(rgba, payload=None) -> np.ndarray:
     """Pack uint8 RGBA rows into TEXCOORD-safe floats: (R*256+G, B*256+A).
 
     Values <= 65535 are exact in float32. XinyiLook uses TEXCOORD_2 for
@@ -69,9 +69,21 @@ def pack_rgba8(rgba) -> np.ndarray:
     pack data whose high bytes (R, B) are constant across every triangle
     (per-building / per-part data). Smoothly varying data (terrain weights,
     tree height) must be written as plain 0..1 floats instead.
+
+    payload (optional, uint array of len(rgba), 0..7): facade generation code stored in bits 15-17 of the
+    first float (x = payload * 32768 + R*256 + G). Requires R <= 127; decode with xc_unpack_tile().
+    payload=None / all zero is bit-identical to the historical output.
     """
     c = np.asarray(rgba, dtype=np.uint32)
-    return np.column_stack([c[:, 0] * 256 + c[:, 1], c[:, 2] * 256 + c[:, 3]]).astype(np.float32)
+    x = c[:, 0] * 256 + c[:, 1]
+    if payload is not None:
+        pl = np.asarray(payload, dtype=np.uint32)
+        if pl.shape != (len(c),) or (pl > 7).any():
+            raise ValueError("payload must be one value 0..7 per row")
+        if (pl > 0).any() and (c[pl > 0, 0] > 127).any():
+            raise ValueError("payload needs R <= 127 (bit 15 of the first float must be free)")
+        x = x + pl * 32768
+    return np.column_stack([x, c[:, 2] * 256 + c[:, 3]]).astype(np.float32)
 
 
 def ue_local_bounds_cm(positions_game) -> dict:
