@@ -1,5 +1,9 @@
 # Facade generation metadata payload v0
 
+> **Superseded in part by `docs/xinyi-facade-grammar-v0a.md`:** the payload encoding (§1-4) is unchanged; the
+> classification (§5, §7, §8) now adds an `acw.facade_profile/0` profile layer and a profile-weighted premium draw,
+> and `xc_wall` consumes the code. The rules below remain the `--no-facade-profile` behaviour.
+
 Status: **data wire installed, not consumed.** No shader visual logic, geometry, texture, roof, storefront, frontage
 or school behaviour changed. Branch `feat/opus55-xinyi-visual-quality`, on top of `d620369`.
 

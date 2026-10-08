@@ -114,6 +114,8 @@ assert (ARCH_LOW, ARCH_WALKUP, ARCH_HUAXIA, ARCH_RESTOWER, ARCH_OFFICE, ARCH_POD
     fg.ARCH_LOW, fg.ARCH_WALKUP, fg.ARCH_HUAXIA, fg.ARCH_RESTOWER, fg.ARCH_OFFICE, fg.ARCH_PODIUM, fg.ARCH_CIVIC,
     fg.ARCH_SCHOOL)
 ERA_CACHE = REPO / "data/lookdev_cache/xinyi_building_era_v0.json.gz"   # optional input; never required
+# regional visual-generation weights (acw.facade_profile/0); optional, --no-facade-profile = morphology prior only
+FACADE_PROFILE = HERE / "profiles/facade_taipei_xinyi_v0.json"
 LANDMARKS = HERE / "landmarks.json"
 
 FLAG_CORE, FLAG_ANCHOR, FLAG_PODIUM, FLAG_ROOFTOP, FLAG_CORRIDOR = 1, 2, 4, 8, 16
@@ -161,8 +163,9 @@ class UF:
             self.p[a] = b
 
 
-def classify(wm, props, era_records=None):
-    """era_records: optional {footprint id: es.EraRecord}; None / missing ids = unknown (never required)."""
+def classify(wm, props, era_records=None, profile=None):
+    """era_records: optional {footprint id: es.EraRecord}; None / missing ids = unknown (never required).
+    profile: optional fg.FacadeProfile (regional generation weights); None = morphology prior only."""
     feats = [b for b in wm["buildings"] if not b["suppressed"]]
     polys = []
     for b in feats:
@@ -277,7 +280,8 @@ def classify(wm, props, era_records=None):
 
         era = es.aggregate_group([(feats[m]["id"], float(areas[m]), era_records.get(feats[m]["id"], es.UNKNOWN))
                                   for m in members]) if era_records else None
-        gen, gen_basis = fg.classify(arch, floors, height, fh, bool(core), era, landmark=lm_variant is not None)
+        gen, gen_basis = fg.classify(arch, floors, height, fh, bool(core), era, landmark=lm_variant is not None,
+                                     profile=profile, key=gid)
 
         for m in members:
             b = feats[m]
@@ -569,7 +573,7 @@ def load_era(path: Path | None):
     return era_pipeline.load_records(path)
 
 
-def build(out_dir: Path, era_path: Path | None = None, payload_on: bool = True):
+def build(out_dir: Path, era_path: Path | None = None, payload_on: bool = True, profile_path: Path | None = None):
     contract = json.loads((CONTRACT / "xinyi_unreal_v2_contract.json").read_text())
     z_offsets = json.loads(Z_OFFSETS.read_text())
     z_offsets = z_offsets["offsets_m"]
@@ -577,7 +581,8 @@ def build(out_dir: Path, era_path: Path | None = None, payload_on: bool = True):
     props = {f["id"]: f["properties"] for f in src["features"]}
     wm = build_worldmodel(SOURCE, CITY, source_crs="EPSG:3826")
     era_records = load_era(era_path)
-    records, arch_stats, group_count, membership, campuses = classify(wm, props, era_records)
+    profile = fg.FacadeProfile.load(profile_path) if profile_path is not None and profile_path.exists() else None
+    records, arch_stats, group_count, membership, campuses = classify(wm, props, era_records, profile)
     all_polys = [Polygon(pt["footprint_enu"], pt.get("holes_enu") or []).buffer(0)
                  for b in wm["buildings"] if not b["suppressed"] for pt in b["polygons"]]
     probes = {c["id"]: campus_id.YardProbe(c["geom"], all_polys) for c in campuses}
@@ -720,6 +725,13 @@ def build(out_dir: Path, era_path: Path | None = None, payload_on: bool = True):
             fg.GEN_NAMES[g["facade_gen"]] for g in {r["group"]: r for r in records.values()}.values()).items())),
         "groups_by_basis": dict(sorted(Counter(
             g["facade_basis"] for g in {r["group"]: r for r in records.values()}.values()).items())),
+        "profile": {"name": profile.name, "sha256": profile.sha256} if profile is not None else None,
+        "records_by_archetype": {ARCH_NAMES[a]: dict(sorted(Counter(
+            fg.GEN_NAMES[r["facade_gen"]] for r in records.values() if r["archetype"] == a).items()))
+            for a in sorted({r["archetype"] for r in records.values()})},
+        "records_by_zone": {z: dict(sorted(Counter(
+            fg.GEN_NAMES[r["facade_gen"]] for r in records.values() if r["core"] == (z == "core")).items()))
+            for z in ("core", "outside")},
     }
     report = {
         "status": "PASS_LOOK_TILES",
@@ -759,8 +771,13 @@ def main():
     ap.add_argument("--no-era", action="store_true", help="ignore any era cache (morphology only)")
     ap.add_argument("--no-facade-payload", action="store_true",
                     help="write generation 0 everywhere (output identical to the pre-payload tiles)")
+    ap.add_argument("--facade-profile", type=Path, default=FACADE_PROFILE,
+                    help="optional acw.facade_profile/0 generation weights; skipped when absent")
+    ap.add_argument("--no-facade-profile", action="store_true",
+                    help="no regional profile: generation from era evidence + morphology prior only")
     args = ap.parse_args()
-    build(args.out, None if args.no_era else args.era_cache, not args.no_facade_payload)
+    build(args.out, None if args.no_era else args.era_cache, not args.no_facade_payload,
+          None if args.no_facade_profile else args.facade_profile)
 
 
 if __name__ == "__main__":

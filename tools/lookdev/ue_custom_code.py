@@ -17,16 +17,17 @@ MATERIALS = {
     "M_XinyiCity": (
         [("WP", 3), ("N", 3), ("UV0", 2), ("UV1", 2), ("UV2", 2), ("Night", 1), ("LitFrac", 1),
          ("ShopTX", 0), ("PlanTX", 0)],
-        # facade generation payload (TEXCOORD_2.x bits 15-17) is stripped here and not consumed yet
+        # facade generation payload (TEXCOORD_2.x bits 15-17): split off first, then drives the residential grammar
         "float fgen;\n"
-        "xl.xc_city(WP, N, UV0, UV1, xl.xc_unpack_tile(UV2, fgen), Night, LitFrac, ShopTX, ShopTXSampler, PlanTX, "
+        "float4 vc = xl.xc_unpack_tile(UV2, fgen);\n"
+        "xl.xc_city(WP, N, UV0, UV1, vc, fgen, Night, LitFrac, ShopTX, ShopTXSampler, PlanTX, "
         "b, r, m, s, e, n);",
         "#define XC_NO_HERO 1\n",
     ),
     "M_Taipei101": (
         [("WP", 3), ("N", 3), ("UV0", 2), ("UV1", 2), ("UV2", 2), ("Night", 1), ("LitFrac", 1),
          ("ShopTX", 0), ("PlanTX", 0)],
-        "xl.xc_city(WP, N, UV0, UV1, xl.xc_unpack(UV2), Night, LitFrac, ShopTX, ShopTXSampler, PlanTX, "
+        "xl.xc_city(WP, N, UV0, UV1, xl.xc_unpack(UV2), 0.0, Night, LitFrac, ShopTX, ShopTXSampler, PlanTX, "
         "b, r, m, s, e, n);",
         "",
     ),

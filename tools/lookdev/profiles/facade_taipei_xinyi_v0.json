@@ -1,0 +1,64 @@
+{
+ "schema": "acw.facade_profile/0",
+ "name": "taipei_xinyi_v0",
+ "status": "provisional v0 visual profile; global weights only, never tuned per building",
+ "provenance": {
+  "band_prior.default": "measured construction decade of Xinyi-area look groups matched to the building_age layer (docs/taipei-urban-visual-language-research-v0.md section 18.3), folded into three bands",
+  "band_prior.core": "assumption: planned high-rise district developed from the 1980s; larger 2000+ share than the surrounding fabric. Low-rise there is genuinely ambiguous and stays mostly unknown",
+  "floor_height_likelihood": "measured in this pass: floor-to-floor height of era-confirmed 2000+ groups vs groups without era evidence, outside the core, 6+ F residential (n = 209 / 1275). Walk-up / low show no signal and keep 1.0",
+  "evidence_recall": "the era cache holds 2001-2025 new-build use permits; outside the core the permit-confirmed 2000+ share of 13-24 F residential groups (27 %) already matches the 25 % the age layer predicts, so absence of a permit is strong evidence against 2000+. 0.85 is deliberately below that measurement",
+  "premium": "assumption: luxury-class share of new residential, highest for tall, high-ceiling towers in the planned core"
+ },
+ "max_floors": 40,
+ "band_prior": {
+  "default": {
+   "low": {"pre_1980": 0.62, "1980_1999": 0.22, "2000_plus": 0.15},
+   "walkup": {"pre_1980": 0.81, "1980_1999": 0.15, "2000_plus": 0.03},
+   "huaxia": {"pre_1980": 0.25, "1980_1999": 0.64, "2000_plus": 0.09},
+   "res_tower": {"pre_1980": 0.14, "1980_1999": 0.62, "2000_plus": 0.25}
+  },
+  "core": {
+   "low": {"pre_1980": 0.05, "1980_1999": 0.15, "2000_plus": 0.15, "unknown": 0.65},
+   "walkup": {"pre_1980": 0.30, "1980_1999": 0.50, "2000_plus": 0.20},
+   "huaxia": {"pre_1980": 0.05, "1980_1999": 0.55, "2000_plus": 0.40},
+   "res_tower": {"pre_1980": 0.02, "1980_1999": 0.50, "2000_plus": 0.48}
+  }
+ },
+ "floor_height_likelihood": {
+  "default": [
+   {"max_fh": 99.0, "pre_1980": 1.0, "1980_1999": 1.0, "2000_plus": 1.0}
+  ],
+  "huaxia": [
+   {"max_fh": 3.05, "pre_1980": 1.1, "1980_1999": 1.0, "2000_plus": 0.20},
+   {"max_fh": 3.35, "pre_1980": 1.0, "1980_1999": 1.0, "2000_plus": 0.42},
+   {"max_fh": 3.6, "pre_1980": 0.9, "1980_1999": 1.0, "2000_plus": 2.0},
+   {"max_fh": 99.0, "pre_1980": 0.8, "1980_1999": 1.0, "2000_plus": 4.4}
+  ],
+  "res_tower": [
+   {"max_fh": 3.05, "pre_1980": 1.1, "1980_1999": 1.0, "2000_plus": 0.20},
+   {"max_fh": 3.35, "pre_1980": 1.0, "1980_1999": 1.0, "2000_plus": 0.42},
+   {"max_fh": 3.6, "pre_1980": 0.9, "1980_1999": 1.0, "2000_plus": 2.0},
+   {"max_fh": 99.0, "pre_1980": 0.8, "1980_1999": 1.0, "2000_plus": 4.4}
+  ]
+ },
+ "evidence_recall": {"2000_plus": 0.85},
+ "premium": {
+  "share_of_2000_plus": {
+   "default": {"low": 0.0, "walkup": 0.0, "huaxia": 0.05, "res_tower": 0.22},
+   "core": {"low": 0.0, "walkup": 0.0, "huaxia": 0.15, "res_tower": 0.45}
+  },
+  "floor_height": [
+   {"max_fh": 3.2, "x": 0.3},
+   {"max_fh": 3.45, "x": 0.8},
+   {"max_fh": 3.7, "x": 1.2},
+   {"max_fh": 99.0, "x": 1.6}
+  ],
+  "floors": [
+   {"max_floors": 11, "x": 0.5},
+   {"max_floors": 17, "x": 1.0},
+   {"max_floors": 999, "x": 1.4}
+  ],
+  "bucket": {"2000_2009": 0.7, "2010_2019": 1.4, "2020_plus": 1.4, "inferred": 1.0},
+  "max_p": 0.85
+ }
+}

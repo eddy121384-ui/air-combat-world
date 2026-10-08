@@ -59,8 +59,9 @@ float4 xc_unpack(float2 d)
 // Look-tile variant of xc_unpack: TEXCOORD_2.x may carry the facade generation payload in bits 15-17
 // (x = gen * 32768 + R*256 + G, R <= 127; tools/lookdev/facade_generation.py). The payload is split off
 // first and the remaining integer is rounded (interpolated constants can land a few ulp off at ~2^17), then
-// decoded exactly like xc_unpack. With gen == 0 the result equals xc_unpack. `gen` (0..4) is not consumed by
-// any visual code yet. Only M_XinyiCity uses this; every other material keeps xc_unpack.
+// decoded exactly like xc_unpack. With gen == 0 the result equals xc_unpack. `gen` (0 unknown, 1 legacy,
+// 2 huaxia, 3 modern, 4 premium) selects the residential facade grammar in xc_wall (Taipei Facade Grammar v0A).
+// Only M_XinyiCity uses this; every other material keeps xc_unpack (M_Taipei101 passes gen = 0).
 float4 xc_unpack_tile(float2 d, out float gen)
 {
     gen = floor((d.x + 0.5) / 32768.0);
@@ -442,8 +443,41 @@ float4 xc_shop_sample(Texture2D tx, SamplerState ss, float4 cell, float2 lp, flo
     return tx.SampleGrad(ss, uv, gx, gy);
 }
 
+// Facade generation palettes (Taipei Facade Grammar v0A), per building constant. Huaxia: 45 mm / 二丁掛 tile (warm
+// beige, grey, muted salmon, pale green, brown, cream). Modern: painted panel / porcelain (light warm grey, cool grey,
+// warm stone, mid grey). Premium: restrained honed stone.
+float3 xc_gen_palette(float r, float gen)
+{
+    float3 c;
+    [branch] if (gen < 2.5)
+    {
+        c = xc_pick6(r, float3(0.64, 0.56, 0.45), float3(0.55, 0.55, 0.52), float3(0.64, 0.50, 0.46),
+                     float3(0.52, 0.58, 0.50), float3(0.45, 0.33, 0.26), float3(0.68, 0.65, 0.57)) * 0.82;
+    }
+    else
+    {
+        float pr = step(3.5, gen);
+        c = xc_pick4(r, lerp(float3(0.70, 0.69, 0.66), float3(0.76, 0.72, 0.65), pr),
+                        lerp(float3(0.60, 0.62, 0.63), float3(0.64, 0.62, 0.58), pr),
+                        lerp(float3(0.68, 0.63, 0.56), float3(0.81, 0.79, 0.74), pr),
+                        lerp(float3(0.50, 0.50, 0.49), float3(0.70, 0.66, 0.58), pr)) * 0.86;
+    }
+    return c;
+}
+
+// Generation glass, one tint per building: huaxia 1990s teal / bronze reflective on ~40 % (else the residential
+// mix `res`); modern neutral clear / grey; premium low-iron neutral with a faint warm or blue cast.
+float3 xc_gen_glass(float gen, float seed, float3 res)
+{
+    float3 hx = lerp(res, lerp(float3(0.10, 0.19, 0.18), float3(0.17, 0.13, 0.09), step(0.55, frac(seed * 7.77))),
+                     step(0.60, frac(seed * 2.93)));
+    float3 mo = lerp(float3(0.13, 0.15, 0.16), float3(0.17, 0.18, 0.18), frac(seed * 2.17));
+    float3 pr = lerp(float3(0.12, 0.13, 0.14), float3(0.15, 0.14, 0.12), step(0.5, frac(seed * 2.17)));
+    return lerp(lerp(hx, mo, step(2.5, gen)), pr, step(3.5, gen));
+}
+
 void xc_wall(float u, float h, float H, float fh, float arch, float variant, float seed,
-             float weather, float flags, float3 wpos, float night, float litFrac,
+             float weather, float flags, float gen, float3 wpos, float night, float litFrac,
              float fwu, float fwh, float4 dUH, float2 tW, float2 nH,
              Texture2D shopTx, SamplerState shopS, Texture2D planTx,
              out float3 base, out float rough, out float metal, out float spec, out float3 emis)
@@ -469,6 +503,17 @@ void xc_wall(float u, float h, float H, float fh, float arch, float variant, flo
     float fPrim = step(5.5, front);
     float fMajor = step(3.5, front) * (1.0 - step(4.5, front)) + step(6.5, front);
     float isHuaxia = step(1.5, arch) * (1.0 - step(2.5, arch));
+    // --- facade generation (Taipei Facade Grammar v0A; tools/lookdev/facade_generation.py) ---------------------
+    // gen is a per-building constant and non-zero only on residential archetypes. 0 unknown and 1 legacy keep the
+    // archetype grammar untouched (every term below reduces to lerp(x, y, 0) == x). 2 huaxia re-parameterises it
+    // (tile palette, teal / bronze glass, two-tone tile bands, orderly balconies, fewer cages); 3 modern and
+    // 4 premium replace the upper-facade composition in coherent per-building branches below. Ground-floor
+    // storefront / arcade / lobby logic is evaluated afterwards and stays as it is.
+    float gHx = xc_eq(gen, 2.0);
+    float gMo = xc_eq(gen, 3.0);
+    float gPr = xc_eq(gen, 4.0);
+    float gNew = gMo + gPr;
+    float isOldG = isOld * (1.0 - gNew);            // old-stock clutter (cages, enclosed balconies, tile grain)
 
     float floorsTotal = max(1.0, floor(H / fh + 0.5));
     float fi = floor(h / fh);
@@ -478,6 +523,7 @@ void xc_wall(float u, float h, float H, float fh, float arch, float variant, flo
     // --- bay rhythm per archetype -------------------------------------------
     float bw = lerp(3.6, 3.1, step(1.5, arch));                 // walkup 3.6 / huaxia 3.1
     bw = lerp(bw, 3.9, isTower);
+    bw = lerp(bw, 3.4, gHx * isTower);                          // 1990s tile tower: denser punched bays
     bw = lerp(bw, 1.5, isOffice);                               // curtain-wall module
     bw = lerp(bw, 7.5, isPodium);
     bw *= 0.9 + 0.2 * frac(seed * 7.13);
@@ -496,11 +542,16 @@ void xc_wall(float u, float h, float H, float fh, float arch, float variant, flo
     // --- wall material -------------------------------------------------------
     float palR = frac(seed * 3.731 + variant * 0.071);
     float3 wall = xc_tile_palette(palR, arch);
+    // generation palette: evaluated only on huaxia / modern / premium buildings (coherent per-building branch)
+    [branch] if (gen > 1.5)
+    {
+        wall = xc_gen_palette(palR, gen);
+    }
     // --- facade finish family (per building constant: no shimmer) ------------------
     // glazed tile (semi-gloss), painted render on ~30 % of old stock (matte, washed pastel),
     // porcelain / stone panels on towers; plus a muted warm / cool cast and +-9 % value
     float finR = frac(seed * 6.17 + variant * 0.113);
-    float painted = isOld * step(0.70, finR);
+    float painted = isOldG * step(0.70, finR);
     float3 paint = xc_pick4(frac(finR * 5.3), float3(0.50, 0.53, 0.49), float3(0.58, 0.55, 0.47),
                             float3(0.47, 0.51, 0.54), float3(0.56, 0.48, 0.45));
     wall = lerp(wall, paint * 0.9, painted);
@@ -508,30 +559,44 @@ void xc_wall(float u, float h, float H, float fh, float arch, float variant, flo
     wall *= (0.91 + 0.18 * frac(seed * 13.7)) * cast;
     float wallRough = lerp(0.58, 0.88, painted);
     wallRough = lerp(wallRough, 0.50, isTower);
+    wallRough = lerp(wallRough, 0.58, gHx);                    // glazed tile
+    wallRough = lerp(wallRough, 0.62, gNew);                   // painted panel / honed stone
     float wallSpec = lerp(0.5, 0.32, painted);
     // office glass family: reflective-coated (tinted mirror) or clear low-E (interior visible)
     float coated = isOffice * step(0.45, frac(seed * 3.97));
     // two-tone huaxia / tower bases (granite-look first floors)
     float baseFloors = lerp(1.0, 2.0, step(0.5, frac(seed * 5.3)));
     float stoneBase = (1.0 - step(baseFloors * fh, h)) * (1.0 - isOffice) * step(1.5, arch);
-    wall = lerp(wall, float3(0.30, 0.29, 0.28), stoneBase * 0.8);
+    // premium: a 2-3 floor warm granite podium (strong base / tower composition, ~7-11 m)
+    float prBase = 0.0;
+    [branch] if (gPr > 0.5)
+    {
+        prBase = 1.0 - step(min(lerp(2.0, 3.0, step(0.4, frac(seed * 5.3))) * fh, 11.5), h);
+        stoneBase = prBase;
+    }
+    wall = lerp(wall, lerp(float3(0.30, 0.29, 0.28), float3(0.44, 0.41, 0.37), gPr), stoneBase * 0.8);
     // mosaic tile grain (only resolved near the camera)
     float tileGrain = xc_hash21(floor(float2(u, h) / 0.1)) - 0.5;
-    wall *= 1.0 + tileGrain * 0.10 * dFine * isOld;
+    wall *= 1.0 + tileGrain * 0.10 * dFine * isOldG;
 
     // --- column rhythm: a short repeating bay pattern per building ------------
     // (living-room window / bathroom window / balcony / solid pier), so facades
     // read as designed buildings instead of random window noise.
     float P = 2.0 + floor(frac(seed * 11.3) * 3.0);
+    P = lerp(P, 2.0 + floor(frac(seed * 11.3) * 2.0), gHx + gMo);   // huaxia / modern: a tighter, orderly 2-3 bay rhythm
     float slot = bi - P * floor(bi / P);
     float colT = xc_hash21(float2(slot, seed * 71.0));
     float tBalc = step(lerp(0.78, 0.55, step(1.5, arch)), colT) * (1.0 - isOffice) * (1.0 - isPodium);
-    float tNarrow = step(0.60, colT) * (1.0 - tBalc) * isOld;
-    float tPier = step(0.52, colT) * (1.0 - step(0.60, colT)) * isOld * step(0.5, frac(seed * 3.1));
+    // huaxia: one balcony column per bay group (regular stacked balcony bands), never a random scatter
+    tBalc = lerp(tBalc, 1.0 - step(0.5, slot), gHx);
+    float tNarrow = step(0.60, colT) * (1.0 - tBalc) * isOldG;
+    float tPier = step(0.52, colT) * (1.0 - step(0.60, colT)) * isOldG * step(0.5, frac(seed * 3.1));
     float wx0 = lerp(0.12, 0.16, isTower);
     float wx1 = lerp(0.88, 0.84, isTower);
     float wy0 = lerp(0.30, 0.16, isTower);
     float wy1 = 0.82;
+    // huaxia: dense punched windows with a tiled sill band (also on 1990s tile towers)
+    wx0 = lerp(wx0, 0.15, gHx); wx1 = lerp(wx1, 0.85, gHx); wy0 = lerp(wy0, 0.30, gHx); wy1 = lerp(wy1, 0.80, gHx);
     wx0 = lerp(wx0, 0.36, tNarrow); wx1 = lerp(wx1, 0.64, tNarrow); wy0 = lerp(wy0, 0.46, tNarrow);
     float win = xc_box(fu, wx0, wx1, fwb) * xc_box(fv, wy0, wy1, fwf) * (1.0 - tPier);
     // balcony: recessed bay, solid tiled knee wall, sliding door behind
@@ -539,7 +604,7 @@ void xc_wall(float u, float h, float H, float fh, float arch, float variant, flo
     float knee = balc * (1.0 - step(0.36, fv));
     float door = balc * xc_box(fu, 0.18, 0.82, fwb) * xc_box(fv, 0.36, 0.86, fwf);
     // enclosed balconies (陽台外推) on old stock: aluminium windows at the front
-    float enclosed = tBalc * isOld * step(0.45, frac(seed * 9.7 + slot * 0.31));
+    float enclosed = tBalc * isOldG * step(lerp(0.45, 0.65, gHx), frac(seed * 9.7 + slot * 0.31));
     win = max(win, max(door, enclosed * balc * step(0.36, fv)));
     // curtain wall: nearly full glass, spandrel at the slab
     float cw = xc_box(fv, 0.14, 0.97, fwf);
@@ -548,7 +613,7 @@ void xc_wall(float u, float h, float H, float fh, float arch, float variant, flo
     win = lerp(win, podGlass, isPodium);
     // aluminium frames + mid mullion on residential windows
     float frameOuter = xc_box(fu, wx0 - 0.03, wx1 + 0.03, fwb) * xc_box(fv, wy0 - 0.03, wy1 + 0.03, fwf) * (1.0 - tPier) * (1.0 - balc);
-    float midM = xc_line(frac((fu - wx0) / max(wx1 - wx0, 0.05) + 0.5), 0.04, fwb * 2.0) * win * isOld;
+    float midM = xc_line(frac((fu - wx0) / max(wx1 - wx0, 0.05) + 0.5), 0.04, fwb * 2.0) * win * isOldG;
     float frame = saturate(frameOuter - win + midM) * dBay * (1.0 - isOffice) * (1.0 - isPodium);
     // average coverage for far-distance filtering
     float winMean = lerp(0.42, 0.83, isOffice);
@@ -561,6 +626,10 @@ void xc_wall(float u, float h, float H, float fh, float arch, float variant, flo
     float3 resGlass = xc_pick4(frac(seed * 2.17 + slot * 0.13),
         float3(0.12, 0.17, 0.16), float3(0.11, 0.13, 0.17), float3(0.14, 0.12, 0.10), float3(0.16, 0.17, 0.17));
     float3 glassCol = lerp(resGlass, xc_glass_palette(frac(seed * 1.37)), isOffice + isTower * 0.3);
+    [branch] if (gen > 1.5)
+    {
+        glassCol = xc_gen_glass(gen, seed, resGlass);
+    }
     // curtains / blinds behind residential glass
     glassCol = lerp(glassCol, float3(0.45, 0.42, 0.36), step(0.72, cellR) * isOld * 0.5);
     // clear office glass shows the interior: dark floor plate, brighter ceiling band (mean far away)
@@ -571,7 +640,7 @@ void xc_wall(float u, float h, float H, float fh, float arch, float variant, flo
     // --- iron window cages (鐵窗) + AC units — the Taipei signature ------------
     float cageP = lerp(0.62, 0.34, step(1.5, arch));            // walkups most caged
     cageP *= lerp(1.0, 0.45, step(4.0, fi));                     // fewer high up
-    cageP *= isOld * (1.0 - core * 0.7);
+    cageP *= isOldG * (1.0 - core * 0.7) * (1.0 - gHx * 0.35);   // huaxia: moderate; modern / premium: none
     cageP *= 1.0 - fRear * 0.2;                                  // rear / side walls: a little less clutter
     float caged = step(1.0 - cageP, frac(cellR * 7.1));
     float barsV = xc_line(frac(u / 0.13), 0.22, fwu / 0.13);
@@ -583,6 +652,7 @@ void xc_wall(float u, float h, float H, float fh, float arch, float variant, flo
     float cageCover = lerp(0.45, cageBars, xc_detail(fwu, 0.26)) * cageMask * (1.0 - tPier);
 
     float acP = lerp(0.55, 0.35, step(1.5, arch)) * (isOld + isTower * 0.5) * (1.0 - isOffice);
+    acP *= 1.0 - gHx * 0.15 - gMo * 0.75 - gPr;                  // modern: AC mostly in ledges; premium: hidden
     // street / alley walls: condensers hang in fixed columns (same side of the window, a few floors skipped), the
     // regular stacks of a Taipei street front; rear / side walls keep the unorganised scatter at 70 % density
     float acColR = xc_hash21(float2(slot, seed * 37.0));
@@ -600,6 +670,114 @@ void xc_wall(float u, float h, float H, float fh, float arch, float variant, flo
     float slab = xc_box(fv, 0.0, lerp(0.07, 0.10, isTower), fwf) * dFloor;
     float mull = xc_line(fu, 0.05, fwb) * isOffice * dBay;
     float spandrel = (1.0 - xc_box(fv, 0.14, 0.97, fwf)) * isOffice * dFloor;
+
+    // huaxia two-tone tile banding (~45 % of huaxia buildings): a contrasting tile course (brown 二丁掛 on light
+    // walls, cream on dark ones) under the sills and over the window heads, reading as horizontal stripes at
+    // 300-800 m; its area mean takes over once single floors are unresolved
+    float3 wallF = wall;
+    [branch] if (gHx * step(0.55, frac(seed * 8.93)) > 0.5)
+    {
+        float hxBand = (1.0 - stoneBase)
+                     * lerp(1.0 - (wy1 + 0.04 - wy0 + 0.02), 1.0 - xc_box(fv, wy0 - 0.02, wy1 + 0.04, fwf), dFloor);
+        float3 hxAcc = lerp(float3(0.62, 0.59, 0.52), float3(0.33, 0.25, 0.20),
+                            step(0.40, dot(wall, float3(0.3, 0.59, 0.11))));
+        wallF = lerp(wall, hxAcc, hxBand * 0.9);
+    }
+
+    // --- compose base colour ------------------------------------------------------
+    // (accepted archetype grammar in the final else; modern / premium replace it per building)
+    // modern residential (gen 3): clean light wall fields, near floor-to-ceiling glazing, a light slab-edge line
+    // per floor and glass balustrades over dark recesses; per building either a "pier" composition (one solid
+    // column every P bays: strong verticals) or a "ribbon" composition (balcony rail across every bay: strong
+    // horizontals). Bay / floor detail converges to its area mean; the pier columns resolve to ~1.5 km.
+    float3 c;
+    [branch] if (gMo > 0.5)
+    {
+        float vert = step(0.5, frac(seed * 5.9));
+        float bm = lerp(0.55, 1.0, 1.0 - vert);                     // rail share of bays
+        float bal = lerp(step(0.45, colT), 1.0, 1.0 - vert);
+        float sl = xc_box(fv, 0.0, 0.10, fwf);
+        float rl = bal * xc_box(fv, 0.10, 0.38, fwf);
+        float gl = xc_box(fv, 0.10, 0.96, fwf);                     // bay-to-bay glazing between slab lines
+        float mu = xc_line(fu, 0.05, fwb);                          // thin dark mullion at the bay line
+        float3 slabC = lerp(wall * 1.08 + 0.04, float3(0.80, 0.79, 0.76), 0.35);
+        float3 railC = lerp(glassCol, float3(0.32, 0.35, 0.37), 0.40);
+        float3 n = lerp(wall, glassCol, gl);
+        n = lerp(n, railC, rl);
+        n = lerp(n, float3(0.20, 0.21, 0.22), mu * gl);
+        n = lerp(n, slabC, sl);
+        n = lerp(n, acCol, ac);
+        float3 bayF = slabC * 0.10 + wall * 0.04 + railC * (0.28 * bm) + glassCol * (0.86 - 0.28 * bm);
+        float dBF = dBay * dFloor;
+        float3 cm = lerp(bayF, n, dBF);
+        float pcw = P * bw;                                         // pier-column period (m)
+        float pw = 1.3 / pcw;                                       // a 1.3 m solid pier / fin every P bays
+        float pier = vert * lerp(pw, xc_box(frac(u / pcw), 0.0, pw, fwu / pcw), xc_detail(fwu, pcw));
+        c = lerp(cm, wall * 0.93, pier);
+        float wNear = gl * (1.0 - rl * 0.6) * (1.0 - mu);
+        winMean = (0.86 - 0.28 * bm * 0.6) * (1.0 - vert * 1.3 / pcw);
+        win = lerp(winMean, wNear * (1.0 - pier), dBF);
+        frame = 0.0;
+        balc = 0.0;
+    }
+    // premium residential (gen 4): a stone or dark / champagne metal frame grid enclosing two-floor x two-bay
+    // cells with a deep reveal ring, a glass balustrade band on every floor, the top floor an open sky-garden
+    // void, over a 2-3 floor granite podium with tall openings. The 7-8 m frame cells resolve to ~1.2 km.
+    else if (gPr > 0.5)
+    {
+        float3 prPal = xc_gen_palette(palR, 4.0);
+        float cw2 = 2.0 * bw;
+        float ch2 = 2.0 * fh;
+        float pu = frac(u / cw2);
+        float pv = frac(h / ch2);
+        float metalF = step(0.62, frac(seed * 4.43));
+        float3 frC = lerp(prPal * 1.10 + 0.03, lerp(float3(0.27, 0.27, 0.28), float3(0.52, 0.47, 0.38),
+                          step(0.4, frac(seed * 6.6))), metalF);       // graphite / champagne metal
+        float inCell = xc_box(pu, 0.075, 0.925, fwu / cw2) * xc_box(pv, 0.07, 0.965, fwh / ch2);
+        float inRev = xc_box(pu, 0.13, 0.87, fwu / cw2) * xc_box(pv, 0.12, 0.93, fwh / ch2);
+        float rl = xc_box(fv, 0.0, 0.26, fwf);
+        float3 railC = lerp(glassCol, float3(0.34, 0.37, 0.39), 0.40);
+        float3 revC = prPal * lerp(0.30, 0.48, metalF);             // metal frames sit on a stone reveal
+        float3 inN = lerp(glassCol, railC, rl);
+        inN = lerp(inN, prPal * 0.5, xc_box(fv, 0.0, 0.035, fwf));
+        float3 inF = glassCol * 0.74 + railC * 0.26;
+        float dIn = dFloor * dBay;
+        float3 inC = lerp(inF, inN, dIn);
+        float crownV = step(H - fh, h) * (1.0 - step(H - 0.6, h));
+        inC = lerp(inC, float3(0.075, 0.08, 0.085), crownV);
+        float3 n = lerp(revC, inC, inRev);
+        n = lerp(frC, n, inCell);
+        float memM = 1.0 - 0.85 * 0.895;
+        float revM = 0.85 * 0.895 - 0.74 * 0.81;
+        float3 cF = frC * memM + revC * revM + inF * (1.0 - memM - revM);
+        float dCell = xc_detail(fwu, cw2) * xc_detail(fwh, ch2);
+        float3 cp = lerp(cF, n, dCell);
+        // granite podium: tall glazed openings between stone piers, one per bay
+        float3 baseN = lerp(wall, glassCol * 0.85, xc_box(fu, 0.16, 0.84, fwb) * xc_box(fv, 0.06, 0.94, fwf));
+        float3 baseC = lerp(wall * 0.32 + glassCol * 0.85 * 0.68 * 0.88, baseN, dBay * dFloor);
+        c = lerp(cp, baseC, prBase);
+        float wIn = 0.74 * 0.81 * 0.70;
+        winMean = lerp(wIn, 0.6, prBase);
+        win = lerp(winMean, lerp(inRev * (1.0 - rl) * (1.0 - crownV), xc_box(fu, 0.16, 0.84, fwb) * xc_box(fv, 0.06, 0.94, fwf), prBase),
+                   dCell * dIn);
+        frame = (1.0 - inCell) * metalF * dCell * (1.0 - prBase);
+        balc = 0.0;
+    }
+    else
+    {
+        c = wallF;
+        c = lerp(c, wall * 0.35, balc * (1.0 - win));               // balcony recess shade
+        c = lerp(c, wallF * 0.9, knee);                              // tiled knee wall
+        c = lerp(c, glassCol, win);
+        c = lerp(c, float3(0.62, 0.63, 0.62), frame * 0.9);          // aluminium frames
+        // piers between bays: slightly different tile tone
+        c *= 1.0 - tPier * 0.08;
+        c = lerp(c, cageCol, cageCover * 0.85);
+        c = lerp(c, acCol, ac);
+        c = lerp(c, wallF * 1.12 + 0.03, slab * (isTower + step(1.5, arch) * 0.6) * (1.0 - isOffice));
+        c = lerp(c, float3(0.70, 0.72, 0.72), mull * 0.85);
+        c = lerp(c, lerp(xc_glass_palette(frac(seed * 1.37)) * 0.6, float3(0.10, 0.10, 0.11), 0.5), spandrel);
+    }
 
     // --- street level: 騎樓 arcade + shopfronts + signage band ------------------
     // Frontage-aware: shopfronts only on commercial frontage (primary + corner side street); sign density follows
@@ -778,19 +956,6 @@ void xc_wall(float u, float h, float H, float fh, float arch, float variant, flo
     dayE = storeDay;
     }
 
-    // --- compose base colour ------------------------------------------------------
-    float3 c = wall;
-    c = lerp(c, wall * 0.35, balc * (1.0 - win));               // balcony recess shade
-    c = lerp(c, wall * 0.9, knee);                               // tiled knee wall
-    c = lerp(c, glassCol, win);
-    c = lerp(c, float3(0.62, 0.63, 0.62), frame * 0.9);          // aluminium frames
-    // piers between bays: slightly different tile tone
-    c *= 1.0 - tPier * 0.08;
-    c = lerp(c, cageCol, cageCover * 0.85);
-    c = lerp(c, acCol, ac);
-    c = lerp(c, wall * 1.12 + 0.03, slab * (isTower + step(1.5, arch) * 0.6) * (1.0 - isOffice));
-    c = lerp(c, float3(0.70, 0.72, 0.72), mull * 0.85);
-    c = lerp(c, lerp(xc_glass_palette(frac(seed * 1.37)) * 0.6, float3(0.10, 0.10, 0.11), 0.5), spandrel);
     // arcade: deep shade with shop glow; rolling shutters on some bays
     // commercial frontage: fewer closed shutters on the primary front, a faintly lit shop interior and a tiled
     // 騎樓 pier at every bay line
@@ -863,8 +1028,9 @@ void xc_wall(float u, float h, float H, float fh, float arch, float variant, flo
     float backW = known * (1.0 - fStreet);
     float grime = saturate((streak * 0.7 + topGrime + splash * 0.6 + runoff * 0.8) * weather * (1.0 + 0.18 * backW));
     grime *= 1.0 - isOffice * 0.8;
+    grime *= 1.0 - gMo * 0.5 - gPr * 0.7;                       // contemporary stock: maintained, little run-off
     c *= 1.0 - grime * 0.42;
-    c = lerp(c, c * float3(0.92, 0.95, 0.92), weather * 0.5 * isOld * (1.0 + 0.6 * backW));   // green-grey humid cast
+    c = lerp(c, c * float3(0.92, 0.95, 0.92), weather * 0.5 * isOldG * (1.0 + 0.6 * backW));   // green-grey humid cast
     // distance contact: at aircraft range a block keeps no arcade / splash detail at its foot, so a
     // short occlusion ramp grounds it into the floor. Gated on a ~4-floor period (on from mid range,
     // where single floors may still resolve) and off up close, so near Xinyi facades are unchanged.
@@ -1111,7 +1277,7 @@ void xc_taipei101(float3 wpos, float2 uv0, float3 vc4rgb, float glassFlag, float
 // Entry point shared by every building surface.
 // vc = COLOR_0 normalised. N = world normal (Z up). fw* = fwidth of coords.
 // ----------------------------------------------------------------------------
-void xc_city(float3 wpos, float3 N, float2 uv0, float2 uv1, float4 vc,
+void xc_city(float3 wpos, float3 N, float2 uv0, float2 uv1, float4 vc, float gen,
              float night, float litFrac, Texture2D shopTx, SamplerState shopS, Texture2D planTx,
              out float3 base, out float rough, out float metal, out float spec, out float3 emis,
              out float3 nrm)
@@ -1150,7 +1316,7 @@ void xc_city(float3 wpos, float3 N, float2 uv0, float2 uv1, float4 vc,
     {
         [branch] if (isRoof < 1.0)
         {
-            xc_wall(uv0.x, uv0.y, uv1.x, uv1.y, arch, variant, seed, weather, flags, wpos,
+            xc_wall(uv0.x, uv0.y, uv1.x, uv1.y, arch, variant, seed, weather, flags, gen, wpos,
                     night, litFrac, fwu, fwh, dUH, tW, nH, shopTx, shopS, planTx, bw, rw, mw, sw, ew);
         }
         [branch] if (isRoof > 0.0)

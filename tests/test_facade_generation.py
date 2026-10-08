@@ -106,6 +106,109 @@ class TestClassification(unittest.TestCase):
         self.assertEqual(subprocess.run([sys.executable, "-I", "-c", code]).returncode, 0)
 
 
+PROFILE_PATH = REPO / "tools/lookdev/profiles/facade_taipei_xinyi_v0.json"
+
+
+def toy_profile(**over):
+    """Small synthetic acw.facade_profile/0 (no regional numbers) for rule tests."""
+    flat = {"pre_1980": 1.0, "1980_1999": 1.0, "2000_plus": 1.0}
+    data = {
+        "schema": "acw.facade_profile/0", "name": "toy",
+        "band_prior": {z: {k: {"pre_1980": 0.2, "1980_1999": 0.5, "2000_plus": 0.3}
+                           for k in ("low", "walkup", "huaxia", "res_tower")} for z in ("default", "core")},
+        "floor_height_likelihood": {"default": [dict(flat, max_fh=99.0)]},
+        "evidence_recall": {"2000_plus": 0.8},
+        "premium": {"share_of_2000_plus": {"default": {"res_tower": 0.5}, "core": {"res_tower": 0.5}},
+                    "floor_height": [{"max_fh": 99.0, "x": 1.0}], "floors": [{"max_floors": 999, "x": 1.0}],
+                    "bucket": {}, "max_p": 0.9},
+    }
+    data.update(over)
+    return fg.FacadeProfile(data)
+
+
+class TestProfileClassification(unittest.TestCase):
+    def test_shipped_profile_loads_and_is_generic_data(self):
+        p = fg.FacadeProfile.load(PROFILE_PATH)
+        self.assertEqual(p.name, "taipei_xinyi_v0")
+        for core in (False, True):
+            for a in fg.RESIDENTIAL_ARCHETYPES:
+                for fh in (2.8, 3.2, 3.5, 4.0):
+                    post = p.posterior(a, fh, core, era_consulted=True)
+                    self.assertAlmostEqual(sum(post.values()), 1.0)
+                    self.assertTrue(all(v >= 0 for v in post.values()))
+
+    def test_bad_profile_rejected(self):
+        with self.assertRaises(ValueError):
+            fg.FacadeProfile({"schema": "something/0"})
+        with self.assertRaises(ValueError):
+            toy_profile(evidence_recall={"2000_plus": 1.0})
+
+    def test_key_required_and_deterministic(self):
+        p = toy_profile()
+        with self.assertRaises(ValueError):
+            fg.classify(fg.ARCH_HUAXIA, 8, 26.0, 3.25, False, None, profile=p)
+        keys = ["tp_building_height.%d" % i for i in range(400)]
+        first = [fg.classify(fg.ARCH_RESTOWER, 18, 60.0, 3.3, False, None, profile=p, key=k) for k in keys]
+        order = list(range(len(keys)))
+        random.Random(11).shuffle(order)
+        again = {i: fg.classify(fg.ARCH_RESTOWER, 18, 60.0, 3.3, False, None, profile=p, key=keys[i]) for i in order}
+        self.assertEqual(first, [again[i] for i in range(len(keys))])
+        self.assertEqual({b for _, b in first}, {fg.BASIS_PROFILE})
+
+    def test_draw_follows_posterior_and_preserves_mixture(self):
+        p = toy_profile()
+        got = [fg.classify(fg.ARCH_HUAXIA, 8, 26.0, 3.25, False, None, profile=p, key="g%d" % i)[0] for i in range(6000)]
+        share = {c: got.count(c) / len(got) for c in set(got)}
+        self.assertAlmostEqual(share[fg.GEN_LEGACY], 0.2, delta=0.03)
+        self.assertAlmostEqual(share[fg.GEN_HUAXIA], 0.5, delta=0.03)
+        self.assertAlmostEqual(share[fg.GEN_MODERN], 0.3, delta=0.03)       # huaxia archetype: no premium share
+        towers = [fg.classify(fg.ARCH_RESTOWER, 20, 66.0, 3.3, True, None, profile=p, key="t%d" % i)[0]
+                  for i in range(6000)]
+        self.assertAlmostEqual(towers.count(fg.GEN_PREMIUM) / 6000, 0.15, delta=0.03)   # 0.3 x 0.5
+        self.assertAlmostEqual(towers.count(fg.GEN_MODERN) / 6000, 0.15, delta=0.03)
+
+    def test_consulted_era_source_without_record_lowers_its_band(self):
+        p = toy_profile()
+        none = p.posterior(fg.ARCH_HUAXIA, 3.25, False, era_consulted=False)
+        miss = p.posterior(fg.ARCH_HUAXIA, 3.25, False, era_consulted=True)
+        self.assertAlmostEqual(none["2000_plus"], 0.3)
+        self.assertAlmostEqual(miss["2000_plus"], 0.3 * 0.2 / (0.7 + 0.3 * 0.2))
+        self.assertGreater(miss["1980_1999"], none["1980_1999"])
+
+    def test_unknown_mass_stays_unknown(self):
+        prior = {z: {k: {"unknown": 1.0} for k in ("low", "walkup", "huaxia", "res_tower")} for z in ("default", "core")}
+        p = toy_profile(band_prior=prior)
+        for i in range(50):
+            self.assertEqual(fg.classify(fg.ARCH_LOW, 2, 7.0, 3.5, True, None, profile=p, key="k%d" % i),
+                             (fg.GEN_UNKNOWN, fg.BASIS_NONE))
+
+    def test_evidence_and_applicability_outrank_profile(self):
+        p = toy_profile()
+        for i in range(30):
+            k = "k%d" % i
+            self.assertEqual(fg.classify(fg.ARCH_HUAXIA, 8, 26.0, 3.25, False, era("pre_1980"), profile=p, key=k),
+                             (fg.GEN_LEGACY, fg.BASIS_OBSERVED))
+            self.assertEqual(fg.classify(fg.ARCH_OFFICE, 30, 120.0, 4.0, True, era("2010_2019"), profile=p, key=k),
+                             (fg.GEN_UNKNOWN, fg.BASIS_NOT_APPLICABLE))
+            self.assertEqual(fg.classify(fg.ARCH_HUAXIA, 8, 26.0, 3.25, False, None, landmark=True, profile=p, key=k),
+                             (fg.GEN_UNKNOWN, fg.BASIS_NOT_APPLICABLE))
+            code, basis = fg.classify(fg.ARCH_RESTOWER, 20, 66.0, 3.3, True, era("2010_2019"), profile=p, key=k)
+            self.assertIn(code, (fg.GEN_MODERN, fg.GEN_PREMIUM))
+            self.assertEqual(basis, fg.BASIS_OBSERVED)
+
+    def test_walkup_family_persists_through_1980s(self):
+        self.assertEqual(fg.family(fg.ARCH_WALKUP, "1980_1999"), fg.GEN_LEGACY)
+        self.assertEqual(fg.family(fg.ARCH_LOW, "1980_1999"), fg.GEN_LEGACY)
+        self.assertEqual(fg.family(fg.ARCH_HUAXIA, "1980_1999"), fg.GEN_HUAXIA)
+        self.assertEqual(fg.family(fg.ARCH_RESTOWER, "2000_plus"), fg.GEN_MODERN)
+
+    def test_shader_consumes_generation_only_through_xc_wall(self):
+        self.assertIn("float weather, float flags, float gen, float3 wpos", HLSL)
+        code = (REPO / "tools/lookdev/ue_custom_code.py").read_text(encoding="utf-8")
+        self.assertIn("xl.xc_city(WP, N, UV0, UV1, vc, fgen, Night", code)
+        self.assertIn("xl.xc_city(WP, N, UV0, UV1, xl.xc_unpack(UV2), 0.0, Night", code)   # Taipei 101: gen 0
+
+
 class TestEncoding(unittest.TestCase):
     def test_round_trip_every_legal_base_and_code(self):
         bases = np.arange(fg.BASE_MAX + 1, dtype=np.int64)

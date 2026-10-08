@@ -283,7 +283,7 @@ void main() {
   float fwp = max(fwidth(vW.x), fwidth(vW.y));
   if (uKind == 0) {
     vec3 Np;
-    xc_city(vW, N, vUv0, vUv1, vc, uNight, uLitFrac, base, rough, metal, spec, emis, Np);
+    xc_city(vW, N, vUv0, vUv1, vc, fgen, uNight, uLitFrac, base, rough, metal, spec, emis, Np);
     // street-canyon sky occlusion: lower floors see less sky
     float wallAO = mix(0.35, 1.0, smoothstep(0.0, 30.0, vUv0.y));
     ao = mix(wallAO, 1.0, smoothstep(0.55, 0.75, N.z));
