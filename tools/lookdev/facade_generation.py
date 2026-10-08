@@ -45,7 +45,9 @@ BASIS_OBSERVED, BASIS_INFERRED, BASIS_PROFILE, BASIS_MORPHOLOGY, BASIS_NONE, BAS
     "observed_era", "inferred_era", "profile", "morphology", "none", "not_applicable")
 
 PAYLOAD_UNIT = 32768           # bit 15
-PAYLOAD_MAX = 7                # 3 bits; values above GEN_PREMIUM are reserved
+PAYLOAD_MAX = 7                # 3 bits; values above GEN_PREMIUM are reserved for per-face flags:
+BLANK_FACE_OFFSET = 5          # blank side-wall v0B: code + 5 (5..7) on the vertices of a marked party-wall face of an
+                               # unknown / legacy / huaxia building (build_blank_walls.py; decoded in xc_wall)
 BASE_MAX = 127 * 256 + 255     # largest legal R*256+G (R <= 127)
 
 # morphology thresholds (v0, provisional; tuned only by a documented global change)

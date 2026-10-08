@@ -662,18 +662,34 @@ def main():
             failures.append({"cheap_clouds": str(exc)[:400]})
     roofs = read_json(LOOK_OUT / "rooftops/rooftops.report.json")
 
+    # Blank side-wall v0B (build_blank_walls.py): tiles holding a marked party-wall face are imported from
+    # blank_walls/tiles_blank/ (same triangle soup, only that face's TEXCOORD_2.x code changes); ACW_XINYI_BLANK_WALLS=off
+    # or an absent / failed report imports the accepted tiles unchanged
+    blank_tiles = {}
+    bw_rep_path = LOOK_OUT / "blank_walls/blank_walls.report.json"
+    if bw_rep_path.is_file() and os.environ.get("ACW_XINYI_BLANK_WALLS", "on").lower() != "off":
+        bw_rep = read_json(bw_rep_path)
+        if bw_rep.get("status") == "PASS_BLANK_WALLS":
+            blank_tiles = {r["tile"]: r for r in bw_rep["tiles"]}
+        else:
+            failures.append({"blank_walls": "report is not PASS_BLANK_WALLS"})
     tiles = []
     for row in look["tiles"]:
         tile = row["tile"]
         try:
-            path, mesh = import_mesh(LOOK_OUT / "tiles" / row["path"], MESH_DIR + "/Tiles/" + tile_key(tile), m_city, 3)
+            src = LOOK_OUT / "tiles" / row["path"]
+            if tile in blank_tiles:
+                if blank_tiles[tile]["source_sha256"] != row["sha256"]:
+                    raise RuntimeError("blank-wall tile was patched from a different look tile (rebuild blank walls)")
+                src = LOOK_OUT / "blank_walls/tiles_blank" / row["path"]
+            path, mesh = import_mesh(src, MESH_DIR + "/Tiles/" + tile_key(tile), m_city, 3)
             origin, extent = mesh_bounds(mesh)
             exp_extent = crow[tile]["runtime_expected_ue_local_bounds_extent_cm"]
             err = max_err(extent, exp_extent)
             if err > EXTENT_TOLERANCE_CM:
                 raise RuntimeError("extent drift %.3f cm vs accepted runtime tile" % err)
             tiles.append({
-                "tile": tile, "asset_path": path, "triangles": row["triangles"],
+                "tile": tile, "asset_path": path, "triangles": row["triangles"], "blank_walls": tile in blank_tiles,
                 "imported_bounds_origin_cm": origin, "imported_bounds_extent_cm": extent,
                 "expected_local_bounds_origin_cm": crow[tile]["runtime_expected_ue_local_bounds_origin_cm"],
                 "tile_world_translation_cm": crow[tile]["expected_ue_translation_cm"],

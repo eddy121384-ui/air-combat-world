@@ -98,6 +98,9 @@ def main():
     # the UE stages skip it with ACW_XINYI_WALL_ADS=off)
     run("tools/lookdev/build_wall_ad_atlas.py")
     run("tools/lookdev/build_wall_ads.py")
+    # Blank side-wall v0B: high-confidence exposed party-wall faces (incl. wall-ad hosts) -> patched tile copies in
+    # blank_walls/tiles_blank/ (the accepted tiles/ stay untouched; ACW_XINYI_BLANK_WALLS=off imports those)
+    run("tools/lookdev/build_blank_walls.py")
     if (CACHE / "far_city_generalized.npz").exists():
         run("tools/lookdev/build_far_city.py")
     run("tools/lookdev/clouds/build_clouds.py")   # Cloud Prototype v0 state -> cells + weather map

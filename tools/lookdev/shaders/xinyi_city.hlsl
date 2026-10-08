@@ -503,6 +503,11 @@ void xc_wall(float u, float h, float H, float fh, float arch, float variant, flo
     float fPrim = step(5.5, front);
     float fMajor = step(3.5, front) * (1.0 - step(4.5, front)) + step(6.5, front);
     float isHuaxia = step(1.5, arch) * (1.0 - step(2.5, arch));
+    // blank side wall (v0B, tools/lookdev/build_blank_walls.py): the reserved generation codes 5..7 mark a
+    // high-confidence exposed party-wall FACE (its own vertices only) of an unknown / legacy / huaxia building;
+    // strip the flag so every term below sees the building's real generation
+    float blankF = step(4.5, gen);
+    gen -= 5.0 * blankF;
     // --- facade generation (Taipei Facade Grammar v0A; tools/lookdev/facade_generation.py) ---------------------
     // gen is a per-building constant and non-zero only on residential archetypes. 0 unknown and 1 legacy keep the
     // archetype grammar untouched (every term below reduces to lerp(x, y, 0) == x). 2 huaxia re-parameterises it
@@ -691,7 +696,40 @@ void xc_wall(float u, float h, float H, float fh, float arch, float variant, flo
     // column every P bays: strong verticals) or a "ribbon" composition (balcony rail across every bay: strong
     // horizontals). Bay / floor detail converges to its area mean; the pier columns resolve to ~1.5 km.
     float3 c;
-    [branch] if (gMo > 0.5)
+    // blank side wall (v0B): a windowless exposed party-wall FACE, evaluated as the first arm of the composition chain
+    // (a separate branch ahead of the chain cost ~0.1-0.3 ms globally on the UHD 770; this arm measured ~0). Every
+    // opening term (windows, balconies, frames, cages, AC, piers, sill streaks) and its far-distance mean is zeroed, so
+    // glass, the material response and the night block see no window here (the tower crown band is switched off
+    // through isTower). The face keeps the host's tile / paint on ~55 %, gets a grey cement render on ~25 % and
+    // corrugated sheet cladding (鐵皮, the usual waterproofing of an exposed party wall) on ~20 %. A windowless wall has
+    // no dark glass in its mean, so it is pulled down toward the windowed facade value (x0.86) to stay part of the
+    // building; broad 12 m tone blotches, a few lighter repair panels, parapet rain stains (~1.6 m spacing, 3-14 m
+    // long) and a faint RC beam line per floor keep it lived-in, all converging to their mean at range.
+    [branch] if (blankF > 0.5)
+    {
+        float bT = frac(seed * 9.31 + variant * 0.17);
+        float clad = step(0.80, bT);
+        float3 bw0 = lerp(wall, float3(0.50, 0.49, 0.46) * (0.92 + 0.16 * frac(seed * 3.3)), step(0.55, bT) * 0.75);
+        float3 sheetC = lerp(float3(0.56, 0.57, 0.56), float3(0.41, 0.46, 0.50), step(0.5, frac(seed * 6.1)));
+        float rib = xc_line(frac(u / 0.2), 0.3, fwu / 0.2) * xc_detail(fwu, 0.4);
+        bw0 = lerp(bw0, sheetC * (1.0 - rib * 0.18 - 0.03), clad);
+        float fwm = max(fwu, fwh);
+        float blot = xc_fnoise(float2(u, h), 0.08, fwm);
+        float2 pc = floor(float2(u / 4.5, h / 3.2));
+        float rep = step(0.80, xc_hash21(pc + seed * 31.0)) * (1.0 - clad);
+        float stainLen = 3.0 + 11.0 * xc_noise1(u * 0.21 + seed * 5.0);
+        float stain = saturate(xc_noise1(u * 0.62 + seed * 19.0) * 2.0 - 0.9) * smoothstep(H - stainLen, H - 0.5, h);
+        stain = lerp(0.12 * smoothstep(H - 9.0, H - 0.5, h), stain, xc_detail(fwu, 1.6));
+        bw0 *= 0.86 * (0.88 + 0.24 * blot) * lerp(1.0, lerp(1.0, 1.08, rep), xc_detail(fwm, 4.5)) * (1.0 - 0.30 * stain);
+        wall = bw0;
+        wallRough = lerp(0.86, 0.55, clad);
+        wallSpec = lerp(0.40, 0.50, clad);
+        win = 0.0; winMean = 0.0; balc = 0.0; knee = 0.0; frame = 0.0; cageCover = 0.0; ac = 0.0; tPier = 0.0;
+        dBay = 0.0;
+        isTower = 0.0;
+        c = lerp(bw0, bw0 * 1.12 + 0.03, slab * 0.5 * (1.0 - clad) * (isTower + step(1.5, arch) * 0.6));
+    }
+    else if (gMo > 0.5)
     {
         float vert = step(0.5, frac(seed * 5.9));
         float bm = lerp(0.55, 1.0, 1.0 - vert);                     // rail share of bays

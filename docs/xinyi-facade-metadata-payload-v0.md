@@ -106,7 +106,7 @@ Stored value (3 bits, `facade_generation.py`):
 | 2 | `huaxia` | 1980-1999 tile mid-rise / 1990s tile tower |
 | 3 | `modern` | 2000+ residential |
 | 4 | `premium` | 2010+ luxury-class residential |
-| 5-7 | reserved | |
+| 5-7 | blank side-wall face (v0B) | code 0 / 1 / 2 + 5 on the vertices of one marked exposed party-wall face only (`build_blank_walls.py`, `docs/xinyi-blank-side-wall-v0b-result.md`); `xc_wall` strips it back to 0-2 |
 
 Rules (pure function of archetype, floors, height, floor height, core flag, optional era record):
 
