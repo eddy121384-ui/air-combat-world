@@ -1,0 +1,37 @@
+{
+  "revision": "r2",
+  "date": "2026-10-09",
+  "parent_commit": "ba96f8a8b4f820e5270b53dcbf967bb0739998f3",
+  "capability": "built-in image_gen.imagegen",
+  "attempts": 3,
+  "rejected": 0,
+  "assets": [
+    {
+      "id": "a1_r2",
+      "family": "a1",
+      "file": "a1_taipei_ceramic_surface_r2.png",
+      "label": "A1 Ceramic Surface r2",
+      "detail": "Only the continuous ceramic SURFACE APPEARANCE, deliberately omit tile layout. An uninterrupted muted warm off-white / beige ceramic glaze surface variation field, subtle soft uneven kiln color and faint broad age-related discoloration, maintained old Taipei exterior finish. Matte/satin albedo, no gloss highlights. Image spans 1.2m x 1.2m at source scale. Absolutely no tile boundaries, grout, lines, cells, checkerboard, mosaic, rectangles, cracks or raised relief. Quiet natural ceramic coloration, low contrast, subtle broad creamy differences and very restrained fine ceramic imperfections. Do not turn into a dirty concrete wall.",
+      "prompt": "Use case: stylized-concept. Generate ONE original square 1024x1024 full-bleed material source for the coherent Skyfront Homeland Taipei grounded game-art library. Flat orthographic perpendicular material plane with no perspective, shadowless albedo/numeric-map appearance. Restrained medium/broad value variation, ordinary maintained Taiwanese urban construction. Seamless repeat on both axes with continuous opposing edges, no border. NO windows, doors, balconies, facade elevation, objects, plants, people, text, logos, grout, rectangular panel joints, baked sunlight, shadows, highlights, reflections, vignette, cinematic grading, photo-scan grain or harsh noise. Only the continuous ceramic SURFACE APPEARANCE, deliberately omit tile layout. An uninterrupted muted warm off-white / beige ceramic glaze surface variation field, subtle soft uneven kiln color and faint broad age-related discoloration, maintained old Taipei exterior finish. Matte/satin albedo, no gloss highlights. Image spans 1.2m x 1.2m at source scale. Absolutely no tile boundaries, grout, lines, cells, checkerboard, mosaic, rectangles, cracks or raised relief. Quiet natural ceramic coloration, low contrast, subtle broad creamy differences and very restrained fine ceramic imperfections. Do not turn into a dirty concrete wall.",
+      "original_path": "C:\\Users\\EDDY\\.codex\\generated_images\\01a11e46-dbad-76b2-89f1-63a22ef46372\\exec-0b86e9b2-ffef-4256-abce-8032892f4ece.png"
+    },
+    {
+      "id": "a3_r2",
+      "family": "a3",
+      "file": "a3_taipei_stone_surface_r2.png",
+      "label": "A3 Stone Surface r2",
+      "detail": "Continuous honed warm-grey limestone-like architectural stone SURFACE VARIATION ONLY for a contemporary Taipei residential tower. No cladding layout. Image spans 4.8m x 4.8m. Clean sophisticated neutral stone, softly irregular subtle mineral clouds and restrained unobtrusive fine grain, no strong veins. Absolutely no panel joints, rectangles, grout, seams, grid, bands, gloss or relief. Fairly uniform low-contrast field without dominant blob. Seamless natural material variation; panel color/layout will be procedural later.",
+      "prompt": "Use case: stylized-concept. Generate ONE original square 1024x1024 full-bleed material source for the coherent Skyfront Homeland Taipei grounded game-art library. Flat orthographic perpendicular material plane with no perspective, shadowless albedo/numeric-map appearance. Restrained medium/broad value variation, ordinary maintained Taiwanese urban construction. Seamless repeat on both axes with continuous opposing edges, no border. NO windows, doors, balconies, facade elevation, objects, plants, people, text, logos, grout, rectangular panel joints, baked sunlight, shadows, highlights, reflections, vignette, cinematic grading, photo-scan grain or harsh noise. Continuous honed warm-grey limestone-like architectural stone SURFACE VARIATION ONLY for a contemporary Taipei residential tower. No cladding layout. Image spans 4.8m x 4.8m. Clean sophisticated neutral stone, softly irregular subtle mineral clouds and restrained unobtrusive fine grain, no strong veins. Absolutely no panel joints, rectangles, grout, seams, grid, bands, gloss or relief. Fairly uniform low-contrast field without dominant blob. Seamless natural material variation; panel color/layout will be procedural later.",
+      "original_path": "C:\\Users\\EDDY\\.codex\\generated_images\\01a11e46-dbad-76b2-89f1-63a22ef46372\\exec-99859786-b4c7-49b0-9c3d-7732efcbd071.png"
+    },
+    {
+      "id": "b2_r2",
+      "family": "b2",
+      "file": "b2_taipei_sparse_repairs_r2.png",
+      "label": "B2 Sparse Repairs r2",
+      "detail": "Strict GRAYSCALE numeric MATERIAL CONTROL MASK, not a surface photo. Image spans 32m x 32m wall. Smooth perfectly even mid-grey 128 background over at least 85-90 percent of the image. ONLY FOUR separate human maintenance repaint/repair patches total, asymmetrically dispersed and far apart, about 3-5m across, one larger 6m repair, different sizes. Mostly slightly lighter (about 140), one slightly darker (about 118). Sparse partly rectangular shapes, one/two straight sides, irregular stepped remaining sides, some feathered roller edges, no fine surface texture. Patches total 8-12 percent coverage maximum. Spacious untouched grey dominates. No camouflage, patchwork tessellation, clouds, noise, many little islands, horizontal floor lines or gridded arrangement. Same mid-grey clean quiet background must continue around all borders so repeat is seamless. Fewer larger repairs than a dense maintenance pattern.",
+      "prompt": "Use case: stylized-concept. Generate ONE original square 1024x1024 full-bleed material source for the coherent Skyfront Homeland Taipei grounded game-art library. Flat orthographic perpendicular material plane with no perspective, shadowless albedo/numeric-map appearance. Restrained medium/broad value variation, ordinary maintained Taiwanese urban construction. Seamless repeat on both axes with continuous opposing edges, no border. NO windows, doors, balconies, facade elevation, objects, plants, people, text, logos, grout, rectangular panel joints, baked sunlight, shadows, highlights, reflections, vignette, cinematic grading, photo-scan grain or harsh noise. Strict GRAYSCALE numeric MATERIAL CONTROL MASK, not a surface photo. Image spans 32m x 32m wall. Smooth perfectly even mid-grey 128 background over at least 85-90 percent of the image. ONLY FOUR separate human maintenance repaint/repair patches total, asymmetrically dispersed and far apart, about 3-5m across, one larger 6m repair, different sizes. Mostly slightly lighter (about 140), one slightly darker (about 118). Sparse partly rectangular shapes, one/two straight sides, irregular stepped remaining sides, some feathered roller edges, no fine surface texture. Patches total 8-12 percent coverage maximum. Spacious untouched grey dominates. No camouflage, patchwork tessellation, clouds, noise, many little islands, horizontal floor lines or gridded arrangement. Same mid-grey clean quiet background must continue around all borders so repeat is seamless. Fewer larger repairs than a dense maintenance pattern.",
+      "original_path": "C:\\Users\\EDDY\\.codex\\generated_images\\01a11e46-dbad-76b2-89f1-63a22ef46372\\exec-69e6b68d-01cf-48bb-8284-e63a2c792bc4.png"
+    }
+  ]
+}

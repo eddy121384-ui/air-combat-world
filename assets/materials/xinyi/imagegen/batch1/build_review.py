@@ -47,6 +47,8 @@ def repeat(im,size=300):
     return out
 
 def build():
+    if (ROOT/'manifest_r1.json').exists():
+        raise RuntimeError('r1 is archived; use build_revision_r2.py to rebuild current review')
     log=json.loads((ROOT/'generation_log.json').read_text())
     for folder in ('sources','normalized_1024','processed','review'): (ROOT/folder).mkdir(exist_ok=True)
     entries=[]; derivatives=[]
@@ -117,6 +119,9 @@ def build():
 
 def validate():
     m=json.loads((ROOT/'manifest.json').read_text())
+    if m.get('revision')=='r2':
+        from build_revision_r2 import validate as validate_revision
+        return validate_revision()
     assert len(m['sources'])==6 and len(m['derivatives'])==9
     files=[]
     for e in m['sources']:
