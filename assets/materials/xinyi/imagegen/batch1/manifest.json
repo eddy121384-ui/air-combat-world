@@ -1,0 +1,666 @@
+{
+  "schema": "acw.material_pack/0",
+  "pilot": "xinyi-imagegen-batch1",
+  "starting_remote_head": "ede7960d8ec05b2aa521b1e4c65b5bbd667c456d",
+  "branch": "spike/xinyi-material-imagegen-batch1",
+  "target_branch": "feat/opus55-xinyi-visual-quality",
+  "generation_attempts": 10,
+  "rejected_generations": 1,
+  "independent_ai_source_count": 9,
+  "accepted_independent_ai_source_count": 6,
+  "needs_revision_source_count": 3,
+  "processed_variant_count": 6,
+  "normalized_copy_count": 9,
+  "total_image_file_count": 30,
+  "review_image_count": 6,
+  "production_atlas_count": 0,
+  "images_imported_into_unreal": 0,
+  "sources": [
+    {
+      "id": "a1",
+      "filename": "sources/a1_taipei_aged_ceramic_tiles.png",
+      "role": "A1 Ceramic Tile",
+      "material_family": "material base",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "mode": "RGB",
+      "sha256": "34a7f6842742cc48300f3914749ff589928aad6f91660e882528f5ba5808614c",
+      "generation_capability": "built-in image_gen.imagegen",
+      "model": "not exposed by tool",
+      "prompt": "Use case: stylized-concept. Original Skyfront Homeland Taipei architectural material source for one coordinated mature grounded game environment library. Generate ONE square 1024x1024 image, full bleed, flat orthographic material view, perpendicular to surface, absolutely no perspective or depth. Restrained neutral palette, medium and broad variation, believable ordinary occupied maintained Taiwanese urban construction, simplified grounded game realism rather than scanned photographic micrograin. No windows, doors, balconies, building elevation, objects, plants, people, text, logos, brands, vignette, dramatic grading, sunlight, directional shadows, baked AO or highlights. Shadowless albedo-like appearance. Aim for seamless repeat on both axes; edge continuity must be real, no frame. Old Taipei ceramic tile exterior. Small ordinary off-white muted beige ceramic tiles, square grid of approximately 24 tiles across representing about 1.2m of wall, very restrained thin warm grey grout, subtle individual tile color differences, mild broad uneven discoloration and ceramic imperfections. Occupied old apartment, not abandoned. No glossy bathroom mosaic, no cracks, no extreme grime. Tile grid strictly straight and orthographic with consistent scale.",
+      "generation_date": "2026-10-09",
+      "independent_ai_output": true,
+      "status": "needs revision",
+      "acceptance_scope": "source/candidate offline review only; not production approval",
+      "visible_tiling_problems": "Grout phase and partial border tiles cause visible horizontal/vertical repeat joins; regular ceramic grid is intentional but no seamless candidate accepted.",
+      "tiling_metrics": {
+        "horizontal_wrap_mae_255": 15.509,
+        "vertical_wrap_mae_255": 67.496,
+        "mean_255": 189.989,
+        "std_255": 23.19
+      },
+      "source_rgb_channel_max_difference": 54,
+      "normalized_copy": "normalized_1024/a1_taipei_aged_ceramic_tiles.png",
+      "processed_derivative_files": [],
+      "imported_into_unreal": false
+    },
+    {
+      "id": "a2",
+      "filename": "sources/a2_taipei_washed_aggregate_plaster.png",
+      "role": "A2 Washed Aggregate / Plaster",
+      "material_family": "material base",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "mode": "RGB",
+      "sha256": "e6720e22d9853130fb3eac30104a229271eb2304397c3b425879dfd3f326c9a5",
+      "generation_capability": "built-in image_gen.imagegen",
+      "model": "not exposed by tool",
+      "prompt": "Use case: stylized-concept. Original Skyfront Homeland Taipei architectural material source for one coordinated mature grounded game environment library. Generate ONE square 1024x1024 image, full bleed, flat orthographic material view, perpendicular to surface, absolutely no perspective or depth. Restrained neutral palette, medium and broad variation, believable ordinary occupied maintained Taiwanese urban construction, simplified grounded game realism rather than scanned photographic micrograin. No windows, doors, balconies, building elevation, objects, plants, people, text, logos, brands, vignette, dramatic grading, sunlight, directional shadows, baked AO or highlights. Shadowless albedo-like appearance. Aim for seamless repeat on both axes; edge continuity must be real, no frame. Taiwanese older residential rough mineral plaster / fine washed render, warm neutral grey. Flat albedo material spanning 4m square. IMPORTANT: simplified quiet game material, NOT exposed pebble aggregate. No individually legible pebbles or black/white dots. Nearly smooth matte mineral matrix with very soft fine mottling and a few gently irregular broad tonal areas, narrow low contrast value range. Limited maintained wear. No photograph-like grain, no noisy gravel, no raised relief. Broad coherent warm grey plaster field that remains quiet at thumbnail size.",
+      "generation_date": "2026-10-09",
+      "independent_ai_output": true,
+      "status": "accepted",
+      "acceptance_scope": "source/candidate offline review only; not production approval",
+      "visible_tiling_problems": "Quiet mineral plaster; raw broad tonal edge steps. Candidate smooth border blend removes edge jump; soft mottling still repeats.",
+      "tiling_metrics": {
+        "horizontal_wrap_mae_255": 6.998,
+        "vertical_wrap_mae_255": 6.995,
+        "mean_255": 155.28,
+        "std_255": 12.543
+      },
+      "source_rgb_channel_max_difference": 29,
+      "normalized_copy": "normalized_1024/a2_taipei_washed_aggregate_plaster.png",
+      "processed_derivative_files": [
+        "processed/a2_taipei_washed_aggregate_plaster_candidate.png"
+      ],
+      "imported_into_unreal": false
+    },
+    {
+      "id": "a3",
+      "filename": "sources/a3_taipei_modern_stone_cladding.png",
+      "role": "A3 Modern Stone",
+      "material_family": "material base",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "mode": "RGB",
+      "sha256": "761f286dd20a8c3b1a5e39ba18ac6dfa3aace95dbd586798b6dcc5e17716ef00",
+      "generation_capability": "built-in image_gen.imagegen",
+      "model": "not exposed by tool",
+      "prompt": "Use case: stylized-concept. Original Skyfront Homeland Taipei architectural material source for one coordinated mature grounded game environment library. Generate ONE square 1024x1024 image, full bleed, flat orthographic material view, perpendicular to surface, absolutely no perspective or depth. Restrained neutral palette, medium and broad variation, believable ordinary occupied maintained Taiwanese urban construction, simplified grounded game realism rather than scanned photographic micrograin. No windows, doors, balconies, building elevation, objects, plants, people, text, logos, brands, vignette, dramatic grading, sunlight, directional shadows, baked AO or highlights. Shadowless albedo-like appearance. Aim for seamless repeat on both axes; edge continuity must be real, no frame. Contemporary Taipei residential tower honed warm-grey limestone-like neutral stone cladding. Approximately 4.8m square surface, restrained large rectangular panel variation (about 1.2m x 0.6m) in running bond, joints implied mostly by subtle value changes, extremely fine unobtrusive grain. Clean maintained but not uniform. No marble veins, palace decoration, gloss, deep panel seams, reflections, synthetic repetitive noise.",
+      "generation_date": "2026-10-09",
+      "independent_ai_output": true,
+      "status": "needs revision",
+      "acceptance_scope": "source/candidate offline review only; not production approval",
+      "visible_tiling_problems": "Panel joints do not close consistently at borders; repeated running-bond phase breaks and fine grain remain. No seamless candidate accepted.",
+      "tiling_metrics": {
+        "horizontal_wrap_mae_255": 11.946,
+        "vertical_wrap_mae_255": 10.797,
+        "mean_255": 165.741,
+        "std_255": 14.833
+      },
+      "source_rgb_channel_max_difference": 46,
+      "normalized_copy": "normalized_1024/a3_taipei_modern_stone_cladding.png",
+      "processed_derivative_files": [],
+      "imported_into_unreal": false
+    },
+    {
+      "id": "b1",
+      "filename": "sources/b1_taipei_weathering_field.png",
+      "role": "B1 Weathering",
+      "material_family": "ageing mask",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "mode": "RGB",
+      "sha256": "27d9d702f85335996e38956baa03571e2592d50e85ed4bf9a828f7320913f84b",
+      "generation_capability": "built-in image_gen.imagegen",
+      "model": "not exposed by tool",
+      "prompt": "Use case: stylized-concept. Original Skyfront Homeland Taipei architectural material source for one coordinated mature grounded game environment library. Generate ONE square 1024x1024 image, full bleed, flat orthographic material view, perpendicular to surface, absolutely no perspective or depth. Restrained neutral palette, medium and broad variation, believable ordinary occupied maintained Taiwanese urban construction, simplified grounded game realism rather than scanned photographic micrograin. No windows, doors, balconies, building elevation, objects, plants, people, text, logos, brands, vignette, dramatic grading, sunlight, directional shadows, baked AO or highlights. Shadowless albedo-like appearance. Aim for seamless repeat on both axes; edge continuity must be real, no frame. GRAYSCALE MATERIAL CONTROL MASK, not a surface photograph. The image spans 32m x 32m of wall. Neutral mid-grey base about 128/255, broad irregular soft damp/mineral/mild biological stain fields 1-8m across cover about one third, darkening at most 25 percent, several uneven dispersed regions, slight downward elongation, no dominant central blob. Clean low-frequency value shapes, soft believable transitions, no fine grain, no tile lines or cracks, no horizontal bands. Grayscale only.",
+      "generation_date": "2026-10-09",
+      "independent_ai_output": true,
+      "status": "accepted",
+      "acceptance_scope": "source/candidate offline review only; not production approval",
+      "visible_tiling_problems": "Raw edge discontinuities and fine stain texture. Candidate low-pass and edge blend retain broad damp fields; recognizable broad blobs still recur every 32m.",
+      "tiling_metrics": {
+        "horizontal_wrap_mae_255": 7.19,
+        "vertical_wrap_mae_255": 6.734,
+        "mean_255": 132.25,
+        "std_255": 11.71
+      },
+      "source_rgb_channel_max_difference": 7,
+      "normalized_copy": "normalized_1024/b1_taipei_weathering_field.png",
+      "processed_derivative_files": [
+        "processed/b1_taipei_weathering_field_candidate.png"
+      ],
+      "imported_into_unreal": false
+    },
+    {
+      "id": "b2",
+      "filename": "sources/b2_taipei_repair_zones.png",
+      "role": "B2 Repair Zones",
+      "material_family": "ageing mask",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "mode": "RGB",
+      "sha256": "51f6ef685ebb6f2a78e51f06e460ac66e68ac3d0b3d9be8ad5f7f6e6c6d64b15",
+      "generation_capability": "built-in image_gen.imagegen",
+      "model": "not exposed by tool",
+      "prompt": "Use case: stylized-concept. Original Skyfront Homeland Taipei architectural material source for one coordinated mature grounded game environment library. Generate ONE square 1024x1024 image, full bleed, flat orthographic material view, perpendicular to surface, absolutely no perspective or depth. Restrained neutral palette, medium and broad variation, believable ordinary occupied maintained Taiwanese urban construction, simplified grounded game realism rather than scanned photographic micrograin. No windows, doors, balconies, building elevation, objects, plants, people, text, logos, brands, vignette, dramatic grading, sunlight, directional shadows, baked AO or highlights. Shadowless albedo-like appearance. Aim for seamless repeat on both axes; edge continuity must be real, no frame. GRAYSCALE MATERIAL CONTROL MASK, not a surface photograph. The image spans 32m x 32m of wall. Neutral even mid-grey base 128/255. Human maintenance history: scattered irregular partly rectangular repaint and repair patches 1-5m wide cover a quarter of area, some overlap, differing sizes, some straight sides, stepped corners and roller-softened other boundaries. Patches vary only plus/minus 12 percent from base. No grid alignment, no floor bands, no cloud/noise field, no fine grain or texture. Must distinctly read repaired zones rather than weathering. Grayscale only.",
+      "generation_date": "2026-10-09",
+      "independent_ai_output": true,
+      "status": "needs revision",
+      "acceptance_scope": "source/candidate offline review only; not production approval",
+      "visible_tiling_problems": "Repair structure is distinct but overly dense and large; cropped patches create abrupt border joins and camouflage-like repetition. No seamless candidate accepted.",
+      "tiling_metrics": {
+        "horizontal_wrap_mae_255": 3.329,
+        "vertical_wrap_mae_255": 2.048,
+        "mean_255": 137.068,
+        "std_255": 10.518
+      },
+      "source_rgb_channel_max_difference": 5,
+      "normalized_copy": "normalized_1024/b2_taipei_repair_zones.png",
+      "processed_derivative_files": [],
+      "imported_into_unreal": false
+    },
+    {
+      "id": "b3",
+      "filename": "sources/b3_taipei_rain_run.png",
+      "role": "B3 Rain Run",
+      "material_family": "ageing mask",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "mode": "RGB",
+      "sha256": "406b7776d96e926e370324d1d650ef59f94780015e70dabae81b640fe67ba82f",
+      "generation_capability": "built-in image_gen.imagegen",
+      "model": "not exposed by tool",
+      "prompt": "Use case: stylized-concept. Original Skyfront Homeland Taipei architectural material source for one coordinated mature grounded game environment library. Generate ONE square 1024x1024 image, full bleed, flat orthographic material view, perpendicular to surface, absolutely no perspective or depth. Restrained neutral palette, medium and broad variation, believable ordinary occupied maintained Taiwanese urban construction, simplified grounded game realism rather than scanned photographic micrograin. No windows, doors, balconies, building elevation, objects, plants, people, text, logos, brands, vignette, dramatic grading, sunlight, directional shadows, baked AO or highlights. Shadowless albedo-like appearance. Aim for seamless repeat on both axes; edge continuity must be real, no frame. GRAYSCALE MATERIAL CONTROL MASK, not a surface photograph. The image spans 32m x 32m of wall. Even neutral mid-grey base about 128/255 with broad soft gravity-aligned vertical rain runoff stains 0.3-0.8m wide and 2-12m long, starting at many irregular heights and fading downward, varied lengths, uneven concentration with groups and open areas, low contrast darkening max 25 percent. No uniform parallel stripes, barcode, high-frequency rain noise, repeated stamps, horizontal bands or fine grain. Grayscale only.",
+      "generation_date": "2026-10-09",
+      "independent_ai_output": true,
+      "status": "accepted",
+      "acceptance_scope": "source/candidate offline review only; not production approval",
+      "visible_tiling_problems": "Gravity-aligned varied runs; raw stains break at edges and have fine noise. Candidate low-pass and blend remove edge jump; 32m groups remain recognizable.",
+      "tiling_metrics": {
+        "horizontal_wrap_mae_255": 5.641,
+        "vertical_wrap_mae_255": 4.214,
+        "mean_255": 128.061,
+        "std_255": 9.439
+      },
+      "source_rgb_channel_max_difference": 5,
+      "normalized_copy": "normalized_1024/b3_taipei_rain_run.png",
+      "processed_derivative_files": [
+        "processed/b3_taipei_rain_run_candidate.png"
+      ],
+      "imported_into_unreal": false
+    },
+    {
+      "id": "a1_r2",
+      "revision": "r2",
+      "supersedes": "a1",
+      "filename": "sources/a1_taipei_ceramic_surface_r2.png",
+      "role": "A1 Ceramic Surface r2",
+      "material_family": "material base",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "mode": "RGB",
+      "sha256": "fda5aaebbdbba8cb12d20a649da7c9b47b20c1e7b8cedfdff145423fa221295c",
+      "generation_capability": "built-in image_gen.imagegen",
+      "model": "not exposed by tool",
+      "prompt": "Use case: stylized-concept. Generate ONE original square 1024x1024 full-bleed material source for the coherent Skyfront Homeland Taipei grounded game-art library. Flat orthographic perpendicular material plane with no perspective, shadowless albedo/numeric-map appearance. Restrained medium/broad value variation, ordinary maintained Taiwanese urban construction. Seamless repeat on both axes with continuous opposing edges, no border. NO windows, doors, balconies, facade elevation, objects, plants, people, text, logos, grout, rectangular panel joints, baked sunlight, shadows, highlights, reflections, vignette, cinematic grading, photo-scan grain or harsh noise. Only the continuous ceramic SURFACE APPEARANCE, deliberately omit tile layout. An uninterrupted muted warm off-white / beige ceramic glaze surface variation field, subtle soft uneven kiln color and faint broad age-related discoloration, maintained old Taipei exterior finish. Matte/satin albedo, no gloss highlights. Image spans 1.2m x 1.2m at source scale. Absolutely no tile boundaries, grout, lines, cells, checkerboard, mosaic, rectangles, cracks or raised relief. Quiet natural ceramic coloration, low contrast, subtle broad creamy differences and very restrained fine ceramic imperfections. Do not turn into a dirty concrete wall.",
+      "generation_date": "2026-10-09",
+      "independent_ai_output": true,
+      "status": "accepted",
+      "acceptance_scope": "offline candidate review; pending artistic approval",
+      "visible_tiling_problems": "No baked grout/grid; low-contrast ceramic mottling repeats. Opposing edge blend removes numeric jump; derivative band still requires art review.",
+      "tiling_metrics": {
+        "horizontal_wrap_mae_255": 5.009,
+        "vertical_wrap_mae_255": 4.709,
+        "mean_255": 213.784,
+        "std_255": 14.456
+      },
+      "normalized_copy": "normalized_1024/a1_taipei_ceramic_surface_r2.png",
+      "processed_derivative_files": [
+        "processed/a1_taipei_ceramic_surface_r2_candidate.png"
+      ],
+      "imported_into_unreal": false
+    },
+    {
+      "id": "a3_r2",
+      "revision": "r2",
+      "supersedes": "a3",
+      "filename": "sources/a3_taipei_stone_surface_r2.png",
+      "role": "A3 Stone Surface r2",
+      "material_family": "material base",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "mode": "RGB",
+      "sha256": "c0c0e370f2082e9be35e84b86d6d7935890d27b4c5c1b5415aa9f1d364be1aed",
+      "generation_capability": "built-in image_gen.imagegen",
+      "model": "not exposed by tool",
+      "prompt": "Use case: stylized-concept. Generate ONE original square 1024x1024 full-bleed material source for the coherent Skyfront Homeland Taipei grounded game-art library. Flat orthographic perpendicular material plane with no perspective, shadowless albedo/numeric-map appearance. Restrained medium/broad value variation, ordinary maintained Taiwanese urban construction. Seamless repeat on both axes with continuous opposing edges, no border. NO windows, doors, balconies, facade elevation, objects, plants, people, text, logos, grout, rectangular panel joints, baked sunlight, shadows, highlights, reflections, vignette, cinematic grading, photo-scan grain or harsh noise. Continuous honed warm-grey limestone-like architectural stone SURFACE VARIATION ONLY for a contemporary Taipei residential tower. No cladding layout. Image spans 4.8m x 4.8m. Clean sophisticated neutral stone, softly irregular subtle mineral clouds and restrained unobtrusive fine grain, no strong veins. Absolutely no panel joints, rectangles, grout, seams, grid, bands, gloss or relief. Fairly uniform low-contrast field without dominant blob. Seamless natural material variation; panel color/layout will be procedural later.",
+      "generation_date": "2026-10-09",
+      "independent_ai_output": true,
+      "status": "accepted",
+      "acceptance_scope": "offline candidate review; pending artistic approval",
+      "visible_tiling_problems": "No panel joints; soft stone mineral groups repeat. Opposing edge blend removes numeric jump; subtle broad periodicity remains.",
+      "tiling_metrics": {
+        "horizontal_wrap_mae_255": 11.144,
+        "vertical_wrap_mae_255": 11.972,
+        "mean_255": 171.891,
+        "std_255": 14.608
+      },
+      "normalized_copy": "normalized_1024/a3_taipei_stone_surface_r2.png",
+      "processed_derivative_files": [
+        "processed/a3_taipei_stone_surface_r2_candidate.png"
+      ],
+      "imported_into_unreal": false
+    },
+    {
+      "id": "b2_r2",
+      "revision": "r2",
+      "supersedes": "b2",
+      "filename": "sources/b2_taipei_sparse_repairs_r2.png",
+      "role": "B2 Sparse Repairs r2",
+      "material_family": "ageing mask",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "mode": "RGB",
+      "sha256": "6666385f39e6dbedc0924479ef5ae73b3a1928cd4c89d4550da453d47fb5edec",
+      "generation_capability": "built-in image_gen.imagegen",
+      "model": "not exposed by tool",
+      "prompt": "Use case: stylized-concept. Generate ONE original square 1024x1024 full-bleed material source for the coherent Skyfront Homeland Taipei grounded game-art library. Flat orthographic perpendicular material plane with no perspective, shadowless albedo/numeric-map appearance. Restrained medium/broad value variation, ordinary maintained Taiwanese urban construction. Seamless repeat on both axes with continuous opposing edges, no border. NO windows, doors, balconies, facade elevation, objects, plants, people, text, logos, grout, rectangular panel joints, baked sunlight, shadows, highlights, reflections, vignette, cinematic grading, photo-scan grain or harsh noise. Strict GRAYSCALE numeric MATERIAL CONTROL MASK, not a surface photo. Image spans 32m x 32m wall. Smooth perfectly even mid-grey 128 background over at least 85-90 percent of the image. ONLY FOUR separate human maintenance repaint/repair patches total, asymmetrically dispersed and far apart, about 3-5m across, one larger 6m repair, different sizes. Mostly slightly lighter (about 140), one slightly darker (about 118). Sparse partly rectangular shapes, one/two straight sides, irregular stepped remaining sides, some feathered roller edges, no fine surface texture. Patches total 8-12 percent coverage maximum. Spacious untouched grey dominates. No camouflage, patchwork tessellation, clouds, noise, many little islands, horizontal floor lines or gridded arrangement. Same mid-grey clean quiet background must continue around all borders so repeat is seamless. Fewer larger repairs than a dense maintenance pattern.",
+      "generation_date": "2026-10-09",
+      "independent_ai_output": true,
+      "status": "accepted",
+      "acceptance_scope": "offline candidate review; pending artistic approval",
+      "visible_tiling_problems": "Four isolated maintenance regions, substantially reduced coverage. Flat background supports wrapping; recognizable four-patch stamp still repeats.",
+      "tiling_metrics": {
+        "horizontal_wrap_mae_255": 1.034,
+        "vertical_wrap_mae_255": 1.11,
+        "mean_255": 131.44,
+        "std_255": 7.773
+      },
+      "normalized_copy": "normalized_1024/b2_taipei_sparse_repairs_r2.png",
+      "processed_derivative_files": [
+        "processed/b2_taipei_sparse_repairs_r2_candidate.png"
+      ],
+      "imported_into_unreal": false,
+      "repair_coverage_proxy": {
+        "method": "fraction farther than 6 grayscale levels from image median; proxy, not semantic segmentation",
+        "background_median_255": 130.0,
+        "fraction": 0.1222
+      }
+    }
+  ],
+  "derivatives": [
+    {
+      "source_id": "a1",
+      "kind": "normalized review copy",
+      "operation": "Pillow convert L for masks / RGB for color, then Lanczos resize 1254 square to 1024 square; no automatic sRGB-to-linear conversion",
+      "output_filename": "normalized_1024/a1_taipei_aged_ceramic_tiles.png",
+      "output_sha256": "0aa598b1d672809c546bb7d93a9a276bbd6d658640fd21d71a8df01d7a83ac7f"
+    },
+    {
+      "source_id": "a2",
+      "kind": "normalized review copy",
+      "operation": "Pillow convert L for masks / RGB for color, then Lanczos resize 1254 square to 1024 square; no automatic sRGB-to-linear conversion",
+      "output_filename": "normalized_1024/a2_taipei_washed_aggregate_plaster.png",
+      "output_sha256": "71a3893b2ff89b238b2b0bd07085f71c855b9eeeb8cc783a218b546a6694ec68"
+    },
+    {
+      "source_id": "a2",
+      "kind": "processed game material candidate",
+      "operation": [
+        "start from normalized_1024 copy",
+        "64px opposing-border pair averaging, weight=0.5*(1-i/63)^2, x then y; identical boundary values, does not guarantee imperceptible derivative joins"
+      ],
+      "output_filename": "processed/a2_taipei_washed_aggregate_plaster_candidate.png",
+      "output_sha256": "29e32c21aaa309fd7a0ef61cd97a554564d83869d7f665531c474a361e40abc3",
+      "dimensions": [
+        1024,
+        1024
+      ],
+      "status": "accepted for offline review, pending artistic approval",
+      "tiling_metrics": {
+        "horizontal_wrap_mae_255": 0.0,
+        "vertical_wrap_mae_255": 0.0,
+        "mean_255": 155.28,
+        "std_255": 11.951
+      }
+    },
+    {
+      "source_id": "a3",
+      "kind": "normalized review copy",
+      "operation": "Pillow convert L for masks / RGB for color, then Lanczos resize 1254 square to 1024 square; no automatic sRGB-to-linear conversion",
+      "output_filename": "normalized_1024/a3_taipei_modern_stone_cladding.png",
+      "output_sha256": "22bb37e808350a309a2610941307fa2b233008755398b35b5c25f05979ee0526"
+    },
+    {
+      "source_id": "b1",
+      "kind": "normalized review copy",
+      "operation": "Pillow convert L for masks / RGB for color, then Lanczos resize 1254 square to 1024 square; no automatic sRGB-to-linear conversion",
+      "output_filename": "normalized_1024/b1_taipei_weathering_field.png",
+      "output_sha256": "578d12fe2a284406098638b29f0539582b19a69400c35abdfffe27d32d22cde3"
+    },
+    {
+      "source_id": "b1",
+      "kind": "processed game material candidate",
+      "operation": [
+        "start from normalized_1024 copy",
+        "Gaussian blur sigma=8px (~0.25m at 32m span)",
+        "min/max linear remap to 112..144, neutral midpoint 128; numeric control values, no gamma interpretation",
+        "64px opposing-border pair averaging, weight=0.5*(1-i/63)^2, x then y; identical boundary values, does not guarantee imperceptible derivative joins"
+      ],
+      "output_filename": "processed/b1_taipei_weathering_field_candidate.png",
+      "output_sha256": "aef4446c20a6c2c80a6c578f22a089fd260c86e929f6105a64b396b312bd081a",
+      "dimensions": [
+        1024,
+        1024
+      ],
+      "status": "accepted for offline review, pending artistic approval",
+      "tiling_metrics": {
+        "horizontal_wrap_mae_255": 0.0,
+        "vertical_wrap_mae_255": 0.0,
+        "mean_255": 131.433,
+        "std_255": 6.406
+      }
+    },
+    {
+      "source_id": "b2",
+      "kind": "normalized review copy",
+      "operation": "Pillow convert L for masks / RGB for color, then Lanczos resize 1254 square to 1024 square; no automatic sRGB-to-linear conversion",
+      "output_filename": "normalized_1024/b2_taipei_repair_zones.png",
+      "output_sha256": "9e63477a4b04bddce96b3e4943a05fe3bee0d91bab4a8cca50e9ee482f0cddb7"
+    },
+    {
+      "source_id": "b3",
+      "kind": "normalized review copy",
+      "operation": "Pillow convert L for masks / RGB for color, then Lanczos resize 1254 square to 1024 square; no automatic sRGB-to-linear conversion",
+      "output_filename": "normalized_1024/b3_taipei_rain_run.png",
+      "output_sha256": "5f342edce409354a75dd46dbade848877e4a175c9e590f864d7289b4be632d6b"
+    },
+    {
+      "source_id": "b3",
+      "kind": "processed game material candidate",
+      "operation": [
+        "start from normalized_1024 copy",
+        "Gaussian blur sigma=8px (~0.25m at 32m span)",
+        "min/max linear remap to 112..144, neutral midpoint 128; numeric control values, no gamma interpretation",
+        "64px opposing-border pair averaging, weight=0.5*(1-i/63)^2, x then y; identical boundary values, does not guarantee imperceptible derivative joins"
+      ],
+      "output_filename": "processed/b3_taipei_rain_run_candidate.png",
+      "output_sha256": "f9f838f969717d6582c690ada0a6f35ce1b7faa30f152b2f871d7588c236686d",
+      "dimensions": [
+        1024,
+        1024
+      ],
+      "status": "accepted for offline review, pending artistic approval",
+      "tiling_metrics": {
+        "horizontal_wrap_mae_255": 0.0,
+        "vertical_wrap_mae_255": 0.0,
+        "mean_255": 133.315,
+        "std_255": 5.728
+      }
+    },
+    {
+      "source_id": "a1_r2",
+      "kind": "normalized review copy",
+      "operation": [
+        "Convert native output to L mask or RGB color, Lanczos resize to 1024x1024"
+      ],
+      "output_filename": "normalized_1024/a1_taipei_ceramic_surface_r2.png",
+      "output_sha256": "cc211129bb8dc31961c774b2510bdcc05668096aed0bd772b35dab330aa4b6b8",
+      "dimensions": [
+        1024,
+        1024
+      ],
+      "status": "accepted for offline review, pending artistic approval",
+      "tiling_metrics": {
+        "horizontal_wrap_mae_255": 4.94,
+        "vertical_wrap_mae_255": 4.599,
+        "mean_255": 213.785,
+        "std_255": 14.388
+      }
+    },
+    {
+      "source_id": "a1_r2",
+      "kind": "processed game material candidate",
+      "operation": [
+        "Convert native output to L mask or RGB color, Lanczos resize to 1024x1024",
+        "64px opposing-border pair blend as build_review.edge_blend; no noise, mirroring or layout synthesis"
+      ],
+      "output_filename": "processed/a1_taipei_ceramic_surface_r2_candidate.png",
+      "output_sha256": "cc0257609b266f069efb570655c95dbe833df5b2d3797a9b70bdb729a708c17e",
+      "dimensions": [
+        1024,
+        1024
+      ],
+      "status": "accepted for offline review, pending artistic approval",
+      "tiling_metrics": {
+        "horizontal_wrap_mae_255": 0.0,
+        "vertical_wrap_mae_255": 0.0,
+        "mean_255": 213.785,
+        "std_255": 14.325
+      }
+    },
+    {
+      "source_id": "a3_r2",
+      "kind": "normalized review copy",
+      "operation": [
+        "Convert native output to L mask or RGB color, Lanczos resize to 1024x1024"
+      ],
+      "output_filename": "normalized_1024/a3_taipei_stone_surface_r2.png",
+      "output_sha256": "ad6e78f2028d1e6962693e3485c65a22759cbfd90823a86a36d863948f077332",
+      "dimensions": [
+        1024,
+        1024
+      ],
+      "status": "accepted for offline review, pending artistic approval",
+      "tiling_metrics": {
+        "horizontal_wrap_mae_255": 11.331,
+        "vertical_wrap_mae_255": 12.331,
+        "mean_255": 171.891,
+        "std_255": 14.344
+      }
+    },
+    {
+      "source_id": "a3_r2",
+      "kind": "processed game material candidate",
+      "operation": [
+        "Convert native output to L mask or RGB color, Lanczos resize to 1024x1024",
+        "64px opposing-border pair blend as build_review.edge_blend; no noise, mirroring or layout synthesis"
+      ],
+      "output_filename": "processed/a3_taipei_stone_surface_r2_candidate.png",
+      "output_sha256": "de5e707d9d34b715c7665762b624d8cdf69769bc1af5998d7282f245fcad6d56",
+      "dimensions": [
+        1024,
+        1024
+      ],
+      "status": "accepted for offline review, pending artistic approval",
+      "tiling_metrics": {
+        "horizontal_wrap_mae_255": 0.0,
+        "vertical_wrap_mae_255": 0.0,
+        "mean_255": 171.891,
+        "std_255": 14.053
+      }
+    },
+    {
+      "source_id": "b2_r2",
+      "kind": "normalized review copy",
+      "operation": [
+        "Convert native output to L mask or RGB color, Lanczos resize to 1024x1024"
+      ],
+      "output_filename": "normalized_1024/b2_taipei_sparse_repairs_r2.png",
+      "output_sha256": "932dfa08861a3cdc4a375ab7e9e7b8b0fc4f30f66ff9c41b779f51135fc36600",
+      "dimensions": [
+        1024,
+        1024
+      ],
+      "status": "accepted for offline review, pending artistic approval",
+      "tiling_metrics": {
+        "horizontal_wrap_mae_255": 1.167,
+        "vertical_wrap_mae_255": 0.592,
+        "mean_255": 131.381,
+        "std_255": 7.737
+      }
+    },
+    {
+      "source_id": "b2_r2",
+      "kind": "processed game material candidate",
+      "operation": [
+        "Convert native output to L mask or RGB color, Lanczos resize to 1024x1024",
+        "Recenter image median to 128 and clamp deviations to +/-12, no blur",
+        "64px opposing-border pair blend as build_review.edge_blend; no noise, mirroring or layout synthesis"
+      ],
+      "output_filename": "processed/b2_taipei_sparse_repairs_r2_candidate.png",
+      "output_sha256": "7280aad4227ed7784986c76f8245682dabc4581cdde16e4f76da33eebb59277c",
+      "dimensions": [
+        1024,
+        1024
+      ],
+      "status": "accepted for offline review, pending artistic approval",
+      "tiling_metrics": {
+        "horizontal_wrap_mae_255": 0.0,
+        "vertical_wrap_mae_255": 0.0,
+        "mean_255": 128.281,
+        "std_255": 4.247
+      }
+    }
+  ],
+  "rejected_attempts": [
+    {
+      "id": "a2_attempt1",
+      "prompt": "Use case: stylized-concept. Original Skyfront Homeland Taipei architectural material source for one coordinated mature grounded game environment library. Generate ONE square 1024x1024 image, full bleed, flat orthographic material view, perpendicular to surface, absolutely no perspective or depth. Restrained neutral palette, medium and broad variation, believable ordinary occupied maintained Taiwanese urban construction, simplified grounded game realism rather than scanned photographic micrograin. No windows, doors, balconies, building elevation, objects, plants, people, text, logos, brands, vignette, dramatic grading, sunlight, directional shadows, baked AO or highlights. Shadowless albedo-like appearance. Aim for seamless repeat on both axes; edge continuity must be real, no frame. Older Taiwanese residential washed aggregate / rough mineral plaster exterior, warm neutral grey, subtle fine mineral variation subordinated to soft medium-scale irregular tonal areas, limited wear. Approximately 4m square surface. Ordinary washed-stone render, no dramatic rock, coarse stone, interior stucco, relief shadows, harsh speckle or excessive bumpiness.",
+      "path": "C:\\Users\\EDDY\\.codex\\generated_images\\01a11e46-dbad-76b2-89f1-63a22ef46372\\exec-2cce0a7c-3a08-40bd-8f8a-60f859a55459.png",
+      "reason": "Excessive exposed aggregate speckle / high-frequency contrast.",
+      "sha256": "2b58f69905c6efc402ca3087fff145cb1055afefa1e48455be905d94629e9ea1",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "tracked_image": false
+    }
+  ],
+  "review_files": [
+    {
+      "filename": "review/comparison_r2.png",
+      "sha256": "6975dc8491333475db782f9774885d38912324ef34a4f72d36e70ba6604064b7"
+    },
+    {
+      "filename": "review/contact_sheet.png",
+      "sha256": "36bc3b9bf2f8d3d11e0ecd6793db03f2bdbc81519f684340b2cda33af2298e81"
+    },
+    {
+      "filename": "review/contact_sheet_r1.png",
+      "sha256": "923ff089f000b4eb57dbc04ecd0685d31de95a96f5917d24246907ad15f9d737"
+    },
+    {
+      "filename": "review/repetition_study_r2.png",
+      "sha256": "f483f260900b4e8d9ba757ad810439617dd9a58142883ffc63362ecfd87d90a7"
+    },
+    {
+      "filename": "review/tiling_review.png",
+      "sha256": "eb18764d28a0f298ef26d1d5e901e03afab2a604f6c88dfb23b4b1f93bfeba3a"
+    },
+    {
+      "filename": "review/tiling_review_r1.png",
+      "sha256": "5972e9cf7cbbfe3b5968fa74347bcfca9b0e0d9af5daa6469bac6f1038565a01"
+    }
+  ],
+  "limitations": [
+    "Offline source review only; no engine, motion, distance or performance validation.",
+    "Source dimensions and microdetail do not themselves establish useful aerial scale.",
+    "No model ID or seed exposed; no invented model/seed.",
+    "Native source masks are RGB with small channel drift; use normalized L derivatives.",
+    "Sources are AI outputs, not third-party texture downloads; licensing uniqueness not independently certified."
+  ],
+  "revision": "r2",
+  "revision_parent_commit": "ba96f8a8b4f820e5270b53dcbf967bb0739998f3",
+  "active_sources": {
+    "a1": "a1_r2",
+    "a2": "a2",
+    "a3": "a3_r2",
+    "b1": "b1",
+    "b2": "b2_r2",
+    "b3": "b3"
+  },
+  "active_independent_ai_source_count": 6,
+  "active_accepted_candidate_count": 6,
+  "revision_generation_attempts": 3,
+  "revision_rejected_generations": 0,
+  "repetition_investigation": {
+    "method": "Offline bilinear periodic resampling of retained candidates; review previews only, no new material asset",
+    "one_sample": "Per-building deterministic UV offset + horizontal mirror + 0.9..1.1 scale. Reduces aligned repetition across separate buildings; intra-wall periodicity unchanged.",
+    "two_sample": "0.5*M(u,v)+0.5*M(-1.37u+0.371,1.37v+0.619), variance restored and clamped to 112..144. No additional blur. Second sample costs +1 texture read; not recommended under current cap without future budget approval.",
+    "findings": [
+      {
+        "source_id": "b1",
+        "baseline": {
+          "horizontal_one_tile_lag_correlation": 1.0,
+          "vertical_one_tile_lag_correlation": 1.0,
+          "std_255": 6.4067,
+          "mean_abs_dx": 0.5288,
+          "mean_abs_dy": 0.4595
+        },
+        "two_sample_study": {
+          "horizontal_one_tile_lag_correlation": 0.4794,
+          "vertical_one_tile_lag_correlation": 0.5457,
+          "std_255": 6.3786,
+          "mean_abs_dx": 0.697,
+          "mean_abs_dy": 0.6196
+        },
+        "important": "Two samples exceed current one-sample budget. Separate-wall transforms do not solve repeat within one continuous wall. No vertical flips/rotations."
+      },
+      {
+        "source_id": "b3",
+        "baseline": {
+          "horizontal_one_tile_lag_correlation": 1.0,
+          "vertical_one_tile_lag_correlation": 1.0,
+          "std_255": 5.7297,
+          "mean_abs_dx": 0.8782,
+          "mean_abs_dy": 0.3529
+        },
+        "two_sample_study": {
+          "horizontal_one_tile_lag_correlation": 0.4747,
+          "vertical_one_tile_lag_correlation": 0.4359,
+          "std_255": 5.7222,
+          "mean_abs_dx": 1.1251,
+          "mean_abs_dy": 0.4918
+        },
+        "important": "Two samples exceed current one-sample budget. Separate-wall transforms do not solve repeat within one continuous wall. No vertical flips/rotations."
+      }
+    ]
+  },
+  "repair_coverage_comparison": {
+    "old": {
+      "method": "fraction farther than 6 grayscale levels from image median; proxy, not semantic segmentation",
+      "background_median_255": 135.0,
+      "fraction": 0.4449
+    },
+    "revised": {
+      "method": "fraction farther than 6 grayscale levels from image median; proxy, not semantic segmentation",
+      "background_median_255": 130.0,
+      "fraction": 0.1222
+    }
+  },
+  "original_preservation": {
+    "manifest": "manifest_r1.json",
+    "all_six_r1_sources_unchanged": true,
+    "a2_b1_b3_candidates_unchanged": true
+  }
+}
