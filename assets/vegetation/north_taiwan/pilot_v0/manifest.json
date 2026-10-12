@@ -1,0 +1,928 @@
+{
+  "schema": "acw.vegetation_pilot/0",
+  "baseline_sha": "ede7960d8ec05b2aa521b1e4c65b5bbd667c456d",
+  "research_inventory_sha": "796e03892d85731582ddb6c9151d3a1fe49d102a",
+  "generation_date": "2026-10-12",
+  "numpy_version": "2.3.4",
+  "source_code_hash_normalization": "CRLF to LF only; image and GLB hashes use untouched bytes",
+  "source_code_sha256": {
+    "tools/vegetation_pilot/build_pilot.py": "85b83059e373551cb7dcaed5e88a80bd148b0436002ea4c8470b7cb960ab5250",
+    "tools/vegetation_pilot/package_review.py": "0268d103d9f415aa10724472ac12b2da58b1d6e1ee27da7209340bc29834f46c",
+    "tools/lookdev/gltf_writer.py": "1884c6f39a4345e75e43b1edd73a851416b3ed3fe04d99b69afe34314404b972",
+    "tools/lookdev/build_ground.py": "cdb0408ed3657f1f75af10f087bb05d242f1cc93d9ef8856b8d1a14b374c48cb",
+    "tools/lookdev/shaders/xinyi_city.hlsl": "43226e062af703dede5d73be8edff26364eaaaa45aedb4c1c5bdbdfdd8270195"
+  },
+  "generator": "Original deterministic procedural mesh; no ImageGen, leaf cards, textures, third-party models or runtime integration",
+  "blender_version": "5.2.1 LTS",
+  "units": "metres; GLB Y-up; modelling/render Z-up",
+  "budgets_hypotheses": [
+    120,
+    40,
+    20
+  ],
+  "assets": [
+    {
+      "archetype": "dense_rounded",
+      "lod": 0,
+      "triangles": 120,
+      "topology_vertices": 76,
+      "exported_vertices": 122,
+      "material_slots": 1,
+      "dimensions_m": [
+        8.28163,
+        6.42165,
+        9.00981
+      ],
+      "bounds_z_up_m": [
+        [
+          -4.22863,
+          -3.04211,
+          -0.00981
+        ],
+        [
+          4.05301,
+          3.37954,
+          9.0
+        ]
+      ],
+      "filename": "models/dense_rounded_lod0.glb",
+      "bytes": 6040,
+      "sha256": "5ec3df7d0565d4b970281af7edaf0cc69cf4570ad1c67be311cfb4ac0c050d61",
+      "blender_reload": {
+        "status": "PASS",
+        "triangles": 120,
+        "vertices": 122,
+        "material_slots": 1
+      }
+    },
+    {
+      "archetype": "dense_rounded",
+      "lod": 1,
+      "triangles": 36,
+      "topology_vertices": 22,
+      "exported_vertices": 38,
+      "material_slots": 1,
+      "dimensions_m": [
+        8.28163,
+        6.42165,
+        9.00981
+      ],
+      "bounds_z_up_m": [
+        [
+          -4.22863,
+          -3.04211,
+          -0.00981
+        ],
+        [
+          4.05301,
+          3.37954,
+          9.0
+        ]
+      ],
+      "filename": "models/dense_rounded_lod1.glb",
+      "bytes": 2672,
+      "sha256": "830bceb0be3158883ba69bd8f409949c8087c17b65dc0ca0187f5cc86d0bf466",
+      "blender_reload": {
+        "status": "PASS",
+        "triangles": 36,
+        "vertices": 38,
+        "material_slots": 1
+      }
+    },
+    {
+      "archetype": "dense_rounded",
+      "lod": 2,
+      "triangles": 20,
+      "topology_vertices": 16,
+      "exported_vertices": 28,
+      "material_slots": 1,
+      "dimensions_m": [
+        8.28163,
+        6.42165,
+        9.00981
+      ],
+      "bounds_z_up_m": [
+        [
+          -4.22863,
+          -3.04211,
+          -0.00981
+        ],
+        [
+          4.05301,
+          3.37954,
+          9.0
+        ]
+      ],
+      "filename": "models/dense_rounded_lod2.glb",
+      "bytes": 2196,
+      "sha256": "67872d03b123ec61ccba941eec6fc17cc5f0e9e9ddfff55f0360165136c94665",
+      "blender_reload": {
+        "status": "PASS",
+        "triangles": 20,
+        "vertices": 28,
+        "material_slots": 1
+      }
+    },
+    {
+      "archetype": "horizontal_tiered",
+      "lod": 0,
+      "triangles": 112,
+      "topology_vertices": 74,
+      "exported_vertices": 134,
+      "material_slots": 1,
+      "dimensions_m": [
+        7.81259,
+        6.45193,
+        9.23554
+      ],
+      "bounds_z_up_m": [
+        [
+          -3.54771,
+          -3.1673,
+          -0.00554
+        ],
+        [
+          4.26489,
+          3.28463,
+          9.23
+        ]
+      ],
+      "filename": "models/horizontal_tiered_lod0.glb",
+      "bytes": 6300,
+      "sha256": "220761f9b1d3c2f74c0f5d10c3c318bade8b8f7ccbe03704f14a753873ca2b7d",
+      "blender_reload": {
+        "status": "PASS",
+        "triangles": 112,
+        "vertices": 134,
+        "material_slots": 1
+      }
+    },
+    {
+      "archetype": "horizontal_tiered",
+      "lod": 1,
+      "triangles": 38,
+      "topology_vertices": 30,
+      "exported_vertices": 60,
+      "material_slots": 1,
+      "dimensions_m": [
+        7.81259,
+        6.45193,
+        9.23554
+      ],
+      "bounds_z_up_m": [
+        [
+          -3.54771,
+          -3.1673,
+          -0.00554
+        ],
+        [
+          4.26489,
+          3.28463,
+          9.23
+        ]
+      ],
+      "filename": "models/horizontal_tiered_lod1.glb",
+      "bytes": 3332,
+      "sha256": "4b873fa98775932b1da2805371c912784725ea682c16d7cab7962ab3cc6f7a20",
+      "blender_reload": {
+        "status": "PASS",
+        "triangles": 38,
+        "vertices": 60,
+        "material_slots": 1
+      }
+    },
+    {
+      "archetype": "horizontal_tiered",
+      "lod": 2,
+      "triangles": 20,
+      "topology_vertices": 18,
+      "exported_vertices": 34,
+      "material_slots": 1,
+      "dimensions_m": [
+        7.81259,
+        6.45193,
+        9.23554
+      ],
+      "bounds_z_up_m": [
+        [
+          -3.54771,
+          -3.1673,
+          -0.00554
+        ],
+        [
+          4.26489,
+          3.28463,
+          9.23
+        ]
+      ],
+      "filename": "models/horizontal_tiered_lod2.glb",
+      "bytes": 2388,
+      "sha256": "429bfee641f5b4e23ff3a2eeaeb316fa6adb1ed8ed3509cd5a2fb0b2ca371f6b",
+      "blender_reload": {
+        "status": "PASS",
+        "triangles": 20,
+        "vertices": 34,
+        "material_slots": 1
+      }
+    },
+    {
+      "archetype": "open_vase",
+      "lod": 0,
+      "triangles": 102,
+      "topology_vertices": 68,
+      "exported_vertices": 126,
+      "material_slots": 1,
+      "dimensions_m": [
+        9.68131,
+        5.66872,
+        9.56166
+      ],
+      "bounds_z_up_m": [
+        [
+          -4.59726,
+          -1.46084,
+          -0.01166
+        ],
+        [
+          5.08405,
+          4.20788,
+          9.55
+        ]
+      ],
+      "filename": "models/open_vase_lod0.glb",
+      "bytes": 5940,
+      "sha256": "95203bcfab893252f5e764870cfb15990ea5feed7e60f1458f1cdc5ce3f3c147",
+      "blender_reload": {
+        "status": "PASS",
+        "triangles": 102,
+        "vertices": 126,
+        "material_slots": 1
+      }
+    },
+    {
+      "archetype": "open_vase",
+      "lod": 1,
+      "triangles": 40,
+      "topology_vertices": 32,
+      "exported_vertices": 72,
+      "material_slots": 1,
+      "dimensions_m": [
+        9.68131,
+        5.66872,
+        9.56166
+      ],
+      "bounds_z_up_m": [
+        [
+          -4.59726,
+          -1.46084,
+          -0.01166
+        ],
+        [
+          5.08405,
+          4.20788,
+          9.55
+        ]
+      ],
+      "filename": "models/open_vase_lod1.glb",
+      "bytes": 3676,
+      "sha256": "4c0edfd8decfe35995008577c98edc668b80d02a1f9e800853cb5cda060203e7",
+      "blender_reload": {
+        "status": "PASS",
+        "triangles": 40,
+        "vertices": 72,
+        "material_slots": 1
+      }
+    },
+    {
+      "archetype": "open_vase",
+      "lod": 2,
+      "triangles": 20,
+      "topology_vertices": 16,
+      "exported_vertices": 32,
+      "material_slots": 1,
+      "dimensions_m": [
+        9.68131,
+        5.66872,
+        9.56166
+      ],
+      "bounds_z_up_m": [
+        [
+          -4.59726,
+          -1.46084,
+          -0.01166
+        ],
+        [
+          5.08405,
+          4.20788,
+          9.55
+        ]
+      ],
+      "filename": "models/open_vase_lod2.glb",
+      "bytes": 2312,
+      "sha256": "68a20600cd5c5b036338b881157497a954c5feefc154defd28140a11d6e6e1f1",
+      "blender_reload": {
+        "status": "PASS",
+        "triangles": 20,
+        "vertices": 32,
+        "material_slots": 1
+      }
+    },
+    {
+      "archetype": "tall_columnar",
+      "lod": 0,
+      "triangles": 108,
+      "topology_vertices": 64,
+      "exported_vertices": 124,
+      "material_slots": 1,
+      "dimensions_m": [
+        2.97535,
+        2.5897,
+        12.75502
+      ],
+      "bounds_z_up_m": [
+        [
+          -1.55788,
+          -1.21661,
+          -0.00502
+        ],
+        [
+          1.41746,
+          1.37309,
+          12.75
+        ]
+      ],
+      "filename": "models/tall_columnar_lod0.glb",
+      "bytes": 5956,
+      "sha256": "41c3df98a19243ebe7fa510e7cf87be6a40c07ae823ac84c2dc9dd9d5a74cba5",
+      "blender_reload": {
+        "status": "PASS",
+        "triangles": 108,
+        "vertices": 124,
+        "material_slots": 1
+      }
+    },
+    {
+      "archetype": "tall_columnar",
+      "lod": 1,
+      "triangles": 38,
+      "topology_vertices": 23,
+      "exported_vertices": 39,
+      "material_slots": 1,
+      "dimensions_m": [
+        2.97535,
+        2.5897,
+        12.75502
+      ],
+      "bounds_z_up_m": [
+        [
+          -1.55788,
+          -1.21661,
+          -0.00502
+        ],
+        [
+          1.41746,
+          1.37309,
+          12.75
+        ]
+      ],
+      "filename": "models/tall_columnar_lod1.glb",
+      "bytes": 2728,
+      "sha256": "3f11b530be7a7dca747e0cd8eb4994dc4a7d0522d374c6e4f9720f25710df750",
+      "blender_reload": {
+        "status": "PASS",
+        "triangles": 38,
+        "vertices": 39,
+        "material_slots": 1
+      }
+    },
+    {
+      "archetype": "tall_columnar",
+      "lod": 2,
+      "triangles": 20,
+      "topology_vertices": 16,
+      "exported_vertices": 32,
+      "material_slots": 1,
+      "dimensions_m": [
+        2.97535,
+        2.5897,
+        12.75502
+      ],
+      "bounds_z_up_m": [
+        [
+          -1.55788,
+          -1.21661,
+          -0.00502
+        ],
+        [
+          1.41746,
+          1.37309,
+          12.75
+        ]
+      ],
+      "filename": "models/tall_columnar_lod2.glb",
+      "bytes": 2312,
+      "sha256": "219c0f9b1e2a744fbc19a1242d1c6e6cb096481b4b10c3c75abd9b5805b6b970",
+      "blender_reload": {
+        "status": "PASS",
+        "triangles": 20,
+        "vertices": 32,
+        "material_slots": 1
+      }
+    },
+    {
+      "archetype": "xinyi_reference_preview",
+      "lod": 0,
+      "triangles": 28,
+      "topology_vertices": 84,
+      "exported_vertices": 76,
+      "material_slots": 1,
+      "dimensions_m": [
+        5.50956,
+        5.89807,
+        8.43619
+      ],
+      "bounds_z_up_m": [
+        [
+          -2.5934,
+          -2.96613,
+          0.0
+        ],
+        [
+          2.91616,
+          2.93194,
+          8.43619
+        ]
+      ],
+      "filename": "models/xinyi_reference_preview_lod0.glb",
+      "bytes": 3656,
+      "sha256": "4805c3ec328284512092cc279dc0c37d482ef45bfce3b827e9c87c6a22ef90cf",
+      "blender_reload": {
+        "status": "PASS",
+        "triangles": 28,
+        "vertices": 76,
+        "material_slots": 1
+      }
+    }
+  ],
+  "reference_original": {
+    "filename": "models/xinyi_reference_original.glb",
+    "sha256": "323939eaaa9076f65d2c81b15f0c7b5d179c91c85c89ed1d783312debdaadbd1",
+    "bytes": 5792,
+    "triangles": 28,
+    "exported_vertices": 84,
+    "material_slots": 1,
+    "method": "Unmodified write_tree_mesh AST from baseline build_ground.py, isolated execution. Preview counterpart uses identical triangles with shared pilot colors."
+  },
+  "render_assumptions": {
+    "engine": "Cycles CPU",
+    "samples": 24,
+    "denoise": true,
+    "seed": 31,
+    "perspective_vfov_degrees": 60,
+    "distance_image_px": [
+      1920,
+      1080
+    ],
+    "orthographic_lineup_width_m": 65,
+    "light": "same fixed sun + neutral world",
+    "shader": "shared opaque vertex color; height ramp approximates xc_foliage, no leafN noise, no exact Unreal shader equivalence",
+    "real_device_measurements": false
+  },
+  "runtime_modified": false,
+  "reproducibility": {
+    "status": "PASS",
+    "separate_generation_runs": 2,
+    "byte_identical_glbs": 14,
+    "sha256_by_filename": {
+      "dense_rounded_lod0.glb": "5ec3df7d0565d4b970281af7edaf0cc69cf4570ad1c67be311cfb4ac0c050d61",
+      "dense_rounded_lod1.glb": "830bceb0be3158883ba69bd8f409949c8087c17b65dc0ca0187f5cc86d0bf466",
+      "dense_rounded_lod2.glb": "67872d03b123ec61ccba941eec6fc17cc5f0e9e9ddfff55f0360165136c94665",
+      "horizontal_tiered_lod0.glb": "220761f9b1d3c2f74c0f5d10c3c318bade8b8f7ccbe03704f14a753873ca2b7d",
+      "horizontal_tiered_lod1.glb": "4b873fa98775932b1da2805371c912784725ea682c16d7cab7962ab3cc6f7a20",
+      "horizontal_tiered_lod2.glb": "429bfee641f5b4e23ff3a2eeaeb316fa6adb1ed8ed3509cd5a2fb0b2ca371f6b",
+      "open_vase_lod0.glb": "95203bcfab893252f5e764870cfb15990ea5feed7e60f1458f1cdc5ce3f3c147",
+      "open_vase_lod1.glb": "4c0edfd8decfe35995008577c98edc668b80d02a1f9e800853cb5cda060203e7",
+      "open_vase_lod2.glb": "68a20600cd5c5b036338b881157497a954c5feefc154defd28140a11d6e6e1f1",
+      "tall_columnar_lod0.glb": "41c3df98a19243ebe7fa510e7cf87be6a40c07ae823ac84c2dc9dd9d5a74cba5",
+      "tall_columnar_lod1.glb": "3f11b530be7a7dca747e0cd8eb4994dc4a7d0522d374c6e4f9720f25710df750",
+      "tall_columnar_lod2.glb": "219c0f9b1e2a744fbc19a1242d1c6e6cb096481b4b10c3c75abd9b5805b6b970",
+      "xinyi_reference_original.glb": "323939eaaa9076f65d2c81b15f0c7b5d179c91c85c89ed1d783312debdaadbd1",
+      "xinyi_reference_preview_lod0.glb": "4805c3ec328284512092cc279dc0c37d482ef45bfce3b827e9c87c6a22ef90cf"
+    }
+  },
+  "visual_review_files": [
+    {
+      "filename": "review/crown_comparison.png",
+      "bytes": 1226313,
+      "sha256": "5418085d388cc3df813ca785862768c475735efbe1568a7d7b1db2bf5c910c34",
+      "dimensions": [
+        1500,
+        1690
+      ]
+    },
+    {
+      "filename": "review/distance_comparison.png",
+      "bytes": 391555,
+      "sha256": "6dc77651e997a8f280067740f3323fb1a9099eb46f6ee29f3f81b44cb34da072",
+      "dimensions": [
+        1500,
+        1170
+      ]
+    },
+    {
+      "filename": "review/lod_comparison.png",
+      "bytes": 1201003,
+      "sha256": "5b3d9e0b8806220d130e67b382949acd80f3f42dc67d79c6a8b5621896763db3",
+      "dimensions": [
+        1500,
+        1690
+      ]
+    },
+    {
+      "filename": "review/mixed_grove.png",
+      "bytes": 762770,
+      "sha256": "d730c3b7b0a2f2cd375ec541173be9a70cdaf2464c8ab54c13a634634b51c654",
+      "dimensions": [
+        1300,
+        1030
+      ]
+    },
+    {
+      "filename": "review/repetition.png",
+      "bytes": 925727,
+      "sha256": "faaa05e2062780417c706b25a09fa598e5a316a252954701a768de20ed73ea23",
+      "dimensions": [
+        1500,
+        1180
+      ]
+    },
+    {
+      "filename": "review/silhouette_comparison.png",
+      "bytes": 776464,
+      "sha256": "4df26a461cd9f37f4be34e8597715646089bcaed3cb0bcaf391ff7c951e103dc",
+      "dimensions": [
+        1500,
+        1100
+      ]
+    }
+  ],
+  "distance_previews": [
+    {
+      "distance_m": 150,
+      "focal_px": 935.3074360871938,
+      "reference_8_436m_projected_height_px_approx": 52.6,
+      "native_crop_xyxy": [
+        640,
+        460,
+        1280,
+        620
+      ],
+      "zoom_crop_xyxy": [
+        864,
+        500,
+        1056,
+        596
+      ],
+      "camera": "12deg pitch, target (0,0,6)m, Euclidean distance to lineup center; edge trees slightly farther"
+    },
+    {
+      "distance_m": 300,
+      "focal_px": 935.3074360871938,
+      "reference_8_436m_projected_height_px_approx": 26.3,
+      "native_crop_xyxy": [
+        640,
+        460,
+        1280,
+        620
+      ],
+      "zoom_crop_xyxy": [
+        864,
+        500,
+        1056,
+        596
+      ],
+      "camera": "12deg pitch, target (0,0,6)m, Euclidean distance to lineup center; edge trees slightly farther"
+    },
+    {
+      "distance_m": 600,
+      "focal_px": 935.3074360871938,
+      "reference_8_436m_projected_height_px_approx": 13.15,
+      "native_crop_xyxy": [
+        640,
+        460,
+        1280,
+        620
+      ],
+      "zoom_crop_xyxy": [
+        864,
+        500,
+        1056,
+        596
+      ],
+      "camera": "12deg pitch, target (0,0,6)m, Euclidean distance to lineup center; edge trees slightly farther"
+    },
+    {
+      "distance_m": 800,
+      "focal_px": 935.3074360871938,
+      "reference_8_436m_projected_height_px_approx": 9.86,
+      "native_crop_xyxy": [
+        640,
+        460,
+        1280,
+        620
+      ],
+      "zoom_crop_xyxy": [
+        864,
+        500,
+        1056,
+        596
+      ],
+      "camera": "12deg pitch, target (0,0,6)m, Euclidean distance to lineup center; edge trees slightly farther"
+    }
+  ],
+  "render_results": [
+    {
+      "id": "shaded_front",
+      "filename": "shaded_front.png",
+      "dimensions": [
+        1500,
+        650
+      ],
+      "bytes": 860253,
+      "sha256": "805562b5f911fd8dafd72ab37dd4de50f65d4859a796748c3de727545e8e524e",
+      "status": "PASS"
+    },
+    {
+      "id": "shaded_oblique",
+      "filename": "shaded_oblique.png",
+      "dimensions": [
+        1500,
+        650
+      ],
+      "bytes": 858224,
+      "sha256": "2a06dbbc229351c7c463c8ba6e359a21db7393db39f9fc542cdef12679249f8c",
+      "status": "PASS"
+    },
+    {
+      "id": "shaded_reverse",
+      "filename": "shaded_reverse.png",
+      "dimensions": [
+        1500,
+        650
+      ],
+      "bytes": 864640,
+      "sha256": "dffd111be431f37b4b0e953690c678c7e44b5048441a802da7cfcdc32984bf25",
+      "status": "PASS"
+    },
+    {
+      "id": "silhouette_front",
+      "filename": "silhouette_front.png",
+      "dimensions": [
+        1500,
+        650
+      ],
+      "bytes": 837232,
+      "sha256": "391b6dd099534c00f48bfda226d70d1cb81602654b20b92697fab2707c9002d6",
+      "status": "PASS"
+    },
+    {
+      "id": "silhouette_oblique",
+      "filename": "silhouette_oblique.png",
+      "dimensions": [
+        1500,
+        650
+      ],
+      "bytes": 833908,
+      "sha256": "bf95a39bfaca37330716f8079ccd143f154bc067733b85c7818aa52d3fa1cebc",
+      "status": "PASS"
+    },
+    {
+      "id": "lod1",
+      "filename": "lod1.png",
+      "dimensions": [
+        1500,
+        650
+      ],
+      "bytes": 849421,
+      "sha256": "d3a276c36e08863a94d957c974aed79c7c73f8a6b0c51390ad2e0ad8fb279d6f",
+      "status": "PASS"
+    },
+    {
+      "id": "lod2",
+      "filename": "lod2.png",
+      "dimensions": [
+        1500,
+        650
+      ],
+      "bytes": 840358,
+      "sha256": "c52185b1ccf5d6d3e2253d38d72289137dd8c9bf2437a639668ffdb1629ac19a",
+      "status": "PASS"
+    },
+    {
+      "id": "repetition",
+      "filename": "repetition.png",
+      "dimensions": [
+        1500,
+        1100
+      ],
+      "bytes": 1490633,
+      "sha256": "f7c84305ef36f216de91bb856e93b5a61a9bea32bd4db4e10355de55f04b05e5",
+      "status": "PASS"
+    },
+    {
+      "id": "mixed_grove",
+      "filename": "mixed_grove.png",
+      "dimensions": [
+        1300,
+        950
+      ],
+      "bytes": 1192741,
+      "sha256": "4fec886e11338651fcab0f2f588c0fa0d3948bc23c8aaaf65a68d5a6fdcdf556",
+      "status": "PASS"
+    },
+    {
+      "id": "range_150",
+      "filename": "range_150.png",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "bytes": 1684367,
+      "sha256": "b8c8f8b7f3a21ef0e1c3cc7698622b8996557e6394708c7cdaba1e014b13720c",
+      "status": "PASS"
+    },
+    {
+      "id": "range_300",
+      "filename": "range_300.png",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "bytes": 1673711,
+      "sha256": "a92f6ea697a594285351fd8ea8177027f88e708aff7a4bda485b9080650a6091",
+      "status": "PASS"
+    },
+    {
+      "id": "range_600",
+      "filename": "range_600.png",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "bytes": 1669048,
+      "sha256": "1fcedee7d1ee5ec0742f96834fbe7dc9883128e0d6665c9330a8a381d3cb7147",
+      "status": "PASS"
+    },
+    {
+      "id": "range_800",
+      "filename": "range_800.png",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "bytes": 1668924,
+      "sha256": "af8afdeafaf5a20066aacb2d14ac9d5862b3e5f500cd460ea3bc9ae25f9a38f4",
+      "status": "PASS"
+    }
+  ],
+  "buffer_validation": [
+    {
+      "filename": "models/dense_rounded_lod0.glb",
+      "status": "PASS",
+      "triangles": 120,
+      "exported_vertices": 122,
+      "degenerate_triangles": 0,
+      "opaque": true,
+      "textures": 0
+    },
+    {
+      "filename": "models/dense_rounded_lod1.glb",
+      "status": "PASS",
+      "triangles": 36,
+      "exported_vertices": 38,
+      "degenerate_triangles": 0,
+      "opaque": true,
+      "textures": 0
+    },
+    {
+      "filename": "models/dense_rounded_lod2.glb",
+      "status": "PASS",
+      "triangles": 20,
+      "exported_vertices": 28,
+      "degenerate_triangles": 0,
+      "opaque": true,
+      "textures": 0
+    },
+    {
+      "filename": "models/horizontal_tiered_lod0.glb",
+      "status": "PASS",
+      "triangles": 112,
+      "exported_vertices": 134,
+      "degenerate_triangles": 0,
+      "opaque": true,
+      "textures": 0
+    },
+    {
+      "filename": "models/horizontal_tiered_lod1.glb",
+      "status": "PASS",
+      "triangles": 38,
+      "exported_vertices": 60,
+      "degenerate_triangles": 0,
+      "opaque": true,
+      "textures": 0
+    },
+    {
+      "filename": "models/horizontal_tiered_lod2.glb",
+      "status": "PASS",
+      "triangles": 20,
+      "exported_vertices": 34,
+      "degenerate_triangles": 0,
+      "opaque": true,
+      "textures": 0
+    },
+    {
+      "filename": "models/open_vase_lod0.glb",
+      "status": "PASS",
+      "triangles": 102,
+      "exported_vertices": 126,
+      "degenerate_triangles": 0,
+      "opaque": true,
+      "textures": 0
+    },
+    {
+      "filename": "models/open_vase_lod1.glb",
+      "status": "PASS",
+      "triangles": 40,
+      "exported_vertices": 72,
+      "degenerate_triangles": 0,
+      "opaque": true,
+      "textures": 0
+    },
+    {
+      "filename": "models/open_vase_lod2.glb",
+      "status": "PASS",
+      "triangles": 20,
+      "exported_vertices": 32,
+      "degenerate_triangles": 0,
+      "opaque": true,
+      "textures": 0
+    },
+    {
+      "filename": "models/tall_columnar_lod0.glb",
+      "status": "PASS",
+      "triangles": 108,
+      "exported_vertices": 124,
+      "degenerate_triangles": 0,
+      "opaque": true,
+      "textures": 0
+    },
+    {
+      "filename": "models/tall_columnar_lod1.glb",
+      "status": "PASS",
+      "triangles": 38,
+      "exported_vertices": 39,
+      "degenerate_triangles": 0,
+      "opaque": true,
+      "textures": 0
+    },
+    {
+      "filename": "models/tall_columnar_lod2.glb",
+      "status": "PASS",
+      "triangles": 20,
+      "exported_vertices": 32,
+      "degenerate_triangles": 0,
+      "opaque": true,
+      "textures": 0
+    },
+    {
+      "filename": "models/xinyi_reference_preview_lod0.glb",
+      "status": "PASS",
+      "triangles": 28,
+      "exported_vertices": 76,
+      "degenerate_triangles": 0,
+      "opaque": true,
+      "textures": 0
+    },
+    {
+      "filename": "models/xinyi_reference_original.glb",
+      "status": "PASS",
+      "triangles": 28,
+      "exported_vertices": 84,
+      "degenerate_triangles": 0,
+      "opaque": true,
+      "textures": 0
+    }
+  ],
+  "measurements": {
+    "prototype_glb_count": 12,
+    "reference_glb_count": 2,
+    "prototype_glb_bytes": 45852,
+    "all_glb_bytes": 55300,
+    "review_png_bytes": 5283832,
+    "render_count": 13,
+    "render_failures": 0,
+    "reference_triangles_identical": true,
+    "matching_lod_bounds": true,
+    "real_device_performance": "NOT MEASURED"
+  }
+}
