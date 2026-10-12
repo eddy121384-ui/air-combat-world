@@ -45,7 +45,9 @@ for gy in np.arange(8, area, 16.0):
             m = (((sx - px) / (rx * s * 0.9)) ** 2 + ((sy - pz) / (rz * s * 0.9)) ** 2) <= 1.0
             cov[i0:i1, j0:j1] |= m
 print("clumps", n, "per ha", round(n / (area * area / 1e4), 1), "crowns/ha", round(5 * n / (area * area / 1e4), 1))
-print("existing hill forest top-down canopy cover (interior, ellipse approx): %.1f %%" % (100 * cov[80:-80, 80:-80].mean()))
+print("MODEL ESTIMATE (geometric ellipse projection, 0.9 x circumradius, 400 m x 400 m sample of the placement rule;"
+      " NOT pixel-measured, NOT the whole Xinyi forest, NOT GIS-validated): top-down canopy cover %.1f %%"
+      % (100 * cov[80:-80, 80:-80].mean()))
 
 # ---- 2. coverage vs instance density for random (Poisson) and for jittered grid ----
 print("\nPoisson canopy cover 1-exp(-N*A): N per km2 for target cover")
@@ -107,3 +109,22 @@ for v in (250, 400):
     for r, a in ((150, 20), (300, 15), (600, 10), (1500, 10), (3000, 5)):
         w = v * math.sin(math.radians(a)) / r
         print("v=%d m/s  r=%5d m  off-axis %2d deg  %.1f px/frame" % (v, r, a, F_PX * w / 60.0))
+
+# ---- 7. Phase B sizing: B1 in-core segments, turn radii / yaw rates, B2 corridor ----
+G = 9.81
+H_FOV = 2 * math.atan(math.tan(V_FOV / 2) * 16 / 9)
+print("\nhorizontal FOV at 16:9: %.1f deg" % math.degrees(H_FOV))
+diag, margin = 1000 * math.sqrt(2), 300.0
+print("B1 straight segment inside 1 km core along the diagonal (%.0f m) with %.0f m margin each end:" % (diag, margin))
+for v in (60, 120, 250, 400):
+    print("  v=%3d m/s  max %.1f s" % (v, (diag - 2 * margin) / v))
+print("level turn radius r = v^2 / (g sqrt(n^2-1)), yaw rate v/r, whole-frame image speed f*w/60:")
+for v, n in ((250, 9), (250, 6), (150, 7), (120, 5), (80, 4)):
+    r = v * v / (G * math.sqrt(n * n - 1))
+    w = v / r
+    print("  v=%3d m/s n=%dg  r=%5.0f m  yaw %.2f rad/s (%.0f deg/s)  %.1f px/frame  fits 1 km core (r<=400 m): %s"
+          % (v, n, r, w, math.degrees(w), F_PX * w / 60, r <= 400))
+print("B2 corridor: length >= v*T + 2*600 m; width for mid band (600 m) when level = 2*600*tan(hFOV/2)")
+for v, T in ((250, 20), (400, 20), (400, 15)):
+    print("  v=%d m/s T=%d s  length >= %.1f km" % (v, T, (v * T + 1200) / 1000))
+print("  width >= %.2f km (level); add bank margin" % (2 * 600 * math.tan(H_FOV / 2) / 1000))
