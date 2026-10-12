@@ -42,3 +42,5 @@ $gpu = (Get-CimInstance Win32_VideoController | Select-Object -First 1 -ExpandPr
    exit_code = $proc.ExitCode; csv = $dest; gpu = $gpu; resolution = "1920x1080"; screen_percentage = 100 } |
     ConvertTo-Json | Set-Content -Encoding utf8 ($dest -replace "\.csv$", ".json")
 Write-Host ("[{0} {1}] ok exit={2} csv={3}" -f $Tag, $Level, $proc.ExitCode, $dest)
+
+exit 0

@@ -1,0 +1,284 @@
+{
+  "status": "PASS_FS_ASSETS",
+  "failures": [],
+  "created": {
+    "/Game/ForestSpike/Textures/T_FS_FieldCore": "Texture2D",
+    "/Game/ForestSpike/Textures/T_FS_FieldCtx": "Texture2D",
+    "/Game/ForestSpike/Materials/M_FS_Ground": "Material",
+    "/Game/ForestSpike/Materials/M_FS_Tree": "Material",
+    "/Game/ForestSpike/Materials/MI_FS_Ground_SOn": "MaterialInstanceConstant",
+    "/Game/ForestSpike/Materials/MI_FS_Ground_SOff": "MaterialInstanceConstant",
+    "/Game/ForestSpike/Materials/MI_FS_Ground_SCtxOnly": "MaterialInstanceConstant",
+    "/Game/ForestSpike/Materials/MI_FS_Tree_A": "MaterialInstanceConstant",
+    "/Game/ForestSpike/Materials/MI_FS_Tree_B": "MaterialInstanceConstant",
+    "/Game/ForestSpike/Meshes/Terrain_Core/terrain_core/StaticMeshes/terrain_core": "StaticMesh",
+    "/Game/ForestSpike/Meshes/Terrain_Context/terrain_context/StaticMeshes/terrain_context": "StaticMesh",
+    "/Game/ForestSpike/Meshes/Tree_A/xinyi_reference_preview_lod0/StaticMeshes/xinyi_reference_preview_lod0": "StaticMesh",
+    "/Game/ForestSpike/Meshes/Tree_B_dense_rounded/dense_rounded_lod0/StaticMeshes/dense_rounded_lod0": "StaticMesh",
+    "/Game/ForestSpike/Meshes/Tree_B_horizontal_tiered/horizontal_tiered_lod0/StaticMeshes/horizontal_tiered_lod0": "StaticMesh",
+    "/Game/ForestSpike/Meshes/Tree_B_open_vase/open_vase_lod0/StaticMeshes/open_vase_lod0": "StaticMesh",
+    "/Game/ForestSpike/Meshes/Tree_B_tall_columnar/tall_columnar_lod0/StaticMeshes/tall_columnar_lod0": "StaticMesh"
+  },
+  "meshes": {
+    "Terrain_Core": {
+      "asset": "/Game/ForestSpike/Meshes/Terrain_Core/terrain_core/StaticMeshes/terrain_core",
+      "lods": 1,
+      "triangles_lod0": 81600,
+      "has_vertex_colors": null,
+      "imported_bounds_origin_cm": [
+        0.0,
+        0.0,
+        12810.20263671875
+      ],
+      "imported_bounds_extent_cm": [
+        50000.0,
+        50000.0,
+        6701.43017578125
+      ],
+      "expected_bounds_origin_cm": [
+        0.0,
+        0.0,
+        12810.202980041504
+      ],
+      "expected_bounds_extent_cm": [
+        50000.0,
+        50000.0,
+        6701.430320739746
+      ],
+      "extent_err_cm": 0.00014495849609375,
+      "pivot_shift_cm": [
+        0.0,
+        0.0,
+        0.00034332275390625
+      ]
+    },
+    "Terrain_Context": {
+      "asset": "/Game/ForestSpike/Meshes/Terrain_Context/terrain_context/StaticMeshes/terrain_context",
+      "lods": 1,
+      "triangles_lod0": 177800,
+      "has_vertex_colors": null,
+      "imported_bounds_origin_cm": [
+        0.0,
+        0.0,
+        28481.81884765625
+      ],
+      "imported_bounds_extent_cm": [
+        300000.0,
+        300000.0,
+        25986.22802734375
+      ],
+      "expected_bounds_origin_cm": [
+        0.0,
+        0.0,
+        28481.819438934326
+      ],
+      "expected_bounds_extent_cm": [
+        300000.0,
+        300000.0,
+        25986.2286567688
+      ],
+      "extent_err_cm": 0.000629425048828125,
+      "pivot_shift_cm": [
+        0.0,
+        0.0,
+        0.000591278076171875
+      ]
+    },
+    "Tree_A": {
+      "asset": "/Game/ForestSpike/Meshes/Tree_A/xinyi_reference_preview_lod0/StaticMeshes/xinyi_reference_preview_lod0",
+      "lods": 3,
+      "triangles_lod0": 28,
+      "has_vertex_colors": null,
+      "imported_bounds_origin_cm": [
+        16.1376953125,
+        1.709197998046875,
+        421.809326171875
+      ],
+      "imported_bounds_extent_cm": [
+        275.47808837890625,
+        294.9032897949219,
+        421.809326171875
+      ],
+      "expected_bounds_origin_cm": [
+        16.137707233428955,
+        1.7091989517211914,
+        421.80933952331543
+      ],
+      "expected_bounds_extent_cm": [
+        275.4780888557434,
+        294.903302192688,
+        421.80933952331543
+      ],
+      "extent_err_cm": 1.33514404296875e-05,
+      "pivot_shift_cm": [
+        1.1920928955078125e-05,
+        9.5367431640625e-07,
+        1.33514404296875e-05
+      ],
+      "auto_lods_set": 3
+    },
+    "Tree_B_dense_rounded": {
+      "asset": "/Game/ForestSpike/Meshes/Tree_B_dense_rounded/dense_rounded_lod0/StaticMeshes/dense_rounded_lod0",
+      "lods": 1,
+      "triangles_lod0": 120,
+      "has_vertex_colors": null,
+      "imported_bounds_origin_cm": [
+        -8.781051635742188,
+        -16.871810913085938,
+        449.5095011293888
+      ],
+      "imported_bounds_extent_cm": [
+        414.0816192626953,
+        321.0823211669922,
+        450.4904988706112
+      ],
+      "expected_bounds_origin_cm": [
+        -8.781051635742188,
+        -16.87180995941162,
+        449.50950113125145
+      ],
+      "expected_bounds_extent_cm": [
+        414.08162117004395,
+        321.08232975006104,
+        450.49049886874855
+      ],
+      "extent_err_cm": 8.58306884765625e-06,
+      "pivot_shift_cm": [
+        0.0,
+        9.5367431640625e-07,
+        1.862645149230957e-09
+      ],
+      "authored_lod_import": {
+        "1": 1,
+        "2": 2
+      },
+      "lods_after_import_lod": 3
+    },
+    "Tree_B_horizontal_tiered": {
+      "asset": "/Game/ForestSpike/Meshes/Tree_B_horizontal_tiered/horizontal_tiered_lod0/StaticMeshes/horizontal_tiered_lod0",
+      "lods": 1,
+      "triangles_lod0": 112,
+      "has_vertex_colors": null,
+      "imported_bounds_origin_cm": [
+        35.85894775390625,
+        -5.8662261962890625,
+        461.22312012314796
+      ],
+      "imported_bounds_extent_cm": [
+        390.6296081542969,
+        322.5966033935547,
+        461.7768188416958
+      ],
+      "expected_bounds_origin_cm": [
+        35.858941078186035,
+        -5.866217613220215,
+        461.22312776278704
+      ],
+      "expected_bounds_extent_cm": [
+        390.62960147857666,
+        322.5965976715088,
+        461.77682646084577
+      ],
+      "extent_err_cm": 7.61914998292923e-06,
+      "pivot_shift_cm": [
+        -6.67572021484375e-06,
+        8.58306884765625e-06,
+        7.63963907957077e-06
+      ],
+      "authored_lod_import": {
+        "1": 1,
+        "2": 2
+      },
+      "lods_after_import_lod": 3
+    },
+    "Tree_B_open_vase": {
+      "asset": "/Game/ForestSpike/Meshes/Tree_B_open_vase/open_vase_lod0/StaticMeshes/open_vase_lod0",
+      "lods": 1,
+      "triangles_lod0": 102,
+      "has_vertex_colors": null,
+      "imported_bounds_origin_cm": [
+        24.33953857421875,
+        -137.35228729248047,
+        476.9169058203697
+      ],
+      "imported_bounds_extent_cm": [
+        484.0654296875,
+        283.43619537353516,
+        478.0830941796303
+      ],
+      "expected_bounds_origin_cm": [
+        24.33953285217285,
+        -137.35228776931763,
+        476.91691536456347
+      ],
+      "expected_bounds_extent_cm": [
+        484.06543731689453,
+        283.43619108200073,
+        478.08310370892286
+      ],
+      "extent_err_cm": 9.529292583465576e-06,
+      "pivot_shift_cm": [
+        -5.7220458984375e-06,
+        -4.76837158203125e-07,
+        9.544193744659424e-06
+      ],
+      "authored_lod_import": {
+        "1": 1,
+        "2": 2
+      },
+      "lods_after_import_lod": 3
+    },
+    "Tree_B_tall_columnar": {
+      "asset": "/Game/ForestSpike/Meshes/Tree_B_tall_columnar/tall_columnar_lod0/StaticMeshes/tall_columnar_lod0",
+      "lods": 1,
+      "triangles_lod0": 108,
+      "has_vertex_colors": null,
+      "imported_bounds_origin_cm": [
+        -7.021095275878906,
+        -7.823951721191406,
+        637.2488921880722
+      ],
+      "imported_bounds_extent_cm": [
+        148.7673110961914,
+        129.48490142822266,
+        637.7511078119278
+      ],
+      "expected_bounds_origin_cm": [
+        -7.021093368530273,
+        -7.8239500522613525,
+        637.2488921973854
+      ],
+      "expected_bounds_extent_cm": [
+        148.76731634140015,
+        129.48489785194397,
+        637.7511078026146
+      ],
+      "extent_err_cm": 5.245208740234375e-06,
+      "pivot_shift_cm": [
+        1.9073486328125e-06,
+        1.6689300537109375e-06,
+        9.313225746154785e-09
+      ],
+      "authored_lod_import": {
+        "1": 1,
+        "2": 2
+      },
+      "lods_after_import_lod": 3
+    }
+  },
+  "inputs_manifest_world": {
+    "seed": 20261012,
+    "core_m": 1000.0,
+    "context_m": 6000.0,
+    "base_elevation_m": 120.0,
+    "forest_threshold": -0.55,
+    "core_relief_m": 130.03331063431784,
+    "core_height_min_m": 65.08772570147781,
+    "core_height_max_m": 195.12103633579565,
+    "core_slope_mean_deg": 12.822008637628667,
+    "core_slope_p90_deg": 20.922041796732454,
+    "core_forest_fraction": 0.749286385034919,
+    "note": "synthetic analytic test fixture; not Northern Taiwan terrain or a land-use dataset"
+  },
+  "error": null
+}
