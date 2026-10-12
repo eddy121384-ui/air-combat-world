@@ -171,3 +171,12 @@ The proposed 224 x 224 km world (`worlds/north_taiwan_224.json`, EPSG:3826, 8 km
 statistics, Xinyi L3 identity-suppression rule and DTM data-gap findings are in `docs/north-taiwan-world-bounds-phase2a.md`.
 Map size is data (`tools/ntw/world_spec.py`); never hard-code 224 km. The MOI DTM mirror has a 154.6 km2 gap in the
 Hsinchu County mountains and stores near-shore sea as 0 m: derive land/sea from vector coastlines, not DTM validity.
+
+### Phase 2B core battlefield + terrain vertical slice
+
+`docs/north-taiwan-core-battlefield-terrain-phase2b.md`: first battlefield `worlds/battlefields/north_core_v1.json` (112 km flyable,
+128 km production, 224 km far field), official TGOS 20 m DEM terrain for two pilot cells (`tools/ntw/build_terrain_cells.py`),
+Xinyi seam stitch strip (Xinyi assets read-only), shard/seam QA (`tools/ntw/terrain_qa.py`, `building_shard_test.py`).
+Rules learned: never ship terrain from the Terrarium mirror where official TGOS sheets exist; the official 2025 DEM itself lacks the
+Hsinchu-County gap (BLOCKED); UE Interchange bakes glTF node translations into vertices, so UE-facing GLBs use identity nodes;
+`build_pilot.FRAGMENT_POLICY` must stay disabled for accepted builds until the locked regression gates pass.
