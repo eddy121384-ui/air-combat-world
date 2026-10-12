@@ -157,3 +157,10 @@ Current sequence:
 
 Do not mix facade polish, materials, gameplay, Taipei-wide expansion, or production-tool winner
 decisions into the Unreal import gate unless the task explicitly asks for them.
+
+## Northern Taiwan expansion (Phase 1 foundation)
+
+Theater-scale GIS audit, NTW world frame (EPSG:3826 minus fixed origin), tile/LOD proposal and three real-data whitebox pilots
+are in `docs/north-taiwan-world-foundation-v0.md` (tools: `tools/ntw/`, evidence: `data/ntw/`). Xinyi stays the accepted L3 sector in
+its own ENU frame; do not re-express or regenerate it in the NTW frame without the locked regression gates above. No theater-wide
+generation is approved yet (see its §12 go/no-go).

@@ -1,0 +1,126 @@
+{
+ "unit_costs_measured_on_pilots": {
+  "triangles_per_component_wfs_like_A": 38.13,
+  "triangles_per_component_overture_like_BC": 16.5,
+  "glb_bytes_per_component_A": 1243.0,
+  "glb_bytes_per_component_BC": 773.8,
+  "seconds_per_component_A_concurrent": 0.0299,
+  "seconds_per_component_BC_concurrent": 0.0165,
+  "builder_rss_kb_per_component_A": 23.6,
+  "xinyi_reference": {
+   "components": 11130,
+   "triangles": 485936,
+   "glb_bytes": 14853448,
+   "tri_per_component": 43.66
+  }
+ },
+ "exact_inputs": {
+  "overture_core6_rows": 479615,
+  "overture_core6_underground_flagged": 36,
+  "overture_core6_plus_yilan_rows": 542874,
+  "taipei_overture_rows": 108399,
+  "taipei_wfs_records": 373532,
+  "taipei_wfs_over_overture_record_ratio": 3.45,
+  "taipei_overture_area_vs_wfs_area_pct": 85.7
+ },
+ "scenarios": [
+  {
+   "name": "S1 Overture only, 6 core regions (exact count, lower bound)",
+   "components_wfs_like": 0,
+   "components_overture_like": 479579,
+   "components_total": 479579,
+   "triangles_millions": 7.9,
+   "glb_gb": 0.37,
+   "single_core_hours_upper_bound": 2.2,
+   "label": "ESTIMATE",
+   "note": "Footprint completeness of Overture outside Taipei is UNKNOWN; this is the minimum, not the expected count."
+  },
+  {
+   "name": "S2 Taipei WFS + Overture elsewhere, 6 core regions (recommended planning case)",
+   "components_wfs_like": 373532,
+   "components_overture_like": 371180,
+   "components_total": 744712,
+   "triangles_millions": 20.4,
+   "glb_gb": 0.75,
+   "single_core_hours_upper_bound": 4.8,
+   "label": "ESTIMATE",
+   "note": "Uses the authoritative Taipei WFS record count; elsewhere only what Overture holds."
+  },
+  {
+   "name": "S3 S2 + Yilan (Overture)",
+   "components_wfs_like": 373532,
+   "components_overture_like": 434439,
+   "components_total": 807971,
+   "triangles_millions": 21.4,
+   "glb_gb": 0.8,
+   "single_core_hours_upper_bound": 5.1,
+   "label": "ESTIMATE",
+   "note": "Adds Yilan as evaluated extra region."
+  },
+  {
+   "name": "S4 STRESS bound: non-Taipei regions as under-recorded as Overture is in Taipei",
+   "components_wfs_like": 373532,
+   "components_overture_like": 1279172,
+   "components_total": 1652704,
+   "triangles_millions": 35.3,
+   "glb_gb": 1.45,
+   "single_core_hours_upper_bound": 9.0,
+   "label": "ESTIMATE",
+   "note": "ASSUMPTION ONLY: applies Taipei's WFS/Overture record ratio to other regions. Taipei WFS is per-unit and Overture merges complexes, so this overstates; kept only to bound memory/disk planning."
+  }
+ ],
+ "partitioning": {
+  "L1_8km_nonempty_cells": 136,
+  "L2_500m_nonempty_owner_tiles_overture_only": 13701,
+  "overture_buildings_per_L2_tile": {
+   "p50": 14.0,
+   "p90": 111.0,
+   "p99": 298.0,
+   "max": 941
+  },
+  "note": "full build must be partitioned per L1 (8 km) cell: build_pilot.py holds a whole block in memory (~24 KB RSS/component measured); one process for the theater would need tens of GB."
+ },
+ "lod_prototype_ratios_measured": {
+  "A": {
+   "L1_triangle_reduction_x": 6.7,
+   "L0_triangle_reduction_x": 221.1,
+   "L2_tri_per_km2": 148586,
+   "L1_tri_per_km2": 22028,
+   "L0_tri_per_km2": 672
+  },
+  "B": {
+   "L1_triangle_reduction_x": 1.2,
+   "L0_triangle_reduction_x": 7.8,
+   "L2_tri_per_km2": 5144,
+   "L1_tri_per_km2": 4444,
+   "L0_tri_per_km2": 662
+  },
+  "C": {
+   "L1_triangle_reduction_x": 1.3,
+   "L0_triangle_reduction_x": 14.0,
+   "L2_tri_per_km2": 13217,
+   "L1_tri_per_km2": 10410,
+   "L0_tri_per_km2": 945
+  }
+ },
+ "l2_radius_for_triangle_budget_illustration": {
+  "label": "ARITHMETIC on measured pilot densities; budgets are assumptions, no device was measured",
+  "by_pilot": {
+   "A": {
+    "L2_radius_km_for_0.5M_tris": 1.03,
+    "L2_radius_km_for_1.0M_tris": 1.46,
+    "L2_radius_km_for_2.0M_tris": 2.07
+   },
+   "B": {
+    "L2_radius_km_for_0.5M_tris": 5.56,
+    "L2_radius_km_for_1.0M_tris": 7.87,
+    "L2_radius_km_for_2.0M_tris": 11.12
+   },
+   "C": {
+    "L2_radius_km_for_0.5M_tris": 3.47,
+    "L2_radius_km_for_1.0M_tris": 4.91,
+    "L2_radius_km_for_2.0M_tris": 6.94
+   }
+  }
+ }
+}

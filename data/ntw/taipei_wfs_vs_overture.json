@@ -1,0 +1,28 @@
+{
+ "overture_release": "2026-09-23.1",
+ "wfs_hits": 373532,
+ "overture_rows_in_taipei": 108399,
+ "wfs_total_footprint_km2": 35.147,
+ "overture_total_footprint_km2": 30.12,
+ "overture_rows_mostly_inside_wfs_pct_ge50": 84.38,
+ "overture_rows_no_wfs_overlap_pct": 10.61,
+ "overture_rows_no_wfs_overlap_count": 11505,
+ "wfs_features_ge50pct_covered_by_overture_pct": 57.07,
+ "wfs_features_not_touched_by_overture_pct": 29.36,
+ "wfs_area_covered_by_overture_pct": 67.77,
+ "by_overture_source": {
+  "OpenStreetMap": {
+   "rows": 78433,
+   "mostly_inside_wfs_pct": 90.47
+  },
+  "doi:10.5281/zenodo.8174931": {
+   "rows": 29966,
+   "mostly_inside_wfs_pct": 68.44
+  }
+ },
+ "wfs_height_source_counts": {
+  "1_bud_high": 373467,
+  "floors_x3.2": 65
+ },
+ "note": "Exact over all of Taipei City; overlap uses planar EPSG:3826 intersection area. 'covered' = area fraction."
+}
