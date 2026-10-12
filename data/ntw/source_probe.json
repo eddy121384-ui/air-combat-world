@@ -1,0 +1,335 @@
+{
+ "overture_release": "2026-09-23.1",
+ "overpass_raw_building_counts": {
+  "taipei": {
+   "status": "OK",
+   "mirror": "https://overpass-api.de/api/interpreter",
+   "ways": 78224,
+   "relations": 367,
+   "total": 78591,
+   "osm_base_timestamp": "2026-10-12T04:04:36Z"
+  },
+  "new_taipei": {
+   "status": "OK",
+   "mirror": "https://overpass.private.coffee/api/interpreter",
+   "ways": 49288,
+   "relations": 205,
+   "total": 49493,
+   "osm_base_timestamp": "2026-06-01T08:52:28Z"
+  },
+  "keelung": {
+   "status": "UNKNOWN",
+   "error": "HTTPError: HTTP Error 500: Internal Server Error"
+  },
+  "taoyuan": {
+   "status": "OK",
+   "mirror": "https://overpass-api.de/api/interpreter",
+   "ways": 57732,
+   "relations": 198,
+   "total": 57930,
+   "osm_base_timestamp": "2026-10-12T04:05:35Z"
+  },
+  "hsinchu_city": {
+   "status": "OK",
+   "mirror": "https://overpass-api.de/api/interpreter",
+   "ways": 6741,
+   "relations": 33,
+   "total": 6774,
+   "osm_base_timestamp": "2026-10-12T04:06:40Z"
+  },
+  "hsinchu_county": {
+   "status": "OK",
+   "mirror": "https://overpass-api.de/api/interpreter",
+   "ways": 10273,
+   "relations": 45,
+   "total": 10318,
+   "osm_base_timestamp": "2026-10-12T04:06:40Z"
+  },
+  "yilan": {
+   "status": "OK",
+   "mirror": "https://overpass-api.de/api/interpreter",
+   "ways": 15589,
+   "relations": 22,
+   "total": 15611,
+   "osm_base_timestamp": "2026-10-12T04:06:40Z"
+  }
+ },
+ "overture_other_themes": {
+  "transportation_segment": {
+   "status": "OK",
+   "seconds": 41.5,
+   "rows": [
+    [
+     "road",
+     "service",
+     101450
+    ],
+    [
+     "road",
+     "footway",
+     51840
+    ],
+    [
+     "road",
+     "residential",
+     49935
+    ],
+    [
+     "road",
+     "tertiary",
+     21167
+    ],
+    [
+     "road",
+     "unclassified",
+     20482
+    ],
+    [
+     "road",
+     "track",
+     14673
+    ],
+    [
+     "road",
+     "path",
+     14072
+    ],
+    [
+     "road",
+     "unknown",
+     12252
+    ],
+    [
+     "road",
+     "steps",
+     10719
+    ],
+    [
+     "road",
+     "secondary",
+     8931
+    ],
+    [
+     "road",
+     "primary",
+     8372
+    ],
+    [
+     "road",
+     "cycleway",
+     2629
+    ],
+    [
+     "road",
+     "motorway",
+     1536
+    ],
+    [
+     "road",
+     "living_street",
+     1369
+    ],
+    [
+     "road",
+     "trunk",
+     1262
+    ],
+    [
+     "rail",
+     "standard_gauge",
+     1104
+    ],
+    [
+     "road",
+     "pedestrian",
+     899
+    ],
+    [
+     "rail",
+     "subway",
+     747
+    ],
+    [
+     "rail",
+     "unknown",
+     278
+    ],
+    [
+     "rail",
+     "light_rail",
+     93
+    ],
+    [
+     "rail",
+     "narrow_gauge",
+     36
+    ],
+    [
+     "water",
+     null,
+     15
+    ],
+    [
+     "rail",
+     "monorail",
+     4
+    ],
+    [
+     "rail",
+     "funicular",
+     2
+    ]
+   ],
+   "total": 323867
+  },
+  "base_water": {
+   "status": "OK",
+   "seconds": 14.0,
+   "rows": [
+    [
+     "stream",
+     "stream",
+     19172
+    ],
+    [
+     "canal",
+     "drain",
+     8589
+    ],
+    [
+     "pond",
+     "pond",
+     5386
+    ],
+    [
+     "canal",
+     "ditch",
+     3325
+    ],
+    [
+     "canal",
+     "canal",
+     2187
+    ],
+    [
+     "river",
+     "river",
+     2100
+    ],
+    [
+     "water",
+     "water",
+     1839
+    ],
+    [
+     "reservoir",
+     "basin",
+     634
+    ],
+    [
+     "human_made",
+     "swimming_pool",
+     390
+    ],
+    [
+     "physical",
+     "waterfall",
+     248
+    ],
+    [
+     "reservoir",
+     "reservoir",
+     184
+    ],
+    [
+     "spring",
+     "spring",
+     115
+    ],
+    [
+     "water",
+     "wastewater",
+     87
+    ],
+    [
+     "lake",
+     "lake",
+     65
+    ],
+    [
+     "spring",
+     "hot_spring",
+     42
+    ],
+    [
+     "physical",
+     "cape",
+     21
+    ],
+    [
+     "physical",
+     "bay",
+     18
+    ],
+    [
+     "human_made",
+     "reflecting_pool",
+     7
+    ],
+    [
+     "lake",
+     "oxbow",
+     4
+    ],
+    [
+     "human_made",
+     "fish_pass",
+     4
+    ],
+    [
+     "ocean",
+     "ocean",
+     2
+    ],
+    [
+     "lake",
+     "lagoon",
+     1
+    ]
+   ],
+   "total": 44420
+  },
+  "base_infrastructure": {
+   "status": "OK",
+   "seconds": 13.2,
+   "rows": [
+    [
+     "airport",
+     "taxiway",
+     356
+    ],
+    [
+     "airport",
+     "helipad",
+     62
+    ],
+    [
+     "airport",
+     "apron",
+     31
+    ],
+    [
+     "airport",
+     "runway",
+     13
+    ],
+    [
+     "airport",
+     "airport",
+     2
+    ]
+   ],
+   "total": 464
+  }
+ }
+}

@@ -1,0 +1,68 @@
+{
+ "mirror": "yhzkiki/taiwan-dtm-2025-terrarium-z13",
+ "zoom": 13,
+ "tiles_in_index_total": 4166,
+ "tiles_with_any_valid_pixels": 2066,
+ "regions": [
+  {
+   "key": "taipei",
+   "tiles_intersecting_land_boundary": 28,
+   "tiles_missing_from_index": 0,
+   "tiles_all_nodata": 0,
+   "mean_valid_fraction": 1.0,
+   "png_tiles_to_download_for_land": 28
+  },
+  {
+   "key": "new_taipei",
+   "tiles_intersecting_land_boundary": 158,
+   "tiles_missing_from_index": 0,
+   "tiles_all_nodata": 0,
+   "mean_valid_fraction": 0.881,
+   "png_tiles_to_download_for_land": 158
+  },
+  {
+   "key": "keelung",
+   "tiles_intersecting_land_boundary": 15,
+   "tiles_missing_from_index": 0,
+   "tiles_all_nodata": 0,
+   "mean_valid_fraction": 0.844,
+   "png_tiles_to_download_for_land": 15
+  },
+  {
+   "key": "taoyuan",
+   "tiles_intersecting_land_boundary": 92,
+   "tiles_missing_from_index": 0,
+   "tiles_all_nodata": 0,
+   "mean_valid_fraction": 0.941,
+   "png_tiles_to_download_for_land": 92
+  },
+  {
+   "key": "hsinchu_city",
+   "tiles_intersecting_land_boundary": 16,
+   "tiles_missing_from_index": 0,
+   "tiles_all_nodata": 0,
+   "mean_valid_fraction": 0.868,
+   "png_tiles_to_download_for_land": 16
+  },
+  {
+   "key": "hsinchu_county",
+   "tiles_intersecting_land_boundary": 99,
+   "tiles_missing_from_index": 0,
+   "tiles_all_nodata": 2,
+   "mean_valid_fraction": 0.926,
+   "png_tiles_to_download_for_land": 97
+  },
+  {
+   "key": "yilan",
+   "tiles_intersecting_land_boundary": 154,
+   "tiles_missing_from_index": 0,
+   "tiles_all_nodata": 4,
+   "mean_valid_fraction": 0.883,
+   "png_tiles_to_download_for_land": 150
+  }
+ ],
+ "approx_pixel_m_at_25N": 17.32,
+ "all_regions_unique_tiles": 442,
+ "all_regions_mean_valid_fraction": 0.886,
+ "note": "valid_fraction < 1 at the coast is expected (sea pixels are NODATA). Vertical datum: MOI DTM is orthometric TWVD2001; Xinyi calibration offset (+0.342 m vs WFS surveyed ground) is NOT validated outside Taipei."
+}

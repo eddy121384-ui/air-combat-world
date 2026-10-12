@@ -1,0 +1,14 @@
+{
+  "note": "Each pilot = a 5 x 5 block of 500 m NTW tiles (2.5 km, the same extent as accepted Xinyi) centred on center_lonlat. Overture fetch bbox is the block + margin.",
+  "pilots": [
+    {"id": "A_taipei_main_station", "provider": "taipei_wfs", "center_lonlat": [121.5170, 25.0478],
+     "role": "dense Greater Taipei core (authoritative WFS, surveyed heights); outside accepted Xinyi",
+     "overture_fetch_bbox": [121.495, 25.035, 121.540, 25.060]},
+    {"id": "B_taoyuan_bade_suburban", "provider": "overture", "center_lonlat": [121.2950, 24.9300],
+     "role": "Taoyuan suburban / low density (Overture only; nearly all heights fallback)",
+     "overture_fetch_bbox": [121.270, 24.915, 121.320, 24.945]},
+    {"id": "C_newtaipei_banqiao_dense", "provider": "overture", "center_lonlat": [121.4590, 25.0140],
+     "role": "New Taipei dense urban (Overture only; stresses fallback heights + merged complexes)",
+     "overture_fetch_bbox": [121.435, 25.000, 121.485, 25.030]}
+  ]
+}

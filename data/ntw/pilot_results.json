@@ -1,0 +1,349 @@
+{
+ "note": "Pilot evidence. Large outputs are NOT committed (ignored: data/generated/ntw/pilots).",
+ "pilots": [
+  {
+   "pilot": "A_taipei_main_station",
+   "role": "dense Greater Taipei core (authoritative WFS, surveyed heights); outside accepted Xinyi",
+   "provider": "taipei_wfs",
+   "block_sw_tile": [
+    154,
+    164
+   ],
+   "gate_pass": true,
+   "determinism": {
+    "runs": 2,
+    "tile_sha256_identical": true,
+    "manifest_sha256_run1": "5704f91bdb2c993cfe1b37aecc47094128cc766de768f951201b3a70025bcfb0",
+    "manifest_sha256_run2": "5704f91bdb2c993cfe1b37aecc47094128cc766de768f951201b3a70025bcfb0",
+    "normalized_input_sha256_identical": true
+   },
+   "ownership": {
+    "emitted_parts": 24353,
+    "parts_in_more_than_one_tile": 0,
+    "parts_with_tile_not_equal_floor_centroid_rule": 0,
+    "glb_nodes": 24355,
+    "duplicate_node_names": 0,
+    "tiles_outside_block": 0
+   },
+   "boundary": {
+    "components_extending_past_owner_tile": 1054,
+    "pct": 4.33,
+    "max_overhang_m": 61.16,
+    "note": "legal by design: tile ownership is by source-part centroid; geometry is never clipped or duplicated"
+   },
+   "accounting": {
+    "source_parts": 24353,
+    "emitted": 24353,
+    "excluded_underground": 0,
+    "source_rejected": 0,
+    "unaccounted": 0,
+    "height_source_counts": {
+     "1_bud_high": 24350,
+     "floors_x3.2": 3
+    },
+    "repair_outcomes": {
+     "ready": 24306,
+     "repaired": 47
+    },
+    "provider_part_counts": {
+     "taipei_wfs_tp_building_height": 24353
+    }
+   },
+   "geometry": {
+    "tiles": 25,
+    "components": 24355,
+    "triangles": 928656,
+    "vertices": 509800,
+    "glb_bytes": 30273520,
+    "triangles_per_component": 38.13,
+    "glb_bytes_per_component": 1243.0,
+    "tile_triangles": {
+     "min": 9460,
+     "median": 33820,
+     "max": 70388
+    },
+    "tile_nodes": {
+     "min": 231,
+     "median": 910,
+     "max": 1855
+    },
+    "manifest_sha256": "5704f91bdb2c993cfe1b37aecc47094128cc766de768f951201b3a70025bcfb0"
+   },
+   "placement": {
+    "sampled_components": 400,
+    "method": "GLB world base vertices -> NTW -> lon/lat (inverse TM2) -> distance to source ring in local aeqd plane",
+    "max_vertex_to_source_boundary_m": 0.0,
+    "p99_m": 0.0,
+    "note": "includes GEOS make_valid + float32 quantisation; repaired parts can legitimately add intersection vertices"
+   },
+   "terrain": {
+    "dtm_source": "MOI 2025 20 m DTM, Terrarium z13 mirror (yhzkiki/taiwan-dtm-2025-terrarium-z13)",
+    "parts_sampled": 24353,
+    "nodata_samples": 0,
+    "dtm_elevation_m": {
+     "min": 0.63,
+     "median": 3.44,
+     "max": 6.68
+    },
+    "dtm_minus_surveyed_ground_m": {
+     "n": 24353,
+     "median": -0.025,
+     "median_abs": 0.201,
+     "p95_abs": 0.697,
+     "gt_3m": 3,
+     "xinyi_accepted_global_offset_m": 0.341955,
+     "median_after_applying_xinyi_offset_m": 0.317
+    }
+   },
+   "performance_wall_clock": {
+    "run1_seconds": 727.6,
+    "max_rss_mb": 562.359375,
+    "note": "three pilots were run concurrently on one machine; timings are upper bounds"
+   },
+   "blender_5_2_headless": {
+    "version": "5.2.1 LTS",
+    "pass": true,
+    "failures": [],
+    "imported_mesh_components": 24355,
+    "imported_triangles": 928656,
+    "failed_meshes": 0,
+    "totals": {
+     "nonfinite_vertices": 0,
+     "nontri_faces": 0,
+     "zero_area_triangles": 0,
+     "wrong_roof_triangles": 0,
+     "wrong_base_triangles": 0,
+     "nonvertical_wall_triangles": 0,
+     "nonmanifold_edges": 0,
+     "inconsistent_edges": 0,
+     "nonpositive_volume": 0,
+     "wrong_tile_transform": 0
+    }
+   }
+  },
+  {
+   "pilot": "B_taoyuan_bade_suburban",
+   "role": "Taoyuan suburban / low density (Overture only; nearly all heights fallback)",
+   "provider": "overture",
+   "block_sw_tile": [
+    109,
+    138
+   ],
+   "gate_pass": true,
+   "determinism": {
+    "runs": 2,
+    "tile_sha256_identical": true,
+    "manifest_sha256_run1": "cd0a7c9146b9fea38ad039b0c49323b75c07f8f4c7d37cc5a782f16ead8bac8a",
+    "manifest_sha256_run2": "cd0a7c9146b9fea38ad039b0c49323b75c07f8f4c7d37cc5a782f16ead8bac8a",
+    "normalized_input_sha256_identical": true
+   },
+   "ownership": {
+    "emitted_parts": 2047,
+    "parts_in_more_than_one_tile": 0,
+    "parts_with_tile_not_equal_floor_centroid_rule": 0,
+    "glb_nodes": 2047,
+    "duplicate_node_names": 0,
+    "tiles_outside_block": 0
+   },
+   "boundary": {
+    "components_extending_past_owner_tile": 152,
+    "pct": 7.43,
+    "max_overhang_m": 164.34,
+    "note": "legal by design: tile ownership is by source-part centroid; geometry is never clipped or duplicated"
+   },
+   "accounting": {
+    "source_parts": 2047,
+    "emitted": 2047,
+    "excluded_underground": 0,
+    "source_rejected": 0,
+    "unaccounted": 0,
+    "height_source_counts": {
+     "fallback_9.6m": 1976,
+     "overture_floors_x3.2": 62,
+     "overture_height": 9
+    },
+    "repair_outcomes": {
+     "ready": 2047
+    },
+    "provider_part_counts": {
+     "overture:doi:10.5281/zenodo.8174931": 1548,
+     "overture:OpenStreetMap": 499
+    }
+   },
+   "geometry": {
+    "tiles": 25,
+    "components": 2047,
+    "triangles": 32152,
+    "vertices": 20164,
+    "glb_bytes": 1539004,
+    "triangles_per_component": 15.71,
+    "glb_bytes_per_component": 751.8,
+    "tile_triangles": {
+     "min": 152,
+     "median": 928,
+     "max": 4320
+    },
+    "tile_nodes": {
+     "min": 6,
+     "median": 62,
+     "max": 321
+    },
+    "manifest_sha256": "cd0a7c9146b9fea38ad039b0c49323b75c07f8f4c7d37cc5a782f16ead8bac8a"
+   },
+   "placement": {
+    "sampled_components": 400,
+    "method": "GLB world base vertices -> NTW -> lon/lat (inverse TM2) -> distance to source ring in local aeqd plane",
+    "max_vertex_to_source_boundary_m": 0.0,
+    "p99_m": 0.0,
+    "note": "includes GEOS make_valid + float32 quantisation; repaired parts can legitimately add intersection vertices"
+   },
+   "terrain": {
+    "dtm_source": "MOI 2025 20 m DTM, Terrarium z13 mirror (yhzkiki/taiwan-dtm-2025-terrarium-z13)",
+    "parts_sampled": 2047,
+    "nodata_samples": 0,
+    "dtm_elevation_m": {
+     "min": 84.06,
+     "median": 142.21,
+     "max": 153.07
+    }
+   },
+   "performance_wall_clock": {
+    "run1_seconds": 38.4,
+    "max_rss_mb": 122.17578125,
+    "note": "three pilots were run concurrently on one machine; timings are upper bounds"
+   },
+   "blender_5_2_headless": {
+    "version": "5.2.1 LTS",
+    "pass": true,
+    "failures": [],
+    "imported_mesh_components": 2047,
+    "imported_triangles": 32152,
+    "failed_meshes": 0,
+    "totals": {
+     "nonfinite_vertices": 0,
+     "nontri_faces": 0,
+     "zero_area_triangles": 0,
+     "wrong_roof_triangles": 0,
+     "wrong_base_triangles": 0,
+     "nonvertical_wall_triangles": 0,
+     "nonmanifold_edges": 0,
+     "inconsistent_edges": 0,
+     "nonpositive_volume": 0,
+     "wrong_tile_transform": 0
+    }
+   }
+  },
+  {
+   "pilot": "C_newtaipei_banqiao_dense",
+   "role": "New Taipei dense urban (Overture only; stresses fallback heights + merged complexes)",
+   "provider": "overture",
+   "block_sw_tile": [
+    142,
+    156
+   ],
+   "gate_pass": true,
+   "determinism": {
+    "runs": 2,
+    "tile_sha256_identical": true,
+    "manifest_sha256_run1": "aa95b83c70f4237d55dd1f6df07275bbccf03c53e2391bb3d83cb0e5c12bac19",
+    "manifest_sha256_run2": "aa95b83c70f4237d55dd1f6df07275bbccf03c53e2391bb3d83cb0e5c12bac19",
+    "normalized_input_sha256_identical": true
+   },
+   "ownership": {
+    "emitted_parts": 4909,
+    "parts_in_more_than_one_tile": 0,
+    "parts_with_tile_not_equal_floor_centroid_rule": 0,
+    "glb_nodes": 4909,
+    "duplicate_node_names": 0,
+    "tiles_outside_block": 0
+   },
+   "boundary": {
+    "components_extending_past_owner_tile": 398,
+    "pct": 8.11,
+    "max_overhang_m": 96.11,
+    "note": "legal by design: tile ownership is by source-part centroid; geometry is never clipped or duplicated"
+   },
+   "accounting": {
+    "source_parts": 4909,
+    "emitted": 4909,
+    "excluded_underground": 0,
+    "source_rejected": 0,
+    "unaccounted": 0,
+    "height_source_counts": {
+     "fallback_9.6m": 4510,
+     "overture_floors_x3.2": 367,
+     "overture_height": 32
+    },
+    "repair_outcomes": {
+     "ready": 4909
+    },
+    "provider_part_counts": {
+     "overture:doi:10.5281/zenodo.8174931": 3491,
+     "overture:OpenStreetMap": 1418
+    }
+   },
+   "geometry": {
+    "tiles": 25,
+    "components": 4909,
+    "triangles": 82608,
+    "vertices": 51094,
+    "glb_bytes": 3843452,
+    "triangles_per_component": 16.83,
+    "glb_bytes_per_component": 782.9,
+    "tile_triangles": {
+     "min": 756,
+     "median": 3332,
+     "max": 5540
+    },
+    "tile_nodes": {
+     "min": 36,
+     "median": 214,
+     "max": 373
+    },
+    "manifest_sha256": "aa95b83c70f4237d55dd1f6df07275bbccf03c53e2391bb3d83cb0e5c12bac19"
+   },
+   "placement": {
+    "sampled_components": 400,
+    "method": "GLB world base vertices -> NTW -> lon/lat (inverse TM2) -> distance to source ring in local aeqd plane",
+    "max_vertex_to_source_boundary_m": 0.0,
+    "p99_m": 0.0,
+    "note": "includes GEOS make_valid + float32 quantisation; repaired parts can legitimately add intersection vertices"
+   },
+   "terrain": {
+    "dtm_source": "MOI 2025 20 m DTM, Terrarium z13 mirror (yhzkiki/taiwan-dtm-2025-terrarium-z13)",
+    "parts_sampled": 4909,
+    "nodata_samples": 0,
+    "dtm_elevation_m": {
+     "min": 3.84,
+     "median": 7.43,
+     "max": 12.16
+    }
+   },
+   "performance_wall_clock": {
+    "run1_seconds": 76.4,
+    "max_rss_mb": 169.07421875,
+    "note": "three pilots were run concurrently on one machine; timings are upper bounds"
+   },
+   "blender_5_2_headless": {
+    "version": "5.2.1 LTS",
+    "pass": true,
+    "failures": [],
+    "imported_mesh_components": 4909,
+    "imported_triangles": 82608,
+    "failed_meshes": 0,
+    "totals": {
+     "nonfinite_vertices": 0,
+     "nontri_faces": 0,
+     "zero_area_triangles": 0,
+     "wrong_roof_triangles": 0,
+     "wrong_base_triangles": 0,
+     "nonvertical_wall_triangles": 0,
+     "nonmanifold_edges": 0,
+     "inconsistent_edges": 0,
+     "nonpositive_volume": 0,
+     "wrong_tile_transform": 0
+    }
+   }
+  }
+ ]
+}

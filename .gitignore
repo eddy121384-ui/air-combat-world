@@ -32,3 +32,6 @@ unreal/Binaries/
 unreal/Plugins/**/Binaries/
 unreal/Plugins/**/Intermediate/
 /data/generated/taipei/era/
+
+# Northern Taiwan foundation: large regenerable survey caches / pilot outputs (do NOT commit)
+/data/generated/ntw/

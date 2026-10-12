@@ -1,0 +1,228 @@
+{
+ "enu_origin_lonlat": [
+  121.5654,
+  25.033
+ ],
+ "landmarks": [
+  {
+   "name": "xinyi_origin",
+   "geodesic_km": 0.0,
+   "enu_flat_dist_error_m": 0.0,
+   "enu_flat_dist_error_pct": 0.0,
+   "tm2_dist_error_m": 0.0,
+   "tm2_dist_error_pct": 0.0,
+   "tm2_point_scale_k": 0.99994,
+   "grid_convergence_deg": 0.2392,
+   "curvature_drop_m_flat_plane": 0.0
+  },
+  {
+   "name": "taoyuan_city",
+   "geodesic_km": 27.04,
+   "enu_flat_dist_error_m": -16.5,
+   "enu_flat_dist_error_pct": -0.061,
+   "tm2_dist_error_m": -2.05,
+   "tm2_dist_error_pct": -0.00757,
+   "tm2_point_scale_k": 0.999911,
+   "grid_convergence_deg": 0.1272,
+   "curvature_drop_m_flat_plane": 57.3
+  },
+  {
+   "name": "zhongli",
+   "geodesic_km": 35.17,
+   "enu_flat_dist_error_m": -21.4,
+   "enu_flat_dist_error_pct": -0.0608,
+   "tm2_dist_error_m": -2.78,
+   "tm2_dist_error_pct": -0.00791,
+   "tm2_point_scale_k": 0.999906,
+   "grid_convergence_deg": 0.095,
+   "curvature_drop_m_flat_plane": 97.0
+  },
+  {
+   "name": "keelung",
+   "geodesic_km": 20.42,
+   "enu_flat_dist_error_m": 23.3,
+   "enu_flat_dist_error_pct": 0.1141,
+   "tm2_dist_error_m": -0.94,
+   "tm2_dist_error_pct": -0.00462,
+   "tm2_point_scale_k": 0.999969,
+   "grid_convergence_deg": 0.3139,
+   "curvature_drop_m_flat_plane": 32.7
+  },
+  {
+   "name": "ruifang_ne",
+   "geodesic_km": 25.77,
+   "enu_flat_dist_error_m": 2.8,
+   "enu_flat_dist_error_pct": 0.0109,
+   "tm2_dist_error_m": -1.03,
+   "tm2_dist_error_pct": -0.004,
+   "tm2_point_scale_k": 0.999982,
+   "grid_convergence_deg": 0.3436,
+   "curvature_drop_m_flat_plane": 52.1
+  },
+  {
+   "name": "sanzhi_nw_coast",
+   "geodesic_km": 26.0,
+   "enu_flat_dist_error_m": 120.1,
+   "enu_flat_dist_error_pct": 0.462,
+   "tm2_dist_error_m": -1.67,
+   "tm2_dist_error_pct": -0.00643,
+   "tm2_point_scale_k": 0.999931,
+   "grid_convergence_deg": 0.2134,
+   "curvature_drop_m_flat_plane": 53.0
+  },
+  {
+   "name": "hsinchu_city",
+   "geodesic_km": 64.99,
+   "enu_flat_dist_error_m": -37.9,
+   "enu_flat_dist_error_pct": -0.0583,
+   "tm2_dist_error_m": -5.67,
+   "tm2_dist_error_pct": -0.00873,
+   "tm2_point_scale_k": 0.9999,
+   "grid_convergence_deg": -0.0132,
+   "curvature_drop_m_flat_plane": 331.1
+  },
+  {
+   "name": "hsinchu_county_smw",
+   "geodesic_km": 82.07,
+   "enu_flat_dist_error_m": 53.9,
+   "enu_flat_dist_error_pct": 0.0657,
+   "tm2_dist_error_m": -7.2,
+   "tm2_dist_error_pct": -0.00877,
+   "tm2_point_scale_k": 0.9999,
+   "grid_convergence_deg": -0.0208,
+   "curvature_drop_m_flat_plane": 528.0
+  },
+  {
+   "name": "yilan_city",
+   "geodesic_km": 35.98,
+   "enu_flat_dist_error_m": 111.6,
+   "enu_flat_dist_error_pct": 0.3101,
+   "tm2_dist_error_m": -1.61,
+   "tm2_dist_error_pct": -0.00448,
+   "tm2_point_scale_k": 0.999972,
+   "grid_convergence_deg": 0.3154,
+   "curvature_drop_m_flat_plane": 101.5
+  },
+  {
+   "name": "su_ao_south",
+   "geodesic_km": 55.42,
+   "enu_flat_dist_error_m": 173.6,
+   "enu_flat_dist_error_pct": 0.3133,
+   "tm2_dist_error_m": -2.04,
+   "tm2_dist_error_pct": -0.00369,
+   "tm2_point_scale_k": 0.999989,
+   "grid_convergence_deg": 0.3497,
+   "curvature_drop_m_flat_plane": 240.8
+  },
+  {
+   "name": "taoyuan_airport",
+   "geodesic_km": 33.99,
+   "enu_flat_dist_error_m": -10.3,
+   "enu_flat_dist_error_pct": -0.0304,
+   "tm2_dist_error_m": -2.68,
+   "tm2_dist_error_pct": -0.00789,
+   "tm2_point_scale_k": 0.999907,
+   "grid_convergence_deg": 0.0984,
+   "curvature_drop_m_flat_plane": 90.6
+  },
+  {
+   "name": "wufeng_far_south",
+   "geodesic_km": 75.77,
+   "enu_flat_dist_error_m": 185.7,
+   "enu_flat_dist_error_pct": 0.2451,
+   "tm2_dist_error_m": -6.25,
+   "tm2_dist_error_pct": -0.00824,
+   "tm2_point_scale_k": 0.999902,
+   "grid_convergence_deg": 0.058,
+   "curvature_drop_m_flat_plane": 450.0
+  }
+ ],
+ "worst_enu_flat_dist_error_m": 185.7,
+ "worst_tm2_dist_error_m": 7.2,
+ "xinyi_enu_to_ntw_affine": {
+  "fit_extent_km": 2.5,
+  "linear_part": [
+   [
+    1.000531273,
+    -0.004154954
+   ],
+   [
+    0.004177942,
+    0.995025997
+   ]
+  ],
+  "translation_m": [
+   83056.8189,
+   81551.8582
+  ],
+  "east_axis_scale": 1.00054,
+  "north_axis_scale": 0.9950347,
+  "east_axis_rotation_deg": 0.23925,
+  "north_axis_rotation_deg": 0.23925,
+  "max_residual_m": 0.12036,
+  "meaning": "ENU 500 m tile maps to 500.3 m east-west x 497.5 m north-south in true ground metres"
+ },
+ "xinyi_enu_to_ntw": {
+  "fit_extent_km": 2.5,
+  "scale": 0.997787334,
+  "rotation_deg_ccw": 0.23925,
+  "translation_m": [
+   83056.8189,
+   81551.8582
+  ],
+  "max_residual_m": 4.9744,
+  "rms_residual_m": 2.9469,
+  "note": "ENU east/north axes are TRUE north/east; NTW axes are TM2 grid. The rotation is grid convergence. Without it a feature 2.5 km from the Xinyi origin is misplaced by ~2500*sin(theta) m.",
+  "misplacement_if_rotation_ignored_at_2p5km_m": 10.44
+ },
+ "enu_frame_stretch_fit": {
+  "5km_halfwidth": {
+   "scale": 0.9977873,
+   "rotation_deg": 0.23925,
+   "max_residual_m": 21.21,
+   "rms_residual_m": 11.81
+  },
+  "20km_halfwidth": {
+   "scale": 0.9977876,
+   "rotation_deg": 0.23925,
+   "max_residual_m": 106.29,
+   "rms_residual_m": 48.56
+  },
+  "50km_halfwidth": {
+   "scale": 0.9977888,
+   "rotation_deg": 0.23925,
+   "max_residual_m": 375.59,
+   "rms_residual_m": 138.48
+  }
+ },
+ "float32_precision": [
+  {
+   "coordinate_magnitude": "xinyi tile-local (<=500 m)",
+   "float32_ulp_m": 3.0517578125e-05,
+   "float32_ulp_cm_in_ue_units": 0.0030517578125
+  },
+  {
+   "coordinate_magnitude": "25 km",
+   "float32_ulp_m": 0.001953125,
+   "float32_ulp_cm_in_ue_units": 0.1953125
+  },
+  {
+   "coordinate_magnitude": "60 km",
+   "float32_ulp_m": 0.00390625,
+   "float32_ulp_cm_in_ue_units": 0.390625
+  },
+  {
+   "coordinate_magnitude": "114 km (theater width)",
+   "float32_ulp_m": 0.0078125,
+   "float32_ulp_cm_in_ue_units": 0.78125
+  },
+  {
+   "coordinate_magnitude": "114 km in UE centimetres (float32)",
+   "float32_ulp_m": 0.01
+  }
+ ],
+ "ntw_origin_epsg3826": [
+  224000.0,
+  2688000.0
+ ]
+}

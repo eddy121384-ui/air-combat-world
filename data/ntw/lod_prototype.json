@@ -1,0 +1,83 @@
+{
+ "method": "Phase 1D prototype: deterministic coarser massing levels derived from the L2 building whitebox, measured on pilots.",
+ "pilots": [
+  {
+   "pilot": "A_taipei_main_station",
+   "block_area_km2": 6.25,
+   "source_parts": 24357,
+   "L2": {
+    "objects": 24357,
+    "triangles": 928660,
+    "vertices": 509798,
+    "tri_per_km2": 148586
+   },
+   "L1": {
+    "objects": 4401,
+    "triangles": 137676,
+    "vertices": 75994,
+    "tri_per_km2": 22028,
+    "reduction_vs_L2_triangles_x": 6.7,
+    "identity_map_entries": 23339
+   },
+   "L0": {
+    "objects": 45,
+    "triangles": 4200,
+    "vertices": 2142,
+    "tri_per_km2": 672,
+    "reduction_vs_L2_triangles_x": 221.1
+   }
+  },
+  {
+   "pilot": "B_taoyuan_bade_suburban",
+   "block_area_km2": 6.25,
+   "source_parts": 2047,
+   "L2": {
+    "objects": 2047,
+    "triangles": 32152,
+    "vertices": 20164,
+    "tri_per_km2": 5144
+   },
+   "L1": {
+    "objects": 1857,
+    "triangles": 27776,
+    "vertices": 17592,
+    "tri_per_km2": 4444,
+    "reduction_vs_L2_triangles_x": 1.2,
+    "identity_map_entries": 1936
+   },
+   "L0": {
+    "objects": 117,
+    "triangles": 4140,
+    "vertices": 2292,
+    "tri_per_km2": 662,
+    "reduction_vs_L2_triangles_x": 7.8
+   }
+  },
+  {
+   "pilot": "C_newtaipei_banqiao_dense",
+   "block_area_km2": 6.25,
+   "source_parts": 4909,
+   "L2": {
+    "objects": 4909,
+    "triangles": 82608,
+    "vertices": 51094,
+    "tri_per_km2": 13217
+   },
+   "L1": {
+    "objects": 4104,
+    "triangles": 65060,
+    "vertices": 40710,
+    "tri_per_km2": 10410,
+    "reduction_vs_L2_triangles_x": 1.3,
+    "identity_map_entries": 4661
+   },
+   "L0": {
+    "objects": 55,
+    "triangles": 5904,
+    "vertices": 2974,
+    "tri_per_km2": 945,
+    "reduction_vs_L2_triangles_x": 14.0
+   }
+  }
+ ]
+}
