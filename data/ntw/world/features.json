@@ -1,0 +1,276 @@
+{
+ "overture_release": "2026-09-23.1",
+ "features": [
+  {
+   "role": "airport",
+   "tier": "required",
+   "name": "臺灣桃園國際機場",
+   "overture_id": "5075c3ec-e950-3c34-a477-44582a60edf3",
+   "source": "overture 2026-09-23.1 base/infrastructure",
+   "lon": 121.23269,
+   "lat": 25.07899,
+   "elevation_m": null,
+   "matches": 1
+  },
+  {
+   "role": "airport",
+   "tier": "required",
+   "name": "臺北松山機場",
+   "overture_id": "4de07199-16fb-37ae-a5a7-183afbb5df31",
+   "source": "overture 2026-09-23.1 base/infrastructure",
+   "lon": 121.55398,
+   "lat": 25.06747,
+   "elevation_m": null,
+   "matches": 1
+  },
+  {
+   "role": "airport",
+   "tier": "required",
+   "name": "空軍新竹基地",
+   "overture_id": "a120ebcf-3a5b-3acd-b30c-f1fb36114f82",
+   "source": "overture 2026-09-23.1 base/land_use",
+   "lon": 120.94071,
+   "lat": 24.82068,
+   "elevation_m": null,
+   "matches": 1
+  },
+  {
+   "role": "airport",
+   "tier": "optional",
+   "name": "臺中清泉崗機場",
+   "overture_id": "cbff7453-b6c1-3120-9e77-3154b2f36c24",
+   "source": "overture 2026-09-23.1 base/land_use",
+   "lon": 120.62417,
+   "lat": 24.26344,
+   "elevation_m": null,
+   "matches": 1
+  },
+  {
+   "role": "airport",
+   "tier": "optional",
+   "name": "花蓮機場",
+   "overture_id": "ce705a8c-3b0f-3bdd-8222-d49eadbb561c",
+   "source": "overture 2026-09-23.1 base/land_use",
+   "lon": 121.61826,
+   "lat": 24.02352,
+   "elevation_m": null,
+   "matches": 1
+  },
+  {
+   "role": "airport",
+   "tier": "optional",
+   "name": "佳山基地",
+   "overture_id": "b0ddc571-f6b5-3688-b460-6b4c82a05f02",
+   "source": "overture 2026-09-23.1 base/land_use",
+   "lon": 121.58737,
+   "lat": 24.0277,
+   "elevation_m": null,
+   "matches": 1
+  },
+  {
+   "role": "airport",
+   "tier": "info_taiwan_outlying",
+   "name": "馬祖南竿機場",
+   "overture_id": "998843e2-3793-34f5-ae8f-82873934b022",
+   "source": "overture 2026-09-23.1 base/infrastructure",
+   "lon": 119.95775,
+   "lat": 26.15917,
+   "elevation_m": null,
+   "matches": 1
+  },
+  {
+   "role": "airport",
+   "tier": "info_taiwan_outlying",
+   "name": "馬祖北竿機場",
+   "overture_id": "74afbcd1-4955-3ef0-82c9-ca0d48c70f0f",
+   "source": "overture 2026-09-23.1 base/infrastructure",
+   "lon": 120.00251,
+   "lat": 26.22502,
+   "elevation_m": null,
+   "matches": 1
+  },
+  {
+   "role": "airport",
+   "tier": "info_foreign",
+   "name": "福州长乐国际机场",
+   "overture_id": "95856175-b67e-3db7-8ff1-54d1ca4733eb",
+   "source": "overture 2026-09-23.1 base/infrastructure",
+   "lon": 119.67171,
+   "lat": 25.93042,
+   "elevation_m": null,
+   "matches": 1
+  },
+  {
+   "role": "airport",
+   "tier": "info_foreign",
+   "name": "与那国空港",
+   "overture_id": "79cc4950-335d-3889-9a4f-9bfa5a829145",
+   "source": "overture 2026-09-23.1 base/infrastructure",
+   "lon": 122.97976,
+   "lat": 24.46714,
+   "elevation_m": null,
+   "matches": 1
+  },
+  {
+   "role": "port",
+   "tier": "required",
+   "name": "基隆港",
+   "overture_id": "6a23af10-0f90-4dc9-ab29-1aff30732e72",
+   "source": "overture 2026-09-23.1 places/place",
+   "lon": 121.7433,
+   "lat": 25.13181,
+   "elevation_m": null,
+   "matches": 1
+  },
+  {
+   "role": "port",
+   "tier": "required",
+   "name": "台北港",
+   "overture_id": "9a6be5f7-52fd-46ae-bf27-35e847ff9b8b",
+   "source": "overture 2026-09-23.1 places/place",
+   "lon": 121.39068,
+   "lat": 25.15087,
+   "elevation_m": null,
+   "matches": 1
+  },
+  {
+   "role": "port",
+   "tier": "required",
+   "name": "蘇澳漁港",
+   "overture_id": "388c8bf0-b4c5-4911-9fb0-56a58c445a85",
+   "source": "overture 2026-09-23.1 places/place",
+   "lon": 121.86578,
+   "lat": 24.58214,
+   "elevation_m": null,
+   "matches": 1
+  },
+  {
+   "role": "port",
+   "tier": "optional",
+   "name": "台中港",
+   "overture_id": "272c9a3a-a4b4-47d8-ac68-9fd160e2b06a",
+   "source": "overture 2026-09-23.1 places/place",
+   "lon": 120.52077,
+   "lat": 24.29304,
+   "elevation_m": null,
+   "matches": 2
+  },
+  {
+   "role": "port",
+   "tier": "optional",
+   "name": "花蓮港",
+   "overture_id": "ae0f0a50-f61c-46f5-9206-ccb57bd2bcdc",
+   "source": "overture 2026-09-23.1 places/place",
+   "lon": 121.62639,
+   "lat": 23.98639,
+   "elevation_m": null,
+   "matches": 1
+  },
+  {
+   "role": "port",
+   "tier": "optional",
+   "name": "烏石漁港",
+   "overture_id": "1678a85b-3cbf-4b76-9a6e-f7aac5bd0604",
+   "source": "overture 2026-09-23.1 places/place",
+   "lon": 121.83554,
+   "lat": 24.87084,
+   "elevation_m": null,
+   "matches": 1
+  },
+  {
+   "role": "port",
+   "tier": "optional",
+   "name": "南寮舊港愛之船咖啡",
+   "overture_id": "33d017f6-c94e-499e-b087-3a1e9a5d432f",
+   "source": "overture 2026-09-23.1 places/place",
+   "lon": 120.92877,
+   "lat": 24.84981,
+   "elevation_m": null,
+   "matches": 1
+  },
+  {
+   "role": "peak",
+   "tier": "required",
+   "name": "雪山主峰",
+   "overture_id": "1dc20a61-5ac5-3b77-b415-b069f452cbeb",
+   "source": "overture 2026-09-23.1 base/land",
+   "lon": 121.2318,
+   "lat": 24.3834,
+   "elevation_m": 3885,
+   "matches": 1
+  },
+  {
+   "role": "peak",
+   "tier": "required",
+   "name": "南湖大山",
+   "overture_id": "90c4e734-95d0-345a-a82e-771a3950a1c6",
+   "source": "overture 2026-09-23.1 base/land",
+   "lon": 121.43938,
+   "lat": 24.36181,
+   "elevation_m": 3741,
+   "matches": 1
+  },
+  {
+   "role": "peak",
+   "tier": "required",
+   "name": "中央尖山",
+   "overture_id": "4d43631c-3b27-3eb7-9501-5efe75f1ea10",
+   "source": "overture 2026-09-23.1 base/land",
+   "lon": 121.41627,
+   "lat": 24.31022,
+   "elevation_m": 3698,
+   "matches": 1
+  },
+  {
+   "role": "peak",
+   "tier": "required",
+   "name": "大霸尖山",
+   "overture_id": "d145f995-6071-342a-88e1-947c3cafa6ac",
+   "source": "overture 2026-09-23.1 base/land",
+   "lon": 121.258,
+   "lat": 24.45774,
+   "elevation_m": 3490,
+   "matches": 1
+  },
+  {
+   "role": "peak",
+   "tier": "required",
+   "name": "七星山",
+   "overture_id": "90bfc39f-041a-3da0-b304-70de90e4d8c5",
+   "source": "overture 2026-09-23.1 base/land",
+   "lon": 121.55344,
+   "lat": 25.1707,
+   "elevation_m": 1118,
+   "matches": 1
+  },
+  {
+   "role": "peak",
+   "tier": "optional",
+   "name": "太平山",
+   "status": "NOT_FOUND"
+  },
+  {
+   "role": "peak",
+   "tier": "optional",
+   "name": "奇萊主山",
+   "overture_id": "29022669-6ded-3f74-a14a-a8572cac94e0",
+   "source": "overture 2026-09-23.1 base/land",
+   "lon": 121.32326,
+   "lat": 24.08646,
+   "elevation_m": 3562,
+   "matches": 1
+  },
+  {
+   "role": "peak",
+   "tier": "info",
+   "name": "觀音山",
+   "overture_id": "e93a69d2-ac7b-318d-a9cd-09a8cc16bca3",
+   "source": "overture 2026-09-23.1 base/land",
+   "lon": 121.42668,
+   "lat": 25.13594,
+   "elevation_m": 611,
+   "matches": 1
+  }
+ ],
+ "note": "Ports use the best Overture place record for the harbour (some are quay/marina records); 南寮舊港 marks Hsinchu Nanliao harbour. Positions are representative points, not port limits."
+}

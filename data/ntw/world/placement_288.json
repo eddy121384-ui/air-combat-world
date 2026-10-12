@@ -1,0 +1,706 @@
+{
+ "size_km": 288.0,
+ "margin_km": 8,
+ "grid_km": 8.0,
+ "candidates_evaluated": 725,
+ "feasible": 24,
+ "core_region_bounds_epsg3826": [
+  237803.1,
+  2689429.4,
+  351648.7,
+  2799078.6
+ ],
+ "required_regions": {
+  "TW-HSZ": "新竹市",
+  "TW-HSQ": "新竹縣",
+  "TW-TAO": "桃園市",
+  "TW-TPE": "臺北市",
+  "TW-NWT": "新北市",
+  "TW-KEE": "基隆市",
+  "TW-ILA": "宜蘭縣"
+ },
+ "required_features": [
+  "臺灣桃園國際機場",
+  "臺北松山機場",
+  "空軍新竹基地",
+  "基隆港",
+  "台北港",
+  "蘇澳漁港",
+  "雪山主峰",
+  "南湖大山",
+  "中央尖山",
+  "大霸尖山",
+  "七星山"
+ ],
+ "ranking": "max min(core W,N,E sea depth) -> max optional features -> max north depth -> west-most, south-most",
+ "core_scanlines": {
+  "west_rows": 63,
+  "east_rows": 110,
+  "north_cols": 114,
+  "definition": "1 km scan line counts as core when its outermost main-island coast point lies within 300 m of a required region"
+ },
+ "top": [
+  {
+   "sw_corner_epsg3826": [
+    152000.0,
+    2640000.0
+   ],
+   "bounds_epsg3826": [
+    152000.0,
+    2640000.0,
+    440000.0,
+    2928000.0
+   ],
+   "feasible": true,
+   "violations": [],
+   "depth_km": {
+    "west_core_min": 86.6,
+    "west_core_median": 101.4,
+    "west_all_min": 18.9,
+    "north_core_min": 129.0,
+    "north_core_median": 148.2,
+    "east_core_min": 88.5,
+    "east_core_median": 105.3,
+    "east_all_min": 88.5
+   },
+   "objective_min_core_depth_km": 86.6,
+   "land_tw_pct": 19.55,
+   "foreign_land_km2": 0.0,
+   "sea_pct": 80.45,
+   "coastline_km_in_world": 648.3,
+   "optional_features_inside": [
+    "臺中清泉崗機場",
+    "花蓮機場",
+    "佳山基地",
+    "台中港",
+    "花蓮港",
+    "烏石漁港",
+    "南寮舊港愛之船咖啡",
+    "奇萊主山"
+   ],
+   "high_mountain_tiles_inside": 108,
+   "high_mountain_tiles_total": 108,
+   "share_west_of_approx_median_line_pct": 13.2,
+   "nearest_foreign_land_km": 2.8
+  },
+  {
+   "sw_corner_epsg3826": [
+    152000.0,
+    2632000.0
+   ],
+   "bounds_epsg3826": [
+    152000.0,
+    2632000.0,
+    440000.0,
+    2920000.0
+   ],
+   "feasible": true,
+   "violations": [],
+   "depth_km": {
+    "west_core_min": 86.6,
+    "west_core_median": 101.4,
+    "west_all_min": 14.2,
+    "north_core_min": 121.0,
+    "north_core_median": 140.2,
+    "east_core_min": 88.5,
+    "east_core_median": 105.3,
+    "east_all_min": 88.5
+   },
+   "objective_min_core_depth_km": 86.6,
+   "land_tw_pct": 20.9,
+   "foreign_land_km2": 0.0,
+   "sea_pct": 79.1,
+   "coastline_km_in_world": 680.3,
+   "optional_features_inside": [
+    "臺中清泉崗機場",
+    "花蓮機場",
+    "佳山基地",
+    "台中港",
+    "花蓮港",
+    "烏石漁港",
+    "南寮舊港愛之船咖啡",
+    "奇萊主山"
+   ],
+   "high_mountain_tiles_inside": 108,
+   "high_mountain_tiles_total": 108,
+   "share_west_of_approx_median_line_pct": 11.8,
+   "nearest_foreign_land_km": 4.4
+  },
+  {
+   "sw_corner_epsg3826": [
+    152000.0,
+    2624000.0
+   ],
+   "bounds_epsg3826": [
+    152000.0,
+    2624000.0,
+    440000.0,
+    2912000.0
+   ],
+   "feasible": true,
+   "violations": [],
+   "depth_km": {
+    "west_core_min": 86.6,
+    "west_core_median": 101.4,
+    "west_all_min": 12.7,
+    "north_core_min": 113.0,
+    "north_core_median": 132.2,
+    "east_core_min": 88.5,
+    "east_core_median": 105.3,
+    "east_all_min": 88.5
+   },
+   "objective_min_core_depth_km": 86.6,
+   "land_tw_pct": 22.26,
+   "foreign_land_km2": 0.0,
+   "sea_pct": 77.74,
+   "coastline_km_in_world": 691.1,
+   "optional_features_inside": [
+    "臺中清泉崗機場",
+    "花蓮機場",
+    "佳山基地",
+    "台中港",
+    "花蓮港",
+    "烏石漁港",
+    "南寮舊港愛之船咖啡",
+    "奇萊主山"
+   ],
+   "high_mountain_tiles_inside": 108,
+   "high_mountain_tiles_total": 108,
+   "share_west_of_approx_median_line_pct": 10.6,
+   "nearest_foreign_land_km": 6.1
+  },
+  {
+   "sw_corner_epsg3826": [
+    152000.0,
+    2616000.0
+   ],
+   "bounds_epsg3826": [
+    152000.0,
+    2616000.0,
+    440000.0,
+    2904000.0
+   ],
+   "feasible": true,
+   "violations": [],
+   "depth_km": {
+    "west_core_min": 86.6,
+    "west_core_median": 101.4,
+    "west_all_min": 10.4,
+    "north_core_min": 105.0,
+    "north_core_median": 124.2,
+    "east_core_min": 88.5,
+    "east_core_median": 105.3,
+    "east_all_min": 88.5
+   },
+   "objective_min_core_depth_km": 86.6,
+   "land_tw_pct": 23.63,
+   "foreign_land_km2": 0.0,
+   "sea_pct": 76.37,
+   "coastline_km_in_world": 712.7,
+   "optional_features_inside": [
+    "臺中清泉崗機場",
+    "花蓮機場",
+    "佳山基地",
+    "台中港",
+    "花蓮港",
+    "烏石漁港",
+    "南寮舊港愛之船咖啡",
+    "奇萊主山"
+   ],
+   "high_mountain_tiles_inside": 108,
+   "high_mountain_tiles_total": 108,
+   "share_west_of_approx_median_line_pct": 9.4,
+   "nearest_foreign_land_km": 6.1
+  },
+  {
+   "sw_corner_epsg3826": [
+    152000.0,
+    2608000.0
+   ],
+   "bounds_epsg3826": [
+    152000.0,
+    2608000.0,
+    440000.0,
+    2896000.0
+   ],
+   "feasible": true,
+   "violations": [],
+   "depth_km": {
+    "west_core_min": 86.6,
+    "west_core_median": 101.4,
+    "west_all_min": 9.6,
+    "north_core_min": 97.0,
+    "north_core_median": 116.2,
+    "east_core_min": 88.5,
+    "east_core_median": 105.3,
+    "east_all_min": 88.5
+   },
+   "objective_min_core_depth_km": 86.6,
+   "land_tw_pct": 24.99,
+   "foreign_land_km2": 0.0,
+   "sea_pct": 75.01,
+   "coastline_km_in_world": 730.0,
+   "optional_features_inside": [
+    "臺中清泉崗機場",
+    "花蓮機場",
+    "佳山基地",
+    "台中港",
+    "花蓮港",
+    "烏石漁港",
+    "南寮舊港愛之船咖啡",
+    "奇萊主山"
+   ],
+   "high_mountain_tiles_inside": 108,
+   "high_mountain_tiles_total": 108,
+   "share_west_of_approx_median_line_pct": 8.3,
+   "nearest_foreign_land_km": 6.1
+  },
+  {
+   "sw_corner_epsg3826": [
+    152000.0,
+    2600000.0
+   ],
+   "bounds_epsg3826": [
+    152000.0,
+    2600000.0,
+    440000.0,
+    2888000.0
+   ],
+   "feasible": true,
+   "violations": [],
+   "depth_km": {
+    "west_core_min": 86.6,
+    "west_core_median": 101.4,
+    "west_all_min": 7.2,
+    "north_core_min": 89.0,
+    "north_core_median": 108.2,
+    "east_core_min": 88.5,
+    "east_core_median": 105.3,
+    "east_all_min": 88.5
+   },
+   "objective_min_core_depth_km": 86.6,
+   "land_tw_pct": 26.35,
+   "foreign_land_km2": 0.0,
+   "sea_pct": 73.65,
+   "coastline_km_in_world": 764.0,
+   "optional_features_inside": [
+    "臺中清泉崗機場",
+    "花蓮機場",
+    "佳山基地",
+    "台中港",
+    "花蓮港",
+    "烏石漁港",
+    "南寮舊港愛之船咖啡",
+    "奇萊主山"
+   ],
+   "high_mountain_tiles_inside": 108,
+   "high_mountain_tiles_total": 108,
+   "share_west_of_approx_median_line_pct": 7.2,
+   "nearest_foreign_land_km": 6.1
+  },
+  {
+   "sw_corner_epsg3826": [
+    152000.0,
+    2592000.0
+   ],
+   "bounds_epsg3826": [
+    152000.0,
+    2592000.0,
+    440000.0,
+    2880000.0
+   ],
+   "feasible": true,
+   "violations": [],
+   "depth_km": {
+    "west_core_min": 86.6,
+    "west_core_median": 101.4,
+    "west_all_min": 6.8,
+    "north_core_min": 81.0,
+    "north_core_median": 100.2,
+    "east_core_min": 88.5,
+    "east_core_median": 105.3,
+    "east_all_min": 88.5
+   },
+   "objective_min_core_depth_km": 81.0,
+   "land_tw_pct": 27.73,
+   "foreign_land_km2": 0.0,
+   "sea_pct": 72.27,
+   "coastline_km_in_world": 796.5,
+   "optional_features_inside": [
+    "臺中清泉崗機場",
+    "花蓮機場",
+    "佳山基地",
+    "台中港",
+    "花蓮港",
+    "烏石漁港",
+    "南寮舊港愛之船咖啡",
+    "奇萊主山"
+   ],
+   "high_mountain_tiles_inside": 108,
+   "high_mountain_tiles_total": 108,
+   "share_west_of_approx_median_line_pct": 6.2,
+   "nearest_foreign_land_km": 6.1
+  },
+  {
+   "sw_corner_epsg3826": [
+    144000.0,
+    2624000.0
+   ],
+   "bounds_epsg3826": [
+    144000.0,
+    2624000.0,
+    432000.0,
+    2912000.0
+   ],
+   "feasible": true,
+   "violations": [],
+   "depth_km": {
+    "west_core_min": 94.6,
+    "west_core_median": 109.4,
+    "west_all_min": 20.7,
+    "north_core_min": 113.0,
+    "north_core_median": 132.2,
+    "east_core_min": 80.5,
+    "east_core_median": 97.3,
+    "east_all_min": 80.5
+   },
+   "objective_min_core_depth_km": 80.5,
+   "land_tw_pct": 22.28,
+   "foreign_land_km2": 0.0,
+   "sea_pct": 77.72,
+   "coastline_km_in_world": 739.1,
+   "optional_features_inside": [
+    "臺中清泉崗機場",
+    "花蓮機場",
+    "佳山基地",
+    "台中港",
+    "花蓮港",
+    "烏石漁港",
+    "南寮舊港愛之船咖啡",
+    "奇萊主山"
+   ],
+   "high_mountain_tiles_inside": 108,
+   "high_mountain_tiles_total": 108,
+   "share_west_of_approx_median_line_pct": 11.9,
+   "nearest_foreign_land_km": 0.9
+  },
+  {
+   "sw_corner_epsg3826": [
+    144000.0,
+    2616000.0
+   ],
+   "bounds_epsg3826": [
+    144000.0,
+    2616000.0,
+    432000.0,
+    2904000.0
+   ],
+   "feasible": true,
+   "violations": [],
+   "depth_km": {
+    "west_core_min": 94.6,
+    "west_core_median": 109.4,
+    "west_all_min": 18.4,
+    "north_core_min": 105.0,
+    "north_core_median": 124.2,
+    "east_core_min": 80.5,
+    "east_core_median": 97.3,
+    "east_all_min": 80.5
+   },
+   "objective_min_core_depth_km": 80.5,
+   "land_tw_pct": 23.64,
+   "foreign_land_km2": 0.0,
+   "sea_pct": 76.36,
+   "coastline_km_in_world": 752.1,
+   "optional_features_inside": [
+    "臺中清泉崗機場",
+    "花蓮機場",
+    "佳山基地",
+    "台中港",
+    "花蓮港",
+    "烏石漁港",
+    "南寮舊港愛之船咖啡",
+    "奇萊主山"
+   ],
+   "high_mountain_tiles_inside": 108,
+   "high_mountain_tiles_total": 108,
+   "share_west_of_approx_median_line_pct": 10.7,
+   "nearest_foreign_land_km": 0.9
+  },
+  {
+   "sw_corner_epsg3826": [
+    144000.0,
+    2608000.0
+   ],
+   "bounds_epsg3826": [
+    144000.0,
+    2608000.0,
+    432000.0,
+    2896000.0
+   ],
+   "feasible": true,
+   "violations": [],
+   "depth_km": {
+    "west_core_min": 94.6,
+    "west_core_median": 109.4,
+    "west_all_min": 17.6,
+    "north_core_min": 97.0,
+    "north_core_median": 116.2,
+    "east_core_min": 80.5,
+    "east_core_median": 97.3,
+    "east_all_min": 80.5
+   },
+   "objective_min_core_depth_km": 80.5,
+   "land_tw_pct": 25.0,
+   "foreign_land_km2": 0.0,
+   "sea_pct": 75.0,
+   "coastline_km_in_world": 750.2,
+   "optional_features_inside": [
+    "臺中清泉崗機場",
+    "花蓮機場",
+    "佳山基地",
+    "台中港",
+    "花蓮港",
+    "烏石漁港",
+    "南寮舊港愛之船咖啡",
+    "奇萊主山"
+   ],
+   "high_mountain_tiles_inside": 108,
+   "high_mountain_tiles_total": 108,
+   "share_west_of_approx_median_line_pct": 9.5,
+   "nearest_foreign_land_km": 0.9
+  },
+  {
+   "sw_corner_epsg3826": [
+    144000.0,
+    2600000.0
+   ],
+   "bounds_epsg3826": [
+    144000.0,
+    2600000.0,
+    432000.0,
+    2888000.0
+   ],
+   "feasible": true,
+   "violations": [],
+   "depth_km": {
+    "west_core_min": 94.6,
+    "west_core_median": 109.4,
+    "west_all_min": 15.2,
+    "north_core_min": 89.0,
+    "north_core_median": 108.2,
+    "east_core_min": 80.5,
+    "east_core_median": 97.3,
+    "east_all_min": 80.5
+   },
+   "objective_min_core_depth_km": 80.5,
+   "land_tw_pct": 26.35,
+   "foreign_land_km2": 0.0,
+   "sea_pct": 73.65,
+   "coastline_km_in_world": 774.4,
+   "optional_features_inside": [
+    "臺中清泉崗機場",
+    "花蓮機場",
+    "佳山基地",
+    "台中港",
+    "花蓮港",
+    "烏石漁港",
+    "南寮舊港愛之船咖啡",
+    "奇萊主山"
+   ],
+   "high_mountain_tiles_inside": 108,
+   "high_mountain_tiles_total": 108,
+   "share_west_of_approx_median_line_pct": 8.3,
+   "nearest_foreign_land_km": 0.9
+  },
+  {
+   "sw_corner_epsg3826": [
+    144000.0,
+    2592000.0
+   ],
+   "bounds_epsg3826": [
+    144000.0,
+    2592000.0,
+    432000.0,
+    2880000.0
+   ],
+   "feasible": true,
+   "violations": [],
+   "depth_km": {
+    "west_core_min": 94.6,
+    "west_core_median": 109.4,
+    "west_all_min": 14.8,
+    "north_core_min": 81.0,
+    "north_core_median": 100.2,
+    "east_core_min": 80.5,
+    "east_core_median": 97.3,
+    "east_all_min": 80.5
+   },
+   "objective_min_core_depth_km": 80.5,
+   "land_tw_pct": 27.73,
+   "foreign_land_km2": 0.0,
+   "sea_pct": 72.27,
+   "coastline_km_in_world": 807.0,
+   "optional_features_inside": [
+    "臺中清泉崗機場",
+    "花蓮機場",
+    "佳山基地",
+    "台中港",
+    "花蓮港",
+    "烏石漁港",
+    "南寮舊港愛之船咖啡",
+    "奇萊主山"
+   ],
+   "high_mountain_tiles_inside": 108,
+   "high_mountain_tiles_total": 108,
+   "share_west_of_approx_median_line_pct": 7.3,
+   "nearest_foreign_land_km": 0.9
+  },
+  {
+   "sw_corner_epsg3826": [
+    144000.0,
+    2584000.0
+   ],
+   "bounds_epsg3826": [
+    144000.0,
+    2584000.0,
+    432000.0,
+    2872000.0
+   ],
+   "feasible": true,
+   "violations": [],
+   "depth_km": {
+    "west_core_min": 94.6,
+    "west_core_median": 109.4,
+    "west_all_min": 14.8,
+    "north_core_min": 73.0,
+    "north_core_median": 92.2,
+    "east_core_min": 80.5,
+    "east_core_median": 97.3,
+    "east_all_min": 80.5
+   },
+   "objective_min_core_depth_km": 73.0,
+   "land_tw_pct": 29.07,
+   "foreign_land_km2": 0.0,
+   "sea_pct": 70.93,
+   "coastline_km_in_world": 816.9,
+   "optional_features_inside": [
+    "臺中清泉崗機場",
+    "花蓮機場",
+    "佳山基地",
+    "台中港",
+    "花蓮港",
+    "烏石漁港",
+    "南寮舊港愛之船咖啡",
+    "奇萊主山"
+   ],
+   "high_mountain_tiles_inside": 108,
+   "high_mountain_tiles_total": 108,
+   "share_west_of_approx_median_line_pct": 6.3,
+   "nearest_foreign_land_km": 0.9
+  },
+  {
+   "sw_corner_epsg3826": [
+    152000.0,
+    2584000.0
+   ],
+   "bounds_epsg3826": [
+    152000.0,
+    2584000.0,
+    440000.0,
+    2872000.0
+   ],
+   "feasible": true,
+   "violations": [],
+   "depth_km": {
+    "west_core_min": 86.6,
+    "west_core_median": 101.4,
+    "west_all_min": 6.8,
+    "north_core_min": 73.0,
+    "north_core_median": 92.2,
+    "east_core_min": 88.5,
+    "east_core_median": 105.3,
+    "east_all_min": 88.5
+   },
+   "objective_min_core_depth_km": 73.0,
+   "land_tw_pct": 29.07,
+   "foreign_land_km2": 0.0,
+   "sea_pct": 70.93,
+   "coastline_km_in_world": 813.3,
+   "optional_features_inside": [
+    "臺中清泉崗機場",
+    "花蓮機場",
+    "佳山基地",
+    "台中港",
+    "花蓮港",
+    "烏石漁港",
+    "南寮舊港愛之船咖啡",
+    "奇萊主山"
+   ],
+   "high_mountain_tiles_inside": 108,
+   "high_mountain_tiles_total": 108,
+   "share_west_of_approx_median_line_pct": 5.3,
+   "nearest_foreign_land_km": 6.1
+  },
+  {
+   "sw_corner_epsg3826": [
+    144000.0,
+    2576000.0
+   ],
+   "bounds_epsg3826": [
+    144000.0,
+    2576000.0,
+    432000.0,
+    2864000.0
+   ],
+   "feasible": true,
+   "violations": [],
+   "depth_km": {
+    "west_core_min": 94.6,
+    "west_core_median": 109.4,
+    "west_all_min": 13.6,
+    "north_core_min": 65.0,
+    "north_core_median": 84.2,
+    "east_core_min": 80.5,
+    "east_core_median": 97.3,
+    "east_all_min": 80.5
+   },
+   "objective_min_core_depth_km": 65.0,
+   "land_tw_pct": 30.39,
+   "foreign_land_km2": 0.0,
+   "sea_pct": 69.61,
+   "coastline_km_in_world": 833.8,
+   "optional_features_inside": [
+    "臺中清泉崗機場",
+    "花蓮機場",
+    "佳山基地",
+    "台中港",
+    "花蓮港",
+    "烏石漁港",
+    "南寮舊港愛之船咖啡",
+    "奇萊主山"
+   ],
+   "high_mountain_tiles_inside": 108,
+   "high_mountain_tiles_total": 108,
+   "share_west_of_approx_median_line_pct": 5.4,
+   "nearest_foreign_land_km": 0.9
+  }
+ ],
+ "infeasible_reasons_histogram": {
+  "foreign_land": 667,
+  "region:TW-HSQ": 307,
+  "region:TW-ILA": 257,
+  "region:TW-HSZ": 242,
+  "feature:雪山主峰": 231,
+  "feature:南湖大山": 221,
+  "feature:中央尖山": 221,
+  "region:TW-TAO": 219,
+  "feature:大霸尖山": 205,
+  "feature:空軍新竹基地": 175,
+  "region:TW-NWT": 150,
+  "feature:蘇澳漁港": 116,
+  "feature:臺灣桃園國際機場": 75,
+  "feature:台北港": 25
+ },
+ "median_line_note": "Approximate commonly cited endpoints (27N,122E)-(23N,118E); NOT an official boundary."
+}

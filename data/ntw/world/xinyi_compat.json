@@ -1,0 +1,83 @@
+{
+ "world": "north_taiwan_224",
+ "sector": {
+  "enu_extent_m": [
+   -1500.0,
+   -1000.0,
+   1000.0,
+   1500.0
+  ],
+  "outline_area_km2": 6.2222,
+  "nominal_enu_area_km2": 6.25,
+  "outline_bounds_epsg3826": [
+   305549.95,
+   2768550.63,
+   308061.58,
+   2771048.59
+  ],
+  "enu_origin_epsg3826": [
+   307056.819,
+   2769551.837
+  ],
+  "fetch_bbox_area_km2": 3.9839
+ },
+ "placement": {
+  "inside_world": true,
+  "distance_to_world_edges_km": {
+   "west": 121.55,
+   "east": 99.94,
+   "south": 120.55,
+   "north": 100.95
+  },
+  "world_cells_8km": [
+   "C+0038+0346"
+  ],
+  "ntw_l2_tiles_touched": 36,
+  "note_alignment": "Xinyi ENU tiles are rotated 0.239 deg and scaled (1.00054 E, 0.99503 N) vs the NTW/TM2 grid, so they can never coincide with NTW L2 tiles; ownership must therefore be by source identity, not by tile.",
+  "xinyi_ue_to_world_ue_affine_cm": {
+   "linear": [
+    [
+     1.000531273,
+     0.004154954
+    ],
+    [
+     -0.004177942,
+     0.995025997
+    ]
+   ],
+   "translation_cm": [
+    1105681.89,
+    -955185.82
+   ],
+   "determinant": 0.995571987,
+   "meaning": "world_UE_xy = linear @ xinyi_level_UE_xy + translation; Z unchanged (both TWVD2001 m * 100)",
+   "enu_origin_in_world_ue_cm": [
+    1105681.89,
+    -955185.82
+   ]
+  },
+  "max_abs_world_ue_coordinate_of_sector_km": 12.06
+ },
+ "l3_suppression": {
+  "rule": "NTW skips any WFS feature whose id is in the Xinyi pinned source id set; Xinyi hero suppression stays Xinyi-owned",
+  "xinyi_source_sha256": "c7ca8da13a4c5baaab0fbd1fcfe5b3799723d49d1998f804cf1593904f70200d",
+  "xinyi_source_features": 11132,
+  "ids_found_in_current_wfs": 11132,
+  "ids_with_identical_geometry": 11132,
+  "ids_missing_from_current_wfs": 0,
+  "missing_examples": [],
+  "current_features_in_fetch_bbox_not_in_xinyi": 0,
+  "new_examples": [],
+  "non_xinyi_features_near_sector": 15679,
+  "non_xinyi_features_overlapping_a_xinyi_footprint_gt_0p01m2": 0,
+  "max_overlap_area_m2": 0.0,
+  "current_wfs_fetch": "2026-10-12T04:06:40+00:00"
+ },
+ "accepted_glb_integrity": {
+  "run": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\Saved\\XinyiV2Full\\run-01",
+  "tiles": 25,
+  "sha256_match": 25,
+  "manifest_sha256": "14c2890baad3e2ab62fe3826312d72d1f00b44137eaf565d2ead58ab49a9e010",
+  "report_tile_keys_equal_constant": true
+ }
+}
