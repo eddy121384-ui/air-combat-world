@@ -1,0 +1,117 @@
+{
+  "name": "north_core_v1",
+  "status": "PROPOSAL (Phase 2B) - first North Taiwan battlefield",
+  "world": "worlds/north_taiwan_224.json",
+  "grid_km": 8,
+  "mission_sizes_km": [
+    96,
+    104,
+    112,
+    120
+  ],
+  "reference_free_size_km": 100,
+  "required": {
+    "regions_full": [
+      "TW-TPE",
+      "TW-KEE",
+      "TW-HSZ"
+    ],
+    "region_margin_km": 2,
+    "points": [
+      {
+        "name": "臺灣桃園國際機場",
+        "margin_km": 8
+      },
+      {
+        "name": "臺北松山機場",
+        "margin_km": 8
+      },
+      {
+        "name": "空軍新竹基地",
+        "margin_km": 8
+      },
+      {
+        "name": "基隆港",
+        "margin_km": 4
+      },
+      {
+        "name": "台北港",
+        "margin_km": 4
+      },
+      {
+        "name": "七星山",
+        "margin_km": 4
+      }
+    ],
+    "derived": {
+      "taipei_basin": {
+        "rule": "connected DTM floor < 20 m containing Taipei Main Station, window E 288-318 km N 2755-2785 km",
+        "margin_km": 4
+      },
+      "tamsui_estuary": {
+        "rule": "Overture water 淡水河 polygon within 1 km of the main-island coast",
+        "margin_km": 4
+      },
+      "north_coast": {
+        "rule": "main-island coastline with N >= 2,784 km between the Tamsui estuary and Keelung port",
+        "margin_km": 4
+      },
+      "north_tip": {
+        "rule": "northernmost main-island point (Fuguijiao)",
+        "margin_km": 4
+      }
+    }
+  },
+  "objective": "maximize min(west core sea depth, north core sea depth); east (NE coast) depth reported",
+  "zones": {
+    "production_halo_km": 8,
+    "far_field": "world bounds (north_taiwan_224)",
+    "beyond_world": "ocean plane to horizon + distant-mountain impostor ring + atmospheric fade"
+  },
+  "approved_key_sites": [
+    "臺灣桃園國際機場",
+    "臺北松山機場",
+    "空軍新竹基地",
+    "基隆港",
+    "台北港"
+  ],
+  "not_key_sites_v1": [
+    "花蓮機場",
+    "佳山基地",
+    "花蓮港",
+    "臺中清泉崗機場",
+    "台中港"
+  ],
+  "detail_policy": {
+    "note": "Planning priority, NOT approval of per-building production (PR #22 review item 5). Runtime streaming/HLOD are separate.",
+    "zones": {
+      "flyable_core": {
+        "terrain_lod0_m": 20,
+        "buildings": "T1: per-building whitebox inside close-view radius, HLOD beyond; T2: block massing; T3: none/instanced"
+      },
+      "production_halo": {
+        "terrain_lod0_m": 40,
+        "buildings": "massing + landmark silhouettes only"
+      },
+      "far_field": {
+        "terrain_lod0_m": 160,
+        "buildings": "city-light / silhouette impostors"
+      },
+      "beyond_world": {
+        "terrain_lod0_m": null,
+        "buildings": null
+      }
+    }
+  },
+  "recommended_size_km": 112,
+  "rotated_angles_deg": [
+    30,
+    40,
+    45,
+    50
+  ],
+  "rotated_sizes_km": [
+    96,
+    104
+  ]
+}

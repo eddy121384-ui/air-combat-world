@@ -1,0 +1,985 @@
+{
+ "shard": {
+  "joint_repeat_manifest_identical": true,
+  "joint_manifest_sha256": "440c022bf81f91c9f37788908e83feb5e2ef19fe0c7a5f0d2fa63fda38c67cc1",
+  "chunks": 255,
+  "independent_cell_builds_chunks": 255,
+  "independent_vs_joint_identical": true,
+  "mismatches": [],
+  "orphans_or_duplicates": {
+   "in_joint_not_independent": 0,
+   "in_independent_not_joint": 0
+  }
+ },
+ "face_orientation": {
+  "faces_checked": 813714,
+  "faces_not_facing_up": 0,
+  "skirt_faces_not_vertical": 0
+ },
+ "seams_conformed": {
+  "same_lod": {
+   "edges_checked": 425,
+   "position_mismatch": 0,
+   "normal_max_angle_deg": 1e-06,
+   "uv_max_abs_diff": 0.0,
+   "cross_cell_edges": 25
+  },
+  "cross_lod": {
+   "pairs": 340,
+   "max_gap_m": 79.845,
+   "max_gap_over_skirt": 0,
+   "worst": {
+    "chunk": "C+0038+0345/ch00",
+    "lod": 3,
+    "skirt_m": 159.69
+   }
+  }
+ },
+ "seams_raw": {
+  "same_lod": {
+   "edges_checked": 425,
+   "position_mismatch": 0,
+   "normal_max_angle_deg": 1e-06,
+   "uv_max_abs_diff": 0.0,
+   "cross_cell_edges": 25
+  },
+  "cross_lod": {
+   "pairs": 340,
+   "max_gap_m": 79.845,
+   "max_gap_over_skirt": 0,
+   "worst": {
+    "chunk": "C+0038+0345/ch00",
+    "lod": 3,
+    "skirt_m": 159.69
+   }
+  }
+ },
+ "xinyi_seam": {
+  "south": {
+   "samples": 1251,
+   "length_m": 2500.0,
+   "raw_official_minus_xinyi": {
+    "max_abs_m": 3.643,
+    "p95_abs_m": 1.222,
+    "mean_m": -0.329,
+    "median_m": -0.34,
+    "defined_fraction": 1.0
+   },
+   "conformed_minus_xinyi": {
+    "max_abs_m": 2.524,
+    "p95_abs_m": 1.073,
+    "mean_m": 0.086,
+    "median_m": -0.008,
+    "defined_fraction": 1.0
+   },
+   "translation_only_xinyi_minus_raw": {
+    "max_abs_m": 5.579,
+    "p95_abs_m": 2.703,
+    "mean_m": 0.62,
+    "median_m": 0.346,
+    "defined_fraction": 0.878
+   },
+   "translation_only_horizontal_misplacement_m": {
+    "max": 10.35,
+    "mean": 6.0
+   },
+   "normal_angle_deg_raw": {
+    "max": 14.14,
+    "p95": 5.03
+   },
+   "normal_angle_deg_conformed": {
+    "max": 20.09,
+    "p95": 10.81
+   }
+  },
+  "east": {
+   "samples": 1251,
+   "length_m": 2500.0,
+   "raw_official_minus_xinyi": {
+    "max_abs_m": 6.012,
+    "p95_abs_m": 0.805,
+    "mean_m": -0.344,
+    "median_m": -0.346,
+    "defined_fraction": 1.0
+   },
+   "conformed_minus_xinyi": {
+    "max_abs_m": 4.307,
+    "p95_abs_m": 0.541,
+    "mean_m": -0.057,
+    "median_m": -0.004,
+    "defined_fraction": 1.0
+   },
+   "translation_only_xinyi_minus_raw": {
+    "max_abs_m": 0.605,
+    "p95_abs_m": 0.455,
+    "mean_m": 0.345,
+    "median_m": 0.348,
+    "defined_fraction": 0.55
+   },
+   "translation_only_horizontal_misplacement_m": {
+    "max": 10.35,
+    "mean": 5.11
+   },
+   "normal_angle_deg_raw": {
+    "max": 17.13,
+    "p95": 9.77
+   },
+   "normal_angle_deg_conformed": {
+    "max": 19.22,
+    "p95": 10.03
+   }
+  },
+  "north": {
+   "samples": 1251,
+   "length_m": 2500.0,
+   "raw_official_minus_xinyi": {
+    "max_abs_m": 1.921,
+    "p95_abs_m": 0.438,
+    "mean_m": -0.335,
+    "median_m": -0.337,
+    "defined_fraction": 1.0
+   },
+   "conformed_minus_xinyi": {
+    "max_abs_m": 0.727,
+    "p95_abs_m": 0.107,
+    "mean_m": -0.004,
+    "median_m": -0.002,
+    "defined_fraction": 1.0
+   },
+   "translation_only_xinyi_minus_raw": {
+    "max_abs_m": 2.743,
+    "p95_abs_m": 0.526,
+    "mean_m": 0.324,
+    "median_m": 0.334,
+    "defined_fraction": 0.997
+   },
+   "translation_only_horizontal_misplacement_m": {
+    "max": 15.28,
+    "mean": 10.72
+   },
+   "normal_angle_deg_raw": {
+    "max": 6.09,
+    "p95": 1.72
+   },
+   "normal_angle_deg_conformed": {
+    "max": 6.39,
+    "p95": 1.85
+   }
+  },
+  "west": {
+   "samples": 1251,
+   "length_m": 2500.0,
+   "raw_official_minus_xinyi": {
+    "max_abs_m": 0.602,
+    "p95_abs_m": 0.464,
+    "mean_m": -0.334,
+    "median_m": -0.338,
+    "defined_fraction": 1.0
+   },
+   "conformed_minus_xinyi": {
+    "max_abs_m": 0.184,
+    "p95_abs_m": 0.085,
+    "mean_m": -0.003,
+    "median_m": 0.002,
+    "defined_fraction": 1.0
+   },
+   "translation_only_xinyi_minus_raw": {
+    "max_abs_m": 0.639,
+    "p95_abs_m": 0.527,
+    "mean_m": 0.331,
+    "median_m": 0.331,
+    "defined_fraction": 0.321
+   },
+   "translation_only_horizontal_misplacement_m": {
+    "max": 15.28,
+    "mean": 8.09
+   },
+   "normal_angle_deg_raw": {
+    "max": 2.43,
+    "p95": 0.99
+   },
+   "normal_angle_deg_conformed": {
+    "max": 2.9,
+    "p95": 1.36
+   }
+  },
+  "all_sides": {
+   "raw_official_minus_xinyi_median_m": -0.34,
+   "raw_max_abs_step_m": 6.012,
+   "conformed_max_abs_step_m": 4.307,
+   "conformed_p95_abs_step_m": 0.419,
+   "accepted_xinyi_vertical_offset_m": 0.3419554143768595,
+   "variants": "raw = official DEM untouched; conformed = 200 m blend band only (comparison, NOT shipped); shipped default = stitch (see xinyi_stitch: exact edge, watertight)",
+   "collision": "shipped stitch mode: the new terrain has a hole exactly covered by the accepted Xinyi Landscape plus the stitch strip (gap/overlap area < 0.2 m2 of float32 noise over ~20 km of seam lines), so a collision trace crossing the edge always meets a surface with zero vertical step at the Xinyi edge. Unreal collision traces NOT TESTED."
+  }
+ },
+ "xinyi_stitch": {
+  "lod0": {
+   "edge_vertices": 2520,
+   "edge_vertices_missing": 0,
+   "edge_height_max_err_m": 0.0,
+   "edge_segments": 2520,
+   "edge_segments_present_as_mesh_edges": 2520,
+   "hole_side_vertices": 510,
+   "hole_side_vertices_not_equal_to_chunk_vertices": 0,
+   "gap_area_m2": 0.1243,
+   "overlap_area_m2": 0.1172,
+   "triangles": 3030,
+   "ring_vs_full_res_xinyi_edge_max_dev_m": 0.0
+  },
+  "lod1": {
+   "edge_vertices": 1260,
+   "edge_vertices_missing": 0,
+   "edge_height_max_err_m": 0.0,
+   "edge_segments": 1260,
+   "edge_segments_present_as_mesh_edges": 1260,
+   "hole_side_vertices": 260,
+   "hole_side_vertices_not_equal_to_chunk_vertices": 0,
+   "gap_area_m2": 0.1197,
+   "overlap_area_m2": 0.1121,
+   "triangles": 1520,
+   "ring_vs_full_res_xinyi_edge_max_dev_m": 0.938
+  },
+  "lod2": {
+   "edge_vertices": 632,
+   "edge_vertices_missing": 0,
+   "edge_height_max_err_m": 0.0,
+   "edge_segments": 632,
+   "edge_segments_present_as_mesh_edges": 632,
+   "hole_side_vertices": 134,
+   "hole_side_vertices_not_equal_to_chunk_vertices": 0,
+   "gap_area_m2": 0.1412,
+   "overlap_area_m2": 0.1233,
+   "triangles": 766,
+   "ring_vs_full_res_xinyi_edge_max_dev_m": 4.281
+  },
+  "lod3": {
+   "edge_vertices": 316,
+   "edge_vertices_missing": 0,
+   "edge_height_max_err_m": 0.0,
+   "edge_segments": 316,
+   "edge_segments_present_as_mesh_edges": 316,
+   "hole_side_vertices": 73,
+   "hole_side_vertices_not_equal_to_chunk_vertices": 0,
+   "gap_area_m2": 0.1272,
+   "overlap_area_m2": 0.1289,
+   "triangles": 389,
+   "ring_vs_full_res_xinyi_edge_max_dev_m": 7.781
+  },
+  "lod4": {
+   "edge_vertices": 160,
+   "edge_vertices_missing": 0,
+   "edge_height_max_err_m": 0.0,
+   "edge_segments": 160,
+   "edge_segments_present_as_mesh_edges": 160,
+   "hole_side_vertices": 42,
+   "hole_side_vertices_not_equal_to_chunk_vertices": 0,
+   "gap_area_m2": 0.1458,
+   "overlap_area_m2": 0.1501,
+   "triangles": 202,
+   "ring_vs_full_res_xinyi_edge_max_dev_m": 19.73
+  }
+ },
+ "sources": {
+  "mirror_minus_official": {
+   "samples": 5151,
+   "median_m": 0.01,
+   "p95_abs_m": 2.883,
+   "max_abs_m": 12.139
+  },
+  "official_minus_wfs_surveyed_ground": {
+   "buildings": 167199,
+   "median_m": 0.045,
+   "median_abs_m": 0.339,
+   "inside_xinyi_median_m": -0.36,
+   "outside_xinyi_median_m": 0.094,
+   "per_1p6km_chunk_median_m": {
+    "0_2": 0.469,
+    "0_3": -0.242,
+    "0_4": -0.187,
+    "0_5": -0.387,
+    "0_6": -0.331,
+    "0_7": 0.072,
+    "0_8": -0.071,
+    "0_9": -0.036,
+    "1_1": 0.355,
+    "1_2": 0.295,
+    "1_3": 0.336,
+    "1_4": 0.321,
+    "1_5": -0.396,
+    "1_6": -0.275,
+    "1_7": 0.213,
+    "1_8": -0.003,
+    "1_9": 0.062,
+    "2_1": 0.637,
+    "2_2": 0.314,
+    "2_3": 0.243,
+    "2_4": 0.371,
+    "2_5": 0.001,
+    "2_6": -0.281,
+    "2_7": 0.179,
+    "2_8": -0.072,
+    "2_9": 0.008,
+    "3_1": 0.493,
+    "3_2": 0.279,
+    "3_3": 0.352,
+    "3_4": 0.604,
+    "3_5": 0.987,
+    "3_6": -0.147,
+    "3_7": 0.333,
+    "3_8": 0.152,
+    "3_9": 0.289,
+    "4_1": 1.034,
+    "4_3": 0.267,
+    "4_5": 0.567,
+    "4_6": 0.44,
+    "4_7": 0.299,
+    "4_8": 0.379,
+    "4_9": 0.72
+   },
+   "chunk_median_range_m": [
+    -0.396,
+    1.034
+   ],
+   "note": "WFS ground = 1_ent_heig (entrance elevation, Taipei City only); differences include building-entrance vs bare-earth semantics"
+  }
+ },
+ "lod": {
+  "sse_model": {
+   "screen_height_px": 1125,
+   "vertical_fov_deg": 60.0,
+   "budgets_px": [
+    2.0,
+    4.0
+   ],
+   "metric": "p95 over chunks of the per-chunk 99th-percentile node error (max error drives skirts only)",
+   "note": "iPhone 11 Pro-class landscape short side; FOV is a design assumption, not a measured camera"
+  },
+  "table": [
+   {
+    "lod": 0,
+    "step_m": 20.0,
+    "triangles_per_chunk": 12800,
+    "triangles_with_skirt": 13440,
+    "glb_kb_per_chunk": 374.2,
+    "err_p99_p95_m": 0.0,
+    "err_max_p95_m": 0.0,
+    "err_rms_mean_m": 0.0,
+    "switch_distance_m_sse_2px": 0,
+    "switch_distance_m_sse_4px": 0
+   },
+   {
+    "lod": 1,
+    "step_m": 40.0,
+    "triangles_per_chunk": 3200,
+    "triangles_with_skirt": 3520,
+    "glb_kb_per_chunk": 100.4,
+    "err_p99_p95_m": 12.89,
+    "err_max_p95_m": 25.76,
+    "err_rms_mean_m": 2.438,
+    "switch_distance_m_sse_2px": 6280,
+    "switch_distance_m_sse_4px": 3140
+   },
+   {
+    "lod": 2,
+    "step_m": 80.0,
+    "triangles_per_chunk": 800,
+    "triangles_with_skirt": 960,
+    "glb_kb_per_chunk": 29.2,
+    "err_p99_p95_m": 23.04,
+    "err_max_p95_m": 42.2,
+    "err_rms_mean_m": 5.085,
+    "switch_distance_m_sse_2px": 11222,
+    "switch_distance_m_sse_4px": 5611
+   },
+   {
+    "lod": 3,
+    "step_m": 160.0,
+    "triangles_per_chunk": 200,
+    "triangles_with_skirt": 280,
+    "glb_kb_per_chunk": 10.0,
+    "err_p99_p95_m": 41.66,
+    "err_max_p95_m": 64.62,
+    "err_rms_mean_m": 9.318,
+    "switch_distance_m_sse_2px": 20295,
+    "switch_distance_m_sse_4px": 10148
+   },
+   {
+    "lod": 4,
+    "step_m": 320.0,
+    "triangles_per_chunk": 50,
+    "triangles_with_skirt": 90,
+    "glb_kb_per_chunk": 4.4,
+    "err_p99_p95_m": 78.81,
+    "err_max_p95_m": 116.94,
+    "err_rms_mean_m": 15.988,
+    "switch_distance_m_sse_2px": 38390,
+    "switch_distance_m_sse_4px": 19195
+   }
+  ],
+  "chunks_per_cell": 25,
+  "lod0_triangles_per_8km_cell": 320000
+ },
+ "terrain_report_summary": {
+  "params": {
+   "chunk_m": 1600.0,
+   "lod_steps_m": [
+    20.0,
+    40.0,
+    80.0,
+    160.0,
+    320.0
+   ],
+   "uv_tile_m": 1000.0,
+   "skirt_min_m": 2.0,
+   "xinyi_conform": true,
+   "xinyi_mode": "stitch",
+   "xinyi_band_m": 200.0,
+   "xinyi_drop_m": 0.5,
+   "ue_landscape_samples": 505,
+   "ue_scale_z": 400.0,
+   "ue_base_round_m": 10.0,
+   "packages": [
+    "臺北市",
+    "新北市"
+   ],
+   "extra": {}
+  },
+  "source": {
+   "product": "MOI 2025 20 m DEM (official TGOS sheets, data.gov.tw 176927)",
+   "crs": "EPSG:3826 TWD97[2020]",
+   "vertical": "TWVD2001",
+   "packages": {
+    "分幅_檔頭欄位定義schema_hdr": {
+     "url": "https://www.tgos.tw:443/MDE/VirtualDir_TC/Product/342505d1-81bc-490a-8e10-9f7e1ec0ed98/schema_hdr.zip",
+     "bytes": 1263,
+     "sha256": "62b237f39b99f310355ecfbcfa9f12d2aceed26c55892617e2d2c2d8e930ec20",
+     "last_modified": null,
+     "fetched_at": "2026-10-12T17:17:28+00:00",
+     "coordinate_system": "TWD97(N、E、H)",
+     "year": "2025年"
+    },
+    "分幅_臺北市20MDEM(2025)": {
+     "url": "https://www.tgos.tw:443/MDE/VirtualDir_TC/Product/60e634ea-7c59-47a4-a967-ac33694e0d05/分幅_臺北市20MDEM(2025).zip",
+     "bytes": 6159665,
+     "sha256": "7f03d8223ee0b60c7c1abc0c29c758cca72a450cfb4a65cd0e6e62b3ea7f55b0",
+     "last_modified": null,
+     "fetched_at": "2026-10-12T17:16:12+00:00",
+     "coordinate_system": "TWD97(N、E、H)",
+     "year": "2025年"
+    },
+    "分幅_新竹縣20MDEM(2025)": {
+     "url": "https://www.tgos.tw:443/MDE/VirtualDir_TC/Product/cc78d253-6b5a-47d8-85c7-996b91749945/分幅_新竹縣20MDEM(2025).zip",
+     "bytes": 24164491,
+     "sha256": "b9dd806c0a5880bfd25964d7cf9328476cfb87915efa9373925013f99b9f8dd9",
+     "last_modified": null,
+     "fetched_at": "2026-10-12T17:16:12+00:00",
+     "coordinate_system": "TWD97(N、E、H)",
+     "year": "2025年"
+    },
+    "分幅_新北市20MDEM(2025)": {
+     "url": "https://www.tgos.tw:443/MDE/VirtualDir_TC/Product/9574dbb5-ca32-4ea3-aaf7-a9f582b9357b/分幅_新北市20MDEM(2025).zip",
+     "bytes": 36525419,
+     "sha256": "dccdeebaea0f02415563e6ec7de2a32922a53325d9a13987fe2de9e2512c03a5",
+     "last_modified": null,
+     "fetched_at": "2026-10-12T17:16:14+00:00",
+     "coordinate_system": "TWD97(N、E、H)",
+     "year": "2025年"
+    },
+    "分幅_新竹市20MDEM(2025)": {
+     "url": "https://www.tgos.tw:443/MDE/VirtualDir_TC/Product/d3b4ae6e-4ca2-40da-9a32-28769415dd3a/分幅_新竹市20MDEM(2025).zip",
+     "bytes": 2431509,
+     "sha256": "b3074ff2aeff3d157fe3054fc8188b7c2e21858fe0509f97b9da94ed09feca23",
+     "last_modified": null,
+     "fetched_at": "2026-10-12T17:17:28+00:00",
+     "coordinate_system": "TWD97(N、E、H)",
+     "year": "2025年"
+    },
+    "分幅_桃園市20MDEM(2025)": {
+     "url": "https://www.tgos.tw:443/MDE/VirtualDir_TC/Product/ba0fcc26-f82e-4345-bfc4-4785574d9014/分幅_桃園市20MDEM(2025).zip",
+     "bytes": 20272123,
+     "sha256": "6ed27f04d5216b49e8db810d334cfb4e0ee321bb93d914c4ad583ddce2fc9891",
+     "last_modified": null,
+     "fetched_at": "2026-10-12T17:17:29+00:00",
+     "coordinate_system": "TWD97(N、E、H)",
+     "year": "2025年"
+    },
+    "分幅_苗栗縣20MDEM(2025)": {
+     "url": "https://www.tgos.tw:443/MDE/VirtualDir_TC/Product/a455608a-d932-48e2-b0f9-c864a8f566e2/分幅_苗栗縣20MDEM(2025).zip",
+     "bytes": 28448238,
+     "sha256": "bd78bda72650749895cae3c6d5d54902d083784e81ec6a2268bda2c07c08509f",
+     "last_modified": null,
+     "fetched_at": "2026-10-12T17:17:29+00:00",
+     "coordinate_system": "TWD97(N、E、H)",
+     "year": "2025年"
+    }
+   },
+   "sheets_used": [
+    {
+     "no": "97224001",
+     "name": "南勢角",
+     "survey_date": "20210618",
+     "production_date": "20220401",
+     "source": "LiDAR-SCOPE",
+     "package": "分幅_新北市20MDEM(2025).zip"
+    },
+    {
+     "no": "97224002",
+     "name": "景美",
+     "survey_date": "20210618",
+     "production_date": "20220401",
+     "source": "LiDAR-SCOPE",
+     "package": "分幅_新北市20MDEM(2025).zip"
+    },
+    {
+     "no": "97224004",
+     "name": "指南宮",
+     "survey_date": "20221122",
+     "production_date": "20221230",
+     "source": "LiDAR-SCOPE",
+     "package": "分幅_新北市20MDEM(2025).zip"
+    },
+    {
+     "no": "97224005",
+     "name": "大崙腳",
+     "survey_date": "20221122",
+     "production_date": "20221230",
+     "source": "LiDAR-SCOPE",
+     "package": "分幅_新北市20MDEM(2025).zip"
+    },
+    {
+     "no": "97224011",
+     "name": "頂城",
+     "survey_date": "20210618",
+     "production_date": "20220401",
+     "source": "LiDAR-SCOPE",
+     "package": "分幅_新北市20MDEM(2025).zip"
+    },
+    {
+     "no": "97224012",
+     "name": "新店",
+     "survey_date": "20210618",
+     "production_date": "20220401",
+     "source": "LiDAR-SCOPE",
+     "package": "分幅_新北市20MDEM(2025).zip"
+    },
+    {
+     "no": "97224013",
+     "name": "大崎腳",
+     "survey_date": "20221122",
+     "production_date": "20221230",
+     "source": "LiDAR-SCOPE",
+     "package": "分幅_新北市20MDEM(2025).zip"
+    },
+    {
+     "no": "97224014",
+     "name": "貓空",
+     "survey_date": "20221122",
+     "production_date": "20221230",
+     "source": "LiDAR-SCOPE",
+     "package": "分幅_新北市20MDEM(2025).zip"
+    },
+    {
+     "no": "97224015",
+     "name": "栳寮",
+     "survey_date": "20221122",
+     "production_date": "20221230",
+     "source": "LiDAR-SCOPE",
+     "package": "分幅_新北市20MDEM(2025).zip"
+    },
+    {
+     "no": "97224021",
+     "name": "直潭",
+     "survey_date": "20210830",
+     "production_date": "20220401",
+     "source": "LiDAR-SCOPE",
+     "package": "分幅_新北市20MDEM(2025).zip"
+    },
+    {
+     "no": "97224022",
+     "name": "花園新城",
+     "survey_date": "20210830",
+     "production_date": "20220401",
+     "source": "LiDAR-SCOPE",
+     "package": "分幅_新北市20MDEM(2025).zip"
+    },
+    {
+     "no": "97224023",
+     "name": "大崎頭山",
+     "survey_date": "20221122",
+     "production_date": "20221230",
+     "source": "LiDAR-SCOPE",
+     "package": "分幅_新北市20MDEM(2025).zip"
+    },
+    {
+     "no": "97224024",
+     "name": "四十分",
+     "survey_date": "20221122",
+     "production_date": "20221230",
+     "source": "LiDAR-SCOPE",
+     "package": "分幅_新北市20MDEM(2025).zip"
+    },
+    {
+     "no": "97224025",
+     "name": "竹坑",
+     "survey_date": "20221122",
+     "production_date": "20221230",
+     "source": "LiDAR-SCOPE",
+     "package": "分幅_新北市20MDEM(2025).zip"
+    },
+    {
+     "no": "97233065",
+     "name": "內溝",
+     "survey_date": "20221122",
+     "production_date": "20221230",
+     "source": "LiDAR-SCOPE",
+     "package": "分幅_新北市20MDEM(2025).zip"
+    },
+    {
+     "no": "97233075",
+     "name": "南港",
+     "survey_date": "20221122",
+     "production_date": "20221230",
+     "source": "LiDAR-SCOPE",
+     "package": "分幅_新北市20MDEM(2025).zip"
+    },
+    {
+     "no": "97233085",
+     "name": "舊莊",
+     "survey_date": "20221122",
+     "production_date": "20221230",
+     "source": "LiDAR-SCOPE",
+     "package": "分幅_新北市20MDEM(2025).zip"
+    },
+    {
+     "no": "97233091",
+     "name": "永和市",
+     "survey_date": "20210618",
+     "production_date": "20220401",
+     "source": "LiDAR-SCOPE",
+     "package": "分幅_新北市20MDEM(2025).zip"
+    },
+    {
+     "no": "97233092",
+     "name": "公館",
+     "survey_date": "20210618",
+     "production_date": "20220401",
+     "source": "LiDAR-SCOPE",
+     "package": "分幅_新北市20MDEM(2025).zip"
+    },
+    {
+     "no": "97233094",
+     "name": "新北投",
+     "survey_date": "20221122",
+     "production_date": "20221230",
+     "source": "LiDAR-SCOPE",
+     "package": "分幅_新北市20MDEM(2025).zip"
+    },
+    {
+     "no": "97233095",
+     "name": "深坑",
+     "survey_date": "20221122",
+     "production_date": "20221230",
+     "source": "LiDAR-SCOPE",
+     "package": "分幅_新北市20MDEM(2025).zip"
+    },
+    {
+     "no": "97233091",
+     "name": "永和市",
+     "survey_date": "20210618",
+     "production_date": "20220401",
+     "source": "LiDAR-SCOPE",
+     "package": "分幅_臺北市20MDEM(2025).zip"
+    },
+    {
+     "no": "97233092",
+     "name": "公館",
+     "survey_date": "20210618",
+     "production_date": "20220401",
+     "source": "LiDAR-SCOPE",
+     "package": "分幅_臺北市20MDEM(2025).zip"
+    },
+    {
+     "no": "97233093",
+     "name": "軍功坑",
+     "survey_date": "20221122",
+     "production_date": "20221230",
+     "source": "LiDAR-SCOPE",
+     "package": "分幅_臺北市20MDEM(2025).zip"
+    },
+    {
+     "no": "97233094",
+     "name": "新北投",
+     "survey_date": "20221122",
+     "production_date": "20221230",
+     "source": "LiDAR-SCOPE",
+     "package": "分幅_臺北市20MDEM(2025).zip"
+    },
+    {
+     "no": "97233095",
+     "name": "深坑",
+     "survey_date": "20221122",
+     "production_date": "20221230",
+     "source": "LiDAR-SCOPE",
+     "package": "分幅_臺北市20MDEM(2025).zip"
+    },
+    {
+     "no": "97224001",
+     "name": "南勢角",
+     "survey_date": "20210618",
+     "production_date": "20220401",
+     "source": "LiDAR-SCOPE",
+     "package": "分幅_臺北市20MDEM(2025).zip"
+    },
+    {
+     "no": "97224002",
+     "name": "景美",
+     "survey_date": "20210618",
+     "production_date": "20220401",
+     "source": "LiDAR-SCOPE",
+     "package": "分幅_臺北市20MDEM(2025).zip"
+    },
+    {
+     "no": "97224003",
+     "name": "木柵",
+     "survey_date": "20221122",
+     "production_date": "20221230",
+     "source": "LiDAR-SCOPE",
+     "package": "分幅_臺北市20MDEM(2025).zip"
+    },
+    {
+     "no": "97224004",
+     "name": "指南宮",
+     "survey_date": "20221122",
+     "production_date": "20221230",
+     "source": "LiDAR-SCOPE",
+     "package": "分幅_臺北市20MDEM(2025).zip"
+    },
+    {
+     "no": "97224005",
+     "name": "大崙腳",
+     "survey_date": "20221122",
+     "production_date": "20221230",
+     "source": "LiDAR-SCOPE",
+     "package": "分幅_臺北市20MDEM(2025).zip"
+    },
+    {
+     "no": "97224012",
+     "name": "新店",
+     "survey_date": "20210618",
+     "production_date": "20220401",
+     "source": "LiDAR-SCOPE",
+     "package": "分幅_臺北市20MDEM(2025).zip"
+    },
+    {
+     "no": "97224013",
+     "name": "大崎腳",
+     "survey_date": "20221122",
+     "production_date": "20221230",
+     "source": "LiDAR-SCOPE",
+     "package": "分幅_臺北市20MDEM(2025).zip"
+    },
+    {
+     "no": "97224014",
+     "name": "貓空",
+     "survey_date": "20221122",
+     "production_date": "20221230",
+     "source": "LiDAR-SCOPE",
+     "package": "分幅_臺北市20MDEM(2025).zip"
+    },
+    {
+     "no": "97224015",
+     "name": "栳寮",
+     "survey_date": "20221122",
+     "production_date": "20221230",
+     "source": "LiDAR-SCOPE",
+     "package": "分幅_臺北市20MDEM(2025).zip"
+    },
+    {
+     "no": "97233061",
+     "name": "士林",
+     "survey_date": "20210830",
+     "production_date": "20220401",
+     "source": "LiDAR-SCOPE",
+     "package": "分幅_臺北市20MDEM(2025).zip"
+    },
+    {
+     "no": "97233062",
+     "name": "大直",
+     "survey_date": "20210830",
+     "production_date": "20220401",
+     "source": "LiDAR-SCOPE",
+     "package": "分幅_臺北市20MDEM(2025).zip"
+    },
+    {
+     "no": "97233063",
+     "name": "港墘",
+     "survey_date": "20221122",
+     "production_date": "20221230",
+     "source": "LiDAR-SCOPE",
+     "package": "分幅_臺北市20MDEM(2025).zip"
+    },
+    {
+     "no": "97233064",
+     "name": "內湖",
+     "survey_date": "20221122",
+     "production_date": "20221230",
+     "source": "LiDAR-SCOPE",
+     "package": "分幅_臺北市20MDEM(2025).zip"
+    },
+    {
+     "no": "97233065",
+     "name": "內溝",
+     "survey_date": "20221122",
+     "production_date": "20221230",
+     "source": "LiDAR-SCOPE",
+     "package": "分幅_臺北市20MDEM(2025).zip"
+    },
+    {
+     "no": "97233071",
+     "name": "雙連",
+     "survey_date": "20210830",
+     "production_date": "20220401",
+     "source": "LiDAR-SCOPE",
+     "package": "分幅_臺北市20MDEM(2025).zip"
+    },
+    {
+     "no": "97233072",
+     "name": "松山機場",
+     "survey_date": "20210830",
+     "production_date": "20220401",
+     "source": "LiDAR-SCOPE",
+     "package": "分幅_臺北市20MDEM(2025).zip"
+    },
+    {
+     "no": "97233073",
+     "name": "松山",
+     "survey_date": "20221122",
+     "production_date": "20221230",
+     "source": "LiDAR-SCOPE",
+     "package": "分幅_臺北市20MDEM(2025).zip"
+    },
+    {
+     "no": "97233074",
+     "name": "內湖交流道",
+     "survey_date": "20221122",
+     "production_date": "20221230",
+     "source": "LiDAR-SCOPE",
+     "package": "分幅_臺北市20MDEM(2025).zip"
+    },
+    {
+     "no": "97233075",
+     "name": "南港",
+     "survey_date": "20221122",
+     "production_date": "20221230",
+     "source": "LiDAR-SCOPE",
+     "package": "分幅_臺北市20MDEM(2025).zip"
+    },
+    {
+     "no": "97233081",
+     "name": "中正紀念堂",
+     "survey_date": "20210830",
+     "production_date": "20220401",
+     "source": "LiDAR-SCOPE",
+     "package": "分幅_臺北市20MDEM(2025).zip"
+    },
+    {
+     "no": "97233082",
+     "name": "中崙",
+     "survey_date": "20210830",
+     "production_date": "20220401",
+     "source": "LiDAR-SCOPE",
+     "package": "分幅_臺北市20MDEM(2025).zip"
+    },
+    {
+     "no": "97233083",
+     "name": "五分埔",
+     "survey_date": "20221122",
+     "production_date": "20221230",
+     "source": "LiDAR-SCOPE",
+     "package": "分幅_臺北市20MDEM(2025).zip"
+    },
+    {
+     "no": "97233084",
+     "name": "拇指山",
+     "survey_date": "20221122",
+     "production_date": "20221230",
+     "source": "LiDAR-SCOPE",
+     "package": "分幅_臺北市20MDEM(2025).zip"
+    },
+    {
+     "no": "97233085",
+     "name": "舊莊",
+     "survey_date": "20221122",
+     "production_date": "20221230",
+     "source": "LiDAR-SCOPE",
+     "package": "分幅_臺北市20MDEM(2025).zip"
+    }
+   ],
+   "duplicate_nodes": {
+    "duplicate_nodes": 214976,
+    "duplicate_max_abs_diff_m": 0.0
+   }
+  },
+  "fail_closed": {
+   "land_nodes_missing": 0,
+   "sea_nodes": 0
+  },
+  "xinyi": {
+   "accepted_r16_sha256": "088c1b18c15a0b807348676e3568c99eb83b63444b0e7266078d673938f0594c",
+   "accepted_vertical_offset_m": 0.3419554143768595,
+   "outline_bounds_epsg3826": [
+    305549.95,
+    2768550.63,
+    308061.58,
+    2771048.59
+   ]
+  },
+  "cell_products": [
+   {
+    "cell": "C+0038+0346",
+    "dem20_tif": "C+0038+0346_dem20.tif",
+    "dem20_sha256": "7bd267104eb072135802f3362bb68d27258dfb5e5bb32ab43cedee7a562cb2d3",
+    "dem20_nodes": [
+     401,
+     401
+    ],
+    "z_min": -4.68,
+    "z_max": 373.55,
+    "ue_r16": "C+0038+0346_ue505.r16",
+    "ue_r16_sha256": "d2cd70702bf1106d35090a86cd2a672b4aeab1c9303d2c37ab57b2ce31d25500",
+    "ue_samples": [
+     505,
+     505
+    ],
+    "ue_spacing_m": 15.873016,
+    "ue_scale_z": 400.0,
+    "ue_actor_z_offset_m": -10.0,
+    "ue_roundtrip_max_err_m": 0.01562,
+    "ue_note": "official DEM only (no Xinyi conformance); 505 = 8 components x 63 quads + 1; bilinear oversampling of 20 m nodes"
+   },
+   {
+    "cell": "C+0038+0345",
+    "dem20_tif": "C+0038+0345_dem20.tif",
+    "dem20_sha256": "9c447ab990a99950a12032abe8d72610e3ca4e632212707c3680f9ea037131db",
+    "dem20_nodes": [
+     401,
+     401
+    ],
+    "z_min": 0.67,
+    "z_max": 608.62,
+    "ue_r16": "C+0038+0345_ue505.r16",
+    "ue_r16_sha256": "eb8c5f6f6105791456a5ad1fd9965e59e8662fa8fe343dc68b28c7f24e392be0",
+    "ue_samples": [
+     505,
+     505
+    ],
+    "ue_spacing_m": 15.873016,
+    "ue_scale_z": 400.0,
+    "ue_actor_z_offset_m": 0.0,
+    "ue_roundtrip_max_err_m": 0.01562,
+    "ue_note": "official DEM only (no Xinyi conformance); 505 = 8 components x 63 quads + 1; bilinear oversampling of 20 m nodes"
+   }
+  ]
+ }
+}

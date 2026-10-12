@@ -1,0 +1,869 @@
+{
+ "config": "north_core_v1",
+ "world": "north_taiwan_224",
+ "results": {
+  "96": {
+   "grid_step_m": 8000.0,
+   "candidates": 289,
+   "feasible": 0,
+   "top": [],
+   "infeasible_reasons": {
+    "derived:taipei_basin": 233,
+    "derived:north_coast": 226,
+    "region:TW-HSZ": 219,
+    "point:空軍新竹基地": 219,
+    "region:TW-TPE": 217,
+    "region:TW-KEE": 199,
+    "derived:north_tip": 190,
+    "point:臺灣桃園國際機場": 189,
+    "point:臺北松山機場": 189,
+    "point:基隆港": 179,
+    "derived:tamsui_estuary": 179,
+    "point:台北港": 168
+   }
+  },
+  "104": {
+   "grid_step_m": 8000.0,
+   "candidates": 256,
+   "feasible": 4,
+   "top": [
+    {
+     "bounds_epsg3826": [
+      232000.0,
+      2728000.0,
+      336000.0,
+      2832000.0
+     ],
+     "feasible": true,
+     "violations": [],
+     "depth_km": {
+      "west_core_min": 6.6,
+      "west_core_median": 21.4,
+      "north_core_min": 33.0,
+      "north_core_median": 51.5,
+      "east_core_min": 0.0,
+      "east_core_median": 4.9
+     },
+     "objective_km": 6.6,
+     "land_pct": 46.1,
+     "sea_pct": 53.9,
+     "regions_partly_inside_pct": {
+      "TW-HSQ": 55.4,
+      "TW-ILA": 25.2,
+      "TW-MIA": 5.1,
+      "TW-NWT": 92.5,
+      "TW-TAO": 95.4
+     },
+     "regions_fully_inside": [
+      "TW-HSZ",
+      "TW-KEE",
+      "TW-TPE"
+     ]
+    },
+    {
+     "bounds_epsg3826": [
+      232000.0,
+      2720000.0,
+      336000.0,
+      2824000.0
+     ],
+     "feasible": true,
+     "violations": [],
+     "depth_km": {
+      "west_core_min": 6.6,
+      "west_core_median": 21.4,
+      "north_core_min": 25.0,
+      "north_core_median": 43.5,
+      "east_core_min": 0.0,
+      "east_core_median": 4.9
+     },
+     "objective_km": 6.6,
+     "land_pct": 53.8,
+     "sea_pct": 46.2,
+     "regions_partly_inside_pct": {
+      "TW-HSQ": 73.5,
+      "TW-ILA": 40.6,
+      "TW-MIA": 15.1,
+      "TW-NWT": 92.5
+     },
+     "regions_fully_inside": [
+      "TW-HSZ",
+      "TW-KEE",
+      "TW-TAO",
+      "TW-TPE"
+     ]
+    },
+    {
+     "bounds_epsg3826": [
+      232000.0,
+      2712000.0,
+      336000.0,
+      2816000.0
+     ],
+     "feasible": true,
+     "violations": [],
+     "depth_km": {
+      "west_core_min": 6.6,
+      "west_core_median": 21.4,
+      "north_core_min": 17.0,
+      "north_core_median": 35.5,
+      "east_core_min": 0.0,
+      "east_core_median": 4.9
+     },
+     "objective_km": 6.6,
+     "land_pct": 61.5,
+     "sea_pct": 38.5,
+     "regions_partly_inside_pct": {
+      "TW-HSQ": 92.4,
+      "TW-ILA": 57.2,
+      "TW-MIA": 26.3,
+      "TW-NWT": 92.5
+     },
+     "regions_fully_inside": [
+      "TW-HSZ",
+      "TW-KEE",
+      "TW-TAO",
+      "TW-TPE"
+     ]
+    },
+    {
+     "bounds_epsg3826": [
+      232000.0,
+      2704000.0,
+      336000.0,
+      2808000.0
+     ],
+     "feasible": true,
+     "violations": [],
+     "depth_km": {
+      "west_core_min": 6.6,
+      "west_core_median": 21.4,
+      "north_core_min": 9.0,
+      "north_core_median": 27.5,
+      "east_core_min": 0.0,
+      "east_core_median": 4.9
+     },
+     "objective_km": 6.6,
+     "land_pct": 69.0,
+     "sea_pct": 31.0,
+     "regions_partly_inside_pct": {
+      "TW-HSQ": 99.5,
+      "TW-ILA": 75.2,
+      "TW-MIA": 44.2,
+      "TW-NWT": 92.5
+     },
+     "regions_fully_inside": [
+      "TW-HSZ",
+      "TW-KEE",
+      "TW-TAO",
+      "TW-TPE"
+     ]
+    }
+   ],
+   "infeasible_reasons": {
+    "derived:taipei_basin": 184,
+    "derived:north_coast": 184,
+    "point:空軍新竹基地": 179,
+    "region:TW-HSZ": 179,
+    "region:TW-TPE": 166,
+    "derived:north_tip": 148,
+    "region:TW-KEE": 146,
+    "point:基隆港": 146,
+    "point:臺灣桃園國際機場": 135,
+    "point:臺北松山機場": 135,
+    "derived:tamsui_estuary": 135,
+    "point:台北港": 124
+   }
+  },
+  "112": {
+   "grid_step_m": 8000.0,
+   "candidates": 225,
+   "feasible": 10,
+   "top": [
+    {
+     "bounds_epsg3826": [
+      224000.0,
+      2728000.0,
+      336000.0,
+      2840000.0
+     ],
+     "feasible": true,
+     "violations": [],
+     "depth_km": {
+      "west_core_min": 14.6,
+      "west_core_median": 29.4,
+      "north_core_min": 41.0,
+      "north_core_median": 59.5,
+      "east_core_min": 0.0,
+      "east_core_median": 4.9
+     },
+     "objective_km": 14.6,
+     "land_pct": 39.8,
+     "sea_pct": 60.2,
+     "regions_partly_inside_pct": {
+      "TW-HSQ": 55.4,
+      "TW-ILA": 25.2,
+      "TW-MIA": 5.2,
+      "TW-NWT": 92.5,
+      "TW-TAO": 95.4
+     },
+     "regions_fully_inside": [
+      "TW-HSZ",
+      "TW-KEE",
+      "TW-TPE"
+     ]
+    },
+    {
+     "bounds_epsg3826": [
+      224000.0,
+      2720000.0,
+      336000.0,
+      2832000.0
+     ],
+     "feasible": true,
+     "violations": [],
+     "depth_km": {
+      "west_core_min": 14.6,
+      "west_core_median": 29.4,
+      "north_core_min": 33.0,
+      "north_core_median": 51.5,
+      "east_core_min": 0.0,
+      "east_core_median": 4.9
+     },
+     "objective_km": 14.6,
+     "land_pct": 46.8,
+     "sea_pct": 53.2,
+     "regions_partly_inside_pct": {
+      "TW-HSQ": 73.5,
+      "TW-ILA": 40.6,
+      "TW-MIA": 18.3,
+      "TW-NWT": 92.5
+     },
+     "regions_fully_inside": [
+      "TW-HSZ",
+      "TW-KEE",
+      "TW-TAO",
+      "TW-TPE"
+     ]
+    },
+    {
+     "bounds_epsg3826": [
+      224000.0,
+      2712000.0,
+      336000.0,
+      2824000.0
+     ],
+     "feasible": true,
+     "violations": [],
+     "depth_km": {
+      "west_core_min": 14.6,
+      "west_core_median": 29.4,
+      "north_core_min": 25.0,
+      "north_core_median": 43.5,
+      "east_core_min": 0.0,
+      "east_core_median": 4.9
+     },
+     "objective_km": 14.6,
+     "land_pct": 53.9,
+     "sea_pct": 46.1,
+     "regions_partly_inside_pct": {
+      "TW-HSQ": 92.4,
+      "TW-ILA": 57.2,
+      "TW-MIA": 33.0,
+      "TW-NWT": 92.5
+     },
+     "regions_fully_inside": [
+      "TW-HSZ",
+      "TW-KEE",
+      "TW-TAO",
+      "TW-TPE"
+     ]
+    },
+    {
+     "bounds_epsg3826": [
+      224000.0,
+      2704000.0,
+      336000.0,
+      2816000.0
+     ],
+     "feasible": true,
+     "violations": [],
+     "depth_km": {
+      "west_core_min": 14.6,
+      "west_core_median": 29.4,
+      "north_core_min": 17.0,
+      "north_core_median": 35.5,
+      "east_core_min": 0.0,
+      "east_core_median": 4.9
+     },
+     "objective_km": 14.6,
+     "land_pct": 61.0,
+     "sea_pct": 39.0,
+     "regions_partly_inside_pct": {
+      "TW-HSQ": 99.5,
+      "TW-ILA": 75.2,
+      "TW-MIA": 54.4,
+      "TW-NWT": 92.5
+     },
+     "regions_fully_inside": [
+      "TW-HSZ",
+      "TW-KEE",
+      "TW-TAO",
+      "TW-TPE"
+     ]
+    },
+    {
+     "bounds_epsg3826": [
+      224000.0,
+      2696000.0,
+      336000.0,
+      2808000.0
+     ],
+     "feasible": true,
+     "violations": [],
+     "depth_km": {
+      "west_core_min": 14.6,
+      "west_core_median": 29.4,
+      "north_core_min": 9.0,
+      "north_core_median": 27.5,
+      "east_core_min": 0.0,
+      "east_core_median": 4.9
+     },
+     "objective_km": 9.0,
+     "land_pct": 67.8,
+     "sea_pct": 32.2,
+     "regions_partly_inside_pct": {
+      "TW-HUA": 0.0,
+      "TW-ILA": 91.7,
+      "TW-MIA": 76.2,
+      "TW-NWT": 92.5,
+      "TW-TXG": 4.0
+     },
+     "regions_fully_inside": [
+      "TW-HSQ",
+      "TW-HSZ",
+      "TW-KEE",
+      "TW-TAO",
+      "TW-TPE"
+     ]
+    }
+   ],
+   "infeasible_reasons": {
+    "region:TW-HSZ": 148,
+    "derived:north_coast": 144,
+    "point:空軍新竹基地": 141,
+    "derived:taipei_basin": 135,
+    "region:TW-TPE": 115,
+    "region:TW-KEE": 115,
+    "point:基隆港": 115,
+    "derived:north_tip": 108,
+    "point:臺灣桃園國際機場": 93,
+    "derived:tamsui_estuary": 93,
+    "point:台北港": 82,
+    "point:七星山": 82
+   }
+  },
+  "120": {
+   "grid_step_m": 8000.0,
+   "candidates": 196,
+   "feasible": 18,
+   "top": [
+    {
+     "bounds_epsg3826": [
+      216000.0,
+      2728000.0,
+      336000.0,
+      2848000.0
+     ],
+     "feasible": true,
+     "violations": [],
+     "depth_km": {
+      "west_core_min": 22.6,
+      "west_core_median": 37.4,
+      "north_core_min": 49.0,
+      "north_core_median": 67.5,
+      "east_core_min": 0.0,
+      "east_core_median": 4.9
+     },
+     "objective_km": 22.6,
+     "land_pct": 34.6,
+     "sea_pct": 65.4,
+     "regions_partly_inside_pct": {
+      "TW-HSQ": 55.4,
+      "TW-ILA": 25.2,
+      "TW-MIA": 5.2,
+      "TW-NWT": 92.5,
+      "TW-TAO": 95.4
+     },
+     "regions_fully_inside": [
+      "TW-HSZ",
+      "TW-KEE",
+      "TW-TPE"
+     ]
+    },
+    {
+     "bounds_epsg3826": [
+      216000.0,
+      2720000.0,
+      336000.0,
+      2840000.0
+     ],
+     "feasible": true,
+     "violations": [],
+     "depth_km": {
+      "west_core_min": 22.6,
+      "west_core_median": 37.4,
+      "north_core_min": 41.0,
+      "north_core_median": 59.5,
+      "east_core_min": 0.0,
+      "east_core_median": 4.9
+     },
+     "objective_km": 22.6,
+     "land_pct": 40.8,
+     "sea_pct": 59.2,
+     "regions_partly_inside_pct": {
+      "TW-HSQ": 73.5,
+      "TW-ILA": 40.6,
+      "TW-MIA": 18.6,
+      "TW-NWT": 92.5
+     },
+     "regions_fully_inside": [
+      "TW-HSZ",
+      "TW-KEE",
+      "TW-TAO",
+      "TW-TPE"
+     ]
+    },
+    {
+     "bounds_epsg3826": [
+      216000.0,
+      2712000.0,
+      336000.0,
+      2832000.0
+     ],
+     "feasible": true,
+     "violations": [],
+     "depth_km": {
+      "west_core_min": 22.6,
+      "west_core_median": 37.4,
+      "north_core_min": 33.0,
+      "north_core_median": 51.5,
+      "east_core_min": 0.0,
+      "east_core_median": 4.9
+     },
+     "objective_km": 22.6,
+     "land_pct": 47.3,
+     "sea_pct": 52.7,
+     "regions_partly_inside_pct": {
+      "TW-HSQ": 92.4,
+      "TW-ILA": 57.2,
+      "TW-MIA": 35.4,
+      "TW-NWT": 92.5
+     },
+     "regions_fully_inside": [
+      "TW-HSZ",
+      "TW-KEE",
+      "TW-TAO",
+      "TW-TPE"
+     ]
+    },
+    {
+     "bounds_epsg3826": [
+      216000.0,
+      2704000.0,
+      336000.0,
+      2824000.0
+     ],
+     "feasible": true,
+     "violations": [],
+     "depth_km": {
+      "west_core_min": 22.6,
+      "west_core_median": 37.4,
+      "north_core_min": 25.0,
+      "north_core_median": 43.5,
+      "east_core_min": 0.0,
+      "east_core_median": 4.9
+     },
+     "objective_km": 22.6,
+     "land_pct": 53.9,
+     "sea_pct": 46.1,
+     "regions_partly_inside_pct": {
+      "TW-HSQ": 99.5,
+      "TW-ILA": 75.2,
+      "TW-MIA": 60.2,
+      "TW-NWT": 92.5
+     },
+     "regions_fully_inside": [
+      "TW-HSZ",
+      "TW-KEE",
+      "TW-TAO",
+      "TW-TPE"
+     ]
+    },
+    {
+     "bounds_epsg3826": [
+      216000.0,
+      2696000.0,
+      336000.0,
+      2816000.0
+     ],
+     "feasible": true,
+     "violations": [],
+     "depth_km": {
+      "west_core_min": 22.6,
+      "west_core_median": 37.4,
+      "north_core_min": 17.0,
+      "north_core_median": 35.5,
+      "east_core_min": 0.0,
+      "east_core_median": 4.9
+     },
+     "objective_km": 17.0,
+     "land_pct": 60.2,
+     "sea_pct": 39.8,
+     "regions_partly_inside_pct": {
+      "TW-HUA": 0.0,
+      "TW-ILA": 91.7,
+      "TW-MIA": 85.3,
+      "TW-NWT": 92.5,
+      "TW-TXG": 4.2
+     },
+     "regions_fully_inside": [
+      "TW-HSQ",
+      "TW-HSZ",
+      "TW-KEE",
+      "TW-TAO",
+      "TW-TPE"
+     ]
+    }
+   ],
+   "infeasible_reasons": {
+    "region:TW-HSZ": 119,
+    "point:空軍新竹基地": 112,
+    "derived:north_coast": 106,
+    "region:TW-KEE": 86,
+    "point:基隆港": 86,
+    "derived:taipei_basin": 86,
+    "derived:north_tip": 79,
+    "region:TW-TPE": 64,
+    "point:臺灣桃園國際機場": 64,
+    "point:台北港": 53,
+    "point:七星山": 53,
+    "derived:tamsui_estuary": 53
+   }
+  },
+  "100": {
+   "grid_step_m": 1000.0,
+   "candidates": 15625,
+   "feasible": 56,
+   "top": [
+    {
+     "bounds_epsg3826": [
+      234000.0,
+      2731000.0,
+      334000.0,
+      2831000.0
+     ],
+     "feasible": true,
+     "violations": [],
+     "depth_km": {
+      "west_core_min": 4.6,
+      "west_core_median": 19.4,
+      "north_core_min": 32.0,
+      "north_core_median": 50.3,
+      "east_core_min": 0.0,
+      "east_core_median": 2.9
+     },
+     "objective_km": 4.6,
+     "land_pct": 46.2,
+     "sea_pct": 53.8,
+     "regions_partly_inside_pct": {
+      "TW-HSQ": 47.5,
+      "TW-ILA": 19.5,
+      "TW-MIA": 2.5,
+      "TW-NWT": 90.2,
+      "TW-TAO": 92.3
+     },
+     "regions_fully_inside": [
+      "TW-HSZ",
+      "TW-KEE",
+      "TW-TPE"
+     ]
+    },
+    {
+     "bounds_epsg3826": [
+      234000.0,
+      2730000.0,
+      334000.0,
+      2830000.0
+     ],
+     "feasible": true,
+     "violations": [],
+     "depth_km": {
+      "west_core_min": 4.6,
+      "west_core_median": 19.4,
+      "north_core_min": 31.0,
+      "north_core_median": 49.3,
+      "east_core_min": 0.0,
+      "east_core_median": 2.9
+     },
+     "objective_km": 4.6,
+     "land_pct": 47.2,
+     "sea_pct": 52.8,
+     "regions_partly_inside_pct": {
+      "TW-HSQ": 50.1,
+      "TW-ILA": 20.9,
+      "TW-MIA": 3.3,
+      "TW-NWT": 90.3,
+      "TW-TAO": 93.5
+     },
+     "regions_fully_inside": [
+      "TW-HSZ",
+      "TW-KEE",
+      "TW-TPE"
+     ]
+    },
+    {
+     "bounds_epsg3826": [
+      234000.0,
+      2729000.0,
+      334000.0,
+      2829000.0
+     ],
+     "feasible": true,
+     "violations": [],
+     "depth_km": {
+      "west_core_min": 4.6,
+      "west_core_median": 19.4,
+      "north_core_min": 30.0,
+      "north_core_median": 48.3,
+      "east_core_min": 0.0,
+      "east_core_median": 2.9
+     },
+     "objective_km": 4.6,
+     "land_pct": 48.2,
+     "sea_pct": 51.8,
+     "regions_partly_inside_pct": {
+      "TW-HSQ": 52.7,
+      "TW-ILA": 22.6,
+      "TW-MIA": 4.0,
+      "TW-NWT": 90.3,
+      "TW-TAO": 94.6
+     },
+     "regions_fully_inside": [
+      "TW-HSZ",
+      "TW-KEE",
+      "TW-TPE"
+     ]
+    },
+    {
+     "bounds_epsg3826": [
+      234000.0,
+      2728000.0,
+      334000.0,
+      2828000.0
+     ],
+     "feasible": true,
+     "violations": [],
+     "depth_km": {
+      "west_core_min": 4.6,
+      "west_core_median": 19.4,
+      "north_core_min": 29.0,
+      "north_core_median": 47.3,
+      "east_core_min": 0.0,
+      "east_core_median": 2.9
+     },
+     "objective_km": 4.6,
+     "land_pct": 49.2,
+     "sea_pct": 50.8,
+     "regions_partly_inside_pct": {
+      "TW-HSQ": 55.4,
+      "TW-ILA": 24.4,
+      "TW-MIA": 4.8,
+      "TW-NWT": 90.3,
+      "TW-TAO": 95.4
+     },
+     "regions_fully_inside": [
+      "TW-HSZ",
+      "TW-KEE",
+      "TW-TPE"
+     ]
+    },
+    {
+     "bounds_epsg3826": [
+      234000.0,
+      2727000.0,
+      334000.0,
+      2827000.0
+     ],
+     "feasible": true,
+     "violations": [],
+     "depth_km": {
+      "west_core_min": 4.6,
+      "west_core_median": 19.4,
+      "north_core_min": 28.0,
+      "north_core_median": 46.3,
+      "east_core_min": 0.0,
+      "east_core_median": 2.9
+     },
+     "objective_km": 4.6,
+     "land_pct": 50.2,
+     "sea_pct": 49.8,
+     "regions_partly_inside_pct": {
+      "TW-HSQ": 57.9,
+      "TW-ILA": 26.1,
+      "TW-MIA": 5.8,
+      "TW-NWT": 90.3,
+      "TW-TAO": 96.2
+     },
+     "regions_fully_inside": [
+      "TW-HSZ",
+      "TW-KEE",
+      "TW-TPE"
+     ]
+    }
+   ],
+   "infeasible_reasons": {
+    "derived:north_coast": 11554,
+    "region:TW-HSZ": 11465,
+    "derived:taipei_basin": 11404,
+    "point:空軍新竹基地": 11173,
+    "region:TW-TPE": 10525,
+    "region:TW-KEE": 9475,
+    "derived:north_tip": 9277,
+    "point:臺灣桃園國際機場": 8737,
+    "point:基隆港": 8585,
+    "point:臺北松山機場": 8569,
+    "derived:tamsui_estuary": 8238,
+    "point:七星山": 7897
+   }
+  }
+ },
+ "rotated_mission_study": {
+  "30deg_96km": null,
+  "30deg_104km": null,
+  "40deg_96km": null,
+  "40deg_104km": null,
+  "45deg_96km": null,
+  "45deg_104km": {
+   "feasible": true,
+   "violations": [],
+   "depth_km": {
+    "west_core_min": 9.8,
+    "west_core_median": 20.3,
+    "north_core_min": 52.6,
+    "north_core_median": 61.4,
+    "east_core_min": 0.0,
+    "east_core_median": 7.0
+   },
+   "objective_km": 9.8,
+   "land_pct": 39.3,
+   "sea_pct": 60.7,
+   "rotation_deg_clockwise": 45,
+   "polygon_epsg3826": [
+    [
+     337278.2,
+     2779355.2
+    ],
+    [
+     263739.1,
+     2852894.3
+    ],
+    [
+     190200.0,
+     2779355.2
+    ],
+    [
+     263739.1,
+     2705816.1
+    ],
+    [
+     337278.2,
+     2779355.2
+    ]
+   ],
+   "note": "depth_km sides refer to the ROTATED frame (west = toward the north-west coast for ~45 deg)"
+  },
+  "50deg_96km": null,
+  "50deg_104km": {
+   "feasible": true,
+   "violations": [],
+   "depth_km": {
+    "west_core_min": 13.2,
+    "west_core_median": 26.0,
+    "north_core_min": 45.9,
+    "north_core_median": 55.0,
+    "east_core_min": 2.4,
+    "east_core_median": 8.2
+   },
+   "objective_km": 13.2,
+   "land_pct": 43.7,
+   "sea_pct": 56.3,
+   "rotation_deg_clockwise": 50,
+   "polygon_epsg3826": [
+    [
+     339265.3,
+     2781039.2
+    ],
+    [
+     259596.7,
+     2847889.2
+    ],
+    [
+     192746.8,
+     2768220.5
+    ],
+    [
+     272415.4,
+     2701370.6
+    ],
+    [
+     339265.3,
+     2781039.2
+    ]
+   ],
+   "note": "depth_km sides refer to the ROTATED frame (west = toward the north-west coast for ~45 deg)"
+  }
+ },
+ "derived_geometry": {
+  "taipei_basin_area_km2": 278.3,
+  "taipei_basin_bounds_epsg3826": [
+   288050,
+   2759950,
+   317950,
+   2784950
+  ],
+  "tamsui_estuary_bounds_epsg3826": [
+   289953,
+   2784718,
+   292902,
+   2785518
+  ],
+  "north_tip_epsg3826": [
+   304068.8,
+   2799078.6
+  ],
+  "north_coast_bounds_epsg3826": [
+   290750,
+   2784000,
+   323682,
+   2799079
+  ]
+ },
+ "core_landscape_span": {
+  "required_set_bounds_epsg3826": [
+   237803,
+   2733944,
+   331515,
+   2799079
+  ],
+  "required_set_extent_km": [
+   93.7,
+   65.1
+  ],
+  "six_core_regions_extent_km": [
+   113.8,
+   96.7
+  ],
+  "note": "required set = Taipei/Keelung/Hsinchu City + airports/ports/Yangmingshan + basin/estuary/north coast; full admin areas of New Taipei, Taoyuan and Hsinchu County are NOT required (their mountain hinterland is far-field)"
+ }
+}

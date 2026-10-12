@@ -1,0 +1,149 @@
+{
+ "policy": {
+  "ownership": "vertex-mean centroid -> 500 m tile -> shard",
+  "fetch_halo_m": 0,
+  "culling_bounds": "measured union of emitted component bounds",
+  "max_overhang_m": 500.0,
+  "l3_suppression": "Xinyi pinned source ids (11,132)"
+ },
+ "shards_epsg3826": {
+  "south": [
+   304000,
+   2767000,
+   312000,
+   2768000
+  ],
+  "north": [
+   304000,
+   2768000,
+   312000,
+   2769000
+  ],
+  "joint": [
+   304000,
+   2767000,
+   312000,
+   2769000
+  ]
+ },
+ "fragment_policy": {
+  "enabled": true,
+  "max_area_m2": 0.01
+ },
+ "ledgered_repair_fragments_joint": [
+  {
+   "building_id": "tp_building_height.211054",
+   "polygon_index": 0,
+   "repaired_part": 1,
+   "area_m2": 4.624929006229583e-06,
+   "reason": "repair_fragment_below_serialization_resolution"
+  }
+ ],
+ "strict_mode_result": "see strict_mode_evidence: the strict accepted policy FAILS CLOSED on 1 part in the north shard",
+ "gate": {
+  "south": true,
+  "north": true,
+  "joint": true
+ },
+ "tiles": {
+  "south": 27,
+  "north": 30,
+  "joint": 57,
+  "union_independent": 57,
+  "joint_tiles_byte_identical_to_independent": 57,
+  "tile_sets_equal": true
+ },
+ "ownership": {
+  "emitted_parts_south": 4810,
+  "emitted_parts_north": 11353,
+  "emitted_parts_joint": 16163,
+  "parts_emitted_by_both_shards": 0,
+  "independent_union_equals_joint": true,
+  "duplicates_within_joint": 0
+ },
+ "ledger_status": {
+  "south": {
+   "emitted": 4810
+  },
+  "north": {
+   "emitted": 11353,
+   "excluded_suppressed_l3_xinyi": 2504
+  },
+  "joint": {
+   "emitted": 16163,
+   "excluded_suppressed_l3_xinyi": 2504
+  }
+ },
+ "orphans": {
+  "source_parts_in_joint_not_accounted": 0,
+  "note": "every part with centroid in the joint region is emitted, suppressed (L3) or ledgered"
+ },
+ "xinyi": {
+  "xinyi_ids_emitted": 0,
+  "suppressed_parts_joint": 2504
+ },
+ "geometry": {
+  "south": {
+   "components": 4812,
+   "triangles": 181400,
+   "glb_bytes": 5992012,
+   "manifest_sha256": "e8b14991b26d8957a1792c30a73ffe860fab9534cf1c61279798ecdaf5716ab6",
+   "runtime_s": 105.1
+  },
+  "north": {
+   "components": 11357,
+   "triangles": 465848,
+   "glb_bytes": 14716656,
+   "manifest_sha256": "26ced1c762d625e3e4d155d8fa3a72ff6ea06913e3adb976979b76de191ffed5",
+   "runtime_s": 239.1
+  },
+  "joint": {
+   "components": 16169,
+   "triangles": 647248,
+   "glb_bytes": 20708668,
+   "manifest_sha256": "1842b44bcd7f4f8189b13c2fd1a3f9a1ad8df385932fccfca61e7778e7f2743c",
+   "runtime_s": 331.2
+  }
+ },
+ "culling": {
+  "south": {
+   "culling_bounds_epsg3826": [
+    304000.0,
+    2766992.91,
+    310856.44,
+    2768019.96
+   ],
+   "max_overhang_m": 19.96,
+   "within_policy": true
+  },
+  "north": {
+   "culling_bounds_epsg3826": [
+    304000.0,
+    2767963.06,
+    312000.0,
+    2769030.65
+   ],
+   "max_overhang_m": 36.94,
+   "within_policy": true
+  }
+ },
+ "pass": true,
+ "strict_mode_evidence": {
+  "north_gate_pass": false,
+  "failures": [
+   {
+    "building_id": "tp_building_height.211054",
+    "provider": "taipei_wfs_tp_building_height",
+    "polygon_index": 0,
+    "height_m": 6.04,
+    "height_source": "1_bud_high",
+    "ground_elev_m": 8.44,
+    "status": "failed_pre_serialization",
+    "tile": "+161_+160",
+    "failures": [
+     "r1:footprint:quantized_footprint_invalid_or_collapsed"
+    ]
+   }
+  ]
+ }
+}

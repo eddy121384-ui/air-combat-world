@@ -49,6 +49,10 @@ import frame  # noqa: E402
 from heights import derive_overture_height, derive_wfs_height  # noqa: E402
 
 CACHE = REPO / "data/generated/ntw"
+# Phase 2B: repair-fragment policy. DEFAULT OFF = the accepted strict fail-closed behaviour. When enabled, a non-largest
+# GEOS make_valid fragment smaller than max_area_m2 whose float32 tile-local footprint collapses is LEDGERED (id + area) instead
+# of failing the build. Enabling it for production requires the locked representative + full-Xinyi regression (AGENTS.md).
+FRAGMENT_POLICY = {"enabled": False, "max_area_m2": 0.01}
 TILE_M = 500.0
 BLOCK_TILES = 5
 GEOD = Geod(ellps="WGS84")
@@ -138,15 +142,27 @@ def rss_mb():
         return None
 
 
-def build(pid, out_dir: Path):
+def build(pid, out_dir: Path, bounds_ntw=None, suppress_ids=None, cfg=None):
+    """Pilot block build. Phase 2B: `bounds_ntw` (500 m-aligned NTW bounds) builds an arbitrary shard with the same code,
+    and `suppress_ids` skips source ids owned by an accepted L3 sector (Xinyi, PR #22 identity rule) - ledgered, never hidden."""
     t0 = time.perf_counter()
-    cfg = pilot_cfg(pid)
-    ix0, iy0 = block_of(cfg)
-    bx0, by0, bx1, by1 = ix0 * TILE_M, iy0 * TILE_M, (ix0 + BLOCK_TILES) * TILE_M, (iy0 + BLOCK_TILES) * TILE_M
+    cfg = cfg or pilot_cfg(pid)
+    if bounds_ntw is None:
+        ix0, iy0 = block_of(cfg)
+        bx0, by0, bx1, by1 = ix0 * TILE_M, iy0 * TILE_M, (ix0 + BLOCK_TILES) * TILE_M, (iy0 + BLOCK_TILES) * TILE_M
+    else:
+        bx0, by0, bx1, by1 = bounds_ntw
+        if any(abs(v / TILE_M - round(v / TILE_M)) > 1e-9 for v in bounds_ntw):
+            raise ValueError("shard bounds must be on the 500 m tile grid")
+        ix0, iy0 = int(round(bx0 / TILE_M)), int(round(by0 / TILE_M))
     if out_dir.exists():
         raise FileExistsError(out_dir)
     out_dir.mkdir(parents=True)
     feats = (load_wfs if cfg["provider"] == "taipei_wfs" else load_overture)(cfg, bx0, by0, bx1, by1)
+    if suppress_ids:
+        for f in feats:
+            if f["id"] in suppress_ids:
+                f["excluded"] = "suppressed_l3_xinyi"
     src_hash = hashlib.sha256(json.dumps(
         [(f["id"], f["height_m"], [[r for r in p[1]] for p in f["polys"]]) for f in feats], separators=(",", ":")).encode()).hexdigest()
 
@@ -186,6 +202,13 @@ def build(pid, out_dir: Path):
                 except Exception as exc:  # noqa: BLE001
                     sparts, fg = [], {"pass": False, "failures": [f"footprint_exception:{type(exc).__name__}:{exc}"]}
                 if not fg["pass"]:
+                    largest = max(range(len(parts)), key=lambda i: parts[i].area)
+                    if (FRAGMENT_POLICY["enabled"] and ri != largest and rp.area < FRAGMENT_POLICY["max_area_m2"]
+                            and all("collapsed" in x for x in fg["failures"])):
+                        # explicit, global, OPT-IN policy (default off): a GEOS repair fragment below GLB float32 resolution
+                        row.setdefault("ledgered_fragments", []).append(
+                            {"repaired_part": ri, "area_m2": float(rp.area), "reason": "repair_fragment_below_serialization_resolution"})
+                        continue
                     bad = True
                     row["failures"] += [f"r{ri}:footprint:{x}" for x in fg["failures"]]
                     continue
@@ -287,7 +310,11 @@ def build(pid, out_dir: Path):
         "pilot": cfg, "frame": {"ntw_origin_epsg3826": frame.NTW_ORIGIN_TM2, "block_sw_tile": [ix0, iy0],
                                  "block_extent_ntw_m": [bx0, by0, bx1, by1]},
         "source": {"features": len(feats), "normalized_input_sha256": src_hash, "provider_part_counts": dict(prov)},
-        "accounting": {"source_polygon_parts": source_parts, "excluded_underground": excluded, "source_rejected": rejected,
+        "fragment_policy": dict(FRAGMENT_POLICY),
+        "ledgered_repair_fragments": [dict(building_id=r["building_id"], polygon_index=r["polygon_index"], **f)
+                                      for r in ledger for f in r.get("ledgered_fragments", [])],
+        "accounting": {"source_polygon_parts": source_parts, "excluded_underground": status_counts.get("excluded_underground", 0),
+                       "suppressed_l3_xinyi": status_counts.get("excluded_suppressed_l3_xinyi", 0), "source_rejected": rejected,
                        "rejection_reasons": dict(reasons), "repair_outcomes": dict(repair_outcomes),
                        "emitted_source_polygon_parts": status_counts.get("emitted", 0),
                        "emitted_serialization_components": emitted_components,

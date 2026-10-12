@@ -1,0 +1,173 @@
+{
+ "battlefield": "north_core_v1",
+ "world": "north_taiwan_224",
+ "recommended_size_km": 112,
+ "flyable_epsg3826": [
+  224000.0,
+  2728000.0,
+  336000.0,
+  2840000.0
+ ],
+ "production_epsg3826": [
+  216000.0,
+  2720000.0,
+  344000.0,
+  2848000.0
+ ],
+ "far_field_epsg3826": [
+  184000.0,
+  2648000.0,
+  408000.0,
+  2872000.0
+ ],
+ "flyable_depth_km": {
+  "west_core_min": 14.6,
+  "west_core_median": 29.4,
+  "north_core_min": 41.0,
+  "north_core_median": 59.5,
+  "east_core_min": 0.0,
+  "east_core_median": 4.9
+ },
+ "flyable_land_pct": 39.8,
+ "regions_partly_inside_pct": {
+  "TW-HSQ": 55.4,
+  "TW-ILA": 25.2,
+  "TW-MIA": 5.2,
+  "TW-NWT": 92.5,
+  "TW-TAO": 95.4
+ },
+ "regions_fully_inside": [
+  "TW-HSZ",
+  "TW-KEE",
+  "TW-TPE"
+ ],
+ "approved_key_sites": [
+  "台北港",
+  "基隆港",
+  "空軍新竹基地",
+  "臺北松山機場",
+  "臺灣桃園國際機場"
+ ],
+ "zone_tier_stats": {
+  "far_field": {
+   "F_far_field_silhouette": {
+    "cells": 58,
+    "land_km2": 3413.3,
+    "sea_km2": 298.7,
+    "buildings_best": 452126
+   },
+   "F_far_field_terrain": {
+    "cells": 99,
+    "land_km2": 5590.3,
+    "sea_km2": 745.7,
+    "buildings_best": 12340
+   },
+   "T4_sea": {
+    "cells": 371,
+    "land_km2": 0.2,
+    "sea_km2": 23743.8,
+    "buildings_best": 0
+   }
+  },
+  "production": {
+   "T3_low_rural_coastal": {
+    "cells": 6,
+    "land_km2": 237.1,
+    "sea_km2": 146.9,
+    "buildings_best": 2302
+   },
+   "P_halo_massing": {
+    "cells": 8,
+    "land_km2": 442.8,
+    "sea_km2": 69.2,
+    "buildings_best": 25865
+   },
+   "T3_low_mountain": {
+    "cells": 6,
+    "land_km2": 384.0,
+    "sea_km2": 0.0,
+    "buildings_best": 913
+   },
+   "T4_sea": {
+    "cells": 40,
+    "land_km2": 0.0,
+    "sea_km2": 2560.0,
+    "buildings_best": 0
+   }
+  },
+  "flyable": {
+   "T3_low_rural_coastal": {
+    "cells": 8,
+    "land_km2": 333.8,
+    "sea_km2": 178.2,
+    "buildings_best": 1890
+   },
+   "T2_periphery_massing": {
+    "cells": 2,
+    "land_km2": 106.9,
+    "sea_km2": 21.1,
+    "buildings_best": 18602
+   },
+   "T2_medium": {
+    "cells": 33,
+    "land_km2": 1626.3,
+    "sea_km2": 485.7,
+    "buildings_best": 70588
+   },
+   "T3_low_mountain": {
+    "cells": 16,
+    "land_km2": 1023.1,
+    "sea_km2": 0.9,
+    "buildings_best": 3429
+   },
+   "T1_high": {
+    "cells": 32,
+    "land_km2": 1900.2,
+    "sea_km2": 147.8,
+    "buildings_best": 705384
+   },
+   "T4_sea": {
+    "cells": 105,
+    "land_km2": 0.2,
+    "sea_km2": 6719.8,
+    "buildings_best": 14
+   }
+  }
+ },
+ "dtm_gap": {
+  "bbox_epsg3826": [
+   250912,
+   2704861,
+   263370,
+   2717825
+  ],
+  "zones": [
+   "far_field"
+  ],
+  "distance_to_production_km": 2.17,
+  "distance_to_flyable_km": 10.17,
+  "status": "BLOCKED (official 2025 DEM has no sheets there; no 0 m, no interpolation)"
+ },
+ "beyond_world": "ocean plane to horizon + distant-mountain impostor ring + atmospheric fade",
+ "detail_policy": {
+  "note": "Planning priority, NOT approval of per-building production (PR #22 review item 5). Runtime streaming/HLOD are separate.",
+  "zones": {
+   "flyable_core": {
+    "terrain_lod0_m": 20,
+    "buildings": "T1: per-building whitebox inside close-view radius, HLOD beyond; T2: block massing; T3: none/instanced"
+   },
+   "production_halo": {
+    "terrain_lod0_m": 40,
+    "buildings": "massing + landmark silhouettes only"
+   },
+   "far_field": {
+    "terrain_lod0_m": 160,
+    "buildings": "city-light / silhouette impostors"
+   },
+   "beyond_world": {
+    "terrain_lod0_m": null,
+    "buildings": null
+   }
+  }
+ }
+}

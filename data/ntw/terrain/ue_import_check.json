@@ -1,0 +1,45 @@
+{
+ "note": "Isolated throwaway UE 5.8 project (never the formal AirCombatWorld project); asset-level import only.",
+ "baked": {
+  "variant": "baked",
+  "engine": "5.8.0-55116800+++UE5+Release-5.8",
+  "imported_meshes": 51,
+  "errors": 0,
+  "triangle_counts_equal_glb": true,
+  "interchange_baked_node_translation": true,
+  "max_vertex_error_ue_to_glb_m": 0.005497,
+  "max_vertex_error_glb_to_ue_m": 0.005497,
+  "cross_mesh_coincident_plan_positions": 28356,
+  "of_which_surface_vertices": 14430,
+  "surface_shared_vertex_max_height_diff_m": 0.0,
+  "import_seconds": 10.9,
+  "not_tested": [
+   "runtime streaming",
+   "HLOD",
+   "collision traces",
+   "Landscape actors",
+   "mobile / device performance"
+  ]
+ },
+ "local": {
+  "variant": "local",
+  "engine": "5.8.0-55116800+++UE5+Release-5.8",
+  "imported_meshes": 51,
+  "errors": 0,
+  "triangle_counts_equal_glb": true,
+  "interchange_baked_node_translation": false,
+  "max_vertex_error_ue_to_glb_m": 0.000108,
+  "max_vertex_error_glb_to_ue_m": 0.000108,
+  "cross_mesh_coincident_plan_positions": 28356,
+  "of_which_surface_vertices": 14430,
+  "surface_shared_vertex_max_height_diff_m": 0.0,
+  "import_seconds": 53.0,
+  "not_tested": [
+   "runtime streaming",
+   "HLOD",
+   "collision traces",
+   "Landscape actors",
+   "mobile / device performance"
+  ]
+ }
+}
