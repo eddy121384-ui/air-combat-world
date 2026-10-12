@@ -19,6 +19,7 @@ tree placement, Xinyi geometry/terrain or PR #18 content was changed. No integra
 |---|---|---|
 | v0 | `3574eef` | first Phase A draft |
 | **v0.1** | review 5489064245 on `3574eef` | (1) REF-U1 retagged **owner-reported AC8, cross-title context only, NOT AC7 evidence**; added provenance-grounded public AC7 gameplay references (Digital Foundry Switch vs Xbox One S footage, PC Mission 2 gameplay) with timestamps and initial morphological targets (§4). (2) ~68 % cover restated as a **geometric model estimate** pending an Unreal top-down stencil measurement (§2.1, §7). (3) Phase B split into **B1** 1 km near/mid microbenchmark with a shared lightweight 6 km context and **B2** separate ≥ 6–9 km high-speed flight/streaming corridor (§12). (4) Far canopy layer S made an **independent factor** in a near-representation × far-layer factorial with a fixed common handover distance (§12.2). (5) UHD 770 allowed for B1 functional/indicative timing only, labelled "UHD 770 only", no extrapolation to PS5, PC discrete GPUs or phones (§2.4, §12.6). (6) Four publicly licensed Northern Taiwan aerial references added as link-only calibration candidates (§9.1). |
+| **v0.2** | review 5493961033 on `ac121a1` + B0 preflight (`spike/ac7-forest-b0-preflight`, `docs/forestspike-b0-preflight-result.md`) | (1) §12.0 added: B0 -> B1a -> B1b -> B2 gates. (2) §12.8 added: measured B0 findings: pixel-origin preflight, frozen `d_S` = 500 m / `w_S` = 100 m, N identifiable only at 50 / 200 m viewpoints, coverage-matching counts, host noise floor. (3) V3 / V5 definitions in §12.3 replaced by inbound / inward-orbit versions after the preflight (originals kept in the B0 viewpoints file). (4) P-04 relabelled as on-screen appearance only; H-AC1 hedged: matching dark far patches on Xbox One S do not show how that pipeline draws them. No other Phase A content changed. |
 
 ## Evidence tags used in this document
 
@@ -153,7 +154,7 @@ platform-scale recommendation. If UE or the GPU is unavailable: **NOT MEASURED**
 
 | ID | Hypothesis | Status after v0.1 footage review | Further confirmation |
 |---|---|---|---|
-| H-AC1 | Beyond some distance, forest is ground texture on non-Switch platforms too | **Supported** by DF 01:24 (far patches identical on Switch and One S) and PC M2 15:00 [V-Vid]; YouTube compression could hide fine relief | PC climb 100 → 1,500 m over one forest (R07) |
+| H-AC1 | Beyond some distance, forest is ground texture on non-Switch platforms too | **Supported as on-screen behaviour** by DF 01:24 (far patches look alike on Switch and One S) and PC M2 15:00 [V-Vid]; this does **not** establish how the One S pipeline implements those patches, and the DF/Switch statement is secondary evidence; YouTube compression could hide fine relief | PC climb 100 → 1,500 m over one forest (R07) |
 | H-AC2 | Near trees are instanced meshes with a view-distance-scaled cull | consistent with A8 and with near crowns present on One S / absent on Switch (DF 01:24) | PC stock vs edited `Engine.ini` (owner's copy) |
 | H-AC3 | Instance colour/value is tuned to the ground texture so the handover is soft | PC M2 11:00 shows a smooth dark forest band above the stipple zone without an obvious hard ring in a still [V-Vid] | motion review across the handover |
 | H-AC4 | Tree shadows only in a near range | not assessed from footage | PC max settings, shadow vs distance |
@@ -174,7 +175,7 @@ platform-scale recommendation. If UE or the GPU is unavailable: **NOT MEASURED**
 | P-01 | Digital Foundry, *Ace Combat 7 – Nintendo Switch DF Tech Review*, 2024-07-19, presenter Oliver Mackenzie — https://www.youtube.com/watch?v=WznKKwSBeHc | top: Nintendo Switch; bottom: Xbox One S (DF labels) | **01:24** (84.5 s) | off-frame | Same view, chase camera, mid–high oblique over forest and fields. **One S: near forest has visible 3D crowns; Switch: same area flat texture.** Distant forest patches look the same on both: dark green ground-texture areas in a field mosaic. |
 | P-02 | same video | Xbox One S full frame | **01:30** (90.0 s) | off-frame | Low–mid pass (altitude not shown; est. ~100–300 m [I]). Closed conifer canopy near with legible crowns; crowns legible into the mid band; village and fields with tree groups and hedgerows; distant hills carry forest as dark patches without crown relief; haze lifts far values toward blue-grey. |
 | P-03 | Shuvon Gaming, *Ace Combat 7: Skies Unknown – Charge the Enemy (Mission 2) \| 4K 60FPS Ultra Settings Gameplay*, 2024-05-19 — https://www.youtube.com/watch?v=2_7h8wQzc18 | "4K 60FPS Ultra Settings" stated; platform not stated (PC implied by Ultra settings — **unverified**) | **11:00** (660 s) | SPEED 689, ALT 512 (units as configured; not verified) | Mid band crop (right half): **dense closed canopy, crown stipple, no ground visible**, forest edge against pasture crisp but irregular; a power-line corridor cut through the forest; upper part of the crop shows a **smooth dark forest band without stipple** (possible instance→texture handover; distance not measurable). |
-| P-04 | same | same | **12:10** (730 s) | partly occluded | Low pass: near conifers with alpha-card foliage and ragged crowns; groups and single trees in pastures, hedgerows; far hills as dark texture masses. |
+| P-04 | same | same | **12:10** (730 s) | partly occluded | Low pass: near conifers whose crowns look, on screen, like alpha-masked foliage with ragged edges (**appearance only; not a verified AC7 asset, mesh or shader technique**); groups and single trees in pastures, hedgerows; far hills as dark texture masses. |
 | P-05 | same | same | **15:00** (900 s) | SPEED 787, ALT 699 | Banked look-down over several km: forests are **dark patches of the field/land-use mosaic** with no visible crown relief (YouTube compression caveat). |
 | P-06 | same | same | **19:00** (1140 s) | ALT unreadable (very low, est. < 100 m [I]) | Ragged canopy skyline silhouette, strong edge breakup against sky; grass visible between trunks at grazing angle. |
 | P-07 | Lord Lucus, *Mission 9: Faceless Soldier … [PC ULTRA 1080p]*, 2019-08-23, "recorded with NVIDIA ShadowPlay on PC" — https://www.youtube.com/watch?v=B9ptoZus-4Y | PC Ultra 1080p (stated) | 1:30–12:20 sampled | — | Snow/rock mountains; **no forest** — negative biome sample only. |
@@ -480,6 +481,15 @@ mark every number **NOT MEASURED**, report the blocker.
 | Gate | starts first, once approved; UHD 770 allowed (labelled) | starts only after B1 results are reviewed **and** a functional UE host is confirmed; only B1-surviving arms enter |
 | Output | rubric + indicative GPU/CPU ms | cold vs warm, hitch/stall, streaming bandwidth, transients — not arm visual ranking |
 
+### 12.0 Stage gates (review 5493961033)
+
+| Stage | Scope | Gate to enter |
+|---|---|---|
+| **B0** preflight | harness, debug ID pass, coverage method, switch observability, perf workflow on the named host | done (see §12.8); stops at a Draft PR |
+| **B1a** | **4 configurations**: N = A vs B x S = off vs on, **70 % measured top-down coverage**, fixed stills + one short moving core pass + one transition pass; interleaved order, variance logged; no inference from triangle counts | B0 checks pass and reviewer approval |
+| **B1b** | N = C, D and coverage 40 / 90 % (full 24 configurations) | only if B1a images, comparability and host budget justify it; asset provenance for C/D; note that 40 % cover **cannot** satisfy the closed-forest target M-1 by design, so F1 is judged stratified by coverage class |
+| **B2** | ≥ 6-9 km arm-specific streaming corridor | deferred until B1 selection, a working UE host and review; no production merge |
+
 ### 12.1 B1 world
 
 - **Core:** 1 km × 1 km; only the factors below vary here.
@@ -504,7 +514,7 @@ mark every number **NOT MEASURED**, report the blocker.
 
 Controls that make the comparison fair:
 
-- **Fixed handover distance `d_S`** (e.g. a value chosen once from §5.1, such as 1.2 km) and a fixed crossfade width
+- **Fixed handover distance `d_S`** (frozen by the B0 pixel-origin preflight: **500 m**, see §12.8; 1.2 km would leave no core transition pixels at 200 m AGL) and a fixed crossfade width
   for **all** N: every N's instances end at `d_S` (with per-instance fade), whether S is on or off. With S off, the
   forest beyond `d_S` is bare context terrain for every N alike.
 - Same seeds, positions, canopy field, lighting, exposure, AA, resolution, cameras in every cell.
@@ -525,9 +535,9 @@ linear speed.
 |---|---|---|
 | V1 | locked stills at 50 / 200 / 500 / 1,000 m AGL, pitches per §5.2, 64 frames each | F1–F8, F10, F11 static; measured band shares from depth |
 | V2 | top-down orthographic + 45° stencil/debug passes of the core | F1 VGF (instances via stencil, S via measurement view) |
-| V3 | slow dolly 30 m/s at 200 m through `d_S` and each LOD ring | F9, F10 |
+| V3 | **inbound** dolly 30 m/s at 200 m AGL from 1,414 m out to the core centre, so the `d_S` ring sweeps the core forest (the first outbound version looked mostly outside the core) | F9, F10 |
 | V4 | straight segment 250 m/s, 3 s, along the diagonal at 50 m and at 200 m | near-band translation ghosting, F11 |
-| V5 | in-core orbit 150 m/s, r ≈ 330 m (7 g), 360° at 200 m and 500 m | rotation-driven shimmer/pop, F9, F11 |
+| V5 | in-core orbit 150 m/s, r ≈ 330 m (7 g, 26°/s), **looking at the core centre** (the tangent-looking version saw mostly context), 360° at 200 m and 500 m; 500 m has no tree instances inside `d_S` | rotation-driven shimmer/pop, F9, F11 (200 m only) |
 | V6 | edge pass along a forest/clearing boundary at 150 m, 120 m/s | F4, F8 |
 
 Each path records **active dwell**: the fraction of frames whose camera position and centre-ray ground hit are both
@@ -567,6 +577,17 @@ Per altitude viewpoint: rubric scores (F1–F11) and N, S, coverage effects vs G
 coverage (B1), plus B2 streaming results for the surviving combination. Native side-by-side sheets. A recommendation
 names techniques per band only where both visual and performance evidence support it, with the host label;
 otherwise "no winner".
+
+---
+
+### 12.8 Measured B0 findings (`docs/forestspike-b0-preflight-result.md` on branch `spike/ac7-forest-b0-preflight`)
+
+- **Pixel-origin preflight (hit-ID + slant range, every registered viewpoint and along V3/V5).** At 1,000 m AGL only 7-23 % of forest pixels are in the variable core; at 500 m 31-44 %, with **zero** tree instances inside `d_S` for any `d_S` ≤ 600 m. One fixed `d_S` therefore cannot make arm-specific geometry visible at all four altitudes.
+- **Frozen for B1a:** `d_S` = 500 m, `w_S` = 100 m (smallest candidate passing the stated rule; the rule was written after the first candidate table, so it is a transparent selection rule, not a blind pre-registration). At 500/100: V1 agl200_p10 has N 0.42 / fade 0.09 / core-S 0.15 of forest pixels; V3 inbound reaches N 0.47; V5 inward 200 m keeps N ≥ 0.13 in 12/12 frames.
+- **Consequence (the split by viewpoint the review allowed):** N (A vs B) is identifiable only at the 50 m and 200 m viewpoints, V3 inbound (t = 14-48 s) and V5 inward at 200 m. 500 m and 1,000 m viewpoints test S and the shared context only. F9/F10 may be claimed only where in-core transition pixels exist.
+- **Coverage-matching method (measured in Unreal, top-down ID capture):** 70 % target met by 30,200 trees (A, 69.6 %) and 30,100 trees (B, 69.8 %). The PR #18 archetypes fill their bounding ellipses ≈ 80 %, so a geometric formula over-predicts arm B by up to 10 points.
+- **Host noise floor (Intel UHD 770 only):** static pose, same configuration varied by 0.3-1.1 ms between rounds and no A vs B difference was resolved; the 18 s moving path varied by 4-12 ms between rounds. Required for B1a: ≥ 5 interleaved rounds, paired deltas, short static poses; ranking must be repeated on a named discrete-GPU host before any platform statement.
+- **Not verified in B0:** per-LOD triangle counts of the imported arm-B LODs; F9/F10/F11 scores; VRAM; discrete GPU, console, phone.
 
 ---
 
