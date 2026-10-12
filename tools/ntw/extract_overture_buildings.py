@@ -6,6 +6,10 @@ count, approx footprint area) to a local parquet cache. No footprints geometry.
 Partitioned by bbox.xmin so bands can run in parallel and never double count.
 
 usage: extract_overture_buildings.py --release 2026-09-23.1 --xmin A --xmax B --out file.parquet
+       [--ymin 24.30 --ymax 25.31] [--centroid]
+Default (Phase 1) selection: bbox.xmin in [xmin, xmax) and bbox fully inside [ymin, ymax].
+--centroid (Phase 2A): select by bbox CENTRE in [xmin, xmax) x [ymin, ymax) so buildings straddling a band or
+window edge are neither dropped nor double counted (PR #16 review item 4, edge omission).
 """
 from __future__ import annotations
 import argparse, json, time
@@ -20,7 +24,17 @@ def main():
     ap.add_argument("--xmin", type=float, required=True)
     ap.add_argument("--xmax", type=float, required=True)
     ap.add_argument("--out", required=True)
+    ap.add_argument("--ymin", type=float, default=BBOX_Y[0])
+    ap.add_argument("--ymax", type=float, default=BBOX_Y[1])
+    ap.add_argument("--centroid", action="store_true")
     a = ap.parse_args()
+    if a.centroid:
+        where = (f"bbox.xmin < {a.xmax} + 0.05 AND bbox.xmax >= {a.xmin} - 0.05 AND bbox.ymin < {a.ymax} + 0.05 AND bbox.ymax >= {a.ymin} - 0.05 "
+                 f"AND (bbox.xmin+bbox.xmax)/2 >= {a.xmin} AND (bbox.xmin+bbox.xmax)/2 < {a.xmax} "
+                 f"AND (bbox.ymin+bbox.ymax)/2 >= {a.ymin} AND (bbox.ymin+bbox.ymax)/2 < {a.ymax}")
+    else:
+        where = (f"bbox.xmin >= {a.xmin} AND bbox.xmin < {a.xmax} "
+                 f"AND bbox.ymin >= {a.ymin} AND bbox.ymax <= {a.ymax}")
     con = duckdb.connect()
     con.execute("INSTALL httpfs; LOAD httpfs; INSTALL spatial; LOAD spatial; SET s3_region='us-west-2';")
     root = f"s3://overturemaps-us-west-2/release/{a.release}/theme=buildings/type=building/*"
@@ -34,8 +48,7 @@ def main():
         ST_NPoints(geometry) AS npts,
         ST_Area(geometry) * 111320.0*cos(radians((bbox.ymin+bbox.ymax)/2)) * 110574.0 AS area_m2
       FROM read_parquet('{root}', hive_partitioning=1)
-      WHERE bbox.xmin >= {a.xmin} AND bbox.xmin < {a.xmax}
-        AND bbox.ymin >= {BBOX_Y[0]} AND bbox.ymax <= {BBOX_Y[1]}
+      WHERE {where}
     ) TO '{a.out}' (FORMAT PARQUET, COMPRESSION ZSTD)
     """)
     n = con.execute(f"select count(*) from read_parquet('{a.out}')").fetchone()[0]

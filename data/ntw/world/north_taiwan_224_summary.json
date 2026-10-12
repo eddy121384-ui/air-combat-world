@@ -1,0 +1,1016 @@
+{
+ "world": {
+  "name": "north_taiwan_224",
+  "size_km": [
+   224.0,
+   224.0
+  ],
+  "cell_km": 8.0,
+  "cells": [
+   28,
+   28
+  ],
+  "cell_count": 784,
+  "l2_tiles_per_cell": 256,
+  "bounds_epsg3826": [
+   184000.0,
+   2648000.0,
+   408000.0,
+   2872000.0
+  ],
+  "runtime_origin_epsg3826": [
+   296000.0,
+   2760000.0
+  ],
+  "bounds_ntw_frame": [
+   -40000.0,
+   -40000.0,
+   184000.0,
+   184000.0
+  ],
+  "ue_extent_cm": {
+   "x": [
+    -11200000.0,
+    11200000.0
+   ],
+   "y": [
+    -11200000.0,
+    11200000.0
+   ]
+  },
+  "max_abs_ue_coordinate_km": 112.0
+ },
+ "tier_rules": {
+  "sea_max_land_frac": 0.005,
+  "t1_min_built_frac": 0.06,
+  "t1_min_buildings": 6000,
+  "t2_min_built_frac": 0.012,
+  "t2_min_buildings": 800,
+  "mountain_min_mean_elev_m": 500.0,
+  "key_site_roles": [
+   "airport",
+   "port"
+  ],
+  "key_site_tiers": [
+   "required",
+   "optional"
+  ],
+  "core_regions": [
+   "TW-HSZ",
+   "TW-HSQ",
+   "TW-TAO",
+   "TW-TPE",
+   "TW-NWT",
+   "TW-KEE",
+   "TW-ILA"
+  ],
+  "core_min_share_of_cell_land": 0.5
+ },
+ "tiers": {
+  "T2_periphery_urban": {
+   "cells": 59,
+   "land_km2": 3469.6,
+   "sea_km2": 306.4,
+   "buildings_best": 439448,
+   "footprint_km2": 142.8
+  },
+  "T3_low_mountain": {
+   "cells": 106,
+   "land_km2": 6755.0,
+   "sea_km2": 29.0,
+   "buildings_best": 13240,
+   "footprint_km2": 2.4
+  },
+  "T1_high": {
+   "cells": 40,
+   "land_km2": 2240.7,
+   "sea_km2": 319.3,
+   "buildings_best": 758166,
+   "footprint_km2": 186.7
+  },
+  "T4_sea": {
+   "cells": 516,
+   "land_km2": 0.4,
+   "sea_km2": 33023.6,
+   "buildings_best": 14,
+   "footprint_km2": 0.0
+  },
+  "T3_low_rural_coastal": {
+   "cells": 25,
+   "land_km2": 757.9,
+   "sea_km2": 842.1,
+   "buildings_best": 5720,
+   "footprint_km2": 1.0
+  },
+  "T2_medium": {
+   "cells": 38,
+   "land_km2": 1834.6,
+   "sea_km2": 597.4,
+   "buildings_best": 76865,
+   "footprint_km2": 22.4
+  }
+ },
+ "sea_sectors": {
+  "east_pacific": {
+   "cells": 185,
+   "sea_km2": 11699.1
+  },
+  "north_east_china_sea": {
+   "cells": 262,
+   "sea_km2": 16682.2
+  },
+  "south": {
+   "cells": 7,
+   "sea_km2": 420.2
+  },
+  "west_taiwan_strait": {
+   "cells": 93,
+   "sea_km2": 5879.7
+  }
+ },
+ "totals": {
+  "area_km2": 50176.0,
+  "tw_land_km2": 15058.3,
+  "foreign_land_km2": 0.0,
+  "sea_km2": 35117.68,
+  "land_pct": 30.01,
+  "coastline_km": 591.3,
+  "buildings_best": 1293453,
+  "buildings_wfs_taipei": 369960,
+  "wfs_records_excluded_outside_overture_taipei_polygon": 3572,
+  "buildings_overture_outside_taipei": 923493,
+  "overture_height_validity_world": {
+   "valid_height": 2163,
+   "valid_floors_only": 37651,
+   "present_but_invalid": 7,
+   "missing_height": 883672
+  }
+ },
+ "admin_regions_in_world": {
+  "TW-CHA": {
+   "name": "彰化縣",
+   "land_km2_total": 1244.9,
+   "land_km2_in_world": 653.0,
+   "pct_in_world": 52.5,
+   "buildings": 112369,
+   "building_source": "overture_lower_bound",
+   "overture_height_validity": {
+    "valid_height": 30,
+    "valid_floors_only": 406,
+    "present_but_invalid": 0,
+    "missing": 111933
+   }
+  },
+  "TW-HSQ": {
+   "name": "新竹縣",
+   "land_km2_total": 1407.0,
+   "land_km2_in_world": 1407.0,
+   "pct_in_world": 100.0,
+   "buildings": 53795,
+   "building_source": "overture_lower_bound",
+   "overture_height_validity": {
+    "valid_height": 203,
+    "valid_floors_only": 577,
+    "present_but_invalid": 0,
+    "missing": 53015
+   }
+  },
+  "TW-HSZ": {
+   "name": "新竹市",
+   "land_km2_total": 107.1,
+   "land_km2_in_world": 107.1,
+   "pct_in_world": 100.0,
+   "buildings": 27634,
+   "building_source": "overture_lower_bound",
+   "overture_height_validity": {
+    "valid_height": 45,
+    "valid_floors_only": 879,
+    "present_but_invalid": 0,
+    "missing": 26710
+   }
+  },
+  "TW-HUA": {
+   "name": "花蓮縣",
+   "land_km2_total": 4600.7,
+   "land_km2_in_world": 1573.3,
+   "pct_in_world": 34.2,
+   "buildings": 60233,
+   "building_source": "overture_lower_bound",
+   "overture_height_validity": {
+    "valid_height": 63,
+    "valid_floors_only": 1147,
+    "present_but_invalid": 0,
+    "missing": 59023
+   }
+  },
+  "TW-ILA": {
+   "name": "宜蘭縣",
+   "land_km2_total": 2192.8,
+   "land_km2_in_world": 2192.8,
+   "pct_in_world": 100.0,
+   "buildings": 63258,
+   "building_source": "overture_lower_bound",
+   "overture_height_validity": {
+    "valid_height": 3,
+    "valid_floors_only": 715,
+    "present_but_invalid": 0,
+    "missing": 62540
+   }
+  },
+  "TW-KEE": {
+   "name": "基隆市",
+   "land_km2_total": 134.1,
+   "land_km2_in_world": 134.1,
+   "pct_in_world": 100.0,
+   "buildings": 14001,
+   "building_source": "overture_lower_bound",
+   "overture_height_validity": {
+    "valid_height": 3,
+    "valid_floors_only": 109,
+    "present_but_invalid": 0,
+    "missing": 13889
+   }
+  },
+  "TW-MIA": {
+   "name": "苗栗縣",
+   "land_km2_total": 1811.0,
+   "land_km2_in_world": 1811.0,
+   "pct_in_world": 100.0,
+   "buildings": 68508,
+   "building_source": "overture_lower_bound",
+   "overture_height_validity": {
+    "valid_height": 5,
+    "valid_floors_only": 422,
+    "present_but_invalid": 0,
+    "missing": 68081
+   }
+  },
+  "TW-NAN": {
+   "name": "南投縣",
+   "land_km2_total": 4097.8,
+   "land_km2_in_world": 1402.1,
+   "pct_in_world": 34.2,
+   "buildings": 38013,
+   "building_source": "overture_lower_bound",
+   "overture_height_validity": {
+    "valid_height": 6,
+    "valid_floors_only": 149,
+    "present_but_invalid": 0,
+    "missing": 37858
+   }
+  },
+  "TW-NWT": {
+   "name": "新北市",
+   "land_km2_total": 2059.7,
+   "land_km2_in_world": 2059.7,
+   "pct_in_world": 100.0,
+   "buildings": 134871,
+   "building_source": "overture_lower_bound",
+   "overture_height_validity": {
+    "valid_height": 592,
+    "valid_floors_only": 11494,
+    "present_but_invalid": 2,
+    "missing": 122783
+   }
+  },
+  "TW-TAO": {
+   "name": "桃園市",
+   "land_km2_total": 1205.8,
+   "land_km2_in_world": 1205.8,
+   "pct_in_world": 100.0,
+   "buildings": 141139,
+   "building_source": "overture_lower_bound",
+   "overture_height_validity": {
+    "valid_height": 855,
+    "valid_floors_only": 3725,
+    "present_but_invalid": 0,
+    "missing": 136559
+   }
+  },
+  "TW-TPE": {
+   "name": "臺北市",
+   "land_km2_total": 269.8,
+   "land_km2_in_world": 269.8,
+   "pct_in_world": 100.0,
+   "buildings": 369960,
+   "building_source": "taipei_wfs",
+   "overture_height_validity": null
+  },
+  "TW-TXG": {
+   "name": "臺中市",
+   "land_km2_total": 2242.6,
+   "land_km2_in_world": 2242.6,
+   "pct_in_world": 100.0,
+   "buildings": 209611,
+   "building_source": "overture_lower_bound",
+   "overture_height_validity": {
+    "valid_height": 358,
+    "valid_floors_only": 18028,
+    "present_but_invalid": 5,
+    "missing": 191220
+   }
+  }
+ },
+ "l0_blocks_32km": [
+  {
+   "block": "L0_0_0",
+   "col": 0,
+   "row": 0,
+   "land_km2": 917.4,
+   "sea_km2": 106.6,
+   "buildings_best": 171346,
+   "tiers": {
+    "T2_periphery_urban": 15,
+    "T3_low_rural_coastal": 1
+   }
+  },
+  {
+   "block": "L0_1_0",
+   "col": 1,
+   "row": 0,
+   "land_km2": 1024.0,
+   "sea_km2": 0.0,
+   "buildings_best": 110346,
+   "tiers": {
+    "T2_periphery_urban": 11,
+    "T3_low_mountain": 4,
+    "T3_low_rural_coastal": 1
+   }
+  },
+  {
+   "block": "L0_2_0",
+   "col": 2,
+   "row": 0,
+   "land_km2": 1024.0,
+   "sea_km2": 0.0,
+   "buildings_best": 6446,
+   "tiers": {
+    "T2_periphery_urban": 3,
+    "T3_low_mountain": 13
+   }
+  },
+  {
+   "block": "L0_3_0",
+   "col": 3,
+   "row": 0,
+   "land_km2": 1023.6,
+   "sea_km2": 0.4,
+   "buildings_best": 44702,
+   "tiers": {
+    "T3_low_mountain": 13,
+    "T2_periphery_urban": 2,
+    "T1_high": 1
+   }
+  },
+  {
+   "block": "L0_4_0",
+   "col": 4,
+   "row": 0,
+   "land_km2": 99.8,
+   "sea_km2": 924.2,
+   "buildings_best": 14632,
+   "tiers": {
+    "T1_high": 2,
+    "T4_sea": 11,
+    "T2_periphery_urban": 2,
+    "T3_low_rural_coastal": 1
+   }
+  },
+  {
+   "block": "L0_5_0",
+   "col": 5,
+   "row": 0,
+   "land_km2": 0.0,
+   "sea_km2": 1024.0,
+   "buildings_best": 0,
+   "tiers": {
+    "T4_sea": 16
+   }
+  },
+  {
+   "block": "L0_6_0",
+   "col": 6,
+   "row": 0,
+   "land_km2": 0.0,
+   "sea_km2": 1024.0,
+   "buildings_best": 0,
+   "tiers": {
+    "T4_sea": 16
+   }
+  },
+  {
+   "block": "L0_0_1",
+   "col": 0,
+   "row": 1,
+   "land_km2": 305.9,
+   "sea_km2": 718.1,
+   "buildings_best": 35800,
+   "tiers": {
+    "T4_sea": 8,
+    "T2_periphery_urban": 5,
+    "T1_high": 2,
+    "T3_low_rural_coastal": 1
+   }
+  },
+  {
+   "block": "L0_1_1",
+   "col": 1,
+   "row": 1,
+   "land_km2": 1021.5,
+   "sea_km2": 2.5,
+   "buildings_best": 56063,
+   "tiers": {
+    "T2_periphery_urban": 12,
+    "T3_low_mountain": 4
+   }
+  },
+  {
+   "block": "L0_2_1",
+   "col": 2,
+   "row": 1,
+   "land_km2": 1024.0,
+   "sea_km2": 0.0,
+   "buildings_best": 1017,
+   "tiers": {
+    "T3_low_mountain": 16
+   }
+  },
+  {
+   "block": "L0_3_1",
+   "col": 3,
+   "row": 1,
+   "land_km2": 1024.0,
+   "sea_km2": 0.0,
+   "buildings_best": 490,
+   "tiers": {
+    "T3_low_mountain": 16
+   }
+  },
+  {
+   "block": "L0_4_1",
+   "col": 4,
+   "row": 1,
+   "land_km2": 559.4,
+   "sea_km2": 464.6,
+   "buildings_best": 3669,
+   "tiers": {
+    "T3_low_mountain": 7,
+    "T4_sea": 4,
+    "T2_medium": 2,
+    "T3_low_rural_coastal": 3
+   }
+  },
+  {
+   "block": "L0_5_1",
+   "col": 5,
+   "row": 1,
+   "land_km2": 0.0,
+   "sea_km2": 1024.0,
+   "buildings_best": 0,
+   "tiers": {
+    "T4_sea": 16
+   }
+  },
+  {
+   "block": "L0_6_1",
+   "col": 6,
+   "row": 1,
+   "land_km2": 0.0,
+   "sea_km2": 1024.0,
+   "buildings_best": 0,
+   "tiers": {
+    "T4_sea": 16
+   }
+  },
+  {
+   "block": "L0_0_2",
+   "col": 0,
+   "row": 2,
+   "land_km2": 0.0,
+   "sea_km2": 1024.0,
+   "buildings_best": 0,
+   "tiers": {
+    "T4_sea": 16
+   }
+  },
+  {
+   "block": "L0_1_2",
+   "col": 1,
+   "row": 2,
+   "land_km2": 588.1,
+   "sea_km2": 435.9,
+   "buildings_best": 58468,
+   "tiers": {
+    "T2_periphery_urban": 8,
+    "T3_low_rural_coastal": 3,
+    "T4_sea": 3,
+    "T2_medium": 1,
+    "T1_high": 1
+   }
+  },
+  {
+   "block": "L0_2_2",
+   "col": 2,
+   "row": 2,
+   "land_km2": 1024.0,
+   "sea_km2": 0.0,
+   "buildings_best": 25486,
+   "tiers": {
+    "T3_low_mountain": 9,
+    "T2_periphery_urban": 1,
+    "T2_medium": 5,
+    "T1_high": 1
+   }
+  },
+  {
+   "block": "L0_3_2",
+   "col": 3,
+   "row": 2,
+   "land_km2": 1024.0,
+   "sea_km2": 0.0,
+   "buildings_best": 2115,
+   "tiers": {
+    "T3_low_mountain": 15,
+    "T3_low_rural_coastal": 1
+   }
+  },
+  {
+   "block": "L0_4_2",
+   "col": 4,
+   "row": 2,
+   "land_km2": 755.8,
+   "sea_km2": 268.2,
+   "buildings_best": 54506,
+   "tiers": {
+    "T3_low_mountain": 3,
+    "T1_high": 5,
+    "T3_low_rural_coastal": 2,
+    "T2_medium": 4,
+    "T4_sea": 2
+   }
+  },
+  {
+   "block": "L0_5_2",
+   "col": 5,
+   "row": 2,
+   "land_km2": 0.0,
+   "sea_km2": 1024.0,
+   "buildings_best": 0,
+   "tiers": {
+    "T4_sea": 16
+   }
+  },
+  {
+   "block": "L0_6_2",
+   "col": 6,
+   "row": 2,
+   "land_km2": 0.0,
+   "sea_km2": 1024.0,
+   "buildings_best": 0,
+   "tiers": {
+    "T4_sea": 16
+   }
+  },
+  {
+   "block": "L0_0_3",
+   "col": 0,
+   "row": 3,
+   "land_km2": 0.0,
+   "sea_km2": 1024.0,
+   "buildings_best": 0,
+   "tiers": {
+    "T4_sea": 16
+   }
+  },
+  {
+   "block": "L0_1_3",
+   "col": 1,
+   "row": 3,
+   "land_km2": 58.0,
+   "sea_km2": 966.0,
+   "buildings_best": 12879,
+   "tiers": {
+    "T4_sea": 14,
+    "T1_high": 1,
+    "T2_medium": 1
+   }
+  },
+  {
+   "block": "L0_2_3",
+   "col": 2,
+   "row": 3,
+   "land_km2": 903.5,
+   "sea_km2": 120.5,
+   "buildings_best": 142098,
+   "tiers": {
+    "T1_high": 11,
+    "T2_medium": 5
+   }
+  },
+  {
+   "block": "L0_3_3",
+   "col": 3,
+   "row": 3,
+   "land_km2": 1024.0,
+   "sea_km2": 0.0,
+   "buildings_best": 398897,
+   "tiers": {
+    "T2_medium": 5,
+    "T3_low_mountain": 3,
+    "T1_high": 8
+   }
+  },
+  {
+   "block": "L0_4_3",
+   "col": 4,
+   "row": 3,
+   "land_km2": 886.3,
+   "sea_km2": 137.7,
+   "buildings_best": 26316,
+   "tiers": {
+    "T3_low_mountain": 2,
+    "T2_medium": 5,
+    "T1_high": 2,
+    "T4_sea": 1,
+    "T3_low_rural_coastal": 6
+   }
+  },
+  {
+   "block": "L0_5_3",
+   "col": 5,
+   "row": 3,
+   "land_km2": 31.9,
+   "sea_km2": 992.1,
+   "buildings_best": 772,
+   "tiers": {
+    "T3_low_rural_coastal": 2,
+    "T4_sea": 13,
+    "T2_medium": 1
+   }
+  },
+  {
+   "block": "L0_6_3",
+   "col": 6,
+   "row": 3,
+   "land_km2": 0.0,
+   "sea_km2": 1024.0,
+   "buildings_best": 0,
+   "tiers": {
+    "T4_sea": 16
+   }
+  },
+  {
+   "block": "L0_0_4",
+   "col": 0,
+   "row": 4,
+   "land_km2": 0.0,
+   "sea_km2": 1024.0,
+   "buildings_best": 0,
+   "tiers": {
+    "T4_sea": 16
+   }
+  },
+  {
+   "block": "L0_1_4",
+   "col": 1,
+   "row": 4,
+   "land_km2": 0.0,
+   "sea_km2": 1024.0,
+   "buildings_best": 0,
+   "tiers": {
+    "T4_sea": 16
+   }
+  },
+  {
+   "block": "L0_2_4",
+   "col": 2,
+   "row": 4,
+   "land_km2": 27.1,
+   "sea_km2": 996.9,
+   "buildings_best": 2332,
+   "tiers": {
+    "T4_sea": 14,
+    "T2_medium": 1,
+    "T1_high": 1
+   }
+  },
+  {
+   "block": "L0_3_4",
+   "col": 3,
+   "row": 4,
+   "land_km2": 460.7,
+   "sea_km2": 563.3,
+   "buildings_best": 106411,
+   "tiers": {
+    "T2_medium": 5,
+    "T1_high": 4,
+    "T4_sea": 6,
+    "T3_low_mountain": 1
+   }
+  },
+  {
+   "block": "L0_4_4",
+   "col": 4,
+   "row": 4,
+   "land_km2": 250.1,
+   "sea_km2": 773.9,
+   "buildings_best": 18634,
+   "tiers": {
+    "T2_medium": 3,
+    "T1_high": 1,
+    "T3_low_rural_coastal": 3,
+    "T4_sea": 9
+   }
+  },
+  {
+   "block": "L0_5_4",
+   "col": 5,
+   "row": 4,
+   "land_km2": 0.0,
+   "sea_km2": 1024.0,
+   "buildings_best": 0,
+   "tiers": {
+    "T4_sea": 16
+   }
+  },
+  {
+   "block": "L0_6_4",
+   "col": 6,
+   "row": 4,
+   "land_km2": 0.0,
+   "sea_km2": 1024.0,
+   "buildings_best": 0,
+   "tiers": {
+    "T4_sea": 16
+   }
+  },
+  {
+   "block": "L0_0_5",
+   "col": 0,
+   "row": 5,
+   "land_km2": 0.0,
+   "sea_km2": 1024.0,
+   "buildings_best": 0,
+   "tiers": {
+    "T4_sea": 16
+   }
+  },
+  {
+   "block": "L0_1_5",
+   "col": 1,
+   "row": 5,
+   "land_km2": 0.0,
+   "sea_km2": 1024.0,
+   "buildings_best": 0,
+   "tiers": {
+    "T4_sea": 16
+   }
+  },
+  {
+   "block": "L0_2_5",
+   "col": 2,
+   "row": 5,
+   "land_km2": 0.0,
+   "sea_km2": 1024.0,
+   "buildings_best": 0,
+   "tiers": {
+    "T4_sea": 16
+   }
+  },
+  {
+   "block": "L0_3_5",
+   "col": 3,
+   "row": 5,
+   "land_km2": 0.0,
+   "sea_km2": 1024.0,
+   "buildings_best": 0,
+   "tiers": {
+    "T4_sea": 16
+   }
+  },
+  {
+   "block": "L0_4_5",
+   "col": 4,
+   "row": 5,
+   "land_km2": 0.0,
+   "sea_km2": 1024.0,
+   "buildings_best": 0,
+   "tiers": {
+    "T4_sea": 16
+   }
+  },
+  {
+   "block": "L0_5_5",
+   "col": 5,
+   "row": 5,
+   "land_km2": 1.2,
+   "sea_km2": 1022.8,
+   "buildings_best": 28,
+   "tiers": {
+    "T4_sea": 15,
+    "T3_low_rural_coastal": 1
+   }
+  },
+  {
+   "block": "L0_6_5",
+   "col": 6,
+   "row": 5,
+   "land_km2": 0.0,
+   "sea_km2": 1024.0,
+   "buildings_best": 0,
+   "tiers": {
+    "T4_sea": 16
+   }
+  },
+  {
+   "block": "L0_0_6",
+   "col": 0,
+   "row": 6,
+   "land_km2": 0.0,
+   "sea_km2": 1024.0,
+   "buildings_best": 0,
+   "tiers": {
+    "T4_sea": 16
+   }
+  },
+  {
+   "block": "L0_1_6",
+   "col": 1,
+   "row": 6,
+   "land_km2": 0.0,
+   "sea_km2": 1024.0,
+   "buildings_best": 0,
+   "tiers": {
+    "T4_sea": 16
+   }
+  },
+  {
+   "block": "L0_2_6",
+   "col": 2,
+   "row": 6,
+   "land_km2": 0.0,
+   "sea_km2": 1024.0,
+   "buildings_best": 0,
+   "tiers": {
+    "T4_sea": 16
+   }
+  },
+  {
+   "block": "L0_3_6",
+   "col": 3,
+   "row": 6,
+   "land_km2": 0.0,
+   "sea_km2": 1024.0,
+   "buildings_best": 0,
+   "tiers": {
+    "T4_sea": 16
+   }
+  },
+  {
+   "block": "L0_4_6",
+   "col": 4,
+   "row": 6,
+   "land_km2": 0.0,
+   "sea_km2": 1024.0,
+   "buildings_best": 0,
+   "tiers": {
+    "T4_sea": 16
+   }
+  },
+  {
+   "block": "L0_5_6",
+   "col": 5,
+   "row": 6,
+   "land_km2": 0.0,
+   "sea_km2": 1024.0,
+   "buildings_best": 0,
+   "tiers": {
+    "T4_sea": 16
+   }
+  },
+  {
+   "block": "L0_6_6",
+   "col": 6,
+   "row": 6,
+   "land_km2": 0.0,
+   "sea_km2": 1024.0,
+   "buildings_best": 0,
+   "tiers": {
+    "T4_sea": 16
+   }
+  }
+ ],
+ "terrain_qa": {
+  "dtm_tiles": 874,
+  "sample_spacing_m": 250.0,
+  "samples": 802816,
+  "land_polygon_vs_dtm_valid_agreement": 0.9719,
+  "land_samples_without_dtm": 710,
+  "dtm_valid_samples_outside_land_polygon": 21832,
+  "max_land_elev_m": 3795.2,
+  "dtm_valid_outside_land_abs_lt_0p5m_share": 0.969,
+  "finding_sea_encoded_as_zero": "the DTM mirror stores sea within ~6 km of the coast as 0.0 m (not NODATA); land/sea must come from the vector coastline, never from DTM validity",
+  "land_samples_without_dtm_on_main_island": 648,
+  "inland_dtm_hole": {
+   "definition": "land sample > 2 km from the coast with DTM NODATA or |z| < 0.5 m, in a thick (> ~1.25 km wide) component >= 4 km2",
+   "samples": 2473,
+   "area_km2": 154.6,
+   "bbox_lonlat": [
+    121.009,
+    24.45,
+    121.132,
+    24.567
+   ],
+   "cells": [
+    "C+0031+0338",
+    "C+0031+0339",
+    "C+0032+0338",
+    "C+0032+0339"
+   ],
+   "impact": "terrain in these cells must not be generated from this mirror until the official TGOS DTM sheet is checked",
+   "small_low_lying_components_not_holes_km2": 24.9,
+   "components": [
+    {
+     "area_km2": 154.6,
+     "bbox_lonlat": [
+      121.009,
+      24.45,
+      121.132,
+      24.567
+     ],
+     "surrounding_land_median_elev_m": 1400.0,
+     "interpretation": "DTM data gap (surrounding terrain is high)"
+    }
+   ]
+  },
+  "land_share_above_1000m": 0.325,
+  "land_share_above_2000m": 0.117,
+  "offshore": "no bathymetry: sea is 0.0 m within ~6 km of the coast and NODATA beyond; a sea plane / bathymetry source is a separate decision"
+ },
+ "edge_and_validity_qa_phase1_regions": {
+  "taipei": {
+   "phase1_bbox_contained_simplified": 108399,
+   "phase2a_centroid_fullres": 108442,
+   "phase2a_centroid_simplified": 108399,
+   "border_flips_simplified_vs_full": 123,
+   "phase1_present_based_fallback": 81737,
+   "phase2a_validated_no_usable_height": 81781,
+   "phase2a_present_but_invalid": 14
+  },
+  "new_taipei": {
+   "phase1_bbox_contained_simplified": 134829,
+   "phase2a_centroid_fullres": 134872,
+   "phase2a_centroid_simplified": 134852,
+   "border_flips_simplified_vs_full": 442,
+   "phase1_present_based_fallback": 122739,
+   "phase2a_validated_no_usable_height": 122786,
+   "phase2a_present_but_invalid": 2
+  },
+  "keelung": {
+   "phase1_bbox_contained_simplified": 13910,
+   "phase2a_centroid_fullres": 14002,
+   "phase2a_centroid_simplified": 13911,
+   "border_flips_simplified_vs_full": 135,
+   "phase1_present_based_fallback": 13801,
+   "phase2a_validated_no_usable_height": 13890,
+   "phase2a_present_but_invalid": 0
+  },
+  "taoyuan": {
+   "phase1_bbox_contained_simplified": 141046,
+   "phase2a_centroid_fullres": 141140,
+   "phase2a_centroid_simplified": 141097,
+   "border_flips_simplified_vs_full": 323,
+   "phase1_present_based_fallback": 136472,
+   "phase2a_validated_no_usable_height": 136560,
+   "phase2a_present_but_invalid": 0
+  },
+  "hsinchu_city": {
+   "phase1_bbox_contained_simplified": 27629,
+   "phase2a_centroid_fullres": 27634,
+   "phase2a_centroid_simplified": 27629,
+   "border_flips_simplified_vs_full": 113,
+   "phase1_present_based_fallback": 26697,
+   "phase2a_validated_no_usable_height": 26710,
+   "phase2a_present_but_invalid": 0
+  },
+  "hsinchu_county": {
+   "phase1_bbox_contained_simplified": 53802,
+   "phase2a_centroid_fullres": 53795,
+   "phase2a_centroid_simplified": 53808,
+   "border_flips_simplified_vs_full": 183,
+   "phase1_present_based_fallback": 53022,
+   "phase2a_validated_no_usable_height": 53015,
+   "phase2a_present_but_invalid": 0
+  },
+  "yilan": {
+   "phase1_bbox_contained_simplified": 63259,
+   "phase2a_centroid_fullres": 63260,
+   "phase2a_centroid_simplified": 63259,
+   "border_flips_simplified_vs_full": 5,
+   "phase1_present_based_fallback": 62541,
+   "phase2a_validated_no_usable_height": 62542,
+   "phase2a_present_but_invalid": 0
+  }
+ },
+ "notes": "Overture counts are lower bounds; Taipei uses WFS. Tiers are a planning classification, not a runtime result."
+}

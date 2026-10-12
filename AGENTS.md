@@ -164,3 +164,10 @@ Theater-scale GIS audit, NTW world frame (EPSG:3826 minus fixed origin), tile/LO
 are in `docs/north-taiwan-world-foundation-v0.md` (tools: `tools/ntw/`, evidence: `data/ntw/`). Xinyi stays the accepted L3 sector in
 its own ENU frame; do not re-express or regenerate it in the NTW frame without the locked regression gates above. No theater-wide
 generation is approved yet (see its §12 go/no-go).
+
+### Phase 2A world bounds
+
+The proposed 224 x 224 km world (`worlds/north_taiwan_224.json`, EPSG:3826, 8 km grid) and its placement study, cell
+statistics, Xinyi L3 identity-suppression rule and DTM data-gap findings are in `docs/north-taiwan-world-bounds-phase2a.md`.
+Map size is data (`tools/ntw/world_spec.py`); never hard-code 224 km. The MOI DTM mirror has a 154.6 km2 gap in the
+Hsinchu County mountains and stores near-shore sea as 0 m: derive land/sea from vector coastlines, not DTM validity.

@@ -6,7 +6,12 @@ data/ntw/theater_regions.json. Writes:
   data/ntw/coverage_map.svg        (static map, committed)
 Everything reported here is an EXACT count over the pinned Overture release, not a sample.
 Region membership = building centroid inside the 150 m-simplified region boundary
-(border buildings may flip by < ~150 m of boundary error; documented, not corrected).
+(border buildings may flip by < ~150 m of boundary error; quantified in Phase 2A world summary QA).
+
+Two height views are reported (PR #16 review item 4):
+  presence-based  explicit_height / floors_only / fallback_needed  (non-null values; Phase 1 numbers)
+  validated       valid_height / valid_floors_only / present_but_invalid / no_usable_height, using the SAME bounds as
+                  tools/ntw/heights.py (1.2-600 m; 1-150 floors with floors x 3.2 inside the height bounds)
 """
 from __future__ import annotations
 
@@ -18,6 +23,8 @@ from pathlib import Path
 
 import duckdb
 import numpy as np
+
+import heights
 from pyproj import Transformer
 from shapely import contains_xy, prepare
 from shapely.geometry import shape
@@ -55,6 +62,11 @@ def load():
         "area": np.asarray(df["area_m2"], float),
         "npts": np.asarray(df["npts"], np.int64),
     }
+    h = np.ma.filled(np.ma.asarray(df["height"]).astype(float), np.nan)
+    f = np.ma.filled(np.ma.asarray(df["num_floors"]).astype(float), np.nan)
+    d["h_valid"] = ~np.isnan(h) & (h >= heights.MIN_M) & (h <= heights.MAX_M)
+    d["f_valid"] = (~np.isnan(f) & (f >= 1) & (f <= 150)
+                    & (f * heights.FLOOR_M >= heights.MIN_M) & (f * heights.FLOOR_M <= heights.MAX_M))
     return d
 
 
@@ -72,6 +84,12 @@ def stats(d, mask, area_km2=None):
         "fallback_needed": int((~h & ~f).sum()),
         "explicit_height_pct": round(100 * float(h.mean()), 2),
         "height_or_floors_pct": round(100 * float((h | f).mean()), 2),
+        "validated": {
+            "valid_height": int(d["h_valid"][mask].sum()),
+            "valid_floors_only": int((~d["h_valid"][mask] & d["f_valid"][mask]).sum()),
+            "present_but_invalid": int(((h | f) & ~d["h_valid"][mask] & ~d["f_valid"][mask]).sum()),
+            "no_usable_height": int((~d["h_valid"][mask] & ~d["f_valid"][mask]).sum()),
+        },
         "has_parts": int(d["has_parts"][mask].sum()),
         "sources": {x: int((d["src"][mask] == x).sum()) for x in sorted(set(d["src"][mask]))},
         "median_footprint_m2": round(float(np.median(a)), 1),

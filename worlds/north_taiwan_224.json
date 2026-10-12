@@ -1,0 +1,18 @@
+{
+  "name": "north_taiwan_224",
+  "status": "PROPOSAL (Phase 2A) - not yet accepted",
+  "size_km": [224, 224],
+  "cell_km": 8,
+  "sw_corner_epsg3826": [184000, 2648000],
+  "crs": "EPSG:3826",
+  "selection": "data/ntw/world/placement_224.json (top-ranked feasible placement; see docs/north-taiwan-world-bounds-phase2a.md)",
+  "alternatives": {
+    "north_deep": {"sw_corner_epsg3826": [184000, 2680000], "why": "north sea depth 105 km; drops Hualien AB / Jiashan / Hualien port / Qilai"},
+    "south_safe": {"sw_corner_epsg3826": [184000, 2640000], "why": "Hualien city + port >= 13 km from the south edge; north depth 65 km"}
+  },
+  "notes": {
+    "runtime_origin": "world centre snapped to the 8 km grid (WorldSpec.runtime_origin_tm2)",
+    "storage_frame": "tile keys stay in the Phase-1 NTW frame (EPSG:3826 - (224000, 2688000)); world-independent",
+    "xinyi": "accepted Xinyi stays in its ENU frame as an L3 sector; see data/ntw/world/xinyi_compat.json"
+  }
+}
