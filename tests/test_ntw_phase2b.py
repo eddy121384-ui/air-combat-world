@@ -124,7 +124,7 @@ class TerrainMeshTests(unittest.TestCase):
         self.assertEqual(n2, 6)
 
     def test_vectorised_xinyi_enu_matches_accepted_formula(self):
-        from build_terrain_cells import tm2_to_xinyi_enu
+        from build_terrain_cells import tm2_to_xinyi_enu_exact as tm2_to_xinyi_enu
         from worldmodel import lonlat_to_enu
         import world_cells as wc
         import xinyi_world_compat as xc
@@ -136,6 +136,19 @@ class TerrainMeshTests(unittest.TestCase):
             ee, nn = lonlat_to_enu(lon[i], lat[i], xc.O_LON, xc.O_LAT)
             self.assertAlmostEqual(e[i], ee, places=6)
             self.assertAlmostEqual(n[i], nn, places=6)
+
+
+class XinyiPlacementTests(unittest.TestCase):
+    def test_affine_placement_roundtrip_and_distance_to_exact(self):
+        import build_terrain_cells as b
+        e = np.array([-1500.0, 1000.0, -1500.0, 1000.0, 0.0])
+        n = np.array([-1000.0, -1000.0, 1500.0, 1500.0, 0.0])
+        x, y = b.xinyi_enu_to_tm2(e, n)
+        e2, n2 = b.tm2_to_xinyi_enu(x, y)
+        self.assertLess(float(np.abs(e2 - e).max()), 1e-6)
+        self.assertLess(float(np.abs(n2 - n).max()), 1e-6)
+        ex, ey = b.tm2_to_xinyi_enu_exact(x, y)
+        self.assertLess(float(np.hypot(ex - e, ey - n).max()), 0.2)   # affine vs exact chain: documented 0.12 m class
 
 
 class TerrainEvidenceTests(unittest.TestCase):

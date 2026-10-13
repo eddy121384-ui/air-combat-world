@@ -180,3 +180,15 @@ Xinyi seam stitch strip (Xinyi assets read-only), shard/seam QA (`tools/ntw/terr
 Rules learned: never ship terrain from the Terrarium mirror where official TGOS sheets exist; the official 2025 DEM itself lacks the
 Hsinchu-County gap (BLOCKED); UE Interchange bakes glTF node translations into vertices, so UE-facing GLBs use identity nodes;
 `build_pilot.FRAGMENT_POLICY` must stay disabled for accepted builds until the locked regression gates pass.
+
+### Phase 2B runtime gate (UE 5.8 isolated PIE)
+
+`docs/north-taiwan-runtime-gate-phase2b.md` (tools `tools/ntw/ue_gate/`, result `data/ntw/runtime/runtime_gate_result.json`):
+real PIE collision traces, actor precision, LOD-combination crack matrix and 300 m/s streaming flights on the two pilot cells + the
+accepted Xinyi Landscape. Rules learned: rebuilding a World Partition level must delete its `__ExternalActors__` first (stale copies
+duplicate every actor); `SetLodFromStaticMesh` brings a new material slot per LOD - remap every LOD section to slot 0;
+`r.ForceLOD` also forces every Landscape component (use per-component `SetForcedLOD` / `SetForcedLodModel` for mixed combos);
+stitch LOD must equal the neighbouring chunk LOD and the Xinyi border Landscape components must stay at LOD0 (hard `ForcedLOD`
+leaves cracks at internal component borders); the OpenWorld template runtime grid (252 m / 768 m) cannot stream 300 m/s flight.
+`build_pilot.QUANT_FALLBACK` (float32 grid-snap fallback) is a CANDIDATE policy, default off, until reviewed + regression-gated.
+Desktop iGPU PIE numbers are not mobile performance.

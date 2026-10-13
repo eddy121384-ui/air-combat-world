@@ -1,0 +1,176 @@
+{
+ "config": "north_core_v1",
+ "note": "GIS comparison only; the proposed battlefield config is NOT changed",
+ "boxes": {
+  "112x112 (proposed)": {
+   "bounds_epsg3826": [
+    224000,
+    2728000,
+    336000,
+    2840000
+   ],
+   "size_km": [
+    112.0,
+    112.0
+   ],
+   "area_km2": 12544.0,
+   "feasible": true,
+   "violations": [],
+   "depth_km": {
+    "west_core_min": 14.6,
+    "west_core_median": 29.4,
+    "north_core_min": 41.0,
+    "north_core_median": 59.5,
+    "east_core_min": 0.0,
+    "east_core_median": 4.9
+   },
+   "east_limitation": "east_core_min = 0: the NE coast (Keelung -> Sandiaojiao) leaves the box; no eastern sea buffer",
+   "sea_km2": 7553.4,
+   "west_ocean_km2": 2606.6,
+   "front_line_sea_0_50km_km2": 6669.5,
+   "coastline_km": 263.1,
+   "flat_low_shore_km_proxy": 187.4,
+   "beach_features": 63,
+   "extension_vs_112": null,
+   "production_follows_box": {
+    "production_zone_epsg3826": [
+     216000,
+     2720000,
+     344000,
+     2848000
+    ],
+    "land_cells": 111,
+    "land_km2": 6054.5,
+    "buildings_best": 828987,
+    "lod0_terrain_triangles_estimate": 35520000
+   },
+   "extra_cost_if_production_follows_box": {
+    "land_cells": 0,
+    "land_km2": 0.0,
+    "buildings_best": 0,
+    "lod0_terrain_triangles_estimate": 0
+   },
+   "extra_cost_if_production_stays_112": {
+    "land_cells": 0,
+    "terrain": "added flyable area rendered as 0 m water plane + far-field terrain only",
+    "risk": "land inside the flyable box but outside production would be far-field quality"
+   }
+  },
+  "120x120": {
+   "bounds_epsg3826": [
+    216000,
+    2728000,
+    336000,
+    2848000
+   ],
+   "size_km": [
+    120.0,
+    120.0
+   ],
+   "area_km2": 14400.0,
+   "feasible": true,
+   "violations": [],
+   "depth_km": {
+    "west_core_min": 22.6,
+    "west_core_median": 37.4,
+    "north_core_min": 49.0,
+    "north_core_median": 67.5,
+    "east_core_min": 0.0,
+    "east_core_median": 4.9
+   },
+   "east_limitation": "east_core_min = 0: the NE coast (Keelung -> Sandiaojiao) leaves the box; no eastern sea buffer",
+   "sea_km2": 9409.4,
+   "west_ocean_km2": 3182.6,
+   "front_line_sea_0_50km_km2": 7633.4,
+   "coastline_km": 263.1,
+   "flat_low_shore_km_proxy": 187.4,
+   "beach_features": 63,
+   "extension_vs_112": {
+    "area_km2": 1856.0,
+    "water_share_pct": 100.0,
+    "land_km2": 0.0
+   },
+   "production_follows_box": {
+    "production_zone_epsg3826": [
+     208000,
+     2720000,
+     344000,
+     2856000
+    ],
+    "land_cells": 111,
+    "land_km2": 6054.5,
+    "buildings_best": 828987,
+    "lod0_terrain_triangles_estimate": 35520000
+   },
+   "extra_cost_if_production_follows_box": {
+    "land_cells": 0,
+    "land_km2": 0.0,
+    "buildings_best": 0,
+    "lod0_terrain_triangles_estimate": 0
+   },
+   "extra_cost_if_production_stays_112": {
+    "land_cells": 0,
+    "terrain": "added flyable area rendered as 0 m water plane + far-field terrain only",
+    "risk": "land inside the flyable box but outside production would be far-field quality"
+   }
+  },
+  "128x112 west-extended": {
+   "bounds_epsg3826": [
+    208000,
+    2728000,
+    336000,
+    2840000
+   ],
+   "size_km": [
+    128.0,
+    112.0
+   ],
+   "area_km2": 14336.0,
+   "feasible": true,
+   "violations": [],
+   "depth_km": {
+    "west_core_min": 30.6,
+    "west_core_median": 45.4,
+    "north_core_min": 41.0,
+    "north_core_median": 59.5,
+    "east_core_min": 0.0,
+    "east_core_median": 4.9
+   },
+   "east_limitation": "east_core_min = 0: the NE coast (Keelung -> Sandiaojiao) leaves the box; no eastern sea buffer",
+   "sea_km2": 9345.4,
+   "west_ocean_km2": 3758.6,
+   "front_line_sea_0_50km_km2": 7842.6,
+   "coastline_km": 263.1,
+   "flat_low_shore_km_proxy": 187.4,
+   "beach_features": 63,
+   "extension_vs_112": {
+    "area_km2": 1792.0,
+    "water_share_pct": 100.0,
+    "land_km2": 0.0
+   },
+   "production_follows_box": {
+    "production_zone_epsg3826": [
+     200000,
+     2720000,
+     344000,
+     2848000
+    ],
+    "land_cells": 111,
+    "land_km2": 6054.5,
+    "buildings_best": 828987,
+    "lod0_terrain_triangles_estimate": 35520000
+   },
+   "extra_cost_if_production_follows_box": {
+    "land_cells": 0,
+    "land_km2": 0.0,
+    "buildings_best": 0,
+    "lod0_terrain_triangles_estimate": 0
+   },
+   "extra_cost_if_production_stays_112": {
+    "land_cells": 0,
+    "terrain": "added flyable area rendered as 0 m water plane + far-field terrain only",
+    "risk": "land inside the flyable box but outside production would be far-field quality"
+   }
+  }
+ }
+}

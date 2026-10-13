@@ -1,0 +1,383 @@
+{
+ "evaluated_failing_parts": 10,
+ "outcomes": {
+  "meshed": 9,
+  "ledgered_fragment": 1,
+  "FAIL": 0
+ },
+ "rows": [
+  {
+   "id": "tp_building_height.125625",
+   "part": 0,
+   "repaired_part": 0,
+   "is_largest": true,
+   "area_m2": 445.38257358656824,
+   "accepted_failures": [
+    "point_contact_hole_regularization_failed:0:Polygon"
+   ],
+   "fallback": {
+    "policy": "float32_grid_snap_fallback",
+    "grid_m": 0.0001220703125,
+    "source_area_m2": 445.38257358656824,
+    "wide_removed_m2": 0.0,
+    "wide_added_m2": 0.0,
+    "hausdorff_m": 8.164727549724993e-05,
+    "symmetric_difference_m2": 0.00033620744943618774,
+    "area_delta_m2": -6.702408199998899e-06,
+    "budget_m2": 0.017156246528815942,
+    "holes_before": 1,
+    "holes_after": 0,
+    "pass_": true
+   },
+   "accepted_gate_on_snapped": {
+    "pass": true,
+    "failures": []
+   },
+   "mesh_gates": [
+    {
+     "float64": true,
+     "float32_local": true,
+     "float32_world": true,
+     "failures": [],
+     "triangles": 144
+    }
+   ],
+   "end_to_end_pass": true,
+   "outcome": "meshed"
+  },
+  {
+   "id": "tp_building_height.167294",
+   "part": 0,
+   "repaired_part": 0,
+   "is_largest": true,
+   "area_m2": 17.152930101086277,
+   "accepted_failures": [
+    "quantized_footprint_invalid_or_collapsed"
+   ],
+   "fallback": {
+    "policy": "float32_grid_snap_fallback",
+    "grid_m": 0.0001220703125,
+    "source_area_m2": 17.152930101086277,
+    "wide_removed_m2": 0.0,
+    "wide_added_m2": 0.0,
+    "hausdorff_m": 0.01892555284863719,
+    "symmetric_difference_m2": 0.0,
+    "area_delta_m2": 9.280658803589859e-05,
+    "budget_m2": 0.0028592850428031955,
+    "holes_before": 0,
+    "holes_after": 0,
+    "pass_": true
+   },
+   "accepted_gate_on_snapped": {
+    "pass": true,
+    "failures": []
+   },
+   "mesh_gates": [
+    {
+     "float64": true,
+     "float32_local": true,
+     "float32_world": true,
+     "failures": [],
+     "triangles": 16
+    }
+   ],
+   "end_to_end_pass": true,
+   "outcome": "meshed"
+  },
+  {
+   "id": "tp_building_height.171665",
+   "part": 0,
+   "repaired_part": 0,
+   "is_largest": true,
+   "area_m2": 283.90959301766816,
+   "accepted_failures": [
+    "quantized_courtyard_not_preserved"
+   ],
+   "fallback": {
+    "policy": "float32_grid_snap_fallback",
+    "grid_m": 0.0001220703125,
+    "source_area_m2": 283.90959301766816,
+    "wide_removed_m2": 0.0,
+    "wide_added_m2": 0.0,
+    "hausdorff_m": 7.414698461248805e-05,
+    "symmetric_difference_m2": 0.0,
+    "area_delta_m2": -0.002625333041578415,
+    "budget_m2": 0.01389491501979307,
+    "holes_before": 2,
+    "holes_after": 1,
+    "pass_": true
+   },
+   "accepted_gate_on_snapped": {
+    "pass": true,
+    "failures": []
+   },
+   "mesh_gates": [
+    {
+     "float64": true,
+     "float32_local": true,
+     "float32_world": true,
+     "failures": [],
+     "triangles": 48
+    }
+   ],
+   "end_to_end_pass": true,
+   "outcome": "meshed"
+  },
+  {
+   "id": "tp_building_height.179103",
+   "part": 0,
+   "repaired_part": 0,
+   "is_largest": true,
+   "area_m2": 990.6186890971362,
+   "accepted_failures": [
+    "quantized_footprint_invalid_or_collapsed"
+   ],
+   "fallback": {
+    "policy": "float32_grid_snap_fallback",
+    "grid_m": 0.0001220703125,
+    "source_area_m2": 990.6186890971362,
+    "wide_removed_m2": 0.0,
+    "wide_added_m2": 0.0,
+    "hausdorff_m": 0.27454521729646564,
+    "symmetric_difference_m2": 0.00012014806270599365,
+    "area_delta_m2": -0.00047391620273629087,
+    "budget_m2": 0.041287211831025884,
+    "holes_before": 3,
+    "holes_after": 3,
+    "pass_": true
+   },
+   "accepted_gate_on_snapped": {
+    "pass": true,
+    "failures": []
+   },
+   "mesh_gates": [
+    {
+     "float64": true,
+     "float32_local": true,
+     "float32_world": true,
+     "failures": [],
+     "triangles": 400
+    }
+   ],
+   "end_to_end_pass": true,
+   "outcome": "meshed"
+  },
+  {
+   "id": "tp_building_height.211054",
+   "part": 0,
+   "repaired_part": 1,
+   "is_largest": false,
+   "area_m2": 4.624929006229583e-06,
+   "accepted_failures": [
+    "quantized_footprint_invalid_or_collapsed"
+   ],
+   "fallback": {
+    "policy": "float32_grid_snap_fallback",
+    "grid_m": 0.0001220703125,
+    "source_area_m2": 4.624929006229583e-06,
+    "ledgered": true,
+    "reason": "repair_fragment_below_quantum",
+    "pass_": true
+   },
+   "accepted_gate_on_snapped": null,
+   "mesh_gates": [],
+   "end_to_end_pass": true,
+   "outcome": "ledgered_fragment"
+  },
+  {
+   "id": "tp_building_height.286126",
+   "part": 0,
+   "repaired_part": 0,
+   "is_largest": true,
+   "area_m2": 320.0594764498231,
+   "accepted_failures": [
+    "quantized_courtyard_not_preserved"
+   ],
+   "fallback": {
+    "policy": "float32_grid_snap_fallback",
+    "grid_m": 0.0001220703125,
+    "source_area_m2": 320.0594764498231,
+    "wide_removed_m2": 0.0,
+    "wide_added_m2": 0.0,
+    "hausdorff_m": 7.9647480808465e-05,
+    "symmetric_difference_m2": 0.0002899095416069031,
+    "area_delta_m2": 0.0007821547630442183,
+    "budget_m2": 0.013012709985560056,
+    "holes_before": 2,
+    "holes_after": 1,
+    "pass_": true
+   },
+   "accepted_gate_on_snapped": {
+    "pass": true,
+    "failures": []
+   },
+   "mesh_gates": [
+    {
+     "float64": true,
+     "float32_local": true,
+     "float32_world": true,
+     "failures": [],
+     "triangles": 104
+    }
+   ],
+   "end_to_end_pass": true,
+   "outcome": "meshed"
+  },
+  {
+   "id": "tp_building_height.301157",
+   "part": 0,
+   "repaired_part": 0,
+   "is_largest": true,
+   "area_m2": 136.84875205339355,
+   "accepted_failures": [
+    "quantized_footprint_invalid_or_collapsed"
+   ],
+   "fallback": {
+    "policy": "float32_grid_snap_fallback",
+    "grid_m": 0.0001220703125,
+    "source_area_m2": 136.84875205339355,
+    "wide_removed_m2": 0.0,
+    "wide_added_m2": 0.0,
+    "hausdorff_m": 3.723512065293329,
+    "symmetric_difference_m2": 0.0,
+    "area_delta_m2": 0.00042257277803514626,
+    "budget_m2": 0.007364312550720293,
+    "holes_before": 0,
+    "holes_after": 0,
+    "pass_": true
+   },
+   "accepted_gate_on_snapped": {
+    "pass": true,
+    "failures": []
+   },
+   "mesh_gates": [
+    {
+     "float64": true,
+     "float32_local": true,
+     "float32_world": true,
+     "failures": [],
+     "triangles": 88
+    }
+   ],
+   "end_to_end_pass": true,
+   "outcome": "meshed"
+  },
+  {
+   "id": "tp_building_height.353579",
+   "part": 0,
+   "repaired_part": 0,
+   "is_largest": true,
+   "area_m2": 13.064624099463657,
+   "accepted_failures": [
+    "quantized_footprint_invalid_or_collapsed"
+   ],
+   "fallback": {
+    "policy": "float32_grid_snap_fallback",
+    "grid_m": 0.0001220703125,
+    "source_area_m2": 13.064624099463657,
+    "wide_removed_m2": 0.0,
+    "wide_added_m2": 0.0,
+    "hausdorff_m": 0.00071363783124848,
+    "symmetric_difference_m2": 0.0,
+    "area_delta_m2": -3.77357308423143e-05,
+    "budget_m2": 0.0017671331114268332,
+    "holes_before": 0,
+    "holes_after": 0,
+    "pass_": true
+   },
+   "accepted_gate_on_snapped": {
+    "pass": true,
+    "failures": []
+   },
+   "mesh_gates": [
+    {
+     "float64": true,
+     "float32_local": true,
+     "float32_world": true,
+     "failures": [],
+     "triangles": 16
+    }
+   ],
+   "end_to_end_pass": true,
+   "outcome": "meshed"
+  },
+  {
+   "id": "tp_building_height.360929",
+   "part": 0,
+   "repaired_part": 0,
+   "is_largest": true,
+   "area_m2": 586.1836027632135,
+   "accepted_failures": [
+    "quantized_courtyard_not_preserved"
+   ],
+   "fallback": {
+    "policy": "float32_grid_snap_fallback",
+    "grid_m": 0.0001220703125,
+    "source_area_m2": 586.1836027632135,
+    "wide_removed_m2": 0.0,
+    "wide_added_m2": 0.0,
+    "hausdorff_m": 1.5262226734233428,
+    "symmetric_difference_m2": 0.0,
+    "area_delta_m2": -0.000854512550176878,
+    "budget_m2": 0.029085405495220908,
+    "holes_before": 4,
+    "holes_after": 1,
+    "pass_": true
+   },
+   "accepted_gate_on_snapped": {
+    "pass": true,
+    "failures": []
+   },
+   "mesh_gates": [
+    {
+     "float64": true,
+     "float32_local": true,
+     "float32_world": true,
+     "failures": [],
+     "triangles": 256
+    }
+   ],
+   "end_to_end_pass": true,
+   "outcome": "meshed"
+  },
+  {
+   "id": "tp_building_height.361019",
+   "part": 0,
+   "repaired_part": 0,
+   "is_largest": true,
+   "area_m2": 407.34703916315004,
+   "accepted_failures": [
+    "quantized_courtyard_not_preserved"
+   ],
+   "fallback": {
+    "policy": "float32_grid_snap_fallback",
+    "grid_m": 0.0001220703125,
+    "source_area_m2": 407.34703916315004,
+    "wide_removed_m2": 0.0,
+    "wide_added_m2": 0.0,
+    "hausdorff_m": 7.913636640053095e-05,
+    "symmetric_difference_m2": 0.0,
+    "area_delta_m2": 5.199011400236486e-05,
+    "budget_m2": 0.020842196285709456,
+    "holes_before": 3,
+    "holes_after": 1,
+    "pass_": true
+   },
+   "accepted_gate_on_snapped": {
+    "pass": true,
+    "failures": []
+   },
+   "mesh_gates": [
+    {
+     "float64": true,
+     "float32_local": true,
+     "float32_world": true,
+     "failures": [],
+     "triangles": 180
+    }
+   ],
+   "end_to_end_pass": true,
+   "outcome": "meshed"
+  }
+ ]
+}

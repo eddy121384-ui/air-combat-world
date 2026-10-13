@@ -1,7 +1,7 @@
 {
  "shard": {
   "joint_repeat_manifest_identical": true,
-  "joint_manifest_sha256": "440c022bf81f91c9f37788908e83feb5e2ef19fe0c7a5f0d2fa63fda38c67cc1",
+  "joint_manifest_sha256": "22f5171bc9d0a5a20164c1fbd59f955c9ca103c3a09d765c2ecf4a6dca968aee",
   "chunks": 255,
   "independent_cell_builds_chunks": 255,
   "independent_vs_joint_identical": true,
@@ -12,7 +12,7 @@
   }
  },
  "face_orientation": {
-  "faces_checked": 813714,
+  "faces_checked": 821428,
   "faces_not_facing_up": 0,
   "skirt_faces_not_vertical": 0
  },
@@ -67,7 +67,7 @@
    },
    "conformed_minus_xinyi": {
     "max_abs_m": 2.524,
-    "p95_abs_m": 1.073,
+    "p95_abs_m": 1.065,
     "mean_m": 0.086,
     "median_m": -0.008,
     "defined_fraction": 1.0
@@ -89,7 +89,7 @@
    },
    "normal_angle_deg_conformed": {
     "max": 20.09,
-    "p95": 10.81
+    "p95": 10.82
    }
   },
   "east": {
@@ -103,10 +103,10 @@
     "defined_fraction": 1.0
    },
    "conformed_minus_xinyi": {
-    "max_abs_m": 4.307,
-    "p95_abs_m": 0.541,
-    "mean_m": -0.057,
-    "median_m": -0.004,
+    "max_abs_m": 4.294,
+    "p95_abs_m": 0.509,
+    "mean_m": -0.055,
+    "median_m": -0.005,
     "defined_fraction": 1.0
    },
    "translation_only_xinyi_minus_raw": {
@@ -125,8 +125,8 @@
     "p95": 9.77
    },
    "normal_angle_deg_conformed": {
-    "max": 19.22,
-    "p95": 10.03
+    "max": 19.27,
+    "p95": 10.0
    }
   },
   "north": {
@@ -141,7 +141,7 @@
    },
    "conformed_minus_xinyi": {
     "max_abs_m": 0.727,
-    "p95_abs_m": 0.107,
+    "p95_abs_m": 0.106,
     "mean_m": -0.004,
     "median_m": -0.002,
     "defined_fraction": 1.0
@@ -177,10 +177,10 @@
     "defined_fraction": 1.0
    },
    "conformed_minus_xinyi": {
-    "max_abs_m": 0.184,
+    "max_abs_m": 0.185,
     "p95_abs_m": 0.085,
-    "mean_m": -0.003,
-    "median_m": 0.002,
+    "mean_m": -0.004,
+    "median_m": 0.001,
     "defined_fraction": 1.0
    },
    "translation_only_xinyi_minus_raw": {
@@ -199,15 +199,15 @@
     "p95": 0.99
    },
    "normal_angle_deg_conformed": {
-    "max": 2.9,
-    "p95": 1.36
+    "max": 2.47,
+    "p95": 1.34
    }
   },
   "all_sides": {
    "raw_official_minus_xinyi_median_m": -0.34,
    "raw_max_abs_step_m": 6.012,
-   "conformed_max_abs_step_m": 4.307,
-   "conformed_p95_abs_step_m": 0.419,
+   "conformed_max_abs_step_m": 4.294,
+   "conformed_p95_abs_step_m": 0.409,
    "accepted_xinyi_vertical_offset_m": 0.3419554143768595,
    "variants": "raw = official DEM untouched; conformed = 200 m blend band only (comparison, NOT shipped); shipped default = stitch (see xinyi_stitch: exact edge, watertight)",
    "collision": "shipped stitch mode: the new terrain has a hole exactly covered by the accepted Xinyi Landscape plus the stitch strip (gap/overlap area < 0.2 m2 of float32 noise over ~20 km of seam lines), so a collision trace crossing the edge always meets a surface with zero vertical step at the Xinyi edge. Unreal collision traces NOT TESTED."
@@ -222,62 +222,77 @@
    "edge_segments_present_as_mesh_edges": 2520,
    "hole_side_vertices": 510,
    "hole_side_vertices_not_equal_to_chunk_vertices": 0,
-   "gap_area_m2": 0.1243,
-   "overlap_area_m2": 0.1172,
+   "gap_area_m2": 0.1872,
+   "overlap_area_m2": 0.1879,
    "triangles": 3030,
-   "ring_vs_full_res_xinyi_edge_max_dev_m": 0.0
+   "ring_vs_full_res_xinyi_edge_max_dev_m": 0.0,
+   "stitch_edge": "full",
+   "skirt_faces": 5040,
+   "skirt_m": 2.0
   },
   "lod1": {
-   "edge_vertices": 1260,
+   "edge_vertices": 2520,
    "edge_vertices_missing": 0,
    "edge_height_max_err_m": 0.0,
-   "edge_segments": 1260,
-   "edge_segments_present_as_mesh_edges": 1260,
+   "edge_segments": 2520,
+   "edge_segments_present_as_mesh_edges": 2520,
    "hole_side_vertices": 260,
    "hole_side_vertices_not_equal_to_chunk_vertices": 0,
-   "gap_area_m2": 0.1197,
-   "overlap_area_m2": 0.1121,
-   "triangles": 1520,
-   "ring_vs_full_res_xinyi_edge_max_dev_m": 0.938
+   "gap_area_m2": 0.1872,
+   "overlap_area_m2": 0.1879,
+   "triangles": 2780,
+   "ring_vs_full_res_xinyi_edge_max_dev_m": 0.0,
+   "stitch_edge": "full",
+   "skirt_faces": 5040,
+   "skirt_m": 2.0
   },
   "lod2": {
-   "edge_vertices": 632,
+   "edge_vertices": 2520,
    "edge_vertices_missing": 0,
    "edge_height_max_err_m": 0.0,
-   "edge_segments": 632,
-   "edge_segments_present_as_mesh_edges": 632,
+   "edge_segments": 2520,
+   "edge_segments_present_as_mesh_edges": 2520,
    "hole_side_vertices": 134,
    "hole_side_vertices_not_equal_to_chunk_vertices": 0,
-   "gap_area_m2": 0.1412,
-   "overlap_area_m2": 0.1233,
-   "triangles": 766,
-   "ring_vs_full_res_xinyi_edge_max_dev_m": 4.281
+   "gap_area_m2": 0.1872,
+   "overlap_area_m2": 0.1879,
+   "triangles": 2654,
+   "ring_vs_full_res_xinyi_edge_max_dev_m": 0.0,
+   "stitch_edge": "full",
+   "skirt_faces": 5040,
+   "skirt_m": 2.0
   },
   "lod3": {
-   "edge_vertices": 316,
+   "edge_vertices": 2520,
    "edge_vertices_missing": 0,
    "edge_height_max_err_m": 0.0,
-   "edge_segments": 316,
-   "edge_segments_present_as_mesh_edges": 316,
+   "edge_segments": 2520,
+   "edge_segments_present_as_mesh_edges": 2520,
    "hole_side_vertices": 73,
    "hole_side_vertices_not_equal_to_chunk_vertices": 0,
-   "gap_area_m2": 0.1272,
-   "overlap_area_m2": 0.1289,
-   "triangles": 389,
-   "ring_vs_full_res_xinyi_edge_max_dev_m": 7.781
+   "gap_area_m2": 0.1872,
+   "overlap_area_m2": 0.1879,
+   "triangles": 2593,
+   "ring_vs_full_res_xinyi_edge_max_dev_m": 0.0,
+   "stitch_edge": "full",
+   "skirt_faces": 5040,
+   "skirt_m": 2.0
   },
   "lod4": {
-   "edge_vertices": 160,
+   "edge_vertices": 2520,
    "edge_vertices_missing": 0,
    "edge_height_max_err_m": 0.0,
-   "edge_segments": 160,
-   "edge_segments_present_as_mesh_edges": 160,
+   "edge_segments": 2520,
+   "edge_segments_present_as_mesh_edges": 2520,
    "hole_side_vertices": 42,
    "hole_side_vertices_not_equal_to_chunk_vertices": 0,
-   "gap_area_m2": 0.1458,
-   "overlap_area_m2": 0.1501,
-   "triangles": 202,
-   "ring_vs_full_res_xinyi_edge_max_dev_m": 19.73
+   "gap_area_m2": 0.1872,
+   "overlap_area_m2": 0.1879,
+   "triangles": 2562,
+   "ring_vs_full_res_xinyi_edge_max_dev_m": 0.0,
+   "stitch_edge": "full",
+   "skirt_faces": 5040,
+   "skirt_m": 2.0
   }
  },
  "sources": {
@@ -443,6 +458,9 @@
     "臺北市",
     "新北市"
    ],
+   "identity_nodes": false,
+   "stitch_edge": "full",
+   "stitch_skirt_m": 2.0,
    "extra": {}
   },
   "source": {
@@ -929,10 +947,10 @@
    "accepted_r16_sha256": "088c1b18c15a0b807348676e3568c99eb83b63444b0e7266078d673938f0594c",
    "accepted_vertical_offset_m": 0.3419554143768595,
    "outline_bounds_epsg3826": [
-    305549.95,
-    2768550.63,
-    308061.58,
-    2771048.59
+    305549.79,
+    2768550.57,
+    308061.51,
+    2771048.58
    ]
   },
   "cell_products": [

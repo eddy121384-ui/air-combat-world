@@ -1,0 +1,170 @@
+{
+ "taipei_wfs": {
+  "records": 373532,
+  "polygon_parts": 374238,
+  "strict_footprint_stage_failures": 10,
+  "source_rejected": 24,
+  "failing_pieces_non_largest": 1,
+  "failing_pieces_largest": 9,
+  "non_largest_area_m2": {
+   "max": 4.624929006229583e-06,
+   "median": 4.624929006229583e-06
+  },
+  "non_largest_mean_width_max_m": 7.585329570540097e-07,
+  "failure_reasons": {
+   "point_contact_hole_regularization_failed": 1,
+   "quantized_footprint_invalid_or_collapsed": 5,
+   "quantized_courtyard_not_preserved": 4
+  },
+  "largest_piece_failures": [
+   {
+    "id": "tp_building_height.125625",
+    "part": 0,
+    "repaired_part": 0,
+    "is_largest": true,
+    "pieces": 1,
+    "area_m2": 445.38257358656824,
+    "mean_width_m": 6.337999188811669,
+    "largest_area_m2": 445.38257358656824,
+    "repair_status": "repaired",
+    "failures": [
+     "point_contact_hole_regularization_failed:0:Polygon"
+    ]
+   },
+   {
+    "id": "tp_building_height.167294",
+    "part": 0,
+    "repaired_part": 0,
+    "is_largest": true,
+    "pieces": 1,
+    "area_m2": 17.152930101086277,
+    "mean_width_m": 1.4646303453711091,
+    "largest_area_m2": 17.152930101086277,
+    "repair_status": "ready",
+    "failures": [
+     "quantized_footprint_invalid_or_collapsed"
+    ]
+   },
+   {
+    "id": "tp_building_height.171665",
+    "part": 0,
+    "repaired_part": 0,
+    "is_largest": true,
+    "pieces": 1,
+    "area_m2": 283.90959301766816,
+    "mean_width_m": 4.988450732539554,
+    "largest_area_m2": 283.90959301766816,
+    "repair_status": "ready",
+    "failures": [
+     "quantized_courtyard_not_preserved"
+    ]
+   },
+   {
+    "id": "tp_building_height.179103",
+    "part": 0,
+    "repaired_part": 0,
+    "is_largest": true,
+    "pieces": 1,
+    "area_m2": 990.6186890971362,
+    "mean_width_m": 5.857759082985756,
+    "largest_area_m2": 990.6186890971362,
+    "repair_status": "repaired",
+    "failures": [
+     "quantized_footprint_invalid_or_collapsed"
+    ]
+   },
+   {
+    "id": "tp_building_height.286126",
+    "part": 0,
+    "repaired_part": 0,
+    "is_largest": true,
+    "pieces": 1,
+    "area_m2": 320.0594764498231,
+    "mean_width_m": 6.0048830576571985,
+    "largest_area_m2": 320.0594764498231,
+    "repair_status": "ready",
+    "failures": [
+     "quantized_courtyard_not_preserved"
+    ]
+   },
+   {
+    "id": "tp_building_height.301157",
+    "part": 0,
+    "repaired_part": 0,
+    "is_largest": true,
+    "pieces": 1,
+    "area_m2": 136.84875205339355,
+    "mean_width_m": 4.536818883024923,
+    "largest_area_m2": 136.84875205339355,
+    "repair_status": "ready",
+    "failures": [
+     "quantized_footprint_invalid_or_collapsed"
+    ]
+   },
+   {
+    "id": "tp_building_height.353579",
+    "part": 0,
+    "repaired_part": 0,
+    "is_largest": true,
+    "pieces": 1,
+    "area_m2": 13.064624099463657,
+    "mean_width_m": 1.8050083329580224,
+    "largest_area_m2": 13.064624099463657,
+    "repair_status": "ready",
+    "failures": [
+     "quantized_footprint_invalid_or_collapsed"
+    ]
+   },
+   {
+    "id": "tp_building_height.360929",
+    "part": 0,
+    "repaired_part": 0,
+    "is_largest": true,
+    "pieces": 1,
+    "area_m2": 586.1836027632135,
+    "mean_width_m": 4.9203873573924755,
+    "largest_area_m2": 586.1836027632135,
+    "repair_status": "repaired",
+    "failures": [
+     "quantized_courtyard_not_preserved"
+    ]
+   },
+   {
+    "id": "tp_building_height.361019",
+    "part": 0,
+    "repaired_part": 0,
+    "is_largest": true,
+    "pieces": 1,
+    "area_m2": 407.34703916315004,
+    "mean_width_m": 4.771578903856156,
+    "largest_area_m2": 407.34703916315004,
+    "repair_status": "ready",
+    "failures": [
+     "quantized_courtyard_not_preserved"
+    ]
+   }
+  ],
+  "non_largest_examples": [
+   {
+    "id": "tp_building_height.211054",
+    "part": 0,
+    "repaired_part": 1,
+    "is_largest": false,
+    "pieces": 2,
+    "area_m2": 4.624929006229583e-06,
+    "mean_width_m": 7.585329570540097e-07,
+    "largest_area_m2": 30.173251345506937,
+    "repair_status": "repaired",
+    "failures": [
+     "quantized_footprint_invalid_or_collapsed"
+    ]
+   }
+  ]
+ },
+ "xinyi_accepted_enu": {
+  "polygon_parts": 11128,
+  "strict_footprint_stage_failures": 0,
+  "failures": []
+ },
+ "seconds": 192.4
+}

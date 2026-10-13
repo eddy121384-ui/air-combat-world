@@ -1,0 +1,410 @@
+{
+ "cells_epsg3826": {
+  "A": [
+   304000,
+   2760000,
+   312000,
+   2768000
+  ],
+  "B": [
+   304000,
+   2768000,
+   312000,
+   2776000
+  ],
+  "joint": [
+   304000,
+   2760000,
+   312000,
+   2776000
+  ]
+ },
+ "policy": {
+  "ownership": "vertex-mean centroid -> 500 m tile -> cell (no clipping, no duplication)",
+  "providers": "Taipei WFS inside TW-TPE, Overture (2026-09-23.1 cached) outside; non-owner copy ledgered",
+  "fetch_halo_m": 0,
+  "fragment_policy": {
+   "enabled": false,
+   "max_area_m2": 0.01
+  },
+  "quantization_fallback": {
+   "enabled": true
+  },
+  "strict_gates": "unchanged (accepted prepare_footprint, strict_mesh_gate float64/float32/world)"
+ },
+ "blocked_source_km2": {
+  "meaning": "inside the cell, outside TW-TPE and outside the cached Overture bbox: no source this round",
+  "A": 11.76,
+  "B": 0.0,
+  "joint": 11.76
+ },
+ "gate": {
+  "A": false,
+  "B": true,
+  "joint": false
+ },
+ "build_failures": {
+  "A": [
+   {
+    "building_id": "tp_building_height.307096",
+    "provider": "taipei_wfs_tp_building_height",
+    "polygon_index": 1,
+    "height_m": 7.0,
+    "height_source": "1_bud_high",
+    "ground_elev_m": 20.0,
+    "status": "failed_pre_serialization",
+    "tile": "+169_+152",
+    "failures": [
+     "r4s0:float64:zero_area_triangles:2",
+     "r16s1:float64:mesh_exception:ValueError:extrude_geos_polygon requires a valid area-bearing Polygon"
+    ]
+   }
+  ],
+  "B": [],
+  "joint": [
+   {
+    "building_id": "tp_building_height.307096",
+    "provider": "taipei_wfs_tp_building_height",
+    "polygon_index": 1,
+    "height_m": 7.0,
+    "height_source": "1_bud_high",
+    "ground_elev_m": 20.0,
+    "status": "failed_pre_serialization",
+    "tile": "+169_+152",
+    "failures": [
+     "r4s0:float64:zero_area_triangles:2",
+     "r16s1:float64:mesh_exception:ValueError:extrude_geos_polygon requires a valid area-bearing Polygon"
+    ]
+   }
+  ]
+ },
+ "diagnostic_write_on_failure": {
+  "A": true,
+  "B": true,
+  "joint": true
+ },
+ "tiles": {
+  "A": 194,
+  "B": 241,
+  "joint": 435,
+  "union_independent": 435,
+  "joint_tiles_byte_identical_to_independent": 435,
+  "tile_sets_equal": true
+ },
+ "ownership": {
+  "emitted_parts": {
+   "A": 43000,
+   "B": 116567,
+   "joint": 159567
+  },
+  "parts_emitted_by_both_cells": 0,
+  "independent_union_equals_joint": true,
+  "duplicates_within_joint": 0,
+  "emitted_by_provider_joint": {
+   "overture:OpenStreetMap": 1051,
+   "overture:doi:10.5281/zenodo.8174931": 1899,
+   "taipei_wfs_tp_building_height": 156617
+  }
+ },
+ "ledger_status": {
+  "A": {
+   "emitted": 43000,
+   "excluded_provider_owner_overture": 751,
+   "excluded_provider_owner_wfs": 12261,
+   "excluded_underground": 2,
+   "failed_pre_serialization": 1,
+   "source_rejected": 3
+  },
+  "B": {
+   "emitted": 116567,
+   "excluded_provider_owner_wfs": 35726,
+   "excluded_suppressed_l3_xinyi": 11136,
+   "excluded_underground": 13,
+   "source_rejected": 5
+  },
+  "joint": {
+   "emitted": 159567,
+   "excluded_provider_owner_overture": 751,
+   "excluded_provider_owner_wfs": 47987,
+   "excluded_suppressed_l3_xinyi": 11136,
+   "excluded_underground": 15,
+   "failed_pre_serialization": 1,
+   "source_rejected": 8
+  }
+ },
+ "orphans": {
+  "A": 0,
+  "B": 0,
+  "joint": 0
+ },
+ "xinyi": {
+  "xinyi_wfs_ids_emitted": 0,
+  "suppressed_parts_joint": 11136
+ },
+ "strict_mode": {
+  "meaning": "parts the ACCEPTED path rejects = exactly the parts the fallback was invoked on",
+  "strict_failures_joint": 7,
+  "parts": [
+   {
+    "building_id": "tp_building_height.179103",
+    "polygon_index": 0,
+    "repaired_part": 0,
+    "accepted_failures": [
+     "quantized_footprint_invalid_or_collapsed"
+    ],
+    "pass": true,
+    "ledgered": null,
+    "reason": null,
+    "failures": null,
+    "source_area_m2": 990.6186890971362,
+    "area_delta_m2": -0.00047391620273629087,
+    "symmetric_difference_m2": 0.00012014806270599365,
+    "hausdorff_m": 0.27454521729646564,
+    "wide_removed_m2": 0.0,
+    "wide_added_m2": 0.0,
+    "holes_before": 3,
+    "holes_after": 3
+   },
+   {
+    "building_id": "tp_building_height.211054",
+    "polygon_index": 0,
+    "repaired_part": 1,
+    "accepted_failures": [
+     "quantized_footprint_invalid_or_collapsed"
+    ],
+    "pass": true,
+    "ledgered": true,
+    "reason": "repair_fragment_below_quantum",
+    "failures": null,
+    "source_area_m2": 4.624929006229583e-06,
+    "area_delta_m2": null,
+    "symmetric_difference_m2": null,
+    "hausdorff_m": null,
+    "wide_removed_m2": null,
+    "wide_added_m2": null,
+    "holes_before": null,
+    "holes_after": null
+   },
+   {
+    "building_id": "tp_building_height.286126",
+    "polygon_index": 0,
+    "repaired_part": 0,
+    "accepted_failures": [
+     "quantized_courtyard_not_preserved"
+    ],
+    "pass": true,
+    "ledgered": null,
+    "reason": null,
+    "failures": null,
+    "source_area_m2": 320.0594764498231,
+    "area_delta_m2": 0.0007821547630442183,
+    "symmetric_difference_m2": 0.0002899095416069031,
+    "hausdorff_m": 7.9647480808465e-05,
+    "wide_removed_m2": 0.0,
+    "wide_added_m2": 0.0,
+    "holes_before": 2,
+    "holes_after": 1
+   },
+   {
+    "building_id": "tp_building_height.301157",
+    "polygon_index": 0,
+    "repaired_part": 0,
+    "accepted_failures": [
+     "quantized_footprint_invalid_or_collapsed"
+    ],
+    "pass": true,
+    "ledgered": null,
+    "reason": null,
+    "failures": null,
+    "source_area_m2": 136.84875205339355,
+    "area_delta_m2": 0.00042257277803514626,
+    "symmetric_difference_m2": 0.0,
+    "hausdorff_m": 3.723512065293329,
+    "wide_removed_m2": 0.0,
+    "wide_added_m2": 0.0,
+    "holes_before": 0,
+    "holes_after": 0
+   },
+   {
+    "building_id": "tp_building_height.353579",
+    "polygon_index": 0,
+    "repaired_part": 0,
+    "accepted_failures": [
+     "quantized_footprint_invalid_or_collapsed"
+    ],
+    "pass": true,
+    "ledgered": null,
+    "reason": null,
+    "failures": null,
+    "source_area_m2": 13.064624099463657,
+    "area_delta_m2": -3.77357308423143e-05,
+    "symmetric_difference_m2": 0.0,
+    "hausdorff_m": 0.00071363783124848,
+    "wide_removed_m2": 0.0,
+    "wide_added_m2": 0.0,
+    "holes_before": 0,
+    "holes_after": 0
+   },
+   {
+    "building_id": "tp_building_height.360929",
+    "polygon_index": 0,
+    "repaired_part": 0,
+    "accepted_failures": [
+     "quantized_courtyard_not_preserved"
+    ],
+    "pass": true,
+    "ledgered": null,
+    "reason": null,
+    "failures": null,
+    "source_area_m2": 586.1836027632135,
+    "area_delta_m2": -0.000854512550176878,
+    "symmetric_difference_m2": 0.0,
+    "hausdorff_m": 1.5262226734233428,
+    "wide_removed_m2": 0.0,
+    "wide_added_m2": 0.0,
+    "holes_before": 4,
+    "holes_after": 1
+   },
+   {
+    "building_id": "tp_building_height.361019",
+    "polygon_index": 0,
+    "repaired_part": 0,
+    "accepted_failures": [
+     "quantized_courtyard_not_preserved"
+    ],
+    "pass": true,
+    "ledgered": null,
+    "reason": null,
+    "failures": null,
+    "source_area_m2": 407.34703916315004,
+    "area_delta_m2": 5.199011400236486e-05,
+    "symmetric_difference_m2": 0.0,
+    "hausdorff_m": 7.913636640053095e-05,
+    "wide_removed_m2": 0.0,
+    "wide_added_m2": 0.0,
+    "holes_before": 3,
+    "holes_after": 1
+   }
+  ]
+ },
+ "geometry": {
+  "A": {
+   "components": 0,
+   "triangles": 1593336,
+   "glb_bytes": 51927140,
+   "manifest_sha256": "7b3a36013b80b0df316dbee98517944e94b56b300ef1354ced7e6891bfadbded",
+   "runtime_s": 909.2
+  },
+  "B": {
+   "components": 116593,
+   "triangles": 4992296,
+   "glb_bytes": 153682176,
+   "manifest_sha256": "0fe52665b45de3f73cfd7572902ef49c8e303afe633d70a9901b725747313b52",
+   "runtime_s": 3309.9
+  },
+  "joint": {
+   "components": 0,
+   "triangles": 6585632,
+   "glb_bytes": 205609316,
+   "manifest_sha256": "fb8fe1b5a5fd56aa6f9dbde5472b28f7eb207450a236c9346ea82e9a428f81e1",
+   "runtime_s": 4209.4
+  }
+ },
+ "culling": {
+  "A": {
+   "culling_bounds_epsg3826": [
+    303931.85,
+    2761455.2,
+    312009.59,
+    2768019.96
+   ],
+   "overhang_m": {
+    "west": 68.15,
+    "south": -1455.2,
+    "east": 9.59,
+    "north": 19.96
+   },
+   "components_overhanging_cell": 72
+  },
+  "B": {
+   "culling_bounds_epsg3826": [
+    304000.0,
+    2767963.06,
+    312000.0,
+    2776008.07
+   ],
+   "overhang_m": {
+    "west": 0.0,
+    "south": 36.94,
+    "east": 0.0,
+    "north": 8.07
+   },
+   "components_overhanging_cell": 63
+  }
+ },
+ "loader_scenario": {
+  "V_1500_m": {
+   "cell_rectangle": {
+    "camera_positions": 154401,
+    "positions_with_visible_but_unloaded_building": 12,
+    "pass": false
+   },
+   "culling_bounds": {
+    "camera_positions": 154401,
+    "positions_with_visible_but_unloaded_building": 0,
+    "pass": true
+   }
+  },
+  "V_3000_m": {
+   "cell_rectangle": {
+    "camera_positions": 154401,
+    "positions_with_visible_but_unloaded_building": 16,
+    "pass": false
+   },
+   "culling_bounds": {
+    "camera_positions": 154401,
+    "positions_with_visible_but_unloaded_building": 0,
+    "pass": true
+   }
+  }
+ },
+ "provider_border": {
+  "border_band_m": 200.0,
+  "wfs_parts_in_band": 2684,
+  "overture_parts_in_band": 406,
+  "overlapping_pairs": 4,
+  "overlap_m2_total": 131.2,
+  "examples": [
+   {
+    "overture_id": "548d8e29-d7e1-4dfb-bee5-3d21a91a6a72",
+    "wfs_id": "tp_building_height.350591",
+    "overlap_m2": 85.1,
+    "overture_area_m2": 447.3,
+    "wfs_area_m2": 85.1
+   },
+   {
+    "overture_id": "548d8e29-d7e1-4dfb-bee5-3d21a91a6a72",
+    "wfs_id": "tp_building_height.350592",
+    "overlap_m2": 17.98,
+    "overture_area_m2": 447.3,
+    "wfs_area_m2": 18.0
+   },
+   {
+    "overture_id": "548d8e29-d7e1-4dfb-bee5-3d21a91a6a72",
+    "wfs_id": "tp_building_height.350589",
+    "overlap_m2": 17.04,
+    "overture_area_m2": 447.3,
+    "wfs_area_m2": 17.4
+   },
+   {
+    "overture_id": "548d8e29-d7e1-4dfb-bee5-3d21a91a6a72",
+    "wfs_id": "tp_building_height.350590",
+    "overlap_m2": 11.04,
+    "overture_area_m2": 447.3,
+    "wfs_area_m2": 11.0
+   }
+  ]
+ },
+ "mechanics_pass": true,
+ "pass": false
+}

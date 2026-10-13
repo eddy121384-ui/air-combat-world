@@ -120,10 +120,20 @@ def check_orientation(run):
             bad += int((fn[top][:, 1] <= 0).sum())
             n += int(top.sum())
             skirt_bad += int((np.abs(fn[~top][:, 1]) > 1e-6).sum())
-        else:
-            bad += int((fn[:, 1] <= 0).sum())
-            n += len(fn)
+        else:  # Xinyi stitch: surface faces first, then (v2) the vertical Xinyi-edge skirt
+            lod = int(f.stem.split("lod")[1])
+            nsurf = stitch_surface_faces(run, f.parent.name, lod, len(fn))
+            bad += int((fn[:nsurf, 1] <= 0).sum())
+            n += nsurf
+            skirt_bad += int((np.abs(fn[nsurf:, 1]) > 1e-6).sum())
     return {"faces_checked": n, "faces_not_facing_up": bad, "skirt_faces_not_vertical": skirt_bad}
+
+
+def stitch_surface_faces(run, cell, lod, nfaces):
+    for c in load_report(run)["chunks"]:
+        if c["cell"] == cell and c["chunk"] == "xinyi_stitch" and c["lod"] == lod:
+            return int(c["triangles_terrain"])
+    return nfaces
 
 
 def check_shard(joint1, joint2, cells_runs):
@@ -215,7 +225,15 @@ def check_stitch(run, xin):
         faces = np.asarray(m.faces)
         from scipy.spatial import cKDTree
         TOL = 0.005  # 5 mm: float32 GLB storage of positions a few km from the node origin
-        P, Pz, _ = xin.edge_ring(every=2 ** k)
+        info = next(c for c in load_report(run)["chunks"] if c["cell"] == cellX and c["chunk"] == "xinyi_stitch" and c["lod"] == k)
+        full = info.get("stitch_edge") == "full"
+        nsurf = int(info["triangles_terrain"])
+        skirt_faces = len(faces) - nsurf
+        keep = np.unique(faces[:nsurf])              # surface only: drop the v2 skirt-bottom vertices and skirt faces
+        remap = -np.ones(len(W), int)
+        remap[keep] = np.arange(len(keep))
+        W, faces = W[keep], remap[faces[:nsurf]]
+        P, Pz, _ = xin.edge_ring(every=1 if full else 2 ** k)
         tree = cKDTree(W[:, :2])
         dd, ii = tree.query(P)
         pidx = [int(i) if d <= TOL else None for d, i in zip(dd, ii)]
@@ -261,7 +279,7 @@ def check_stitch(run, xin):
         ov = (shapely.intersection(stitch, keptu).area + shapely.intersection(stitch, inner).area + shapely.intersection(keptu, inner).area)
         # edge deviation of this LOD's ring vs the full-resolution accepted edge (what a LOD0 Xinyi Landscape would show)
         P0, Pz0, _ = xin.edge_ring(every=1)
-        if k:
+        if k and not full:
             s0 = np.r_[0, np.cumsum(np.hypot(*np.diff(np.vstack([P0, P0[:1]]), axis=0).T))]
             z0 = np.r_[Pz0, Pz0[:1]]
             sk = s0[::2 ** k]
@@ -274,7 +292,8 @@ def check_stitch(run, xin):
                           "edge_segments": len(P), "edge_segments_present_as_mesh_edges": seg_ok,
                           "hole_side_vertices": q_n, "hole_side_vertices_not_equal_to_chunk_vertices": q_bad,
                           "gap_area_m2": round(gap, 4), "overlap_area_m2": round(ov, 4), "triangles": len(faces),
-                          "ring_vs_full_res_xinyi_edge_max_dev_m": round(dev, 3)}
+                          "ring_vs_full_res_xinyi_edge_max_dev_m": round(dev, 3),
+                          "stitch_edge": "full" if full else "decimated", "skirt_faces": int(skirt_faces), "skirt_m": info.get("skirt_m", 0.0)}
     return out
 
 
