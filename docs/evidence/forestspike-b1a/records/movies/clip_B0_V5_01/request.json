@@ -1,0 +1,47 @@
+{
+  "started_utc": "2026-10-13T09:42:41.7587411+00:00",
+  "scope": "Native MRQ deferred frames; disabled cinematic/game/forced-LOD overrides; not a performance run",
+  "args": [
+    "\"D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\ForestSpike\\ForestSpikeB1a.uproject\"",
+    "/Game/ForestSpike/B1a_20261013a/Perf/L_FSB1a_20261013a_B0_V5",
+    "-game",
+    "-windowed",
+    "-RenderOffscreen",
+    "-ResX=1920",
+    "-ResY=1080",
+    "-ForceRes",
+    "-nosound",
+    "-nosplash",
+    "-NoScreenMessages",
+    "-unattended",
+    "-benchmark",
+    "-fps=60",
+    "-MoviePipelineConfig=/Game/ForestSpike/B1a_20261013a/Movies/MRQ_clip_B0_V5_01.MRQ_clip_B0_V5_01",
+    "-LevelSequence=/Game/ForestSpike/B1a_20261013a/Perf/LS_L_FSB1a_20261013a_B0_V5.LS_L_FSB1a_20261013a_B0_V5",
+    "-MoviePipelineLocalExecutorClass=/Script/MovieRenderPipelineCore.MoviePipelineInProcessExecutor",
+    "-abslog=\"D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\ForestSpike\\Saved\\ForestSpike\\b1a\\movies\\clip_B0_V5_01\\engine.log\""
+  ],
+  "tag": "clip_B0_V5_01",
+  "config": {
+    "tag": "clip_B0_V5_01",
+    "config": "/Game/ForestSpike/B1a_20261013a/Movies/MRQ_clip_B0_V5_01.MRQ_clip_B0_V5_01",
+    "map": "/Game/ForestSpike/B1a_20261013a/Perf/L_FSB1a_20261013a_B0_V5",
+    "sequence": "/Game/ForestSpike/B1a_20261013a/Perf/LS_L_FSB1a_20261013a_B0_V5.LS_L_FSB1a_20261013a_B0_V5",
+    "group": "B0",
+    "path_id": "V5",
+    "frames": 401,
+    "res": [
+      1920,
+      1080
+    ],
+    "game_overrides_enabled": false,
+    "force_lod_zero": false,
+    "cinematic_quality": false,
+    "spatial_samples": 1,
+    "temporal_samples": 1,
+    "aa_override": false,
+    "warm_hold_in_sequence": 120,
+    "output_directory": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\ForestSpike\\Saved\\ForestSpike\\b1a\\movies\\clip_B0_V5_01\\frames",
+    "scope": "Matched native short clip; complete flight independently verified in game CSV. V3 t14..20, V5 az0..120; same initial 120-frame warm hold."
+  }
+}

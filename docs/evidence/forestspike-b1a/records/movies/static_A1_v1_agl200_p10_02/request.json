@@ -1,0 +1,77 @@
+{
+  "args": [
+    "\"D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\ForestSpike\\ForestSpikeB1a.uproject\"",
+    "/Game/ForestSpike/B1a_20261013a/NativeStatic/L_static_A1_v1_agl200_p10_02",
+    "-game",
+    "-windowed",
+    "-RenderOffscreen",
+    "-ResX=1920",
+    "-ResY=1080",
+    "-ForceRes",
+    "-nosound",
+    "-nosplash",
+    "-NoScreenMessages",
+    "-unattended",
+    "-benchmark",
+    "-fps=60",
+    "-MoviePipelineConfig=/Game/ForestSpike/B1a_20261013a/Movies/MRQ_static_A1_v1_agl200_p10_02.MRQ_static_A1_v1_agl200_p10_02",
+    "-LevelSequence=/Game/ForestSpike/B1a_20261013a/NativeStatic/LS_static_A1_v1_agl200_p10_02.LS_static_A1_v1_agl200_p10_02",
+    "-MoviePipelineLocalExecutorClass=/Script/MovieRenderPipelineCore.MoviePipelineInProcessExecutor",
+    "-abslog=\"D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\ForestSpike\\Saved\\ForestSpike\\b1a\\movies\\static_A1_v1_agl200_p10_02\\engine.log\""
+  ],
+  "scope": "Native MRQ deferred frames; disabled cinematic/game/forced-LOD overrides; not a performance run",
+  "config": {
+    "tag": "static_A1_v1_agl200_p10_02",
+    "config": "/Game/ForestSpike/B1a_20261013a/Movies/MRQ_static_A1_v1_agl200_p10_02.MRQ_static_A1_v1_agl200_p10_02",
+    "map": "/Game/ForestSpike/B1a_20261013a/NativeStatic/L_static_A1_v1_agl200_p10_02",
+    "sequence": "/Game/ForestSpike/B1a_20261013a/NativeStatic/LS_static_A1_v1_agl200_p10_02.LS_static_A1_v1_agl200_p10_02",
+    "group": "A1",
+    "path_id": "v1_agl200_p10",
+    "frames": 184,
+    "res": [
+      1920,
+      1080
+    ],
+    "game_overrides_enabled": false,
+    "force_lod_zero": false,
+    "cinematic_quality": false,
+    "spatial_samples": 1,
+    "temporal_samples": 1,
+    "aa_override": false,
+    "warm_hold_in_sequence": 120,
+    "output_directory": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\ForestSpike\\Saved\\ForestSpike\\b1a\\movies\\static_A1_v1_agl200_p10_02\\frames",
+    "pose": {
+      "id": "v1_agl200_p10",
+      "group": "V1",
+      "eye_enu": [
+        -420.0,
+        -420.0,
+        310.049
+      ],
+      "agl_m": 200,
+      "heading_deg": 45.0,
+      "pitch_deg": -10.0,
+      "fov_h_deg": 91.4928,
+      "fov_v_deg": 60.0
+    },
+    "before_close_bindings": [
+      {
+        "name": "FS_PerfCamera",
+        "objects": [
+          "/Game/ForestSpike/B1a_20261013a/NativeStatic/L_static_A1_v1_agl200_p10_02.L_static_A1_v1_agl200_p10_02:PersistentLevel.CameraActor_0"
+        ]
+      }
+    ],
+    "scope": "Native static pipeline alignment follow-up: first120 fixed warm output frames; 120..183 are64 consecutive static frames. No shader/material/lighting/LOD change.",
+    "after_reopen_bindings": [
+      {
+        "name": "FS_PerfCamera",
+        "objects": [
+          "/Game/ForestSpike/B1a_20261013a/NativeStatic/L_static_A1_v1_agl200_p10_02.L_static_A1_v1_agl200_p10_02:PersistentLevel.CameraActor_0"
+        ]
+      }
+    ]
+  },
+  "started_utc": "2026-10-13T16:51:12.3269345+00:00",
+  "tag": "static_A1_v1_agl200_p10_02"
+}

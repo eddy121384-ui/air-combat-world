@@ -1,0 +1,7 @@
+{
+  "status": "PASS_FS_B1A_80_CAPTURE_SWEEP",
+  "completed_utc": "2026-10-13T09:16:33.626293+00:00",
+  "measured_harness_unchanged": true,
+  "plan_commit": "ea36b5632d72fbba6f5609c779dd343803b38f61",
+  "scope": "Capture/motion integrity only; post-sweep statistics and visual acceptance separate."
+}

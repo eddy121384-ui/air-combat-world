@@ -1,0 +1,4 @@
+{
+  "status": "FAIL_FS_B1A_COVERAGE_ID_CALIBRATION",
+  "reason": "ID codes invalid (0% exact). IdGamma=1 applied inverse sRGB twice on this LDR host; preserved B0 coverage spec uses host-calibrated IdGamma=0. A code147 is misclassified, B code222 accidentally rounds to B; neither ratio accepted. No shader change."
+}

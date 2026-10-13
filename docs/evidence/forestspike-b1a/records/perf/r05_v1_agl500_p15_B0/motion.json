@@ -1,0 +1,17 @@
+{
+  "status": "PASS_FS_B1A_MOTION",
+  "csv_sha256": "d66572e03b2a696b81bba09727f34c967c5cb8b9095ced748b9a99d2e8eeb217",
+  "group": "B0",
+  "view": "v1_agl500_p15",
+  "errors": [],
+  "host_scope": "Intel UHD 770 only",
+  "frames": 601,
+  "invalid_boot_frames": 1,
+  "startup_sequence_frame": 0,
+  "warm_displacement_m": 1.5999999959603883e-05,
+  "max_errors": {
+    "position_error_m": 1.5999999959603883e-05,
+    "forward_error_deg": 0.0007876588247205569,
+    "up_error_deg": 0.000611179098985218
+  }
+}

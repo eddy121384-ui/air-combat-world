@@ -1,0 +1,5 @@
+{
+  "status": "FAIL_FS_B1A_MOVIE_CONFIGS",
+  "configs": [],
+  "error": "Traceback (most recent call last):\n  File \"D:/Users/EDDY/Documents/GitHub/air-combat-world/adapters/unreal/forestspike/fs_b1a_movie_configs.py\", line 29, in <module>\n    cv.set_editor_property('console_variables',{'foliage.ForceLOD':-1.,'r.ForceLOD':-1.,'foliage.LODDistanceScale':1.,'foliage.RandomLODRange':0.,'r.ViewDistanceScale':1.,'r.ScreenPercentage':100.,'r.MotionBlurQuality':0.,'r.RayTracing':0.})\nException: MoviePipelineConsoleVariableSetting: Failed to find property 'console_variables' for attribute 'console_variables' on 'MoviePipelineConsoleVariableSetting'\n"
+}

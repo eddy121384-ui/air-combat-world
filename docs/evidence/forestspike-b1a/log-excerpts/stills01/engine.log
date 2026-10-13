@@ -1,0 +1,689 @@
+LogWindows: Started CrashReportClient (pid=5288)
+LogCsvProfiler: Display: Metadata set : platform="Windows"
+LogCsvProfiler: Display: Metadata set : config="Development"
+LogCsvProfiler: Display: Metadata set : buildversion="++UE5+Release-5.8-CL-55116800"
+LogCsvProfiler: Display: Metadata set : engineversion="5.8.0-55116800+++UE5+Release-5.8"
+LogCsvProfiler: Display: Metadata set : enginereleaseversion="5.8.0"
+LogCsvProfiler: Display: Metadata set : os="Windows 11 (25H2) [10.0.26200.9457] "
+LogCsvProfiler: Display: Metadata set : cpu="GenuineIntel|12th Gen Intel(R) Core(TM) i7-12700"
+LogCsvProfiler: Display: Metadata set : pgoenabled="0"
+LogCsvProfiler: Display: Metadata set : pgoprofilingenabled="0"
+LogCsvProfiler: Display: Metadata set : ltoenabled="0"
+LogCsvProfiler: Display: Metadata set : asan="0"
+LogCsvProfiler: Display: Metadata set : mergedmodules="0"
+LogCsvProfiler: Display: Metadata set : compacttset="0"
+LogCsvProfiler: Display: Metadata set : commandline="" D:\Users\EDDY\Documents\GitHub\air-combat-world\unreal\ForestSpike\ForestSpike.uproject -ExecutePythonScript=D:\Users\EDDY\Documents\GitHub\air-combat-world\adapters\unreal\forestspike\fs_b1a_stills.py -unattended -nopause -nosound -abslog=D:\Users\EDDY\Documents\GitHub\air-combat-world\unreal\ForestSpike\Saved\ForestSpike\b1a\stills01\engine.log""
+LogCsvProfiler: Display: Metadata set : loginid="0e4fcd404acde9fd84f51499fbe8dfcc"
+LogCsvProfiler: Display: Metadata set : llm="0"
+LogCsvProfiler: Display: Metadata set : zenstreaming="0"
+LogCsvProfiler: Display: Metadata set : systemresolution.resx="1280"
+LogCsvProfiler: Display: Metadata set : systemresolution.resy="720"
+LogInit: Session CrashGUID >====================================================
+         Session CrashGUID >   UECC-Windows-4AC16DDB4DE140AA043599B751F97659
+         Session CrashGUID >====================================================
+LogConfig: Applying CVar settings from Section [/Script/CompositeCore.CompositeCorePluginSettings] File [Engine]
+LogConfig: Applying CVar settings from Section [/Script/RenderDocPlugin.RenderDocPluginSettings] File [Engine]
+LogModuleManager: InternalLoadLibrary: 'CrashDiagnostics' ('C:/Program Files/Epic Games/UE_5.8/Engine/Plugins/Experimental/EditorPerformance/Binaries/Win64/UnrealEditor-CrashDiagnostics.dll')
+[2026.10.13-09.44.19:471][  0]LogConfig: Applying CVar settings from Section [/Script/Engine.RendererSettings] File [Engine]
+[2026.10.13-09.44.19:471][  0]LogConfig: Set CVar [[r.GPUCrashDebugging:0]]
+[2026.10.13-09.44.19:471][  0]LogConfig: Applying CVar settings from Section [/Script/Engine.RendererOverrideSettings] File [Engine]
+[2026.10.13-09.44.19:471][  0]LogConfig: Applying CVar settings from Section [/Script/Engine.StreamingSettings] File [Engine]
+[2026.10.13-09.44.19:471][  0]LogConfig: Applying CVar settings from Section [/Script/Engine.GarbageCollectionSettings] File [Engine]
+[2026.10.13-09.44.19:471][  0]LogConfig: Applying CVar settings from Section [/Script/Engine.NetworkSettings] File [Engine]
+[2026.10.13-09.44.19:471][  0]LogConfig: Applying CVar settings from Section [/Script/UnrealEd.CookerSettings] File [Engine]
+[2026.10.13-09.44.19:475][  0]LogCsvProfiler: Display: Metadata set : systemresolution.resx="1920"
+[2026.10.13-09.44.19:475][  0]LogCsvProfiler: Display: Metadata set : systemresolution.resy="1080"
+[2026.10.13-09.44.19:476][  0]LogConfig: Applying CVar settings from Section [ViewDistanceQuality@3] File [Scalability]
+[2026.10.13-09.44.19:476][  0]LogConfig: Applying CVar settings from Section [AntiAliasingQuality@3] File [Scalability]
+[2026.10.13-09.44.19:476][  0]LogConfig: Applying CVar settings from Section [ShadowQuality@3] File [Scalability]
+[2026.10.13-09.44.19:476][  0]LogConfig: Set CVar [[r.Shadow.MaxResolution:2048]]
+[2026.10.13-09.44.19:476][  0]LogConfig: Set CVar [[r.Shadow.MaxCSMResolution:2048]]
+[2026.10.13-09.44.19:476][  0]LogConfig: Set CVar [[r.Shadow.PreShadowResolutionFactor:1.0]]
+[2026.10.13-09.44.19:476][  0]LogConfig: Set CVar [[r.Shadow.Virtual.ResolutionLodBiasDirectional:-1.5]]
+[2026.10.13-09.44.19:476][  0]LogConfig: Set CVar [[r.Shadow.Virtual.ResolutionLodBiasDirectionalMoving:-1.5]]
+[2026.10.13-09.44.19:476][  0]LogConfig: Set CVar [[r.Shadow.Virtual.ResolutionLodBiasLocal:0.0]]
+[2026.10.13-09.44.19:476][  0]LogConfig: Set CVar [[r.Shadow.Virtual.ResolutionLodBiasLocalMoving:1.0]]
+[2026.10.13-09.44.19:477][  0]LogConfig: Applying CVar settings from Section [GlobalIlluminationQuality@3] File [Scalability]
+[2026.10.13-09.44.19:477][  0]LogConfig: Set CVar [[r.LumenScene.SurfaceCache.CardMinResolution:2]]
+[2026.10.13-09.44.19:477][  0]LogConfig: Set CVar [[r.LumenScene.SurfaceCache.CardMaxResolution:512]]
+[2026.10.13-09.44.19:477][  0]LogConfig: Set CVar [[r.LumenScene.Radiosity.HemisphereProbeResolution:4]]
+[2026.10.13-09.44.19:477][  0]LogConfig: Set CVar [[r.Lumen.ScreenProbeGather.RadianceCache.ProbeResolution:32]]
+[2026.10.13-09.44.19:477][  0]LogConfig: Set CVar [[r.Lumen.ScreenProbeGather.TracingOctahedronResolution:8]]
+[2026.10.13-09.44.19:477][  0]LogConfig: Set CVar [[r.Lumen.ScreenProbeGather.FullResolutionJitterWidth:1]]
+[2026.10.13-09.44.19:477][  0]LogConfig: Set CVar [[r.Lumen.TranslucencyVolume.TracingOctahedronResolution:3]]
+[2026.10.13-09.44.19:477][  0]LogConfig: Set CVar [[r.Lumen.TranslucencyVolume.RadianceCache.ProbeResolution:8]]
+[2026.10.13-09.44.19:477][  0]LogConfig: Set CVar [[r.Lumen.TranslucencyVolume.RadianceCache.GridResolution:24]]
+[2026.10.13-09.44.19:477][  0]LogConfig: Applying CVar settings from Section [ReflectionQuality@3] File [Scalability]
+[2026.10.13-09.44.19:477][  0]LogConfig: Applying CVar settings from Section [PostProcessQuality@3] File [Scalability]
+[2026.10.13-09.44.19:477][  0]LogConfig: Set CVar [[r.DOF.Gather.ResolutionDivisor:2         ; lower gathering resolution]]
+[2026.10.13-09.44.19:478][  0]LogConfig: Applying CVar settings from Section [TextureQuality@3] File [Scalability]
+[2026.10.13-09.44.19:478][  0]LogConfig: Applying CVar settings from Section [EffectsQuality@3] File [Scalability]
+[2026.10.13-09.44.19:478][  0]LogConfig: Set CVar [[r.SkyAtmosphere.AerialPerspectiveLUT.DepthResolution:16.0]]
+[2026.10.13-09.44.19:478][  0]LogConfig: Set CVar [[r.HeterogeneousVolumes.Shadows.Resolution:512]]
+[2026.10.13-09.44.19:478][  0]LogConfig: Applying CVar settings from Section [FoliageQuality@3] File [Scalability]
+[2026.10.13-09.44.19:478][  0]LogConfig: Applying CVar settings from Section [ShadingQuality@3] File [Scalability]
+[2026.10.13-09.44.19:478][  0]LogConfig: Applying CVar settings from Section [LandscapeQuality@3] File [Scalability]
+[2026.10.13-09.44.19:480][  0]LogDeviceProfileManager: Pushing Device Profile CVar: [[UI.SlateSDFText.ResolutionLevel:2 -> 2]]
+[2026.10.13-09.44.19:480][  0]LogConfig: Applying CVar settings from Section [Startup] File [../../../Engine/Config/ConsoleVariables.ini]
+[2026.10.13-09.44.19:481][  0]LogConfig: Applying CVar settings from Section [Startup_Windows] File [../../../Engine/Config/ConsoleVariables.ini]
+[2026.10.13-09.44.19:481][  0]LogConfig: Applying CVar settings from Section [ConsoleVariables] File [Engine]
+[2026.10.13-09.44.19:481][  0]LogConfig: Applying CVar settings from Section [ConsoleVariables] File [D:/Users/EDDY/Documents/GitHub/air-combat-world/unreal/ForestSpike/Saved/Config/WindowsEditor/Editor.ini]
+[2026.10.13-09.44.19:513][  0]LogCsvProfiler: Display: Metadata set : extradevelopmentmemorymb="0"
+[2026.10.13-09.44.27:987][  0]LogCsvProfiler: Display: Metadata set : verbatimrhiname="D3D12"
+[2026.10.13-09.44.27:987][  0]LogCsvProfiler: Display: Metadata set : rhiname="D3D12"
+[2026.10.13-09.44.27:987][  0]LogCsvProfiler: Display: Metadata set : rhifeaturelevel="SM5"
+[2026.10.13-09.44.27:987][  0]LogCsvProfiler: Display: Metadata set : shaderplatform="PCD3D_SM5"
+[2026.10.13-09.44.27:987][  0]LogCsvProfiler: Display: Metadata set : gpu="Intel(R) UHD Graphics 770"
+[2026.10.13-09.44.27:987][  0]LogCsvProfiler: Display: Metadata set : gpudriver="31.0.101.4502"
+[2026.10.13-09.44.35:353][  0]LogCsvProfiler: Display: Metadata set : deviceprofile="WindowsEditor"
+[2026.10.13-09.44.36:435][  0]LogConfig: Applying CVar settings from Section [/Script/CQTest.CQTestSettings] File [Engine]
+[2026.10.13-09.44.38:302][  0]LogConfig: Applying CVar settings from Section [/Script/PCG.PCGEngineSettings] File [Engine]
+[2026.10.13-09.44.40:430][  0]LogConfig: Applying CVar settings from Section [/Script/NNEDenoiser.NNEDenoiserSettings] File [Engine]
+[2026.10.13-09.44.42:565][  0]LogCsvProfiler: Display: Metadata set : largeworldcoordinates="1"
+[2026.10.13-09.44.44:462][  0]LogCsvProfiler: Display: Metadata set : raytracing="0"
+[2026.10.13-09.44.47:911][  0]LogCsvProfiler: Display: Metadata set : streamingpoolsizemb="1000"
+[2026.10.13-09.44.52:004][  2]LogPython: FS_B1A_TREE_BEGIN v1_agl50_p15_A0_visual
+[2026.10.13-09.44.52:044][  2]LogPython: FS_B1A_TREE_END v1_agl50_p15_A0_visual
+[2026.10.13-09.44.52:165][  2]LogPython: FS_B1A_TREE_BEGIN v1_agl50_p15_A0_visual
+[2026.10.13-09.44.52:232][  2]LogPython: FS_B1A_TREE_END v1_agl50_p15_A0_visual
+[2026.10.13-09.44.52:241][  2]LogPython: FS_B1A_TREE_BEGIN v1_agl50_p15_A0_visual
+[2026.10.13-09.44.52:316][  2]LogPython: FS_B1A_TREE_END v1_agl50_p15_A0_visual
+[2026.10.13-09.44.52:446][  2]LogPython: FS_B1A_TREE_BEGIN v1_agl50_p15_A0_visual
+[2026.10.13-09.44.52:510][  2]LogPython: FS_B1A_TREE_END v1_agl50_p15_A0_visual
+[2026.10.13-09.44.54:715][ 45]LogPython: FS_B1A_RENDER_BEGIN v1_agl50_p15_A0_visual
+[2026.10.13-09.45.32:901][177]LogPython: FS_B1A_RENDER_END v1_agl50_p15_A0_visual
+[2026.10.13-09.45.32:909][178]LogPython: FS_B1A_TREE_BEGIN v1_agl50_p15_A1_visual
+[2026.10.13-09.45.32:950][178]LogPython: FS_B1A_TREE_END v1_agl50_p15_A1_visual
+[2026.10.13-09.45.32:991][178]LogPython: FS_B1A_TREE_BEGIN v1_agl50_p15_A1_visual
+[2026.10.13-09.45.33:032][178]LogPython: FS_B1A_TREE_END v1_agl50_p15_A1_visual
+[2026.10.13-09.45.34:902][224]LogPython: FS_B1A_RENDER_BEGIN v1_agl50_p15_A1_visual
+[2026.10.13-09.46.13:226][356]LogPython: FS_B1A_RENDER_END v1_agl50_p15_A1_visual
+[2026.10.13-09.46.14:370][357]LogPython: FS_B1A_TREE_BEGIN v1_agl50_p15_B0_visual
+[2026.10.13-09.46.14:402][357]LogPython: FS_B1A_TREE_END v1_agl50_p15_B0_visual
+[2026.10.13-09.46.16:300][408]LogPython: FS_B1A_RENDER_BEGIN v1_agl50_p15_B0_visual
+[2026.10.13-09.46.55:446][540]LogPython: FS_B1A_RENDER_END v1_agl50_p15_B0_visual
+[2026.10.13-09.46.55:455][541]LogPython: FS_B1A_TREE_BEGIN v1_agl50_p15_B1_visual
+[2026.10.13-09.46.55:487][541]LogPython: FS_B1A_TREE_END v1_agl50_p15_B1_visual
+[2026.10.13-09.46.57:375][592]LogPython: FS_B1A_RENDER_BEGIN v1_agl50_p15_B1_visual
+[2026.10.13-09.47.37:584][724]LogPython: FS_B1A_RENDER_END v1_agl50_p15_B1_visual
+[2026.10.13-09.47.38:780][725]LogPython: FS_B1A_TREE_BEGIN v1_agl50_p15_A1_id
+[2026.10.13-09.47.38:822][725]LogPython: FS_B1A_TREE_END v1_agl50_p15_A1_id
+[2026.10.13-09.47.40:423][776]LogPython: FS_B1A_RENDER_BEGIN v1_agl50_p15_A1_id
+[2026.10.13-09.47.41:019][785]LogPython: FS_B1A_RENDER_END v1_agl50_p15_A1_id
+[2026.10.13-09.47.42:162][786]LogPython: FS_B1A_TREE_BEGIN v1_agl50_p15_A1_lod
+[2026.10.13-09.47.42:162][786]LogPython: FS_B1A_TREE_END v1_agl50_p15_A1_lod
+[2026.10.13-09.47.43:334][837]LogPython: FS_B1A_RENDER_BEGIN v1_agl50_p15_A1_lod
+[2026.10.13-09.47.43:642][846]LogPython: FS_B1A_RENDER_END v1_agl50_p15_A1_lod
+[2026.10.13-09.47.44:806][847]LogPython: FS_B1A_TREE_BEGIN v1_agl50_p15_B1_id
+[2026.10.13-09.47.44:845][847]LogPython: FS_B1A_TREE_END v1_agl50_p15_B1_id
+[2026.10.13-09.47.46:618][898]LogPython: FS_B1A_RENDER_BEGIN v1_agl50_p15_B1_id
+[2026.10.13-09.47.47:274][907]LogPython: FS_B1A_RENDER_END v1_agl50_p15_B1_id
+[2026.10.13-09.47.49:082][908]LogPython: FS_B1A_TREE_BEGIN v1_agl50_p15_B1_lod
+[2026.10.13-09.47.49:128][908]LogPython: FS_B1A_TREE_END v1_agl50_p15_B1_lod
+[2026.10.13-09.47.50:318][959]LogPython: FS_B1A_RENDER_BEGIN v1_agl50_p15_B1_lod
+[2026.10.13-09.47.50:761][968]LogPython: FS_B1A_RENDER_END v1_agl50_p15_B1_lod
+[2026.10.13-09.47.52:191][969]LogPython: FS_B1A_TREE_BEGIN v1_agl200_p10_A0_visual
+[2026.10.13-09.47.52:236][969]LogPython: FS_B1A_TREE_END v1_agl200_p10_A0_visual
+[2026.10.13-09.47.54:328][ 20]LogPython: FS_B1A_RENDER_BEGIN v1_agl200_p10_A0_visual
+[2026.10.13-09.48.34:126][152]LogPython: FS_B1A_RENDER_END v1_agl200_p10_A0_visual
+[2026.10.13-09.48.34:135][153]LogPython: FS_B1A_TREE_BEGIN v1_agl200_p10_A1_visual
+[2026.10.13-09.48.34:178][153]LogPython: FS_B1A_TREE_END v1_agl200_p10_A1_visual
+[2026.10.13-09.48.36:054][204]LogPython: FS_B1A_RENDER_BEGIN v1_agl200_p10_A1_visual
+[2026.10.13-09.49.15:802][336]LogPython: FS_B1A_RENDER_END v1_agl200_p10_A1_visual
+[2026.10.13-09.49.17:112][337]LogPython: FS_B1A_TREE_BEGIN v1_agl200_p10_B0_visual
+[2026.10.13-09.49.17:144][337]LogPython: FS_B1A_TREE_END v1_agl200_p10_B0_visual
+[2026.10.13-09.49.18:954][388]LogPython: FS_B1A_RENDER_BEGIN v1_agl200_p10_B0_visual
+[2026.10.13-09.49.57:925][520]LogPython: FS_B1A_RENDER_END v1_agl200_p10_B0_visual
+[2026.10.13-09.49.57:933][521]LogPython: FS_B1A_TREE_BEGIN v1_agl200_p10_B1_visual
+[2026.10.13-09.49.57:967][521]LogPython: FS_B1A_TREE_END v1_agl200_p10_B1_visual
+[2026.10.13-09.49.59:773][572]LogPython: FS_B1A_RENDER_BEGIN v1_agl200_p10_B1_visual
+[2026.10.13-09.50.39:563][704]LogPython: FS_B1A_RENDER_END v1_agl200_p10_B1_visual
+[2026.10.13-09.50.40:921][705]LogPython: FS_B1A_TREE_BEGIN v1_agl200_p10_A1_id
+[2026.10.13-09.50.40:962][705]LogPython: FS_B1A_TREE_END v1_agl200_p10_A1_id
+[2026.10.13-09.50.42:479][756]LogPython: FS_B1A_RENDER_BEGIN v1_agl200_p10_A1_id
+[2026.10.13-09.50.43:091][765]LogPython: FS_B1A_RENDER_END v1_agl200_p10_A1_id
+[2026.10.13-09.50.44:261][766]LogPython: FS_B1A_TREE_BEGIN v1_agl200_p10_A1_lod
+[2026.10.13-09.50.44:301][766]LogPython: FS_B1A_TREE_END v1_agl200_p10_A1_lod
+[2026.10.13-09.50.45:093][817]LogPython: FS_B1A_RENDER_BEGIN v1_agl200_p10_A1_lod
+[2026.10.13-09.50.45:377][826]LogPython: FS_B1A_RENDER_END v1_agl200_p10_A1_lod
+[2026.10.13-09.50.46:560][827]LogPython: FS_B1A_TREE_BEGIN v1_agl200_p10_B1_id
+[2026.10.13-09.50.46:591][827]LogPython: FS_B1A_TREE_END v1_agl200_p10_B1_id
+[2026.10.13-09.50.48:021][878]LogPython: FS_B1A_RENDER_BEGIN v1_agl200_p10_B1_id
+[2026.10.13-09.50.48:624][887]LogPython: FS_B1A_RENDER_END v1_agl200_p10_B1_id
+[2026.10.13-09.50.49:845][888]LogPython: FS_B1A_TREE_BEGIN v1_agl200_p10_B1_lod
+[2026.10.13-09.50.49:878][888]LogPython: FS_B1A_TREE_END v1_agl200_p10_B1_lod
+[2026.10.13-09.50.50:763][939]LogPython: FS_B1A_RENDER_BEGIN v1_agl200_p10_B1_lod
+[2026.10.13-09.50.51:060][948]LogPython: FS_B1A_RENDER_END v1_agl200_p10_B1_lod
+[2026.10.13-09.50.52:323][949]LogPython: FS_B1A_TREE_BEGIN v1_agl500_p15_A0_visual
+[2026.10.13-09.50.52:369][949]LogPython: FS_B1A_TREE_END v1_agl500_p15_A0_visual
+[2026.10.13-09.50.54:142][  0]LogPython: FS_B1A_RENDER_BEGIN v1_agl500_p15_A0_visual
+[2026.10.13-09.51.33:962][132]LogPython: FS_B1A_RENDER_END v1_agl500_p15_A0_visual
+[2026.10.13-09.51.33:970][133]LogPython: FS_B1A_TREE_BEGIN v1_agl500_p15_A1_visual
+[2026.10.13-09.51.34:013][133]LogPython: FS_B1A_TREE_END v1_agl500_p15_A1_visual
+[2026.10.13-09.51.35:916][184]LogPython: FS_B1A_RENDER_BEGIN v1_agl500_p15_A1_visual
+[2026.10.13-09.52.19:598][316]LogPython: FS_B1A_RENDER_END v1_agl500_p15_A1_visual
+[2026.10.13-09.52.20:743][317]LogPython: FS_B1A_TREE_BEGIN v1_agl500_p15_B0_visual
+[2026.10.13-09.52.20:777][317]LogPython: FS_B1A_TREE_END v1_agl500_p15_B0_visual
+[2026.10.13-09.52.22:443][368]LogPython: FS_B1A_RENDER_BEGIN v1_agl500_p15_B0_visual
+[2026.10.13-09.53.02:095][500]LogPython: FS_B1A_RENDER_END v1_agl500_p15_B0_visual
+[2026.10.13-09.53.02:103][501]LogPython: FS_B1A_TREE_BEGIN v1_agl500_p15_B1_visual
+[2026.10.13-09.53.02:146][501]LogPython: FS_B1A_TREE_END v1_agl500_p15_B1_visual
+[2026.10.13-09.53.03:907][552]LogPython: FS_B1A_RENDER_BEGIN v1_agl500_p15_B1_visual
+[2026.10.13-09.53.43:167][684]LogPython: FS_B1A_RENDER_END v1_agl500_p15_B1_visual
+[2026.10.13-09.53.44:266][685]LogPython: FS_B1A_TREE_BEGIN v1_agl500_p15_A1_id
+[2026.10.13-09.53.44:309][685]LogPython: FS_B1A_TREE_END v1_agl500_p15_A1_id
+[2026.10.13-09.53.45:622][736]LogPython: FS_B1A_RENDER_BEGIN v1_agl500_p15_A1_id
+[2026.10.13-09.53.46:130][745]LogPython: FS_B1A_RENDER_END v1_agl500_p15_A1_id
+[2026.10.13-09.53.47:241][746]LogPython: FS_B1A_TREE_BEGIN v1_agl500_p15_A1_lod
+[2026.10.13-09.53.47:283][746]LogPython: FS_B1A_TREE_END v1_agl500_p15_A1_lod
+[2026.10.13-09.53.47:842][797]LogPython: FS_B1A_RENDER_BEGIN v1_agl500_p15_A1_lod
+[2026.10.13-09.53.48:043][806]LogPython: FS_B1A_RENDER_END v1_agl500_p15_A1_lod
+[2026.10.13-09.53.49:183][807]LogPython: FS_B1A_TREE_BEGIN v1_agl500_p15_B1_id
+[2026.10.13-09.53.49:220][807]LogPython: FS_B1A_TREE_END v1_agl500_p15_B1_id
+[2026.10.13-09.53.50:511][858]LogPython: FS_B1A_RENDER_BEGIN v1_agl500_p15_B1_id
+[2026.10.13-09.53.51:020][867]LogPython: FS_B1A_RENDER_END v1_agl500_p15_B1_id
+[2026.10.13-09.53.52:176][868]LogPython: FS_B1A_TREE_BEGIN v1_agl500_p15_B1_lod
+[2026.10.13-09.53.52:209][868]LogPython: FS_B1A_TREE_END v1_agl500_p15_B1_lod
+[2026.10.13-09.53.52:839][919]LogPython: FS_B1A_RENDER_BEGIN v1_agl500_p15_B1_lod
+[2026.10.13-09.53.53:045][928]LogPython: FS_B1A_RENDER_END v1_agl500_p15_B1_lod
+[2026.10.13-09.53.54:149][929]LogPython: FS_B1A_TREE_BEGIN v1_agl1000_p20_A0_visual
+[2026.10.13-09.53.54:189][929]LogPython: FS_B1A_TREE_END v1_agl1000_p20_A0_visual
+[2026.10.13-09.53.55:759][980]LogPython: FS_B1A_RENDER_BEGIN v1_agl1000_p20_A0_visual
+[2026.10.13-09.54.36:399][112]LogPython: FS_B1A_RENDER_END v1_agl1000_p20_A0_visual
+[2026.10.13-09.54.36:407][113]LogPython: FS_B1A_TREE_BEGIN v1_agl1000_p20_A1_visual
+[2026.10.13-09.54.36:449][113]LogPython: FS_B1A_TREE_END v1_agl1000_p20_A1_visual
+[2026.10.13-09.54.40:115][164]LogPython: FS_B1A_RENDER_BEGIN v1_agl1000_p20_A1_visual
+[2026.10.13-09.55.27:083][279]LogPython: FS_B1A_RENDER_END v1_agl1000_p20_A1_visual
+[2026.10.13-09.55.28:240][280]LogPython: FS_B1A_TREE_BEGIN v1_agl1000_p20_B0_visual
+[2026.10.13-09.55.28:273][280]LogPython: FS_B1A_TREE_END v1_agl1000_p20_B0_visual
+[2026.10.13-09.55.30:674][331]LogPython: FS_B1A_RENDER_BEGIN v1_agl1000_p20_B0_visual
+[2026.10.13-09.56.14:047][463]LogPython: FS_B1A_RENDER_END v1_agl1000_p20_B0_visual
+[2026.10.13-09.56.14:055][464]LogPython: FS_B1A_TREE_BEGIN v1_agl1000_p20_B1_visual
+[2026.10.13-09.56.14:088][464]LogPython: FS_B1A_TREE_END v1_agl1000_p20_B1_visual
+[2026.10.13-09.56.16:412][515]LogPython: FS_B1A_RENDER_BEGIN v1_agl1000_p20_B1_visual
+[2026.10.13-09.56.56:443][647]LogPython: FS_B1A_RENDER_END v1_agl1000_p20_B1_visual
+[2026.10.13-09.56.57:580][648]LogPython: FS_B1A_TREE_BEGIN v1_agl1000_p20_A1_id
+[2026.10.13-09.56.57:622][648]LogPython: FS_B1A_TREE_END v1_agl1000_p20_A1_id
+[2026.10.13-09.56.59:052][699]LogPython: FS_B1A_RENDER_BEGIN v1_agl1000_p20_A1_id
+[2026.10.13-09.56.59:786][708]LogPython: FS_B1A_RENDER_END v1_agl1000_p20_A1_id
+[2026.10.13-09.57.00:915][709]LogPython: FS_B1A_TREE_BEGIN v1_agl1000_p20_A1_lod
+[2026.10.13-09.57.00:958][709]LogPython: FS_B1A_TREE_END v1_agl1000_p20_A1_lod
+[2026.10.13-09.57.01:607][760]LogPython: FS_B1A_RENDER_BEGIN v1_agl1000_p20_A1_lod
+[2026.10.13-09.57.01:836][769]LogPython: FS_B1A_RENDER_END v1_agl1000_p20_A1_lod
+[2026.10.13-09.57.03:006][770]LogPython: FS_B1A_TREE_BEGIN v1_agl1000_p20_B1_id
+[2026.10.13-09.57.03:041][770]LogPython: FS_B1A_TREE_END v1_agl1000_p20_B1_id
+[2026.10.13-09.57.04:463][821]LogPython: FS_B1A_RENDER_BEGIN v1_agl1000_p20_B1_id
+[2026.10.13-09.57.05:105][830]LogPython: FS_B1A_RENDER_END v1_agl1000_p20_B1_id
+[2026.10.13-09.57.06:261][831]LogPython: FS_B1A_TREE_BEGIN v1_agl1000_p20_B1_lod
+[2026.10.13-09.57.06:292][831]LogPython: FS_B1A_TREE_END v1_agl1000_p20_B1_lod
+[2026.10.13-09.57.06:950][882]LogPython: FS_B1A_RENDER_BEGIN v1_agl1000_p20_B1_lod
+[2026.10.13-09.57.07:182][891]LogPython: FS_B1A_RENDER_END v1_agl1000_p20_B1_lod
+[2026.10.13-09.57.08:325][892]LogPython: FS_B1A_TREE_BEGIN v3i_t18_A0_visual
+[2026.10.13-09.57.08:366][892]LogPython: FS_B1A_TREE_END v3i_t18_A0_visual
+[2026.10.13-09.57.10:516][943]LogPython: FS_B1A_RENDER_BEGIN v3i_t18_A0_visual
+[2026.10.13-09.57.14:296][ 12]LogPython: FS_B1A_RENDER_END v3i_t18_A0_visual
+[2026.10.13-09.57.14:304][ 13]LogPython: FS_B1A_TREE_BEGIN v3i_t18_A1_visual
+[2026.10.13-09.57.14:348][ 13]LogPython: FS_B1A_TREE_END v3i_t18_A1_visual
+[2026.10.13-09.57.16:419][ 64]LogPython: FS_B1A_RENDER_BEGIN v3i_t18_A1_visual
+[2026.10.13-09.57.20:350][133]LogPython: FS_B1A_RENDER_END v3i_t18_A1_visual
+[2026.10.13-09.57.21:509][134]LogPython: FS_B1A_TREE_BEGIN v3i_t18_B0_visual
+[2026.10.13-09.57.21:540][134]LogPython: FS_B1A_TREE_END v3i_t18_B0_visual
+[2026.10.13-09.57.24:054][185]LogPython: FS_B1A_RENDER_BEGIN v3i_t18_B0_visual
+[2026.10.13-09.57.28:001][254]LogPython: FS_B1A_RENDER_END v3i_t18_B0_visual
+[2026.10.13-09.57.28:010][255]LogPython: FS_B1A_TREE_BEGIN v3i_t18_B1_visual
+[2026.10.13-09.57.28:043][255]LogPython: FS_B1A_TREE_END v3i_t18_B1_visual
+[2026.10.13-09.57.30:396][306]LogPython: FS_B1A_RENDER_BEGIN v3i_t18_B1_visual
+[2026.10.13-09.57.34:467][375]LogPython: FS_B1A_RENDER_END v3i_t18_B1_visual
+[2026.10.13-09.57.35:614][376]LogPython: FS_B1A_TREE_BEGIN v3i_t18_A1_id
+[2026.10.13-09.57.35:654][376]LogPython: FS_B1A_TREE_END v3i_t18_A1_id
+[2026.10.13-09.57.37:554][427]LogPython: FS_B1A_RENDER_BEGIN v3i_t18_A1_id
+[2026.10.13-09.57.38:217][436]LogPython: FS_B1A_RENDER_END v3i_t18_A1_id
+[2026.10.13-09.57.39:349][437]LogPython: FS_B1A_TREE_BEGIN v3i_t18_A1_lod
+[2026.10.13-09.57.39:391][437]LogPython: FS_B1A_TREE_END v3i_t18_A1_lod
+[2026.10.13-09.57.40:323][488]LogPython: FS_B1A_RENDER_BEGIN v3i_t18_A1_lod
+[2026.10.13-09.57.40:642][497]LogPython: FS_B1A_RENDER_END v3i_t18_A1_lod
+[2026.10.13-09.57.41:801][498]LogPython: FS_B1A_TREE_BEGIN v3i_t18_B1_id
+[2026.10.13-09.57.41:834][498]LogPython: FS_B1A_TREE_END v3i_t18_B1_id
+[2026.10.13-09.57.43:688][549]LogPython: FS_B1A_RENDER_BEGIN v3i_t18_B1_id
+[2026.10.13-09.57.44:403][558]LogPython: FS_B1A_RENDER_END v3i_t18_B1_id
+[2026.10.13-09.57.45:558][559]LogPython: FS_B1A_TREE_BEGIN v3i_t18_B1_lod
+[2026.10.13-09.57.45:590][559]LogPython: FS_B1A_TREE_END v3i_t18_B1_lod
+[2026.10.13-09.57.46:571][610]LogPython: FS_B1A_RENDER_BEGIN v3i_t18_B1_lod
+[2026.10.13-09.57.46:892][619]LogPython: FS_B1A_RENDER_END v3i_t18_B1_lod
+[2026.10.13-09.57.48:035][620]LogPython: FS_B1A_TREE_BEGIN v3i_t26_A0_visual
+[2026.10.13-09.57.48:076][620]LogPython: FS_B1A_TREE_END v3i_t26_A0_visual
+[2026.10.13-09.57.50:470][671]LogPython: FS_B1A_RENDER_BEGIN v3i_t26_A0_visual
+[2026.10.13-09.57.54:550][740]LogPython: FS_B1A_RENDER_END v3i_t26_A0_visual
+[2026.10.13-09.57.54:558][741]LogPython: FS_B1A_TREE_BEGIN v3i_t26_A1_visual
+[2026.10.13-09.57.54:602][741]LogPython: FS_B1A_TREE_END v3i_t26_A1_visual
+[2026.10.13-09.57.57:030][792]LogPython: FS_B1A_RENDER_BEGIN v3i_t26_A1_visual
+[2026.10.13-09.58.01:084][861]LogPython: FS_B1A_RENDER_END v3i_t26_A1_visual
+[2026.10.13-09.58.02:236][862]LogPython: FS_B1A_TREE_BEGIN v3i_t26_B0_visual
+[2026.10.13-09.58.02:270][862]LogPython: FS_B1A_TREE_END v3i_t26_B0_visual
+[2026.10.13-09.58.04:674][913]LogPython: FS_B1A_RENDER_BEGIN v3i_t26_B0_visual
+[2026.10.13-09.58.08:729][982]LogPython: FS_B1A_RENDER_END v3i_t26_B0_visual
+[2026.10.13-09.58.08:737][983]LogPython: FS_B1A_TREE_BEGIN v3i_t26_B1_visual
+[2026.10.13-09.58.08:770][983]LogPython: FS_B1A_TREE_END v3i_t26_B1_visual
+[2026.10.13-09.58.11:173][ 34]LogPython: FS_B1A_RENDER_BEGIN v3i_t26_B1_visual
+[2026.10.13-09.58.15:679][103]LogPython: FS_B1A_RENDER_END v3i_t26_B1_visual
+[2026.10.13-09.58.16:827][104]LogPython: FS_B1A_TREE_BEGIN v3i_t26_A1_id
+[2026.10.13-09.58.16:866][104]LogPython: FS_B1A_TREE_END v3i_t26_A1_id
+[2026.10.13-09.58.18:794][155]LogPython: FS_B1A_RENDER_BEGIN v3i_t26_A1_id
+[2026.10.13-09.58.19:514][164]LogPython: FS_B1A_RENDER_END v3i_t26_A1_id
+[2026.10.13-09.58.20:667][165]LogPython: FS_B1A_TREE_BEGIN v3i_t26_A1_lod
+[2026.10.13-09.58.20:708][165]LogPython: FS_B1A_TREE_END v3i_t26_A1_lod
+[2026.10.13-09.58.21:774][216]LogPython: FS_B1A_RENDER_BEGIN v3i_t26_A1_lod
+[2026.10.13-09.58.22:122][225]LogPython: FS_B1A_RENDER_END v3i_t26_A1_lod
+[2026.10.13-09.58.23:286][226]LogPython: FS_B1A_TREE_BEGIN v3i_t26_B1_id
+[2026.10.13-09.58.23:318][226]LogPython: FS_B1A_TREE_END v3i_t26_B1_id
+[2026.10.13-09.58.25:288][277]LogPython: FS_B1A_RENDER_BEGIN v3i_t26_B1_id
+[2026.10.13-09.58.25:988][286]LogPython: FS_B1A_RENDER_END v3i_t26_B1_id
+[2026.10.13-09.58.27:143][287]LogPython: FS_B1A_TREE_BEGIN v3i_t26_B1_lod
+[2026.10.13-09.58.27:178][287]LogPython: FS_B1A_TREE_END v3i_t26_B1_lod
+[2026.10.13-09.58.28:448][338]LogPython: FS_B1A_RENDER_BEGIN v3i_t26_B1_lod
+[2026.10.13-09.58.28:847][347]LogPython: FS_B1A_RENDER_END v3i_t26_B1_lod
+[2026.10.13-09.58.30:038][348]LogPython: FS_B1A_TREE_BEGIN v3i_t32_A0_visual
+[2026.10.13-09.58.30:082][348]LogPython: FS_B1A_TREE_END v3i_t32_A0_visual
+[2026.10.13-09.58.32:716][399]LogPython: FS_B1A_RENDER_BEGIN v3i_t32_A0_visual
+[2026.10.13-09.58.36:728][468]LogPython: FS_B1A_RENDER_END v3i_t32_A0_visual
+[2026.10.13-09.58.36:736][469]LogPython: FS_B1A_TREE_BEGIN v3i_t32_A1_visual
+[2026.10.13-09.58.36:779][469]LogPython: FS_B1A_TREE_END v3i_t32_A1_visual
+[2026.10.13-09.58.39:132][520]LogPython: FS_B1A_RENDER_BEGIN v3i_t32_A1_visual
+[2026.10.13-09.58.43:261][589]LogPython: FS_B1A_RENDER_END v3i_t32_A1_visual
+[2026.10.13-09.58.44:426][590]LogPython: FS_B1A_TREE_BEGIN v3i_t32_B0_visual
+[2026.10.13-09.58.44:458][590]LogPython: FS_B1A_TREE_END v3i_t32_B0_visual
+[2026.10.13-09.58.46:869][641]LogPython: FS_B1A_RENDER_BEGIN v3i_t32_B0_visual
+[2026.10.13-09.58.50:905][710]LogPython: FS_B1A_RENDER_END v3i_t32_B0_visual
+[2026.10.13-09.58.50:913][711]LogPython: FS_B1A_TREE_BEGIN v3i_t32_B1_visual
+[2026.10.13-09.58.50:945][711]LogPython: FS_B1A_TREE_END v3i_t32_B1_visual
+[2026.10.13-09.58.53:441][762]LogPython: FS_B1A_RENDER_BEGIN v3i_t32_B1_visual
+[2026.10.13-09.58.57:615][831]LogPython: FS_B1A_RENDER_END v3i_t32_B1_visual
+[2026.10.13-09.58.58:772][832]LogPython: FS_B1A_TREE_BEGIN v3i_t32_A1_id
+[2026.10.13-09.58.58:813][832]LogPython: FS_B1A_TREE_END v3i_t32_A1_id
+[2026.10.13-09.59.00:715][883]LogPython: FS_B1A_RENDER_BEGIN v3i_t32_A1_id
+[2026.10.13-09.59.01:428][892]LogPython: FS_B1A_RENDER_END v3i_t32_A1_id
+[2026.10.13-09.59.02:629][893]LogPython: FS_B1A_TREE_BEGIN v3i_t32_A1_lod
+[2026.10.13-09.59.02:677][893]LogPython: FS_B1A_TREE_END v3i_t32_A1_lod
+[2026.10.13-09.59.03:938][944]LogPython: FS_B1A_RENDER_BEGIN v3i_t32_A1_lod
+[2026.10.13-09.59.04:258][953]LogPython: FS_B1A_RENDER_END v3i_t32_A1_lod
+[2026.10.13-09.59.05:430][954]LogPython: FS_B1A_TREE_BEGIN v3i_t32_B1_id
+[2026.10.13-09.59.05:462][954]LogPython: FS_B1A_TREE_END v3i_t32_B1_id
+[2026.10.13-09.59.07:325][  5]LogPython: FS_B1A_RENDER_BEGIN v3i_t32_B1_id
+[2026.10.13-09.59.08:024][ 14]LogPython: FS_B1A_RENDER_END v3i_t32_B1_id
+[2026.10.13-09.59.09:192][ 15]LogPython: FS_B1A_TREE_BEGIN v3i_t32_B1_lod
+[2026.10.13-09.59.09:225][ 15]LogPython: FS_B1A_TREE_END v3i_t32_B1_lod
+[2026.10.13-09.59.10:219][ 66]LogPython: FS_B1A_RENDER_BEGIN v3i_t32_B1_lod
+[2026.10.13-09.59.10:552][ 75]LogPython: FS_B1A_RENDER_END v3i_t32_B1_lod
+[2026.10.13-09.59.11:737][ 76]LogPython: FS_B1A_TREE_BEGIN v5i_agl200_a000_A0_visual
+[2026.10.13-09.59.11:778][ 76]LogPython: FS_B1A_TREE_END v5i_agl200_a000_A0_visual
+[2026.10.13-09.59.14:353][127]LogPython: FS_B1A_RENDER_BEGIN v5i_agl200_a000_A0_visual
+[2026.10.13-09.59.18:772][196]LogPython: FS_B1A_RENDER_END v5i_agl200_a000_A0_visual
+[2026.10.13-09.59.18:782][197]LogPython: FS_B1A_TREE_BEGIN v5i_agl200_a000_A1_visual
+[2026.10.13-09.59.18:823][197]LogPython: FS_B1A_TREE_END v5i_agl200_a000_A1_visual
+[2026.10.13-09.59.21:560][248]LogPython: FS_B1A_RENDER_BEGIN v5i_agl200_a000_A1_visual
+[2026.10.13-09.59.25:966][317]LogPython: FS_B1A_RENDER_END v5i_agl200_a000_A1_visual
+[2026.10.13-09.59.27:141][318]LogPython: FS_B1A_TREE_BEGIN v5i_agl200_a000_B0_visual
+[2026.10.13-09.59.27:172][318]LogPython: FS_B1A_TREE_END v5i_agl200_a000_B0_visual
+[2026.10.13-09.59.29:778][369]LogPython: FS_B1A_RENDER_BEGIN v5i_agl200_a000_B0_visual
+[2026.10.13-09.59.34:278][438]LogPython: FS_B1A_RENDER_END v5i_agl200_a000_B0_visual
+[2026.10.13-09.59.34:287][439]LogPython: FS_B1A_TREE_BEGIN v5i_agl200_a000_B1_visual
+[2026.10.13-09.59.34:320][439]LogPython: FS_B1A_TREE_END v5i_agl200_a000_B1_visual
+[2026.10.13-09.59.37:062][490]LogPython: FS_B1A_RENDER_BEGIN v5i_agl200_a000_B1_visual
+[2026.10.13-09.59.41:531][559]LogPython: FS_B1A_RENDER_END v5i_agl200_a000_B1_visual
+[2026.10.13-09.59.42:678][560]LogPython: FS_B1A_TREE_BEGIN v5i_agl200_a000_A1_id
+[2026.10.13-09.59.42:717][560]LogPython: FS_B1A_TREE_END v5i_agl200_a000_A1_id
+[2026.10.13-09.59.44:909][611]LogPython: FS_B1A_RENDER_BEGIN v5i_agl200_a000_A1_id
+[2026.10.13-09.59.45:697][620]LogPython: FS_B1A_RENDER_END v5i_agl200_a000_A1_id
+[2026.10.13-09.59.46:835][621]LogPython: FS_B1A_TREE_BEGIN v5i_agl200_a000_A1_lod
+[2026.10.13-09.59.46:879][621]LogPython: FS_B1A_TREE_END v5i_agl200_a000_A1_lod
+[2026.10.13-09.59.47:925][672]LogPython: FS_B1A_RENDER_BEGIN v5i_agl200_a000_A1_lod
+[2026.10.13-09.59.48:281][681]LogPython: FS_B1A_RENDER_END v5i_agl200_a000_A1_lod
+[2026.10.13-09.59.49:447][682]LogPython: FS_B1A_TREE_BEGIN v5i_agl200_a000_B1_id
+[2026.10.13-09.59.49:480][682]LogPython: FS_B1A_TREE_END v5i_agl200_a000_B1_id
+[2026.10.13-09.59.51:703][733]LogPython: FS_B1A_RENDER_BEGIN v5i_agl200_a000_B1_id
+[2026.10.13-09.59.52:539][742]LogPython: FS_B1A_RENDER_END v5i_agl200_a000_B1_id
+[2026.10.13-09.59.53:724][743]LogPython: FS_B1A_TREE_BEGIN v5i_agl200_a000_B1_lod
+[2026.10.13-09.59.53:758][743]LogPython: FS_B1A_TREE_END v5i_agl200_a000_B1_lod
+[2026.10.13-09.59.56:010][794]LogPython: FS_B1A_RENDER_BEGIN v5i_agl200_a000_B1_lod
+[2026.10.13-09.59.56:674][803]LogPython: FS_B1A_RENDER_END v5i_agl200_a000_B1_lod
+[2026.10.13-09.59.57:814][804]LogPython: FS_B1A_TREE_BEGIN v5i_agl200_a090_A0_visual
+[2026.10.13-09.59.57:857][804]LogPython: FS_B1A_TREE_END v5i_agl200_a090_A0_visual
+[2026.10.13-10.00.02:378][855]LogPython: FS_B1A_RENDER_BEGIN v5i_agl200_a090_A0_visual
+[2026.10.13-10.00.09:534][924]LogPython: FS_B1A_RENDER_END v5i_agl200_a090_A0_visual
+[2026.10.13-10.00.09:548][925]LogPython: FS_B1A_TREE_BEGIN v5i_agl200_a090_A1_visual
+[2026.10.13-10.00.09:592][925]LogPython: FS_B1A_TREE_END v5i_agl200_a090_A1_visual
+[2026.10.13-10.00.14:122][976]LogPython: FS_B1A_RENDER_BEGIN v5i_agl200_a090_A1_visual
+[2026.10.13-10.00.21:433][ 45]LogPython: FS_B1A_RENDER_END v5i_agl200_a090_A1_visual
+[2026.10.13-10.00.22:695][ 46]LogPython: FS_B1A_TREE_BEGIN v5i_agl200_a090_B0_visual
+[2026.10.13-10.00.22:728][ 46]LogPython: FS_B1A_TREE_END v5i_agl200_a090_B0_visual
+[2026.10.13-10.00.27:305][ 97]LogPython: FS_B1A_RENDER_BEGIN v5i_agl200_a090_B0_visual
+[2026.10.13-10.00.34:673][167]LogPython: FS_B1A_RENDER_END v5i_agl200_a090_B0_visual
+[2026.10.13-10.00.34:681][167]LogPython: FS_B1A_TREE_BEGIN v5i_agl200_a090_B1_visual
+[2026.10.13-10.00.34:716][167]LogPython: FS_B1A_TREE_END v5i_agl200_a090_B1_visual
+[2026.10.13-10.00.39:320][218]LogPython: FS_B1A_RENDER_BEGIN v5i_agl200_a090_B1_visual
+[2026.10.13-10.00.46:672][287]LogPython: FS_B1A_RENDER_END v5i_agl200_a090_B1_visual
+[2026.10.13-10.00.47:847][288]LogPython: FS_B1A_TREE_BEGIN v5i_agl200_a090_A1_id
+[2026.10.13-10.00.47:888][288]LogPython: FS_B1A_TREE_END v5i_agl200_a090_A1_id
+[2026.10.13-10.00.51:684][339]LogPython: FS_B1A_RENDER_BEGIN v5i_agl200_a090_A1_id
+[2026.10.13-10.00.52:996][348]LogPython: FS_B1A_RENDER_END v5i_agl200_a090_A1_id
+[2026.10.13-10.00.54:157][349]LogPython: FS_B1A_TREE_BEGIN v5i_agl200_a090_A1_lod
+[2026.10.13-10.00.54:201][349]LogPython: FS_B1A_TREE_END v5i_agl200_a090_A1_lod
+[2026.10.13-10.00.56:564][400]LogPython: FS_B1A_RENDER_BEGIN v5i_agl200_a090_A1_lod
+[2026.10.13-10.00.57:303][409]LogPython: FS_B1A_RENDER_END v5i_agl200_a090_A1_lod
+[2026.10.13-10.00.58:484][410]LogPython: FS_B1A_TREE_BEGIN v5i_agl200_a090_B1_id
+[2026.10.13-10.00.58:518][410]LogPython: FS_B1A_TREE_END v5i_agl200_a090_B1_id
+[2026.10.13-10.01.02:198][461]LogPython: FS_B1A_RENDER_BEGIN v5i_agl200_a090_B1_id
+[2026.10.13-10.01.03:413][470]LogPython: FS_B1A_RENDER_END v5i_agl200_a090_B1_id
+[2026.10.13-10.01.04:584][471]LogPython: FS_B1A_TREE_BEGIN v5i_agl200_a090_B1_lod
+[2026.10.13-10.01.04:624][471]LogPython: FS_B1A_TREE_END v5i_agl200_a090_B1_lod
+[2026.10.13-10.01.06:964][522]LogPython: FS_B1A_RENDER_BEGIN v5i_agl200_a090_B1_lod
+[2026.10.13-10.01.07:670][531]LogPython: FS_B1A_RENDER_END v5i_agl200_a090_B1_lod
+[2026.10.13-10.01.08:823][532]LogPython: FS_B1A_TREE_BEGIN v5i_agl200_a180_A0_visual
+[2026.10.13-10.01.08:863][532]LogPython: FS_B1A_TREE_END v5i_agl200_a180_A0_visual
+[2026.10.13-10.01.13:223][583]LogPython: FS_B1A_RENDER_BEGIN v5i_agl200_a180_A0_visual
+[2026.10.13-10.01.20:479][652]LogPython: FS_B1A_RENDER_END v5i_agl200_a180_A0_visual
+[2026.10.13-10.01.20:487][653]LogPython: FS_B1A_TREE_BEGIN v5i_agl200_a180_A1_visual
+[2026.10.13-10.01.20:532][653]LogPython: FS_B1A_TREE_END v5i_agl200_a180_A1_visual
+[2026.10.13-10.01.25:137][704]LogPython: FS_B1A_RENDER_BEGIN v5i_agl200_a180_A1_visual
+[2026.10.13-10.01.32:496][773]LogPython: FS_B1A_RENDER_END v5i_agl200_a180_A1_visual
+[2026.10.13-10.01.33:722][774]LogPython: FS_B1A_TREE_BEGIN v5i_agl200_a180_B0_visual
+[2026.10.13-10.01.33:760][774]LogPython: FS_B1A_TREE_END v5i_agl200_a180_B0_visual
+[2026.10.13-10.01.38:420][825]LogPython: FS_B1A_RENDER_BEGIN v5i_agl200_a180_B0_visual
+[2026.10.13-10.01.45:497][894]LogPython: FS_B1A_RENDER_END v5i_agl200_a180_B0_visual
+[2026.10.13-10.01.45:504][895]LogPython: FS_B1A_TREE_BEGIN v5i_agl200_a180_B1_visual
+[2026.10.13-10.01.45:538][895]LogPython: FS_B1A_TREE_END v5i_agl200_a180_B1_visual
+[2026.10.13-10.01.49:956][946]LogPython: FS_B1A_RENDER_BEGIN v5i_agl200_a180_B1_visual
+[2026.10.13-10.01.57:152][ 15]LogPython: FS_B1A_RENDER_END v5i_agl200_a180_B1_visual
+[2026.10.13-10.01.58:305][ 16]LogPython: FS_B1A_TREE_BEGIN v5i_agl200_a180_A1_id
+[2026.10.13-10.01.58:353][ 16]LogPython: FS_B1A_TREE_END v5i_agl200_a180_A1_id
+[2026.10.13-10.02.02:064][ 67]LogPython: FS_B1A_RENDER_BEGIN v5i_agl200_a180_A1_id
+[2026.10.13-10.02.03:320][ 76]LogPython: FS_B1A_RENDER_END v5i_agl200_a180_A1_id
+[2026.10.13-10.02.04:494][ 77]LogPython: FS_B1A_TREE_BEGIN v5i_agl200_a180_A1_lod
+[2026.10.13-10.02.04:545][ 77]LogPython: FS_B1A_TREE_END v5i_agl200_a180_A1_lod
+[2026.10.13-10.02.06:909][128]LogPython: FS_B1A_RENDER_BEGIN v5i_agl200_a180_A1_lod
+[2026.10.13-10.02.07:561][137]LogPython: FS_B1A_RENDER_END v5i_agl200_a180_A1_lod
+[2026.10.13-10.02.08:730][138]LogPython: FS_B1A_TREE_BEGIN v5i_agl200_a180_B1_id
+[2026.10.13-10.02.08:762][138]LogPython: FS_B1A_TREE_END v5i_agl200_a180_B1_id
+[2026.10.13-10.02.12:537][189]LogPython: FS_B1A_RENDER_BEGIN v5i_agl200_a180_B1_id
+[2026.10.13-10.02.13:733][198]LogPython: FS_B1A_RENDER_END v5i_agl200_a180_B1_id
+[2026.10.13-10.02.14:899][199]LogPython: FS_B1A_TREE_BEGIN v5i_agl200_a180_B1_lod
+[2026.10.13-10.02.14:934][199]LogPython: FS_B1A_TREE_END v5i_agl200_a180_B1_lod
+[2026.10.13-10.02.17:216][250]LogPython: FS_B1A_RENDER_BEGIN v5i_agl200_a180_B1_lod
+[2026.10.13-10.02.17:923][259]LogPython: FS_B1A_RENDER_END v5i_agl200_a180_B1_lod
+[2026.10.13-10.02.19:094][260]LogPython: FS_B1A_TREE_BEGIN v5i_agl200_a270_A0_visual
+[2026.10.13-10.02.19:136][260]LogPython: FS_B1A_TREE_END v5i_agl200_a270_A0_visual
+[2026.10.13-10.02.23:591][311]LogPython: FS_B1A_RENDER_BEGIN v5i_agl200_a270_A0_visual
+[2026.10.13-10.02.30:735][380]LogPython: FS_B1A_RENDER_END v5i_agl200_a270_A0_visual
+[2026.10.13-10.02.30:743][381]LogPython: FS_B1A_TREE_BEGIN v5i_agl200_a270_A1_visual
+[2026.10.13-10.02.30:783][381]LogPython: FS_B1A_TREE_END v5i_agl200_a270_A1_visual
+[2026.10.13-10.02.35:382][432]LogPython: FS_B1A_RENDER_BEGIN v5i_agl200_a270_A1_visual
+[2026.10.13-10.02.42:498][501]LogPython: FS_B1A_RENDER_END v5i_agl200_a270_A1_visual
+[2026.10.13-10.02.43:667][502]LogPython: FS_B1A_TREE_BEGIN v5i_agl200_a270_B0_visual
+[2026.10.13-10.02.43:699][502]LogPython: FS_B1A_TREE_END v5i_agl200_a270_B0_visual
+[2026.10.13-10.02.47:879][553]LogPython: FS_B1A_RENDER_BEGIN v5i_agl200_a270_B0_visual
+[2026.10.13-10.02.54:936][622]LogPython: FS_B1A_RENDER_END v5i_agl200_a270_B0_visual
+[2026.10.13-10.02.54:943][623]LogPython: FS_B1A_TREE_BEGIN v5i_agl200_a270_B1_visual
+[2026.10.13-10.02.54:975][623]LogPython: FS_B1A_TREE_END v5i_agl200_a270_B1_visual
+[2026.10.13-10.02.59:233][674]LogPython: FS_B1A_RENDER_BEGIN v5i_agl200_a270_B1_visual
+[2026.10.13-10.03.06:202][743]LogPython: FS_B1A_RENDER_END v5i_agl200_a270_B1_visual
+[2026.10.13-10.03.07:346][744]LogPython: FS_B1A_TREE_BEGIN v5i_agl200_a270_A1_id
+[2026.10.13-10.03.07:387][744]LogPython: FS_B1A_TREE_END v5i_agl200_a270_A1_id
+[2026.10.13-10.03.11:018][795]LogPython: FS_B1A_RENDER_BEGIN v5i_agl200_a270_A1_id
+[2026.10.13-10.03.12:199][804]LogPython: FS_B1A_RENDER_END v5i_agl200_a270_A1_id
+[2026.10.13-10.03.13:349][805]LogPython: FS_B1A_TREE_BEGIN v5i_agl200_a270_A1_lod
+[2026.10.13-10.03.13:391][805]LogPython: FS_B1A_TREE_END v5i_agl200_a270_A1_lod
+[2026.10.13-10.03.15:491][856]LogPython: FS_B1A_RENDER_BEGIN v5i_agl200_a270_A1_lod
+[2026.10.13-10.03.16:180][865]LogPython: FS_B1A_RENDER_END v5i_agl200_a270_A1_lod
+[2026.10.13-10.03.17:422][866]LogPython: FS_B1A_TREE_BEGIN v5i_agl200_a270_B1_id
+[2026.10.13-10.03.17:456][866]LogPython: FS_B1A_TREE_END v5i_agl200_a270_B1_id
+[2026.10.13-10.03.21:175][917]LogPython: FS_B1A_RENDER_BEGIN v5i_agl200_a270_B1_id
+[2026.10.13-10.03.22:439][926]LogPython: FS_B1A_RENDER_END v5i_agl200_a270_B1_id
+[2026.10.13-10.03.23:654][927]LogPython: FS_B1A_TREE_BEGIN v5i_agl200_a270_B1_lod
+[2026.10.13-10.03.23:687][927]LogPython: FS_B1A_TREE_END v5i_agl200_a270_B1_lod
+[2026.10.13-10.03.26:023][978]LogPython: FS_B1A_RENDER_BEGIN v5i_agl200_a270_B1_lod
+[2026.10.13-10.03.26:719][987]LogPython: FS_B1A_RENDER_END v5i_agl200_a270_B1_lod
+[2026.10.13-10.03.27:897][988]LogPython: FS_B1A_TREE_BEGIN v3i_t14_A1_id
+[2026.10.13-10.03.27:938][988]LogPython: FS_B1A_TREE_END v3i_t14_A1_id
+[2026.10.13-10.03.31:195][ 39]LogPython: FS_B1A_RENDER_BEGIN v3i_t14_A1_id
+[2026.10.13-10.03.32:229][ 48]LogPython: FS_B1A_RENDER_END v3i_t14_A1_id
+[2026.10.13-10.03.33:383][ 49]LogPython: FS_B1A_TREE_BEGIN v3i_t14_A1_lod
+[2026.10.13-10.03.33:425][ 49]LogPython: FS_B1A_TREE_END v3i_t14_A1_lod
+[2026.10.13-10.03.35:100][100]LogPython: FS_B1A_RENDER_BEGIN v3i_t14_A1_lod
+[2026.10.13-10.03.35:644][109]LogPython: FS_B1A_RENDER_END v3i_t14_A1_lod
+[2026.10.13-10.03.36:852][110]LogPython: FS_B1A_TREE_BEGIN v3i_t14_B1_id
+[2026.10.13-10.03.36:885][110]LogPython: FS_B1A_TREE_END v3i_t14_B1_id
+[2026.10.13-10.03.39:432][161]LogPython: FS_B1A_RENDER_BEGIN v3i_t14_B1_id
+[2026.10.13-10.03.40:105][170]LogPython: FS_B1A_RENDER_END v3i_t14_B1_id
+[2026.10.13-10.03.41:291][171]LogPython: FS_B1A_TREE_BEGIN v3i_t14_B1_lod
+[2026.10.13-10.03.41:328][171]LogPython: FS_B1A_TREE_END v3i_t14_B1_lod
+[2026.10.13-10.03.42:642][222]LogPython: FS_B1A_RENDER_BEGIN v3i_t14_B1_lod
+[2026.10.13-10.03.43:008][231]LogPython: FS_B1A_RENDER_END v3i_t14_B1_lod
+[2026.10.13-10.03.44:155][232]LogPython: FS_B1A_TREE_BEGIN v3i_t16_A1_id
+[2026.10.13-10.03.44:197][232]LogPython: FS_B1A_TREE_END v3i_t16_A1_id
+[2026.10.13-10.03.46:658][283]LogPython: FS_B1A_RENDER_BEGIN v3i_t16_A1_id
+[2026.10.13-10.03.47:396][292]LogPython: FS_B1A_RENDER_END v3i_t16_A1_id
+[2026.10.13-10.03.48:552][293]LogPython: FS_B1A_TREE_BEGIN v3i_t16_A1_lod
+[2026.10.13-10.03.48:594][293]LogPython: FS_B1A_TREE_END v3i_t16_A1_lod
+[2026.10.13-10.03.49:766][344]LogPython: FS_B1A_RENDER_BEGIN v3i_t16_A1_lod
+[2026.10.13-10.03.50:278][353]LogPython: FS_B1A_RENDER_END v3i_t16_A1_lod
+[2026.10.13-10.03.51:539][354]LogPython: FS_B1A_TREE_BEGIN v3i_t16_B1_id
+[2026.10.13-10.03.51:570][354]LogPython: FS_B1A_TREE_END v3i_t16_B1_id
+[2026.10.13-10.03.54:016][405]LogPython: FS_B1A_RENDER_BEGIN v3i_t16_B1_id
+[2026.10.13-10.03.54:859][414]LogPython: FS_B1A_RENDER_END v3i_t16_B1_id
+[2026.10.13-10.03.56:114][415]LogPython: FS_B1A_TREE_BEGIN v3i_t16_B1_lod
+[2026.10.13-10.03.56:150][415]LogPython: FS_B1A_TREE_END v3i_t16_B1_lod
+[2026.10.13-10.03.57:348][466]LogPython: FS_B1A_RENDER_BEGIN v3i_t16_B1_lod
+[2026.10.13-10.03.57:942][475]LogPython: FS_B1A_RENDER_END v3i_t16_B1_lod
+[2026.10.13-10.03.59:132][476]LogPython: FS_B1A_TREE_BEGIN v3i_t20_A1_id
+[2026.10.13-10.03.59:175][476]LogPython: FS_B1A_TREE_END v3i_t20_A1_id
+[2026.10.13-10.04.01:748][527]LogPython: FS_B1A_RENDER_BEGIN v3i_t20_A1_id
+[2026.10.13-10.04.02:464][536]LogPython: FS_B1A_RENDER_END v3i_t20_A1_id
+[2026.10.13-10.04.03:635][537]LogPython: FS_B1A_TREE_BEGIN v3i_t20_A1_lod
+[2026.10.13-10.04.03:678][537]LogPython: FS_B1A_TREE_END v3i_t20_A1_lod
+[2026.10.13-10.04.05:163][588]LogPython: FS_B1A_RENDER_BEGIN v3i_t20_A1_lod
+[2026.10.13-10.04.05:526][597]LogPython: FS_B1A_RENDER_END v3i_t20_A1_lod
+[2026.10.13-10.04.06:714][598]LogPython: FS_B1A_TREE_BEGIN v3i_t20_B1_id
+[2026.10.13-10.04.06:744][598]LogPython: FS_B1A_TREE_END v3i_t20_B1_id
+[2026.10.13-10.04.09:387][649]LogPython: FS_B1A_RENDER_BEGIN v3i_t20_B1_id
+[2026.10.13-10.04.10:172][658]LogPython: FS_B1A_RENDER_END v3i_t20_B1_id
+[2026.10.13-10.04.11:351][659]LogPython: FS_B1A_TREE_BEGIN v3i_t20_B1_lod
+[2026.10.13-10.04.11:382][659]LogPython: FS_B1A_TREE_END v3i_t20_B1_lod
+[2026.10.13-10.04.12:873][710]LogPython: FS_B1A_RENDER_BEGIN v3i_t20_B1_lod
+[2026.10.13-10.04.13:417][719]LogPython: FS_B1A_RENDER_END v3i_t20_B1_lod
+[2026.10.13-10.04.14:566][720]LogPython: FS_B1A_TREE_BEGIN v3i_t22_A1_id
+[2026.10.13-10.04.14:607][720]LogPython: FS_B1A_TREE_END v3i_t22_A1_id
+[2026.10.13-10.04.17:252][771]LogPython: FS_B1A_RENDER_BEGIN v3i_t22_A1_id
+[2026.10.13-10.04.18:111][780]LogPython: FS_B1A_RENDER_END v3i_t22_A1_id
+[2026.10.13-10.04.19:250][781]LogPython: FS_B1A_TREE_BEGIN v3i_t22_A1_lod
+[2026.10.13-10.04.19:294][781]LogPython: FS_B1A_TREE_END v3i_t22_A1_lod
+[2026.10.13-10.04.20:872][832]LogPython: FS_B1A_RENDER_BEGIN v3i_t22_A1_lod
+[2026.10.13-10.04.21:300][841]LogPython: FS_B1A_RENDER_END v3i_t22_A1_lod
+[2026.10.13-10.04.22:479][842]LogPython: FS_B1A_TREE_BEGIN v3i_t22_B1_id
+[2026.10.13-10.04.22:513][842]LogPython: FS_B1A_TREE_END v3i_t22_B1_id
+[2026.10.13-10.04.25:295][893]LogPython: FS_B1A_RENDER_BEGIN v3i_t22_B1_id
+[2026.10.13-10.04.26:129][902]LogPython: FS_B1A_RENDER_END v3i_t22_B1_id
+[2026.10.13-10.04.27:292][903]LogPython: FS_B1A_TREE_BEGIN v3i_t22_B1_lod
+[2026.10.13-10.04.27:323][903]LogPython: FS_B1A_TREE_END v3i_t22_B1_lod
+[2026.10.13-10.04.29:512][954]LogPython: FS_B1A_RENDER_BEGIN v3i_t22_B1_lod
+[2026.10.13-10.04.30:155][963]LogPython: FS_B1A_RENDER_END v3i_t22_B1_lod
+[2026.10.13-10.04.31:291][964]LogPython: FS_B1A_TREE_BEGIN v3i_t24_A1_id
+[2026.10.13-10.04.31:331][964]LogPython: FS_B1A_TREE_END v3i_t24_A1_id
+[2026.10.13-10.04.33:913][ 15]LogPython: FS_B1A_RENDER_BEGIN v3i_t24_A1_id
+[2026.10.13-10.04.34:849][ 24]LogPython: FS_B1A_RENDER_END v3i_t24_A1_id
+[2026.10.13-10.04.35:994][ 25]LogPython: FS_B1A_TREE_BEGIN v3i_t24_A1_lod
+[2026.10.13-10.04.36:034][ 25]LogPython: FS_B1A_TREE_END v3i_t24_A1_lod
+[2026.10.13-10.04.37:576][ 76]LogPython: FS_B1A_RENDER_BEGIN v3i_t24_A1_lod
+[2026.10.13-10.04.37:987][ 85]LogPython: FS_B1A_RENDER_END v3i_t24_A1_lod
+[2026.10.13-10.04.39:145][ 86]LogPython: FS_B1A_TREE_BEGIN v3i_t24_B1_id
+[2026.10.13-10.04.39:180][ 86]LogPython: FS_B1A_TREE_END v3i_t24_B1_id
+[2026.10.13-10.04.41:535][137]LogPython: FS_B1A_RENDER_BEGIN v3i_t24_B1_id
+[2026.10.13-10.04.42:559][146]LogPython: FS_B1A_RENDER_END v3i_t24_B1_id
+[2026.10.13-10.04.43:753][147]LogPython: FS_B1A_TREE_BEGIN v3i_t24_B1_lod
+[2026.10.13-10.04.43:786][147]LogPython: FS_B1A_TREE_END v3i_t24_B1_lod
+[2026.10.13-10.04.45:337][198]LogPython: FS_B1A_RENDER_BEGIN v3i_t24_B1_lod
+[2026.10.13-10.04.45:695][207]LogPython: FS_B1A_RENDER_END v3i_t24_B1_lod
+[2026.10.13-10.04.46:865][208]LogPython: FS_B1A_TREE_BEGIN v3i_t28_A1_id
+[2026.10.13-10.04.46:906][208]LogPython: FS_B1A_TREE_END v3i_t28_A1_id
+[2026.10.13-10.04.49:393][259]LogPython: FS_B1A_RENDER_BEGIN v3i_t28_A1_id
+[2026.10.13-10.04.50:276][268]LogPython: FS_B1A_RENDER_END v3i_t28_A1_id
+[2026.10.13-10.04.51:421][269]LogPython: FS_B1A_TREE_BEGIN v3i_t28_A1_lod
+[2026.10.13-10.04.51:462][269]LogPython: FS_B1A_TREE_END v3i_t28_A1_lod
+[2026.10.13-10.04.52:861][320]LogPython: FS_B1A_RENDER_BEGIN v3i_t28_A1_lod
+[2026.10.13-10.04.53:380][329]LogPython: FS_B1A_RENDER_END v3i_t28_A1_lod
+[2026.10.13-10.04.54:566][330]LogPython: FS_B1A_TREE_BEGIN v3i_t28_B1_id
+[2026.10.13-10.04.54:597][330]LogPython: FS_B1A_TREE_END v3i_t28_B1_id
+[2026.10.13-10.04.57:470][381]LogPython: FS_B1A_RENDER_BEGIN v3i_t28_B1_id
+[2026.10.13-10.04.58:364][390]LogPython: FS_B1A_RENDER_END v3i_t28_B1_id
+[2026.10.13-10.04.59:527][391]LogPython: FS_B1A_TREE_BEGIN v3i_t28_B1_lod
+[2026.10.13-10.04.59:559][391]LogPython: FS_B1A_TREE_END v3i_t28_B1_lod
+[2026.10.13-10.05.01:128][442]LogPython: FS_B1A_RENDER_BEGIN v3i_t28_B1_lod
+[2026.10.13-10.05.01:546][451]LogPython: FS_B1A_RENDER_END v3i_t28_B1_lod
+[2026.10.13-10.05.02:695][452]LogPython: FS_B1A_TREE_BEGIN v3i_t30_A1_id
+[2026.10.13-10.05.02:740][452]LogPython: FS_B1A_TREE_END v3i_t30_A1_id
+[2026.10.13-10.05.05:300][503]LogPython: FS_B1A_RENDER_BEGIN v3i_t30_A1_id
+[2026.10.13-10.05.06:179][512]LogPython: FS_B1A_RENDER_END v3i_t30_A1_id
+[2026.10.13-10.05.07:383][513]LogPython: FS_B1A_TREE_BEGIN v3i_t30_A1_lod
+[2026.10.13-10.05.07:425][513]LogPython: FS_B1A_TREE_END v3i_t30_A1_lod
+[2026.10.13-10.05.09:095][559]LogPython: FS_B1A_RENDER_BEGIN v3i_t30_A1_lod
+[2026.10.13-10.05.09:588][569]LogPython: FS_B1A_RENDER_END v3i_t30_A1_lod
+[2026.10.13-10.05.10:754][569]LogPython: FS_B1A_TREE_BEGIN v3i_t30_B1_id
+[2026.10.13-10.05.10:788][569]LogPython: FS_B1A_TREE_END v3i_t30_B1_id
+[2026.10.13-10.05.13:384][620]LogPython: FS_B1A_RENDER_BEGIN v3i_t30_B1_id
+[2026.10.13-10.05.14:351][629]LogPython: FS_B1A_RENDER_END v3i_t30_B1_id
+[2026.10.13-10.05.15:514][630]LogPython: FS_B1A_TREE_BEGIN v3i_t30_B1_lod
+[2026.10.13-10.05.15:548][630]LogPython: FS_B1A_TREE_END v3i_t30_B1_lod
+[2026.10.13-10.05.17:198][681]LogPython: FS_B1A_RENDER_BEGIN v3i_t30_B1_lod
+[2026.10.13-10.05.17:693][691]LogPython: FS_B1A_RENDER_END v3i_t30_B1_lod
+[2026.10.13-10.05.18:840][691]LogPython: FS_B1A_TREE_BEGIN v5i_agl200_a030_A1_id
+[2026.10.13-10.05.18:881][691]LogPython: FS_B1A_TREE_END v5i_agl200_a030_A1_id
+[2026.10.13-10.05.21:889][742]LogPython: FS_B1A_RENDER_BEGIN v5i_agl200_a030_A1_id
+[2026.10.13-10.05.22:787][751]LogPython: FS_B1A_RENDER_END v5i_agl200_a030_A1_id
+[2026.10.13-10.05.23:927][752]LogPython: FS_B1A_TREE_BEGIN v5i_agl200_a030_A1_lod
+[2026.10.13-10.05.23:969][752]LogPython: FS_B1A_TREE_END v5i_agl200_a030_A1_lod
+[2026.10.13-10.05.26:254][803]LogPython: FS_B1A_RENDER_BEGIN v5i_agl200_a030_A1_lod
+[2026.10.13-10.05.26:997][812]LogPython: FS_B1A_RENDER_END v5i_agl200_a030_A1_lod
+[2026.10.13-10.05.28:140][813]LogPython: FS_B1A_TREE_BEGIN v5i_agl200_a030_B1_id
+[2026.10.13-10.05.28:171][813]LogPython: FS_B1A_TREE_END v5i_agl200_a030_B1_id
+[2026.10.13-10.05.29:739][864]LogPython: FS_B1A_RENDER_BEGIN v5i_agl200_a030_B1_id
+[2026.10.13-10.05.30:393][873]LogPython: FS_B1A_RENDER_END v5i_agl200_a030_B1_id
+[2026.10.13-10.05.31:521][874]LogPython: FS_B1A_TREE_BEGIN v5i_agl200_a030_B1_lod
+[2026.10.13-10.05.31:553][874]LogPython: FS_B1A_TREE_END v5i_agl200_a030_B1_lod
+[2026.10.13-10.05.32:372][925]LogPython: FS_B1A_RENDER_BEGIN v5i_agl200_a030_B1_lod
+[2026.10.13-10.05.32:656][934]LogPython: FS_B1A_RENDER_END v5i_agl200_a030_B1_lod
+[2026.10.13-10.05.33:761][935]LogPython: FS_B1A_TREE_BEGIN v5i_agl200_a060_A1_id
+[2026.10.13-10.05.33:800][935]LogPython: FS_B1A_TREE_END v5i_agl200_a060_A1_id
+[2026.10.13-10.05.35:415][986]LogPython: FS_B1A_RENDER_BEGIN v5i_agl200_a060_A1_id
+[2026.10.13-10.05.36:052][995]LogPython: FS_B1A_RENDER_END v5i_agl200_a060_A1_id
+[2026.10.13-10.05.37:153][996]LogPython: FS_B1A_TREE_BEGIN v5i_agl200_a060_A1_lod
+[2026.10.13-10.05.37:191][996]LogPython: FS_B1A_TREE_END v5i_agl200_a060_A1_lod
+[2026.10.13-10.05.37:964][ 47]LogPython: FS_B1A_RENDER_BEGIN v5i_agl200_a060_A1_lod
+[2026.10.13-10.05.38:226][ 56]LogPython: FS_B1A_RENDER_END v5i_agl200_a060_A1_lod
+[2026.10.13-10.05.39:351][ 57]LogPython: FS_B1A_TREE_BEGIN v5i_agl200_a060_B1_id
+[2026.10.13-10.05.39:383][ 57]LogPython: FS_B1A_TREE_END v5i_agl200_a060_B1_id
+[2026.10.13-10.05.40:958][108]LogPython: FS_B1A_RENDER_BEGIN v5i_agl200_a060_B1_id
+[2026.10.13-10.05.41:613][117]LogPython: FS_B1A_RENDER_END v5i_agl200_a060_B1_id
+[2026.10.13-10.05.42:743][118]LogPython: FS_B1A_TREE_BEGIN v5i_agl200_a060_B1_lod
+[2026.10.13-10.05.42:775][118]LogPython: FS_B1A_TREE_END v5i_agl200_a060_B1_lod
+[2026.10.13-10.05.43:630][169]LogPython: FS_B1A_RENDER_BEGIN v5i_agl200_a060_B1_lod
+[2026.10.13-10.05.43:909][178]LogPython: FS_B1A_RENDER_END v5i_agl200_a060_B1_lod
+[2026.10.13-10.05.45:072][179]LogPython: FS_B1A_TREE_BEGIN v5i_agl200_a120_A1_id
+[2026.10.13-10.05.45:114][179]LogPython: FS_B1A_TREE_END v5i_agl200_a120_A1_id
+[2026.10.13-10.05.46:784][230]LogPython: FS_B1A_RENDER_BEGIN v5i_agl200_a120_A1_id
+[2026.10.13-10.05.47:423][239]LogPython: FS_B1A_RENDER_END v5i_agl200_a120_A1_id
+[2026.10.13-10.05.48:529][240]LogPython: FS_B1A_TREE_BEGIN v5i_agl200_a120_A1_lod
+[2026.10.13-10.05.48:567][240]LogPython: FS_B1A_TREE_END v5i_agl200_a120_A1_lod
+[2026.10.13-10.05.49:411][291]LogPython: FS_B1A_RENDER_BEGIN v5i_agl200_a120_A1_lod
+[2026.10.13-10.05.49:700][300]LogPython: FS_B1A_RENDER_END v5i_agl200_a120_A1_lod
+[2026.10.13-10.05.50:831][301]LogPython: FS_B1A_TREE_BEGIN v5i_agl200_a120_B1_id
+[2026.10.13-10.05.50:862][301]LogPython: FS_B1A_TREE_END v5i_agl200_a120_B1_id
+[2026.10.13-10.05.52:476][352]LogPython: FS_B1A_RENDER_BEGIN v5i_agl200_a120_B1_id
+[2026.10.13-10.05.53:115][361]LogPython: FS_B1A_RENDER_END v5i_agl200_a120_B1_id
+[2026.10.13-10.05.54:260][362]LogPython: FS_B1A_TREE_BEGIN v5i_agl200_a120_B1_lod
+[2026.10.13-10.05.54:291][362]LogPython: FS_B1A_TREE_END v5i_agl200_a120_B1_lod
+[2026.10.13-10.05.55:101][413]LogPython: FS_B1A_RENDER_BEGIN v5i_agl200_a120_B1_lod
+[2026.10.13-10.05.55:378][422]LogPython: FS_B1A_RENDER_END v5i_agl200_a120_B1_lod
+[2026.10.13-10.05.56:484][423]LogPython: FS_B1A_TREE_BEGIN v5i_agl200_a150_A1_id
+[2026.10.13-10.05.56:523][423]LogPython: FS_B1A_TREE_END v5i_agl200_a150_A1_id
+[2026.10.13-10.05.58:171][474]LogPython: FS_B1A_RENDER_BEGIN v5i_agl200_a150_A1_id
+[2026.10.13-10.05.58:793][483]LogPython: FS_B1A_RENDER_END v5i_agl200_a150_A1_id
+[2026.10.13-10.05.59:890][484]LogPython: FS_B1A_TREE_BEGIN v5i_agl200_a150_A1_lod
+[2026.10.13-10.05.59:930][484]LogPython: FS_B1A_TREE_END v5i_agl200_a150_A1_lod
+[2026.10.13-10.06.00:744][535]LogPython: FS_B1A_RENDER_BEGIN v5i_agl200_a150_A1_lod
+[2026.10.13-10.06.01:021][544]LogPython: FS_B1A_RENDER_END v5i_agl200_a150_A1_lod
+[2026.10.13-10.06.02:155][545]LogPython: FS_B1A_TREE_BEGIN v5i_agl200_a150_B1_id
+[2026.10.13-10.06.02:187][545]LogPython: FS_B1A_TREE_END v5i_agl200_a150_B1_id
+[2026.10.13-10.06.03:809][596]LogPython: FS_B1A_RENDER_BEGIN v5i_agl200_a150_B1_id
+[2026.10.13-10.06.04:447][605]LogPython: FS_B1A_RENDER_END v5i_agl200_a150_B1_id
+[2026.10.13-10.06.05:583][606]LogPython: FS_B1A_TREE_BEGIN v5i_agl200_a150_B1_lod
+[2026.10.13-10.06.05:615][606]LogPython: FS_B1A_TREE_END v5i_agl200_a150_B1_lod
+[2026.10.13-10.06.06:490][657]LogPython: FS_B1A_RENDER_BEGIN v5i_agl200_a150_B1_lod
+[2026.10.13-10.06.06:790][666]LogPython: FS_B1A_RENDER_END v5i_agl200_a150_B1_lod
+[2026.10.13-10.06.07:899][667]LogPython: FS_B1A_TREE_BEGIN v5i_agl200_a210_A1_id
+[2026.10.13-10.06.07:939][667]LogPython: FS_B1A_TREE_END v5i_agl200_a210_A1_id
+[2026.10.13-10.06.09:467][718]LogPython: FS_B1A_RENDER_BEGIN v5i_agl200_a210_A1_id
+[2026.10.13-10.06.10:072][727]LogPython: FS_B1A_RENDER_END v5i_agl200_a210_A1_id
+[2026.10.13-10.06.11:183][728]LogPython: FS_B1A_TREE_BEGIN v5i_agl200_a210_A1_lod
+[2026.10.13-10.06.11:224][728]LogPython: FS_B1A_TREE_END v5i_agl200_a210_A1_lod
+[2026.10.13-10.06.11:912][779]LogPython: FS_B1A_RENDER_BEGIN v5i_agl200_a210_A1_lod
+[2026.10.13-10.06.12:150][788]LogPython: FS_B1A_RENDER_END v5i_agl200_a210_A1_lod
+[2026.10.13-10.06.13:284][789]LogPython: FS_B1A_TREE_BEGIN v5i_agl200_a210_B1_id
+[2026.10.13-10.06.13:316][789]LogPython: FS_B1A_TREE_END v5i_agl200_a210_B1_id
+[2026.10.13-10.06.14:848][840]LogPython: FS_B1A_RENDER_BEGIN v5i_agl200_a210_B1_id
+[2026.10.13-10.06.15:463][849]LogPython: FS_B1A_RENDER_END v5i_agl200_a210_B1_id
+[2026.10.13-10.06.16:602][850]LogPython: FS_B1A_TREE_BEGIN v5i_agl200_a210_B1_lod
+[2026.10.13-10.06.16:633][850]LogPython: FS_B1A_TREE_END v5i_agl200_a210_B1_lod
+[2026.10.13-10.06.17:354][901]LogPython: FS_B1A_RENDER_BEGIN v5i_agl200_a210_B1_lod
+[2026.10.13-10.06.17:598][910]LogPython: FS_B1A_RENDER_END v5i_agl200_a210_B1_lod
+[2026.10.13-10.06.18:704][911]LogPython: FS_B1A_TREE_BEGIN v5i_agl200_a240_A1_id
+[2026.10.13-10.06.18:743][911]LogPython: FS_B1A_TREE_END v5i_agl200_a240_A1_id
+[2026.10.13-10.06.20:315][962]LogPython: FS_B1A_RENDER_BEGIN v5i_agl200_a240_A1_id
+[2026.10.13-10.06.20:954][971]LogPython: FS_B1A_RENDER_END v5i_agl200_a240_A1_id
+[2026.10.13-10.06.22:086][972]LogPython: FS_B1A_TREE_BEGIN v5i_agl200_a240_A1_lod
+[2026.10.13-10.06.22:129][972]LogPython: FS_B1A_TREE_END v5i_agl200_a240_A1_lod
+[2026.10.13-10.06.22:844][ 23]LogPython: FS_B1A_RENDER_BEGIN v5i_agl200_a240_A1_lod
+[2026.10.13-10.06.23:090][ 32]LogPython: FS_B1A_RENDER_END v5i_agl200_a240_A1_lod
+[2026.10.13-10.06.24:238][ 33]LogPython: FS_B1A_TREE_BEGIN v5i_agl200_a240_B1_id
+[2026.10.13-10.06.24:271][ 33]LogPython: FS_B1A_TREE_END v5i_agl200_a240_B1_id
+[2026.10.13-10.06.25:858][ 84]LogPython: FS_B1A_RENDER_BEGIN v5i_agl200_a240_B1_id
+[2026.10.13-10.06.26:486][ 93]LogPython: FS_B1A_RENDER_END v5i_agl200_a240_B1_id
+[2026.10.13-10.06.27:662][ 94]LogPython: FS_B1A_TREE_BEGIN v5i_agl200_a240_B1_lod
+[2026.10.13-10.06.27:695][ 94]LogPython: FS_B1A_TREE_END v5i_agl200_a240_B1_lod
+[2026.10.13-10.06.28:443][145]LogPython: FS_B1A_RENDER_BEGIN v5i_agl200_a240_B1_lod
+[2026.10.13-10.06.28:699][154]LogPython: FS_B1A_RENDER_END v5i_agl200_a240_B1_lod
+[2026.10.13-10.06.29:801][155]LogPython: FS_B1A_TREE_BEGIN v5i_agl200_a300_A1_id
+[2026.10.13-10.06.29:840][155]LogPython: FS_B1A_TREE_END v5i_agl200_a300_A1_id
+[2026.10.13-10.06.31:410][206]LogPython: FS_B1A_RENDER_BEGIN v5i_agl200_a300_A1_id
+[2026.10.13-10.06.32:023][215]LogPython: FS_B1A_RENDER_END v5i_agl200_a300_A1_id
+[2026.10.13-10.06.33:126][216]LogPython: FS_B1A_TREE_BEGIN v5i_agl200_a300_A1_lod
+[2026.10.13-10.06.33:166][216]LogPython: FS_B1A_TREE_END v5i_agl200_a300_A1_lod
+[2026.10.13-10.06.33:887][267]LogPython: FS_B1A_RENDER_BEGIN v5i_agl200_a300_A1_lod
+[2026.10.13-10.06.34:159][276]LogPython: FS_B1A_RENDER_END v5i_agl200_a300_A1_lod
+[2026.10.13-10.06.35:515][277]LogPython: FS_B1A_TREE_BEGIN v5i_agl200_a300_B1_id
+[2026.10.13-10.06.35:547][277]LogPython: FS_B1A_TREE_END v5i_agl200_a300_B1_id
+[2026.10.13-10.06.37:196][328]LogPython: FS_B1A_RENDER_BEGIN v5i_agl200_a300_B1_id
+[2026.10.13-10.06.37:870][337]LogPython: FS_B1A_RENDER_END v5i_agl200_a300_B1_id
+[2026.10.13-10.06.39:128][338]LogPython: FS_B1A_TREE_BEGIN v5i_agl200_a300_B1_lod
+[2026.10.13-10.06.39:160][338]LogPython: FS_B1A_TREE_END v5i_agl200_a300_B1_lod
+[2026.10.13-10.06.41:470][389]LogPython: FS_B1A_RENDER_BEGIN v5i_agl200_a300_B1_lod
+[2026.10.13-10.06.42:145][398]LogPython: FS_B1A_RENDER_END v5i_agl200_a300_B1_lod
+[2026.10.13-10.06.43:295][399]LogPython: FS_B1A_TREE_BEGIN v5i_agl200_a330_A1_id
+[2026.10.13-10.06.43:336][399]LogPython: FS_B1A_TREE_END v5i_agl200_a330_A1_id
+[2026.10.13-10.06.46:906][450]LogPython: FS_B1A_RENDER_BEGIN v5i_agl200_a330_A1_id
+[2026.10.13-10.06.48:055][459]LogPython: FS_B1A_RENDER_END v5i_agl200_a330_A1_id
+[2026.10.13-10.06.49:267][460]LogPython: FS_B1A_TREE_BEGIN v5i_agl200_a330_A1_lod
+[2026.10.13-10.06.49:307][460]LogPython: FS_B1A_TREE_END v5i_agl200_a330_A1_lod
+[2026.10.13-10.06.51:423][511]LogPython: FS_B1A_RENDER_BEGIN v5i_agl200_a330_A1_lod
+[2026.10.13-10.06.52:077][520]LogPython: FS_B1A_RENDER_END v5i_agl200_a330_A1_lod
+[2026.10.13-10.06.53:269][521]LogPython: FS_B1A_TREE_BEGIN v5i_agl200_a330_B1_id
+[2026.10.13-10.06.53:303][521]LogPython: FS_B1A_TREE_END v5i_agl200_a330_B1_id
+[2026.10.13-10.06.57:017][572]LogPython: FS_B1A_RENDER_BEGIN v5i_agl200_a330_B1_id
+[2026.10.13-10.06.58:031][581]LogPython: FS_B1A_RENDER_END v5i_agl200_a330_B1_id
+[2026.10.13-10.06.59:195][582]LogPython: FS_B1A_TREE_BEGIN v5i_agl200_a330_B1_lod
+[2026.10.13-10.06.59:228][582]LogPython: FS_B1A_TREE_END v5i_agl200_a330_B1_lod
+[2026.10.13-10.07.01:133][633]LogPython: FS_B1A_RENDER_BEGIN v5i_agl200_a330_B1_lod
+[2026.10.13-10.07.01:823][642]LogPython: FS_B1A_RENDER_END v5i_agl200_a330_B1_lod
+[2026.10.13-10.07.03:152][644]LogExit: Preparing to exit.
+[2026.10.13-10.07.07:435][644]LogExit: Editor shut down
+[2026.10.13-10.07.07:488][644]LogExit: Transaction tracking system shut down
+[2026.10.13-10.07.09:404][644]LogExit: Object subsystem successfully closed.
+[2026.10.13-10.07.12:868][644]LogExit: Exiting.

@@ -1,0 +1,10 @@
+{
+  "moving_gpu_ranking_allowed": false,
+  "group": "B0",
+  "view": "v1_agl200_p10",
+  "exit_code": 0,
+  "motion_pass": true,
+  "status": "PASS_FS_B1A_RUN",
+  "capture_pass": true,
+  "host_scope": "Intel UHD 770 only"
+}

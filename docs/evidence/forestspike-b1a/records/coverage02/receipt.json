@@ -1,0 +1,125 @@
+{
+  "status": "PASS_FS_B1A_COVERAGE_CAPTURE",
+  "cvars": {
+    "r.VSync": 0.0,
+    "t.MaxFPS": 0.0,
+    "r.ScreenPercentage": 100.0,
+    "r.MotionBlurQuality": 0.0,
+    "r.RayTracing": 0.0,
+    "foliage.ForceLOD": -1.0,
+    "r.ForceLOD": -1.0,
+    "foliage.LODDistanceScale": 1.0,
+    "foliage.RandomLODRange": 0.0,
+    "r.ViewDistanceScale": 1.0
+  },
+  "coverage_spec": {
+    "target": 0.7,
+    "tolerance": 0.01,
+    "max_arm_difference": 0.005,
+    "px": 2048,
+    "ortho_m": 1000,
+    "camera_z_m": 1000,
+    "definition": "Actual normal-auto-LOD orthographic tree pixels inside the common analytic forest mask / forest-mask pixels. End culling disabled only for physical density calibration; normal 500m culling in all perspective measurements."
+  },
+  "captures": [
+    {
+      "arm": "A",
+      "count": 30200,
+      "name": "coverage_A",
+      "file": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\ForestSpike\\Saved\\ForestSpike\\b1a\\coverage02\\captures\\coverage_A.png",
+      "sha256": "fc92de8cb3384c1b2de22848025ee0f437254e5bcc01056f967424d57f42d066",
+      "res": [
+        2048,
+        2048
+      ],
+      "instances": {
+        "Tree_A": 30200,
+        "Tree_B_dense_rounded": 0,
+        "Tree_B_horizontal_tiered": 0,
+        "Tree_B_open_vase": 0,
+        "Tree_B_tall_columnar": 0
+      }
+    },
+    {
+      "arm": "B",
+      "count": 30100,
+      "name": "coverage_B",
+      "file": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\ForestSpike\\Saved\\ForestSpike\\b1a\\coverage02\\captures\\coverage_B.png",
+      "sha256": "daefe49e49444589469cde74cabcfdc6230cdfac7f014e372f7d4d489e2de7b6",
+      "res": [
+        2048,
+        2048
+      ],
+      "instances": {
+        "Tree_A": 0,
+        "Tree_B_dense_rounded": 11946,
+        "Tree_B_horizontal_tiered": 6026,
+        "Tree_B_open_vase": 6044,
+        "Tree_B_tall_columnar": 6084
+      }
+    }
+  ],
+  "error": null,
+  "mesh_readback": {
+    "Tree_A": {
+      "triangles": [
+        28,
+        28,
+        28
+      ],
+      "screens": [
+        1.0,
+        0.07999999821186066,
+        0.029999999329447746
+      ]
+    },
+    "Tree_B_dense_rounded": {
+      "triangles": [
+        120,
+        36,
+        20
+      ],
+      "screens": [
+        1.0,
+        0.07999999821186066,
+        0.029999999329447746
+      ]
+    },
+    "Tree_B_horizontal_tiered": {
+      "triangles": [
+        112,
+        38,
+        20
+      ],
+      "screens": [
+        1.0,
+        0.07999999821186066,
+        0.029999999329447746
+      ]
+    },
+    "Tree_B_open_vase": {
+      "triangles": [
+        102,
+        40,
+        20
+      ],
+      "screens": [
+        1.0,
+        0.07999999821186066,
+        0.029999999329447746
+      ]
+    },
+    "Tree_B_tall_columnar": {
+      "triangles": [
+        108,
+        38,
+        20
+      ],
+      "screens": [
+        1.0,
+        0.07999999821186066,
+        0.029999999329447746
+      ]
+    }
+  }
+}

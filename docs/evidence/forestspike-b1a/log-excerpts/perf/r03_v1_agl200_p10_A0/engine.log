@@ -1,0 +1,137 @@
+LogWindows: Started CrashReportClient (pid=26868)
+LogCsvProfiler: Display: Metadata set : platform="Windows"
+LogCsvProfiler: Display: Metadata set : config="Development"
+LogCsvProfiler: Display: Metadata set : buildversion="++UE5+Release-5.8-CL-55116800"
+LogCsvProfiler: Display: Metadata set : engineversion="5.8.0-55116800+++UE5+Release-5.8"
+LogCsvProfiler: Display: Metadata set : enginereleaseversion="5.8.0"
+LogCsvProfiler: Display: Metadata set : os="Windows 11 (25H2) [10.0.26200.9457] "
+LogCsvProfiler: Display: Metadata set : cpu="GenuineIntel|12th Gen Intel(R) Core(TM) i7-12700"
+LogCsvProfiler: Display: Metadata set : pgoenabled="0"
+LogCsvProfiler: Display: Metadata set : pgoprofilingenabled="0"
+LogCsvProfiler: Display: Metadata set : ltoenabled="0"
+LogCsvProfiler: Display: Metadata set : asan="0"
+LogCsvProfiler: Display: Metadata set : mergedmodules="0"
+LogCsvProfiler: Display: Metadata set : compacttset="0"
+LogCsvProfiler: Display: Metadata set : commandline="" D:\Users\EDDY\Documents\GitHub\air-combat-world\unreal\ForestSpike\ForestSpike.uproject /Game/ForestSpike/B1a_20261013a/Perf/L_FSB1a_20261013a_A0_v1_agl200_p10 -game -windowed -ResX=1920 -ResY=1080 -nosound -nosplash -unattended -benchmark -fps=60 -ExecCmds="r.VSync 0,t.MaxFPS 0,r.ScreenPercentage 100,r.MotionBlurQuality 0,r.RayTracing 0,foliage.ForceLOD -1,r.ForceLOD -1,foliage.LODDistanceScale 1,foliage.RandomLODRange 0,r.ViewDistanceScale 1" -csvCaptureFrames=601 -ExitAfterCsvProfiling -csvMetadata=tag=r03_v1_agl200_p10_A0,level=L_FSB1a_20261013a_A0_v1_agl200_p10,run_id=5e05a7c80fd240ab8593c26063cf524a -abslog=D:\Users\EDDY\Documents\GitHub\air-combat-world\unreal\ForestSpike\Saved\ForestSpike\b1a\perf\r03_v1_agl200_p10_A0\engine.log""
+LogCsvProfiler: Display: Metadata set : loginid="0e4fcd404acde9fd84f51499fbe8dfcc"
+LogCsvProfiler: Display: Metadata set : tag="r03_v1_agl200_p10_A0"
+LogCsvProfiler: Display: Metadata set : level="L_FSB1a_20261013a_A0_v1_agl200_p10"
+LogCsvProfiler: Display: Metadata set : run_id="5e05a7c80fd240ab8593c26063cf524a"
+LogCsvProfiler: Display: Capture Starting
+LogCsvProfiler: Doing a boot time capture. Start time offset 0.28
+LogCsvProfiler: Display: Starting CSV processing thread with priority TPri_Lowest
+LogCsvProfiler: Display: Metadata set : csvid="AB43FB224DC3F75CC2E0B78844CA1C09"
+LogCsvProfiler: Display: Capture started. CSV ID: AB43FB224DC3F75CC2E0B78844CA1C09
+LogCsvProfiler: Display: Metadata set : targetframerate="60"
+LogCsvProfiler: Display: Metadata set : starttimestamp="1791880618"
+LogCsvProfiler: Display: Metadata set : namedevents="0"
+LogCsvProfiler: Display: Metadata set : hasgtstalls="0"
+LogCsvProfiler: Display: Metadata set : vsyncenabled="0"
+LogCsvProfiler: Csv profiler benchmark completed (10000 iterations). Time taken: 10.85ms
+LogCsvProfiler: Timing stat ns: 168.51ns
+LogCsvProfiler: Custom stat ns: 102.81ns
+LogCsvProfiler: Display: Metadata set : csvbench_timingstat_ns="168.515000"
+LogCsvProfiler: Display: Metadata set : csvbench_customstat_ns="102.810000"
+LogCsvProfiler: Display: Metadata set : csvbench_duration_ms="10.853800"
+LogCsvProfiler: Display: Metadata set : llm="0"
+LogCsvProfiler: Display: Metadata set : zenstreaming="0"
+LogCsvProfiler: Display: Metadata set : systemresolution.resx="1280"
+LogCsvProfiler: Display: Metadata set : systemresolution.resy="720"
+LogInit: Session CrashGUID >====================================================
+         Session CrashGUID >   UECC-Windows-5CE524CD430632619F30EC948C2D3EB8
+         Session CrashGUID >====================================================
+LogConfig: Applying CVar settings from Section [/Script/CompositeCore.CompositeCorePluginSettings] File [Engine]
+LogConfig: Applying CVar settings from Section [/Script/RenderDocPlugin.RenderDocPluginSettings] File [Engine]
+[2026.10.13-08.37.00:105][  0]LogConfig: Applying CVar settings from Section [/Script/Engine.RendererSettings] File [Engine]
+[2026.10.13-08.37.00:105][  0]LogConfig: Set CVar [[r.GPUCrashDebugging:0]]
+[2026.10.13-08.37.00:105][  0]LogConfig: Applying CVar settings from Section [/Script/Engine.RendererOverrideSettings] File [Engine]
+[2026.10.13-08.37.00:105][  0]LogConfig: Applying CVar settings from Section [/Script/Engine.StreamingSettings] File [Engine]
+[2026.10.13-08.37.00:106][  0]LogConfig: Applying CVar settings from Section [/Script/Engine.GarbageCollectionSettings] File [Engine]
+[2026.10.13-08.37.00:106][  0]LogConfig: Applying CVar settings from Section [/Script/Engine.NetworkSettings] File [Engine]
+[2026.10.13-08.37.00:106][  0]LogConfig: Applying CVar settings from Section [/Script/UnrealEd.CookerSettings] File [Engine]
+[2026.10.13-08.37.00:143][  0]LogCsvProfiler: Display: Metadata set : systemresolution.resx="1920"
+[2026.10.13-08.37.00:143][  0]LogCsvProfiler: Display: Metadata set : systemresolution.resy="1080"
+[2026.10.13-08.37.00:144][  0]LogConfig: Applying CVar settings from Section [ViewDistanceQuality@3] File [Scalability]
+[2026.10.13-08.37.00:144][  0]LogConfig: Applying CVar settings from Section [AntiAliasingQuality@3] File [Scalability]
+[2026.10.13-08.37.00:144][  0]LogConfig: Applying CVar settings from Section [ShadowQuality@3] File [Scalability]
+[2026.10.13-08.37.00:144][  0]LogConfig: Set CVar [[r.Shadow.MaxResolution:2048]]
+[2026.10.13-08.37.00:144][  0]LogConfig: Set CVar [[r.Shadow.MaxCSMResolution:2048]]
+[2026.10.13-08.37.00:144][  0]LogConfig: Set CVar [[r.Shadow.PreShadowResolutionFactor:1.0]]
+[2026.10.13-08.37.00:144][  0]LogConfig: Set CVar [[r.Shadow.Virtual.ResolutionLodBiasDirectional:-1.5]]
+[2026.10.13-08.37.00:144][  0]LogConfig: Set CVar [[r.Shadow.Virtual.ResolutionLodBiasDirectionalMoving:-1.5]]
+[2026.10.13-08.37.00:144][  0]LogConfig: Set CVar [[r.Shadow.Virtual.ResolutionLodBiasLocal:0.0]]
+[2026.10.13-08.37.00:144][  0]LogConfig: Set CVar [[r.Shadow.Virtual.ResolutionLodBiasLocalMoving:1.0]]
+[2026.10.13-08.37.00:144][  0]LogConfig: Applying CVar settings from Section [GlobalIlluminationQuality@3] File [Scalability]
+[2026.10.13-08.37.00:144][  0]LogConfig: Set CVar [[r.LumenScene.SurfaceCache.CardMinResolution:2]]
+[2026.10.13-08.37.00:144][  0]LogConfig: Set CVar [[r.LumenScene.SurfaceCache.CardMaxResolution:512]]
+[2026.10.13-08.37.00:144][  0]LogConfig: Set CVar [[r.LumenScene.Radiosity.HemisphereProbeResolution:4]]
+[2026.10.13-08.37.00:144][  0]LogConfig: Set CVar [[r.Lumen.ScreenProbeGather.RadianceCache.ProbeResolution:32]]
+[2026.10.13-08.37.00:144][  0]LogConfig: Set CVar [[r.Lumen.ScreenProbeGather.TracingOctahedronResolution:8]]
+[2026.10.13-08.37.00:144][  0]LogConfig: Set CVar [[r.Lumen.ScreenProbeGather.FullResolutionJitterWidth:1]]
+[2026.10.13-08.37.00:145][  0]LogConfig: Set CVar [[r.Lumen.TranslucencyVolume.TracingOctahedronResolution:3]]
+[2026.10.13-08.37.00:145][  0]LogConfig: Set CVar [[r.Lumen.TranslucencyVolume.RadianceCache.ProbeResolution:8]]
+[2026.10.13-08.37.00:145][  0]LogConfig: Set CVar [[r.Lumen.TranslucencyVolume.RadianceCache.GridResolution:24]]
+[2026.10.13-08.37.00:145][  0]LogConfig: Applying CVar settings from Section [ReflectionQuality@3] File [Scalability]
+[2026.10.13-08.37.00:145][  0]LogConfig: Applying CVar settings from Section [PostProcessQuality@3] File [Scalability]
+[2026.10.13-08.37.00:145][  0]LogConfig: Set CVar [[r.DOF.Gather.ResolutionDivisor:2         ; lower gathering resolution]]
+[2026.10.13-08.37.00:145][  0]LogConfig: Applying CVar settings from Section [TextureQuality@3] File [Scalability]
+[2026.10.13-08.37.00:145][  0]LogConfig: Applying CVar settings from Section [EffectsQuality@3] File [Scalability]
+[2026.10.13-08.37.00:145][  0]LogConfig: Set CVar [[r.SkyAtmosphere.AerialPerspectiveLUT.DepthResolution:16.0]]
+[2026.10.13-08.37.00:146][  0]LogConfig: Set CVar [[r.HeterogeneousVolumes.Shadows.Resolution:512]]
+[2026.10.13-08.37.00:146][  0]LogConfig: Applying CVar settings from Section [FoliageQuality@3] File [Scalability]
+[2026.10.13-08.37.00:146][  0]LogConfig: Applying CVar settings from Section [ShadingQuality@3] File [Scalability]
+[2026.10.13-08.37.00:146][  0]LogConfig: Applying CVar settings from Section [LandscapeQuality@3] File [Scalability]
+[2026.10.13-08.37.00:148][  0]LogDeviceProfileManager: Pushing Device Profile CVar: [[UI.SlateSDFText.ResolutionLevel:2 -> 2]]
+[2026.10.13-08.37.00:148][  0]LogConfig: Applying CVar settings from Section [Startup] File [../../../Engine/Config/ConsoleVariables.ini]
+[2026.10.13-08.37.00:148][  0]LogConfig: Applying CVar settings from Section [Startup_Windows] File [../../../Engine/Config/ConsoleVariables.ini]
+[2026.10.13-08.37.00:148][  0]LogConfig: Applying CVar settings from Section [ConsoleVariables] File [Engine]
+[2026.10.13-08.37.00:148][  0]LogConfig: Applying CVar settings from Section [ConsoleVariables] File [C:/Users/EDDY/AppData/Local/UnrealEngine/5.8/Saved/Config/WindowsEditor/Editor.ini]
+[2026.10.13-08.37.00:176][  0]LogCsvProfiler: Display: Metadata set : extradevelopmentmemorymb="0"
+[2026.10.13-08.37.01:650][  0]LogCsvProfiler: Display: Metadata set : verbatimrhiname="D3D12"
+[2026.10.13-08.37.01:650][  0]LogCsvProfiler: Display: Metadata set : rhiname="D3D12"
+[2026.10.13-08.37.01:650][  0]LogCsvProfiler: Display: Metadata set : rhifeaturelevel="SM5"
+[2026.10.13-08.37.01:650][  0]LogCsvProfiler: Display: Metadata set : shaderplatform="PCD3D_SM5"
+[2026.10.13-08.37.01:650][  0]LogCsvProfiler: Display: Metadata set : gpu="Intel(R) UHD Graphics 770"
+[2026.10.13-08.37.01:650][  0]LogCsvProfiler: Display: Metadata set : gpudriver="31.0.101.4502"
+[2026.10.13-08.37.14:449][  0]LogCsvProfiler: Display: Metadata set : deviceprofile="WindowsEditor"
+[2026.10.13-08.37.15:720][  0]LogConfig: Applying CVar settings from Section [/Script/CQTest.CQTestSettings] File [Engine]
+[2026.10.13-08.37.17:710][  0]LogConfig: Applying CVar settings from Section [/Script/PCG.PCGEngineSettings] File [Engine]
+[2026.10.13-08.37.17:844][  0]LogConfig: Applying CVar settings from Section [/Script/NNEDenoiser.NNEDenoiserSettings] File [Engine]
+[2026.10.13-08.37.19:787][  0]LogCsvProfiler: Display: Metadata set : largeworldcoordinates="1"
+[2026.10.13-08.37.21:228][  0]LogCsvProfiler: Display: Metadata set : raytracing="0"
+[2026.10.13-08.37.21:330][  0]LogCsvProfiler: Display: CSVEvent "GC" [Frame 0]
+[2026.10.13-08.37.21:647][  0]LogWorld: Bringing World /Game/ForestSpike/B1a_20261013a/Perf/L_FSB1a_20261013a_A0_v1_agl200_p10.L_FSB1a_20261013a_A0_v1_agl200_p10 up for play (max tick rate 0) at 2026.10.13-16.37.21
+[2026.10.13-08.37.22:877][  0]LogCsvProfiler: Display: Metadata set : streamingpoolsizemb="1000"
+[2026.10.13-08.37.23:765][  0]LogCsvProfiler: Display: CSVEvent "Cmd: r.VSync 0" [Frame 1]
+[2026.10.13-08.37.23:765][  0]LogCsvProfiler: Display: CSVEvent "Cmd: r.VSync 0" [Frame 1]
+[2026.10.13-08.37.23:765][  0]LogCsvProfiler: Display: CSVEvent "Cmd: t.MaxFPS 0" [Frame 1]
+[2026.10.13-08.37.23:765][  0]LogCsvProfiler: Display: CSVEvent "Cmd: t.MaxFPS 0" [Frame 1]
+[2026.10.13-08.37.23:765][  0]LogCsvProfiler: Display: CSVEvent "Cmd: r.ScreenPercentage 100" [Frame 1]
+[2026.10.13-08.37.23:765][  0]LogCsvProfiler: Display: CSVEvent "Cmd: r.ScreenPercentage 100" [Frame 1]
+[2026.10.13-08.37.23:765][  0]LogCsvProfiler: Display: CSVEvent "Cmd: r.MotionBlurQuality 0" [Frame 1]
+[2026.10.13-08.37.23:765][  0]LogCsvProfiler: Display: CSVEvent "Cmd: r.MotionBlurQuality 0" [Frame 1]
+[2026.10.13-08.37.23:765][  0]LogCsvProfiler: Display: CSVEvent "Cmd: r.RayTracing 0" [Frame 1]
+[2026.10.13-08.37.23:765][  0]LogCsvProfiler: Display: CSVEvent "Cmd: r.RayTracing 0" [Frame 1]
+[2026.10.13-08.37.23:765][  0]LogCsvProfiler: Display: CSVEvent "Cmd: foliage.ForceLOD -1" [Frame 1]
+[2026.10.13-08.37.23:765][  0]LogCsvProfiler: Display: CSVEvent "Cmd: foliage.ForceLOD -1" [Frame 1]
+[2026.10.13-08.37.23:765][  0]LogCsvProfiler: Display: CSVEvent "Cmd: r.ForceLOD -1" [Frame 1]
+[2026.10.13-08.37.23:765][  0]LogCsvProfiler: Display: CSVEvent "Cmd: r.ForceLOD -1" [Frame 1]
+[2026.10.13-08.37.23:765][  0]LogCsvProfiler: Display: CSVEvent "Cmd: foliage.LODDistanceScale 1" [Frame 1]
+[2026.10.13-08.37.23:765][  0]LogCsvProfiler: Display: CSVEvent "Cmd: foliage.LODDistanceScale 1" [Frame 1]
+[2026.10.13-08.37.23:769][  0]LogCsvProfiler: Display: CSVEvent "Cmd: foliage.RandomLODRange 0" [Frame 1]
+[2026.10.13-08.37.23:769][  0]LogCsvProfiler: Display: CSVEvent "Cmd: foliage.RandomLODRange 0" [Frame 1]
+[2026.10.13-08.37.23:769][  1]LogCsvProfiler: Display: CSVEvent "Cmd: r.ViewDistanceScale 1" [Frame 1]
+[2026.10.13-08.37.23:769][  1]LogCsvProfiler: Display: CSVEvent "Cmd: r.ViewDistanceScale 1" [Frame 1]
+[2026.10.13-08.37.43:273][600]LogCsvProfiler: Display: Metadata set : endtimestamp="1791880663"
+[2026.10.13-08.37.43:273][600]LogCsvProfiler: Display: Metadata set : captureduration="44.775178"
+[2026.10.13-08.37.43:273][600]LogCsvProfiler: Display: Metadata set : csvmaxfilebytesreached="0"
+[2026.10.13-08.37.43:306][600]LogCsvProfiler: Display: Capture Stop requested
+[2026.10.13-08.37.43:364][600]LogCsvProfiler: Display: Capture Ending
+[2026.10.13-08.37.43:377][601]LogCsvProfiler: Display: Capture Ended. Writing CSV to file : ../../../../../../Users/EDDY/AppData/Local/UnrealEngine/5.8/Saved/Profiling/CSV/Profile(20261013_163658).csv
+[2026.10.13-08.37.43:377][601]LogCsvProfiler: Display:   Frames : 601
+[2026.10.13-08.37.43:377][601]LogCsvProfiler: Display:   Peak memory usage  : 1.37MB
+[2026.10.13-08.37.43:377][601]LogCsvProfiler: Display:   CSV finalize time : 0.014 seconds
+[2026.10.13-08.37.44:435][602]LogExit: Preparing to exit.
+[2026.10.13-08.37.44:799][602]LogExit: Game engine shut down
+[2026.10.13-08.37.44:936][602]LogExit: Object subsystem successfully closed.
+[2026.10.13-08.37.45:379][602]LogExit: Exiting.

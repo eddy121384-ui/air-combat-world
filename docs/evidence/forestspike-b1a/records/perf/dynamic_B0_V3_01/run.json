@@ -1,0 +1,10 @@
+{
+  "group": "B0",
+  "moving_gpu_ranking_allowed": false,
+  "exit_code": 0,
+  "motion_pass": true,
+  "host_scope": "Intel UHD 770 only",
+  "status": "PASS_FS_B1A_RUN",
+  "capture_pass": true,
+  "view": "V3"
+}

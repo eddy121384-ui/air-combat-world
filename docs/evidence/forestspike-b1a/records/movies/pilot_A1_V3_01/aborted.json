@@ -1,0 +1,6 @@
+{
+  "reason": "Native frame logs reached requested end but hidden viewport produced zero PNGs and finalization did not complete",
+  "process_id": 26188,
+  "status": "FAIL_FS_B1A_MOVIE_PILOT",
+  "aborted_utc": "2026-10-13T07:14:13.5708587+00:00"
+}

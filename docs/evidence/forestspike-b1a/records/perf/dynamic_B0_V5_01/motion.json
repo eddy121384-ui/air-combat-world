@@ -1,0 +1,26 @@
+{
+  "status": "PASS_FS_B1A_MOTION",
+  "csv_sha256": "c778b985a84bb772a38253a73717fd8e55fd827a1b671cca283f6ff9cb741e86",
+  "group": "B0",
+  "view": "V5",
+  "errors": [],
+  "host_scope": "Intel UHD 770 only",
+  "flight_samples": 841,
+  "flight_csv_range": [
+    120,
+    960
+  ],
+  "flight_seconds": 14.0,
+  "registered_distance_m": 2059.7037049340374,
+  "measured_distance_m": 2059.7036358120076,
+  "endpoint_error_m": 8.000000016181729e-06,
+  "frames": 1024,
+  "invalid_boot_frames": 1,
+  "startup_sequence_frame": 1,
+  "warm_displacement_m": 8.000000016181729e-06,
+  "max_errors": {
+    "position_error_m": 0.0001926950641642403,
+    "forward_error_deg": 0.0032492780992643237,
+    "up_error_deg": 0.003732837420387524
+  }
+}

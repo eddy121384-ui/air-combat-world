@@ -1,0 +1,16 @@
+{
+  "script": "fs_b1a_reopen.py",
+  "args": [
+    "\"D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\ForestSpike\\ForestSpike.uproject\"",
+    "-ExecutePythonScript=\"D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\adapters\\unreal\\forestspike\\fs_b1a_reopen.py\"",
+    "-unattended",
+    "-nopause",
+    "-nosound",
+    "-abslog=\"D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\ForestSpike\\Saved\\ForestSpike\\b1a\\reopen02\\engine.log\""
+  ],
+  "tag": "reopen02",
+  "env": {
+    "ACW_FS_B1A_BUILD": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\ForestSpike\\Saved\\ForestSpike\\b1a\\build01\\receipt.json"
+  },
+  "started_utc": "2026-10-13T07:05:20.9325031+00:00"
+}

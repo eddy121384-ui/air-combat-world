@@ -1,0 +1,478 @@
+{
+  "status": "PASS_FS_B1A_EIGHT_PATH_RECHECKS",
+  "rows": [
+    {
+      "tag": "dynamic_A0_V3_01",
+      "motion": {
+        "status": "PASS_FS_B1A_MOTION",
+        "csv_sha256": "9b661719d30dd0570c3c551d40a0fce611ce9ef80d6e3f52e425daecded89e20",
+        "group": "A0",
+        "view": "V3",
+        "errors": [],
+        "host_scope": "Intel UHD 770 only",
+        "flight_samples": 1081,
+        "flight_csv_range": [
+          120,
+          1200
+        ],
+        "flight_seconds": 18.0,
+        "registered_distance_m": 546.7875307983065,
+        "measured_distance_m": 546.7875409012673,
+        "endpoint_error_m": 1.9595917981902405e-05,
+        "frames": 1264,
+        "invalid_boot_frames": 1,
+        "startup_sequence_frame": 1,
+        "warm_displacement_m": 8.000000016181729e-06,
+        "max_errors": {
+          "position_error_m": 9.899494933483578e-05,
+          "forward_error_deg": 0.0032214616368570026,
+          "up_error_deg": 0.0010503543126446297
+        }
+      },
+      "core_camera_and_centre_ground_ray": {
+        "eligible_flight_samples": 506,
+        "eligible_intervals": 505,
+        "eligible_seconds": 8.416666666666666,
+        "first_path_t_s": 23.583333333333336,
+        "last_path_t_s": 32.0
+      },
+      "moving_timing_diagnostic_only": {
+        "GPUTime": {
+          "median_ms": 30.7595,
+          "p95_ms": 35.0777
+        },
+        "FrameTime": {
+          "median_ms": 32.9175,
+          "p95_ms": 39.3677
+        },
+        "GameThreadTime": {
+          "median_ms": 4.5567,
+          "p95_ms": 6.864
+        },
+        "RenderThreadTime": {
+          "median_ms": 32.9182,
+          "p95_ms": 39.805
+        },
+        "RHIThreadTime": {
+          "median_ms": 4.1261,
+          "p95_ms": 5.9504
+        }
+      },
+      "prohibition": "Intel UHD 770 only; GPU moving timings are diagnostic, never ranked or used for N/S performance conclusions."
+    },
+    {
+      "tag": "dynamic_A1_V3_01",
+      "motion": {
+        "status": "PASS_FS_B1A_MOTION",
+        "csv_sha256": "b87e674cb44b25b671e78a41f4187b1429db825703620b53bad103f8f617b4a1",
+        "group": "A1",
+        "view": "V3",
+        "errors": [],
+        "host_scope": "Intel UHD 770 only",
+        "flight_samples": 1081,
+        "flight_csv_range": [
+          120,
+          1200
+        ],
+        "flight_seconds": 18.0,
+        "registered_distance_m": 546.7875307983065,
+        "measured_distance_m": 546.7875409012673,
+        "endpoint_error_m": 1.9595917981902405e-05,
+        "frames": 1264,
+        "invalid_boot_frames": 1,
+        "startup_sequence_frame": 1,
+        "warm_displacement_m": 8.000000016181729e-06,
+        "max_errors": {
+          "position_error_m": 9.899494933483578e-05,
+          "forward_error_deg": 0.0032214616368570026,
+          "up_error_deg": 0.0010503543126446297
+        }
+      },
+      "core_camera_and_centre_ground_ray": {
+        "eligible_flight_samples": 506,
+        "eligible_intervals": 505,
+        "eligible_seconds": 8.416666666666666,
+        "first_path_t_s": 23.583333333333336,
+        "last_path_t_s": 32.0
+      },
+      "moving_timing_diagnostic_only": {
+        "GPUTime": {
+          "median_ms": 31.2079,
+          "p95_ms": 33.6079
+        },
+        "FrameTime": {
+          "median_ms": 33.401,
+          "p95_ms": 37.5026
+        },
+        "GameThreadTime": {
+          "median_ms": 4.3493,
+          "p95_ms": 6.5281
+        },
+        "RenderThreadTime": {
+          "median_ms": 33.3918,
+          "p95_ms": 37.8418
+        },
+        "RHIThreadTime": {
+          "median_ms": 4.0822,
+          "p95_ms": 5.6913
+        }
+      },
+      "prohibition": "Intel UHD 770 only; GPU moving timings are diagnostic, never ranked or used for N/S performance conclusions."
+    },
+    {
+      "tag": "dynamic_B0_V3_01",
+      "motion": {
+        "status": "PASS_FS_B1A_MOTION",
+        "csv_sha256": "48e610bbc79b8853dba2b2c52d65a69045d32243baca0e67b714fe6a53f9c11f",
+        "group": "B0",
+        "view": "V3",
+        "errors": [],
+        "host_scope": "Intel UHD 770 only",
+        "flight_samples": 1081,
+        "flight_csv_range": [
+          120,
+          1200
+        ],
+        "flight_seconds": 18.0,
+        "registered_distance_m": 546.7875307983065,
+        "measured_distance_m": 546.7875409012673,
+        "endpoint_error_m": 1.9595917981902405e-05,
+        "frames": 1264,
+        "invalid_boot_frames": 1,
+        "startup_sequence_frame": 1,
+        "warm_displacement_m": 8.000000016181729e-06,
+        "max_errors": {
+          "position_error_m": 9.899494933483578e-05,
+          "forward_error_deg": 0.0032214616368570026,
+          "up_error_deg": 0.0010503543126446297
+        }
+      },
+      "core_camera_and_centre_ground_ray": {
+        "eligible_flight_samples": 506,
+        "eligible_intervals": 505,
+        "eligible_seconds": 8.416666666666666,
+        "first_path_t_s": 23.583333333333336,
+        "last_path_t_s": 32.0
+      },
+      "moving_timing_diagnostic_only": {
+        "GPUTime": {
+          "median_ms": 30.2584,
+          "p95_ms": 32.211
+        },
+        "FrameTime": {
+          "median_ms": 31.9777,
+          "p95_ms": 34.0551
+        },
+        "GameThreadTime": {
+          "median_ms": 2.8584,
+          "p95_ms": 3.4763
+        },
+        "RenderThreadTime": {
+          "median_ms": 31.9558,
+          "p95_ms": 34.0012
+        },
+        "RHIThreadTime": {
+          "median_ms": 2.2707,
+          "p95_ms": 3.0806
+        }
+      },
+      "prohibition": "Intel UHD 770 only; GPU moving timings are diagnostic, never ranked or used for N/S performance conclusions."
+    },
+    {
+      "tag": "dynamic_B1_V3_01",
+      "motion": {
+        "status": "PASS_FS_B1A_MOTION",
+        "csv_sha256": "cf164e6eb13fda7818c191eab42baac247ee49e190a7235d0526448b67b980d1",
+        "group": "B1",
+        "view": "V3",
+        "errors": [],
+        "host_scope": "Intel UHD 770 only",
+        "flight_samples": 1081,
+        "flight_csv_range": [
+          120,
+          1200
+        ],
+        "flight_seconds": 18.0,
+        "registered_distance_m": 546.7875307983065,
+        "measured_distance_m": 546.7875409012673,
+        "endpoint_error_m": 1.9595917981902405e-05,
+        "frames": 1264,
+        "invalid_boot_frames": 1,
+        "startup_sequence_frame": 1,
+        "warm_displacement_m": 8.000000016181729e-06,
+        "max_errors": {
+          "position_error_m": 9.899494933483578e-05,
+          "forward_error_deg": 0.0032214616368570026,
+          "up_error_deg": 0.0010503543126446297
+        }
+      },
+      "core_camera_and_centre_ground_ray": {
+        "eligible_flight_samples": 506,
+        "eligible_intervals": 505,
+        "eligible_seconds": 8.416666666666666,
+        "first_path_t_s": 23.583333333333336,
+        "last_path_t_s": 32.0
+      },
+      "moving_timing_diagnostic_only": {
+        "GPUTime": {
+          "median_ms": 30.8979,
+          "p95_ms": 33.6179
+        },
+        "FrameTime": {
+          "median_ms": 32.6028,
+          "p95_ms": 35.5899
+        },
+        "GameThreadTime": {
+          "median_ms": 2.914,
+          "p95_ms": 3.8081
+        },
+        "RenderThreadTime": {
+          "median_ms": 32.5804,
+          "p95_ms": 35.5799
+        },
+        "RHIThreadTime": {
+          "median_ms": 2.3361,
+          "p95_ms": 3.3936
+        }
+      },
+      "prohibition": "Intel UHD 770 only; GPU moving timings are diagnostic, never ranked or used for N/S performance conclusions."
+    },
+    {
+      "tag": "dynamic_A0_V5_01",
+      "motion": {
+        "status": "PASS_FS_B1A_MOTION",
+        "csv_sha256": "5d5a38d71e583ea2273f9af0b3f9164a5e5cc98676e42c0b498781a142b57699",
+        "group": "A0",
+        "view": "V5",
+        "errors": [],
+        "host_scope": "Intel UHD 770 only",
+        "flight_samples": 841,
+        "flight_csv_range": [
+          120,
+          960
+        ],
+        "flight_seconds": 14.0,
+        "registered_distance_m": 2059.7037049340374,
+        "measured_distance_m": 2059.7036358120076,
+        "endpoint_error_m": 8.000000016181729e-06,
+        "frames": 1024,
+        "invalid_boot_frames": 1,
+        "startup_sequence_frame": 1,
+        "warm_displacement_m": 8.000000016181729e-06,
+        "max_errors": {
+          "position_error_m": 0.0001926950641642403,
+          "forward_error_deg": 0.0032492780992643237,
+          "up_error_deg": 0.003732837420387524
+        }
+      },
+      "core_camera_and_centre_ground_ray": {
+        "eligible_flight_samples": 841,
+        "eligible_intervals": 840,
+        "eligible_seconds": 14.0,
+        "first_path_t_s": 0.0,
+        "last_path_t_s": 14.0
+      },
+      "moving_timing_diagnostic_only": {
+        "GPUTime": {
+          "median_ms": 34.829,
+          "p95_ms": 39.4706
+        },
+        "FrameTime": {
+          "median_ms": 36.7111,
+          "p95_ms": 41.4546
+        },
+        "GameThreadTime": {
+          "median_ms": 2.948,
+          "p95_ms": 3.7122
+        },
+        "RenderThreadTime": {
+          "median_ms": 36.6673,
+          "p95_ms": 41.4603
+        },
+        "RHIThreadTime": {
+          "median_ms": 2.3985,
+          "p95_ms": 3.4482
+        }
+      },
+      "prohibition": "Intel UHD 770 only; GPU moving timings are diagnostic, never ranked or used for N/S performance conclusions."
+    },
+    {
+      "tag": "dynamic_A1_V5_01",
+      "motion": {
+        "status": "PASS_FS_B1A_MOTION",
+        "csv_sha256": "ac0a49603f952a88bf5771c9351cbaac49529dd0c240b47dadecc852876a077e",
+        "group": "A1",
+        "view": "V5",
+        "errors": [],
+        "host_scope": "Intel UHD 770 only",
+        "flight_samples": 841,
+        "flight_csv_range": [
+          120,
+          960
+        ],
+        "flight_seconds": 14.0,
+        "registered_distance_m": 2059.7037049340374,
+        "measured_distance_m": 2059.7036358120076,
+        "endpoint_error_m": 8.000000016181729e-06,
+        "frames": 1024,
+        "invalid_boot_frames": 1,
+        "startup_sequence_frame": 1,
+        "warm_displacement_m": 8.000000016181729e-06,
+        "max_errors": {
+          "position_error_m": 0.0001926950641642403,
+          "forward_error_deg": 0.0032492780992643237,
+          "up_error_deg": 0.003732837420387524
+        }
+      },
+      "core_camera_and_centre_ground_ray": {
+        "eligible_flight_samples": 841,
+        "eligible_intervals": 840,
+        "eligible_seconds": 14.0,
+        "first_path_t_s": 0.0,
+        "last_path_t_s": 14.0
+      },
+      "moving_timing_diagnostic_only": {
+        "GPUTime": {
+          "median_ms": 39.179,
+          "p95_ms": 47.1921
+        },
+        "FrameTime": {
+          "median_ms": 40.7415,
+          "p95_ms": 52.2203
+        },
+        "GameThreadTime": {
+          "median_ms": 4.5063,
+          "p95_ms": 7.9607
+        },
+        "RenderThreadTime": {
+          "median_ms": 40.7729,
+          "p95_ms": 52.0937
+        },
+        "RHIThreadTime": {
+          "median_ms": 4.4433,
+          "p95_ms": 6.5176
+        }
+      },
+      "prohibition": "Intel UHD 770 only; GPU moving timings are diagnostic, never ranked or used for N/S performance conclusions."
+    },
+    {
+      "tag": "dynamic_B0_V5_01",
+      "motion": {
+        "status": "PASS_FS_B1A_MOTION",
+        "csv_sha256": "c778b985a84bb772a38253a73717fd8e55fd827a1b671cca283f6ff9cb741e86",
+        "group": "B0",
+        "view": "V5",
+        "errors": [],
+        "host_scope": "Intel UHD 770 only",
+        "flight_samples": 841,
+        "flight_csv_range": [
+          120,
+          960
+        ],
+        "flight_seconds": 14.0,
+        "registered_distance_m": 2059.7037049340374,
+        "measured_distance_m": 2059.7036358120076,
+        "endpoint_error_m": 8.000000016181729e-06,
+        "frames": 1024,
+        "invalid_boot_frames": 1,
+        "startup_sequence_frame": 1,
+        "warm_displacement_m": 8.000000016181729e-06,
+        "max_errors": {
+          "position_error_m": 0.0001926950641642403,
+          "forward_error_deg": 0.0032492780992643237,
+          "up_error_deg": 0.003732837420387524
+        }
+      },
+      "core_camera_and_centre_ground_ray": {
+        "eligible_flight_samples": 841,
+        "eligible_intervals": 840,
+        "eligible_seconds": 14.0,
+        "first_path_t_s": 0.0,
+        "last_path_t_s": 14.0
+      },
+      "moving_timing_diagnostic_only": {
+        "GPUTime": {
+          "median_ms": 35.718,
+          "p95_ms": 40.9515
+        },
+        "FrameTime": {
+          "median_ms": 37.5248,
+          "p95_ms": 43.3085
+        },
+        "GameThreadTime": {
+          "median_ms": 3.0885,
+          "p95_ms": 4.731
+        },
+        "RenderThreadTime": {
+          "median_ms": 37.5189,
+          "p95_ms": 43.2977
+        },
+        "RHIThreadTime": {
+          "median_ms": 2.5734,
+          "p95_ms": 3.9904
+        }
+      },
+      "prohibition": "Intel UHD 770 only; GPU moving timings are diagnostic, never ranked or used for N/S performance conclusions."
+    },
+    {
+      "tag": "dynamic_B1_V5_01",
+      "motion": {
+        "status": "PASS_FS_B1A_MOTION",
+        "csv_sha256": "1d37583c0481447276d2fe29fe798fa43b9a52bdab9ac647913b5e4dfe908fa0",
+        "group": "B1",
+        "view": "V5",
+        "errors": [],
+        "host_scope": "Intel UHD 770 only",
+        "flight_samples": 841,
+        "flight_csv_range": [
+          120,
+          960
+        ],
+        "flight_seconds": 14.0,
+        "registered_distance_m": 2059.7037049340374,
+        "measured_distance_m": 2059.7036358120076,
+        "endpoint_error_m": 8.000000016181729e-06,
+        "frames": 1024,
+        "invalid_boot_frames": 1,
+        "startup_sequence_frame": 1,
+        "warm_displacement_m": 8.000000016181729e-06,
+        "max_errors": {
+          "position_error_m": 0.0001926950641642403,
+          "forward_error_deg": 0.0032492780992643237,
+          "up_error_deg": 0.003732837420387524
+        }
+      },
+      "core_camera_and_centre_ground_ray": {
+        "eligible_flight_samples": 841,
+        "eligible_intervals": 840,
+        "eligible_seconds": 14.0,
+        "first_path_t_s": 0.0,
+        "last_path_t_s": 14.0
+      },
+      "moving_timing_diagnostic_only": {
+        "GPUTime": {
+          "median_ms": 35.3426,
+          "p95_ms": 37.9865
+        },
+        "FrameTime": {
+          "median_ms": 37.2312,
+          "p95_ms": 39.8439
+        },
+        "GameThreadTime": {
+          "median_ms": 2.8467,
+          "p95_ms": 3.3866
+        },
+        "RenderThreadTime": {
+          "median_ms": 37.1959,
+          "p95_ms": 39.8617
+        },
+        "RHIThreadTime": {
+          "median_ms": 2.2923,
+          "p95_ms": 3.1881
+        }
+      },
+      "prohibition": "Intel UHD 770 only; GPU moving timings are diagnostic, never ranked or used for N/S performance conclusions."
+    }
+  ],
+  "scope": "Fixed-step sequence time, not achieved real-time FPS. Analytic centre-ray/core dwell is a view eligibility check, not visibility attribution."
+}

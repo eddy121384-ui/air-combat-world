@@ -1,0 +1,43 @@
+{
+  "schema": "forestspike.b1a_visual_addendum/2",
+  "reason": "Source benchmark requires active in-core dwell. Initial V3 first-six-second clip has camera outside the core. Before four-arm video comparison, select the earliest registered V3 key after camera enters the core, followed by six seconds. This geometric eligibility rule does not use performance or image-difference outcomes.",
+  "V3": {
+    "capture": "Retain complete native 0..1200 PNG sequence for each group; independently verify complete 18s flight from game CSV",
+    "primary_comparison_frames": [
+      720,
+      1080
+    ],
+    "path_time_seconds": [
+      24,
+      30
+    ],
+    "comparison_seconds": 6.0,
+    "camera_inside_core": true
+  },
+  "V5": {
+    "capture": "Matched native short clips 0..400 including warm hold; independently verify full 14s orbit from game CSV",
+    "primary_comparison_frames": [
+      120,
+      400
+    ],
+    "orbit_degrees": [
+      0,
+      120
+    ],
+    "comparison_seconds": 4.666666666666667,
+    "camera_inside_core": true
+  },
+  "F11_static": {
+    "poses": "All four registered static altitudes, all four groups",
+    "backend": "Native SceneCapture2D, persistent temporal state, same baseline TAA/shadows/exposure",
+    "warm_capture_ticks": 120,
+    "consecutive_native_frames": 64,
+    "metric": "Per-pixel display-referred D65 sRGB L* temporal standard deviation (population, ddof=0), p95 inside same-view ID forest mask; report near/far separately",
+    "threshold_scope": "PR20 F11 thresholds are calibration-pending; descriptive measurements cannot establish production-quality PASS",
+    "caveat": "Low far jitter in S-off is not visual superiority because far forest is deliberately absent"
+  },
+  "preservation": "Original visual_windows.json and all interrupted/failed/pilot outputs remain intact. No shader, fade, material, shadow, geometry, LOD or performance-window change.",
+  "registered_utc": "2026-10-13T08:10:27.366835+00:00",
+  "prior_visual_windows_sha256": "06cd8ae61c84899d2fd087edc617842afe108aa544ec5a13083fea690c1997eb",
+  "scene_capture_alignment": "Explicitly match baseline ScreenSpace reflections for every arm; UE SceneCapture otherwise defaults reflections to None. No shader/material/LOD/fade/shadow changes."
+}

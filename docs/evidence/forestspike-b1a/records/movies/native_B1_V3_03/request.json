@@ -1,0 +1,46 @@
+{
+  "started_utc": "2026-10-13T09:39:22.4730113+00:00",
+  "scope": "Native MRQ deferred frames; disabled cinematic/game/forced-LOD overrides; not a performance run",
+  "args": [
+    "\"D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\ForestSpike\\ForestSpikeB1a.uproject\"",
+    "/Game/ForestSpike/B1a_20261013a/Perf/L_FSB1a_20261013a_B1_V3",
+    "-game",
+    "-windowed",
+    "-RenderOffscreen",
+    "-ResX=1920",
+    "-ResY=1080",
+    "-ForceRes",
+    "-nosound",
+    "-nosplash",
+    "-NoScreenMessages",
+    "-unattended",
+    "-benchmark",
+    "-fps=60",
+    "-MoviePipelineConfig=/Game/ForestSpike/B1a_20261013a/Movies/MRQ_native_B1_V3_03.MRQ_native_B1_V3_03",
+    "-LevelSequence=/Game/ForestSpike/B1a_20261013a/Perf/LS_L_FSB1a_20261013a_B1_V3.LS_L_FSB1a_20261013a_B1_V3",
+    "-MoviePipelineLocalExecutorClass=/Script/MovieRenderPipelineCore.MoviePipelineInProcessExecutor",
+    "-abslog=\"D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\ForestSpike\\Saved\\ForestSpike\\b1a\\movies\\native_B1_V3_03\\engine.log\""
+  ],
+  "tag": "native_B1_V3_03",
+  "config": {
+    "tag": "native_B1_V3_03",
+    "config": "/Game/ForestSpike/B1a_20261013a/Movies/MRQ_native_B1_V3_03.MRQ_native_B1_V3_03",
+    "map": "/Game/ForestSpike/B1a_20261013a/Perf/L_FSB1a_20261013a_B1_V3",
+    "sequence": "/Game/ForestSpike/B1a_20261013a/Perf/LS_L_FSB1a_20261013a_B1_V3.LS_L_FSB1a_20261013a_B1_V3",
+    "group": "B1",
+    "path_id": "V3",
+    "frames": 1201,
+    "res": [
+      1920,
+      1080
+    ],
+    "game_overrides_enabled": false,
+    "force_lod_zero": false,
+    "cinematic_quality": false,
+    "spatial_samples": 1,
+    "temporal_samples": 1,
+    "aa_override": false,
+    "warm_hold_in_sequence": 120,
+    "output_directory": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\ForestSpike\\Saved\\ForestSpike\\b1a\\movies\\native_B1_V3_03\\frames"
+  }
+}

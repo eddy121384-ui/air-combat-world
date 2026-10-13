@@ -1,0 +1,672 @@
+[
+  {
+    "file": "csv-round-01-metadata-redacted.zip",
+    "sha256": "a3f78da48cfb65eadae83a042dd0719a62c18fead73fba7cd9067095cd063ffd",
+    "entries": [
+      {
+        "tag": "r01_v1_agl50_p15_A0",
+        "entry": "r01_v1_agl50_p15_A0/Profile(20261013_155706).csv",
+        "raw_sha256": "fe382289417941f406e8e83879f7deb629c5114808db4bcc6109012f5763b7ad",
+        "public_sha256": "0940eb2616db3d16c28cbd99d26d69551081e2c9e3197ee1a187ae0db6d6ef50",
+        "bytes": 1422161,
+        "transformation": "Only UE loginid metadata redacted; all timing values, frames and other metadata unchanged."
+      },
+      {
+        "tag": "r01_v1_agl50_p15_A1",
+        "entry": "r01_v1_agl50_p15_A1/Profile(20261013_155803).csv",
+        "raw_sha256": "a8768b9a99d997ef24865ccb41c3403d4a35c29b878fcde048b60c5beff7a547",
+        "public_sha256": "c2d8883a9ebc5f562a9d8144e155fa25260c39a051ec0859f92ca5594eb2a2e4",
+        "bytes": 1425809,
+        "transformation": "Only UE loginid metadata redacted; all timing values, frames and other metadata unchanged."
+      },
+      {
+        "tag": "r01_v1_agl50_p15_B1",
+        "entry": "r01_v1_agl50_p15_B1/Profile(20261013_155903).csv",
+        "raw_sha256": "8319663182e489515696ca9fee05ed2c9ef9040782663ed2c605b70144d66fd8",
+        "public_sha256": "e4434d12dbe62099b15341b82a2dadef06b75a9c0da30f42fa8165264cc172b2",
+        "bytes": 1429325,
+        "transformation": "Only UE loginid metadata redacted; all timing values, frames and other metadata unchanged."
+      },
+      {
+        "tag": "r01_v1_agl50_p15_B0",
+        "entry": "r01_v1_agl50_p15_B0/Profile(20261013_155956).csv",
+        "raw_sha256": "bdf70cb4b6f45d81b1b9261745d53dab877ea0391245b03a78789209aedfdbd0",
+        "public_sha256": "560efce769f0194a5fca8c25937b995ee2426eb0f6c757173d3abb68a5c158e8",
+        "bytes": 1421393,
+        "transformation": "Only UE loginid metadata redacted; all timing values, frames and other metadata unchanged."
+      },
+      {
+        "tag": "r01_v1_agl200_p10_A0",
+        "entry": "r01_v1_agl200_p10_A0/Profile(20261013_160048).csv",
+        "raw_sha256": "b0ce6ec1c622b9819e82b9f9ddbabeef7143ef47f8b956ba35492ea166f789d1",
+        "public_sha256": "9de1edc900a1a8fc18f2721131fd5f8f615be6d8e35334b845064577a739d24c",
+        "bytes": 1422555,
+        "transformation": "Only UE loginid metadata redacted; all timing values, frames and other metadata unchanged."
+      },
+      {
+        "tag": "r01_v1_agl200_p10_A1",
+        "entry": "r01_v1_agl200_p10_A1/Profile(20261013_160139).csv",
+        "raw_sha256": "1f351e7aa7bdc85796fde459c54f9c7057de381f876dd512239f2d1f4dff6f1a",
+        "public_sha256": "8a8e4a85e4b081ba4915c06fd9737665fe3f728685c099140acafb9c73472347",
+        "bytes": 1423129,
+        "transformation": "Only UE loginid metadata redacted; all timing values, frames and other metadata unchanged."
+      },
+      {
+        "tag": "r01_v1_agl200_p10_B1",
+        "entry": "r01_v1_agl200_p10_B1/Profile(20261013_160234).csv",
+        "raw_sha256": "531a16a0a835028355ec28e12f2d22a130ee44bd02d89785081f576f24f1ff81",
+        "public_sha256": "1fd0e7e25ff8ae90c8d1eebadbf6f41e5f76aabb5b319b936c7ff99c3fe94eec",
+        "bytes": 1425718,
+        "transformation": "Only UE loginid metadata redacted; all timing values, frames and other metadata unchanged."
+      },
+      {
+        "tag": "r01_v1_agl200_p10_B0",
+        "entry": "r01_v1_agl200_p10_B0/Profile(20261013_160328).csv",
+        "raw_sha256": "01d4aad6df1110ff64a27ceefc0735b9182c2c0b0fd187ca59bb998f22639134",
+        "public_sha256": "c29bd7611a3c2352739d48c6b0ec41ac8d17df4841b89801d1adfdd6e9acd0e3",
+        "bytes": 1428291,
+        "transformation": "Only UE loginid metadata redacted; all timing values, frames and other metadata unchanged."
+      },
+      {
+        "tag": "r01_v1_agl500_p15_A0",
+        "entry": "r01_v1_agl500_p15_A0/Profile(20261013_160419).csv",
+        "raw_sha256": "934ca2eb00faa46ac04618381ecce789c48f772b433c6e33fe7431136b46bf69",
+        "public_sha256": "48ce5ac82a03deec585c0fbc829e1e0ded6b9580d21b1cd020dffe9f361d517c",
+        "bytes": 1425283,
+        "transformation": "Only UE loginid metadata redacted; all timing values, frames and other metadata unchanged."
+      },
+      {
+        "tag": "r01_v1_agl500_p15_A1",
+        "entry": "r01_v1_agl500_p15_A1/Profile(20261013_160510).csv",
+        "raw_sha256": "56d0f5c18ff44388ff6d675b692012b1df34deecc3d503aaa4c3ba51c7c257e5",
+        "public_sha256": "966904500142c5d8a372225d943cab80dbf3f0a70265b9f19ff1f513afac6dd7",
+        "bytes": 1427820,
+        "transformation": "Only UE loginid metadata redacted; all timing values, frames and other metadata unchanged."
+      },
+      {
+        "tag": "r01_v1_agl500_p15_B1",
+        "entry": "r01_v1_agl500_p15_B1/Profile(20261013_160601).csv",
+        "raw_sha256": "eb4ad16a7262b74cc62b378dab7b9a3736ad04da19f55be8a1ab347f2b88e560",
+        "public_sha256": "2aa0d4decfaed2a7cd3f81f49c3d3d46aee85a6cc4738fe277c0a9113460d7cd",
+        "bytes": 1424772,
+        "transformation": "Only UE loginid metadata redacted; all timing values, frames and other metadata unchanged."
+      },
+      {
+        "tag": "r01_v1_agl500_p15_B0",
+        "entry": "r01_v1_agl500_p15_B0/Profile(20261013_160652).csv",
+        "raw_sha256": "b27cdc44e40bb1afabb811c54f31d11fb273d276fff1a58b47892cfe49d2574c",
+        "public_sha256": "f0e3cf7c6c13636e03dcd1ee816a3a284a9500b2b7db272e4c0dd7b88749a747",
+        "bytes": 1428730,
+        "transformation": "Only UE loginid metadata redacted; all timing values, frames and other metadata unchanged."
+      },
+      {
+        "tag": "r01_v1_agl1000_p20_A0",
+        "entry": "r01_v1_agl1000_p20_A0/Profile(20261013_160741).csv",
+        "raw_sha256": "630abf817dab105bf11bffa086d47c11569c0afeea07a615460dd654a90a5ecc",
+        "public_sha256": "087c464d08ed5cf2da046fb2e159ff9ec1eff295f951d7a19646a9f086bf40f7",
+        "bytes": 1422847,
+        "transformation": "Only UE loginid metadata redacted; all timing values, frames and other metadata unchanged."
+      },
+      {
+        "tag": "r01_v1_agl1000_p20_A1",
+        "entry": "r01_v1_agl1000_p20_A1/Profile(20261013_160829).csv",
+        "raw_sha256": "00f776e62824bd9e3cc296163b4b9d55634e2965c742fe814910711bada8b76d",
+        "public_sha256": "07ee154ad52d5540c3f18548b53df4d9accb2c23c432c60350f240bd2ed71b55",
+        "bytes": 1423562,
+        "transformation": "Only UE loginid metadata redacted; all timing values, frames and other metadata unchanged."
+      },
+      {
+        "tag": "r01_v1_agl1000_p20_B1",
+        "entry": "r01_v1_agl1000_p20_B1/Profile(20261013_160918).csv",
+        "raw_sha256": "9cc08799cac99d3dc927bff9f60ac3a1c91985bc66ce01bd00ad6a3205eaec27",
+        "public_sha256": "947756bc13fd599bc4fd43259f20f192aaa1e658c13a28387a0386d972c020ee",
+        "bytes": 1425603,
+        "transformation": "Only UE loginid metadata redacted; all timing values, frames and other metadata unchanged."
+      },
+      {
+        "tag": "r01_v1_agl1000_p20_B0",
+        "entry": "r01_v1_agl1000_p20_B0/Profile(20261013_161007).csv",
+        "raw_sha256": "53b440ce0227e8ca98b4b6ffce0aebede79380cb630557fdd12cbe7b54f93950",
+        "public_sha256": "61d0c369538483b02b282af12f5089b2e79a8bc8d8a5c1c5b53412d48304fe0d",
+        "bytes": 1420495,
+        "transformation": "Only UE loginid metadata redacted; all timing values, frames and other metadata unchanged."
+      }
+    ]
+  },
+  {
+    "file": "csv-round-02-metadata-redacted.zip",
+    "sha256": "d3563b073dbdfeccd957e3d845fc28bc8bb857fb5bef530b55dccce1f807ad8a",
+    "entries": [
+      {
+        "tag": "r02_v1_agl200_p10_A1",
+        "entry": "r02_v1_agl200_p10_A1/Profile(20261013_161056).csv",
+        "raw_sha256": "776160d2ccf4cad2989d7b88161cf5c13ebefb48bd05afc04207ce4125145a1f",
+        "public_sha256": "5db10b3a0a928ef9a92966e318f7b7c1d001e29433f45a5ecd19e993daed027f",
+        "bytes": 1423599,
+        "transformation": "Only UE loginid metadata redacted; all timing values, frames and other metadata unchanged."
+      },
+      {
+        "tag": "r02_v1_agl200_p10_B0",
+        "entry": "r02_v1_agl200_p10_B0/Profile(20261013_161147).csv",
+        "raw_sha256": "31df5f6f9f6082a6eda88aaa907acc3304f0c09e769310a3becdc6f5fb9b80ef",
+        "public_sha256": "a9ee35727fc4a758b37d6870876cb32a01942c842368f525bd737d380e273277",
+        "bytes": 1432183,
+        "transformation": "Only UE loginid metadata redacted; all timing values, frames and other metadata unchanged."
+      },
+      {
+        "tag": "r02_v1_agl200_p10_A0",
+        "entry": "r02_v1_agl200_p10_A0/Profile(20261013_161238).csv",
+        "raw_sha256": "af34665b751ab5c91a911988b73b70628044cc4698178023f05e21ce69e4af68",
+        "public_sha256": "a7a7fd642554d3c4cfc04fa709f8414c359672ebac59257491a6bdd11b4536f3",
+        "bytes": 1428612,
+        "transformation": "Only UE loginid metadata redacted; all timing values, frames and other metadata unchanged."
+      },
+      {
+        "tag": "r02_v1_agl200_p10_B1",
+        "entry": "r02_v1_agl200_p10_B1/Profile(20261013_161329).csv",
+        "raw_sha256": "14b26c9075a23799390b8934ecbfed0ad72b489c16f5fee2e700924dc47dcd3e",
+        "public_sha256": "a8d3ffd7f33154576827bec3468f566dec38721fddcef5d2fb9547320cdc080d",
+        "bytes": 1425946,
+        "transformation": "Only UE loginid metadata redacted; all timing values, frames and other metadata unchanged."
+      },
+      {
+        "tag": "r02_v1_agl500_p15_A1",
+        "entry": "r02_v1_agl500_p15_A1/Profile(20261013_161421).csv",
+        "raw_sha256": "1b4276a9e1e7dde6ddb88568dbbf43aa1355dcb70eee06d2f6e30538008b9edb",
+        "public_sha256": "b815886376b0671ae0f3a4355b4c99574ef260dcd3b090d439a77b3423a7f8de",
+        "bytes": 1427628,
+        "transformation": "Only UE loginid metadata redacted; all timing values, frames and other metadata unchanged."
+      },
+      {
+        "tag": "r02_v1_agl500_p15_B0",
+        "entry": "r02_v1_agl500_p15_B0/Profile(20261013_161512).csv",
+        "raw_sha256": "5b918d16afe2f1614cf7ffeb1f1ec7da6d6ea55006f7a25c029e58bbe6466d0e",
+        "public_sha256": "c47f207e74c7da59767ba6c5ec78b5db1b022a55553c1790194e0d34f73382f2",
+        "bytes": 1427892,
+        "transformation": "Only UE loginid metadata redacted; all timing values, frames and other metadata unchanged."
+      },
+      {
+        "tag": "r02_v1_agl500_p15_A0",
+        "entry": "r02_v1_agl500_p15_A0/Profile(20261013_161603).csv",
+        "raw_sha256": "e53a2b6c118873c5ed28d7430a9c96011dc4cbf9feeb9222ff99b877b8be839f",
+        "public_sha256": "476afe2966dadd617cdaa000042a26831d7a4911a993fde94f1c6aba3a2f4005",
+        "bytes": 1422733,
+        "transformation": "Only UE loginid metadata redacted; all timing values, frames and other metadata unchanged."
+      },
+      {
+        "tag": "r02_v1_agl500_p15_B1",
+        "entry": "r02_v1_agl500_p15_B1/Profile(20261013_161653).csv",
+        "raw_sha256": "13000dd02c771aa16b6d550e3c446ce725d7337241cd6ec2774880ce9bff571a",
+        "public_sha256": "a764a9e7bcedbf800512080d90c693681b943b6b05775b2e80cf37fc30db8584",
+        "bytes": 1427875,
+        "transformation": "Only UE loginid metadata redacted; all timing values, frames and other metadata unchanged."
+      },
+      {
+        "tag": "r02_v1_agl1000_p20_A1",
+        "entry": "r02_v1_agl1000_p20_A1/Profile(20261013_161744).csv",
+        "raw_sha256": "71f3bf690a64d74b4630be1bf9c196b92bcae0843eb9b25b569fd0ddb111eba0",
+        "public_sha256": "406cb0b4eb519a264ae8bf74f5ffcac74a5fc6b558a19a51245478a9abd18a57",
+        "bytes": 1423167,
+        "transformation": "Only UE loginid metadata redacted; all timing values, frames and other metadata unchanged."
+      },
+      {
+        "tag": "r02_v1_agl1000_p20_B0",
+        "entry": "r02_v1_agl1000_p20_B0/Profile(20261013_161832).csv",
+        "raw_sha256": "d8fd1a668be468e952fe80d8ca9c96f48a58127c52ce15b7f72a4e5583be6bfc",
+        "public_sha256": "bfba658b0378cce0ab17e7ce38338ea32876296a8261d722fef6a8e68f60ef2c",
+        "bytes": 1419918,
+        "transformation": "Only UE loginid metadata redacted; all timing values, frames and other metadata unchanged."
+      },
+      {
+        "tag": "r02_v1_agl1000_p20_A0",
+        "entry": "r02_v1_agl1000_p20_A0/Profile(20261013_161921).csv",
+        "raw_sha256": "214435427fd65d983f3153793f97dc3c111712fe7a9014f98b0c6b6b0eba533f",
+        "public_sha256": "480b99ba0758ef9ed493cbc8e0236868c3d4365f7ab7855c5b819786b293c957",
+        "bytes": 1424633,
+        "transformation": "Only UE loginid metadata redacted; all timing values, frames and other metadata unchanged."
+      },
+      {
+        "tag": "r02_v1_agl1000_p20_B1",
+        "entry": "r02_v1_agl1000_p20_B1/Profile(20261013_162009).csv",
+        "raw_sha256": "d5c6a18e7fa276aeaf284e470f462515e9afab96ea0cf9070cdb41c5c7f47b65",
+        "public_sha256": "49550a5555c8d4d352b9664e4c161ba4dc11f3d0d7c041334c27ff0e975fdb3f",
+        "bytes": 1418938,
+        "transformation": "Only UE loginid metadata redacted; all timing values, frames and other metadata unchanged."
+      },
+      {
+        "tag": "r02_v1_agl50_p15_A1",
+        "entry": "r02_v1_agl50_p15_A1/Profile(20261013_162100).csv",
+        "raw_sha256": "05639624f4a48f649d0038cbe6e797189bfa6b43ef01b591de67b81c2abfa5e7",
+        "public_sha256": "f6fa78401db2d66909ab5469603778404014c524bb849ccdba480809a003368a",
+        "bytes": 1429001,
+        "transformation": "Only UE loginid metadata redacted; all timing values, frames and other metadata unchanged."
+      },
+      {
+        "tag": "r02_v1_agl50_p15_B0",
+        "entry": "r02_v1_agl50_p15_B0/Profile(20261013_162151).csv",
+        "raw_sha256": "de731b987f421ee9686f96ccfc5f80e7ddbfb5f17fe179d8e8e8a050bf2b1783",
+        "public_sha256": "b7c24f7be9cc59170fa6556c5547428641f6e6717bf9d838a86b0111d18dca2f",
+        "bytes": 1426629,
+        "transformation": "Only UE loginid metadata redacted; all timing values, frames and other metadata unchanged."
+      },
+      {
+        "tag": "r02_v1_agl50_p15_A0",
+        "entry": "r02_v1_agl50_p15_A0/Profile(20261013_162243).csv",
+        "raw_sha256": "35ed1b9e01cd1cb1b7b1bc39f185fb8432c888c355999a2c071cb0153fd3f156",
+        "public_sha256": "e537b4ff99996343f28fb55bc33504eb004d53e1984ba0b2c73e16b537a1e90e",
+        "bytes": 1422257,
+        "transformation": "Only UE loginid metadata redacted; all timing values, frames and other metadata unchanged."
+      },
+      {
+        "tag": "r02_v1_agl50_p15_B1",
+        "entry": "r02_v1_agl50_p15_B1/Profile(20261013_162334).csv",
+        "raw_sha256": "55123cc64b0b981cf45ba0f94c82ed868be9900fa56d751835a89d083809a50d",
+        "public_sha256": "a4b3d14a8e2cbb5a667cfd18afcde0ad3cf052a1cb444fd3dadfdb95ca4d7e6b",
+        "bytes": 1429619,
+        "transformation": "Only UE loginid metadata redacted; all timing values, frames and other metadata unchanged."
+      }
+    ]
+  },
+  {
+    "file": "csv-round-03-metadata-redacted.zip",
+    "sha256": "03bdbbbcc950c8683741cea65d28e6df12f54b7d9988f128dab9c35c3ea3b4bf",
+    "entries": [
+      {
+        "tag": "r03_v1_agl500_p15_B0",
+        "entry": "r03_v1_agl500_p15_B0/Profile(20261013_162426).csv",
+        "raw_sha256": "9a3ddb181b2f43c362ab5c3aa2bfbc3a46ebffef68654ceeaf39eca50b15ef49",
+        "public_sha256": "3cd1c462a1313c53d9a93a52782dfb11d8bd62c971301a76e7716e710109c982",
+        "bytes": 1427306,
+        "transformation": "Only UE loginid metadata redacted; all timing values, frames and other metadata unchanged."
+      },
+      {
+        "tag": "r03_v1_agl500_p15_B1",
+        "entry": "r03_v1_agl500_p15_B1/Profile(20261013_162515).csv",
+        "raw_sha256": "bd6383f86e09a60f936e83aa5576fffa011f0604656c90e25e906b40dc1c36a1",
+        "public_sha256": "ca7e2926563f06257539fb5e4ddc3576b93b9a794f6caf11831042f09dd0008c",
+        "bytes": 1430087,
+        "transformation": "Only UE loginid metadata redacted; all timing values, frames and other metadata unchanged."
+      },
+      {
+        "tag": "r03_v1_agl500_p15_A1",
+        "entry": "r03_v1_agl500_p15_A1/Profile(20261013_162605).csv",
+        "raw_sha256": "0dbf113c5abcb75ff4d16fa4b6e7e808a028a2a4b552c0bd4c2a8479c0e44562",
+        "public_sha256": "99fca57401177322847212913150026f5b4e9cf9e1d37568db26f618bfcc81f2",
+        "bytes": 1433270,
+        "transformation": "Only UE loginid metadata redacted; all timing values, frames and other metadata unchanged."
+      },
+      {
+        "tag": "r03_v1_agl500_p15_A0",
+        "entry": "r03_v1_agl500_p15_A0/Profile(20261013_162656).csv",
+        "raw_sha256": "8b896b918dc9b19b5d119a3fdf0e149c3bcd0c2cdec8a2d311dae9347ef715a4",
+        "public_sha256": "2d2fb16dde33a0b135ee7f0383c08d7ab14121a4920f1698bbbca18d2b2df648",
+        "bytes": 1424990,
+        "transformation": "Only UE loginid metadata redacted; all timing values, frames and other metadata unchanged."
+      },
+      {
+        "tag": "r03_v1_agl1000_p20_B0",
+        "entry": "r03_v1_agl1000_p20_B0/Profile(20261013_162746).csv",
+        "raw_sha256": "a4f01c1fbe809e723e55550659296607dd54ed00a842a8ddd89cfbf4640ed8de",
+        "public_sha256": "40c3847ae093afbae2d9d597eb2ec96cd81e0772eda1eb1015a2a443d203499c",
+        "bytes": 1419577,
+        "transformation": "Only UE loginid metadata redacted; all timing values, frames and other metadata unchanged."
+      },
+      {
+        "tag": "r03_v1_agl1000_p20_B1",
+        "entry": "r03_v1_agl1000_p20_B1/Profile(20261013_162835).csv",
+        "raw_sha256": "4cce9540f3f986b8ee10bbeed51687351138ccc71fa1146230ad60cff8896122",
+        "public_sha256": "b97f173f9b637da4a52dd1dacbf9f3fa919fd4342c7085baeb579ff1acac4389",
+        "bytes": 1424344,
+        "transformation": "Only UE loginid metadata redacted; all timing values, frames and other metadata unchanged."
+      },
+      {
+        "tag": "r03_v1_agl1000_p20_A1",
+        "entry": "r03_v1_agl1000_p20_A1/Profile(20261013_162924).csv",
+        "raw_sha256": "ec641737a036b3d4488ac6c11e8575cd2364a244f9e01e7601abc31f06a02f0f",
+        "public_sha256": "0b0b47e1b6ab2e970d2953e7ecf550ad44a0ec4371c4c201d825e710ad8f6e5f",
+        "bytes": 1423328,
+        "transformation": "Only UE loginid metadata redacted; all timing values, frames and other metadata unchanged."
+      },
+      {
+        "tag": "r03_v1_agl1000_p20_A0",
+        "entry": "r03_v1_agl1000_p20_A0/Profile(20261013_163014).csv",
+        "raw_sha256": "885c2a1cc3dc24e4955a34a3f006e5e32d0a17178559c4124d9243f48bff2174",
+        "public_sha256": "b167126c2271a5c1bab79eecd80c1c27cb95a6712dcfc1e881efe0827632d4db",
+        "bytes": 1420126,
+        "transformation": "Only UE loginid metadata redacted; all timing values, frames and other metadata unchanged."
+      },
+      {
+        "tag": "r03_v1_agl50_p15_B0",
+        "entry": "r03_v1_agl50_p15_B0/Profile(20261013_163103).csv",
+        "raw_sha256": "1573ab53a8db545e8dc472a95e386694d0b2aabb351a934dbde1ed6e80e1ad60",
+        "public_sha256": "6f4139807142c2172fe0525f5ef7e3140b908dcf2356b66ae1cd1423f50554c8",
+        "bytes": 1424122,
+        "transformation": "Only UE loginid metadata redacted; all timing values, frames and other metadata unchanged."
+      },
+      {
+        "tag": "r03_v1_agl50_p15_B1",
+        "entry": "r03_v1_agl50_p15_B1/Profile(20261013_163154).csv",
+        "raw_sha256": "cb34311ea00dc7601b7955b71e5a987f27fb0b4b6e1696e1da75ad97a3545fdf",
+        "public_sha256": "7de1c57695032244b026f7772cea33a9cae9e00640b3eec855b7900b85e9d7b6",
+        "bytes": 1419836,
+        "transformation": "Only UE loginid metadata redacted; all timing values, frames and other metadata unchanged."
+      },
+      {
+        "tag": "r03_v1_agl50_p15_A1",
+        "entry": "r03_v1_agl50_p15_A1/Profile(20261013_163246).csv",
+        "raw_sha256": "1f3dd488726f59c09be74e6ef88453b051251dbfab926e97f42a48d9d1c4ae7c",
+        "public_sha256": "19fca8668240266b4ed5df4979566f83e2e501a7ea546c417cae422b8f0cbc03",
+        "bytes": 1421120,
+        "transformation": "Only UE loginid metadata redacted; all timing values, frames and other metadata unchanged."
+      },
+      {
+        "tag": "r03_v1_agl50_p15_A0",
+        "entry": "r03_v1_agl50_p15_A0/Profile(20261013_163335).csv",
+        "raw_sha256": "ef1db638aee93fc8343349001f8784bf172d9803368542846e9ef1982d1efd11",
+        "public_sha256": "84f7374c849d86563b3eaf21a1baa8a6642297214e0fd09b4b525c7e9d4ba45e",
+        "bytes": 1422540,
+        "transformation": "Only UE loginid metadata redacted; all timing values, frames and other metadata unchanged."
+      },
+      {
+        "tag": "r03_v1_agl200_p10_B0",
+        "entry": "r03_v1_agl200_p10_B0/Profile(20261013_163426).csv",
+        "raw_sha256": "33d56e9fcafbe858d7bc73b9a427e00a10eac8915ed8f1c746151d8ee11f0fbb",
+        "public_sha256": "2d23a33d109b795d4c1f60669875ddc1bf1a5ee38933e71daaf83ffa4e5a4b4b",
+        "bytes": 1424682,
+        "transformation": "Only UE loginid metadata redacted; all timing values, frames and other metadata unchanged."
+      },
+      {
+        "tag": "r03_v1_agl200_p10_B1",
+        "entry": "r03_v1_agl200_p10_B1/Profile(20261013_163517).csv",
+        "raw_sha256": "d5f196673dfdfe16c072c89ac651edcc91303615262b77a98736671ac5daf993",
+        "public_sha256": "9df21dd8167b1fb5dece942980c9ff041cbd8fbef3df5131f581b5caacb88279",
+        "bytes": 1429687,
+        "transformation": "Only UE loginid metadata redacted; all timing values, frames and other metadata unchanged."
+      },
+      {
+        "tag": "r03_v1_agl200_p10_A1",
+        "entry": "r03_v1_agl200_p10_A1/Profile(20261013_163608).csv",
+        "raw_sha256": "217e4f44d868c36200f40fe5402af08458b23ce959baeea7166e8abe7fc0089d",
+        "public_sha256": "8c6332b57c6407496d3a246adb6db3975b2677e2f42a0fdbf1afa0a8359eb61c",
+        "bytes": 1427813,
+        "transformation": "Only UE loginid metadata redacted; all timing values, frames and other metadata unchanged."
+      },
+      {
+        "tag": "r03_v1_agl200_p10_A0",
+        "entry": "r03_v1_agl200_p10_A0/Profile(20261013_163658).csv",
+        "raw_sha256": "a9860ecd28d396bfe268eda7b454ec39b86655fc35531e52dc1c55ee8eb021b5",
+        "public_sha256": "2f8cc10412706c68e46c8a5d74d394200ca81ca2cc7b47bdc27e46fcdf1e60fd",
+        "bytes": 1426117,
+        "transformation": "Only UE loginid metadata redacted; all timing values, frames and other metadata unchanged."
+      }
+    ]
+  },
+  {
+    "file": "csv-round-04-metadata-redacted.zip",
+    "sha256": "92fb82461f7b500bbfa201dedebe35141871754de34e751ddd37032368e8996e",
+    "entries": [
+      {
+        "tag": "r04_v1_agl1000_p20_B1",
+        "entry": "r04_v1_agl1000_p20_B1/Profile(20261013_163749).csv",
+        "raw_sha256": "f6a08290a9033be182e20b0067ba7cb4fab2c02da4e917ec4dbd9a3c64055258",
+        "public_sha256": "8876f92e97bc476b0084cac359dc889dc5476eef137c29b3642641f40b92d9a9",
+        "bytes": 1420448,
+        "transformation": "Only UE loginid metadata redacted; all timing values, frames and other metadata unchanged."
+      },
+      {
+        "tag": "r04_v1_agl1000_p20_A0",
+        "entry": "r04_v1_agl1000_p20_A0/Profile(20261013_163838).csv",
+        "raw_sha256": "c9738dc8939a5dfb7fdcb90f4bc77640ca428a9e3f77154c8925f53e8e97a195",
+        "public_sha256": "fe2db162755edec0469d3c96a4af34e62577c9d0d0d5593a96e1982012005235",
+        "bytes": 1423088,
+        "transformation": "Only UE loginid metadata redacted; all timing values, frames and other metadata unchanged."
+      },
+      {
+        "tag": "r04_v1_agl1000_p20_B0",
+        "entry": "r04_v1_agl1000_p20_B0/Profile(20261013_163926).csv",
+        "raw_sha256": "8970d822a35718c5c9088d21a0ab6cbac9db66627efb5d7359f91b634904816b",
+        "public_sha256": "6fc295fbc3b9bbd428e3cebca9a30d29f1a3645d9ee0277edacd14afa8ed2ee2",
+        "bytes": 1419651,
+        "transformation": "Only UE loginid metadata redacted; all timing values, frames and other metadata unchanged."
+      },
+      {
+        "tag": "r04_v1_agl1000_p20_A1",
+        "entry": "r04_v1_agl1000_p20_A1/Profile(20261013_164013).csv",
+        "raw_sha256": "afeadfd08313cd7f82a65bb043bf58ce3f437b42f963f97c642f23ac17e34fcc",
+        "public_sha256": "324f79ae5cc096999ecf8e24bdd81d71c63e01869aa79fb0d7c9831a0733ca78",
+        "bytes": 1423348,
+        "transformation": "Only UE loginid metadata redacted; all timing values, frames and other metadata unchanged."
+      },
+      {
+        "tag": "r04_v1_agl50_p15_B1",
+        "entry": "r04_v1_agl50_p15_B1/Profile(20261013_164101).csv",
+        "raw_sha256": "dd29e14a715615ac4e7d9cbd6b814c1ccbd3ea80833fb794fdbb31eae788f672",
+        "public_sha256": "b4ba3b000f9911efe963e5aae0a8c038179367d81ec76938978388eb4e7b9b80",
+        "bytes": 1426086,
+        "transformation": "Only UE loginid metadata redacted; all timing values, frames and other metadata unchanged."
+      },
+      {
+        "tag": "r04_v1_agl50_p15_A0",
+        "entry": "r04_v1_agl50_p15_A0/Profile(20261013_164154).csv",
+        "raw_sha256": "ae002ed1acdd227d635a12636bc712f82f2c3b088d2f9c990e58e9d958b767a5",
+        "public_sha256": "00fd92fda44996c22d8fa7d1fa1ff1daeec46044751be57ba08a4a0c66e72673",
+        "bytes": 1426575,
+        "transformation": "Only UE loginid metadata redacted; all timing values, frames and other metadata unchanged."
+      },
+      {
+        "tag": "r04_v1_agl50_p15_B0",
+        "entry": "r04_v1_agl50_p15_B0/Profile(20261013_164245).csv",
+        "raw_sha256": "316cbbf52f2568565188c4e858661750725eed94a5b266b198403face626b80c",
+        "public_sha256": "2306ca3dc4ba489bc79920d766521abcf86743ebd190359c4d35143ffe570fc2",
+        "bytes": 1428651,
+        "transformation": "Only UE loginid metadata redacted; all timing values, frames and other metadata unchanged."
+      },
+      {
+        "tag": "r04_v1_agl50_p15_A1",
+        "entry": "r04_v1_agl50_p15_A1/Profile(20261013_164336).csv",
+        "raw_sha256": "32a8bf90bcd98cb1b8c358c51ca2bcbb4fb92de85ef12bd42ef9b379248eb008",
+        "public_sha256": "ea1451a6fa2a60a6fcfa3e162ac5a0778f7c2ab859b053a6f31d1e211b780815",
+        "bytes": 1423232,
+        "transformation": "Only UE loginid metadata redacted; all timing values, frames and other metadata unchanged."
+      },
+      {
+        "tag": "r04_v1_agl200_p10_B1",
+        "entry": "r04_v1_agl200_p10_B1/Profile(20261013_164427).csv",
+        "raw_sha256": "c09d7f92876e121d19611f2193ce121f6e654368e4a5810cc684f5c6db709e71",
+        "public_sha256": "251a80748925c97b7220da6075755278193dec61d399245b07b9caa3c03aa230",
+        "bytes": 1428912,
+        "transformation": "Only UE loginid metadata redacted; all timing values, frames and other metadata unchanged."
+      },
+      {
+        "tag": "r04_v1_agl200_p10_A0",
+        "entry": "r04_v1_agl200_p10_A0/Profile(20261013_164517).csv",
+        "raw_sha256": "fbcd3f62e42d47c8282469310a6639c3397878bf047c377ea62d2de5d16bc922",
+        "public_sha256": "ac71e08527b9ce9b99a6605eaca9926e0ad0d4d7cd2d1f0dc696f7ca75fdc0e8",
+        "bytes": 1424410,
+        "transformation": "Only UE loginid metadata redacted; all timing values, frames and other metadata unchanged."
+      },
+      {
+        "tag": "r04_v1_agl200_p10_B0",
+        "entry": "r04_v1_agl200_p10_B0/Profile(20261013_164608).csv",
+        "raw_sha256": "c88793d79900889eae62aebe7660c73d260525cbd709d3fb3c727d8da7bf427c",
+        "public_sha256": "5215a35033180cfe1361bcd571c16ac877198b12a5f9f86060b73147c3544592",
+        "bytes": 1431351,
+        "transformation": "Only UE loginid metadata redacted; all timing values, frames and other metadata unchanged."
+      },
+      {
+        "tag": "r04_v1_agl200_p10_A1",
+        "entry": "r04_v1_agl200_p10_A1/Profile(20261013_164659).csv",
+        "raw_sha256": "12c0bbb46fa5e0c9286481cc69bf1ae163f8e72cbd1c94015384a9b6d10c12e1",
+        "public_sha256": "75f3bca28efcdb6294c93fca5c212470387d4b652bdc8e951bbb7e148ec6dcdd",
+        "bytes": 1424502,
+        "transformation": "Only UE loginid metadata redacted; all timing values, frames and other metadata unchanged."
+      },
+      {
+        "tag": "r04_v1_agl500_p15_B1",
+        "entry": "r04_v1_agl500_p15_B1/Profile(20261013_164749).csv",
+        "raw_sha256": "5dba2f3bef3aec1a64bef1d2035436ebc891eec481157a8c96b0e3ad5a3fda93",
+        "public_sha256": "f1b125981242be673515c13877736107a44e1191bb6707fc6094d1641326fde4",
+        "bytes": 1430175,
+        "transformation": "Only UE loginid metadata redacted; all timing values, frames and other metadata unchanged."
+      },
+      {
+        "tag": "r04_v1_agl500_p15_A0",
+        "entry": "r04_v1_agl500_p15_A0/Profile(20261013_164840).csv",
+        "raw_sha256": "604d01f1cb9f922b8133b5fd2a990cd7493e427e3c9315cb15f9ccf223d1afef",
+        "public_sha256": "2f42d73da71799464ee74657806a8d8f9bfdac43a3c60544332f6f9d6ade7c85",
+        "bytes": 1427060,
+        "transformation": "Only UE loginid metadata redacted; all timing values, frames and other metadata unchanged."
+      },
+      {
+        "tag": "r04_v1_agl500_p15_B0",
+        "entry": "r04_v1_agl500_p15_B0/Profile(20261013_164939).csv",
+        "raw_sha256": "221aac19549c96441075733a9b9793849d3eec2107d9d07e797eb00e88208f6f",
+        "public_sha256": "e662a1dd762fe0a79e445686d8e8c9d3bb55cdb6b421c0917a1921e9cf315c12",
+        "bytes": 1431300,
+        "transformation": "Only UE loginid metadata redacted; all timing values, frames and other metadata unchanged."
+      },
+      {
+        "tag": "r04_v1_agl500_p15_A1",
+        "entry": "r04_v1_agl500_p15_A1/Profile(20261013_165029).csv",
+        "raw_sha256": "c3d887b44592dfe28d97081065b163fbfe58091b9a747a90e5306698ee272355",
+        "public_sha256": "2fe603d83a77b984a7213b4af60e8ce321e8456fb6f096f9fc774c64ca600a54",
+        "bytes": 1428875,
+        "transformation": "Only UE loginid metadata redacted; all timing values, frames and other metadata unchanged."
+      }
+    ]
+  },
+  {
+    "file": "csv-round-05-metadata-redacted.zip",
+    "sha256": "e53f98ef3904a9f4b88c066e523b8f4090704a54c36216463fa66688eb654664",
+    "entries": [
+      {
+        "tag": "r05_v1_agl50_p15_B0",
+        "entry": "r05_v1_agl50_p15_B0/Profile(20261013_165119).csv",
+        "raw_sha256": "762022837b75e63b06ad79a6fc7c8cdb0b89f9e1aacc162e701aab61d153c96c",
+        "public_sha256": "76fefcbae317c08d131ad959fa4a4aa3c5e77856a766b21e9b71c92422b9113b",
+        "bytes": 1424811,
+        "transformation": "Only UE loginid metadata redacted; all timing values, frames and other metadata unchanged."
+      },
+      {
+        "tag": "r05_v1_agl50_p15_B1",
+        "entry": "r05_v1_agl50_p15_B1/Profile(20261013_165211).csv",
+        "raw_sha256": "7a1315b6062711c71d4f8bcc5e499226bcdf387040ac21923853b1b397d9b46e",
+        "public_sha256": "690ad4bf9f4b15805ac7acf8e72cf50346af1048ff0e8a13cab67830e465b490",
+        "bytes": 1430508,
+        "transformation": "Only UE loginid metadata redacted; all timing values, frames and other metadata unchanged."
+      },
+      {
+        "tag": "r05_v1_agl50_p15_A1",
+        "entry": "r05_v1_agl50_p15_A1/Profile(20261013_165302).csv",
+        "raw_sha256": "11af68955a11011cf1b28ef5da6b6724ea288c417622e7588e4dae612bcc8295",
+        "public_sha256": "2414dfd48c97a2c659d53152e7477c9d2a623999efed3b10a0824e07dbb56d7f",
+        "bytes": 1429585,
+        "transformation": "Only UE loginid metadata redacted; all timing values, frames and other metadata unchanged."
+      },
+      {
+        "tag": "r05_v1_agl50_p15_A0",
+        "entry": "r05_v1_agl50_p15_A0/Profile(20261013_165353).csv",
+        "raw_sha256": "8dad9929924b2e65bff9caf401030a2911012deeda93e130edc76a105905555c",
+        "public_sha256": "665aabbf4c41c08b5ae1115702fcde785df0e9adf2bf678ffd5193b577349b6d",
+        "bytes": 1421710,
+        "transformation": "Only UE loginid metadata redacted; all timing values, frames and other metadata unchanged."
+      },
+      {
+        "tag": "r05_v1_agl200_p10_B0",
+        "entry": "r05_v1_agl200_p10_B0/Profile(20261013_165443).csv",
+        "raw_sha256": "3751175c6ea5d57fc3a0c450c9430dbfefdf1c6bfca5bf2fa4796846507ae41c",
+        "public_sha256": "00ee631bbedf45f430f97cf0962ca5a1f9f4ffb242ccfdf668221693b8963e35",
+        "bytes": 1432060,
+        "transformation": "Only UE loginid metadata redacted; all timing values, frames and other metadata unchanged."
+      },
+      {
+        "tag": "r05_v1_agl200_p10_B1",
+        "entry": "r05_v1_agl200_p10_B1/Profile(20261013_165535).csv",
+        "raw_sha256": "cf646c9f4c088b922c98b5d7a22878cdfd7507f18dd3e51b4b484ce7533313d7",
+        "public_sha256": "adc91b6868e19359fe32334b4decb67a79411b24a54ccf532ea8e369823093e1",
+        "bytes": 1432065,
+        "transformation": "Only UE loginid metadata redacted; all timing values, frames and other metadata unchanged."
+      },
+      {
+        "tag": "r05_v1_agl200_p10_A1",
+        "entry": "r05_v1_agl200_p10_A1/Profile(20261013_165619).csv",
+        "raw_sha256": "630c4b347bb3515a60e6f90280999eb5a8fdfce8603fbc5947b2b3ca0426569f",
+        "public_sha256": "0842d3723bb7fd13596273f827c2193beb7fdfcc1f6b3e1921a26be00cb16d93",
+        "bytes": 1427740,
+        "transformation": "Only UE loginid metadata redacted; all timing values, frames and other metadata unchanged."
+      },
+      {
+        "tag": "r05_v1_agl200_p10_A0",
+        "entry": "r05_v1_agl200_p10_A0/Profile(20261013_165712).csv",
+        "raw_sha256": "cde7359ad73955904274d3198a690448f9d61bd2ab05d21d2aca5661bd9a9162",
+        "public_sha256": "fd46a3c3de1c4c687609ebcfc0aca882353e6d05237eb9a0a074757d6454503c",
+        "bytes": 1429923,
+        "transformation": "Only UE loginid metadata redacted; all timing values, frames and other metadata unchanged."
+      },
+      {
+        "tag": "r05_v1_agl500_p15_B0",
+        "entry": "r05_v1_agl500_p15_B0/Profile(20261013_165807).csv",
+        "raw_sha256": "d66572e03b2a696b81bba09727f34c967c5cb8b9095ced748b9a99d2e8eeb217",
+        "public_sha256": "704d2448689946274ce6ca879f7c8eaa15fb3a8f3154a20f02f96b811706480f",
+        "bytes": 1432618,
+        "transformation": "Only UE loginid metadata redacted; all timing values, frames and other metadata unchanged."
+      },
+      {
+        "tag": "r05_v1_agl500_p15_B1",
+        "entry": "r05_v1_agl500_p15_B1/Profile(20261013_165900).csv",
+        "raw_sha256": "43668cc7625263b8f262525184edb8131b395023775dff3557c176a0c9018b1c",
+        "public_sha256": "7f0891411180bf8f2470a7d829ed1b5506d3afb10159b62edcababe4179ae351",
+        "bytes": 1427553,
+        "transformation": "Only UE loginid metadata redacted; all timing values, frames and other metadata unchanged."
+      },
+      {
+        "tag": "r05_v1_agl500_p15_A1",
+        "entry": "r05_v1_agl500_p15_A1/Profile(20261013_165953).csv",
+        "raw_sha256": "1f8bf4936d366b8a53b938df64c12d0899ec9e4476d711d716af6e65a91f560b",
+        "public_sha256": "70114d957327c634ca0f2bcb78062f868fe02c001275352aec1e7bb0366585bb",
+        "bytes": 1426037,
+        "transformation": "Only UE loginid metadata redacted; all timing values, frames and other metadata unchanged."
+      },
+      {
+        "tag": "r05_v1_agl500_p15_A0",
+        "entry": "r05_v1_agl500_p15_A0/Profile(20261013_170045).csv",
+        "raw_sha256": "63d110e190eec7288823d51d2359afbd7226c9d7c806fc3d79cc7c6f03d3bb55",
+        "public_sha256": "4dbfa8fcffd18335ac761ed3fc07de3658c416f381ecb167a20275c60793bb9f",
+        "bytes": 1426282,
+        "transformation": "Only UE loginid metadata redacted; all timing values, frames and other metadata unchanged."
+      },
+      {
+        "tag": "r05_v1_agl1000_p20_B0",
+        "entry": "r05_v1_agl1000_p20_B0/Profile(20261013_170135).csv",
+        "raw_sha256": "bf02db4da2628f2a2f718dd0074cef04902fe1af2102e8a9561c28d90dd050c6",
+        "public_sha256": "8bef7905bb251c3bc3a04d010b58eb7adbcb0a7f34ec6052497c05a1dbb2845b",
+        "bytes": 1423104,
+        "transformation": "Only UE loginid metadata redacted; all timing values, frames and other metadata unchanged."
+      },
+      {
+        "tag": "r05_v1_agl1000_p20_B1",
+        "entry": "r05_v1_agl1000_p20_B1/Profile(20261013_170223).csv",
+        "raw_sha256": "6c2cf61b5991a938b2dc4e95cddb20a67c5547263f69c959cd84741d8887d132",
+        "public_sha256": "f2f33627697dadf5fbc91abe8544609b385dfaa3c8102f5d430263c7845443c0",
+        "bytes": 1421325,
+        "transformation": "Only UE loginid metadata redacted; all timing values, frames and other metadata unchanged."
+      },
+      {
+        "tag": "r05_v1_agl1000_p20_A1",
+        "entry": "r05_v1_agl1000_p20_A1/Profile(20261013_170313).csv",
+        "raw_sha256": "4cd2fa6871f3972d6026237835e95ba9aa0479bcad902235f7f60b37e71f4d02",
+        "public_sha256": "07935ff697419d920b34e1d145904b696489d4b544b5ebfc743d01ee6cfb3220",
+        "bytes": 1424427,
+        "transformation": "Only UE loginid metadata redacted; all timing values, frames and other metadata unchanged."
+      },
+      {
+        "tag": "r05_v1_agl1000_p20_A0",
+        "entry": "r05_v1_agl1000_p20_A0/Profile(20261013_170401).csv",
+        "raw_sha256": "1ec41ca902fb4bcb83ea3ea85e0a1214ccb7e9424d43c913e19b9b77d5c1ec55",
+        "public_sha256": "e1c3b6df7107a646d5792ae45b6fbb8a1177379b7431ec11e8dd95abef126bd4",
+        "bytes": 1425758,
+        "transformation": "Only UE loginid metadata redacted; all timing values, frames and other metadata unchanged."
+      }
+    ]
+  }
+]

@@ -1,0 +1,32 @@
+{
+  "level": "L_FSB1a_20261013a_A1_v1_agl500_p15",
+  "group": "A1",
+  "view": "v1_agl500_p15",
+  "run_id": "94ad1c6cf6a34c20a4d908591d237ea3",
+  "tag": "r05_v1_agl500_p15_A1",
+  "reopen_receipt_sha256": "F38B8B259C676BD21B7676CECB0769C19EE0C9C00D2E4F7ACBDA259DE9A6EE86",
+  "host_scope": "Intel UHD 770 only",
+  "world_path": "/Game/ForestSpike/B1a_20261013a/Perf/L_FSB1a_20261013a_A1_v1_agl500_p15",
+  "args": [
+    "\"D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\ForestSpike\\ForestSpike.uproject\"",
+    "/Game/ForestSpike/B1a_20261013a/Perf/L_FSB1a_20261013a_A1_v1_agl500_p15",
+    "-game",
+    "-windowed",
+    "-ResX=1920",
+    "-ResY=1080",
+    "-nosound",
+    "-nosplash",
+    "-unattended",
+    "-benchmark",
+    "-fps=60",
+    "-ExecCmds=\"r.VSync 0,t.MaxFPS 0,r.ScreenPercentage 100,r.MotionBlurQuality 0,r.RayTracing 0,foliage.ForceLOD -1,r.ForceLOD -1,foliage.LODDistanceScale 1,foliage.RandomLODRange 0,r.ViewDistanceScale 1\"",
+    "-csvCaptureFrames=601",
+    "-ExitAfterCsvProfiling",
+    "-csvMetadata=\"tag=r05_v1_agl500_p15_A1,level=L_FSB1a_20261013a_A1_v1_agl500_p15,run_id=94ad1c6cf6a34c20a4d908591d237ea3\"",
+    "-abslog=\"D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\ForestSpike\\Saved\\ForestSpike\\b1a\\perf\\r05_v1_agl500_p15_A1\\engine.log\""
+  ],
+  "frames": 601,
+  "started_utc": "2026-10-13T08:59:52.8720943+00:00",
+  "registration_sha256": "8354A3FC6A2249DE5D73121B19077BEBBFA168847D332E0B2F03DAFEEDE8C68C",
+  "cold": 121
+}

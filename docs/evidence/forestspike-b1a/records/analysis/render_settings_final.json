@@ -1,0 +1,1346 @@
+{
+  "status": "PASS_FS_B1A_COMMON_RENDER_INITIALIZATION",
+  "logs": [
+    {
+      "log": "perf\\r01_v1_agl50_p15_A0\\engine.log",
+      "sha256": "8fa428c27fcf95865738be0fe615c119f0f8d2be1d4725e640a59e4dbedc6667",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "perf\\r01_v1_agl50_p15_A1\\engine.log",
+      "sha256": "e4c24ac0d1a11addbc53920031d2c9e45169f9743518f90d5dbf2a4fc771fc83",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "perf\\r01_v1_agl50_p15_B1\\engine.log",
+      "sha256": "997e5b98654f7bd6a9d7518ce28a389641244e863bcd45b13471602c791c9950",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "perf\\r01_v1_agl50_p15_B0\\engine.log",
+      "sha256": "ec70be08f06423a3657a8d6aa9fb797aba4fc69032b87a39b24f20dc33e82037",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "perf\\r01_v1_agl200_p10_A0\\engine.log",
+      "sha256": "4141bb26441e366f73e47da0b2802d3cf9a1f96e35c779d4ca9b575c48a17246",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "perf\\r01_v1_agl200_p10_A1\\engine.log",
+      "sha256": "e09b3e2113d7e3778e582ec7d770fb4d8b642fe51f02cc8875636ed09115e66d",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "perf\\r01_v1_agl200_p10_B1\\engine.log",
+      "sha256": "78b95e047e25a3e84a7c351c025f9408ffa138fc28c1bd3849634c34d0a21a01",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "perf\\r01_v1_agl200_p10_B0\\engine.log",
+      "sha256": "7bf307a3a4e76fab2a7d062f038e6dd9b4ee58180bd4d4882b36bcbebf8052c8",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "perf\\r01_v1_agl500_p15_A0\\engine.log",
+      "sha256": "959a730e6ef839cb9290586920df5ca548232f4c1a0b967bf73d50956596f1a6",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "perf\\r01_v1_agl500_p15_A1\\engine.log",
+      "sha256": "1d5288bed4a354aa78c4b6a2ca0df3b06a8fdfdf135c44230436f0263fffce8f",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "perf\\r01_v1_agl500_p15_B1\\engine.log",
+      "sha256": "724f936f84c9ac9c8ab43c359495e0699c730ac66f2becd6ac7cb11acd356974",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "perf\\r01_v1_agl500_p15_B0\\engine.log",
+      "sha256": "4ba3aaee8f0bf744d0ab291f4c8890738e88b2e2515d556ed80d134efeac5cac",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "perf\\r01_v1_agl1000_p20_A0\\engine.log",
+      "sha256": "ded1d8972e9b3d6bf2fedec0e36b51835219259830969624fe3d2e15e302aeba",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "perf\\r01_v1_agl1000_p20_A1\\engine.log",
+      "sha256": "f00af38b76b869de5b3495a2efebe3fc0bd3341aeda5f515ad24f93f20afa853",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "perf\\r01_v1_agl1000_p20_B1\\engine.log",
+      "sha256": "07f00495183a2adff4a47cfc94ff029a3cac526a5b03f5aae0b359d7d32f811a",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "perf\\r01_v1_agl1000_p20_B0\\engine.log",
+      "sha256": "412f81d51e28d73a414ef71a88001fc5bdac9e1eb3ad9d64dcfbe0b45545f431",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "perf\\r02_v1_agl200_p10_A1\\engine.log",
+      "sha256": "99f46959c9b68ba56390621019afd5c4aa87bfd567ad05d2ec35811eb7db2220",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "perf\\r02_v1_agl200_p10_B0\\engine.log",
+      "sha256": "85b6894b3c4b01970bdc198f61233788798e3a72d595ea17bd66206369a059c2",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "perf\\r02_v1_agl200_p10_A0\\engine.log",
+      "sha256": "93b92332f33a1dbd86c6b93071bc47172a29e998ea195c01d3e650370b2edefa",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "perf\\r02_v1_agl200_p10_B1\\engine.log",
+      "sha256": "af1f60cd97936bc8da5f294ca8e20f388eafa619c4120b56514bce4af6bcaf2f",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "perf\\r02_v1_agl500_p15_A1\\engine.log",
+      "sha256": "afa966f4815f0bdf8c0805c0f0034d7a6e1ce58e8431ea8b8a9ba6c986f142f5",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "perf\\r02_v1_agl500_p15_B0\\engine.log",
+      "sha256": "e9b7a3fc5d89f3d0b9da6250dec7f1f895c37587d300c5dc1f84d58ecee6bba3",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "perf\\r02_v1_agl500_p15_A0\\engine.log",
+      "sha256": "1ad3736517152eb59e1fdcca3c81e922afcf61b51b16722b1156f400a1129481",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "perf\\r02_v1_agl500_p15_B1\\engine.log",
+      "sha256": "81bc950c16d2e54450b5e74e3c12b9cb81cd2048b7a338c986ba75ed27d80f4a",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "perf\\r02_v1_agl1000_p20_A1\\engine.log",
+      "sha256": "90b0be09ad1a35175bd26e7e2556d928dc1dd1a3ab4bc1d3f16d6aa8d2a9f8c0",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "perf\\r02_v1_agl1000_p20_B0\\engine.log",
+      "sha256": "062b71afd54d7b2d5ceb3ae4c15ac808067e0b705667e4b263d6e787218ef4fe",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "perf\\r02_v1_agl1000_p20_A0\\engine.log",
+      "sha256": "c7f36a28480136b5dac79d3504e92175a2a2eb49c7e196eb91d8e5c5d4422c8c",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "perf\\r02_v1_agl1000_p20_B1\\engine.log",
+      "sha256": "942000b5f526731a9a4f3dcb6f4f980e9ce0c645d5f1f34bbec36c25b406e8c7",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "perf\\r02_v1_agl50_p15_A1\\engine.log",
+      "sha256": "0e41172884d6948233ad3ee4966f6ac3a6fc38d8c8fdc48c8884faa58dec76d8",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "perf\\r02_v1_agl50_p15_B0\\engine.log",
+      "sha256": "05dea9dd70e907b0519eb7ba0dca1f3e28e992d05ed5a687f3a435ea55fdae9a",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "perf\\r02_v1_agl50_p15_A0\\engine.log",
+      "sha256": "4968abe4e1017ce4ad73a1d7a828693dfcfb812eb2566a4cb826cf7c62ca27c3",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "perf\\r02_v1_agl50_p15_B1\\engine.log",
+      "sha256": "1cec245cc714f5aca578d92168b1f515fe88a0a111f87635dd8810a468ffc6c5",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "perf\\r03_v1_agl500_p15_B0\\engine.log",
+      "sha256": "0bc59a37e368d678efb2d1aa65267de9356ecd857222098f0390769bcc797ec6",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "perf\\r03_v1_agl500_p15_B1\\engine.log",
+      "sha256": "721157ce68352afac7ac5a8b4c3be44272f4db222844bbe605a9166357dc03bb",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "perf\\r03_v1_agl500_p15_A1\\engine.log",
+      "sha256": "eccf9f382a51b87482c5237632ab7840ea0ef3053bc2f2205b2846a04771158d",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "perf\\r03_v1_agl500_p15_A0\\engine.log",
+      "sha256": "46a1a76c1f77a748f4f83f53996f2906b296162102cab53a400b8de78954bafc",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "perf\\r03_v1_agl1000_p20_B0\\engine.log",
+      "sha256": "b2c96132d20b755454186ca91669a67b94ebbc43fb5ab2e3373ab5299283e75f",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "perf\\r03_v1_agl1000_p20_B1\\engine.log",
+      "sha256": "ec3fcf9304cdf8a5752ef1024173add25171605240b064f762ef06903c5c320e",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "perf\\r03_v1_agl1000_p20_A1\\engine.log",
+      "sha256": "3b3a2022caffa34e6863c0550eae921897041eca6bf4ffe8cf029ca5d2b6c932",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "perf\\r03_v1_agl1000_p20_A0\\engine.log",
+      "sha256": "4b08c90162947558036279e16e8cfa9fdf8a22be2c0166b37fd2649b8d3471a7",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "perf\\r03_v1_agl50_p15_B0\\engine.log",
+      "sha256": "3fafd5594842b5d0791585f87accc6dcb5469c195fb83c7dd255f61ec237bce8",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "perf\\r03_v1_agl50_p15_B1\\engine.log",
+      "sha256": "1d8ff467c46cfc227317edc6d83d013a0782d370840829ecf15381c51906731e",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "perf\\r03_v1_agl50_p15_A1\\engine.log",
+      "sha256": "b9fc29c55d558b52c19a6a600401683fecf8fe324a5262773ea52de84bb1c278",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "perf\\r03_v1_agl50_p15_A0\\engine.log",
+      "sha256": "c4f5203ed15fcc53e9cfa3cd11da4314fb97dd62612a64bc7c769cd6d879b3c6",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "perf\\r03_v1_agl200_p10_B0\\engine.log",
+      "sha256": "97ca575162271c6f82f1f0502c15517ebfd31b2a95f0ff5b84abf8ee1df48c41",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "perf\\r03_v1_agl200_p10_B1\\engine.log",
+      "sha256": "a49f93568c8ab064a93747b55ed6de602595020c54008cd231da7600f0e004da",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "perf\\r03_v1_agl200_p10_A1\\engine.log",
+      "sha256": "71ae7ecd43276407ba20fc641ce7119419fb0adb4c677f0b2da87e7d7756ef10",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "perf\\r03_v1_agl200_p10_A0\\engine.log",
+      "sha256": "a0b018441a6d51eecaeeff83fc5c2ec6e17554146e458d9fdf751148b4312fff",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "perf\\r04_v1_agl1000_p20_B1\\engine.log",
+      "sha256": "2081cd9dac77be311a3d01a9c1b790b580e76d13475a83d9bae7b7a4aa6a8208",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "perf\\r04_v1_agl1000_p20_A0\\engine.log",
+      "sha256": "e3a83f5a1025945a29dc69005bb2b342b0329d31d6023b7a2c89204d51f89c9b",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "perf\\r04_v1_agl1000_p20_B0\\engine.log",
+      "sha256": "445a7ade8f10c7ccf3437616be584ebba8c503bcbe022d80a6545e008598050a",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "perf\\r04_v1_agl1000_p20_A1\\engine.log",
+      "sha256": "930baa2878df201209811a560bb120732bfad37ed1603337aa62f6b09df95b3b",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "perf\\r04_v1_agl50_p15_B1\\engine.log",
+      "sha256": "be033ac88443f2f28ef8bd844bd6f3bcf17357dfe98187b4d23b500aade254ba",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "perf\\r04_v1_agl50_p15_A0\\engine.log",
+      "sha256": "62fc8d87bc8fd5a2c1ea3b4267dd0162da28cb9a40fd786e7c5819fa130f45a8",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "perf\\r04_v1_agl50_p15_B0\\engine.log",
+      "sha256": "df6710ae161a0bf5be412eecf6eccab8dbce199c709ea8a8fe4d62f1079aeb15",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "perf\\r04_v1_agl50_p15_A1\\engine.log",
+      "sha256": "0a126c3056792f48b5e1f2b42c5b9f4cbd14291f50b911b225513d2c8a50a172",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "perf\\r04_v1_agl200_p10_B1\\engine.log",
+      "sha256": "4f59a3fd425ffd9e391d1b33df326be18c7ed91f8e8df784130db3e11cf3a0b4",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "perf\\r04_v1_agl200_p10_A0\\engine.log",
+      "sha256": "d286f2457a9f841f0220d4f15ea5cabbde0115656af114fd29ffa2287df4e663",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "perf\\r04_v1_agl200_p10_B0\\engine.log",
+      "sha256": "40e7452bb4ff98a87327588ec8f515bd8b52eaef2f6624b079f0013e7620cad6",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "perf\\r04_v1_agl200_p10_A1\\engine.log",
+      "sha256": "39d30b4b4e8fb8f95a5b97b7e6b2d90537a6fd27b440043f6701073fb7c08234",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "perf\\r04_v1_agl500_p15_B1\\engine.log",
+      "sha256": "5dce483b7334afadedc5afa6d55df135b7665f7fd0786cdb0ea5bc48edf5f598",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "perf\\r04_v1_agl500_p15_A0\\engine.log",
+      "sha256": "459163fed0a0e209a19b043bdd95de3d5cc30199023db4d9ce48bf56751ee360",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "perf\\r04_v1_agl500_p15_B0\\engine.log",
+      "sha256": "10b8009de49557f06fdca61aea07c81023a32b61bce5751a480cfed9db73fcf6",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "perf\\r04_v1_agl500_p15_A1\\engine.log",
+      "sha256": "cfa19df63379f8f50a188855126afb9cc2a7e2245555ec5ac97faa204654a571",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "perf\\r05_v1_agl50_p15_B0\\engine.log",
+      "sha256": "f5fbcd83b63f3179671293339728cfd0f6f3fbdf7ec57584b7c78f003034351e",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "perf\\r05_v1_agl50_p15_B1\\engine.log",
+      "sha256": "7fbd870937ac6c6a7edeba93ac106ccb86bc4d3d3a67bd9aef057f2e6f02a6d8",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "perf\\r05_v1_agl50_p15_A1\\engine.log",
+      "sha256": "34a5a6cce420fedabf9164bffc61d46fbf6f5e2d3f6b6f89bace5d99ac7f94d6",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "perf\\r05_v1_agl50_p15_A0\\engine.log",
+      "sha256": "247ca4470326192eab7166e248d82946fee76a6473d5843c4195f350887863e4",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "perf\\r05_v1_agl200_p10_B0\\engine.log",
+      "sha256": "edd081b1824cb2de989122a5a97c96424f47ea5a82b89953d6c554ce90ec9f75",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "perf\\r05_v1_agl200_p10_B1\\engine.log",
+      "sha256": "70ab02a334c96230a9a7021360fe60093d4f6652a75390302b0544acadc46606",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "perf\\r05_v1_agl200_p10_A1\\engine.log",
+      "sha256": "1fca546de2f07713bcee40bba7c7577835ea9492016d1ddc618b7b03559a8c6e",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "perf\\r05_v1_agl200_p10_A0\\engine.log",
+      "sha256": "49dddb8b52b4f0c783c1e65f503e34fbeb3e64acfc620cb8f7c9a6559f8a73dd",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "perf\\r05_v1_agl500_p15_B0\\engine.log",
+      "sha256": "7be74c64f26205208b84fb379548cdd19acdf1406aae4a604fea3282c3de1ea8",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "perf\\r05_v1_agl500_p15_B1\\engine.log",
+      "sha256": "e830ae6bf75dff90016a735c71ed91862811081a5234055a600bdac8b564a134",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "perf\\r05_v1_agl500_p15_A1\\engine.log",
+      "sha256": "1b691e4ad1d7403f2e31535e711bb31732f4d396c54ba8cbb2c0f276e54c47bb",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "perf\\r05_v1_agl500_p15_A0\\engine.log",
+      "sha256": "d5bbee09615e8be34d52d7eb1a79fac5ef524c4e0352a4f0c6cd22d25aa22de9",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "perf\\r05_v1_agl1000_p20_B0\\engine.log",
+      "sha256": "b062c60166bc7c8a39b9f880204f1623de618f9215fe9c900d5cc781b71d1632",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "perf\\r05_v1_agl1000_p20_B1\\engine.log",
+      "sha256": "9dbe39f1201340173e1ca3d5c1c05d00e192703652e83ab91de22116cdbda6f8",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "perf\\r05_v1_agl1000_p20_A1\\engine.log",
+      "sha256": "5736c09bcd53c0a21384cc60ca08deb2f5efda80a1584e552ee99fcdfb07d7dc",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "perf\\r05_v1_agl1000_p20_A0\\engine.log",
+      "sha256": "06893cd69c6556d248ea898da3df7e02fea85c1345982e966c4c60d20cd8f21a",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "perf\\dynamic_A0_V3_01\\engine.log",
+      "sha256": "51e42357c90d675b077417e4e4b5013c7fb28059d5cc2041b95c6d707e31fde8",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "perf\\dynamic_A0_V5_01\\engine.log",
+      "sha256": "aa91281379e9aa0c9330f57d844b8d2241471e6552bd3826bd41b43d98c478a4",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "perf\\dynamic_A1_V3_01\\engine.log",
+      "sha256": "895ffe63e7932681cae2624dfcf389d4bcb4b04e693183fe036773fba459328a",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "perf\\dynamic_A1_V5_01\\engine.log",
+      "sha256": "1f8882d8df60a1a69f665fc9190a744a6eef3373500167957e23a0e39d3d5ac9",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "perf\\dynamic_B0_V3_01\\engine.log",
+      "sha256": "7106686e7b8f1e908b1e343836b6987945e96514f552d53ef1c65881189fbc94",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "perf\\dynamic_B0_V5_01\\engine.log",
+      "sha256": "249922c9fd091a09cbc48b7ebea6fd6e2e576b1678a1ddf7017d0cc68904ef62",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "perf\\dynamic_B1_V3_01\\engine.log",
+      "sha256": "1c4c12311f917a8131dbd0aa07705dc774a0102e088e393ca95ee66bfd68fd8c",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "perf\\dynamic_B1_V5_01\\engine.log",
+      "sha256": "72ff3e5c438a29f0ddaff716e3a7202fed1680188e2b9f4c7c52238817959ecc",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "runtime_lod\\runtime_lod_v1_agl1000_p20_A1_01\\engine.log",
+      "sha256": "f375e12bc50008895843639c14cbc263457a01b05e2051bcba941acb96ff20ef",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "runtime_lod\\runtime_lod_v1_agl1000_p20_B1_01\\engine.log",
+      "sha256": "ea31629249761b9356562647a741663af27aff6152ac33daadf264769e40d184",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "runtime_lod\\runtime_lod_v1_agl200_p10_A1_01\\engine.log",
+      "sha256": "6947c81442f6f5c61c622dd116a3457747d4d5d689a41996ef9c6aee36a5327b",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "runtime_lod\\runtime_lod_v1_agl200_p10_B1_01\\engine.log",
+      "sha256": "a9265ac90ae01df22868b2ab9e6c0670115fe37de2bb900985ddf1eb328725cd",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "runtime_lod\\runtime_lod_v1_agl500_p15_A1_01\\engine.log",
+      "sha256": "766f1b1366af238c51ed98b4aeac548c08746e902922a2ba41ab8aab031e2b8e",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "runtime_lod\\runtime_lod_v1_agl500_p15_B1_01\\engine.log",
+      "sha256": "c905e29ff87d6c8834b3dd3cec7a3e21da827036bf5294f37b7f70bb64d12070",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "runtime_lod\\runtime_lod_v1_agl50_p15_A1_01\\engine.log",
+      "sha256": "c1c12ee6330dfee4df907b662c3af493bd7dbeaa57a013a321af1cb1918179eb",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "runtime_lod\\runtime_lod_v1_agl50_p15_B1_01\\engine.log",
+      "sha256": "8442e18fd605fed154af17bb7a2d42b8a0e9006466bdca76ef94c57486326ff3",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "movies\\clip_A0_V5_01\\engine.log",
+      "sha256": "a6235dde85d59c07457ed146d14598ca532e4ef9459929de25429ffc750c9ff9",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "movies\\clip_A1_V5_01\\engine.log",
+      "sha256": "91825ce6464dcd93a2c077b5a6ec0526c0bafad0e815688012b845ddcbd76039",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "movies\\clip_B0_V5_01\\engine.log",
+      "sha256": "0f871ef7555ea2d61b31ee4e0549cdd5cca530eb75d835382c7fb1d74ebe987f",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "movies\\clip_B1_V5_01\\engine.log",
+      "sha256": "49ff851f8dd099dd15c4c35952501c2e2b8677d9bbeb487be3bcf556f6eabc79",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "movies\\native_A0_V3_03\\engine.log",
+      "sha256": "d1c66985a5e2074d90e08a2723e140831ff4a716a7641e24a17252bc45190f7c",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "movies\\native_A1_V3_03\\engine.log",
+      "sha256": "70fd2eaa921fb8ed747915e33a0ce59e2315e3c260a274792c5fee576ac04984",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "movies\\native_B0_V3_03\\engine.log",
+      "sha256": "17938edbb95570fc021de9ffa4316619f41274ae383824303ebdb2df36d31bb2",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "movies\\native_B1_V3_03\\engine.log",
+      "sha256": "94aaa6c70da144941da7d649fe5800c2e4e212e97be78482fbffeece8f4ca8bb",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "movies\\static_A0_v1_agl1000_p20_02\\engine.log",
+      "sha256": "a6831c8780112b34934b31c01b32b6d77929e4cc68d13aece3b9122587e01459",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "movies\\static_A0_v1_agl200_p10_02\\engine.log",
+      "sha256": "698a9ea12c4bf0026956c593a00cc3b0cd6fd8035b08d3e22738a84d4fe13ad0",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "movies\\static_A0_v1_agl500_p15_02\\engine.log",
+      "sha256": "caad45393af2f94fac930463140bdea7f86633c4c281ddd13b53a9550908d29f",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "movies\\static_A0_v1_agl50_p15_02\\engine.log",
+      "sha256": "4ebfd582e483a81f1e0fca1b00b9246ecbcead49ed9a65b2b3798e04ea0e6f9f",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "movies\\static_A1_v1_agl1000_p20_02\\engine.log",
+      "sha256": "c4e7f99360d2c3c1da25f68fce08b52dd07bf58a7ce00f3ec7c9b27375d5a3ba",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "movies\\static_A1_v1_agl200_p10_02\\engine.log",
+      "sha256": "4a217661a4993c6ef4e759cfe675ba14be9172cf266cb8676d2419f02e6a62de",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "movies\\static_A1_v1_agl500_p15_02\\engine.log",
+      "sha256": "581f4bf27bce87803cd08877835aa9de3b58379d606051fd5ae1947f9fe0563a",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "movies\\static_A1_v1_agl50_p15_02\\engine.log",
+      "sha256": "5f2b22a8ce5241a81a1dc97ffdb19fae7a45715b1fcc1e7909cf5760de6b663b",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "movies\\static_B0_v1_agl1000_p20_02\\engine.log",
+      "sha256": "0b69cec56f6a0bba41a591b152ac7519fbcaa2192c0067250173e41f6003fd18",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "movies\\static_B0_v1_agl200_p10_02\\engine.log",
+      "sha256": "019c05238ee1e9ec816553d2581999eee4a3461e1ebbdd2bc19fe017d551c00c",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "movies\\static_B0_v1_agl500_p15_02\\engine.log",
+      "sha256": "89b0ccf5daa2af6c3d1237d5f5d8dbad2d678bc20116a9dd7a07b220edb2f429",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "movies\\static_B0_v1_agl50_p15_02\\engine.log",
+      "sha256": "d6643c0a906f4f2ea8a8f9ad4cb6840eed6923dc92191d00d670199d7bd01916",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "movies\\static_B1_v1_agl1000_p20_02\\engine.log",
+      "sha256": "e6ee4951926d69e9af8a31dfc5c6cabf38b90b3e162bdd5c7136efc7a22e704f",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "movies\\static_B1_v1_agl200_p10_02\\engine.log",
+      "sha256": "8fb95c854e681fe511e912e75a3c2e5643fa6c779d116289d6c665055b8014e1",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "movies\\static_B1_v1_agl500_p15_02\\engine.log",
+      "sha256": "2bd487453c56ab363c58a8a0ef2695044cb1aa814de49037a6a9a8fb40b0acff",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "movies\\static_B1_v1_agl50_p15_02\\engine.log",
+      "sha256": "2acae7ecdf4c94dccdd933453154c53457d8ea66756db92deac08eb3aa13cd05",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    },
+    {
+      "log": "stills01\\engine.log",
+      "sha256": "a0fba99019a87f145eb3931527aa41fb4983dc5068f30e0774b749ed92b01a04",
+      "initialization_settings": {
+        "r.AntiAliasingMethod": 2,
+        "r.TemporalAA.Quality": 2,
+        "r.ShadowQuality": 5,
+        "r.Shadow.CSM.MaxCascades": 10,
+        "r.Shadow.DistanceScale": 1
+      }
+    }
+  ],
+  "scope": "All 80 static, 8 dynamic, 8 standalone LOD, all currently accepted MRQ and one SceneCapture stage initialize the same listed values. Per-light CSM count=4 is bounded by global maximum10. Native MRQ disabled quality overrides; AA flags off only in diagnostic ID/LOD jobs.",
+  "legacy_readback_correction": {
+    "name": "r.PostProcessAAQuality",
+    "observed_value": 0,
+    "meaning": "Unregistered legacy CVar in installed UE5.8; Kismet returns0 and warns when lookup fails. Does NOT mean TAA disabled. Valid r.TemporalAA.Quality initializes2 in every accepted log.",
+    "source_refs": [
+      "Engine/Source/Runtime/Engine/Private/KismetSystemLibrary.cpp:610",
+      "Engine/Source/Runtime/Renderer/Private/PostProcess/TemporalAA.cpp:46"
+    ]
+  }
+}

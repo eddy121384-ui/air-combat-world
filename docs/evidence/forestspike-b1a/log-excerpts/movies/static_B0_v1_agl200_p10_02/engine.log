@@ -1,0 +1,127 @@
+LogWindows: Started CrashReportClient (pid=10668)
+LogCsvProfiler: Display: Metadata set : platform="Windows"
+LogCsvProfiler: Display: Metadata set : config="Development"
+LogCsvProfiler: Display: Metadata set : buildversion="++UE5+Release-5.8-CL-55116800"
+LogCsvProfiler: Display: Metadata set : engineversion="5.8.0-55116800+++UE5+Release-5.8"
+LogCsvProfiler: Display: Metadata set : enginereleaseversion="5.8.0"
+LogCsvProfiler: Display: Metadata set : os="Windows 11 (25H2) [10.0.26200.9457] "
+LogCsvProfiler: Display: Metadata set : cpu="GenuineIntel|12th Gen Intel(R) Core(TM) i7-12700"
+LogCsvProfiler: Display: Metadata set : pgoenabled="0"
+LogCsvProfiler: Display: Metadata set : pgoprofilingenabled="0"
+LogCsvProfiler: Display: Metadata set : ltoenabled="0"
+LogCsvProfiler: Display: Metadata set : asan="0"
+LogCsvProfiler: Display: Metadata set : mergedmodules="0"
+LogCsvProfiler: Display: Metadata set : compacttset="0"
+LogCsvProfiler: Display: Metadata set : commandline="" D:\Users\EDDY\Documents\GitHub\air-combat-world\unreal\ForestSpike\ForestSpikeB1a.uproject /Game/ForestSpike/B1a_20261013a/NativeStatic/L_static_B0_v1_agl200_p10_02 -game -windowed -RenderOffscreen -ResX=1920 -ResY=1080 -ForceRes -nosound -nosplash -NoScreenMessages -unattended -benchmark -fps=60 -MoviePipelineConfig=/Game/ForestSpike/B1a_20261013a/Movies/MRQ_static_B0_v1_agl200_p10_02.MRQ_static_B0_v1_agl200_p10_02 -LevelSequence=/Game/ForestSpike/B1a_20261013a/NativeStatic/LS_static_B0_v1_agl200_p10_02.LS_static_B0_v1_agl200_p10_02 -MoviePipelineLocalExecutorClass=/Script/MovieRenderPipelineCore.MoviePipelineInProcessExecutor -abslog=D:\Users\EDDY\Documents\GitHub\air-combat-world\unreal\ForestSpike\Saved\ForestSpike\b1a\movies\static_B0_v1_agl200_p10_02\engine.log""
+LogCsvProfiler: Display: Metadata set : loginid="0e4fcd404acde9fd84f51499fbe8dfcc"
+LogCsvProfiler: Display: Metadata set : llm="0"
+LogCsvProfiler: Display: Metadata set : zenstreaming="0"
+LogCsvProfiler: Display: Metadata set : systemresolution.resx="1280"
+LogCsvProfiler: Display: Metadata set : systemresolution.resy="720"
+LogInit: Session CrashGUID >====================================================
+         Session CrashGUID >   UECC-Windows-CA6D15F94BB13580C958CEB68BF8ADDF
+         Session CrashGUID >====================================================
+LogConfig: Applying CVar settings from Section [/Script/CompositeCore.CompositeCorePluginSettings] File [Engine]
+LogConfig: Applying CVar settings from Section [/Script/RenderDocPlugin.RenderDocPluginSettings] File [Engine]
+[2026.10.13-16.53.27:559][  0]LogConfig: Applying CVar settings from Section [/Script/Engine.RendererSettings] File [Engine]
+[2026.10.13-16.53.27:559][  0]LogConfig: Set CVar [[r.GPUCrashDebugging:0]]
+[2026.10.13-16.53.27:559][  0]LogConfig: Applying CVar settings from Section [/Script/Engine.RendererOverrideSettings] File [Engine]
+[2026.10.13-16.53.27:559][  0]LogConfig: Applying CVar settings from Section [/Script/Engine.StreamingSettings] File [Engine]
+[2026.10.13-16.53.27:559][  0]LogConfig: Applying CVar settings from Section [/Script/Engine.GarbageCollectionSettings] File [Engine]
+[2026.10.13-16.53.27:559][  0]LogConfig: Applying CVar settings from Section [/Script/Engine.NetworkSettings] File [Engine]
+[2026.10.13-16.53.27:559][  0]LogConfig: Applying CVar settings from Section [/Script/UnrealEd.CookerSettings] File [Engine]
+[2026.10.13-16.53.27:560][  0]LogCsvProfiler: Display: Metadata set : systemresolution.resx="1920"
+[2026.10.13-16.53.27:560][  0]LogCsvProfiler: Display: Metadata set : systemresolution.resy="1080"
+[2026.10.13-16.53.27:560][  0]LogConfig: Applying CVar settings from Section [ViewDistanceQuality@3] File [Scalability]
+[2026.10.13-16.53.27:560][  0]LogConfig: Applying CVar settings from Section [AntiAliasingQuality@3] File [Scalability]
+[2026.10.13-16.53.27:560][  0]LogConfig: Applying CVar settings from Section [ShadowQuality@3] File [Scalability]
+[2026.10.13-16.53.27:561][  0]LogConfig: Set CVar [[r.Shadow.MaxResolution:2048]]
+[2026.10.13-16.53.27:561][  0]LogConfig: Set CVar [[r.Shadow.MaxCSMResolution:2048]]
+[2026.10.13-16.53.27:561][  0]LogConfig: Set CVar [[r.Shadow.PreShadowResolutionFactor:1.0]]
+[2026.10.13-16.53.27:561][  0]LogConfig: Set CVar [[r.Shadow.Virtual.ResolutionLodBiasDirectional:-1.5]]
+[2026.10.13-16.53.27:561][  0]LogConfig: Set CVar [[r.Shadow.Virtual.ResolutionLodBiasDirectionalMoving:-1.5]]
+[2026.10.13-16.53.27:561][  0]LogConfig: Set CVar [[r.Shadow.Virtual.ResolutionLodBiasLocal:0.0]]
+[2026.10.13-16.53.27:561][  0]LogConfig: Set CVar [[r.Shadow.Virtual.ResolutionLodBiasLocalMoving:1.0]]
+[2026.10.13-16.53.27:561][  0]LogConfig: Applying CVar settings from Section [GlobalIlluminationQuality@3] File [Scalability]
+[2026.10.13-16.53.27:561][  0]LogConfig: Set CVar [[r.LumenScene.SurfaceCache.CardMinResolution:2]]
+[2026.10.13-16.53.27:561][  0]LogConfig: Set CVar [[r.LumenScene.SurfaceCache.CardMaxResolution:512]]
+[2026.10.13-16.53.27:561][  0]LogConfig: Set CVar [[r.LumenScene.Radiosity.HemisphereProbeResolution:4]]
+[2026.10.13-16.53.27:561][  0]LogConfig: Set CVar [[r.Lumen.ScreenProbeGather.RadianceCache.ProbeResolution:32]]
+[2026.10.13-16.53.27:561][  0]LogConfig: Set CVar [[r.Lumen.ScreenProbeGather.TracingOctahedronResolution:8]]
+[2026.10.13-16.53.27:561][  0]LogConfig: Set CVar [[r.Lumen.ScreenProbeGather.FullResolutionJitterWidth:1]]
+[2026.10.13-16.53.27:561][  0]LogConfig: Set CVar [[r.Lumen.TranslucencyVolume.TracingOctahedronResolution:3]]
+[2026.10.13-16.53.27:561][  0]LogConfig: Set CVar [[r.Lumen.TranslucencyVolume.RadianceCache.ProbeResolution:8]]
+[2026.10.13-16.53.27:561][  0]LogConfig: Set CVar [[r.Lumen.TranslucencyVolume.RadianceCache.GridResolution:24]]
+[2026.10.13-16.53.27:561][  0]LogConfig: Applying CVar settings from Section [ReflectionQuality@3] File [Scalability]
+[2026.10.13-16.53.27:561][  0]LogConfig: Applying CVar settings from Section [PostProcessQuality@3] File [Scalability]
+[2026.10.13-16.53.27:562][  0]LogConfig: Set CVar [[r.DOF.Gather.ResolutionDivisor:2         ; lower gathering resolution]]
+[2026.10.13-16.53.27:562][  0]LogConfig: Applying CVar settings from Section [TextureQuality@3] File [Scalability]
+[2026.10.13-16.53.27:562][  0]LogConfig: Applying CVar settings from Section [EffectsQuality@3] File [Scalability]
+[2026.10.13-16.53.27:562][  0]LogConfig: Set CVar [[r.SkyAtmosphere.AerialPerspectiveLUT.DepthResolution:16.0]]
+[2026.10.13-16.53.27:562][  0]LogConfig: Set CVar [[r.HeterogeneousVolumes.Shadows.Resolution:512]]
+[2026.10.13-16.53.27:562][  0]LogConfig: Applying CVar settings from Section [FoliageQuality@3] File [Scalability]
+[2026.10.13-16.53.27:562][  0]LogConfig: Applying CVar settings from Section [ShadingQuality@3] File [Scalability]
+[2026.10.13-16.53.27:562][  0]LogConfig: Applying CVar settings from Section [LandscapeQuality@3] File [Scalability]
+[2026.10.13-16.53.27:564][  0]LogDeviceProfileManager: Pushing Device Profile CVar: [[UI.SlateSDFText.ResolutionLevel:2 -> 2]]
+[2026.10.13-16.53.27:564][  0]LogConfig: Applying CVar settings from Section [Startup] File [../../../Engine/Config/ConsoleVariables.ini]
+[2026.10.13-16.53.27:565][  0]LogConfig: Applying CVar settings from Section [Startup_Windows] File [../../../Engine/Config/ConsoleVariables.ini]
+[2026.10.13-16.53.27:565][  0]LogConfig: Applying CVar settings from Section [ConsoleVariables] File [Engine]
+[2026.10.13-16.53.27:565][  0]LogConfig: Applying CVar settings from Section [ConsoleVariables] File [D:/Users/EDDY/Documents/GitHub/air-combat-world/unreal/ForestSpike/Saved/Config/WindowsEditor/Editor.ini]
+[2026.10.13-16.53.27:586][  0]LogCsvProfiler: Display: Metadata set : extradevelopmentmemorymb="0"
+[2026.10.13-16.53.28:992][  0]LogCsvProfiler: Display: Metadata set : verbatimrhiname="D3D12"
+[2026.10.13-16.53.28:992][  0]LogCsvProfiler: Display: Metadata set : rhiname="D3D12"
+[2026.10.13-16.53.28:992][  0]LogCsvProfiler: Display: Metadata set : rhifeaturelevel="SM5"
+[2026.10.13-16.53.28:992][  0]LogCsvProfiler: Display: Metadata set : shaderplatform="PCD3D_SM5"
+[2026.10.13-16.53.28:992][  0]LogCsvProfiler: Display: Metadata set : gpu="Intel(R) UHD Graphics 770"
+[2026.10.13-16.53.28:992][  0]LogCsvProfiler: Display: Metadata set : gpudriver="31.0.101.4502"
+[2026.10.13-16.53.36:555][  0]LogCsvProfiler: Display: Metadata set : deviceprofile="WindowsEditor"
+[2026.10.13-16.53.37:285][  0]LogConfig: Applying CVar settings from Section [/Script/CQTest.CQTestSettings] File [Engine]
+[2026.10.13-16.53.38:346][  0]LogConfig: Applying CVar settings from Section [/Script/PCG.PCGEngineSettings] File [Engine]
+[2026.10.13-16.53.38:514][  0]LogConfig: Applying CVar settings from Section [/Script/NNEDenoiser.NNEDenoiserSettings] File [Engine]
+[2026.10.13-16.53.38:560][  0]LogMovieRenderPipeline: Detected that the user intends to render a movie. Waiting until engine loop init is complete to ensure
+[2026.10.13-16.53.39:692][  0]LogCsvProfiler: Display: Metadata set : largeworldcoordinates="1"
+[2026.10.13-16.53.40:304][  0]LogCsvProfiler: Display: Metadata set : raytracing="0"
+[2026.10.13-16.53.40:537][  0]LogWorld: Bringing World /Game/ForestSpike/B1a_20261013a/NativeStatic/L_static_B0_v1_agl200_p10_02.L_static_B0_v1_agl200_p10_02 up for play (max tick rate 0) at 2026.10.14-00.53.40
+[2026.10.13-16.53.41:095][  0]LogCsvProfiler: Display: Metadata set : streamingpoolsizemb="1000"
+[2026.10.13-16.53.41:299][  1]LogMovieRenderPipeline: Loaded explicitly specified Movie Pipeline Executor /Script/MovieRenderPipelineCore.MoviePipelineInProcessExecutor.
+[2026.10.13-16.53.41:299][  1]LogMovieRenderPipeline: Using default Movie Pipeline . See '-MoviePipelineClass' if you need to override this.
+[2026.10.13-16.53.41:302][  1]LogMovieRenderPipeline: Successfully detected and loaded required movie arguments. Rendering will begin once the map is loaded.
+[2026.10.13-16.53.41:302][  1]LogMovieRenderPipeline: NumJobs: 1 ExecutorClass: MoviePipelineInProcessExecutor
+[2026.10.13-16.53.41:302][  1]LogMovieRenderPipeline: MoviePipelineLinearExecutorBase starting 1 jobs.
+[2026.10.13-16.53.41:302][  1]LogMovieRenderPipeline: MoviePipelineLinearExecutorBase starting job [1/1]
+[2026.10.13-16.53.41:307][  1]LogMovieRenderPipeline: About to load target map /Game/ForestSpike/B1a_20261013a/NativeStatic/L_static_B0_v1_agl200_p10_02
+[2026.10.13-16.53.41:502][  2]LogWorld: Bringing World /Game/ForestSpike/B1a_20261013a/NativeStatic/L_static_B0_v1_agl200_p10_02.L_static_B0_v1_agl200_p10_02 up for play (max tick rate 0) at 2026.10.14-00.53.41
+[2026.10.13-16.53.41:504][  2]LogMovieRenderPipeline: Finished map load L_static_B0_v1_agl200_p10_02
+[2026.10.13-16.53.41:504][  2]LogMovieRenderPipeline: Zero Initial Delay, initializing...
+[2026.10.13-16.53.41:504][  2]LogMovieRenderPipeline: [2] Initializing overall Movie Pipeline
+[2026.10.13-16.53.41:506][  2]LogMovieRenderPipeline: Applying CVar "foliage.ForceLOD" PreviousValue: -1.000000 NewValue: -1.000000
+[2026.10.13-16.53.41:506][  2]LogMovieRenderPipeline: Applying CVar "r.ForceLOD" PreviousValue: -1.000000 NewValue: -1.000000
+[2026.10.13-16.53.41:512][  2]LogMovieRenderPipeline: Applying CVar "foliage.LODDistanceScale" PreviousValue: 1.000000 NewValue: 1.000000
+[2026.10.13-16.53.41:512][  2]LogMovieRenderPipeline: Applying CVar "foliage.RandomLODRange" PreviousValue: 0.000000 NewValue: 0.000000
+[2026.10.13-16.53.41:512][  2]LogMovieRenderPipeline: Applying CVar "r.ViewDistanceScale" PreviousValue: 1.000000 NewValue: 1.000000
+[2026.10.13-16.53.41:512][  2]LogMovieRenderPipeline: Applying CVar "r.ScreenPercentage" PreviousValue: 0.000000 NewValue: 100.000000
+[2026.10.13-16.53.41:512][  2]LogMovieRenderPipeline: Applying CVar "r.MotionBlurQuality" PreviousValue: 4.000000 NewValue: 0.000000
+[2026.10.13-16.53.41:512][  2]LogMovieRenderPipeline: Applying CVar "r.RayTracing" PreviousValue: 0.000000 NewValue: 0.000000
+[2026.10.13-16.53.41:513][  2]LogMovieRenderPipeline: Generated new ShotInfo for Inner: FS_PerfCamera Outer: no shot (No existing shot found in the job).
+[2026.10.13-16.53.41:513][  2]LogMovieRenderPipeline: Registering range: [0,73600) (InnerName: FS_PerfCamera OuterName: no shot)
+[2026.10.13-16.53.41:690][  3]LogMovieRenderPipeline: Expanding Shot 1/1 (Shot: no shot Camera: FS_PerfCamera)
+[2026.10.13-16.53.41:690][  3]LogMovieRenderPipeline: [3] Initializing Camera Cut [1/1] in [no shot] FS_PerfCamera.
+[2026.10.13-16.53.41:690][  3]LogMovieRenderPipeline: [3] Initialization set state to MotionBlur due to having no warm up frames.
+[2026.10.13-16.53.41:698][  3]LogMovieRenderPipeline: Finished setting up rendering for shot. Shot has 1 Passes. Total resolution: (1920x1080) Individual tile resolution: (1920x1080). Tile count: (1x1)
+[2026.10.13-16.53.41:698][  3]LogMovieRenderPipeline: [3] Finished initializing Camera Cut [1/1] in [no shot] FS_PerfCamera.
+[2026.10.13-16.53.51:772][188]LogMovieRenderPipeline: [188] Finished processing Camera Cut [1/1].
+[2026.10.13-16.53.51:870][188]LogMovieRenderPipeline: [188] Finished rendering last shot. Moving to Finalize to finish writing items to disk.
+[2026.10.13-16.53.53:747][860]LogMovieRenderPipeline: Restoring CVar "foliage.ForceLOD" PreviousValue: -1.000000 NewValue: -1.000000
+[2026.10.13-16.53.53:747][860]LogMovieRenderPipeline: Restoring CVar "r.ForceLOD" PreviousValue: -1.000000 NewValue: -1.000000
+[2026.10.13-16.53.53:749][860]LogMovieRenderPipeline: Restoring CVar "foliage.LODDistanceScale" PreviousValue: 1.000000 NewValue: 1.000000
+[2026.10.13-16.53.53:749][860]LogMovieRenderPipeline: Restoring CVar "foliage.RandomLODRange" PreviousValue: 0.000000 NewValue: 0.000000
+[2026.10.13-16.53.53:749][860]LogMovieRenderPipeline: Restoring CVar "r.ViewDistanceScale" PreviousValue: 1.000000 NewValue: 1.000000
+[2026.10.13-16.53.53:749][860]LogMovieRenderPipeline: Restoring CVar "r.ScreenPercentage" PreviousValue: 100.000000 NewValue: 0.000000
+[2026.10.13-16.53.53:749][860]LogMovieRenderPipeline: Restoring CVar "r.MotionBlurQuality" PreviousValue: 0.000000 NewValue: 4.000000
+[2026.10.13-16.53.53:749][860]LogMovieRenderPipeline: Restoring CVar "r.RayTracing" PreviousValue: 0.000000 NewValue: 0.000000
+[2026.10.13-16.53.53:750][860]LogMovieRenderPipeline: Movie Pipeline completed. Duration: +00:00:12.132
+[2026.10.13-16.53.53:750][860]LogMovieRenderPipeline: MoviePipelineLinearExecutorBase finished 1 jobs in +00:00:12.448.
+[2026.10.13-16.53.54:370][861]LogExit: Preparing to exit.
+[2026.10.13-16.53.54:560][861]LogExit: Game engine shut down
+[2026.10.13-16.53.54:671][861]LogExit: Object subsystem successfully closed.
+[2026.10.13-16.53.55:120][861]LogExit: Exiting.
