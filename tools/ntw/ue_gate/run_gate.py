@@ -30,8 +30,12 @@ MAIN = Path(r"D:\Users\EDDY\Documents\GitHub\air-combat-world")   # read-only so
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("stage", choices=["build", "runtime"])
-    ap.add_argument("--mode", default="full", choices=["probe", "full", "followup"])
+    ap.add_argument("--mode", default="full", choices=["probe", "full", "followup", "closure", "physics", "probe_points", "closure_lod"])
     ap.add_argument("--timeout", type=float, default=7200.0)
+    ap.add_argument("--terrain-run", default="joint_ue_local", help="terrain run under data/generated/ntw/terrain (2B-C: joint_ue_local_v3)")
+    ap.add_argument("--v1-run", default="joint_ue_local_v1", help="decimated-stitch comparison run, or 'none'")
+    ap.add_argument("--inputs", default="gate_inputs.json")
+    ap.add_argument("--tag", default="", help="suffix for build report / runtime output folder")
     a = ap.parse_args()
     env = dict(os.environ)
     if a.stage == "build":
@@ -45,17 +49,19 @@ def main():
         exe = UE / "UnrealEditor-Cmd.exe"
         script = HERE / "ue_gate_build.py"
         out = OUT
-        env.update(ACW_GATE_TERRAIN_RUN=str(REPO / "data/generated/ntw/terrain/joint_ue_local"),
-                   ACW_GATE_TERRAIN_RUN_V1=str(REPO / "data/generated/ntw/terrain/joint_ue_local_v1"),
+        env.pop("ACW_GATE_TERRAIN_RUN_V1", None)
+        if a.v1_run != "none":
+            env["ACW_GATE_TERRAIN_RUN_V1"] = str(REPO / "data/generated/ntw/terrain" / a.v1_run)
+        env.update(ACW_GATE_TERRAIN_RUN=str(REPO / "data/generated/ntw/terrain" / a.terrain_run),
                    ACW_GATE_XINYI_CONTRACT=str(MAIN / "unreal/Saved/XinyiUnrealV2Inputs/run-35822928983/unreal/Saved/XinyiUnrealV2Contract"),
-                   ACW_GATE_AFFINE_JSON=str(OUT / "affine.json"), ACW_GATE_REPORT=str(OUT / "build.json"))
-        log = OUT / "build.log"
+                   ACW_GATE_AFFINE_JSON=str(OUT / "affine.json"), ACW_GATE_REPORT=str(OUT / ("build%s.json" % a.tag)))
+        log = OUT / ("build%s.log" % a.tag)
     else:
         exe = UE / "UnrealEditor.exe"
         script = HERE / "ue_gate_runtime.py"
-        out = OUT / ("runtime_" + a.mode)
+        out = OUT / ("runtime_" + a.mode + a.tag)
         out.mkdir(parents=True, exist_ok=True)
-        env.update(ACW_GATE_INPUTS=str(OUT / "gate_inputs.json"), ACW_GATE_OUT=str(out), ACW_GATE_MODE=a.mode)
+        env.update(ACW_GATE_INPUTS=str(OUT / a.inputs), ACW_GATE_OUT=str(out), ACW_GATE_MODE=a.mode)
         log = out / "runtime.log"
     cmd = [str(exe), str(PROJECT), "/Game/NTWGate/L_NTWGate", "-ExecutePythonScript=" + script.as_posix(), "-unattended", "-nopause",
            "-nosound", "-nosplash", "-abslog=" + log.as_posix()]
@@ -83,6 +89,12 @@ def main():
         w.writerow(["wall", "rss_bytes", "private_bytes"])
         w.writerows(rows)
     print("exit", p.returncode, "timed_out", timed_out, "seconds", round(time.time() - t0, 1), flush=True)
+    import json
+    (out / ("runner_%s%s.json" % (a.stage, a.tag))).write_text(json.dumps({
+        "stage": a.stage, "mode": a.mode, "terrain_run": a.terrain_run if a.stage == "build" else json.loads((OUT / a.inputs).read_text(encoding="utf-8")).get("terrain_run"),
+        "inputs": a.inputs, "editor_exit_code": p.returncode,
+        "editor_exit_code_hex": None if p.returncode is None else hex(p.returncode & 0xFFFFFFFF), "timed_out": timed_out,
+        "seconds": round(time.time() - t0, 1), "cmd": cmd}, indent=1), encoding="utf-8")
     sys.exit(1 if timed_out else 0)
 
 

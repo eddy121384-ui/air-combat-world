@@ -192,3 +192,13 @@ stitch LOD must equal the neighbouring chunk LOD and the Xinyi border Landscape 
 leaves cracks at internal component borders); the OpenWorld template runtime grid (252 m / 768 m) cannot stream 300 m/s flight.
 `build_pilot.QUANT_FALLBACK` (float32 grid-snap fallback) is a CANDIDATE policy, default off, until reviewed + regression-gated.
 Desktop iGPU PIE numbers are not mobile performance.
+
+### Phase 2B-C seam collision + LOD runtime closure
+
+`docs/north-taiwan-seam-lod-closure-phase2b-c.md` (result `data/ntw/runtime/closure_result.json`): fixed-hole stitch
+(`build_terrain_cells.py --stitch-hole fixed`, one hole for every LOD -> watertight for every stitch x chunk LOD), neighbour-aware
+chunk skirts (`--neighbour-skirts`), surface-only engine collision meshes (`--collision-meshes`; skirts must never collide), exact
+collision-only flange + render apron (`tools/ntw/ue_gate/build_collision_flange.py`). Rules learned: `SetLODBias` on Landscape
+components has no measurable effect - use the Landscape LOD0/LOD distribution settings; fast small bodies need CCD (tunnelling is
+generic, not a seam issue); a linear flange is not good enough (build it from the source triangles). Physics fall-through at one
+boundary point remains open. QUANT_FALLBACK stays off (review only: `tools/ntw/fallback_review.py`).
