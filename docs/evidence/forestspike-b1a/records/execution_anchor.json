@@ -1,0 +1,7 @@
+{
+  "plan_commit": "ea36b5632d72fbba6f5609c779dd343803b38f61",
+  "formal_started_utc": "2026-10-13T07:57:05.642504+00:00",
+  "clean_worktree_before_sweep": true,
+  "registration_sha256": "8354a3fc6a2249de5d73121b19077bebbfa168847d332e0b2f03dafeede8c68c",
+  "scope": "Five complete interleaved rounds, four arms, four static views; no concurrent Unreal/video/analysis workload during the sweep"
+}

@@ -1,0 +1,14 @@
+{
+  "script": "fs_b1a_native_static_configs.py",
+  "args": [
+    "\"D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\ForestSpike\\ForestSpikeB1a.uproject\"",
+    "-ExecutePythonScript=\"D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\adapters\\unreal\\forestspike\\fs_b1a_native_static_configs.py\"",
+    "-unattended",
+    "-nopause",
+    "-nosound",
+    "-abslog=\"D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\ForestSpike\\Saved\\ForestSpike\\b1a\\native_static_configs02\\engine.log\""
+  ],
+  "started_utc": "2026-10-13T16:46:56.6085879+00:00",
+  "tag": "native_static_configs02",
+  "env": {}
+}

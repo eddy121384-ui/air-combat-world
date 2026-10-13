@@ -1,0 +1,12 @@
+{
+  "status": "PASS_FS_B1A_VIEWPORT_DIMENSIONS_ONLY",
+  "resolution": [
+    1920,
+    1080
+  ],
+  "scope": "Fresh 1x game viewport screenshot with the same static launch settings. This auxiliary CSV FAIL is retained and excluded from performance analysis; screenshot interrupts normal profiling startup.",
+  "csv_status_retained": "FAIL_FS_B1A_RUN",
+  "exit_code": 0,
+  "file": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\ForestSpike\\Saved\\ForestSpike\\b1a\\resolution\\resolution01\\viewport_1x.png",
+  "sha256": "cefb892b1391229262327fae7fd335c60bc307dfccdf0abe3db706944b454000"
+}

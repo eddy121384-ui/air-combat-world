@@ -1,0 +1,5 @@
+{
+  "status": "FAIL_FS_B1A_REOPEN",
+  "maps": [],
+  "error": "Traceback (most recent call last):\n  File \"D:/Users/EDDY/Documents/GitHub/air-combat-world/adapters/unreal/forestspike/fs_b1a_reopen.py\", line 36, in <module>\n    for row in build['maps']:one(row)\n                             ^^^^^^^^\n  File \"D:/Users/EDDY/Documents/GitHub/air-combat-world/adapters/unreal/forestspike/fs_b1a_reopen.py\", line 14, in one\n    mesh=h.get_static_mesh();active=(key=='Tree_A')==(row['arm']=='A')\n         ^^^^^^^^^^^^^^^^^\nAttributeError: 'HierarchicalInstancedStaticMeshComponent' object has no attribute 'get_static_mesh'\n"
+}

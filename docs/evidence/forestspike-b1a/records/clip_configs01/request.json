@@ -1,0 +1,14 @@
+{
+  "args": [
+    "\"D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\ForestSpike\\ForestSpikeB1a.uproject\"",
+    "-ExecutePythonScript=\"D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\adapters\\unreal\\forestspike\\fs_b1a_clip_configs.py\"",
+    "-unattended",
+    "-nopause",
+    "-nosound",
+    "-abslog=\"D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\ForestSpike\\Saved\\ForestSpike\\b1a\\clip_configs01\\engine.log\""
+  ],
+  "tag": "clip_configs01",
+  "env": {},
+  "started_utc": "2026-10-13T07:53:20.4226670+00:00",
+  "script": "fs_b1a_clip_configs.py"
+}

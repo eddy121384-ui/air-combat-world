@@ -1,0 +1,17 @@
+{
+  "FileVersion": 3,
+  "EngineAssociation": "5.8",
+  "Category": "",
+  "Description": "Isolated B1a native movie capture companion. Original ForestSpike project/config/content preserved.",
+  "Modules": [],
+  "Plugins": [
+    {
+      "Name": "PythonScriptPlugin",
+      "Enabled": true
+    },
+    {
+      "Name": "MovieRenderPipeline",
+      "Enabled": true
+    }
+  ]
+}

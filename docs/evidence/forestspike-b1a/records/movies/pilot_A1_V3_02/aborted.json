@@ -1,0 +1,6 @@
+{
+  "process_id": 9980,
+  "aborted_utc": "2026-10-13T07:18:26.9443940+00:00",
+  "status": "FAIL_FS_B1A_MOVIE_PILOT",
+  "reason": "Offscreen legacy viewport framegrabber also produced zero finalized PNGs"
+}

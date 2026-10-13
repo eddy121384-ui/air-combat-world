@@ -1,0 +1,7 @@
+{
+  "status": "INTERRUPTED_INCOMPLETE_NOT_PASS",
+  "actual_final_png_count": 24,
+  "reason": "Earlier no-output observation was stale: MRQ completed map reload/shader setup and began output before termination. Do not claim MRQ is incapable or truly deadlocked. Retain interrupted partial output.",
+  "first_output_utc": "2026-10-13T07:35:32.085937+00:00",
+  "last_output_utc": "2026-10-13T07:35:43.043881+00:00"
+}

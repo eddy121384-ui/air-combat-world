@@ -1,0 +1,20 @@
+[
+  {
+    "file": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\ForestSpike\\Saved\\ForestSpike\\b1a\\review_media\\v1_agl200_p10_A1_range_overlay.png",
+    "sha256": "bbf4f08fe6471575d80cd937316609b2931055f6ba8f071fa7d7b9e63f5ff5ee",
+    "source": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\ForestSpike\\Saved\\ForestSpike\\b1a\\native_static_primary\\v1_agl200_p10_A1_visual.png",
+    "source_sha256": "70f2dbcd0a0ac82536591e8e7b645269a6396bfc9caf728e39e00e8f8ad01427",
+    "id_source": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\ForestSpike\\Saved\\ForestSpike\\b1a\\stills01\\captures\\v1_agl200_p10_A1_id.png",
+    "id_sha256": "0318642121e0023cc07a3c155bc09c064f3e4e4d12887a7dbaef78ae794d748b",
+    "annotation": "Yellow400..403m / red497..500m slant range only in core forest/tree ID classes. Existing open clearings are not marked as seams. Original native pixels unchanged elsewhere; no rescaling."
+  },
+  {
+    "file": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\ForestSpike\\Saved\\ForestSpike\\b1a\\review_media\\v1_agl200_p10_B1_range_overlay.png",
+    "sha256": "90ef8651e7053573d1b718c982705fb72692d18b3f73b61c2d8b975870392857",
+    "source": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\ForestSpike\\Saved\\ForestSpike\\b1a\\native_static_primary\\v1_agl200_p10_B1_visual.png",
+    "source_sha256": "ed259c86a01b78de0cdd26b7c77622acdb8893c3f10265acfc861a4ce52e853f",
+    "id_source": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\ForestSpike\\Saved\\ForestSpike\\b1a\\stills01\\captures\\v1_agl200_p10_B1_id.png",
+    "id_sha256": "f3fa8186feb0c517a4f22e7b6e8ab79cecbd534496108ddeb818306ed848c6ec",
+    "annotation": "Yellow400..403m / red497..500m slant range only in core forest/tree ID classes. Existing open clearings are not marked as seams. Original native pixels unchanged elsewhere; no rescaling."
+  }
+]

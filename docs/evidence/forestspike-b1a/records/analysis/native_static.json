@@ -1,0 +1,636 @@
+{
+  "status": "PASS_FS_B1A_NATIVE_STATIC_F11_DATA",
+  "F11_static": [
+    {
+      "pose": "v1_agl50_p15",
+      "group": "A0",
+      "frames": 64,
+      "warm_render_ticks": 120,
+      "metrics": {
+        "all_potential_forest": {
+          "pixels": 1505128,
+          "p95_sigma_Lstar": 0.25842897437404905,
+          "mean_sigma_Lstar": 0.1006416444292811
+        },
+        "near": {
+          "pixels": 1460977,
+          "p95_sigma_Lstar": 0.2597192446129418,
+          "mean_sigma_Lstar": 0.10047646170670956
+        },
+        "tree_geometry": {
+          "pixels": 1225208,
+          "p95_sigma_Lstar": 0.2640213082425507,
+          "mean_sigma_Lstar": 0.10636262164694234
+        },
+        "far_potential_forest": {
+          "pixels": 44151,
+          "p95_sigma_Lstar": 0.19221265621135358,
+          "mean_sigma_Lstar": 0.10610761707937792
+        }
+      },
+      "scope": "Primary native-game MRQ PNG frame120..183 after120 fixed warm output frames; population sigma D65 display-referred sRGB L*. Source matches accepted movie pipeline; calibration-pending thresholds are not production acceptance."
+    },
+    {
+      "pose": "v1_agl200_p10",
+      "group": "A0",
+      "frames": 64,
+      "warm_render_ticks": 120,
+      "metrics": {
+        "all_potential_forest": {
+          "pixels": 1121996,
+          "p95_sigma_Lstar": 0.27407804412811654,
+          "mean_sigma_Lstar": 0.12761517206471337
+        },
+        "near": {
+          "pixels": 620256,
+          "p95_sigma_Lstar": 0.3126359310971025,
+          "mean_sigma_Lstar": 0.16075620556304496
+        },
+        "tree_geometry": {
+          "pixels": 515279,
+          "p95_sigma_Lstar": 0.31921982996366133,
+          "mean_sigma_Lstar": 0.16882519051528566
+        },
+        "far_potential_forest": {
+          "pixels": 501740,
+          "p95_sigma_Lstar": 0.1806109856772909,
+          "mean_sigma_Lstar": 0.08664589540042279
+        }
+      },
+      "scope": "Primary native-game MRQ PNG frame120..183 after120 fixed warm output frames; population sigma D65 display-referred sRGB L*. Source matches accepted movie pipeline; calibration-pending thresholds are not production acceptance."
+    },
+    {
+      "pose": "v1_agl500_p15",
+      "group": "A0",
+      "frames": 64,
+      "warm_render_ticks": 120,
+      "metrics": {
+        "all_potential_forest": {
+          "pixels": 1051863,
+          "p95_sigma_Lstar": 0.17782243246136767,
+          "mean_sigma_Lstar": 0.08661499362613836
+        },
+        "near": {
+          "pixels": 1774,
+          "p95_sigma_Lstar": 0.3855837430983802,
+          "mean_sigma_Lstar": 0.22540566972355813
+        },
+        "tree_geometry": {
+          "pixels": 1774,
+          "p95_sigma_Lstar": 0.3855837430983802,
+          "mean_sigma_Lstar": 0.22540566972355813
+        },
+        "far_potential_forest": {
+          "pixels": 1050089,
+          "p95_sigma_Lstar": 0.17736287569000148,
+          "mean_sigma_Lstar": 0.08638052334847922
+        }
+      },
+      "scope": "Primary native-game MRQ PNG frame120..183 after120 fixed warm output frames; population sigma D65 display-referred sRGB L*. Source matches accepted movie pipeline; calibration-pending thresholds are not production acceptance."
+    },
+    {
+      "pose": "v1_agl1000_p20",
+      "group": "A0",
+      "frames": 64,
+      "warm_render_ticks": 120,
+      "metrics": {
+        "all_potential_forest": {
+          "pixels": 999169,
+          "p95_sigma_Lstar": 0.1763530403043442,
+          "mean_sigma_Lstar": 0.08758881149154214
+        },
+        "far_potential_forest": {
+          "pixels": 999169,
+          "p95_sigma_Lstar": 0.1763530403043442,
+          "mean_sigma_Lstar": 0.08758881149154214
+        }
+      },
+      "scope": "Primary native-game MRQ PNG frame120..183 after120 fixed warm output frames; population sigma D65 display-referred sRGB L*. Source matches accepted movie pipeline; calibration-pending thresholds are not production acceptance."
+    },
+    {
+      "pose": "v1_agl50_p15",
+      "group": "A1",
+      "frames": 64,
+      "warm_render_ticks": 120,
+      "metrics": {
+        "all_potential_forest": {
+          "pixels": 1505128,
+          "p95_sigma_Lstar": 0.258816944713448,
+          "mean_sigma_Lstar": 0.10122148493076195
+        },
+        "near": {
+          "pixels": 1460977,
+          "p95_sigma_Lstar": 0.2597126158541083,
+          "mean_sigma_Lstar": 0.10048055321610166
+        },
+        "tree_geometry": {
+          "pixels": 1225208,
+          "p95_sigma_Lstar": 0.26402051463763565,
+          "mean_sigma_Lstar": 0.1063685268065898
+        },
+        "far_potential_forest": {
+          "pixels": 44151,
+          "p95_sigma_Lstar": 0.22853240172832412,
+          "mean_sigma_Lstar": 0.1257392578846989
+        }
+      },
+      "scope": "Primary native-game MRQ PNG frame120..183 after120 fixed warm output frames; population sigma D65 display-referred sRGB L*. Source matches accepted movie pipeline; calibration-pending thresholds are not production acceptance."
+    },
+    {
+      "pose": "v1_agl200_p10",
+      "group": "A1",
+      "frames": 64,
+      "warm_render_ticks": 120,
+      "metrics": {
+        "all_potential_forest": {
+          "pixels": 1121996,
+          "p95_sigma_Lstar": 0.2772286272180331,
+          "mean_sigma_Lstar": 0.1496226490341967
+        },
+        "near": {
+          "pixels": 620256,
+          "p95_sigma_Lstar": 0.31259570077265686,
+          "mean_sigma_Lstar": 0.160622565678772
+        },
+        "tree_geometry": {
+          "pixels": 515279,
+          "p95_sigma_Lstar": 0.31916499833724027,
+          "mean_sigma_Lstar": 0.16878269820461866
+        },
+        "far_potential_forest": {
+          "pixels": 501740,
+          "p95_sigma_Lstar": 0.24009734871062663,
+          "mean_sigma_Lstar": 0.13602444219739337
+        }
+      },
+      "scope": "Primary native-game MRQ PNG frame120..183 after120 fixed warm output frames; population sigma D65 display-referred sRGB L*. Source matches accepted movie pipeline; calibration-pending thresholds are not production acceptance."
+    },
+    {
+      "pose": "v1_agl500_p15",
+      "group": "A1",
+      "frames": 64,
+      "warm_render_ticks": 120,
+      "metrics": {
+        "all_potential_forest": {
+          "pixels": 1051863,
+          "p95_sigma_Lstar": 0.23649783249630627,
+          "mean_sigma_Lstar": 0.14960262144544184
+        },
+        "near": {
+          "pixels": 1774,
+          "p95_sigma_Lstar": 0.37147306916143696,
+          "mean_sigma_Lstar": 0.21925531367396356
+        },
+        "tree_geometry": {
+          "pixels": 1774,
+          "p95_sigma_Lstar": 0.37147306916143696,
+          "mean_sigma_Lstar": 0.21925531367396356
+        },
+        "far_potential_forest": {
+          "pixels": 1050089,
+          "p95_sigma_Lstar": 0.23616384845709112,
+          "mean_sigma_Lstar": 0.14948495153744987
+        }
+      },
+      "scope": "Primary native-game MRQ PNG frame120..183 after120 fixed warm output frames; population sigma D65 display-referred sRGB L*. Source matches accepted movie pipeline; calibration-pending thresholds are not production acceptance."
+    },
+    {
+      "pose": "v1_agl1000_p20",
+      "group": "A1",
+      "frames": 64,
+      "warm_render_ticks": 120,
+      "metrics": {
+        "all_potential_forest": {
+          "pixels": 999169,
+          "p95_sigma_Lstar": 0.23734435282802938,
+          "mean_sigma_Lstar": 0.15161152290748342
+        },
+        "far_potential_forest": {
+          "pixels": 999169,
+          "p95_sigma_Lstar": 0.23734435282802938,
+          "mean_sigma_Lstar": 0.15161152290748342
+        }
+      },
+      "scope": "Primary native-game MRQ PNG frame120..183 after120 fixed warm output frames; population sigma D65 display-referred sRGB L*. Source matches accepted movie pipeline; calibration-pending thresholds are not production acceptance."
+    },
+    {
+      "pose": "v1_agl50_p15",
+      "group": "B0",
+      "frames": 64,
+      "warm_render_ticks": 120,
+      "metrics": {
+        "all_potential_forest": {
+          "pixels": 1518041,
+          "p95_sigma_Lstar": 0.2586803398079023,
+          "mean_sigma_Lstar": 0.1269387119782868
+        },
+        "near": {
+          "pixels": 1478740,
+          "p95_sigma_Lstar": 0.25957367912874113,
+          "mean_sigma_Lstar": 0.1274177577950147
+        },
+        "tree_geometry": {
+          "pixels": 1234457,
+          "p95_sigma_Lstar": 0.26302311748089213,
+          "mean_sigma_Lstar": 0.1388007791654614
+        },
+        "far_potential_forest": {
+          "pixels": 39301,
+          "p95_sigma_Lstar": 0.19921049894684073,
+          "mean_sigma_Lstar": 0.10891412708150958
+        }
+      },
+      "scope": "Primary native-game MRQ PNG frame120..183 after120 fixed warm output frames; population sigma D65 display-referred sRGB L*. Source matches accepted movie pipeline; calibration-pending thresholds are not production acceptance."
+    },
+    {
+      "pose": "v1_agl200_p10",
+      "group": "B0",
+      "frames": 64,
+      "warm_render_ticks": 120,
+      "metrics": {
+        "all_potential_forest": {
+          "pixels": 1127233,
+          "p95_sigma_Lstar": 0.27287708497036445,
+          "mean_sigma_Lstar": 0.13637824140051105
+        },
+        "near": {
+          "pixels": 648960,
+          "p95_sigma_Lstar": 0.30341801425805426,
+          "mean_sigma_Lstar": 0.17018003679133725
+        },
+        "tree_geometry": {
+          "pixels": 554825,
+          "p95_sigma_Lstar": 0.30657681162931943,
+          "mean_sigma_Lstar": 0.17756904211600916
+        },
+        "far_potential_forest": {
+          "pixels": 478273,
+          "p95_sigma_Lstar": 0.18923702763968378,
+          "mean_sigma_Lstar": 0.09051319541875884
+        }
+      },
+      "scope": "Primary native-game MRQ PNG frame120..183 after120 fixed warm output frames; population sigma D65 display-referred sRGB L*. Source matches accepted movie pipeline; calibration-pending thresholds are not production acceptance."
+    },
+    {
+      "pose": "v1_agl500_p15",
+      "group": "B0",
+      "frames": 64,
+      "warm_render_ticks": 120,
+      "metrics": {
+        "all_potential_forest": {
+          "pixels": 1051866,
+          "p95_sigma_Lstar": 0.17893497809980263,
+          "mean_sigma_Lstar": 0.08713667740288161
+        },
+        "near": {
+          "pixels": 3970,
+          "p95_sigma_Lstar": 0.3632120396430842,
+          "mean_sigma_Lstar": 0.2118281344176618
+        },
+        "tree_geometry": {
+          "pixels": 3970,
+          "p95_sigma_Lstar": 0.3632120396430842,
+          "mean_sigma_Lstar": 0.2118281344176618
+        },
+        "far_potential_forest": {
+          "pixels": 1047896,
+          "p95_sigma_Lstar": 0.17798355749238667,
+          "mean_sigma_Lstar": 0.08666427834386364
+        }
+      },
+      "scope": "Primary native-game MRQ PNG frame120..183 after120 fixed warm output frames; population sigma D65 display-referred sRGB L*. Source matches accepted movie pipeline; calibration-pending thresholds are not production acceptance."
+    },
+    {
+      "pose": "v1_agl1000_p20",
+      "group": "B0",
+      "frames": 64,
+      "warm_render_ticks": 120,
+      "metrics": {
+        "all_potential_forest": {
+          "pixels": 999169,
+          "p95_sigma_Lstar": 0.1763530403043442,
+          "mean_sigma_Lstar": 0.08758881149154214
+        },
+        "far_potential_forest": {
+          "pixels": 999169,
+          "p95_sigma_Lstar": 0.1763530403043442,
+          "mean_sigma_Lstar": 0.08758881149154214
+        }
+      },
+      "scope": "Primary native-game MRQ PNG frame120..183 after120 fixed warm output frames; population sigma D65 display-referred sRGB L*. Source matches accepted movie pipeline; calibration-pending thresholds are not production acceptance."
+    },
+    {
+      "pose": "v1_agl50_p15",
+      "group": "B1",
+      "frames": 64,
+      "warm_render_ticks": 120,
+      "metrics": {
+        "all_potential_forest": {
+          "pixels": 1518041,
+          "p95_sigma_Lstar": 0.2589558398139228,
+          "mean_sigma_Lstar": 0.12733327952530357
+        },
+        "near": {
+          "pixels": 1478740,
+          "p95_sigma_Lstar": 0.2595660508711809,
+          "mean_sigma_Lstar": 0.12742219856408532
+        },
+        "tree_geometry": {
+          "pixels": 1234457,
+          "p95_sigma_Lstar": 0.26300667176423176,
+          "mean_sigma_Lstar": 0.13880567704590904
+        },
+        "far_potential_forest": {
+          "pixels": 39301,
+          "p95_sigma_Lstar": 0.23058770933590064,
+          "mean_sigma_Lstar": 0.12398761047341961
+        }
+      },
+      "scope": "Primary native-game MRQ PNG frame120..183 after120 fixed warm output frames; population sigma D65 display-referred sRGB L*. Source matches accepted movie pipeline; calibration-pending thresholds are not production acceptance."
+    },
+    {
+      "pose": "v1_agl200_p10",
+      "group": "B1",
+      "frames": 64,
+      "warm_render_ticks": 120,
+      "metrics": {
+        "all_potential_forest": {
+          "pixels": 1127233,
+          "p95_sigma_Lstar": 0.27532410369992055,
+          "mean_sigma_Lstar": 0.1553973636973194
+        },
+        "near": {
+          "pixels": 648960,
+          "p95_sigma_Lstar": 0.30256702949388675,
+          "mean_sigma_Lstar": 0.1697183851185219
+        },
+        "tree_geometry": {
+          "pixels": 554825,
+          "p95_sigma_Lstar": 0.30540676195034816,
+          "mean_sigma_Lstar": 0.17724277790554166
+        },
+        "far_potential_forest": {
+          "pixels": 478273,
+          "p95_sigma_Lstar": 0.2436556105320106,
+          "mean_sigma_Lstar": 0.13596542825144733
+        }
+      },
+      "scope": "Primary native-game MRQ PNG frame120..183 after120 fixed warm output frames; population sigma D65 display-referred sRGB L*. Source matches accepted movie pipeline; calibration-pending thresholds are not production acceptance."
+    },
+    {
+      "pose": "v1_agl500_p15",
+      "group": "B1",
+      "frames": 64,
+      "warm_render_ticks": 120,
+      "metrics": {
+        "all_potential_forest": {
+          "pixels": 1051866,
+          "p95_sigma_Lstar": 0.23686990761500495,
+          "mean_sigma_Lstar": 0.14973610017579647
+        },
+        "near": {
+          "pixels": 3970,
+          "p95_sigma_Lstar": 0.35096762187694813,
+          "mean_sigma_Lstar": 0.20949295868115653
+        },
+        "tree_geometry": {
+          "pixels": 3970,
+          "p95_sigma_Lstar": 0.35096762187694813,
+          "mean_sigma_Lstar": 0.20949295868115653
+        },
+        "far_potential_forest": {
+          "pixels": 1047896,
+          "p95_sigma_Lstar": 0.23632914183854087,
+          "mean_sigma_Lstar": 0.14950970869394492
+        }
+      },
+      "scope": "Primary native-game MRQ PNG frame120..183 after120 fixed warm output frames; population sigma D65 display-referred sRGB L*. Source matches accepted movie pipeline; calibration-pending thresholds are not production acceptance."
+    },
+    {
+      "pose": "v1_agl1000_p20",
+      "group": "B1",
+      "frames": 64,
+      "warm_render_ticks": 120,
+      "metrics": {
+        "all_potential_forest": {
+          "pixels": 999169,
+          "p95_sigma_Lstar": 0.23734435282802938,
+          "mean_sigma_Lstar": 0.15161152290748342
+        },
+        "far_potential_forest": {
+          "pixels": 999169,
+          "p95_sigma_Lstar": 0.23734435282802938,
+          "mean_sigma_Lstar": 0.15161152290748342
+        }
+      },
+      "scope": "Primary native-game MRQ PNG frame120..183 after120 fixed warm output frames; population sigma D65 display-referred sRGB L*. Source matches accepted movie pipeline; calibration-pending thresholds are not production acceptance."
+    }
+  ],
+  "matched_image_changes": [
+    {
+      "pose": "v1_agl1000_p20",
+      "agl_m": 1000,
+      "changes": {
+        "S_A": {
+          "whole_frame_Lstar_MAE": 8.195322920883712,
+          "projected_core_Lstar_MAE": 13.054553820079079,
+          "potential_forest_Lstar_MAE": 16.971319536905508
+        },
+        "S_B": {
+          "whole_frame_Lstar_MAE": 8.195322920883712,
+          "projected_core_Lstar_MAE": 13.054553820079079,
+          "potential_forest_Lstar_MAE": 16.971319536905508
+        }
+      },
+      "scope": "Matched native display-referred image-change magnitude, not perceptual improvement. No N contrast at500/1000m."
+    },
+    {
+      "pose": "v1_agl200_p10",
+      "agl_m": 200,
+      "changes": {
+        "S_A": {
+          "whole_frame_Lstar_MAE": 3.935180824998459,
+          "projected_core_Lstar_MAE": 2.0740929102670065,
+          "potential_forest_Lstar_MAE": 7.197315501044914
+        },
+        "S_B": {
+          "whole_frame_Lstar_MAE": 3.689994176025445,
+          "projected_core_Lstar_MAE": 1.530070914250429,
+          "potential_forest_Lstar_MAE": 6.747622522487134
+        },
+        "N_Soff": {
+          "whole_frame_Lstar_MAE": 4.2365430910256885,
+          "projected_core_Lstar_MAE": 9.400302154695046,
+          "potential_forest_Lstar_MAE": 7.637512683927057
+        },
+        "N_Son": {
+          "whole_frame_Lstar_MAE": 4.194008909440922,
+          "projected_core_Lstar_MAE": 9.305914801963015,
+          "potential_forest_Lstar_MAE": 7.559546842087169
+        }
+      },
+      "scope": "Matched native display-referred image-change magnitude, not perceptual improvement. No N contrast at500/1000m."
+    },
+    {
+      "pose": "v1_agl500_p15",
+      "agl_m": 500,
+      "changes": {
+        "S_A": {
+          "whole_frame_Lstar_MAE": 8.76017412430765,
+          "projected_core_Lstar_MAE": 11.769334949074128,
+          "potential_forest_Lstar_MAE": 17.232375349046606
+        },
+        "S_B": {
+          "whole_frame_Lstar_MAE": 8.738943634513916,
+          "projected_core_Lstar_MAE": 11.678312144266792,
+          "potential_forest_Lstar_MAE": 17.190541780544844
+        }
+      },
+      "scope": "Matched native display-referred image-change magnitude, not perceptual improvement. No N contrast at500/1000m."
+    },
+    {
+      "pose": "v1_agl50_p15",
+      "agl_m": 50,
+      "changes": {
+        "S_A": {
+          "whole_frame_Lstar_MAE": 0.2565668985397301,
+          "projected_core_Lstar_MAE": 0.04285578805308851,
+          "potential_forest_Lstar_MAE": 0.3486943618264422
+        },
+        "S_B": {
+          "whole_frame_Lstar_MAE": 0.22371551348762672,
+          "projected_core_Lstar_MAE": 0.003502376945989118,
+          "potential_forest_Lstar_MAE": 0.30387486340154574
+        },
+        "N_Soff": {
+          "whole_frame_Lstar_MAE": 10.300042677324212,
+          "projected_core_Lstar_MAE": 12.596186736886187,
+          "potential_forest_Lstar_MAE": 13.787535145047036
+        },
+        "N_Son": {
+          "whole_frame_Lstar_MAE": 10.28849282110645,
+          "projected_core_Lstar_MAE": 12.581728485831299,
+          "potential_forest_Lstar_MAE": 13.771764594322224
+        }
+      },
+      "scope": "Matched native display-referred image-change magnitude, not perceptual improvement. No N contrast at500/1000m."
+    }
+  ],
+  "sources": [
+    {
+      "pose": "v1_agl50_p15",
+      "group": "A0",
+      "primary": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\ForestSpike\\Saved\\ForestSpike\\b1a\\native_static_primary\\v1_agl50_p15_A0_visual.png",
+      "primary_sha256": "6d5f7e82796ad9d61adc72acf8c8f3aa10ae4f30d37cf0a610a952d887b96ee6",
+      "validation_sha256": "79b3db2805925de5fc62b7cdd9bd1ea3f26c82caeabfecefa09c77f5232373d4"
+    },
+    {
+      "pose": "v1_agl200_p10",
+      "group": "A0",
+      "primary": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\ForestSpike\\Saved\\ForestSpike\\b1a\\native_static_primary\\v1_agl200_p10_A0_visual.png",
+      "primary_sha256": "77911e7adcef8957f8cc2ad43e2c2f92533c3b211f0c79e9c7f3ecd019264506",
+      "validation_sha256": "4e7eb27298ced9a9f125a61e3b163f81d41fb9d1b14c3f832d3bd52f2cb5965b"
+    },
+    {
+      "pose": "v1_agl500_p15",
+      "group": "A0",
+      "primary": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\ForestSpike\\Saved\\ForestSpike\\b1a\\native_static_primary\\v1_agl500_p15_A0_visual.png",
+      "primary_sha256": "8d4507c02429ffd1fc66f9a1a5b937a357b84ff070f53bb4245ba8fc5982984c",
+      "validation_sha256": "65de2cafe98c1daa29111336ca7a8e4fa0fc11e5c20be1dfc24da057ddf3b5f1"
+    },
+    {
+      "pose": "v1_agl1000_p20",
+      "group": "A0",
+      "primary": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\ForestSpike\\Saved\\ForestSpike\\b1a\\native_static_primary\\v1_agl1000_p20_A0_visual.png",
+      "primary_sha256": "855094a145777ce7075b80be6618864db80dda78283215fb9a2c8d47f9c63f40",
+      "validation_sha256": "3c4803c57343a703f439b1923b68a4cb7f98cdfeeca579c58d94cd8b1193459c"
+    },
+    {
+      "pose": "v1_agl50_p15",
+      "group": "A1",
+      "primary": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\ForestSpike\\Saved\\ForestSpike\\b1a\\native_static_primary\\v1_agl50_p15_A1_visual.png",
+      "primary_sha256": "2cc8cbd48385077f2d5e5096b72332df185a80857e107bf1195cc3b8f0dc87f5",
+      "validation_sha256": "b79a2d8879e18183cc934cf232815ecce111c2e79e940f0d2e532a5a47e2df76"
+    },
+    {
+      "pose": "v1_agl200_p10",
+      "group": "A1",
+      "primary": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\ForestSpike\\Saved\\ForestSpike\\b1a\\native_static_primary\\v1_agl200_p10_A1_visual.png",
+      "primary_sha256": "70f2dbcd0a0ac82536591e8e7b645269a6396bfc9caf728e39e00e8f8ad01427",
+      "validation_sha256": "7e1035655c9d650b6bbc8819fd2c4ee6924dd3fb33eea1e284f04a7b7bc75b38"
+    },
+    {
+      "pose": "v1_agl500_p15",
+      "group": "A1",
+      "primary": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\ForestSpike\\Saved\\ForestSpike\\b1a\\native_static_primary\\v1_agl500_p15_A1_visual.png",
+      "primary_sha256": "ccc0b6b0beca46e037945f5a4a5ff282ea26491b40dfc1845847cf6c171234c3",
+      "validation_sha256": "56ae8ad7a4be23d6599203ebac83d52be525cb68a4998ae99918021b7314fa9b"
+    },
+    {
+      "pose": "v1_agl1000_p20",
+      "group": "A1",
+      "primary": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\ForestSpike\\Saved\\ForestSpike\\b1a\\native_static_primary\\v1_agl1000_p20_A1_visual.png",
+      "primary_sha256": "1a5493157489e4032a7abc07644faa82842bbfa9d64d8e345f5f8ae03d90ddcf",
+      "validation_sha256": "4ac1564251885f6cd0bb9246ce972827a9cd1e4a084d5cdd9885f9ddd8e5073c"
+    },
+    {
+      "pose": "v1_agl50_p15",
+      "group": "B0",
+      "primary": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\ForestSpike\\Saved\\ForestSpike\\b1a\\native_static_primary\\v1_agl50_p15_B0_visual.png",
+      "primary_sha256": "fc52c19eb2c01753162eeeaf4ee8c48073b8411ed2c137ca18d1fd21b05e847d",
+      "validation_sha256": "7454178dc9c1fc96da847e3fe2e8fa729975416b8a13caff22c4a67923a321ec"
+    },
+    {
+      "pose": "v1_agl200_p10",
+      "group": "B0",
+      "primary": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\ForestSpike\\Saved\\ForestSpike\\b1a\\native_static_primary\\v1_agl200_p10_B0_visual.png",
+      "primary_sha256": "9054c0a7dfcc474b10dd7ad85cfb6882069cfd1e4048c37d1d8cb62149f056bd",
+      "validation_sha256": "267e2b811162d8ab52abd47874f58857bd6a2e3cdfd445111e492a1e97da71b6"
+    },
+    {
+      "pose": "v1_agl500_p15",
+      "group": "B0",
+      "primary": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\ForestSpike\\Saved\\ForestSpike\\b1a\\native_static_primary\\v1_agl500_p15_B0_visual.png",
+      "primary_sha256": "707e8dbe3d156f936f470078190b396e7fa30023932a3391a74abb6cd6fe97a5",
+      "validation_sha256": "0de42c2c82b953a66e0e4760e7bd6568721701cc526259b8dafc42ef2f75c8cc"
+    },
+    {
+      "pose": "v1_agl1000_p20",
+      "group": "B0",
+      "primary": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\ForestSpike\\Saved\\ForestSpike\\b1a\\native_static_primary\\v1_agl1000_p20_B0_visual.png",
+      "primary_sha256": "855094a145777ce7075b80be6618864db80dda78283215fb9a2c8d47f9c63f40",
+      "validation_sha256": "232e718f7ec811b7d8481f32668abd24c97b571d9bb01ddb6faa99e31303c5b9"
+    },
+    {
+      "pose": "v1_agl50_p15",
+      "group": "B1",
+      "primary": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\ForestSpike\\Saved\\ForestSpike\\b1a\\native_static_primary\\v1_agl50_p15_B1_visual.png",
+      "primary_sha256": "ca50bcd322a883724f3b9e42d32161cf24248385e990eca110e4095f8203e9dc",
+      "validation_sha256": "4d7fda386e15579499178b516b217a60713f0e793d18aac17fc188e7528734df"
+    },
+    {
+      "pose": "v1_agl200_p10",
+      "group": "B1",
+      "primary": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\ForestSpike\\Saved\\ForestSpike\\b1a\\native_static_primary\\v1_agl200_p10_B1_visual.png",
+      "primary_sha256": "ed259c86a01b78de0cdd26b7c77622acdb8893c3f10265acfc861a4ce52e853f",
+      "validation_sha256": "7f6dc40d560ffe690053bf1ce3b1bf04cfa74fdae60061297594a086db87c4e0"
+    },
+    {
+      "pose": "v1_agl500_p15",
+      "group": "B1",
+      "primary": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\ForestSpike\\Saved\\ForestSpike\\b1a\\native_static_primary\\v1_agl500_p15_B1_visual.png",
+      "primary_sha256": "b5d11dc8703f5c9c75531f0595e5538f09b21d34bf8b51ea312bc71f305c77e3",
+      "validation_sha256": "ab69227d224f775fdecbec4d39f9abbf39058b6cc4a84bf16f7ee3266d7bb965"
+    },
+    {
+      "pose": "v1_agl1000_p20",
+      "group": "B1",
+      "primary": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\ForestSpike\\Saved\\ForestSpike\\b1a\\native_static_primary\\v1_agl1000_p20_B1_visual.png",
+      "primary_sha256": "1a5493157489e4032a7abc07644faa82842bbfa9d64d8e345f5f8ae03d90ddcf",
+      "validation_sha256": "ea6b0b4493b8682b5b50f6f3266d04efecf97a74e62c05fd0eb819352b2c71fc"
+    }
+  ],
+  "host_scope": "Intel UHD 770 only",
+  "color_source": "UE5.8 MoviePipelineImageSequenceOutput.cpp:257 applies sRGB quantization unless OCIO enabled; no OCIO override in configs.",
+  "supersedes_for_primary_quality": "SceneCapture shaded images/F11 remain retained, secondary diagnostics only. Their export appearance differs; no cross-pipeline luminance inference."
+}

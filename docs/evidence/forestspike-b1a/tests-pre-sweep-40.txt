@@ -1,0 +1,45 @@
+test_moving_static_rejected (test_b1a_integrity.B1aTests.test_moving_static_rejected) ... ok
+test_static (test_b1a_integrity.B1aTests.test_static) ... ok
+test_stationary_v5_rejected (test_b1a_integrity.B1aTests.test_stationary_v5_rejected) ... ok
+test_v3 (test_b1a_integrity.B1aTests.test_v3) ... ok
+test_v5_full_inward_orbit (test_b1a_integrity.B1aTests.test_v5_full_inward_orbit) ... ok
+test_wrong_v5_heading_rejected (test_b1a_integrity.B1aTests.test_wrong_v5_heading_rejected) ... ok
+test_complete_warm_hold_and_flight (test_motion_integrity.MotionIntegrityTests.test_complete_warm_hold_and_flight) ... ok
+test_missing_endpoint_rejected (test_motion_integrity.MotionIntegrityTests.test_missing_endpoint_rejected) ... ok
+test_nonfinite_camera_vector_rejected (test_motion_integrity.MotionIntegrityTests.test_nonfinite_camera_vector_rejected) ... ok
+test_restore_to_start_after_sequence_rejected (test_motion_integrity.MotionIntegrityTests.test_restore_to_start_after_sequence_rejected) ... ok
+test_stationary_camera_rejected (test_motion_integrity.MotionIntegrityTests.test_stationary_camera_rejected) ... ok
+test_warm_hold_motion_rejected (test_motion_integrity.MotionIntegrityTests.test_warm_hold_motion_rejected) ... ok
+test_wrong_orientation_rejected (test_motion_integrity.MotionIntegrityTests.test_wrong_orientation_rejected) ... ok
+test_analyzer_accepts_verified_receipt (test_perf_integrity.PerfIntegrityTests.test_analyzer_accepts_verified_receipt) ... ok
+test_analyzer_does_not_promote_csv_without_receipt (test_perf_integrity.PerfIntegrityTests.test_analyzer_does_not_promote_csv_without_receipt) ... ok
+test_analyzer_rejects_changed_csv_after_receipt (test_perf_integrity.PerfIntegrityTests.test_analyzer_rejects_changed_csv_after_receipt) ... ok
+test_csv_without_completion_fails_even_exit_zero (test_perf_integrity.PerfIntegrityTests.test_csv_without_completion_fails_even_exit_zero) ... ok
+test_duplicate_metadata_fails (test_perf_integrity.PerfIntegrityTests.test_duplicate_metadata_fails) ... ok
+test_early_crash_fails (test_perf_integrity.PerfIntegrityTests.test_early_crash_fails) ... ok
+test_explicit_isolated_world_path (test_perf_integrity.PerfIntegrityTests.test_explicit_isolated_world_path) ... ok
+test_explicit_world_does_not_accept_original_map (test_perf_integrity.PerfIntegrityTests.test_explicit_world_does_not_accept_original_map) ... ok
+test_legacy_decoded_but_cannot_pass_new_capture (test_perf_integrity.PerfIntegrityTests.test_legacy_decoded_but_cannot_pass_new_capture) ... ok
+test_missing_gpu_column (test_perf_integrity.PerfIntegrityTests.test_missing_gpu_column) ... ok
+test_nan_numeric (test_perf_integrity.PerfIntegrityTests.test_nan_numeric) ... ok
+test_optional_late_column_retains_alignment (test_perf_integrity.PerfIntegrityTests.test_optional_late_column_retains_alignment) ... ok
+test_shutdown_crash_after_completion_is_disclosed (test_perf_integrity.PerfIntegrityTests.test_shutdown_crash_after_completion_is_disclosed) ... ok
+test_stale_csv (test_perf_integrity.PerfIntegrityTests.test_stale_csv) ... ok
+test_stale_log (test_perf_integrity.PerfIntegrityTests.test_stale_log) ... ok
+test_truncated_required_column (test_perf_integrity.PerfIntegrityTests.test_truncated_required_column) ... ok
+test_unescaped_ue_commandline_tail_is_preserved (test_perf_integrity.PerfIntegrityTests.test_unescaped_ue_commandline_tail_is_preserved) ... ok
+test_unobserved_exit (test_perf_integrity.PerfIntegrityTests.test_unobserved_exit) ... ok
+test_valid_capture (test_perf_integrity.PerfIntegrityTests.test_valid_capture) ... ok
+test_wrong_capture_id_in_log (test_perf_integrity.PerfIntegrityTests.test_wrong_capture_id_in_log) ... ok
+test_wrong_frames (test_perf_integrity.PerfIntegrityTests.test_wrong_frames) ... ok
+test_wrong_level (test_perf_integrity.PerfIntegrityTests.test_wrong_level) ... ok
+test_wrong_resolution (test_perf_integrity.PerfIntegrityTests.test_wrong_resolution) ... ok
+test_wrong_run_id (test_perf_integrity.PerfIntegrityTests.test_wrong_run_id) ... ok
+test_wrong_tag (test_perf_integrity.PerfIntegrityTests.test_wrong_tag) ... ok
+test_wrong_world_in_log (test_perf_integrity.PerfIntegrityTests.test_wrong_world_in_log) ... ok
+test_zero_warm_gpu (test_perf_integrity.PerfIntegrityTests.test_zero_warm_gpu) ... ok
+
+----------------------------------------------------------------------
+Ran 40 tests in 1.563s
+
+OK

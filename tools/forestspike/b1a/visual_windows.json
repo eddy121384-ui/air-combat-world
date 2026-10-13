@@ -1,0 +1,38 @@
+{
+  "registered_utc": "2026-10-13T07:47:51.799907+00:00",
+  "before_four_arm_video_comparison": true,
+  "V3": {
+    "native_movie_frames_including_warm": [
+      0,
+      480
+    ],
+    "flight_comparison_frames": [
+      120,
+      480
+    ],
+    "path_time_seconds": [
+      14,
+      20
+    ],
+    "flight_duration_s": 6.0
+  },
+  "V5": {
+    "native_movie_frames_including_warm": [
+      0,
+      400
+    ],
+    "flight_comparison_frames": [
+      120,
+      400
+    ],
+    "orbit_degrees": [
+      0,
+      120
+    ],
+    "flight_duration_s": 4.666666666666667
+  },
+  "full_path_csv": "All four groups, full 18s V3 and full 14s V5. Moving GPU diagnostic only.",
+  "additional_full_reference": "A1 V3 full native movie already initiated, all outputs retained; other comparison movies use the same preregistered windows.",
+  "stills": "Four-arm shaded stills at four static poses and selected V3/V5 key views; separate native ID/LOD diagnostics at every registered V3/V5 key pose plus four static poses.",
+  "scope": "Necessary matched short videos, not a claim that all four arms have full-path movie coverage. Native cadence/fixed-step, no achieved 60fps performance claim."
+}

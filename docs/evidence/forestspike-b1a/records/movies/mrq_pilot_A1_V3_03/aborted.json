@@ -1,0 +1,6 @@
+{
+  "reason": "No image output or pipeline progress after map load; process stalled before frame 1. No root cause inferred. Switching to verified SceneCapture backend with actual saved sequence evaluation and per-frame camera receipts.",
+  "process_id": 26440,
+  "aborted_utc": "2026-10-13T07:35:43.9191195+00:00",
+  "status": "FAIL_FS_B1A_MRQ_PILOT"
+}

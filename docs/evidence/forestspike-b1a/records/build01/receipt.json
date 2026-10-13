@@ -1,0 +1,715 @@
+{
+  "status": "PASS_FS_B1A_BUILD_REOPEN_REQUIRED",
+  "root": "/Game/ForestSpike/B1a_20261013a",
+  "maps": [
+    {
+      "group": "A0",
+      "arm": "A",
+      "s": 0,
+      "view": "v1_agl50_p15",
+      "name": "L_FSB1a_20261013a_A0_v1_agl50_p15",
+      "world_path": "/Game/ForestSpike/B1a_20261013a/Perf/L_FSB1a_20261013a_A0_v1_agl50_p15",
+      "pose": {
+        "id": "v1_agl50_p15",
+        "group": "V1",
+        "eye_enu": [
+          -420.0,
+          -420.0,
+          160.049
+        ],
+        "agl_m": 50,
+        "heading_deg": 45.0,
+        "pitch_deg": -15.0,
+        "fov_h_deg": 91.4928,
+        "fov_v_deg": 60.0
+      },
+      "path_id": null
+    },
+    {
+      "group": "A0",
+      "arm": "A",
+      "s": 0,
+      "view": "v1_agl200_p10",
+      "name": "L_FSB1a_20261013a_A0_v1_agl200_p10",
+      "world_path": "/Game/ForestSpike/B1a_20261013a/Perf/L_FSB1a_20261013a_A0_v1_agl200_p10",
+      "pose": {
+        "id": "v1_agl200_p10",
+        "group": "V1",
+        "eye_enu": [
+          -420.0,
+          -420.0,
+          310.049
+        ],
+        "agl_m": 200,
+        "heading_deg": 45.0,
+        "pitch_deg": -10.0,
+        "fov_h_deg": 91.4928,
+        "fov_v_deg": 60.0
+      },
+      "path_id": null
+    },
+    {
+      "group": "A0",
+      "arm": "A",
+      "s": 0,
+      "view": "v1_agl500_p15",
+      "name": "L_FSB1a_20261013a_A0_v1_agl500_p15",
+      "world_path": "/Game/ForestSpike/B1a_20261013a/Perf/L_FSB1a_20261013a_A0_v1_agl500_p15",
+      "pose": {
+        "id": "v1_agl500_p15",
+        "group": "V1",
+        "eye_enu": [
+          -420.0,
+          -420.0,
+          610.049
+        ],
+        "agl_m": 500,
+        "heading_deg": 45.0,
+        "pitch_deg": -15.0,
+        "fov_h_deg": 91.4928,
+        "fov_v_deg": 60.0
+      },
+      "path_id": null
+    },
+    {
+      "group": "A0",
+      "arm": "A",
+      "s": 0,
+      "view": "v1_agl1000_p20",
+      "name": "L_FSB1a_20261013a_A0_v1_agl1000_p20",
+      "world_path": "/Game/ForestSpike/B1a_20261013a/Perf/L_FSB1a_20261013a_A0_v1_agl1000_p20",
+      "pose": {
+        "id": "v1_agl1000_p20",
+        "group": "V1",
+        "eye_enu": [
+          -420.0,
+          -420.0,
+          1110.049
+        ],
+        "agl_m": 1000,
+        "heading_deg": 45.0,
+        "pitch_deg": -20.0,
+        "fov_h_deg": 91.4928,
+        "fov_v_deg": 60.0
+      },
+      "path_id": null
+    },
+    {
+      "group": "A0",
+      "arm": "A",
+      "s": 0,
+      "view": "V3",
+      "name": "L_FSB1a_20261013a_A0_V3",
+      "world_path": "/Game/ForestSpike/B1a_20261013a/Perf/L_FSB1a_20261013a_A0_V3",
+      "pose": {
+        "id": "v3i_t14",
+        "group": "V3",
+        "eye_enu": [
+          -703.015,
+          -703.015,
+          324.003
+        ],
+        "agl_m": 200,
+        "heading_deg": 45.0,
+        "pitch_deg": -10.0,
+        "fov_h_deg": 91.4928,
+        "fov_v_deg": 60.0,
+        "t_s": 14.0,
+        "speed_mps": 30.0
+      },
+      "path_id": "V3",
+      "sequence_path": "/Game/ForestSpike/B1a_20261013a/Perf/LS_L_FSB1a_20261013a_A0_V3.LS_L_FSB1a_20261013a_A0_V3",
+      "before_close_bindings": [
+        {
+          "name": "FS_PerfCamera",
+          "objects": [
+            "/Game/ForestSpike/B1a_20261013a/Perf/L_FSB1a_20261013a_A0_V3.L_FSB1a_20261013a_A0_V3:PersistentLevel.CameraActor_0"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "A0",
+      "arm": "A",
+      "s": 0,
+      "view": "V5",
+      "name": "L_FSB1a_20261013a_A0_V5",
+      "world_path": "/Game/ForestSpike/B1a_20261013a/Perf/L_FSB1a_20261013a_A0_V5",
+      "pose": {
+        "id": "v5i_agl200_a000",
+        "group": "V5",
+        "eye_enu": [
+          0.0,
+          330.0,
+          333.617
+        ],
+        "agl_m": 200,
+        "heading_deg": 180.0,
+        "pitch_deg": -25.0,
+        "fov_h_deg": 91.4928,
+        "fov_v_deg": 60.0,
+        "orbit_az_deg": 0.0,
+        "speed_mps": 150.0,
+        "t_s": 0.0
+      },
+      "path_id": "V5",
+      "sequence_path": "/Game/ForestSpike/B1a_20261013a/Perf/LS_L_FSB1a_20261013a_A0_V5.LS_L_FSB1a_20261013a_A0_V5",
+      "before_close_bindings": [
+        {
+          "name": "FS_PerfCamera",
+          "objects": [
+            "/Game/ForestSpike/B1a_20261013a/Perf/L_FSB1a_20261013a_A0_V5.L_FSB1a_20261013a_A0_V5:PersistentLevel.CameraActor_0"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "A1",
+      "arm": "A",
+      "s": 1,
+      "view": "v1_agl50_p15",
+      "name": "L_FSB1a_20261013a_A1_v1_agl50_p15",
+      "world_path": "/Game/ForestSpike/B1a_20261013a/Perf/L_FSB1a_20261013a_A1_v1_agl50_p15",
+      "pose": {
+        "id": "v1_agl50_p15",
+        "group": "V1",
+        "eye_enu": [
+          -420.0,
+          -420.0,
+          160.049
+        ],
+        "agl_m": 50,
+        "heading_deg": 45.0,
+        "pitch_deg": -15.0,
+        "fov_h_deg": 91.4928,
+        "fov_v_deg": 60.0
+      },
+      "path_id": null
+    },
+    {
+      "group": "A1",
+      "arm": "A",
+      "s": 1,
+      "view": "v1_agl200_p10",
+      "name": "L_FSB1a_20261013a_A1_v1_agl200_p10",
+      "world_path": "/Game/ForestSpike/B1a_20261013a/Perf/L_FSB1a_20261013a_A1_v1_agl200_p10",
+      "pose": {
+        "id": "v1_agl200_p10",
+        "group": "V1",
+        "eye_enu": [
+          -420.0,
+          -420.0,
+          310.049
+        ],
+        "agl_m": 200,
+        "heading_deg": 45.0,
+        "pitch_deg": -10.0,
+        "fov_h_deg": 91.4928,
+        "fov_v_deg": 60.0
+      },
+      "path_id": null
+    },
+    {
+      "group": "A1",
+      "arm": "A",
+      "s": 1,
+      "view": "v1_agl500_p15",
+      "name": "L_FSB1a_20261013a_A1_v1_agl500_p15",
+      "world_path": "/Game/ForestSpike/B1a_20261013a/Perf/L_FSB1a_20261013a_A1_v1_agl500_p15",
+      "pose": {
+        "id": "v1_agl500_p15",
+        "group": "V1",
+        "eye_enu": [
+          -420.0,
+          -420.0,
+          610.049
+        ],
+        "agl_m": 500,
+        "heading_deg": 45.0,
+        "pitch_deg": -15.0,
+        "fov_h_deg": 91.4928,
+        "fov_v_deg": 60.0
+      },
+      "path_id": null
+    },
+    {
+      "group": "A1",
+      "arm": "A",
+      "s": 1,
+      "view": "v1_agl1000_p20",
+      "name": "L_FSB1a_20261013a_A1_v1_agl1000_p20",
+      "world_path": "/Game/ForestSpike/B1a_20261013a/Perf/L_FSB1a_20261013a_A1_v1_agl1000_p20",
+      "pose": {
+        "id": "v1_agl1000_p20",
+        "group": "V1",
+        "eye_enu": [
+          -420.0,
+          -420.0,
+          1110.049
+        ],
+        "agl_m": 1000,
+        "heading_deg": 45.0,
+        "pitch_deg": -20.0,
+        "fov_h_deg": 91.4928,
+        "fov_v_deg": 60.0
+      },
+      "path_id": null
+    },
+    {
+      "group": "A1",
+      "arm": "A",
+      "s": 1,
+      "view": "V3",
+      "name": "L_FSB1a_20261013a_A1_V3",
+      "world_path": "/Game/ForestSpike/B1a_20261013a/Perf/L_FSB1a_20261013a_A1_V3",
+      "pose": {
+        "id": "v3i_t14",
+        "group": "V3",
+        "eye_enu": [
+          -703.015,
+          -703.015,
+          324.003
+        ],
+        "agl_m": 200,
+        "heading_deg": 45.0,
+        "pitch_deg": -10.0,
+        "fov_h_deg": 91.4928,
+        "fov_v_deg": 60.0,
+        "t_s": 14.0,
+        "speed_mps": 30.0
+      },
+      "path_id": "V3",
+      "sequence_path": "/Game/ForestSpike/B1a_20261013a/Perf/LS_L_FSB1a_20261013a_A1_V3.LS_L_FSB1a_20261013a_A1_V3",
+      "before_close_bindings": [
+        {
+          "name": "FS_PerfCamera",
+          "objects": [
+            "/Game/ForestSpike/B1a_20261013a/Perf/L_FSB1a_20261013a_A1_V3.L_FSB1a_20261013a_A1_V3:PersistentLevel.CameraActor_0"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "A1",
+      "arm": "A",
+      "s": 1,
+      "view": "V5",
+      "name": "L_FSB1a_20261013a_A1_V5",
+      "world_path": "/Game/ForestSpike/B1a_20261013a/Perf/L_FSB1a_20261013a_A1_V5",
+      "pose": {
+        "id": "v5i_agl200_a000",
+        "group": "V5",
+        "eye_enu": [
+          0.0,
+          330.0,
+          333.617
+        ],
+        "agl_m": 200,
+        "heading_deg": 180.0,
+        "pitch_deg": -25.0,
+        "fov_h_deg": 91.4928,
+        "fov_v_deg": 60.0,
+        "orbit_az_deg": 0.0,
+        "speed_mps": 150.0,
+        "t_s": 0.0
+      },
+      "path_id": "V5",
+      "sequence_path": "/Game/ForestSpike/B1a_20261013a/Perf/LS_L_FSB1a_20261013a_A1_V5.LS_L_FSB1a_20261013a_A1_V5",
+      "before_close_bindings": [
+        {
+          "name": "FS_PerfCamera",
+          "objects": [
+            "/Game/ForestSpike/B1a_20261013a/Perf/L_FSB1a_20261013a_A1_V5.L_FSB1a_20261013a_A1_V5:PersistentLevel.CameraActor_0"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "B0",
+      "arm": "B",
+      "s": 0,
+      "view": "v1_agl50_p15",
+      "name": "L_FSB1a_20261013a_B0_v1_agl50_p15",
+      "world_path": "/Game/ForestSpike/B1a_20261013a/Perf/L_FSB1a_20261013a_B0_v1_agl50_p15",
+      "pose": {
+        "id": "v1_agl50_p15",
+        "group": "V1",
+        "eye_enu": [
+          -420.0,
+          -420.0,
+          160.049
+        ],
+        "agl_m": 50,
+        "heading_deg": 45.0,
+        "pitch_deg": -15.0,
+        "fov_h_deg": 91.4928,
+        "fov_v_deg": 60.0
+      },
+      "path_id": null
+    },
+    {
+      "group": "B0",
+      "arm": "B",
+      "s": 0,
+      "view": "v1_agl200_p10",
+      "name": "L_FSB1a_20261013a_B0_v1_agl200_p10",
+      "world_path": "/Game/ForestSpike/B1a_20261013a/Perf/L_FSB1a_20261013a_B0_v1_agl200_p10",
+      "pose": {
+        "id": "v1_agl200_p10",
+        "group": "V1",
+        "eye_enu": [
+          -420.0,
+          -420.0,
+          310.049
+        ],
+        "agl_m": 200,
+        "heading_deg": 45.0,
+        "pitch_deg": -10.0,
+        "fov_h_deg": 91.4928,
+        "fov_v_deg": 60.0
+      },
+      "path_id": null
+    },
+    {
+      "group": "B0",
+      "arm": "B",
+      "s": 0,
+      "view": "v1_agl500_p15",
+      "name": "L_FSB1a_20261013a_B0_v1_agl500_p15",
+      "world_path": "/Game/ForestSpike/B1a_20261013a/Perf/L_FSB1a_20261013a_B0_v1_agl500_p15",
+      "pose": {
+        "id": "v1_agl500_p15",
+        "group": "V1",
+        "eye_enu": [
+          -420.0,
+          -420.0,
+          610.049
+        ],
+        "agl_m": 500,
+        "heading_deg": 45.0,
+        "pitch_deg": -15.0,
+        "fov_h_deg": 91.4928,
+        "fov_v_deg": 60.0
+      },
+      "path_id": null
+    },
+    {
+      "group": "B0",
+      "arm": "B",
+      "s": 0,
+      "view": "v1_agl1000_p20",
+      "name": "L_FSB1a_20261013a_B0_v1_agl1000_p20",
+      "world_path": "/Game/ForestSpike/B1a_20261013a/Perf/L_FSB1a_20261013a_B0_v1_agl1000_p20",
+      "pose": {
+        "id": "v1_agl1000_p20",
+        "group": "V1",
+        "eye_enu": [
+          -420.0,
+          -420.0,
+          1110.049
+        ],
+        "agl_m": 1000,
+        "heading_deg": 45.0,
+        "pitch_deg": -20.0,
+        "fov_h_deg": 91.4928,
+        "fov_v_deg": 60.0
+      },
+      "path_id": null
+    },
+    {
+      "group": "B0",
+      "arm": "B",
+      "s": 0,
+      "view": "V3",
+      "name": "L_FSB1a_20261013a_B0_V3",
+      "world_path": "/Game/ForestSpike/B1a_20261013a/Perf/L_FSB1a_20261013a_B0_V3",
+      "pose": {
+        "id": "v3i_t14",
+        "group": "V3",
+        "eye_enu": [
+          -703.015,
+          -703.015,
+          324.003
+        ],
+        "agl_m": 200,
+        "heading_deg": 45.0,
+        "pitch_deg": -10.0,
+        "fov_h_deg": 91.4928,
+        "fov_v_deg": 60.0,
+        "t_s": 14.0,
+        "speed_mps": 30.0
+      },
+      "path_id": "V3",
+      "sequence_path": "/Game/ForestSpike/B1a_20261013a/Perf/LS_L_FSB1a_20261013a_B0_V3.LS_L_FSB1a_20261013a_B0_V3",
+      "before_close_bindings": [
+        {
+          "name": "FS_PerfCamera",
+          "objects": [
+            "/Game/ForestSpike/B1a_20261013a/Perf/L_FSB1a_20261013a_B0_V3.L_FSB1a_20261013a_B0_V3:PersistentLevel.CameraActor_0"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "B0",
+      "arm": "B",
+      "s": 0,
+      "view": "V5",
+      "name": "L_FSB1a_20261013a_B0_V5",
+      "world_path": "/Game/ForestSpike/B1a_20261013a/Perf/L_FSB1a_20261013a_B0_V5",
+      "pose": {
+        "id": "v5i_agl200_a000",
+        "group": "V5",
+        "eye_enu": [
+          0.0,
+          330.0,
+          333.617
+        ],
+        "agl_m": 200,
+        "heading_deg": 180.0,
+        "pitch_deg": -25.0,
+        "fov_h_deg": 91.4928,
+        "fov_v_deg": 60.0,
+        "orbit_az_deg": 0.0,
+        "speed_mps": 150.0,
+        "t_s": 0.0
+      },
+      "path_id": "V5",
+      "sequence_path": "/Game/ForestSpike/B1a_20261013a/Perf/LS_L_FSB1a_20261013a_B0_V5.LS_L_FSB1a_20261013a_B0_V5",
+      "before_close_bindings": [
+        {
+          "name": "FS_PerfCamera",
+          "objects": [
+            "/Game/ForestSpike/B1a_20261013a/Perf/L_FSB1a_20261013a_B0_V5.L_FSB1a_20261013a_B0_V5:PersistentLevel.CameraActor_0"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "B1",
+      "arm": "B",
+      "s": 1,
+      "view": "v1_agl50_p15",
+      "name": "L_FSB1a_20261013a_B1_v1_agl50_p15",
+      "world_path": "/Game/ForestSpike/B1a_20261013a/Perf/L_FSB1a_20261013a_B1_v1_agl50_p15",
+      "pose": {
+        "id": "v1_agl50_p15",
+        "group": "V1",
+        "eye_enu": [
+          -420.0,
+          -420.0,
+          160.049
+        ],
+        "agl_m": 50,
+        "heading_deg": 45.0,
+        "pitch_deg": -15.0,
+        "fov_h_deg": 91.4928,
+        "fov_v_deg": 60.0
+      },
+      "path_id": null
+    },
+    {
+      "group": "B1",
+      "arm": "B",
+      "s": 1,
+      "view": "v1_agl200_p10",
+      "name": "L_FSB1a_20261013a_B1_v1_agl200_p10",
+      "world_path": "/Game/ForestSpike/B1a_20261013a/Perf/L_FSB1a_20261013a_B1_v1_agl200_p10",
+      "pose": {
+        "id": "v1_agl200_p10",
+        "group": "V1",
+        "eye_enu": [
+          -420.0,
+          -420.0,
+          310.049
+        ],
+        "agl_m": 200,
+        "heading_deg": 45.0,
+        "pitch_deg": -10.0,
+        "fov_h_deg": 91.4928,
+        "fov_v_deg": 60.0
+      },
+      "path_id": null
+    },
+    {
+      "group": "B1",
+      "arm": "B",
+      "s": 1,
+      "view": "v1_agl500_p15",
+      "name": "L_FSB1a_20261013a_B1_v1_agl500_p15",
+      "world_path": "/Game/ForestSpike/B1a_20261013a/Perf/L_FSB1a_20261013a_B1_v1_agl500_p15",
+      "pose": {
+        "id": "v1_agl500_p15",
+        "group": "V1",
+        "eye_enu": [
+          -420.0,
+          -420.0,
+          610.049
+        ],
+        "agl_m": 500,
+        "heading_deg": 45.0,
+        "pitch_deg": -15.0,
+        "fov_h_deg": 91.4928,
+        "fov_v_deg": 60.0
+      },
+      "path_id": null
+    },
+    {
+      "group": "B1",
+      "arm": "B",
+      "s": 1,
+      "view": "v1_agl1000_p20",
+      "name": "L_FSB1a_20261013a_B1_v1_agl1000_p20",
+      "world_path": "/Game/ForestSpike/B1a_20261013a/Perf/L_FSB1a_20261013a_B1_v1_agl1000_p20",
+      "pose": {
+        "id": "v1_agl1000_p20",
+        "group": "V1",
+        "eye_enu": [
+          -420.0,
+          -420.0,
+          1110.049
+        ],
+        "agl_m": 1000,
+        "heading_deg": 45.0,
+        "pitch_deg": -20.0,
+        "fov_h_deg": 91.4928,
+        "fov_v_deg": 60.0
+      },
+      "path_id": null
+    },
+    {
+      "group": "B1",
+      "arm": "B",
+      "s": 1,
+      "view": "V3",
+      "name": "L_FSB1a_20261013a_B1_V3",
+      "world_path": "/Game/ForestSpike/B1a_20261013a/Perf/L_FSB1a_20261013a_B1_V3",
+      "pose": {
+        "id": "v3i_t14",
+        "group": "V3",
+        "eye_enu": [
+          -703.015,
+          -703.015,
+          324.003
+        ],
+        "agl_m": 200,
+        "heading_deg": 45.0,
+        "pitch_deg": -10.0,
+        "fov_h_deg": 91.4928,
+        "fov_v_deg": 60.0,
+        "t_s": 14.0,
+        "speed_mps": 30.0
+      },
+      "path_id": "V3",
+      "sequence_path": "/Game/ForestSpike/B1a_20261013a/Perf/LS_L_FSB1a_20261013a_B1_V3.LS_L_FSB1a_20261013a_B1_V3",
+      "before_close_bindings": [
+        {
+          "name": "FS_PerfCamera",
+          "objects": [
+            "/Game/ForestSpike/B1a_20261013a/Perf/L_FSB1a_20261013a_B1_V3.L_FSB1a_20261013a_B1_V3:PersistentLevel.CameraActor_0"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "B1",
+      "arm": "B",
+      "s": 1,
+      "view": "V5",
+      "name": "L_FSB1a_20261013a_B1_V5",
+      "world_path": "/Game/ForestSpike/B1a_20261013a/Perf/L_FSB1a_20261013a_B1_V5",
+      "pose": {
+        "id": "v5i_agl200_a000",
+        "group": "V5",
+        "eye_enu": [
+          0.0,
+          330.0,
+          333.617
+        ],
+        "agl_m": 200,
+        "heading_deg": 180.0,
+        "pitch_deg": -25.0,
+        "fov_h_deg": 91.4928,
+        "fov_v_deg": 60.0,
+        "orbit_az_deg": 0.0,
+        "speed_mps": 150.0,
+        "t_s": 0.0
+      },
+      "path_id": "V5",
+      "sequence_path": "/Game/ForestSpike/B1a_20261013a/Perf/LS_L_FSB1a_20261013a_B1_V5.LS_L_FSB1a_20261013a_B1_V5",
+      "before_close_bindings": [
+        {
+          "name": "FS_PerfCamera",
+          "objects": [
+            "/Game/ForestSpike/B1a_20261013a/Perf/L_FSB1a_20261013a_B1_V5.L_FSB1a_20261013a_B1_V5:PersistentLevel.CameraActor_0"
+          ]
+        }
+      ]
+    }
+  ],
+  "mesh_readback": {
+    "Tree_A": {
+      "triangles": [
+        28,
+        28,
+        28
+      ],
+      "screens": [
+        1.0,
+        0.07999999821186066,
+        0.029999999329447746
+      ]
+    },
+    "Tree_B_dense_rounded": {
+      "triangles": [
+        120,
+        36,
+        20
+      ],
+      "screens": [
+        1.0,
+        0.07999999821186066,
+        0.029999999329447746
+      ]
+    },
+    "Tree_B_horizontal_tiered": {
+      "triangles": [
+        112,
+        38,
+        20
+      ],
+      "screens": [
+        1.0,
+        0.07999999821186066,
+        0.029999999329447746
+      ]
+    },
+    "Tree_B_open_vase": {
+      "triangles": [
+        102,
+        40,
+        20
+      ],
+      "screens": [
+        1.0,
+        0.07999999821186066,
+        0.029999999329447746
+      ]
+    },
+    "Tree_B_tall_columnar": {
+      "triangles": [
+        108,
+        38,
+        20
+      ],
+      "screens": [
+        1.0,
+        0.07999999821186066,
+        0.029999999329447746
+      ]
+    }
+  },
+  "error": null,
+  "registration_sha256": "8354a3fc6a2249de5d73121b19077bebbfa168847d332e0b2f03dafeede8c68c",
+  "coverage_sha256": "8e66dc249f21beeb663fda113cb42c0789213413091801d263200a81e62df234"
+}

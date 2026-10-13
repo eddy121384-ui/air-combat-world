@@ -1,0 +1,43 @@
+{
+  "status": "PASS_FS_B1A_COVERAGE",
+  "frozen_utc": "2026-10-13T07:00:18.552112+00:00",
+  "counts": {
+    "A": 30200,
+    "B": 30100
+  },
+  "rows": [
+    {
+      "image": "unreal\\ForestSpike\\Saved\\ForestSpike\\b1a\\coverage03\\captures\\coverage_A.png",
+      "px": 2048,
+      "forest_px": 3140226,
+      "instance_px_in_forest": 2185677,
+      "instance_px_outside_forest": 16887,
+      "ground_forest_px_visible": 953937,
+      "cover": 0.696025381612661,
+      "codes_exact": 1.0,
+      "sky_or_unknown_px": 0,
+      "arm": "A",
+      "count": 30200,
+      "sha256": "853941cacd21ffe726559ae6e17306891b5f98de1f2949dcc3315b5452c0fd3f"
+    },
+    {
+      "image": "unreal\\ForestSpike\\Saved\\ForestSpike\\b1a\\coverage03\\captures\\coverage_B.png",
+      "px": 2048,
+      "forest_px": 3140226,
+      "instance_px_in_forest": 2190838,
+      "instance_px_outside_forest": 20045,
+      "ground_forest_px_visible": 948767,
+      "cover": 0.6976688938948981,
+      "codes_exact": 1.0,
+      "sky_or_unknown_px": 0,
+      "arm": "B",
+      "count": 30100,
+      "sha256": "3b3f963f434632d292f2ffa6e74bce7488b192e79ecca40a9f40bf53e0fc272b"
+    }
+  ],
+  "scope": "Actual normal-auto-LOD orthographic tree pixels inside the common analytic forest mask / forest-mask pixels. End culling disabled only for physical density calibration; normal 500m culling in all perspective measurements.",
+  "recalibration_required": false,
+  "id_gamma": 0,
+  "source_receipt_sha256": "6dc897dcbf752d3b412725c996b2633407266c3cb78dc6b5fec3d3e8e76da643",
+  "shutdown_success": false
+}

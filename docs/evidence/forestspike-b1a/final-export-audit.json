@@ -1,0 +1,22 @@
+{
+  "status": "PASS_FS_B1A_REVIEW_EXPORT_AUDIT",
+  "formal_csv_count": 80,
+  "numeric_export_scope": "Exact byte identity except the single UE loginid metadata value; hashes of all formal raw CSV/log files rechecked.",
+  "primary_png_count": 24,
+  "relative_report_links_checked": [
+    "evidence/forestspike-b1a/images/v1_agl50_p15_four_arm_review.jpg",
+    "evidence/forestspike-b1a/images/v1_agl200_p10_four_arm_review.jpg",
+    "evidence/forestspike-b1a/images/v1_agl500_p15_four_arm_review.jpg",
+    "evidence/forestspike-b1a/images/v1_agl1000_p20_four_arm_review.jpg",
+    "evidence/forestspike-b1a/images/",
+    "evidence/forestspike-b1a/video/V3_four_arm_4k60_review.mp4",
+    "evidence/forestspike-b1a/video/V5_four_arm_4k60_review.mp4",
+    "evidence/forestspike-b1a/video/",
+    "evidence/forestspike-b1a/images/v1_agl200_p10_A1_range_overlay.png",
+    "evidence/forestspike-b1a/preserved-originals.json",
+    "evidence/forestspike-b1a/raw-output-inventory.json",
+    "evidence/forestspike-b1a/generated-asset-inventory.json"
+  ],
+  "preserved_originals": 1100,
+  "scope": "Export/data integrity only; does not turn incomplete F9/F11 or failed F10 into visual PASS."
+}

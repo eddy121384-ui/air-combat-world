@@ -1,0 +1,18 @@
+{
+  "args": [
+    "\"D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\ForestSpike\\ForestSpike.uproject\"",
+    "-ExecutePythonScript=\"D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\adapters\\unreal\\forestspike\\fs_b1a_sequence_capture.py\"",
+    "-unattended",
+    "-nopause",
+    "-nosound",
+    "-abslog=\"D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\ForestSpike\\Saved\\ForestSpike\\b1a\\sequence_pilot01\\engine.log\""
+  ],
+  "started_utc": "2026-10-13T07:38:34.8165811+00:00",
+  "env": {
+    "ACW_FS_B1A_GROUP": "A1",
+    "ACW_FS_B1A_MOVIE_END": "150",
+    "ACW_FS_B1A_PATH": "V3"
+  },
+  "tag": "sequence_pilot01",
+  "script": "fs_b1a_sequence_capture.py"
+}

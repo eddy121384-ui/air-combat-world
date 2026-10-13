@@ -1,0 +1,182 @@
+{
+  "status": "PASS_FS_B1A_MOVIE_CONFIGS",
+  "configs": [
+    {
+      "tag": "clip_A0_V3_01",
+      "config": "/Game/ForestSpike/B1a_20261013a/Movies/MRQ_clip_A0_V3_01.MRQ_clip_A0_V3_01",
+      "map": "/Game/ForestSpike/B1a_20261013a/Perf/L_FSB1a_20261013a_A0_V3",
+      "sequence": "/Game/ForestSpike/B1a_20261013a/Perf/LS_L_FSB1a_20261013a_A0_V3.LS_L_FSB1a_20261013a_A0_V3",
+      "group": "A0",
+      "path_id": "V3",
+      "frames": 481,
+      "res": [
+        1920,
+        1080
+      ],
+      "game_overrides_enabled": false,
+      "force_lod_zero": false,
+      "cinematic_quality": false,
+      "spatial_samples": 1,
+      "temporal_samples": 1,
+      "aa_override": false,
+      "warm_hold_in_sequence": 120,
+      "output_directory": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\ForestSpike\\Saved\\ForestSpike\\b1a\\movies\\clip_A0_V3_01\\frames",
+      "scope": "Matched native short clip; complete flight independently verified in game CSV. V3 t14..20, V5 az0..120; same initial 120-frame warm hold."
+    },
+    {
+      "tag": "clip_A0_V5_01",
+      "config": "/Game/ForestSpike/B1a_20261013a/Movies/MRQ_clip_A0_V5_01.MRQ_clip_A0_V5_01",
+      "map": "/Game/ForestSpike/B1a_20261013a/Perf/L_FSB1a_20261013a_A0_V5",
+      "sequence": "/Game/ForestSpike/B1a_20261013a/Perf/LS_L_FSB1a_20261013a_A0_V5.LS_L_FSB1a_20261013a_A0_V5",
+      "group": "A0",
+      "path_id": "V5",
+      "frames": 401,
+      "res": [
+        1920,
+        1080
+      ],
+      "game_overrides_enabled": false,
+      "force_lod_zero": false,
+      "cinematic_quality": false,
+      "spatial_samples": 1,
+      "temporal_samples": 1,
+      "aa_override": false,
+      "warm_hold_in_sequence": 120,
+      "output_directory": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\ForestSpike\\Saved\\ForestSpike\\b1a\\movies\\clip_A0_V5_01\\frames",
+      "scope": "Matched native short clip; complete flight independently verified in game CSV. V3 t14..20, V5 az0..120; same initial 120-frame warm hold."
+    },
+    {
+      "tag": "clip_A1_V3_01",
+      "config": "/Game/ForestSpike/B1a_20261013a/Movies/MRQ_clip_A1_V3_01.MRQ_clip_A1_V3_01",
+      "map": "/Game/ForestSpike/B1a_20261013a/Perf/L_FSB1a_20261013a_A1_V3",
+      "sequence": "/Game/ForestSpike/B1a_20261013a/Perf/LS_L_FSB1a_20261013a_A1_V3.LS_L_FSB1a_20261013a_A1_V3",
+      "group": "A1",
+      "path_id": "V3",
+      "frames": 481,
+      "res": [
+        1920,
+        1080
+      ],
+      "game_overrides_enabled": false,
+      "force_lod_zero": false,
+      "cinematic_quality": false,
+      "spatial_samples": 1,
+      "temporal_samples": 1,
+      "aa_override": false,
+      "warm_hold_in_sequence": 120,
+      "output_directory": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\ForestSpike\\Saved\\ForestSpike\\b1a\\movies\\clip_A1_V3_01\\frames",
+      "scope": "Matched native short clip; complete flight independently verified in game CSV. V3 t14..20, V5 az0..120; same initial 120-frame warm hold."
+    },
+    {
+      "tag": "clip_A1_V5_01",
+      "config": "/Game/ForestSpike/B1a_20261013a/Movies/MRQ_clip_A1_V5_01.MRQ_clip_A1_V5_01",
+      "map": "/Game/ForestSpike/B1a_20261013a/Perf/L_FSB1a_20261013a_A1_V5",
+      "sequence": "/Game/ForestSpike/B1a_20261013a/Perf/LS_L_FSB1a_20261013a_A1_V5.LS_L_FSB1a_20261013a_A1_V5",
+      "group": "A1",
+      "path_id": "V5",
+      "frames": 401,
+      "res": [
+        1920,
+        1080
+      ],
+      "game_overrides_enabled": false,
+      "force_lod_zero": false,
+      "cinematic_quality": false,
+      "spatial_samples": 1,
+      "temporal_samples": 1,
+      "aa_override": false,
+      "warm_hold_in_sequence": 120,
+      "output_directory": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\ForestSpike\\Saved\\ForestSpike\\b1a\\movies\\clip_A1_V5_01\\frames",
+      "scope": "Matched native short clip; complete flight independently verified in game CSV. V3 t14..20, V5 az0..120; same initial 120-frame warm hold."
+    },
+    {
+      "tag": "clip_B0_V3_01",
+      "config": "/Game/ForestSpike/B1a_20261013a/Movies/MRQ_clip_B0_V3_01.MRQ_clip_B0_V3_01",
+      "map": "/Game/ForestSpike/B1a_20261013a/Perf/L_FSB1a_20261013a_B0_V3",
+      "sequence": "/Game/ForestSpike/B1a_20261013a/Perf/LS_L_FSB1a_20261013a_B0_V3.LS_L_FSB1a_20261013a_B0_V3",
+      "group": "B0",
+      "path_id": "V3",
+      "frames": 481,
+      "res": [
+        1920,
+        1080
+      ],
+      "game_overrides_enabled": false,
+      "force_lod_zero": false,
+      "cinematic_quality": false,
+      "spatial_samples": 1,
+      "temporal_samples": 1,
+      "aa_override": false,
+      "warm_hold_in_sequence": 120,
+      "output_directory": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\ForestSpike\\Saved\\ForestSpike\\b1a\\movies\\clip_B0_V3_01\\frames",
+      "scope": "Matched native short clip; complete flight independently verified in game CSV. V3 t14..20, V5 az0..120; same initial 120-frame warm hold."
+    },
+    {
+      "tag": "clip_B0_V5_01",
+      "config": "/Game/ForestSpike/B1a_20261013a/Movies/MRQ_clip_B0_V5_01.MRQ_clip_B0_V5_01",
+      "map": "/Game/ForestSpike/B1a_20261013a/Perf/L_FSB1a_20261013a_B0_V5",
+      "sequence": "/Game/ForestSpike/B1a_20261013a/Perf/LS_L_FSB1a_20261013a_B0_V5.LS_L_FSB1a_20261013a_B0_V5",
+      "group": "B0",
+      "path_id": "V5",
+      "frames": 401,
+      "res": [
+        1920,
+        1080
+      ],
+      "game_overrides_enabled": false,
+      "force_lod_zero": false,
+      "cinematic_quality": false,
+      "spatial_samples": 1,
+      "temporal_samples": 1,
+      "aa_override": false,
+      "warm_hold_in_sequence": 120,
+      "output_directory": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\ForestSpike\\Saved\\ForestSpike\\b1a\\movies\\clip_B0_V5_01\\frames",
+      "scope": "Matched native short clip; complete flight independently verified in game CSV. V3 t14..20, V5 az0..120; same initial 120-frame warm hold."
+    },
+    {
+      "tag": "clip_B1_V3_01",
+      "config": "/Game/ForestSpike/B1a_20261013a/Movies/MRQ_clip_B1_V3_01.MRQ_clip_B1_V3_01",
+      "map": "/Game/ForestSpike/B1a_20261013a/Perf/L_FSB1a_20261013a_B1_V3",
+      "sequence": "/Game/ForestSpike/B1a_20261013a/Perf/LS_L_FSB1a_20261013a_B1_V3.LS_L_FSB1a_20261013a_B1_V3",
+      "group": "B1",
+      "path_id": "V3",
+      "frames": 481,
+      "res": [
+        1920,
+        1080
+      ],
+      "game_overrides_enabled": false,
+      "force_lod_zero": false,
+      "cinematic_quality": false,
+      "spatial_samples": 1,
+      "temporal_samples": 1,
+      "aa_override": false,
+      "warm_hold_in_sequence": 120,
+      "output_directory": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\ForestSpike\\Saved\\ForestSpike\\b1a\\movies\\clip_B1_V3_01\\frames",
+      "scope": "Matched native short clip; complete flight independently verified in game CSV. V3 t14..20, V5 az0..120; same initial 120-frame warm hold."
+    },
+    {
+      "tag": "clip_B1_V5_01",
+      "config": "/Game/ForestSpike/B1a_20261013a/Movies/MRQ_clip_B1_V5_01.MRQ_clip_B1_V5_01",
+      "map": "/Game/ForestSpike/B1a_20261013a/Perf/L_FSB1a_20261013a_B1_V5",
+      "sequence": "/Game/ForestSpike/B1a_20261013a/Perf/LS_L_FSB1a_20261013a_B1_V5.LS_L_FSB1a_20261013a_B1_V5",
+      "group": "B1",
+      "path_id": "V5",
+      "frames": 401,
+      "res": [
+        1920,
+        1080
+      ],
+      "game_overrides_enabled": false,
+      "force_lod_zero": false,
+      "cinematic_quality": false,
+      "spatial_samples": 1,
+      "temporal_samples": 1,
+      "aa_override": false,
+      "warm_hold_in_sequence": 120,
+      "output_directory": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\ForestSpike\\Saved\\ForestSpike\\b1a\\movies\\clip_B1_V5_01\\frames",
+      "scope": "Matched native short clip; complete flight independently verified in game CSV. V3 t14..20, V5 az0..120; same initial 120-frame warm hold."
+    }
+  ],
+  "error": null
+}

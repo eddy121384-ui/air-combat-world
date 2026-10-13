@@ -1,0 +1,16 @@
+{
+  "args": [
+    "\"D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\ForestSpike\\ForestSpike.uproject\"",
+    "-ExecutePythonScript=\"D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\adapters\\unreal\\forestspike\\fs_b1a_coverage.py\"",
+    "-unattended",
+    "-nopause",
+    "-nosound",
+    "-abslog=\"D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\ForestSpike\\Saved\\ForestSpike\\b1a\\coverage03\\engine.log\""
+  ],
+  "script": "fs_b1a_coverage.py",
+  "env": {
+    "ACW_FS_B1A_REUSE_COVERAGE_ASSETS": "1"
+  },
+  "tag": "coverage03",
+  "started_utc": "2026-10-13T06:57:08.7774267+00:00"
+}
