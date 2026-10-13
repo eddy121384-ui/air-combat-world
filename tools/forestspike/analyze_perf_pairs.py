@@ -31,16 +31,30 @@ def main():
     ap.add_argument("--out", default=None)
     a = ap.parse_args()
     runs = {}
-    for f in sorted(Path(a.dir).glob("%s_r*__L_FSP_*.csv" % a.prefix)):
-        m = re.match(r"%s_r(\d+)__L_FSP_([AB])_S(\d)_(.+)\.csv" % re.escape(a.prefix), f.name)
+    for f in sorted(Path(a.dir).rglob("*.csv")):
+        cols, meta = P.parse(f)
+        identity = "%s__%s.csv" % (meta.get("tag", ""), meta.get("level", ""))
+        m = re.fullmatch(r"%s_r(\d+)__L_FSP_([AB])_S(\d)_(.+)\.csv" % re.escape(a.prefix), identity)
         if not m:
             continue
         rnd, arm, s, view = int(m.group(1)), m.group(2), m.group(3), m.group(4)
-        cols, _ = P.parse(f)
-        runs[(rnd, arm)] = {"file": f.name, "view": view, "s": s, "cols": cols}
+        status = P.classification(f, meta)
+        if status == 'FAIL_FS_PERF_CAPTURE':
+            raise RuntimeError('invalid completion receipt: ' + str(f))
+        if (rnd, arm) in runs:
+            raise RuntimeError('duplicate round/arm; choose one view and S state per invocation')
+        runs[(rnd, arm)] = {"file": f.relative_to(a.dir).as_posix(), "view": view, "s": s, "cols": cols, "capture_status": status}
     rounds = sorted({r for r, _ in runs})
     complete = [r for r in rounds if (r, "A") in runs and (r, "B") in runs]
+    if not runs or len(complete) != len(rounds):
+        raise RuntimeError('missing runs or incomplete pairs')
+    identities = {(r['view'], r['s'], len(r['cols']['FrameTime'])) for r in runs.values()}
+    if len(identities) != 1:
+        raise RuntimeError('pairing different views, S states or frame counts is invalid')
     out = {"prefix": a.prefix, "cold_frames": a.cold, "rounds_found": rounds, "rounds_complete": complete, "runs": {}, "pairs": {}}
+    out['host_scope'] = 'Intel UHD 770 only'
+    out['capture_status'] = 'PASS_FS_PERF_CAPTURE' if all(r['capture_status'] == 'PASS_FS_PERF_CAPTURE' for r in runs.values()) else 'HISTORICAL_ONLY_UNVERIFIED'
+    out['scope'] = 'paired CSV timings; moving-path/LOD gates require separate validation'
     for (rnd, arm), r in sorted(runs.items()):
         n = len(r["cols"]["FrameTime"])
         out["runs"]["r%d_%s" % (rnd, arm)] = {"file": r["file"], "frames": n, "warm_frames": n - a.cold,
@@ -64,7 +78,8 @@ def main():
             out["pairs"]["GPUTime_median_spread_arm_%s" % arm] = {"per_round": meds, "range": round(max(meds) - min(meds), 3)}
     print(json.dumps(out["pairs"], indent=1))
     if a.out:
-        Path(a.out).write_text(json.dumps(out, indent=1))
+        with Path(a.out).open('x', encoding='utf-8') as fh:
+            json.dump(out, fh, indent=1)
 
 
 if __name__ == "__main__":

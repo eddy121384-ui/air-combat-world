@@ -1,0 +1,40 @@
+{
+ "name": "probe_v1_agl200_p10_lod-1",
+ "job": {
+  "kind": "id",
+  "pose": {
+   "id": "v1_agl200_p10",
+   "group": "V1",
+   "eye_enu": [
+    -420.0,
+    -420.0,
+    310.049
+   ],
+   "agl_m": 200,
+   "heading_deg": 45.0,
+   "pitch_deg": -10.0,
+   "fov_h_deg": 91.4928,
+   "fov_v_deg": 60.0
+  },
+  "arm": "B",
+  "count_a": 30200,
+  "count_b": 30100,
+  "und": 0,
+  "name": "probe_v1_agl200_p10_lod-1",
+  "ds_m": 500,
+  "ws_m": 100,
+  "force_lod": -1,
+  "s_ctx": 1,
+  "s_core": 1,
+  "force_lod_cvar_readback": -1
+ },
+ "res": [
+  1920,
+  1080
+ ],
+ "id_gamma": 0.0,
+ "counts": {
+  "a": null,
+  "b": 30100
+ }
+}

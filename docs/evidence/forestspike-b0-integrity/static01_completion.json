@@ -1,0 +1,25 @@
+{
+  "schema": "forestspike.perf_completion/1",
+  "status": "FAIL_FS_PERF",
+  "tag": "b0fix_static01",
+  "level": "L_FSP_A_S1_v1_agl200_p10",
+  "run_id": "d7df77d79d6e462fa05808b9448d0ad1",
+  "expected_frames": 480,
+  "cold_frames": 120,
+  "started_epoch": 1791852285.0,
+  "exit_code": null,
+  "host_scope": "Intel UHD 770 only",
+  "csv": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\ForestSpike\\Saved\\ForestSpike\\perf_v2\\b0fix_static01__L_FSP_A_S1_v1_agl200_p10\\MISSING.csv",
+  "log": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\ForestSpike\\Saved\\ForestSpike\\perf_v2\\b0fix_static01__L_FSP_A_S1_v1_agl200_p10\\engine.log",
+  "errors": [
+    "process exit was not observed",
+    "FileNotFoundError: [WinError 2] \u7cfb\u7d71\u627e\u4e0d\u5230\u6307\u5b9a\u7684\u6a94\u6848\u3002: 'D:\\\\Users\\\\EDDY\\\\Documents\\\\GitHub\\\\air-combat-world\\\\unreal\\\\ForestSpike\\\\Saved\\\\ForestSpike\\\\perf_v2\\\\b0fix_static01__L_FSP_A_S1_v1_agl200_p10\\\\MISSING.csv'"
+  ],
+  "completed_utc": "2026-10-13T00:53:34.554476+00:00",
+  "_public_export": {
+    "raw_receipt": "unreal\\ForestSpike\\Saved\\ForestSpike\\perf_v2\\b0fix_static01__L_FSP_A_S1_v1_agl200_p10\\completion.json",
+    "raw_receipt_sha256": "a8f1bcf06b8fd33921a804e107f0a270c47b1237443a728360378584d329d134",
+    "omitted_fields": [],
+    "all_raw_files_retained": true
+  }
+}

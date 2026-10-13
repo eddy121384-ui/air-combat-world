@@ -5,13 +5,15 @@ param(
     [Parameter(Mandatory)][string[]]$Levels,
     [int]$Rounds = 3,
     [int]$Frames = 480,
+    [int]$Cold = 120,
+    [Parameter(Mandatory)][string]$Python,
     [string]$Prefix = "run"
 )
 $ErrorActionPreference = "Stop"
 for ($r = 1; $r -le $Rounds; $r++) {
     $order = if ($r % 2 -eq 1) { $Levels } else { $Levels[($Levels.Length - 1)..0] }
     foreach ($lv in $order) {
-        & (Join-Path $PSScriptRoot "run_perf.ps1") -Level $lv -Tag ("{0}_r{1}" -f $Prefix, $r) -Frames $Frames
+        & (Join-Path $PSScriptRoot "run_perf.ps1") -Level $lv -Tag ("{0}_r{1}" -f $Prefix, $r) -Frames $Frames -Cold $Cold -Python $Python
         if ($LASTEXITCODE -ne 0) { throw "perf run failed: $lv round $r" }
     }
 }

@@ -1,0 +1,10 @@
+{
+  "status": "PASS_UNCHANGED_ORIGINALS",
+  "checked_utc": "2026-10-13T01:08:31.586160+00:00",
+  "base_head": "7d94d6e0f96ecbd0f6e9572c7a5b32b4f7cc1bbc",
+  "files_checked": 107,
+  "changed_or_missing": [],
+  "historical_runs_checked": 13,
+  "unchanged_metric_windows_checked": 91,
+  "host_scope": "Intel UHD 770 only"
+}

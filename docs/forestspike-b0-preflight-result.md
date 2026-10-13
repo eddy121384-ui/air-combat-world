@@ -1,5 +1,14 @@
 # ForestSpike B0 preflight — result (Issue #19, Phase B0)
 
+> **2026-10-13 correction: B1a NO-GO.** Read
+> [`forestspike-b0-integrity-correction.md`](forestspike-b0-integrity-correction.md) first.
+> The original timing numbers and evidence below are preserved, but the six historical
+> "moving" CSVs actually show a stationary camera at V3 t14; both saved sequences have
+> unresolved camera bindings. All four B meshes' three render LOD counts and all 14 source
+> hashes now match PR #18, while expected standalone LOD selection remains incomplete.
+> The conditional GO and moving-path interpretation below are superseded. The revised
+> CSV/completion validator passed a new static test; B1a/B1b/B2 remain stopped.
+
 Branch `spike/ac7-forest-b0-preflight`, base `feat/opus55-xinyi-visual-quality` @ `ede7960d8ec05b2aa521b1e4c65b5bbd667c456d`.
 Scope: harness + measurement-method preflight only. **Not** the 24-configuration sweep, not B1a/B1b/B2, no Northern-Taiwan
 forest, no change to the Xinyi scene, accepted geometry, PR #18 or PR #20. No PR was merged. Research findings that belong

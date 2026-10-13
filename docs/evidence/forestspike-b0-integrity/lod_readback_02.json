@@ -1,0 +1,390 @@
+{
+  "schema": "forestspike.lod_readback/1",
+  "started_utc": "2026-10-13T00:58:12.223150+00:00",
+  "engine": "5.8.0-55116800+++UE5+Release-5.8",
+  "run_id": "b0_review_lod_20261013_02",
+  "status": "PARTIAL_FS_LOD_READBACK_RUNTIME_SELECTION_REQUIRED",
+  "failures": [],
+  "sources": [
+    {
+      "filename": "dense_rounded_lod0.glb",
+      "expected_sha256": "5ec3df7d0565d4b970281af7edaf0cc69cf4570ad1c67be311cfb4ac0c050d61",
+      "copy_sha256": "5ec3df7d0565d4b970281af7edaf0cc69cf4570ad1c67be311cfb4ac0c050d61",
+      "pr18_sha256": "5ec3df7d0565d4b970281af7edaf0cc69cf4570ad1c67be311cfb4ac0c050d61",
+      "expected_triangles": 120,
+      "pass": true
+    },
+    {
+      "filename": "dense_rounded_lod1.glb",
+      "expected_sha256": "830bceb0be3158883ba69bd8f409949c8087c17b65dc0ca0187f5cc86d0bf466",
+      "copy_sha256": "830bceb0be3158883ba69bd8f409949c8087c17b65dc0ca0187f5cc86d0bf466",
+      "pr18_sha256": "830bceb0be3158883ba69bd8f409949c8087c17b65dc0ca0187f5cc86d0bf466",
+      "expected_triangles": 36,
+      "pass": true
+    },
+    {
+      "filename": "dense_rounded_lod2.glb",
+      "expected_sha256": "67872d03b123ec61ccba941eec6fc17cc5f0e9e9ddfff55f0360165136c94665",
+      "copy_sha256": "67872d03b123ec61ccba941eec6fc17cc5f0e9e9ddfff55f0360165136c94665",
+      "pr18_sha256": "67872d03b123ec61ccba941eec6fc17cc5f0e9e9ddfff55f0360165136c94665",
+      "expected_triangles": 20,
+      "pass": true
+    },
+    {
+      "filename": "horizontal_tiered_lod0.glb",
+      "expected_sha256": "220761f9b1d3c2f74c0f5d10c3c318bade8b8f7ccbe03704f14a753873ca2b7d",
+      "copy_sha256": "220761f9b1d3c2f74c0f5d10c3c318bade8b8f7ccbe03704f14a753873ca2b7d",
+      "pr18_sha256": "220761f9b1d3c2f74c0f5d10c3c318bade8b8f7ccbe03704f14a753873ca2b7d",
+      "expected_triangles": 112,
+      "pass": true
+    },
+    {
+      "filename": "horizontal_tiered_lod1.glb",
+      "expected_sha256": "4b873fa98775932b1da2805371c912784725ea682c16d7cab7962ab3cc6f7a20",
+      "copy_sha256": "4b873fa98775932b1da2805371c912784725ea682c16d7cab7962ab3cc6f7a20",
+      "pr18_sha256": "4b873fa98775932b1da2805371c912784725ea682c16d7cab7962ab3cc6f7a20",
+      "expected_triangles": 38,
+      "pass": true
+    },
+    {
+      "filename": "horizontal_tiered_lod2.glb",
+      "expected_sha256": "429bfee641f5b4e23ff3a2eeaeb316fa6adb1ed8ed3509cd5a2fb0b2ca371f6b",
+      "copy_sha256": "429bfee641f5b4e23ff3a2eeaeb316fa6adb1ed8ed3509cd5a2fb0b2ca371f6b",
+      "pr18_sha256": "429bfee641f5b4e23ff3a2eeaeb316fa6adb1ed8ed3509cd5a2fb0b2ca371f6b",
+      "expected_triangles": 20,
+      "pass": true
+    },
+    {
+      "filename": "open_vase_lod0.glb",
+      "expected_sha256": "95203bcfab893252f5e764870cfb15990ea5feed7e60f1458f1cdc5ce3f3c147",
+      "copy_sha256": "95203bcfab893252f5e764870cfb15990ea5feed7e60f1458f1cdc5ce3f3c147",
+      "pr18_sha256": "95203bcfab893252f5e764870cfb15990ea5feed7e60f1458f1cdc5ce3f3c147",
+      "expected_triangles": 102,
+      "pass": true
+    },
+    {
+      "filename": "open_vase_lod1.glb",
+      "expected_sha256": "4c0edfd8decfe35995008577c98edc668b80d02a1f9e800853cb5cda060203e7",
+      "copy_sha256": "4c0edfd8decfe35995008577c98edc668b80d02a1f9e800853cb5cda060203e7",
+      "pr18_sha256": "4c0edfd8decfe35995008577c98edc668b80d02a1f9e800853cb5cda060203e7",
+      "expected_triangles": 40,
+      "pass": true
+    },
+    {
+      "filename": "open_vase_lod2.glb",
+      "expected_sha256": "68a20600cd5c5b036338b881157497a954c5feefc154defd28140a11d6e6e1f1",
+      "copy_sha256": "68a20600cd5c5b036338b881157497a954c5feefc154defd28140a11d6e6e1f1",
+      "pr18_sha256": "68a20600cd5c5b036338b881157497a954c5feefc154defd28140a11d6e6e1f1",
+      "expected_triangles": 20,
+      "pass": true
+    },
+    {
+      "filename": "tall_columnar_lod0.glb",
+      "expected_sha256": "41c3df98a19243ebe7fa510e7cf87be6a40c07ae823ac84c2dc9dd9d5a74cba5",
+      "copy_sha256": "41c3df98a19243ebe7fa510e7cf87be6a40c07ae823ac84c2dc9dd9d5a74cba5",
+      "pr18_sha256": "41c3df98a19243ebe7fa510e7cf87be6a40c07ae823ac84c2dc9dd9d5a74cba5",
+      "expected_triangles": 108,
+      "pass": true
+    },
+    {
+      "filename": "tall_columnar_lod1.glb",
+      "expected_sha256": "3f11b530be7a7dca747e0cd8eb4994dc4a7d0522d374c6e4f9720f25710df750",
+      "copy_sha256": "3f11b530be7a7dca747e0cd8eb4994dc4a7d0522d374c6e4f9720f25710df750",
+      "pr18_sha256": "3f11b530be7a7dca747e0cd8eb4994dc4a7d0522d374c6e4f9720f25710df750",
+      "expected_triangles": 38,
+      "pass": true
+    },
+    {
+      "filename": "tall_columnar_lod2.glb",
+      "expected_sha256": "219c0f9b1e2a744fbc19a1242d1c6e6cb096481b4b10c3c75abd9b5805b6b970",
+      "copy_sha256": "219c0f9b1e2a744fbc19a1242d1c6e6cb096481b4b10c3c75abd9b5805b6b970",
+      "pr18_sha256": "219c0f9b1e2a744fbc19a1242d1c6e6cb096481b4b10c3c75abd9b5805b6b970",
+      "expected_triangles": 20,
+      "pass": true
+    },
+    {
+      "filename": "xinyi_reference_preview_lod0.glb",
+      "expected_sha256": "4805c3ec328284512092cc279dc0c37d482ef45bfce3b827e9c87c6a22ef90cf",
+      "copy_sha256": "4805c3ec328284512092cc279dc0c37d482ef45bfce3b827e9c87c6a22ef90cf",
+      "pr18_sha256": "4805c3ec328284512092cc279dc0c37d482ef45bfce3b827e9c87c6a22ef90cf",
+      "expected_triangles": 28,
+      "pass": true
+    },
+    {
+      "filename": "xinyi_reference_original.glb",
+      "expected_sha256": "323939eaaa9076f65d2c81b15f0c7b5d179c91c85c89ed1d783312debdaadbd1",
+      "copy_sha256": "323939eaaa9076f65d2c81b15f0c7b5d179c91c85c89ed1d783312debdaadbd1",
+      "pr18_sha256": "323939eaaa9076f65d2c81b15f0c7b5d179c91c85c89ed1d783312debdaadbd1",
+      "expected_triangles": 28,
+      "pass": true
+    }
+  ],
+  "meshes": [
+    {
+      "name": "Terrain_Core",
+      "asset": "/Game/ForestSpike/Meshes/Terrain_Core/terrain_core/StaticMeshes/terrain_core",
+      "render_lod_count": 1,
+      "source_lod_count": 1,
+      "triangles": [
+        81600
+      ],
+      "vertices": [
+        42001
+      ],
+      "screen_sizes": [
+        2.0
+      ],
+      "source_models": {
+        "unavailable": "StaticMesh: Failed to find property 'source_models' for attribute 'source_models' on 'StaticMesh'"
+      },
+      "asset_import_data": "<Object '/Game/ForestSpike/Meshes/Terrain_Core/terrain_core/StaticMeshes/terrain_core.terrain_core:InterchangeAssetImportData_0' (0x000002BA8C518580) Class 'InterchangeAssetImportData'>",
+      "nanite_settings": "<Struct 'MeshNaniteSettings' (0x000002BA415FB3A0) {enabled: False, explicit_tangents: False, lerp_u_vs: True, separable: False, voxel_ndf: True, voxel_opacity: False, shape_preservation: None, position_precision: -2147483648, normal_precision: -1, tangent_precision: -1, bone_weight_precision: -1, keep_percent_triangles: 1.000000, trim_relative_error: 0.000000, generate_fallback: PlatformDefault, fallback_target: Auto, fallback_percent_triangles: 1.000000, fallback_relative_error: 1.000000, max_edge_length_factor: 0.000000, num_rays: 64, voxel_level: 0, ray_back_up: 0.000000, displacement_uv_channel: 0}>",
+      "lod_selection_status": "NOT_VERIFIED_RUNTIME",
+      "reduction_settings": [
+        "<Struct 'MeshReductionSettings' (0x000002BA9FFFF2D0) {percent_triangles: 1.000000, percent_vertices: 1.000000, max_deviation: 0.000000, pixel_error: 8.000000, welding_threshold: 0.000000, hard_angle_threshold: 80.000000, base_lod_model: 0, silhouette_importance: Normal, texture_importance: Normal, shading_importance: Normal, recalculate_normals: False, generate_unique_lightmap_u_vs: False, keep_symmetry: False, visibility_aided: False, cull_occluded: False, termination_criterion: Triangles, visibility_aggressiveness: Lowest, vertex_color_importance: Off}>"
+      ]
+    },
+    {
+      "name": "Terrain_Context",
+      "asset": "/Game/ForestSpike/Meshes/Terrain_Context/terrain_context/StaticMeshes/terrain_context",
+      "render_lod_count": 1,
+      "source_lod_count": 1,
+      "triangles": [
+        177800
+      ],
+      "vertices": [
+        91000
+      ],
+      "screen_sizes": [
+        2.0
+      ],
+      "source_models": {
+        "unavailable": "StaticMesh: Failed to find property 'source_models' for attribute 'source_models' on 'StaticMesh'"
+      },
+      "asset_import_data": "<Object '/Game/ForestSpike/Meshes/Terrain_Context/terrain_context/StaticMeshes/terrain_context.terrain_context:InterchangeAssetImportData_0' (0x000002B9DEE2FC80) Class 'InterchangeAssetImportData'>",
+      "nanite_settings": "<Struct 'MeshNaniteSettings' (0x000002BA415FD3A0) {enabled: False, explicit_tangents: False, lerp_u_vs: True, separable: False, voxel_ndf: True, voxel_opacity: False, shape_preservation: None, position_precision: -2147483648, normal_precision: -1, tangent_precision: -1, bone_weight_precision: -1, keep_percent_triangles: 1.000000, trim_relative_error: 0.000000, generate_fallback: PlatformDefault, fallback_target: Auto, fallback_percent_triangles: 1.000000, fallback_relative_error: 1.000000, max_edge_length_factor: 0.000000, num_rays: 64, voxel_level: 0, ray_back_up: 0.000000, displacement_uv_channel: 0}>",
+      "lod_selection_status": "NOT_VERIFIED_RUNTIME",
+      "reduction_settings": [
+        "<Struct 'MeshReductionSettings' (0x000002BA9FFFE130) {percent_triangles: 1.000000, percent_vertices: 1.000000, max_deviation: 0.000000, pixel_error: 8.000000, welding_threshold: 0.000000, hard_angle_threshold: 80.000000, base_lod_model: 0, silhouette_importance: Normal, texture_importance: Normal, shading_importance: Normal, recalculate_normals: False, generate_unique_lightmap_u_vs: False, keep_symmetry: False, visibility_aided: False, cull_occluded: False, termination_criterion: Triangles, visibility_aggressiveness: Lowest, vertex_color_importance: Off}>"
+      ]
+    },
+    {
+      "name": "Tree_A",
+      "asset": "/Game/ForestSpike/Meshes/Tree_A/xinyi_reference_preview_lod0/StaticMeshes/xinyi_reference_preview_lod0",
+      "render_lod_count": 3,
+      "source_lod_count": 3,
+      "triangles": [
+        28,
+        28,
+        28
+      ],
+      "vertices": [
+        76,
+        76,
+        76
+      ],
+      "screen_sizes": [
+        1.0,
+        0.11999999731779099,
+        0.03999999910593033
+      ],
+      "source_models": {
+        "unavailable": "StaticMesh: Failed to find property 'source_models' for attribute 'source_models' on 'StaticMesh'"
+      },
+      "asset_import_data": "<Object '/Game/ForestSpike/Meshes/Tree_A/xinyi_reference_preview_lod0/StaticMeshes/xinyi_reference_preview_lod0.xinyi_reference_preview_lod0:InterchangeAssetImportData_0' (0x000002B9D881DAC0) Class 'InterchangeAssetImportData'>",
+      "nanite_settings": "<Struct 'MeshNaniteSettings' (0x000002BA7A86F3A0) {enabled: False, explicit_tangents: False, lerp_u_vs: True, separable: False, voxel_ndf: True, voxel_opacity: False, shape_preservation: None, position_precision: -2147483648, normal_precision: -1, tangent_precision: -1, bone_weight_precision: -1, keep_percent_triangles: 1.000000, trim_relative_error: 0.000000, generate_fallback: PlatformDefault, fallback_target: Auto, fallback_percent_triangles: 1.000000, fallback_relative_error: 1.000000, max_edge_length_factor: 0.000000, num_rays: 64, voxel_level: 0, ray_back_up: 0.000000, displacement_uv_channel: 0}>",
+      "lod_selection_status": "NOT_VERIFIED_RUNTIME",
+      "reduction_settings": [
+        "<Struct 'MeshReductionSettings' (0x000002BA9FFFE730) {percent_triangles: 1.000000, percent_vertices: 1.000000, max_deviation: 0.000000, pixel_error: 8.000000, welding_threshold: 0.000000, hard_angle_threshold: 80.000000, base_lod_model: 0, silhouette_importance: Normal, texture_importance: Normal, shading_importance: Normal, recalculate_normals: False, generate_unique_lightmap_u_vs: False, keep_symmetry: False, visibility_aided: False, cull_occluded: False, termination_criterion: Triangles, visibility_aggressiveness: Lowest, vertex_color_importance: Off}>",
+        "<Struct 'MeshReductionSettings' (0x000002BA9FFFE940) {percent_triangles: 0.500000, percent_vertices: 1.000000, max_deviation: 0.000000, pixel_error: 8.000000, welding_threshold: 0.000000, hard_angle_threshold: 80.000000, base_lod_model: 0, silhouette_importance: Normal, texture_importance: Normal, shading_importance: Normal, recalculate_normals: False, generate_unique_lightmap_u_vs: False, keep_symmetry: False, visibility_aided: False, cull_occluded: False, termination_criterion: Triangles, visibility_aggressiveness: Lowest, vertex_color_importance: Off}>",
+        "<Struct 'MeshReductionSettings' (0x000002BA9FFFE5E0) {percent_triangles: 0.250000, percent_vertices: 1.000000, max_deviation: 0.000000, pixel_error: 8.000000, welding_threshold: 0.000000, hard_angle_threshold: 80.000000, base_lod_model: 0, silhouette_importance: Normal, texture_importance: Normal, shading_importance: Normal, recalculate_normals: False, generate_unique_lightmap_u_vs: False, keep_symmetry: False, visibility_aided: False, cull_occluded: False, termination_criterion: Triangles, visibility_aggressiveness: Lowest, vertex_color_importance: Off}>"
+      ]
+    },
+    {
+      "name": "Tree_B_dense_rounded",
+      "asset": "/Game/ForestSpike/Meshes/Tree_B_dense_rounded/dense_rounded_lod0/StaticMeshes/dense_rounded_lod0",
+      "render_lod_count": 3,
+      "source_lod_count": 3,
+      "triangles": [
+        120,
+        36,
+        20
+      ],
+      "vertices": [
+        104,
+        34,
+        24
+      ],
+      "screen_sizes": [
+        2.0,
+        0.75,
+        0.5625
+      ],
+      "source_models": {
+        "unavailable": "StaticMesh: Failed to find property 'source_models' for attribute 'source_models' on 'StaticMesh'"
+      },
+      "asset_import_data": "<Object '/Game/ForestSpike/Meshes/Tree_B_dense_rounded/dense_rounded_lod0/StaticMeshes/dense_rounded_lod0.dense_rounded_lod0:InterchangeAssetImportData_0' (0x000002BA8C518D00) Class 'InterchangeAssetImportData'>",
+      "nanite_settings": "<Struct 'MeshNaniteSettings' (0x000002BA79899BA0) {enabled: False, explicit_tangents: False, lerp_u_vs: True, separable: False, voxel_ndf: True, voxel_opacity: False, shape_preservation: None, position_precision: -2147483648, normal_precision: -1, tangent_precision: -1, bone_weight_precision: -1, keep_percent_triangles: 1.000000, trim_relative_error: 0.000000, generate_fallback: PlatformDefault, fallback_target: Auto, fallback_percent_triangles: 1.000000, fallback_relative_error: 1.000000, max_edge_length_factor: 0.000000, num_rays: 64, voxel_level: 0, ray_back_up: 0.000000, displacement_uv_channel: 0}>",
+      "lod_selection_status": "NOT_VERIFIED_RUNTIME",
+      "reduction_settings": [
+        "<Struct 'MeshReductionSettings' (0x000002BA9FFFD020) {percent_triangles: 1.000000, percent_vertices: 1.000000, max_deviation: 0.000000, pixel_error: 8.000000, welding_threshold: 0.000000, hard_angle_threshold: 80.000000, base_lod_model: 0, silhouette_importance: Normal, texture_importance: Normal, shading_importance: Normal, recalculate_normals: False, generate_unique_lightmap_u_vs: False, keep_symmetry: False, visibility_aided: False, cull_occluded: False, termination_criterion: Triangles, visibility_aggressiveness: Lowest, vertex_color_importance: Off}>",
+        "<Struct 'MeshReductionSettings' (0x000002BA9FFFD7A0) {percent_triangles: 1.000000, percent_vertices: 1.000000, max_deviation: 0.000000, pixel_error: 8.000000, welding_threshold: 0.000000, hard_angle_threshold: 80.000000, base_lod_model: 0, silhouette_importance: Normal, texture_importance: Normal, shading_importance: Normal, recalculate_normals: False, generate_unique_lightmap_u_vs: False, keep_symmetry: False, visibility_aided: False, cull_occluded: False, termination_criterion: Triangles, visibility_aggressiveness: Lowest, vertex_color_importance: Off}>",
+        "<Struct 'MeshReductionSettings' (0x000002BA9FFFD080) {percent_triangles: 1.000000, percent_vertices: 1.000000, max_deviation: 0.000000, pixel_error: 8.000000, welding_threshold: 0.000000, hard_angle_threshold: 80.000000, base_lod_model: 0, silhouette_importance: Normal, texture_importance: Normal, shading_importance: Normal, recalculate_normals: False, generate_unique_lightmap_u_vs: False, keep_symmetry: False, visibility_aided: False, cull_occluded: False, termination_criterion: Triangles, visibility_aggressiveness: Lowest, vertex_color_importance: Off}>"
+      ],
+      "expected_triangles": [
+        120,
+        36,
+        20
+      ],
+      "triangles_pass": true
+    },
+    {
+      "name": "Tree_B_horizontal_tiered",
+      "asset": "/Game/ForestSpike/Meshes/Tree_B_horizontal_tiered/horizontal_tiered_lod0/StaticMeshes/horizontal_tiered_lod0",
+      "render_lod_count": 3,
+      "source_lod_count": 3,
+      "triangles": [
+        112,
+        38,
+        20
+      ],
+      "vertices": [
+        114,
+        48,
+        26
+      ],
+      "screen_sizes": [
+        2.0,
+        0.75,
+        0.5625
+      ],
+      "source_models": {
+        "unavailable": "StaticMesh: Failed to find property 'source_models' for attribute 'source_models' on 'StaticMesh'"
+      },
+      "asset_import_data": "<Object '/Game/ForestSpike/Meshes/Tree_B_horizontal_tiered/horizontal_tiered_lod0/StaticMeshes/horizontal_tiered_lod0.horizontal_tiered_lod0:InterchangeAssetImportData_0' (0x000002BA8C519000) Class 'InterchangeAssetImportData'>",
+      "nanite_settings": "<Struct 'MeshNaniteSettings' (0x000002BA5B6213A0) {enabled: False, explicit_tangents: False, lerp_u_vs: True, separable: False, voxel_ndf: True, voxel_opacity: False, shape_preservation: None, position_precision: -2147483648, normal_precision: -1, tangent_precision: -1, bone_weight_precision: -1, keep_percent_triangles: 1.000000, trim_relative_error: 0.000000, generate_fallback: PlatformDefault, fallback_target: Auto, fallback_percent_triangles: 1.000000, fallback_relative_error: 1.000000, max_edge_length_factor: 0.000000, num_rays: 64, voxel_level: 0, ray_back_up: 0.000000, displacement_uv_channel: 0}>",
+      "lod_selection_status": "NOT_VERIFIED_RUNTIME",
+      "reduction_settings": [
+        "<Struct 'MeshReductionSettings' (0x000002BA9FFFD500) {percent_triangles: 1.000000, percent_vertices: 1.000000, max_deviation: 0.000000, pixel_error: 8.000000, welding_threshold: 0.000000, hard_angle_threshold: 80.000000, base_lod_model: 0, silhouette_importance: Normal, texture_importance: Normal, shading_importance: Normal, recalculate_normals: False, generate_unique_lightmap_u_vs: False, keep_symmetry: False, visibility_aided: False, cull_occluded: False, termination_criterion: Triangles, visibility_aggressiveness: Lowest, vertex_color_importance: Off}>",
+        "<Struct 'MeshReductionSettings' (0x000002BA9FFFDE30) {percent_triangles: 1.000000, percent_vertices: 1.000000, max_deviation: 0.000000, pixel_error: 8.000000, welding_threshold: 0.000000, hard_angle_threshold: 80.000000, base_lod_model: 0, silhouette_importance: Normal, texture_importance: Normal, shading_importance: Normal, recalculate_normals: False, generate_unique_lightmap_u_vs: False, keep_symmetry: False, visibility_aided: False, cull_occluded: False, termination_criterion: Triangles, visibility_aggressiveness: Lowest, vertex_color_importance: Off}>",
+        "<Struct 'MeshReductionSettings' (0x000002BA9FFFD800) {percent_triangles: 1.000000, percent_vertices: 1.000000, max_deviation: 0.000000, pixel_error: 8.000000, welding_threshold: 0.000000, hard_angle_threshold: 80.000000, base_lod_model: 0, silhouette_importance: Normal, texture_importance: Normal, shading_importance: Normal, recalculate_normals: False, generate_unique_lightmap_u_vs: False, keep_symmetry: False, visibility_aided: False, cull_occluded: False, termination_criterion: Triangles, visibility_aggressiveness: Lowest, vertex_color_importance: Off}>"
+      ],
+      "expected_triangles": [
+        112,
+        38,
+        20
+      ],
+      "triangles_pass": true
+    },
+    {
+      "name": "Tree_B_open_vase",
+      "asset": "/Game/ForestSpike/Meshes/Tree_B_open_vase/open_vase_lod0/StaticMeshes/open_vase_lod0",
+      "render_lod_count": 3,
+      "source_lod_count": 3,
+      "triangles": [
+        102,
+        40,
+        20
+      ],
+      "vertices": [
+        102,
+        56,
+        24
+      ],
+      "screen_sizes": [
+        2.0,
+        0.75,
+        0.5625
+      ],
+      "source_models": {
+        "unavailable": "StaticMesh: Failed to find property 'source_models' for attribute 'source_models' on 'StaticMesh'"
+      },
+      "asset_import_data": "<Object '/Game/ForestSpike/Meshes/Tree_B_open_vase/open_vase_lod0/StaticMeshes/open_vase_lod0.open_vase_lod0:InterchangeAssetImportData_0' (0x000002BA8C519300) Class 'InterchangeAssetImportData'>",
+      "nanite_settings": "<Struct 'MeshNaniteSettings' (0x000002BA5B620BA0) {enabled: False, explicit_tangents: False, lerp_u_vs: True, separable: False, voxel_ndf: True, voxel_opacity: False, shape_preservation: None, position_precision: -2147483648, normal_precision: -1, tangent_precision: -1, bone_weight_precision: -1, keep_percent_triangles: 1.000000, trim_relative_error: 0.000000, generate_fallback: PlatformDefault, fallback_target: Auto, fallback_percent_triangles: 1.000000, fallback_relative_error: 1.000000, max_edge_length_factor: 0.000000, num_rays: 64, voxel_level: 0, ray_back_up: 0.000000, displacement_uv_channel: 0}>",
+      "lod_selection_status": "NOT_VERIFIED_RUNTIME",
+      "reduction_settings": [
+        "<Struct 'MeshReductionSettings' (0x000002BA9FFFD9E0) {percent_triangles: 1.000000, percent_vertices: 1.000000, max_deviation: 0.000000, pixel_error: 8.000000, welding_threshold: 0.000000, hard_angle_threshold: 80.000000, base_lod_model: 0, silhouette_importance: Normal, texture_importance: Normal, shading_importance: Normal, recalculate_normals: False, generate_unique_lightmap_u_vs: False, keep_symmetry: False, visibility_aided: False, cull_occluded: False, termination_criterion: Triangles, visibility_aggressiveness: Lowest, vertex_color_importance: Off}>",
+        "<Struct 'MeshReductionSettings' (0x000002BA9FFFDDD0) {percent_triangles: 1.000000, percent_vertices: 1.000000, max_deviation: 0.000000, pixel_error: 8.000000, welding_threshold: 0.000000, hard_angle_threshold: 80.000000, base_lod_model: 0, silhouette_importance: Normal, texture_importance: Normal, shading_importance: Normal, recalculate_normals: False, generate_unique_lightmap_u_vs: False, keep_symmetry: False, visibility_aided: False, cull_occluded: False, termination_criterion: Triangles, visibility_aggressiveness: Lowest, vertex_color_importance: Off}>",
+        "<Struct 'MeshReductionSettings' (0x000002BA9FFFDE90) {percent_triangles: 1.000000, percent_vertices: 1.000000, max_deviation: 0.000000, pixel_error: 8.000000, welding_threshold: 0.000000, hard_angle_threshold: 80.000000, base_lod_model: 0, silhouette_importance: Normal, texture_importance: Normal, shading_importance: Normal, recalculate_normals: False, generate_unique_lightmap_u_vs: False, keep_symmetry: False, visibility_aided: False, cull_occluded: False, termination_criterion: Triangles, visibility_aggressiveness: Lowest, vertex_color_importance: Off}>"
+      ],
+      "expected_triangles": [
+        102,
+        40,
+        20
+      ],
+      "triangles_pass": true
+    },
+    {
+      "name": "Tree_B_tall_columnar",
+      "asset": "/Game/ForestSpike/Meshes/Tree_B_tall_columnar/tall_columnar_lod0/StaticMeshes/tall_columnar_lod0",
+      "render_lod_count": 3,
+      "source_lod_count": 3,
+      "triangles": [
+        108,
+        38,
+        20
+      ],
+      "vertices": [
+        104,
+        35,
+        24
+      ],
+      "screen_sizes": [
+        2.0,
+        0.75,
+        0.5625
+      ],
+      "source_models": {
+        "unavailable": "StaticMesh: Failed to find property 'source_models' for attribute 'source_models' on 'StaticMesh'"
+      },
+      "asset_import_data": "<Object '/Game/ForestSpike/Meshes/Tree_B_tall_columnar/tall_columnar_lod0/StaticMeshes/tall_columnar_lod0.tall_columnar_lod0:InterchangeAssetImportData_0' (0x000002BA8C519600) Class 'InterchangeAssetImportData'>",
+      "nanite_settings": "<Struct 'MeshNaniteSettings' (0x000002BA5B6203A0) {enabled: False, explicit_tangents: False, lerp_u_vs: True, separable: False, voxel_ndf: True, voxel_opacity: False, shape_preservation: None, position_precision: -2147483648, normal_precision: -1, tangent_precision: -1, bone_weight_precision: -1, keep_percent_triangles: 1.000000, trim_relative_error: 0.000000, generate_fallback: PlatformDefault, fallback_target: Auto, fallback_percent_triangles: 1.000000, fallback_relative_error: 1.000000, max_edge_length_factor: 0.000000, num_rays: 64, voxel_level: 0, ray_back_up: 0.000000, displacement_uv_channel: 0}>",
+      "lod_selection_status": "NOT_VERIFIED_RUNTIME",
+      "reduction_settings": [
+        "<Struct 'MeshReductionSettings' (0x000002BA9FFFC960) {percent_triangles: 1.000000, percent_vertices: 1.000000, max_deviation: 0.000000, pixel_error: 8.000000, welding_threshold: 0.000000, hard_angle_threshold: 80.000000, base_lod_model: 0, silhouette_importance: Normal, texture_importance: Normal, shading_importance: Normal, recalculate_normals: False, generate_unique_lightmap_u_vs: False, keep_symmetry: False, visibility_aided: False, cull_occluded: False, termination_criterion: Triangles, visibility_aggressiveness: Lowest, vertex_color_importance: Off}>",
+        "<Struct 'MeshReductionSettings' (0x000002BA9FFFCDB0) {percent_triangles: 1.000000, percent_vertices: 1.000000, max_deviation: 0.000000, pixel_error: 8.000000, welding_threshold: 0.000000, hard_angle_threshold: 80.000000, base_lod_model: 0, silhouette_importance: Normal, texture_importance: Normal, shading_importance: Normal, recalculate_normals: False, generate_unique_lightmap_u_vs: False, keep_symmetry: False, visibility_aided: False, cull_occluded: False, termination_criterion: Triangles, visibility_aggressiveness: Lowest, vertex_color_importance: Off}>",
+        "<Struct 'MeshReductionSettings' (0x000002BA9FFFC2D0) {percent_triangles: 1.000000, percent_vertices: 1.000000, max_deviation: 0.000000, pixel_error: 8.000000, welding_threshold: 0.000000, hard_angle_threshold: 80.000000, base_lod_model: 0, silhouette_importance: Normal, texture_importance: Normal, shading_importance: Normal, recalculate_normals: False, generate_unique_lightmap_u_vs: False, keep_symmetry: False, visibility_aided: False, cull_occluded: False, termination_criterion: Triangles, visibility_aggressiveness: Lowest, vertex_color_importance: Off}>"
+      ],
+      "expected_triangles": [
+        108,
+        38,
+        20
+      ],
+      "triangles_pass": true
+    }
+  ],
+  "sequence_audit": [
+    {
+      "name": "A_S1_v3i_t14_t32",
+      "status": "FAIL_CAMERA_BINDING",
+      "cameras": [
+        "/Game/ForestSpike/Perf/L_FSP_A_S1_v3i_t14_t32.L_FSP_A_S1_v3i_t14_t32:PersistentLevel.CameraActor_0"
+      ],
+      "playback_start": 0,
+      "playback_end": 1081,
+      "bindings": [
+        {
+          "name": "FS_PerfCamera",
+          "resolved_objects": []
+        }
+      ]
+    },
+    {
+      "name": "B_S1_v3i_t14_t32",
+      "status": "FAIL_CAMERA_BINDING",
+      "cameras": [
+        "/Game/ForestSpike/Perf/L_FSP_B_S1_v3i_t14_t32.L_FSP_B_S1_v3i_t14_t32:PersistentLevel.CameraActor_0"
+      ],
+      "playback_start": 0,
+      "playback_end": 1081,
+      "bindings": [
+        {
+          "name": "FS_PerfCamera",
+          "resolved_objects": []
+        }
+      ]
+    }
+  ],
+  "pr18_manifest_sha256": "02874470664c0275024578cf0c94861ecb9afbc2de44a699c0d7379da3d4df01",
+  "completed_utc": "2026-10-13T00:58:14.792911+00:00"
+}

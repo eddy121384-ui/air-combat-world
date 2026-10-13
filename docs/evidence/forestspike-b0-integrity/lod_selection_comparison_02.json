@@ -1,0 +1,178 @@
+{
+  "scope": "transient ID-render diagnostic; forced LOD bypasses normal cluster culling, so full-frame equality is invalid; compare automatic tree pixels <=350m, within 500m cull. Not performance/final visual acceptance",
+  "expected_policy": "No approved B1a LOD screen-size/distance policy exists; original B0 B defaults must not imply near LOD0",
+  "rows": [
+    {
+      "pose": "v1_agl200_p10",
+      "resolution": [
+        1920,
+        1080
+      ],
+      "automatic": {
+        "file": "probe_v1_agl200_p10_lod-1.png",
+        "sha256": "a679d0a2da9b7dbef60b248392cb24ea72ffd4b07ebc793e13350c3db3eae8b6"
+      },
+      "forced_comparisons": [
+        {
+          "lod": 0,
+          "file": "probe_v1_agl200_p10_lod0.png",
+          "sha256": "761dc198cd65d6ab6a66d0f106ff318f17d99cb7eda19c6edf7a07480dab755d",
+          "different_pixels": 650037,
+          "automatic_tree_pixels_le350m": 346545,
+          "different_auto_tree_pixels_le350m": 327864,
+          "total_pixels": 2073600,
+          "max_channel_error": 255
+        },
+        {
+          "lod": 1,
+          "file": "probe_v1_agl200_p10_lod1.png",
+          "sha256": "76c089be237123f7f563d94ac5db8ee71bdc908feac45b87578e23eeaf06d061",
+          "different_pixels": 660393,
+          "automatic_tree_pixels_le350m": 346545,
+          "different_auto_tree_pixels_le350m": 331214,
+          "total_pixels": 2073600,
+          "max_channel_error": 255
+        },
+        {
+          "lod": 2,
+          "file": "probe_v1_agl200_p10_lod2.png",
+          "sha256": "314a728419f838f7bcfe108fcaa68543f91a481e7324bd7901cb18b4eadf4c70",
+          "different_pixels": 103742,
+          "automatic_tree_pixels_le350m": 346545,
+          "different_auto_tree_pixels_le350m": 0,
+          "total_pixels": 2073600,
+          "max_channel_error": 255
+        }
+      ]
+    },
+    {
+      "pose": "v1_agl50_p15",
+      "resolution": [
+        1920,
+        1080
+      ],
+      "automatic": {
+        "file": "probe_v1_agl50_p15_lod-1.png",
+        "sha256": "68244934b194f1573b9915fda0fad75c7d387ed985bdf19bc255f9865804582d"
+      },
+      "forced_comparisons": [
+        {
+          "lod": 0,
+          "file": "probe_v1_agl50_p15_lod0.png",
+          "sha256": "51abfd1e8dd0ece9c4bff397ea5f992c53c2c373c5e0d9b4d5f0acdc1f157207",
+          "different_pixels": 962305,
+          "automatic_tree_pixels_le350m": 1169031,
+          "different_auto_tree_pixels_le350m": 849021,
+          "total_pixels": 2073600,
+          "max_channel_error": 255
+        },
+        {
+          "lod": 1,
+          "file": "probe_v1_agl50_p15_lod1.png",
+          "sha256": "2621d315ec8fdcebf93fe1db5a2eb96c8e88db84b414e7b27add3f99ab37c117",
+          "different_pixels": 1187446,
+          "automatic_tree_pixels_le350m": 1169031,
+          "different_auto_tree_pixels_le350m": 1047387,
+          "total_pixels": 2073600,
+          "max_channel_error": 255
+        },
+        {
+          "lod": 2,
+          "file": "probe_v1_agl50_p15_lod2.png",
+          "sha256": "45ccb12f3a654a04addc15c41f5ba221fffcd8d6c9e9a6365bf9c695d8eddf29",
+          "different_pixels": 410460,
+          "automatic_tree_pixels_le350m": 1169031,
+          "different_auto_tree_pixels_le350m": 371212,
+          "total_pixels": 2073600,
+          "max_channel_error": 255
+        }
+      ]
+    },
+    {
+      "pose": "v3i_t18",
+      "resolution": [
+        1920,
+        1080
+      ],
+      "automatic": {
+        "file": "probe_v3i_t18_lod-1.png",
+        "sha256": "81c8e44d52c6eafd819c62dccd8f997f28f1d5eb97bf6951d3efb7ae7669a97e"
+      },
+      "forced_comparisons": [
+        {
+          "lod": 0,
+          "file": "probe_v3i_t18_lod0.png",
+          "sha256": "61843ebd58010a49f4bb0e053ec2969de2ef0a59ab8233b3a00bc82b2095dbd4",
+          "different_pixels": 372329,
+          "automatic_tree_pixels_le350m": 43184,
+          "different_auto_tree_pixels_le350m": 40658,
+          "total_pixels": 2073600,
+          "max_channel_error": 255
+        },
+        {
+          "lod": 1,
+          "file": "probe_v3i_t18_lod1.png",
+          "sha256": "a825f62529c45435f1032b9d73787cf85ef1035efce2ef7aa749ecaf97054fc1",
+          "different_pixels": 379402,
+          "automatic_tree_pixels_le350m": 43184,
+          "different_auto_tree_pixels_le350m": 41358,
+          "total_pixels": 2073600,
+          "max_channel_error": 255
+        },
+        {
+          "lod": 2,
+          "file": "probe_v3i_t18_lod2.png",
+          "sha256": "5b9fa20e82e3974adfbc28548d16d0cfebe1f5b1cc5df0737b1e65b6a56cf00e",
+          "different_pixels": 103908,
+          "automatic_tree_pixels_le350m": 43184,
+          "different_auto_tree_pixels_le350m": 0,
+          "total_pixels": 2073600,
+          "max_channel_error": 255
+        }
+      ]
+    },
+    {
+      "pose": "v5i_agl200_a000",
+      "resolution": [
+        1920,
+        1080
+      ],
+      "automatic": {
+        "file": "probe_v5i_agl200_a000_lod-1.png",
+        "sha256": "22c235b086b973e93b2bd495c5fe58a7633704dcff0e6b11999bc0579a1a99ea"
+      },
+      "forced_comparisons": [
+        {
+          "lod": 0,
+          "file": "probe_v5i_agl200_a000_lod0.png",
+          "sha256": "a258613327e45a29b55e298a6cef08310081be8b05f98d2fa06e95e4417513b1",
+          "different_pixels": 785288,
+          "automatic_tree_pixels_le350m": 478384,
+          "different_auto_tree_pixels_le350m": 451698,
+          "total_pixels": 2073600,
+          "max_channel_error": 255
+        },
+        {
+          "lod": 1,
+          "file": "probe_v5i_agl200_a000_lod1.png",
+          "sha256": "abb889c4f24dd6d1648c75d66191f7b178728469732ee69102177ac30ec50c12",
+          "different_pixels": 806274,
+          "automatic_tree_pixels_le350m": 478384,
+          "different_auto_tree_pixels_le350m": 458155,
+          "total_pixels": 2073600,
+          "max_channel_error": 255
+        },
+        {
+          "lod": 2,
+          "file": "probe_v5i_agl200_a000_lod2.png",
+          "sha256": "1948d00105b09a1c208ef1d855824a0ecb7daa2fecf4cb3d3b8f1cad2ce2d32c",
+          "different_pixels": 86357,
+          "automatic_tree_pixels_le350m": 478384,
+          "different_auto_tree_pixels_le350m": 0,
+          "total_pixels": 2073600,
+          "max_channel_error": 255
+        }
+      ]
+    }
+  ]
+}
