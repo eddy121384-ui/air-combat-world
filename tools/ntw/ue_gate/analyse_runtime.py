@@ -106,7 +106,8 @@ class Reference:
         o = np.column_stack([x, y, np.full(len(x), 5000.0)])
         loc, ri, _ = self.world.ray.intersects_location(o, np.tile([0, 0, -1.0], (len(x), 1)), multiple_hits=False)
         z = np.full(len(x), np.nan)
-        z[ri] = loc[:, 2]
+        if len(ri):
+            z[ri] = np.asarray(loc).reshape(-1, 3)[:, 2]
         return z
 
     def enu(self, x, y):
@@ -172,7 +173,9 @@ def collision(inp, tr, micro_inp, micro_hits, ref):
     for i, t in enumerate(T):
         if expect[i] is not None:
             by[t["set"]].append(i)
-    ok_kinds = {"xinyi_landscape": {"L"}, "stitch": {"S2"}, "chunk_or_stitch": {"C", "S2"}, "chunk_vertex": {"C"}, "either": {"L", "S2"}}
+    # S3 = Phase 2B-C fixed-hole stitch; F = collision-only flange (exists only within w of the Xinyi edge)
+    ok_kinds = {"xinyi_landscape": {"L", "F"}, "stitch": {"S2", "S3", "F"}, "chunk_or_stitch": {"C", "S2", "S3", "F"}, "chunk_vertex": {"C"},
+                "either": {"L", "S2", "S3", "F"}}
     out = {"landscape_triangulation": {"diagonal": diag, "max_abs_dz_A_m": round(float(eA), 4), "max_abs_dz_B_m": round(float(eB), 4), "n": len(li),
                                        "note": "Landscape collision = quad split along diagonal A; landscape expectations use it (bilinear also reported)"},
            "expectation_corrections": {"exact_boundary_points_expect_either": n_either, "excluded": dict(excluded),

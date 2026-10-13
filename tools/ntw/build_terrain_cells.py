@@ -67,6 +67,16 @@ class TerrainParams:
     stitch_edge: str = "full"              # "full" (v2): every stitch LOD keeps ALL accepted Landscape edge vertices, only the
                                            # hole side follows the chunk LOD | "decimated" (v1, Phase 2B): every 2**k vertices
     stitch_skirt_m: float = 2.0            # v2: vertical skirt hanging from the Xinyi edge (hides sub-skirt landscape-LOD dips)           # UE-facing export: node transform = identity, origin only in the report (Xinyi style)
+    stitch_hole: str = "per_lod"           # "per_lod" (PR #23/#25: hole = triangles near the outline at each LOD, so its size
+                                           # changes with the LOD) | "fixed" (Phase 2B-C: ONE hole for every LOD, aligned to the
+                                           # coarsest LOD grid; stitch LOD k = the LOD-k grid clipped to the Xinyi edge, plus
+                                           # hole-edge skirts on both sides -> watertight for every stitch x chunk LOD combination)
+    hole_align_m: float = 320.0            # fixed hole = union of hole_align_m cells touching the outline buffered by hole_margin_m
+    hole_margin_m: float = 20.0
+    collision_meshes: bool = False         # also write surface-only LOD0 *_col.glb (engine complex collision without skirts)
+    neighbour_skirts: bool = False         # Phase 2B-C: chunk perimeter skirt = 2 x max coarsest-LOD error of the chunk AND its 8
+                                           # neighbours + 0.5 m (a finer chunk's edge can be HIGHER than a coarser neighbour's; the
+                                           # per-chunk own-LOD skirt left 679 px of cracks in the UE chunk-checkerboard test)
     extra: dict = field(default_factory=dict)
 
 
@@ -234,8 +244,11 @@ def conform_xinyi(X, Y, Z, xin, outline, band, drop, step):
     return zr.reshape(Z.shape), cr.reshape(Z.shape)
 
 
-def chunk_mesh(xs, ys, Z, nrm, uv, skirt, drop=None):
-    """xs (nx), ys (ny) local metres; Z (ny,nx); returns trimesh with glTF Y-up vertices (x, z, -y)."""
+def chunk_mesh(xs, ys, Z, nrm, uv, skirt, drop=None, drop_poly=None, hole_skirt=0.0):
+    """xs (nx), ys (ny) local metres; Z (ny,nx); returns trimesh with glTF Y-up vertices (x, z, -y).
+    drop: node mask (per-LOD hole: a face is removed if any vertex is masked). drop_poly: local-coordinate polygon aligned to
+    this grid (fixed hole: a face is removed if its centroid lies inside); hole_skirt > 0 adds two-sided vertical skirts of
+    that depth along every edge between a kept and a removed face (hides LOD T-junction gaps against the stitch)."""
     ny, nx = Z.shape
     GX, GY = np.meshgrid(xs, ys)
     V = np.column_stack([GX.ravel(), Z.ravel(), -GY.ravel()])
@@ -250,6 +263,16 @@ def chunk_mesh(xs, ys, Z, nrm, uv, skirt, drop=None):
     if drop is not None and drop.any():
         dm = drop.ravel()[F].any(axis=1)
         removed, F = F[dm], F[~dm]
+    if drop_poly is not None:
+        cxy = np.column_stack([V[F, 0].mean(axis=1), -V[F, 2].mean(axis=1)])
+        dm = shapely.contains_xy(drop_poly, cxy[:, 0], cxy[:, 1])
+        removed, F = F[dm], F[~dm]
+    hole_edges = []
+    if hole_skirt > 0 and len(removed):
+        und = lambda E: {(min(u, w), max(u, w)) for u, w in E}  # noqa: E731
+        ek = und(np.vstack([F[:, [0, 1]], F[:, [1, 2]], F[:, [2, 0]]]).tolist())
+        er = und(np.vstack([removed[:, [0, 1]], removed[:, [1, 2]], removed[:, [2, 0]]]).tolist())
+        hole_edges = sorted(ek & er)
     ring = np.concatenate([idx[0, :], idx[1:, -1], idx[-1, -2::-1], idx[-2:0:-1, 0]])
     base = len(V)
     Vs = V[ring].copy()
@@ -261,6 +284,17 @@ def chunk_mesh(xs, ys, Z, nrm, uv, skirt, drop=None):
     top0, top1 = ring[r], ring[(r + 1) % len(ring)]
     bot0, bot1 = base + r, base + (r + 1) % len(ring)
     S = np.concatenate([np.stack([top0, bot0, top1], -1), np.stack([top1, bot0, bot1], -1)])
+    if hole_edges:
+        tops = sorted({u for e in hole_edges for u in e})
+        bmap = {u: len(V) + i for i, u in enumerate(tops)}
+        Vb = V[tops].copy()
+        Vb[:, 1] -= hole_skirt
+        V, N, T = np.vstack([V, Vb]), np.vstack([N, N[tops]]), np.vstack([T, T[tops]])
+        H_ = []
+        for u, w in hole_edges:
+            bu, bw = bmap[u], bmap[w]
+            H_ += [[u, bu, w], [w, bu, bw], [u, w, bu], [w, bw, bu]]      # two-sided
+        S = np.vstack([S, np.array(H_)])
     m = trimesh.Trimesh(vertices=V, faces=np.vstack([F, S]), vertex_normals=N,
                         visual=trimesh.visual.TextureVisuals(uv=T), process=False)
     return m, len(F), removed
@@ -312,22 +346,19 @@ def build(cells, out, params: TerrainParams, world: WorldSpec):
                            "outline_bounds_epsg3826": [round(v, 2) for v in outline.bounds]}
     world_x0, world_y0 = world.sw_tm2
     chunks = []
+    H, D_hole = None, 0.0
+    if xin is not None and params.xinyi_mode == "stitch" and params.stitch_hole == "fixed":
+        H, D_hole, hole_rep = fixed_hole(xin, outline, Z, bb, step0, params)
+        report["fixed_hole"] = hole_rep
+    nb_skirt = {}
+    if params.neighbour_skirts:
+        nb_skirt, nb_rep = neighbour_skirt_depths(Z, bb, step0, cb, xin, outline if xin is not None else None, params)
+        report["neighbour_skirts"] = nb_rep
     for (cx0, cy0, cx1, cy1), cid in zip(cb, cells):
         (out / "chunks" / cid).mkdir()
         nch = int(round(c / params.chunk_m))
         for k, s in enumerate(params.lod_steps_m):
-            stride = int(round(s / step0))
-            # LOD grid over the cell + one LOD step of halo (for normals), absolute alignment
-            gx = np.arange(cx0 - s, cx1 + s + 0.5, s)
-            gy = np.arange(cy0 - s, cy1 + s + 0.5, s)
-            ii = np.rint((gx - bb[0]) / step0).astype(int)
-            jj = np.rint((gy - bb[1]) / step0).astype(int)
-            ZL = Z[np.ix_(jj, ii)]
-            GX, GY = np.meshgrid(gx, gy)
-            cls = np.zeros(ZL.shape, np.int8)
-            if xin is not None and shapely.intersects(outline.buffer(params.xinyi_band_m + s), shapely.box(cx0 - s, cy0 - s, cx1 + s, cy1 + s)):
-                ZL, cls = conform_xinyi(GX, GY, ZL, xin, outline, params.xinyi_band_m,
-                                        0.0 if params.xinyi_mode == "stitch" else params.xinyi_drop_m, s)
+            GX, GY, ZL, cls = lod_grid(Z, bb, step0, (cx0, cy0, cx1, cy1), s, xin, outline if xin is not None else None, params)
             if not np.isfinite(ZL).all():  # fail closed: never ship a non-finite height
                 raise SystemExit(f"FAIL: non-finite terrain heights in {cid} LOD{k} ({int((~np.isfinite(ZL)).sum())} nodes)")
             dzdx = (ZL[1:-1, 2:] - ZL[1:-1, :-2]) / (2 * s)
@@ -339,7 +370,7 @@ def build(cells, out, params: TerrainParams, world: WorldSpec):
             q = int(round(params.chunk_m / s))
             stitch_hole, removed_tris, node_lookup = None, [], {}
             if xin is not None and params.xinyi_mode == "stitch" and shapely.intersects(outline, shapely.box(cx0, cy0, cx1, cy1)):
-                stitch_hole = outline.buffer(1.0 * s)  # every triangle crossing the edge has a vertex within 0.71 s
+                stitch_hole = H if H is not None else outline.buffer(1.0 * s)  # per-LOD: every crossing triangle has a vertex within 0.71 s
             # geometric error of this LOD vs LOD0 official nodes (per chunk, computed on the full 20 m grid)
             for a_ in range(nch):
                 for b_ in range(nch):
@@ -348,11 +379,16 @@ def build(cells, out, params: TerrainParams, world: WorldSpec):
                     ox, oy = xc_[0, 0], yc_[0, 0]
                     err_max, err_rms, err_p99 = lod_error(Z, bb, ox, oy, params.chunk_m, s, zc, xin is not None and cls[1:-1, 1:-1][sl].any())
                     skirt = max(params.skirt_min_m, 2 * err_max)
+                    if params.neighbour_skirts:
+                        skirt = max(skirt, nb_skirt[(round(ox), round(oy))])
                     uv = np.stack([(xc_ - world_x0) / params.uv_tile_m, (yc_ - world_y0) / params.uv_tile_m], -1)
-                    drop = None
-                    if stitch_hole is not None:
+                    drop = drop_poly = None
+                    if stitch_hole is not None and H is None:
                         drop = shapely.contains_xy(stitch_hole, xc_.ravel(), yc_.ravel()).reshape(xc_.shape)
-                    mesh, nterr, removed = chunk_mesh(xc_[0] - ox, yc_[:, 0] - oy, zc, nrm[sl], uv, skirt, drop)
+                    elif H is not None and shapely.intersects(H, shapely.box(ox, oy, ox + params.chunk_m, oy + params.chunk_m)):
+                        drop_poly = shapely.affinity.translate(H, xoff=-ox, yoff=-oy)
+                    mesh, nterr, removed = chunk_mesh(xc_[0] - ox, yc_[:, 0] - oy, zc, nrm[sl], uv, skirt, drop, drop_poly,
+                                                      hole_skirt=D_hole if drop_poly is not None else 0.0)
                     if len(removed):
                         V0 = np.column_stack([xc_.ravel(), yc_.ravel()])
                         removed_tris.extend(shapely.polygons(V0[removed]).tolist())
@@ -368,14 +404,20 @@ def build(cells, out, params: TerrainParams, world: WorldSpec):
                     glb = scene.export(file_type="glb")
                     fn = out / "chunks" / cid / f"ch{a_}{b_}_lod{k}.glb"
                     fn.write_bytes(glb)
+                    if k == 0 and params.collision_meshes:
+                        write_collision_glb(out / "chunks" / cid / f"ch{a_}{b_}_col.glb", mesh, nterr, f"{key}_col", T)
                     chunks.append({"cell": cid, "chunk": f"ch{a_}{b_}", "lod": k, "step_m": s, "sw_epsg3826": [ox, oy],
                                    "vertices_terrain": int(zc.size), "triangles_terrain": int(nterr), "triangles_total": int(len(mesh.faces)),
                                    "skirt_m": round(skirt, 3), "lod_err_max_m": round(err_max, 3), "lod_err_rms_m": round(err_rms, 3), "lod_err_p99_m": round(err_p99, 3),
                                    "z_min": round(float(zc.min()), 3), "z_max": round(float(zc.max()), 3),
                                    "xinyi_conformed_nodes": int((cls[1:-1, 1:-1][sl] > 0).sum()),
+                                   "hole_skirt_m": round(D_hole, 3) if drop_poly is not None else 0.0,
                                    "bytes": len(glb), "sha256": hashlib.sha256(glb).hexdigest()})
             if stitch_hole is not None and removed_tris:
-                chunks.append(build_stitch(out, cid, k, s, xin, removed_tris, node_lookup, world, params))
+                if H is not None:
+                    chunks.append(build_stitch_grid(out, cid, k, s, xin, H, node_lookup, world, params, D_hole))
+                else:
+                    chunks.append(build_stitch(out, cid, k, s, xin, removed_tris, node_lookup, world, params))
         # per-cell master outputs: official 20 m grid (GeoTIFF) and UE Landscape R16 candidate
         write_cell_products(out, cid, (cx0, cy0, cx1, cy1), Z, bb, params, report)
     report["chunks"] = chunks
@@ -385,6 +427,195 @@ def build(cells, out, params: TerrainParams, world: WorldSpec):
     (out / "terrain.report.json").write_text(json.dumps(report, ensure_ascii=False, indent=1, default=float), encoding="utf-8")
     print(json.dumps({"cells": cells, "chunks": len(chunks), "manifest": report["chunk_manifest_sha256"], "seconds": report["runtime_seconds"]}))
     return report
+
+
+def lod_grid(Z, bb, step0, cbox, s, xin, outline, params):
+    """LOD grid over the cell + one LOD step of halo (for normals), absolute alignment, Xinyi-conformed."""
+    cx0, cy0, cx1, cy1 = cbox
+    gx = np.arange(cx0 - s, cx1 + s + 0.5, s)
+    gy = np.arange(cy0 - s, cy1 + s + 0.5, s)
+    ii = np.rint((gx - bb[0]) / step0).astype(int)
+    jj = np.rint((gy - bb[1]) / step0).astype(int)
+    ZL = Z[np.ix_(jj, ii)]
+    GX, GY = np.meshgrid(gx, gy)
+    cls = np.zeros(ZL.shape, np.int8)
+    if xin is not None and shapely.intersects(outline.buffer(params.xinyi_band_m + s), shapely.box(cx0 - s, cy0 - s, cx1 + s, cy1 + s)):
+        ZL, cls = conform_xinyi(GX, GY, ZL, xin, outline, params.xinyi_band_m,
+                                0.0 if params.xinyi_mode == "stitch" else params.xinyi_drop_m, s)
+    return GX, GY, ZL, cls
+
+
+def neighbour_skirt_depths(Z, bb, step0, cb, xin, outline, params):
+    """Per chunk: 2 x max(coarsest-LOD error of the chunk and its 8 neighbours) + 0.5 m (neighbours outside the built cells
+    do not exist and are ignored). Errors vs the official 20 m nodes, as lod_error."""
+    s = max(params.lod_steps_m)
+    q = int(round(params.chunk_m / s))
+    err = {}
+    for cbox in cb:
+        GX, GY, ZL, cls = lod_grid(Z, bb, step0, cbox, s, xin, outline, params)
+        Zc, Xc, Yc = ZL[1:-1, 1:-1], GX[1:-1, 1:-1], GY[1:-1, 1:-1]
+        nch = int(round((cbox[2] - cbox[0]) / params.chunk_m))
+        for a_ in range(nch):
+            for b_ in range(nch):
+                sl = (slice(b_ * q, b_ * q + q + 1), slice(a_ * q, a_ * q + q + 1))
+                ox, oy = Xc[sl][0, 0], Yc[sl][0, 0]
+                err[(round(ox), round(oy))] = lod_error(Z, bb, ox, oy, params.chunk_m, s, Zc[sl], False)[0]
+    c = params.chunk_m
+    depth = {}
+    for (ox, oy), e in err.items():
+        nb = [err.get((round(ox + dx * c), round(oy + dy * c))) for dx in (-1, 0, 1) for dy in (-1, 0, 1)]
+        depth[(ox, oy)] = max(params.skirt_min_m, 2.0 * max(v for v in nb if v is not None) + 0.5)
+    vals = sorted(depth.values())
+    return depth, {"rule": "2 x max(coarsest-LOD error of chunk + 8 neighbours) + 0.5 m", "coarsest_step_m": s,
+                   "skirt_m": {"min": round(vals[0], 2), "median": round(vals[len(vals) // 2], 2), "max": round(vals[-1], 2)}}
+
+
+def write_collision_glb(path, mesh, n_surface, name, T):
+    """Phase 2B-C: surface-only LOD0 copy used as the engine's COMPLEX collision mesh. Skirts are visual crack covers only;
+    as (one-sided, vertical) collision they pushed resting physics bodies through the accepted Landscape at the seam.
+    A chunk entirely inside the fixed Xinyi hole has no surface faces -> no collision mesh (and no collision)."""
+    if n_surface == 0:
+        return
+    used = np.unique(mesh.faces[:n_surface])
+    remap = -np.ones(len(mesh.vertices), int)
+    remap[used] = np.arange(len(used))
+    cm = trimesh.Trimesh(np.asarray(mesh.vertices)[used], remap[mesh.faces[:n_surface]], process=False)
+    sc = trimesh.Scene()
+    sc.add_geometry(cm, geom_name=name, node_name=name, transform=T)
+    path.write_bytes(sc.export(file_type="glb"))
+
+
+def fixed_hole(xin, outline, Z, bb, step0, params):
+    """One hole for every LOD: union of hole_align_m cells (absolute grid, a multiple of every LOD step) touching the outline
+    buffered by hole_margin_m. Skirt depth for both sides of the hole edge = 2 x the largest deviation of any LOD's
+    piecewise-linear hole edge from the 20 m (LOD0) conformed nodes on that edge, + 0.5 m."""
+    a = params.hole_align_m
+    R = outline.buffer(params.hole_margin_m)
+    x0, y0, x1, y1 = R.bounds
+    cells = [shapely.box(i * a, j * a, i * a + a, j * a + a) for i in range(int(x0 // a), int(x1 // a) + 1)
+             for j in range(int(y0 // a), int(y1 // a) + 1) if shapely.intersects(shapely.box(i * a, j * a, i * a + a, j * a + a), R)]
+    H = shapely.union_all(cells)
+    if H.geom_type != "Polygon" or len(H.interiors):
+        raise SystemExit("FAIL: fixed Xinyi hole is not a simple polygon")
+    ring = shapely.segmentize(H.exterior, step0)
+    co = np.asarray(ring.coords)[:-1]
+    co = np.round(co / step0) * step0
+    ii = np.rint((co[:, 0] - bb[0]) / step0).astype(int)
+    jj = np.rint((co[:, 1] - bb[1]) / step0).astype(int)
+    z20, _ = conform_xinyi(co[:, 0][None, :], co[:, 1][None, :], Z[jj, ii][None, :], xin, outline, params.xinyi_band_m, 0.0, step0)
+    z20 = z20[0]
+    sarc = np.r_[0, np.cumsum(np.hypot(*np.diff(np.vstack([co, co[:1]]), axis=0).T))]
+    zc = np.r_[z20, z20[:1]]
+    devs = {}
+    for s in params.lod_steps_m:
+        on = (np.abs(np.r_[co[:, 0], co[:1, 0]] / s - np.round(np.r_[co[:, 0], co[:1, 0]] / s)) < 1e-6) & \
+             (np.abs(np.r_[co[:, 1], co[:1, 1]] / s - np.round(np.r_[co[:, 1], co[:1, 1]] / s)) < 1e-6)
+        lin = np.interp(sarc, sarc[on], zc[on])
+        devs[str(int(s))] = round(float(np.abs(lin - zc).max()), 3)
+    D = max(params.skirt_min_m, 2.0 * max(devs.values()) + 0.5)
+    rep_ = {"bounds_epsg3826": [round(v, 1) for v in H.bounds], "area_km2": round(H.area / 1e6, 4), "align_m": a,
+            "margin_m": params.hole_margin_m, "annulus_width_min_m": round(float(H.exterior.distance(outline.exterior)), 1),
+            "hole_edge_lod_deviation_m": devs, "hole_skirt_m": round(D, 3)}
+    return H, D, rep_
+
+
+def build_stitch_grid(out, cid, k, s, xin, H, node_lookup, world, params, D_hole):
+    """Fixed-hole stitch at LOD k: the LOD-k grid inside the hole minus the accepted sector. Whole grid cells away from the
+    Xinyi edge keep the chunk's fixed diagonal; the cells crossed by the edge form one band triangulated by GEOS constrained
+    Delaunay whose ONLY vertices are grid nodes and the 2,520 accepted edge vertices (no new vertices). Skirts: 2 m below the
+    Xinyi edge (as v2) and D_hole (two-sided) along the hole edge."""
+    P, Pz, Pn = xin.edge_ring(every=1)
+    inner = shapely.Polygon(P)
+    lut = {(round(x, 3), round(y, 3)): (z, n) for (x, y), z, n in zip(P, Pz, Pn)}
+    lut.update(node_lookup)
+    x0, y0, x1, y1 = H.bounds
+    full, partial = [], []
+    for x in np.arange(x0, x1 - 0.5 * s, s):
+        for y in np.arange(y0, y1 - 0.5 * s, s):
+            cell = shapely.box(x, y, x + s, y + s)
+            if not shapely.within(cell, H) or shapely.within(cell, inner):
+                continue
+            if shapely.intersects(cell, inner):
+                partial.append(cell)
+            else:
+                a_, b_, c_, d_ = (x, y), (x + s, y), (x, y + s), (x + s, y + s)
+                full += [(a_, b_, d_), (a_, d_, c_)]
+    band = shapely.segmentize(shapely.difference(shapely.union_all(partial), inner), s)
+    tris = [tuple(t.exterior.coords)[:3] for t in shapely.get_parts(shapely.constrained_delaunay_triangles(band))]
+    verts, vidx, faces, missing = [], {}, [], 0
+    for t in full + tris:
+        f = []
+        for x, y in t:
+            key = (round(x, 3), round(y, 3))
+            if key not in lut:
+                missing += 1
+                break
+            if key not in vidx:
+                vidx[key] = len(verts)
+                verts.append((x, y, lut[key][0]) + tuple(lut[key][1]))
+            f.append(vidx[key])
+        else:
+            faces.append(f)
+    if missing:
+        raise SystemExit(f"FAIL: fixed-hole stitch introduced {missing} vertices that are neither grid nodes nor accepted edge vertices ({cid} LOD{k})")
+    V = np.array(verts)
+    F = np.array(faces)
+    a, b, c = V[F[:, 0], :2], V[F[:, 1], :2], V[F[:, 2], :2]
+    cw = ((b[:, 0] - a[:, 0]) * (c[:, 1] - a[:, 1]) - (b[:, 1] - a[:, 1]) * (c[:, 0] - a[:, 0])) < 0
+    F[cw] = F[cw][:, [0, 2, 1]]
+    n_surface_faces = len(F)
+    surf = shapely.union_all(shapely.polygons(V[F][:, :, :2]))
+    # Xinyi-edge skirt (one-sided, facing away from Xinyi) as v2
+    top = [vidx[(round(x, 3), round(y, 3))] for x, y in P]
+    base = len(V)
+    V = np.vstack([V, np.column_stack([V[top, 0], V[top, 1], V[top, 2] - params.stitch_skirt_m, V[top, 3:]])])
+    sk = []
+    for i in range(len(top)):
+        a_, b_ = top[i], top[(i + 1) % len(top)]
+        c_, d_ = base + (i + 1) % len(top), base + i
+        sk += [[a_, d_, b_], [b_, d_, c_]]
+    # hole-edge skirt (two-sided) on boundary edges lying on the hole boundary
+    E = np.vstack([F[:n_surface_faces, [0, 1]], F[:n_surface_faces, [1, 2]], F[:n_surface_faces, [2, 0]]])
+    Eu = np.sort(E, axis=1)
+    uniq, cnt = np.unique(Eu, axis=0, return_counts=True)
+    bnd = uniq[cnt == 1]
+    hb = H.exterior
+    on_h = np.array([shapely.distance(shapely.points(V[u, 0], V[u, 1]), hb) < 1e-3 and shapely.distance(shapely.points(V[w, 0], V[w, 1]), hb) < 1e-3
+                     for u, w in bnd], bool) if len(bnd) else np.zeros(0, bool)
+    hedges = bnd[on_h]
+    tops = sorted({int(u) for e in hedges for u in e})
+    bmap = {u: len(V) + i for i, u in enumerate(tops)}
+    if tops:
+        V = np.vstack([V, np.column_stack([V[tops, 0], V[tops, 1], V[tops, 2] - D_hole, V[tops, 3:]])])
+    for u, w in hedges:
+        bu, bw = bmap[int(u)], bmap[int(w)]
+        sk += [[u, bu, w], [w, bu, bw], [u, w, bu], [w, bw, bu]]
+    F = np.vstack([F, np.array(sk)])
+    ob = xin.outline_tm2().bounds
+    ox, oy = math.floor((ob[0] - 1000.0) / 320.0) * 320.0, math.floor((ob[1] - 1000.0) / 320.0) * 320.0
+    if V[:, 0].min() < ox or V[:, 1].min() < oy:
+        raise SystemExit("FAIL: stitch extends south-west of its fixed origin")
+    Vg = np.column_stack([V[:, 0] - ox, V[:, 2], -(V[:, 1] - oy)])
+    Ng = np.column_stack([V[:, 3], V[:, 5], -V[:, 4]])
+    uv = np.column_stack([(V[:, 0] - world.sw_tm2[0]) / params.uv_tile_m, (V[:, 1] - world.sw_tm2[1]) / params.uv_tile_m])
+    m = trimesh.Trimesh(vertices=Vg, faces=F, vertex_normals=Ng, visual=trimesh.visual.TextureVisuals(uv=uv), process=False)
+    sc = trimesh.Scene()
+    nx_, ny_ = frame.tm2_to_ntw(ox, oy)
+    T = np.eye(4)
+    if not params.identity_nodes:
+        T[:3, 3] = [float(nx_), 0.0, -float(ny_)]
+    sc.add_geometry(m, geom_name=f"{cid}_xinyi_stitch_lod{k}", node_name=f"{cid}_xinyi_stitch_lod{k}", transform=T)
+    glb = sc.export(file_type="glb")
+    (out / "chunks" / cid / f"xinyi_stitch_lod{k}.glb").write_bytes(glb)
+    if k == 0 and params.collision_meshes:
+        write_collision_glb(out / "chunks" / cid / "xinyi_stitch_col.glb", m, n_surface_faces, f"{cid}_xinyi_stitch_col", T)
+    return {"cell": cid, "chunk": "xinyi_stitch", "lod": k, "step_m": s, "sw_epsg3826": [ox, oy], "vertices_terrain": int(base),
+            "triangles_terrain": int(n_surface_faces), "triangles_total": len(F), "skirt_m": params.stitch_skirt_m,
+            "hole_skirt_m": round(D_hole, 3), "hole_skirt_edges": int(len(hedges)), "stitch_edge": "full", "stitch_hole": "fixed",
+            "grid_cells_full": len(full) // 2, "band_triangles": len(tris), "lod_err_max_m": 0.0, "lod_err_rms_m": 0.0,
+            "z_min": round(float(V[:base, 2].min()), 3), "z_max": round(float(V[:base, 2].max()), 3), "xinyi_conformed_nodes": -1,
+            "xinyi_edge_vertices": len(P), "hole_area_km2": round(H.area / 1e6, 4), "annulus_area_km2": round(surf.area / 1e6, 5),
+            "bytes": len(glb), "sha256": hashlib.sha256(glb).hexdigest()}
 
 
 def build_stitch(out, cid, k, s, xin, removed_tris, node_lookup, world, params):
@@ -528,9 +759,14 @@ def main():
     ap.add_argument("--xinyi-mode", choices=["stitch", "conform"], default="stitch")
     ap.add_argument("--identity-nodes", action="store_true", help="UE-facing export: no node translation (origins in report)")
     ap.add_argument("--stitch-edge", choices=["full", "decimated"], default="full")
+    ap.add_argument("--stitch-hole", choices=["per_lod", "fixed"], default="per_lod")
+    ap.add_argument("--collision-meshes", action="store_true", help="write surface-only LOD0 collision GLBs (no skirts)")
+    ap.add_argument("--neighbour-skirts", action="store_true", help="chunk skirts cover the coarsest-LOD error of the 8 neighbours")
+    ap.add_argument("--stitch-skirt-m", type=float, default=2.0, help="depth of the skirt below the Xinyi edge (v2 default 2 m)")
     a = ap.parse_args()
     p = TerrainParams(xinyi_conform=not a.no_xinyi_conform, xinyi_mode=a.xinyi_mode, identity_nodes=a.identity_nodes,
-                      stitch_edge=a.stitch_edge)
+                      stitch_edge=a.stitch_edge, stitch_hole=a.stitch_hole, collision_meshes=a.collision_meshes,
+                      neighbour_skirts=a.neighbour_skirts, stitch_skirt_m=a.stitch_skirt_m)
     build(a.cells, a.out, p, WorldSpec.load(a.world))
 
 

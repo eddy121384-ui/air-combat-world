@@ -214,6 +214,9 @@ def check_stitch(run, xin):
     cellX = "C+0038+0346"
     out = {}
     cell_box = shapely.box(304000, 2768000, 312000, 2776000)
+    rep_ = load_report(run)
+    identity = bool(rep_["params"].get("identity_nodes"))
+    rep_chunks = rep_["chunks"]
     for f in sorted((run / "chunks" / cellX).glob("xinyi_stitch_lod*.glb")):
         k = int(f.stem.split("lod")[1])
         sc = trimesh.load_scene(io.BytesIO(f.read_bytes()), file_type="glb", process=False)
@@ -222,6 +225,9 @@ def check_stitch(run, xin):
         m = sc.geometry[g]
         v = np.asarray(m.vertices, dtype=np.float64)
         W = np.column_stack([v[:, 0] + tr[0, 3] + frame.NTW_ORIGIN_TM2[0], -(v[:, 2] + tr[2, 3]) + frame.NTW_ORIGIN_TM2[1], v[:, 1]])
+        if identity:                                   # identity-node (UE-facing) run: origin only in the report
+            o_ = next(c["sw_epsg3826"] for c in rep_chunks if c["cell"] == cellX and c["chunk"] == "xinyi_stitch" and c["lod"] == k)
+            W = np.column_stack([v[:, 0] + o_[0], -v[:, 2] + o_[1], v[:, 1]])
         faces = np.asarray(m.faces)
         from scipy.spatial import cKDTree
         TOL = 0.005  # 5 mm: float32 GLB storage of positions a few km from the node origin
@@ -255,6 +261,9 @@ def check_stitch(run, xin):
             m2 = sc2.geometry[g2]
             v2 = np.asarray(m2.vertices, dtype=np.float64)
             W2 = np.column_stack([v2[:, 0] + tr2[0, 3] + frame.NTW_ORIGIN_TM2[0], -(v2[:, 2] + tr2[2, 3]) + frame.NTW_ORIGIN_TM2[1], v2[:, 1]])
+            if identity:
+                o2 = next(c["sw_epsg3826"] for c in rep_chunks if c["cell"] == cellX and c["chunk"] == cf.stem.split("_")[0] and c["lod"] == k)
+                W2 = np.column_stack([v2[:, 0] + o2[0], -v2[:, 2] + o2[1], v2[:, 1]])
             nx_ = len(np.unique(v2[:, 0]))
             ngrid = nx_ * nx_
             chunk_xy.append(W2[:ngrid, :2])
@@ -505,9 +514,39 @@ def plot_diff_map(run_conf, run_raw, xin, path):
     img.save(path, optimize=True)
 
 
+def stitch_run_qa(name, out_path):
+    """Phase 2B-C: stitch / orientation / seam QA of one UE-facing run (e.g. the fixed-hole joint_ue_local_v3), incl. the
+    stitch footprint of every LOD (identical for a fixed hole)."""
+    xin = XinyiLandscape()
+    run = T / name
+    st = check_stitch(run, xin)
+    rep = load_report(run)
+    feet = {}
+    for f in sorted((run / "chunks" / "C+0038+0346").glob("xinyi_stitch_lod*.glb")):
+        k = int(f.stem.split("lod")[1])
+        sc = trimesh.load_scene(io.BytesIO(f.read_bytes()), file_type="glb", process=False)
+        tr, g = sc.graph[sc.graph.nodes_geometry[0]]
+        m = sc.geometry[g]
+        v = np.asarray(m.vertices, dtype=np.float64)
+        nsurf = stitch_surface_faces(run, "C+0038+0346", k, len(m.faces))
+        feet[k] = shapely.union_all(shapely.polygons(v[np.asarray(m.faces)[:nsurf]][:, :, [0, 2]] * [1, -1]))
+    sym = max(float(shapely.symmetric_difference(feet[0], feet[k]).area) for k in feet)
+    out = {"run": name, "manifest": rep["chunk_manifest_sha256"], "params": rep["params"], "fixed_hole": rep.get("fixed_hole"),
+           "face_orientation": check_orientation(run),
+           "xinyi_stitch": st, "stitch_footprint_area_km2": {k: round(float(g.area) / 1e6, 6) for k, g in feet.items()},
+           "stitch_footprint_max_symdiff_vs_lod0_m2": round(sym, 4)}
+    Path(out_path).write_text(json.dumps(out, ensure_ascii=False, indent=1, default=float), encoding="utf-8")
+    print(json.dumps({k: out[k] for k in ("face_orientation", "stitch_footprint_area_km2", "stitch_footprint_max_symdiff_vs_lod0_m2")}, indent=1))
+    print(json.dumps(st, indent=1)[:3000])
+
+
 def main():
     ap = argparse.ArgumentParser()
-    ap.parse_args()
+    ap.add_argument("--stitch-run", help="only the stitch/orientation/seam QA of this run (Phase 2B-C)")
+    ap.add_argument("--out")
+    a = ap.parse_args()
+    if a.stitch_run:
+        return stitch_run_qa(a.stitch_run, a.out)
     xin = XinyiLandscape()
     cells = ["C+0038+0346", "C+0038+0345"]
     FIG.mkdir(parents=True, exist_ok=True)

@@ -20,7 +20,8 @@ import time
 import unreal
 
 RUN = os.environ["ACW_GATE_TERRAIN_RUN"]
-RUN_V1 = os.environ["ACW_GATE_TERRAIN_RUN_V1"]
+RUN_V1 = os.environ.get("ACW_GATE_TERRAIN_RUN_V1")   # optional (Phase 2B-C builds only the fixed-hole stitch v3)
+N_BALLS = 28
 CONTRACT = os.environ["ACW_GATE_XINYI_CONTRACT"]
 AFFINE = json.load(open(os.environ["ACW_GATE_AFFINE_JSON"], encoding="utf-8"))
 REPORT = os.environ["ACW_GATE_REPORT"]
@@ -99,6 +100,24 @@ def prepare_mesh(sm, mat, collision=True):
                                unreal.CollisionTraceFlag.CTF_USE_COMPLEX_AS_SIMPLE if collision else unreal.CollisionTraceFlag.CTF_USE_DEFAULT)
 
 
+COMPLEX_COLLISION = {}
+
+
+def set_complex_collision(base, col):
+    """Use a surface-only mesh as the engine's complex collision (CTF_USE_COMPLEX_AS_SIMPLE keeps it for physics too)."""
+    try:
+        ns = col.get_editor_property("nanite_settings")
+        ns.enabled = False
+        col.set_editor_property("nanite_settings", ns)
+    except Exception:  # noqa: BLE001
+        pass
+    base.set_editor_property("complex_collision_mesh", col)
+    got = base.get_editor_property("complex_collision_mesh")
+    if got is None or got.get_path_name() != col.get_path_name():
+        raise RuntimeError("complex collision mesh not applied to %s" % base.get_name())
+    COMPLEX_COLLISION[base.get_name()] = col.get_path_name()
+
+
 def lod_chain(base, lod_meshes):
     for k, src in enumerate(lod_meshes, start=1):
         sms.set_lod_from_static_mesh(base, k, src, 0, True)
@@ -155,6 +174,9 @@ def main():
         base = meshes[0]
         prepare_mesh(base, m_ter)
         sizes, ok, n = lod_chain(base, meshes[1:])
+        colp = os.path.join(RUN, "chunks", cell, "%s_col.glb" % ch)
+        if os.path.exists(colp):          # Phase 2B-C: surface-only complex collision (skirts never collide)
+            set_complex_collision(base, import_glb(colp, "%s/col" % d))
         e, nn = origin[(cell, ch, 0)]
         x, y = ue_xy(e, nn)
         spawn_mesh(base, x, y, 0.0, "NTW_%s_%s" % (cell, ch), ["NTWChunk", cell, ch])
@@ -162,7 +184,8 @@ def main():
     step("chunks_placed", count=len(placed), example=placed[0])
 
     stitches = {}
-    for tag, run in (("v2", RUN), ("v1", RUN_V1)):
+    main_tag = "v3" if rpt["params"].get("stitch_hole") == "fixed" else "v2"
+    for tag, run in [(main_tag, RUN)] + ([("v1", RUN_V1)] if RUN_V1 else []):
         r2 = json.load(open(os.path.join(run, "terrain.report.json"), encoding="utf-8"))
         so = {c["lod"]: c["sw_epsg3826"] for c in r2["chunks"] if c["chunk"] == "xinyi_stitch"}
         d = "%s/Stitch_%s" % (ROOT, tag)
@@ -172,8 +195,11 @@ def main():
             # possible in one LOD chain, so record it; v2/v1 stitch LOD origins are reported and checked below
             pass
         base = meshes[0]
-        prepare_mesh(base, m_ter, collision=(tag == "v2"))
+        prepare_mesh(base, m_ter, collision=(tag != "v1"))
         sizes, ok, n = lod_chain(base, meshes[1:])
+        colp = os.path.join(run, "chunks", "C+0038+0346", "xinyi_stitch_col.glb")
+        if tag != "v1" and os.path.exists(colp):
+            set_complex_collision(base, import_glb(colp, "%s/col" % d))
         e, nn = so[0]
         x, y = ue_xy(e, nn)
         a = spawn_mesh(base, x, y, 0.0, "NTW_XinyiStitch_%s" % tag, ["NTWStitch", tag])
@@ -182,6 +208,40 @@ def main():
             a.set_actor_enable_collision(False)
         stitches[tag] = {"lod_origins_epsg3826": so, "ue_cm": [x, y], "lods": n, "screen_sizes": sizes}
     step("stitches_placed", stitches=stitches)
+
+    # Phase 2B-C collision-only flanges (hidden, collision OFF by default; the runtime enables one at a time)
+    flanges = {}
+    fdir = os.path.join(RUN, "chunks", "C+0038+0346")
+    so0 = next(c["sw_epsg3826"] for c in rpt["chunks"] if c["chunk"] == "xinyi_stitch" and c["lod"] == 0)
+    for f in sorted(x for x in os.listdir(fdir) if x.startswith("xinyi_flange_w") and x.endswith(".glb")):
+        tag = f[len("xinyi_flange_"):-4]
+        sm = import_glb(os.path.join(fdir, f), "%s/Flange_%s" % (ROOT, tag))
+        prepare_mesh(sm, m_mag, collision=True)
+        x, y = ue_xy(*so0)
+        a = spawn_mesh(sm, x, y, 0.0, "NTW_XinyiFlange_%s" % tag, ["NTWFlange", tag])
+        a.set_actor_hidden_in_game(True)
+        a.set_actor_enable_collision(False)
+        flanges[tag] = {"ue_cm": [x, y], "glb": f}
+    step("flanges_placed", flanges=flanges)
+    apron = os.path.join(fdir, "xinyi_apron_w50.glb")
+    if os.path.exists(apron):            # Phase 2B-C render apron: visible, no collision, sunk 2 cm under both surfaces
+        sm = import_glb(apron, "%s/Apron" % ROOT)
+        prepare_mesh(sm, m_ter, collision=False)
+        x, y = ue_xy(*so0)
+        a = spawn_mesh(sm, x, y, 0.0, "NTW_XinyiApron", ["NTWApron"])
+        a.set_actor_enable_collision(False)
+        step("apron_placed", ue_cm=[x, y])
+    step("complex_collision_meshes", count=len(COMPLEX_COLLISION), example=sorted(COMPLEX_COLLISION.items())[:2])
+
+    # physics drop probes: 28 movable 10 cm spheres parked far away (always loaded, simulation off until the runtime test)
+    sphere = lib.load_asset("/Engine/BasicShapes/Sphere")
+    for i in range(N_BALLS):
+        b = spawn_mesh(sphere, 11000000.0 + 300.0 * i, -11000000.0 + 3000.0, 30000.0, "NTW_Ball_%02d" % i, ["NTWBall", "%02d" % i],
+                       scale=(0.1, 0.1, 0.1))
+        b.static_mesh_component.set_mobility(unreal.ComponentMobility.MOVABLE)
+        b.static_mesh_component.set_simulate_physics(False)
+        b.set_editor_property("is_spatially_loaded", False)
+    step("physics_balls", count=N_BALLS, diameter_m=0.1)
 
     # accepted Xinyi Landscape: actor transform from three exact affine-mapped vertices
     c = json.load(open(os.path.join(CONTRACT, "xinyi_unreal_v2_contract.json"), encoding="utf-8"))
@@ -269,11 +329,17 @@ def main():
     counts = {}
     for a in unreal.EditorLevelLibrary.get_all_level_actors():
         cn = a.get_class().get_name()
-        key = next((str(t) for t in a.tags if str(t) in ("NTWChunk", "NTWStitch", "XinyiBuildings", "NTWProbe", "NTWCrackPlane", "NTWCapture")), None)
+        key = next((str(t) for t in a.tags if str(t) in ("NTWChunk", "NTWStitch", "XinyiBuildings", "NTWProbe", "NTWCrackPlane", "NTWCapture",
+                                                          "NTWFlange", "NTWBall", "NTWApron")), None)
         key = key or ("Landscape" if cn == "Landscape" else None)
         if key:
             counts[key] = counts.get(key, 0) + 1
-    expected = {"NTWChunk": 50, "NTWStitch": 2, "XinyiBuildings": 25, "NTWProbe": 2, "NTWCrackPlane": 1, "NTWCapture": 1, "Landscape": 1}
+    expected = {"NTWChunk": 50, "NTWStitch": len(stitches), "XinyiBuildings": 25, "NTWProbe": 2, "NTWCrackPlane": 1, "NTWCapture": 1,
+                "Landscape": 1, "NTWBall": N_BALLS}
+    if flanges:
+        expected["NTWFlange"] = len(flanges)
+    if os.path.exists(apron):
+        expected["NTWApron"] = 1
     step("actor_census", counts=counts, expected=expected)
     if counts != expected:
         raise RuntimeError("actor census mismatch %r != %r" % (counts, expected))

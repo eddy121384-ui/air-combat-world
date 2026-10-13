@@ -11,9 +11,11 @@ Writes D:/Users/EDDY/UEIsolated/gate_out/gate_inputs.json and a copy of the expe
 """
 from __future__ import annotations
 
+import argparse
 import io
 import json
 import math
+import os
 import sys
 from pathlib import Path
 
@@ -30,7 +32,8 @@ import frame  # noqa: E402
 
 OUT = Path("D:/Users/EDDY/UEIsolated/gate_out/gate_inputs.json")
 ORIGIN = (296000.0, 2760000.0)
-RUN = REPO / "data/generated/ntw/terrain/joint_ue_local"
+# terrain run whose SHIPPED meshes define the expected heights (Phase 2B-C: the fixed-hole run joint_ue_local_v3)
+RUN = REPO / "data/generated/ntw/terrain" / os.environ.get("ACW_GATE_TERRAIN_RUN_NAME", "joint_ue_local")
 
 
 def ue(e, n, z=0.0):
@@ -46,6 +49,9 @@ def load_world_mesh(path, sw):
 
 
 def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--out", type=Path, default=OUT)
+    args = ap.parse_args()
     rep = json.loads((RUN / "terrain.report.json").read_text(encoding="utf-8"))
     sw = {(c["cell"], c["chunk"], c["lod"]): c["sw_epsg3826"] for c in rep["chunks"]}
     meshes = [load_world_mesh(RUN / "chunks" / c / f"{ch}_lod0.glb", sw[(c, ch, 0)]) for (c, ch, l) in sw if l == 0 and ch.startswith("ch")]
@@ -60,7 +66,8 @@ def main():
         d = np.tile([0, 0, -1.0], (len(e), 1))
         loc, ri, _ = world.ray.intersects_location(o, d, multiple_hits=False)
         z = np.full(len(e), np.nan)
-        z[ri] = loc[:, 2]
+        if len(ri):
+            z[ri] = np.asarray(loc).reshape(-1, 3)[:, 2]
         return z
 
     traces = []
@@ -154,13 +161,98 @@ def main():
             for i in range(len(t)):
                 micro.append({"set": f"micro_{side}", "off": off, "s": float(t[i]), "ue": ue(x[i], y[i]), "exp_z": None,
                               "expect": "xinyi_landscape" if off < 0 else ("either" if off == 0 else "stitch")})
-    inp = {"origin_epsg3826": ORIGIN, "traces": traces, "micro_traces": micro, "cameras": cams, "altitude_cameras": alt, "flight": {
+    # ---- Phase 2B-C: high-speed sweeps across the boundary (300 m/s = 10 m / 5 m per frame at 30 / 60 fps)
+    # each segment STARTS above and ENDS below the exact local surface (Landscape triangulation inside, shipped mesh outside),
+    # so a continuous collision surface MUST report a blocking hit; crossing points lie EXACTLY on the boundary line
+    from analyse_runtime import landscape_tri_heights
+
+    def surf_enu(e, n):
+        e, n = np.atleast_1d(e), np.atleast_1d(n)
+        x, y = btc.xinyi_enu_to_tm2(e, n)
+        ins = (e > xin.e0) & (e < xin.e1) & (n > xin.n0) & (n < xin.n1)
+        za, _ = landscape_tri_heights(xin, e, n)
+        zm = mesh_z(x, y)
+        return np.where(ins, za, zm), x, y
+    sweeps = []
+    rngs = np.random.default_rng(7)
+    for side, ((ea, na), (eb, nb), (ox_, oy_)) in sides.items():
+        for t_ in np.sort(rngs.uniform(0.02, 0.98, 40)):
+            ce, cn = ea + t_ * (eb - ea), na + t_ * (nb - na)
+            tx, ty = (eb - ea) / 2500.0, (nb - na) / 2500.0       # along-edge unit
+            for dname, (dx, dy) in (("in", (-ox_, -oy_)), ("out", (ox_, oy_)), ("in45", (-ox_ + tx, -oy_ + ty)), ("out45", (ox_ + tx, oy_ + ty))):
+                L_ = math.hypot(dx, dy)
+                dx, dy = dx / L_, dy / L_
+                for Lh in (10.0, 5.0):
+                    for prof, (above, below) in (("steep", (0.5, 1.0)), ("grazing", (0.2, 0.2))):
+                        se, sn, ee, en = ce - dx * Lh / 2, cn - dy * Lh / 2, ce + dx * Lh / 2, cn + dy * Lh / 2
+                        z2, x2, y2 = surf_enu(np.array([se, ee]), np.array([sn, en]))
+                        if not np.isfinite(z2).all():
+                            continue
+                        for r_ in (0.0, 0.05, 0.5):
+                            sweeps.append({"set": side, "dir": dname, "len_m": Lh, "profile": prof, "radius_m": r_, "t": float(t_),
+                                           "start": ue(x2[0], y2[0], z2[0] + above + r_), "end": ue(x2[1], y2[1], z2[1] - below)})
+    for cname, (ce, cn) in corners.items():
+        for ang in range(0, 360, 45):
+            dx, dy = math.cos(math.radians(ang)), math.sin(math.radians(ang))
+            for Lh in (10.0, 5.0):
+                for prof, (above, below) in (("steep", (0.5, 1.0)), ("grazing", (0.2, 0.2))):
+                    se, sn, ee, en = ce - dx * Lh / 2, cn - dy * Lh / 2, ce + dx * Lh / 2, cn + dy * Lh / 2
+                    z2, x2, y2 = surf_enu(np.array([se, ee]), np.array([sn, en]))
+                    if not np.isfinite(z2).all():
+                        continue
+                    for r_ in (0.0, 0.05, 0.5):
+                        sweeps.append({"set": "corner_" + cname, "dir": "a%d" % ang, "len_m": Lh, "profile": prof, "radius_m": r_, "t": 0.0,
+                                       "start": ue(x2[0], y2[0], z2[0] + above + r_), "end": ue(x2[1], y2[1], z2[1] - below)})
+    # physics drop probes: 6 points exactly on each edge line + the 4 corners
+    drops = []
+    for side, ((ea, na), (eb, nb), _o) in sides.items():
+        for t_ in (0.1, 0.25, 0.4, 0.55, 0.7, 0.9):
+            ce, cn = ea + t_ * (eb - ea), na + t_ * (nb - na)
+            z1, x1, y1 = surf_enu(np.array([ce]), np.array([cn]))
+            zz = float(xin.height_enu(np.array([ce]), np.array([cn]), tol_m=0.01)[0])
+            drops.append({"set": side, "t": t_, "ue_xy": ue(x1[0], y1[0])[:2], "surface_z_m": zz})
+    for cname, (ce, cn) in corners.items():
+        x1, y1 = btc.xinyi_enu_to_tm2(np.array([ce]), np.array([cn]))
+        zz = float(xin.height_enu(np.array([ce]), np.array([cn]), tol_m=0.01)[0])
+        drops.append({"set": "corner_" + cname, "t": 0.0, "ue_xy": ue(x1[0], y1[0])[:2], "surface_z_m": zz})
+    # controls: the same along-edge positions 1 m INSIDE (accepted Landscape) and 1 m OUTSIDE (stitch)
+    drops_in, drops_out = [], []
+    for side, ((ea, na), (eb, nb), (ox_, oy_)) in sides.items():
+        for t_ in (0.1, 0.25, 0.4, 0.55, 0.7, 0.9):
+            ce, cn = ea + t_ * (eb - ea), na + t_ * (nb - na)
+            for lst, off in ((drops_in, -1.0), (drops_out, 1.0)):
+                e_, n_ = ce + off * ox_, cn + off * oy_
+                z1, x1, y1 = surf_enu(np.array([e_]), np.array([n_]))
+                lst.append({"set": side, "t": t_, "off_m": off, "ue_xy": ue(x1[0], y1[0])[:2], "surface_z_m": float(z1[0])})
+    for cname, (ce, cn) in corners.items():
+        sx = 1 if ce == xin.e0 else -1
+        sy = 1 if cn == xin.n0 else -1
+        for lst, off in ((drops_in, -1.0), (drops_out, 1.0)):
+            e_, n_ = ce - off * sx, cn - off * sy
+            z1, x1, y1 = surf_enu(np.array([e_]), np.array([n_]))
+            lst.append({"set": "corner_" + cname, "t": 0.0, "off_m": off, "ue_xy": ue(x1[0], y1[0])[:2], "surface_z_m": float(z1[0])})
+    # automatic-LOD dolly paths: from 120 m to 7 km out and 40 m to 2.5 km up, looking at an edge / corner point
+    dolly = []
+    for name, (te, tn, ue_, un_) in (("south", ((xin.e0 + xin.e1) / 2, xin.n0, 0, -1)), ("east", (xin.e1, (xin.n0 + xin.n1) / 2, 1, 0)),
+                                     ("north", ((xin.e0 + xin.e1) / 2, xin.n1, 0, 1)), ("west", (xin.e0, (xin.n0 + xin.n1) / 2, -1, 0)),
+                                     ("corner_SE", (xin.e1, xin.n0, 0.7071, -0.7071)), ("corner_NW", (xin.e0, xin.n1, -0.7071, 0.7071))):
+        gz_d = float(xin.height_enu(np.array([te]), np.array([tn]), tol_m=1.0)[0])
+        tx_, ty_ = btc.xinyi_enu_to_tm2(np.array([te]), np.array([tn]))
+        steps = []
+        for f_ in np.linspace(0, 1, 30):
+            dist = 120.0 * (7000.0 / 120.0) ** f_
+            alt_d = 40.0 * (2500.0 / 40.0) ** f_
+            cx_, cy_ = btc.xinyi_enu_to_tm2(np.array([te + ue_ * dist]), np.array([tn + un_ * dist]))
+            steps.append({"loc": ue(cx_[0], cy_[0], gz_d + alt_d), "dist_m": round(dist, 1), "alt_m": round(alt_d, 1)})
+        dolly.append({"name": name, "target": ue(tx_[0], ty_[0], gz_d), "steps": steps, "fov": 50.0})
+    inp = {"origin_epsg3826": ORIGIN, "terrain_run": RUN.name, "traces": traces, "micro_traces": micro, "sweeps": sweeps, "drops": drops, "drops_in": drops_in, "drops_out": drops_out,
+           "dolly": dolly, "cameras": cams, "altitude_cameras": alt, "flight": {
         "speed_mps": 300.0, "length_m": L, "paths": paths, "terrain_profile_m": gz.tolist(), "envelope_m": env.tolist()},
         "lod_matrix": [["auto", None, None], ["L0_S0", 0, 0], ["L0_S2", 0, 2], ["L0_S4", 0, 4], ["L1_S0", 1, 0], ["L2_S0", 2, 0],
                        ["L3_S0", 3, 0], ["L2_S2", 2, 2], ["L3_S4", 3, 4]],
         "far_offset_test_cm": [11000000.0, -11000000.0]}
-    OUT.write_text(json.dumps(inp), encoding="utf-8")
-    print(OUT, len(traces), "traces", len(cams), "cams", {k: len(v) for k, v in paths.items()}, "path m", round(L))
+    args.out.write_text(json.dumps(inp), encoding="utf-8")
+    print(args.out, len(traces), "traces", len(sweeps), "sweeps", len(drops), "drops", len(cams), "cams", {k: len(v) for k, v in paths.items()}, "path m", round(L))
 
 
 if __name__ == "__main__":
