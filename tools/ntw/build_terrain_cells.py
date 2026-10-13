@@ -63,12 +63,48 @@ class TerrainParams:
     ue_scale_z: float = 400.0              # +-1024 m around the per-cell base (step 0.03125 m); mountain cells: 800
     ue_base_round_m: float = 10.0          # per-cell base elevation (actor Z offset) = floor(min / round) * round
     packages: tuple = ("臺北市", "新北市")
-    identity_nodes: bool = False           # UE-facing export: node transform = identity, origin only in the report (Xinyi style)
+    identity_nodes: bool = False
+    stitch_edge: str = "full"              # "full" (v2): every stitch LOD keeps ALL accepted Landscape edge vertices, only the
+                                           # hole side follows the chunk LOD | "decimated" (v1, Phase 2B): every 2**k vertices
+    stitch_skirt_m: float = 2.0            # v2: vertical skirt hanging from the Xinyi edge (hides sub-skirt landscape-LOD dips)           # UE-facing export: node transform = identity, origin only in the report (Xinyi style)
     extra: dict = field(default_factory=dict)
 
 
 # ------------------------------------------------------------------------------------------------ Xinyi accepted landscape
+XINYI_PLACEMENT = "affine"   # Phase 2B runtime gate: the engine can only place the accepted Landscape with an affine actor
+                             # transform, so seam geometry must use the SAME measured affine (data/ntw/coordinate_study.json),
+                             # not the exact ENU chain (they differ by up to 0.12 m over the 2.5 km sector).
+
+
+def _affine():
+    st = json.loads((REPO / "data/ntw/coordinate_study.json").read_text(encoding="utf-8"))["xinyi_enu_to_ntw_affine"]
+    M = np.array(st["linear_part"])
+    t = np.array(st["translation_m"]) + np.array(frame.NTW_ORIGIN_TM2)
+    return M, t
+
+
+def xinyi_enu_to_tm2(e, n):
+    """Accepted Xinyi ENU -> EPSG:3826 under XINYI_PLACEMENT ('affine' = engine-realisable, 'exact' = ENU->lonlat->TM2)."""
+    e, n = np.atleast_1d(np.asarray(e, float)), np.atleast_1d(np.asarray(n, float))
+    if XINYI_PLACEMENT == "affine":
+        M, t = _affine()
+        q = M @ np.vstack([e, n])
+        return q[0] + t[0], q[1] + t[1]
+    import xinyi_world_compat as xc
+    lon = xc.O_LON + np.degrees(e / (6378137.0 * math.cos(math.radians(xc.O_LAT))))
+    lat = xc.O_LAT + np.degrees(n / 6378137.0)
+    return wc.TO_TM2.transform(lon, lat)
+
+
 def tm2_to_xinyi_enu(x, y):
+    if XINYI_PLACEMENT == "affine":
+        M, t = _affine()
+        q = np.linalg.solve(M, np.vstack([np.atleast_1d(np.asarray(x, float)) - t[0], np.atleast_1d(np.asarray(y, float)) - t[1]]))
+        return q[0], q[1]
+    return tm2_to_xinyi_enu_exact(x, y)
+
+
+def tm2_to_xinyi_enu_exact(x, y):
     """EPSG:3826 -> lon/lat (pyproj) -> accepted Xinyi ENU (vectorised copy of worldmodel.lonlat_to_enu; test-checked)."""
     from worldmodel import R_WGS84
     import xinyi_world_compat as xc
@@ -139,9 +175,7 @@ class XinyiLandscape:
         e = self.e0 + cols * self.step
         nn = self.n1 - rows * self.step
         z = h[rows, cols]
-        lon = self.lon0 + np.degrees(e / (6378137.0 * math.cos(math.radians(self.lat0))))
-        lat = self.lat0 + np.degrees(nn / 6378137.0)
-        x, y = wc.TO_TM2.transform(lon, lat)
+        x, y = xinyi_enu_to_tm2(e, nn)
         cp, cm = np.minimum(cols + 1, n - 1), np.maximum(cols - 1, 0)
         rp, rm = np.minimum(rows + 1, n - 1), np.maximum(rows - 1, 0)
         dzde = (h[rows, cp] - h[rows, cm]) / ((cp - cm) * self.step)
@@ -153,8 +187,14 @@ class XinyiLandscape:
         return np.column_stack([x, y]), z, nrm
 
     def outline_tm2(self, step=10.0):
-        import xinyi_world_compat as xc
-        return xc.enu_ring_to_tm2(self.e0, self.n0, self.e1, self.n1, step=step)
+        pts = []
+        for (ax, ay), (bx, by) in (((self.e0, self.n0), (self.e1, self.n0)), ((self.e1, self.n0), (self.e1, self.n1)),
+                                   ((self.e1, self.n1), (self.e0, self.n1)), ((self.e0, self.n1), (self.e0, self.n0))):
+            k = max(1, int(math.hypot(bx - ax, by - ay) / step))
+            t = np.arange(k) / k
+            x, y = xinyi_enu_to_tm2(ax + t * (bx - ax), ay + t * (by - ay))
+            pts.extend(zip(x, y))
+        return shapely.Polygon(pts)
 
 
 # ------------------------------------------------------------------------------------------------ core
@@ -354,7 +394,7 @@ def build_stitch(out, cid, k, s, xin, removed_tris, node_lookup, world, params):
     hole = shapely.union_all(removed_tris)
     if hole.geom_type != "Polygon":
         hole = max(shapely.get_parts(hole), key=lambda g: g.area)
-    P, Pz, Pn = xin.edge_ring(every=2 ** k)
+    P, Pz, Pn = xin.edge_ring(every=1 if params.stitch_edge == "full" else 2 ** k)
     inner = shapely.Polygon(P)
     ann = shapely.Polygon(hole.exterior.coords).difference(inner)
     tris = shapely.get_parts(shapely.constrained_delaunay_triangles(ann))
@@ -378,11 +418,30 @@ def build_stitch(out, cid, k, s, xin, removed_tris, node_lookup, world, params):
     if missing:
         raise SystemExit(f"FAIL: stitch triangulation introduced {missing} vertices not on either ring ({cid} LOD{k})")
     V = np.array(verts)
-    ox, oy = math.floor(V[:, 0].min() / 20) * 20, math.floor(V[:, 1].min() / 20) * 20
+    # one fixed origin for EVERY stitch LOD (engine LOD chains share one actor transform): the 320 m-grid point at least
+    # 1 km south-west of the Xinyi outline, which every LOD's hole stays inside of
+    ob = xin.outline_tm2().bounds
+    ox, oy = math.floor((ob[0] - 1000.0) / 320.0) * 320.0, math.floor((ob[1] - 1000.0) / 320.0) * 320.0
+    if V[:, 0].min() < ox or V[:, 1].min() < oy:
+        raise SystemExit("FAIL: stitch extends south-west of its fixed origin")
     F = np.array(faces)
     a, b, c = V[F[:, 0], :2], V[F[:, 1], :2], V[F[:, 2], :2]
     cw = ((b[:, 0] - a[:, 0]) * (c[:, 1] - a[:, 1]) - (b[:, 1] - a[:, 1]) * (c[:, 0] - a[:, 0])) < 0
     F[cw] = F[cw][:, [0, 2, 1]]
+    n_surface_faces = len(F)
+    if params.stitch_edge == "full" and params.stitch_skirt_m > 0:
+        # vertical skirt below the Xinyi edge ring: quads (top_i, top_i+1, bottom_i+1, bottom_i), facing away from Xinyi
+        top = [vidx[(round(x, 3), round(y, 3))] for x, y in P]
+        base = len(V)
+        bot = np.column_stack([V[top, 0], V[top, 1], V[top, 2] - params.stitch_skirt_m, V[top, 3:]])
+        V = np.vstack([V, bot])
+        m_ = len(top)
+        sk = []
+        for i in range(m_):
+            a, b = top[i], top[(i + 1) % m_]
+            c, d = base + (i + 1) % m_, base + i
+            sk += [[a, d, b], [b, d, c]]
+        F = np.vstack([F, np.array(sk)])
     Vg = np.column_stack([V[:, 0] - ox, V[:, 2], -(V[:, 1] - oy)])
     Ng = np.column_stack([V[:, 3], V[:, 5], -V[:, 4]])
     uv = np.column_stack([(V[:, 0] - world.sw_tm2[0]) / params.uv_tile_m, (V[:, 1] - world.sw_tm2[1]) / params.uv_tile_m])
@@ -398,7 +457,8 @@ def build_stitch(out, cid, k, s, xin, removed_tris, node_lookup, world, params):
     fn = out / "chunks" / cid / f"xinyi_stitch_lod{k}.glb"
     fn.write_bytes(glb)
     return {"cell": cid, "chunk": "xinyi_stitch", "lod": k, "step_m": s, "sw_epsg3826": [ox, oy], "vertices_terrain": len(V),
-            "triangles_terrain": len(F), "triangles_total": len(F), "skirt_m": 0.0, "lod_err_max_m": 0.0, "lod_err_rms_m": 0.0,
+            "triangles_terrain": int(n_surface_faces), "triangles_total": len(F),
+            "skirt_m": params.stitch_skirt_m if params.stitch_edge == "full" else 0.0, "stitch_edge": params.stitch_edge, "lod_err_max_m": 0.0, "lod_err_rms_m": 0.0,
             "z_min": round(float(V[:, 2].min()), 3), "z_max": round(float(V[:, 2].max()), 3), "xinyi_conformed_nodes": -1,
             "xinyi_edge_vertices": len(P), "hole_area_km2": round(hole.area / 1e6, 4), "annulus_area_km2": round(ann.area / 1e6, 5),
             "bytes": len(glb), "sha256": hashlib.sha256(glb).hexdigest()}
@@ -467,8 +527,10 @@ def main():
     ap.add_argument("--no-xinyi-conform", action="store_true")
     ap.add_argument("--xinyi-mode", choices=["stitch", "conform"], default="stitch")
     ap.add_argument("--identity-nodes", action="store_true", help="UE-facing export: no node translation (origins in report)")
+    ap.add_argument("--stitch-edge", choices=["full", "decimated"], default="full")
     a = ap.parse_args()
-    p = TerrainParams(xinyi_conform=not a.no_xinyi_conform, xinyi_mode=a.xinyi_mode, identity_nodes=a.identity_nodes)
+    p = TerrainParams(xinyi_conform=not a.no_xinyi_conform, xinyi_mode=a.xinyi_mode, identity_nodes=a.identity_nodes,
+                      stitch_edge=a.stitch_edge)
     build(a.cells, a.out, p, WorldSpec.load(a.world))
 
 

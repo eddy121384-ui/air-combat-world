@@ -53,6 +53,14 @@ CACHE = REPO / "data/generated/ntw"
 # GEOS make_valid fragment smaller than max_area_m2 whose float32 tile-local footprint collapses is LEDGERED (id + area) instead
 # of failing the build. Enabling it for production requires the locked representative + full-Xinyi regression (AGENTS.md).
 FRAGMENT_POLICY = {"enabled": False, "max_area_m2": 0.01}
+# Runtime-gate round (PR #23 review P0 #2): CANDIDATE float32-grid snap fallback (tools/ntw/quantization_fallback.py).
+# DEFAULT OFF. Runs ONLY after the accepted prepare_footprint has FAILED a part, so every build that passes today is
+# byte-identical with it enabled; accepted gates are re-run unchanged on the snapped part. Production use needs approval.
+QUANT_FALLBACK = {"enabled": False}
+# DIAGNOSTIC ONLY (default off): still serialise / write the tiles of the PASSING parts when some part failed, so shard
+# mechanics (tile identity, ownership, culling) can be measured. The gate result stays FAIL and every failure is reported;
+# never use it for a production build.
+DIAGNOSTIC_WRITE_ON_FAILURE = {"enabled": False}
 TILE_M = 500.0
 BLOCK_TILES = 5
 GEOD = Geod(ellps="WGS84")
@@ -109,7 +117,7 @@ def load_wfs(cfg, bx0, by0, bx1, by1):
 
 def load_overture(cfg, bx0, by0, bx1, by1):
     import duckdb
-    f = CACHE / f"ovt_{cfg['id']}.parquet"
+    f = Path(cfg["overture_parquet"]) if cfg.get("overture_parquet") else CACHE / f"ovt_{cfg['id']}.parquet"
     if not f.exists():
         raise SystemExit(f"missing {f}; run fetch_overture_footprints.py (see pilots.json bbox)")
     rows = duckdb.connect().execute(
@@ -132,6 +140,27 @@ def load_overture(cfg, bx0, by0, bx1, by1):
         feats.append({"id": rid, "provider": f"overture:{src}", "record_id": rid, "height_m": hm, "height_source": hs,
                       "ground_elev_m": None, "polys": polys, "excluded": "underground" if ug else None})
     return feats
+
+
+def load_mixed(cfg, bx0, by0, bx1, by1):
+    """Runtime-gate round: provider ownership by admin polygon. WFS (surveyed) owns every source part whose vertex-mean centroid
+    lies inside cfg['wfs_owner_polygon_ntw_wkb'] (Taipei City, NTW frame); Overture owns the parts outside it. The non-owner
+    copy is LEDGERED as excluded (never silently dropped). One feature per source part so ownership is per part."""
+    owner = shapely.from_wkb(bytes.fromhex(cfg["wfs_owner_polygon_ntw_wkb"]))
+    shapely.prepare(owner)
+    out = []
+    for loader, own_inside in ((load_wfs, True), (load_overture, False)):
+        for f in loader(cfg, bx0, by0, bx1, by1):
+            for si, rings in f["polys"]:
+                cx, cy = vmean(rings[0])
+                g = dict(f, polys=[(si, rings)])
+                if bool(shapely.contains_xy(owner, cx, cy)) != own_inside:
+                    g["excluded"] = g["excluded"] or ("provider_owner_overture" if own_inside else "provider_owner_wfs")
+                out.append(g)
+    return out
+
+
+LOADERS = {"taipei_wfs": load_wfs, "overture": load_overture, "mixed_wfs_overture": load_mixed}
 
 
 def rss_mb():
@@ -158,7 +187,7 @@ def build(pid, out_dir: Path, bounds_ntw=None, suppress_ids=None, cfg=None):
     if out_dir.exists():
         raise FileExistsError(out_dir)
     out_dir.mkdir(parents=True)
-    feats = (load_wfs if cfg["provider"] == "taipei_wfs" else load_overture)(cfg, bx0, by0, bx1, by1)
+    feats = LOADERS[cfg["provider"]](cfg, bx0, by0, bx1, by1)
     if suppress_ids:
         for f in feats:
             if f["id"] in suppress_ids:
@@ -209,9 +238,25 @@ def build(pid, out_dir: Path, bounds_ntw=None, suppress_ids=None, cfg=None):
                         row.setdefault("ledgered_fragments", []).append(
                             {"repaired_part": ri, "area_m2": float(rp.area), "reason": "repair_fragment_below_serialization_resolution"})
                         continue
-                    bad = True
-                    row["failures"] += [f"r{ri}:footprint:{x}" for x in fg["failures"]]
-                    continue
+                    if QUANT_FALLBACK["enabled"]:
+                        import quantization_fallback as qf
+                        sparts, frep = qf.fallback(rp, origin, ri == largest)
+                        frep = {k: v for k, v in frep.items() if k != "pass_"} | {"pass": bool(frep.get("pass_")), "repaired_part": ri,
+                                                                                  "accepted_failures": list(fg["failures"])}
+                        row.setdefault("quantization_fallback", []).append(frep)
+                        if frep["pass"] and frep.get("ledgered"):
+                            row.setdefault("ledgered_fragments", []).append(
+                                {"repaired_part": ri, "area_m2": float(rp.area), "reason": frep["reason"]})
+                            continue
+                        if not frep["pass"]:
+                            bad = True
+                            row["failures"] += [f"r{ri}:footprint:{x}" for x in fg["failures"]]
+                            row["failures"] += [f"r{ri}:fallback:{x}" for x in frep.get("failures", [])]
+                            continue
+                    else:
+                        bad = True
+                        row["failures"] += [f"r{ri}:footprint:{x}" for x in fg["failures"]]
+                        continue
                 for sj, sp in enumerate(sparts):
                     name = f"{b['id']}_p{si}_r{ri}_s{sj}"
                     try:
@@ -244,7 +289,7 @@ def build(pid, out_dir: Path, bounds_ntw=None, suppress_ids=None, cfg=None):
             tiles[key].extend(pend)
 
     tile_bytes, tile_reports = {}, []
-    if not failures:
+    if not failures or DIAGNOSTIC_WRITE_ON_FAILURE["enabled"]:
         for key in sorted(tiles):
             entries = tiles[key]
             scene = trimesh.Scene()
@@ -283,7 +328,8 @@ def build(pid, out_dir: Path, bounds_ntw=None, suppress_ids=None, cfg=None):
                                  "bytes": len(glb), "sha256": hashlib.sha256(glb).hexdigest(), "origin_ntw_m": entries[0]["origin"]})
 
     ok = not failures
-    if ok:
+    write = ok or DIAGNOSTIC_WRITE_ON_FAILURE["enabled"]
+    if write:
         td = out_dir / "tiles"
         td.mkdir()
         for k, g in sorted(tile_bytes.items()):
@@ -293,14 +339,14 @@ def build(pid, out_dir: Path, bounds_ntw=None, suppress_ids=None, cfg=None):
                 r["status"] = "emitted"
 
     # ---- placement verification: GLB world vertices -> lon/lat (independent inverse), vs source ring in lon/lat
-    placement = place_check(cfg, feats, tile_bytes, pid) if ok else None
-    terrain = terrain_check(cfg, ledger, feats) if ok else None
+    placement = place_check(cfg, feats, tile_bytes, pid) if write else None
+    terrain = terrain_check(cfg, ledger, feats) if write else None
 
     with gzip.open(out_dir / "buildings.ledger.jsonl.gz", "wt", encoding="utf-8") as fh:
         for r in ledger:
             fh.write(json.dumps(r, ensure_ascii=False, allow_nan=False) + "\n")
     tile_reports.sort(key=lambda r: r["tile"])
-    digest = hashlib.sha256("\n".join(f'{r["tile"]}:{r["sha256"]}' for r in tile_reports).encode()).hexdigest() if ok else None
+    digest = hashlib.sha256("\n".join(f'{r["tile"]}:{r["sha256"]}' for r in tile_reports).encode()).hexdigest() if write else None
     status_counts = Counter(r["status"] for r in ledger)
     emitted_components = sum(len(v) for v in tiles.values()) if ok else 0
     report = {
@@ -311,6 +357,9 @@ def build(pid, out_dir: Path, bounds_ntw=None, suppress_ids=None, cfg=None):
                                  "block_extent_ntw_m": [bx0, by0, bx1, by1]},
         "source": {"features": len(feats), "normalized_input_sha256": src_hash, "provider_part_counts": dict(prov)},
         "fragment_policy": dict(FRAGMENT_POLICY),
+        "quantization_fallback_policy": dict(QUANT_FALLBACK),
+        "quantization_fallback_applied": [dict(building_id=r["building_id"], polygon_index=r["polygon_index"], **f)
+                                          for r in ledger for f in r.get("quantization_fallback", [])],
         "ledgered_repair_fragments": [dict(building_id=r["building_id"], polygon_index=r["polygon_index"], **f)
                                       for r in ledger for f in r.get("ledgered_fragments", [])],
         "accounting": {"source_polygon_parts": source_parts, "excluded_underground": status_counts.get("excluded_underground", 0),
@@ -323,7 +372,8 @@ def build(pid, out_dir: Path, bounds_ntw=None, suppress_ids=None, cfg=None):
         "gate_result": {"pass": ok, "failure_count": len(failures)},
         "failures": failures[:50],
         "tiles": tile_reports,
-        "tile_summary": {"count": len(tile_reports) if ok else 0,
+        "diagnostic_write_on_failure": bool(DIAGNOSTIC_WRITE_ON_FAILURE["enabled"]),
+        "tile_summary": {"count": len(tile_reports) if write else 0,
                          "nodes": q([r["nodes"] for r in tile_reports]), "triangles": q([r["triangles"] for r in tile_reports]),
                          "total_vertices": sum(r["vertices"] for r in tile_reports), "total_triangles": sum(r["triangles"] for r in tile_reports),
                          "total_glb_bytes": sum(r["bytes"] for r in tile_reports), "manifest_sha256": digest},
@@ -353,7 +403,7 @@ def q(v):
 def place_check(cfg, feats, tile_bytes, pid, sample=400):
     """GLB (glTF Y-up: x=east, z=-north, tile transform) -> NTW -> lon/lat via the inverse projection, then measure the
     distance from each base vertex to the SOURCE ring boundary in a local azimuthal-equidistant plane at that building."""
-    by_id = {f["id"]: f for f in feats}
+    by_part = {(f["id"], si): rings for f in feats for si, rings in f["polys"]}
     rng = np.random.default_rng(20261012)
     names = []
     scenes = {k: trimesh.load_scene(io.BytesIO(g), file_type="glb", process=False) for k, g in tile_bytes.items()}
@@ -373,8 +423,7 @@ def place_check(cfg, feats, tile_bytes, pid, sample=400):
         if len(base) == 0:
             continue
         bid, pi = n.split("_p")[0], int(n.split("_p")[1].split("_")[0])
-        f = by_id[bid]
-        rings = dict(f["polys"])[pi]
+        rings = by_part[(bid, pi)]
         to_ll = lambda ring: [FROM_TM2.transform(x + frame.NTW_ORIGIN_TM2[0], y + frame.NTW_ORIGIN_TM2[1]) for x, y in ring]  # noqa: E731
         src_ll = to_ll(rings[0])
         hole_ll = [to_ll(h) for h in rings[1:]]
@@ -395,13 +444,12 @@ def place_check(cfg, feats, tile_bytes, pid, sample=400):
 def terrain_check(cfg, ledger, feats):
     from dtm import Dtm
     d = Dtm()
-    by_id = {f["id"]: f for f in feats}
+    by_part = {(f["id"], si): rings for f in feats for si, rings in f["polys"]}
     diffs, nan, sampled, base = [], 0, 0, []
     for r in ledger:
         if r["status"] != "emitted":
             continue
-        f = by_id[r["building_id"]]
-        rings = dict(f["polys"])[r["polygon_index"]]
+        rings = by_part[(r["building_id"], r["polygon_index"])]
         cx, cy = vmean(rings[0])
         lon, lat = frame.ntw_to_lonlat(cx, cy)
         z = d.sample(float(lon), float(lat))
