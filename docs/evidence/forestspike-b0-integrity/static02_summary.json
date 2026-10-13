@@ -1,0 +1,156 @@
+{
+  "file": "Profile(20261013_085336).csv",
+  "frames": 480,
+  "cold_frames": 120,
+  "meta": {
+    "tag": "b0fix_static02",
+    "level": "L_FSP_A_S1_v1_agl200_p10",
+    "cpu": "GenuineIntel|12th Gen Intel(R) Core(TM) i7-12700",
+    "targetframerate": "60",
+    "vsyncenabled": "0",
+    "config": "Development"
+  },
+  "capture_status": "PASS_FS_PERF_CAPTURE",
+  "host_scope": "Intel UHD 770 only",
+  "scope": "CSV timing summary; does not establish LOD or moving-path validity",
+  "FrameTime": {
+    "cold": {
+      "n": 120,
+      "median": 33.958,
+      "p95": 39.085,
+      "p99": 2840.744,
+      "max": 90835.781,
+      "min": 15.515,
+      "mean": 815.134
+    },
+    "warm": {
+      "n": 360,
+      "median": 33.544,
+      "p95": 36.621,
+      "p99": 37.746,
+      "max": 38.94,
+      "min": 26.339,
+      "mean": 33.575
+    }
+  },
+  "GameThreadTime": {
+    "cold": {
+      "n": 120,
+      "median": 4.268,
+      "p95": 6.804,
+      "p99": 18.781,
+      "max": 2532.105,
+      "min": 0.0,
+      "mean": 25.585
+    },
+    "warm": {
+      "n": 360,
+      "median": 4.068,
+      "p95": 6.389,
+      "p99": 7.236,
+      "max": 9.916,
+      "min": 2.936,
+      "mean": 4.356
+    }
+  },
+  "RenderThreadTime": {
+    "cold": {
+      "n": 120,
+      "median": 33.935,
+      "p95": 38.267,
+      "p99": 7431.698,
+      "max": 7431.698,
+      "min": 0.0,
+      "mean": 157.765
+    },
+    "warm": {
+      "n": 360,
+      "median": 33.528,
+      "p95": 36.603,
+      "p99": 37.491,
+      "max": 38.898,
+      "min": 26.608,
+      "mean": 33.551
+    }
+  },
+  "RHIThreadTime": {
+    "cold": {
+      "n": 120,
+      "median": 5.3,
+      "p95": 8.331,
+      "p99": 20.414,
+      "max": 39.66,
+      "min": 0.0,
+      "mean": 6.003
+    },
+    "warm": {
+      "n": 360,
+      "median": 4.746,
+      "p95": 6.539,
+      "p99": 7.662,
+      "max": 10.5,
+      "min": 2.835,
+      "mean": 4.901
+    }
+  },
+  "GPUTime": {
+    "cold": {
+      "n": 120,
+      "median": 31.977,
+      "p95": 35.5,
+      "p99": 39.959,
+      "max": 39.959,
+      "min": 0.0,
+      "mean": 31.989
+    },
+    "warm": {
+      "n": 360,
+      "median": 31.386,
+      "p95": 33.7,
+      "p99": 35.202,
+      "max": 37.127,
+      "min": 30.343,
+      "mean": 31.695
+    }
+  },
+  "RHI/DrawCalls": {
+    "cold": {
+      "n": 120,
+      "median": 56.0,
+      "p95": 60.0,
+      "p99": 61.0,
+      "max": 77.0,
+      "min": 56.0,
+      "mean": 57.383
+    },
+    "warm": {
+      "n": 360,
+      "median": 56.0,
+      "p95": 60.0,
+      "p99": 60.0,
+      "max": 60.0,
+      "min": 0.0,
+      "mean": 56.944
+    }
+  },
+  "PhysicalUsedMB": {
+    "cold": {
+      "n": 120,
+      "median": 2504.516,
+      "p95": 2506.574,
+      "p99": 2506.734,
+      "max": 2506.734,
+      "min": 2157.992,
+      "mean": 2496.528
+    },
+    "warm": {
+      "n": 360,
+      "median": 2475.834,
+      "p95": 2510.043,
+      "p99": 2510.391,
+      "max": 2510.477,
+      "min": 2472.035,
+      "mean": 2482.451
+    }
+  }
+}

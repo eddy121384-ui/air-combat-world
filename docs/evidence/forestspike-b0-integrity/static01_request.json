@@ -1,0 +1,28 @@
+{
+  "args": [
+    "\"D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\ForestSpike\\ForestSpike.uproject\"",
+    "/Game/ForestSpike/Perf/L_FSP_A_S1_v1_agl200_p10",
+    "-game",
+    "-windowed",
+    "-ResX=1920",
+    "-ResY=1080",
+    "-nosound",
+    "-nosplash",
+    "-unattended",
+    "-benchmark",
+    "-fps=60",
+    "-ExecCmds=\"r.VSync 0,t.MaxFPS 0,r.ScreenPercentage 100,r.MotionBlurQuality 0,r.RayTracing 0\"",
+    "-csvCaptureFrames=480",
+    "-ExitAfterCsvProfiling",
+    "-csvMetadata=\"tag=b0fix_static01,level=L_FSP_A_S1_v1_agl200_p10,run_id=d7df77d79d6e462fa05808b9448d0ad1\"",
+    "-abslog=\"D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\ForestSpike\\Saved\\ForestSpike\\perf_v2\\b0fix_static01__L_FSP_A_S1_v1_agl200_p10\\engine.log\""
+  ],
+  "level": "L_FSP_A_S1_v1_agl200_p10",
+  "started_utc": "2026-10-13T00:44:45.8018814+00:00",
+  "cold": 120,
+  "host_scope": "Intel UHD 770 only",
+  "frames": 480,
+  "run_id": "d7df77d79d6e462fa05808b9448d0ad1",
+  "tag": "b0fix_static01",
+  "schema": "forestspike.perf_request/1"
+}

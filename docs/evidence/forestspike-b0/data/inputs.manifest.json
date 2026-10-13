@@ -1,0 +1,93 @@
+{
+  "world": {
+    "seed": 20261012,
+    "core_m": 1000.0,
+    "context_m": 6000.0,
+    "base_elevation_m": 120.0,
+    "forest_threshold": -0.55,
+    "core_relief_m": 130.03331063431784,
+    "core_height_min_m": 65.08772570147781,
+    "core_height_max_m": 195.12103633579565,
+    "core_slope_mean_deg": 12.822008637628667,
+    "core_slope_p90_deg": 20.922041796732454,
+    "core_forest_fraction": 0.749286385034919,
+    "note": "synthetic analytic test fixture; not Northern Taiwan terrain or a land-use dataset"
+  },
+  "terrain": {
+    "core": {
+      "vertices": 41201,
+      "triangles": 81600,
+      "flipped_for_winding": 0
+    },
+    "context": {
+      "vertices": 89600,
+      "triangles": 177800,
+      "flipped_for_winding": 0,
+      "cells": 300
+    }
+  },
+  "fields": {
+    "core": {
+      "texel_m": 1.953125,
+      "forest_fraction": 0.7481842041015625,
+      "slope_mean_deg": 12.815382020986508
+    },
+    "ctx": {
+      "texel_m": 5.859375,
+      "forest_fraction": 0.8007230758666992,
+      "slope_mean_deg": 13.612883734032039
+    }
+  },
+  "pool": {
+    "count": 95401,
+    "columns": [
+      "e",
+      "n",
+      "z",
+      "yaw_deg",
+      "scale",
+      "variant",
+      "color",
+      "u"
+    ],
+    "dtype": "<f4",
+    "cell_m": 2.8,
+    "density_per_km2_all": 95401.0,
+    "archetype_weights": [
+      0.4,
+      0.2,
+      0.2,
+      0.2
+    ]
+  },
+  "models": {
+    "count": 14,
+    "mismatch": [],
+    "missing_from_copy": [],
+    "sha256": {
+      "dense_rounded_lod0.glb": "5ec3df7d0565d4b970281af7edaf0cc69cf4570ad1c67be311cfb4ac0c050d61",
+      "dense_rounded_lod1.glb": "830bceb0be3158883ba69bd8f409949c8087c17b65dc0ca0187f5cc86d0bf466",
+      "dense_rounded_lod2.glb": "67872d03b123ec61ccba941eec6fc17cc5f0e9e9ddfff55f0360165136c94665",
+      "horizontal_tiered_lod0.glb": "220761f9b1d3c2f74c0f5d10c3c318bade8b8f7ccbe03704f14a753873ca2b7d",
+      "horizontal_tiered_lod1.glb": "4b873fa98775932b1da2805371c912784725ea682c16d7cab7962ab3cc6f7a20",
+      "horizontal_tiered_lod2.glb": "429bfee641f5b4e23ff3a2eeaeb316fa6adb1ed8ed3509cd5a2fb0b2ca371f6b",
+      "open_vase_lod0.glb": "95203bcfab893252f5e764870cfb15990ea5feed7e60f1458f1cdc5ce3f3c147",
+      "open_vase_lod1.glb": "4c0edfd8decfe35995008577c98edc668b80d02a1f9e800853cb5cda060203e7",
+      "open_vase_lod2.glb": "68a20600cd5c5b036338b881157497a954c5feefc154defd28140a11d6e6e1f1",
+      "tall_columnar_lod0.glb": "41c3df98a19243ebe7fa510e7cf87be6a40c07ae823ac84c2dc9dd9d5a74cba5",
+      "tall_columnar_lod1.glb": "3f11b530be7a7dca747e0cd8eb4994dc4a7d0522d374c6e4f9720f25710df750",
+      "tall_columnar_lod2.glb": "219c0f9b1e2a744fbc19a1242d1c6e6cb096481b4b10c3c75abd9b5805b6b970",
+      "xinyi_reference_original.glb": "323939eaaa9076f65d2c81b15f0c7b5d179c91c85c89ed1d783312debdaadbd1",
+      "xinyi_reference_preview_lod0.glb": "4805c3ec328284512092cc279dc0c37d482ef45bfce3b827e9c87c6a22ef90cf"
+    },
+    "pr18_manifest_baseline_sha": "ede7960d8ec05b2aa521b1e4c65b5bbd667c456d"
+  },
+  "outputs_sha256": {
+    "field_core.png": "8da222a0a4aba37e8290586f1551a0da0b73d7b5707734e46fa6ac2e4ab19366",
+    "field_ctx.png": "38041952ba77ab2dcb96bb46a2f386bd6e8d7739a4edf5985fb608cbb12d6ed6",
+    "pool.f32": "c2a51ab8dfa667a2b0e6a50f9535db3f6261ba3dc474f26b5ed8a858a8909bd4",
+    "pool.json": "36dcc8f5d4f36e33a5778e8c2252dfb93be831eea109f4f3e5afcc7d309c4902",
+    "terrain_context.glb": "86181b14313aa5dacbe913e70d092f410f979c3e09807e714dea1723c8398e6e",
+    "terrain_core.glb": "2bdde3c21723b7c90bc83e7bef202c177b2854b5776c8d6cbac34ca3a4e72947"
+  }
+}

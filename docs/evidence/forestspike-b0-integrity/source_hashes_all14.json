@@ -1,0 +1,100 @@
+[
+  {
+    "pass": true,
+    "copy": "5ec3df7d0565d4b970281af7edaf0cc69cf4570ad1c67be311cfb4ac0c050d61",
+    "pr18": "5ec3df7d0565d4b970281af7edaf0cc69cf4570ad1c67be311cfb4ac0c050d61",
+    "file": "dense_rounded_lod0.glb",
+    "expected": "5ec3df7d0565d4b970281af7edaf0cc69cf4570ad1c67be311cfb4ac0c050d61"
+  },
+  {
+    "pass": true,
+    "copy": "830bceb0be3158883ba69bd8f409949c8087c17b65dc0ca0187f5cc86d0bf466",
+    "pr18": "830bceb0be3158883ba69bd8f409949c8087c17b65dc0ca0187f5cc86d0bf466",
+    "file": "dense_rounded_lod1.glb",
+    "expected": "830bceb0be3158883ba69bd8f409949c8087c17b65dc0ca0187f5cc86d0bf466"
+  },
+  {
+    "pass": true,
+    "copy": "67872d03b123ec61ccba941eec6fc17cc5f0e9e9ddfff55f0360165136c94665",
+    "pr18": "67872d03b123ec61ccba941eec6fc17cc5f0e9e9ddfff55f0360165136c94665",
+    "file": "dense_rounded_lod2.glb",
+    "expected": "67872d03b123ec61ccba941eec6fc17cc5f0e9e9ddfff55f0360165136c94665"
+  },
+  {
+    "pass": true,
+    "copy": "220761f9b1d3c2f74c0f5d10c3c318bade8b8f7ccbe03704f14a753873ca2b7d",
+    "pr18": "220761f9b1d3c2f74c0f5d10c3c318bade8b8f7ccbe03704f14a753873ca2b7d",
+    "file": "horizontal_tiered_lod0.glb",
+    "expected": "220761f9b1d3c2f74c0f5d10c3c318bade8b8f7ccbe03704f14a753873ca2b7d"
+  },
+  {
+    "pass": true,
+    "copy": "4b873fa98775932b1da2805371c912784725ea682c16d7cab7962ab3cc6f7a20",
+    "pr18": "4b873fa98775932b1da2805371c912784725ea682c16d7cab7962ab3cc6f7a20",
+    "file": "horizontal_tiered_lod1.glb",
+    "expected": "4b873fa98775932b1da2805371c912784725ea682c16d7cab7962ab3cc6f7a20"
+  },
+  {
+    "pass": true,
+    "copy": "429bfee641f5b4e23ff3a2eeaeb316fa6adb1ed8ed3509cd5a2fb0b2ca371f6b",
+    "pr18": "429bfee641f5b4e23ff3a2eeaeb316fa6adb1ed8ed3509cd5a2fb0b2ca371f6b",
+    "file": "horizontal_tiered_lod2.glb",
+    "expected": "429bfee641f5b4e23ff3a2eeaeb316fa6adb1ed8ed3509cd5a2fb0b2ca371f6b"
+  },
+  {
+    "pass": true,
+    "copy": "95203bcfab893252f5e764870cfb15990ea5feed7e60f1458f1cdc5ce3f3c147",
+    "pr18": "95203bcfab893252f5e764870cfb15990ea5feed7e60f1458f1cdc5ce3f3c147",
+    "file": "open_vase_lod0.glb",
+    "expected": "95203bcfab893252f5e764870cfb15990ea5feed7e60f1458f1cdc5ce3f3c147"
+  },
+  {
+    "pass": true,
+    "copy": "4c0edfd8decfe35995008577c98edc668b80d02a1f9e800853cb5cda060203e7",
+    "pr18": "4c0edfd8decfe35995008577c98edc668b80d02a1f9e800853cb5cda060203e7",
+    "file": "open_vase_lod1.glb",
+    "expected": "4c0edfd8decfe35995008577c98edc668b80d02a1f9e800853cb5cda060203e7"
+  },
+  {
+    "pass": true,
+    "copy": "68a20600cd5c5b036338b881157497a954c5feefc154defd28140a11d6e6e1f1",
+    "pr18": "68a20600cd5c5b036338b881157497a954c5feefc154defd28140a11d6e6e1f1",
+    "file": "open_vase_lod2.glb",
+    "expected": "68a20600cd5c5b036338b881157497a954c5feefc154defd28140a11d6e6e1f1"
+  },
+  {
+    "pass": true,
+    "copy": "41c3df98a19243ebe7fa510e7cf87be6a40c07ae823ac84c2dc9dd9d5a74cba5",
+    "pr18": "41c3df98a19243ebe7fa510e7cf87be6a40c07ae823ac84c2dc9dd9d5a74cba5",
+    "file": "tall_columnar_lod0.glb",
+    "expected": "41c3df98a19243ebe7fa510e7cf87be6a40c07ae823ac84c2dc9dd9d5a74cba5"
+  },
+  {
+    "pass": true,
+    "copy": "3f11b530be7a7dca747e0cd8eb4994dc4a7d0522d374c6e4f9720f25710df750",
+    "pr18": "3f11b530be7a7dca747e0cd8eb4994dc4a7d0522d374c6e4f9720f25710df750",
+    "file": "tall_columnar_lod1.glb",
+    "expected": "3f11b530be7a7dca747e0cd8eb4994dc4a7d0522d374c6e4f9720f25710df750"
+  },
+  {
+    "pass": true,
+    "copy": "219c0f9b1e2a744fbc19a1242d1c6e6cb096481b4b10c3c75abd9b5805b6b970",
+    "pr18": "219c0f9b1e2a744fbc19a1242d1c6e6cb096481b4b10c3c75abd9b5805b6b970",
+    "file": "tall_columnar_lod2.glb",
+    "expected": "219c0f9b1e2a744fbc19a1242d1c6e6cb096481b4b10c3c75abd9b5805b6b970"
+  },
+  {
+    "pass": true,
+    "copy": "4805c3ec328284512092cc279dc0c37d482ef45bfce3b827e9c87c6a22ef90cf",
+    "pr18": "4805c3ec328284512092cc279dc0c37d482ef45bfce3b827e9c87c6a22ef90cf",
+    "file": "xinyi_reference_preview_lod0.glb",
+    "expected": "4805c3ec328284512092cc279dc0c37d482ef45bfce3b827e9c87c6a22ef90cf"
+  },
+  {
+    "pass": true,
+    "copy": "323939eaaa9076f65d2c81b15f0c7b5d179c91c85c89ed1d783312debdaadbd1",
+    "pr18": "323939eaaa9076f65d2c81b15f0c7b5d179c91c85c89ed1d783312debdaadbd1",
+    "file": "xinyi_reference_original.glb",
+    "expected": "323939eaaa9076f65d2c81b15f0c7b5d179c91c85c89ed1d783312debdaadbd1"
+  }
+]

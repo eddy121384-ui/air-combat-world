@@ -1,0 +1,78 @@
+{
+  "status": "PASS_FS_CAPTURE",
+  "set": "lod_selection_review01",
+  "res": [
+    1920,
+    1080
+  ],
+  "captures": [
+    {
+      "name": "probe_v1_agl50_p15_lod-1",
+      "bytes": 1173227
+    },
+    {
+      "name": "probe_v1_agl50_p15_lod0",
+      "bytes": 1173227
+    },
+    {
+      "name": "probe_v1_agl50_p15_lod1",
+      "bytes": 1173227
+    },
+    {
+      "name": "probe_v1_agl50_p15_lod2",
+      "bytes": 1173227
+    },
+    {
+      "name": "probe_v1_agl200_p10_lod-1",
+      "bytes": 1173227
+    },
+    {
+      "name": "probe_v1_agl200_p10_lod0",
+      "bytes": 1624447
+    },
+    {
+      "name": "probe_v1_agl200_p10_lod1",
+      "bytes": 1173227
+    },
+    {
+      "name": "probe_v1_agl200_p10_lod2",
+      "bytes": 1616585
+    },
+    {
+      "name": "probe_v3i_t18_lod-1",
+      "bytes": 1173227
+    },
+    {
+      "name": "probe_v3i_t18_lod0",
+      "bytes": 1173227
+    },
+    {
+      "name": "probe_v3i_t18_lod1",
+      "bytes": 1173227
+    },
+    {
+      "name": "probe_v3i_t18_lod2",
+      "bytes": 1173227
+    },
+    {
+      "name": "probe_v5i_agl200_a000_lod-1",
+      "bytes": 1624447
+    },
+    {
+      "name": "probe_v5i_agl200_a000_lod0",
+      "bytes": 1624447
+    },
+    {
+      "name": "probe_v5i_agl200_a000_lod1",
+      "bytes": 1624447
+    },
+    {
+      "name": "probe_v5i_agl200_a000_lod2",
+      "bytes": 1624447
+    }
+  ],
+  "placement_s": 1.5,
+  "elapsed_s": 19.905999999988126,
+  "rhi_adapter": null,
+  "error": null
+}

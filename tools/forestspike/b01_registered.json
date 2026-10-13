@@ -1,0 +1,201 @@
+{
+  "schema": "forestspike.b01_registration/1",
+  "id": "20261013a",
+  "asset_root": "/Game/ForestSpike/B01_20261013a",
+  "registered_utc": "2026-10-13T01:51:58.984309+00:00",
+  "base_head": "d7fa5f87703ecec0dacf701c60a92976172fce58",
+  "lod_screens": [
+    1.0,
+    0.08,
+    0.03
+  ],
+  "lod_reason": "Common normalized projected bounds diameter: LOD0 above 8%, LOD1 3-8%, LOD2 below 3%, until 500m cull. Meaningful authored tiers; no promise all 200m pixels use LOD0.",
+  "foliage_force_lod": -1,
+  "foliage_lod_distance_scale": 1.0,
+  "foliage_random_lod_range": 0.0,
+  "instance_lod_distance_scale": 1.0,
+  "cull_m": 500,
+  "fps": 60,
+  "warm_frames": 120,
+  "flight_intervals": 1080,
+  "sequence_end_frame": 1261,
+  "capture_frames": 1264,
+  "path": {
+    "poses": [
+      {
+        "id": "v3i_t14",
+        "group": "V3",
+        "eye_enu": [
+          -703.015,
+          -703.015,
+          324.003
+        ],
+        "agl_m": 200,
+        "heading_deg": 45.0,
+        "pitch_deg": -10.0,
+        "fov_h_deg": 91.4928,
+        "fov_v_deg": 60.0,
+        "t_s": 14.0,
+        "speed_mps": 30.0
+      },
+      {
+        "id": "v3i_t16",
+        "group": "V3",
+        "eye_enu": [
+          -660.589,
+          -660.589,
+          308.799
+        ],
+        "agl_m": 200,
+        "heading_deg": 45.0,
+        "pitch_deg": -10.0,
+        "fov_h_deg": 91.4928,
+        "fov_v_deg": 60.0,
+        "t_s": 16.0,
+        "speed_mps": 30.0
+      },
+      {
+        "id": "v3i_t18",
+        "group": "V3",
+        "eye_enu": [
+          -618.162,
+          -618.162,
+          296.572
+        ],
+        "agl_m": 200,
+        "heading_deg": 45.0,
+        "pitch_deg": -10.0,
+        "fov_h_deg": 91.4928,
+        "fov_v_deg": 60.0,
+        "t_s": 18.0,
+        "speed_mps": 30.0
+      },
+      {
+        "id": "v3i_t20",
+        "group": "V3",
+        "eye_enu": [
+          -575.736,
+          -575.736,
+          291.458
+        ],
+        "agl_m": 200,
+        "heading_deg": 45.0,
+        "pitch_deg": -10.0,
+        "fov_h_deg": 91.4928,
+        "fov_v_deg": 60.0,
+        "t_s": 20.0,
+        "speed_mps": 30.0
+      },
+      {
+        "id": "v3i_t22",
+        "group": "V3",
+        "eye_enu": [
+          -533.31,
+          -533.31,
+          293.172
+        ],
+        "agl_m": 200,
+        "heading_deg": 45.0,
+        "pitch_deg": -10.0,
+        "fov_h_deg": 91.4928,
+        "fov_v_deg": 60.0,
+        "t_s": 22.0,
+        "speed_mps": 30.0
+      },
+      {
+        "id": "v3i_t24",
+        "group": "V3",
+        "eye_enu": [
+          -490.883,
+          -490.883,
+          298.615
+        ],
+        "agl_m": 200,
+        "heading_deg": 45.0,
+        "pitch_deg": -10.0,
+        "fov_h_deg": 91.4928,
+        "fov_v_deg": 60.0,
+        "t_s": 24.0,
+        "speed_mps": 30.0
+      },
+      {
+        "id": "v3i_t26",
+        "group": "V3",
+        "eye_enu": [
+          -448.457,
+          -448.457,
+          305.18
+        ],
+        "agl_m": 200,
+        "heading_deg": 45.0,
+        "pitch_deg": -10.0,
+        "fov_h_deg": 91.4928,
+        "fov_v_deg": 60.0,
+        "t_s": 26.0,
+        "speed_mps": 30.0
+      },
+      {
+        "id": "v3i_t28",
+        "group": "V3",
+        "eye_enu": [
+          -406.03,
+          -406.03,
+          312.728
+        ],
+        "agl_m": 200,
+        "heading_deg": 45.0,
+        "pitch_deg": -10.0,
+        "fov_h_deg": 91.4928,
+        "fov_v_deg": 60.0,
+        "t_s": 28.0,
+        "speed_mps": 30.0
+      },
+      {
+        "id": "v3i_t30",
+        "group": "V3",
+        "eye_enu": [
+          -363.604,
+          -363.604,
+          322.801
+        ],
+        "agl_m": 200,
+        "heading_deg": 45.0,
+        "pitch_deg": -10.0,
+        "fov_h_deg": 91.4928,
+        "fov_v_deg": 60.0,
+        "t_s": 30.0,
+        "speed_mps": 30.0
+      },
+      {
+        "id": "v3i_t32",
+        "group": "V3",
+        "eye_enu": [
+          -321.177,
+          -321.177,
+          336.294
+        ],
+        "agl_m": 200,
+        "heading_deg": 45.0,
+        "pitch_deg": -10.0,
+        "fov_h_deg": 91.4928,
+        "fov_v_deg": 60.0,
+        "t_s": 32.0,
+        "speed_mps": 30.0
+      }
+    ],
+    "fps": 60,
+    "frames_per_pose": 120
+  },
+  "motion_tolerances": {
+    "position_m": 0.05,
+    "orientation_deg": 0.02,
+    "boot_frames_max": 4,
+    "first_valid_sequence_frame_allowed": [
+      0,
+      1
+    ],
+    "warm_displacement_m": 0.02
+  },
+  "host_scope": "Intel UHD 770 only",
+  "lod_confidence": "LOD-colored render pixels plus controlled single-HISM-instance tests; no per-instance histogram inferred from forest pixel counts"
+}

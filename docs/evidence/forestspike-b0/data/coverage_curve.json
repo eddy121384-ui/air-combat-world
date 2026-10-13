@@ -1,0 +1,111 @@
+{
+ "target": 0.7,
+ "arms": {
+  "A": {
+   "rows": [
+    {
+     "n": 8000,
+     "cover_measured": 0.2514048351933905,
+     "cover_model_ellipse": 0.25682784210837395,
+     "cover_poisson": 0.2525799426721623,
+     "instance_px_outside_forest": 4780,
+     "forest_px": 3140226,
+     "codes_exact": 1.0
+    },
+    {
+     "n": 16000,
+     "cover_measured": 0.4491011156521855,
+     "cover_model_ellipse": 0.45746383511866184,
+     "cover_poisson": 0.44136325790405184,
+     "instance_px_outside_forest": 9237,
+     "forest_px": 3140226,
+     "codes_exact": 1.0
+    },
+    {
+     "n": 26000,
+     "cover_measured": 0.6357615662057444,
+     "cover_model_ellipse": 0.6454594420051244,
+     "cover_poisson": 0.6117732721919571,
+     "instance_px_outside_forest": 14695,
+     "forest_px": 3140226,
+     "codes_exact": 1.0
+    },
+    {
+     "n": 40000,
+     "cover_measured": 0.80776797593549,
+     "cover_model_ellipse": 0.8161547433838662,
+     "cover_poisson": 0.7667488784195519,
+     "instance_px_outside_forest": 21882,
+     "forest_px": 3140226,
+     "codes_exact": 1.0
+    },
+    {
+     "n": 60000,
+     "cover_measured": 0.9374060975229171,
+     "cover_model_ellipse": 0.9422924666250596,
+     "cover_poisson": 0.8873488548009797,
+     "instance_px_outside_forest": 30178,
+     "forest_px": 3140226,
+     "codes_exact": 1.0
+    }
+   ],
+   "n_for_target_measured_fit": 30250,
+   "k_measured": 4.7680571344955224e-05,
+   "n_for_target_ellipse_model_fit": 29561,
+   "k_model": 4.909710585331557e-05
+  },
+  "B": {
+   "rows": [
+    {
+     "n": 8000,
+     "cover_measured": 0.25734803800745554,
+     "cover_model_ellipse": 0.32742520336849895,
+     "cover_poisson": 0.3248145748823077,
+     "instance_px_outside_forest": 5766,
+     "forest_px": 3140226,
+     "codes_exact": 1.0
+    },
+    {
+     "n": 16000,
+     "cover_measured": 0.4572486184115411,
+     "cover_model_ellipse": 0.5587715844761072,
+     "cover_poisson": 0.5441246417086412,
+     "instance_px_outside_forest": 11461,
+     "forest_px": 3140226,
+     "codes_exact": 1.0
+    },
+    {
+     "n": 26000,
+     "cover_measured": 0.6405691819633363,
+     "cover_model_ellipse": 0.7479459456029962,
+     "cover_poisson": 0.7209866772074334,
+     "instance_px_outside_forest": 17710,
+     "forest_px": 3140226,
+     "codes_exact": 1.0
+    },
+    {
+     "n": 40000,
+     "cover_measured": 0.8051885437544941,
+     "cover_model_ellipse": 0.8914120240278868,
+     "cover_poisson": 0.85968138346706,
+     "instance_px_outside_forest": 26058,
+     "forest_px": 3140226,
+     "codes_exact": 1.0
+    },
+    {
+     "n": 60000,
+     "cover_measured": 0.9289653037711298,
+     "cover_model_ellipse": 0.973920479836457,
+     "cover_poisson": 0.9474378717952779,
+     "instance_px_outside_forest": 36065,
+     "forest_px": 3140226,
+     "codes_exact": 1.0
+    }
+   ],
+   "n_for_target_measured_fit": 30131,
+   "k_measured": 4.510662500138367e-05,
+   "n_for_target_ellipse_model_fit": 22890,
+   "k_model": 6.244506376680628e-05
+  }
+ }
+}

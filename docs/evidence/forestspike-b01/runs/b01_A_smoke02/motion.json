@@ -1,0 +1,27 @@
+{
+  "status": "PASS_FS_B01_MOTION",
+  "csv_sha256": "17643b39ba75b72e777b3ba42d49463181d07c86357f23c341b14dec4e033ef0",
+  "errors": [],
+  "host_scope": "Intel UHD 770 only",
+  "scope": "camera motion integrity; GPU data diagnostic only",
+  "frames": 1264,
+  "invalid_boot_frames": 1,
+  "first_valid_sequence_frame": 1,
+  "first_120_valid_world_view_max_displacement_m": 8.000000016181729e-06,
+  "flight_samples": 1081,
+  "verified_flight_seconds": 18.0,
+  "flight_csv_range": [
+    120,
+    1200
+  ],
+  "measured_distance_m": 546.7875409012677,
+  "registered_distance_m": 546.7875307983065,
+  "nonmonotonic_steps": 0,
+  "max_errors": {
+    "position_error_m": 9.899494933483578e-05,
+    "forward_error_deg": 0.0032214616368570026,
+    "up_error_deg": 0.0010503543126446297
+  },
+  "flight_endpoint_error_m": 1.9595917981902405e-05,
+  "endpoint_hold_samples": 63
+}

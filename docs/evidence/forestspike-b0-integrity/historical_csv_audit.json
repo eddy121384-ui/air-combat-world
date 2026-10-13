@@ -1,0 +1,600 @@
+[
+ {
+  "file": "ppa_r1__L_FSP_A_S1_v3i_t14_t32.csv",
+  "sha256": "7d6c6f2c6ac9c7a60b3dd7fca2037607dd1a1b684de419571290efbb78869317",
+  "frames": 900,
+  "cold_frames": 120,
+  "warm_frames": 780,
+  "tag": "ppa_r1",
+  "level": "L_FSP_A_S1_v3i_t14_t32",
+  "legacy_metadata": true,
+  "raw_tag": "ppa_r1;level=L_FSP_A_S1_v3i_t14_t32",
+  "sidecar_match": true,
+  "log": "unreal/ForestSpike/Saved/ForestSpike/logs/perf_ppa_r1__L_FSP_A_S1_v3i_t14_t32.log",
+  "log_sha256": "9b7939ad9489490c2cec8e8c39762cbe972d7ad9d3c537df19bdf6647a204007",
+  "engine_world_match": true,
+  "engine_completed_frames": [
+   "900"
+  ],
+  "engine_capture_id_match": true,
+  "engine_finalize_logged": true,
+  "view_columns": [
+   "View/PosX",
+   "View/PosY",
+   "View/PosZ",
+   "View/Speed",
+   "View/Speed2D",
+   "View/ForwardX",
+   "View/ForwardY",
+   "View/ForwardZ",
+   "View/UpX",
+   "View/UpY",
+   "View/UpZ"
+  ],
+  "status": "HISTORICAL_ONLY_NOT_NEW_PASS",
+  "sequence": {
+   "declared_frames": 1081,
+   "intended_key_interval_s": [
+    14,
+    32
+   ],
+   "nominal_csv_s": 15.0,
+   "nominal_warm_s": 13.0,
+   "trajectory_matching_frames": 899,
+   "warm_matching_frames": 780,
+   "observed_path_t_s": [
+    14.0,
+    14.0
+   ],
+   "observed_warm_path_t_s": [
+    14.0,
+    14.0
+   ],
+   "nonmatching_frames": [
+    0
+   ],
+   "full_18_seconds_measured": false,
+   "warmup_consumed_path": null,
+   "motion_status": "FAIL_STATIONARY_CAMERA",
+   "warmup_note": "Autoplay without a lead-in would consume motion; these historical views are stationary"
+  }
+ },
+ {
+  "file": "ppa_r1__L_FSP_B_S1_v3i_t14_t32.csv",
+  "sha256": "d7f1c4d34de77c54e92f2f9037afaa33b739f533e1bfcd07e33cea87105e0c54",
+  "frames": 900,
+  "cold_frames": 120,
+  "warm_frames": 780,
+  "tag": "ppa_r1",
+  "level": "L_FSP_B_S1_v3i_t14_t32",
+  "legacy_metadata": true,
+  "raw_tag": "ppa_r1;level=L_FSP_B_S1_v3i_t14_t32",
+  "sidecar_match": true,
+  "log": "unreal/ForestSpike/Saved/ForestSpike/logs/perf_ppa_r1__L_FSP_B_S1_v3i_t14_t32.log",
+  "log_sha256": "0e75b3d61ee6b961a5b66fe4a50fc415102494b0e54fba6011516bc003a53f69",
+  "engine_world_match": true,
+  "engine_completed_frames": [
+   "900"
+  ],
+  "engine_capture_id_match": true,
+  "engine_finalize_logged": true,
+  "view_columns": [
+   "View/PosX",
+   "View/PosY",
+   "View/PosZ",
+   "View/Speed",
+   "View/Speed2D",
+   "View/ForwardX",
+   "View/ForwardY",
+   "View/ForwardZ",
+   "View/UpX",
+   "View/UpY",
+   "View/UpZ"
+  ],
+  "status": "HISTORICAL_ONLY_NOT_NEW_PASS",
+  "sequence": {
+   "declared_frames": 1081,
+   "intended_key_interval_s": [
+    14,
+    32
+   ],
+   "nominal_csv_s": 15.0,
+   "nominal_warm_s": 13.0,
+   "trajectory_matching_frames": 899,
+   "warm_matching_frames": 780,
+   "observed_path_t_s": [
+    14.0,
+    14.0
+   ],
+   "observed_warm_path_t_s": [
+    14.0,
+    14.0
+   ],
+   "nonmatching_frames": [
+    0
+   ],
+   "full_18_seconds_measured": false,
+   "warmup_consumed_path": null,
+   "motion_status": "FAIL_STATIONARY_CAMERA",
+   "warmup_note": "Autoplay without a lead-in would consume motion; these historical views are stationary"
+  }
+ },
+ {
+  "file": "ppa_r2__L_FSP_A_S1_v3i_t14_t32.csv",
+  "sha256": "787b25a1e9486505e7f76061b9912afffa2f6cd7b2a75dd57bfa6067d2d52f7d",
+  "frames": 900,
+  "cold_frames": 120,
+  "warm_frames": 780,
+  "tag": "ppa_r2",
+  "level": "L_FSP_A_S1_v3i_t14_t32",
+  "legacy_metadata": true,
+  "raw_tag": "ppa_r2;level=L_FSP_A_S1_v3i_t14_t32",
+  "sidecar_match": true,
+  "log": "unreal/ForestSpike/Saved/ForestSpike/logs/perf_ppa_r2__L_FSP_A_S1_v3i_t14_t32.log",
+  "log_sha256": "33e706040f2c51e05e2851d0f978c6757a63688ead613efbd81eef46c39a88e7",
+  "engine_world_match": true,
+  "engine_completed_frames": [
+   "900"
+  ],
+  "engine_capture_id_match": true,
+  "engine_finalize_logged": true,
+  "view_columns": [
+   "View/PosX",
+   "View/PosY",
+   "View/PosZ",
+   "View/Speed",
+   "View/Speed2D",
+   "View/ForwardX",
+   "View/ForwardY",
+   "View/ForwardZ",
+   "View/UpX",
+   "View/UpY",
+   "View/UpZ"
+  ],
+  "status": "HISTORICAL_ONLY_NOT_NEW_PASS",
+  "sequence": {
+   "declared_frames": 1081,
+   "intended_key_interval_s": [
+    14,
+    32
+   ],
+   "nominal_csv_s": 15.0,
+   "nominal_warm_s": 13.0,
+   "trajectory_matching_frames": 899,
+   "warm_matching_frames": 780,
+   "observed_path_t_s": [
+    14.0,
+    14.0
+   ],
+   "observed_warm_path_t_s": [
+    14.0,
+    14.0
+   ],
+   "nonmatching_frames": [
+    0
+   ],
+   "full_18_seconds_measured": false,
+   "warmup_consumed_path": null,
+   "motion_status": "FAIL_STATIONARY_CAMERA",
+   "warmup_note": "Autoplay without a lead-in would consume motion; these historical views are stationary"
+  }
+ },
+ {
+  "file": "ppa_r2__L_FSP_B_S1_v3i_t14_t32.csv",
+  "sha256": "31ab70353a64c34666da7b753a6d643886ca066a8f5ea91e6a19498bb4e29d5f",
+  "frames": 900,
+  "cold_frames": 120,
+  "warm_frames": 780,
+  "tag": "ppa_r2",
+  "level": "L_FSP_B_S1_v3i_t14_t32",
+  "legacy_metadata": true,
+  "raw_tag": "ppa_r2;level=L_FSP_B_S1_v3i_t14_t32",
+  "sidecar_match": true,
+  "log": "unreal/ForestSpike/Saved/ForestSpike/logs/perf_ppa_r2__L_FSP_B_S1_v3i_t14_t32.log",
+  "log_sha256": "4bf89a5e69f4f90d1656f9278ae80f327c3f9f13116272fdfef5898ed32619d9",
+  "engine_world_match": true,
+  "engine_completed_frames": [
+   "900"
+  ],
+  "engine_capture_id_match": true,
+  "engine_finalize_logged": true,
+  "view_columns": [
+   "View/PosX",
+   "View/PosY",
+   "View/PosZ",
+   "View/Speed",
+   "View/Speed2D",
+   "View/ForwardX",
+   "View/ForwardY",
+   "View/ForwardZ",
+   "View/UpX",
+   "View/UpY",
+   "View/UpZ"
+  ],
+  "status": "HISTORICAL_ONLY_NOT_NEW_PASS",
+  "sequence": {
+   "declared_frames": 1081,
+   "intended_key_interval_s": [
+    14,
+    32
+   ],
+   "nominal_csv_s": 15.0,
+   "nominal_warm_s": 13.0,
+   "trajectory_matching_frames": 899,
+   "warm_matching_frames": 780,
+   "observed_path_t_s": [
+    14.0,
+    14.0
+   ],
+   "observed_warm_path_t_s": [
+    14.0,
+    14.0
+   ],
+   "nonmatching_frames": [
+    0
+   ],
+   "full_18_seconds_measured": false,
+   "warmup_consumed_path": null,
+   "motion_status": "FAIL_STATIONARY_CAMERA",
+   "warmup_note": "Autoplay without a lead-in would consume motion; these historical views are stationary"
+  }
+ },
+ {
+  "file": "ppa_r3__L_FSP_A_S1_v3i_t14_t32.csv",
+  "sha256": "b34f443932ad19b645d8e0328393c13ba3d4a1415a17a7c97c0958432b5d30d3",
+  "frames": 900,
+  "cold_frames": 120,
+  "warm_frames": 780,
+  "tag": "ppa_r3",
+  "level": "L_FSP_A_S1_v3i_t14_t32",
+  "legacy_metadata": true,
+  "raw_tag": "ppa_r3;level=L_FSP_A_S1_v3i_t14_t32",
+  "sidecar_match": true,
+  "log": "unreal/ForestSpike/Saved/ForestSpike/logs/perf_ppa_r3__L_FSP_A_S1_v3i_t14_t32.log",
+  "log_sha256": "5fadd22ac3580372fd66ccb3c6608391714dd9f49dffa050e74d7602c3868be2",
+  "engine_world_match": true,
+  "engine_completed_frames": [
+   "900"
+  ],
+  "engine_capture_id_match": true,
+  "engine_finalize_logged": true,
+  "view_columns": [
+   "View/PosX",
+   "View/PosY",
+   "View/PosZ",
+   "View/Speed",
+   "View/Speed2D",
+   "View/ForwardX",
+   "View/ForwardY",
+   "View/ForwardZ",
+   "View/UpX",
+   "View/UpY",
+   "View/UpZ"
+  ],
+  "status": "HISTORICAL_ONLY_NOT_NEW_PASS",
+  "sequence": {
+   "declared_frames": 1081,
+   "intended_key_interval_s": [
+    14,
+    32
+   ],
+   "nominal_csv_s": 15.0,
+   "nominal_warm_s": 13.0,
+   "trajectory_matching_frames": 899,
+   "warm_matching_frames": 780,
+   "observed_path_t_s": [
+    14.0,
+    14.0
+   ],
+   "observed_warm_path_t_s": [
+    14.0,
+    14.0
+   ],
+   "nonmatching_frames": [
+    0
+   ],
+   "full_18_seconds_measured": false,
+   "warmup_consumed_path": null,
+   "motion_status": "FAIL_STATIONARY_CAMERA",
+   "warmup_note": "Autoplay without a lead-in would consume motion; these historical views are stationary"
+  }
+ },
+ {
+  "file": "ppa_r3__L_FSP_B_S1_v3i_t14_t32.csv",
+  "sha256": "9c109b8dfce3759a1dc2cb0e53aea48290b16d04f7305dadf9246d5964100a98",
+  "frames": 900,
+  "cold_frames": 120,
+  "warm_frames": 780,
+  "tag": "ppa_r3",
+  "level": "L_FSP_B_S1_v3i_t14_t32",
+  "legacy_metadata": true,
+  "raw_tag": "ppa_r3;level=L_FSP_B_S1_v3i_t14_t32",
+  "sidecar_match": true,
+  "log": "unreal/ForestSpike/Saved/ForestSpike/logs/perf_ppa_r3__L_FSP_B_S1_v3i_t14_t32.log",
+  "log_sha256": "1bcb4f0c74f7b8bbf14711b3c7b0c9bc11cc21de6a0c4e1b83abdb97d727b289",
+  "engine_world_match": true,
+  "engine_completed_frames": [
+   "900"
+  ],
+  "engine_capture_id_match": true,
+  "engine_finalize_logged": true,
+  "view_columns": [
+   "View/PosX",
+   "View/PosY",
+   "View/PosZ",
+   "View/Speed",
+   "View/Speed2D",
+   "View/ForwardX",
+   "View/ForwardY",
+   "View/ForwardZ",
+   "View/UpX",
+   "View/UpY",
+   "View/UpZ"
+  ],
+  "status": "HISTORICAL_ONLY_NOT_NEW_PASS",
+  "sequence": {
+   "declared_frames": 1081,
+   "intended_key_interval_s": [
+    14,
+    32
+   ],
+   "nominal_csv_s": 15.0,
+   "nominal_warm_s": 13.0,
+   "trajectory_matching_frames": 899,
+   "warm_matching_frames": 780,
+   "observed_path_t_s": [
+    14.0,
+    14.0
+   ],
+   "observed_warm_path_t_s": [
+    14.0,
+    14.0
+   ],
+   "nonmatching_frames": [
+    0
+   ],
+   "full_18_seconds_measured": false,
+   "warmup_consumed_path": null,
+   "motion_status": "FAIL_STATIONARY_CAMERA",
+   "warmup_note": "Autoplay without a lead-in would consume motion; these historical views are stationary"
+  }
+ },
+ {
+  "file": "pst_r1__L_FSP_A_S1_v1_agl200_p10.csv",
+  "sha256": "3aea42078899b7bfe6526295dadc01ab96060fcfb303262af78f0e68668db615",
+  "frames": 480,
+  "cold_frames": 120,
+  "warm_frames": 360,
+  "tag": "pst_r1",
+  "level": "L_FSP_A_S1_v1_agl200_p10",
+  "legacy_metadata": true,
+  "raw_tag": "pst_r1;level=L_FSP_A_S1_v1_agl200_p10",
+  "sidecar_match": true,
+  "log": "unreal/ForestSpike/Saved/ForestSpike/logs/perf_pst_r1__L_FSP_A_S1_v1_agl200_p10.log",
+  "log_sha256": "4b1ae8ee980b9babce3337fa4b771b1d1f932419a4e2ac20fdc54acf4c2acaca",
+  "engine_world_match": true,
+  "engine_completed_frames": [
+   "480"
+  ],
+  "engine_capture_id_match": true,
+  "engine_finalize_logged": true,
+  "view_columns": [
+   "View/PosX",
+   "View/PosY",
+   "View/PosZ",
+   "View/Speed",
+   "View/Speed2D",
+   "View/ForwardX",
+   "View/ForwardY",
+   "View/ForwardZ",
+   "View/UpX",
+   "View/UpY",
+   "View/UpZ"
+  ],
+  "status": "HISTORICAL_ONLY_NOT_NEW_PASS"
+ },
+ {
+  "file": "pst_r1__L_FSP_B_S1_v1_agl200_p10.csv",
+  "sha256": "6eea90567403e7b27d26084d4f6aa7db6d21a179c03c6b519d554bb0dceef8a7",
+  "frames": 480,
+  "cold_frames": 120,
+  "warm_frames": 360,
+  "tag": "pst_r1",
+  "level": "L_FSP_B_S1_v1_agl200_p10",
+  "legacy_metadata": true,
+  "raw_tag": "pst_r1;level=L_FSP_B_S1_v1_agl200_p10",
+  "sidecar_match": true,
+  "log": "unreal/ForestSpike/Saved/ForestSpike/logs/perf_pst_r1__L_FSP_B_S1_v1_agl200_p10.log",
+  "log_sha256": "2759bcb909edbdca76844d954c6b0a80f7bbb5869be6fa9eb698e7de62112fdc",
+  "engine_world_match": true,
+  "engine_completed_frames": [
+   "480"
+  ],
+  "engine_capture_id_match": true,
+  "engine_finalize_logged": true,
+  "view_columns": [
+   "View/PosX",
+   "View/PosY",
+   "View/PosZ",
+   "View/Speed",
+   "View/Speed2D",
+   "View/ForwardX",
+   "View/ForwardY",
+   "View/ForwardZ",
+   "View/UpX",
+   "View/UpY",
+   "View/UpZ"
+  ],
+  "status": "HISTORICAL_ONLY_NOT_NEW_PASS"
+ },
+ {
+  "file": "pst_r2__L_FSP_A_S1_v1_agl200_p10.csv",
+  "sha256": "782b9efeb21109663d4cd3839681fce12df8684db71a2485c8369a8dcdb56f81",
+  "frames": 480,
+  "cold_frames": 120,
+  "warm_frames": 360,
+  "tag": "pst_r2",
+  "level": "L_FSP_A_S1_v1_agl200_p10",
+  "legacy_metadata": true,
+  "raw_tag": "pst_r2;level=L_FSP_A_S1_v1_agl200_p10",
+  "sidecar_match": true,
+  "log": "unreal/ForestSpike/Saved/ForestSpike/logs/perf_pst_r2__L_FSP_A_S1_v1_agl200_p10.log",
+  "log_sha256": "5c159a7cf14cbad3a168f37106dc0ce68bc1b2837f6c30119238af0e48ac3d88",
+  "engine_world_match": true,
+  "engine_completed_frames": [
+   "480"
+  ],
+  "engine_capture_id_match": true,
+  "engine_finalize_logged": true,
+  "view_columns": [
+   "View/PosX",
+   "View/PosY",
+   "View/PosZ",
+   "View/Speed",
+   "View/Speed2D",
+   "View/ForwardX",
+   "View/ForwardY",
+   "View/ForwardZ",
+   "View/UpX",
+   "View/UpY",
+   "View/UpZ"
+  ],
+  "status": "HISTORICAL_ONLY_NOT_NEW_PASS"
+ },
+ {
+  "file": "pst_r2__L_FSP_B_S1_v1_agl200_p10.csv",
+  "sha256": "85a841223fc9d93bb0a6c387fa46ebf7f12787dab42a6ecfbb06c5def670a12e",
+  "frames": 480,
+  "cold_frames": 120,
+  "warm_frames": 360,
+  "tag": "pst_r2",
+  "level": "L_FSP_B_S1_v1_agl200_p10",
+  "legacy_metadata": true,
+  "raw_tag": "pst_r2;level=L_FSP_B_S1_v1_agl200_p10",
+  "sidecar_match": true,
+  "log": "unreal/ForestSpike/Saved/ForestSpike/logs/perf_pst_r2__L_FSP_B_S1_v1_agl200_p10.log",
+  "log_sha256": "27ddf30c3b733e9922b39fb422f095f90db15f46fa8b48f83110a9c7f52994e0",
+  "engine_world_match": true,
+  "engine_completed_frames": [
+   "480"
+  ],
+  "engine_capture_id_match": true,
+  "engine_finalize_logged": true,
+  "view_columns": [
+   "View/PosX",
+   "View/PosY",
+   "View/PosZ",
+   "View/Speed",
+   "View/Speed2D",
+   "View/ForwardX",
+   "View/ForwardY",
+   "View/ForwardZ",
+   "View/UpX",
+   "View/UpY",
+   "View/UpZ"
+  ],
+  "status": "HISTORICAL_ONLY_NOT_NEW_PASS"
+ },
+ {
+  "file": "pst_r3__L_FSP_A_S1_v1_agl200_p10.csv",
+  "sha256": "c1f13291e8db48b9584ad9352819d8d5ccc0961ade8c3835ef7b36cb04e95f92",
+  "frames": 480,
+  "cold_frames": 120,
+  "warm_frames": 360,
+  "tag": "pst_r3",
+  "level": "L_FSP_A_S1_v1_agl200_p10",
+  "legacy_metadata": true,
+  "raw_tag": "pst_r3;level=L_FSP_A_S1_v1_agl200_p10",
+  "sidecar_match": true,
+  "log": "unreal/ForestSpike/Saved/ForestSpike/logs/perf_pst_r3__L_FSP_A_S1_v1_agl200_p10.log",
+  "log_sha256": "9e64f243a2e42d83db34c8ce1905ec3873429eed88f86ae3855c58248177601e",
+  "engine_world_match": true,
+  "engine_completed_frames": [
+   "480"
+  ],
+  "engine_capture_id_match": true,
+  "engine_finalize_logged": true,
+  "view_columns": [
+   "View/PosX",
+   "View/PosY",
+   "View/PosZ",
+   "View/Speed",
+   "View/Speed2D",
+   "View/ForwardX",
+   "View/ForwardY",
+   "View/ForwardZ",
+   "View/UpX",
+   "View/UpY",
+   "View/UpZ"
+  ],
+  "status": "HISTORICAL_ONLY_NOT_NEW_PASS"
+ },
+ {
+  "file": "pst_r3__L_FSP_B_S1_v1_agl200_p10.csv",
+  "sha256": "f0228168c9d96df7230b438e3efdabc45f3833e1174990a964291755ccf1f574",
+  "frames": 480,
+  "cold_frames": 120,
+  "warm_frames": 360,
+  "tag": "pst_r3",
+  "level": "L_FSP_B_S1_v1_agl200_p10",
+  "legacy_metadata": true,
+  "raw_tag": "pst_r3;level=L_FSP_B_S1_v1_agl200_p10",
+  "sidecar_match": true,
+  "log": "unreal/ForestSpike/Saved/ForestSpike/logs/perf_pst_r3__L_FSP_B_S1_v1_agl200_p10.log",
+  "log_sha256": "4d7661b993ceb1cd5ddf465ec7b83263eea93240eb395dbe8a3001ec4f18a6b3",
+  "engine_world_match": true,
+  "engine_completed_frames": [
+   "480"
+  ],
+  "engine_capture_id_match": true,
+  "engine_finalize_logged": true,
+  "view_columns": [
+   "View/PosX",
+   "View/PosY",
+   "View/PosZ",
+   "View/Speed",
+   "View/Speed2D",
+   "View/ForwardX",
+   "View/ForwardY",
+   "View/ForwardZ",
+   "View/UpX",
+   "View/UpY",
+   "View/UpZ"
+  ],
+  "status": "HISTORICAL_ONLY_NOT_NEW_PASS"
+ },
+ {
+  "file": "static_r1__L_FSP_A_S1_v1_agl200_p10.csv",
+  "sha256": "a96525e33e3d4e8a6f9fb9d0827e0d55f0b30545f2d6d1c997172fc30e6c90d7",
+  "frames": 480,
+  "cold_frames": 120,
+  "warm_frames": 360,
+  "tag": "static_r1",
+  "level": "L_FSP_A_S1_v1_agl200_p10",
+  "legacy_metadata": true,
+  "raw_tag": "static_r1;level=L_FSP_A_S1_v1_agl200_p10",
+  "sidecar_match": true,
+  "log": "unreal/ForestSpike/Saved/ForestSpike/logs/perf_static_r1__L_FSP_A_S1_v1_agl200_p10.log",
+  "log_sha256": "61196c61e17202aca1385f76582fd29907d9201a6d978fecb6edfe0d89415606",
+  "engine_world_match": true,
+  "engine_completed_frames": [
+   "480"
+  ],
+  "engine_capture_id_match": true,
+  "engine_finalize_logged": true,
+  "view_columns": [
+   "View/PosX",
+   "View/PosY",
+   "View/PosZ",
+   "View/Speed",
+   "View/Speed2D",
+   "View/ForwardX",
+   "View/ForwardY",
+   "View/ForwardZ",
+   "View/UpX",
+   "View/UpY",
+   "View/UpZ"
+  ],
+  "status": "HISTORICAL_ONLY_NOT_NEW_PASS"
+ }
+]

@@ -1,0 +1,178 @@
+[2026.10.13-02.35.23:329][  2]LogPython: FS_B01_TREE_BEGIN boundary_Tree_A_lod1_near
+[2026.10.13-02.35.23:329][  2]LogConsoleResponse: Display: Rebuild Foliage Trees
+[2026.10.13-02.35.23:329][  2]LogPython: FS_B01_TREE_END boundary_Tree_A_lod1_near
+[2026.10.13-02.35.23:455][  2]LogPython: FS_B01_TREE_BEGIN boundary_Tree_A_lod1_near
+[2026.10.13-02.35.23:455][  2]LogConsoleResponse: Display: Rebuild Foliage Trees
+[2026.10.13-02.35.23:455][  2]LogPython: FS_B01_TREE_END boundary_Tree_A_lod1_near
+[2026.10.13-02.35.23:472][  2]LogPython: FS_B01_TREE_BEGIN boundary_Tree_A_lod1_near
+[2026.10.13-02.35.23:472][  2]LogConsoleResponse: Display: Rebuild Foliage Trees
+[2026.10.13-02.35.23:472][  2]LogPython: FS_B01_TREE_END boundary_Tree_A_lod1_near
+[2026.10.13-02.35.23:678][  2]LogPython: FS_B01_TREE_BEGIN boundary_Tree_A_lod1_near
+[2026.10.13-02.35.23:679][  2]LogConsoleResponse: Display: Rebuild Foliage Trees
+[2026.10.13-02.35.23:679][  2]LogPython: FS_B01_TREE_END boundary_Tree_A_lod1_near
+[2026.10.13-02.35.24:819][ 53]LogPython: FS_B01_RENDER_BEGIN boundary_Tree_A_lod1_near
+[2026.10.13-02.35.24:843][ 56]LogStaticMesh: Display: lod:0/3   section:0/1   runs:   1   inst:       1   tris:       28   cast shadow:1   cull:   50000   shadow:0     /Game/ForestSpike/B01_20261013c/Debug/Tree_A_policy.Tree_A_policy M_LOD0
+[2026.10.13-02.35.24:844][ 56]LogStaticMesh: Display: lod:0/3   section:0/1   runs:   1   inst:       1   tris:       28   cast shadow:1   cull:   50000   shadow:1     /Game/ForestSpike/B01_20261013c/Debug/Tree_A_policy.Tree_A_policy M_LOD0
+[2026.10.13-02.35.24:992][ 61]LogPython: FS_B01_RENDER_END boundary_Tree_A_lod1_near
+[2026.10.13-02.35.24:992][ 61]LogPython: FS_B01_LOD boundary_Tree_A_lod1_near
+[2026.10.13-02.35.25:000][ 62]LogPython: FS_B01_TREE_BEGIN boundary_Tree_A_lod1_far
+[2026.10.13-02.35.25:000][ 62]LogConsoleResponse: Display: Rebuild Foliage Trees
+[2026.10.13-02.35.25:000][ 62]LogPython: FS_B01_TREE_END boundary_Tree_A_lod1_far
+[2026.10.13-02.35.25:571][113]LogPython: FS_B01_RENDER_BEGIN boundary_Tree_A_lod1_far
+[2026.10.13-02.35.25:595][116]LogStaticMesh: Display: lod:1/3   section:0/1   runs:   1   inst:       1   tris:       28   cast shadow:1   cull:   50000   shadow:0     /Game/ForestSpike/B01_20261013c/Debug/Tree_A_policy.Tree_A_policy M_LOD1
+[2026.10.13-02.35.25:595][116]LogStaticMesh: Display: lod:1/3   section:0/1   runs:   1   inst:       1   tris:       28   cast shadow:1   cull:   50000   shadow:1     /Game/ForestSpike/B01_20261013c/Debug/Tree_A_policy.Tree_A_policy M_LOD1
+[2026.10.13-02.35.25:752][121]LogPython: FS_B01_RENDER_END boundary_Tree_A_lod1_far
+[2026.10.13-02.35.25:752][121]LogPython: FS_B01_LOD boundary_Tree_A_lod1_far
+[2026.10.13-02.35.25:760][122]LogPython: FS_B01_TREE_BEGIN boundary_Tree_A_lod2_near
+[2026.10.13-02.35.25:761][122]LogConsoleResponse: Display: Rebuild Foliage Trees
+[2026.10.13-02.35.25:761][122]LogPython: FS_B01_TREE_END boundary_Tree_A_lod2_near
+[2026.10.13-02.35.26:277][173]LogPython: FS_B01_RENDER_BEGIN boundary_Tree_A_lod2_near
+[2026.10.13-02.35.26:296][176]LogStaticMesh: Display: lod:1/3   section:0/1   runs:   1   inst:       1   tris:       28   cast shadow:1   cull:   50000   shadow:0     /Game/ForestSpike/B01_20261013c/Debug/Tree_A_policy.Tree_A_policy M_LOD1
+[2026.10.13-02.35.26:297][176]LogStaticMesh: Display: lod:1/3   section:0/1   runs:   1   inst:       1   tris:       28   cast shadow:1   cull:   50000   shadow:1     /Game/ForestSpike/B01_20261013c/Debug/Tree_A_policy.Tree_A_policy M_LOD1
+[2026.10.13-02.35.26:460][181]LogPython: FS_B01_RENDER_END boundary_Tree_A_lod2_near
+[2026.10.13-02.35.26:460][181]LogPython: FS_B01_LOD boundary_Tree_A_lod2_near
+[2026.10.13-02.35.26:468][182]LogPython: FS_B01_TREE_BEGIN boundary_Tree_A_lod2_far
+[2026.10.13-02.35.26:468][182]LogConsoleResponse: Display: Rebuild Foliage Trees
+[2026.10.13-02.35.26:468][182]LogPython: FS_B01_TREE_END boundary_Tree_A_lod2_far
+[2026.10.13-02.35.27:052][233]LogPython: FS_B01_RENDER_BEGIN boundary_Tree_A_lod2_far
+[2026.10.13-02.35.27:070][236]LogStaticMesh: Display: lod:2/3   section:0/1   runs:   1   inst:       1   tris:       28   cast shadow:1   cull:   50000   shadow:0     /Game/ForestSpike/B01_20261013c/Debug/Tree_A_policy.Tree_A_policy M_LOD2
+[2026.10.13-02.35.27:071][236]LogStaticMesh: Display: lod:2/3   section:0/1   runs:   1   inst:       1   tris:       28   cast shadow:1   cull:   50000   shadow:1     /Game/ForestSpike/B01_20261013c/Debug/Tree_A_policy.Tree_A_policy M_LOD2
+[2026.10.13-02.35.27:071][236]LogStaticMesh: Display: lod:2/3   section:0/1   runs:   1   inst:       1   tris:       28   cast shadow:1   cull:   50000   shadow:1     /Game/ForestSpike/B01_20261013c/Debug/Tree_A_policy.Tree_A_policy M_LOD2
+[2026.10.13-02.35.27:212][241]LogPython: FS_B01_RENDER_END boundary_Tree_A_lod2_far
+[2026.10.13-02.35.27:212][241]LogPython: FS_B01_LOD boundary_Tree_A_lod2_far
+[2026.10.13-02.35.27:224][242]LogPython: FS_B01_TREE_BEGIN boundary_Tree_B_dense_rounded_lod1_near
+[2026.10.13-02.35.27:224][242]LogConsoleResponse: Display: Rebuild Foliage Trees
+[2026.10.13-02.35.27:224][242]LogPython: FS_B01_TREE_END boundary_Tree_B_dense_rounded_lod1_near
+[2026.10.13-02.35.27:737][293]LogPython: FS_B01_RENDER_BEGIN boundary_Tree_B_dense_rounded_lod1_near
+[2026.10.13-02.35.27:758][296]LogStaticMesh: Display: lod:0/3   section:0/1   runs:   1   inst:       1   tris:      120   cast shadow:1   cull:   50000   shadow:0     /Game/ForestSpike/B01_20261013c/Debug/Tree_B_dense_rounded_policy.Tree_B_dense_rounded_policy M_LOD0
+[2026.10.13-02.35.27:759][296]LogStaticMesh: Display: lod:0/3   section:0/1   runs:   1   inst:       1   tris:      120   cast shadow:1   cull:   50000   shadow:1     /Game/ForestSpike/B01_20261013c/Debug/Tree_B_dense_rounded_policy.Tree_B_dense_rounded_policy M_LOD0
+[2026.10.13-02.35.27:905][301]LogPython: FS_B01_RENDER_END boundary_Tree_B_dense_rounded_lod1_near
+[2026.10.13-02.35.27:905][301]LogPython: FS_B01_LOD boundary_Tree_B_dense_rounded_lod1_near
+[2026.10.13-02.35.27:913][302]LogPython: FS_B01_TREE_BEGIN boundary_Tree_B_dense_rounded_lod1_far
+[2026.10.13-02.35.27:913][302]LogConsoleResponse: Display: Rebuild Foliage Trees
+[2026.10.13-02.35.27:913][302]LogPython: FS_B01_TREE_END boundary_Tree_B_dense_rounded_lod1_far
+[2026.10.13-02.35.28:420][353]LogPython: FS_B01_RENDER_BEGIN boundary_Tree_B_dense_rounded_lod1_far
+[2026.10.13-02.35.28:445][356]LogStaticMesh: Display: lod:1/3   section:0/1   runs:   1   inst:       1   tris:       36   cast shadow:1   cull:   50000   shadow:0     /Game/ForestSpike/B01_20261013c/Debug/Tree_B_dense_rounded_policy.Tree_B_dense_rounded_policy M_LOD1
+[2026.10.13-02.35.28:446][356]LogStaticMesh: Display: lod:1/3   section:0/1   runs:   1   inst:       1   tris:       36   cast shadow:1   cull:   50000   shadow:1     /Game/ForestSpike/B01_20261013c/Debug/Tree_B_dense_rounded_policy.Tree_B_dense_rounded_policy M_LOD1
+[2026.10.13-02.35.28:593][361]LogPython: FS_B01_RENDER_END boundary_Tree_B_dense_rounded_lod1_far
+[2026.10.13-02.35.28:593][361]LogPython: FS_B01_LOD boundary_Tree_B_dense_rounded_lod1_far
+[2026.10.13-02.35.28:600][362]LogPython: FS_B01_TREE_BEGIN boundary_Tree_B_dense_rounded_lod2_near
+[2026.10.13-02.35.28:600][362]LogConsoleResponse: Display: Rebuild Foliage Trees
+[2026.10.13-02.35.28:600][362]LogPython: FS_B01_TREE_END boundary_Tree_B_dense_rounded_lod2_near
+[2026.10.13-02.35.29:126][413]LogPython: FS_B01_RENDER_BEGIN boundary_Tree_B_dense_rounded_lod2_near
+[2026.10.13-02.35.29:146][416]LogStaticMesh: Display: lod:1/3   section:0/1   runs:   1   inst:       1   tris:       36   cast shadow:1   cull:   50000   shadow:0     /Game/ForestSpike/B01_20261013c/Debug/Tree_B_dense_rounded_policy.Tree_B_dense_rounded_policy M_LOD1
+[2026.10.13-02.35.29:147][416]LogStaticMesh: Display: lod:1/3   section:0/1   runs:   1   inst:       1   tris:       36   cast shadow:1   cull:   50000   shadow:1     /Game/ForestSpike/B01_20261013c/Debug/Tree_B_dense_rounded_policy.Tree_B_dense_rounded_policy M_LOD1
+[2026.10.13-02.35.29:147][416]LogStaticMesh: Display: lod:1/3   section:0/1   runs:   1   inst:       1   tris:       36   cast shadow:1   cull:   50000   shadow:1     /Game/ForestSpike/B01_20261013c/Debug/Tree_B_dense_rounded_policy.Tree_B_dense_rounded_policy M_LOD1
+[2026.10.13-02.35.29:292][421]LogPython: FS_B01_RENDER_END boundary_Tree_B_dense_rounded_lod2_near
+[2026.10.13-02.35.29:292][421]LogPython: FS_B01_LOD boundary_Tree_B_dense_rounded_lod2_near
+[2026.10.13-02.35.29:300][422]LogPython: FS_B01_TREE_BEGIN boundary_Tree_B_dense_rounded_lod2_far
+[2026.10.13-02.35.29:301][422]LogConsoleResponse: Display: Rebuild Foliage Trees
+[2026.10.13-02.35.29:301][422]LogPython: FS_B01_TREE_END boundary_Tree_B_dense_rounded_lod2_far
+[2026.10.13-02.35.29:816][473]LogPython: FS_B01_RENDER_BEGIN boundary_Tree_B_dense_rounded_lod2_far
+[2026.10.13-02.35.29:837][476]LogStaticMesh: Display: lod:2/3   section:0/1   runs:   1   inst:       1   tris:       20   cast shadow:1   cull:   50000   shadow:0     /Game/ForestSpike/B01_20261013c/Debug/Tree_B_dense_rounded_policy.Tree_B_dense_rounded_policy M_LOD2
+[2026.10.13-02.35.29:837][476]LogStaticMesh: Display: lod:2/3   section:0/1   runs:   1   inst:       1   tris:       20   cast shadow:1   cull:   50000   shadow:1     /Game/ForestSpike/B01_20261013c/Debug/Tree_B_dense_rounded_policy.Tree_B_dense_rounded_policy M_LOD2
+[2026.10.13-02.35.29:839][476]LogStaticMesh: Display: lod:2/3   section:0/1   runs:   1   inst:       1   tris:       20   cast shadow:1   cull:   50000   shadow:1     /Game/ForestSpike/B01_20261013c/Debug/Tree_B_dense_rounded_policy.Tree_B_dense_rounded_policy M_LOD2
+[2026.10.13-02.35.29:979][481]LogPython: FS_B01_RENDER_END boundary_Tree_B_dense_rounded_lod2_far
+[2026.10.13-02.35.29:979][481]LogPython: FS_B01_LOD boundary_Tree_B_dense_rounded_lod2_far
+[2026.10.13-02.35.29:989][482]LogPython: FS_B01_TREE_BEGIN boundary_Tree_B_horizontal_tiered_lod1_near
+[2026.10.13-02.35.29:989][482]LogConsoleResponse: Display: Rebuild Foliage Trees
+[2026.10.13-02.35.29:989][482]LogPython: FS_B01_TREE_END boundary_Tree_B_horizontal_tiered_lod1_near
+[2026.10.13-02.35.30:532][533]LogPython: FS_B01_RENDER_BEGIN boundary_Tree_B_horizontal_tiered_lod1_near
+[2026.10.13-02.35.30:554][536]LogStaticMesh: Display: lod:0/3   section:0/1   runs:   1   inst:       1   tris:      112   cast shadow:1   cull:   50000   shadow:0     /Game/ForestSpike/B01_20261013c/Debug/Tree_B_horizontal_tiered_policy.Tree_B_horizontal_tiered_policy M_LOD0
+[2026.10.13-02.35.30:555][536]LogStaticMesh: Display: lod:0/3   section:0/1   runs:   1   inst:       1   tris:      112   cast shadow:1   cull:   50000   shadow:1     /Game/ForestSpike/B01_20261013c/Debug/Tree_B_horizontal_tiered_policy.Tree_B_horizontal_tiered_policy M_LOD0
+[2026.10.13-02.35.30:711][541]LogPython: FS_B01_RENDER_END boundary_Tree_B_horizontal_tiered_lod1_near
+[2026.10.13-02.35.30:711][541]LogPython: FS_B01_LOD boundary_Tree_B_horizontal_tiered_lod1_near
+[2026.10.13-02.35.30:719][542]LogPython: FS_B01_TREE_BEGIN boundary_Tree_B_horizontal_tiered_lod1_far
+[2026.10.13-02.35.30:719][542]LogConsoleResponse: Display: Rebuild Foliage Trees
+[2026.10.13-02.35.30:719][542]LogPython: FS_B01_TREE_END boundary_Tree_B_horizontal_tiered_lod1_far
+[2026.10.13-02.35.31:236][593]LogPython: FS_B01_RENDER_BEGIN boundary_Tree_B_horizontal_tiered_lod1_far
+[2026.10.13-02.35.31:256][596]LogStaticMesh: Display: lod:1/3   section:0/1   runs:   1   inst:       1   tris:       38   cast shadow:1   cull:   50000   shadow:0     /Game/ForestSpike/B01_20261013c/Debug/Tree_B_horizontal_tiered_policy.Tree_B_horizontal_tiered_policy M_LOD1
+[2026.10.13-02.35.31:256][596]LogStaticMesh: Display: lod:1/3   section:0/1   runs:   1   inst:       1   tris:       38   cast shadow:1   cull:   50000   shadow:1     /Game/ForestSpike/B01_20261013c/Debug/Tree_B_horizontal_tiered_policy.Tree_B_horizontal_tiered_policy M_LOD1
+[2026.10.13-02.35.31:406][601]LogPython: FS_B01_RENDER_END boundary_Tree_B_horizontal_tiered_lod1_far
+[2026.10.13-02.35.31:406][601]LogPython: FS_B01_LOD boundary_Tree_B_horizontal_tiered_lod1_far
+[2026.10.13-02.35.31:414][602]LogPython: FS_B01_TREE_BEGIN boundary_Tree_B_horizontal_tiered_lod2_near
+[2026.10.13-02.35.31:414][602]LogConsoleResponse: Display: Rebuild Foliage Trees
+[2026.10.13-02.35.31:415][602]LogPython: FS_B01_TREE_END boundary_Tree_B_horizontal_tiered_lod2_near
+[2026.10.13-02.35.31:931][653]LogPython: FS_B01_RENDER_BEGIN boundary_Tree_B_horizontal_tiered_lod2_near
+[2026.10.13-02.35.31:951][656]LogStaticMesh: Display: lod:1/3   section:0/1   runs:   1   inst:       1   tris:       38   cast shadow:1   cull:   50000   shadow:0     /Game/ForestSpike/B01_20261013c/Debug/Tree_B_horizontal_tiered_policy.Tree_B_horizontal_tiered_policy M_LOD1
+[2026.10.13-02.35.31:951][656]LogStaticMesh: Display: lod:1/3   section:0/1   runs:   1   inst:       1   tris:       38   cast shadow:1   cull:   50000   shadow:1     /Game/ForestSpike/B01_20261013c/Debug/Tree_B_horizontal_tiered_policy.Tree_B_horizontal_tiered_policy M_LOD1
+[2026.10.13-02.35.31:952][656]LogStaticMesh: Display: lod:1/3   section:0/1   runs:   1   inst:       1   tris:       38   cast shadow:1   cull:   50000   shadow:1     /Game/ForestSpike/B01_20261013c/Debug/Tree_B_horizontal_tiered_policy.Tree_B_horizontal_tiered_policy M_LOD1
+[2026.10.13-02.35.32:094][661]LogPython: FS_B01_RENDER_END boundary_Tree_B_horizontal_tiered_lod2_near
+[2026.10.13-02.35.32:094][661]LogPython: FS_B01_LOD boundary_Tree_B_horizontal_tiered_lod2_near
+[2026.10.13-02.35.32:102][662]LogPython: FS_B01_TREE_BEGIN boundary_Tree_B_horizontal_tiered_lod2_far
+[2026.10.13-02.35.32:102][662]LogConsoleResponse: Display: Rebuild Foliage Trees
+[2026.10.13-02.35.32:102][662]LogPython: FS_B01_TREE_END boundary_Tree_B_horizontal_tiered_lod2_far
+[2026.10.13-02.35.32:621][713]LogPython: FS_B01_RENDER_BEGIN boundary_Tree_B_horizontal_tiered_lod2_far
+[2026.10.13-02.35.32:641][716]LogStaticMesh: Display: lod:2/3   section:0/1   runs:   1   inst:       1   tris:       20   cast shadow:1   cull:   50000   shadow:0     /Game/ForestSpike/B01_20261013c/Debug/Tree_B_horizontal_tiered_policy.Tree_B_horizontal_tiered_policy M_LOD2
+[2026.10.13-02.35.32:642][716]LogStaticMesh: Display: lod:2/3   section:0/1   runs:   1   inst:       1   tris:       20   cast shadow:1   cull:   50000   shadow:1     /Game/ForestSpike/B01_20261013c/Debug/Tree_B_horizontal_tiered_policy.Tree_B_horizontal_tiered_policy M_LOD2
+[2026.10.13-02.35.32:642][716]LogStaticMesh: Display: lod:2/3   section:0/1   runs:   1   inst:       1   tris:       20   cast shadow:1   cull:   50000   shadow:1     /Game/ForestSpike/B01_20261013c/Debug/Tree_B_horizontal_tiered_policy.Tree_B_horizontal_tiered_policy M_LOD2
+[2026.10.13-02.35.32:791][721]LogPython: FS_B01_RENDER_END boundary_Tree_B_horizontal_tiered_lod2_far
+[2026.10.13-02.35.32:791][721]LogPython: FS_B01_LOD boundary_Tree_B_horizontal_tiered_lod2_far
+[2026.10.13-02.35.32:801][722]LogPython: FS_B01_TREE_BEGIN boundary_Tree_B_open_vase_lod1_near
+[2026.10.13-02.35.32:802][722]LogConsoleResponse: Display: Rebuild Foliage Trees
+[2026.10.13-02.35.32:802][722]LogPython: FS_B01_TREE_END boundary_Tree_B_open_vase_lod1_near
+[2026.10.13-02.35.33:324][773]LogPython: FS_B01_RENDER_BEGIN boundary_Tree_B_open_vase_lod1_near
+[2026.10.13-02.35.33:346][776]LogStaticMesh: Display: lod:0/3   section:0/1   runs:   1   inst:       1   tris:      102   cast shadow:1   cull:   50000   shadow:0     /Game/ForestSpike/B01_20261013c/Debug/Tree_B_open_vase_policy.Tree_B_open_vase_policy M_LOD0
+[2026.10.13-02.35.33:348][776]LogStaticMesh: Display: lod:0/3   section:0/1   runs:   1   inst:       1   tris:      102   cast shadow:1   cull:   50000   shadow:1     /Game/ForestSpike/B01_20261013c/Debug/Tree_B_open_vase_policy.Tree_B_open_vase_policy M_LOD0
+[2026.10.13-02.35.33:508][781]LogPython: FS_B01_RENDER_END boundary_Tree_B_open_vase_lod1_near
+[2026.10.13-02.35.33:508][781]LogPython: FS_B01_LOD boundary_Tree_B_open_vase_lod1_near
+[2026.10.13-02.35.33:517][782]LogPython: FS_B01_TREE_BEGIN boundary_Tree_B_open_vase_lod1_far
+[2026.10.13-02.35.33:517][782]LogConsoleResponse: Display: Rebuild Foliage Trees
+[2026.10.13-02.35.33:517][782]LogPython: FS_B01_TREE_END boundary_Tree_B_open_vase_lod1_far
+[2026.10.13-02.35.34:035][833]LogPython: FS_B01_RENDER_BEGIN boundary_Tree_B_open_vase_lod1_far
+[2026.10.13-02.35.34:053][836]LogStaticMesh: Display: lod:1/3   section:0/1   runs:   1   inst:       1   tris:       40   cast shadow:1   cull:   50000   shadow:0     /Game/ForestSpike/B01_20261013c/Debug/Tree_B_open_vase_policy.Tree_B_open_vase_policy M_LOD1
+[2026.10.13-02.35.34:054][836]LogStaticMesh: Display: lod:1/3   section:0/1   runs:   1   inst:       1   tris:       40   cast shadow:1   cull:   50000   shadow:1     /Game/ForestSpike/B01_20261013c/Debug/Tree_B_open_vase_policy.Tree_B_open_vase_policy M_LOD1
+[2026.10.13-02.35.34:194][841]LogPython: FS_B01_RENDER_END boundary_Tree_B_open_vase_lod1_far
+[2026.10.13-02.35.34:194][841]LogPython: FS_B01_LOD boundary_Tree_B_open_vase_lod1_far
+[2026.10.13-02.35.34:202][842]LogPython: FS_B01_TREE_BEGIN boundary_Tree_B_open_vase_lod2_near
+[2026.10.13-02.35.34:202][842]LogConsoleResponse: Display: Rebuild Foliage Trees
+[2026.10.13-02.35.34:202][842]LogPython: FS_B01_TREE_END boundary_Tree_B_open_vase_lod2_near
+[2026.10.13-02.35.34:715][893]LogPython: FS_B01_RENDER_BEGIN boundary_Tree_B_open_vase_lod2_near
+[2026.10.13-02.35.34:738][896]LogStaticMesh: Display: lod:1/3   section:0/1   runs:   1   inst:       1   tris:       40   cast shadow:1   cull:   50000   shadow:0     /Game/ForestSpike/B01_20261013c/Debug/Tree_B_open_vase_policy.Tree_B_open_vase_policy M_LOD1
+[2026.10.13-02.35.34:739][896]LogStaticMesh: Display: lod:1/3   section:0/1   runs:   1   inst:       1   tris:       40   cast shadow:1   cull:   50000   shadow:1     /Game/ForestSpike/B01_20261013c/Debug/Tree_B_open_vase_policy.Tree_B_open_vase_policy M_LOD1
+[2026.10.13-02.35.34:739][896]LogStaticMesh: Display: lod:1/3   section:0/1   runs:   1   inst:       1   tris:       40   cast shadow:1   cull:   50000   shadow:1     /Game/ForestSpike/B01_20261013c/Debug/Tree_B_open_vase_policy.Tree_B_open_vase_policy M_LOD1
+[2026.10.13-02.35.34:878][901]LogPython: FS_B01_RENDER_END boundary_Tree_B_open_vase_lod2_near
+[2026.10.13-02.35.34:878][901]LogPython: FS_B01_LOD boundary_Tree_B_open_vase_lod2_near
+[2026.10.13-02.35.34:886][902]LogPython: FS_B01_TREE_BEGIN boundary_Tree_B_open_vase_lod2_far
+[2026.10.13-02.35.34:886][902]LogConsoleResponse: Display: Rebuild Foliage Trees
+[2026.10.13-02.35.34:886][902]LogPython: FS_B01_TREE_END boundary_Tree_B_open_vase_lod2_far
+[2026.10.13-02.35.35:358][953]LogPython: FS_B01_RENDER_BEGIN boundary_Tree_B_open_vase_lod2_far
+[2026.10.13-02.35.35:380][956]LogStaticMesh: Display: lod:2/3   section:0/1   runs:   1   inst:       1   tris:       20   cast shadow:1   cull:   50000   shadow:0     /Game/ForestSpike/B01_20261013c/Debug/Tree_B_open_vase_policy.Tree_B_open_vase_policy M_LOD2
+[2026.10.13-02.35.35:380][956]LogStaticMesh: Display: lod:2/3   section:0/1   runs:   1   inst:       1   tris:       20   cast shadow:1   cull:   50000   shadow:1     /Game/ForestSpike/B01_20261013c/Debug/Tree_B_open_vase_policy.Tree_B_open_vase_policy M_LOD2
+[2026.10.13-02.35.35:528][961]LogPython: FS_B01_RENDER_END boundary_Tree_B_open_vase_lod2_far
+[2026.10.13-02.35.35:529][961]LogPython: FS_B01_LOD boundary_Tree_B_open_vase_lod2_far
+[2026.10.13-02.35.35:540][962]LogPython: FS_B01_TREE_BEGIN boundary_Tree_B_tall_columnar_lod1_near
+[2026.10.13-02.35.35:541][962]LogConsoleResponse: Display: Rebuild Foliage Trees
+[2026.10.13-02.35.35:541][962]LogPython: FS_B01_TREE_END boundary_Tree_B_tall_columnar_lod1_near
+[2026.10.13-02.35.36:038][ 13]LogPython: FS_B01_RENDER_BEGIN boundary_Tree_B_tall_columnar_lod1_near
+[2026.10.13-02.35.36:059][ 16]LogStaticMesh: Display: lod:0/3   section:0/1   runs:   1   inst:       1   tris:      108   cast shadow:1   cull:   50000   shadow:0     /Game/ForestSpike/B01_20261013c/Debug/Tree_B_tall_columnar_policy.Tree_B_tall_columnar_policy M_LOD0
+[2026.10.13-02.35.36:059][ 16]LogStaticMesh: Display: lod:0/3   section:0/1   runs:   1   inst:       1   tris:      108   cast shadow:1   cull:   50000   shadow:1     /Game/ForestSpike/B01_20261013c/Debug/Tree_B_tall_columnar_policy.Tree_B_tall_columnar_policy M_LOD0
+[2026.10.13-02.35.36:196][ 21]LogPython: FS_B01_RENDER_END boundary_Tree_B_tall_columnar_lod1_near
+[2026.10.13-02.35.36:197][ 21]LogPython: FS_B01_LOD boundary_Tree_B_tall_columnar_lod1_near
+[2026.10.13-02.35.36:204][ 22]LogPython: FS_B01_TREE_BEGIN boundary_Tree_B_tall_columnar_lod1_far
+[2026.10.13-02.35.36:204][ 22]LogConsoleResponse: Display: Rebuild Foliage Trees
+[2026.10.13-02.35.36:204][ 22]LogPython: FS_B01_TREE_END boundary_Tree_B_tall_columnar_lod1_far
+[2026.10.13-02.35.36:706][ 73]LogPython: FS_B01_RENDER_BEGIN boundary_Tree_B_tall_columnar_lod1_far
+[2026.10.13-02.35.36:725][ 76]LogStaticMesh: Display: lod:1/3   section:0/1   runs:   1   inst:       1   tris:       38   cast shadow:1   cull:   50000   shadow:0     /Game/ForestSpike/B01_20261013c/Debug/Tree_B_tall_columnar_policy.Tree_B_tall_columnar_policy M_LOD1
+[2026.10.13-02.35.36:725][ 76]LogStaticMesh: Display: lod:1/3   section:0/1   runs:   1   inst:       1   tris:       38   cast shadow:1   cull:   50000   shadow:1     /Game/ForestSpike/B01_20261013c/Debug/Tree_B_tall_columnar_policy.Tree_B_tall_columnar_policy M_LOD1
+[2026.10.13-02.35.36:871][ 81]LogPython: FS_B01_RENDER_END boundary_Tree_B_tall_columnar_lod1_far
+[2026.10.13-02.35.36:871][ 81]LogPython: FS_B01_LOD boundary_Tree_B_tall_columnar_lod1_far
+[2026.10.13-02.35.36:879][ 82]LogPython: FS_B01_TREE_BEGIN boundary_Tree_B_tall_columnar_lod2_near
+[2026.10.13-02.35.36:879][ 82]LogConsoleResponse: Display: Rebuild Foliage Trees
+[2026.10.13-02.35.36:879][ 82]LogPython: FS_B01_TREE_END boundary_Tree_B_tall_columnar_lod2_near
+[2026.10.13-02.35.37:346][133]LogPython: FS_B01_RENDER_BEGIN boundary_Tree_B_tall_columnar_lod2_near
+[2026.10.13-02.35.37:366][136]LogStaticMesh: Display: lod:1/3   section:0/1   runs:   1   inst:       1   tris:       38   cast shadow:1   cull:   50000   shadow:0     /Game/ForestSpike/B01_20261013c/Debug/Tree_B_tall_columnar_policy.Tree_B_tall_columnar_policy M_LOD1
+[2026.10.13-02.35.37:367][136]LogStaticMesh: Display: lod:1/3   section:0/1   runs:   1   inst:       1   tris:       38   cast shadow:1   cull:   50000   shadow:1     /Game/ForestSpike/B01_20261013c/Debug/Tree_B_tall_columnar_policy.Tree_B_tall_columnar_policy M_LOD1
+[2026.10.13-02.35.37:367][136]LogStaticMesh: Display: lod:1/3   section:0/1   runs:   1   inst:       1   tris:       38   cast shadow:1   cull:   50000   shadow:1     /Game/ForestSpike/B01_20261013c/Debug/Tree_B_tall_columnar_policy.Tree_B_tall_columnar_policy M_LOD1
+[2026.10.13-02.35.37:515][141]LogPython: FS_B01_RENDER_END boundary_Tree_B_tall_columnar_lod2_near
+[2026.10.13-02.35.37:515][141]LogPython: FS_B01_LOD boundary_Tree_B_tall_columnar_lod2_near
+[2026.10.13-02.35.37:523][142]LogPython: FS_B01_TREE_BEGIN boundary_Tree_B_tall_columnar_lod2_far
+[2026.10.13-02.35.37:524][142]LogConsoleResponse: Display: Rebuild Foliage Trees
+[2026.10.13-02.35.37:524][142]LogPython: FS_B01_TREE_END boundary_Tree_B_tall_columnar_lod2_far
+[2026.10.13-02.35.38:004][193]LogPython: FS_B01_RENDER_BEGIN boundary_Tree_B_tall_columnar_lod2_far
+[2026.10.13-02.35.38:023][196]LogStaticMesh: Display: lod:2/3   section:0/1   runs:   1   inst:       1   tris:       20   cast shadow:1   cull:   50000   shadow:0     /Game/ForestSpike/B01_20261013c/Debug/Tree_B_tall_columnar_policy.Tree_B_tall_columnar_policy M_LOD2
+[2026.10.13-02.35.38:023][196]LogStaticMesh: Display: lod:2/3   section:0/1   runs:   1   inst:       1   tris:       20   cast shadow:1   cull:   50000   shadow:1     /Game/ForestSpike/B01_20261013c/Debug/Tree_B_tall_columnar_policy.Tree_B_tall_columnar_policy M_LOD2
+[2026.10.13-02.35.38:167][202]LogPython: FS_B01_RENDER_END boundary_Tree_B_tall_columnar_lod2_far
+[2026.10.13-02.35.38:167][202]LogPython: FS_B01_LOD boundary_Tree_B_tall_columnar_lod2_far
+[2026.10.13-02.35.40:993][203]LogExit: Exiting.
+[2026.10.13-02.35.41:018][203]Log file closed, 10/13/26 10:35:41

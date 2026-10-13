@@ -1,0 +1,8 @@
+LogCsvProfiler: Display: Capture started. CSV ID: 916C032F464D85759F50E3BFD251F588
+[2026.10.13-02.13.41:023][  0]LogWorld: Bringing World /Game/ForestSpike/B01_20261013d/Perf/L_FSP_B01_20261013d_A_V3.L_FSP_B01_20261013d_A_V3 up for play (max tick rate 0) at 2026.10.13-10.13.41
+[2026.10.13-02.14.25:122][263]LogCsvProfiler: Display: Capture Ended. Writing CSV to file : ../../../../../../Users/EDDY/AppData/Local/UnrealEngine/5.8/Saved/Profiling/CSV/Profile(20261013_101316).csv
+[2026.10.13-02.14.25:128][264]LogWindows: FPlatformMisc::RequestExit(0, CsvProfiler.ExitAfterCsvProfiling)
+[2026.10.13-02.14.25:128][265]LogWindows: FPlatformMisc::RequestExitWithStatus(0, 0, CsvProfiler.ExitAfterCsvProfiling)
+[2026.10.13-02.14.25:129][265]LogCore: Engine exit requested (reason: Win RequestExit)
+[2026.10.13-02.14.26:929][265]LogExit: Exiting.
+[2026.10.13-02.14.26:968][265]Log file closed, 10/13/26 10:14:26

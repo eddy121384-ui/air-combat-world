@@ -1,0 +1,31 @@
+{
+  "level": "L_FSP_B01_20261013c_A_V3",
+  "frames": 1264,
+  "args": [
+    "\"D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\ForestSpike\\ForestSpike.uproject\"",
+    "/Game/ForestSpike/B01_20261013c/Perf/L_FSP_B01_20261013c_A_V3",
+    "-game",
+    "-windowed",
+    "-ResX=1920",
+    "-ResY=1080",
+    "-nosound",
+    "-nosplash",
+    "-unattended",
+    "-benchmark",
+    "-fps=60",
+    "-ExecCmds=\"r.VSync 0,t.MaxFPS 0,r.ScreenPercentage 100,r.MotionBlurQuality 0,r.RayTracing 0,foliage.ForceLOD -1,r.ForceLOD -1,foliage.LODDistanceScale 1,foliage.RandomLODRange 0,r.ViewDistanceScale 1\"",
+    "-csvCaptureFrames=1264",
+    "-ExitAfterCsvProfiling",
+    "-csvMetadata=\"tag=b01_A_smoke01,level=L_FSP_B01_20261013c_A_V3,run_id=c13530b8f09d46dabad27d006368d5dc\"",
+    "-abslog=\"D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\ForestSpike\\Saved\\ForestSpike\\b01\\b01_A_smoke01\\engine.log\""
+  ],
+  "started_utc": "2026-10-13T02:04:25.3172826+00:00",
+  "run_id": "c13530b8f09d46dabad27d006368d5dc",
+  "reopen_receipt_sha256": "3D78D64BBFFD7E91DBD6147EE413CFE7E8229E4D44319AA09BE931A0D55885C2",
+  "tag": "b01_A_smoke01",
+  "host_scope": "Intel UHD 770 only",
+  "registration_sha256": "5D2FA2D4472B11CB983A656C1FE4175B60AFF448CC03C2D051294B8CBE368E03",
+  "world_path": "/Game/ForestSpike/B01_20261013c/Perf/L_FSP_B01_20261013c_A_V3",
+  "arm": "A",
+  "warm_world_frames": 120
+}

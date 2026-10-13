@@ -1,0 +1,98 @@
+{
+  "stages": [
+    {
+      "tag": "b01_A_smoke01",
+      "status": "FAIL_FS_B01_SMOKE",
+      "scope": "one repair smoke; GPU diagnostic only, no A/B ranking",
+      "arm": "A",
+      "capture_pass": true,
+      "exit_code": 0,
+      "host_scope": "Intel UHD 770 only",
+      "motion_pass": false
+    },
+    {
+      "tag": "b01_A_smoke02",
+      "motion_pass": true,
+      "host_scope": "Intel UHD 770 only",
+      "scope": "one repair smoke; GPU diagnostic only, no A/B ranking",
+      "status": "PASS_FS_B01_SMOKE",
+      "arm": "A",
+      "exit_code": 0,
+      "capture_pass": true
+    },
+    {
+      "tag": "b01_B_smoke01",
+      "host_scope": "Intel UHD 770 only",
+      "exit_code": 0,
+      "status": "PASS_FS_B01_SMOKE",
+      "arm": "B",
+      "capture_pass": true,
+      "motion_pass": true,
+      "scope": "one repair smoke; GPU diagnostic only, no A/B ranking"
+    },
+    {
+      "tag": "b01_build_a",
+      "status": "MISSING_RECEIPT",
+      "exit_code": 3,
+      "completion_scope": "editor stage receipt, not motion/performance/visual acceptance",
+      "fresh_receipt": false
+    },
+    {
+      "tag": "b01_build_b",
+      "exit_code": -1073741819,
+      "fresh_receipt": false,
+      "completion_scope": "editor stage receipt, not motion/performance/visual acceptance",
+      "status": "FAIL_FS_B01_BUILD"
+    },
+    {
+      "tag": "b01_build_c",
+      "completion_scope": "editor stage receipt, not motion/performance/visual acceptance",
+      "exit_code": -1073741819,
+      "fresh_receipt": true,
+      "status": "PASS_FS_B01_BUILD_REOPEN_REQUIRED"
+    },
+    {
+      "tag": "b01_build_d",
+      "completion_scope": "editor stage receipt, not motion/performance/visual acceptance",
+      "status": "PASS_FS_B01_BUILD_REOPEN_REQUIRED",
+      "exit_code": 0,
+      "fresh_receipt": true
+    },
+    {
+      "tag": "b01_lod01",
+      "fresh_receipt": true,
+      "completion_scope": "editor stage receipt, not motion/performance/visual acceptance",
+      "exit_code": 0,
+      "status": "PASS_FS_B01_LOD_CAPTURE"
+    },
+    {
+      "tag": "b01_lod02",
+      "exit_code": 0,
+      "fresh_receipt": true,
+      "status": "PASS_FS_B01_LOD_CAPTURE",
+      "completion_scope": "editor stage receipt, not motion/performance/visual acceptance"
+    },
+    {
+      "tag": "b01_lod03",
+      "fresh_receipt": true,
+      "exit_code": -1073741819,
+      "status": "PASS_FS_B01_LOD_CAPTURE",
+      "completion_scope": "editor stage receipt, not motion/performance/visual acceptance"
+    },
+    {
+      "tag": "b01_reopen_c",
+      "fresh_receipt": true,
+      "status": "PASS_FS_B01_REOPEN",
+      "exit_code": -1073741819,
+      "completion_scope": "editor stage receipt, not motion/performance/visual acceptance"
+    },
+    {
+      "tag": "b01_reopen_d",
+      "completion_scope": "editor stage receipt, not motion/performance/visual acceptance",
+      "exit_code": 0,
+      "fresh_receipt": true,
+      "status": "PASS_FS_B01_REOPEN"
+    }
+  ],
+  "scope": "Stage receipt success is distinct from independent motion/LOD acceptance. Abnormal observed exits are preserved."
+}

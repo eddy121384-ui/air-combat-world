@@ -1,0 +1,16 @@
+{
+  "started_utc": "2026-10-13T02:00:56.2683411+00:00",
+  "tag": "b01_build_c",
+  "env": {
+    "ACW_FS_B01_SPEC": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\tools\\forestspike\\b01_registered_c.json"
+  },
+  "script": "fs_b01_build.py",
+  "args": [
+    "\"D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\ForestSpike\\ForestSpike.uproject\"",
+    "-ExecutePythonScript=\"D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\adapters\\unreal\\forestspike\\fs_b01_build.py\"",
+    "-unattended",
+    "-nopause",
+    "-nosound",
+    "-abslog=\"D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\ForestSpike\\Saved\\ForestSpike\\b01\\b01_build_c\\engine.log\""
+  ]
+}

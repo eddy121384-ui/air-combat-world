@@ -1,0 +1,97 @@
+{
+  "results": [
+    {
+      "status": "FAIL_FS_B01_MOTION",
+      "csv_sha256": "d69977631db5f8130786438c0f1f7ce905f937975014ff4bbd7bc6c942139309",
+      "errors": [
+        "per-frame position differs from registered fixed-rate trajectory",
+        "travel distance or monotonic inbound motion invalid"
+      ],
+      "host_scope": "Intel UHD 770 only",
+      "scope": "camera motion integrity; GPU data diagnostic only",
+      "frames": 1264,
+      "invalid_boot_frames": 1,
+      "first_valid_sequence_frame": 0,
+      "first_120_valid_world_view_max_displacement_m": 8.000000016181729e-06,
+      "flight_samples": 1081,
+      "verified_flight_seconds": null,
+      "flight_csv_range": [
+        121,
+        1201
+      ],
+      "measured_distance_m": 546.2716823254225,
+      "registered_distance_m": 546.7875307983065,
+      "nonmonotonic_steps": 1,
+      "max_errors": {
+        "position_error_m": 540.1403382199335,
+        "forward_error_deg": 0.0032214616368570026,
+        "up_error_deg": 0.0010503543126446297
+      },
+      "flight_endpoint_error_m": 1.9595917981902405e-05,
+      "endpoint_hold_samples": 62,
+      "tag": "b01_A_smoke01",
+      "registration_sha256": "5d2fa2d4472b11cb983a656c1fe4175b60aff448cc03c2d051294b8cbe368e03",
+      "scope_note": "Offline recheck with final validator, same retained raw capture; not an additional UE run."
+    },
+    {
+      "status": "PASS_FS_B01_MOTION",
+      "csv_sha256": "e4765b3fd8e8e25549ebbe41f55fde0b00d372c7ad1a793f5816ff569d484f84",
+      "errors": [],
+      "host_scope": "Intel UHD 770 only",
+      "scope": "camera motion integrity; GPU data diagnostic only",
+      "frames": 1264,
+      "invalid_boot_frames": 1,
+      "first_valid_sequence_frame": 1,
+      "first_120_valid_world_view_max_displacement_m": 8.000000016181729e-06,
+      "flight_samples": 1081,
+      "verified_flight_seconds": 18.0,
+      "flight_csv_range": [
+        120,
+        1200
+      ],
+      "measured_distance_m": 546.7875409012677,
+      "registered_distance_m": 546.7875307983065,
+      "nonmonotonic_steps": 0,
+      "max_errors": {
+        "position_error_m": 9.899494933483578e-05,
+        "forward_error_deg": 0.0032214616368570026,
+        "up_error_deg": 0.0010503543126446297
+      },
+      "flight_endpoint_error_m": 1.9595917981902405e-05,
+      "endpoint_hold_samples": 63,
+      "tag": "b01_B_smoke01",
+      "registration_sha256": "9faf325f37f1b9cda24879972733856fff22d6dc7830cc402f51b7825336d82a",
+      "scope_note": "Offline recheck with final validator, same retained raw capture; not an additional UE run."
+    },
+    {
+      "status": "PASS_FS_B01_MOTION",
+      "csv_sha256": "17643b39ba75b72e777b3ba42d49463181d07c86357f23c341b14dec4e033ef0",
+      "errors": [],
+      "host_scope": "Intel UHD 770 only",
+      "scope": "camera motion integrity; GPU data diagnostic only",
+      "frames": 1264,
+      "invalid_boot_frames": 1,
+      "first_valid_sequence_frame": 1,
+      "first_120_valid_world_view_max_displacement_m": 8.000000016181729e-06,
+      "flight_samples": 1081,
+      "verified_flight_seconds": 18.0,
+      "flight_csv_range": [
+        120,
+        1200
+      ],
+      "measured_distance_m": 546.7875409012677,
+      "registered_distance_m": 546.7875307983065,
+      "nonmonotonic_steps": 0,
+      "max_errors": {
+        "position_error_m": 9.899494933483578e-05,
+        "forward_error_deg": 0.0032214616368570026,
+        "up_error_deg": 0.0010503543126446297
+      },
+      "flight_endpoint_error_m": 1.9595917981902405e-05,
+      "endpoint_hold_samples": 63,
+      "tag": "b01_A_smoke02",
+      "registration_sha256": "9faf325f37f1b9cda24879972733856fff22d6dc7830cc402f51b7825336d82a",
+      "scope_note": "Offline recheck with final validator, same retained raw capture; not an additional UE run."
+    }
+  ]
+}

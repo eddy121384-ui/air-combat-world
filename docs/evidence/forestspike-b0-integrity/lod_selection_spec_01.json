@@ -1,0 +1,460 @@
+{
+  "set": "lod_selection_review01",
+  "jobs": [
+    {
+      "kind": "id",
+      "pose": {
+        "id": "v1_agl50_p15",
+        "group": "V1",
+        "eye_enu": [
+          -420.0,
+          -420.0,
+          160.049
+        ],
+        "agl_m": 50,
+        "heading_deg": 45.0,
+        "pitch_deg": -15.0,
+        "fov_h_deg": 91.4928,
+        "fov_v_deg": 60.0
+      },
+      "arm": "B",
+      "count_a": 30200,
+      "count_b": 30100,
+      "und": 0,
+      "name": "probe_v1_agl50_p15_lod-1",
+      "ds_m": 500,
+      "ws_m": 100,
+      "force_lod": -1,
+      "s_ctx": 1,
+      "s_core": 1
+    },
+    {
+      "kind": "id",
+      "pose": {
+        "id": "v1_agl50_p15",
+        "group": "V1",
+        "eye_enu": [
+          -420.0,
+          -420.0,
+          160.049
+        ],
+        "agl_m": 50,
+        "heading_deg": 45.0,
+        "pitch_deg": -15.0,
+        "fov_h_deg": 91.4928,
+        "fov_v_deg": 60.0
+      },
+      "arm": "B",
+      "count_a": 30200,
+      "count_b": 30100,
+      "und": 0,
+      "name": "probe_v1_agl50_p15_lod0",
+      "ds_m": 500,
+      "ws_m": 100,
+      "force_lod": 0,
+      "s_ctx": 1,
+      "s_core": 1
+    },
+    {
+      "kind": "id",
+      "pose": {
+        "id": "v1_agl50_p15",
+        "group": "V1",
+        "eye_enu": [
+          -420.0,
+          -420.0,
+          160.049
+        ],
+        "agl_m": 50,
+        "heading_deg": 45.0,
+        "pitch_deg": -15.0,
+        "fov_h_deg": 91.4928,
+        "fov_v_deg": 60.0
+      },
+      "arm": "B",
+      "count_a": 30200,
+      "count_b": 30100,
+      "und": 0,
+      "name": "probe_v1_agl50_p15_lod1",
+      "ds_m": 500,
+      "ws_m": 100,
+      "force_lod": 1,
+      "s_ctx": 1,
+      "s_core": 1
+    },
+    {
+      "kind": "id",
+      "pose": {
+        "id": "v1_agl50_p15",
+        "group": "V1",
+        "eye_enu": [
+          -420.0,
+          -420.0,
+          160.049
+        ],
+        "agl_m": 50,
+        "heading_deg": 45.0,
+        "pitch_deg": -15.0,
+        "fov_h_deg": 91.4928,
+        "fov_v_deg": 60.0
+      },
+      "arm": "B",
+      "count_a": 30200,
+      "count_b": 30100,
+      "und": 0,
+      "name": "probe_v1_agl50_p15_lod2",
+      "ds_m": 500,
+      "ws_m": 100,
+      "force_lod": 2,
+      "s_ctx": 1,
+      "s_core": 1
+    },
+    {
+      "kind": "id",
+      "pose": {
+        "id": "v1_agl200_p10",
+        "group": "V1",
+        "eye_enu": [
+          -420.0,
+          -420.0,
+          310.049
+        ],
+        "agl_m": 200,
+        "heading_deg": 45.0,
+        "pitch_deg": -10.0,
+        "fov_h_deg": 91.4928,
+        "fov_v_deg": 60.0
+      },
+      "arm": "B",
+      "count_a": 30200,
+      "count_b": 30100,
+      "und": 0,
+      "name": "probe_v1_agl200_p10_lod-1",
+      "ds_m": 500,
+      "ws_m": 100,
+      "force_lod": -1,
+      "s_ctx": 1,
+      "s_core": 1
+    },
+    {
+      "kind": "id",
+      "pose": {
+        "id": "v1_agl200_p10",
+        "group": "V1",
+        "eye_enu": [
+          -420.0,
+          -420.0,
+          310.049
+        ],
+        "agl_m": 200,
+        "heading_deg": 45.0,
+        "pitch_deg": -10.0,
+        "fov_h_deg": 91.4928,
+        "fov_v_deg": 60.0
+      },
+      "arm": "B",
+      "count_a": 30200,
+      "count_b": 30100,
+      "und": 0,
+      "name": "probe_v1_agl200_p10_lod0",
+      "ds_m": 500,
+      "ws_m": 100,
+      "force_lod": 0,
+      "s_ctx": 1,
+      "s_core": 1
+    },
+    {
+      "kind": "id",
+      "pose": {
+        "id": "v1_agl200_p10",
+        "group": "V1",
+        "eye_enu": [
+          -420.0,
+          -420.0,
+          310.049
+        ],
+        "agl_m": 200,
+        "heading_deg": 45.0,
+        "pitch_deg": -10.0,
+        "fov_h_deg": 91.4928,
+        "fov_v_deg": 60.0
+      },
+      "arm": "B",
+      "count_a": 30200,
+      "count_b": 30100,
+      "und": 0,
+      "name": "probe_v1_agl200_p10_lod1",
+      "ds_m": 500,
+      "ws_m": 100,
+      "force_lod": 1,
+      "s_ctx": 1,
+      "s_core": 1
+    },
+    {
+      "kind": "id",
+      "pose": {
+        "id": "v1_agl200_p10",
+        "group": "V1",
+        "eye_enu": [
+          -420.0,
+          -420.0,
+          310.049
+        ],
+        "agl_m": 200,
+        "heading_deg": 45.0,
+        "pitch_deg": -10.0,
+        "fov_h_deg": 91.4928,
+        "fov_v_deg": 60.0
+      },
+      "arm": "B",
+      "count_a": 30200,
+      "count_b": 30100,
+      "und": 0,
+      "name": "probe_v1_agl200_p10_lod2",
+      "ds_m": 500,
+      "ws_m": 100,
+      "force_lod": 2,
+      "s_ctx": 1,
+      "s_core": 1
+    },
+    {
+      "kind": "id",
+      "pose": {
+        "id": "v3i_t18",
+        "group": "V3",
+        "eye_enu": [
+          -618.162,
+          -618.162,
+          296.572
+        ],
+        "agl_m": 200,
+        "heading_deg": 45.0,
+        "pitch_deg": -10.0,
+        "fov_h_deg": 91.4928,
+        "fov_v_deg": 60.0,
+        "t_s": 18.0,
+        "speed_mps": 30.0
+      },
+      "arm": "B",
+      "count_a": 30200,
+      "count_b": 30100,
+      "und": 0,
+      "name": "probe_v3i_t18_lod-1",
+      "ds_m": 500,
+      "ws_m": 100,
+      "force_lod": -1,
+      "s_ctx": 1,
+      "s_core": 1
+    },
+    {
+      "kind": "id",
+      "pose": {
+        "id": "v3i_t18",
+        "group": "V3",
+        "eye_enu": [
+          -618.162,
+          -618.162,
+          296.572
+        ],
+        "agl_m": 200,
+        "heading_deg": 45.0,
+        "pitch_deg": -10.0,
+        "fov_h_deg": 91.4928,
+        "fov_v_deg": 60.0,
+        "t_s": 18.0,
+        "speed_mps": 30.0
+      },
+      "arm": "B",
+      "count_a": 30200,
+      "count_b": 30100,
+      "und": 0,
+      "name": "probe_v3i_t18_lod0",
+      "ds_m": 500,
+      "ws_m": 100,
+      "force_lod": 0,
+      "s_ctx": 1,
+      "s_core": 1
+    },
+    {
+      "kind": "id",
+      "pose": {
+        "id": "v3i_t18",
+        "group": "V3",
+        "eye_enu": [
+          -618.162,
+          -618.162,
+          296.572
+        ],
+        "agl_m": 200,
+        "heading_deg": 45.0,
+        "pitch_deg": -10.0,
+        "fov_h_deg": 91.4928,
+        "fov_v_deg": 60.0,
+        "t_s": 18.0,
+        "speed_mps": 30.0
+      },
+      "arm": "B",
+      "count_a": 30200,
+      "count_b": 30100,
+      "und": 0,
+      "name": "probe_v3i_t18_lod1",
+      "ds_m": 500,
+      "ws_m": 100,
+      "force_lod": 1,
+      "s_ctx": 1,
+      "s_core": 1
+    },
+    {
+      "kind": "id",
+      "pose": {
+        "id": "v3i_t18",
+        "group": "V3",
+        "eye_enu": [
+          -618.162,
+          -618.162,
+          296.572
+        ],
+        "agl_m": 200,
+        "heading_deg": 45.0,
+        "pitch_deg": -10.0,
+        "fov_h_deg": 91.4928,
+        "fov_v_deg": 60.0,
+        "t_s": 18.0,
+        "speed_mps": 30.0
+      },
+      "arm": "B",
+      "count_a": 30200,
+      "count_b": 30100,
+      "und": 0,
+      "name": "probe_v3i_t18_lod2",
+      "ds_m": 500,
+      "ws_m": 100,
+      "force_lod": 2,
+      "s_ctx": 1,
+      "s_core": 1
+    },
+    {
+      "kind": "id",
+      "pose": {
+        "id": "v5i_agl200_a000",
+        "group": "V5",
+        "eye_enu": [
+          0.0,
+          330.0,
+          333.617
+        ],
+        "agl_m": 200,
+        "heading_deg": 180.0,
+        "pitch_deg": -25.0,
+        "fov_h_deg": 91.4928,
+        "fov_v_deg": 60.0,
+        "orbit_az_deg": 0.0,
+        "speed_mps": 150.0
+      },
+      "arm": "B",
+      "count_a": 30200,
+      "count_b": 30100,
+      "und": 0,
+      "name": "probe_v5i_agl200_a000_lod-1",
+      "ds_m": 500,
+      "ws_m": 100,
+      "force_lod": -1,
+      "s_ctx": 1,
+      "s_core": 1
+    },
+    {
+      "kind": "id",
+      "pose": {
+        "id": "v5i_agl200_a000",
+        "group": "V5",
+        "eye_enu": [
+          0.0,
+          330.0,
+          333.617
+        ],
+        "agl_m": 200,
+        "heading_deg": 180.0,
+        "pitch_deg": -25.0,
+        "fov_h_deg": 91.4928,
+        "fov_v_deg": 60.0,
+        "orbit_az_deg": 0.0,
+        "speed_mps": 150.0
+      },
+      "arm": "B",
+      "count_a": 30200,
+      "count_b": 30100,
+      "und": 0,
+      "name": "probe_v5i_agl200_a000_lod0",
+      "ds_m": 500,
+      "ws_m": 100,
+      "force_lod": 0,
+      "s_ctx": 1,
+      "s_core": 1
+    },
+    {
+      "kind": "id",
+      "pose": {
+        "id": "v5i_agl200_a000",
+        "group": "V5",
+        "eye_enu": [
+          0.0,
+          330.0,
+          333.617
+        ],
+        "agl_m": 200,
+        "heading_deg": 180.0,
+        "pitch_deg": -25.0,
+        "fov_h_deg": 91.4928,
+        "fov_v_deg": 60.0,
+        "orbit_az_deg": 0.0,
+        "speed_mps": 150.0
+      },
+      "arm": "B",
+      "count_a": 30200,
+      "count_b": 30100,
+      "und": 0,
+      "name": "probe_v5i_agl200_a000_lod1",
+      "ds_m": 500,
+      "ws_m": 100,
+      "force_lod": 1,
+      "s_ctx": 1,
+      "s_core": 1
+    },
+    {
+      "kind": "id",
+      "pose": {
+        "id": "v5i_agl200_a000",
+        "group": "V5",
+        "eye_enu": [
+          0.0,
+          330.0,
+          333.617
+        ],
+        "agl_m": 200,
+        "heading_deg": 180.0,
+        "pitch_deg": -25.0,
+        "fov_h_deg": 91.4928,
+        "fov_v_deg": 60.0,
+        "orbit_az_deg": 0.0,
+        "speed_mps": 150.0
+      },
+      "arm": "B",
+      "count_a": 30200,
+      "count_b": 30100,
+      "und": 0,
+      "name": "probe_v5i_agl200_a000_lod2",
+      "ds_m": 500,
+      "ws_m": 100,
+      "force_lod": 2,
+      "s_ctx": 1,
+      "s_core": 1
+    }
+  ],
+  "res": [
+    1920,
+    1080
+  ],
+  "settle": 6,
+  "id_gamma": 0.0,
+  "warmup": 12
+}

@@ -1,0 +1,19 @@
+{
+  "args": [
+    "\"D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\ForestSpike\\ForestSpike.uproject\"",
+    "-ExecutePythonScript=\"D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\adapters\\unreal\\forestspike\\fs_b01_lod_probe.py\"",
+    "-unattended",
+    "-nopause",
+    "-nosound",
+    "-abslog=\"D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\ForestSpike\\Saved\\ForestSpike\\b01\\b01_lod03\\engine.log\""
+  ],
+  "script": "fs_b01_lod_probe.py",
+  "tag": "b01_lod03",
+  "started_utc": "2026-10-13T02:34:58.4861139+00:00",
+  "env": {
+    "ACW_FS_B01_BUILD": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\ForestSpike\\Saved\\ForestSpike\\b01\\b01_build_d\\receipt.json",
+    "ACW_FS_B01_SPEC": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\tools\\forestspike\\b01_registered_d.json",
+    "ACW_FS_B01_BOUNDARY_ONLY": "1",
+    "ACW_FS_B01_BOUNDS": "C:\\Users\\EDDY\\Desktop\\M1A2\\forestspike-b01\\render_bounds.json"
+  }
+}

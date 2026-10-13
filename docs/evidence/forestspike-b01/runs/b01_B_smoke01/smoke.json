@@ -1,0 +1,9 @@
+{
+  "host_scope": "Intel UHD 770 only",
+  "exit_code": 0,
+  "status": "PASS_FS_B01_SMOKE",
+  "arm": "B",
+  "capture_pass": true,
+  "motion_pass": true,
+  "scope": "one repair smoke; GPU diagnostic only, no A/B ranking"
+}
