@@ -1,3 +1,32 @@
+# ForestSpike B0 integrity — B0.1 repair update, 2026-10-13
+
+**B0.1 repair gates PASS within the controlled evidence scope; stop for review. B1a remains on hold and PR #24 remains Draft.**
+
+Latest response to review [5497750104](https://github.com/eddy121384-ui/air-combat-world/pull/24#pullrequestreview-5497750104):
+[complete B0.1 repair report](forestspike-b01-repair-result.md).
+
+| Current repair gate | Result |
+|---|---|
+| New A/B sequences survive save, process close and reopen | PASS; one exact camera binding per new fixture |
+| Warm hold and real V3 motion | PASS; one successful smoke per arm, 120 stationary valid world views then all 1,080 flight intervals / 18s sequence time |
+| Per-frame position/orientation/travel/endpoint plus capture integrity | PASS; 1,264 rows per smoke, 546.787541m travel, correct identities/finalized output, both exit 0 |
+| Automatic LOD policy and 50m/200m choice | PASS for controlled native draw/color evidence; common 1.0/0.08/0.03 policy, no forced LOD; 81 independent controls |
+| HISM culling separated from LOD selection | PASS; synchronous native tree rebuild, 450m/550m cull on/off controls |
+| Preservation | All 540 inventoried artifact files unchanged; this separate report addendum retains the original bytes verbatim |
+| B1a / visual acceptance / platform inference | WAIT FOR REVIEW; no B1a branch or sweep. Fade ring remains a defect; F9/F10 not PASS, F11 visual shimmer unmeasured. Intel UHD 770 only |
+
+Evidence includes a retained CSV-PASS/motion-FAIL A attempt and two failed LOD analyses.
+The corrected final 20-boundary LOD capture has complete fresh outputs but an abnormal
+shutdown exit, disclosed separately; it is not marked as a healthy engine shutdown.
+34 focused regression tests and both PowerShell syntax checks pass.
+[Final preservation check](evidence/forestspike-b01/preservation_final.json) and
+[all stage outcomes](evidence/forestspike-b01/stage_outcomes.json) are included.
+
+The entire original d7fa5f8 report follows unchanged as historical evidence. Its old six
+moving captures remain stationary/historical; no old timing numbers or failures are rewritten.
+
+---
+
 # ForestSpike B0 measurement-integrity correction — 2026-10-13
 
 **B1a NO-GO. Stop after this B0 correction.** This addendum supersedes the conditional GO and

@@ -1,0 +1,462 @@
+{
+  "status": "PASS_FS_B01_REOPEN",
+  "maps": [
+    {
+      "arm": "A",
+      "name": "L_FSP_B01_20261013c_A_V3",
+      "world_path": "/Game/ForestSpike/B01_20261013c/Perf/L_FSP_B01_20261013c_A_V3",
+      "sequence_path": "/Game/ForestSpike/B01_20261013c/Perf/LS_L_FSP_B01_20261013c_A_V3",
+      "before_close_bindings": [
+        {
+          "name": "FS_PerfCamera",
+          "objects": [
+            "/Game/ForestSpike/B01_20261013c/Perf/L_FSP_B01_20261013c_A_V3.L_FSP_B01_20261013c_A_V3:PersistentLevel.CameraActor_0"
+          ]
+        }
+      ],
+      "camera_path": "/Game/ForestSpike/B01_20261013c/Perf/L_FSP_B01_20261013c_A_V3.L_FSP_B01_20261013c_A_V3:PersistentLevel.CameraActor_0",
+      "sequence_frames": 1261,
+      "after_reopen_bindings": [
+        {
+          "name": "FS_PerfCamera",
+          "objects": [
+            "/Game/ForestSpike/B01_20261013c/Perf/L_FSP_B01_20261013c_A_V3.L_FSP_B01_20261013c_A_V3:PersistentLevel.CameraActor_0"
+          ]
+        }
+      ],
+      "camera_paths": [
+        "/Game/ForestSpike/B01_20261013c/Perf/L_FSP_B01_20261013c_A_V3.L_FSP_B01_20261013c_A_V3:PersistentLevel.CameraActor_0"
+      ],
+      "playback": [
+        0,
+        1261
+      ],
+      "pass": true
+    },
+    {
+      "arm": "B",
+      "name": "L_FSP_B01_20261013c_B_V3",
+      "world_path": "/Game/ForestSpike/B01_20261013c/Perf/L_FSP_B01_20261013c_B_V3",
+      "sequence_path": "/Game/ForestSpike/B01_20261013c/Perf/LS_L_FSP_B01_20261013c_B_V3",
+      "before_close_bindings": [
+        {
+          "name": "FS_PerfCamera",
+          "objects": [
+            "/Game/ForestSpike/B01_20261013c/Perf/L_FSP_B01_20261013c_B_V3.L_FSP_B01_20261013c_B_V3:PersistentLevel.CameraActor_0"
+          ]
+        }
+      ],
+      "camera_path": "/Game/ForestSpike/B01_20261013c/Perf/L_FSP_B01_20261013c_B_V3.L_FSP_B01_20261013c_B_V3:PersistentLevel.CameraActor_0",
+      "sequence_frames": 1261,
+      "after_reopen_bindings": [
+        {
+          "name": "FS_PerfCamera",
+          "objects": [
+            "/Game/ForestSpike/B01_20261013c/Perf/L_FSP_B01_20261013c_B_V3.L_FSP_B01_20261013c_B_V3:PersistentLevel.CameraActor_0"
+          ]
+        }
+      ],
+      "camera_paths": [
+        "/Game/ForestSpike/B01_20261013c/Perf/L_FSP_B01_20261013c_B_V3.L_FSP_B01_20261013c_B_V3:PersistentLevel.CameraActor_0"
+      ],
+      "playback": [
+        0,
+        1261
+      ],
+      "pass": true
+    }
+  ],
+  "meshes": [
+    {
+      "name": "Tree_A",
+      "kind": "policy",
+      "triangles": [
+        28,
+        28,
+        28
+      ],
+      "screens": [
+        1.0,
+        0.07999999821186066,
+        0.029999999329447746
+      ],
+      "slots": [
+        [
+          0
+        ],
+        [
+          0
+        ],
+        [
+          0
+        ]
+      ],
+      "pass": true
+    },
+    {
+      "name": "Tree_A",
+      "kind": "debug_policy",
+      "triangles": [
+        28,
+        28,
+        28
+      ],
+      "screens": [
+        1.0,
+        0.07999999821186066,
+        0.029999999329447746
+      ],
+      "slots": [
+        [
+          0
+        ],
+        [
+          1
+        ],
+        [
+          2
+        ]
+      ],
+      "pass": true
+    },
+    {
+      "name": "Tree_A",
+      "kind": "debug_legacy",
+      "triangles": [
+        28,
+        28,
+        28
+      ],
+      "screens": [
+        1.0,
+        0.11999999731779099,
+        0.03999999910593033
+      ],
+      "slots": [
+        [
+          0
+        ],
+        [
+          1
+        ],
+        [
+          2
+        ]
+      ],
+      "pass": true
+    },
+    {
+      "name": "Tree_B_dense_rounded",
+      "kind": "policy",
+      "triangles": [
+        120,
+        36,
+        20
+      ],
+      "screens": [
+        1.0,
+        0.07999999821186066,
+        0.029999999329447746
+      ],
+      "slots": [
+        [
+          0
+        ],
+        [
+          0
+        ],
+        [
+          0
+        ]
+      ],
+      "pass": true
+    },
+    {
+      "name": "Tree_B_dense_rounded",
+      "kind": "debug_policy",
+      "triangles": [
+        120,
+        36,
+        20
+      ],
+      "screens": [
+        1.0,
+        0.07999999821186066,
+        0.029999999329447746
+      ],
+      "slots": [
+        [
+          0
+        ],
+        [
+          1
+        ],
+        [
+          2
+        ]
+      ],
+      "pass": true
+    },
+    {
+      "name": "Tree_B_dense_rounded",
+      "kind": "debug_legacy",
+      "triangles": [
+        120,
+        36,
+        20
+      ],
+      "screens": [
+        2.0,
+        0.75,
+        0.5625
+      ],
+      "slots": [
+        [
+          0
+        ],
+        [
+          1
+        ],
+        [
+          2
+        ]
+      ],
+      "pass": true
+    },
+    {
+      "name": "Tree_B_horizontal_tiered",
+      "kind": "policy",
+      "triangles": [
+        112,
+        38,
+        20
+      ],
+      "screens": [
+        1.0,
+        0.07999999821186066,
+        0.029999999329447746
+      ],
+      "slots": [
+        [
+          0
+        ],
+        [
+          0
+        ],
+        [
+          0
+        ]
+      ],
+      "pass": true
+    },
+    {
+      "name": "Tree_B_horizontal_tiered",
+      "kind": "debug_policy",
+      "triangles": [
+        112,
+        38,
+        20
+      ],
+      "screens": [
+        1.0,
+        0.07999999821186066,
+        0.029999999329447746
+      ],
+      "slots": [
+        [
+          0
+        ],
+        [
+          1
+        ],
+        [
+          2
+        ]
+      ],
+      "pass": true
+    },
+    {
+      "name": "Tree_B_horizontal_tiered",
+      "kind": "debug_legacy",
+      "triangles": [
+        112,
+        38,
+        20
+      ],
+      "screens": [
+        2.0,
+        0.75,
+        0.5625
+      ],
+      "slots": [
+        [
+          0
+        ],
+        [
+          1
+        ],
+        [
+          2
+        ]
+      ],
+      "pass": true
+    },
+    {
+      "name": "Tree_B_open_vase",
+      "kind": "policy",
+      "triangles": [
+        102,
+        40,
+        20
+      ],
+      "screens": [
+        1.0,
+        0.07999999821186066,
+        0.029999999329447746
+      ],
+      "slots": [
+        [
+          0
+        ],
+        [
+          0
+        ],
+        [
+          0
+        ]
+      ],
+      "pass": true
+    },
+    {
+      "name": "Tree_B_open_vase",
+      "kind": "debug_policy",
+      "triangles": [
+        102,
+        40,
+        20
+      ],
+      "screens": [
+        1.0,
+        0.07999999821186066,
+        0.029999999329447746
+      ],
+      "slots": [
+        [
+          0
+        ],
+        [
+          1
+        ],
+        [
+          2
+        ]
+      ],
+      "pass": true
+    },
+    {
+      "name": "Tree_B_open_vase",
+      "kind": "debug_legacy",
+      "triangles": [
+        102,
+        40,
+        20
+      ],
+      "screens": [
+        2.0,
+        0.75,
+        0.5625
+      ],
+      "slots": [
+        [
+          0
+        ],
+        [
+          1
+        ],
+        [
+          2
+        ]
+      ],
+      "pass": true
+    },
+    {
+      "name": "Tree_B_tall_columnar",
+      "kind": "policy",
+      "triangles": [
+        108,
+        38,
+        20
+      ],
+      "screens": [
+        1.0,
+        0.07999999821186066,
+        0.029999999329447746
+      ],
+      "slots": [
+        [
+          0
+        ],
+        [
+          0
+        ],
+        [
+          0
+        ]
+      ],
+      "pass": true
+    },
+    {
+      "name": "Tree_B_tall_columnar",
+      "kind": "debug_policy",
+      "triangles": [
+        108,
+        38,
+        20
+      ],
+      "screens": [
+        1.0,
+        0.07999999821186066,
+        0.029999999329447746
+      ],
+      "slots": [
+        [
+          0
+        ],
+        [
+          1
+        ],
+        [
+          2
+        ]
+      ],
+      "pass": true
+    },
+    {
+      "name": "Tree_B_tall_columnar",
+      "kind": "debug_legacy",
+      "triangles": [
+        108,
+        38,
+        20
+      ],
+      "screens": [
+        2.0,
+        0.75,
+        0.5625
+      ],
+      "slots": [
+        [
+          0
+        ],
+        [
+          1
+        ],
+        [
+          2
+        ]
+      ],
+      "pass": true
+    }
+  ],
+  "error": null
+}

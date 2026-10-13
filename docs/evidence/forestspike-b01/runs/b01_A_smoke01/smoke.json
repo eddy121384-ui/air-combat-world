@@ -1,0 +1,9 @@
+{
+  "status": "FAIL_FS_B01_SMOKE",
+  "scope": "one repair smoke; GPU diagnostic only, no A/B ranking",
+  "arm": "A",
+  "capture_pass": true,
+  "exit_code": 0,
+  "host_scope": "Intel UHD 770 only",
+  "motion_pass": false
+}

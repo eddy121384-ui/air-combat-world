@@ -45,6 +45,14 @@ class PerfIntegrityTests(unittest.TestCase):
     def test_valid_capture(self):
         self.assertEqual(self.validate()["status"], "PASS_FS_PERF_CAPTURE")
 
+    def test_explicit_isolated_world_path(self):
+        new_path = '/Game/ForestSpike/B01_test/Perf/L_FSP_A_static'
+        self.log.write_text(self.log_text.replace('/Game/ForestSpike/Perf/L_FSP_A_static', new_path))
+        self.assertEqual(self.validate(world_path=new_path)['status'], 'PASS_FS_PERF_CAPTURE')
+
+    def test_explicit_world_does_not_accept_original_map(self):
+        self.assertFail(world_path='/Game/ForestSpike/B01_test/Perf/L_FSP_A_static')
+
     def test_shutdown_crash_after_completion_is_disclosed(self):
         result = self.validate(exit_code=-1073741819)
         self.assertEqual(result["status"], "PASS_FS_PERF_CAPTURE")

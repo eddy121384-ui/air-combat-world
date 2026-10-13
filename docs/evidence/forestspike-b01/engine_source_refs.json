@@ -1,0 +1,61 @@
+{
+  "engine": "5.8.0 CL55116800",
+  "references": {
+    "Source/Runtime/Engine/Private/StaticMesh.cpp": {
+      "lines": [
+        309,
+        3111,
+        5105,
+        7285
+      ],
+      "use": "Auto screen policy defaults; GetBounds and cached editor LOD0 bounds",
+      "sha256": "19aa05147f931d774f68bb3f4a921d5b659677d34b5db821291e12788fad3871"
+    },
+    "Source/Editor/StaticMeshEditor/Private/StaticMeshEditorSubsystem.cpp": {
+      "lines": [
+        1020,
+        1093
+      ],
+      "use": "Explicit screen-size setter disables automatic screen computation",
+      "sha256": "8c9e71501320f6ef9cb4a3d6ab668eee6184230a2f85a8b9e3748e1831ca6760"
+    },
+    "Source/Developer/MeshBuilder/Private/StaticMeshBuilder.cpp": {
+      "lines": [
+        865,
+        1169,
+        1211,
+        1808
+      ],
+      "use": "All-LOD RenderData bounds union",
+      "sha256": "ac4845329704bd8f9b1ffbe1b26c9adf0ffce864fa690521308c0792dcce6508"
+    },
+    "Source/Runtime/Core/Public/Math/BoxSphereBounds.h": {
+      "lines": [
+        332,
+        454,
+        466
+      ],
+      "use": "Sphere/box union formula",
+      "sha256": "690fb6d64a5375caf53635fc1efe210fed8c9d2679c5a2f864d08f742085198b"
+    },
+    "Source/Runtime/Engine/Private/HierarchicalInstancedStaticMesh.cpp": {
+      "lines": [
+        1041,
+        1111,
+        1652,
+        3391
+      ],
+      "use": "Native draw log, cluster near/far LOD, sphere/scale distance, synchronous tree rebuild",
+      "sha256": "c66dce2abdc160e49daa4d4d018583107cdec9e57fbcc1c91220b9c0579fc830"
+    },
+    "Source/Runtime/Engine/Private/SceneManagement.cpp": {
+      "lines": [
+        965,
+        993
+      ],
+      "use": "Projected sphere screen size",
+      "sha256": "ef04e2a947de76b6527c8b3f100d7e44f75380b07e29dd38f03a5abe44554251"
+    }
+  },
+  "scope": "Installed engine source inspected read-only; no engine source modified or copied."
+}

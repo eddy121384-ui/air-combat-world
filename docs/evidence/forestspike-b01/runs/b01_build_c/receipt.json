@@ -1,0 +1,854 @@
+{
+  "status": "PASS_FS_B01_BUILD_REOPEN_REQUIRED",
+  "asset_root": "/Game/ForestSpike/B01_20261013c",
+  "spec": {
+    "schema": "forestspike.b01_registration/1",
+    "id": "20261013c",
+    "asset_root": "/Game/ForestSpike/B01_20261013c",
+    "registered_utc": "2026-10-13T02:00:56.079007+00:00",
+    "base_head": "d7fa5f87703ecec0dacf701c60a92976172fce58",
+    "lod_screens": [
+      1.0,
+      0.08,
+      0.03
+    ],
+    "lod_reason": "Common normalized projected bounds diameter: LOD0 above 8%, LOD1 3-8%, LOD2 below 3%, until 500m cull. Meaningful authored tiers; no promise all 200m pixels use LOD0.",
+    "foliage_force_lod": -1,
+    "foliage_lod_distance_scale": 1.0,
+    "foliage_random_lod_range": 0.0,
+    "instance_lod_distance_scale": 1.0,
+    "cull_m": 500,
+    "fps": 60,
+    "warm_frames": 120,
+    "flight_intervals": 1080,
+    "sequence_end_frame": 1261,
+    "capture_frames": 1264,
+    "path": {
+      "poses": [
+        {
+          "id": "v3i_t14",
+          "group": "V3",
+          "eye_enu": [
+            -703.015,
+            -703.015,
+            324.003
+          ],
+          "agl_m": 200,
+          "heading_deg": 45.0,
+          "pitch_deg": -10.0,
+          "fov_h_deg": 91.4928,
+          "fov_v_deg": 60.0,
+          "t_s": 14.0,
+          "speed_mps": 30.0
+        },
+        {
+          "id": "v3i_t16",
+          "group": "V3",
+          "eye_enu": [
+            -660.589,
+            -660.589,
+            308.799
+          ],
+          "agl_m": 200,
+          "heading_deg": 45.0,
+          "pitch_deg": -10.0,
+          "fov_h_deg": 91.4928,
+          "fov_v_deg": 60.0,
+          "t_s": 16.0,
+          "speed_mps": 30.0
+        },
+        {
+          "id": "v3i_t18",
+          "group": "V3",
+          "eye_enu": [
+            -618.162,
+            -618.162,
+            296.572
+          ],
+          "agl_m": 200,
+          "heading_deg": 45.0,
+          "pitch_deg": -10.0,
+          "fov_h_deg": 91.4928,
+          "fov_v_deg": 60.0,
+          "t_s": 18.0,
+          "speed_mps": 30.0
+        },
+        {
+          "id": "v3i_t20",
+          "group": "V3",
+          "eye_enu": [
+            -575.736,
+            -575.736,
+            291.458
+          ],
+          "agl_m": 200,
+          "heading_deg": 45.0,
+          "pitch_deg": -10.0,
+          "fov_h_deg": 91.4928,
+          "fov_v_deg": 60.0,
+          "t_s": 20.0,
+          "speed_mps": 30.0
+        },
+        {
+          "id": "v3i_t22",
+          "group": "V3",
+          "eye_enu": [
+            -533.31,
+            -533.31,
+            293.172
+          ],
+          "agl_m": 200,
+          "heading_deg": 45.0,
+          "pitch_deg": -10.0,
+          "fov_h_deg": 91.4928,
+          "fov_v_deg": 60.0,
+          "t_s": 22.0,
+          "speed_mps": 30.0
+        },
+        {
+          "id": "v3i_t24",
+          "group": "V3",
+          "eye_enu": [
+            -490.883,
+            -490.883,
+            298.615
+          ],
+          "agl_m": 200,
+          "heading_deg": 45.0,
+          "pitch_deg": -10.0,
+          "fov_h_deg": 91.4928,
+          "fov_v_deg": 60.0,
+          "t_s": 24.0,
+          "speed_mps": 30.0
+        },
+        {
+          "id": "v3i_t26",
+          "group": "V3",
+          "eye_enu": [
+            -448.457,
+            -448.457,
+            305.18
+          ],
+          "agl_m": 200,
+          "heading_deg": 45.0,
+          "pitch_deg": -10.0,
+          "fov_h_deg": 91.4928,
+          "fov_v_deg": 60.0,
+          "t_s": 26.0,
+          "speed_mps": 30.0
+        },
+        {
+          "id": "v3i_t28",
+          "group": "V3",
+          "eye_enu": [
+            -406.03,
+            -406.03,
+            312.728
+          ],
+          "agl_m": 200,
+          "heading_deg": 45.0,
+          "pitch_deg": -10.0,
+          "fov_h_deg": 91.4928,
+          "fov_v_deg": 60.0,
+          "t_s": 28.0,
+          "speed_mps": 30.0
+        },
+        {
+          "id": "v3i_t30",
+          "group": "V3",
+          "eye_enu": [
+            -363.604,
+            -363.604,
+            322.801
+          ],
+          "agl_m": 200,
+          "heading_deg": 45.0,
+          "pitch_deg": -10.0,
+          "fov_h_deg": 91.4928,
+          "fov_v_deg": 60.0,
+          "t_s": 30.0,
+          "speed_mps": 30.0
+        },
+        {
+          "id": "v3i_t32",
+          "group": "V3",
+          "eye_enu": [
+            -321.177,
+            -321.177,
+            336.294
+          ],
+          "agl_m": 200,
+          "heading_deg": 45.0,
+          "pitch_deg": -10.0,
+          "fov_h_deg": 91.4928,
+          "fov_v_deg": 60.0,
+          "t_s": 32.0,
+          "speed_mps": 30.0
+        }
+      ],
+      "fps": 60,
+      "frames_per_pose": 120
+    },
+    "motion_tolerances": {
+      "position_m": 0.05,
+      "orientation_deg": 0.02,
+      "boot_frames_max": 4,
+      "first_valid_sequence_frame_allowed": [
+        0,
+        1
+      ],
+      "warm_displacement_m": 0.02
+    },
+    "host_scope": "Intel UHD 770 only",
+    "lod_confidence": "LOD-colored render pixels plus controlled single-HISM-instance tests; no per-instance histogram inferred from forest pixel counts",
+    "prior_registration_sha256": "f44b89ac922a13d805ba5bec376d9f9adab88ce99a4cc102b00f9c569312e788",
+    "namespace_revision_reason": "Preserve failed b; SaveMap is Save-As and leaves old world active. Explicitly reload new map before binding; final SaveCurrentLevel. Same policy/path/tolerances."
+  },
+  "meshes": {
+    "Tree_A": {
+      "original": {
+        "path": "/Game/ForestSpike/Meshes/Tree_A/xinyi_reference_preview_lod0/StaticMeshes/xinyi_reference_preview_lod0.xinyi_reference_preview_lod0",
+        "triangles": [
+          28,
+          28,
+          28
+        ],
+        "screens": [
+          1.0,
+          0.11999999731779099,
+          0.03999999910593033
+        ],
+        "sphere_radius_cm": 454.087159946328,
+        "bounds_origin_cm": [
+          16.1376953125,
+          1.709197998046875,
+          421.809326171875
+        ],
+        "material_slots_per_lod": [
+          [
+            0
+          ],
+          [
+            0
+          ],
+          [
+            0
+          ]
+        ]
+      },
+      "policy": {
+        "path": "/Game/ForestSpike/B01_20261013c/Meshes/Tree_A.Tree_A",
+        "triangles": [
+          28,
+          28,
+          28
+        ],
+        "screens": [
+          1.0,
+          0.07999999821186066,
+          0.029999999329447746
+        ],
+        "sphere_radius_cm": 454.087159946328,
+        "bounds_origin_cm": [
+          16.1376953125,
+          1.709197998046875,
+          421.809326171875
+        ],
+        "material_slots_per_lod": [
+          [
+            0
+          ],
+          [
+            0
+          ],
+          [
+            0
+          ]
+        ]
+      },
+      "debug_legacy": {
+        "path": "/Game/ForestSpike/B01_20261013c/Debug/Tree_A_legacy.Tree_A_legacy",
+        "triangles": [
+          28,
+          28,
+          28
+        ],
+        "screens": [
+          1.0,
+          0.11999999731779099,
+          0.03999999910593033
+        ],
+        "sphere_radius_cm": 454.087158203125,
+        "bounds_origin_cm": [
+          16.1376953125,
+          1.709197998046875,
+          421.809326171875
+        ],
+        "material_slots_per_lod": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ]
+        ]
+      },
+      "debug_policy": {
+        "path": "/Game/ForestSpike/B01_20261013c/Debug/Tree_A_policy.Tree_A_policy",
+        "triangles": [
+          28,
+          28,
+          28
+        ],
+        "screens": [
+          1.0,
+          0.07999999821186066,
+          0.029999999329447746
+        ],
+        "sphere_radius_cm": 454.087158203125,
+        "bounds_origin_cm": [
+          16.1376953125,
+          1.709197998046875,
+          421.809326171875
+        ],
+        "material_slots_per_lod": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ]
+        ]
+      }
+    },
+    "Tree_B_dense_rounded": {
+      "original": {
+        "path": "/Game/ForestSpike/Meshes/Tree_B_dense_rounded/dense_rounded_lod0/StaticMeshes/dense_rounded_lod0.dense_rounded_lod0",
+        "triangles": [
+          120,
+          36,
+          20
+        ],
+        "screens": [
+          2.0,
+          0.75,
+          0.5625
+        ],
+        "sphere_radius_cm": 481.25343698099806,
+        "bounds_origin_cm": [
+          -8.781051635742188,
+          -16.871810913085938,
+          449.5095011293888
+        ],
+        "material_slots_per_lod": [
+          [
+            0
+          ],
+          [
+            0
+          ],
+          [
+            0
+          ]
+        ]
+      },
+      "policy": {
+        "path": "/Game/ForestSpike/B01_20261013c/Meshes/Tree_B_dense_rounded.Tree_B_dense_rounded",
+        "triangles": [
+          120,
+          36,
+          20
+        ],
+        "screens": [
+          1.0,
+          0.07999999821186066,
+          0.029999999329447746
+        ],
+        "sphere_radius_cm": 481.25343698099806,
+        "bounds_origin_cm": [
+          -8.781051635742188,
+          -16.871810913085938,
+          449.5095011293888
+        ],
+        "material_slots_per_lod": [
+          [
+            0
+          ],
+          [
+            0
+          ],
+          [
+            0
+          ]
+        ]
+      },
+      "debug_legacy": {
+        "path": "/Game/ForestSpike/B01_20261013c/Debug/Tree_B_dense_rounded_legacy.Tree_B_dense_rounded_legacy",
+        "triangles": [
+          120,
+          36,
+          20
+        ],
+        "screens": [
+          2.0,
+          0.75,
+          0.5625
+        ],
+        "sphere_radius_cm": 515.560302734375,
+        "bounds_origin_cm": [
+          -8.781051635742188,
+          -16.871810913085938,
+          449.5094909667969
+        ],
+        "material_slots_per_lod": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ]
+        ]
+      },
+      "debug_policy": {
+        "path": "/Game/ForestSpike/B01_20261013c/Debug/Tree_B_dense_rounded_policy.Tree_B_dense_rounded_policy",
+        "triangles": [
+          120,
+          36,
+          20
+        ],
+        "screens": [
+          1.0,
+          0.07999999821186066,
+          0.029999999329447746
+        ],
+        "sphere_radius_cm": 515.560302734375,
+        "bounds_origin_cm": [
+          -8.781051635742188,
+          -16.871810913085938,
+          449.5094909667969
+        ],
+        "material_slots_per_lod": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ]
+        ]
+      }
+    },
+    "Tree_B_horizontal_tiered": {
+      "original": {
+        "path": "/Game/ForestSpike/Meshes/Tree_B_horizontal_tiered/horizontal_tiered_lod0/StaticMeshes/horizontal_tiered_lod0.horizontal_tiered_lod0",
+        "triangles": [
+          112,
+          38,
+          20
+        ],
+        "screens": [
+          2.0,
+          0.75,
+          0.5625
+        ],
+        "sphere_radius_cm": 508.271274505718,
+        "bounds_origin_cm": [
+          35.85894775390625,
+          -5.8662261962890625,
+          461.22312012314796
+        ],
+        "material_slots_per_lod": [
+          [
+            0
+          ],
+          [
+            0
+          ],
+          [
+            0
+          ]
+        ]
+      },
+      "policy": {
+        "path": "/Game/ForestSpike/B01_20261013c/Meshes/Tree_B_horizontal_tiered.Tree_B_horizontal_tiered",
+        "triangles": [
+          112,
+          38,
+          20
+        ],
+        "screens": [
+          1.0,
+          0.07999999821186066,
+          0.029999999329447746
+        ],
+        "sphere_radius_cm": 508.271274505718,
+        "bounds_origin_cm": [
+          35.85894775390625,
+          -5.8662261962890625,
+          461.22312012314796
+        ],
+        "material_slots_per_lod": [
+          [
+            0
+          ],
+          [
+            0
+          ],
+          [
+            0
+          ]
+        ]
+      },
+      "debug_legacy": {
+        "path": "/Game/ForestSpike/B01_20261013c/Debug/Tree_B_horizontal_tiered_legacy.Tree_B_horizontal_tiered_legacy",
+        "triangles": [
+          112,
+          38,
+          20
+        ],
+        "screens": [
+          2.0,
+          0.75,
+          0.5625
+        ],
+        "sphere_radius_cm": 508.27130126953125,
+        "bounds_origin_cm": [
+          35.85894775390625,
+          -5.8662261962890625,
+          461.2231140136719
+        ],
+        "material_slots_per_lod": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ]
+        ]
+      },
+      "debug_policy": {
+        "path": "/Game/ForestSpike/B01_20261013c/Debug/Tree_B_horizontal_tiered_policy.Tree_B_horizontal_tiered_policy",
+        "triangles": [
+          112,
+          38,
+          20
+        ],
+        "screens": [
+          1.0,
+          0.07999999821186066,
+          0.029999999329447746
+        ],
+        "sphere_radius_cm": 508.27130126953125,
+        "bounds_origin_cm": [
+          35.85894775390625,
+          -5.8662261962890625,
+          461.2231140136719
+        ],
+        "material_slots_per_lod": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ]
+        ]
+      }
+    },
+    "Tree_B_open_vase": {
+      "original": {
+        "path": "/Game/ForestSpike/Meshes/Tree_B_open_vase/open_vase_lod0/StaticMeshes/open_vase_lod0.open_vase_lod0",
+        "triangles": [
+          102,
+          40,
+          20
+        ],
+        "screens": [
+          2.0,
+          0.75,
+          0.5625
+        ],
+        "sphere_radius_cm": 612.9217621462225,
+        "bounds_origin_cm": [
+          24.33953857421875,
+          -137.35228729248047,
+          476.9169058203697
+        ],
+        "material_slots_per_lod": [
+          [
+            0
+          ],
+          [
+            0
+          ],
+          [
+            0
+          ]
+        ]
+      },
+      "policy": {
+        "path": "/Game/ForestSpike/B01_20261013c/Meshes/Tree_B_open_vase.Tree_B_open_vase",
+        "triangles": [
+          102,
+          40,
+          20
+        ],
+        "screens": [
+          1.0,
+          0.07999999821186066,
+          0.029999999329447746
+        ],
+        "sphere_radius_cm": 612.9217621462225,
+        "bounds_origin_cm": [
+          24.33953857421875,
+          -137.35228729248047,
+          476.9169058203697
+        ],
+        "material_slots_per_lod": [
+          [
+            0
+          ],
+          [
+            0
+          ],
+          [
+            0
+          ]
+        ]
+      },
+      "debug_legacy": {
+        "path": "/Game/ForestSpike/B01_20261013c/Debug/Tree_B_open_vase_legacy.Tree_B_open_vase_legacy",
+        "triangles": [
+          102,
+          40,
+          20
+        ],
+        "screens": [
+          2.0,
+          0.75,
+          0.5625
+        ],
+        "sphere_radius_cm": 662.36328125,
+        "bounds_origin_cm": [
+          24.33953857421875,
+          -137.352294921875,
+          476.9169006347656
+        ],
+        "material_slots_per_lod": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ]
+        ]
+      },
+      "debug_policy": {
+        "path": "/Game/ForestSpike/B01_20261013c/Debug/Tree_B_open_vase_policy.Tree_B_open_vase_policy",
+        "triangles": [
+          102,
+          40,
+          20
+        ],
+        "screens": [
+          1.0,
+          0.07999999821186066,
+          0.029999999329447746
+        ],
+        "sphere_radius_cm": 662.36328125,
+        "bounds_origin_cm": [
+          24.33953857421875,
+          -137.352294921875,
+          476.9169006347656
+        ],
+        "material_slots_per_lod": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ]
+        ]
+      }
+    },
+    "Tree_B_tall_columnar": {
+      "original": {
+        "path": "/Game/ForestSpike/Meshes/Tree_B_tall_columnar/tall_columnar_lod0/StaticMeshes/tall_columnar_lod0.tall_columnar_lod0",
+        "triangles": [
+          108,
+          38,
+          20
+        ],
+        "screens": [
+          2.0,
+          0.75,
+          0.5625
+        ],
+        "sphere_radius_cm": 639.4798685859927,
+        "bounds_origin_cm": [
+          -7.021095275878906,
+          -7.823951721191406,
+          637.2488921880722
+        ],
+        "material_slots_per_lod": [
+          [
+            0
+          ],
+          [
+            0
+          ],
+          [
+            0
+          ]
+        ]
+      },
+      "policy": {
+        "path": "/Game/ForestSpike/B01_20261013c/Meshes/Tree_B_tall_columnar.Tree_B_tall_columnar",
+        "triangles": [
+          108,
+          38,
+          20
+        ],
+        "screens": [
+          1.0,
+          0.07999999821186066,
+          0.029999999329447746
+        ],
+        "sphere_radius_cm": 639.4798685859927,
+        "bounds_origin_cm": [
+          -7.021095275878906,
+          -7.823951721191406,
+          637.2488921880722
+        ],
+        "material_slots_per_lod": [
+          [
+            0
+          ],
+          [
+            0
+          ],
+          [
+            0
+          ]
+        ]
+      },
+      "debug_legacy": {
+        "path": "/Game/ForestSpike/B01_20261013c/Debug/Tree_B_tall_columnar_legacy.Tree_B_tall_columnar_legacy",
+        "triangles": [
+          108,
+          38,
+          20
+        ],
+        "screens": [
+          2.0,
+          0.75,
+          0.5625
+        ],
+        "sphere_radius_cm": 639.4798583984375,
+        "bounds_origin_cm": [
+          -7.021095275878906,
+          -7.823951721191406,
+          637.2489013671875
+        ],
+        "material_slots_per_lod": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ]
+        ]
+      },
+      "debug_policy": {
+        "path": "/Game/ForestSpike/B01_20261013c/Debug/Tree_B_tall_columnar_policy.Tree_B_tall_columnar_policy",
+        "triangles": [
+          108,
+          38,
+          20
+        ],
+        "screens": [
+          1.0,
+          0.07999999821186066,
+          0.029999999329447746
+        ],
+        "sphere_radius_cm": 639.4798583984375,
+        "bounds_origin_cm": [
+          -7.021095275878906,
+          -7.823951721191406,
+          637.2489013671875
+        ],
+        "material_slots_per_lod": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ]
+        ]
+      }
+    }
+  },
+  "maps": [
+    {
+      "arm": "A",
+      "name": "L_FSP_B01_20261013c_A_V3",
+      "world_path": "/Game/ForestSpike/B01_20261013c/Perf/L_FSP_B01_20261013c_A_V3",
+      "sequence_path": "/Game/ForestSpike/B01_20261013c/Perf/LS_L_FSP_B01_20261013c_A_V3",
+      "before_close_bindings": [
+        {
+          "name": "FS_PerfCamera",
+          "objects": [
+            "/Game/ForestSpike/B01_20261013c/Perf/L_FSP_B01_20261013c_A_V3.L_FSP_B01_20261013c_A_V3:PersistentLevel.CameraActor_0"
+          ]
+        }
+      ],
+      "camera_path": "/Game/ForestSpike/B01_20261013c/Perf/L_FSP_B01_20261013c_A_V3.L_FSP_B01_20261013c_A_V3:PersistentLevel.CameraActor_0",
+      "sequence_frames": 1261
+    },
+    {
+      "arm": "B",
+      "name": "L_FSP_B01_20261013c_B_V3",
+      "world_path": "/Game/ForestSpike/B01_20261013c/Perf/L_FSP_B01_20261013c_B_V3",
+      "sequence_path": "/Game/ForestSpike/B01_20261013c/Perf/LS_L_FSP_B01_20261013c_B_V3",
+      "before_close_bindings": [
+        {
+          "name": "FS_PerfCamera",
+          "objects": [
+            "/Game/ForestSpike/B01_20261013c/Perf/L_FSP_B01_20261013c_B_V3.L_FSP_B01_20261013c_B_V3:PersistentLevel.CameraActor_0"
+          ]
+        }
+      ],
+      "camera_path": "/Game/ForestSpike/B01_20261013c/Perf/L_FSP_B01_20261013c_B_V3.L_FSP_B01_20261013c_B_V3:PersistentLevel.CameraActor_0",
+      "sequence_frames": 1261
+    }
+  ],
+  "error": null
+}

@@ -91,7 +91,7 @@ def read_csv(path):
             "omitted_optional": omitted_optional}
 
 
-def validate_run(csv_path, log_path, *, tag, level, run_id, frames, cold, started_epoch, exit_code):
+def validate_run(csv_path, log_path, *, tag, level, run_id, frames, cold, started_epoch, exit_code, world_path=None):
     errors = []
     result = {"schema": "forestspike.perf_completion/1", "status": "FAIL_FS_PERF", "tag": tag,
               "level": level, "run_id": run_id, "expected_frames": frames, "cold_frames": cold,
@@ -140,7 +140,8 @@ def validate_run(csv_path, log_path, *, tag, level, run_id, frames, cold, starte
             errors.append("missing finalized profiler completion before exit")
         if not meta.get("csvid") or "Capture started. CSV ID: " + meta.get("csvid", "") not in log:
             errors.append("CSV capture ID does not match engine log")
-        map_path = "/Game/ForestSpike/Perf/" + level
+        map_path = world_path or "/Game/ForestSpike/Perf/" + level
+        result["expected_world_path"] = map_path
         if not re.search(r"Bringing World " + re.escape(map_path) + r"\." + re.escape(level) + r" up for play", log):
             errors.append("expected world not loaded")
         for key, value in (("tag", tag), ("level", level), ("run_id", run_id)):
@@ -168,9 +169,10 @@ def main():
         ap.add_argument("--" + name, required=True, type=int)
     ap.add_argument("--exit-code", type=int, default=None)
     ap.add_argument("--started-epoch", required=True, type=float)
+    ap.add_argument("--world-path", default=None)
     a = ap.parse_args()
     result = validate_run(a.csv, a.log, tag=a.tag, level=a.level, run_id=a.run_id, frames=a.frames,
-                          cold=a.cold, started_epoch=a.started_epoch, exit_code=a.exit_code)
+                          cold=a.cold, started_epoch=a.started_epoch, exit_code=a.exit_code, world_path=a.world_path)
     result["completed_utc"] = datetime.datetime.now(datetime.timezone.utc).isoformat()
     with Path(a.receipt).open("x", encoding="utf-8") as fh:
         json.dump(result, fh, indent=2)

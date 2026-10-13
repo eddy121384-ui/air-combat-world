@@ -1,0 +1,2705 @@
+{
+  "base_head": "d7fa5f87703ecec0dacf701c60a92976172fce58",
+  "files": [
+    {
+      "file": "unreal/ForestSpike/Content/ForestSpike/L_ForestSpike_B0.umap",
+      "bytes": 7600175,
+      "sha256": "f7ca9e77826f1586cee65ed2f94b10c9d60ac26b66f760ca7152daeaaa3ef4f2"
+    },
+    {
+      "file": "unreal/ForestSpike/Content/ForestSpike/Materials/M_FS_Ground.uasset",
+      "bytes": 27325,
+      "sha256": "dff6969fa22372fec7d40f712d17ecd65ef8902bc36a62249b756907458fe994"
+    },
+    {
+      "file": "unreal/ForestSpike/Content/ForestSpike/Materials/M_FS_Tree.uasset",
+      "bytes": 23920,
+      "sha256": "8ff52dc753ea2a45c2bbeea78f4ffacbca51f67addfafcf73b14fb223ed43806"
+    },
+    {
+      "file": "unreal/ForestSpike/Content/ForestSpike/Materials/MI_FS_Ground_SCtxOnly.uasset",
+      "bytes": 7264,
+      "sha256": "b2ce463d91fa5462811f17f0af6d5a77cd9cfeec8affc2174d5a34f95987d239"
+    },
+    {
+      "file": "unreal/ForestSpike/Content/ForestSpike/Materials/MI_FS_Ground_SOff.uasset",
+      "bytes": 7240,
+      "sha256": "c9770a00a788ab776c56262584ecfe0a226bb20415b0f4c4c0f4eddae6edc229"
+    },
+    {
+      "file": "unreal/ForestSpike/Content/ForestSpike/Materials/MI_FS_Ground_SOn.uasset",
+      "bytes": 7234,
+      "sha256": "39e1e959542ffe0af834757a87f077594ce001b2fc9bed4f87fa3881de13b305"
+    },
+    {
+      "file": "unreal/ForestSpike/Content/ForestSpike/Materials/MI_FS_Tree_A.uasset",
+      "bytes": 7824,
+      "sha256": "9af01d66ec153dbb286e3d3a799f6300412ec910eca4cbef5460779d2554d459"
+    },
+    {
+      "file": "unreal/ForestSpike/Content/ForestSpike/Materials/MI_FS_Tree_B.uasset",
+      "bytes": 7824,
+      "sha256": "34fe7b785960a3748a3bae16490c9e4504fc5c0d14f4ff8a34e6191b79578804"
+    },
+    {
+      "file": "unreal/ForestSpike/Content/ForestSpike/Materials/MI_FSP_A_S1_v1_agl200_p10.uasset",
+      "bytes": 9154,
+      "sha256": "46f82d010c62c24a04598850faf715dc9db0ffccb264a7c6d59abe8d974a45e2"
+    },
+    {
+      "file": "unreal/ForestSpike/Content/ForestSpike/Materials/MI_FSP_A_S1_v3i_t14_t32.uasset",
+      "bytes": 8746,
+      "sha256": "d339de00081e6573829a0bb3b18e5665786aa3b3ac98ad8cd5f7c77a090c2268"
+    },
+    {
+      "file": "unreal/ForestSpike/Content/ForestSpike/Materials/MI_FSP_B_S1_v1_agl200_p10.uasset",
+      "bytes": 8758,
+      "sha256": "ef300cd67a9e1ee10ede9675daeb9d027827a323f49a5eba53925391c769616a"
+    },
+    {
+      "file": "unreal/ForestSpike/Content/ForestSpike/Materials/MI_FSP_B_S1_v3i_t14_t32.uasset",
+      "bytes": 8746,
+      "sha256": "db61fa018db3f50c3f092e7a7e038c1bb387e2073d16f33d60cc5f6b740f2189"
+    },
+    {
+      "file": "unreal/ForestSpike/Content/ForestSpike/Meshes/Terrain_Context/terrain_context/StaticMeshes/terrain_context.uasset",
+      "bytes": 2882067,
+      "sha256": "54e3aca2fde8bac29ae37cadfd5614420b71211bd2df6d787b1f4dec9446f9a2"
+    },
+    {
+      "file": "unreal/ForestSpike/Content/ForestSpike/Meshes/Terrain_Core/terrain_core/StaticMeshes/terrain_core.uasset",
+      "bytes": 1399525,
+      "sha256": "9740467fe9546d92a6bc80411791266b13f9cf6272abdd45629f2683eb2584e4"
+    },
+    {
+      "file": "unreal/ForestSpike/Content/ForestSpike/Meshes/Tree_A/xinyi_reference_preview_lod0/StaticMeshes/xinyi_reference_preview_lod0.uasset",
+      "bytes": 85698,
+      "sha256": "11b9b788777a3a17f2d063c6bc2373986edfe1a012e34253a85ee788663e3389"
+    },
+    {
+      "file": "unreal/ForestSpike/Content/ForestSpike/Meshes/Tree_B_dense_rounded/dense_rounded_lod0/StaticMeshes/dense_rounded_lod0.uasset",
+      "bytes": 91868,
+      "sha256": "a5f66a39c3bcaa13e7f60353f79f24371bf7c4ec51f142b5261f43d00373867a"
+    },
+    {
+      "file": "unreal/ForestSpike/Content/ForestSpike/Meshes/Tree_B_horizontal_tiered/horizontal_tiered_lod0/StaticMeshes/horizontal_tiered_lod0.uasset",
+      "bytes": 92611,
+      "sha256": "2527d98138dc807e1232e542133ddf766e208b946507672e201c041abebe2108"
+    },
+    {
+      "file": "unreal/ForestSpike/Content/ForestSpike/Meshes/Tree_B_open_vase/open_vase_lod0/StaticMeshes/open_vase_lod0.uasset",
+      "bytes": 91358,
+      "sha256": "d4636b1fd848295d0b1cfec5629ad29ba20bc5ba082144c2421d1e9942a869c1"
+    },
+    {
+      "file": "unreal/ForestSpike/Content/ForestSpike/Meshes/Tree_B_tall_columnar/tall_columnar_lod0/StaticMeshes/tall_columnar_lod0.uasset",
+      "bytes": 91077,
+      "sha256": "7818008501996931731a8485afcf5150038449313b7277280a97ed8446f9158b"
+    },
+    {
+      "file": "unreal/ForestSpike/Content/ForestSpike/Perf/L_FSP_A_S1_v1_agl200_p10.umap",
+      "bytes": 4435460,
+      "sha256": "52f2c64cdea2fcae40d19e74aa4f5a237ec5ce192cfd131d9ad0814ee601c03f"
+    },
+    {
+      "file": "unreal/ForestSpike/Content/ForestSpike/Perf/L_FSP_A_S1_v3i_t14_t32.umap",
+      "bytes": 4438298,
+      "sha256": "b983082b5062773b47533490a0d4061b4a2a802ea13a22341e78fe6579269f87"
+    },
+    {
+      "file": "unreal/ForestSpike/Content/ForestSpike/Perf/L_FSP_B_S1_v1_agl200_p10.umap",
+      "bytes": 4432052,
+      "sha256": "d6df7c6a2efa2304d91df2987c5d0ea65a73a684a1c31f86732a63e1b70629b3"
+    },
+    {
+      "file": "unreal/ForestSpike/Content/ForestSpike/Perf/L_FSP_B_S1_v3i_t14_t32.umap",
+      "bytes": 4434890,
+      "sha256": "e248caddc0a0fd9870131eddb873592988cff95a4c19adb19dd74cc1b0db8566"
+    },
+    {
+      "file": "unreal/ForestSpike/Content/ForestSpike/Perf/LS_FSP_A_S1_v3i_t14_t32.uasset",
+      "bytes": 12744,
+      "sha256": "ae00c4744c70bca570f24545503d10a6e9c576320df524ceec422c20c0363f19"
+    },
+    {
+      "file": "unreal/ForestSpike/Content/ForestSpike/Perf/LS_FSP_B_S1_v3i_t14_t32.uasset",
+      "bytes": 12744,
+      "sha256": "9fc4a219f1f49a2fe31901f6052988d85d4963365eb4b70c1ca8c44fae328a06"
+    },
+    {
+      "file": "unreal/ForestSpike/Content/ForestSpike/Textures/T_FS_FieldCore.uasset",
+      "bytes": 129153,
+      "sha256": "6f79552d67c99e3142f1c077d3a760fbf709dc27b7f3cab7f85b2b4ca0a16d0f"
+    },
+    {
+      "file": "unreal/ForestSpike/Content/ForestSpike/Textures/T_FS_FieldCtx.uasset",
+      "bytes": 763500,
+      "sha256": "71e9e4192adcae6c3b64b79aa6b17375fc6d56719c4b068648f5bc2a45330015"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/coverage/cov_A_n16000.json",
+      "bytes": 324,
+      "sha256": "ebd0bd2e061cc9a413b7ccf4248427c6a1fdf8fa0517a39481de3dbbe6746c37"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/coverage/cov_A_n16000.png",
+      "bytes": 3090912,
+      "sha256": "84778add97f18b836a033fd8a4ca352be8c1d89cb70fdcef120c7c1620e53a47"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/coverage/cov_A_n26000.json",
+      "bytes": 324,
+      "sha256": "dd484a05f39929d5a0a5dbc187ea2187af76117c2615cfad541e9d125c934e7a"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/coverage/cov_A_n26000.png",
+      "bytes": 3090912,
+      "sha256": "25c3b345b0dae0017fbd058e90b459f671c9bc6a325cb088ec5bde24d3c131fc"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/coverage/cov_A_n40000.json",
+      "bytes": 324,
+      "sha256": "cf57a0bb3389f889b4ef486cb35209cb48872d93cf4073c826e8238dd07c4c89"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/coverage/cov_A_n40000.png",
+      "bytes": 3090912,
+      "sha256": "70161bce6e9eb85726e79603212fc2dbe1973fbdd691d34420588e0c5c739473"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/coverage/cov_A_n60000.json",
+      "bytes": 324,
+      "sha256": "efcff7ab66adccde0f77c6dc8ff24c3d8c772976ee6ebbc7d840efb786009d2c"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/coverage/cov_A_n60000.png",
+      "bytes": 3090912,
+      "sha256": "7d4de6ea2f58cefd83ff9d22f376657f45396c3c1edee94801393f2b48985cb9"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/coverage/cov_A_n8000.json",
+      "bytes": 320,
+      "sha256": "bf38ee4177bc603a94f73fe227eea0694f0b572f76d464c274eb19fe1b6a9e8a"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/coverage/cov_A_n8000.png",
+      "bytes": 2244875,
+      "sha256": "5e73626be2a8a4ffcac91058f50a717d823c7f1be042a1c19b7961379bad9b25"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/coverage/cov_B_n16000.json",
+      "bytes": 325,
+      "sha256": "0c33c1248e0ea85706a4e8dfafb684ecdd7c564f5f5ea3f0aad5c7828244e914"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/coverage/cov_B_n16000.png",
+      "bytes": 3090912,
+      "sha256": "4e947b5edaa662e0ed9f7b8463c531b5852f7112ee81e99a4cd80615158a34aa"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/coverage/cov_B_n26000.json",
+      "bytes": 325,
+      "sha256": "22ff35b19cc8b39bc42e4dc301c97530779d8328d680ea1322f979ae978ae517"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/coverage/cov_B_n26000.png",
+      "bytes": 3090912,
+      "sha256": "cea3ac4c45cb87608d31ebb6b5f3041f9f862b717e8fa2dd0259a94141fe6aca"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/coverage/cov_B_n40000.json",
+      "bytes": 325,
+      "sha256": "4509f0e77224ff9ff3e44b241a4e0225febbd0e23d266a4a9657a82b400f2461"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/coverage/cov_B_n40000.png",
+      "bytes": 4252804,
+      "sha256": "822c6171fd2f593cd05982c1881e7812d3a20f1b2956eab54eaff1a97e82578b"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/coverage/cov_B_n60000.json",
+      "bytes": 325,
+      "sha256": "b3357d5557b85dbf5388ccf21f665a49e3e4f3bcbddb795544e99da8763c17da"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/coverage/cov_B_n60000.png",
+      "bytes": 4252804,
+      "sha256": "ef0f6fc73b97ee9db379f08f48eebae49a5680cf926095a0c267cd92f7368653"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/coverage/cov_B_n8000.json",
+      "bytes": 321,
+      "sha256": "578eac8c34893a7dca15c194665c473088537df2addf15886912002521be062f"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/coverage/cov_B_n8000.png",
+      "bytes": 2244875,
+      "sha256": "7a8b55c41eb6029ddd2e7bbf388f5f68c182fc9c68f52b4c35e8cba12b3152a3"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v1_agl1000_p20.json",
+      "bytes": 500,
+      "sha256": "ff91d4c1c43a55fbf717a63969b7a01c1b2b1070cd8466d7c2dbeba8a157dafb"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v1_agl1000_p20.png",
+      "bytes": 846093,
+      "sha256": "78ff992987680f839f5d29fe7f94bf1317c1c8b4aa3e9a70795afc4c21d90cf9"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v1_agl1000_p45.json",
+      "bytes": 500,
+      "sha256": "eaaa268005130f28cbb24ce07fc43ab70f4f52da12f53fbd23a7e38846f99dcb"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v1_agl1000_p45.png",
+      "bytes": 1624447,
+      "sha256": "ab1800bbb71452022cb0f4d2c851a2b2f9af62717f28a87056d5a630e737aa25"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v1_agl200_p10.json",
+      "bytes": 495,
+      "sha256": "5c428e5ba3033bc1b0c9b82be50d8fae42e09872e388ca4d9d4c6da7fd324812"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v1_agl200_p10.png",
+      "bytes": 1173227,
+      "sha256": "25c453129a596b1cb43ca4d469fc6d5210ce1b1c4dd5aa67dab811f4f3601a98"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v1_agl200_p25.json",
+      "bytes": 495,
+      "sha256": "a36f6056c8caf852fafd30137e4e91e86d5a357e352bd3f2c656d496bfce461e"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v1_agl200_p25.png",
+      "bytes": 1624447,
+      "sha256": "4fe937a441bef0d0e4e5a27026f932b119041e757ab953bad8b4015251f4cde4"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v1_agl500_p15.json",
+      "bytes": 495,
+      "sha256": "7dbbe3c9ec717bda94924618583f2980aba901e789c9af50804d67bc39b551e6"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v1_agl500_p15.png",
+      "bytes": 1173227,
+      "sha256": "8875ec882618f3a2e7756d54634e0720c7c1d89e84f174dd5c581b9f8f92e2e3"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v1_agl500_p35.json",
+      "bytes": 495,
+      "sha256": "f1b910f5ae048e0dd9fd262a1b5e23d98e404442e04941a922b7c171d24282b8"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v1_agl500_p35.png",
+      "bytes": 1624447,
+      "sha256": "9fe6abe81f57e0951ef69334b7f59d8e1cc45ebff338b5ede68d76c97066049c"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v1_agl50_p15.json",
+      "bytes": 491,
+      "sha256": "3232a8de6455f91af38bd53c43b4894499e24493590c873ba00d9441f07efcab"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v1_agl50_p15.png",
+      "bytes": 846093,
+      "sha256": "4a07c6feaed8cbdb7181abf06358264ef9650b9707124aef62bb0cc6246969cf"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v1_agl50_p5.json",
+      "bytes": 487,
+      "sha256": "751166af69583c0b4618ea8f3fe87a50f4ac07cf8f9afb7eda2ed181958d322b"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v1_agl50_p5.png",
+      "bytes": 846093,
+      "sha256": "8b4fab99cb79433778d084c295086da6a9f15f80838d075c776bd66f115554e3"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v3_t00.json",
+      "bytes": 513,
+      "sha256": "a5e41e5e49543178a24373744917bd176eb696c1ef32d3814b07e4790a07c92a"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v3_t00.png",
+      "bytes": 1173227,
+      "sha256": "79e10e1ca097b2f8f67cf06077fc54cb1adca42e4f28283d268fbbb9241c2fbc"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v3_t02.json",
+      "bytes": 517,
+      "sha256": "5bd48b4830b3951520e30a80f84043eabe14c70b545049ee189e525d4d62fb69"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v3_t02.png",
+      "bytes": 1173227,
+      "sha256": "9d0912109c59d985b5f3378223dfee2eb3c89648240bf3d25fb59979dafd031b"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v3_t04.json",
+      "bytes": 517,
+      "sha256": "1b53fc5e93c28f1338f279cafca11cc29fb24f294881d7dc1761e0d49a616a78"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v3_t04.png",
+      "bytes": 1173227,
+      "sha256": "8b6047ec52f5d86dc875b623fdfa27725e893cecf99e680ee008406fa98a3a69"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v3_t06.json",
+      "bytes": 517,
+      "sha256": "1418d37fc6cefcae81a17a635c9acf630e69f608d4dcf1dfb1213e47a7b7cee3"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v3_t06.png",
+      "bytes": 1173227,
+      "sha256": "4ed81a82ad12c308abf00bf69cef1311d87015f62a03a0f545187657edfabd27"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v3_t08.json",
+      "bytes": 517,
+      "sha256": "8f28a40a5002d9100e962a12a0d6f9d95b2ca4f8ed8ab8e7a4db8bd871cd51e9"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v3_t08.png",
+      "bytes": 1173227,
+      "sha256": "b5636a01714b769a83256076b321332cf57644dffcab10553172e198a2fbe54d"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v3_t10.json",
+      "bytes": 517,
+      "sha256": "fdec8b2fe54ec9f7a19d6936c7042920ab47520b81836d966c80576196397312"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v3_t10.png",
+      "bytes": 1173227,
+      "sha256": "f16098c6c05af36c494e00537698bfdf371d1400b9519b4f5d2a52c2df192044"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v3_t12.json",
+      "bytes": 518,
+      "sha256": "92288caa816ecaba183924fc5528f8fba6da7fae328b949e5aad8ac4fa73d9ee"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v3_t12.png",
+      "bytes": 1173227,
+      "sha256": "862bb6695f7b179f90eba9ad7e57f395a361402072c726512c69de40d7221ead"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v3_t14.json",
+      "bytes": 518,
+      "sha256": "e0ebc2edf33fbb8514ce53ce7da0766032fd416891e40ae0d8bafebb3b518e94"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v3_t14.png",
+      "bytes": 1173227,
+      "sha256": "caa379c9f4955dc2d95142055676638c91ce987045449656991c830f6193f6aa"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v3_t16.json",
+      "bytes": 518,
+      "sha256": "48fea4a89983134be76a3f4bb1b50589c54225dae05d61cc10631d645ef3aac7"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v3_t16.png",
+      "bytes": 1173227,
+      "sha256": "e9281a876f1b2b4fc4e175355417ffeb899feb3150d07ee81674d4b58ef7ceab"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v3_t18.json",
+      "bytes": 516,
+      "sha256": "94b963b483fa598abb78b06f4d2f5253437e68ede674ddcf31571fa9a799928e"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v3_t18.png",
+      "bytes": 1173227,
+      "sha256": "82a013eebf0ad189af509c3ec0faa4de4fd35a258f90071ed4d7851bb1c1ca73"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v3_t20.json",
+      "bytes": 516,
+      "sha256": "f4cd61a1efa8745546660f76202ce9c945ff28a2e676513fa8924d810aad4973"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v3_t20.png",
+      "bytes": 1173227,
+      "sha256": "6c2de0e9fe79087ce5097c3ffc410e26d85e780333ec445f79c0bc3e6f37fc7e"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v3_t22.json",
+      "bytes": 512,
+      "sha256": "c7c246baf322dafe9a25d839fbe16efebbe8ff7947c3767607c72204803540bf"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v3_t22.png",
+      "bytes": 1170890,
+      "sha256": "e17fbf6b025af92747043b86e0b5ab2d8d2847a6cb1fda7b09a901fe2f9177fa"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v3_t24.json",
+      "bytes": 514,
+      "sha256": "304b10b4e1c71e56d8e9e8ce81fae74a5120fcc5621d03d4d4e7592ba3030fcd"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v3_t24.png",
+      "bytes": 1170141,
+      "sha256": "1e513191db3ee98aff3160c44cdb6f24e2f431c3125b58d51e39f4b3cf0ba3b9"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v3_t26.json",
+      "bytes": 516,
+      "sha256": "2d76702bc50e249fc75a1260764f4f8e766dc9552fe37d9b1f60785238baa389"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v3_t26.png",
+      "bytes": 1168183,
+      "sha256": "2ee465c31bb074b092a9ac554bd6bb2fa709b47dfbc46b1f2245b8b43b3bf398"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v3_t28.json",
+      "bytes": 514,
+      "sha256": "77dc7a58327419a41d0800d7cc50e1cd9da3c5fd118128a73a1832bf276b4bf4"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v3_t28.png",
+      "bytes": 846093,
+      "sha256": "e95a1710e3e2df00aca213aa16886c79d960579b1c03fb8af34d2685fc664877"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v3_t30.json",
+      "bytes": 516,
+      "sha256": "2a9b8747cebf03e7821a3d579b58148bf595c998fd6348c134c080c898a44153"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v3_t30.png",
+      "bytes": 846093,
+      "sha256": "e840f2aa45aed21ddf60492b4f95c04be38b637d1fd69a2e8ad4e21056d5a436"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v3_t32.json",
+      "bytes": 515,
+      "sha256": "2bc709b8a515ed0bb1e2a2d91d68a5d7c35a25061d9ad1d173ad7d44e16d0b51"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v3_t32.png",
+      "bytes": 846093,
+      "sha256": "74ec4f00a3acea33a5bc649a276b39b61aa77bbd3cc8e5c5c541d9aaa11a53bb"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v3_t34.json",
+      "bytes": 516,
+      "sha256": "bcb193e7497f6f4bbd2fe803db7ea7bbe4194b4e1cbbd4b5fd635a99c2e558fb"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v3_t34.png",
+      "bytes": 846093,
+      "sha256": "ecc3513c5607c601f3282f269ca97e97a5940164a9c79bcf8e49184d4a855203"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v3_t36.json",
+      "bytes": 516,
+      "sha256": "b76ed7d154bac6dd1c7ae495646b9d3aba1f22cf7d6ac2bdd913314253231b51"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v3_t36.png",
+      "bytes": 609202,
+      "sha256": "48f7eff73c99cd111264b2eac620d37b4c27683501ab617321853e7608707357"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v3_t38.json",
+      "bytes": 516,
+      "sha256": "9b0c1fdc7f0736459ff662570ecc80268948911ab0607e62bfedd3918aa727de"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v3_t38.png",
+      "bytes": 609202,
+      "sha256": "445d49b46fce36bd75079a4a509d8a3b3729b96ed41cf40812545b618dc116af"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v3_t40.json",
+      "bytes": 516,
+      "sha256": "4d539f2738475c45d588262b980b85bfe9ec2551644c0b208f6977b256512b18"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v3_t40.png",
+      "bytes": 609202,
+      "sha256": "93978a2ed673ffd830e0fc46e2a5be25148e8724454605a670cf898343204160"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v3_t42.json",
+      "bytes": 515,
+      "sha256": "dc0f6fd47ee2a3534fa3bf6316761d678d1481a572b3ea68bba97aa8769be635"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v3_t42.png",
+      "bytes": 609202,
+      "sha256": "ee8136562b50115381379615a22cf7ec6f1d15834a6bd430aadaa6236141984c"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v5_agl200_a000.json",
+      "bytes": 543,
+      "sha256": "a8e41dd2bda1ad8914dc16bd34b8016506d9264fa14ea859c5c38b2a279a679f"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v5_agl200_a000.png",
+      "bytes": 1173227,
+      "sha256": "fa047889035153d8ff9c17375d07d40f5f68d61c28a569cb6d4d08818330dd5e"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v5_agl200_a030.json",
+      "bytes": 549,
+      "sha256": "959dbcde1c47dd4b7d413ff8d07aee47fc9ea2046e868f82d92d25f43427785c"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v5_agl200_a030.png",
+      "bytes": 846093,
+      "sha256": "805586fb09dcc5f1f24a5a748746b891e4b15a57f72753702735a7eae1a7aadc"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v5_agl200_a060.json",
+      "bytes": 549,
+      "sha256": "4a6e7c8b266b9ac8ac2631c584db3f5754b45c4f3cbc2f5874165f666569a1e2"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v5_agl200_a060.png",
+      "bytes": 846093,
+      "sha256": "0a645504d8d08a0eed294bb5287857c87dcbbc57d847ff26ce7d563385d53303"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v5_agl200_a090.json",
+      "bytes": 544,
+      "sha256": "cda82ab6636ebeed2b92c3621bbeb58dbcfead8ada160f6c852568497bf1ece9"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v5_agl200_a090.png",
+      "bytes": 846093,
+      "sha256": "1d8968fe61c9af3237ce97d2c167c4ae9d01aaf2bd30f5b37b82492b4c6b95a0"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v5_agl200_a120.json",
+      "bytes": 551,
+      "sha256": "9f3a29fb1e25ba1a508c32e3cb152951dfd51d2d063ec1904788755c62b43449"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v5_agl200_a120.png",
+      "bytes": 846093,
+      "sha256": "b6c55598baa27eb3bc1473e38f27caaaa8bc4081ff34c859f4d696413e217a60"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v5_agl200_a150.json",
+      "bytes": 551,
+      "sha256": "a66daf7c84f5d7b73811f1ee9ee1df7565c69cb68e2d6e047cf5a224f7f8cabb"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v5_agl200_a150.png",
+      "bytes": 846093,
+      "sha256": "0dacaffa132074da6e4f68fd35e2d98e36f0e6cbefa5e1414add71fb1d058569"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v5_agl200_a180.json",
+      "bytes": 547,
+      "sha256": "56ca96649658568e881308ee40dcf135e731c0a0b2794bcb96df183fce803ad0"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v5_agl200_a180.png",
+      "bytes": 1173227,
+      "sha256": "173561601b423ac1d4cc644e47e6dbe0e20080bb92b6e8806db61857833a9ead"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v5_agl200_a210.json",
+      "bytes": 552,
+      "sha256": "07c94bc7a9ecf769b13f2bbd5e98dbc7a95aa60f17e97ef75585a5994a8e6e0d"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v5_agl200_a210.png",
+      "bytes": 1173227,
+      "sha256": "5d5d2300fbdb9a23054adf6be5327f87cbb0fafcc1090749fdc8f401ee00c2e2"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v5_agl200_a240.json",
+      "bytes": 552,
+      "sha256": "c7c170bf0296549c2886dc410deef308afef91f397cd04490efd473b6b73f3e9"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v5_agl200_a240.png",
+      "bytes": 846093,
+      "sha256": "2602dd81d1ca47e12d048f30a8f147ea9dd519b54f7f42efbfef742d0e1b8e77"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v5_agl200_a270.json",
+      "bytes": 546,
+      "sha256": "96d00fca2426f6d71ec295c7a6c1e6cb9f11a2887ac7341de0e9bdb6fee741b1"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v5_agl200_a270.png",
+      "bytes": 846093,
+      "sha256": "8d834987e3c8c7ca2d03a6b2a0c8369e64083cccbdd7de9ac8743e81ca59087b"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v5_agl200_a300.json",
+      "bytes": 549,
+      "sha256": "b8ac16004c55e3bd78a6e2299bba7183db8e7e3dacda8bc2233c47a74146d2e1"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v5_agl200_a300.png",
+      "bytes": 846093,
+      "sha256": "cfcc77c1cddf53a2520e4ed411239e0c32809289db1f07d4c17931b3e844d841"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v5_agl200_a330.json",
+      "bytes": 550,
+      "sha256": "b593ebd1f8d3324730e1ca8e79ee466f7c22c68335890b5c296fe923a75b2965"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v5_agl200_a330.png",
+      "bytes": 846093,
+      "sha256": "8ba6d0081bfbb166c59abb66a2500c19062476a23376ef4ad2aa3225937f71c3"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v5_agl500_a000.json",
+      "bytes": 543,
+      "sha256": "95f380cb53a3243ed5d40d687231369dcc9c25868985afcc478e5608c63c8781"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v5_agl500_a000.png",
+      "bytes": 1173227,
+      "sha256": "9ffa6856c1ce1535c5a2a13b495a7a6375c43ed73ba71cefa92e859c5bc83f6e"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v5_agl500_a030.json",
+      "bytes": 549,
+      "sha256": "7a2aaa5007b4b348a0056db015ff8082022967dce2818035c723f5ef4fe0353e"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v5_agl500_a030.png",
+      "bytes": 1173227,
+      "sha256": "340d614299f8c179ad86a6a205ae65adc2f29fcbe0847e4f03830bfc31cee4fa"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v5_agl500_a060.json",
+      "bytes": 549,
+      "sha256": "0fe91a5eac538d3de7cde0cee32a95e648b7bbda2454358bf9e969fc1229699c"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v5_agl500_a060.png",
+      "bytes": 1173227,
+      "sha256": "29492eec1814e8cbf2bdebbcea815fe2162954955e1f2b92f31a2685af21bb1e"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v5_agl500_a090.json",
+      "bytes": 544,
+      "sha256": "b85bb1f6cf52307016b88ee0e8664847a54d158b451829417107ad969b16bbe7"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v5_agl500_a090.png",
+      "bytes": 1173227,
+      "sha256": "0a2a32c5da86f4c0944ac1e3177c244b568b86bf8678fbdc55ae621bbc728b31"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v5_agl500_a120.json",
+      "bytes": 551,
+      "sha256": "fb70a04731a4199148c0a24893c62c1cf2b22a8313d6a7a9fee89a442619bc21"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v5_agl500_a120.png",
+      "bytes": 1173227,
+      "sha256": "67d4bb49683143c602d87063f863ca817df12637c730a76c1ea391eee51925ff"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v5_agl500_a150.json",
+      "bytes": 551,
+      "sha256": "17bcad67dfaf5ddd0217e9b7d12d2a648539ab1243d52f13e193093476619d49"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v5_agl500_a150.png",
+      "bytes": 1173227,
+      "sha256": "ba4d58e2c4760bcdcbfc3cace594d9461ec52e4913f126cc0d9db47eb196df43"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v5_agl500_a180.json",
+      "bytes": 547,
+      "sha256": "0032192f221922eec3c77f9b4be45ddab385dbac71c313dbac18fb460ec32a6e"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v5_agl500_a180.png",
+      "bytes": 1173227,
+      "sha256": "3bb8c1d73005b63207d6e359c29b0451264ed67a633eed74972845e3d34badde"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v5_agl500_a210.json",
+      "bytes": 552,
+      "sha256": "eb7cffa2e8ca586709fcea1ec8f7b58b3403694dd3f7a0445573713c55973aa0"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v5_agl500_a210.png",
+      "bytes": 1173227,
+      "sha256": "8189cd3b19ab34487e04b9e2abaddc869268cc36750051d2c194f85cb72695a2"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v5_agl500_a240.json",
+      "bytes": 552,
+      "sha256": "a92e791769d5f5232c851464df9e73f67a5b7a962074d20bd6406368d287ebed"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v5_agl500_a240.png",
+      "bytes": 1173227,
+      "sha256": "a95a412a1ab02dc1b4989f140a7c4e5c7d8f2589f69387cf67439ef7e1313121"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v5_agl500_a270.json",
+      "bytes": 546,
+      "sha256": "a33b5a76dccf62d3534d9c934fc0df23356ffbbaf41415cde95ab8dc6ca1cc4a"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v5_agl500_a270.png",
+      "bytes": 1173227,
+      "sha256": "641b7fafe98b6d5af29b8e95cebde11d9114352faeba8f95d9ceec6bb5256d9d"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v5_agl500_a300.json",
+      "bytes": 549,
+      "sha256": "b86cb0dc121f76701494f5d4f808b31766db9303736770ce6a598578791cd901"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v5_agl500_a300.png",
+      "bytes": 1173227,
+      "sha256": "356394339cda1f759a646e507dc2d7647b8c367a195356294e8f813274c07693"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v5_agl500_a330.json",
+      "bytes": 550,
+      "sha256": "c443e5e9bb6ff302f452385161d8cb44441e2cedd5acc4f915b06efb08e7673b"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/id_v5_agl500_a330.png",
+      "bytes": 1173227,
+      "sha256": "941ac64890ac43872c6e238518ede02a63e7a60c8ca37e3b29e821a576d611fb"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/idB_v1_agl1000_p20.json",
+      "bytes": 503,
+      "sha256": "c15b2a21505f69ed200841bcdb86910964539522496df2946487e4c723933fe5"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/idB_v1_agl1000_p20.png",
+      "bytes": 1165486,
+      "sha256": "7ee7b24fb38e9b1fcaaa6bb97911ec4d3713a7b38e0aa57f4b1c7816babded34"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/idB_v1_agl1000_p45.json",
+      "bytes": 503,
+      "sha256": "e375ab8f8850e7d4ef8935beeb6212ebb1fce49b3e6642b34ce97e7f92b0465f"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/idB_v1_agl1000_p45.png",
+      "bytes": 1624447,
+      "sha256": "d889374af705a788bc041ccf5420c830aea49e6d107ab713e91a97f4e5668563"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/idB_v1_agl200_p10.json",
+      "bytes": 498,
+      "sha256": "4218dc25161715008c63d440d4687f06b965fd288dbcf128772e1935c664eab6"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/idB_v1_agl200_p10.png",
+      "bytes": 1616585,
+      "sha256": "aaf8e2a3ef4caed1486323e5d247f68abb4c9c2f6939c2e29c7370ffac641802"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/idB_v1_agl200_p25.json",
+      "bytes": 498,
+      "sha256": "08fce4c8cb1b5b627c1145164f1aa445a76116535f12ddd53d0476f5312c8a04"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/idB_v1_agl200_p25.png",
+      "bytes": 1624447,
+      "sha256": "c0542502cd3b59e5e2eeb8c018dd8835ec8609d1bebd7a284bf009bdda45e86f"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/idB_v1_agl500_p15.json",
+      "bytes": 498,
+      "sha256": "d19d7a2f3ee2ddca10b4088f7b3c4ead3993ee0e4f34c80fd20611aa9365da59"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/idB_v1_agl500_p15.png",
+      "bytes": 1173227,
+      "sha256": "8c56ee640318d1fdc0fef8749eeecf6f60db8fab9329f1fff979b17a398cca70"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/idB_v1_agl500_p35.json",
+      "bytes": 498,
+      "sha256": "98671191c5c992b7f98c5260fc1b0a4e70597135c88ccab8c0a3ef252ad10817"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/idB_v1_agl500_p35.png",
+      "bytes": 2242312,
+      "sha256": "c4a2cf2a597fd9b795581326e6a9f3880dc4794a77a5a66c99abbf3538f9d9c7"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/idB_v1_agl50_p15.json",
+      "bytes": 494,
+      "sha256": "7cb4df003d2f4a3b8972bd591d3a04d0d61e31b044f726bb5f2545820ecd36bb"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/idB_v1_agl50_p15.png",
+      "bytes": 1173227,
+      "sha256": "d93579c2a09ad86c49f26bf7a310307cd05129e0271c60240a3bd1f373b990d4"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/idB_v1_agl50_p5.json",
+      "bytes": 490,
+      "sha256": "6e76f8935ea6a39abdae3f19a875ff41340f47db045a2bb0f5b9e8b33d8854eb"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate/idB_v1_agl50_p5.png",
+      "bytes": 846093,
+      "sha256": "24a8403afc7da511f672337e61c8082566fe3bda1524354e823f78c6e7c11776"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate2/id_v3i_t00.json",
+      "bytes": 518,
+      "sha256": "ac29dee80670643071714f5259125baee88e7a413727cfbffc648668ea0e7b84"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate2/id_v3i_t00.png",
+      "bytes": 846093,
+      "sha256": "4dbeaba7b8f4c18ffab1dc3202d5533f35adc747a911d8ca8c7605bd825b0711"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate2/id_v3i_t02.json",
+      "bytes": 520,
+      "sha256": "689c7d1c22548d98b1b277010df1becd86ac2fbf78eca2c7ad3fbc9227018b2a"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate2/id_v3i_t02.png",
+      "bytes": 846093,
+      "sha256": "98c7af6c2d0bda068506e98f82c8729c75a90cd2bd48e11c167173f64a4167d1"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate2/id_v3i_t04.json",
+      "bytes": 520,
+      "sha256": "1843b1ca02b0bd62d6e97ba85052115d9c84ff3bb1f9e63645b5bb5e37e3318d"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate2/id_v3i_t04.png",
+      "bytes": 846093,
+      "sha256": "2ce21b4a35f3cda36c346d26201c1b4aedc2c91e91542ee6b7a9a7101f1a7560"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate2/id_v3i_t06.json",
+      "bytes": 520,
+      "sha256": "95c3732a1d9360315a2ee2a3f92b1c5d7002e485c0f703d94517cf43fa1eae66"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate2/id_v3i_t06.png",
+      "bytes": 846093,
+      "sha256": "bee6c0b45323a3a89dee1fd8fb007c3bd7af4b6b34fc52b02b64fbbc31d6f3dd"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate2/id_v3i_t08.json",
+      "bytes": 520,
+      "sha256": "7d1aba5a77db151ff4253a7feb20f493e47dbb1931ddfd72ce1c39484a0f1e78"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate2/id_v3i_t08.png",
+      "bytes": 846093,
+      "sha256": "ecd4ae28b3b9e3f845aa954ad6dd4b912550e2b0a3ace3f9c1c3f5d3837f3206"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate2/id_v3i_t10.json",
+      "bytes": 521,
+      "sha256": "8c93f9ea6854614941507a8cb09d86dc95a8889cbfb7063f087fe1bb4a4ef368"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate2/id_v3i_t10.png",
+      "bytes": 1173227,
+      "sha256": "ea243c02014be47ac79cb5239c23051949f2010225a553eae41b120062416ab3"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate2/id_v3i_t12.json",
+      "bytes": 520,
+      "sha256": "d05614c19712cb012f4a14512fac40974fc52971316f39bbde03144aa895d694"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate2/id_v3i_t12.png",
+      "bytes": 1173227,
+      "sha256": "a5a70333f003ee314e037ef5168db61e216bc48b2c089c34ce781e4cab550bfd"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate2/id_v3i_t14.json",
+      "bytes": 521,
+      "sha256": "6a35bce8541bfd72ed7f8d25028ede39c29c8ba6481066b170641d27369f7c24"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate2/id_v3i_t14.png",
+      "bytes": 1173227,
+      "sha256": "aa08f5cb675996bd79952a83fe1085c32481f84c3760e5d84cf7898c4c85f092"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate2/id_v3i_t16.json",
+      "bytes": 521,
+      "sha256": "c87fe5b1c8bfb5da5c17af7beaf39731a91a956b6963a22814052436b5db246e"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate2/id_v3i_t16.png",
+      "bytes": 1173227,
+      "sha256": "eaea3a7bf697d93e260663871a73cb1bb87f70a63bbbe9ca5bd09a067d660114"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate2/id_v3i_t18.json",
+      "bytes": 521,
+      "sha256": "7da1a36e6503bc954b841a45379cd6af4299125f379dc2d70d0a60fbac1674c0"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate2/id_v3i_t18.png",
+      "bytes": 1173227,
+      "sha256": "fb599d0eed77e902bddc1bd4a34543a1d76add7e5da8b4144860af8f583658f5"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate2/id_v3i_t20.json",
+      "bytes": 521,
+      "sha256": "575c2d9e78d7b764026a3d2687ecf63754e6aef127f25cf84e91e256e9d52156"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate2/id_v3i_t20.png",
+      "bytes": 1173227,
+      "sha256": "759a464975c23d81c9069ad66e06bacc34bf08a927c298db33ee01122f5cd689"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate2/id_v3i_t22.json",
+      "bytes": 519,
+      "sha256": "1ddb6b4cdfdf1764c9f7ed5b66b3d48548e8e66739d1d885b7898dde8b61349c"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate2/id_v3i_t22.png",
+      "bytes": 1173227,
+      "sha256": "28e509e16346e0d51a7a29944fea8fd1016bc36d5672295f989bb684ecf33fca"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate2/id_v3i_t24.json",
+      "bytes": 521,
+      "sha256": "65156eee10b228dc38bb75e2318a128b1b23337c181598c785ccae18860ceeaf"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate2/id_v3i_t24.png",
+      "bytes": 1173227,
+      "sha256": "49f3c87a709b871685d9aac8157d87feb7484f9c7a334daac2424c5d2df505b7"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate2/id_v3i_t26.json",
+      "bytes": 520,
+      "sha256": "ebc2d83c99d7098d0d98b5f53056fba51f4c623df4e6b486b81874935f481b09"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate2/id_v3i_t26.png",
+      "bytes": 1173227,
+      "sha256": "24863f01ab2c76e927b471164b0088547d80f485727a9f07e3b82e7518be5fc2"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate2/id_v3i_t28.json",
+      "bytes": 519,
+      "sha256": "513eca716c2644d2b1c31cf667235bf6b0544d11b9f6924759fcf4d57d6ac03e"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate2/id_v3i_t28.png",
+      "bytes": 1173227,
+      "sha256": "119138a013730764506a6c875a8cdd0fb0e7e0c0fd01e2fc0a2d2997f4ad1d46"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate2/id_v3i_t30.json",
+      "bytes": 521,
+      "sha256": "8fbe22e538823b7d35d4f05d34c4d43406a7ab3c56728ecb318a339d908351f8"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate2/id_v3i_t30.png",
+      "bytes": 1173227,
+      "sha256": "558f43894dfaaf38d478de644109553b8efaab62b7b6944e13983b7afc0f3692"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate2/id_v3i_t32.json",
+      "bytes": 521,
+      "sha256": "6e65a66f7f8609d2792bf06a2aa2ede9c447ec906f85eb94fe63bc68ae08ae39"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate2/id_v3i_t32.png",
+      "bytes": 1173227,
+      "sha256": "a65f8035ed89c6468d28cecd153fbf14ab6a79662ed2e89555a1f3c6ecc4d7a3"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate2/id_v3i_t34.json",
+      "bytes": 521,
+      "sha256": "50eb101a100a087a4bf271673a6349e4c8f4380c735bf4467b0bc4e5f04ef887"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate2/id_v3i_t34.png",
+      "bytes": 1173227,
+      "sha256": "ddcc962a69de01efaedf284553435e1f190eabbec0509b5d6af9413514f20775"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate2/id_v3i_t36.json",
+      "bytes": 521,
+      "sha256": "4bdd6ddbdab077797606eb15053c65dfdeeeeefb507b5163b8aeebdbb1ba3e25"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate2/id_v3i_t36.png",
+      "bytes": 1173227,
+      "sha256": "95d3314f97054fa9168b3bb43d8e1b1ff01512e2c5cea567f77a520920aa23a1"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate2/id_v3i_t38.json",
+      "bytes": 521,
+      "sha256": "8fe837dffdb4ed34b43eb3726d9a4a0a4ce8b659f45b7e9cdf796d403a9ff34c"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate2/id_v3i_t38.png",
+      "bytes": 1173227,
+      "sha256": "182c8a32b54dbad534ab10d180e9db2879ca970452b7348d546a3292200cb800"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate2/id_v3i_t40.json",
+      "bytes": 521,
+      "sha256": "0c344506529f4ebec79f365dab4e4f13bbd5ececa7d4f95e1cb7eaa2cf6a5d42"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate2/id_v3i_t40.png",
+      "bytes": 1173227,
+      "sha256": "cfec960a9e8e58fb438c48040ad05020a245a9f7d25a2be350e136e43874784f"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate2/id_v3i_t42.json",
+      "bytes": 521,
+      "sha256": "5a95a25cf3b0798d73504af5e8f90e0a75a201be6905c6a7073f0fa7ad988d4b"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate2/id_v3i_t42.png",
+      "bytes": 1173227,
+      "sha256": "2319f5540a3ccce37abee0140bda887561215afeaa00ac40665acd589a108cee"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate2/id_v3i_t44.json",
+      "bytes": 519,
+      "sha256": "815370a573146bfeb494f954c15c208a331c87c191a4e870df0cefb51429c74c"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate2/id_v3i_t44.png",
+      "bytes": 1173227,
+      "sha256": "a8d5a73f90b6898d18b364ed0e0b30ddea546760b21b03646ad9a94c34d6622a"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate2/id_v3i_t46.json",
+      "bytes": 519,
+      "sha256": "735f23c80a80378d055ef16c964e9d90abd72957c6dd56b63d89e0f08eca1466"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate2/id_v3i_t46.png",
+      "bytes": 1173227,
+      "sha256": "434ec999e378e4f3b27aaeb8257b371abbb44efc13b057f34db7c402f105a7de"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate2/id_v3i_t48.json",
+      "bytes": 517,
+      "sha256": "11a3b808cc3e221539d55ccdf364017f4dd417608ae531e2038b7cdd7fa07b08"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate2/id_v3i_t48.png",
+      "bytes": 1169358,
+      "sha256": "f49990bab7f33124c667cd1375c6931efb7572ca83659aea79dc3ff472b1f3d4"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate2/id_v5i_agl200_a000.json",
+      "bytes": 547,
+      "sha256": "6d9a8cd2e448db20ff5ab0df81561c469836a4e3f25ab13a0b807ccf7c193d1e"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate2/id_v5i_agl200_a000.png",
+      "bytes": 1624447,
+      "sha256": "537be25a61fd06708139179ccabde2917c5c601b49a3ec1558c50df9105a1f8f"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate2/id_v5i_agl200_a030.json",
+      "bytes": 552,
+      "sha256": "ec09c935b5a51b686a28ea66589895e25a52940b3a2dc6ea9ae79719f61f0f14"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate2/id_v5i_agl200_a030.png",
+      "bytes": 1624447,
+      "sha256": "4ef7b1fd80d929d68665e17dbc3f612289e2624a1a962e7fa81a36d676902da3"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate2/id_v5i_agl200_a060.json",
+      "bytes": 552,
+      "sha256": "20d5591e45b40638952d82d387df80a58db5e7a237008dab1ac529158042196e"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate2/id_v5i_agl200_a060.png",
+      "bytes": 1624447,
+      "sha256": "f06a9c6b4ec32fc4ed25b5a00b4dcf484a2d61ad555f8f5c4c34bf12aae50ed3"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate2/id_v5i_agl200_a090.json",
+      "bytes": 547,
+      "sha256": "86d61f63c514b978d1af171b3861aa8694ec7d6be967ccddae34c25cc57e96c0"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate2/id_v5i_agl200_a090.png",
+      "bytes": 1624447,
+      "sha256": "34a7c3f871954447b673149c834de53e76f2255d0d49ad58e3738e086723529d"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate2/id_v5i_agl200_a120.json",
+      "bytes": 554,
+      "sha256": "0b79c4337168de47f6cb07f807434be4f52c0e43ab850eb641665a5b7d67e627"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate2/id_v5i_agl200_a120.png",
+      "bytes": 1624447,
+      "sha256": "87131226106eb3c465efb07032d332116212b17e1e010458572518be15fa8398"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate2/id_v5i_agl200_a150.json",
+      "bytes": 554,
+      "sha256": "526a0dfb1f47ef957b09924752a896f24461a1a3618060898d13a07d2764d6e9"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate2/id_v5i_agl200_a150.png",
+      "bytes": 1173227,
+      "sha256": "ab892deffa46ec37dc63cb3b1afa8657e8d530835aa99abf5bf333f345b3d311"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate2/id_v5i_agl200_a180.json",
+      "bytes": 548,
+      "sha256": "d9d9e3ddb4c1b5e0ac7376c42cac519f2a55083262b0df0d6f6b2ea3d601a1a4"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate2/id_v5i_agl200_a180.png",
+      "bytes": 1173227,
+      "sha256": "48cbfc469d0e9083c39eaec1ca175956660fbe0c35f551e97aac7a2b21d323aa"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate2/id_v5i_agl200_a210.json",
+      "bytes": 554,
+      "sha256": "24a367603604d0ec1f63ae6bda6688879aaa32cf9f82355a66e240f8c8ea6389"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate2/id_v5i_agl200_a210.png",
+      "bytes": 1173227,
+      "sha256": "21081c4f3b98940aeae8b7258db89c52c1f82c6626d9ed65564b93778fdae9a4"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate2/id_v5i_agl200_a240.json",
+      "bytes": 554,
+      "sha256": "72402177740c5d5cb1449525c3b73c650ee805ae978eb295131d07dc30787bb9"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate2/id_v5i_agl200_a240.png",
+      "bytes": 1624447,
+      "sha256": "d3b22b9acd5a1365b58ab127d24d72b560f58d033abbd6d5f27b14804f6d63c7"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate2/id_v5i_agl200_a270.json",
+      "bytes": 550,
+      "sha256": "d763874d4d325696a92b1f8d9883b6669590ad51def23b455bdae51ed6c09c71"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate2/id_v5i_agl200_a270.png",
+      "bytes": 1624447,
+      "sha256": "bcae47d745e0ffa10f582429b0ecba0d6f72ad57082b381533ea412d735eb746"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate2/id_v5i_agl200_a300.json",
+      "bytes": 553,
+      "sha256": "6bf810b7b663193f0ab95ee85321faf934c3a5c1d18fc1e2b927582bc3c3dd69"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate2/id_v5i_agl200_a300.png",
+      "bytes": 1624447,
+      "sha256": "12fe22701e2fa0af3cdeafe1bb58a57e939d86393fdf51e9a2d3bb30a1e93078"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate2/id_v5i_agl200_a330.json",
+      "bytes": 554,
+      "sha256": "a3e984e718067fb4e2a6cc22b674ca0d080c6fda364dd64e203fd01121547868"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate2/id_v5i_agl200_a330.png",
+      "bytes": 1624447,
+      "sha256": "e8d268aab3c1a3b27c2ed8d1442bdddab67ece91a23b1d6acaad467ed77b2a44"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate2/id_v5i_agl500_a000.json",
+      "bytes": 547,
+      "sha256": "ffa3ae6e2f0535f1c0fd78acfc6af04b0a71bfd38e5755538448899a7c64ba5c"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate2/id_v5i_agl500_a000.png",
+      "bytes": 1624447,
+      "sha256": "ae95b95af1f7a727360d94a5fb6808ff7b10e77ee8cbc293496a93df77250d27"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate2/id_v5i_agl500_a030.json",
+      "bytes": 552,
+      "sha256": "3dc2f528827d52fa75425ac0934f844cc9f4a6a85acdc3e97dc69a2b749a090c"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate2/id_v5i_agl500_a030.png",
+      "bytes": 1624447,
+      "sha256": "ce3eacec635f9d974f4a50c2e4ca22d07fedf5d0160b5f2c620074d7e507f3bf"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate2/id_v5i_agl500_a060.json",
+      "bytes": 552,
+      "sha256": "46763c2237198ff4349ab1502e994b019b4f46504e371f07121392377f0d6c26"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate2/id_v5i_agl500_a060.png",
+      "bytes": 1624447,
+      "sha256": "8efe5bf67b1b2012c9640a76f2e8c440b70d617a2da621732917f690214cdccf"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate2/id_v5i_agl500_a090.json",
+      "bytes": 547,
+      "sha256": "49f89eeb54b40d37e3fdbb66b601a59a1a4aded8acf1383260e97877f94ab982"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate2/id_v5i_agl500_a090.png",
+      "bytes": 1624447,
+      "sha256": "aaa0831e27b6eae706aec6877f2208c657614bc047905f3db6eaf75482642af0"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate2/id_v5i_agl500_a120.json",
+      "bytes": 554,
+      "sha256": "8f665d0db2c196f4502470c19632ef63a959766b8aac538d8e18c73a8b5f21cf"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate2/id_v5i_agl500_a120.png",
+      "bytes": 1624447,
+      "sha256": "000d4f5a9579ba47acfe2c5113b2ac0091832a2f137aa05ade66743c2fa51d4e"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate2/id_v5i_agl500_a150.json",
+      "bytes": 554,
+      "sha256": "55c2ec7430673aded9be9e11e542cdc9f1254dcf65284f44d6784d75c0c852bd"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate2/id_v5i_agl500_a150.png",
+      "bytes": 1624447,
+      "sha256": "7057cb4d7c57d5b1d0f41d6a30b36ea95c3a4e4f936a77a6e446f22f87c38326"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate2/id_v5i_agl500_a180.json",
+      "bytes": 548,
+      "sha256": "a1936885a7d0933b62b4ce7c0b5fed5b3fd2237cce370562b8e7807ef9a2f32e"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate2/id_v5i_agl500_a180.png",
+      "bytes": 1624447,
+      "sha256": "55c4ab026c18d3e55bea4620ad45c8edf1e1396a0c34dc18716c2e6c2d826871"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate2/id_v5i_agl500_a210.json",
+      "bytes": 554,
+      "sha256": "8ffed98e81986bb96ccaab230652493d174d4feeed29b4ab9f2e478ca8722655"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate2/id_v5i_agl500_a210.png",
+      "bytes": 1624447,
+      "sha256": "305bbc9fcb778d8917dc9e0ade0486b2caf9d91e77ca9a9a0f81be9630d645bc"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate2/id_v5i_agl500_a240.json",
+      "bytes": 554,
+      "sha256": "f5567f35edd5ec5a314ef7264db645a751bc37d02183f001903690ded11baef0"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate2/id_v5i_agl500_a240.png",
+      "bytes": 1624447,
+      "sha256": "580bfe4d5dfc161d9754488a41bb3ce888ed66e68a95f8e7258be65ec41796c5"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate2/id_v5i_agl500_a270.json",
+      "bytes": 550,
+      "sha256": "1b19fdbf15a0aacd1dc22e9bdc2860e95f71b7f6f6b74096b9decca9d48d853e"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate2/id_v5i_agl500_a270.png",
+      "bytes": 1624447,
+      "sha256": "095776d081974982bd9997ea06f7b7daac93bfaa2db1e5da13bd8cfa0e78d7a9"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate2/id_v5i_agl500_a300.json",
+      "bytes": 553,
+      "sha256": "9998a48986acdf7401f3bdc8c3bc3f0e628c367b78fd0bce9ef8f90722ecb026"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate2/id_v5i_agl500_a300.png",
+      "bytes": 1624447,
+      "sha256": "80398cce31f164ef9d3df2abb7015d0a61336795b44c42bbb81bcb68aa21694c"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate2/id_v5i_agl500_a330.json",
+      "bytes": 554,
+      "sha256": "4c1a529dd784d93acf200cab8c95e15ef77c6baa76ef2910c3b1cd99abd3a9a8"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/gate2/id_v5i_agl500_a330.png",
+      "bytes": 1624447,
+      "sha256": "4d58a538e88713ec9ad6dd8a07144ef26df398f9741fdd6fe2e944f196bd7032"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/lod_selection_review01/probe_v1_agl200_p10_lod-1.json",
+      "bytes": 643,
+      "sha256": "ee45d2c06b24dcc3c206001265803d0ff9f9a86cdc7145872cd3ac821d2cfe80"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/lod_selection_review01/probe_v1_agl200_p10_lod-1.png",
+      "bytes": 1173227,
+      "sha256": "a679d0a2da9b7dbef60b248392cb24ea72ffd4b07ebc793e13350c3db3eae8b6"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/lod_selection_review01/probe_v1_agl200_p10_lod0.json",
+      "bytes": 639,
+      "sha256": "d745449295ed4db0028268e0c6397efbddd7b01ce1e99d1a9c1baef8149cdae3"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/lod_selection_review01/probe_v1_agl200_p10_lod0.png",
+      "bytes": 1624447,
+      "sha256": "761dc198cd65d6ab6a66d0f106ff318f17d99cb7eda19c6edf7a07480dab755d"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/lod_selection_review01/probe_v1_agl200_p10_lod1.json",
+      "bytes": 639,
+      "sha256": "7f883a03dca0827d89730471d31d12dd5132fc77193988a462f5b9f891f60b2c"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/lod_selection_review01/probe_v1_agl200_p10_lod1.png",
+      "bytes": 1173227,
+      "sha256": "76c089be237123f7f563d94ac5db8ee71bdc908feac45b87578e23eeaf06d061"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/lod_selection_review01/probe_v1_agl200_p10_lod2.json",
+      "bytes": 639,
+      "sha256": "b210970db9a79710de57d12466003ca863b89bd86630ee1ebc8d7eaee35ec5a7"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/lod_selection_review01/probe_v1_agl200_p10_lod2.png",
+      "bytes": 1616585,
+      "sha256": "314a728419f838f7bcfe108fcaa68543f91a481e7324bd7901cb18b4eadf4c70"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/lod_selection_review01/probe_v1_agl50_p15_lod-1.json",
+      "bytes": 639,
+      "sha256": "cde68c90ba5a938872292875ecbc8fff0fd4ae2390bfd1e302cf50965dedcf13"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/lod_selection_review01/probe_v1_agl50_p15_lod-1.png",
+      "bytes": 1173227,
+      "sha256": "68244934b194f1573b9915fda0fad75c7d387ed985bdf19bc255f9865804582d"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/lod_selection_review01/probe_v1_agl50_p15_lod0.json",
+      "bytes": 635,
+      "sha256": "cb5604b4dfe323fc31415666c1791699de926fb9cc5af83466575e4c302494e9"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/lod_selection_review01/probe_v1_agl50_p15_lod0.png",
+      "bytes": 1173227,
+      "sha256": "51abfd1e8dd0ece9c4bff397ea5f992c53c2c373c5e0d9b4d5f0acdc1f157207"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/lod_selection_review01/probe_v1_agl50_p15_lod1.json",
+      "bytes": 635,
+      "sha256": "5f760cf3a40f42fc9280f743d4143ef62573d30b1f5f0d293694dc9fe8b8d60e"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/lod_selection_review01/probe_v1_agl50_p15_lod1.png",
+      "bytes": 1173227,
+      "sha256": "2621d315ec8fdcebf93fe1db5a2eb96c8e88db84b414e7b27add3f99ab37c117"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/lod_selection_review01/probe_v1_agl50_p15_lod2.json",
+      "bytes": 635,
+      "sha256": "84970f4f675574cb1cde6980f93445b7988127db9aa67635fac7b170d0eed26d"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/lod_selection_review01/probe_v1_agl50_p15_lod2.png",
+      "bytes": 1173227,
+      "sha256": "45ccb12f3a654a04addc15c41f5ba221fffcd8d6c9e9a6365bf9c695d8eddf29"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/lod_selection_review01/probe_v3i_t18_lod-1.json",
+      "bytes": 669,
+      "sha256": "4bdfcfb3515527bf36afb92c9b2e64dde3cd19c4ad35f1a51bae5358ca79caf3"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/lod_selection_review01/probe_v3i_t18_lod-1.png",
+      "bytes": 1173227,
+      "sha256": "81c8e44d52c6eafd819c62dccd8f997f28f1d5eb97bf6951d3efb7ae7669a97e"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/lod_selection_review01/probe_v3i_t18_lod0.json",
+      "bytes": 665,
+      "sha256": "2f3ca7f996e9a1c01c9e30eb861df6e5b849e52a4acbe3d4593c41875765b74e"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/lod_selection_review01/probe_v3i_t18_lod0.png",
+      "bytes": 1173227,
+      "sha256": "61843ebd58010a49f4bb0e053ec2969de2ef0a59ab8233b3a00bc82b2095dbd4"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/lod_selection_review01/probe_v3i_t18_lod1.json",
+      "bytes": 665,
+      "sha256": "9f84ec72862414779861d1a8577f0eb31cf664cec9a8d5e8b8bfc02a0fc2ec08"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/lod_selection_review01/probe_v3i_t18_lod1.png",
+      "bytes": 1173227,
+      "sha256": "a825f62529c45435f1032b9d73787cf85ef1035efce2ef7aa749ecaf97054fc1"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/lod_selection_review01/probe_v3i_t18_lod2.json",
+      "bytes": 665,
+      "sha256": "2031486be96469371ab709a9174e912908c77213d4f23c8560eb357f9d88189c"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/lod_selection_review01/probe_v3i_t18_lod2.png",
+      "bytes": 1173227,
+      "sha256": "5b9fa20e82e3974adfbc28548d16d0cfebe1f5b1cc5df0737b1e65b6a56cf00e"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/lod_selection_review01/probe_v5i_agl200_a000_lod-1.json",
+      "bytes": 695,
+      "sha256": "80cc025288adabe0a3856c943519149e81b84bf9d626b31660e15f97dda9c15d"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/lod_selection_review01/probe_v5i_agl200_a000_lod-1.png",
+      "bytes": 1624447,
+      "sha256": "22c235b086b973e93b2bd495c5fe58a7633704dcff0e6b11999bc0579a1a99ea"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/lod_selection_review01/probe_v5i_agl200_a000_lod0.json",
+      "bytes": 691,
+      "sha256": "11c13c9860a835c34f3247c29248a78f9243148df65478d0b6a99feee91a4d96"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/lod_selection_review01/probe_v5i_agl200_a000_lod0.png",
+      "bytes": 1624447,
+      "sha256": "a258613327e45a29b55e298a6cef08310081be8b05f98d2fa06e95e4417513b1"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/lod_selection_review01/probe_v5i_agl200_a000_lod1.json",
+      "bytes": 691,
+      "sha256": "8a1dda383a80fa8dd1af170ebbaf673b131fec4a364ec4a822a054c67c7b7289"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/lod_selection_review01/probe_v5i_agl200_a000_lod1.png",
+      "bytes": 1624447,
+      "sha256": "abb889c4f24dd6d1648c75d66191f7b178728469732ee69102177ac30ec50c12"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/lod_selection_review01/probe_v5i_agl200_a000_lod2.json",
+      "bytes": 691,
+      "sha256": "c1fd3d9d27e08e5618e575a88fd2735da82938c30dfe74cb5e3a8248fc2a8903"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/lod_selection_review01/probe_v5i_agl200_a000_lod2.png",
+      "bytes": 1624447,
+      "sha256": "1948d00105b09a1c208ef1d855824a0ecb7daa2fecf4cb3d3b8f1cad2ce2d32c"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/ring/ring_A_S0_t14.json",
+      "bytes": 611,
+      "sha256": "4927ef0175334f3622a896e6f329207bf64afc1170c3ef83911a7b527c701aff"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/ring/ring_A_S0_t14.png",
+      "bytes": 2244875,
+      "sha256": "790b55a564aa4ab17cb60c1bc45ba139a2fd30e5b2b8b0c3b1d0af0f359871d6"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/ring/ring_A_S0_t18.json",
+      "bytes": 611,
+      "sha256": "26b3c49042642895dc3d3b331b1c7aed8dcfdf3852976ac7e1ccbe7ccbf17eab"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/ring/ring_A_S0_t18.png",
+      "bytes": 3090912,
+      "sha256": "0b282080cca6176006a0501e5dd7ed4023c7fbcc4b498ee7e4a374c98548cc4f"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/ring/ring_A_S0_t22.json",
+      "bytes": 609,
+      "sha256": "cb6e6c870646ae89b5441c0994342736c0aaa33e9bac7c5131f18599002e4ac7"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/ring/ring_A_S0_t22.png",
+      "bytes": 3090912,
+      "sha256": "472c28ec197a7fa51eca8913e5c5ea915ffae5a577775a1cd27fc56f381c1941"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/ring/ring_A_S0_t26.json",
+      "bytes": 610,
+      "sha256": "6996c396a23269b1295b3c69bf8e0699a02c1f85035e86d6f7794802dfe0a0b8"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/ring/ring_A_S0_t26.png",
+      "bytes": 3090912,
+      "sha256": "f5da4c528c4e4ebf5fb14d83aff2abdd4d6ef0bb63e5d0c6920a86c484d0d055"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/ring/ring_A_S0_t30.json",
+      "bytes": 611,
+      "sha256": "94dfdb4b7348d6f2d233cc0003989b1daa7714a47222284fbdd50aa21a702e53"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/ring/ring_A_S0_t30.png",
+      "bytes": 3090912,
+      "sha256": "fe11979753ec18ea71566541465c5aae85d5a15f081bc1f604344f5e9f8d0838"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/ring/ring_A_S1_t14.json",
+      "bytes": 611,
+      "sha256": "430c38c5264965c7664378e82c9ce00e9e202abb1e8ad1f842dd6fa113c0cbb7"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/ring/ring_A_S1_t14.png",
+      "bytes": 3090912,
+      "sha256": "e58cdd5dc8dba1eab468f92df3d0965fb016913d2fdad5bfabb5242362ed663f"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/ring/ring_A_S1_t18.json",
+      "bytes": 611,
+      "sha256": "95e95d758165de67759bacffe4a2779ad7bc899275372354ea0cafa792530aac"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/ring/ring_A_S1_t18.png",
+      "bytes": 3090912,
+      "sha256": "305ee2e95a4e7d4bb922a2af7332d127f886cf2f17b38d79cf9d815c20f75680"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/ring/ring_A_S1_t22.json",
+      "bytes": 609,
+      "sha256": "b136b2911faa692177e281dcb66470a9c865247f0c611fb61454ff7cf5a0a1aa"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/ring/ring_A_S1_t22.png",
+      "bytes": 3090912,
+      "sha256": "12bcccff63852ab7e799b6eb1602376fb964ea79caf3f729e40fe4b083b8495a"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/ring/ring_A_S1_t26.json",
+      "bytes": 610,
+      "sha256": "8422e107d18ad11a0785a8e1afa1344326c5fb579a2798c8849be5f27694dea7"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/ring/ring_A_S1_t26.png",
+      "bytes": 3090912,
+      "sha256": "4c9a74b8fde310578ac91b4adda63bf74c9874554a36500bd3020c9b47ab3d62"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/ring/ring_A_S1_t30.json",
+      "bytes": 611,
+      "sha256": "c66ece02dcb5a65ff2e204f89d87694872211a932841c688df1b81e5216ce016"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/ring/ring_A_S1_t30.png",
+      "bytes": 3090912,
+      "sha256": "807ec673220a85b69f9b7800501f52b38c0d12bd612d435cee42d808ceb16b2d"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/smoke/smoke_id_v1_agl200_p10_A.json",
+      "bytes": 511,
+      "sha256": "4c06c798dc143f0aa32e3460c508762c1d47df42628df1f520f589fa4003d0e0"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/smoke/smoke_id_v1_agl200_p10_A.png",
+      "bytes": 1173227,
+      "sha256": "9e0ae88b51b9029f48a5ff5e0bd69539939d43c8a7a975703c4265adb01af064"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/smoke/smoke_id_v1_agl500_p35_A.json",
+      "bytes": 511,
+      "sha256": "9fa687ad325cf7d7f023334ea0af1417e1bb4646172bf87ab2896fef936bbdcf"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/smoke/smoke_id_v1_agl500_p35_A.png",
+      "bytes": 1624447,
+      "sha256": "0cacfd59f95071da6465e94d25c33c8865d0498e4de05c162392af8f5ac32157"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/smoke/smoke_topdown_A_n26000.json",
+      "bytes": 301,
+      "sha256": "18812ce6d36877daeb0cdc19547a7ae05742e796cca6425ae7fefb61d8c9d513"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/smoke/smoke_topdown_A_n26000.png",
+      "bytes": 79019,
+      "sha256": "f1d14f882efd81181ee9ed084d0bffb18ad9648786818e773a750745ecdcc120"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/smoke/smoke_v1_agl200_p10_A_s1.json",
+      "bytes": 595,
+      "sha256": "3b18b5aa939515a79fec34e8ef7baecdab5209a9d88b3d486f3666c9add05845"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/smoke/smoke_v1_agl200_p10_A_s1.png",
+      "bytes": 3090912,
+      "sha256": "93ed903a16d4f44fc3d84e04d02c1aaab7897101a58185ce58e8a304ef95d7c3"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/smoke/smoke_v1_agl500_p35_A_s1.json",
+      "bytes": 595,
+      "sha256": "8d9c0f2fa0c92329b1a6bc2a5d39e9540cd48a5ac15774bf5f77428c81c5c330"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/smoke/smoke_v1_agl500_p35_A_s1.png",
+      "bytes": 3090912,
+      "sha256": "f939f10fd05319b13bee89b939ae2529aa12bf03aa956392ecc416e2753eef31"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/tdtest/td_z1000_n26000.json",
+      "bytes": 324,
+      "sha256": "513e2f95a1c78778035eb7ddd3aa86a8d87b6d9d23b6ecb65968a6a56fcd7312"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/tdtest/td_z1000_n26000.png",
+      "bytes": 1173227,
+      "sha256": "596ab02d259880d88b25428f0ee353c8ac749045ed6605f7e48dec5c684d9365"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/tdtest/td_z600_n26000.json",
+      "bytes": 321,
+      "sha256": "45ea53ef3687b84df60b3ccbc09f79e51fce97d0867d14fda2ca916d982efb5b"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/tdtest/td_z600_n26000.png",
+      "bytes": 1173227,
+      "sha256": "6e755fc290a419bad390fa715be359dd1b29b7c706eb86fbe81730de5d1d6d52"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/verify/ver_A_n30200.json",
+      "bytes": 281,
+      "sha256": "420ae1759946ab3a18e05a24610cecda3f8fa1e0544feb208ac66a64bf36aec5"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/verify/ver_A_n30200.png",
+      "bytes": 3090912,
+      "sha256": "39c477132e31bc75b24856967231471752cb63404d591fdb6f79840bd0046f02"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/verify/ver_B_n30100.json",
+      "bytes": 282,
+      "sha256": "dbe5255a0a3eba57b8af3b06f6bf9a3de113a705eef5486e95ec41fcf2052257"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/verify/ver_B_n30100.png",
+      "bytes": 3090912,
+      "sha256": "1288083588b72f8aa6c1a874936817f9097d9b0938883296b2edf203911c4f95"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/visual/vis_v1_agl1000_p45_A_S0.json",
+      "bytes": 597,
+      "sha256": "cdcd66096d1bd56112fc24edf90fc19325e846e9ea9e76794f2fede81c77c75d"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/visual/vis_v1_agl1000_p45_A_S0.png",
+      "bytes": 2244875,
+      "sha256": "e3406acc67b8d3741c34de7884eff16ee6c6d81af45cee516a826e10551c21f8"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/visual/vis_v1_agl1000_p45_A_S1.json",
+      "bytes": 597,
+      "sha256": "bf6111643480516b0378c7bed618326e57ccbc49134136a9bed9cd7c4d3499de"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/visual/vis_v1_agl1000_p45_A_S1.png",
+      "bytes": 3090912,
+      "sha256": "be28eaa5ff66b77c78110622d96cb8d1885fa08fe3df6a1af87eb561af682386"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/visual/vis_v1_agl1000_p45_B_S0.json",
+      "bytes": 597,
+      "sha256": "885447baeaaa16c138d87d675418ae8fccbfbc16325bf56b7d15437afd59c8da"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/visual/vis_v1_agl1000_p45_B_S0.png",
+      "bytes": 2244875,
+      "sha256": "66f6062ef0a688c39f178d03f88d17ba897b11d854359e58f89844a69951eaf6"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/visual/vis_v1_agl1000_p45_B_S1.json",
+      "bytes": 597,
+      "sha256": "353832d78debffcdaf0002ded34929af4f4fcd74da685d0dba2fe8e747c63217"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/visual/vis_v1_agl1000_p45_B_S1.png",
+      "bytes": 3090912,
+      "sha256": "e388c6093d6d2518ae832a2ea2fce12a7fa3ff328476687a1f074e182cbebd6d"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/visual/vis_v1_agl200_p10_A_S0.json",
+      "bytes": 592,
+      "sha256": "cd584b1b4095cda663049232226eb533cd995956a6b1386eace412a391a2a3c2"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/visual/vis_v1_agl200_p10_A_S0.png",
+      "bytes": 3090912,
+      "sha256": "5a04277938692ea7a387acc5465bd4cce20b37d37914dfac019a92ff500bcd82"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/visual/vis_v1_agl200_p10_A_S1.json",
+      "bytes": 592,
+      "sha256": "26e77fa70539d1ff645c9f4610c1b5d9a81d84a7702fe1395697a8d0d090d792"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/visual/vis_v1_agl200_p10_A_S1.png",
+      "bytes": 3090912,
+      "sha256": "9bcaa8a23ab83ca10a95f40e13cb79449794960ad7a5530f0536cda406580b8a"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/visual/vis_v1_agl200_p10_B_S0.json",
+      "bytes": 592,
+      "sha256": "b988b97062e647c436caa3400e1581d4d01beea5ad79ff7c5624d658f06bf449"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/visual/vis_v1_agl200_p10_B_S0.png",
+      "bytes": 3090912,
+      "sha256": "5aade84cca206e9d77e49863991d863f8cc42ed02980e757d4854b9e6ba93a79"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/visual/vis_v1_agl200_p10_B_S1.json",
+      "bytes": 592,
+      "sha256": "113caf092facfd52719999509bb3c1cc4442f0de1a55b533af6331373669a678"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/visual/vis_v1_agl200_p10_B_S1.png",
+      "bytes": 3090912,
+      "sha256": "49604d2c60c257979661c342314292228049f37d5b163526f3029f5e7eca1518"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/visual/vis_v1_agl500_p35_A_S0.json",
+      "bytes": 592,
+      "sha256": "07c80e40f740c72273d7bd7228b0f7d5a5edaee9e1e0e5241ae13e87d69a0c15"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/visual/vis_v1_agl500_p35_A_S0.png",
+      "bytes": 3090912,
+      "sha256": "f613b98a0a416bd42a425bbdd71fb9dee21bbc7cc54a6643153f0bd4eb029a3f"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/visual/vis_v1_agl500_p35_A_S1.json",
+      "bytes": 592,
+      "sha256": "b93a47b3b98995d8c72d3449b236d2d9b4aaed26985bd797f64b13a3ed3d5b65"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/visual/vis_v1_agl500_p35_A_S1.png",
+      "bytes": 3090912,
+      "sha256": "926a21f7c1a454deefe6223d91a3817b9f813312123d2bc5a7bc4066e5394073"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/visual/vis_v1_agl500_p35_B_S0.json",
+      "bytes": 592,
+      "sha256": "bba3d86b12c93097e8ab503f4b220bf04704b17df39dd9b79e9845813a578653"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/visual/vis_v1_agl500_p35_B_S0.png",
+      "bytes": 3090912,
+      "sha256": "43989e418b22c5a7b66946587042646a7736549f09a61303530ae591630d1b63"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/visual/vis_v1_agl500_p35_B_S1.json",
+      "bytes": 592,
+      "sha256": "860e53997fb7f324e0a8193d4581127152af07f9f499eca39f32f33f0f9c12a2"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/visual/vis_v1_agl500_p35_B_S1.png",
+      "bytes": 3090912,
+      "sha256": "b5a4673f1cb230e2593c102a889e7ae1b5beab5e7a1ab16ee532606790a2960e"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/visual/vis_v1_agl50_p15_A_S0.json",
+      "bytes": 587,
+      "sha256": "d1577236d94d3f6f2acd75cd176992c9878f1ca37b69ba0a2d4ec97cc6e97bbd"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/visual/vis_v1_agl50_p15_A_S0.png",
+      "bytes": 3090912,
+      "sha256": "fe46449de50b0e49293022a85e5466d606c9dcc7df35952ec71b383bcdfd9d89"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/visual/vis_v1_agl50_p15_A_S1.json",
+      "bytes": 587,
+      "sha256": "35eaa48b08854720d00a8e305fd53b2da6bd9dc926abcb6ae820dd2bf260ddcf"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/visual/vis_v1_agl50_p15_A_S1.png",
+      "bytes": 3090912,
+      "sha256": "c9f6d75c38c82ec6fe96fc16c2d1186315bff6e54a34f17036fd6c274a78507a"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/visual/vis_v1_agl50_p15_B_S0.json",
+      "bytes": 588,
+      "sha256": "fa00fa342aca012a2f4252ae1bab7f6ee88f210163b9fdad61af8c5df964cdbd"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/visual/vis_v1_agl50_p15_B_S0.png",
+      "bytes": 3090912,
+      "sha256": "c5619ee7c2b4b13dece1249aff23f39acebb8c69224907da3d10094805bf2ce1"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/visual/vis_v1_agl50_p15_B_S1.json",
+      "bytes": 588,
+      "sha256": "93eb1878bf14312a50ce19d6010aacb70887d8bd80797df66c396a6f86613da1"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/captures/visual/vis_v1_agl50_p15_B_S1.png",
+      "bytes": 3090912,
+      "sha256": "7ba3e6c87bf50283ae9d3dbbc143ae5a019ad6981ab89be86c9e2ed7c4fb0b08"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/inputs/bounds.json",
+      "bytes": 3927,
+      "sha256": "bcadb2b1c8780813bee7bcb60bc597575d938b78514dafaf7ab3339277558d86"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/inputs/field_core.png",
+      "bytes": 126505,
+      "sha256": "8da222a0a4aba37e8290586f1551a0da0b73d7b5707734e46fa6ac2e4ab19366"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/inputs/field_ctx.png",
+      "bytes": 802294,
+      "sha256": "38041952ba77ab2dcb96bb46a2f386bd6e8d7739a4edf5985fb608cbb12d6ed6"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/inputs/inputs.manifest.json",
+      "bytes": 3630,
+      "sha256": "69d59dc134d04d78d046cd441c6ebbad93c1d2f0ff7c3fb23940952a2c031866"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/inputs/pool.f32",
+      "bytes": 3052832,
+      "sha256": "c2a51ab8dfa667a2b0e6a50f9535db3f6261ba3dc474f26b5ed8a858a8909bd4"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/inputs/pool.json",
+      "bytes": 288,
+      "sha256": "36dcc8f5d4f36e33a5778e8c2252dfb93be831eea109f4f3e5afcc7d309c4902"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/inputs/terrain_context.glb",
+      "bytes": 5001956,
+      "sha256": "86181b14313aa5dacbe913e70d092f410f979c3e09807e714dea1723c8398e6e"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/inputs/terrain_core.glb",
+      "bytes": 2298772,
+      "sha256": "2bdde3c21723b7c90bc83e7bef202c177b2854b5776c8d6cbac34ca3a4e72947"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/logs/assets.log",
+      "bytes": 373026,
+      "sha256": "eeb0b50e592a29b84991315582137b08a68c6c913b22521457c9934bae033bae"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/logs/capture_coverage.log",
+      "bytes": 272511,
+      "sha256": "3108de0cc748ef363294b11c749ddc26d399e3a52eaf60b5b65b8aef322b6015"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/logs/capture_gate.log",
+      "bytes": 272739,
+      "sha256": "0806d51b3ab86b923cb7351373b7442ee20c42af6b0e231ea4abc2923952aba1"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/logs/capture_gate2.log",
+      "bytes": 272503,
+      "sha256": "cd0c3d11162557f703219c1dcaa6fd3d667aa616b6583a7fd8022d705191f5a6"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/logs/capture_ring-backup-2026.10.12-18.15.19.log",
+      "bytes": 272805,
+      "sha256": "eba2ffa93ef1533ea0ae6402f52905864fbfded68611c28fffc7a74725c90ea7"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/logs/capture_ring-backup-2026.10.12-18.16.49.log",
+      "bytes": 272734,
+      "sha256": "76d10fa5a8e0838d1465c2a960f59a197e35b888368aa22b211f8bcfb96ba8b4"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/logs/capture_ring.log",
+      "bytes": 272746,
+      "sha256": "36f5c5b642f90e475c7d88f3851d9416a93003f219ca535a7b1605248a1cbc1b"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/logs/capture_smoke-backup-2026.10.12-17.45.03.log",
+      "bytes": 272507,
+      "sha256": "51ed30fa5a18a3666d3631eebf5e83ebed93e585397ba75c04d116e8bce0b826"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/logs/capture_smoke-backup-2026.10.12-17.46.25.log",
+      "bytes": 272503,
+      "sha256": "04f60d728ca6b7c8896588b981c0928529cdc204c01d28a590c35caa253de5f7"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/logs/capture_smoke.log",
+      "bytes": 272501,
+      "sha256": "9c6ba026f29dfe1047e127723b84c6869772bb3605529aace733f28538573624"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/logs/capture_td.log",
+      "bytes": 272496,
+      "sha256": "5ccdce30a9398ceb7e857a5c244b1cd510c2c5fffff029d8a8168cbefafedb50"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/logs/capture_verify.log",
+      "bytes": 272508,
+      "sha256": "180e84f6cc2660bbbeda6b3d1db06487f44e2bc6ec9b2de10d07772c7f06ade2"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/logs/capture_visual-backup-2026.10.12-18.13.16.log",
+      "bytes": 272501,
+      "sha256": "60815d1303e2d057034fa21048d1b0e7397f3eea303883487c962f73d3a515ac"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/logs/capture_visual-backup-2026.10.12-18.16.20.log",
+      "bytes": 272743,
+      "sha256": "93c142d9f188ab1fe8436a464a60aa604c64ee3ff0f3745ec4a952abcd47e72a"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/logs/capture_visual.log",
+      "bytes": 272841,
+      "sha256": "c2ed11a007b79360dc78d8f2f69a065a8b7e7c44e7eb0160fa6245f758f641fe"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/logs/env-backup-2026.10.12-17.25.33.log",
+      "bytes": 283443,
+      "sha256": "13f525ae090a202915f6d16b85f8ba693492e1e7688eb486ae661765ac64a2d9"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/logs/env-backup-2026.10.12-17.26.52.log",
+      "bytes": 270868,
+      "sha256": "5dc02b02e9e35fe404607ed5dabba06876ac6f19e31a697f7adc98cd6d65b49b"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/logs/env.log",
+      "bytes": 270769,
+      "sha256": "712a62b2c1141ea91da6e99ccc9642fcca758f8c6fe9dbb864d7591ca079ccad"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/logs/level.log",
+      "bytes": 280424,
+      "sha256": "e113e431c3a25e319fd0c72d13e33b2f0e9e59c30863915e4efeab5d30ba48c8"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/logs/perf_levels-backup-2026.10.12-18.22.05.log",
+      "bytes": 280046,
+      "sha256": "e60b9535370675f0153a5a459924478bb4c6953eace53a00ebec88e711d7e3ef"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/logs/perf_levels-backup-2026.10.12-18.22.46.log",
+      "bytes": 281966,
+      "sha256": "2cc2dd081237776375cc747498fca98d9be7eb2fa9e3dc3ab41b61eb4a7b201d"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/logs/perf_levels-backup-2026.10.12-18.24.01.log",
+      "bytes": 282162,
+      "sha256": "22524ae06e137d8ee431341de02489f85acd605b20d28b22ee749855fac8f1dd"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/logs/perf_levels-backup-2026.10.12-18.24.41.log",
+      "bytes": 282042,
+      "sha256": "78715d265de524562758bf4253b878f3ed08bb6af91a80e277fe16dbec45fe99"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/logs/perf_levels.log",
+      "bytes": 294980,
+      "sha256": "894578818efdc7c6430731443e3e85e027b59b57a6bd552708665dff296c1b2e"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/logs/perf_ppa_r1__L_FSP_A_S1_v3i_t14_t32.log",
+      "bytes": 197483,
+      "sha256": "9b7939ad9489490c2cec8e8c39762cbe972d7ad9d3c537df19bdf6647a204007"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/logs/perf_ppa_r1__L_FSP_B_S1_v3i_t14_t32.log",
+      "bytes": 197724,
+      "sha256": "0e75b3d61ee6b961a5b66fe4a50fc415102494b0e54fba6011516bc003a53f69"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/logs/perf_ppa_r2__L_FSP_A_S1_v3i_t14_t32.log",
+      "bytes": 205632,
+      "sha256": "33e706040f2c51e05e2851d0f978c6757a63688ead613efbd81eef46c39a88e7"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/logs/perf_ppa_r2__L_FSP_B_S1_v3i_t14_t32.log",
+      "bytes": 197292,
+      "sha256": "4bf89a5e69f4f90d1656f9278ae80f327c3f9f13116272fdfef5898ed32619d9"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/logs/perf_ppa_r3__L_FSP_A_S1_v3i_t14_t32.log",
+      "bytes": 199132,
+      "sha256": "5fadd22ac3580372fd66ccb3c6608391714dd9f49dffa050e74d7602c3868be2"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/logs/perf_ppa_r3__L_FSP_B_S1_v3i_t14_t32.log",
+      "bytes": 197480,
+      "sha256": "1bcb4f0c74f7b8bbf14711b3c7b0c9bc11cc21de6a0c4e1b83abdb97d727b289"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/logs/perf_pst_r1__L_FSP_A_S1_v1_agl200_p10.log",
+      "bytes": 199929,
+      "sha256": "4b1ae8ee980b9babce3337fa4b771b1d1f932419a4e2ac20fdc54acf4c2acaca"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/logs/perf_pst_r1__L_FSP_B_S1_v1_agl200_p10.log",
+      "bytes": 197224,
+      "sha256": "2759bcb909edbdca76844d954c6b0a80f7bbb5869be6fa9eb698e7de62112fdc"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/logs/perf_pst_r2__L_FSP_A_S1_v1_agl200_p10.log",
+      "bytes": 197314,
+      "sha256": "5c159a7cf14cbad3a168f37106dc0ce68bc1b2837f6c30119238af0e48ac3d88"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/logs/perf_pst_r2__L_FSP_B_S1_v1_agl200_p10.log",
+      "bytes": 197414,
+      "sha256": "27ddf30c3b733e9922b39fb422f095f90db15f46fa8b48f83110a9c7f52994e0"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/logs/perf_pst_r3__L_FSP_A_S1_v1_agl200_p10.log",
+      "bytes": 197416,
+      "sha256": "9e64f243a2e42d83db34c8ce1905ec3873429eed88f86ae3855c58248177601e"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/logs/perf_pst_r3__L_FSP_B_S1_v1_agl200_p10.log",
+      "bytes": 197221,
+      "sha256": "4d7661b993ceb1cd5ddf465ec7b83263eea93240eb395dbe8a3001ec4f18a6b3"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/logs/perf_shot__L_FSP_A_S1_v1_agl200_p10.log",
+      "bytes": 198244,
+      "sha256": "a2f6e741b07640974320515e99ce2bfd7939ae2abb1c781e7a287ae3aa2cf19c"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/logs/perf_static_r1__L_FSP_A_S1_v1_agl200_p10.log",
+      "bytes": 197241,
+      "sha256": "61196c61e17202aca1385f76582fd29907d9201a6d978fecb6edfe0d89415606"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/logs/perf_t0__L_FSP_A_S1_v1_agl200_p10.log",
+      "bytes": 197288,
+      "sha256": "c69fc804253ce57bacafa5f98a0cc1120daa36942f36c8561c60792ca235466b"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/logs/perf_t1__L_FSP_A_S1_v1_agl200_p10-backup-2026.10.12-18.30.10.log",
+      "bytes": 197205,
+      "sha256": "a7dba91eaff8baea7f818df8a91863024131cc6e68862768b07359295a71cba5"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/logs/perf_t1__L_FSP_A_S1_v1_agl200_p10.log",
+      "bytes": 197394,
+      "sha256": "857843932b7494cc1a376843c97c9a590d122422548f5fd15d83c2fd0d5215f5"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/logs/probe-backup-2026.10.12-17.30.14.log",
+      "bytes": 187302,
+      "sha256": "2ba3600ac38e1e8931c7c688511b0cb44c1d2b75486c9cd2cc3947c90e8f85ee"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/logs/probe.log",
+      "bytes": 187302,
+      "sha256": "8e642e717027e6c21fb4c89e063cbe27592e3e04d556aeb87b8c8708decff758"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/logs/probe_api-backup-2026.10.12-18.23.23.log",
+      "bytes": 271093,
+      "sha256": "b2372d56936cead600620c7a112c941dda66d1401054dd393461311c43cc6d1b"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/logs/probe_api.log",
+      "bytes": 271096,
+      "sha256": "a93eae5005d5765c3f0eb62f0a67e888de3ec6b6877e6a411faecbed12b5455c"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/perf/ppa_r1__L_FSP_A_S1_v3i_t14_t32.csv",
+      "bytes": 1931237,
+      "sha256": "7d6c6f2c6ac9c7a60b3dd7fca2037607dd1a1b684de419571290efbb78869317"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/perf/ppa_r1__L_FSP_A_S1_v3i_t14_t32.json",
+      "bytes": 451,
+      "sha256": "e4c874ac768d9b59837b9891a278f9f925fb272584ed7c04b507be774b9bcaf8"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/perf/ppa_r1__L_FSP_B_S1_v3i_t14_t32.csv",
+      "bytes": 1923939,
+      "sha256": "d7f1c4d34de77c54e92f2f9037afaa33b739f533e1bfcd07e33cea87105e0c54"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/perf/ppa_r1__L_FSP_B_S1_v3i_t14_t32.json",
+      "bytes": 443,
+      "sha256": "aece6834eafa383d60330e5e12a2ac3896399aa75e97ffbd77d4b1f64c1cff89"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/perf/ppa_r2__L_FSP_A_S1_v3i_t14_t32.csv",
+      "bytes": 1920654,
+      "sha256": "787b25a1e9486505e7f76061b9912afffa2f6cd7b2a75dd57bfa6067d2d52f7d"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/perf/ppa_r2__L_FSP_A_S1_v3i_t14_t32.json",
+      "bytes": 443,
+      "sha256": "845e0ddac5706fbc7d426458dcd457a7971a94cfed898e1c549d466af71542c6"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/perf/ppa_r2__L_FSP_B_S1_v3i_t14_t32.csv",
+      "bytes": 1911012,
+      "sha256": "31ab70353a64c34666da7b753a6d643886ca066a8f5ea91e6a19498bb4e29d5f"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/perf/ppa_r2__L_FSP_B_S1_v3i_t14_t32.json",
+      "bytes": 443,
+      "sha256": "8822a6b8300146c154c609c9d6ddc4d8cc78a4a4e3aa307e4d9b85eba2464535"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/perf/ppa_r3__L_FSP_A_S1_v3i_t14_t32.csv",
+      "bytes": 1916369,
+      "sha256": "b34f443932ad19b645d8e0328393c13ba3d4a1415a17a7c97c0958432b5d30d3"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/perf/ppa_r3__L_FSP_A_S1_v3i_t14_t32.json",
+      "bytes": 443,
+      "sha256": "98e74975ce6181a889cc32ad949eda6e0687c7d07b4a587217454f2bb92f6feb"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/perf/ppa_r3__L_FSP_B_S1_v3i_t14_t32.csv",
+      "bytes": 1933436,
+      "sha256": "9c109b8dfce3759a1dc2cb0e53aea48290b16d04f7305dadf9246d5964100a98"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/perf/ppa_r3__L_FSP_B_S1_v3i_t14_t32.json",
+      "bytes": 443,
+      "sha256": "cce47b39b5cfe5a748aafdc0424c5b443af60a27e011e059ac76bc5c8df711a5"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/perf/pst_r1__L_FSP_A_S1_v1_agl200_p10.csv",
+      "bytes": 1233951,
+      "sha256": "3aea42078899b7bfe6526295dadc01ab96060fcfb303262af78f0e68668db615"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/perf/pst_r1__L_FSP_A_S1_v1_agl200_p10.json",
+      "bytes": 447,
+      "sha256": "45866dd9d79f4e99b40c319cfc7d365e1f167f5259d69feab54b9d2a02a201c6"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/perf/pst_r1__L_FSP_B_S1_v1_agl200_p10.csv",
+      "bytes": 1236320,
+      "sha256": "6eea90567403e7b27d26084d4f6aa7db6d21a179c03c6b519d554bb0dceef8a7"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/perf/pst_r1__L_FSP_B_S1_v1_agl200_p10.json",
+      "bytes": 447,
+      "sha256": "da879c2a9297a5ea5a4d43b677c25914b5b0b95b478fb56f0fa2025c3ed8ca1e"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/perf/pst_r2__L_FSP_A_S1_v1_agl200_p10.csv",
+      "bytes": 1234669,
+      "sha256": "782b9efeb21109663d4cd3839681fce12df8684db71a2485c8369a8dcdb56f81"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/perf/pst_r2__L_FSP_A_S1_v1_agl200_p10.json",
+      "bytes": 447,
+      "sha256": "c19edb764b7f2b8a48e9aae95c6bfc4350cde8a2039a88bca1ef171d0887d209"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/perf/pst_r2__L_FSP_B_S1_v1_agl200_p10.csv",
+      "bytes": 1231202,
+      "sha256": "85a841223fc9d93bb0a6c387fa46ebf7f12787dab42a6ecfbb06c5def670a12e"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/perf/pst_r2__L_FSP_B_S1_v1_agl200_p10.json",
+      "bytes": 447,
+      "sha256": "bfa64757a526b7861efff934d684c609a6155358740512e69369522e85caaa6b"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/perf/pst_r3__L_FSP_A_S1_v1_agl200_p10.csv",
+      "bytes": 1230305,
+      "sha256": "c1f13291e8db48b9584ad9352819d8d5ccc0961ade8c3835ef7b36cb04e95f92"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/perf/pst_r3__L_FSP_A_S1_v1_agl200_p10.json",
+      "bytes": 447,
+      "sha256": "523fbb0985c6a94bb671597bb31d455ba95639ef237d8a166c4a0abd27f513e5"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/perf/pst_r3__L_FSP_B_S1_v1_agl200_p10.csv",
+      "bytes": 1232808,
+      "sha256": "f0228168c9d96df7230b438e3efdabc45f3833e1174990a964291755ccf1f574"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/perf/pst_r3__L_FSP_B_S1_v1_agl200_p10.json",
+      "bytes": 455,
+      "sha256": "56f9222426900d28971df486490af5315637b6578043e7d6c250c120427a8509"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/perf/static_r1__L_FSP_A_S1_v1_agl200_p10.csv",
+      "bytes": 1238811,
+      "sha256": "a96525e33e3d4e8a6f9fb9d0827e0d55f0b30545f2d6d1c997172fc30e6c90d7"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/perf/static_r1__L_FSP_A_S1_v1_agl200_p10.json",
+      "bytes": 453,
+      "sha256": "45e64e29ffd07cfc6e258e03399d38647e6baaa90843a8648ca5f634d4f55999"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/perf_v2/b0fix_static01__L_FSP_A_S1_v1_agl200_p10/completion.json",
+      "bytes": 1089,
+      "sha256": "a8f1bcf06b8fd33921a804e107f0a270c47b1237443a728360378584d329d134"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/perf_v2/b0fix_static01__L_FSP_A_S1_v1_agl200_p10/engine.log",
+      "bytes": 172855,
+      "sha256": "001e9f5b7ae649f3bc057224476fbb331af398a9a3b56cd0ce14abf150440a38"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/perf_v2/b0fix_static01__L_FSP_A_S1_v1_agl200_p10/request.json",
+      "bytes": 1091,
+      "sha256": "2a7d5df3293bbcd84bba35deb07fcb54a7e2b6650a8fdcfe7366b896889f2f2f"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/perf_v2/b0fix_static02__L_FSP_A_S1_v1_agl200_p10/completion.json",
+      "bytes": 3200,
+      "sha256": "f3abc9d55a3f768be77f6f8b95d9a1e90e6cc79de7eabc325f5fdf306f8cd0a4"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/perf_v2/b0fix_static02__L_FSP_A_S1_v1_agl200_p10/completion_recheck.json",
+      "bytes": 3836,
+      "sha256": "048d2612ec7eb63db216ec86b0a5dc26c34bb91fddc82b36927d8c5672f3c9fc"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/perf_v2/b0fix_static02__L_FSP_A_S1_v1_agl200_p10/engine.log",
+      "bytes": 204091,
+      "sha256": "5f064fd12d2f2892772a68a9c0629e8273621d63155ded58a5e3d41dac649eb8"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/perf_v2/b0fix_static02__L_FSP_A_S1_v1_agl200_p10/Profile(20261013_085336).csv",
+      "bytes": 1233977,
+      "sha256": "efa2bdd62b6882cf08c66553ea894c1de595e118ce47ea6cfa26a197dad62129"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/perf_v2/b0fix_static02__L_FSP_A_S1_v1_agl200_p10/request.json",
+      "bytes": 1091,
+      "sha256": "4b9760129440d2ab484701cc26fc7bfbca628b4507deed164890720a9d5eece5"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/reports/calibration.json",
+      "bytes": 91,
+      "sha256": "318cbe0f5baf46eadc8975d53778313947bedf6fcbe553ddc7ba42fcabf56a15"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/reports/coverage_curve.json",
+      "bytes": 3080,
+      "sha256": "d35c4db9555913a9460fb98161848a7cbd81ef7115868f3451b1510d0c5ed706"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/reports/fs_assets.report.json",
+      "bytes": 8840,
+      "sha256": "005723322f21940fef395c137f812ab355e2911741d5e36b3183ee88a1fa0a66"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/reports/fs_capture.coverage.report.json",
+      "bytes": 933,
+      "sha256": "5d88833af3ac4ed191b79ffd89169566e00c59376fa73f89448b530209d54cb8"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/reports/fs_capture.gate.report.json",
+      "bytes": 4674,
+      "sha256": "59ec0f23249a4e0c4837017268f128825927adaa0e0f344c4d0a4c00980d9efb"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/reports/fs_capture.gate2.report.json",
+      "bytes": 3739,
+      "sha256": "c3808215b104887afd8319ce0a898a3d449dbb36cc7a4292d150e1eebfe27fdc"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/reports/fs_capture.lod_selection_review01.report.json",
+      "bytes": 1531,
+      "sha256": "58f37a218a1a368a802276e714e741e19573585b23e50eddfe5b36ce3a781fbd"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/reports/fs_capture.ring.report.json",
+      "bytes": 942,
+      "sha256": "ddea178eac55e23a734b4abbf80cf6229a773d360118f7093a59c5a2e2002755"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/reports/fs_capture.smoke.report.json",
+      "bytes": 638,
+      "sha256": "80fa9fd5d111a6ec9437d9c381d2d057609eaae65b4f93d8e907e8f6bfeab9b3"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/reports/fs_capture.tdtest.report.json",
+      "bytes": 379,
+      "sha256": "5a73de58bb254476f18aa3e8912f7f67e6ee7a031ecb9db5b8a5f4e255f2c2f4"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/reports/fs_capture.verify.report.json",
+      "bytes": 373,
+      "sha256": "6bfad3d069c0e3ea6a9f8e79430deb581242fc3aac32433348ec9f5d7353923c"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/reports/fs_capture.visual.report.json",
+      "bytes": 1514,
+      "sha256": "9f84f61e6933b08566c1339aeaf155283759b9b7cf0f33fd941af7a63a6d3e96"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/reports/fs_level.report.json",
+      "bytes": 315,
+      "sha256": "8836d98751ad6d10700d09c0d247287af0ba46ff9063b8939f90cc42490e8811"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/reports/fs_perf_levels.report.json",
+      "bytes": 665,
+      "sha256": "407d3927f823d59d9c538d0cae3984b052d5fb6a49924dcc1e3c962fb348b3ef"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/reports/gate2_table.json",
+      "bytes": 86994,
+      "sha256": "af95e672f68e9e3eae99e1baf4205b4d1127e96bf9f8f677835a8c888cf7634c"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/reports/gate_table.json",
+      "bytes": 109217,
+      "sha256": "b6e43547d10db53f56d40fa033c8857a42bfef2d460d3dd8ff50a3a385c57f57"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/reports/pairs_ppa.json",
+      "bytes": 13732,
+      "sha256": "4d25ce1129317386351fe4fc5b15c1f8cf51bec21fb2dde9fb620c72917edd88"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/reports/pairs_pst.json",
+      "bytes": 13740,
+      "sha256": "56657de9072fbe500f4b3e4720940a151eda8cad36de4ba0b165cc7d036b05ad"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/reports/perf_summary_all.json",
+      "bytes": 35421,
+      "sha256": "ce127c4bda283d0c7ac25aaab24b643a2e213914f8ada06c0a6064366d11702a"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/reports/probe_api.json",
+      "bytes": 1096,
+      "sha256": "9c36e24021902f8513166a9d01d4fcbccd025ea53174fdbde65b7a7245aeddf9"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/specs/coverage.json",
+      "bytes": 471,
+      "sha256": "c315fbd4892726aab6369e6d750c6287aa6b0d394112d2ff7b4af596ce73e05b"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/specs/gate.json",
+      "bytes": 25466,
+      "sha256": "fe9acec0d06b48d18ffd705710e9fd89f7e9b456b22cdfceb45b2c835ba2a145"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/specs/gate2.json",
+      "bytes": 20779,
+      "sha256": "d682ef25354ffb93668336289d88694ba5b9bf7edbfe116c061317e5c31bd4d8"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/specs/perf_pilot.json",
+      "bytes": 7808,
+      "sha256": "762cb45f1e1debb94d424547a0a82a8b712a1bacc00d9ae76c9cfcb941187482"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/specs/ring.json",
+      "bytes": 5143,
+      "sha256": "8d5cf75d478fe9dbe26fc66cbcdd2cc8ce3048a6b817043c1893fa42176714e3"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/specs/smoke.json",
+      "bytes": 1975,
+      "sha256": "9b9ae6cd50ed68f4a2febd949e454fcfc1ffd0815af064077e065cb291009307"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/specs/tdtest.json",
+      "bytes": 334,
+      "sha256": "2a66b91a45f55910c9f65f339fb826068af7012ae41f48c943a43dcfc6c843be"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/specs/verify.json",
+      "bytes": 375,
+      "sha256": "66142fb8710c47175e6bfdc25d00483a96859031af976ef644910f5c61215990"
+    },
+    {
+      "file": "unreal/ForestSpike/Saved/ForestSpike/specs/visual.json",
+      "bytes": 7677,
+      "sha256": "3e830d85fcc0984ba16832a6dc540d9d3c768b6e8574fe5f45cbc1fb30e1ea7b"
+    },
+    {
+      "file": "assets/forestspike/b0/models/dense_rounded_lod0.glb",
+      "bytes": 6040,
+      "sha256": "5ec3df7d0565d4b970281af7edaf0cc69cf4570ad1c67be311cfb4ac0c050d61"
+    },
+    {
+      "file": "assets/forestspike/b0/models/dense_rounded_lod1.glb",
+      "bytes": 2672,
+      "sha256": "830bceb0be3158883ba69bd8f409949c8087c17b65dc0ca0187f5cc86d0bf466"
+    },
+    {
+      "file": "assets/forestspike/b0/models/dense_rounded_lod2.glb",
+      "bytes": 2196,
+      "sha256": "67872d03b123ec61ccba941eec6fc17cc5f0e9e9ddfff55f0360165136c94665"
+    },
+    {
+      "file": "assets/forestspike/b0/models/horizontal_tiered_lod0.glb",
+      "bytes": 6300,
+      "sha256": "220761f9b1d3c2f74c0f5d10c3c318bade8b8f7ccbe03704f14a753873ca2b7d"
+    },
+    {
+      "file": "assets/forestspike/b0/models/horizontal_tiered_lod1.glb",
+      "bytes": 3332,
+      "sha256": "4b873fa98775932b1da2805371c912784725ea682c16d7cab7962ab3cc6f7a20"
+    },
+    {
+      "file": "assets/forestspike/b0/models/horizontal_tiered_lod2.glb",
+      "bytes": 2388,
+      "sha256": "429bfee641f5b4e23ff3a2eeaeb316fa6adb1ed8ed3509cd5a2fb0b2ca371f6b"
+    },
+    {
+      "file": "assets/forestspike/b0/models/open_vase_lod0.glb",
+      "bytes": 5940,
+      "sha256": "95203bcfab893252f5e764870cfb15990ea5feed7e60f1458f1cdc5ce3f3c147"
+    },
+    {
+      "file": "assets/forestspike/b0/models/open_vase_lod1.glb",
+      "bytes": 3676,
+      "sha256": "4c0edfd8decfe35995008577c98edc668b80d02a1f9e800853cb5cda060203e7"
+    },
+    {
+      "file": "assets/forestspike/b0/models/open_vase_lod2.glb",
+      "bytes": 2312,
+      "sha256": "68a20600cd5c5b036338b881157497a954c5feefc154defd28140a11d6e6e1f1"
+    },
+    {
+      "file": "assets/forestspike/b0/models/tall_columnar_lod0.glb",
+      "bytes": 5956,
+      "sha256": "41c3df98a19243ebe7fa510e7cf87be6a40c07ae823ac84c2dc9dd9d5a74cba5"
+    },
+    {
+      "file": "assets/forestspike/b0/models/tall_columnar_lod1.glb",
+      "bytes": 2728,
+      "sha256": "3f11b530be7a7dca747e0cd8eb4994dc4a7d0522d374c6e4f9720f25710df750"
+    },
+    {
+      "file": "assets/forestspike/b0/models/tall_columnar_lod2.glb",
+      "bytes": 2312,
+      "sha256": "219c0f9b1e2a744fbc19a1242d1c6e6cb096481b4b10c3c75abd9b5805b6b970"
+    },
+    {
+      "file": "assets/forestspike/b0/models/xinyi_reference_original.glb",
+      "bytes": 5792,
+      "sha256": "323939eaaa9076f65d2c81b15f0c7b5d179c91c85c89ed1d783312debdaadbd1"
+    },
+    {
+      "file": "assets/forestspike/b0/models/xinyi_reference_preview_lod0.glb",
+      "bytes": 3656,
+      "sha256": "4805c3ec328284512092cc279dc0c37d482ef45bfce3b827e9c87c6a22ef90cf"
+    },
+    {
+      "file": "assets/forestspike/b0/pr18_manifest.json",
+      "bytes": 24291,
+      "sha256": "02874470664c0275024578cf0c94861ecb9afbc2de44a699c0d7379da3d4df01"
+    },
+    {
+      "file": "docs/evidence/forestspike-b0/arms_s_sheet.jpg",
+      "bytes": 443224,
+      "sha256": "3c0a8cf86e50234034c71808df8b195b0111fa0e81a5597fcdbda13e063c3dc1"
+    },
+    {
+      "file": "docs/evidence/forestspike-b0/data/calibration.json",
+      "bytes": 91,
+      "sha256": "318cbe0f5baf46eadc8975d53778313947bedf6fcbe553ddc7ba42fcabf56a15"
+    },
+    {
+      "file": "docs/evidence/forestspike-b0/data/coverage_curve.json",
+      "bytes": 3080,
+      "sha256": "d35c4db9555913a9460fb98161848a7cbd81ef7115868f3451b1510d0c5ed706"
+    },
+    {
+      "file": "docs/evidence/forestspike-b0/data/fs_assets.report.json",
+      "bytes": 8840,
+      "sha256": "005723322f21940fef395c137f812ab355e2911741d5e36b3183ee88a1fa0a66"
+    },
+    {
+      "file": "docs/evidence/forestspike-b0/data/gate2_table.json",
+      "bytes": 86994,
+      "sha256": "af95e672f68e9e3eae99e1baf4205b4d1127e96bf9f8f677835a8c888cf7634c"
+    },
+    {
+      "file": "docs/evidence/forestspike-b0/data/gate_table.json",
+      "bytes": 109217,
+      "sha256": "b6e43547d10db53f56d40fa033c8857a42bfef2d460d3dd8ff50a3a385c57f57"
+    },
+    {
+      "file": "docs/evidence/forestspike-b0/data/inputs.manifest.json",
+      "bytes": 3630,
+      "sha256": "69d59dc134d04d78d046cd441c6ebbad93c1d2f0ff7c3fb23940952a2c031866"
+    },
+    {
+      "file": "docs/evidence/forestspike-b0/data/pairs_ppa.json",
+      "bytes": 13732,
+      "sha256": "4d25ce1129317386351fe4fc5b15c1f8cf51bec21fb2dde9fb620c72917edd88"
+    },
+    {
+      "file": "docs/evidence/forestspike-b0/data/pairs_pst.json",
+      "bytes": 13740,
+      "sha256": "56657de9072fbe500f4b3e4720940a151eda8cad36de4ba0b165cc7d036b05ad"
+    },
+    {
+      "file": "docs/evidence/forestspike-b0/data/perf_summary_all.json",
+      "bytes": 35421,
+      "sha256": "ce127c4bda283d0c7ac25aaab24b643a2e213914f8ada06c0a6064366d11702a"
+    },
+    {
+      "file": "docs/evidence/forestspike-b0/native_crop_agl200_A_S1.png",
+      "bytes": 321361,
+      "sha256": "e00a1456aa7ffb42a8a8e29c2c8bbdb3047451832746352fcf91855b9f659b8c"
+    },
+    {
+      "file": "docs/evidence/forestspike-b0/origin_map_v1.jpg",
+      "bytes": 165314,
+      "sha256": "b721ed0024bfba62cef6d0dc810cd0905607f5dbbfeb291dc0c0ccae45cbe037"
+    },
+    {
+      "file": "docs/evidence/forestspike-b0/ring_switch_sheet.jpg",
+      "bytes": 293384,
+      "sha256": "2d84f9006980324b817d67b6cd30186a689f8a8fd14b3b77778ee5eb67c49ee0"
+    },
+    {
+      "file": "docs/evidence/forestspike-b0-integrity/corrected_historical_summary.json",
+      "bytes": 37540,
+      "sha256": "0926b19b7b8fe9fb4f8f65f4d7e99e9d6b1776ff7fe1547fff2cbe2580cff325"
+    },
+    {
+      "file": "docs/evidence/forestspike-b0-integrity/historical_camera_trace.csv",
+      "bytes": 561712,
+      "sha256": "db826fa3396b856326e1e4b0ad0ea9c466a45a021719a5f2540a8d86ec7e9197"
+    },
+    {
+      "file": "docs/evidence/forestspike-b0-integrity/historical_csv_audit.json",
+      "bytes": 16381,
+      "sha256": "14c844d3655d7e662218a405c6bf40483d0eb345eeea1afbddbf9acc95a96007"
+    },
+    {
+      "file": "docs/evidence/forestspike-b0-integrity/lod_readback_02.json",
+      "bytes": 27864,
+      "sha256": "d3118a868c02cc7a4be86fedb87910e8f67d6a38c999c12876746364b92be1b4"
+    },
+    {
+      "file": "docs/evidence/forestspike-b0-integrity/lod_selection_capture_receipt.json",
+      "bytes": 1531,
+      "sha256": "58f37a218a1a368a802276e714e741e19573585b23e50eddfe5b36ce3a781fbd"
+    },
+    {
+      "file": "docs/evidence/forestspike-b0-integrity/lod_selection_comparison_02.json",
+      "bytes": 6419,
+      "sha256": "34b9de678d4ffa51f07c7bbcb63076db6ba18f6fea7d989eabed98618704e420"
+    },
+    {
+      "file": "docs/evidence/forestspike-b0-integrity/lod_selection_spec_01.json",
+      "bytes": 9835,
+      "sha256": "2dac4ac92b3f230ba471db6a458325e34ab71328046b2f56a937b783bf933c72"
+    },
+    {
+      "file": "docs/evidence/forestspike-b0-integrity/native/probe_v1_agl200_p10_lod-1.json",
+      "bytes": 643,
+      "sha256": "ee45d2c06b24dcc3c206001265803d0ff9f9a86cdc7145872cd3ac821d2cfe80"
+    },
+    {
+      "file": "docs/evidence/forestspike-b0-integrity/native/probe_v1_agl200_p10_lod-1.png",
+      "bytes": 1173227,
+      "sha256": "a679d0a2da9b7dbef60b248392cb24ea72ffd4b07ebc793e13350c3db3eae8b6"
+    },
+    {
+      "file": "docs/evidence/forestspike-b0-integrity/native/probe_v1_agl200_p10_lod2.json",
+      "bytes": 639,
+      "sha256": "b210970db9a79710de57d12466003ca863b89bd86630ee1ebc8d7eaee35ec5a7"
+    },
+    {
+      "file": "docs/evidence/forestspike-b0-integrity/native/probe_v1_agl200_p10_lod2.png",
+      "bytes": 1616585,
+      "sha256": "314a728419f838f7bcfe108fcaa68543f91a481e7324bd7901cb18b4eadf4c70"
+    },
+    {
+      "file": "docs/evidence/forestspike-b0-integrity/native/probe_v1_agl50_p15_lod-1.json",
+      "bytes": 639,
+      "sha256": "cde68c90ba5a938872292875ecbc8fff0fd4ae2390bfd1e302cf50965dedcf13"
+    },
+    {
+      "file": "docs/evidence/forestspike-b0-integrity/native/probe_v1_agl50_p15_lod-1.png",
+      "bytes": 1173227,
+      "sha256": "68244934b194f1573b9915fda0fad75c7d387ed985bdf19bc255f9865804582d"
+    },
+    {
+      "file": "docs/evidence/forestspike-b0-integrity/native/probe_v1_agl50_p15_lod2.json",
+      "bytes": 635,
+      "sha256": "84970f4f675574cb1cde6980f93445b7988127db9aa67635fac7b170d0eed26d"
+    },
+    {
+      "file": "docs/evidence/forestspike-b0-integrity/native/probe_v1_agl50_p15_lod2.png",
+      "bytes": 1173227,
+      "sha256": "45ccb12f3a654a04addc15c41f5ba221fffcd8d6c9e9a6365bf9c695d8eddf29"
+    },
+    {
+      "file": "docs/evidence/forestspike-b0-integrity/new_outputs_manifest.json",
+      "bytes": 11882,
+      "sha256": "d18937d639e26ac0daf1e7bd28c6d1204784e1c8ad59f8827e8514c330457adf"
+    },
+    {
+      "file": "docs/evidence/forestspike-b0-integrity/preservation_check.json",
+      "bytes": 330,
+      "sha256": "1170d76973bf07f70fb06574aff0a27a4e974f25955d52508e612037aaf9eb2a"
+    },
+    {
+      "file": "docs/evidence/forestspike-b0-integrity/preserved_inventory.json",
+      "bytes": 21836,
+      "sha256": "22742cd532bfd61598e7fb984f5501271c4d696d4ee039e42bb9803024124b31"
+    },
+    {
+      "file": "docs/evidence/forestspike-b0-integrity/source_hashes_all14.json",
+      "bytes": 4431,
+      "sha256": "a6407f2ccd8f512dd6a25be35764c04645b7281193d92f7799cb93cb8912ef78"
+    },
+    {
+      "file": "docs/evidence/forestspike-b0-integrity/static01_completion.json",
+      "bytes": 1407,
+      "sha256": "97c7d02f7485e0dfc82df99f5bd58a0382a502bd197216f791a356112617309a"
+    },
+    {
+      "file": "docs/evidence/forestspike-b0-integrity/static01_request.json",
+      "bytes": 1091,
+      "sha256": "2a7d5df3293bbcd84bba35deb07fcb54a7e2b6650a8fdcfe7366b896889f2f2f"
+    },
+    {
+      "file": "docs/evidence/forestspike-b0-integrity/static02_completion.json",
+      "bytes": 4142,
+      "sha256": "bd22c0a0768e3a5bb97f23f3941a2e6b04fc401feab6aa62ed33a0cd59f26cc6"
+    },
+    {
+      "file": "docs/evidence/forestspike-b0-integrity/static02_request.json",
+      "bytes": 1091,
+      "sha256": "4b9760129440d2ab484701cc26fc7bfbca628b4507deed164890720a9d5eece5"
+    },
+    {
+      "file": "docs/evidence/forestspike-b0-integrity/static02_summary.json",
+      "bytes": 3107,
+      "sha256": "96a4b88e3c81545e73827a9d1cd009273f33ad4fab1f2bb7b0e3b4a6a18f6ced"
+    },
+    {
+      "file": "docs/evidence/forestspike-b0-integrity/unittest_25.txt",
+      "bytes": 2797,
+      "sha256": "243ffd359b06a0b41459b7bdceb2352d090b1d7a98dab50c81310357d02eeb95"
+    }
+  ]
+}

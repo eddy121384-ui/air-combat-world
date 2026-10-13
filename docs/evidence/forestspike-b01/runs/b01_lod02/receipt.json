@@ -1,0 +1,4070 @@
+{
+  "status": "PASS_FS_B01_LOD_CAPTURE",
+  "scope": "auto LOD-colored render capture, separate offline gate required",
+  "cvars": {
+    "foliage.ForceLOD": -1.0,
+    "r.ForceLOD": -1.0,
+    "foliage.LODDistanceScale": 1.0,
+    "foliage.RandomLODRange": 0.0,
+    "r.ViewDistanceScale": 1.0
+  },
+  "capture_lod_distance_factor": 1.0,
+  "captures": [
+    {
+      "job": {
+        "name": "forest_A_legacy_v1_agl50_p15_cull500",
+        "kind": "forest",
+        "arm": "A",
+        "policy": "legacy",
+        "pose_id": "v1_agl50_p15",
+        "cull_m": 500,
+        "tree_build_method": "native foliage.RebuildFoliageTrees; synchronous forced tree rebuild, normal automatic LOD",
+        "camera_cm": [
+          -42000.0,
+          42000.0,
+          16004.900000000001
+        ],
+        "camera_rot_roll_pitch_yaw": [
+          0.0,
+          -15.0,
+          -45.0
+        ]
+      },
+      "sha256": "dd415bd19ae5eb64fe16975ddb61e58a4021e4ed04926afc2a89b5dc817c88f2",
+      "bytes": 112860,
+      "res": [
+        1920,
+        1080
+      ],
+      "hism_state": {
+        "Tree_A": {
+          "instance_count": 30200,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        }
+      }
+    },
+    {
+      "job": {
+        "name": "forest_A_legacy_v1_agl50_p15_cull0",
+        "kind": "forest",
+        "arm": "A",
+        "policy": "legacy",
+        "pose_id": "v1_agl50_p15",
+        "cull_m": 0,
+        "tree_build_method": "native foliage.RebuildFoliageTrees; synchronous forced tree rebuild, normal automatic LOD",
+        "camera_cm": [
+          -42000.0,
+          42000.0,
+          16004.900000000001
+        ],
+        "camera_rot_roll_pitch_yaw": [
+          0.0,
+          -15.0,
+          -45.0
+        ]
+      },
+      "sha256": "51eb64871244bdbb733734d5c4993bc77b194143075efd3f5e2d710f93e7c81b",
+      "bytes": 112860,
+      "res": [
+        1920,
+        1080
+      ],
+      "hism_state": {
+        "Tree_A": {
+          "instance_count": 30200,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        }
+      }
+    },
+    {
+      "job": {
+        "name": "forest_A_legacy_v1_agl200_p10_cull500",
+        "kind": "forest",
+        "arm": "A",
+        "policy": "legacy",
+        "pose_id": "v1_agl200_p10",
+        "cull_m": 500,
+        "tree_build_method": "native foliage.RebuildFoliageTrees; synchronous forced tree rebuild, normal automatic LOD",
+        "camera_cm": [
+          -42000.0,
+          42000.0,
+          31004.899999999998
+        ],
+        "camera_rot_roll_pitch_yaw": [
+          0.0,
+          -10.0,
+          -45.0
+        ]
+      },
+      "sha256": "03dd41bdd56f53afc3ee962f003c06c6ca230a71a2ec5a01edee63a6039da265",
+      "bytes": 112860,
+      "res": [
+        1920,
+        1080
+      ],
+      "hism_state": {
+        "Tree_A": {
+          "instance_count": 30200,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        }
+      }
+    },
+    {
+      "job": {
+        "name": "forest_A_legacy_v1_agl200_p10_cull0",
+        "kind": "forest",
+        "arm": "A",
+        "policy": "legacy",
+        "pose_id": "v1_agl200_p10",
+        "cull_m": 0,
+        "tree_build_method": "native foliage.RebuildFoliageTrees; synchronous forced tree rebuild, normal automatic LOD",
+        "camera_cm": [
+          -42000.0,
+          42000.0,
+          31004.899999999998
+        ],
+        "camera_rot_roll_pitch_yaw": [
+          0.0,
+          -10.0,
+          -45.0
+        ]
+      },
+      "sha256": "2834ce9ff51e18e14911ba0c12a5d7ac493733968a33ad18a7d4d05c833dab9b",
+      "bytes": 112860,
+      "res": [
+        1920,
+        1080
+      ],
+      "hism_state": {
+        "Tree_A": {
+          "instance_count": 30200,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        }
+      }
+    },
+    {
+      "job": {
+        "name": "forest_B_legacy_v1_agl50_p15_cull500",
+        "kind": "forest",
+        "arm": "B",
+        "policy": "legacy",
+        "pose_id": "v1_agl50_p15",
+        "cull_m": 500,
+        "tree_build_method": "native foliage.RebuildFoliageTrees; synchronous forced tree rebuild, normal automatic LOD",
+        "camera_cm": [
+          -42000.0,
+          42000.0,
+          16004.900000000001
+        ],
+        "camera_rot_roll_pitch_yaw": [
+          0.0,
+          -15.0,
+          -45.0
+        ]
+      },
+      "sha256": "ec31b61726366131cadf77083c65814f4d082e88030f7d8bae00430f4a65cd26",
+      "bytes": 157982,
+      "res": [
+        1920,
+        1080
+      ],
+      "hism_state": {
+        "Tree_B_dense_rounded": {
+          "instance_count": 11946,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        },
+        "Tree_B_horizontal_tiered": {
+          "instance_count": 6026,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        },
+        "Tree_B_open_vase": {
+          "instance_count": 6044,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        },
+        "Tree_B_tall_columnar": {
+          "instance_count": 6084,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        }
+      }
+    },
+    {
+      "job": {
+        "name": "forest_B_legacy_v1_agl50_p15_cull0",
+        "kind": "forest",
+        "arm": "B",
+        "policy": "legacy",
+        "pose_id": "v1_agl50_p15",
+        "cull_m": 0,
+        "tree_build_method": "native foliage.RebuildFoliageTrees; synchronous forced tree rebuild, normal automatic LOD",
+        "camera_cm": [
+          -42000.0,
+          42000.0,
+          16004.900000000001
+        ],
+        "camera_rot_roll_pitch_yaw": [
+          0.0,
+          -15.0,
+          -45.0
+        ]
+      },
+      "sha256": "22311277ba2f2f7b330b396d95d71a437c062a65801fae0a50464ab2d610146d",
+      "bytes": 157982,
+      "res": [
+        1920,
+        1080
+      ],
+      "hism_state": {
+        "Tree_B_dense_rounded": {
+          "instance_count": 11946,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        },
+        "Tree_B_horizontal_tiered": {
+          "instance_count": 6026,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        },
+        "Tree_B_open_vase": {
+          "instance_count": 6044,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        },
+        "Tree_B_tall_columnar": {
+          "instance_count": 6084,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        }
+      }
+    },
+    {
+      "job": {
+        "name": "forest_B_legacy_v1_agl200_p10_cull500",
+        "kind": "forest",
+        "arm": "B",
+        "policy": "legacy",
+        "pose_id": "v1_agl200_p10",
+        "cull_m": 500,
+        "tree_build_method": "native foliage.RebuildFoliageTrees; synchronous forced tree rebuild, normal automatic LOD",
+        "camera_cm": [
+          -42000.0,
+          42000.0,
+          31004.899999999998
+        ],
+        "camera_rot_roll_pitch_yaw": [
+          0.0,
+          -10.0,
+          -45.0
+        ]
+      },
+      "sha256": "06c9cabd8edb8d3d737f704f9ccf8de2476c23de63e8478afbae3d2acc9c71e9",
+      "bytes": 157982,
+      "res": [
+        1920,
+        1080
+      ],
+      "hism_state": {
+        "Tree_B_dense_rounded": {
+          "instance_count": 11946,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        },
+        "Tree_B_horizontal_tiered": {
+          "instance_count": 6026,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        },
+        "Tree_B_open_vase": {
+          "instance_count": 6044,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        },
+        "Tree_B_tall_columnar": {
+          "instance_count": 6084,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        }
+      }
+    },
+    {
+      "job": {
+        "name": "forest_B_legacy_v1_agl200_p10_cull0",
+        "kind": "forest",
+        "arm": "B",
+        "policy": "legacy",
+        "pose_id": "v1_agl200_p10",
+        "cull_m": 0,
+        "tree_build_method": "native foliage.RebuildFoliageTrees; synchronous forced tree rebuild, normal automatic LOD",
+        "camera_cm": [
+          -42000.0,
+          42000.0,
+          31004.899999999998
+        ],
+        "camera_rot_roll_pitch_yaw": [
+          0.0,
+          -10.0,
+          -45.0
+        ]
+      },
+      "sha256": "05abd8ed3eb5eb45a9a0112279321a90f68dd7557063c4ad0fcd9078ca1842ab",
+      "bytes": 157982,
+      "res": [
+        1920,
+        1080
+      ],
+      "hism_state": {
+        "Tree_B_dense_rounded": {
+          "instance_count": 11946,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        },
+        "Tree_B_horizontal_tiered": {
+          "instance_count": 6026,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        },
+        "Tree_B_open_vase": {
+          "instance_count": 6044,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        },
+        "Tree_B_tall_columnar": {
+          "instance_count": 6084,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        }
+      }
+    },
+    {
+      "job": {
+        "name": "forest_A_policy_v1_agl50_p15_cull500",
+        "kind": "forest",
+        "arm": "A",
+        "policy": "policy",
+        "pose_id": "v1_agl50_p15",
+        "cull_m": 500,
+        "tree_build_method": "native foliage.RebuildFoliageTrees; synchronous forced tree rebuild, normal automatic LOD",
+        "camera_cm": [
+          -42000.0,
+          42000.0,
+          16004.900000000001
+        ],
+        "camera_rot_roll_pitch_yaw": [
+          0.0,
+          -15.0,
+          -45.0
+        ]
+      },
+      "sha256": "6577811bdf586e233c1803a7846ac803f0e7cece2aa8a4d805ca7dd7a557489c",
+      "bytes": 112860,
+      "res": [
+        1920,
+        1080
+      ],
+      "hism_state": {
+        "Tree_A": {
+          "instance_count": 30200,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        }
+      }
+    },
+    {
+      "job": {
+        "name": "forest_A_policy_v1_agl50_p15_cull0",
+        "kind": "forest",
+        "arm": "A",
+        "policy": "policy",
+        "pose_id": "v1_agl50_p15",
+        "cull_m": 0,
+        "tree_build_method": "native foliage.RebuildFoliageTrees; synchronous forced tree rebuild, normal automatic LOD",
+        "camera_cm": [
+          -42000.0,
+          42000.0,
+          16004.900000000001
+        ],
+        "camera_rot_roll_pitch_yaw": [
+          0.0,
+          -15.0,
+          -45.0
+        ]
+      },
+      "sha256": "985f8ff563326aeb6b2cbdd979a99e566132ddd737ef1a76679003011b6effcb",
+      "bytes": 112860,
+      "res": [
+        1920,
+        1080
+      ],
+      "hism_state": {
+        "Tree_A": {
+          "instance_count": 30200,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        }
+      }
+    },
+    {
+      "job": {
+        "name": "forest_A_policy_v1_agl200_p10_cull500",
+        "kind": "forest",
+        "arm": "A",
+        "policy": "policy",
+        "pose_id": "v1_agl200_p10",
+        "cull_m": 500,
+        "tree_build_method": "native foliage.RebuildFoliageTrees; synchronous forced tree rebuild, normal automatic LOD",
+        "camera_cm": [
+          -42000.0,
+          42000.0,
+          31004.899999999998
+        ],
+        "camera_rot_roll_pitch_yaw": [
+          0.0,
+          -10.0,
+          -45.0
+        ]
+      },
+      "sha256": "1cfa0a7522fff395936a524530e78bd8797c8441dc7d170a06097e47a20637f1",
+      "bytes": 112860,
+      "res": [
+        1920,
+        1080
+      ],
+      "hism_state": {
+        "Tree_A": {
+          "instance_count": 30200,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        }
+      }
+    },
+    {
+      "job": {
+        "name": "forest_A_policy_v1_agl200_p10_cull0",
+        "kind": "forest",
+        "arm": "A",
+        "policy": "policy",
+        "pose_id": "v1_agl200_p10",
+        "cull_m": 0,
+        "tree_build_method": "native foliage.RebuildFoliageTrees; synchronous forced tree rebuild, normal automatic LOD",
+        "camera_cm": [
+          -42000.0,
+          42000.0,
+          31004.899999999998
+        ],
+        "camera_rot_roll_pitch_yaw": [
+          0.0,
+          -10.0,
+          -45.0
+        ]
+      },
+      "sha256": "d367fe2db90c02781e8643c0263eca3bdf4a079e397aa16c0658a1604721d45a",
+      "bytes": 112860,
+      "res": [
+        1920,
+        1080
+      ],
+      "hism_state": {
+        "Tree_A": {
+          "instance_count": 30200,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        }
+      }
+    },
+    {
+      "job": {
+        "name": "forest_B_policy_v1_agl50_p15_cull500",
+        "kind": "forest",
+        "arm": "B",
+        "policy": "policy",
+        "pose_id": "v1_agl50_p15",
+        "cull_m": 500,
+        "tree_build_method": "native foliage.RebuildFoliageTrees; synchronous forced tree rebuild, normal automatic LOD",
+        "camera_cm": [
+          -42000.0,
+          42000.0,
+          16004.900000000001
+        ],
+        "camera_rot_roll_pitch_yaw": [
+          0.0,
+          -15.0,
+          -45.0
+        ]
+      },
+      "sha256": "2870c06f3cef7c54ceb1beadc358851355759bdbb0249d670a069bd69e00e522",
+      "bytes": 157982,
+      "res": [
+        1920,
+        1080
+      ],
+      "hism_state": {
+        "Tree_B_dense_rounded": {
+          "instance_count": 11946,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        },
+        "Tree_B_horizontal_tiered": {
+          "instance_count": 6026,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        },
+        "Tree_B_open_vase": {
+          "instance_count": 6044,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        },
+        "Tree_B_tall_columnar": {
+          "instance_count": 6084,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        }
+      }
+    },
+    {
+      "job": {
+        "name": "forest_B_policy_v1_agl50_p15_cull0",
+        "kind": "forest",
+        "arm": "B",
+        "policy": "policy",
+        "pose_id": "v1_agl50_p15",
+        "cull_m": 0,
+        "tree_build_method": "native foliage.RebuildFoliageTrees; synchronous forced tree rebuild, normal automatic LOD",
+        "camera_cm": [
+          -42000.0,
+          42000.0,
+          16004.900000000001
+        ],
+        "camera_rot_roll_pitch_yaw": [
+          0.0,
+          -15.0,
+          -45.0
+        ]
+      },
+      "sha256": "c9bcb187d04ee897c11d6f5f63ed5157afc9fb4ea7f540402b5b801c9b96869f",
+      "bytes": 157982,
+      "res": [
+        1920,
+        1080
+      ],
+      "hism_state": {
+        "Tree_B_dense_rounded": {
+          "instance_count": 11946,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        },
+        "Tree_B_horizontal_tiered": {
+          "instance_count": 6026,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        },
+        "Tree_B_open_vase": {
+          "instance_count": 6044,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        },
+        "Tree_B_tall_columnar": {
+          "instance_count": 6084,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        }
+      }
+    },
+    {
+      "job": {
+        "name": "forest_B_policy_v1_agl200_p10_cull500",
+        "kind": "forest",
+        "arm": "B",
+        "policy": "policy",
+        "pose_id": "v1_agl200_p10",
+        "cull_m": 500,
+        "tree_build_method": "native foliage.RebuildFoliageTrees; synchronous forced tree rebuild, normal automatic LOD",
+        "camera_cm": [
+          -42000.0,
+          42000.0,
+          31004.899999999998
+        ],
+        "camera_rot_roll_pitch_yaw": [
+          0.0,
+          -10.0,
+          -45.0
+        ]
+      },
+      "sha256": "58f51a81de3f42b25ba8ef6bedd53a0767d04f2384abe10e9f46acd7d8d93133",
+      "bytes": 157982,
+      "res": [
+        1920,
+        1080
+      ],
+      "hism_state": {
+        "Tree_B_dense_rounded": {
+          "instance_count": 11946,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        },
+        "Tree_B_horizontal_tiered": {
+          "instance_count": 6026,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        },
+        "Tree_B_open_vase": {
+          "instance_count": 6044,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        },
+        "Tree_B_tall_columnar": {
+          "instance_count": 6084,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        }
+      }
+    },
+    {
+      "job": {
+        "name": "forest_B_policy_v1_agl200_p10_cull0",
+        "kind": "forest",
+        "arm": "B",
+        "policy": "policy",
+        "pose_id": "v1_agl200_p10",
+        "cull_m": 0,
+        "tree_build_method": "native foliage.RebuildFoliageTrees; synchronous forced tree rebuild, normal automatic LOD",
+        "camera_cm": [
+          -42000.0,
+          42000.0,
+          31004.899999999998
+        ],
+        "camera_rot_roll_pitch_yaw": [
+          0.0,
+          -10.0,
+          -45.0
+        ]
+      },
+      "sha256": "d4fa5f6770b5f5c091a198964511e5ddf79d99472405fbfc84faaec6dc6f4e93",
+      "bytes": 157982,
+      "res": [
+        1920,
+        1080
+      ],
+      "hism_state": {
+        "Tree_B_dense_rounded": {
+          "instance_count": 11946,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        },
+        "Tree_B_horizontal_tiered": {
+          "instance_count": 6026,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        },
+        "Tree_B_open_vase": {
+          "instance_count": 6044,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        },
+        "Tree_B_tall_columnar": {
+          "instance_count": 6084,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        }
+      }
+    },
+    {
+      "job": {
+        "name": "boundary_Tree_A_lod1_near",
+        "kind": "single",
+        "mesh": "Tree_A",
+        "policy": "policy",
+        "agl_m": 50,
+        "distance_m": 88.48148,
+        "cull_m": 500,
+        "expected_lod": 0,
+        "analytic_transition_m": 98.3127540114619,
+        "bracket_ratio": 0.9,
+        "projected_sphere_diameter": 0.08888888749280587,
+        "tree_build_method": "native foliage.RebuildFoliageTrees; synchronous forced tree rebuild, normal automatic LOD",
+        "camera_cm": [
+          0.0,
+          0.0,
+          5000.0
+        ],
+        "camera_rot_roll_pitch_yaw": [
+          0.0,
+          -31.1592120763581,
+          0.0
+        ]
+      },
+      "sha256": "600f58ad2f117d1947a87666ff0f6a4e2e0c207d10a5851e2a993f6d96c45e4d",
+      "bytes": 54849,
+      "res": [
+        1920,
+        1080
+      ],
+      "hism_state": {
+        "Tree_A": {
+          "instance_count": 1,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        }
+      }
+    },
+    {
+      "job": {
+        "name": "boundary_Tree_A_lod1_far",
+        "kind": "single",
+        "mesh": "Tree_A",
+        "policy": "policy",
+        "agl_m": 50,
+        "distance_m": 108.14403,
+        "cull_m": 500,
+        "expected_lod": 1,
+        "analytic_transition_m": 98.3127540114619,
+        "bracket_ratio": 1.1,
+        "projected_sphere_diameter": 0.07272727233224943,
+        "tree_build_method": "native foliage.RebuildFoliageTrees; synchronous forced tree rebuild, normal automatic LOD",
+        "camera_cm": [
+          0.0,
+          0.0,
+          5000.0
+        ],
+        "camera_rot_roll_pitch_yaw": [
+          0.0,
+          -25.045760584786006,
+          0.0
+        ]
+      },
+      "sha256": "4896c16960158d54db31687ff82e201686a8c5787dfddf00c7b971bab4ef46d8",
+      "bytes": 54547,
+      "res": [
+        1920,
+        1080
+      ],
+      "hism_state": {
+        "Tree_A": {
+          "instance_count": 1,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        }
+      }
+    },
+    {
+      "job": {
+        "name": "boundary_Tree_A_lod2_near",
+        "kind": "single",
+        "mesh": "Tree_A",
+        "policy": "policy",
+        "agl_m": 50,
+        "distance_m": 235.95061,
+        "cull_m": 500,
+        "expected_lod": 1,
+        "analytic_transition_m": 262.1673440305651,
+        "bracket_ratio": 0.9,
+        "projected_sphere_diameter": 0.03333333328071054,
+        "tree_build_method": "native foliage.RebuildFoliageTrees; synchronous forced tree rebuild, normal automatic LOD",
+        "camera_cm": [
+          0.0,
+          0.0,
+          5000.0
+        ],
+        "camera_rot_roll_pitch_yaw": [
+          0.0,
+          -11.188165927755767,
+          0.0
+        ]
+      },
+      "sha256": "f951c4289d7eb444fe4a32fe1a66bf4e08c2558f5e5a7d4ad7c0ac032eba6261",
+      "bytes": 54244,
+      "res": [
+        1920,
+        1080
+      ],
+      "hism_state": {
+        "Tree_A": {
+          "instance_count": 1,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        }
+      }
+    },
+    {
+      "job": {
+        "name": "boundary_Tree_A_lod2_far",
+        "kind": "single",
+        "mesh": "Tree_A",
+        "policy": "policy",
+        "agl_m": 50,
+        "distance_m": 288.38408,
+        "cull_m": 500,
+        "expected_lod": 2,
+        "analytic_transition_m": 262.1673440305651,
+        "bracket_ratio": 1.1,
+        "projected_sphere_diameter": 0.02727272712459354,
+        "tree_build_method": "native foliage.RebuildFoliageTrees; synchronous forced tree rebuild, normal automatic LOD",
+        "camera_cm": [
+          0.0,
+          0.0,
+          5000.0
+        ],
+        "camera_rot_roll_pitch_yaw": [
+          0.0,
+          -9.13453716136648,
+          0.0
+        ]
+      },
+      "sha256": "44fd0c4b6637f5a3bd2a5e81fd850ee6d0fc233480dd2e3e15f3b70190b60942",
+      "bytes": 53973,
+      "res": [
+        1920,
+        1080
+      ],
+      "hism_state": {
+        "Tree_A": {
+          "instance_count": 1,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        }
+      }
+    },
+    {
+      "job": {
+        "name": "single_Tree_A_agl50_d80",
+        "kind": "single",
+        "mesh": "Tree_A",
+        "policy": "policy",
+        "agl_m": 50,
+        "distance_m": 80,
+        "cull_m": 500,
+        "expected_lod": 0,
+        "projected_sphere_diameter": 0.09831275401146192,
+        "tree_build_method": "native foliage.RebuildFoliageTrees; synchronous forced tree rebuild, normal automatic LOD",
+        "camera_cm": [
+          0.0,
+          0.0,
+          5000.0
+        ],
+        "camera_rot_roll_pitch_yaw": [
+          0.0,
+          -34.90893982211139,
+          0.0
+        ]
+      },
+      "sha256": "a1ff826ed934d754d780a790a86d788d4d99ec5350eb56e8fc66516e319791c0",
+      "bytes": 54602,
+      "res": [
+        1920,
+        1080
+      ],
+      "hism_state": {
+        "Tree_A": {
+          "instance_count": 1,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        }
+      }
+    },
+    {
+      "job": {
+        "name": "single_Tree_A_agl50_d240",
+        "kind": "single",
+        "mesh": "Tree_A",
+        "policy": "policy",
+        "agl_m": 50,
+        "distance_m": 240,
+        "cull_m": 500,
+        "expected_lod": 1,
+        "projected_sphere_diameter": 0.032770918003820634,
+        "tree_build_method": "native foliage.RebuildFoliageTrees; synchronous forced tree rebuild, normal automatic LOD",
+        "camera_cm": [
+          0.0,
+          0.0,
+          5000.0
+        ],
+        "camera_rot_roll_pitch_yaw": [
+          0.0,
+          -10.997020283138717,
+          0.0
+        ]
+      },
+      "sha256": "6c36337515a3d29689a380c4fc685b78e0edd477c553b74b40bef8207188410e",
+      "bytes": 54578,
+      "res": [
+        1920,
+        1080
+      ],
+      "hism_state": {
+        "Tree_A": {
+          "instance_count": 1,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        }
+      }
+    },
+    {
+      "job": {
+        "name": "single_Tree_A_agl50_d480",
+        "kind": "single",
+        "mesh": "Tree_A",
+        "policy": "policy",
+        "agl_m": 50,
+        "distance_m": 480,
+        "cull_m": 500,
+        "expected_lod": 2,
+        "projected_sphere_diameter": 0.016385459001910317,
+        "tree_build_method": "native foliage.RebuildFoliageTrees; synchronous forced tree rebuild, normal automatic LOD",
+        "camera_cm": [
+          0.0,
+          0.0,
+          5000.0
+        ],
+        "camera_rot_roll_pitch_yaw": [
+          0.0,
+          -5.473132377106718,
+          0.0
+        ]
+      },
+      "sha256": "185db569ef2acdd02569a5e7f9999490887596356ade7b856d2854716a9812c4",
+      "bytes": 53927,
+      "res": [
+        1920,
+        1080
+      ],
+      "hism_state": {
+        "Tree_A": {
+          "instance_count": 1,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        }
+      }
+    },
+    {
+      "job": {
+        "name": "single_Tree_A_agl200_d240",
+        "kind": "single",
+        "mesh": "Tree_A",
+        "policy": "policy",
+        "agl_m": 200,
+        "distance_m": 240,
+        "cull_m": 500,
+        "expected_lod": 1,
+        "projected_sphere_diameter": 0.032770918003820634,
+        "tree_build_method": "native foliage.RebuildFoliageTrees; synchronous forced tree rebuild, normal automatic LOD",
+        "camera_cm": [
+          0.0,
+          0.0,
+          20000.0
+        ],
+        "camera_rot_roll_pitch_yaw": [
+          0.0,
+          -54.662374824359254,
+          0.0
+        ]
+      },
+      "sha256": "89f0dafb80cedfde03072282e70b831bdfebf7c3178814b93f0fd59e28c3e468",
+      "bytes": 54426,
+      "res": [
+        1920,
+        1080
+      ],
+      "hism_state": {
+        "Tree_A": {
+          "instance_count": 1,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        }
+      }
+    },
+    {
+      "job": {
+        "name": "single_Tree_A_agl200_d480",
+        "kind": "single",
+        "mesh": "Tree_A",
+        "policy": "policy",
+        "agl_m": 200,
+        "distance_m": 480,
+        "cull_m": 500,
+        "expected_lod": 2,
+        "projected_sphere_diameter": 0.016385459001910317,
+        "tree_build_method": "native foliage.RebuildFoliageTrees; synchronous forced tree rebuild, normal automatic LOD",
+        "camera_cm": [
+          0.0,
+          0.0,
+          20000.0
+        ],
+        "camera_rot_roll_pitch_yaw": [
+          0.0,
+          -24.07166462630706,
+          0.0
+        ]
+      },
+      "sha256": "2a985eb53ebc5542ae93b46dbf74ed87a222841e7868c56674a492ddd92cf567",
+      "bytes": 53839,
+      "res": [
+        1920,
+        1080
+      ],
+      "hism_state": {
+        "Tree_A": {
+          "instance_count": 1,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        }
+      }
+    },
+    {
+      "job": {
+        "name": "cull_Tree_A_d450_cull500",
+        "kind": "cull",
+        "mesh": "Tree_A",
+        "policy": "policy",
+        "agl_m": 50,
+        "distance_m": 450,
+        "cull_m": 500,
+        "expected_visible": true,
+        "projected_sphere_diameter": 0.017477822935371007,
+        "tree_build_method": "native foliage.RebuildFoliageTrees; synchronous forced tree rebuild, normal automatic LOD",
+        "camera_cm": [
+          0.0,
+          0.0,
+          5000.0
+        ],
+        "camera_rot_roll_pitch_yaw": [
+          0.0,
+          -5.839236310248294,
+          0.0
+        ]
+      },
+      "sha256": "ccbac85eb98228714fc4a76d2191d426749f334d2424b5a3a0eba170fc314648",
+      "bytes": 53832,
+      "res": [
+        1920,
+        1080
+      ],
+      "hism_state": {
+        "Tree_A": {
+          "instance_count": 1,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        }
+      }
+    },
+    {
+      "job": {
+        "name": "cull_Tree_A_d450_cull0",
+        "kind": "cull",
+        "mesh": "Tree_A",
+        "policy": "policy",
+        "agl_m": 50,
+        "distance_m": 450,
+        "cull_m": 0,
+        "expected_visible": true,
+        "projected_sphere_diameter": 0.017477822935371007,
+        "tree_build_method": "native foliage.RebuildFoliageTrees; synchronous forced tree rebuild, normal automatic LOD",
+        "camera_cm": [
+          0.0,
+          0.0,
+          5000.0
+        ],
+        "camera_rot_roll_pitch_yaw": [
+          0.0,
+          -5.839236310248294,
+          0.0
+        ]
+      },
+      "sha256": "ccbac85eb98228714fc4a76d2191d426749f334d2424b5a3a0eba170fc314648",
+      "bytes": 53832,
+      "res": [
+        1920,
+        1080
+      ],
+      "hism_state": {
+        "Tree_A": {
+          "instance_count": 1,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        }
+      }
+    },
+    {
+      "job": {
+        "name": "cull_Tree_A_d550_cull500",
+        "kind": "cull",
+        "mesh": "Tree_A",
+        "policy": "policy",
+        "agl_m": 50,
+        "distance_m": 550,
+        "cull_m": 500,
+        "expected_visible": false,
+        "projected_sphere_diameter": 0.014300036947121732,
+        "tree_build_method": "native foliage.RebuildFoliageTrees; synchronous forced tree rebuild, normal automatic LOD",
+        "camera_cm": [
+          0.0,
+          0.0,
+          5000.0
+        ],
+        "camera_rot_roll_pitch_yaw": [
+          0.0,
+          -4.77481584747518,
+          0.0
+        ]
+      },
+      "sha256": "e34670c7468f15e0d01115f1e87ecb8ba197d5f723a148ae43725c8bcdcf84ad",
+      "bytes": 53161,
+      "res": [
+        1920,
+        1080
+      ],
+      "hism_state": {
+        "Tree_A": {
+          "instance_count": 1,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        }
+      }
+    },
+    {
+      "job": {
+        "name": "cull_Tree_A_d550_cull0",
+        "kind": "cull",
+        "mesh": "Tree_A",
+        "policy": "policy",
+        "agl_m": 50,
+        "distance_m": 550,
+        "cull_m": 0,
+        "expected_visible": true,
+        "projected_sphere_diameter": 0.014300036947121732,
+        "tree_build_method": "native foliage.RebuildFoliageTrees; synchronous forced tree rebuild, normal automatic LOD",
+        "camera_cm": [
+          0.0,
+          0.0,
+          5000.0
+        ],
+        "camera_rot_roll_pitch_yaw": [
+          0.0,
+          -4.77481584747518,
+          0.0
+        ]
+      },
+      "sha256": "f655c8f86f01c0e1a5b0f29f9596b6c83444dce6688b51bdd04478138aac88f2",
+      "bytes": 53784,
+      "res": [
+        1920,
+        1080
+      ],
+      "hism_state": {
+        "Tree_A": {
+          "instance_count": 1,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        }
+      }
+    },
+    {
+      "job": {
+        "name": "boundary_Tree_B_dense_rounded_lod1_near",
+        "kind": "single",
+        "mesh": "Tree_B_dense_rounded",
+        "policy": "policy",
+        "agl_m": 50,
+        "distance_m": 93.77498,
+        "cull_m": 500,
+        "expected_lod": 0,
+        "analytic_transition_m": 104.19442552102942,
+        "bracket_ratio": 0.9,
+        "projected_sphere_diameter": 0.08888889170312117,
+        "tree_build_method": "native foliage.RebuildFoliageTrees; synchronous forced tree rebuild, normal automatic LOD",
+        "camera_cm": [
+          0.0,
+          0.0,
+          5000.0
+        ],
+        "camera_rot_roll_pitch_yaw": [
+          0.0,
+          -29.029269456902618,
+          0.0
+        ]
+      },
+      "sha256": "cfc28167eb4ba8ff370008a55275f2cbd0c227ca565bbe43d45a2d543868df62",
+      "bytes": 54512,
+      "res": [
+        1920,
+        1080
+      ],
+      "hism_state": {
+        "Tree_A": {
+          "instance_count": 1,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        }
+      }
+    },
+    {
+      "job": {
+        "name": "boundary_Tree_B_dense_rounded_lod1_far",
+        "kind": "single",
+        "mesh": "Tree_B_dense_rounded",
+        "policy": "policy",
+        "agl_m": 50,
+        "distance_m": 114.61387,
+        "cull_m": 500,
+        "expected_lod": 1,
+        "analytic_transition_m": 104.19442552102942,
+        "bracket_ratio": 1.1,
+        "projected_sphere_diameter": 0.07272727150459497,
+        "tree_build_method": "native foliage.RebuildFoliageTrees; synchronous forced tree rebuild, normal automatic LOD",
+        "camera_cm": [
+          0.0,
+          0.0,
+          5000.0
+        ],
+        "camera_rot_roll_pitch_yaw": [
+          0.0,
+          -23.392509624522692,
+          0.0
+        ]
+      },
+      "sha256": "c51250b0315883013f36ccf61687cb227bd734ff5360e22e392a851d93734c2a",
+      "bytes": 54336,
+      "res": [
+        1920,
+        1080
+      ],
+      "hism_state": {
+        "Tree_A": {
+          "instance_count": 1,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        }
+      }
+    },
+    {
+      "job": {
+        "name": "boundary_Tree_B_dense_rounded_lod2_near",
+        "kind": "single",
+        "mesh": "Tree_B_dense_rounded",
+        "policy": "policy",
+        "agl_m": 50,
+        "distance_m": 250.06662,
+        "cull_m": 500,
+        "expected_lod": 1,
+        "analytic_transition_m": 277.8518013894118,
+        "bracket_ratio": 0.9,
+        "projected_sphere_diameter": 0.03333333350001833,
+        "tree_build_method": "native foliage.RebuildFoliageTrees; synchronous forced tree rebuild, normal automatic LOD",
+        "camera_cm": [
+          0.0,
+          0.0,
+          5000.0
+        ],
+        "camera_rot_roll_pitch_yaw": [
+          0.0,
+          -10.484593550996722,
+          0.0
+        ]
+      },
+      "sha256": "65ba148a49f8c4517b8339c25fd7fcc2d9423741ef8550bf4a39702cf9b0417c",
+      "bytes": 54431,
+      "res": [
+        1920,
+        1080
+      ],
+      "hism_state": {
+        "Tree_A": {
+          "instance_count": 1,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        }
+      }
+    },
+    {
+      "job": {
+        "name": "boundary_Tree_B_dense_rounded_lod2_far",
+        "kind": "single",
+        "mesh": "Tree_B_dense_rounded",
+        "policy": "policy",
+        "agl_m": 50,
+        "distance_m": 305.63698,
+        "cull_m": 500,
+        "expected_lod": 2,
+        "analytic_transition_m": 277.8518013894118,
+        "bracket_ratio": 1.1,
+        "projected_sphere_diameter": 0.027272727409105905,
+        "tree_build_method": "native foliage.RebuildFoliageTrees; synchronous forced tree rebuild, normal automatic LOD",
+        "camera_cm": [
+          0.0,
+          0.0,
+          5000.0
+        ],
+        "camera_rot_roll_pitch_yaw": [
+          0.0,
+          -8.562343365130841,
+          0.0
+        ]
+      },
+      "sha256": "3d52d67643a84fb27dbe23fc078b4cbb117f00f2aff9e92402788f000331146a",
+      "bytes": 54453,
+      "res": [
+        1920,
+        1080
+      ],
+      "hism_state": {
+        "Tree_A": {
+          "instance_count": 1,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        }
+      }
+    },
+    {
+      "job": {
+        "name": "single_Tree_B_dense_rounded_agl50_d80",
+        "kind": "single",
+        "mesh": "Tree_B_dense_rounded",
+        "policy": "policy",
+        "agl_m": 50,
+        "distance_m": 80,
+        "cull_m": 500,
+        "expected_lod": 0,
+        "projected_sphere_diameter": 0.10419442552102942,
+        "tree_build_method": "native foliage.RebuildFoliageTrees; synchronous forced tree rebuild, normal automatic LOD",
+        "camera_cm": [
+          0.0,
+          0.0,
+          5000.0
+        ],
+        "camera_rot_roll_pitch_yaw": [
+          0.0,
+          -34.66737648009201,
+          0.0
+        ]
+      },
+      "sha256": "898a1d8703b70d8da23d20f6ceca26498ddb48a488c5e4229d22a1967e681956",
+      "bytes": 55032,
+      "res": [
+        1920,
+        1080
+      ],
+      "hism_state": {
+        "Tree_A": {
+          "instance_count": 1,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        }
+      }
+    },
+    {
+      "job": {
+        "name": "single_Tree_B_dense_rounded_agl50_d240",
+        "kind": "single",
+        "mesh": "Tree_B_dense_rounded",
+        "policy": "policy",
+        "agl_m": 50,
+        "distance_m": 240,
+        "cull_m": 500,
+        "expected_lod": 1,
+        "projected_sphere_diameter": 0.034731475173676474,
+        "tree_build_method": "native foliage.RebuildFoliageTrees; synchronous forced tree rebuild, normal automatic LOD",
+        "camera_cm": [
+          0.0,
+          0.0,
+          5000.0
+        ],
+        "camera_rot_roll_pitch_yaw": [
+          0.0,
+          -10.92966162436856,
+          0.0
+        ]
+      },
+      "sha256": "d3d7dd8abe318bbb1e216ab686ede8012bb174c583a05cf2bfd2051475c283b6",
+      "bytes": 54598,
+      "res": [
+        1920,
+        1080
+      ],
+      "hism_state": {
+        "Tree_A": {
+          "instance_count": 1,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        }
+      }
+    },
+    {
+      "job": {
+        "name": "single_Tree_B_dense_rounded_agl50_d480",
+        "kind": "single",
+        "mesh": "Tree_B_dense_rounded",
+        "policy": "policy",
+        "agl_m": 50,
+        "distance_m": 480,
+        "cull_m": 500,
+        "expected_lod": 2,
+        "projected_sphere_diameter": 0.017365737586838237,
+        "tree_build_method": "native foliage.RebuildFoliageTrees; synchronous forced tree rebuild, normal automatic LOD",
+        "camera_cm": [
+          0.0,
+          0.0,
+          5000.0
+        ],
+        "camera_rot_roll_pitch_yaw": [
+          0.0,
+          -5.439917218474145,
+          0.0
+        ]
+      },
+      "sha256": "666d0e4753aca365a47785987f871f8956f87e09d3e49cf9c0e8e8db110efced",
+      "bytes": 54361,
+      "res": [
+        1920,
+        1080
+      ],
+      "hism_state": {
+        "Tree_A": {
+          "instance_count": 1,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        }
+      }
+    },
+    {
+      "job": {
+        "name": "single_Tree_B_dense_rounded_agl200_d240",
+        "kind": "single",
+        "mesh": "Tree_B_dense_rounded",
+        "policy": "policy",
+        "agl_m": 200,
+        "distance_m": 240,
+        "cull_m": 500,
+        "expected_lod": 1,
+        "projected_sphere_diameter": 0.034731475173676474,
+        "tree_build_method": "native foliage.RebuildFoliageTrees; synchronous forced tree rebuild, normal automatic LOD",
+        "camera_cm": [
+          0.0,
+          0.0,
+          20000.0
+        ],
+        "camera_rot_roll_pitch_yaw": [
+          0.0,
+          -54.54820246520501,
+          0.0
+        ]
+      },
+      "sha256": "e321777633d132649f6b2b232bd297f3b303ff52b40aead2f8f0ce6df84afa71",
+      "bytes": 54602,
+      "res": [
+        1920,
+        1080
+      ],
+      "hism_state": {
+        "Tree_A": {
+          "instance_count": 1,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        }
+      }
+    },
+    {
+      "job": {
+        "name": "single_Tree_B_dense_rounded_agl200_d480",
+        "kind": "single",
+        "mesh": "Tree_B_dense_rounded",
+        "policy": "policy",
+        "agl_m": 200,
+        "distance_m": 480,
+        "cull_m": 500,
+        "expected_lod": 2,
+        "projected_sphere_diameter": 0.017365737586838237,
+        "tree_build_method": "native foliage.RebuildFoliageTrees; synchronous forced tree rebuild, normal automatic LOD",
+        "camera_cm": [
+          0.0,
+          0.0,
+          20000.0
+        ],
+        "camera_rot_roll_pitch_yaw": [
+          0.0,
+          -24.035455776211446,
+          0.0
+        ]
+      },
+      "sha256": "848ecbb61760fc401d97672ba9d95f41b041911e1e03b818f11fc27883d66ce4",
+      "bytes": 54325,
+      "res": [
+        1920,
+        1080
+      ],
+      "hism_state": {
+        "Tree_A": {
+          "instance_count": 1,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        }
+      }
+    },
+    {
+      "job": {
+        "name": "cull_Tree_B_dense_rounded_d450_cull500",
+        "kind": "cull",
+        "mesh": "Tree_B_dense_rounded",
+        "policy": "policy",
+        "agl_m": 50,
+        "distance_m": 450,
+        "cull_m": 500,
+        "expected_visible": true,
+        "projected_sphere_diameter": 0.018523453425960786,
+        "tree_build_method": "native foliage.RebuildFoliageTrees; synchronous forced tree rebuild, normal automatic LOD",
+        "camera_cm": [
+          0.0,
+          0.0,
+          5000.0
+        ],
+        "camera_rot_roll_pitch_yaw": [
+          0.0,
+          -5.803784515973851,
+          0.0
+        ]
+      },
+      "sha256": "a81a3da426e76373a3ee0d56cdb1bf1cb9ad449d8690777e6050ebbcb14fe814",
+      "bytes": 54526,
+      "res": [
+        1920,
+        1080
+      ],
+      "hism_state": {
+        "Tree_A": {
+          "instance_count": 1,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        }
+      }
+    },
+    {
+      "job": {
+        "name": "cull_Tree_B_dense_rounded_d450_cull0",
+        "kind": "cull",
+        "mesh": "Tree_B_dense_rounded",
+        "policy": "policy",
+        "agl_m": 50,
+        "distance_m": 450,
+        "cull_m": 0,
+        "expected_visible": true,
+        "projected_sphere_diameter": 0.018523453425960786,
+        "tree_build_method": "native foliage.RebuildFoliageTrees; synchronous forced tree rebuild, normal automatic LOD",
+        "camera_cm": [
+          0.0,
+          0.0,
+          5000.0
+        ],
+        "camera_rot_roll_pitch_yaw": [
+          0.0,
+          -5.803784515973851,
+          0.0
+        ]
+      },
+      "sha256": "fa6a798aead67f281574bee3baf2cf8262a41dc3d9f68b5a5d9b328fe5d4f4f4",
+      "bytes": 54526,
+      "res": [
+        1920,
+        1080
+      ],
+      "hism_state": {
+        "Tree_A": {
+          "instance_count": 1,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        }
+      }
+    },
+    {
+      "job": {
+        "name": "cull_Tree_B_dense_rounded_d550_cull500",
+        "kind": "cull",
+        "mesh": "Tree_B_dense_rounded",
+        "policy": "policy",
+        "agl_m": 50,
+        "distance_m": 550,
+        "cull_m": 500,
+        "expected_visible": false,
+        "projected_sphere_diameter": 0.015155552803058825,
+        "tree_build_method": "native foliage.RebuildFoliageTrees; synchronous forced tree rebuild, normal automatic LOD",
+        "camera_cm": [
+          0.0,
+          0.0,
+          5000.0
+        ],
+        "camera_rot_roll_pitch_yaw": [
+          0.0,
+          -4.74585954340724,
+          0.0
+        ]
+      },
+      "sha256": "eab5b1e90039cd8b6a56f0e59cd56753d567c93b037a75cb7aeba468e6e775be",
+      "bytes": 53161,
+      "res": [
+        1920,
+        1080
+      ],
+      "hism_state": {
+        "Tree_A": {
+          "instance_count": 1,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        }
+      }
+    },
+    {
+      "job": {
+        "name": "cull_Tree_B_dense_rounded_d550_cull0",
+        "kind": "cull",
+        "mesh": "Tree_B_dense_rounded",
+        "policy": "policy",
+        "agl_m": 50,
+        "distance_m": 550,
+        "cull_m": 0,
+        "expected_visible": true,
+        "projected_sphere_diameter": 0.015155552803058825,
+        "tree_build_method": "native foliage.RebuildFoliageTrees; synchronous forced tree rebuild, normal automatic LOD",
+        "camera_cm": [
+          0.0,
+          0.0,
+          5000.0
+        ],
+        "camera_rot_roll_pitch_yaw": [
+          0.0,
+          -4.74585954340724,
+          0.0
+        ]
+      },
+      "sha256": "493b97e357bc643e48fefdafd0cd96009608ab7d2e9994098de21043ce0213d7",
+      "bytes": 53933,
+      "res": [
+        1920,
+        1080
+      ],
+      "hism_state": {
+        "Tree_A": {
+          "instance_count": 1,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        }
+      }
+    },
+    {
+      "job": {
+        "name": "boundary_Tree_B_horizontal_tiered_lod1_near",
+        "kind": "single",
+        "mesh": "Tree_B_horizontal_tiered",
+        "policy": "policy",
+        "agl_m": 50,
+        "distance_m": 99.03956,
+        "cull_m": 500,
+        "expected_lod": 0,
+        "analytic_transition_m": 110.04395893396142,
+        "bracket_ratio": 0.9,
+        "projected_sphere_diameter": 0.08888889161782336,
+        "tree_build_method": "native foliage.RebuildFoliageTrees; synchronous forced tree rebuild, normal automatic LOD",
+        "camera_cm": [
+          0.0,
+          0.0,
+          5000.0
+        ],
+        "camera_rot_roll_pitch_yaw": [
+          0.0,
+          -27.27612205828365,
+          0.0
+        ]
+      },
+      "sha256": "d4ea0c9984eee3e95ce25763549672d7b4083fa1ed784471234f7a1d049586b3",
+      "bytes": 54676,
+      "res": [
+        1920,
+        1080
+      ],
+      "hism_state": {
+        "Tree_A": {
+          "instance_count": 1,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        }
+      }
+    },
+    {
+      "job": {
+        "name": "boundary_Tree_B_horizontal_tiered_lod1_far",
+        "kind": "single",
+        "mesh": "Tree_B_horizontal_tiered",
+        "policy": "policy",
+        "agl_m": 50,
+        "distance_m": 121.04835,
+        "cull_m": 500,
+        "expected_lod": 1,
+        "analytic_transition_m": 110.04395893396142,
+        "bracket_ratio": 1.1,
+        "projected_sphere_diameter": 0.07272727562760593,
+        "tree_build_method": "native foliage.RebuildFoliageTrees; synchronous forced tree rebuild, normal automatic LOD",
+        "camera_cm": [
+          0.0,
+          0.0,
+          5000.0
+        ],
+        "camera_rot_roll_pitch_yaw": [
+          0.0,
+          -22.021574848926218,
+          0.0
+        ]
+      },
+      "sha256": "79bf7a11a867e20bf9601507d0a6c5bf887fef022169b773ce613f7b8a8558be",
+      "bytes": 54376,
+      "res": [
+        1920,
+        1080
+      ],
+      "hism_state": {
+        "Tree_A": {
+          "instance_count": 1,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        }
+      }
+    },
+    {
+      "job": {
+        "name": "boundary_Tree_B_horizontal_tiered_lod2_near",
+        "kind": "single",
+        "mesh": "Tree_B_horizontal_tiered",
+        "policy": "policy",
+        "agl_m": 50,
+        "distance_m": 264.1055,
+        "cull_m": 500,
+        "expected_lod": 1,
+        "analytic_transition_m": 293.45055715723043,
+        "bracket_ratio": 0.9,
+        "projected_sphere_diameter": 0.03333333351526914,
+        "tree_build_method": "native foliage.RebuildFoliageTrees; synchronous forced tree rebuild, normal automatic LOD",
+        "camera_cm": [
+          0.0,
+          0.0,
+          5000.0
+        ],
+        "camera_rot_roll_pitch_yaw": [
+          0.0,
+          -9.895672182282155,
+          0.0
+        ]
+      },
+      "sha256": "a6ceec540908741b740b8b991dcae97c9f1445da9b0dcb417892671120f3b370",
+      "bytes": 54115,
+      "res": [
+        1920,
+        1080
+      ],
+      "hism_state": {
+        "Tree_A": {
+          "instance_count": 1,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        }
+      }
+    },
+    {
+      "job": {
+        "name": "boundary_Tree_B_horizontal_tiered_lod2_far",
+        "kind": "single",
+        "mesh": "Tree_B_horizontal_tiered",
+        "policy": "policy",
+        "agl_m": 50,
+        "distance_m": 322.79561,
+        "cull_m": 500,
+        "expected_lod": 2,
+        "analytic_transition_m": 293.45055715723043,
+        "bracket_ratio": 1.1,
+        "projected_sphere_diameter": 0.027272727515460674,
+        "tree_build_method": "native foliage.RebuildFoliageTrees; synchronous forced tree rebuild, normal automatic LOD",
+        "camera_cm": [
+          0.0,
+          0.0,
+          5000.0
+        ],
+        "camera_rot_roll_pitch_yaw": [
+          0.0,
+          -8.083052275060584,
+          0.0
+        ]
+      },
+      "sha256": "81f6434699eb078e4361f46cca47cdf1c60dec5cfd3294065752ab8aeae8bb47",
+      "bytes": 54031,
+      "res": [
+        1920,
+        1080
+      ],
+      "hism_state": {
+        "Tree_A": {
+          "instance_count": 1,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        }
+      }
+    },
+    {
+      "job": {
+        "name": "single_Tree_B_horizontal_tiered_agl50_d80",
+        "kind": "single",
+        "mesh": "Tree_B_horizontal_tiered",
+        "policy": "policy",
+        "agl_m": 50,
+        "distance_m": 80,
+        "cull_m": 500,
+        "expected_lod": 0,
+        "projected_sphere_diameter": 0.11004395893396142,
+        "tree_build_method": "native foliage.RebuildFoliageTrees; synchronous forced tree rebuild, normal automatic LOD",
+        "camera_cm": [
+          0.0,
+          0.0,
+          5000.0
+        ],
+        "camera_rot_roll_pitch_yaw": [
+          0.0,
+          -34.56543807700246,
+          0.0
+        ]
+      },
+      "sha256": "b739a23d8262b61d2cc8bf030484ab5c497411bc74521461e2316ea8b54dad52",
+      "bytes": 54804,
+      "res": [
+        1920,
+        1080
+      ],
+      "hism_state": {
+        "Tree_A": {
+          "instance_count": 1,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        }
+      }
+    },
+    {
+      "job": {
+        "name": "single_Tree_B_horizontal_tiered_agl50_d240",
+        "kind": "single",
+        "mesh": "Tree_B_horizontal_tiered",
+        "policy": "policy",
+        "agl_m": 50,
+        "distance_m": 240,
+        "cull_m": 500,
+        "expected_lod": 1,
+        "projected_sphere_diameter": 0.036681319644653806,
+        "tree_build_method": "native foliage.RebuildFoliageTrees; synchronous forced tree rebuild, normal automatic LOD",
+        "camera_cm": [
+          0.0,
+          0.0,
+          5000.0
+        ],
+        "camera_rot_roll_pitch_yaw": [
+          0.0,
+          -10.901182161905503,
+          0.0
+        ]
+      },
+      "sha256": "44c35270529fd6eb569d8b9567656c46df7b2dd2d0d514445a1b36d5bea07994",
+      "bytes": 54118,
+      "res": [
+        1920,
+        1080
+      ],
+      "hism_state": {
+        "Tree_A": {
+          "instance_count": 1,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        }
+      }
+    },
+    {
+      "job": {
+        "name": "single_Tree_B_horizontal_tiered_agl50_d480",
+        "kind": "single",
+        "mesh": "Tree_B_horizontal_tiered",
+        "policy": "policy",
+        "agl_m": 50,
+        "distance_m": 480,
+        "cull_m": 500,
+        "expected_lod": 2,
+        "projected_sphere_diameter": 0.018340659822326903,
+        "tree_build_method": "native foliage.RebuildFoliageTrees; synchronous forced tree rebuild, normal automatic LOD",
+        "camera_cm": [
+          0.0,
+          0.0,
+          5000.0
+        ],
+        "camera_rot_roll_pitch_yaw": [
+          0.0,
+          -5.425872021466879,
+          0.0
+        ]
+      },
+      "sha256": "d6d3b0047f5355df9553bdc38a87752af3c3c54b3148295c568ead0dcf26e97c",
+      "bytes": 53932,
+      "res": [
+        1920,
+        1080
+      ],
+      "hism_state": {
+        "Tree_A": {
+          "instance_count": 1,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        }
+      }
+    },
+    {
+      "job": {
+        "name": "single_Tree_B_horizontal_tiered_agl200_d240",
+        "kind": "single",
+        "mesh": "Tree_B_horizontal_tiered",
+        "policy": "policy",
+        "agl_m": 200,
+        "distance_m": 240,
+        "cull_m": 500,
+        "expected_lod": 1,
+        "projected_sphere_diameter": 0.036681319644653806,
+        "tree_build_method": "native foliage.RebuildFoliageTrees; synchronous forced tree rebuild, normal automatic LOD",
+        "camera_cm": [
+          0.0,
+          0.0,
+          20000.0
+        ],
+        "camera_rot_roll_pitch_yaw": [
+          0.0,
+          -54.500018250485006,
+          0.0
+        ]
+      },
+      "sha256": "47cbb82aca5fac57a61fc5c8f167d36128f7f8e79bbf7c7acdff1bf6ab716511",
+      "bytes": 54109,
+      "res": [
+        1920,
+        1080
+      ],
+      "hism_state": {
+        "Tree_A": {
+          "instance_count": 1,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        }
+      }
+    },
+    {
+      "job": {
+        "name": "single_Tree_B_horizontal_tiered_agl200_d480",
+        "kind": "single",
+        "mesh": "Tree_B_horizontal_tiered",
+        "policy": "policy",
+        "agl_m": 200,
+        "distance_m": 480,
+        "cull_m": 500,
+        "expected_lod": 2,
+        "projected_sphere_diameter": 0.018340659822326903,
+        "tree_build_method": "native foliage.RebuildFoliageTrees; synchronous forced tree rebuild, normal automatic LOD",
+        "camera_cm": [
+          0.0,
+          0.0,
+          20000.0
+        ],
+        "camera_rot_roll_pitch_yaw": [
+          0.0,
+          -24.02014715023314,
+          0.0
+        ]
+      },
+      "sha256": "c97f027331625e4828a2329e078bb0de274693e05ff1d41539687e9b78492341",
+      "bytes": 53924,
+      "res": [
+        1920,
+        1080
+      ],
+      "hism_state": {
+        "Tree_A": {
+          "instance_count": 1,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        }
+      }
+    },
+    {
+      "job": {
+        "name": "cull_Tree_B_horizontal_tiered_d450_cull500",
+        "kind": "cull",
+        "mesh": "Tree_B_horizontal_tiered",
+        "policy": "policy",
+        "agl_m": 50,
+        "distance_m": 450,
+        "cull_m": 500,
+        "expected_visible": true,
+        "projected_sphere_diameter": 0.019563370477148696,
+        "tree_build_method": "native foliage.RebuildFoliageTrees; synchronous forced tree rebuild, normal automatic LOD",
+        "camera_cm": [
+          0.0,
+          0.0,
+          5000.0
+        ],
+        "camera_rot_roll_pitch_yaw": [
+          0.0,
+          -5.788793628385166,
+          0.0
+        ]
+      },
+      "sha256": "420a9a8f0d9d320bdf5658bb2e289822cd3fe2ff6b61f7846cf8d5bb3865de24",
+      "bytes": 53932,
+      "res": [
+        1920,
+        1080
+      ],
+      "hism_state": {
+        "Tree_A": {
+          "instance_count": 1,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        }
+      }
+    },
+    {
+      "job": {
+        "name": "cull_Tree_B_horizontal_tiered_d450_cull0",
+        "kind": "cull",
+        "mesh": "Tree_B_horizontal_tiered",
+        "policy": "policy",
+        "agl_m": 50,
+        "distance_m": 450,
+        "cull_m": 0,
+        "expected_visible": true,
+        "projected_sphere_diameter": 0.019563370477148696,
+        "tree_build_method": "native foliage.RebuildFoliageTrees; synchronous forced tree rebuild, normal automatic LOD",
+        "camera_cm": [
+          0.0,
+          0.0,
+          5000.0
+        ],
+        "camera_rot_roll_pitch_yaw": [
+          0.0,
+          -5.788793628385166,
+          0.0
+        ]
+      },
+      "sha256": "420a9a8f0d9d320bdf5658bb2e289822cd3fe2ff6b61f7846cf8d5bb3865de24",
+      "bytes": 53932,
+      "res": [
+        1920,
+        1080
+      ],
+      "hism_state": {
+        "Tree_A": {
+          "instance_count": 1,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        }
+      }
+    },
+    {
+      "job": {
+        "name": "cull_Tree_B_horizontal_tiered_d550_cull500",
+        "kind": "cull",
+        "mesh": "Tree_B_horizontal_tiered",
+        "policy": "policy",
+        "agl_m": 50,
+        "distance_m": 550,
+        "cull_m": 500,
+        "expected_visible": false,
+        "projected_sphere_diameter": 0.016006394026758023,
+        "tree_build_method": "native foliage.RebuildFoliageTrees; synchronous forced tree rebuild, normal automatic LOD",
+        "camera_cm": [
+          0.0,
+          0.0,
+          5000.0
+        ],
+        "camera_rot_roll_pitch_yaw": [
+          0.0,
+          -4.73361510893811,
+          0.0
+        ]
+      },
+      "sha256": "fd6ed6e1262d35469539c66a4a3173701c6303f575ce42bf0979d1fe72219711",
+      "bytes": 53161,
+      "res": [
+        1920,
+        1080
+      ],
+      "hism_state": {
+        "Tree_A": {
+          "instance_count": 1,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        }
+      }
+    },
+    {
+      "job": {
+        "name": "cull_Tree_B_horizontal_tiered_d550_cull0",
+        "kind": "cull",
+        "mesh": "Tree_B_horizontal_tiered",
+        "policy": "policy",
+        "agl_m": 50,
+        "distance_m": 550,
+        "cull_m": 0,
+        "expected_visible": true,
+        "projected_sphere_diameter": 0.016006394026758023,
+        "tree_build_method": "native foliage.RebuildFoliageTrees; synchronous forced tree rebuild, normal automatic LOD",
+        "camera_cm": [
+          0.0,
+          0.0,
+          5000.0
+        ],
+        "camera_rot_roll_pitch_yaw": [
+          0.0,
+          -4.73361510893811,
+          0.0
+        ]
+      },
+      "sha256": "0c49d4fe30341c384244355ea458f8b55c6a46754111bf3a9f10fd47d963cd44",
+      "bytes": 53346,
+      "res": [
+        1920,
+        1080
+      ],
+      "hism_state": {
+        "Tree_A": {
+          "instance_count": 1,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        }
+      }
+    },
+    {
+      "job": {
+        "name": "boundary_Tree_B_open_vase_lod1_near",
+        "kind": "single",
+        "mesh": "Tree_B_open_vase",
+        "policy": "policy",
+        "agl_m": 50,
+        "distance_m": 119.43131,
+        "cull_m": 500,
+        "expected_lod": 0,
+        "analytic_transition_m": 132.70145413773798,
+        "bracket_ratio": 0.9,
+        "projected_sphere_diameter": 0.0888888879391764,
+        "tree_build_method": "native foliage.RebuildFoliageTrees; synchronous forced tree rebuild, normal automatic LOD",
+        "camera_cm": [
+          0.0,
+          0.0,
+          5000.0
+        ],
+        "camera_rot_roll_pitch_yaw": [
+          0.0,
+          -22.254318062715672,
+          0.0
+        ]
+      },
+      "sha256": "a4fb9f5a5c154a67a1da4e276039d2541f926a2c6dbc3fd1d43be8c189eed646",
+      "bytes": 55000,
+      "res": [
+        1920,
+        1080
+      ],
+      "hism_state": {
+        "Tree_A": {
+          "instance_count": 1,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        }
+      }
+    },
+    {
+      "job": {
+        "name": "boundary_Tree_B_open_vase_lod1_far",
+        "kind": "single",
+        "mesh": "Tree_B_open_vase",
+        "policy": "policy",
+        "agl_m": 50,
+        "distance_m": 145.9716,
+        "cull_m": 500,
+        "expected_lod": 1,
+        "analytic_transition_m": 132.70145413773798,
+        "bracket_ratio": 1.1,
+        "projected_sphere_diameter": 0.07272727250382292,
+        "tree_build_method": "native foliage.RebuildFoliageTrees; synchronous forced tree rebuild, normal automatic LOD",
+        "camera_cm": [
+          0.0,
+          0.0,
+          5000.0
+        ],
+        "camera_rot_roll_pitch_yaw": [
+          0.0,
+          -18.050822943111932,
+          0.0
+        ]
+      },
+      "sha256": "b3a81765f0236d8f8acd6136263b1225d41f3f271f5b9695bf5d87cd80598a78",
+      "bytes": 54467,
+      "res": [
+        1920,
+        1080
+      ],
+      "hism_state": {
+        "Tree_A": {
+          "instance_count": 1,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        }
+      }
+    },
+    {
+      "job": {
+        "name": "boundary_Tree_B_open_vase_lod2_near",
+        "kind": "single",
+        "mesh": "Tree_B_open_vase",
+        "policy": "policy",
+        "agl_m": 50,
+        "distance_m": 318.48349,
+        "cull_m": 500,
+        "expected_lod": 1,
+        "analytic_transition_m": 353.87054436730125,
+        "bracket_ratio": 0.9,
+        "projected_sphere_diameter": 0.03333333332606672,
+        "tree_build_method": "native foliage.RebuildFoliageTrees; synchronous forced tree rebuild, normal automatic LOD",
+        "camera_cm": [
+          0.0,
+          0.0,
+          5000.0
+        ],
+        "camera_rot_roll_pitch_yaw": [
+          0.0,
+          -8.16471652955475,
+          0.0
+        ]
+      },
+      "sha256": "fe6b6a56e9d7adbac809028806ce241cda2cec6d14e6f6c3b975a1eee145ab1f",
+      "bytes": 53947,
+      "res": [
+        1920,
+        1080
+      ],
+      "hism_state": {
+        "Tree_A": {
+          "instance_count": 1,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        }
+      }
+    },
+    {
+      "job": {
+        "name": "boundary_Tree_B_open_vase_lod2_far",
+        "kind": "single",
+        "mesh": "Tree_B_open_vase",
+        "policy": "policy",
+        "agl_m": 50,
+        "distance_m": 389.2576,
+        "cull_m": 500,
+        "expected_lod": 2,
+        "analytic_transition_m": 353.87054436730125,
+        "bracket_ratio": 1.1,
+        "projected_sphere_diameter": 0.027272727188933595,
+        "tree_build_method": "native foliage.RebuildFoliageTrees; synchronous forced tree rebuild, normal automatic LOD",
+        "camera_cm": [
+          0.0,
+          0.0,
+          5000.0
+        ],
+        "camera_rot_roll_pitch_yaw": [
+          0.0,
+          -6.672710343714869,
+          0.0
+        ]
+      },
+      "sha256": "d193482149e6dda28bd9d62dc5e7b6fa2c0d8ae63f07bc5a6544ac9b0a84fbcc",
+      "bytes": 53984,
+      "res": [
+        1920,
+        1080
+      ],
+      "hism_state": {
+        "Tree_A": {
+          "instance_count": 1,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        }
+      }
+    },
+    {
+      "job": {
+        "name": "single_Tree_B_open_vase_agl50_d80",
+        "kind": "single",
+        "mesh": "Tree_B_open_vase",
+        "policy": "policy",
+        "agl_m": 50,
+        "distance_m": 80,
+        "cull_m": 500,
+        "expected_lod": 0,
+        "projected_sphere_diameter": 0.13270145413773798,
+        "tree_build_method": "native foliage.RebuildFoliageTrees; synchronous forced tree rebuild, normal automatic LOD",
+        "camera_cm": [
+          0.0,
+          0.0,
+          5000.0
+        ],
+        "camera_rot_roll_pitch_yaw": [
+          0.0,
+          -34.429057534426754,
+          0.0
+        ]
+      },
+      "sha256": "66860f11107bc63f1def208193154e390ff02db9ca13f3f69a4100b63d9fd2bc",
+      "bytes": 54962,
+      "res": [
+        1920,
+        1080
+      ],
+      "hism_state": {
+        "Tree_A": {
+          "instance_count": 1,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        }
+      }
+    },
+    {
+      "job": {
+        "name": "single_Tree_B_open_vase_agl50_d240",
+        "kind": "single",
+        "mesh": "Tree_B_open_vase",
+        "policy": "policy",
+        "agl_m": 50,
+        "distance_m": 240,
+        "cull_m": 500,
+        "expected_lod": 1,
+        "projected_sphere_diameter": 0.04423381804591266,
+        "tree_build_method": "native foliage.RebuildFoliageTrees; synchronous forced tree rebuild, normal automatic LOD",
+        "camera_cm": [
+          0.0,
+          0.0,
+          5000.0
+        ],
+        "camera_rot_roll_pitch_yaw": [
+          0.0,
+          -10.86302994383596,
+          0.0
+        ]
+      },
+      "sha256": "725488383f9554f6056e338489bc24d3571b0e1f57c7078b482c2068bf373f07",
+      "bytes": 54087,
+      "res": [
+        1920,
+        1080
+      ],
+      "hism_state": {
+        "Tree_A": {
+          "instance_count": 1,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        }
+      }
+    },
+    {
+      "job": {
+        "name": "single_Tree_B_open_vase_agl50_d480",
+        "kind": "single",
+        "mesh": "Tree_B_open_vase",
+        "policy": "policy",
+        "agl_m": 50,
+        "distance_m": 480,
+        "cull_m": 500,
+        "expected_lod": 2,
+        "projected_sphere_diameter": 0.02211690902295633,
+        "tree_build_method": "native foliage.RebuildFoliageTrees; synchronous forced tree rebuild, normal automatic LOD",
+        "camera_cm": [
+          0.0,
+          0.0,
+          5000.0
+        ],
+        "camera_rot_roll_pitch_yaw": [
+          0.0,
+          -5.407054924055526,
+          0.0
+        ]
+      },
+      "sha256": "0f796ee14023060e85f7263b4e62dcd07e2ada995c8be386d3f34d684fd3bab9",
+      "bytes": 53900,
+      "res": [
+        1920,
+        1080
+      ],
+      "hism_state": {
+        "Tree_A": {
+          "instance_count": 1,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        }
+      }
+    },
+    {
+      "job": {
+        "name": "single_Tree_B_open_vase_agl200_d240",
+        "kind": "single",
+        "mesh": "Tree_B_open_vase",
+        "policy": "policy",
+        "agl_m": 200,
+        "distance_m": 240,
+        "cull_m": 500,
+        "expected_lod": 1,
+        "projected_sphere_diameter": 0.04423381804591266,
+        "tree_build_method": "native foliage.RebuildFoliageTrees; synchronous forced tree rebuild, normal automatic LOD",
+        "camera_cm": [
+          0.0,
+          0.0,
+          20000.0
+        ],
+        "camera_rot_roll_pitch_yaw": [
+          0.0,
+          -54.43555043473018,
+          0.0
+        ]
+      },
+      "sha256": "d33e7072a96ef1fc687cb403a5e28f5a236fb2e099f9aadb19bc021a50952421",
+      "bytes": 54558,
+      "res": [
+        1920,
+        1080
+      ],
+      "hism_state": {
+        "Tree_A": {
+          "instance_count": 1,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        }
+      }
+    },
+    {
+      "job": {
+        "name": "single_Tree_B_open_vase_agl200_d480",
+        "kind": "single",
+        "mesh": "Tree_B_open_vase",
+        "policy": "policy",
+        "agl_m": 200,
+        "distance_m": 480,
+        "cull_m": 500,
+        "expected_lod": 2,
+        "projected_sphere_diameter": 0.02211690902295633,
+        "tree_build_method": "native foliage.RebuildFoliageTrees; synchronous forced tree rebuild, normal automatic LOD",
+        "camera_cm": [
+          0.0,
+          0.0,
+          20000.0
+        ],
+        "camera_rot_roll_pitch_yaw": [
+          0.0,
+          -23.99963966778563,
+          0.0
+        ]
+      },
+      "sha256": "78d01b454be5e41925e46cea3b09325e6c6ad617fcd47f4a70abd25b1f962048",
+      "bytes": 54500,
+      "res": [
+        1920,
+        1080
+      ],
+      "hism_state": {
+        "Tree_A": {
+          "instance_count": 1,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        }
+      }
+    },
+    {
+      "job": {
+        "name": "cull_Tree_B_open_vase_d450_cull500",
+        "kind": "cull",
+        "mesh": "Tree_B_open_vase",
+        "policy": "policy",
+        "agl_m": 50,
+        "distance_m": 450,
+        "cull_m": 500,
+        "expected_visible": true,
+        "projected_sphere_diameter": 0.02359136962448675,
+        "tree_build_method": "native foliage.RebuildFoliageTrees; synchronous forced tree rebuild, normal automatic LOD",
+        "camera_cm": [
+          0.0,
+          0.0,
+          5000.0
+        ],
+        "camera_rot_roll_pitch_yaw": [
+          0.0,
+          -5.768709615132327,
+          0.0
+        ]
+      },
+      "sha256": "38864b3da3f72470076074aee955ee9b8b85927c839ce511b89fbd4e66bdac14",
+      "bytes": 53826,
+      "res": [
+        1920,
+        1080
+      ],
+      "hism_state": {
+        "Tree_A": {
+          "instance_count": 1,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        }
+      }
+    },
+    {
+      "job": {
+        "name": "cull_Tree_B_open_vase_d450_cull0",
+        "kind": "cull",
+        "mesh": "Tree_B_open_vase",
+        "policy": "policy",
+        "agl_m": 50,
+        "distance_m": 450,
+        "cull_m": 0,
+        "expected_visible": true,
+        "projected_sphere_diameter": 0.02359136962448675,
+        "tree_build_method": "native foliage.RebuildFoliageTrees; synchronous forced tree rebuild, normal automatic LOD",
+        "camera_cm": [
+          0.0,
+          0.0,
+          5000.0
+        ],
+        "camera_rot_roll_pitch_yaw": [
+          0.0,
+          -5.768709615132327,
+          0.0
+        ]
+      },
+      "sha256": "bc54227b210dcdb08e329cb2bda02cca2e2e09feae3bb602d9b9af0da3bd637b",
+      "bytes": 53826,
+      "res": [
+        1920,
+        1080
+      ],
+      "hism_state": {
+        "Tree_A": {
+          "instance_count": 1,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        }
+      }
+    },
+    {
+      "job": {
+        "name": "cull_Tree_B_open_vase_d550_cull500",
+        "kind": "cull",
+        "mesh": "Tree_B_open_vase",
+        "policy": "policy",
+        "agl_m": 50,
+        "distance_m": 550,
+        "cull_m": 500,
+        "expected_visible": false,
+        "projected_sphere_diameter": 0.019302029692761888,
+        "tree_build_method": "native foliage.RebuildFoliageTrees; synchronous forced tree rebuild, normal automatic LOD",
+        "camera_cm": [
+          0.0,
+          0.0,
+          5000.0
+        ],
+        "camera_rot_roll_pitch_yaw": [
+          0.0,
+          -4.717210481668231,
+          0.0
+        ]
+      },
+      "sha256": "eb1159074c71558531d5a824e527570ae81429348fe2fdc058186865e5bac043",
+      "bytes": 53161,
+      "res": [
+        1920,
+        1080
+      ],
+      "hism_state": {
+        "Tree_A": {
+          "instance_count": 1,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        }
+      }
+    },
+    {
+      "job": {
+        "name": "cull_Tree_B_open_vase_d550_cull0",
+        "kind": "cull",
+        "mesh": "Tree_B_open_vase",
+        "policy": "policy",
+        "agl_m": 50,
+        "distance_m": 550,
+        "cull_m": 0,
+        "expected_visible": true,
+        "projected_sphere_diameter": 0.019302029692761888,
+        "tree_build_method": "native foliage.RebuildFoliageTrees; synchronous forced tree rebuild, normal automatic LOD",
+        "camera_cm": [
+          0.0,
+          0.0,
+          5000.0
+        ],
+        "camera_rot_roll_pitch_yaw": [
+          0.0,
+          -4.717210481668231,
+          0.0
+        ]
+      },
+      "sha256": "f0f10fbb7c750442ad8b26fa60cc4d6872d2773a6c4d480b8c3f9961d54d6fcd",
+      "bytes": 53797,
+      "res": [
+        1920,
+        1080
+      ],
+      "hism_state": {
+        "Tree_A": {
+          "instance_count": 1,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        }
+      }
+    },
+    {
+      "job": {
+        "name": "boundary_Tree_B_tall_columnar_lod1_near",
+        "kind": "single",
+        "mesh": "Tree_B_tall_columnar",
+        "policy": "policy",
+        "agl_m": 50,
+        "distance_m": 124.60631,
+        "cull_m": 500,
+        "expected_lod": 0,
+        "analytic_transition_m": 138.451452851051,
+        "bracket_ratio": 0.9,
+        "projected_sphere_diameter": 0.0888888871525373,
+        "tree_build_method": "native foliage.RebuildFoliageTrees; synchronous forced tree rebuild, normal automatic LOD",
+        "camera_cm": [
+          0.0,
+          0.0,
+          5000.0
+        ],
+        "camera_rot_roll_pitch_yaw": [
+          0.0,
+          -20.494826746281863,
+          0.0
+        ]
+      },
+      "sha256": "18f0a15c24772a67535386066794ee1ef1c0bb5c4e88ea48dfd65de24561b5cb",
+      "bytes": 54235,
+      "res": [
+        1920,
+        1080
+      ],
+      "hism_state": {
+        "Tree_A": {
+          "instance_count": 1,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        }
+      }
+    },
+    {
+      "job": {
+        "name": "boundary_Tree_B_tall_columnar_lod1_far",
+        "kind": "single",
+        "mesh": "Tree_B_tall_columnar",
+        "policy": "policy",
+        "agl_m": 50,
+        "distance_m": 152.2966,
+        "cull_m": 500,
+        "expected_lod": 1,
+        "analytic_transition_m": 138.451452851051,
+        "bracket_ratio": 1.1,
+        "projected_sphere_diameter": 0.07272727183721817,
+        "tree_build_method": "native foliage.RebuildFoliageTrees; synchronous forced tree rebuild, normal automatic LOD",
+        "camera_cm": [
+          0.0,
+          0.0,
+          5000.0
+        ],
+        "camera_rot_roll_pitch_yaw": [
+          0.0,
+          -16.646385801590522,
+          0.0
+        ]
+      },
+      "sha256": "28adfc1e495a26340c8f58f645950c62193d41e5423a564a15fa44c278e11996",
+      "bytes": 54109,
+      "res": [
+        1920,
+        1080
+      ],
+      "hism_state": {
+        "Tree_A": {
+          "instance_count": 1,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        }
+      }
+    },
+    {
+      "job": {
+        "name": "boundary_Tree_B_tall_columnar_lod2_near",
+        "kind": "single",
+        "mesh": "Tree_B_tall_columnar",
+        "policy": "policy",
+        "agl_m": 50,
+        "distance_m": 332.28349,
+        "cull_m": 500,
+        "expected_lod": 1,
+        "analytic_transition_m": 369.20387426946934,
+        "bracket_ratio": 0.9,
+        "projected_sphere_diameter": 0.03333333301658798,
+        "tree_build_method": "native foliage.RebuildFoliageTrees; synchronous forced tree rebuild, normal automatic LOD",
+        "camera_cm": [
+          0.0,
+          0.0,
+          5000.0
+        ],
+        "camera_rot_roll_pitch_yaw": [
+          0.0,
+          -7.544492737124236,
+          0.0
+        ]
+      },
+      "sha256": "6004681ba80afb178c172c477b8e249a7239987993a31a55e50a58441d9bb9c0",
+      "bytes": 53330,
+      "res": [
+        1920,
+        1080
+      ],
+      "hism_state": {
+        "Tree_A": {
+          "instance_count": 1,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        }
+      }
+    },
+    {
+      "job": {
+        "name": "boundary_Tree_B_tall_columnar_lod2_far",
+        "kind": "single",
+        "mesh": "Tree_B_tall_columnar",
+        "policy": "policy",
+        "agl_m": 50,
+        "distance_m": 406.12426,
+        "cull_m": 500,
+        "expected_lod": 2,
+        "analytic_transition_m": 369.20387426946934,
+        "bracket_ratio": 1.1,
+        "projected_sphere_diameter": 0.02727272738664782,
+        "tree_build_method": "native foliage.RebuildFoliageTrees; synchronous forced tree rebuild, normal automatic LOD",
+        "camera_cm": [
+          0.0,
+          0.0,
+          5000.0
+        ],
+        "camera_rot_roll_pitch_yaw": [
+          0.0,
+          -6.166844271608585,
+          0.0
+        ]
+      },
+      "sha256": "73e4c0456f067f62180715bff5839ee12876053ebf37f8b2d6a8523ca03514cd",
+      "bytes": 53907,
+      "res": [
+        1920,
+        1080
+      ],
+      "hism_state": {
+        "Tree_A": {
+          "instance_count": 1,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        }
+      }
+    },
+    {
+      "job": {
+        "name": "single_Tree_B_tall_columnar_agl50_d80",
+        "kind": "single",
+        "mesh": "Tree_B_tall_columnar",
+        "policy": "policy",
+        "agl_m": 50,
+        "distance_m": 80,
+        "cull_m": 500,
+        "expected_lod": 0,
+        "projected_sphere_diameter": 0.138451452851051,
+        "tree_build_method": "native foliage.RebuildFoliageTrees; synchronous forced tree rebuild, normal automatic LOD",
+        "camera_cm": [
+          0.0,
+          0.0,
+          5000.0
+        ],
+        "camera_rot_roll_pitch_yaw": [
+          0.0,
+          -33.04816689856574,
+          0.0
+        ]
+      },
+      "sha256": "0fba1d31ccf9c65db9d307d14cb87a808b6cdc65c779dbb61beedcbb49060d5f",
+      "bytes": 55022,
+      "res": [
+        1920,
+        1080
+      ],
+      "hism_state": {
+        "Tree_A": {
+          "instance_count": 1,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        }
+      }
+    },
+    {
+      "job": {
+        "name": "single_Tree_B_tall_columnar_agl50_d240",
+        "kind": "single",
+        "mesh": "Tree_B_tall_columnar",
+        "policy": "policy",
+        "agl_m": 50,
+        "distance_m": 240,
+        "cull_m": 500,
+        "expected_lod": 1,
+        "projected_sphere_diameter": 0.046150484283683665,
+        "tree_build_method": "native foliage.RebuildFoliageTrees; synchronous forced tree rebuild, normal automatic LOD",
+        "camera_cm": [
+          0.0,
+          0.0,
+          5000.0
+        ],
+        "camera_rot_roll_pitch_yaw": [
+          0.0,
+          -10.473532488472227,
+          0.0
+        ]
+      },
+      "sha256": "bd2854ed224a35d97430563f0173e05a9e91976b06b84fd4a8eb9e051e509450",
+      "bytes": 53965,
+      "res": [
+        1920,
+        1080
+      ],
+      "hism_state": {
+        "Tree_A": {
+          "instance_count": 1,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        }
+      }
+    },
+    {
+      "job": {
+        "name": "single_Tree_B_tall_columnar_agl50_d480",
+        "kind": "single",
+        "mesh": "Tree_B_tall_columnar",
+        "policy": "policy",
+        "agl_m": 50,
+        "distance_m": 480,
+        "cull_m": 500,
+        "expected_lod": 2,
+        "projected_sphere_diameter": 0.023075242141841833,
+        "tree_build_method": "native foliage.RebuildFoliageTrees; synchronous forced tree rebuild, normal automatic LOD",
+        "camera_cm": [
+          0.0,
+          0.0,
+          5000.0
+        ],
+        "camera_rot_roll_pitch_yaw": [
+          0.0,
+          -5.214847481281725,
+          0.0
+        ]
+      },
+      "sha256": "fcda49c0ff224c7a2aa7e2321a5442cc5b7b261994261e4737db582a4d575d12",
+      "bytes": 53862,
+      "res": [
+        1920,
+        1080
+      ],
+      "hism_state": {
+        "Tree_A": {
+          "instance_count": 1,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        }
+      }
+    },
+    {
+      "job": {
+        "name": "single_Tree_B_tall_columnar_agl200_d240",
+        "kind": "single",
+        "mesh": "Tree_B_tall_columnar",
+        "policy": "policy",
+        "agl_m": 200,
+        "distance_m": 240,
+        "cull_m": 500,
+        "expected_lod": 1,
+        "projected_sphere_diameter": 0.046150484283683665,
+        "tree_build_method": "native foliage.RebuildFoliageTrees; synchronous forced tree rebuild, normal automatic LOD",
+        "camera_cm": [
+          0.0,
+          0.0,
+          20000.0
+        ],
+        "camera_rot_roll_pitch_yaw": [
+          0.0,
+          -53.78263691307642,
+          0.0
+        ]
+      },
+      "sha256": "98d16a2e182df99f40a9e8b057b42af086de41095e5bff776ab1f8e4c3481d70",
+      "bytes": 53353,
+      "res": [
+        1920,
+        1080
+      ],
+      "hism_state": {
+        "Tree_A": {
+          "instance_count": 1,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        }
+      }
+    },
+    {
+      "job": {
+        "name": "single_Tree_B_tall_columnar_agl200_d480",
+        "kind": "single",
+        "mesh": "Tree_B_tall_columnar",
+        "policy": "policy",
+        "agl_m": 200,
+        "distance_m": 480,
+        "cull_m": 500,
+        "expected_lod": 2,
+        "projected_sphere_diameter": 0.023075242141841833,
+        "tree_build_method": "native foliage.RebuildFoliageTrees; synchronous forced tree rebuild, normal automatic LOD",
+        "camera_cm": [
+          0.0,
+          0.0,
+          20000.0
+        ],
+        "camera_rot_roll_pitch_yaw": [
+          0.0,
+          -23.790316116155683,
+          0.0
+        ]
+      },
+      "sha256": "55d963a13aff6440d640533167c6131787ba63d622369954c80972907acaa103",
+      "bytes": 53884,
+      "res": [
+        1920,
+        1080
+      ],
+      "hism_state": {
+        "Tree_A": {
+          "instance_count": 1,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        }
+      }
+    },
+    {
+      "job": {
+        "name": "cull_Tree_B_tall_columnar_d450_cull500",
+        "kind": "cull",
+        "mesh": "Tree_B_tall_columnar",
+        "policy": "policy",
+        "agl_m": 50,
+        "distance_m": 450,
+        "cull_m": 500,
+        "expected_visible": true,
+        "projected_sphere_diameter": 0.024613591617964625,
+        "tree_build_method": "native foliage.RebuildFoliageTrees; synchronous forced tree rebuild, normal automatic LOD",
+        "camera_cm": [
+          0.0,
+          0.0,
+          5000.0
+        ],
+        "camera_rot_roll_pitch_yaw": [
+          0.0,
+          -5.563566169307516,
+          0.0
+        ]
+      },
+      "sha256": "0a164bc3004ef2fe53496cec7cf40220d1558df640d0cd374dad09cbf9a8b139",
+      "bytes": 53902,
+      "res": [
+        1920,
+        1080
+      ],
+      "hism_state": {
+        "Tree_A": {
+          "instance_count": 1,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        }
+      }
+    },
+    {
+      "job": {
+        "name": "cull_Tree_B_tall_columnar_d450_cull0",
+        "kind": "cull",
+        "mesh": "Tree_B_tall_columnar",
+        "policy": "policy",
+        "agl_m": 50,
+        "distance_m": 450,
+        "cull_m": 0,
+        "expected_visible": true,
+        "projected_sphere_diameter": 0.024613591617964625,
+        "tree_build_method": "native foliage.RebuildFoliageTrees; synchronous forced tree rebuild, normal automatic LOD",
+        "camera_cm": [
+          0.0,
+          0.0,
+          5000.0
+        ],
+        "camera_rot_roll_pitch_yaw": [
+          0.0,
+          -5.563566169307516,
+          0.0
+        ]
+      },
+      "sha256": "5c9fb7f5ba81f83e63c11372c55670053cf1c60c26f5857167fc4bf527ccf1c5",
+      "bytes": 53902,
+      "res": [
+        1920,
+        1080
+      ],
+      "hism_state": {
+        "Tree_A": {
+          "instance_count": 1,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        }
+      }
+    },
+    {
+      "job": {
+        "name": "cull_Tree_B_tall_columnar_d550_cull500",
+        "kind": "cull",
+        "mesh": "Tree_B_tall_columnar",
+        "policy": "policy",
+        "agl_m": 50,
+        "distance_m": 550,
+        "cull_m": 500,
+        "expected_visible": false,
+        "projected_sphere_diameter": 0.020138393141971054,
+        "tree_build_method": "native foliage.RebuildFoliageTrees; synchronous forced tree rebuild, normal automatic LOD",
+        "camera_cm": [
+          0.0,
+          0.0,
+          5000.0
+        ],
+        "camera_rot_roll_pitch_yaw": [
+          0.0,
+          -4.549638308195178,
+          0.0
+        ]
+      },
+      "sha256": "6e4e7c9fd3f570fe1767215bfcb2bbf73cac05abc34d3fcaad29f6307ebb9bfb",
+      "bytes": 53161,
+      "res": [
+        1920,
+        1080
+      ],
+      "hism_state": {
+        "Tree_A": {
+          "instance_count": 1,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        }
+      }
+    },
+    {
+      "job": {
+        "name": "cull_Tree_B_tall_columnar_d550_cull0",
+        "kind": "cull",
+        "mesh": "Tree_B_tall_columnar",
+        "policy": "policy",
+        "agl_m": 50,
+        "distance_m": 550,
+        "cull_m": 0,
+        "expected_visible": true,
+        "projected_sphere_diameter": 0.020138393141971054,
+        "tree_build_method": "native foliage.RebuildFoliageTrees; synchronous forced tree rebuild, normal automatic LOD",
+        "camera_cm": [
+          0.0,
+          0.0,
+          5000.0
+        ],
+        "camera_rot_roll_pitch_yaw": [
+          0.0,
+          -4.549638308195178,
+          0.0
+        ]
+      },
+      "sha256": "860771f88ba4868a01b7299276a7667e5054319807e6d172b29f235942f94fa8",
+      "bytes": 53861,
+      "res": [
+        1920,
+        1080
+      ],
+      "hism_state": {
+        "Tree_A": {
+          "instance_count": 1,
+          "num_built_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_instances' for attribute 'num_built_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "num_built_render_instances": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'num_built_render_instances' for attribute 'num_built_render_instances' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_count_to_render": {
+            "unavailable": "HierarchicalInstancedStaticMeshComponent: Failed to find property 'instance_count_to_render' for attribute 'instance_count_to_render' on 'HierarchicalInstancedStaticMeshComponent'"
+          },
+          "instance_lod_distance_scale": 1.0,
+          "forced_lod_model": 0
+        }
+      }
+    }
+  ],
+  "error": null,
+  "elapsed_s": 160.90700000000015
+}

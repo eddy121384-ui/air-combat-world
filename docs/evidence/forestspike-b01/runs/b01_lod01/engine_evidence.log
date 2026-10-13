@@ -1,0 +1,83 @@
+[2026.10.13-02.15.40:266][ 61]LogPython: FS_B01_LOD forest_A_legacy_v1_agl50_p15_cull500
+[2026.10.13-02.15.42:677][121]LogPython: FS_B01_LOD forest_A_legacy_v1_agl50_p15_cull0
+[2026.10.13-02.15.44:581][181]LogPython: FS_B01_LOD forest_A_legacy_v1_agl200_p10_cull500
+[2026.10.13-02.15.46:782][241]LogPython: FS_B01_LOD forest_A_legacy_v1_agl200_p10_cull0
+[2026.10.13-02.15.48:886][301]LogPython: FS_B01_LOD forest_B_legacy_v1_agl50_p15_cull500
+[2026.10.13-02.15.51:134][361]LogPython: FS_B01_LOD forest_B_legacy_v1_agl50_p15_cull0
+[2026.10.13-02.15.53:056][421]LogPython: FS_B01_LOD forest_B_legacy_v1_agl200_p10_cull500
+[2026.10.13-02.15.55:161][481]LogPython: FS_B01_LOD forest_B_legacy_v1_agl200_p10_cull0
+[2026.10.13-02.15.57:221][541]LogPython: FS_B01_LOD forest_A_policy_v1_agl50_p15_cull500
+[2026.10.13-02.15.59:620][601]LogPython: FS_B01_LOD forest_A_policy_v1_agl50_p15_cull0
+[2026.10.13-02.16.01:497][661]LogPython: FS_B01_LOD forest_A_policy_v1_agl200_p10_cull500
+[2026.10.13-02.16.03:652][721]LogPython: FS_B01_LOD forest_A_policy_v1_agl200_p10_cull0
+[2026.10.13-02.16.05:804][781]LogPython: FS_B01_LOD forest_B_policy_v1_agl50_p15_cull500
+[2026.10.13-02.16.08:111][841]LogPython: FS_B01_LOD forest_B_policy_v1_agl50_p15_cull0
+[2026.10.13-02.16.10:046][901]LogPython: FS_B01_LOD forest_B_policy_v1_agl200_p10_cull500
+[2026.10.13-02.16.12:142][961]LogPython: FS_B01_LOD forest_B_policy_v1_agl200_p10_cull0
+[2026.10.13-02.16.12:802][ 21]LogPython: FS_B01_LOD boundary_Tree_A_lod1_near
+[2026.10.13-02.16.13:437][ 81]LogPython: FS_B01_LOD boundary_Tree_A_lod1_far
+[2026.10.13-02.16.14:115][141]LogPython: FS_B01_LOD boundary_Tree_A_lod2_near
+[2026.10.13-02.16.14:783][201]LogPython: FS_B01_LOD boundary_Tree_A_lod2_far
+[2026.10.13-02.16.15:426][261]LogPython: FS_B01_LOD single_Tree_A_agl50_d80
+[2026.10.13-02.16.16:088][321]LogPython: FS_B01_LOD single_Tree_A_agl50_d240
+[2026.10.13-02.16.16:763][381]LogPython: FS_B01_LOD single_Tree_A_agl50_d480
+[2026.10.13-02.16.17:421][441]LogPython: FS_B01_LOD single_Tree_A_agl200_d240
+[2026.10.13-02.16.18:068][501]LogPython: FS_B01_LOD single_Tree_A_agl200_d480
+[2026.10.13-02.16.18:728][561]LogPython: FS_B01_LOD cull_Tree_A_d450_cull500
+[2026.10.13-02.16.19:386][621]LogPython: FS_B01_LOD cull_Tree_A_d450_cull0
+[2026.10.13-02.16.20:078][681]LogPython: FS_B01_LOD cull_Tree_A_d550_cull500
+[2026.10.13-02.16.20:730][741]LogPython: FS_B01_LOD cull_Tree_A_d550_cull0
+[2026.10.13-02.16.21:388][801]LogPython: FS_B01_LOD boundary_Tree_B_dense_rounded_lod1_near
+[2026.10.13-02.16.22:040][861]LogPython: FS_B01_LOD boundary_Tree_B_dense_rounded_lod1_far
+[2026.10.13-02.16.22:682][921]LogPython: FS_B01_LOD boundary_Tree_B_dense_rounded_lod2_near
+[2026.10.13-02.16.23:334][981]LogPython: FS_B01_LOD boundary_Tree_B_dense_rounded_lod2_far
+[2026.10.13-02.16.23:982][ 42]LogPython: FS_B01_LOD single_Tree_B_dense_rounded_agl50_d80
+[2026.10.13-02.16.24:633][101]LogPython: FS_B01_LOD single_Tree_B_dense_rounded_agl50_d240
+[2026.10.13-02.16.25:300][161]LogPython: FS_B01_LOD single_Tree_B_dense_rounded_agl50_d480
+[2026.10.13-02.16.25:970][221]LogPython: FS_B01_LOD single_Tree_B_dense_rounded_agl200_d240
+[2026.10.13-02.16.26:604][281]LogPython: FS_B01_LOD single_Tree_B_dense_rounded_agl200_d480
+[2026.10.13-02.16.27:267][341]LogPython: FS_B01_LOD cull_Tree_B_dense_rounded_d450_cull500
+[2026.10.13-02.16.27:922][401]LogPython: FS_B01_LOD cull_Tree_B_dense_rounded_d450_cull0
+[2026.10.13-02.16.28:551][461]LogPython: FS_B01_LOD cull_Tree_B_dense_rounded_d550_cull500
+[2026.10.13-02.16.29:229][521]LogPython: FS_B01_LOD cull_Tree_B_dense_rounded_d550_cull0
+[2026.10.13-02.16.29:899][581]LogPython: FS_B01_LOD boundary_Tree_B_horizontal_tiered_lod1_near
+[2026.10.13-02.16.30:546][641]LogPython: FS_B01_LOD boundary_Tree_B_horizontal_tiered_lod1_far
+[2026.10.13-02.16.31:220][701]LogPython: FS_B01_LOD boundary_Tree_B_horizontal_tiered_lod2_near
+[2026.10.13-02.16.31:869][761]LogPython: FS_B01_LOD boundary_Tree_B_horizontal_tiered_lod2_far
+[2026.10.13-02.16.32:503][821]LogPython: FS_B01_LOD single_Tree_B_horizontal_tiered_agl50_d80
+[2026.10.13-02.16.33:166][881]LogPython: FS_B01_LOD single_Tree_B_horizontal_tiered_agl50_d240
+[2026.10.13-02.16.33:823][941]LogPython: FS_B01_LOD single_Tree_B_horizontal_tiered_agl50_d480
+[2026.10.13-02.16.34:489][  1]LogPython: FS_B01_LOD single_Tree_B_horizontal_tiered_agl200_d240
+[2026.10.13-02.16.35:163][ 61]LogPython: FS_B01_LOD single_Tree_B_horizontal_tiered_agl200_d480
+[2026.10.13-02.16.35:813][121]LogPython: FS_B01_LOD cull_Tree_B_horizontal_tiered_d450_cull500
+[2026.10.13-02.16.36:459][181]LogPython: FS_B01_LOD cull_Tree_B_horizontal_tiered_d450_cull0
+[2026.10.13-02.16.37:106][241]LogPython: FS_B01_LOD cull_Tree_B_horizontal_tiered_d550_cull500
+[2026.10.13-02.16.37:753][301]LogPython: FS_B01_LOD cull_Tree_B_horizontal_tiered_d550_cull0
+[2026.10.13-02.16.38:418][361]LogPython: FS_B01_LOD boundary_Tree_B_open_vase_lod1_near
+[2026.10.13-02.16.39:107][422]LogPython: FS_B01_LOD boundary_Tree_B_open_vase_lod1_far
+[2026.10.13-02.16.39:757][481]LogPython: FS_B01_LOD boundary_Tree_B_open_vase_lod2_near
+[2026.10.13-02.16.40:458][541]LogPython: FS_B01_LOD boundary_Tree_B_open_vase_lod2_far
+[2026.10.13-02.16.41:149][601]LogPython: FS_B01_LOD single_Tree_B_open_vase_agl50_d80
+[2026.10.13-02.16.41:795][661]LogPython: FS_B01_LOD single_Tree_B_open_vase_agl50_d240
+[2026.10.13-02.16.42:452][721]LogPython: FS_B01_LOD single_Tree_B_open_vase_agl50_d480
+[2026.10.13-02.16.43:125][781]LogPython: FS_B01_LOD single_Tree_B_open_vase_agl200_d240
+[2026.10.13-02.16.43:785][841]LogPython: FS_B01_LOD single_Tree_B_open_vase_agl200_d480
+[2026.10.13-02.16.44:486][901]LogPython: FS_B01_LOD cull_Tree_B_open_vase_d450_cull500
+[2026.10.13-02.16.45:195][961]LogPython: FS_B01_LOD cull_Tree_B_open_vase_d450_cull0
+[2026.10.13-02.16.45:862][ 21]LogPython: FS_B01_LOD cull_Tree_B_open_vase_d550_cull500
+[2026.10.13-02.16.46:521][ 81]LogPython: FS_B01_LOD cull_Tree_B_open_vase_d550_cull0
+[2026.10.13-02.16.47:210][141]LogPython: FS_B01_LOD boundary_Tree_B_tall_columnar_lod1_near
+[2026.10.13-02.16.47:905][201]LogPython: FS_B01_LOD boundary_Tree_B_tall_columnar_lod1_far
+[2026.10.13-02.16.48:554][261]LogPython: FS_B01_LOD boundary_Tree_B_tall_columnar_lod2_near
+[2026.10.13-02.16.49:257][322]LogPython: FS_B01_LOD boundary_Tree_B_tall_columnar_lod2_far
+[2026.10.13-02.16.49:916][381]LogPython: FS_B01_LOD single_Tree_B_tall_columnar_agl50_d80
+[2026.10.13-02.16.50:570][441]LogPython: FS_B01_LOD single_Tree_B_tall_columnar_agl50_d240
+[2026.10.13-02.16.51:247][501]LogPython: FS_B01_LOD single_Tree_B_tall_columnar_agl50_d480
+[2026.10.13-02.16.51:896][561]LogPython: FS_B01_LOD single_Tree_B_tall_columnar_agl200_d240
+[2026.10.13-02.16.52:533][621]LogPython: FS_B01_LOD single_Tree_B_tall_columnar_agl200_d480
+[2026.10.13-02.16.53:223][681]LogPython: FS_B01_LOD cull_Tree_B_tall_columnar_d450_cull500
+[2026.10.13-02.16.53:885][741]LogPython: FS_B01_LOD cull_Tree_B_tall_columnar_d450_cull0
+[2026.10.13-02.16.54:535][801]LogPython: FS_B01_LOD cull_Tree_B_tall_columnar_d550_cull500
+[2026.10.13-02.16.55:201][861]LogPython: FS_B01_LOD cull_Tree_B_tall_columnar_d550_cull0
+[2026.10.13-02.16.58:105][863]LogExit: Exiting.
+[2026.10.13-02.16.58:134][863]Log file closed, 10/13/26 10:16:58

@@ -1,0 +1,227 @@
+{
+  "status": "PASS_FS_B01_SOURCE_BOUNDS_RECONSTRUCTION",
+  "meshes": {
+    "Tree_A": {
+      "render_sphere_radius_cm": 454.087159946328,
+      "method": "UE cached sphere for unchanged 28/28/28 automatic copies; independently bracketed by native render controls"
+    },
+    "Tree_B_dense_rounded": {
+      "render_sphere_radius_cm": 515.5603202010778,
+      "cached_lod0_radius_cm": 481.25343698099806,
+      "lod0_cached_check_error_cm": 4.443212617388781e-06,
+      "all_lod_source_bounds": [
+        {
+          "file": "assets/forestspike/b0/models/dense_rounded_lod0.glb",
+          "sha256": "5ec3df7d0565d4b970281af7edaf0cc69cf4570ad1c67be311cfb4ac0c050d61",
+          "source_origin_cm": [
+            -8.781051635742188,
+            449.50950113125145,
+            -16.87180995941162
+          ],
+          "source_extent_cm": [
+            414.08162117004395,
+            450.49049886874855,
+            321.08232975006104
+          ],
+          "radius_cm": 481.25343253778544
+        },
+        {
+          "file": "assets/forestspike/b0/models/dense_rounded_lod1.glb",
+          "sha256": "830bceb0be3158883ba69bd8f409949c8087c17b65dc0ca0187f5cc86d0bf466",
+          "source_origin_cm": [
+            -8.781051635742188,
+            449.50950113125145,
+            -16.87180995941162
+          ],
+          "source_extent_cm": [
+            414.08162117004395,
+            450.49049886874855,
+            321.08232975006104
+          ],
+          "radius_cm": 515.5603202010778
+        },
+        {
+          "file": "assets/forestspike/b0/models/dense_rounded_lod2.glb",
+          "sha256": "67872d03b123ec61ccba941eec6fc17cc5f0e9e9ddfff55f0360165136c94665",
+          "source_origin_cm": [
+            -8.781051635742188,
+            449.50950113125145,
+            -16.87180995941162
+          ],
+          "source_extent_cm": [
+            414.08162117004395,
+            450.49049886874855,
+            321.08232975006104
+          ],
+          "radius_cm": 465.23458635142913
+        }
+      ],
+      "method": "Source-derived all-LOD FBoxSphereBounds union; axis permutation/reflection preserves radius. Not a direct RenderData Python readback."
+    },
+    "Tree_B_horizontal_tiered": {
+      "render_sphere_radius_cm": 508.2712900811824,
+      "cached_lod0_radius_cm": 508.271274505718,
+      "lod0_cached_check_error_cm": 1.5575464431094588e-05,
+      "all_lod_source_bounds": [
+        {
+          "file": "assets/forestspike/b0/models/horizontal_tiered_lod0.glb",
+          "sha256": "220761f9b1d3c2f74c0f5d10c3c318bade8b8f7ccbe03704f14a753873ca2b7d",
+          "source_origin_cm": [
+            35.858941078186035,
+            461.22312776278704,
+            -5.866217613220215
+          ],
+          "source_extent_cm": [
+            390.62960147857666,
+            461.77682646084577,
+            322.5965976715088
+          ],
+          "radius_cm": 508.2712900811824
+        },
+        {
+          "file": "assets/forestspike/b0/models/horizontal_tiered_lod1.glb",
+          "sha256": "4b873fa98775932b1da2805371c912784725ea682c16d7cab7962ab3cc6f7a20",
+          "source_origin_cm": [
+            35.858941078186035,
+            461.22312776278704,
+            -5.866217613220215
+          ],
+          "source_extent_cm": [
+            390.62960147857666,
+            461.77682646084577,
+            322.5965976715088
+          ],
+          "radius_cm": 464.2249735609478
+        },
+        {
+          "file": "assets/forestspike/b0/models/horizontal_tiered_lod2.glb",
+          "sha256": "429bfee641f5b4e23ff3a2eeaeb316fa6adb1ed8ed3509cd5a2fb0b2ca371f6b",
+          "source_origin_cm": [
+            35.858941078186035,
+            461.22312776278704,
+            -5.866217613220215
+          ],
+          "source_extent_cm": [
+            390.62960147857666,
+            461.77682646084577,
+            322.5965976715088
+          ],
+          "radius_cm": 506.7569968344169
+        }
+      ],
+      "method": "Source-derived all-LOD FBoxSphereBounds union; axis permutation/reflection preserves radius. Not a direct RenderData Python readback."
+    },
+    "Tree_B_open_vase": {
+      "render_sphere_radius_cm": 662.3632934649552,
+      "cached_lod0_radius_cm": 612.9217621462225,
+      "lod0_cached_check_error_cm": 1.087724785975297e-05,
+      "all_lod_source_bounds": [
+        {
+          "file": "assets/forestspike/b0/models/open_vase_lod0.glb",
+          "sha256": "95203bcfab893252f5e764870cfb15990ea5feed7e60f1458f1cdc5ce3f3c147",
+          "source_origin_cm": [
+            24.33953285217285,
+            476.91691536456347,
+            -137.35228776931763
+          ],
+          "source_extent_cm": [
+            484.06543731689453,
+            478.08310370892286,
+            283.43619108200073
+          ],
+          "radius_cm": 612.9217512689746
+        },
+        {
+          "file": "assets/forestspike/b0/models/open_vase_lod1.glb",
+          "sha256": "4c0edfd8decfe35995008577c98edc668b80d02a1f9e800853cb5cda060203e7",
+          "source_origin_cm": [
+            24.33953285217285,
+            476.91691536456347,
+            -137.35228776931763
+          ],
+          "source_extent_cm": [
+            484.06543731689453,
+            478.08310370892286,
+            283.43619108200073
+          ],
+          "radius_cm": 603.8969048958717
+        },
+        {
+          "file": "assets/forestspike/b0/models/open_vase_lod2.glb",
+          "sha256": "68a20600cd5c5b036338b881157497a954c5feefc154defd28140a11d6e6e1f1",
+          "source_origin_cm": [
+            24.33953285217285,
+            476.91691536456347,
+            -137.35228776931763
+          ],
+          "source_extent_cm": [
+            484.06543731689453,
+            478.08310370892286,
+            283.43619108200073
+          ],
+          "radius_cm": 662.3632934649552
+        }
+      ],
+      "method": "Source-derived all-LOD FBoxSphereBounds union; axis permutation/reflection preserves radius. Not a direct RenderData Python readback."
+    },
+    "Tree_B_tall_columnar": {
+      "render_sphere_radius_cm": 639.4798683820072,
+      "cached_lod0_radius_cm": 639.4798685859927,
+      "lod0_cached_check_error_cm": 2.039854507529526e-07,
+      "all_lod_source_bounds": [
+        {
+          "file": "assets/forestspike/b0/models/tall_columnar_lod0.glb",
+          "sha256": "41c3df98a19243ebe7fa510e7cf87be6a40c07ae823ac84c2dc9dd9d5a74cba5",
+          "source_origin_cm": [
+            -7.021093368530273,
+            637.2488921973854,
+            -7.8239500522613525
+          ],
+          "source_extent_cm": [
+            148.76731634140015,
+            637.7511078026146,
+            129.48489785194397
+          ],
+          "radius_cm": 639.4798683820072
+        },
+        {
+          "file": "assets/forestspike/b0/models/tall_columnar_lod1.glb",
+          "sha256": "3f11b530be7a7dca747e0cd8eb4994dc4a7d0522d374c6e4f9720f25710df750",
+          "source_origin_cm": [
+            -7.021093368530273,
+            637.2488921973854,
+            -7.8239500522613525
+          ],
+          "source_extent_cm": [
+            148.76731634140015,
+            637.7511078026146,
+            129.48489785194397
+          ],
+          "radius_cm": 639.2651508309422
+        },
+        {
+          "file": "assets/forestspike/b0/models/tall_columnar_lod2.glb",
+          "sha256": "219c0f9b1e2a744fbc19a1242d1c6e6cb096481b4b10c3c75abd9b5805b6b970",
+          "source_origin_cm": [
+            -7.021093368530273,
+            637.2488921973854,
+            -7.8239500522613525
+          ],
+          "source_extent_cm": [
+            148.76731634140015,
+            637.7511078026146,
+            129.48489785194397
+          ],
+          "radius_cm": 638.9717979776761
+        }
+      ],
+      "method": "Source-derived all-LOD FBoxSphereBounds union; axis permutation/reflection preserves radius. Not a direct RenderData Python readback."
+    }
+  },
+  "scope": "Diagnostic boundary placement only; common registered screen thresholds are unchanged. Native automatic draw/color controls independently validate predictions.",
+  "engine_method": {
+    "StaticMeshBuilder.cpp": "MeshBoundsBuilder adds every LOD SourceMeshBounds at 1169; assigns RenderData.Bounds at 1211",
+    "BoxSphereBounds.h": "Builder append/operator+ at 454-466",
+    "StaticMesh.cpp": "GetBounds returns ExtendedBounds; editor UpdateBounds prefers CachedMeshDescriptionBounds (LOD0) at 7285-7317"
+  }
+}
