@@ -301,7 +301,7 @@ def build(target_count: int, output_glb: Path, output_report: Path) -> dict:
     report = {
         "gate": "Xinyi v2 serialization-space representative gate (quantized footprint AND float64 AND actual GLB float32)",
         "baseline_76_of_80_commit":"3b963a4076b81ff413fcb7152688b2eb6e37f4bb",
-        "pipeline":"GEOS repaired ENU -> 500m tile local -> float32 footprint -> GEOS validity -> earcut/trimesh -> GLB reload",
+        "pipeline":"GEOS repaired ENU -> 500m tile local -> float32 footprint -> GEOS validity -> GEOS constrained Delaunay/trimesh -> GLB reload",
         "baseline_selection": {k:v for k,v in lock.items() if k != 'selected'},
         "selected_unique_buildings":len({c['building_id'] for c in selected}),
         "same_80_parts_as_baseline":True,
