@@ -32,3 +32,6 @@ unreal/Binaries/
 unreal/Plugins/**/Binaries/
 unreal/Plugins/**/Intermediate/
 /data/generated/taipei/era/
+
+# tree look-dev working outputs (renders/blends regenerate from tools/treegen)
+/out/

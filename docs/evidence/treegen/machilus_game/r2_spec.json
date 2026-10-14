@@ -1,0 +1,81 @@
+{
+ "set": "r2",
+ "res": [
+  1920,
+  1080
+ ],
+ "warmup": 40,
+ "settle": 10,
+ "jobs": [
+  {
+   "name": "r2_front_auto",
+   "view": "front",
+   "lod": -1
+  },
+  {
+   "name": "r2_oblique_auto",
+   "view": "oblique",
+   "lod": -1
+  },
+  {
+   "name": "r2_top_auto",
+   "view": "top",
+   "lod": -1
+  },
+  {
+   "name": "r2_close_auto",
+   "view": "close",
+   "lod": -1
+  },
+  {
+   "name": "r2_agl50_auto",
+   "view": "agl50",
+   "lod": -1
+  },
+  {
+   "name": "r2_agl200_auto",
+   "view": "agl200",
+   "lod": -1
+  },
+  {
+   "name": "r2_agl50_lod0",
+   "view": "agl50",
+   "lod": 0
+  },
+  {
+   "name": "r2_agl50_lod1",
+   "view": "agl50",
+   "lod": 1
+  },
+  {
+   "name": "r2_agl50_lod2",
+   "view": "agl50",
+   "lod": 2
+  },
+  {
+   "name": "r2_agl200_lod0",
+   "view": "agl200",
+   "lod": 0
+  },
+  {
+   "name": "r2_agl200_lod1",
+   "view": "agl200",
+   "lod": 1
+  },
+  {
+   "name": "r2_agl200_lod2",
+   "view": "agl200",
+   "lod": 2
+  },
+  {
+   "name": "r2_front_lod1",
+   "view": "front",
+   "lod": 1
+  },
+  {
+   "name": "r2_front_lod2",
+   "view": "front",
+   "lod": 2
+  }
+ ]
+}

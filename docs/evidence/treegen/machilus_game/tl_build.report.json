@@ -1,0 +1,150 @@
+{
+  "status": "PASS_TL_BUILD",
+  "textures": {
+    "T_Machilus_LeafAtlas_BC": {
+      "path": "/Game/TreeLookdev/Textures/T_Machilus_LeafAtlas_BC",
+      "size": [
+        2048,
+        2048
+      ],
+      "compression": "<TextureCompressionSettings.TC_DEFAULT: 0>",
+      "srgb": true,
+      "memory_bytes": 16384
+    },
+    "T_Machilus_LeafAtlas_N": {
+      "path": "/Game/TreeLookdev/Textures/T_Machilus_LeafAtlas_N",
+      "size": [
+        2048,
+        2048
+      ],
+      "compression": "<TextureCompressionSettings.TC_NORMALMAP: 1>",
+      "srgb": false,
+      "memory_bytes": 16384
+    },
+    "T_Machilus_Bark_BC": {
+      "path": "/Game/TreeLookdev/Textures/T_Machilus_Bark_BC",
+      "size": [
+        512,
+        512
+      ],
+      "compression": "<TextureCompressionSettings.TC_DEFAULT: 0>",
+      "srgb": true,
+      "memory_bytes": 8192
+    },
+    "T_Machilus_Bark_N": {
+      "path": "/Game/TreeLookdev/Textures/T_Machilus_Bark_N",
+      "size": [
+        512,
+        512
+      ],
+      "compression": "<TextureCompressionSettings.TC_NORMALMAP: 1>",
+      "srgb": false,
+      "memory_bytes": 16384
+    }
+  },
+  "materials": [
+    "/Game/TreeLookdev/Materials/M_TL_LeafCards",
+    "/Game/TreeLookdev/Materials/M_TL_Bark",
+    "/Game/TreeLookdev/Materials/M_TL_Ground",
+    "/Game/TreeLookdev/Materials/M_TL_Grey"
+  ],
+  "mesh": {
+    "imported_lod0": {
+      "lods": 1,
+      "screens": [
+        2.0
+      ],
+      "triangles": [
+        129278
+      ],
+      "vertices": [
+        165639
+      ],
+      "sections": [
+        2
+      ],
+      "slots": [
+        "M_TL_Bark",
+        "M_TL_LeafCards"
+      ],
+      "section_slots": [
+        [
+          0,
+          1
+        ]
+      ],
+      "bounds_origin_cm": [
+        4.511962890625,
+        -37.482025146484375,
+        710.206964969635
+      ],
+      "bounds_extent_cm": [
+        791.6282958984375,
+        720.4622497558594,
+        716.0011649131775
+      ],
+      "sphere_radius_cm": 850.9442129358462
+    },
+    "import_lod1": 1,
+    "import_lod2": 2,
+    "asset": "/Game/TreeLookdev/Meshes/Machilus/machilus_lod0/StaticMeshes/machilus_lod0",
+    "final": {
+      "lods": 3,
+      "screens": [
+        1.0,
+        0.5,
+        0.15000000596046448
+      ],
+      "triangles": [
+        129278,
+        36710,
+        4256
+      ],
+      "vertices": [
+        165639,
+        50943,
+        6495
+      ],
+      "sections": [
+        2,
+        2,
+        2
+      ],
+      "slots": [
+        "Bark",
+        "LeafCards"
+      ],
+      "section_slots": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "bounds_origin_cm": [
+        4.511962890625,
+        -37.482025146484375,
+        710.206964969635
+      ],
+      "bounds_extent_cm": [
+        791.6282958984375,
+        720.4622497558594,
+        716.0011649131775
+      ],
+      "sphere_radius_cm": 850.9442129358462
+    }
+  },
+  "error": null,
+  "lighting": {
+    "sun_lux": 11.0,
+    "sky": 4.0,
+    "exposure_ev": 0.8
+  }
+}
