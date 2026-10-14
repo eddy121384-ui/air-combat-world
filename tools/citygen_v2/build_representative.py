@@ -28,6 +28,7 @@ sys.path.insert(0, str(HERE))
 
 from geometry import concavity_ratio, extrude_geos_polygon, repair_worldmodel_polygon  # noqa: E402
 from worldmodel import build_worldmodel  # noqa: E402
+from source_lock import verify_frozen_source  # noqa: E402
 from strict_qa import strict_mesh_gate  # noqa: E402
 from serialization_space import prepare_footprint, tile_origin, tile_transform  # noqa: E402
 
@@ -142,6 +143,7 @@ def build(target_count: int, output_glb: Path, output_report: Path) -> dict:
             "projected v2 source missing; run: node tools/citygen_v2/fetch_projected_sample.mjs"
         )
     source_sha256 = hashlib.sha256(source.read_bytes()).hexdigest()
+    verify_frozen_source(source_sha256)
     wm = build_worldmodel(source, city, source_crs="EPSG:3826")
 
     outcome_counts = Counter()
