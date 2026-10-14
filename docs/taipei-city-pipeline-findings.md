@@ -2,6 +2,8 @@
 
 Last updated: 2026-09-20
 
+> **Historical snapshot (2026-09-20):** Counts, failure gates, proposed alternatives, and issue/PR status below describe the **original custom compiler before the Xinyi v2 geometry pipeline**. They are retained as forensic lessons, **not current production status**. For the newer GEOS/CDT full-Xinyi results see [PR #6](https://github.com/eddy121384-ui/air-combat-world/pull/6) and `docs/xinyi-v2-full-xinyi-cloud-result.md` on its branch. This document does not override later accepted evidence.
+
 This document records durable, evidence-backed findings from the Taipei/Xinyi city-pipeline work so future agents and workstations do not repeat the same experiments.
 
 ## Scope and product framing
