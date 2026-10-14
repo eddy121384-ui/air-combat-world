@@ -1,6 +1,9 @@
 # 北台灣世界生成流程 × MSFS 架構對照研究（Issue #28）
 
 日期：2026-10-14 · 分支：`research/issue-28-msfs-world-pipeline`（自 `origin/main` @ `08afe38` 建立）
+
+> **盤點時間快照：** 本報告的「`main` 只合併 PR #1」是 **2026-10-14 建立研究分支時** 的 Git 狀態，不是持續更新的即時清單。後續 PR（例如歷史文件 #4）可能已合併；請以 GitHub 的即時 base/head 與合併紀錄為準。本報告不代表授權未確認的資產已可出貨。
+
 性質：**純研究、唯讀盤點**。未修改任何生成器、Unreal runtime、信義區資產或其他 PR 分支；未下載 GIS 資料。
 修訂：rev 1（回應 PR #29 Sophira Review #5512312587）— 更正 WorldCover 授權敘述並補品質限制；台灣官方資料授權改為資料集層級核對；移除無證據的「比 MSFS 嚴格」比較；分開證據等級；地表語意 v0 驗收改為單一 Cell 一份 raster + 小型 manifest。研究範圍不變。
 
