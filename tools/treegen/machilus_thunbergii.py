@@ -1,4 +1,4 @@
-﻿"""蝝? / 鞊祈璆?Machilus thunbergii ??golden-reference tree (Blender 5.2, Cycles).
+"""紅楠 / 豬腳楠 Machilus thunbergii - golden-reference tree (Blender 5.2, Cycles).
 
 blender -b --factory-startup --python tools/treegen/machilus_thunbergii.py -- <out_dir> [--views front,oblique,top,close]
         [--res 1920x1080] [--samples 96] [--no-render]
@@ -349,13 +349,5 @@ def main():
         print("RENDER_S", round(time.time() - t1, 1))
 
 
-main()
-
-
-
-
-
-
-
-
-
+if __name__ == "__main__":
+    main()

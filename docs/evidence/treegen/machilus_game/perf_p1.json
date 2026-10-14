@@ -1,0 +1,2955 @@
+{
+ "cold_frames": 150,
+ "runs": {
+  "p1r1__L_TLP_agl200_empty": {
+   "tag": "p1r1",
+   "level": "L_TLP_agl200_empty",
+   "frames": 600,
+   "metrics": {
+    "FrameTime": {
+     "median": 34.648,
+     "p95": 36.671
+    },
+    "RenderThreadTime": {
+     "median": 34.648,
+     "p95": 36.679
+    },
+    "GameThreadTime": {
+     "median": 3.167,
+     "p95": 3.581
+    },
+    "GPUTime": {
+     "median": 32.781,
+     "p95": 34.707
+    },
+    "RHIThreadTime": {
+     "median": 2.529,
+     "p95": 3.23
+    },
+    "GPU/RayTracingGeometry": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/DistanceFields": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/AllocateRendertargets": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/VisibilityCommands": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/GPUSceneUpdate": {
+     "median": 0.004,
+     "p95": 0.005
+    },
+    "GPU/FXSystemPreRender": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/BuildRenderingCommandsDeferred": {
+     "median": 0.09,
+     "p95": 0.112
+    },
+    "GPU/Prepass": {
+     "median": 0.149,
+     "p95": 0.177
+    },
+    "GPU/HZB": {
+     "median": 0.246,
+     "p95": 0.272
+    },
+    "GPU/BeginOcclusionTests": {
+     "median": 0.008,
+     "p95": 0.01
+    },
+    "GPU/LightGrid": {
+     "median": 0.092,
+     "p95": 0.098
+    },
+    "GPU/LightFunctionAtlasGeneration": {
+     "median": 0.001,
+     "p95": 0.001
+    },
+    "GPU/SkyAtmosphereLUTs": {
+     "median": 0.548,
+     "p95": 0.559
+    },
+    "GPU/CaptureConvolveSkyEnvMap": {
+     "median": 0.111,
+     "p95": 0.37
+    },
+    "GPU/Basepass": {
+     "median": 1.567,
+     "p95": 1.602
+    },
+    "GPU/ShadowDepths": {
+     "median": 0.767,
+     "p95": 0.89
+    },
+    "GPU/CompositionPreLighting": {
+     "median": 0.0,
+     "p95": 0.001
+    },
+    "GPU/SSAOSetup": {
+     "median": 0.964,
+     "p95": 1.123
+    },
+    "GPU/SSAO": {
+     "median": 7.401,
+     "p95": 8.01
+    },
+    "GPU/RenderDeferredLighting": {
+     "median": 1.295,
+     "p95": 1.428
+    },
+    "GPU/TranslucentLighting": {
+     "median": 0.104,
+     "p95": 0.106
+    },
+    "GPU/Lights": {
+     "median": 5.188,
+     "p95": 5.341
+    },
+    "GPU/ShadowProjection": {
+     "median": 1.627,
+     "p95": 1.751
+    },
+    "GPU/ScreenSpaceReflections": {
+     "median": 0.45,
+     "p95": 0.534
+    },
+    "GPU/ReflectionEnvironment": {
+     "median": 4.639,
+     "p95": 4.872
+    },
+    "GPU/SkyAtmosphere": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/PostRenderOpsFX": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/FXSystemPostRenderOpaque": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/Translucency": {
+     "median": 0.499,
+     "p95": 0.637
+    },
+    "GPU/Postprocessing": {
+     "median": 0.938,
+     "p95": 1.116
+    },
+    "GPU/TAA": {
+     "median": 5.409,
+     "p95": 5.612
+    },
+    "GPU/VirtualTextureUpdate": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/SlateUI": {
+     "median": 0.012,
+     "p95": 0.014
+    },
+    "GPU/Unaccounted": {
+     "median": 0.558,
+     "p95": 0.61
+    }
+   }
+  },
+  "p1r1__L_TLP_agl200_tree": {
+   "tag": "p1r1",
+   "level": "L_TLP_agl200_tree",
+   "frames": 600,
+   "metrics": {
+    "FrameTime": {
+     "median": 34.807,
+     "p95": 36.993
+    },
+    "RenderThreadTime": {
+     "median": 34.777,
+     "p95": 36.893
+    },
+    "GameThreadTime": {
+     "median": 3.248,
+     "p95": 3.713
+    },
+    "GPUTime": {
+     "median": 32.942,
+     "p95": 34.871
+    },
+    "RHIThreadTime": {
+     "median": 2.545,
+     "p95": 3.207
+    },
+    "GPU/RayTracingGeometry": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/DistanceFields": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/AllocateRendertargets": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/VisibilityCommands": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/GPUSceneUpdate": {
+     "median": 0.004,
+     "p95": 0.005
+    },
+    "GPU/FXSystemPreRender": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/BuildRenderingCommandsDeferred": {
+     "median": 0.091,
+     "p95": 0.114
+    },
+    "GPU/Prepass": {
+     "median": 0.18,
+     "p95": 0.211
+    },
+    "GPU/HZB": {
+     "median": 0.247,
+     "p95": 0.272
+    },
+    "GPU/BeginOcclusionTests": {
+     "median": 0.009,
+     "p95": 0.01
+    },
+    "GPU/LightGrid": {
+     "median": 0.093,
+     "p95": 0.099
+    },
+    "GPU/LightFunctionAtlasGeneration": {
+     "median": 0.001,
+     "p95": 0.001
+    },
+    "GPU/SkyAtmosphereLUTs": {
+     "median": 0.548,
+     "p95": 0.558
+    },
+    "GPU/CaptureConvolveSkyEnvMap": {
+     "median": 0.106,
+     "p95": 0.374
+    },
+    "GPU/Basepass": {
+     "median": 1.635,
+     "p95": 1.688
+    },
+    "GPU/ShadowDepths": {
+     "median": 0.824,
+     "p95": 0.947
+    },
+    "GPU/CompositionPreLighting": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/SSAOSetup": {
+     "median": 0.973,
+     "p95": 1.146
+    },
+    "GPU/SSAO": {
+     "median": 7.414,
+     "p95": 8.367
+    },
+    "GPU/RenderDeferredLighting": {
+     "median": 1.3,
+     "p95": 1.426
+    },
+    "GPU/TranslucentLighting": {
+     "median": 0.105,
+     "p95": 0.107
+    },
+    "GPU/Lights": {
+     "median": 5.184,
+     "p95": 5.333
+    },
+    "GPU/ShadowProjection": {
+     "median": 1.63,
+     "p95": 1.724
+    },
+    "GPU/ScreenSpaceReflections": {
+     "median": 0.451,
+     "p95": 0.533
+    },
+    "GPU/ReflectionEnvironment": {
+     "median": 4.643,
+     "p95": 4.85
+    },
+    "GPU/SkyAtmosphere": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/PostRenderOpsFX": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/FXSystemPostRenderOpaque": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/Translucency": {
+     "median": 0.49,
+     "p95": 0.604
+    },
+    "GPU/Postprocessing": {
+     "median": 0.934,
+     "p95": 1.146
+    },
+    "GPU/TAA": {
+     "median": 5.406,
+     "p95": 5.66
+    },
+    "GPU/VirtualTextureUpdate": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/SlateUI": {
+     "median": 0.013,
+     "p95": 0.015
+    },
+    "GPU/Unaccounted": {
+     "median": 0.558,
+     "p95": 0.609
+    }
+   }
+  },
+  "p1r1__L_TLP_agl50_empty": {
+   "tag": "p1r1",
+   "level": "L_TLP_agl50_empty",
+   "frames": 600,
+   "metrics": {
+    "FrameTime": {
+     "median": 34.486,
+     "p95": 36.795
+    },
+    "RenderThreadTime": {
+     "median": 34.414,
+     "p95": 36.9
+    },
+    "GameThreadTime": {
+     "median": 3.153,
+     "p95": 3.623
+    },
+    "GPUTime": {
+     "median": 32.579,
+     "p95": 35.16
+    },
+    "RHIThreadTime": {
+     "median": 2.553,
+     "p95": 3.331
+    },
+    "GPU/RayTracingGeometry": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/DistanceFields": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/AllocateRendertargets": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/VisibilityCommands": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/GPUSceneUpdate": {
+     "median": 0.004,
+     "p95": 0.005
+    },
+    "GPU/FXSystemPreRender": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/BuildRenderingCommandsDeferred": {
+     "median": 0.09,
+     "p95": 0.113
+    },
+    "GPU/Prepass": {
+     "median": 0.148,
+     "p95": 0.194
+    },
+    "GPU/HZB": {
+     "median": 0.248,
+     "p95": 0.283
+    },
+    "GPU/BeginOcclusionTests": {
+     "median": 0.009,
+     "p95": 0.01
+    },
+    "GPU/LightGrid": {
+     "median": 0.093,
+     "p95": 0.1
+    },
+    "GPU/LightFunctionAtlasGeneration": {
+     "median": 0.001,
+     "p95": 0.001
+    },
+    "GPU/SkyAtmosphereLUTs": {
+     "median": 0.546,
+     "p95": 0.561
+    },
+    "GPU/CaptureConvolveSkyEnvMap": {
+     "median": 0.106,
+     "p95": 0.369
+    },
+    "GPU/Basepass": {
+     "median": 1.461,
+     "p95": 1.514
+    },
+    "GPU/ShadowDepths": {
+     "median": 0.761,
+     "p95": 0.918
+    },
+    "GPU/CompositionPreLighting": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/SSAOSetup": {
+     "median": 0.962,
+     "p95": 1.161
+    },
+    "GPU/SSAO": {
+     "median": 7.435,
+     "p95": 8.324
+    },
+    "GPU/RenderDeferredLighting": {
+     "median": 1.306,
+     "p95": 1.424
+    },
+    "GPU/TranslucentLighting": {
+     "median": 0.106,
+     "p95": 0.108
+    },
+    "GPU/Lights": {
+     "median": 4.884,
+     "p95": 5.077
+    },
+    "GPU/ShadowProjection": {
+     "median": 1.924,
+     "p95": 2.148
+    },
+    "GPU/ScreenSpaceReflections": {
+     "median": 0.445,
+     "p95": 0.549
+    },
+    "GPU/ReflectionEnvironment": {
+     "median": 4.341,
+     "p95": 4.662
+    },
+    "GPU/SkyAtmosphere": {
+     "median": 0.156,
+     "p95": 0.184
+    },
+    "GPU/PostRenderOpsFX": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/FXSystemPostRenderOpaque": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/Translucency": {
+     "median": 0.5,
+     "p95": 0.676
+    },
+    "GPU/Postprocessing": {
+     "median": 0.942,
+     "p95": 1.208
+    },
+    "GPU/TAA": {
+     "median": 5.413,
+     "p95": 5.737
+    },
+    "GPU/VirtualTextureUpdate": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/SlateUI": {
+     "median": 0.013,
+     "p95": 0.015
+    },
+    "GPU/Unaccounted": {
+     "median": 0.561,
+     "p95": 0.632
+    }
+   }
+  },
+  "p1r1__L_TLP_agl50_tree": {
+   "tag": "p1r1",
+   "level": "L_TLP_agl50_tree",
+   "frames": 600,
+   "metrics": {
+    "FrameTime": {
+     "median": 35.836,
+     "p95": 38.1
+    },
+    "RenderThreadTime": {
+     "median": 35.802,
+     "p95": 38.144
+    },
+    "GameThreadTime": {
+     "median": 3.617,
+     "p95": 4.065
+    },
+    "GPUTime": {
+     "median": 33.795,
+     "p95": 36.637
+    },
+    "RHIThreadTime": {
+     "median": 2.603,
+     "p95": 3.263
+    },
+    "GPU/RayTracingGeometry": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/DistanceFields": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/AllocateRendertargets": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/VisibilityCommands": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/GPUSceneUpdate": {
+     "median": 0.004,
+     "p95": 0.005
+    },
+    "GPU/FXSystemPreRender": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/BuildRenderingCommandsDeferred": {
+     "median": 0.087,
+     "p95": 0.108
+    },
+    "GPU/Prepass": {
+     "median": 0.333,
+     "p95": 0.395
+    },
+    "GPU/HZB": {
+     "median": 0.249,
+     "p95": 0.289
+    },
+    "GPU/BeginOcclusionTests": {
+     "median": 0.009,
+     "p95": 0.01
+    },
+    "GPU/LightGrid": {
+     "median": 0.091,
+     "p95": 0.097
+    },
+    "GPU/LightFunctionAtlasGeneration": {
+     "median": 0.001,
+     "p95": 0.001
+    },
+    "GPU/SkyAtmosphereLUTs": {
+     "median": 0.548,
+     "p95": 0.56
+    },
+    "GPU/CaptureConvolveSkyEnvMap": {
+     "median": 0.114,
+     "p95": 0.369
+    },
+    "GPU/Basepass": {
+     "median": 2.0,
+     "p95": 2.112
+    },
+    "GPU/ShadowDepths": {
+     "median": 1.454,
+     "p95": 1.635
+    },
+    "GPU/CompositionPreLighting": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/SSAOSetup": {
+     "median": 0.916,
+     "p95": 1.136
+    },
+    "GPU/SSAO": {
+     "median": 7.213,
+     "p95": 7.884
+    },
+    "GPU/RenderDeferredLighting": {
+     "median": 1.303,
+     "p95": 1.433
+    },
+    "GPU/TranslucentLighting": {
+     "median": 0.105,
+     "p95": 0.106
+    },
+    "GPU/Lights": {
+     "median": 4.897,
+     "p95": 5.171
+    },
+    "GPU/ShadowProjection": {
+     "median": 1.95,
+     "p95": 2.205
+    },
+    "GPU/ScreenSpaceReflections": {
+     "median": 0.449,
+     "p95": 0.562
+    },
+    "GPU/ReflectionEnvironment": {
+     "median": 4.352,
+     "p95": 4.7
+    },
+    "GPU/SkyAtmosphere": {
+     "median": 0.156,
+     "p95": 0.186
+    },
+    "GPU/PostRenderOpsFX": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/FXSystemPostRenderOpaque": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/Translucency": {
+     "median": 0.488,
+     "p95": 0.664
+    },
+    "GPU/Postprocessing": {
+     "median": 0.959,
+     "p95": 1.177
+    },
+    "GPU/TAA": {
+     "median": 5.429,
+     "p95": 5.826
+    },
+    "GPU/VirtualTextureUpdate": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/SlateUI": {
+     "median": 0.013,
+     "p95": 0.015
+    },
+    "GPU/Unaccounted": {
+     "median": 0.556,
+     "p95": 0.622
+    }
+   }
+  },
+  "p1r1__L_TLP_close_empty": {
+   "tag": "p1r1",
+   "level": "L_TLP_close_empty",
+   "frames": 600,
+   "metrics": {
+    "FrameTime": {
+     "median": 35.573,
+     "p95": 37.435
+    },
+    "RenderThreadTime": {
+     "median": 35.521,
+     "p95": 38.784
+    },
+    "GameThreadTime": {
+     "median": 3.806,
+     "p95": 4.672
+    },
+    "GPUTime": {
+     "median": 33.803,
+     "p95": 35.849
+    },
+    "RHIThreadTime": {
+     "median": 2.55,
+     "p95": 3.274
+    },
+    "GPU/RayTracingGeometry": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/DistanceFields": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/AllocateRendertargets": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/VisibilityCommands": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/GPUSceneUpdate": {
+     "median": 0.004,
+     "p95": 0.006
+    },
+    "GPU/FXSystemPreRender": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/BuildRenderingCommandsDeferred": {
+     "median": 0.108,
+     "p95": 0.148
+    },
+    "GPU/Prepass": {
+     "median": 0.205,
+     "p95": 0.256
+    },
+    "GPU/HZB": {
+     "median": 0.297,
+     "p95": 0.336
+    },
+    "GPU/BeginOcclusionTests": {
+     "median": 0.002,
+     "p95": 0.002
+    },
+    "GPU/LightGrid": {
+     "median": 0.099,
+     "p95": 0.119
+    },
+    "GPU/LightFunctionAtlasGeneration": {
+     "median": 0.001,
+     "p95": 0.001
+    },
+    "GPU/SkyAtmosphereLUTs": {
+     "median": 0.551,
+     "p95": 0.575
+    },
+    "GPU/CaptureConvolveSkyEnvMap": {
+     "median": 0.112,
+     "p95": 0.371
+    },
+    "GPU/Basepass": {
+     "median": 1.544,
+     "p95": 1.623
+    },
+    "GPU/ShadowDepths": {
+     "median": 0.714,
+     "p95": 0.945
+    },
+    "GPU/CompositionPreLighting": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/SSAOSetup": {
+     "median": 0.908,
+     "p95": 1.089
+    },
+    "GPU/SSAO": {
+     "median": 7.889,
+     "p95": 8.512
+    },
+    "GPU/RenderDeferredLighting": {
+     "median": 1.569,
+     "p95": 1.742
+    },
+    "GPU/TranslucentLighting": {
+     "median": 0.105,
+     "p95": 0.107
+    },
+    "GPU/Lights": {
+     "median": 4.937,
+     "p95": 5.065
+    },
+    "GPU/ShadowProjection": {
+     "median": 2.166,
+     "p95": 2.389
+    },
+    "GPU/ScreenSpaceReflections": {
+     "median": 0.448,
+     "p95": 0.521
+    },
+    "GPU/ReflectionEnvironment": {
+     "median": 4.374,
+     "p95": 4.601
+    },
+    "GPU/SkyAtmosphere": {
+     "median": 0.145,
+     "p95": 0.156
+    },
+    "GPU/PostRenderOpsFX": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/FXSystemPostRenderOpaque": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/Translucency": {
+     "median": 0.503,
+     "p95": 0.638
+    },
+    "GPU/Postprocessing": {
+     "median": 0.942,
+     "p95": 1.138
+    },
+    "GPU/TAA": {
+     "median": 5.411,
+     "p95": 5.663
+    },
+    "GPU/VirtualTextureUpdate": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/SlateUI": {
+     "median": 0.012,
+     "p95": 0.014
+    },
+    "GPU/Unaccounted": {
+     "median": 0.569,
+     "p95": 0.633
+    }
+   }
+  },
+  "p1r1__L_TLP_close_tree": {
+   "tag": "p1r1",
+   "level": "L_TLP_close_tree",
+   "frames": 600,
+   "metrics": {
+    "FrameTime": {
+     "median": 60.434,
+     "p95": 66.027
+    },
+    "RenderThreadTime": {
+     "median": 60.854,
+     "p95": 65.612
+    },
+    "GameThreadTime": {
+     "median": 3.916,
+     "p95": 4.869
+    },
+    "GPUTime": {
+     "median": 58.453,
+     "p95": 64.563
+    },
+    "RHIThreadTime": {
+     "median": 2.755,
+     "p95": 3.644
+    },
+    "GPU/RayTracingGeometry": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/DistanceFields": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/AllocateRendertargets": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/VisibilityCommands": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/GPUSceneUpdate": {
+     "median": 0.004,
+     "p95": 0.006
+    },
+    "GPU/FXSystemPreRender": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/BuildRenderingCommandsDeferred": {
+     "median": 0.062,
+     "p95": 0.072
+    },
+    "GPU/Prepass": {
+     "median": 8.646,
+     "p95": 10.181
+    },
+    "GPU/HZB": {
+     "median": 0.265,
+     "p95": 0.343
+    },
+    "GPU/BeginOcclusionTests": {
+     "median": 0.002,
+     "p95": 0.002
+    },
+    "GPU/LightGrid": {
+     "median": 0.093,
+     "p95": 0.101
+    },
+    "GPU/LightFunctionAtlasGeneration": {
+     "median": 0.001,
+     "p95": 0.001
+    },
+    "GPU/SkyAtmosphereLUTs": {
+     "median": 0.544,
+     "p95": 0.554
+    },
+    "GPU/CaptureConvolveSkyEnvMap": {
+     "median": 0.09,
+     "p95": 0.365
+    },
+    "GPU/Basepass": {
+     "median": 9.588,
+     "p95": 11.623
+    },
+    "GPU/ShadowDepths": {
+     "median": 3.934,
+     "p95": 4.406
+    },
+    "GPU/CompositionPreLighting": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/SSAOSetup": {
+     "median": 0.972,
+     "p95": 1.131
+    },
+    "GPU/SSAO": {
+     "median": 9.06,
+     "p95": 9.88
+    },
+    "GPU/RenderDeferredLighting": {
+     "median": 1.869,
+     "p95": 2.107
+    },
+    "GPU/TranslucentLighting": {
+     "median": 0.105,
+     "p95": 0.107
+    },
+    "GPU/Lights": {
+     "median": 5.437,
+     "p95": 5.948
+    },
+    "GPU/ShadowProjection": {
+     "median": 3.806,
+     "p95": 4.071
+    },
+    "GPU/ScreenSpaceReflections": {
+     "median": 0.571,
+     "p95": 0.774
+    },
+    "GPU/ReflectionEnvironment": {
+     "median": 5.186,
+     "p95": 5.935
+    },
+    "GPU/SkyAtmosphere": {
+     "median": 0.052,
+     "p95": 0.069
+    },
+    "GPU/PostRenderOpsFX": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/FXSystemPostRenderOpaque": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/Translucency": {
+     "median": 0.627,
+     "p95": 0.87
+    },
+    "GPU/Postprocessing": {
+     "median": 1.06,
+     "p95": 1.347
+    },
+    "GPU/TAA": {
+     "median": 5.556,
+     "p95": 6.162
+    },
+    "GPU/VirtualTextureUpdate": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/SlateUI": {
+     "median": 0.013,
+     "p95": 0.015
+    },
+    "GPU/Unaccounted": {
+     "median": 0.577,
+     "p95": 0.653
+    }
+   }
+  },
+  "p1r1__L_TLP_front_empty": {
+   "tag": "p1r1",
+   "level": "L_TLP_front_empty",
+   "frames": 600,
+   "metrics": {
+    "FrameTime": {
+     "median": 27.383,
+     "p95": 30.166
+    },
+    "RenderThreadTime": {
+     "median": 27.373,
+     "p95": 30.193
+    },
+    "GameThreadTime": {
+     "median": 2.646,
+     "p95": 3.093
+    },
+    "GPUTime": {
+     "median": 25.771,
+     "p95": 28.55
+    },
+    "RHIThreadTime": {
+     "median": 2.253,
+     "p95": 3.043
+    },
+    "GPU/RayTracingGeometry": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/DistanceFields": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/AllocateRendertargets": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/VisibilityCommands": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/GPUSceneUpdate": {
+     "median": 0.004,
+     "p95": 0.005
+    },
+    "GPU/FXSystemPreRender": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/BuildRenderingCommandsDeferred": {
+     "median": 0.071,
+     "p95": 0.09
+    },
+    "GPU/Prepass": {
+     "median": 0.067,
+     "p95": 0.074
+    },
+    "GPU/HZB": {
+     "median": 0.238,
+     "p95": 0.252
+    },
+    "GPU/BeginOcclusionTests": {
+     "median": 0.009,
+     "p95": 0.01
+    },
+    "GPU/LightGrid": {
+     "median": 0.091,
+     "p95": 0.099
+    },
+    "GPU/LightFunctionAtlasGeneration": {
+     "median": 0.001,
+     "p95": 0.001
+    },
+    "GPU/SkyAtmosphereLUTs": {
+     "median": 0.545,
+     "p95": 0.56
+    },
+    "GPU/CaptureConvolveSkyEnvMap": {
+     "median": 0.103,
+     "p95": 0.365
+    },
+    "GPU/Basepass": {
+     "median": 0.644,
+     "p95": 0.662
+    },
+    "GPU/ShadowDepths": {
+     "median": 0.453,
+     "p95": 0.631
+    },
+    "GPU/CompositionPreLighting": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/SSAOSetup": {
+     "median": 0.452,
+     "p95": 0.619
+    },
+    "GPU/SSAO": {
+     "median": 7.405,
+     "p95": 8.417
+    },
+    "GPU/RenderDeferredLighting": {
+     "median": 1.412,
+     "p95": 1.541
+    },
+    "GPU/TranslucentLighting": {
+     "median": 0.104,
+     "p95": 0.106
+    },
+    "GPU/Lights": {
+     "median": 2.382,
+     "p95": 2.572
+    },
+    "GPU/ShadowProjection": {
+     "median": 0.946,
+     "p95": 1.068
+    },
+    "GPU/ScreenSpaceReflections": {
+     "median": 0.416,
+     "p95": 0.478
+    },
+    "GPU/ReflectionEnvironment": {
+     "median": 1.85,
+     "p95": 2.137
+    },
+    "GPU/SkyAtmosphere": {
+     "median": 1.075,
+     "p95": 1.093
+    },
+    "GPU/PostRenderOpsFX": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/FXSystemPostRenderOpaque": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/Translucency": {
+     "median": 0.46,
+     "p95": 0.722
+    },
+    "GPU/Postprocessing": {
+     "median": 0.926,
+     "p95": 1.249
+    },
+    "GPU/TAA": {
+     "median": 5.401,
+     "p95": 5.869
+    },
+    "GPU/VirtualTextureUpdate": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/SlateUI": {
+     "median": 0.014,
+     "p95": 0.016
+    },
+    "GPU/Unaccounted": {
+     "median": 0.561,
+     "p95": 0.643
+    }
+   }
+  },
+  "p1r1__L_TLP_front_tree": {
+   "tag": "p1r1",
+   "level": "L_TLP_front_tree",
+   "frames": 600,
+   "metrics": {
+    "FrameTime": {
+     "median": 37.96,
+     "p95": 39.876
+    },
+    "RenderThreadTime": {
+     "median": 37.936,
+     "p95": 39.781
+    },
+    "GameThreadTime": {
+     "median": 3.364,
+     "p95": 3.873
+    },
+    "GPUTime": {
+     "median": 36.295,
+     "p95": 38.02
+    },
+    "RHIThreadTime": {
+     "median": 2.286,
+     "p95": 2.952
+    },
+    "GPU/RayTracingGeometry": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/DistanceFields": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/AllocateRendertargets": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/VisibilityCommands": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/GPUSceneUpdate": {
+     "median": 0.004,
+     "p95": 0.005
+    },
+    "GPU/FXSystemPreRender": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/BuildRenderingCommandsDeferred": {
+     "median": 0.061,
+     "p95": 0.072
+    },
+    "GPU/Prepass": {
+     "median": 1.3,
+     "p95": 1.4
+    },
+    "GPU/HZB": {
+     "median": 0.243,
+     "p95": 0.268
+    },
+    "GPU/BeginOcclusionTests": {
+     "median": 0.009,
+     "p95": 0.019
+    },
+    "GPU/LightGrid": {
+     "median": 0.093,
+     "p95": 0.098
+    },
+    "GPU/LightFunctionAtlasGeneration": {
+     "median": 0.001,
+     "p95": 0.001
+    },
+    "GPU/SkyAtmosphereLUTs": {
+     "median": 0.545,
+     "p95": 0.557
+    },
+    "GPU/CaptureConvolveSkyEnvMap": {
+     "median": 0.097,
+     "p95": 0.366
+    },
+    "GPU/Basepass": {
+     "median": 4.418,
+     "p95": 4.692
+    },
+    "GPU/ShadowDepths": {
+     "median": 3.541,
+     "p95": 3.85
+    },
+    "GPU/CompositionPreLighting": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/SSAOSetup": {
+     "median": 0.559,
+     "p95": 0.65
+    },
+    "GPU/SSAO": {
+     "median": 7.185,
+     "p95": 7.486
+    },
+    "GPU/RenderDeferredLighting": {
+     "median": 1.56,
+     "p95": 1.722
+    },
+    "GPU/TranslucentLighting": {
+     "median": 0.101,
+     "p95": 0.103
+    },
+    "GPU/Lights": {
+     "median": 3.255,
+     "p95": 3.416
+    },
+    "GPU/ShadowProjection": {
+     "median": 1.697,
+     "p95": 1.815
+    },
+    "GPU/ScreenSpaceReflections": {
+     "median": 0.435,
+     "p95": 0.504
+    },
+    "GPU/ReflectionEnvironment": {
+     "median": 2.7,
+     "p95": 2.929
+    },
+    "GPU/SkyAtmosphere": {
+     "median": 0.818,
+     "p95": 0.826
+    },
+    "GPU/PostRenderOpsFX": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/FXSystemPostRenderOpaque": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/Translucency": {
+     "median": 0.477,
+     "p95": 0.625
+    },
+    "GPU/Postprocessing": {
+     "median": 0.961,
+     "p95": 1.181
+    },
+    "GPU/TAA": {
+     "median": 5.43,
+     "p95": 5.705
+    },
+    "GPU/VirtualTextureUpdate": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/SlateUI": {
+     "median": 0.013,
+     "p95": 0.015
+    },
+    "GPU/Unaccounted": {
+     "median": 0.577,
+     "p95": 0.643
+    }
+   }
+  },
+  "p1r2__L_TLP_agl200_empty": {
+   "tag": "p1r2",
+   "level": "L_TLP_agl200_empty",
+   "frames": 600,
+   "metrics": {
+    "FrameTime": {
+     "median": 34.536,
+     "p95": 36.385
+    },
+    "RenderThreadTime": {
+     "median": 34.548,
+     "p95": 36.492
+    },
+    "GameThreadTime": {
+     "median": 3.182,
+     "p95": 3.575
+    },
+    "GPUTime": {
+     "median": 32.751,
+     "p95": 34.572
+    },
+    "RHIThreadTime": {
+     "median": 2.511,
+     "p95": 3.241
+    },
+    "GPU/RayTracingGeometry": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/DistanceFields": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/AllocateRendertargets": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/VisibilityCommands": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/GPUSceneUpdate": {
+     "median": 0.004,
+     "p95": 0.005
+    },
+    "GPU/FXSystemPreRender": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/BuildRenderingCommandsDeferred": {
+     "median": 0.089,
+     "p95": 0.109
+    },
+    "GPU/Prepass": {
+     "median": 0.151,
+     "p95": 0.187
+    },
+    "GPU/HZB": {
+     "median": 0.249,
+     "p95": 0.286
+    },
+    "GPU/BeginOcclusionTests": {
+     "median": 0.009,
+     "p95": 0.01
+    },
+    "GPU/LightGrid": {
+     "median": 0.093,
+     "p95": 0.098
+    },
+    "GPU/LightFunctionAtlasGeneration": {
+     "median": 0.001,
+     "p95": 0.001
+    },
+    "GPU/SkyAtmosphereLUTs": {
+     "median": 0.548,
+     "p95": 0.559
+    },
+    "GPU/CaptureConvolveSkyEnvMap": {
+     "median": 0.097,
+     "p95": 0.37
+    },
+    "GPU/Basepass": {
+     "median": 1.565,
+     "p95": 1.605
+    },
+    "GPU/ShadowDepths": {
+     "median": 0.744,
+     "p95": 0.874
+    },
+    "GPU/CompositionPreLighting": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/SSAOSetup": {
+     "median": 0.95,
+     "p95": 1.087
+    },
+    "GPU/SSAO": {
+     "median": 7.459,
+     "p95": 8.089
+    },
+    "GPU/RenderDeferredLighting": {
+     "median": 1.3,
+     "p95": 1.433
+    },
+    "GPU/TranslucentLighting": {
+     "median": 0.105,
+     "p95": 0.107
+    },
+    "GPU/Lights": {
+     "median": 5.187,
+     "p95": 5.354
+    },
+    "GPU/ShadowProjection": {
+     "median": 1.62,
+     "p95": 1.757
+    },
+    "GPU/ScreenSpaceReflections": {
+     "median": 0.45,
+     "p95": 0.524
+    },
+    "GPU/ReflectionEnvironment": {
+     "median": 4.631,
+     "p95": 4.814
+    },
+    "GPU/SkyAtmosphere": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/PostRenderOpsFX": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/FXSystemPostRenderOpaque": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/Translucency": {
+     "median": 0.487,
+     "p95": 0.595
+    },
+    "GPU/Postprocessing": {
+     "median": 0.933,
+     "p95": 1.093
+    },
+    "GPU/TAA": {
+     "median": 5.404,
+     "p95": 5.564
+    },
+    "GPU/VirtualTextureUpdate": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/SlateUI": {
+     "median": 0.013,
+     "p95": 0.014
+    },
+    "GPU/Unaccounted": {
+     "median": 0.555,
+     "p95": 0.595
+    }
+   }
+  },
+  "p1r2__L_TLP_agl200_tree": {
+   "tag": "p1r2",
+   "level": "L_TLP_agl200_tree",
+   "frames": 600,
+   "metrics": {
+    "FrameTime": {
+     "median": 34.709,
+     "p95": 36.603
+    },
+    "RenderThreadTime": {
+     "median": 34.659,
+     "p95": 36.776
+    },
+    "GameThreadTime": {
+     "median": 3.251,
+     "p95": 3.652
+    },
+    "GPUTime": {
+     "median": 32.86,
+     "p95": 34.958
+    },
+    "RHIThreadTime": {
+     "median": 2.484,
+     "p95": 3.278
+    },
+    "GPU/RayTracingGeometry": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/DistanceFields": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/AllocateRendertargets": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/VisibilityCommands": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/GPUSceneUpdate": {
+     "median": 0.004,
+     "p95": 0.005
+    },
+    "GPU/FXSystemPreRender": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/BuildRenderingCommandsDeferred": {
+     "median": 0.093,
+     "p95": 0.118
+    },
+    "GPU/Prepass": {
+     "median": 0.174,
+     "p95": 0.2
+    },
+    "GPU/HZB": {
+     "median": 0.247,
+     "p95": 0.27
+    },
+    "GPU/BeginOcclusionTests": {
+     "median": 0.009,
+     "p95": 0.01
+    },
+    "GPU/LightGrid": {
+     "median": 0.093,
+     "p95": 0.097
+    },
+    "GPU/LightFunctionAtlasGeneration": {
+     "median": 0.001,
+     "p95": 0.001
+    },
+    "GPU/SkyAtmosphereLUTs": {
+     "median": 0.548,
+     "p95": 0.558
+    },
+    "GPU/CaptureConvolveSkyEnvMap": {
+     "median": 0.102,
+     "p95": 0.369
+    },
+    "GPU/Basepass": {
+     "median": 1.636,
+     "p95": 1.69
+    },
+    "GPU/ShadowDepths": {
+     "median": 0.82,
+     "p95": 0.945
+    },
+    "GPU/CompositionPreLighting": {
+     "median": 0.0,
+     "p95": 0.001
+    },
+    "GPU/SSAOSetup": {
+     "median": 0.977,
+     "p95": 1.116
+    },
+    "GPU/SSAO": {
+     "median": 7.354,
+     "p95": 8.031
+    },
+    "GPU/RenderDeferredLighting": {
+     "median": 1.297,
+     "p95": 1.438
+    },
+    "GPU/TranslucentLighting": {
+     "median": 0.106,
+     "p95": 0.107
+    },
+    "GPU/Lights": {
+     "median": 5.185,
+     "p95": 5.384
+    },
+    "GPU/ShadowProjection": {
+     "median": 1.631,
+     "p95": 1.781
+    },
+    "GPU/ScreenSpaceReflections": {
+     "median": 0.45,
+     "p95": 0.555
+    },
+    "GPU/ReflectionEnvironment": {
+     "median": 4.637,
+     "p95": 4.873
+    },
+    "GPU/SkyAtmosphere": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/PostRenderOpsFX": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/FXSystemPostRenderOpaque": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/Translucency": {
+     "median": 0.489,
+     "p95": 0.628
+    },
+    "GPU/Postprocessing": {
+     "median": 0.934,
+     "p95": 1.123
+    },
+    "GPU/TAA": {
+     "median": 5.402,
+     "p95": 5.589
+    },
+    "GPU/VirtualTextureUpdate": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/SlateUI": {
+     "median": 0.013,
+     "p95": 0.014
+    },
+    "GPU/Unaccounted": {
+     "median": 0.556,
+     "p95": 0.601
+    }
+   }
+  },
+  "p1r2__L_TLP_agl50_empty": {
+   "tag": "p1r2",
+   "level": "L_TLP_agl50_empty",
+   "frames": 600,
+   "metrics": {
+    "FrameTime": {
+     "median": 34.279,
+     "p95": 36.192
+    },
+    "RenderThreadTime": {
+     "median": 34.266,
+     "p95": 36.283
+    },
+    "GameThreadTime": {
+     "median": 3.146,
+     "p95": 3.581
+    },
+    "GPUTime": {
+     "median": 32.464,
+     "p95": 34.062
+    },
+    "RHIThreadTime": {
+     "median": 2.488,
+     "p95": 3.169
+    },
+    "GPU/RayTracingGeometry": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/DistanceFields": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/AllocateRendertargets": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/VisibilityCommands": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/GPUSceneUpdate": {
+     "median": 0.004,
+     "p95": 0.005
+    },
+    "GPU/FXSystemPreRender": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/BuildRenderingCommandsDeferred": {
+     "median": 0.088,
+     "p95": 0.11
+    },
+    "GPU/Prepass": {
+     "median": 0.16,
+     "p95": 0.199
+    },
+    "GPU/HZB": {
+     "median": 0.25,
+     "p95": 0.275
+    },
+    "GPU/BeginOcclusionTests": {
+     "median": 0.009,
+     "p95": 0.01
+    },
+    "GPU/LightGrid": {
+     "median": 0.095,
+     "p95": 0.099
+    },
+    "GPU/LightFunctionAtlasGeneration": {
+     "median": 0.001,
+     "p95": 0.001
+    },
+    "GPU/SkyAtmosphereLUTs": {
+     "median": 0.547,
+     "p95": 0.558
+    },
+    "GPU/CaptureConvolveSkyEnvMap": {
+     "median": 0.106,
+     "p95": 0.369
+    },
+    "GPU/Basepass": {
+     "median": 1.458,
+     "p95": 1.514
+    },
+    "GPU/ShadowDepths": {
+     "median": 0.747,
+     "p95": 0.87
+    },
+    "GPU/CompositionPreLighting": {
+     "median": 0.0,
+     "p95": 0.001
+    },
+    "GPU/SSAOSetup": {
+     "median": 0.957,
+     "p95": 1.095
+    },
+    "GPU/SSAO": {
+     "median": 7.365,
+     "p95": 7.887
+    },
+    "GPU/RenderDeferredLighting": {
+     "median": 1.309,
+     "p95": 1.442
+    },
+    "GPU/TranslucentLighting": {
+     "median": 0.104,
+     "p95": 0.106
+    },
+    "GPU/Lights": {
+     "median": 4.866,
+     "p95": 5.019
+    },
+    "GPU/ShadowProjection": {
+     "median": 1.921,
+     "p95": 2.05
+    },
+    "GPU/ScreenSpaceReflections": {
+     "median": 0.445,
+     "p95": 0.525
+    },
+    "GPU/ReflectionEnvironment": {
+     "median": 4.316,
+     "p95": 4.543
+    },
+    "GPU/SkyAtmosphere": {
+     "median": 0.154,
+     "p95": 0.179
+    },
+    "GPU/PostRenderOpsFX": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/FXSystemPostRenderOpaque": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/Translucency": {
+     "median": 0.498,
+     "p95": 0.621
+    },
+    "GPU/Postprocessing": {
+     "median": 0.933,
+     "p95": 1.118
+    },
+    "GPU/TAA": {
+     "median": 5.409,
+     "p95": 5.576
+    },
+    "GPU/VirtualTextureUpdate": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/SlateUI": {
+     "median": 0.012,
+     "p95": 0.013
+    },
+    "GPU/Unaccounted": {
+     "median": 0.554,
+     "p95": 0.598
+    }
+   }
+  },
+  "p1r2__L_TLP_agl50_tree": {
+   "tag": "p1r2",
+   "level": "L_TLP_agl50_tree",
+   "frames": 600,
+   "metrics": {
+    "FrameTime": {
+     "median": 35.532,
+     "p95": 37.449
+    },
+    "RenderThreadTime": {
+     "median": 35.524,
+     "p95": 37.46
+    },
+    "GameThreadTime": {
+     "median": 3.582,
+     "p95": 4.009
+    },
+    "GPUTime": {
+     "median": 33.547,
+     "p95": 35.572
+    },
+    "RHIThreadTime": {
+     "median": 2.553,
+     "p95": 3.07
+    },
+    "GPU/RayTracingGeometry": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/DistanceFields": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/AllocateRendertargets": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/VisibilityCommands": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/GPUSceneUpdate": {
+     "median": 0.004,
+     "p95": 0.005
+    },
+    "GPU/FXSystemPreRender": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/BuildRenderingCommandsDeferred": {
+     "median": 0.085,
+     "p95": 0.107
+    },
+    "GPU/Prepass": {
+     "median": 0.332,
+     "p95": 0.38
+    },
+    "GPU/HZB": {
+     "median": 0.249,
+     "p95": 0.284
+    },
+    "GPU/BeginOcclusionTests": {
+     "median": 0.009,
+     "p95": 0.01
+    },
+    "GPU/LightGrid": {
+     "median": 0.092,
+     "p95": 0.097
+    },
+    "GPU/LightFunctionAtlasGeneration": {
+     "median": 0.001,
+     "p95": 0.001
+    },
+    "GPU/SkyAtmosphereLUTs": {
+     "median": 0.547,
+     "p95": 0.56
+    },
+    "GPU/CaptureConvolveSkyEnvMap": {
+     "median": 0.109,
+     "p95": 0.37
+    },
+    "GPU/Basepass": {
+     "median": 1.992,
+     "p95": 2.093
+    },
+    "GPU/ShadowDepths": {
+     "median": 1.42,
+     "p95": 1.612
+    },
+    "GPU/CompositionPreLighting": {
+     "median": 0.0,
+     "p95": 0.001
+    },
+    "GPU/SSAOSetup": {
+     "median": 0.912,
+     "p95": 1.076
+    },
+    "GPU/SSAO": {
+     "median": 7.112,
+     "p95": 7.656
+    },
+    "GPU/RenderDeferredLighting": {
+     "median": 1.306,
+     "p95": 1.425
+    },
+    "GPU/TranslucentLighting": {
+     "median": 0.106,
+     "p95": 0.108
+    },
+    "GPU/Lights": {
+     "median": 4.884,
+     "p95": 5.057
+    },
+    "GPU/ShadowProjection": {
+     "median": 1.942,
+     "p95": 2.104
+    },
+    "GPU/ScreenSpaceReflections": {
+     "median": 0.448,
+     "p95": 0.523
+    },
+    "GPU/ReflectionEnvironment": {
+     "median": 4.319,
+     "p95": 4.525
+    },
+    "GPU/SkyAtmosphere": {
+     "median": 0.155,
+     "p95": 0.175
+    },
+    "GPU/PostRenderOpsFX": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/FXSystemPostRenderOpaque": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/Translucency": {
+     "median": 0.491,
+     "p95": 0.616
+    },
+    "GPU/Postprocessing": {
+     "median": 0.937,
+     "p95": 1.101
+    },
+    "GPU/TAA": {
+     "median": 5.415,
+     "p95": 5.597
+    },
+    "GPU/VirtualTextureUpdate": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/SlateUI": {
+     "median": 0.013,
+     "p95": 0.014
+    },
+    "GPU/Unaccounted": {
+     "median": 0.552,
+     "p95": 0.595
+    }
+   }
+  },
+  "p1r2__L_TLP_close_empty": {
+   "tag": "p1r2",
+   "level": "L_TLP_close_empty",
+   "frames": 600,
+   "metrics": {
+    "FrameTime": {
+     "median": 35.76,
+     "p95": 37.638
+    },
+    "RenderThreadTime": {
+     "median": 35.822,
+     "p95": 38.482
+    },
+    "GameThreadTime": {
+     "median": 3.895,
+     "p95": 4.908
+    },
+    "GPUTime": {
+     "median": 33.895,
+     "p95": 35.871
+    },
+    "RHIThreadTime": {
+     "median": 2.612,
+     "p95": 3.42
+    },
+    "GPU/RayTracingGeometry": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/DistanceFields": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/AllocateRendertargets": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/VisibilityCommands": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/GPUSceneUpdate": {
+     "median": 0.004,
+     "p95": 0.006
+    },
+    "GPU/FXSystemPreRender": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/BuildRenderingCommandsDeferred": {
+     "median": 0.107,
+     "p95": 0.153
+    },
+    "GPU/Prepass": {
+     "median": 0.2,
+     "p95": 0.247
+    },
+    "GPU/HZB": {
+     "median": 0.291,
+     "p95": 0.335
+    },
+    "GPU/BeginOcclusionTests": {
+     "median": 0.002,
+     "p95": 0.002
+    },
+    "GPU/LightGrid": {
+     "median": 0.1,
+     "p95": 0.119
+    },
+    "GPU/LightFunctionAtlasGeneration": {
+     "median": 0.001,
+     "p95": 0.001
+    },
+    "GPU/SkyAtmosphereLUTs": {
+     "median": 0.552,
+     "p95": 0.572
+    },
+    "GPU/CaptureConvolveSkyEnvMap": {
+     "median": 0.118,
+     "p95": 0.378
+    },
+    "GPU/Basepass": {
+     "median": 1.548,
+     "p95": 1.641
+    },
+    "GPU/ShadowDepths": {
+     "median": 0.73,
+     "p95": 0.971
+    },
+    "GPU/CompositionPreLighting": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/SSAOSetup": {
+     "median": 0.916,
+     "p95": 1.122
+    },
+    "GPU/SSAO": {
+     "median": 7.935,
+     "p95": 8.603
+    },
+    "GPU/RenderDeferredLighting": {
+     "median": 1.583,
+     "p95": 1.742
+    },
+    "GPU/TranslucentLighting": {
+     "median": 0.104,
+     "p95": 0.107
+    },
+    "GPU/Lights": {
+     "median": 4.948,
+     "p95": 5.116
+    },
+    "GPU/ShadowProjection": {
+     "median": 2.184,
+     "p95": 2.382
+    },
+    "GPU/ScreenSpaceReflections": {
+     "median": 0.45,
+     "p95": 0.53
+    },
+    "GPU/ReflectionEnvironment": {
+     "median": 4.383,
+     "p95": 4.646
+    },
+    "GPU/SkyAtmosphere": {
+     "median": 0.144,
+     "p95": 0.156
+    },
+    "GPU/PostRenderOpsFX": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/FXSystemPostRenderOpaque": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/Translucency": {
+     "median": 0.503,
+     "p95": 0.649
+    },
+    "GPU/Postprocessing": {
+     "median": 0.96,
+     "p95": 1.159
+    },
+    "GPU/TAA": {
+     "median": 5.417,
+     "p95": 5.642
+    },
+    "GPU/VirtualTextureUpdate": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/SlateUI": {
+     "median": 0.013,
+     "p95": 0.015
+    },
+    "GPU/Unaccounted": {
+     "median": 0.57,
+     "p95": 0.632
+    }
+   }
+  },
+  "p1r2__L_TLP_close_tree": {
+   "tag": "p1r2",
+   "level": "L_TLP_close_tree",
+   "frames": 600,
+   "metrics": {
+    "FrameTime": {
+     "median": 60.087,
+     "p95": 64.201
+    },
+    "RenderThreadTime": {
+     "median": 60.534,
+     "p95": 64.738
+    },
+    "GameThreadTime": {
+     "median": 3.796,
+     "p95": 4.585
+    },
+    "GPUTime": {
+     "median": 57.936,
+     "p95": 62.207
+    },
+    "RHIThreadTime": {
+     "median": 2.767,
+     "p95": 3.634
+    },
+    "GPU/RayTracingGeometry": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/DistanceFields": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/AllocateRendertargets": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/VisibilityCommands": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/GPUSceneUpdate": {
+     "median": 0.004,
+     "p95": 0.005
+    },
+    "GPU/FXSystemPreRender": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/BuildRenderingCommandsDeferred": {
+     "median": 0.061,
+     "p95": 0.069
+    },
+    "GPU/Prepass": {
+     "median": 8.584,
+     "p95": 9.469
+    },
+    "GPU/HZB": {
+     "median": 0.266,
+     "p95": 0.333
+    },
+    "GPU/BeginOcclusionTests": {
+     "median": 0.002,
+     "p95": 0.002
+    },
+    "GPU/LightGrid": {
+     "median": 0.093,
+     "p95": 0.1
+    },
+    "GPU/LightFunctionAtlasGeneration": {
+     "median": 0.001,
+     "p95": 0.001
+    },
+    "GPU/SkyAtmosphereLUTs": {
+     "median": 0.544,
+     "p95": 0.554
+    },
+    "GPU/CaptureConvolveSkyEnvMap": {
+     "median": 0.094,
+     "p95": 0.364
+    },
+    "GPU/Basepass": {
+     "median": 9.486,
+     "p95": 11.14
+    },
+    "GPU/ShadowDepths": {
+     "median": 3.918,
+     "p95": 4.249
+    },
+    "GPU/CompositionPreLighting": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/SSAOSetup": {
+     "median": 0.965,
+     "p95": 1.068
+    },
+    "GPU/SSAO": {
+     "median": 9.008,
+     "p95": 9.571
+    },
+    "GPU/RenderDeferredLighting": {
+     "median": 1.855,
+     "p95": 2.045
+    },
+    "GPU/TranslucentLighting": {
+     "median": 0.104,
+     "p95": 0.106
+    },
+    "GPU/Lights": {
+     "median": 5.422,
+     "p95": 5.675
+    },
+    "GPU/ShadowProjection": {
+     "median": 3.799,
+     "p95": 3.951
+    },
+    "GPU/ScreenSpaceReflections": {
+     "median": 0.573,
+     "p95": 0.721
+    },
+    "GPU/ReflectionEnvironment": {
+     "median": 5.144,
+     "p95": 5.574
+    },
+    "GPU/SkyAtmosphere": {
+     "median": 0.048,
+     "p95": 0.06
+    },
+    "GPU/PostRenderOpsFX": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/FXSystemPostRenderOpaque": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/Translucency": {
+     "median": 0.604,
+     "p95": 0.757
+    },
+    "GPU/Postprocessing": {
+     "median": 1.041,
+     "p95": 1.265
+    },
+    "GPU/TAA": {
+     "median": 5.525,
+     "p95": 5.886
+    },
+    "GPU/VirtualTextureUpdate": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/SlateUI": {
+     "median": 0.013,
+     "p95": 0.015
+    },
+    "GPU/Unaccounted": {
+     "median": 0.56,
+     "p95": 0.619
+    }
+   }
+  },
+  "p1r2__L_TLP_front_empty": {
+   "tag": "p1r2",
+   "level": "L_TLP_front_empty",
+   "frames": 600,
+   "metrics": {
+    "FrameTime": {
+     "median": 27.174,
+     "p95": 28.831
+    },
+    "RenderThreadTime": {
+     "median": 27.158,
+     "p95": 28.71
+    },
+    "GameThreadTime": {
+     "median": 2.649,
+     "p95": 2.963
+    },
+    "GPUTime": {
+     "median": 25.606,
+     "p95": 26.913
+    },
+    "RHIThreadTime": {
+     "median": 2.205,
+     "p95": 2.88
+    },
+    "GPU/RayTracingGeometry": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/DistanceFields": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/AllocateRendertargets": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/VisibilityCommands": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/GPUSceneUpdate": {
+     "median": 0.004,
+     "p95": 0.005
+    },
+    "GPU/FXSystemPreRender": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/BuildRenderingCommandsDeferred": {
+     "median": 0.068,
+     "p95": 0.08
+    },
+    "GPU/Prepass": {
+     "median": 0.067,
+     "p95": 0.076
+    },
+    "GPU/HZB": {
+     "median": 0.238,
+     "p95": 0.247
+    },
+    "GPU/BeginOcclusionTests": {
+     "median": 0.009,
+     "p95": 0.01
+    },
+    "GPU/LightGrid": {
+     "median": 0.091,
+     "p95": 0.097
+    },
+    "GPU/LightFunctionAtlasGeneration": {
+     "median": 0.001,
+     "p95": 0.001
+    },
+    "GPU/SkyAtmosphereLUTs": {
+     "median": 0.545,
+     "p95": 0.557
+    },
+    "GPU/CaptureConvolveSkyEnvMap": {
+     "median": 0.109,
+     "p95": 0.362
+    },
+    "GPU/Basepass": {
+     "median": 0.644,
+     "p95": 0.655
+    },
+    "GPU/ShadowDepths": {
+     "median": 0.448,
+     "p95": 0.587
+    },
+    "GPU/CompositionPreLighting": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/SSAOSetup": {
+     "median": 0.44,
+     "p95": 0.53
+    },
+    "GPU/SSAO": {
+     "median": 7.286,
+     "p95": 7.79
+    },
+    "GPU/RenderDeferredLighting": {
+     "median": 1.404,
+     "p95": 1.532
+    },
+    "GPU/TranslucentLighting": {
+     "median": 0.103,
+     "p95": 0.106
+    },
+    "GPU/Lights": {
+     "median": 2.383,
+     "p95": 2.451
+    },
+    "GPU/ShadowProjection": {
+     "median": 0.945,
+     "p95": 1.012
+    },
+    "GPU/ScreenSpaceReflections": {
+     "median": 0.409,
+     "p95": 0.45
+    },
+    "GPU/ReflectionEnvironment": {
+     "median": 1.844,
+     "p95": 2.006
+    },
+    "GPU/SkyAtmosphere": {
+     "median": 1.074,
+     "p95": 1.086
+    },
+    "GPU/PostRenderOpsFX": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/FXSystemPostRenderOpaque": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/Translucency": {
+     "median": 0.468,
+     "p95": 0.6
+    },
+    "GPU/Postprocessing": {
+     "median": 0.926,
+     "p95": 1.119
+    },
+    "GPU/TAA": {
+     "median": 5.379,
+     "p95": 5.614
+    },
+    "GPU/VirtualTextureUpdate": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/SlateUI": {
+     "median": 0.013,
+     "p95": 0.014
+    },
+    "GPU/Unaccounted": {
+     "median": 0.552,
+     "p95": 0.602
+    }
+   }
+  },
+  "p1r2__L_TLP_front_tree": {
+   "tag": "p1r2",
+   "level": "L_TLP_front_tree",
+   "frames": 600,
+   "metrics": {
+    "FrameTime": {
+     "median": 37.938,
+     "p95": 39.867
+    },
+    "RenderThreadTime": {
+     "median": 37.928,
+     "p95": 39.884
+    },
+    "GameThreadTime": {
+     "median": 3.331,
+     "p95": 3.8
+    },
+    "GPUTime": {
+     "median": 36.174,
+     "p95": 38.206
+    },
+    "RHIThreadTime": {
+     "median": 2.346,
+     "p95": 3.084
+    },
+    "GPU/RayTracingGeometry": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/DistanceFields": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/AllocateRendertargets": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/VisibilityCommands": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/GPUSceneUpdate": {
+     "median": 0.004,
+     "p95": 0.005
+    },
+    "GPU/FXSystemPreRender": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/BuildRenderingCommandsDeferred": {
+     "median": 0.062,
+     "p95": 0.071
+    },
+    "GPU/Prepass": {
+     "median": 1.3,
+     "p95": 1.377
+    },
+    "GPU/HZB": {
+     "median": 0.243,
+     "p95": 0.271
+    },
+    "GPU/BeginOcclusionTests": {
+     "median": 0.009,
+     "p95": 0.019
+    },
+    "GPU/LightGrid": {
+     "median": 0.094,
+     "p95": 0.099
+    },
+    "GPU/LightFunctionAtlasGeneration": {
+     "median": 0.001,
+     "p95": 0.001
+    },
+    "GPU/SkyAtmosphereLUTs": {
+     "median": 0.545,
+     "p95": 0.555
+    },
+    "GPU/CaptureConvolveSkyEnvMap": {
+     "median": 0.101,
+     "p95": 0.366
+    },
+    "GPU/Basepass": {
+     "median": 4.405,
+     "p95": 4.633
+    },
+    "GPU/ShadowDepths": {
+     "median": 3.527,
+     "p95": 3.907
+    },
+    "GPU/CompositionPreLighting": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/SSAOSetup": {
+     "median": 0.559,
+     "p95": 0.656
+    },
+    "GPU/SSAO": {
+     "median": 7.184,
+     "p95": 7.647
+    },
+    "GPU/RenderDeferredLighting": {
+     "median": 1.562,
+     "p95": 1.718
+    },
+    "GPU/TranslucentLighting": {
+     "median": 0.104,
+     "p95": 0.106
+    },
+    "GPU/Lights": {
+     "median": 3.246,
+     "p95": 3.384
+    },
+    "GPU/ShadowProjection": {
+     "median": 1.691,
+     "p95": 1.808
+    },
+    "GPU/ScreenSpaceReflections": {
+     "median": 0.434,
+     "p95": 0.49
+    },
+    "GPU/ReflectionEnvironment": {
+     "median": 2.699,
+     "p95": 2.902
+    },
+    "GPU/SkyAtmosphere": {
+     "median": 0.819,
+     "p95": 0.828
+    },
+    "GPU/PostRenderOpsFX": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/FXSystemPostRenderOpaque": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/Translucency": {
+     "median": 0.457,
+     "p95": 0.566
+    },
+    "GPU/Postprocessing": {
+     "median": 0.957,
+     "p95": 1.185
+    },
+    "GPU/TAA": {
+     "median": 5.425,
+     "p95": 5.673
+    },
+    "GPU/VirtualTextureUpdate": {
+     "median": 0.0,
+     "p95": 0.0
+    },
+    "GPU/SlateUI": {
+     "median": 0.013,
+     "p95": 0.015
+    },
+    "GPU/Unaccounted": {
+     "median": 0.57,
+     "p95": 0.623
+    }
+   }
+  }
+ },
+ "tree_minus_empty": {
+  "agl200": {
+   "rounds": [
+    {
+     "tag": "p1r1",
+     "GPUTime": 0.161,
+     "FrameTime": 0.159,
+     "GPU/AllocateRendertargets": 0.0,
+     "GPU/Basepass": 0.068,
+     "GPU/BeginOcclusionTests": 0.001,
+     "GPU/BuildRenderingCommandsDeferred": 0.001,
+     "GPU/CaptureConvolveSkyEnvMap": -0.005,
+     "GPU/CompositionPreLighting": 0.0,
+     "GPU/DistanceFields": 0.0,
+     "GPU/FXSystemPostRenderOpaque": 0.0,
+     "GPU/FXSystemPreRender": 0.0,
+     "GPU/GPUSceneUpdate": 0.0,
+     "GPU/HZB": 0.001,
+     "GPU/LightFunctionAtlasGeneration": 0.0,
+     "GPU/LightGrid": 0.001,
+     "GPU/Lights": -0.004,
+     "GPU/PostRenderOpsFX": 0.0,
+     "GPU/Postprocessing": -0.004,
+     "GPU/Prepass": 0.031,
+     "GPU/RayTracingGeometry": 0.0,
+     "GPU/ReflectionEnvironment": 0.004,
+     "GPU/RenderDeferredLighting": 0.005,
+     "GPU/SSAO": 0.013,
+     "GPU/SSAOSetup": 0.009,
+     "GPU/ScreenSpaceReflections": 0.001,
+     "GPU/ShadowDepths": 0.057,
+     "GPU/ShadowProjection": 0.003,
+     "GPU/SkyAtmosphere": 0.0,
+     "GPU/SkyAtmosphereLUTs": 0.0,
+     "GPU/SlateUI": 0.001,
+     "GPU/TAA": -0.003,
+     "GPU/Translucency": -0.009,
+     "GPU/TranslucentLighting": 0.001,
+     "GPU/Unaccounted": 0.0,
+     "GPU/VirtualTextureUpdate": 0.0,
+     "GPU/VisibilityCommands": 0.0
+    },
+    {
+     "tag": "p1r2",
+     "GPUTime": 0.109,
+     "FrameTime": 0.173,
+     "GPU/AllocateRendertargets": 0.0,
+     "GPU/Basepass": 0.071,
+     "GPU/BeginOcclusionTests": 0.0,
+     "GPU/BuildRenderingCommandsDeferred": 0.004,
+     "GPU/CaptureConvolveSkyEnvMap": 0.005,
+     "GPU/CompositionPreLighting": 0.0,
+     "GPU/DistanceFields": 0.0,
+     "GPU/FXSystemPostRenderOpaque": 0.0,
+     "GPU/FXSystemPreRender": 0.0,
+     "GPU/GPUSceneUpdate": 0.0,
+     "GPU/HZB": -0.002,
+     "GPU/LightFunctionAtlasGeneration": 0.0,
+     "GPU/LightGrid": 0.0,
+     "GPU/Lights": -0.002,
+     "GPU/PostRenderOpsFX": 0.0,
+     "GPU/Postprocessing": 0.001,
+     "GPU/Prepass": 0.023,
+     "GPU/RayTracingGeometry": 0.0,
+     "GPU/ReflectionEnvironment": 0.006,
+     "GPU/RenderDeferredLighting": -0.003,
+     "GPU/SSAO": -0.105,
+     "GPU/SSAOSetup": 0.027,
+     "GPU/ScreenSpaceReflections": 0.0,
+     "GPU/ShadowDepths": 0.076,
+     "GPU/ShadowProjection": 0.011,
+     "GPU/SkyAtmosphere": 0.0,
+     "GPU/SkyAtmosphereLUTs": 0.0,
+     "GPU/SlateUI": 0.0,
+     "GPU/TAA": -0.002,
+     "GPU/Translucency": 0.002,
+     "GPU/TranslucentLighting": 0.001,
+     "GPU/Unaccounted": 0.001,
+     "GPU/VirtualTextureUpdate": 0.0,
+     "GPU/VisibilityCommands": 0.0
+    }
+   ],
+   "gpu_delta_mean_ms": 0.135,
+   "gpu_delta_min_ms": 0.109,
+   "gpu_delta_max_ms": 0.161
+  },
+  "agl50": {
+   "rounds": [
+    {
+     "tag": "p1r1",
+     "GPUTime": 1.216,
+     "FrameTime": 1.35,
+     "GPU/AllocateRendertargets": 0.0,
+     "GPU/Basepass": 0.539,
+     "GPU/BeginOcclusionTests": 0.0,
+     "GPU/BuildRenderingCommandsDeferred": -0.003,
+     "GPU/CaptureConvolveSkyEnvMap": 0.008,
+     "GPU/CompositionPreLighting": 0.0,
+     "GPU/DistanceFields": 0.0,
+     "GPU/FXSystemPostRenderOpaque": 0.0,
+     "GPU/FXSystemPreRender": 0.0,
+     "GPU/GPUSceneUpdate": 0.0,
+     "GPU/HZB": 0.001,
+     "GPU/LightFunctionAtlasGeneration": 0.0,
+     "GPU/LightGrid": -0.002,
+     "GPU/Lights": 0.013,
+     "GPU/PostRenderOpsFX": 0.0,
+     "GPU/Postprocessing": 0.017,
+     "GPU/Prepass": 0.185,
+     "GPU/RayTracingGeometry": 0.0,
+     "GPU/ReflectionEnvironment": 0.011,
+     "GPU/RenderDeferredLighting": -0.003,
+     "GPU/SSAO": -0.222,
+     "GPU/SSAOSetup": -0.046,
+     "GPU/ScreenSpaceReflections": 0.004,
+     "GPU/ShadowDepths": 0.693,
+     "GPU/ShadowProjection": 0.026,
+     "GPU/SkyAtmosphere": 0.0,
+     "GPU/SkyAtmosphereLUTs": 0.002,
+     "GPU/SlateUI": 0.0,
+     "GPU/TAA": 0.016,
+     "GPU/Translucency": -0.012,
+     "GPU/TranslucentLighting": -0.001,
+     "GPU/Unaccounted": -0.005,
+     "GPU/VirtualTextureUpdate": 0.0,
+     "GPU/VisibilityCommands": 0.0
+    },
+    {
+     "tag": "p1r2",
+     "GPUTime": 1.083,
+     "FrameTime": 1.253,
+     "GPU/AllocateRendertargets": 0.0,
+     "GPU/Basepass": 0.534,
+     "GPU/BeginOcclusionTests": 0.0,
+     "GPU/BuildRenderingCommandsDeferred": -0.003,
+     "GPU/CaptureConvolveSkyEnvMap": 0.003,
+     "GPU/CompositionPreLighting": 0.0,
+     "GPU/DistanceFields": 0.0,
+     "GPU/FXSystemPostRenderOpaque": 0.0,
+     "GPU/FXSystemPreRender": 0.0,
+     "GPU/GPUSceneUpdate": 0.0,
+     "GPU/HZB": -0.001,
+     "GPU/LightFunctionAtlasGeneration": 0.0,
+     "GPU/LightGrid": -0.003,
+     "GPU/Lights": 0.018,
+     "GPU/PostRenderOpsFX": 0.0,
+     "GPU/Postprocessing": 0.004,
+     "GPU/Prepass": 0.172,
+     "GPU/RayTracingGeometry": 0.0,
+     "GPU/ReflectionEnvironment": 0.003,
+     "GPU/RenderDeferredLighting": -0.003,
+     "GPU/SSAO": -0.253,
+     "GPU/SSAOSetup": -0.045,
+     "GPU/ScreenSpaceReflections": 0.003,
+     "GPU/ShadowDepths": 0.673,
+     "GPU/ShadowProjection": 0.021,
+     "GPU/SkyAtmosphere": 0.001,
+     "GPU/SkyAtmosphereLUTs": 0.0,
+     "GPU/SlateUI": 0.001,
+     "GPU/TAA": 0.006,
+     "GPU/Translucency": -0.007,
+     "GPU/TranslucentLighting": 0.002,
+     "GPU/Unaccounted": -0.002,
+     "GPU/VirtualTextureUpdate": 0.0,
+     "GPU/VisibilityCommands": 0.0
+    }
+   ],
+   "gpu_delta_mean_ms": 1.149,
+   "gpu_delta_min_ms": 1.083,
+   "gpu_delta_max_ms": 1.216
+  },
+  "close": {
+   "rounds": [
+    {
+     "tag": "p1r1",
+     "GPUTime": 24.65,
+     "FrameTime": 24.861,
+     "GPU/AllocateRendertargets": 0.0,
+     "GPU/Basepass": 8.044,
+     "GPU/BeginOcclusionTests": 0.0,
+     "GPU/BuildRenderingCommandsDeferred": -0.046,
+     "GPU/CaptureConvolveSkyEnvMap": -0.022,
+     "GPU/CompositionPreLighting": 0.0,
+     "GPU/DistanceFields": 0.0,
+     "GPU/FXSystemPostRenderOpaque": 0.0,
+     "GPU/FXSystemPreRender": 0.0,
+     "GPU/GPUSceneUpdate": 0.0,
+     "GPU/HZB": -0.032,
+     "GPU/LightFunctionAtlasGeneration": 0.0,
+     "GPU/LightGrid": -0.006,
+     "GPU/Lights": 0.5,
+     "GPU/PostRenderOpsFX": 0.0,
+     "GPU/Postprocessing": 0.118,
+     "GPU/Prepass": 8.441,
+     "GPU/RayTracingGeometry": 0.0,
+     "GPU/ReflectionEnvironment": 0.812,
+     "GPU/RenderDeferredLighting": 0.3,
+     "GPU/SSAO": 1.171,
+     "GPU/SSAOSetup": 0.064,
+     "GPU/ScreenSpaceReflections": 0.123,
+     "GPU/ShadowDepths": 3.22,
+     "GPU/ShadowProjection": 1.64,
+     "GPU/SkyAtmosphere": -0.093,
+     "GPU/SkyAtmosphereLUTs": -0.007,
+     "GPU/SlateUI": 0.001,
+     "GPU/TAA": 0.145,
+     "GPU/Translucency": 0.124,
+     "GPU/TranslucentLighting": 0.0,
+     "GPU/Unaccounted": 0.008,
+     "GPU/VirtualTextureUpdate": 0.0,
+     "GPU/VisibilityCommands": 0.0
+    },
+    {
+     "tag": "p1r2",
+     "GPUTime": 24.041,
+     "FrameTime": 24.327,
+     "GPU/AllocateRendertargets": 0.0,
+     "GPU/Basepass": 7.938,
+     "GPU/BeginOcclusionTests": 0.0,
+     "GPU/BuildRenderingCommandsDeferred": -0.046,
+     "GPU/CaptureConvolveSkyEnvMap": -0.024,
+     "GPU/CompositionPreLighting": 0.0,
+     "GPU/DistanceFields": 0.0,
+     "GPU/FXSystemPostRenderOpaque": 0.0,
+     "GPU/FXSystemPreRender": 0.0,
+     "GPU/GPUSceneUpdate": 0.0,
+     "GPU/HZB": -0.025,
+     "GPU/LightFunctionAtlasGeneration": 0.0,
+     "GPU/LightGrid": -0.007,
+     "GPU/Lights": 0.474,
+     "GPU/PostRenderOpsFX": 0.0,
+     "GPU/Postprocessing": 0.081,
+     "GPU/Prepass": 8.384,
+     "GPU/RayTracingGeometry": 0.0,
+     "GPU/ReflectionEnvironment": 0.761,
+     "GPU/RenderDeferredLighting": 0.272,
+     "GPU/SSAO": 1.073,
+     "GPU/SSAOSetup": 0.049,
+     "GPU/ScreenSpaceReflections": 0.123,
+     "GPU/ShadowDepths": 3.188,
+     "GPU/ShadowProjection": 1.615,
+     "GPU/SkyAtmosphere": -0.096,
+     "GPU/SkyAtmosphereLUTs": -0.008,
+     "GPU/SlateUI": 0.0,
+     "GPU/TAA": 0.108,
+     "GPU/Translucency": 0.101,
+     "GPU/TranslucentLighting": 0.0,
+     "GPU/Unaccounted": -0.01,
+     "GPU/VirtualTextureUpdate": 0.0,
+     "GPU/VisibilityCommands": 0.0
+    }
+   ],
+   "gpu_delta_mean_ms": 24.346,
+   "gpu_delta_min_ms": 24.041,
+   "gpu_delta_max_ms": 24.65
+  },
+  "front": {
+   "rounds": [
+    {
+     "tag": "p1r1",
+     "GPUTime": 10.524,
+     "FrameTime": 10.577,
+     "GPU/AllocateRendertargets": 0.0,
+     "GPU/Basepass": 3.774,
+     "GPU/BeginOcclusionTests": 0.0,
+     "GPU/BuildRenderingCommandsDeferred": -0.01,
+     "GPU/CaptureConvolveSkyEnvMap": -0.006,
+     "GPU/CompositionPreLighting": 0.0,
+     "GPU/DistanceFields": 0.0,
+     "GPU/FXSystemPostRenderOpaque": 0.0,
+     "GPU/FXSystemPreRender": 0.0,
+     "GPU/GPUSceneUpdate": 0.0,
+     "GPU/HZB": 0.005,
+     "GPU/LightFunctionAtlasGeneration": 0.0,
+     "GPU/LightGrid": 0.002,
+     "GPU/Lights": 0.873,
+     "GPU/PostRenderOpsFX": 0.0,
+     "GPU/Postprocessing": 0.035,
+     "GPU/Prepass": 1.233,
+     "GPU/RayTracingGeometry": 0.0,
+     "GPU/ReflectionEnvironment": 0.85,
+     "GPU/RenderDeferredLighting": 0.148,
+     "GPU/SSAO": -0.22,
+     "GPU/SSAOSetup": 0.107,
+     "GPU/ScreenSpaceReflections": 0.019,
+     "GPU/ShadowDepths": 3.088,
+     "GPU/ShadowProjection": 0.751,
+     "GPU/SkyAtmosphere": -0.257,
+     "GPU/SkyAtmosphereLUTs": 0.0,
+     "GPU/SlateUI": -0.001,
+     "GPU/TAA": 0.029,
+     "GPU/Translucency": 0.017,
+     "GPU/TranslucentLighting": -0.003,
+     "GPU/Unaccounted": 0.016,
+     "GPU/VirtualTextureUpdate": 0.0,
+     "GPU/VisibilityCommands": 0.0
+    },
+    {
+     "tag": "p1r2",
+     "GPUTime": 10.568,
+     "FrameTime": 10.764,
+     "GPU/AllocateRendertargets": 0.0,
+     "GPU/Basepass": 3.761,
+     "GPU/BeginOcclusionTests": 0.0,
+     "GPU/BuildRenderingCommandsDeferred": -0.006,
+     "GPU/CaptureConvolveSkyEnvMap": -0.008,
+     "GPU/CompositionPreLighting": 0.0,
+     "GPU/DistanceFields": 0.0,
+     "GPU/FXSystemPostRenderOpaque": 0.0,
+     "GPU/FXSystemPreRender": 0.0,
+     "GPU/GPUSceneUpdate": 0.0,
+     "GPU/HZB": 0.005,
+     "GPU/LightFunctionAtlasGeneration": 0.0,
+     "GPU/LightGrid": 0.003,
+     "GPU/Lights": 0.863,
+     "GPU/PostRenderOpsFX": 0.0,
+     "GPU/Postprocessing": 0.031,
+     "GPU/Prepass": 1.233,
+     "GPU/RayTracingGeometry": 0.0,
+     "GPU/ReflectionEnvironment": 0.855,
+     "GPU/RenderDeferredLighting": 0.158,
+     "GPU/SSAO": -0.102,
+     "GPU/SSAOSetup": 0.119,
+     "GPU/ScreenSpaceReflections": 0.025,
+     "GPU/ShadowDepths": 3.079,
+     "GPU/ShadowProjection": 0.746,
+     "GPU/SkyAtmosphere": -0.255,
+     "GPU/SkyAtmosphereLUTs": 0.0,
+     "GPU/SlateUI": 0.0,
+     "GPU/TAA": 0.046,
+     "GPU/Translucency": -0.011,
+     "GPU/TranslucentLighting": 0.001,
+     "GPU/Unaccounted": 0.018,
+     "GPU/VirtualTextureUpdate": 0.0,
+     "GPU/VisibilityCommands": 0.0
+    }
+   ],
+   "gpu_delta_mean_ms": 10.546,
+   "gpu_delta_min_ms": 10.524,
+   "gpu_delta_max_ms": 10.568
+  }
+ }
+}

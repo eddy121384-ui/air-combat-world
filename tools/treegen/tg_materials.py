@@ -1,4 +1,4 @@
-﻿"""Procedural materials for the golden-reference trees (Cycles). All patterns are UV-driven so they can
+"""Procedural materials for the golden-reference trees (Cycles). All patterns are UV-driven so they can
 later be baked to game textures. Colours are linear-RGB values chosen against reference photos."""
 from __future__ import annotations
 

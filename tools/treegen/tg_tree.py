@@ -302,7 +302,7 @@ def _catmull(pts, rads, sub):
     return op, orad
 
 
-def mesh_branches(sk, min_radius=0.0, flare=None, bark_tile=0.6, rng=None):
+def mesh_branches(sk, min_radius=0.0, flare=None, bark_tile=0.6, rng=None, sides_fn=None, sub_fn=None):
     """Return (verts, faces, uvs, attrs) numpy arrays for all chains with radius >= min_radius.
 
     flare: callable(z, angle) -> radius multiplier for the trunk chain base (root flare / buttress).
@@ -318,12 +318,18 @@ def mesh_branches(sk, min_radius=0.0, flare=None, bark_tile=0.6, rng=None):
             rads[0] = rads[1]  # attach ring uses the child's radius (sits inside the parent)
         if max(rads) < min_radius:
             continue
+        if min_radius > 0:
+            # game LODs: cut the thin end of a chain (foliage cards carry their own twigs)
+            keep = len(rads)
+            while keep > 2 and rads[keep - 1] < 0.6 * min_radius:
+                keep -= 1
+            pts, rads = pts[:keep], rads[:keep]
         is_trunk = sk.parent[ch[0]] == -1
         if is_trunk:
             trunk_chain = ch
-        sub = 3 if rads[0] > 0.05 else (2 if rads[0] > 0.015 else 1)
+        sub = sub_fn(rads[0]) if sub_fn else (3 if rads[0] > 0.05 else (2 if rads[0] > 0.015 else 1))
         pts, rads = _catmull(pts, rads, sub)
-        n = _sides(rads[0])
+        n = sides_fn(rads[0]) if sides_fn else _sides(rads[0])
         repeats = max(1, round(2 * math.pi * rads[0] / bark_tile))
         # parallel-transport frames
         tang = []

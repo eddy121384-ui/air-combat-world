@@ -1,4 +1,4 @@
-﻿"""Shared Blender look-dev stage for single-tree review renders (Cycles, headless).
+"""Shared Blender look-dev stage for single-tree review renders (Cycles, headless).
 
 Every tree is rendered on the same stage: physical sky + sun, neutral grass ground, a 1.7 m scale
 figure, fixed exposure, and four auto-framed cameras (front, oblique, top, close).

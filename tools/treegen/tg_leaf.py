@@ -1,4 +1,4 @@
-﻿"""Leaf blades and leafy twig-spray prototypes (instanced on the skeleton tips).
+"""Leaf blades and leafy twig-spray prototypes (instanced on the skeleton tips).
 
 Local spray frame: +Z = growth direction of the spray, +Y = the side that faces the sky.
 Each prototype is one mesh with material slots 0 = leaf, 1 = twig; per-point attributes
