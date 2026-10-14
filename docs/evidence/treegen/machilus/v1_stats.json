@@ -1,0 +1,117 @@
+{
+ "params": {
+  "seed": 20261014,
+  "height_fork": 2.7,
+  "trunk_lean": [
+   0.18,
+   0.06
+  ],
+  "n_limbs": 5,
+  "limb_len": [
+   3.2,
+   4.8
+  ],
+  "limb_elev": [
+   36,
+   60
+  ],
+  "leader": true,
+  "shell_c": [
+   0.0,
+   0.0,
+   7.1
+  ],
+  "shell_r": [
+   6.4,
+   6.1,
+   5.2
+  ],
+  "n_lobes": 22,
+  "lobe_r": [
+   1.9,
+   2.8
+  ],
+  "lobe_zf": 0.9,
+  "lobe_elev": [
+   -48,
+   86
+  ],
+  "lobe_frac": [
+   0.7,
+   0.93
+  ],
+  "core_frac": 0.82,
+  "dome": {
+   "c": [
+    0.0,
+    0.0,
+    4.8
+   ],
+   "r_xy": [
+    7.6,
+    7.3
+   ],
+   "rz_up": 9.4,
+   "rz_dn": 2.9,
+   "q_up": 1.35,
+   "asym": {
+    "r1": 0.1,
+    "a1": 2.4,
+    "r2": 0.07,
+    "a2": 0.6,
+    "z1": 0.1,
+    "az": 2.0
+   }
+  },
+  "limb_stagger_nodes": 3,
+  "attr_n": 52000,
+  "attr_zmin": 2.3,
+  "surface_bias": 0.55,
+  "keep_floor": 0.08,
+  "seg": 0.2,
+  "influence": 1.7,
+  "kill": 0.32,
+  "tropism": [
+   0.0,
+   0.0,
+   0.1
+  ],
+  "r_tip": 0.006,
+  "pipe_exp": 2.35,
+  "r_root": 0.3,
+  "spray_back_prob": 0.85,
+  "sprays_back": 3,
+  "shell_depth": 1.1,
+  "interior_keep": 0.45,
+  "spray_scale": [
+   0.85,
+   1.2
+  ]
+ },
+ "stats": {
+  "sc_iterations": 47,
+  "nodes": 19799,
+  "attractors": 52000,
+  "lobes": 23,
+  "trunk_radius_base_m": 0.29999999999999993,
+  "build_skeleton_s": 16.9,
+  "branch_tris": 298384,
+  "sprays": 15456,
+  "tips": 4578,
+  "proto_tris": [
+   1496,
+   1190,
+   1832,
+   884,
+   1826,
+   1496,
+   398,
+   1200
+  ],
+  "instanced_spray_tris": 19900140,
+  "total_tris": 20198524,
+  "leaves": 591826,
+  "height_m": 14.1,
+  "spread_m": 15.69
+ }
+}
