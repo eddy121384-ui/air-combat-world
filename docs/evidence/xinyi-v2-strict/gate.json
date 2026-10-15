@@ -1,0 +1,83 @@
+{
+  "verdict": "FAIL",
+  "ready_for_full_xinyi": false,
+  "source_sha256": "c7ca8da13a4c5baaab0fbd1fcfe5b3799723d49d1998f804cf1593904f70200d",
+  "same_80_parts_as_baseline": true,
+  "selected_parts": 80,
+  "selected_unique_buildings": 79,
+  "float64_pass": 80,
+  "float32_pass": 76,
+  "float32_fail": 4,
+  "failure_details": [
+    {
+      "building_id": "tp_building_height.296019",
+      "polygon_index": 0,
+      "repaired_part_index": 0,
+      "stage": "float32_glb_roundtrip",
+      "failures": [
+        "roof_normal_not_up:1",
+        "base_normal_not_down:1",
+        "roof_overlapping_triangles",
+        "base_overlapping_triangles"
+      ]
+    },
+    {
+      "building_id": "tp_building_height.269609",
+      "polygon_index": 0,
+      "repaired_part_index": 0,
+      "stage": "float32_glb_roundtrip",
+      "failures": [
+        "roof_normal_not_up:1",
+        "base_normal_not_down:1",
+        "roof_overlapping_triangles",
+        "base_overlapping_triangles"
+      ]
+    },
+    {
+      "building_id": "tp_building_height.295251",
+      "polygon_index": 0,
+      "repaired_part_index": 0,
+      "stage": "float32_glb_roundtrip",
+      "failures": [
+        "roof_normal_not_up:1",
+        "base_normal_not_down:1",
+        "roof_overlapping_triangles",
+        "base_overlapping_triangles"
+      ]
+    },
+    {
+      "building_id": "tp_building_height.269018",
+      "polygon_index": 0,
+      "repaired_part_index": 0,
+      "stage": "float32_glb_roundtrip",
+      "failures": [
+        "roof_normal_not_up:1",
+        "base_normal_not_down:1",
+        "roof_overlapping_triangles",
+        "base_overlapping_triangles"
+      ]
+    }
+  ],
+  "raw_glb_totals": {
+    "zero_area_triangles": 0,
+    "wrong_roof_triangles": 4,
+    "wrong_base_triangles": 4,
+    "nonfinite_vertices": 0,
+    "wrong_wall_triangles": 0
+  },
+  "blender": {
+    "status": "not_run_numerical_gate_failed",
+    "zero_area": null,
+    "wrong_caps": null,
+    "nonfinite_vertices": null,
+    "holes_preserved": null,
+    "visual_inspection": "not_run",
+    "screenshots": []
+  },
+  "full_xinyi": "not_run",
+  "unreal": "not_run",
+  "tests": {
+    "passed": 23,
+    "skipped": 0
+  }
+}

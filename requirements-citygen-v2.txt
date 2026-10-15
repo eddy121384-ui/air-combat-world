@@ -1,0 +1,7 @@
+# Xinyi robust whitebox v2 geometry stack.
+# Pinned so the spike is reproducible across home and CI.
+numpy==2.3.5
+shapely==2.1.2
+trimesh==5.1.0
+mapbox-earcut==2.1.0
+pyproj==3.7.2

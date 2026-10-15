@@ -6,6 +6,8 @@
 /data/generated/taipei/worldmodel_sample.json
 /data/generated/taipei/*.glb
 /data/generated/taipei/*.report.json
+/data/generated/taipei/sample_buildings_epsg3826.geojson
+/data/generated/taipei/sample_buildings_epsg3826.manifest.json
 /godot/greybox/assets/*.glb
 
 # Python noise

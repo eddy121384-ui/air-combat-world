@@ -1,0 +1,241 @@
+{
+  "baseline_glb_sha256": "dae3eff4608c5842e7fc5cf180d6e0a2e33975711301b4d7d27cb172e449cc84",
+  "baseline_report_sha256": "93188ca4e77882aa93d77b50f62d8ee8e7e43462f808d81c53f40c59d9a75d56",
+  "source_sha256": "c7ca8da13a4c5baaab0fbd1fcfe5b3799723d49d1998f804cf1593904f70200d",
+  "raw_buffer_decoder": "struct/NumPy accessors, no trimesh loader or mesh repair",
+  "raw_glb_parts_pass": 76,
+  "raw_glb_parts_fail": 4,
+  "raw_glb_totals": {
+    "zero_area_triangles": 0,
+    "wrong_roof_triangles": 4,
+    "wrong_base_triangles": 4,
+    "nonfinite_vertices": 0,
+    "wrong_wall_triangles": 0
+  },
+  "failures": [
+    {
+      "building_id": "tp_building_height.296019",
+      "polygon_index": 0,
+      "repaired_part_index": 0,
+      "failures": [
+        "roof_normal_not_up:1",
+        "base_normal_not_down:1",
+        "roof_overlapping_triangles",
+        "base_overlapping_triangles"
+      ],
+      "identical_face_indices": true,
+      "max_coordinate_rounding_m": 3.0276161282927205e-05,
+      "cap_overlap_m2": 4.263781011104584e-05,
+      "flipped_roof_triangles": [
+        {
+          "face_index": 68,
+          "signed_area_float64_m2": 1.5922628914921688e-05,
+          "signed_area_float32_m2": -4.263781011104584e-05,
+          "float64_triangle_gltf_m": [
+            [
+              930.2262779207308,
+              14.89,
+              -584.668746565319
+            ],
+            [
+              926.4581133256814,
+              14.89,
+              -589.3783660766098
+            ],
+            [
+              922.8444550629803,
+              14.89,
+              -593.8948682586686
+            ]
+          ],
+          "raw_float32_triangle_gltf_m": [
+            [
+              930.2262573242188,
+              14.890000343322754,
+              -584.6687622070312
+            ],
+            [
+              926.4581298828125,
+              14.890000343322754,
+              -589.3783569335938
+            ],
+            [
+              922.844482421875,
+              14.890000343322754,
+              -593.8948974609375
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "building_id": "tp_building_height.269609",
+      "polygon_index": 0,
+      "repaired_part_index": 0,
+      "failures": [
+        "roof_normal_not_up:1",
+        "base_normal_not_down:1",
+        "roof_overlapping_triangles",
+        "base_overlapping_triangles"
+      ],
+      "identical_face_indices": true,
+      "max_coordinate_rounding_m": 3.0201657637007884e-05,
+      "cap_overlap_m2": 5.983747541904449e-07,
+      "flipped_roof_triangles": [
+        {
+          "face_index": 145,
+          "signed_area_float64_m2": 3.658346084595143e-06,
+          "signed_area_float32_m2": -5.983747541904449e-07,
+          "float64_triangle_gltf_m": [
+            [
+              -489.0614370314096,
+              14.86,
+              490.4988053282664
+            ],
+            [
+              -488.7902262542614,
+              14.86,
+              490.84736268850367
+            ],
+            [
+              -488.5189159614816,
+              14.86,
+              491.19602096734747
+            ]
+          ],
+          "raw_float32_triangle_gltf_m": [
+            [
+              -489.0614318847656,
+              14.859999656677246,
+              490.4988098144531
+            ],
+            [
+              -488.79022216796875,
+              14.859999656677246,
+              490.84735107421875
+            ],
+            [
+              -488.5189208984375,
+              14.859999656677246,
+              491.1960144042969
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "building_id": "tp_building_height.295251",
+      "polygon_index": 0,
+      "repaired_part_index": 0,
+      "failures": [
+        "roof_normal_not_up:1",
+        "base_normal_not_down:1",
+        "roof_overlapping_triangles",
+        "base_overlapping_triangles"
+      ],
+      "identical_face_indices": true,
+      "max_coordinate_rounding_m": 3.0239484885896672e-05,
+      "cap_overlap_m2": 5.997717380523682e-07,
+      "flipped_roof_triangles": [
+        {
+          "face_index": 57,
+          "signed_area_float64_m2": 1.3480441716610947e-05,
+          "signed_area_float32_m2": -5.997717380523682e-07,
+          "float64_triangle_gltf_m": [
+            [
+              583.4415284612593,
+              15.58,
+              -779.4309145020138
+            ],
+            [
+              583.4591873380341,
+              15.58,
+              -779.9232882509864
+            ],
+            [
+              583.4745895123493,
+              15.58,
+              -780.3542662395867
+            ]
+          ],
+          "raw_float32_triangle_gltf_m": [
+            [
+              583.4415283203125,
+              15.579999923706055,
+              -779.430908203125
+            ],
+            [
+              583.4591674804688,
+              15.579999923706055,
+              -779.9232788085938
+            ],
+            [
+              583.474609375,
+              15.579999923706055,
+              -780.354248046875
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "building_id": "tp_building_height.269018",
+      "polygon_index": 0,
+      "repaired_part_index": 0,
+      "failures": [
+        "roof_normal_not_up:1",
+        "base_normal_not_down:1",
+        "roof_overlapping_triangles",
+        "base_overlapping_triangles"
+      ],
+      "identical_face_indices": true,
+      "max_coordinate_rounding_m": 1.449684037879706e-05,
+      "cap_overlap_m2": 1.6834819689393044e-05,
+      "flipped_roof_triangles": [
+        {
+          "face_index": 5,
+          "signed_area_float64_m2": 2.8823507085329325e-05,
+          "signed_area_float32_m2": -1.6834819689393044e-05,
+          "float64_triangle_gltf_m": [
+            [
+              -154.8539740774945,
+              3.5,
+              290.5180084681076
+            ],
+            [
+              -147.50756792275445,
+              3.5,
+              290.5751016221337
+            ],
+            [
+              -147.6455872215108,
+              3.5,
+              290.57402114769087
+            ]
+          ],
+          "raw_float32_triangle_gltf_m": [
+            [
+              -154.85397338867188,
+              3.5,
+              290.51800537109375
+            ],
+            [
+              -147.507568359375,
+              3.5,
+              290.5751037597656
+            ],
+            [
+              -147.6455841064453,
+              3.5,
+              290.57403564453125
+            ]
+          ]
+        }
+      ]
+    }
+  ],
+  "cause": "Near-collinear cap triangles reverse signed area under global-coordinate float32 quantization; topology and positive volume alone do not detect this.",
+  "blender": "not_run_numerical_gate_failed",
+  "screenshots": [],
+  "final_verdict": "FAIL; not ready for full Xinyi tiled generation"
+}

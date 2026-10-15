@@ -1,0 +1,69 @@
+name: Xinyi Whitebox Preview
+
+on:
+  push:
+    branches:
+      - feat/xinyi-robust-whitebox-v2
+    paths:
+      - "tools/preview/xinyi_blender_preview.py"
+      - ".github/workflows/xinyi-preview.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download validated full-Xinyi artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: xinyi-v2-full-evidence
+          path: unreal/Saved/XinyiV2Full
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          repository: ${{ github.repository }}
+          run-id: 35557915078
+
+      - name: Download pinned official Blender 5.2.0
+        run: |
+          set -euo pipefail
+          curl --fail --location --retry 3 \
+            https://download.blender.org/release/Blender5.2/blender-5.2.0-linux-x64.tar.xz \
+            --output blender-5.2.0-linux-x64.tar.xz
+          curl --fail --location --retry 3 \
+            https://download.blender.org/release/Blender5.2/blender-5.2.0.sha256 \
+            --output blender-5.2.0.sha256
+          grep 'blender-5.2.0-linux-x64.tar.xz' blender-5.2.0.sha256 | sha256sum --check -
+          tar -xf blender-5.2.0-linux-x64.tar.xz
+
+      - name: Install headless Mesa / EGL runtime
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends libegl1 libgl1 libgl1-mesa-dri
+
+      - name: Render readable whitebox previews
+        env:
+          LIBGL_ALWAYS_SOFTWARE: "1"
+          MESA_LOADER_DRIVER_OVERRIDE: llvmpipe
+        run: |
+          mkdir -p unreal/Saved/XinyiV2Preview
+          ./blender-5.2.0-linux-x64/blender \
+            --background \
+            --factory-startup \
+            --python-exit-code 2 \
+            --python tools/preview/xinyi_blender_preview.py \
+            -- \
+            --tiles unreal/Saved/XinyiV2Full/run-01/tiles \
+            --out unreal/Saved/XinyiV2Preview
+
+      - name: Upload whitebox previews
+        uses: actions/upload-artifact@v4
+        with:
+          name: xinyi-v2-whitebox-preview
+          if-no-files-found: error
+          path: unreal/Saved/XinyiV2Preview/*.png
