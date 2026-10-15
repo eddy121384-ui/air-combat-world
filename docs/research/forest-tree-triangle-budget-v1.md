@@ -4,18 +4,22 @@ Branch `research/forest-tree-lod-budget-v1`, stacked on `lookdev/forest-assets-v
 system, no new species, no Xinyi / ForestSpike changes, no merge. PR #30 evidence (golden `.blend` sha256 `510F8D10…EB98833`, verified unchanged before
 and after every Blender run here) and the UE LOD0/1/2 baseline are kept as the fixed reference.
 
-> Draft for review. Host scope everywhere: **Intel UHD 770 iGPU, UE 5.8, standalone `-game` 1080p** — no statement about discrete GPUs, consoles or phones.
+> Draft for review (revision 2: corrected patch perf `q2`, moving-camera gate §11). Host scope everywhere: **Intel UHD 770 iGPU, UE 5.8, standalone `-game` 1080p** — no statement about discrete GPUs, consoles or phones.
 
 ## 0. Short answer
 
 **Is the current 紅楠 too heavy? Yes — for flight and forest use — but not in the way the triangle counts suggest.**
 
 1. **Against the industry (grade [V]/[C], no flight title's per-tree numbers are public).** Game-ready trees ship at LOD0 ≈ 7–25 k, LOD1 ≈ 4–11 k, LOD2 ≈ 1–5 k triangles and a far billboard / impostor of 8–117 triangles (§2.2). Our LOD0 (129 k) is ~5–18× that range; our LOD1 (36.7 k) is bigger than a typical LOD0; our LOD2 (4.3 k) is normal; we have **no far representation**.
-2. **LOD0 is not the problem.** 34 k triangles (same 紅楠 cards; no visible loss in the front view, coarser leaves only at the 2–3 m close-up) cost only **17 % less** GPU than 129 k in the front view (+11.0 → +9.1 ms), because near trees are **masked-card fill-bound** (same card area, same ~16 layers). It is also the LOD a flying player sees for ~0.2 s (§2.4). It matters for memory (mesh 6.9 → 2.2 MB), not for flight performance.
-3. **LOD1 (52–175 m) is the LOD most worth improving.** In the 100-tree same-tree patch at 150 m slant (55 trees on LOD1, 43 on LOD2): baseline **+25.0 ms** → LOD1 cut to 14.8 k (candidate D) **+14.3 ms (−43 %)** with a crown that stays close to the baseline; → LOD1 cut to 4.9 k (candidate B) **+6.0 ms (−76 %)** but the crown becomes visibly sparser and paler (§6.3). A good LOD1 has to cut *both* triangles and card area; fewer-but-bigger cards only cut triangles.
-4. **The cost regime flips with distance.** Near (front, close) the cost is fill-rate (overdraw). From ~150 m the cards are smaller than a pixel and, over 16 patch configurations, GPU time tracks **submitted triangles** (8–21 ms per million triangles) far better than masked fragments (0.2–9 ms per million, a 45× spread) (§6.5). PR #30's "not triangles" is right for the near view and **not** a safe rule for the mid/far band.
-5. **Far trees dissolve and cost the most per pixel of information.** The baseline LOD2 loses its crown at 500–1000 m (cards sub-pixel, mips eat the alpha). A 534-triangle far LOD with big cards held a rounder crown and cost **~5× less** in the 1000 m patch (+0.59 vs +3.53 ms). This is a cheap stop-gap; an impostor (Epic's Impostor Baker, Fortnite precedent) is the mature answer and **could not be tested** here (§6.6).
+2. **LOD0 is not the problem.** 34 k triangles (same 紅楠 cards; no visible loss in the front view, coarser leaves only at the 2–3 m close-up) cost only **16 % less** GPU than 129 k in the front view (+10.8 → +9.0 ms), because near trees are **masked-card fill-bound** (same card area, same ~16 layers). It is also the LOD a flying player sees for ~0.2 s (§2.4). It matters for memory (mesh 6.9 → 2.2 MB), not for flight performance.
+3. **LOD1 (52–175 m) is the LOD most worth improving.** In the 100-tree same-tree patch at 150 m slant (55 trees on LOD1, 43 on LOD2): baseline **+48.2 ms** → LOD1 cut to 14.8 k (candidate D) **+34.8 ms (−28 %)** with a crown that stays close to the baseline; → LOD1 cut to 4.9 k (candidate B) **+17.9 ms (−63 %)** but the crown becomes visibly sparser and paler (§6.3). A good LOD1 has to cut *both* triangles and card area; fewer-but-bigger cards only cut triangles.
+4. **Both terms matter, and the balance flips with distance.** Near (front, close) the cost is fill-rate (overdraw). From ~300 m, where cards are smaller than a pixel, a two-term fit over 16 patch configurations (≈ 10.5 ms per million triangles + 0.43 ms per million masked fragments + 2.4 ms, R² 0.98; triangles alone 0.80, fragments alone 0.83) says triangle count is a real cost too. PR #30's "not triangles" is right for the near view and **not** a safe rule for the mid/far band (§6.5; exploratory, one iGPU).
+5. **Far trees dissolve and cost the most per pixel of information.** The baseline LOD2 loses its crown at 500–1000 m (cards sub-pixel, mips eat the alpha). A 534-triangle far LOD with big cards held a rounder crown and cost **~3.7× less** in the 1000 m patch (+1.28 / +1.38 vs +4.76 ms). This is a cheap stop-gap; an impostor (Epic's Impostor Baker, Fortnite precedent) is the mature answer and **could not be tested** here (§6.6).
 6. **No whole-screen forest number can be derived.** The patch costs above are one tree repeated 100×, one iGPU. Single-tree triangles do not give forest FPS; §8 lists what is unknown and the smallest next experiment.
+
+7. **Moving-camera gate (follow-up, §11):** flying A and D over the patch at 100–250 m/s through the ~175 m and ~430 m switches in native Movie Render Queue frames, D stays close to A (crown+shadow footprint within 1.4 %, tree luminance ≈ 1.5 % darker, equal step statistics at the shared 172 m switch, no measurable 430 m switch, flicker proxy 2–7 % higher) and costs **40–61 % less** tree GPU time at the median and **26–36 % less at p95**. D is supported as the next-stage candidate asset, pending visual acceptance of the videos.
+
+> **Correction (this update).** The first revision's patch GPU numbers were measured with the leaf/bark materials not flagged for instanced static meshes, so the HISM patch drew the engine's default grey material. All patch runs were repeated (`q2`); rankings are unchanged, magnitudes are ~1.5–2.7× higher, the "tracks triangles" statement became the two-term reading above. Details in §6.5 and §10.
 
 Provisional single-tree budget for PC (high), **to be validated, not accepted**: LOD0 ≤ ~35 k (< ~50 m), LOD1 ~10–15 k (50–175 m), LOD2 ~2–4 k (175–430 m), far ≤ ~0.5 k or an 8-triangle impostor (> ~430 m). PC (mid) and phones are hypotheses only (§8).
 
@@ -199,57 +203,59 @@ B's LOD1 holes are larger than the golden's natural gaps and are the main visibl
 
 At 1000 m slant the baseline LOD2 (1,391 small cards, ×3.3) turns into a sparse scatter of dark pixels — the crown outline is gone. B, C and D (fewer but ×4–9 larger cards) keep a rounder outline; B and C show a hollow centre. Same mechanism as PR #30 §7 item 7 (forced LOD0 dissolving at 200 m). So the far problem is partly a *representation* problem: fewer, bigger cards are better than many small ones in the sub-pixel regime, and an aggregate / impostor is the standard fix (§2.3).
 
-### 6.5 GPU cost (UHD 770, tree − empty, 3 interleaved rounds, mean [min..max] ms; pass columns over frames 60–209)
+### 6.5 GPU cost (UHD 770, tree − empty, 3 interleaved rounds, mean [min..max] ms; pass columns over frames 60–209) — **re-measured, `q2`**
 
-Empty-stage GPU time per round (ms): front 25.8 / 25.6 / 26.2; sl150 33.3 / 32.7 / 33.0; sl300 32.4 / 32.2 / 33.1; sl500 31.2 / 31.5 / 31.7; sl1000 29.9 / 29.8 / 29.8 (SSAO alone is ~7 ms of it on this iGPU).
+> **Correction.** The first revision of this document reported numbers from run set `q1`. Those patch (HISM) runs were standalone `-game` with `M_TL_LeafCards` / `M_TL_Bark` **not flagged "Used with Instanced Static Meshes"** in the saved asset (the editor sets the flag only in memory), so the HISM patch drew the engine's default grey opaque material instead of the masked foliage — cheaper than the real thing and with no alpha test. It was found when the moving-camera frames (§11) showed flat grey cards. The flag is now saved (`tl_fix_material_usage.py`), all runs were repeated (`q2`, same schedule, same host), and the old file is kept as `budget_perf_q1_INVALID_default_grey_material.json`. Rankings are unchanged; patch costs are ~1.5–2.7× higher; the "cost tracks triangles" statement of the first revision is replaced below. Editor captures (§6.3) and the plain-`StaticMeshComponent` single-tree rows were not affected.
+
+Empty-stage GPU time per round (ms): front 26.3 / 25.8 / 26.4; sl150 32.6 / 32.9 / 32.5; sl300 32.9 / 32.4 / 32.2; sl500 31.3 / 31.2 / 31.3; sl1000 30.6 / 30.0 / 29.5 (SSAO alone is ~7 ms of it on this iGPU).
 
 | view | form | cand | GPU Δ | Prepass | Basepass | ShadowDepths |
 |---|---|---|---:|---:|---:|---:|
-| front | single | A | **+11.00** [+10.44..+11.75] | +1.24 | +3.74 | +3.17 |
-| front | single | C | **+9.09** [+8.72..+9.34] | +1.21 | +2.51 | +2.67 |
-| front | single | D | **+9.34** [+8.70..+10.11] | +1.21 | +2.52 | +2.71 |
-| sl150 | single | A | **+1.58** [+1.03..+2.49] | +0.19 | +0.56 | +0.72 |
-| sl150 | single | C | **+0.38** [+0.12..+0.70] | +0.04 | +0.15 | +0.14 |
-| sl150 | single | D | **+0.79** [+0.54..+1.10] | +0.12 | +0.32 | +0.43 |
-| sl150 | patch | A | **+24.98** [+24.81..+25.13] | +2.96 | +10.43 | +11.57 |
-| sl150 | patch | B | **+5.99** [+5.72..+6.30] | +0.77 | +2.96 | +2.23 |
-| sl150 | patch | C | **+6.14** [+5.90..+6.61] | +0.77 | +2.86 | +2.25 |
-| sl150 | patch | D | **+14.32** [+14.14..+14.62] | +1.79 | +6.26 | +6.27 |
-| sl300 | patch | A | **+5.88** [+5.22..+6.22] | +1.13 | +3.34 | +1.79 |
-| sl300 | patch | B | **+2.46** [+2.01..+2.73] | +0.39 | +1.46 | +0.79 |
-| sl300 | patch | C | **+3.02** [+2.60..+3.56] | +0.40 | +1.49 | +0.79 |
-| sl300 | patch | D | **+4.52** [+3.66..+5.70] | +0.67 | +2.49 | +1.36 |
-| sl500 | patch | A | **+4.71** [+4.44..+4.86] | +1.06 | +2.99 | +1.12 |
-| sl500 | patch | B | **+1.86** [+1.59..+2.11] | +0.31 | +1.18 | +0.45 |
-| sl500 | patch | C | **+1.42** [+1.04..+1.86] | +0.21 | +0.74 | +0.32 |
-| sl500 | patch | D | **+1.57** [+1.52..+1.64] | +0.28 | +1.00 | +0.29 |
-| sl1000 | patch | A | **+3.53** [+3.08..+3.88] | +0.82 | +2.99 | −0.27 |
-| sl1000 | patch | B | **+1.45** [+1.40..+1.48] | +0.16 | +0.37 | −0.20 |
-| sl1000 | patch | C | **+0.66** [+0.53..+0.74] | +0.10 | +0.32 | +0.03 |
-| sl1000 | patch | D | **+0.59** [+0.55..+0.61] | +0.10 | +0.31 | +0.04 |
+| front | single | A | **+10.78** [+10.20..+11.58] | +1.24 | +3.85 | +3.08 |
+| front | single | C | **+10.08** [+8.33..+13.44] | +1.21 | +2.66 | +2.84 |
+| front | single | D | **+9.04** [+8.31..+10.20] | +1.21 | +2.58 | +2.76 |
+| sl150 | single | A | **+4.61** [+1.97..+9.05] | +0.15 | +0.44 | +0.57 |
+| sl150 | single | C | **+0.53** [+0.23..+0.70] | +0.05 | +0.15 | +0.14 |
+| sl150 | single | D | **+1.12** [+0.82..+1.32] | +0.13 | +0.33 | +0.45 |
+| sl150 | patch | A | **+48.16** [+47.84..+48.73] | +6.61 | +19.96 | +19.01 |
+| sl150 | patch | B | **+17.87** [+17.67..+18.25] | +2.84 | +7.30 | +5.20 |
+| sl150 | patch | C | **+18.97** [+18.45..+19.81] | +2.85 | +7.40 | +5.24 |
+| sl150 | patch | D | **+34.81** [+34.55..+35.26] | +5.52 | +13.63 | +12.54 |
+| sl300 | patch | A | **+12.05** [+11.57..+12.47] | +2.21 | +6.56 | +3.06 |
+| sl300 | patch | B | **+7.00** [+6.62..+7.32] | +1.49 | +3.75 | +1.53 |
+| sl300 | patch | C | **+7.07** [+6.80..+7.23] | +1.50 | +3.80 | +1.53 |
+| sl300 | patch | D | **+10.64** [+10.26..+10.88] | +2.00 | +5.40 | +2.59 |
+| sl500 | patch | A | **+8.39** [+8.17..+8.62] | +1.66 | +5.08 | +1.77 |
+| sl500 | patch | B | **+4.83** [+4.57..+4.97] | +1.23 | +2.60 | +0.98 |
+| sl500 | patch | C | **+3.98** [+3.67..+4.42] | +0.98 | +1.89 | +0.90 |
+| sl500 | patch | D | **+4.77** [+3.99..+6.03] | +1.04 | +2.29 | +0.95 |
+| sl1000 | patch | A | **+4.76** [+4.52..+5.04] | +1.31 | +4.32 | −0.34 |
+| sl1000 | patch | B | **+2.59** [+1.96..+3.02] | +0.87 | +2.01 | +0.00 |
+| sl1000 | patch | C | **+1.38** [+1.18..+1.57] | +0.53 | +0.82 | +0.10 |
+| sl1000 | patch | D | **+1.28** [+0.92..+1.62] | +0.55 | +0.81 | +0.09 |
 
 Reading (this host only):
 
-* **Near / single tree is fill-bound.** Front: 129 k → 34 k triangles (−73 %) is −17 % GPU. Overdraw is unchanged (16.7 → 16.4 layers).
-* **Shadow depth is a large slice.** At `sl150` it is 46 % of A's patch delta (+11.6 of +25.0 ms) and 44 % of D's (+6.3 of +14.3); the level's dynamic shadow distance is 600 m, so it is ~0 at 1000 m. Masked cards cast into the cascades.
-* **Patch cost tracks submitted triangles, not fragments.** Triangles per frame (sum over patch trees of the LOD each tree uses) and masked fragments (offline rasteriser × 1/d² footprint scaling; `fragment_model.md`):
+* **Near / single tree is fill-bound.** Front: 129 k → 34 k triangles (−73 %) is only −16 % GPU for D (+10.8 → +9.0 ms). Overdraw is unchanged (16.7 → 16.4 layers).
+* **Shadow depth is a large slice.** At `sl150` it is 39 % of A's patch delta (+19.0 of +48.2 ms) and 36 % of D's (+12.5 of +34.8 ms); the level's dynamic shadow distance is 600 m, so it is ~0 at 1000 m. Masked cards cast into the cascades.
+* **Neither triangles nor masked fragments alone explain the patch cost; both terms do.** Triangles per frame (sum over patch trees of the LOD each tree uses) and masked fragments (offline rasteriser × 1/d² footprint scaling; `fragment_model.md`), 16 patch configurations:
 
-| view | cand | triangles submitted (M) | masked fragments (M) | GPU Δ ms | ms per M triangles | ms per M fragments |
-|---|---|---:|---:|---:|---:|---:|
-| sl150 | A | 2.46 | 47.4 | +24.98 | 10.2 | 0.53 |
-| sl150 | B | 0.40 | 30.5 | +5.99 | 15.1 | 0.20 |
-| sl150 | D | 0.97 | 47.5 | +14.32 | 14.8 | 0.30 |
-| sl300 | A | 0.52 | 5.3 | +5.88 | 11.2 | 1.10 |
-| sl300 | D | 0.23 | 5.2 | +4.52 | 19.3 | 0.87 |
-| sl500 | A | 0.43 | 1.65 | +4.71 | 11.1 | 2.86 |
-| sl500 | C | 0.08 | 1.52 | +1.42 | 17.9 | 0.93 |
-| sl1000 | A | 0.43 | 0.39 | +3.53 | 8.3 | 8.97 |
-| sl1000 | C | 0.05 | 0.34 | +0.66 | 12.3 | 1.91 |
+| view | cand | triangles submitted (M) | masked fragments (M) | GPU Δ ms |
+|---|---|---:|---:|---:|
+| sl150 | A | 2.46 | 47.4 | +48.16 |
+| sl150 | B | 0.40 | 30.5 | +17.87 |
+| sl150 | D | 0.97 | 47.5 | +34.81 |
+| sl300 | A | 0.52 | 5.3 | +12.05 |
+| sl300 | D | 0.23 | 5.2 | +10.64 |
+| sl500 | A | 0.43 | 1.65 | +8.39 |
+| sl500 | C | 0.08 | 1.52 | +3.98 |
+| sl1000 | A | 0.43 | 0.39 | +4.76 |
+| sl1000 | C | 0.05 | 0.34 | +1.38 |
 
-  Over all 16 patch configurations (`fragment_model.md`) the cost per million triangles stays within 8.3–20.6 ms, while the cost per million fragments spans 0.2–9.0 ms. A and D have the *same* fragment count at `sl150` (47 M) but cost +25.0 vs +14.3 ms, i.e. fewer triangles at equal fragments lowers cost here. These are 16 correlated points on one iGPU with candidates that change triangles, card count and layers together; this shows tracking, not an isolated cause, and the per-triangle figure is **not** transferable to other GPUs. It does mean: from ~150 m, where cards are ≤ 1 px, **triangle (and card) count is a real cost on this host**, contrary to the near-view reading.
-* **LOD1 is where the money is at 150 m**: 55 of 100 patch trees. D saves 10.7 ms of A's 25.0 (−43 %); B saves 19.0 ms (−76 %).
-* **Far LOD**: C vs B at 1000 m (all trees LOD3 534 vs LOD2 1,400): +0.66 vs +1.45 ms (−54 %); vs A +3.53 (−81 %). At 500 m (70 / 30 split) the C/D gain over B is smaller (+1.4–1.6 vs +1.9).
-* **Noise / drift**: spread over the 3 rounds is below ±0.4 ms in most rows and up to ±1 ms for `sl300` C / D and `sl150` single A. PR #30 measured A single at 50 m AGL (slant ~152 m) +1.15 ms; here +1.58 [+1.03..+2.49] — host drift between sessions, so only interleaved same-session comparisons are used. Single-tree deltas at 150 m are within ~1 ms of noise: that single-tree ranking is **not** reliable; the patch rows are.
+  Least squares over all 16 points (`cost_fit_q2.txt`): triangles only R² = 0.80, fragments only R² = 0.83, **both R² = 0.96**, both + constant **GPU Δ ≈ 10.5 ms/M triangles + 0.43 ms/M fragments + 2.4 ms, R² = 0.98**. That is an exploratory two-term fit of 16 correlated points on one iGPU — candidates change triangles, card count and layers together; it is **not** transferable to other GPUs and not a validated model. What it supports: near the camera (large fragment counts) the fragment term dominates; from ~300 m, where cards are ≲ 1 px, the triangle term does, so far/mid LODs should be cut in triangles *and* card area, not in either alone. A and D have the *same* fragment count at `sl150` (47 M) but cost +48.2 vs +34.8 ms: at equal fragments, fewer triangles lowers cost.
+* **LOD1 is where the money is at 150 m**: 55 of 100 patch trees. D saves 13.4 ms of A's 48.2 (−28 %); B saves 30.3 ms (−63 %).
+* **Far LOD**: C vs B at 1000 m (all trees LOD3 534 vs LOD2 1,400): +1.38 vs +2.59 ms (−47 %); vs A +4.76 (−71 %); D +1.28 (−73 %). At 500 m (70 / 30 split) the C/D gain over B is smaller (+4.0–4.8 vs +4.8).
+* **Noise / drift**: spread over the 3 rounds is below ±0.5 ms in most patch rows and up to ±1.2 ms for `sl500` D; single-tree `sl150` A swings +1.97..+9.05 ms (PR #30 measured +1.15 ms in its own session), so single-tree deltas at 150 m are **not** reliable — the patch rows are. Only interleaved same-session comparisons are used.
 * **Pass columns**: `GPU/<pass>` columns stop updating after ~frame 209 on the heavy patch levels, so pass breakdowns use frames 60–209 for every run; GPUTime / FrameTime are stable from frame ~10 (`analyze_budget_perf.py`).
 
 ### 6.6 Hard-switch step size and the impostor attempt
@@ -266,7 +272,7 @@ Reading (this host only):
 | near–mid 5–20 k | 14.8 k (D) held the baseline look at 150 m; **4.9 k (B) did not** with the current card technique. The band's lower end needs a different LOD1 construction (cut-out / cluster cards), not just fewer cards. |
 | mid–far 0.5–4 k | 1.4–2.0 k at 175–430 m held the crown shape at 300 m (B/C slightly lighter and bluer than A, D closest); 534 triangles at 500–1000 m kept a rounder crown than A's 4.3 k but is patchy / hollow on single trees. |
 | far: billboard / impostor | not measured (tooling blocked, §6.6). Published numbers say 8–117 triangles. |
-| "higher numbers are needed to keep quality" | not supported at LOD0 beyond ~50 m, nor at LOD1 beyond ~15 k, in these captures. LOD1 at ~15 k vs 37 k: no visible loss at 150 m, 43 % cheaper in the patch. |
+| "higher numbers are needed to keep quality" | not supported at LOD0 beyond ~50 m, nor at LOD1 beyond ~15 k, in these captures. LOD1 at ~15 k vs 37 k: no visible loss at 150 m, 28 % cheaper in the patch (B at 4.9 k: 63 % cheaper but visibly sparse). |
 
 ## 8. Provisional vegetation budget (proposal — nothing below is accepted or validated beyond what §6 states)
 
@@ -278,7 +284,7 @@ Per **tree** (triangles, current masked-card technique; switch slants inherited 
 | **PC mid** | ≤ ~15–20 k | ≤ ~5–7 k | ≤ ~1.5 k | ≤ ~0.5 k / impostor, switch distances ×0.6–0.7 | **hypothesis** from published 7–15 k LOD0 and "each step 30–40 %" (§2.2); B's 4.9 k LOD1 failed the visual check, so 5–7 k needs a new LOD1 construction |
 | **phone (high-end)** | ≤ ~1.5–3 k | ≤ ~0.6–1 k | impostor from ~100–150 m | impostor | **hypothesis only**, from published mobile figures (SpeedTree mobile 999; mobile pack 1.5–3 k; community "100–250 high / 2 tris far") — **not tested; the masked-card technique itself is unproven on mobile** |
 
-Per **screen** (visible forest): **cannot be stated.** The 100-tree patch above is one tree repeated, one iGPU, 1080p, CSM shadows; per-million-triangle costs are not transferable to other hardware, and a single tree's triangle count does not give forest FPS. Unknowns that block a reliable number:
+Per **screen** (visible forest): **cannot be stated.** The 100-tree patch above is one tree repeated, one iGPU, 1080p, CSM shadows; the per-million-triangle / per-million-fragment costs of the fit are not transferable to other hardware, and a single tree's triangle count does not give forest FPS. Unknowns that block a reliable number:
 
 1. cost vs forest density (thousands of instances, occlusion, species variety) and shadow-cascade cost at flight altitudes;
 2. HISM vs non-instanced (every patch here used HISM, so the instancing saving was not measured);
@@ -288,11 +294,11 @@ Per **screen** (visible forest): **cannot be stated.** The 100-tree patch above 
 6. Nanite Foliage on our target hardware (Experimental; Epic's masked-foliage caveat);
 7. the actual per-tree numbers of AC7 / AC8 / MSFS / War Thunder (not public).
 
-**Smallest next experiment toward a screen budget**: a thousands-of-instance HISM patch (e.g. 2,000–5,000 trees, chain D, three altitudes) on this host and, if possible, one discrete GPU, with the same CSV harness — report ms per 1,000 trees per distance band; then substitute the far band with an impostor and repeat. Treat the §6.5 per-triangle figures as hypotheses to check, not as a model.
+**Smallest next experiment toward a screen budget**: a thousands-of-instance HISM patch (e.g. 2,000–5,000 trees, chain D, three altitudes) on this host and, if possible, one discrete GPU, with the same CSV harness — report ms per 1,000 trees per distance band; then substitute the far band with an impostor and repeat. Treat the §6.5 two-term fit as a hypothesis to check, not as a model.
 
 ## 9. Next steps worth the effort (1–2)
 
-1. **Far / mid representation via Epic's Impostor Baker, run interactively.** The far band is triangle-bound on this host and the current cards dissolve at 500–1000 m. Bake an upper-hemisphere impostor from a copy of candidate D's LOD0 in the editor GUI, add it as candidate E to the existing harness (≈ one more mesh path + level + capture job), and measure the same patch and the 300–600 m transition against D's LOD2/LOD3. Decide LOD2/LOD3 vs impostor from that.
+1. **Far / mid representation via Epic's Impostor Baker, run interactively.** The far band is triangle-heavy on this host (two-term fit, §6.5) and the current cards dissolve at 500–1000 m. Bake an upper-hemisphere impostor from a copy of candidate D's LOD0 in the editor GUI, add it as candidate E to the existing harness (≈ one more mesh path + level + capture job), and measure the same patch and the 300–600 m transition against D's LOD2/LOD3. Decide LOD2/LOD3 vs impostor from that.
 2. **A LOD1 that cuts card area and triangles together.** LOD1 holds most of the patch cost at 150 m; D vs B shows the trade (look vs ms) is set by layer count. PR #30 already measured ~73 % of each card as transparent: alpha-fitted cut-out cards (SpeedTree "generate mesh" / Simplygon tight-fit precedent) or cluster cards, aiming for D's look at about B's cost; verify with `card_overdraw.py` first (cheap, offline), then the patch harness.
 
 Not recommended now: more LOD0 reduction work (little flight value), Nanite Foliage (Experimental, no Nanite hardware here), a general LOD framework.
@@ -324,6 +330,7 @@ Code changes (all opt-in; PR #30 default paths unchanged): `tools/treegen/machil
 Failures and deviations, kept visible:
 
 * Epic Impostor Baker: three probes, no output (§6.6).
+* **Revision 2:** the `q1` patch perf runs used the default grey material (leaf/bark not flagged "Used with Instanced Static Meshes" in the saved assets); found through the native flight frames, fixed with `tl_fix_material_usage.py`, all patch runs repeated as `q2`; `q1` kept as `budget_perf_q1_INVALID_default_grey_material.json`. `AutomatedLevelSequenceCapture` wrote no frames in this project (Movie Render Queue used instead). Re-saving a map over a deleted one failed once (`save_map`), so flight maps live in a fresh folder per revision. The `ImpostorBaker` / MRQ plugins are enabled in the `.uproject` (`MovieRenderPipeline` added for §11).
 * B's first LOD1 failed the visual check at 150 m → D added (not hidden).
 * The first `lod3` profile used `min_r = 0.30`, which removed all branches (`ValueError` in the generator); fixed to 0.18 (trunk + main limbs, 164 tris) and re-exported. The golden hash was re-verified after every Blender run.
 * `GPU/<pass>` CSV columns stop after ~209 frames on the heavy patch levels; one common 60–209 window is used for all runs (runs are 260 frames, originally planned 600).
@@ -332,3 +339,83 @@ Failures and deviations, kept visible:
 * Host drift between PR #30's session and this one (A single, 50 m AGL: +1.15 vs +1.58 ms) is why only interleaved same-session deltas are compared.
 
 Limits: one host (Intel UHD 770 + i7-12700), UE 5.8 CSM shadows, still images only, one tree species / one seed / one atlas, same-tree patch, no Nanite / VSM / Lumen, no discrete GPU, no phone, no impostor, no LOD cross-fade.
+
+## 11. Moving-camera visual gate (follow-up to review 5527203703)
+
+Request: keep A (baseline) and D (balanced) only; fly the camera over the 100-tree 紅楠 HISM patch at air-combat speed through the ~175 m and ~430 m LOD switches, native Unreal renders, compare A vs D for sudden crown change, leaf flicker, LOD-switch visibility, shadow jumps, and GPU frame time / p95. B and C are not part of this gate. Impostor stays a later optimisation.
+
+### 11.1 Flights (`tools/treegen/flight_paths.py`; UE units cm, patch at the origin, 60 fps fixed step, 90-frame stationary hold, then constant speed; every key linear)
+
+| id | path | speed | what it crosses (calculated, slant to the crown centre) |
+|---|---|---:|---|
+| `P1_250` | level inbound, AGL 120 m, pitch −12°, 900 m → −300 m along the approach bearing, over the patch centre | 250 m/s (900 km/h) | ~430 m (LOD3→LOD2, D only) then ~172 m (LOD2→LOD1, A and D); trees pass under/below the frame near the end |
+| `P2_250` | dive onto the patch centre: (800 m, 300 m AGL) → (100 m, 37.5 m AGL), nose on the line, pitch −20.6° | 250 m/s | both switches with the patch in the middle of the frame |
+| `P2_100` | same dive, slow | 100 m/s | same, 2.5× longer: easier to see temporal artefacts |
+| `P3_250` | lateral pass at 400 m offset, AGL 150 m (closest slant 427 m = the far-LOD boundary), always looking at the patch centre | 250 m/s | D's LOD2↔LOD3 boundary swept across many trees; A has no switch in this pass |
+
+### 11.2 Method, and three things found on the way
+
+* **Rendering:** native Movie Render Queue from a Level Sequence, standalone `-game`, 1920×1080, 60 fps fixed step, deferred pass, 1 spatial / 1 temporal sample, no AA override, no cinematic / LOD overrides — the ForestSpike B1a recipe (`tl_flight_build.py`, `tl_flight_mrq_configs.py`, `run_tlf_mrq.ps1`). `AutomatedLevelSequenceCapture` was tried first and wrote no frames in this project. A and D use the same map, camera, sequence and stage; an **empty** map (E) with the same sequence gives the tree mask. The step is fixed (simulated time): this is **not** a real-time cadence claim; at 37–70 ms GPU per frame on this iGPU the real-time playback would be 14–27 fps.
+* **Material usage flag (found here):** the first native frames showed flat grey cards — `M_TL_LeafCards` / `M_TL_Bark` were not saved with "Used with Instanced Static Meshes", so standalone `-game` drew the default material for HISM. Fixed (usage flag saved, graphs untouched) and the §6.5 patch runs repeated (see its correction note).
+* **Exposure:** the PR #30 stage (manual EV +0.8) was calibrated in editor SceneCapture; in native output the same stage is ~2 EV too bright (ground ≈ 2× brighter, crowns washed out). All flights use one global manual exposure bias of **−0.6 EV** on the existing PostProcessVolume, identical for A, D and E; nothing else about the stage changed. The still-image comparisons of §6 keep the PR #30 SceneCapture stage.
+
+### 11.3 What to look at (evidence you can watch)
+
+All in `docs/evidence/treegen/budget/flight/`: **side-by-side videos** (A left, D right, each panel 1280×720, overlay = frame, time, slant to the patch centre, calculated LOD mix, red bar at every calculated switch of ≥ 3 trees) — real time `flight_<path>_AvsD.mp4` and 4× slow motion `flight_<path>_AvsD_slow4x.mp4` for the four paths; **frame strips** `strip_<path>_<A|D>_f<frame>.jpg` (A over D, frames −4, −2, 0, +2, +4 around the largest switch events, native frames scaled to 640×360); charts `flight_chart_<path>.png`; numbers `flight_metrics.json`, `flight_pop_local.json`, `flight_perf.json`, `flight_tables.md`. 8 clips = 3 368 native PNG frames (plus 1 684 empty-stage frames); the PNGs themselves are not committed (regenerable).
+
+### 11.4 GPU time while flying (UHD 770; each row = mean over 3 interleaved rounds of that round's window statistic; window = flight frames shrunk by 15 on each side; Δ = same sequence frame, tree − empty)
+
+| path | cand | GPU median | GPU p95 | GPU max | Δ median | Δ p95 |
+|---|---|---:|---:|---:|---:|---:|
+| P1_250 | empty | 29.8 | 32.6 | – | – | – |
+| P1_250 | A | 36.8 | 41.6 | 46.9 | +6.6 | +12.0 |
+| P1_250 | D | **32.6** | **38.3** | 41.0 | **+2.6** | **+8.4** |
+| P2_250 | empty | 33.7 | 38.6 | – | – | – |
+| P2_250 | A | 41.3 | 70.7 | 78.8 | +7.8 | +35.9 |
+| P2_250 | D | **38.1** | **61.8** | 66.1 | **+4.7** | **+26.4** |
+| P2_100 | empty | 33.0 | 38.2 | – | – | – |
+| P2_100 | A | 42.7 | 79.3 | 90.3 | +9.6 | +45.5 |
+| P2_100 | D | **37.6** | **66.5** | 74.3 | **+4.5** | **+32.6** |
+| P3_250 | empty | 31.4 | 33.3 | – | – | – |
+| P3_250 | A | 40.2 | 42.8 | 44.9 | +8.6 | +10.8 |
+| P3_250 | D | **36.2** | **39.3** | 42.5 | **+4.8** | **+6.9** |
+
+D's tree cost is 40–61 % lower at the median and 26–36 % lower at p95 than A's in all four flights; p95 across rounds never overlaps (e.g. P2_250 A 69.0–72.6 vs D 60.2–62.7 ms). The large p95 of the two dives comes from the last ~1 s, when trees fill the frame (near, fill-bound; both candidates are on LOD0/LOD1 there); the empty stage alone already costs 30–34 ms on this iGPU, so only the A-vs-D difference carries meaning. FrameTime follows GPUTime (`flight_perf.json`). The CSV boot offset between sequence frame 0 and row 0 is not measured (±12 frames absorbed by the window margin). `GPU/<pass>` breakdowns are not available beyond ~209 frames.
+
+### 11.5 Image metrics, A vs D (960×540 luminance of the native frames; "footprint" = pixels differing from the empty stage = crowns + cast shadows; flight window)
+
+| path | footprint D/A | tree luminance A | tree luminance D | A-vs-D blurred MAD in footprint | flicker proxy D/A |
+|---|---:|---:|---:|---:|---:|
+| P1_250 | 0.986 | 0.2658 | 0.2620 | 0.0126 | 1.07 |
+| P2_250 | 0.994 | 0.2355 | 0.2315 | 0.0176 | 1.03 |
+| P2_100 | 0.994 | 0.2347 | 0.2308 | 0.0178 | 1.02 |
+| P3_250 | 0.966 | 0.2571 | 0.2533 | 0.0161 | 1.06 |
+
+Calculated LOD switch events (≥ 3 trees in one frame; slant formula of §5.3 [K], **not read from the engine**): A 23 / 14 / 3 / 0 and D 35 / 23 / 4 / 4 in P1 / P2_250 / P2_100 / P3. Per-tree switch step ratio (frame-to-frame change inside the tree's projected window at the switch frame ÷ the median change at the neighbouring frames of the same window; ≈ 1 = nothing beyond camera motion; control = same windows at non-switch frames):
+
+| path | cand | transition | n | median | p90 | p99 | max |
+|---|---|---|---:|---:|---:|---:|---:|
+| P2_250 | A | LOD2→LOD1 (~172 m) | 46 | 0.976 | 1.07 | 2.11 | 2.24 |
+| P2_250 | D | LOD2→LOD1 (~172 m) | 46 | 0.997 | 1.10 | 2.18 | 2.27 |
+| P2_250 | D | LOD3→LOD2 (~430 m) | 100 | 0.993 | 1.01 | 1.04 | 1.05 |
+| P2_250 | control (A / D) | – | 400 | 0.999 / 1.001 | 1.06 / 1.09 | 1.33 / 1.23 | 1.77 / 1.83 |
+| P2_100 | A | LOD2→LOD1 | 47 | 0.991 | 1.02 | 1.08 | 1.08 |
+| P2_100 | D | LOD2→LOD1 / LOD3→LOD2 | 47 / 100 | 1.000 / 0.996 | 1.03 / 1.03 | 1.12 / 1.09 | 1.12 / 1.14 |
+| P3_250 | D | LOD2→LOD3 / LOD3→LOD2 | 60 / 60 | 1.012 / 1.001 | 1.05 / 1.07 | 1.12 / 1.18 | 1.17 / 1.23 |
+| P1_250 | D | LOD3→LOD2 | 100 | 0.999 | 1.02 | 1.03 | 1.03 |
+
+(`flight_tables.md` has every row; in `P1_250` the LOD2→LOD1 trees are mostly outside the frame, so only the 430 m switch is measurable there.)
+
+### 11.6 Reading against the five questions (my reading; the videos are the evidence)
+
+1. **Crown suddenly thinner / reshaped / recoloured?** Not seen. D's crown+shadow footprint is 0.6–1.4 % smaller than A's in the three dives/passes aimed at the patch (3.4 % smaller in the far lateral pass, where D's LOD3 crowns are smaller), and its tree luminance is a constant ≈ 0.004 (≈ 1.5 %) darker — an offset, not a step: neither series has a step at the switch frames, and D's footprint-jump scores at its events are not larger than A's (P1 5.0 vs 5.1, P2_250 11.8 vs 41.2, P2_100 9.9 vs 11.4; dominated by camera-driven growth, so only a rough comparison). In the strips (events at ~172 m and ~430 m) A and D look the same at 640×360 per panel.
+2. **Leaf flicker / speckle / vanishing leaves?** Not seen in the frames examined; the temporal flicker proxy inside the tree mask is **2–7 % higher** for D (1.02–1.07 ×), small but consistently on the D side. This is a proxy on luminance, not a speckle detector; stills and a metric cannot replace watching the slow-motion clips for shimmer.
+3. **LOD switches noticeable?** The 430 m far-LOD switch (D only) is not measurable above the camera-motion floor: step ratio median 0.99–1.01, p99 ≤ 1.18, below the controls' p99 (1.2–1.5). The ~172 m switch (identical thresholds for A and D) shows occasional steps: p99 2.1–2.2 vs control p99 1.2–1.3 at 250 m/s (about one in a hundred switching trees changes ~2× more than its neighbouring frames), **the same for A and D**, and smaller at 100 m/s (p99 1.08–1.12). D's cheaper LOD1 (14.8 k vs 36.7 k) did not make the switch worse by this measure. No cross-fade/dither is used (hard switch; none of the candidates changes that).
+4. **Shadows jump?** No separate shadow detector was built. The footprint includes the cast shadows and shows no step at the switch frames for either candidate; the shadow depth cost is lower for D (§6.5). A shadow-only mask (e.g. a ground-only render with `no tree` shading) is the missing instrument.
+5. **GPU frame time / p95:** §11.4 — D is cheaper in every flight, at p95 as well as the median.
+
+### 11.7 Verdict, and what it does not cover
+
+On these measures D's moving-camera appearance stays close to A's (footprint within 1.4 %, tree luminance ≈ 1.5 % darker, equal switch-step statistics at the shared 172 m switch, a barely measurable 430 m switch, slightly higher flicker proxy) while costing 40–61 % less tree GPU time at the median and 26–36 % less at p95. **This supports adopting D as the next-stage candidate, pending your visual acceptance of the videos.** Not covered: whether the engine's real switch frames match the calculated ones (the step statistics show tails only near the calculated 172 m events, which is consistent but not a proof); speckle / shimmer perception (proxy only); a shadow-only test; one tree species / one atlas / one seed on a regular 25 m patch; the −0.6 EV stage; UHD 770 only, fixed-step (no real-time cadence); no phone, no discrete GPU; D's 534-triangle far LOD still shows the single-tree hollow-crown artefact of §6.3/§6.4 at 500–1000 m, which the patch-scale flights do not make visible.
+
+Reproduce (after the §10 steps): `flight_paths.py` → `tl_fix_material_usage.py` → `tl_flight_build.py` (env `ACW_TL_FLIGHT_EV=-0.6`, `ACW_TL_FLIGHT_DIR=FlightF`) → `tl_flight_mrq_configs.py` (`ACW_TL_FLIGHT_REV=f1`, conds `A,D` then `E`) → `run_tlf_mrq.ps1 -Tag mrq_<cond>_<path>_f1` → `flight_analyze.py`, `flight_pop_local.py`, `flight_video.py` → `run_tlf_perf_schedule.ps1 -Prefix fp -Rounds 3` → `flight_perf_analyze.py`, `flight_tables.py`.

@@ -6,7 +6,7 @@ import json, math, random, sys, os
 E = sys.argv[1]
 ov = {p: json.load(open(os.path.join(E, "overdraw_%s.json" % p)))["results"] for p in ("v1", "budget", "balanced")}
 views = {v["name"]: v for v in json.load(open(os.path.join(E, "views_budget.json")))["views"]}
-perf = json.load(open(os.path.join(E, "budget_perf_q1.json")))["candidate_minus_empty"]
+perf = json.load(open(os.path.join(E, "budget_perf_q2.json")))["candidate_minus_empty"]
 frag = lambda prof, lod: ov[prof]["sl150/lod%d" % lod]["card_fragments_total"]  # noqa: E731
 chain = {"A": ("v1", 3, (0.5, 0.15)), "B": ("budget", 3, (0.5, 0.15)), "C": ("budget", 4, (0.5, 0.15, 0.06)), "D": ("balanced", 4, (0.5, 0.15, 0.06))}
 rng = random.Random(20261015)

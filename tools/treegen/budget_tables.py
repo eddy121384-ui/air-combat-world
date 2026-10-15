@@ -1,7 +1,7 @@
 """Markdown tables for docs/research/forest-tree-triangle-budget-v1.md (project venv; stdlib only).
 
 python tools/treegen/budget_tables.py <evidence_dir>
-Reads <evidence_dir>/{budget_perf_q1.json, overdraw_*.json, mesh_audit.json, lod_pop.json} and prints the tables used in the document.
+Reads <evidence_dir>/{budget_perf_q2.json, overdraw_*.json, mesh_audit.json, lod_pop.json} and prints the tables used in the document.
 """
 import json
 import os
@@ -10,7 +10,7 @@ import sys
 E = sys.argv[1]
 J = lambda n: json.load(open(os.path.join(E, n)))  # noqa: E731
 
-perf = J("budget_perf_q1.json")
+perf = J("budget_perf_q2.json")
 runs, delta = perf["runs"], perf["candidate_minus_empty"]
 rounds = sorted({r["tag"] for r in runs.values()})
 print("rounds:", rounds, "window frames:", perf["window_frames"])
