@@ -1,0 +1,41 @@
+{
+  "status": "PASS_TL_BUDGET",
+  "meshes": {
+    "D_import": {
+      "1": 1,
+      "2": 2,
+      "3": 3
+    },
+    "D": {
+      "asset": "/Game/TreeLookdev/Budget/D/machilus_balanced_lod0/StaticMeshes/machilus_balanced_lod0",
+      "lods": 4,
+      "screens": [
+        1.0,
+        0.5,
+        0.15000000596046448,
+        0.05999999865889549
+      ],
+      "triangles": [
+        34272,
+        14806,
+        2018,
+        534
+      ],
+      "vertices": [
+        55437,
+        26224,
+        3814,
+        846
+      ],
+      "sections": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "sphere_radius_cm": 837.6590598130069
+    }
+  },
+  "levels": [],
+  "error": null
+}

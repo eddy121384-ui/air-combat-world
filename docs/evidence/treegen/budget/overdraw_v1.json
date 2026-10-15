@@ -1,0 +1,129 @@
+{
+ "note": "python tools/treegen/card_overdraw.py <game_out_dir> <out_dir> [view,view,...]",
+ "resolution": [
+  1920,
+  1080
+ ],
+ "results": {
+  "sl150/lod0": {
+   "card_footprint_px": 17366,
+   "covered_px": 15710,
+   "raster_layers_mean": 17.01,
+   "raster_layers_p95": 33,
+   "raster_layers_max": 55,
+   "opaque_layers_mean": 4.64,
+   "opaque_layers_p95": 10,
+   "card_fragments_total": 295466
+  },
+  "sl150/lod1": {
+   "card_footprint_px": 18034,
+   "covered_px": 16176,
+   "raster_layers_mean": 16.28,
+   "raster_layers_p95": 31,
+   "raster_layers_max": 53,
+   "opaque_layers_mean": 4.46,
+   "opaque_layers_p95": 10,
+   "card_fragments_total": 293525
+  },
+  "sl150/lod2": {
+   "card_footprint_px": 18688,
+   "covered_px": 15278,
+   "raster_layers_mean": 8.6,
+   "raster_layers_p95": 18,
+   "raster_layers_max": 31,
+   "opaque_layers_mean": 2.68,
+   "opaque_layers_p95": 6,
+   "card_fragments_total": 160649
+  },
+  "sl300/lod0": {
+   "card_footprint_px": 4325,
+   "covered_px": 3913,
+   "raster_layers_mean": 17.07,
+   "raster_layers_p95": 33,
+   "raster_layers_max": 52,
+   "opaque_layers_mean": 4.59,
+   "opaque_layers_p95": 10,
+   "card_fragments_total": 73838
+  },
+  "sl300/lod1": {
+   "card_footprint_px": 4493,
+   "covered_px": 4028,
+   "raster_layers_mean": 16.32,
+   "raster_layers_p95": 31,
+   "raster_layers_max": 49,
+   "opaque_layers_mean": 4.47,
+   "opaque_layers_p95": 10,
+   "card_fragments_total": 73339
+  },
+  "sl300/lod2": {
+   "card_footprint_px": 4650,
+   "covered_px": 3802,
+   "raster_layers_mean": 8.63,
+   "raster_layers_p95": 18,
+   "raster_layers_max": 30,
+   "opaque_layers_mean": 2.73,
+   "opaque_layers_p95": 6,
+   "card_fragments_total": 40141
+  },
+  "sl500/lod0": {
+   "card_footprint_px": 1553,
+   "covered_px": 1401,
+   "raster_layers_mean": 17.11,
+   "raster_layers_p95": 33,
+   "raster_layers_max": 47,
+   "opaque_layers_mean": 4.61,
+   "opaque_layers_p95": 10,
+   "card_fragments_total": 26578
+  },
+  "sl500/lod1": {
+   "card_footprint_px": 1620,
+   "covered_px": 1449,
+   "raster_layers_mean": 16.34,
+   "raster_layers_p95": 31,
+   "raster_layers_max": 50,
+   "opaque_layers_mean": 4.43,
+   "opaque_layers_p95": 10,
+   "card_fragments_total": 26473
+  },
+  "sl500/lod2": {
+   "card_footprint_px": 1674,
+   "covered_px": 1357,
+   "raster_layers_mean": 8.68,
+   "raster_layers_p95": 18,
+   "raster_layers_max": 28,
+   "opaque_layers_mean": 2.74,
+   "opaque_layers_p95": 6,
+   "card_fragments_total": 14524
+  },
+  "sl1000/lod0": {
+   "card_footprint_px": 389,
+   "covered_px": 355,
+   "raster_layers_mean": 17.31,
+   "raster_layers_p95": 34,
+   "raster_layers_max": 48,
+   "opaque_layers_mean": 4.81,
+   "opaque_layers_p95": 11,
+   "card_fragments_total": 6734
+  },
+  "sl1000/lod1": {
+   "card_footprint_px": 405,
+   "covered_px": 361,
+   "raster_layers_mean": 16.37,
+   "raster_layers_p95": 31,
+   "raster_layers_max": 48,
+   "opaque_layers_mean": 4.49,
+   "opaque_layers_p95": 9,
+   "card_fragments_total": 6628
+  },
+  "sl1000/lod2": {
+   "card_footprint_px": 419,
+   "covered_px": 335,
+   "raster_layers_mean": 8.57,
+   "raster_layers_p95": 18,
+   "raster_layers_max": 24,
+   "opaque_layers_mean": 2.69,
+   "opaque_layers_p95": 6,
+   "card_fragments_total": 3591
+  }
+ }
+}

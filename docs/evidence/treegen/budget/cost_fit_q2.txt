@@ -1,0 +1,1 @@
+tris only R2 0.80; frags only R2 0.83; tris+frags R2 0.96; tris+frags+const (10.5 ms/Mtri + 0.43 ms/Mfrag + 2.4 ms) R2 0.98 (16 points, exploratory)

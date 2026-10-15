@@ -1,0 +1,326 @@
+{
+ "set": "b1",
+ "res": [
+  1920,
+  1080
+ ],
+ "warmup": 40,
+ "settle": 10,
+ "jobs": [
+  {
+   "name": "close_single_A",
+   "view": "close",
+   "cand": "A",
+   "mode": "single",
+   "lod": -1
+  },
+  {
+   "name": "close_single_B",
+   "view": "close",
+   "cand": "B",
+   "mode": "single",
+   "lod": -1
+  },
+  {
+   "name": "close_single_C",
+   "view": "close",
+   "cand": "C",
+   "mode": "single",
+   "lod": -1
+  },
+  {
+   "name": "front_single_A",
+   "view": "front",
+   "cand": "A",
+   "mode": "single",
+   "lod": -1
+  },
+  {
+   "name": "front_single_B",
+   "view": "front",
+   "cand": "B",
+   "mode": "single",
+   "lod": -1
+  },
+  {
+   "name": "front_single_C",
+   "view": "front",
+   "cand": "C",
+   "mode": "single",
+   "lod": -1
+  },
+  {
+   "name": "sl150_single_A",
+   "view": "sl150",
+   "cand": "A",
+   "mode": "single",
+   "lod": -1
+  },
+  {
+   "name": "sl150_single_B",
+   "view": "sl150",
+   "cand": "B",
+   "mode": "single",
+   "lod": -1
+  },
+  {
+   "name": "sl150_single_C",
+   "view": "sl150",
+   "cand": "C",
+   "mode": "single",
+   "lod": -1
+  },
+  {
+   "name": "sl300_single_A",
+   "view": "sl300",
+   "cand": "A",
+   "mode": "single",
+   "lod": -1
+  },
+  {
+   "name": "sl300_single_B",
+   "view": "sl300",
+   "cand": "B",
+   "mode": "single",
+   "lod": -1
+  },
+  {
+   "name": "sl300_single_C",
+   "view": "sl300",
+   "cand": "C",
+   "mode": "single",
+   "lod": -1
+  },
+  {
+   "name": "sl500_single_A",
+   "view": "sl500",
+   "cand": "A",
+   "mode": "single",
+   "lod": -1
+  },
+  {
+   "name": "sl500_single_B",
+   "view": "sl500",
+   "cand": "B",
+   "mode": "single",
+   "lod": -1
+  },
+  {
+   "name": "sl500_single_C",
+   "view": "sl500",
+   "cand": "C",
+   "mode": "single",
+   "lod": -1
+  },
+  {
+   "name": "sl1000_single_A",
+   "view": "sl1000",
+   "cand": "A",
+   "mode": "single",
+   "lod": -1
+  },
+  {
+   "name": "sl1000_single_B",
+   "view": "sl1000",
+   "cand": "B",
+   "mode": "single",
+   "lod": -1
+  },
+  {
+   "name": "sl1000_single_C",
+   "view": "sl1000",
+   "cand": "C",
+   "mode": "single",
+   "lod": -1
+  },
+  {
+   "name": "sl150_patch_A",
+   "view": "sl150",
+   "cand": "A",
+   "mode": "patch",
+   "lod": -1
+  },
+  {
+   "name": "sl150_patch_B",
+   "view": "sl150",
+   "cand": "B",
+   "mode": "patch",
+   "lod": -1
+  },
+  {
+   "name": "sl150_patch_C",
+   "view": "sl150",
+   "cand": "C",
+   "mode": "patch",
+   "lod": -1
+  },
+  {
+   "name": "sl300_patch_A",
+   "view": "sl300",
+   "cand": "A",
+   "mode": "patch",
+   "lod": -1
+  },
+  {
+   "name": "sl300_patch_B",
+   "view": "sl300",
+   "cand": "B",
+   "mode": "patch",
+   "lod": -1
+  },
+  {
+   "name": "sl300_patch_C",
+   "view": "sl300",
+   "cand": "C",
+   "mode": "patch",
+   "lod": -1
+  },
+  {
+   "name": "sl500_patch_A",
+   "view": "sl500",
+   "cand": "A",
+   "mode": "patch",
+   "lod": -1
+  },
+  {
+   "name": "sl500_patch_B",
+   "view": "sl500",
+   "cand": "B",
+   "mode": "patch",
+   "lod": -1
+  },
+  {
+   "name": "sl500_patch_C",
+   "view": "sl500",
+   "cand": "C",
+   "mode": "patch",
+   "lod": -1
+  },
+  {
+   "name": "sl1000_patch_A",
+   "view": "sl1000",
+   "cand": "A",
+   "mode": "patch",
+   "lod": -1
+  },
+  {
+   "name": "sl1000_patch_B",
+   "view": "sl1000",
+   "cand": "B",
+   "mode": "patch",
+   "lod": -1
+  },
+  {
+   "name": "sl1000_patch_C",
+   "view": "sl1000",
+   "cand": "C",
+   "mode": "patch",
+   "lod": -1
+  },
+  {
+   "name": "sl150_single_A_lod0",
+   "view": "sl150",
+   "cand": "A",
+   "mode": "single",
+   "lod": 0
+  },
+  {
+   "name": "sl150_single_A_lod1",
+   "view": "sl150",
+   "cand": "A",
+   "mode": "single",
+   "lod": 1
+  },
+  {
+   "name": "sl150_single_A_lod2",
+   "view": "sl150",
+   "cand": "A",
+   "mode": "single",
+   "lod": 2
+  },
+  {
+   "name": "sl150_single_B_lod0",
+   "view": "sl150",
+   "cand": "B",
+   "mode": "single",
+   "lod": 0
+  },
+  {
+   "name": "sl150_single_B_lod1",
+   "view": "sl150",
+   "cand": "B",
+   "mode": "single",
+   "lod": 1
+  },
+  {
+   "name": "sl150_single_B_lod2",
+   "view": "sl150",
+   "cand": "B",
+   "mode": "single",
+   "lod": 2
+  },
+  {
+   "name": "sl300_single_A_lod0",
+   "view": "sl300",
+   "cand": "A",
+   "mode": "single",
+   "lod": 0
+  },
+  {
+   "name": "sl300_single_A_lod1",
+   "view": "sl300",
+   "cand": "A",
+   "mode": "single",
+   "lod": 1
+  },
+  {
+   "name": "sl300_single_A_lod2",
+   "view": "sl300",
+   "cand": "A",
+   "mode": "single",
+   "lod": 2
+  },
+  {
+   "name": "sl300_single_C_lod0",
+   "view": "sl300",
+   "cand": "C",
+   "mode": "single",
+   "lod": 0
+  },
+  {
+   "name": "sl300_single_C_lod1",
+   "view": "sl300",
+   "cand": "C",
+   "mode": "single",
+   "lod": 1
+  },
+  {
+   "name": "sl300_single_C_lod2",
+   "view": "sl300",
+   "cand": "C",
+   "mode": "single",
+   "lod": 2
+  },
+  {
+   "name": "sl300_single_C_lod3",
+   "view": "sl300",
+   "cand": "C",
+   "mode": "single",
+   "lod": 3
+  },
+  {
+   "name": "sl1000_single_C_lod2",
+   "view": "sl1000",
+   "cand": "C",
+   "mode": "single",
+   "lod": 2
+  },
+  {
+   "name": "sl1000_single_C_lod3",
+   "view": "sl1000",
+   "cand": "C",
+   "mode": "single",
+   "lod": 3
+  }
+ ]
+}

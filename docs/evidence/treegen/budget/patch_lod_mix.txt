@@ -1,0 +1,8 @@
+sl150 A/B LOD counts [2, 55, 43]
+sl150 C/D LOD counts [2, 55, 43, 0]
+sl300 A/B LOD counts [0, 3, 97]
+sl300 C/D LOD counts [0, 3, 93, 4]
+sl500 A/B LOD counts [0, 0, 100]
+sl500 C/D LOD counts [0, 0, 30, 70]
+sl1000 A/B LOD counts [0, 0, 100]
+sl1000 C/D LOD counts [0, 0, 0, 100]

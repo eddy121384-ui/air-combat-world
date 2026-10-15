@@ -20,7 +20,8 @@ from PIL import Image
 
 GAME, OUT = sys.argv[1], sys.argv[2]
 os.makedirs(OUT, exist_ok=True)
-VIEWS = {v["name"]: v for v in json.load(open(os.path.join(GAME, "views.json")))["views"]}
+PROFILE = os.environ.get("ACW_TL_PROFILE", "v1")  # budget profile files: cards_budget_lodN.npz
+VIEWS = {v["name"]: v for v in json.load(open(os.path.join(GAME, os.environ.get("ACW_TL_VIEWS", "views.json"))))["views"]}
 names = sys.argv[3].split(",") if len(sys.argv) > 3 else ["front", "oblique", "close", "agl50", "agl200"]
 alpha = np.asarray(Image.open(os.path.join(GAME, "textures", "T_Machilus_LeafAtlas_BC.png")).getchannel("A"), np.float32) / 255.0
 AH, AW = alpha.shape
@@ -115,9 +116,12 @@ def heat(ras, path):
 res = {}
 for name in names:
     c = camera(VIEWS[name])
-    for lod in ("lod0", "lod1", "lod2"):
-        ras, opq = raster(os.path.join(GAME, "cards_%s.npz" % lod), c)
+    for lod in ("lod0", "lod1", "lod2", "lod3"):
+        npz = os.path.join(GAME, "cards_%s.npz" % lod if PROFILE == "v1" else "cards_%s_%s.npz" % (PROFILE, lod))
+        if not os.path.isfile(npz):
+            continue
+        ras, opq = raster(npz, c)
         res["%s/%s" % (name, lod)] = stats(ras, opq)
         heat(ras, os.path.join(OUT, "overdraw_%s_%s.png" % (name, lod)))
-        print(name, lod, res["%s/%s" % (name, lod)], flush=True)
+        print(PROFILE, name, lod, res["%s/%s" % (name, lod)], flush=True)
 json.dump(dict(note=__doc__.split("\n\n")[1], resolution=[W, H], results=res), open(os.path.join(OUT, "overdraw.json"), "w"), indent=1)

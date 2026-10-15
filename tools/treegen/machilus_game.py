@@ -45,16 +45,48 @@ for d in ("glb", "textures", "bake"):
     os.makedirs(os.path.join(OUT, d), exist_ok=True)
 report = dict(golden=GOLDEN, t0=time.time())
 
-LODS = [
+PROFILES = {
     # keep: fraction of sprays kept (shell-weighted); views: card views per spray; crown_w: weight of the crown normal
-    dict(name="lod0", keep=1.0, views=("top", "end"), crown_w=0.6, min_r=0.012,
-         sides=lambda r: 10 if r > 0.16 else 8 if r > 0.07 else 6 if r > 0.03 else 4,
-         sub=lambda r: 2 if r > 0.05 else 1),
-    dict(name="lod1", keep=0.33, views=("top", "end"), crown_w=0.75, min_r=0.025,
-         sides=lambda r: 8 if r > 0.12 else 6 if r > 0.05 else 4, sub=lambda r: 1),
-    dict(name="lod2", keep=0.09, views=("top",), crown_w=0.9, min_r=0.07,
-         sides=lambda r: 6 if r > 0.15 else 4, sub=lambda r: 1),
-]
+    "v1": [
+        dict(name="lod0", keep=1.0, views=("top", "end"), crown_w=0.6, min_r=0.012,
+             sides=lambda r: 10 if r > 0.16 else 8 if r > 0.07 else 6 if r > 0.03 else 4,
+             sub=lambda r: 2 if r > 0.05 else 1),
+        dict(name="lod1", keep=0.33, views=("top", "end"), crown_w=0.75, min_r=0.025,
+             sides=lambda r: 8 if r > 0.12 else 6 if r > 0.05 else 4, sub=lambda r: 1),
+        dict(name="lod2", keep=0.09, views=("top",), crown_w=0.9, min_r=0.07,
+             sides=lambda r: 6 if r > 0.15 else 4, sub=lambda r: 1),
+    ],
+    # research/forest-tree-lod-budget-v1: same atlas, same card technique, lower geometry budget (see docs/research/forest-tree-triangle-budget-v1.md)
+    "budget": [
+        dict(name="lod0", keep=0.40, views=("top", "end"), crown_w=0.65, min_r=0.03,
+             sides=lambda r: 8 if r > 0.16 else 6 if r > 0.07 else 4, sub=lambda r: 1),
+        dict(name="lod1", keep=0.12, views=("top",), crown_w=0.8, min_r=0.09,
+             sides=lambda r: 6 if r > 0.15 else 4, sub=lambda r: 1),
+        dict(name="lod2", keep=0.04, views=("top",), crown_w=0.9, min_r=0.18,
+             sides=lambda r: 5 if r > 0.3 else 4, sub=lambda r: 1),
+        dict(name="lod3", keep=0.012, views=("top",), crown_w=0.95, min_r=0.18,
+             sides=lambda r: 4, sub=lambda r: 1),
+    ],
+    # second iteration after the first "budget" LOD1 (top-only, 1,855 enlarged cards) read sparse / pale at 150 m slant
+    "balanced": [
+        dict(name="lod0", keep=0.40, views=("top", "end"), crown_w=0.65, min_r=0.03,
+             sides=lambda r: 8 if r > 0.16 else 6 if r > 0.07 else 4, sub=lambda r: 1),
+        dict(name="lod1", keep=0.20, views=("top", "end"), crown_w=0.75, min_r=0.06,
+             sides=lambda r: 6 if r > 0.12 else 4, sub=lambda r: 1),
+        dict(name="lod2", keep=0.06, views=("top",), crown_w=0.85, min_r=0.18,
+             sides=lambda r: 5 if r > 0.3 else 4, sub=lambda r: 1),
+        dict(name="lod3", keep=0.012, views=("top",), crown_w=0.95, min_r=0.18,
+             sides=lambda r: 4, sub=lambda r: 1),
+    ],
+}
+PROFILE = os.environ.get("ACW_TL_PROFILE", "v1")
+LODS = PROFILES[PROFILE]
+REUSE_BAKE = os.environ.get("ACW_TL_REUSE_BAKE") == "1"  # reuse <out>/bake/frames.json + the committed atlas (non-default profiles)
+
+
+def fname(stem, name, ext):
+    """v1 keeps the original file names; other profiles are written beside them with a profile tag."""
+    return "%s_%s%s" % (stem, name, ext) if PROFILE == "v1" else "%s_%s_%s%s" % (stem, PROFILE, name, ext)
 
 
 # ----------------------------------------------------------------------------- golden data (read-only)
@@ -107,8 +139,9 @@ views = [cam_spec(bpy.data.objects["CAM_" + v], v) for v in ("front", "oblique",
 views += [look("agl50", (40.0, -140.0, 50.0), (0.0, 0.0, 6.0), 60.0), look("agl200", (80.0, -330.0, 200.0), (0.0, 0.0, 6.0), 60.0)]
 sun = bpy.data.objects["TG_Sun"]
 sun_dir = list((sun.matrix_world.to_3x3() @ Vector((0, 0, -1))).normalized())
-json.dump(dict(views=views, sun_travel_dir_blender=sun_dir, sun_energy=sun.data.energy,
-               note="Blender metres, Z up; UE = (x, -y, z) * 100 cm"), open(os.path.join(OUT, "views.json"), "w"), indent=1)
+if PROFILE == "v1":
+    json.dump(dict(views=views, sun_travel_dir_blender=sun_dir, sun_energy=sun.data.energy,
+                   note="Blender metres, Z up; UE = (x, -y, z) * 100 cm"), open(os.path.join(OUT, "views.json"), "w"), indent=1)
 
 
 # ----------------------------------------------------------------------------- spray atlas bake
@@ -350,7 +383,7 @@ def make_lod_object(lod, frames, rng, m_bark, m_leaf):
     tris = sum(len(p.vertices) - 2 for p in me.polygons)
     info = dict(name=lod["name"], branch_tris=btris, card_tris=cinfo["cards"] * 2, cards=cinfo["cards"],
                 sprays=cinfo["sprays"], card_enlarge=round(cinfo["enlarge"], 3), total_tris=tris, verts=len(me.vertices))
-    np.savez_compressed(os.path.join(OUT, "cards_%s.npz" % lod["name"]), corners=cinfo["corners"], uvrect=cinfo["uvrect"])
+    np.savez_compressed(os.path.join(OUT, fname("cards", lod["name"], ".npz")), corners=cinfo["corners"], uvrect=cinfo["uvrect"])
     return ob, info
 
 
@@ -377,22 +410,29 @@ def export_glb(ob, path):
 
 def main():
     t = time.time()
-    frames = bake_atlas()
-    report["bake_s"] = round(time.time() - t, 1)
-    json.dump({"%d_%s" % k: dict(C=list(v["C"]), F=list(v["F"]), U=list(v["U"]), R=list(v["R"]), s=v["s"]) for k, v in frames.items()},
-              open(os.path.join(OUT, "bake", "frames.json"), "w"), indent=1)
+    if REUSE_BAKE:
+        fj = json.load(open(os.path.join(OUT, "bake", "frames.json")))
+        frames = {(int(k.split("_")[0]), k.split("_")[1]): dict(C=Vector(v["C"]), F=Vector(v["F"]), U=Vector(v["U"]), R=Vector(v["R"]), s=v["s"])
+                  for k, v in fj.items()}
+        report["bake_s"] = "reused"
+    else:
+        frames = bake_atlas()
+        report["bake_s"] = round(time.time() - t, 1)
+        json.dump({"%d_%s" % k: dict(C=list(v["C"]), F=list(v["F"]), U=list(v["U"]), R=list(v["R"]), s=v["s"]) for k, v in frames.items()},
+                  open(os.path.join(OUT, "bake", "frames.json"), "w"), indent=1)
     m_bark = bpy.data.materials.new("M_TL_Bark")
     m_leaf = bpy.data.materials.new("M_TL_LeafCards")
     rng = np.random.default_rng(20261015)
     report["lods"] = []
     for lod in LODS:
         ob, info = make_lod_object(lod, frames, rng, m_bark, m_leaf)
-        info["glb_option"] = str(export_glb(ob, os.path.join(OUT, "glb", "machilus_%s.glb" % lod["name"])))
-        info["glb_bytes"] = os.path.getsize(os.path.join(OUT, "glb", "machilus_%s.glb" % lod["name"]))
+        glb = os.path.join(OUT, "glb", fname("machilus", lod["name"], ".glb"))
+        info["glb_option"] = str(export_glb(ob, glb))
+        info["glb_bytes"] = os.path.getsize(glb)
         report["lods"].append(info)
         print("LOD", json.dumps(info))
     report["elapsed_s"] = round(time.time() - report.pop("t0"), 1)
-    json.dump(report, open(os.path.join(OUT, "game_report.json"), "w"), indent=1)
+    json.dump(report, open(os.path.join(OUT, "game_report.json" if PROFILE == "v1" else "game_report_%s.json" % PROFILE), "w"), indent=1)
     print("GAME_EXPORT_OK")
 
 

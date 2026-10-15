@@ -1,0 +1,57 @@
+{
+ "golden": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world-forest-budget\\docs\\evidence\\treegen\\machilus\\machilus_thunbergii_v1.blend",
+ "skeleton_nodes": 19799,
+ "instances": 15456,
+ "bake_s": "reused",
+ "lods": [
+  {
+   "name": "lod0",
+   "branch_tris": 9544,
+   "card_tris": 24728,
+   "cards": 12364,
+   "sprays": 6182,
+   "card_enlarge": 1.581,
+   "total_tris": 34272,
+   "verts": 55437,
+   "glb_option": "{'export_vertex_color': 'ACTIVE'}",
+   "glb_bytes": 2425620
+  },
+  {
+   "name": "lod1",
+   "branch_tris": 1158,
+   "card_tris": 3710,
+   "cards": 1855,
+   "sprays": 1855,
+   "card_enlarge": 2.887,
+   "total_tris": 4868,
+   "verts": 8152,
+   "glb_option": "{'export_vertex_color': 'ACTIVE'}",
+   "glb_bytes": 357768
+  },
+  {
+   "name": "lod2",
+   "branch_tris": 164,
+   "card_tris": 1236,
+   "cards": 618,
+   "sprays": 618,
+   "card_enlarge": 5.0,
+   "total_tris": 1400,
+   "verts": 2578,
+   "glb_option": "{'export_vertex_color': 'ACTIVE'}",
+   "glb_bytes": 113988
+  },
+  {
+   "name": "lod3",
+   "branch_tris": 164,
+   "card_tris": 370,
+   "cards": 185,
+   "sprays": 185,
+   "card_enlarge": 9.129,
+   "total_tris": 534,
+   "verts": 846,
+   "glb_option": "{'export_vertex_color': 'ACTIVE'}",
+   "glb_bytes": 39500
+  }
+ ],
+ "elapsed_s": 11.0
+}
