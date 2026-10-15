@@ -2,7 +2,7 @@
 #   run_tl_perf.ps1 -Level L_TLP_front_tree -Tag r1a [-Frames 600]
 # Host scope: Intel UHD 770 only. Do not run other heavy jobs at the same time (shared package power).
 param(
-    [Parameter(Mandatory)][ValidatePattern('^L_TLP_[A-Za-z0-9_]+$')][string]$Level,
+    [Parameter(Mandatory)][ValidatePattern('^L_TL[PB]_[A-Za-z0-9_]+$')][string]$Level,
     [Parameter(Mandatory)][ValidatePattern('^[A-Za-z0-9_-]+$')][string]$Tag,
     [int]$Frames = 600,
     [string]$EngineRoot = 'C:\Program Files\Epic Games\UE_5.8'

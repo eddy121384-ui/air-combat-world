@@ -1,0 +1,144 @@
+{
+ "set": "b1",
+ "res": [
+  1920,
+  1080
+ ],
+ "warmup": 40,
+ "settle": 10,
+ "jobs": [
+  {
+   "name": "close_single_D",
+   "view": "close",
+   "cand": "D",
+   "mode": "single",
+   "lod": -1
+  },
+  {
+   "name": "front_single_D",
+   "view": "front",
+   "cand": "D",
+   "mode": "single",
+   "lod": -1
+  },
+  {
+   "name": "sl150_single_D",
+   "view": "sl150",
+   "cand": "D",
+   "mode": "single",
+   "lod": -1
+  },
+  {
+   "name": "sl300_single_D",
+   "view": "sl300",
+   "cand": "D",
+   "mode": "single",
+   "lod": -1
+  },
+  {
+   "name": "sl500_single_D",
+   "view": "sl500",
+   "cand": "D",
+   "mode": "single",
+   "lod": -1
+  },
+  {
+   "name": "sl1000_single_D",
+   "view": "sl1000",
+   "cand": "D",
+   "mode": "single",
+   "lod": -1
+  },
+  {
+   "name": "sl150_patch_D",
+   "view": "sl150",
+   "cand": "D",
+   "mode": "patch",
+   "lod": -1
+  },
+  {
+   "name": "sl300_patch_D",
+   "view": "sl300",
+   "cand": "D",
+   "mode": "patch",
+   "lod": -1
+  },
+  {
+   "name": "sl500_patch_D",
+   "view": "sl500",
+   "cand": "D",
+   "mode": "patch",
+   "lod": -1
+  },
+  {
+   "name": "sl1000_patch_D",
+   "view": "sl1000",
+   "cand": "D",
+   "mode": "patch",
+   "lod": -1
+  },
+  {
+   "name": "sl150_single_D_lod0",
+   "view": "sl150",
+   "cand": "D",
+   "mode": "single",
+   "lod": 0
+  },
+  {
+   "name": "sl150_single_D_lod1",
+   "view": "sl150",
+   "cand": "D",
+   "mode": "single",
+   "lod": 1
+  },
+  {
+   "name": "sl150_single_D_lod2",
+   "view": "sl150",
+   "cand": "D",
+   "mode": "single",
+   "lod": 2
+  },
+  {
+   "name": "sl300_single_D_lod0",
+   "view": "sl300",
+   "cand": "D",
+   "mode": "single",
+   "lod": 0
+  },
+  {
+   "name": "sl300_single_D_lod1",
+   "view": "sl300",
+   "cand": "D",
+   "mode": "single",
+   "lod": 1
+  },
+  {
+   "name": "sl300_single_D_lod2",
+   "view": "sl300",
+   "cand": "D",
+   "mode": "single",
+   "lod": 2
+  },
+  {
+   "name": "sl300_single_D_lod3",
+   "view": "sl300",
+   "cand": "D",
+   "mode": "single",
+   "lod": 3
+  },
+  {
+   "name": "sl1000_single_D_lod2",
+   "view": "sl1000",
+   "cand": "D",
+   "mode": "single",
+   "lod": 2
+  },
+  {
+   "name": "sl1000_single_D_lod3",
+   "view": "sl1000",
+   "cand": "D",
+   "mode": "single",
+   "lod": 3
+  }
+ ]
+}
