@@ -9,6 +9,8 @@ import re
 import statistics
 from pathlib import Path
 
+from first_hit_oracle import tile_sources, verify_positive_samples
+
 
 def sha(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
@@ -99,6 +101,14 @@ def main():
             raise ValueError('Candidate must use normal/simple queries over exact corpus')
         if [x['id'] for x in raw['steps']] != [x['id'] for x in plan['steps']]:
             raise ValueError('Plan order mismatch')
+        # Runtime must echo the unmodified, pre-registered plan expectations.
+        for runtime_step, plan_step in zip(raw['steps'], plan['steps']):
+            expected = [(q['id'], q['expected_tile'], q['expect_hit'])
+                        for q in plan_step['building_samples']]
+            observed = [(q['id'], q['expected_tile'], q['expect_hit'])
+                        for q in runtime_step['building_queries']]
+            if observed != expected:
+                raise ValueError('Runtime positive/negative plan identity mismatch')
     if baseline_host['executable_sha256']!=candidate_host['executable_sha256']:
         raise ValueError('A/B executable mismatch')
 
@@ -109,6 +119,15 @@ def main():
     placement=source/contract['outputs']['building_component_placement']['path']
     if sha(contract_path)!=plan['sources']['contract_sha256'] or sha(placement)!=plan['sources']['placement_sha256']:
         raise ValueError('Accepted source hash mismatch')
+    # Historical v1 corpus remains reproducible as historical FAIL; only a new
+    # v2 plan with independently recomputed source-triangle first-hit receipts
+    # is eligible for a positive correctness PASS.
+    first_hit_certified = False
+    if plan.get('schema') == 'xinyi-collision-plan/v2':
+        first_hit_certified = verify_positive_samples(
+            plan['steps'], tile_sources(contract, source))
+        if not first_hit_certified:
+            raise ValueError('Missing or invalid source-geometry first-hit certificate')
     with gzip.open(placement,'rt',encoding='utf-8') as f:
         header=json.loads(next(f))['header'];boxes=[json.loads(line) for line in f]
     if len(boxes)!=header['count'] or len(boxes)!=11130:raise ValueError('Placement count mismatch')
@@ -128,6 +147,17 @@ def main():
 
     baseline=summarize(baseline_raw,baseline_host,baseline_log)
     candidate=summarize(candidate_raw,candidate_host,candidate_log)
+    # Per-triangle Chaos hits should also agree with the source geometry's
+    # closest distance, not just the identity of the hit tile.
+    positive_distance_tolerance_cm = 2.0
+    if first_hit_certified:
+        for runtime_step, plan_step in zip(candidate_raw['steps'], plan['steps']):
+            for query, sample in zip(runtime_step['building_queries'], plan_step['building_samples']):
+                if not sample['expect_hit'] or not query['hit']:
+                    continue
+                expected_distance = sample['certificate']['first_hit']['distance_cm']
+                if abs(query.get('distance_cm', float('inf')) - expected_distance) > positive_distance_tolerance_cm:
+                    candidate['positive_failures'].append(query['id'] + ':first_hit_distance')
     expected_sweeps={('low_rise_wall','sphere_r50_cm'):True,
                      ('high_rise_wall','box_50_50_100_cm'):True,
                      ('gap_between_buildings_+000_+000','sphere_r50_cm'):False,
@@ -138,7 +168,7 @@ def main():
     dynamic=candidate['dynamic_simulation']
     dynamic_pass=(dynamic['simulate_physics'] and dynamic['blocking_hit_observed'] and
                   dynamic['hit_tile']==dynamic['expected_tile'])
-    candidate_correct=(candidate['positive_count']==15 and not candidate['positive_failures'] and
+    candidate_correct=(first_hit_certified and candidate['positive_count']==15 and not candidate['positive_failures'] and
                        candidate['negative_count']==27 and candidate['negative_blocked_count']==0 and
                        not sweep_fail and dynamic_pass and candidate['audited_tile_count']==25 and
                        candidate['effective_trace_flag_counts']=={'3':25} and
@@ -153,6 +183,8 @@ def main():
         'streaming_wait':candidate['max_streaming_wait_ms']/max(baseline['max_streaming_wait_ms'],1e-9),
     }
     result={'schema':'xinyi-complex-as-simple-gate/v1','run_id':run.name,'status':'MEASURED',
+            'source_geometry_first_hit_certified':first_hit_certified,
+            'source_geometry_first_hit_distance_tolerance_cm':positive_distance_tolerance_cm,
             'candidate_correctness':'PASS' if candidate_correct else 'FAIL',
             'certified_negative_count':certified,'sweep_failures':sweep_fail,
             'dynamic_simulation_pass':dynamic_pass,'same_executable':True,
