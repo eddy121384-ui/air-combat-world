@@ -131,3 +131,13 @@ Every stall happened at the same `open_area_+000_-001` → `open_area_+000_+000`
 Under the v2 source-geometry oracle, every candidate process that completed (8 of 8) passes all collision correctness gates, with Chaos hit distances within 0.001 cm of the source mesh. Three of eleven v2 candidate processes stalled at the `open_area_+000_+000` streaming step, where World Partition kept the previous source position. No baseline stalled in twelve v2 processes, or in the September run. This session does **not** issue `COMPLEX_AS_SIMPLE_CORRECTNESS_PASS`. The gate stays **FAIL** on gate 7, through an intermittent, undiagnosed, candidate-only streaming-source stall. It is not a collision identity, distance, negative-space, sweep or dynamic failure.
 
 No accepted asset, collision policy, terrain, geometry, placement, source lock or GLB was changed. Raw package, logs, raw JSON and host launch receipts remain under `unreal/Saved/XinyiHostGates/<run>` on the validation host. Evidence: [evidence/xinyi-complex-as-simple-20261016/](evidence/xinyi-complex-as-simple-20261016/).
+
+## Bounded diagnostic batch (owner-approved, final)
+
+Package run `20261016T093423Z-8f72d100`: the `6d54192` probe rebuilt after an external process emptied all packaged builds under `unreal/Saved`. The rebuilt exe `672286c6…`, pak and cooked containers are byte-identical to the original. Pre-registered stopping rule: stop at the first stall or after 12 pair attempts ([16-bounded-batch-preregistration.json](evidence/xinyi-complex-as-simple-20261016/16-bounded-batch-preregistration.json)).
+
+The batch was paused after attempt 3 because each attempt copied the 0.93 GB package and D: was filling. Attempts 4–12 resumed with NTFS hardlinks of the read-only payload; each attempt kept its own `Saved`, logs and receipts ([17-resume-addendum.json](evidence/xinyi-complex-as-simple-20261016/17-resume-addendum.json)). Free space then moved about 0.06 GB over nine attempts. The shared exe, pak and ucas hashes were unchanged at the end.
+
+Result: **`STALL_NOT_REPRODUCED_IN_BOUNDED_BATCH`**. All 12 attempts completed both modes on an idle host with no stall. Every candidate passed all correctness gates and source immutability passed in every attempt ([bounded-batch-summary.json](evidence/xinyi-complex-as-simple-20261016/bounded-batch-summary.json)). The readback never fired, so the stall root cause is still undiagnosed. The earlier failures are not resolved, and no overall correctness PASS is issued. Pooled across all v2 runs, stalls are 3 in 23 candidate processes, all before the readback build.
+
+The abandoned setup directory `20261016T094337Z-8f72d100` was not counted as a pair.

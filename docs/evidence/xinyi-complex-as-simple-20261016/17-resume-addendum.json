@@ -1,0 +1,11 @@
+{
+  "schema": "xinyi-complex-as-simple-bounded-diagnostic-addendum/v1",
+  "written_utc": "2026-10-16T09:47:10Z",
+  "written_before_resume_launch": true,
+  "amends": "16-bounded-batch-preregistration.json (unchanged; all rules, stopping rule, package identity, plan SHA, timeout, predicate and thresholds remain in force)",
+  "reason": "Owner paused the batch after D: free space fell ~1 GB per attempt because every attempt copied the full ~0.93 GB package.",
+  "change": "Per-attempt package copy replaced by NTFS hardlinks of the read-only package payload (everything except runtime Saved) from this run's packaged-candidate. Each attempt keeps its own run directory, snapshot, plan, logs, raw JSON, host receipts and its own runtime Saved. Hardlink dry run: 48/48 files linked, 0.01 MB free-space delta, executable hash identical, source intact. Added guards: stop if D: free < 20 GB; the shared exe, pak and ucas hashes are re-checked at batch end and recorded.",
+  "completed_before_pause": "Attempts 1-3 completed normally (3 complete pairs, no stall); ledger 60-bounded-batch-ledger.jsonl.",
+  "abandoned_attempt": "Run 20261016T094337Z-8f72d100 was interrupted during setup by the owner-requested pause: snapshot and plan exist, package copy complete, no test launched. Preserved, not deleted, not counted as a pair.",
+  "resume": "Attempts 4-12 (maximum 9 further attempts) on the unchanged stopping rule: stop at the first FAIL_* status in either mode, else after attempt 12. No further batch afterwards."
+}

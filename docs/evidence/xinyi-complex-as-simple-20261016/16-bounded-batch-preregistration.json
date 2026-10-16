@@ -1,0 +1,18 @@
+{
+  "schema": "xinyi-complex-as-simple-bounded-diagnostic-preregistration/v1",
+  "written_utc": "2026-10-16T09:37:18Z",
+  "written_before_any_launch": true,
+  "approval": "Owner approved ONE final bounded diagnostic batch; goal is to capture the stall root cause, not to obtain passing runs.",
+  "code": "probe/validator/tests identical to 6d54192 (HEAD 8f72d10 differs only in docs)",
+  "package_run_id": "20261016T093423Z-8f72d100",
+  "package_provenance": "Rebuilt with the documented BuildCookRun after every earlier package payload under unreal/Saved was deleted externally at 2026-10-16T09:25:27Z. Rebuild is byte-identical to the original 6d54192 package: exe 672286c634353745d716bdc42a2d0778d5cb469c256a01f7cab5b3b016f25309, pak 23fcac1d3c9e9d5651634b01aad4c5bf95d5bc1b254616a8d7c21c4ccd57f8c8, AirCombatWorld-Windows.ucas 9892d13e0be888e20b63bb78c1c06ec534d5341a5d0958b661e896631507e038, .utoc 38c83323f37a0189610137e7ef76e036474a4e6d7f7c5ee8e52ae38921801ae9, global.ucas 0909f7db8b9f42ea848a5526d3dd75c86836b8db489ca7c6aa516615abc01bfc, global.utoc 34c121361eb2ec5528750d1ebd445368d7a14a15e9204abc76478aec4ea1e9c0.",
+  "plan_sha256": "235bfd9573c84b3ddab7da5b588d33c3f1263f50b6f24f1cdbbc8490a46b6531",
+  "unchanged": ["90 s step timeout", "streaming-completion predicate (observed at target AND source completed AND all completed, held 0.25 s)", "collision thresholds and validator gates", "collision policy of accepted assets"],
+  "max_pair_attempts": 12,
+  "pair_protocol": "Sequential. Each attempt: new run ID, fresh snapshot, regenerated v2 plan (SHA must match), copy of this package without runtime Saved, wait for 30 s with no UnrealEditor/UnrealEditor-Cmd process, Baseline then ComplexAsSimple via run_complex_candidate.ps1 (which refuses to launch if an editor is running), validator, source immutability. Other-editor presence during a pair is sampled every 500 ms and flagged.",
+  "stopping_rule": "Stop immediately after the first attempt in which either process ends with a FAIL_* status (candidate stall is the target; a baseline stall also stops the batch). Otherwise stop after 12 pair attempts. Harness aborts (a mode refused or not launched) count as attempts but not as complete pairs. No further batch is launched automatically.",
+  "no_stall_outcome": "STALL_NOT_REPRODUCED_IN_BOUNDED_BATCH, reported with the number of complete pairs; previous failures are not declared resolved and no overall correctness PASS is issued.",
+  "stall_evidence_preserved": ["SetActorLocation return (source_readback.set_actor_location_returned)", "actual source actor position (actor_location_cm, actor_distance_to_target_cm)", "component GetStreamingSource position (component_source_location_cm, distance)", "source enabled (source_enabled) and provider registered (provider_registered)", "World Partition cached source: runtime_streaming_source_count and nearest_runtime_source_cm (distance only)", "individual predicate states and false-tick counts", "XINYI_COMPLEX_WAIT / XINYI_COMPLEX_READBACK log lines", "raw JSON, logs, host receipts, snapshot, immutability receipt"],
+  "known_limitation": "The 6d54192 probe records World Partition's cached source as a count and a distance to the target, not as a position. Identifying that cached position with a specific location (e.g. the previous step source) is an inference from distance, not direct evidence.",
+  "classification": "First observable broken link via validate_complex_candidate.streaming_stall_readback: source_actor_not_at_target -> component_source_not_at_target -> provider_unregistered -> world_partition_source_list_stale. Direct evidence and inferred root cause are reported separately."
+}
