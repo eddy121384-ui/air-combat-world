@@ -1,0 +1,64 @@
+{
+ "role": "LOOKDEV_TEST_TERRAIN_REAL_DTM",
+ "label": "Xiangshan (象山) north-west flank, MOI 2025 20 m DTM derivative mirror, bicubic to 2 m",
+ "source": {
+  "path": "data/lookdev_cache/moi_2025_dtm_xinyi_mirror.tif",
+  "sha256": "29c89511f842e2d2a15139f675edf4e00aab5fc6a197d709794ae44ab21e36cb",
+  "official_dataset": "2025年版全臺灣20公尺網格數值地形模型DTM資料 (data.gov.tw/dataset/176927)",
+  "vertical_alignment_m": 0.341955
+ },
+ "crs": "EPSG:3826",
+ "center_wgs84": [
+  121.5752,
+  25.0268
+ ],
+ "center_3826": [
+  308048.71526739944,
+  2768869.2540086065
+ ],
+ "spacing_m": 2.0,
+ "size": [
+  505,
+  505
+ ],
+ "extent_m": 1008.0,
+ "landscape": {
+  "components": [
+   8,
+   8
+  ],
+  "num_subsections": 1,
+  "subsection_quads": 63,
+  "scale_xyz": [
+   200.0,
+   200.0,
+   100.0
+  ],
+  "location_cm": [
+   -50400.0,
+   -50400.0,
+   0.0
+  ],
+  "z_rule": "world_z_m = (raw - 32768) / 128 * scale_z / 100 + h_ref_m - h_ref_m  (Landscape at Z=0, so UE Z = height - h_ref)",
+  "h_ref_m": 96.0
+ },
+ "ue_frame": "UE X = east (m*100), UE Y = south (= -north), UE Z = height - h_ref; origin = grid centre",
+ "height_m": {
+  "min": 9.328125,
+  "max": 182.2421875,
+  "mean": 70.08506774902344
+ },
+ "slope_deg": {
+  "mean": 20.797005847394985,
+  "p90": 34.981375498235934,
+  "max": 66.97246651168317
+ },
+ "limitations": [
+  "20 m source resolution: no relief below ~20 m (rocks, trail cuts, retaining walls, buildings)",
+  "bare-earth DTM: no canopy height model, so tree heights are not from data"
+ ],
+ "outputs": {
+  "terrain.r16": "469c995c78ba7a00f1518e8122fbf5a0b1dcd8bc9a268a13934149797b508f1e",
+  "terrain_height.npy": "483c4f4e8a0261f3b5cdc4b1a5781a3ceaecc5ac869ba7c074eec13a0ff05811"
+ }
+}
