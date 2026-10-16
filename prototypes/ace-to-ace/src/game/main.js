@@ -89,7 +89,16 @@ function start(k) {
   const playerScale = k === 'pvai' ? PLAYER_DAMAGE_SCALE[diff] ?? 1 : 1;
   match = new Match({ seed, blue: { type: 'F16V', name: 'F-16V', damageScale: playerScale }, red: { type: 'J16', name: 'J-16' } });
   rend.addAircraft(match.blue); rend.addAircraft(match.red);
-  enemyAI = new PilotAI(match.red, { skill: diff, seed: seed + 7, onRadio: (m) => { if (kind === 'pvai' || spectateTarget === 'blue') { hud.say('J-16', m.text); audio.radio(); } } });
+  enemyAI = new PilotAI(match.red, {
+    skill: diff, seed: seed + 7,
+    onRadio: (m) => { if (kind === 'pvai' || spectateTarget === 'blue') { hud.say('J-16', m.text); audio.radio(); } },
+    onTactic: (ev) => {
+      if (kind !== 'pvai') return;
+      // A cue to a real manoeuvre, no forced cinematic camera or fake reversal.
+      if (ev.type === 'brakeStart') hud.flash('J-16 減速！', '#ffc04d', 1.1);
+      if (ev.type === 'overshoot') hud.flash('J-16 反咬！', '#ff8f8f', 1.8, true);
+    },
+  });
   match.setController(match.red, enemyAI);
   if (k === 'aivai') {
     blueAI = new PilotAI(match.blue, { skill: params.get('blueSkill') || 'veteran', seed: seed + 3, onRadio: (m) => { if (spectateTarget === 'red') { hud.say('F-16V', m.text); audio.radio(); } } });
@@ -196,7 +205,7 @@ function showResult() {
     <div><b>${Math.round(foe.stats.damageDealt)}</b><span>受到傷害</span></div>
     <div><b>${foe.stats.missileHits}/${foe.stats.missilesFired}</b><span>J-16 飛彈命中/發射</span></div>
     <div><b>${foe.stats.flaresUsed}</b><span>J-16 熱焰彈</span></div>`;
-  $('#resAI').innerHTML = `<p><b>J-16 戰術時間：</b>${share}</p><p><b>J-16 對你的判讀：</b>${read}（閃避指數 ${ai.oppEvades.toFixed(2)}）</p>
+  $('#resAI').innerHTML = `<p><b>J-16 戰術時間：</b>${share}</p><p><b>減速誘敵：</b>${ai.brakeAttempts} 次嘗試、${ai.brakeSuccesses} 次觀測到衝過頭</p><p><b>J-16 對你的判讀：</b>${read}（閃避指數 ${ai.oppEvades.toFixed(2)}）</p>
     <p class="dim">最後的決策：${ai.transitions.slice(-4).map((t) => `${fmtTime(t.t)} ${t.to} — ${t.why}`).join('<br>')}</p>`;
   showScreen('result');
   $('#touch').classList.add('hidden');
