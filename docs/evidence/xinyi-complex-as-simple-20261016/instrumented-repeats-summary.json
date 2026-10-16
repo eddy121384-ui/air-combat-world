@@ -1,0 +1,453 @@
+{
+  "schema": "xinyi-complex-as-simple-repeat-summary/v1",
+  "package_run_id": "20261016T071453Z-89416b47",
+  "repeats": [
+    {
+      "repeat": 1,
+      "run_id": "20261016T072003Z-89416b47",
+      "plan_sha256": "235bfd9573c84b3ddab7da5b588d33c3f1263f50b6f24f1cdbbc8490a46b6531",
+      "validator_candidate_correctness": "NO_RECEIPT",
+      "source_immutability": "PASS_SOURCE_IMMUTABILITY",
+      "other_editor_samples": "4/67",
+      "modes": {
+        "Baseline": {
+          "status": "ENGINE_COMPLEX_CANDIDATE_COMPLETE",
+          "process_id": 8592,
+          "host_process_id": "8592",
+          "executable_sha256": "ba4865f6d90aec93fa84d0048cd6ab552a0039422ec8986ec6da22f0852fb617",
+          "exit_code": 0,
+          "elapsed_seconds": 33.557,
+          "steps_captured": 101,
+          "steps_with_predicate_record": 101,
+          "max_wait_ticks": 590,
+          "false_ticks_total": {
+            "source_observed_false_ticks": 0,
+            "source_completed_false_ticks": 253,
+            "all_completed_false_ticks": 253
+          },
+          "longest_waits_ms": [
+            [
+              278.458,
+              "terrain_center_3_0"
+            ],
+            [
+              270.506,
+              "terrain_center_3_3"
+            ],
+            [
+              269.545,
+              "terrain_center_3_2"
+            ]
+          ],
+          "step_timeout_diagnostics": null
+        },
+        "ComplexAsSimple": {
+          "status": "NO_RAW"
+        }
+      },
+      "classification": "FAIL"
+    },
+    {
+      "repeat": 2,
+      "run_id": "20261016T072424Z-89416b47",
+      "plan_sha256": "235bfd9573c84b3ddab7da5b588d33c3f1263f50b6f24f1cdbbc8490a46b6531",
+      "validator_candidate_correctness": "NO_RECEIPT",
+      "source_immutability": "PASS_SOURCE_IMMUTABILITY",
+      "other_editor_samples": "137/283",
+      "modes": {
+        "Baseline": {
+          "status": "ENGINE_COMPLEX_CANDIDATE_COMPLETE",
+          "process_id": 21056,
+          "host_process_id": "21056",
+          "executable_sha256": "ba4865f6d90aec93fa84d0048cd6ab552a0039422ec8986ec6da22f0852fb617",
+          "exit_code": 0,
+          "elapsed_seconds": 33.345,
+          "steps_captured": 101,
+          "steps_with_predicate_record": 101,
+          "max_wait_ticks": 562,
+          "false_ticks_total": {
+            "source_observed_false_ticks": 0,
+            "source_completed_false_ticks": 212,
+            "all_completed_false_ticks": 212
+          },
+          "longest_waits_ms": [
+            [
+              280.3,
+              "terrain_center_3_0"
+            ],
+            [
+              277.524,
+              "terrain_center_3_3"
+            ],
+            [
+              272.177,
+              "terrain_center_3_2"
+            ]
+          ],
+          "step_timeout_diagnostics": null
+        },
+        "ComplexAsSimple": {
+          "status": "FAIL_STEP_TIMEOUT",
+          "process_id": 20100,
+          "host_process_id": "20100",
+          "executable_sha256": "ba4865f6d90aec93fa84d0048cd6ab552a0039422ec8986ec6da22f0852fb617",
+          "exit_code": 0,
+          "elapsed_seconds": 112.489,
+          "steps_captured": 76,
+          "steps_with_predicate_record": 76,
+          "max_wait_ticks": 550,
+          "false_ticks_total": {
+            "source_observed_false_ticks": 0,
+            "source_completed_false_ticks": 256,
+            "all_completed_false_ticks": 256
+          },
+          "longest_waits_ms": [
+            [
+              297.644,
+              "terrain_center_3_0"
+            ],
+            [
+              289.416,
+              "terrain_center_3_3"
+            ],
+            [
+              287.112,
+              "terrain_center_4_0"
+            ]
+          ],
+          "step_timeout_diagnostics": {
+            "wait_ticks": 139179,
+            "source_observed_false_ticks": 139179,
+            "source_completed_false_ticks": 139179,
+            "all_completed_false_ticks": 0,
+            "step_id": "open_area_+000_+000",
+            "step_index": 76,
+            "wait_seconds": 90.0003382973373,
+            "source_observed_at_target": false,
+            "source_streaming_completed": false,
+            "subsystem_all_streaming_completed": true,
+            "runtime_streaming_source_count": 1,
+            "nearest_runtime_source_cm": 45069.39094329986
+          }
+        }
+      },
+      "classification": "FAIL"
+    },
+    {
+      "repeat": 3,
+      "run_id": "20261016T072900Z-89416b47",
+      "plan_sha256": "235bfd9573c84b3ddab7da5b588d33c3f1263f50b6f24f1cdbbc8490a46b6531",
+      "validator_candidate_correctness": "PASS",
+      "source_immutability": "PASS_SOURCE_IMMUTABILITY",
+      "other_editor_samples": "0/124",
+      "modes": {
+        "Baseline": {
+          "status": "ENGINE_COMPLEX_CANDIDATE_COMPLETE",
+          "process_id": 18452,
+          "host_process_id": "18452",
+          "executable_sha256": "ba4865f6d90aec93fa84d0048cd6ab552a0039422ec8986ec6da22f0852fb617",
+          "exit_code": 0,
+          "elapsed_seconds": 33.078,
+          "steps_captured": 101,
+          "steps_with_predicate_record": 101,
+          "max_wait_ticks": 549,
+          "false_ticks_total": {
+            "source_observed_false_ticks": 0,
+            "source_completed_false_ticks": 236,
+            "all_completed_false_ticks": 236
+          },
+          "longest_waits_ms": [
+            [
+              278.283,
+              "terrain_center_3_0"
+            ],
+            [
+              269.769,
+              "terrain_center_3_3"
+            ],
+            [
+              268.957,
+              "terrain_center_0_4"
+            ]
+          ],
+          "step_timeout_diagnostics": null
+        },
+        "ComplexAsSimple": {
+          "status": "ENGINE_COMPLEX_CANDIDATE_COMPLETE",
+          "process_id": 25456,
+          "host_process_id": "25456",
+          "executable_sha256": "ba4865f6d90aec93fa84d0048cd6ab552a0039422ec8986ec6da22f0852fb617",
+          "exit_code": 0,
+          "elapsed_seconds": 30.054,
+          "steps_captured": 101,
+          "steps_with_predicate_record": 101,
+          "max_wait_ticks": 546,
+          "false_ticks_total": {
+            "source_observed_false_ticks": 0,
+            "source_completed_false_ticks": 240,
+            "all_completed_false_ticks": 240
+          },
+          "longest_waits_ms": [
+            [
+              280.564,
+              "terrain_center_3_0"
+            ],
+            [
+              271.336,
+              "terrain_center_3_3"
+            ],
+            [
+              270.99,
+              "terrain_center_3_2"
+            ]
+          ],
+          "step_timeout_diagnostics": null
+        }
+      },
+      "candidate": {
+        "positive_expected_tile_match_count": 15,
+        "positive_failures": [],
+        "negative_blocked_count": 0,
+        "sweep_failures": [],
+        "dynamic_simulation_pass": true,
+        "effective_trace_flag_counts": {
+          "3": 25
+        },
+        "all_streaming_complete": true
+      },
+      "baseline_negative_blocked_count": 17,
+      "ratios": {
+        "median_query_time": 0.9584,
+        "p95_query_time": 2.758,
+        "frame_p95": 1.1314,
+        "frame_p99": 1.0608,
+        "peak_working_set": 0.9658,
+        "peak_private": 1.01,
+        "streaming_wait": 1.0082
+      },
+      "absolute": {
+        "Baseline": {
+          "query_p95_us": 1.337,
+          "query_median_us": 1.145,
+          "frame_p95_ms": 1.037,
+          "frame_p99_ms": 1.608,
+          "frame_max_ms": 30.558,
+          "runtime_peak_memory_bytes": 300621824,
+          "max_streaming_wait_ms": 278.283
+        },
+        "ComplexAsSimple": {
+          "query_p95_us": 3.687,
+          "query_median_us": 1.098,
+          "frame_p95_ms": 1.173,
+          "frame_p99_ms": 1.706,
+          "frame_max_ms": 31.877,
+          "runtime_peak_memory_bytes": 300216320,
+          "max_streaming_wait_ms": 280.564
+        }
+      },
+      "classification": "PASS"
+    },
+    {
+      "repeat": 4,
+      "run_id": "20261016T075849Z-89416b47",
+      "plan_sha256": "235bfd9573c84b3ddab7da5b588d33c3f1263f50b6f24f1cdbbc8490a46b6531",
+      "validator_candidate_correctness": "PASS",
+      "source_immutability": "PASS_SOURCE_IMMUTABILITY",
+      "other_editor_samples": "0/132",
+      "modes": {
+        "Baseline": {
+          "status": "ENGINE_COMPLEX_CANDIDATE_COMPLETE",
+          "process_id": 20312,
+          "host_process_id": "20312",
+          "executable_sha256": "ba4865f6d90aec93fa84d0048cd6ab552a0039422ec8986ec6da22f0852fb617",
+          "exit_code": 0,
+          "elapsed_seconds": 36.974,
+          "steps_captured": 101,
+          "steps_with_predicate_record": 101,
+          "max_wait_ticks": 598,
+          "false_ticks_total": {
+            "source_observed_false_ticks": 0,
+            "source_completed_false_ticks": 273,
+            "all_completed_false_ticks": 273
+          },
+          "longest_waits_ms": [
+            [
+              285.316,
+              "terrain_center_0_0"
+            ],
+            [
+              282.24,
+              "terrain_center_3_0"
+            ],
+            [
+              271.516,
+              "terrain_center_3_3"
+            ]
+          ],
+          "step_timeout_diagnostics": null
+        },
+        "ComplexAsSimple": {
+          "status": "ENGINE_COMPLEX_CANDIDATE_COMPLETE",
+          "process_id": 9832,
+          "host_process_id": "9832",
+          "executable_sha256": "ba4865f6d90aec93fa84d0048cd6ab552a0039422ec8986ec6da22f0852fb617",
+          "exit_code": 0,
+          "elapsed_seconds": 30.066,
+          "steps_captured": 101,
+          "steps_with_predicate_record": 101,
+          "max_wait_ticks": 607,
+          "false_ticks_total": {
+            "source_observed_false_ticks": 0,
+            "source_completed_false_ticks": 263,
+            "all_completed_false_ticks": 263
+          },
+          "longest_waits_ms": [
+            [
+              282.328,
+              "terrain_center_3_0"
+            ],
+            [
+              272.197,
+              "terrain_center_0_4"
+            ],
+            [
+              270.989,
+              "terrain_center_3_3"
+            ]
+          ],
+          "step_timeout_diagnostics": null
+        }
+      },
+      "candidate": {
+        "positive_expected_tile_match_count": 15,
+        "positive_failures": [],
+        "negative_blocked_count": 0,
+        "sweep_failures": [],
+        "dynamic_simulation_pass": true,
+        "effective_trace_flag_counts": {
+          "3": 25
+        },
+        "all_streaming_complete": true
+      },
+      "baseline_negative_blocked_count": 17,
+      "ratios": {
+        "median_query_time": 0.962,
+        "p95_query_time": 1.1104,
+        "frame_p95": 1.0113,
+        "frame_p99": 1.028,
+        "peak_working_set": 0.9505,
+        "peak_private": 0.9881,
+        "streaming_wait": 0.9895
+      },
+      "absolute": {
+        "Baseline": {
+          "query_p95_us": 1.763,
+          "query_median_us": 1.132,
+          "frame_p95_ms": 0.646,
+          "frame_p99_ms": 0.902,
+          "frame_max_ms": 33.34,
+          "runtime_peak_memory_bytes": 303091712,
+          "max_streaming_wait_ms": 285.316
+        },
+        "ComplexAsSimple": {
+          "query_p95_us": 1.958,
+          "query_median_us": 1.089,
+          "frame_p95_ms": 0.653,
+          "frame_p99_ms": 0.927,
+          "frame_max_ms": 31.966,
+          "runtime_peak_memory_bytes": 302653440,
+          "max_streaming_wait_ms": 282.328
+        }
+      },
+      "classification": "PASS"
+    },
+    {
+      "repeat": 5,
+      "run_id": "20261016T080100Z-89416b47",
+      "plan_sha256": "235bfd9573c84b3ddab7da5b588d33c3f1263f50b6f24f1cdbbc8490a46b6531",
+      "validator_candidate_correctness": "NO_RECEIPT",
+      "source_immutability": "PASS_SOURCE_IMMUTABILITY",
+      "other_editor_samples": "0/297",
+      "modes": {
+        "Baseline": {
+          "status": "ENGINE_COMPLEX_CANDIDATE_COMPLETE",
+          "process_id": 6696,
+          "host_process_id": "6696",
+          "executable_sha256": "ba4865f6d90aec93fa84d0048cd6ab552a0039422ec8986ec6da22f0852fb617",
+          "exit_code": 0,
+          "elapsed_seconds": 40.799,
+          "steps_captured": 101,
+          "steps_with_predicate_record": 101,
+          "max_wait_ticks": 456,
+          "false_ticks_total": {
+            "source_observed_false_ticks": 0,
+            "source_completed_false_ticks": 258,
+            "all_completed_false_ticks": 258
+          },
+          "longest_waits_ms": [
+            [
+              298.529,
+              "terrain_center_0_0"
+            ],
+            [
+              288.783,
+              "terrain_center_3_0"
+            ],
+            [
+              280.709,
+              "terrain_center_3_3"
+            ]
+          ],
+          "step_timeout_diagnostics": null
+        },
+        "ComplexAsSimple": {
+          "status": "FAIL_STEP_TIMEOUT",
+          "process_id": 6564,
+          "host_process_id": "6564",
+          "executable_sha256": "ba4865f6d90aec93fa84d0048cd6ab552a0039422ec8986ec6da22f0852fb617",
+          "exit_code": 0,
+          "elapsed_seconds": 112.478,
+          "steps_captured": 76,
+          "steps_with_predicate_record": 76,
+          "max_wait_ticks": 506,
+          "false_ticks_total": {
+            "source_observed_false_ticks": 0,
+            "source_completed_false_ticks": 149,
+            "all_completed_false_ticks": 149
+          },
+          "longest_waits_ms": [
+            [
+              289.701,
+              "terrain_center_3_0"
+            ],
+            [
+              273.139,
+              "terrain_center_3_3"
+            ],
+            [
+              272.36,
+              "terrain_center_3_2"
+            ]
+          ],
+          "step_timeout_diagnostics": {
+            "wait_ticks": 177894,
+            "source_observed_false_ticks": 177894,
+            "source_completed_false_ticks": 177894,
+            "all_completed_false_ticks": 0,
+            "step_id": "open_area_+000_+000",
+            "step_index": 76,
+            "wait_seconds": 90.00034679844975,
+            "source_observed_at_target": false,
+            "source_streaming_completed": false,
+            "subsystem_all_streaming_completed": true,
+            "runtime_streaming_source_count": 1,
+            "nearest_runtime_source_cm": 45069.39094329986
+          }
+        }
+      },
+      "classification": "FAIL"
+    }
+  ],
+  "pass_count": 2,
+  "stall_count": 2
+}

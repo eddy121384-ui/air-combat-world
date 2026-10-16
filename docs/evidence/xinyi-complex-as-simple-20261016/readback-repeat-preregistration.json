@@ -1,0 +1,16 @@
+{
+  "schema": "xinyi-complex-as-simple-repeat-preregistration/v1",
+  "written_utc": "2026-10-16T08:14:11Z",
+  "written_before_package_completion_and_before_any_launch": true,
+  "code_head": "6d54192",
+  "package_run_id": "20261016T081352Z-6d541926",
+  "package_pipeline": "RunUAT BuildCookRun Development Win64, explicit /Game/XinyiV2/L_XinyiV2_Contract_WP (documented command)",
+  "purpose": "Diagnose the candidate-only open_area_+000_+000 streaming stall by reading back SetActorLocation return, actor location, component GetStreamingSource location, source enabled and provider registered.",
+  "repeat_count": 5,
+  "repeat_protocol": "Identical to batch 20261016T071453Z-89416b47: one run ID per repeat, fresh snapshot, regenerated v2 plan that must equal SHA 235bfd9573c84b3ddab7da5b588d33c3f1263f50b6f24f1cdbbc8490a46b6531, copy of this run's package without runtime Saved, 30 s idle-host wait, Baseline then ComplexAsSimple, validator, source immutability. All 5 are run and reported; none is discarded or rerun.",
+  "package_acceptance": "Cooked IoStore containers must be byte-identical to the September and 89416b47 packages; otherwise the batch is reported as a different-content package.",
+  "per_repeat_classification": "PASS only if both processes complete, validator candidate_correctness=PASS and source immutability PASS. A harness abort or any stall is FAIL for that repeat.",
+  "diagnosis_reporting": "Every stall is reported with its false predicate terms and the validator's source_readback classification (source_actor_not_at_target / component_source_not_at_target / provider_unregistered / world_partition_source_list_stale). If no stall occurs in this batch, the cause stays undiagnosed and is reported as such.",
+  "verdict_policy": "Unchanged: earlier candidate stalls stay FAIL, and this session does not issue COMPLEX_AS_SIMPLE_CORRECTNESS_PASS. The batch produces diagnosis and repeat statistics for the owner's decision.",
+  "performance": "Within-pair ratios only; no thresholds; contention flagged."
+}

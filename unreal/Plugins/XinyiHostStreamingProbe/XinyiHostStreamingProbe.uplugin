@@ -1,0 +1,13 @@
+{
+  "FileVersion": 3,
+  "Version": 1,
+  "VersionName": "0.1.0",
+  "FriendlyName": "Xinyi Host Streaming Probe",
+  "Description": "Opt-in runtime observation of the isolated Xinyi World Partition world.",
+  "Category": "Skyfront",
+  "CanContainContent": false,
+  "EnabledByDefault": true,
+  "Modules": [
+    { "Name": "XinyiHostStreamingProbe", "Type": "Runtime", "LoadingPhase": "Default" }
+  ]
+}
