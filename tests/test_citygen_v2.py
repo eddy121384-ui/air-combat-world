@@ -201,5 +201,20 @@ class TestStrictSolidQA(unittest.TestCase):
         self.assertEqual(strict_mesh_gate(self.mesh,self.poly,self.height)['zero_area_triangles'],1)
 
 
+class TestFullXinyiProvenanceGuards(unittest.TestCase):
+    def test_full_report_pipeline_names_geos_cdt_not_earcut(self):
+        from build_full_xinyi import PIPELINE_DESCRIPTION
+        self.assertIn("GEOS constrained Delaunay", PIPELINE_DESCRIPTION)
+        self.assertNotIn("earcut", PIPELINE_DESCRIPTION.lower())
+
+    def test_source_drift_fails_closed_and_frozen_hash_is_unchanged(self):
+        from source_lock import SourceDriftError, frozen_source_sha256, verify_frozen_source
+        frozen = "c7ca8da13a4c5baaab0fbd1fcfe5b3799723d49d1998f804cf1593904f70200d"
+        self.assertEqual(frozen_source_sha256(), frozen)
+        verify_frozen_source(frozen)
+        with self.assertRaisesRegex(SourceDriftError, "SOURCE DRIFT"):
+            verify_frozen_source("0" * 64)
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

@@ -28,7 +28,12 @@ RASTER = CACHE / "moi_2025_dtm_xinyi_mirror.tif"
 MANIFEST = OUT / "moi_2025_dtm_mirror_source.json"
 
 HF_REPO = "yhzkiki/taiwan-dtm-2025-terrarium-z13"
-HF_BASE = f"https://huggingface.co/datasets/{HF_REPO}/resolve/main"
+# Pinned mirror revision (last upstream commit, 2026-09-14, predates the accepted
+# Terrain v0 run). Changing it is a new-source candidate, not a CI fix.
+HF_REVISION = "8ae5c06ae126ca8e01d02928260f512d713a0be8"
+# SHA-256 over sorted "z/x/y:sha256" lines of every downloaded terrain tile.
+EXPECTED_TILESET_SHA256 = "9890498de0836a44a9ab4aefa1f3072389b20424a2430d462a5d81480b1eb839"
+HF_BASE = f"https://huggingface.co/datasets/{HF_REPO}/resolve/{HF_REVISION}"
 ZOOM = 13
 TILE_SIZE = 256
 
@@ -163,6 +168,18 @@ with RASTER.open("rb") as fh:
         h.update(block)
 
 repo_commits = sorted({t["x_repo_commit"] for t in tiles if t.get("x_repo_commit")})
+tileset_sha256 = sha256_bytes(
+    chr(10).join(f'{t["z"]}/{t["x"]}/{t["y"]}:{t["sha256"]}' for t in sorted(tiles, key=lambda t: (t["x"], t["y"]))).encode()
+)
+if repo_commits and repo_commits != [HF_REVISION]:  # URL is revision-pinned; headers are advisory
+    raise SystemExit(f"MIRROR SOURCE DRIFT: served commits {repo_commits} != pinned {HF_REVISION}")
+if EXPECTED_TILESET_SHA256 and tileset_sha256 != EXPECTED_TILESET_SHA256:
+    raise SystemExit(
+        "MIRROR SOURCE DRIFT: tile-set sha256 does not match the pinned baseline. "
+        f"expected {EXPECTED_TILESET_SHA256} actual {tileset_sha256}. "
+        "Do not update the pin to turn CI green; treat as a new-source candidate."
+    )
+
 manifest = {
     "role": "OFFICIAL_MOI_2025_DTM_DERIVATIVE_MIRROR_CANDIDATE",
     "official_dataset": {
@@ -177,6 +194,8 @@ manifest = {
         "dataset_card": f"https://huggingface.co/datasets/{HF_REPO}",
         "format": "Terrarium RGB XYZ z13",
         "decode": "R*256 + G + B/256 - 32768",
+        "pinned_revision": HF_REVISION,
+        "tileset_sha256": tileset_sha256,
         "repo_commits_from_headers": repo_commits,
         "metadata_files": source_meta,
     },
@@ -192,6 +211,10 @@ manifest = {
         "elevation_max_m": float(np.max(mosaic)),
         "sha256": h.hexdigest(),
     },
+    "redistribution_status": (
+        "UNRESOLVED: independent provenance of the mirror conversion and rights for commercial "
+        "redistribution are not established; this is not a commercial shipping clearance."
+    ),
     "acceptance_note": (
         "This is a cloud-readable derivative of the official MOI 2025 bare-earth DTM. "
         "Production acceptance still requires cross-checking against WFS surveyed ground "
