@@ -28,6 +28,7 @@ sys.path.insert(0, str(HERE))
 
 from geometry import concavity_ratio, extrude_geos_polygon, repair_worldmodel_polygon  # noqa: E402
 from worldmodel import build_worldmodel  # noqa: E402
+from source_lock import verify_frozen_source  # noqa: E402
 from strict_qa import strict_mesh_gate  # noqa: E402
 from serialization_space import prepare_footprint, tile_origin, tile_transform  # noqa: E402
 
@@ -142,6 +143,7 @@ def build(target_count: int, output_glb: Path, output_report: Path) -> dict:
             "projected v2 source missing; run: node tools/citygen_v2/fetch_projected_sample.mjs"
         )
     source_sha256 = hashlib.sha256(source.read_bytes()).hexdigest()
+    verify_frozen_source(source_sha256)
     wm = build_worldmodel(source, city, source_crs="EPSG:3826")
 
     outcome_counts = Counter()
@@ -299,7 +301,7 @@ def build(target_count: int, output_glb: Path, output_report: Path) -> dict:
     report = {
         "gate": "Xinyi v2 serialization-space representative gate (quantized footprint AND float64 AND actual GLB float32)",
         "baseline_76_of_80_commit":"3b963a4076b81ff413fcb7152688b2eb6e37f4bb",
-        "pipeline":"GEOS repaired ENU -> 500m tile local -> float32 footprint -> GEOS validity -> earcut/trimesh -> GLB reload",
+        "pipeline":"GEOS repaired ENU -> 500m tile local -> float32 footprint -> GEOS validity -> GEOS constrained Delaunay/trimesh -> GLB reload",
         "baseline_selection": {k:v for k,v in lock.items() if k != 'selected'},
         "selected_unique_buildings":len({c['building_id'] for c in selected}),
         "same_80_parts_as_baseline":True,
