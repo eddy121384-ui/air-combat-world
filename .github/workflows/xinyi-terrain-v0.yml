@@ -9,6 +9,7 @@ on:
       - ".github/workflows/xinyi-terrain-v0.yml"
       - "cities/taipei/**"
       - "tools/citygen_v2/fetch_projected_sample.mjs"
+      - "tools/citygen_v2/source_lock.py"
       - "tools/compiler/worldmodel.py"
       - "requirements-citygen-v2.txt"
       - "requirements-terrain-v0.txt"
@@ -26,6 +27,9 @@ jobs:
 
       - name: Fetch locked projected Xinyi building source
         run: node tools/citygen_v2/fetch_projected_sample.mjs
+
+      - name: Verify fetched source against frozen accepted baseline (fail closed)
+        run: python tools/citygen_v2/source_lock.py
 
       - name: Audit official MOI 2025 20 m DTM catalog
         run: node tools/terrain/audit_nlsc_dtm_source.mjs
