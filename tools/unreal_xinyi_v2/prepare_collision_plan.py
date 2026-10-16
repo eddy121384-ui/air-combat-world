@@ -15,7 +15,7 @@ import math
 import struct
 from pathlib import Path
 
-from first_hit_oracle import certify_positive_samples, tile_sources
+from first_hit_oracle import certify_positive_samples, first_hit, tile_sources
 
 
 def sha(path):
@@ -84,6 +84,7 @@ def main():
         boxes = [json.loads(line) for line in f]
     if len(boxes) != header["count"] or len(boxes) != 11130:
         raise ValueError("placement count")
+    source_tiles = tile_sources(contract, base)
 
     steps = []
     def add_step(id, x, y, kind, terrain=True):
@@ -227,9 +228,9 @@ def main():
                 distance_to_border=min(abs(center[0]-ox),abs(center[0]-(ox+50000)),
                                        abs(center[1]-oy),abs(center[1]-(oy-50000)))
                 score=(1/(1+distance_to_border) if category=="tile_boundary" else area)
-                if category=="low_rise":
+                if category in ("low_rise", "tile_boundary"):
                     wall_candidates.append((score,center,(nx/area,nz/area),area))
-                elif best_wall is None or score>best_wall[0]:
+                if best_wall is None or score>best_wall[0]:
                     best_wall=(score,center,(nx/area,nz/area),area)
         if category=="low_rise" and low_building:
             lo,hi=low_building["expected_ue_bounds_min_cm"],low_building["expected_ue_bounds_max_cm"]
@@ -237,8 +238,33 @@ def main():
                       lo[1]<=w[1][1]<=hi[1] and lo[2]<=w[1][2]<=hi[2]]
             if eligible:best_wall=max(eligible,key=lambda w:w[3])
         if not best_roof or not best_wall: raise ValueError(f"no source triangles: {tile_id}")
+        wall_probe = best_wall
+        if category == "tile_boundary":
+            # Source-derived nearest-border face can be co-owned by adjacent
+            # runtime tiles. Select the first non-grazing, unambiguous wall ray,
+            # using source triangles only (never observed Chaos results).
+            wall_probe = None
+            for candidate in sorted(wall_candidates, key=lambda entry: entry[0], reverse=True):
+                _, center, (nx, ny), _ = candidate
+                start = [center[0]+nx*1000, center[1]+ny*1000, center[2]]
+                end = [center[0]-nx*1000, center[1]-ny*1000, center[2]]
+                try:
+                    hit = first_hit(source_tiles, start, end)
+                except ValueError as exc:
+                    # Only a no-hit or ambiguous owner is eligible for another
+                    # test candidate; source-hash drift stays fatal.
+                    if not any(x in str(exc) for x in ("no source-triangle", "Ambiguous first-hit")):
+                        raise
+                    continue
+                if hit["tile"] == tile_id and 5 < hit["distance_cm"] < 1995:
+                    wall_probe = candidate
+                    break
+            if wall_probe is None:
+                raise ValueError("No source-certified nonambiguous boundary wall probe")
         selected.append((category,tile_id,best_roof,best_wall,sha(glb)))
-        for kind,center,normal in [("roof",best_roof[1],None),("wall",best_wall[1],best_wall[2]),
+        # Preserve the original 60m 'mass' ray as a cross-tile occlusion test.
+        # Only the nearly coincident 20m wall probe is replaced if ambiguous.
+        for kind,center,normal in [("roof",best_roof[1],None),("wall",wall_probe[1],wall_probe[2]),
                                    ("mass",best_wall[1],best_wall[2])]:
             x,y,z=center
             if normal is None:
@@ -250,13 +276,13 @@ def main():
             step["building_samples"].append({"id":f"{category}_{kind}","kind":kind,
                 "expected_tile":tile_id,"expect_hit":True,"start_cm":start,"end_cm":end,
                 "certificate":{"source_glb_sha256":sha(glb),"triangle_center_cm":center,
-                               "triangle_area_m2_x2":best_roof[2] if kind=="roof" else best_wall[3],
+                               "triangle_area_m2_x2":best_roof[2] if kind=="roof" else (wall_probe if kind=="wall" else best_wall)[3],
                                "source_building_id":low_building["building_id"] if category=="low_rise" else None,
                                "source_building_height_cm":(low_building["expected_ue_bounds_max_cm"][2]-low_building["expected_ue_bounds_min_cm"][2]) if category=="low_rise" else None}})
     # A selected source wall is only a witness: a longer ray may encounter a
     # different tile first. Certify all 15 positive rays against all 25 hashed
     # runtime GLBs, before any UE/Chaos observation or packaged launch.
-    first_hit_count = certify_positive_samples(steps, tile_sources(contract, base))
+    first_hit_count = certify_positive_samples(steps, source_tiles)
     if first_hit_count != 15:
         raise ValueError(f"Expected 15 source-certified positive probes, got {first_hit_count}")
 
