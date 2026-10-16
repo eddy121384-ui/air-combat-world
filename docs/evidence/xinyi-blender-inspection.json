@@ -1,0 +1,174 @@
+{
+  "blender": "5.2.0 LTS",
+  "coordinate_frame": "Blender Z-up meters, imported from GLB Y-up",
+  "results": {
+    "greybox": {
+      "scene": "Xinyi_Winding_Inspection",
+      "meshes": [
+        {
+          "name": "layerA_low",
+          "vertices": 135600,
+          "triangles": 45200,
+          "bounds_m": [
+            [
+              -1149.833740234375,
+              -968.4795532226562,
+              0.0
+            ],
+            [
+              948.1085205078125,
+              1113.1949462890625,
+              19.989999771118164
+            ]
+          ],
+          "nonfinite_vertices": 0,
+          "faces": {
+            "roof_up": 7637,
+            "roof_wrong": 111,
+            "base_down": 7637,
+            "base_wrong": 111,
+            "walls": 29690,
+            "zero_area_triangles": 14
+          }
+        },
+        {
+          "name": "layerA_mid",
+          "vertices": 100812,
+          "triangles": 33604,
+          "bounds_m": [
+            [
+              -1149.833740234375,
+              -979.6115112304688,
+              0.0
+            ],
+            [
+              948.1085205078125,
+              1168.8546142578125,
+              59.650001525878906
+            ]
+          ],
+          "nonfinite_vertices": 0,
+          "faces": {
+            "roof_up": 5848,
+            "roof_wrong": 72,
+            "base_down": 5848,
+            "base_wrong": 72,
+            "walls": 21758,
+            "zero_area_triangles": 6
+          }
+        },
+        {
+          "name": "layerA_high",
+          "vertices": 13224,
+          "triangles": 4408,
+          "bounds_m": [
+            [
+              -1069.1436767578125,
+              -879.4239501953125,
+              0.0
+            ],
+            [
+              897.6771850585938,
+              1124.326904296875,
+              269.04998779296875
+            ]
+          ],
+          "nonfinite_vertices": 0,
+          "faces": {
+            "roof_up": 787,
+            "roof_wrong": 7,
+            "base_down": 787,
+            "base_wrong": 7,
+            "walls": 2820,
+            "zero_area_triangles": 0
+          }
+        },
+        {
+          "name": "ground_plane",
+          "vertices": 12,
+          "triangles": 4,
+          "bounds_m": [
+            [
+              -1400.0,
+              -1206.0,
+              -0.20000000298023224
+            ],
+            [
+              1200.0,
+              1394.0,
+              -0.20000000298023224
+            ]
+          ],
+          "nonfinite_vertices": 0
+        },
+        {
+          "name": "hero_taipei101_placeholder",
+          "vertices": 108,
+          "triangles": 36,
+          "bounds_m": [
+            [
+              -119.06050109863281,
+              49.63949203491211,
+              0.0
+            ],
+            [
+              -62.4921989440918,
+              106.20779418945312,
+              508.0
+            ]
+          ],
+          "nonfinite_vertices": 0
+        }
+      ]
+    },
+    "full": {
+      "scene": "Xinyi_Full_Inspection",
+      "meshes": [
+        {
+          "name": "layerA_city_massing",
+          "vertices": 249636,
+          "triangles": 83212,
+          "bounds_m": [
+            [
+              -1149.833740234375,
+              -979.6115112304688,
+              0.0
+            ],
+            [
+              948.1085205078125,
+              1168.8546142578125,
+              269.04998779296875
+            ]
+          ],
+          "nonfinite_vertices": 0,
+          "faces": {
+            "roof_up": 14272,
+            "roof_wrong": 190,
+            "base_down": 14272,
+            "base_wrong": 190,
+            "walls": 54268,
+            "zero_area_triangles": 20
+          }
+        },
+        {
+          "name": "hero_taipei101_placeholder.001",
+          "vertices": 108,
+          "triangles": 36,
+          "bounds_m": [
+            [
+              -119.06050109863281,
+              49.63949203491211,
+              0.0
+            ],
+            [
+              -62.4921989440918,
+              106.20779418945312,
+              508.0
+            ]
+          ],
+          "nonfinite_vertices": 0
+        }
+      ]
+    }
+  }
+}

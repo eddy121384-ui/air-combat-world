@@ -240,12 +240,12 @@ def extrude(ring: list, tris: list, height: float) -> tuple[list, list, list]:
             nrm.extend(n)
         idx.extend([base, base + 1, base + 2])
 
-    # roof (CCW ring in XZ where z=-y flips winding -> emit reversed for +Y normal)
+    # roof (ENU CCW maps to +Y in the game frame (x, height, -y))
     rp = [(x, height, -y) for x, y in ring]
     for a, b, c in tris:
         if _tri_area2(ring[a], ring[b], ring[c]) < 1e-12:
             continue  # degenerate cap: strict importers reject it
-        add_tri(rp[a], rp[c], rp[b])
+        add_tri(rp[a], rp[b], rp[c])
     # walls (skip zero-length edges)
     n = len(ring)
     for i in range(n):
@@ -264,5 +264,5 @@ def extrude(ring: list, tris: list, height: float) -> tuple[list, list, list]:
     for a, b, c in tris:
         if _tri_area2(ring[a], ring[b], ring[c]) < 1e-12:
             continue
-        add_tri(bp[a], bp[b], bp[c])
+        add_tri(bp[a], bp[c], bp[b])
     return pos, nrm, idx
