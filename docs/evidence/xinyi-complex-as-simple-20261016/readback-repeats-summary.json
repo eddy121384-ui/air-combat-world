@@ -1,0 +1,578 @@
+{
+  "schema": "xinyi-complex-as-simple-repeat-summary/v1",
+  "package_run_id": "20261016T081352Z-6d541926",
+  "repeats": [
+    {
+      "repeat": 1,
+      "run_id": "20261016T081753Z-6d541926",
+      "plan_sha256": "235bfd9573c84b3ddab7da5b588d33c3f1263f50b6f24f1cdbbc8490a46b6531",
+      "validator_candidate_correctness": "PASS",
+      "source_immutability": "PASS_SOURCE_IMMUTABILITY",
+      "other_editor_samples": "0/125",
+      "modes": {
+        "Baseline": {
+          "status": "ENGINE_COMPLEX_CANDIDATE_COMPLETE",
+          "process_id": 23808,
+          "host_process_id": "23808",
+          "executable_sha256": "672286c634353745d716bdc42a2d0778d5cb469c256a01f7cab5b3b016f25309",
+          "exit_code": 0,
+          "elapsed_seconds": 32.806,
+          "steps_captured": 101,
+          "steps_with_predicate_record": 101,
+          "max_wait_ticks": 611,
+          "false_ticks_total": {
+            "source_observed_false_ticks": 0,
+            "source_completed_false_ticks": 278,
+            "all_completed_false_ticks": 278
+          },
+          "longest_waits_ms": [
+            [
+              281.119,
+              "terrain_center_3_0"
+            ],
+            [
+              271.047,
+              "terrain_center_3_3"
+            ],
+            [
+              270.556,
+              "terrain_center_3_2"
+            ]
+          ],
+          "step_timeout_diagnostics": null
+        },
+        "ComplexAsSimple": {
+          "status": "ENGINE_COMPLEX_CANDIDATE_COMPLETE",
+          "process_id": 10824,
+          "host_process_id": "10824",
+          "executable_sha256": "672286c634353745d716bdc42a2d0778d5cb469c256a01f7cab5b3b016f25309",
+          "exit_code": 0,
+          "elapsed_seconds": 29.963,
+          "steps_captured": 101,
+          "steps_with_predicate_record": 101,
+          "max_wait_ticks": 642,
+          "false_ticks_total": {
+            "source_observed_false_ticks": 0,
+            "source_completed_false_ticks": 258,
+            "all_completed_false_ticks": 258
+          },
+          "longest_waits_ms": [
+            [
+              279.65,
+              "terrain_center_3_0"
+            ],
+            [
+              270.688,
+              "terrain_center_3_3"
+            ],
+            [
+              267.271,
+              "terrain_center_3_2"
+            ]
+          ],
+          "step_timeout_diagnostics": null
+        }
+      },
+      "candidate": {
+        "positive_expected_tile_match_count": 15,
+        "positive_failures": [],
+        "negative_blocked_count": 0,
+        "sweep_failures": [],
+        "dynamic_simulation_pass": true,
+        "effective_trace_flag_counts": {
+          "3": 25
+        },
+        "all_streaming_complete": true
+      },
+      "baseline_negative_blocked_count": 17,
+      "ratios": {
+        "median_query_time": 0.9358,
+        "p95_query_time": 0.7641,
+        "frame_p95": 0.961,
+        "frame_p99": 0.7932,
+        "peak_working_set": 0.9615,
+        "peak_private": 1.004,
+        "streaming_wait": 0.9948
+      },
+      "absolute": {
+        "Baseline": {
+          "query_p95_us": 2.278,
+          "query_median_us": 1.155,
+          "frame_p95_ms": 0.614,
+          "frame_p99_ms": 0.876,
+          "frame_max_ms": 31.918,
+          "runtime_peak_memory_bytes": 304254976,
+          "max_streaming_wait_ms": 281.119
+        },
+        "ComplexAsSimple": {
+          "query_p95_us": 1.741,
+          "query_median_us": 1.081,
+          "frame_p95_ms": 0.59,
+          "frame_p99_ms": 0.695,
+          "frame_max_ms": 29.629,
+          "runtime_peak_memory_bytes": 303693824,
+          "max_streaming_wait_ms": 279.65
+        }
+      },
+      "classification": "PASS"
+    },
+    {
+      "repeat": 2,
+      "run_id": "20261016T081958Z-6d541926",
+      "plan_sha256": "235bfd9573c84b3ddab7da5b588d33c3f1263f50b6f24f1cdbbc8490a46b6531",
+      "validator_candidate_correctness": "PASS",
+      "source_immutability": "PASS_SOURCE_IMMUTABILITY",
+      "other_editor_samples": "0/125",
+      "modes": {
+        "Baseline": {
+          "status": "ENGINE_COMPLEX_CANDIDATE_COMPLETE",
+          "process_id": 23776,
+          "host_process_id": "23776",
+          "executable_sha256": "672286c634353745d716bdc42a2d0778d5cb469c256a01f7cab5b3b016f25309",
+          "exit_code": 0,
+          "elapsed_seconds": 33.046,
+          "steps_captured": 101,
+          "steps_with_predicate_record": 101,
+          "max_wait_ticks": 627,
+          "false_ticks_total": {
+            "source_observed_false_ticks": 0,
+            "source_completed_false_ticks": 284,
+            "all_completed_false_ticks": 284
+          },
+          "longest_waits_ms": [
+            [
+              282.799,
+              "terrain_center_3_0"
+            ],
+            [
+              269.384,
+              "terrain_center_3_3"
+            ],
+            [
+              268.711,
+              "terrain_center_3_2"
+            ]
+          ],
+          "step_timeout_diagnostics": null
+        },
+        "ComplexAsSimple": {
+          "status": "ENGINE_COMPLEX_CANDIDATE_COMPLETE",
+          "process_id": 13828,
+          "host_process_id": "13828",
+          "executable_sha256": "672286c634353745d716bdc42a2d0778d5cb469c256a01f7cab5b3b016f25309",
+          "exit_code": 0,
+          "elapsed_seconds": 29.967,
+          "steps_captured": 101,
+          "steps_with_predicate_record": 101,
+          "max_wait_ticks": 620,
+          "false_ticks_total": {
+            "source_observed_false_ticks": 0,
+            "source_completed_false_ticks": 260,
+            "all_completed_false_ticks": 260
+          },
+          "longest_waits_ms": [
+            [
+              279.83,
+              "terrain_center_3_0"
+            ],
+            [
+              269.157,
+              "terrain_center_3_3"
+            ],
+            [
+              268.572,
+              "terrain_center_3_2"
+            ]
+          ],
+          "step_timeout_diagnostics": null
+        }
+      },
+      "candidate": {
+        "positive_expected_tile_match_count": 15,
+        "positive_failures": [],
+        "negative_blocked_count": 0,
+        "sweep_failures": [],
+        "dynamic_simulation_pass": true,
+        "effective_trace_flag_counts": {
+          "3": 25
+        },
+        "all_streaming_complete": true
+      },
+      "baseline_negative_blocked_count": 17,
+      "ratios": {
+        "median_query_time": 0.9752,
+        "p95_query_time": 1.3281,
+        "frame_p95": 1.0083,
+        "frame_p99": 0.8633,
+        "peak_working_set": 0.9539,
+        "peak_private": 0.9928,
+        "streaming_wait": 0.9895
+      },
+      "absolute": {
+        "Baseline": {
+          "query_p95_us": 1.306,
+          "query_median_us": 1.102,
+          "frame_p95_ms": 0.589,
+          "frame_p99_ms": 0.81,
+          "frame_max_ms": 30.565,
+          "runtime_peak_memory_bytes": 298782720,
+          "max_streaming_wait_ms": 282.799
+        },
+        "ComplexAsSimple": {
+          "query_p95_us": 1.735,
+          "query_median_us": 1.074,
+          "frame_p95_ms": 0.594,
+          "frame_p99_ms": 0.699,
+          "frame_max_ms": 31.561,
+          "runtime_peak_memory_bytes": 303058944,
+          "max_streaming_wait_ms": 279.83
+        }
+      },
+      "classification": "PASS"
+    },
+    {
+      "repeat": 3,
+      "run_id": "20261016T082200Z-6d541926",
+      "plan_sha256": "235bfd9573c84b3ddab7da5b588d33c3f1263f50b6f24f1cdbbc8490a46b6531",
+      "validator_candidate_correctness": "PASS",
+      "source_immutability": "PASS_SOURCE_IMMUTABILITY",
+      "other_editor_samples": "0/129",
+      "modes": {
+        "Baseline": {
+          "status": "ENGINE_COMPLEX_CANDIDATE_COMPLETE",
+          "process_id": 17416,
+          "host_process_id": "17416",
+          "executable_sha256": "672286c634353745d716bdc42a2d0778d5cb469c256a01f7cab5b3b016f25309",
+          "exit_code": 0,
+          "elapsed_seconds": 35.086,
+          "steps_captured": 101,
+          "steps_with_predicate_record": 101,
+          "max_wait_ticks": 616,
+          "false_ticks_total": {
+            "source_observed_false_ticks": 0,
+            "source_completed_false_ticks": 227,
+            "all_completed_false_ticks": 227
+          },
+          "longest_waits_ms": [
+            [
+              282.028,
+              "terrain_center_3_0"
+            ],
+            [
+              272.045,
+              "terrain_center_0_0"
+            ],
+            [
+              271.162,
+              "terrain_center_3_2"
+            ]
+          ],
+          "step_timeout_diagnostics": null
+        },
+        "ComplexAsSimple": {
+          "status": "ENGINE_COMPLEX_CANDIDATE_COMPLETE",
+          "process_id": 18664,
+          "host_process_id": "18664",
+          "executable_sha256": "672286c634353745d716bdc42a2d0778d5cb469c256a01f7cab5b3b016f25309",
+          "exit_code": 0,
+          "elapsed_seconds": 30.011,
+          "steps_captured": 101,
+          "steps_with_predicate_record": 101,
+          "max_wait_ticks": 614,
+          "false_ticks_total": {
+            "source_observed_false_ticks": 0,
+            "source_completed_false_ticks": 212,
+            "all_completed_false_ticks": 212
+          },
+          "longest_waits_ms": [
+            [
+              282.993,
+              "terrain_center_3_0"
+            ],
+            [
+              270.058,
+              "terrain_center_3_3"
+            ],
+            [
+              268.288,
+              "terrain_center_3_2"
+            ]
+          ],
+          "step_timeout_diagnostics": null
+        }
+      },
+      "candidate": {
+        "positive_expected_tile_match_count": 15,
+        "positive_failures": [],
+        "negative_blocked_count": 0,
+        "sweep_failures": [],
+        "dynamic_simulation_pass": true,
+        "effective_trace_flag_counts": {
+          "3": 25
+        },
+        "all_streaming_complete": true
+      },
+      "baseline_negative_blocked_count": 17,
+      "ratios": {
+        "median_query_time": 0.9437,
+        "p95_query_time": 1.3031,
+        "frame_p95": 0.9986,
+        "frame_p99": 1.0361,
+        "peak_working_set": 0.9713,
+        "peak_private": 1.017,
+        "streaming_wait": 1.0034
+      },
+      "absolute": {
+        "Baseline": {
+          "query_p95_us": 1.334,
+          "query_median_us": 1.138,
+          "frame_p95_ms": 0.909,
+          "frame_p99_ms": 1.093,
+          "frame_max_ms": 31.602,
+          "runtime_peak_memory_bytes": 302190592,
+          "max_streaming_wait_ms": 282.028
+        },
+        "ComplexAsSimple": {
+          "query_p95_us": 1.739,
+          "query_median_us": 1.074,
+          "frame_p95_ms": 0.908,
+          "frame_p99_ms": 1.132,
+          "frame_max_ms": 33.295,
+          "runtime_peak_memory_bytes": 300507136,
+          "max_streaming_wait_ms": 282.993
+        }
+      },
+      "classification": "PASS"
+    },
+    {
+      "repeat": 4,
+      "run_id": "20261016T091041Z-6d541926",
+      "plan_sha256": "235bfd9573c84b3ddab7da5b588d33c3f1263f50b6f24f1cdbbc8490a46b6531",
+      "validator_candidate_correctness": "PASS",
+      "source_immutability": "PASS_SOURCE_IMMUTABILITY",
+      "other_editor_samples": "0/130",
+      "modes": {
+        "Baseline": {
+          "status": "ENGINE_COMPLEX_CANDIDATE_COMPLETE",
+          "process_id": 23892,
+          "host_process_id": "23892",
+          "executable_sha256": "672286c634353745d716bdc42a2d0778d5cb469c256a01f7cab5b3b016f25309",
+          "exit_code": 0,
+          "elapsed_seconds": 35.648,
+          "steps_captured": 101,
+          "steps_with_predicate_record": 101,
+          "max_wait_ticks": 644,
+          "false_ticks_total": {
+            "source_observed_false_ticks": 0,
+            "source_completed_false_ticks": 252,
+            "all_completed_false_ticks": 252
+          },
+          "longest_waits_ms": [
+            [
+              282.449,
+              "terrain_center_0_0"
+            ],
+            [
+              281.301,
+              "terrain_center_3_0"
+            ],
+            [
+              269.183,
+              "terrain_center_3_3"
+            ]
+          ],
+          "step_timeout_diagnostics": null
+        },
+        "ComplexAsSimple": {
+          "status": "ENGINE_COMPLEX_CANDIDATE_COMPLETE",
+          "process_id": 24904,
+          "host_process_id": "24904",
+          "executable_sha256": "672286c634353745d716bdc42a2d0778d5cb469c256a01f7cab5b3b016f25309",
+          "exit_code": 0,
+          "elapsed_seconds": 30.099,
+          "steps_captured": 101,
+          "steps_with_predicate_record": 101,
+          "max_wait_ticks": 602,
+          "false_ticks_total": {
+            "source_observed_false_ticks": 0,
+            "source_completed_false_ticks": 227,
+            "all_completed_false_ticks": 227
+          },
+          "longest_waits_ms": [
+            [
+              281.508,
+              "terrain_center_3_0"
+            ],
+            [
+              272.358,
+              "terrain_center_3_3"
+            ],
+            [
+              268.804,
+              "terrain_center_3_2"
+            ]
+          ],
+          "step_timeout_diagnostics": null
+        }
+      },
+      "candidate": {
+        "positive_expected_tile_match_count": 15,
+        "positive_failures": [],
+        "negative_blocked_count": 0,
+        "sweep_failures": [],
+        "dynamic_simulation_pass": true,
+        "effective_trace_flag_counts": {
+          "3": 25
+        },
+        "all_streaming_complete": true
+      },
+      "baseline_negative_blocked_count": 17,
+      "ratios": {
+        "median_query_time": 0.9789,
+        "p95_query_time": 1.1254,
+        "frame_p95": 0.9791,
+        "frame_p99": 1.0498,
+        "peak_working_set": 0.9647,
+        "peak_private": 1.0075,
+        "streaming_wait": 0.9967
+      },
+      "absolute": {
+        "Baseline": {
+          "query_p95_us": 1.538,
+          "query_median_us": 1.113,
+          "frame_p95_ms": 0.885,
+          "frame_p99_ms": 1.089,
+          "frame_max_ms": 30.983,
+          "runtime_peak_memory_bytes": 298229760,
+          "max_streaming_wait_ms": 282.449
+        },
+        "ComplexAsSimple": {
+          "query_p95_us": 1.731,
+          "query_median_us": 1.09,
+          "frame_p95_ms": 0.866,
+          "frame_p99_ms": 1.144,
+          "frame_max_ms": 32.253,
+          "runtime_peak_memory_bytes": 298299392,
+          "max_streaming_wait_ms": 281.508
+        }
+      },
+      "classification": "PASS"
+    },
+    {
+      "repeat": 5,
+      "run_id": "20261016T091247Z-6d541926",
+      "plan_sha256": "235bfd9573c84b3ddab7da5b588d33c3f1263f50b6f24f1cdbbc8490a46b6531",
+      "validator_candidate_correctness": "PASS",
+      "source_immutability": "PASS_SOURCE_IMMUTABILITY",
+      "other_editor_samples": "0/132",
+      "modes": {
+        "Baseline": {
+          "status": "ENGINE_COMPLEX_CANDIDATE_COMPLETE",
+          "process_id": 16184,
+          "host_process_id": "16184",
+          "executable_sha256": "672286c634353745d716bdc42a2d0778d5cb469c256a01f7cab5b3b016f25309",
+          "exit_code": 0,
+          "elapsed_seconds": 37.08,
+          "steps_captured": 101,
+          "steps_with_predicate_record": 101,
+          "max_wait_ticks": 609,
+          "false_ticks_total": {
+            "source_observed_false_ticks": 0,
+            "source_completed_false_ticks": 236,
+            "all_completed_false_ticks": 236
+          },
+          "longest_waits_ms": [
+            [
+              291.321,
+              "terrain_center_0_0"
+            ],
+            [
+              282.035,
+              "terrain_center_3_0"
+            ],
+            [
+              269.683,
+              "terrain_center_3_3"
+            ]
+          ],
+          "step_timeout_diagnostics": null
+        },
+        "ComplexAsSimple": {
+          "status": "ENGINE_COMPLEX_CANDIDATE_COMPLETE",
+          "process_id": 19104,
+          "host_process_id": "19104",
+          "executable_sha256": "672286c634353745d716bdc42a2d0778d5cb469c256a01f7cab5b3b016f25309",
+          "exit_code": 0,
+          "elapsed_seconds": 29.999,
+          "steps_captured": 101,
+          "steps_with_predicate_record": 101,
+          "max_wait_ticks": 612,
+          "false_ticks_total": {
+            "source_observed_false_ticks": 0,
+            "source_completed_false_ticks": 232,
+            "all_completed_false_ticks": 232
+          },
+          "longest_waits_ms": [
+            [
+              285.716,
+              "terrain_center_3_0"
+            ],
+            [
+              271.25,
+              "terrain_center_3_3"
+            ],
+            [
+              269.11,
+              "terrain_center_3_2"
+            ]
+          ],
+          "step_timeout_diagnostics": null
+        }
+      },
+      "candidate": {
+        "positive_expected_tile_match_count": 15,
+        "positive_failures": [],
+        "negative_blocked_count": 0,
+        "sweep_failures": [],
+        "dynamic_simulation_pass": true,
+        "effective_trace_flag_counts": {
+          "3": 25
+        },
+        "all_streaming_complete": true
+      },
+      "baseline_negative_blocked_count": 17,
+      "ratios": {
+        "median_query_time": 0.922,
+        "p95_query_time": 1.3044,
+        "frame_p95": 0.8676,
+        "frame_p99": 0.916,
+        "peak_working_set": 0.9709,
+        "peak_private": 1.0152,
+        "streaming_wait": 0.9808
+      },
+      "absolute": {
+        "Baseline": {
+          "query_p95_us": 1.447,
+          "query_median_us": 1.172,
+          "frame_p95_ms": 0.911,
+          "frame_p99_ms": 1.316,
+          "frame_max_ms": 41.076,
+          "runtime_peak_memory_bytes": 304730112,
+          "max_streaming_wait_ms": 291.321
+        },
+        "ComplexAsSimple": {
+          "query_p95_us": 1.887,
+          "query_median_us": 1.08,
+          "frame_p95_ms": 0.79,
+          "frame_p99_ms": 1.205,
+          "frame_max_ms": 33.036,
+          "runtime_peak_memory_bytes": 301395968,
+          "max_streaming_wait_ms": 285.716
+        }
+      },
+      "classification": "PASS"
+    }
+  ],
+  "pass_count": 5,
+  "stall_count": 0
+}

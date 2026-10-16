@@ -93,8 +93,41 @@ Counting run 1, three runs used this probe without the new logging. Run 1, run 2
 
 Performance in the two passing idle repeats (candidate/baseline): P95 query 2.758x and 1.110x, median query 0.958x and 0.962x, frame P95 1.131x and 1.011x, peak working set 0.966x and 0.950x. P95 query cost varies widely between otherwise identical idle pairs (run 2: 1.272x). No threshold is applied.
 
+## Source readback repeats
+
+Commit `6d54192` adds a source readback to the probe. It records the `SetActorLocation` return value on every step. While a step waits, and on timeout, it also reads back the actor location, the source component's own `GetStreamingSource` location, whether the source is enabled and whether its provider is still registered. The validator classifies a stall by its first broken link: `source_actor_not_at_target`, `component_source_not_at_target`, `provider_unregistered` or `world_partition_source_list_stale`. The regression tests cover each class (33 host-gate tests pass).
+
+The package was rebuilt in run `20261016T081352Z-6d541926` (638 cooked packages, 0 errors, 0 warnings). The executable is `672286c6…`. The cooked IoStore containers are byte-identical to the September and `89416b4` packages, and the pak is identical to `89416b4`'s.
+
+The five repeats were pre-registered ([readback-repeat-preregistration.json](evidence/xinyi-complex-as-simple-20261016/readback-repeat-preregistration.json); [readback-repeats-summary.json](evidence/xinyi-complex-as-simple-20261016/readback-repeats-summary.json)). All five ran on an idle host (0 other-editor samples). All ten processes completed, all five candidates passed the validator, and source immutability passed every time. No stall occurred, so the readback never fired on a stalled step. **The stall cause remains undiagnosed.**
+
+The per-step data that was recorded is clean. `SetActorLocation` returned true for every move in all ten processes. Every step, including step 76 `open_area_+000_+000` (~251 ms), saw its source on the first tick. Baseline convex blocked 17/27 negatives in every pair.
+
+| Repeat | P95 query | Median query | Frame P95 | Frame P99 | Peak working set |
+|---|---:|---:|---:|---:|---:|
+| `20261016T081753Z-6d541926` | 0.764x | 0.936x | 0.961x | 0.793x | 0.962x |
+| `20261016T081958Z-6d541926` | 1.328x | 0.975x | 1.008x | 0.863x | 0.954x |
+| `20261016T082200Z-6d541926` | 1.303x | 0.944x | 0.999x | 1.036x | 0.971x |
+| `20261016T091041Z-6d541926` | 1.125x | 0.979x | 0.979x | 1.050x | 0.965x |
+| `20261016T091247Z-6d541926` | 1.304x | 0.922x | 0.868x | 0.916x | 0.971x |
+
+## Totals across all fresh processes in this validation
+
+All rows use the v2 plan `235bfd95…`.
+
+| Package | Candidates launched | Candidate stalls | Candidates passing all collision gates | Baselines (all complete) |
+|---|---:|---:|---:|---:|
+| September exe `1567fee4…` (runs 1–2) | 2 | 1 | 1 | 2 |
+| Predicate logging `ba4865f6…` | 4 (+1 not launched) | 2 | 2 | 5 |
+| Source readback `672286c6…` | 5 | 0 | 5 | 5 |
+| **Total** | **11** | **3** | **8** | **12** |
+
+The September run (v1 corpus) is excluded from the collision column. Its candidate and baseline both completed streaming.
+
+Every stall happened at the same `open_area_+000_-001` → `open_area_+000_+000` transition, in candidate mode only, with World Partition's single source left at the previous step position. Every completed v2 candidate (8 of 8) passed all collision correctness gates. The 0/5 readback batch versus 2/4 in the predicate-logging batch is too small a sample to show that the readback build changed anything.
+
 ## Verdict
 
-Under the v2 source-geometry oracle, every candidate process that completed (runs 2, 3 and 4) passes all collision correctness gates, with Chaos hit distances within 0.001 cm of the source mesh. Three of seven fresh candidate processes stalled at the `open_area_+000_+000` streaming step, where World Partition kept the previous source position; no baseline stalled in eight processes. This session does **not** issue `COMPLEX_AS_SIMPLE_CORRECTNESS_PASS`. The gate stays **FAIL** on gate 7, through a reproducible candidate-only streaming-source stall. It is not a collision identity, distance, negative-space, sweep or dynamic failure.
+Under the v2 source-geometry oracle, every candidate process that completed (8 of 8) passes all collision correctness gates, with Chaos hit distances within 0.001 cm of the source mesh. Three of eleven v2 candidate processes stalled at the `open_area_+000_+000` streaming step, where World Partition kept the previous source position. No baseline stalled in twelve v2 processes, or in the September run. This session does **not** issue `COMPLEX_AS_SIMPLE_CORRECTNESS_PASS`. The gate stays **FAIL** on gate 7, through an intermittent, undiagnosed, candidate-only streaming-source stall. It is not a collision identity, distance, negative-space, sweep or dynamic failure.
 
 No accepted asset, collision policy, terrain, geometry, placement, source lock or GLB was changed. Raw package, logs, raw JSON and host launch receipts remain under `unreal/Saved/XinyiHostGates/<run>` on the validation host. Evidence: [evidence/xinyi-complex-as-simple-20261016/](evidence/xinyi-complex-as-simple-20261016/).
