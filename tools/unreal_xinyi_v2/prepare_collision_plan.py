@@ -15,6 +15,8 @@ import math
 import struct
 from pathlib import Path
 
+from first_hit_oracle import certify_positive_samples, tile_sources
+
 
 def sha(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
@@ -251,12 +253,19 @@ def main():
                                "triangle_area_m2_x2":best_roof[2] if kind=="roof" else best_wall[3],
                                "source_building_id":low_building["building_id"] if category=="low_rise" else None,
                                "source_building_height_cm":(low_building["expected_ue_bounds_max_cm"][2]-low_building["expected_ue_bounds_min_cm"][2]) if category=="low_rise" else None}})
+    # A selected source wall is only a witness: a longer ray may encounter a
+    # different tile first. Certify all 15 positive rays against all 25 hashed
+    # runtime GLBs, before any UE/Chaos observation or packaged launch.
+    first_hit_count = certify_positive_samples(steps, tile_sources(contract, base))
+    if first_hit_count != 15:
+        raise ValueError(f"Expected 15 source-certified positive probes, got {first_hit_count}")
+
     # A terrain vertex beside source-derived building geometry tests the terrain/building transition.
     bx, by = selected[0][2][1][:2]
     c = round((bx+150000)/spacing); r = round((by+150000)/spacing)
     add_step("terrain_building_transition",-150000+c*spacing,-150000+r*spacing,
              "terrain_building_transition")
-    doc={"schema":"xinyi-collision-plan/v1","status":"PLAN_ONLY",
+    doc={"schema":"xinyi-collision-plan/v2","status":"PLAN_ONLY",
          "world":"/Game/XinyiV2/L_XinyiV2_Contract_WP",
          "sources":{"contract_sha256":sha(contract_path),"heightmap_sha256":sha(r16_path),
                     "placement_sha256":sha(place_path)},
