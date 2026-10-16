@@ -1,0 +1,13 @@
+{
+  "schema": "xinyi-complex-as-simple-attempt-disposition/v1",
+  "run_id": "20261016T065302Z-07740159",
+  "written_before_any_repeat_launch": true,
+  "baseline": "ENGINE_COMPLEX_CANDIDATE_COMPLETE (101/101 steps)",
+  "candidate": "FAIL_STEP_TIMEOUT at step 77/101 open_area_+000_+000; 76 steps captured; positive steps (index 85+) never reached",
+  "observed_cause": "World Partition streaming-completion predicate (source observed at target AND source IsStreamingCompleted AND subsystem IsAllStreamingCompleted) never held for the probe's fixed 90 s step timeout. Engine kept ticking (172,373 frame samples, max frame 47.57 ms); no missing-package / failed-load lines. The probe does not record which predicate term was false, so the sub-cause is not attributable from this evidence.",
+  "host_contention": "Other UnrealEditor-Cmd processes (hillside-forest worktree) were present in 139 of 282 500 ms samples across the A/B window (32-host-concurrency.json).",
+  "validator": "validate_complex_candidate.py refused: 'ComplexAsSimple runtime did not complete'",
+  "source_immutability": "PASS (90-source-immutability.json)",
+  "disposition": "FAIL. This attempt is preserved unchanged and cannot be converted to PASS.",
+  "pre_registered_repeat_policy": "Exactly one diagnostic repeat with a new run ID, same package/exe/pak, a freshly regenerated (deterministic) v2 plan and an idle-host wait. Its results are reported alongside this attempt. Because one candidate attempt has already failed streaming completion (gate 7), the overall COMPLEX_AS_SIMPLE_CORRECTNESS_PASS label will not be issued from this session even if the repeat passes all gates; a passing repeat only establishes that the collision-identity gates (1-6, 8) can pass and that the stall is intermittent rather than deterministic."
+}

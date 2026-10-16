@@ -1,0 +1,89 @@
+{
+  "schema": "xinyi-complex-as-simple-attempt-summary/v1",
+  "run_id": "20261016T065302Z-07740159",
+  "plan_sha256": "235bfd9573c84b3ddab7da5b588d33c3f1263f50b6f24f1cdbbc8490a46b6531",
+  "plan_schema": "xinyi-collision-plan/v2",
+  "validator_result": "REFUSED: ComplexAsSimple runtime did not complete",
+  "modes": {
+    "Baseline": {
+      "status": "ENGINE_COMPLEX_CANDIDATE_COMPLETE",
+      "process_id": 3168,
+      "host_process_id": "3168",
+      "launch_id": "605380c6-e37a-44c6-802d-90074628c2c4",
+      "exit_code": 0,
+      "timed_out": false,
+      "started_utc": "2026-10-16T06:57:02.6456057Z",
+      "finished_utc": "2026-10-16T06:57:34.8635373Z",
+      "elapsed_seconds": 32.2179316,
+      "executable_sha256": "1567fee425193d9032332ce9d8729fe926ea4c27dd26a555c6277b5caad6f692",
+      "plan_sha256": "235bfd9573c84b3ddab7da5b588d33c3f1263f50b6f24f1cdbbc8490a46b6531",
+      "snapshot_sha256": "d15393939f853d9b6e15c1827c3dd23e3cf7607bd964644cadad2b185e3e0a35",
+      "manifest_sha256": "cc694f20830cb2e93fc2251795e0485eedb89e9d2fcd1ab00f46668d65ff0fbd",
+      "raw_sha256": "736c1b7887a828b05d3f8a89b12bb8b507de8095eb86f7aa9254f34a7376cc74",
+      "log_sha256": "ee222d5ccdec355651f47ebf98303aec289c353ebb0953a980dc56c75b5ef4f4",
+      "pak_bytes": 10705822,
+      "steps_captured": 101,
+      "plan_steps": 101,
+      "last_captured_step": "terrain_building_transition",
+      "stalled_step": null,
+      "all_captured_steps_streaming_complete": true,
+      "positives_captured": 15,
+      "negatives_captured": 27,
+      "negatives_captured_blocked": 17,
+      "audited_tile_count": 25,
+      "effective_trace_flag_enums": [
+        1
+      ],
+      "dynamic_simulation_reached": true,
+      "frame_time": {
+        "sample_count": 50335,
+        "p50_ms": 0.4839003086090088,
+        "p95_ms": 0.8474294096231456,
+        "p99_ms": 1.1329978704452504,
+        "max_ms": 30.744999647140503
+      },
+      "max_streaming_wait_ms": 281.3312001526356,
+      "peak_process_memory_bytes": 303906816
+    },
+    "ComplexAsSimple": {
+      "status": "FAIL_STEP_TIMEOUT",
+      "process_id": 18684,
+      "host_process_id": "18684",
+      "launch_id": "86a9b930-2f19-4218-b054-99b565369e0b",
+      "exit_code": 0,
+      "timed_out": false,
+      "started_utc": "2026-10-16T06:57:35.9836581Z",
+      "finished_utc": "2026-10-16T06:59:28.5332084Z",
+      "elapsed_seconds": 112.54955029999999,
+      "executable_sha256": "1567fee425193d9032332ce9d8729fe926ea4c27dd26a555c6277b5caad6f692",
+      "plan_sha256": "235bfd9573c84b3ddab7da5b588d33c3f1263f50b6f24f1cdbbc8490a46b6531",
+      "snapshot_sha256": "d15393939f853d9b6e15c1827c3dd23e3cf7607bd964644cadad2b185e3e0a35",
+      "manifest_sha256": "cc694f20830cb2e93fc2251795e0485eedb89e9d2fcd1ab00f46668d65ff0fbd",
+      "raw_sha256": "fd2d050dbbc6b9218cc92309485ecf44417af5792779441935fbd5d6afaae34a",
+      "log_sha256": "6cfe973b742d80f256b7aa208e155933fc4bfe91fa6b50e4f4d75bed329480cf",
+      "pak_bytes": 10705822,
+      "steps_captured": 76,
+      "plan_steps": 101,
+      "last_captured_step": "open_area_+000_-001",
+      "stalled_step": "open_area_+000_+000",
+      "all_captured_steps_streaming_complete": true,
+      "positives_captured": 0,
+      "negatives_captured": 18,
+      "negatives_captured_blocked": 0,
+      "audited_tile_count": 25,
+      "effective_trace_flag_enums": [
+        3
+      ],
+      "dynamic_simulation_reached": false,
+      "frame_time": {
+        "sample_count": 172373,
+        "p50_ms": 0.5652979016304016,
+        "p95_ms": 1.0937407612800591,
+        "p99_ms": 1.630926728248596,
+        "max_ms": 47.57159948348999
+      },
+      "max_streaming_wait_ms": 304.20709773898125,
+      "peak_process_memory_bytes": 303611904
+    }
+  }
+}

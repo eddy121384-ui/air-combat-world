@@ -1,0 +1,18 @@
+{
+    "schema":  "xinyi-host-concurrency-observation/v1",
+    "run_id":  "20261016T065302Z-07740159",
+    "purpose":  "Detect other Unreal editor processes sharing the host during packaged A/B timing",
+    "sample_interval_ms":  500,
+    "sample_count":  282,
+    "samples_with_other_unreal_editor":  139,
+    "other_unreal_editor_processes":  [
+                                          "UnrealEditor-Cmd:23744",
+                                          "UnrealEditor-Cmd:8080"
+                                      ],
+    "first_sample_utc":  "2026-10-16T06:57:02.8069439Z",
+    "last_sample_utc":  "2026-10-16T06:59:29.1170881Z",
+    "modes":  {
+                  "Baseline":  "COMPLETE",
+                  "ComplexAsSimple":  "COMPLETE"
+              }
+}
