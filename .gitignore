@@ -25,3 +25,7 @@ unreal/Binaries/
 #   data/generated/taipei/sample_buildings.manifest.json
 !data/generated/taipei/sample_buildings.geojson
 !data/generated/taipei/sample_buildings.manifest.json
+
+# Project plugin build products
+unreal/Plugins/**/Binaries/
+unreal/Plugins/**/Intermediate/

@@ -1,0 +1,17 @@
+{
+  "FileVersion": 3,
+  "Version": 1,
+  "VersionName": "0.1.0",
+  "FriendlyName": "Xinyi Landscape Bridge",
+  "Description": "Editor-only minimal bridge that materializes the validated Xinyi uint16 terrain contract as ALandscape.",
+  "Category": "Skyfront",
+  "CanContainContent": false,
+  "Installed": false,
+  "Modules": [
+    {
+      "Name": "XinyiLandscapeBridge",
+      "Type": "Editor",
+      "LoadingPhase": "Default"
+    }
+  ]
+}
