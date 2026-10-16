@@ -115,7 +115,24 @@ if (scenario === 'all' || scenario === 'touch') {
   for (let i = 1; i <= 10; i++) { await touch('touchMove', [{ x: 150 + i * 5, y: 260 + i * 4, id: 1 }]); await sleep(60); }
   await sleep(800);
   await shot(p, '08-touch-stick-turn');
+  const beforeRelease = await p.evaluate(() => ({ ...window.__game.input.stick }));
   await touch('touchEnd', []);
+  const afterRelease = await p.evaluate(() => ({ ...window.__game.input.stick }));
+  const equalStick = (a, b) => Math.abs(a.x - b.x) < 1e-8 && Math.abs(a.y - b.y) < 1e-8;
+  if (Math.hypot(beforeRelease.x, beforeRelease.y) < 0.1 || !equalStick(beforeRelease, afterRelease))
+    throw new Error('Touch release must hold the last joystick command (not auto-center)');
+  await touch('touchStart', [{ x: 150, y: 260, id: 2 }]);
+  const afterRetouch = await p.evaluate(() => ({ ...window.__game.input.stick }));
+  if (!equalStick(afterRelease, afterRetouch))
+    throw new Error('Re-touch must not jump the joystick back to neutral');
+  await touch('touchMove', [{ x: 160, y: 255, id: 2 }]);
+  const adjusted = await p.evaluate(() => ({ ...window.__game.input.stick }));
+  if (equalStick(adjusted, afterRetouch))
+    throw new Error('A new drag should adjust the held joystick command');
+  await touch('touchEnd', []);
+  const afterSecondRelease = await p.evaluate(() => ({ ...window.__game.input.stick }));
+  if (!equalStick(adjusted, afterSecondRelease))
+    throw new Error('Second touch release must also hold the adjusted command');
   await p.tap('[data-btn="msl"]');
   await sleep(500); await shot(p, '09-touch-msl');
   report.perf.touch = await state(p);
