@@ -200,7 +200,7 @@ private:
         const FStep& Step = Steps[Index];
         if (!Moving)
         {
-            SourceActor->SetActorLocation(Step.Source);
+            bMoveAccepted = SourceActor->SetActorLocation(Step.Source);
             Source->EnableStreamingSource();
             StepAt = Now;
             CompleteSince = 0;
@@ -222,6 +222,13 @@ private:
             UE_LOG(LogTemp, Display, TEXT("XINYI_COMPLEX_WAIT %s mode=%s wait_s=%.1f source_observed=%d source_completed=%d all_completed=%d sources=%d nearest_source_cm=%.3f"),
                 *Step.Id, *Mode, Now - StepAt, LastPredicate.bSourceObserved ? 1 : 0, LastPredicate.bSourceCompleted ? 1 : 0,
                 LastPredicate.bAllCompleted ? 1 : 0, LastPredicate.SourceCount, LastPredicate.NearestSourceCm);
+            const TSharedRef<FJsonObject> Readback = SourceReadback(Step.Source);
+            UE_LOG(LogTemp, Display, TEXT("XINYI_COMPLEX_READBACK %s mode=%s move_returned=%d actor_to_target_cm=%.3f component_source=%d component_to_target_cm=%.3f enabled=%d provider_registered=%d"),
+                *Step.Id, *Mode, bMoveAccepted ? 1 : 0, Readback->GetNumberField(TEXT("actor_distance_to_target_cm")),
+                Readback->GetBoolField(TEXT("component_streaming_source_returned")) ? 1 : 0,
+                Readback->GetNumberField(TEXT("component_source_distance_to_target_cm")),
+                Readback->GetBoolField(TEXT("source_enabled")) ? 1 : 0,
+                Readback->GetBoolField(TEXT("provider_registered")) ? 1 : 0);
         }
         const bool Complete = LastPredicate.IsComplete();
         CompleteSince = Complete ? (CompleteSince == 0 ? Now : CompleteSince) : 0;
@@ -244,6 +251,7 @@ private:
             Stall->SetBoolField(TEXT("subsystem_all_streaming_completed"), LastPredicate.bAllCompleted);
             Stall->SetNumberField(TEXT("runtime_streaming_source_count"), LastPredicate.SourceCount);
             Stall->SetNumberField(TEXT("nearest_runtime_source_cm"), LastPredicate.NearestSourceCm);
+            Stall->SetObjectField(TEXT("source_readback"), SourceReadback(Step.Source));
             Report->SetObjectField(TEXT("step_timeout_diagnostics"), Stall);
             Finish(TEXT("FAIL_STEP_TIMEOUT"));
             return false;
@@ -290,6 +298,25 @@ private:
         return Result;
     }
 
+    // Separates "the source actor did not move" from "World Partition kept a stale source list".
+    TSharedRef<FJsonObject> SourceReadback(const FVector& Target) const
+    {
+        TSharedRef<FJsonObject> Readback = MakeShared<FJsonObject>();
+        const FVector ActorLocation = SourceActor->GetActorLocation();
+        FWorldPartitionStreamingSource ComponentSource;
+        const bool bComponentSource = Source->GetStreamingSource(ComponentSource);
+        Readback->SetBoolField(TEXT("set_actor_location_returned"), bMoveAccepted);
+        Readback->SetArrayField(TEXT("actor_location_cm"), Vec(ActorLocation));
+        Readback->SetNumberField(TEXT("actor_distance_to_target_cm"), FVector::Distance(ActorLocation, Target));
+        Readback->SetBoolField(TEXT("component_streaming_source_returned"), bComponentSource);
+        Readback->SetArrayField(TEXT("component_source_location_cm"), Vec(ComponentSource.Location));
+        Readback->SetNumberField(TEXT("component_source_distance_to_target_cm"),
+            bComponentSource ? FVector::Distance(ComponentSource.Location, Target) : -1.0);
+        Readback->SetBoolField(TEXT("source_enabled"), Source->IsStreamingSourceEnabled());
+        Readback->SetBoolField(TEXT("provider_registered"), Subsystem->IsStreamingSourceProviderRegistered(Source));
+        return Readback;
+    }
+
     TSharedRef<FJsonObject> PredicateTicks() const
     {
         TSharedRef<FJsonObject> Ticks = MakeShared<FJsonObject>();
@@ -297,6 +324,7 @@ private:
         Ticks->SetNumberField(TEXT("source_observed_false_ticks"), FalseObservedTicks);
         Ticks->SetNumberField(TEXT("source_completed_false_ticks"), FalseSourceCompletedTicks);
         Ticks->SetNumberField(TEXT("all_completed_false_ticks"), FalseAllCompletedTicks);
+        Ticks->SetBoolField(TEXT("set_actor_location_returned"), bMoveAccepted);
         return Ticks;
     }
 
@@ -525,7 +553,7 @@ private:
 
     FTSTicker::FDelegateHandle Handle;
     FString PlanPath, ManifestPath, OutputPath, RunId, Mode;
-    bool bCandidate = false, Moving = false, Finished = false;
+    bool bCandidate = false, Moving = false, Finished = false, bMoveAccepted = false;
     TArray<FStep> Steps;
     TMap<FString, FString> TileByAsset;
     TMap<FString, int32> OriginalFlagByTile;

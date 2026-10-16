@@ -36,7 +36,8 @@ def load_run(run: Path, mode: str):
         raise ValueError(f'{mode} process identity mismatch')
     if host['timed_out'] or host['exit_code']!=0 or raw['status']!='ENGINE_COMPLEX_CANDIDATE_COMPLETE':
         raise ValueError(f'{mode} runtime did not complete: status={raw["status"]} '
-                         f'false_streaming_terms={streaming_stall_terms(raw)}')
+                         f'false_streaming_terms={streaming_stall_terms(raw)} '
+                         f'source_readback={streaming_stall_readback(raw)}')
     return raw,host,log_path
 
 
@@ -52,6 +53,25 @@ def streaming_stall_terms(raw):
     if not isinstance(stall,dict) or any(not isinstance(stall.get(t),bool) for t in STREAMING_TERMS):
         return ['unrecorded']
     return [t for t in STREAMING_TERMS if not stall[t]]
+
+
+def streaming_stall_readback(raw, tolerance_cm=1.0):
+    """Classify where a stalled streaming source was lost, first failing link first.
+
+    Same 1 cm tolerance as the probe's own source-at-target test. Diagnosis only.
+    """
+    stall=raw.get('step_timeout_diagnostics')
+    back=stall.get('source_readback') if isinstance(stall,dict) else None
+    if not isinstance(back,dict):
+        return 'unrecorded'
+    if not back['set_actor_location_returned'] or back['actor_distance_to_target_cm']>tolerance_cm:
+        return 'source_actor_not_at_target'
+    if not back['source_enabled'] or not back['component_streaming_source_returned'] or \
+            back['component_source_distance_to_target_cm']>tolerance_cm:
+        return 'component_source_not_at_target'
+    if not back['provider_registered']:
+        return 'provider_unregistered'
+    return 'world_partition_source_list_stale'
 
 
 def summarize(raw,host,log_path):
