@@ -230,7 +230,7 @@ def main():
                 score=(1/(1+distance_to_border) if category=="tile_boundary" else area)
                 if category in ("low_rise", "tile_boundary"):
                     wall_candidates.append((score,center,(nx/area,nz/area),area))
-                if best_wall is None or score>best_wall[0]:
+                if category != "low_rise" and (best_wall is None or score>best_wall[0]):
                     best_wall=(score,center,(nx/area,nz/area),area)
         if category=="low_rise" and low_building:
             lo,hi=low_building["expected_ue_bounds_min_cm"],low_building["expected_ue_bounds_max_cm"]
