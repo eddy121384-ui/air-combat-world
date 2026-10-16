@@ -42,14 +42,18 @@ LEAF_VARIANTS = {  # existing M_TL_LeafCards parameters only (parent defaults: T
 }
 # instance file: instances.json = version A (single 紅楠 D); instances_mix.json = version B (mix v0: form A = D, form B = crown B)
 INSTANCES = os.environ.get("ACW_HF_INSTANCES", "instances.json")
-FORM_MESH = {"A": PATH["D"], "B": "/Game/HillsideForest/Trees/CrownB/machilus_balanced_lod0/StaticMeshes/machilus_balanced_lod0"}
+# form A LOD chain: D balanced (default, Mix D) or PR #31's aggressive C (Mix C low-precision tolerance test); form B is always crown B
+A_CHAIN = os.environ.get("ACW_HF_A_CHAIN", "D")
+if A_CHAIN not in ("C", "D"):
+    raise RuntimeError("ACW_HF_A_CHAIN must be C or D")
+FORM_MESH = {"A": PATH[A_CHAIN], "B": "/Game/HillsideForest/Trees/CrownB/machilus_balanced_lod0/StaticMeshes/machilus_balanced_lod0"}
 # inside the block the floor stands in for the understory (shrubs / ferns / saplings - not modelled): two dark greens mottled by a ~6 m
 # world-space noise; outside the block a flat placeholder olive-grey that is visibly NOT forest (test terrain only)
 GROUND = {"inside": ((0.016, 0.024, 0.009), (0.034, 0.040, 0.017)), "outside": (0.060, 0.062, 0.040)}
 
 levels = unreal.get_editor_subsystem(unreal.LevelEditorSubsystem)
 actors = unreal.get_editor_subsystem(unreal.EditorActorSubsystem)
-report = {"status": "FAIL_HF_BUILD", "rev": REV, "instances_file": INSTANCES, "maps": {}, "materials": {}, "error": None}
+report = {"status": "FAIL_HF_BUILD", "rev": REV, "instances_file": INSTANCES, "a_chain": A_CHAIN, "maps": {}, "materials": {}, "error": None}
 T = json.loads((HF_DIR / "terrain.json").read_text(encoding="utf-8"))
 I = json.loads((HF_DIR / INSTANCES).read_text(encoding="utf-8"))
 V = json.loads((HF_DIR / "views.json").read_text(encoding="utf-8"))

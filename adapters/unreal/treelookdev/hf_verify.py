@@ -32,13 +32,17 @@ HF_DIR = Path(os.environ["ACW_HF_DIR"])
 build = json.loads((OUT / "reports" / "hf_build.report.json").read_text(encoding="utf-8"))
 INSTANCES = os.environ.get("ACW_HF_INSTANCES", "instances.json")
 I = json.loads((HF_DIR / INSTANCES).read_text(encoding="utf-8"))["instances"]
-FORM_MESH = {"A": PATH["D"], "B": "/Game/HillsideForest/Trees/CrownB/machilus_balanced_lod0/StaticMeshes/machilus_balanced_lod0"}
+# form A LOD chain: D balanced (default, Mix D) or PR #31's aggressive C (Mix C low-precision tolerance test); form B is always crown B
+A_CHAIN = os.environ.get("ACW_HF_A_CHAIN", "D")
+if A_CHAIN not in ("C", "D"):
+    raise RuntimeError("ACW_HF_A_CHAIN must be C or D")
+FORM_MESH = {"A": PATH[A_CHAIN], "B": "/Game/HillsideForest/Trees/CrownB/machilus_balanced_lod0/StaticMeshes/machilus_balanced_lod0"}
 GROUPS = sorted({(it.get("form", "A"), it["variant"]) for it in I})
 levels = unreal.get_editor_subsystem(unreal.LevelEditorSubsystem)
 actors = unreal.get_editor_subsystem(unreal.EditorActorSubsystem)
 sms = unreal.get_editor_subsystem(unreal.StaticMeshEditorSubsystem)
 DEFAULTS = ("/Engine/EngineMaterials/WorldGridMaterial", "/Engine/EngineMaterials/DefaultMaterial", "/Engine/EngineMaterials/DefaultDeferredDecalMaterial")
-rep = {"status": "FAIL_HF_VERIFY", "instances_file": INSTANCES, "checks": [], "materials": {}, "maps": {}, "error": None}
+rep = {"status": "FAIL_HF_VERIFY", "instances_file": INSTANCES, "a_chain": A_CHAIN, "checks": [], "materials": {}, "maps": {}, "error": None}
 
 
 def check(name, ok, detail=None):
@@ -132,7 +136,7 @@ def forest_gate(key, path, expect_forest):
         comps.append({"name": h.get_name(), "mesh": mp, "lods": mesh.get_num_lods() if mesh else None, "screens": screens,
                       "triangles": [mesh.get_num_triangles(i) for i in range(mesh.get_num_lods())] if mesh else None,
                       "instances": n, "materials": mats, "cast_shadow": bool(h.get_editor_property("cast_shadow"))})
-        check("%s %s mesh = D balanced or crown B" % (key, h.get_name()), mp in FORM_MESH.values(), mp)
+        check("%s %s mesh = form-A chain (D or C) or crown B" % (key, h.get_name()), mp in FORM_MESH.values(), mp)
         per_mesh[mp] = per_mesh.get(mp, 0) + n
         check("%s %s 4 LODs 1/0.5/0.15/0.06" % (key, h.get_name()), screens == [1.0, 0.5, 0.15, 0.06], screens)
         check("%s %s slot0 bark" % (key, h.get_name()), mats[0]["base"] == MAT_DIR + "/M_TL_Bark" and mats[0]["base_ism_usage"], mats[0])

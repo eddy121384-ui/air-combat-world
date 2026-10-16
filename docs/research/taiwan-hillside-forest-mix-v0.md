@@ -1,5 +1,7 @@
 # Taiwan hillside forest — Forest Mix V0 (two 紅楠 crown forms), UE 5.8
 
+> **Follow-up: low-precision tolerance test** (Mix D vs Mix C: form A on PR #31's aggressive C LOD) → `taiwan-hillside-forest-lod-tolerance-v0.md`.
+
 Follow-up to `docs/research/taiwan-hillside-forest-lookdev-v1.md` on the same branch / Draft PR. Same 象山 250 m × 250 m block, same
 terrain, stage, cameras, flight and render settings. No scene enlargement, no third tree, no forest-system refactor, no production map.
 
