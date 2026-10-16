@@ -1,0 +1,57 @@
+{
+ "golden": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world-hillside-forest\\out\\treegen\\machilus_b\\v1_machilus_thunbergii.blend",
+ "skeleton_nodes": 17869,
+ "instances": 11758,
+ "bake_s": "reused",
+ "lods": [
+  {
+   "name": "lod0",
+   "branch_tris": 10038,
+   "card_tris": 18812,
+   "cards": 9406,
+   "sprays": 4703,
+   "card_enlarge": 1.581,
+   "total_tris": 28850,
+   "verts": 43922,
+   "glb_option": "{'export_vertex_color': 'ACTIVE'}",
+   "glb_bytes": 1932488
+  },
+  {
+   "name": "lod1",
+   "branch_tris": 2092,
+   "card_tris": 9408,
+   "cards": 4704,
+   "sprays": 2352,
+   "card_enlarge": 2.236,
+   "total_tris": 11500,
+   "verts": 20099,
+   "glb_option": "{'export_vertex_color': 'ACTIVE'}",
+   "glb_bytes": 875460
+  },
+  {
+   "name": "lod2",
+   "branch_tris": 188,
+   "card_tris": 1410,
+   "cards": 705,
+   "sprays": 705,
+   "card_enlarge": 4.082,
+   "total_tris": 1598,
+   "verts": 2941,
+   "glb_option": "{'export_vertex_color': 'ACTIVE'}",
+   "glb_bytes": 129700
+  },
+  {
+   "name": "lod3",
+   "branch_tris": 188,
+   "card_tris": 282,
+   "cards": 141,
+   "sprays": 141,
+   "card_enlarge": 9.129,
+   "total_tris": 470,
+   "verts": 685,
+   "glb_option": "{'export_vertex_color': 'ACTIVE'}",
+   "glb_bytes": 32676
+  }
+ ],
+ "elapsed_s": 9.9
+}

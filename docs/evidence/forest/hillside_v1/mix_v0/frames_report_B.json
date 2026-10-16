@@ -1,0 +1,111 @@
+{
+ "rev": "m1",
+ "stills": {
+  "agl50": {
+   "frame": 47,
+   "agl_m": 50.0,
+   "pitch_deg": -10,
+   "tree_pixel_share": 0.9027,
+   "block_pixel_share": 0.9453,
+   "canopy_cover_in_block_screen": 0.8977,
+   "tree_px_median_saturation": 0.3,
+   "tree_px_green_hue_share": 0.941,
+   "tree_px_median_value": 0.29,
+   "lod_calc_in_frustum": [
+    3,
+    152,
+    378,
+    67
+   ],
+   "native_material_guard": "PASS"
+  },
+  "agl200": {
+   "frame": 95,
+   "agl_m": 200.0,
+   "pitch_deg": -40,
+   "tree_pixel_share": 0.6823,
+   "block_pixel_share": 0.7151,
+   "canopy_cover_in_block_screen": 0.8907,
+   "tree_px_median_saturation": 0.246,
+   "tree_px_green_hue_share": 0.897,
+   "tree_px_median_value": 0.329,
+   "lod_calc_in_frustum": [
+    0,
+    22,
+    539,
+    234
+   ],
+   "native_material_guard": "PASS"
+  },
+  "agl500": {
+   "frame": 143,
+   "agl_m": 500.0,
+   "pitch_deg": -55,
+   "tree_pixel_share": 0.2437,
+   "block_pixel_share": 0.2571,
+   "canopy_cover_in_block_screen": 0.8486,
+   "tree_px_median_saturation": 0.198,
+   "tree_px_green_hue_share": 0.771,
+   "tree_px_median_value": 0.376,
+   "lod_calc_in_frustum": [
+    0,
+    0,
+    52,
+    931
+   ],
+   "native_material_guard": "PASS"
+  }
+ },
+ "guard": {
+  "native_material_guard": "PASS",
+  "rule": "tree pixels: median saturation >= 0.12 and >= 70 % hue 50-170 deg, tree share > 2 %"
+ },
+ "flight": {
+  "frames": 451,
+  "speed_mps": 40.0,
+  "length_m": 300.0,
+  "agl_range_m": [
+   56.08,
+   77.78
+  ],
+  "lod_calc_in_view_frame0": [
+   0,
+   23,
+   363,
+   158
+  ],
+  "lod_calc_in_view_mid": [
+   1,
+   127,
+   391,
+   42
+  ],
+  "lod_calc_in_view_last": [
+   0,
+   75,
+   23,
+   0
+  ],
+  "lod_calc_in_view_mean": [
+   0.5,
+   100.7,
+   326.6,
+   65.4
+  ],
+  "calc_switches_total": 747,
+  "frames_with_ge3_switches": 108,
+  "pop_proxy": {
+   "rule": "mean |frame - prev| (lower 2/3, 480x270 grey) / rolling median(9) > 1.5",
+   "spikes": [],
+   "n_spikes": 0,
+   "median_diff": 10.843
+  },
+  "pop_proxy_tiles": {
+   "rule": "tile |frame - prev| > 2 x its rolling median(9) and > 2 grey levels; 8 x 6 tiles at 480 x 270",
+   "frames_with_tile_hit": [],
+   "n_frames_with_tile_hit": 0,
+   "share_within_1_frame_of_a_calc_switch": 0.0,
+   "chance_share_of_frames_within_1_frame_of_a_calc_switch": 0.971
+  }
+ }
+}

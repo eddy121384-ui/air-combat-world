@@ -65,6 +65,16 @@ P = dict(
     interior_keep=0.45,
     spray_scale=(0.85, 1.2),
 )
+# Opt-in crown-form variant (hillside forest mix v0): ACW_TG_PARAMS = JSON file whose keys replace entries of P (unknown keys are an
+# error). Unset = the PR #30 golden parameters above, unchanged. machilus_game.py imports this module, so set the same variable there.
+if os.environ.get("ACW_TG_PARAMS"):
+    with open(os.environ["ACW_TG_PARAMS"], encoding="utf-8") as _fh:
+        for _k, _v in json.load(_fh).items():
+            if _k.startswith("_"):
+                continue
+            if _k not in P:
+                raise KeyError("ACW_TG_PARAMS: unknown parameter %s" % _k)
+            P[_k] = tuple(_v) if isinstance(_v, list) else _v
 
 
 def args():

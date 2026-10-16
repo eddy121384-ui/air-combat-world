@@ -6,6 +6,8 @@ untouched (only referenced). No Xinyi / North Taiwan production content, no new 
 
 > Draft for visual review. Host everywhere: **Intel UHD 770 iGPU, UE 5.8, standalone `-game` 1080p** (no Nanite / Lumen / VSM; CSM shadows).
 
+> **Follow-up: Forest Mix V0** (second 紅楠 crown form, A vs B on the same block) → `docs/research/taiwan-hillside-forest-mix-v0.md`.
+
 **Core question:** can the current 紅楠 plus mature Unreal features make a patch of forest that, from the air, really reads as North Taiwan?
 
 ## 0. Short answer
@@ -106,9 +108,9 @@ with the sun from the right.
 
 | still | camera | trees in view on LOD0 / 1 / 2 / 3 (calculated) | triangles submitted (calc.) |
 |---|---|---|---:|
-| `still_agl50` | 50 m AGL, pitch −10°, inside the block's south-west part, looking up-slope toward the summit | 1 / 144 / 378 / 71 | 2.97 M |
-| `still_agl200` | 200 m AGL, pitch −40°, 226 m from the block centre | 0 / 19 / 524 / 246 | 1.47 M |
-| `still_agl500` | 500 m AGL, pitch −55°, 517 m from the block centre; the block fills 26 % of the frame | 0 / 0 / 52 / 931 | 0.60 M |
+| `still_agl50` | 50 m AGL, pitch −10°, inside the block's south-west part, looking up-slope toward the summit | 3 / 149 / 375 / 68 | 3.10 M |
+| `still_agl200` | 200 m AGL, pitch −40°, 226 m from the block centre | 0 / 19 / 532 / 240 | 1.48 M |
+| `still_agl500` | 500 m AGL, pitch −55°, 517 m from the block centre; the block fills 26 % of the frame | 0 / 0 / 53 / 930 | 0.60 M |
 
 ![50 m AGL](../evidence/forest/hillside_v1/still_agl50.jpg)
 ![200 m AGL](../evidence/forest/hillside_v1/still_agl200.jpg)
@@ -127,12 +129,15 @@ earlier flight designs were rejected on their native frames (§8).
 
 Screen size = 3.08 × R / d (UE `ComputeBoundsScreenSize`, 60° hfov 16:9, R = 8.377 m × instance scale), trees inside the view frustum.
 HISM selects LODs per cluster node, so the engine can differ near a threshold; these are **calculated**, not read from the engine.
+*Corrected in the Mix V0 update:* the first revision scaled the bounds sphere by max(XY scale, Z scale), ignoring the elliptical X / Y
+scales; UE uses the largest of X / Y / Z. Still counts moved by ≤ 8 trees per LOD (50 m was 1 / 144 / 378 / 71); the flyover row and the
+findings are unchanged (the flyover numbers already used X / Y / Z).
 
 | view | LOD0 (34 k) | LOD1 (14.8 k) | LOD2 (2.0 k) | LOD3 (534) |
 |---|---:|---:|---:|---:|
-| 50 m AGL still | 1 | 144 | 378 | 71 |
-| 200 m AGL still | 0 | 19 | 524 | 246 |
-| 500 m AGL still | 0 | 0 | 52 | 931 |
+| 50 m AGL still | 3 | 149 | 375 | 68 |
+| 200 m AGL still | 0 | 19 | 532 | 240 |
+| 500 m AGL still | 0 | 0 | 53 | 930 |
 | flyover, mean over 451 frames | 0.4 | 97.9 | 325.6 | 67.9 |
 
 The flyover has 745 calculated switches of in-view trees (99 frames with ≥ 3). LOD2 (2,018 tris) carries most of what a pilot sees from
@@ -155,12 +160,12 @@ of the same round, mean [min..max] over the 2 rounds. Empty stage (terrain, sky,
 Reading (this host only; exploratory):
 
 * ~1,000 masked-card trees at 50–200 m AGL cost **~100–165 ms** of GPU on the UHD 770 — the scene runs at ~5–7 fps there, ~15 fps at
-  500 m. Per tree in view that is ~0.27 ms at 50 m (594 trees), ~0.13 ms at 200 m (789) and ~0.02 ms at 500 m (983); it is consistent in kind with PR #31's 100-tree patch (+34.8 ms at 150 m slant).
+  500 m. Per tree in view that is ~0.27 ms at 50 m (595 trees), ~0.13 ms at 200 m (791) and ~0.02 ms at 500 m (983); it is consistent in kind with PR #31's 100-tree patch (+34.8 ms at 150 m slant).
 * **Shadow depth is ~40 %** of the forest cost at 50 / 200 m (+65 / +38 ms): 989 masked casters in 4 CSM cascades out to 1,200 m. Base pass
   (+68 / +45 ms, masked overdraw) is the other ~40 %. The obvious levers, not tried here: shorter / coarser far cascades or no far-tree shadow
   casting, and a cheaper mid LOD — exactly the PR #31 next steps (impostor / cut-out cards).
 * At 500 m, where 94 % of trees are on the 534-triangle LOD3, the forest costs +19 ms: far LOD works for cost too.
-* Triangles submitted (calculated): 2.97 M / 1.47 M / 0.60 M at 50 / 200 / 500 m.
+* Triangles submitted (calculated): 3.10 M / 1.48 M / 0.60 M at 50 / 200 / 500 m.
 
 ## 8. Iterations and failures (kept visible)
 

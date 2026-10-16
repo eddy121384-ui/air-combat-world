@@ -1,0 +1,48 @@
+{
+  "status": "PASS_HF_IMPORT_CROWN_B",
+  "error": null,
+  "import_lods": {
+    "1": 1,
+    "2": 2,
+    "3": 3
+  },
+  "asset": "/Game/HillsideForest/Trees/CrownB/machilus_balanced_lod0/StaticMeshes/machilus_balanced_lod0",
+  "mesh": {
+    "lods": 4,
+    "screens": [
+      1.0,
+      0.5,
+      0.15,
+      0.06
+    ],
+    "triangles": [
+      28850,
+      11500,
+      1598,
+      470
+    ],
+    "vertices": [
+      43922,
+      20099,
+      2941,
+      685
+    ],
+    "sections": [
+      2,
+      2,
+      2,
+      2
+    ],
+    "sphere_radius_cm": 906.6936474308533,
+    "bounds_origin_cm": [
+      178.38760375976562,
+      -17.5531005859375,
+      606.568785905838
+    ],
+    "bounds_extent_cm": [
+      873.4745788574219,
+      815.10986328125,
+      611.198059797287
+    ]
+  }
+}

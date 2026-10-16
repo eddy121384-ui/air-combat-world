@@ -10,8 +10,8 @@ LOD mix: screen size = 3.08 x R / d (UE ComputeBoundsScreenSize at 60 deg hfov, 
 thresholds 1.0 / 0.5 / 0.15 / 0.06 -> LOD0 / 1 / 2 / 3. CALCULATED per instance, not read from the engine (HISM selects LODs
 per cluster node, so the engine can differ near a threshold).
 
-    python tools/forest/hillside_views.py <terrain_dir>
-Writes <terrain_dir>/views.json.
+    python tools/forest/hillside_views.py <terrain_dir> [instances_file views_file]
+Writes <terrain_dir>/views.json (default; mix v0: instances_mix.json -> views_mix.json, same poses, LOD mix of the mixed forest).
 """
 import json
 import math
@@ -102,8 +102,8 @@ def lod_mix(T, inst, cam, bearing, pitch, frustum=True):
     ty = tx / ASPECT
     cnt = [0, 0, 0, 0]
     for it in inst:
-        R = MESH_SPHERE_R * max(it["scale_xy"], it["scale_z"])
-        c = np.array([it["x_m"], it["y_m"], it["z_m"] + 7.1 * it["scale_z"]])
+        R = it.get("sphere_r_m", MESH_SPHERE_R) * max(it.get("scale_x", it["scale_xy"]), it.get("scale_y", it["scale_xy"]), it["scale_z"])
+        c = np.array([it["x_m"], it["y_m"], it["z_m"] + it.get("crown_z_m", 7.1) * it["scale_z"]])
         v = c - cam
         dist = float(np.linalg.norm(v))
         if frustum:
@@ -115,10 +115,10 @@ def lod_mix(T, inst, cam, bearing, pitch, frustum=True):
     return cnt
 
 
-def main(d):
+def main(d, inst_file="instances.json", out_file="views.json"):
     d = Path(d)
     T = Terrain(d)
-    inst = json.loads((d / "instances.json").read_text(encoding="utf-8"))["instances"]
+    inst = json.loads((d / inst_file).read_text(encoding="utf-8"))["instances"]
     h_ref = T.meta["landscape"]["h_ref_m"]
     centre = (0.0, 0.0, float(T.height(0.0, 0.0)[0]) + 8.0)
     stills = []
@@ -184,11 +184,12 @@ def main(d):
            "still_hold_frames": STILL_HOLD, "stills": stills,
            "flight": {"name": "fly_e_ridge_50mps", "bearing_deg": fb, "line_y_m": y0, "speed_mps": speed, "length_m": length, "agl_target_m": agl_f, "aim_ahead_m": ahead,
                       "frames": nfr, "agl_range_m": [min(k_["agl_m"] for k_ in keys), max(k_["agl_m"] for k_ in keys)], "keys": keys}}
-    (d / "views.json").write_text(json.dumps(out, indent=0) + "\n", encoding="utf-8")
+    out["instances_file"] = inst_file
+    (d / out_file).write_text(json.dumps(out, indent=0) + "\n", encoding="utf-8")
     for s_ in stills:
         print(s_["name"], s_["pitch_deg"], s_["pos_local_m"], s_["frame_composition"], s_["lod_calc_in_frustum"], s_["slant_to_block_centre_m"])
     print("flight agl range", out["flight"]["agl_range_m"], "frames", nfr)
 
 
 if __name__ == "__main__":
-    main(sys.argv[1])
+    main(*sys.argv[1:4])

@@ -7,7 +7,8 @@ This stage reads only what is on disk:
 * M_TL_LeafCards / M_TL_Bark packages: used_with_instanced_static_meshes == True, leaf blend mode MASKED + two-sided + foliage shading,
   and the package is not dirty after load; after ALL maps below were loaded (HISMs registered) no material / forest package is dirty
   (a missing saved flag would be set in memory there and dirty its package);
-* every map that renders the forest (main, stills, flight, perf): HF_Forest has 3 HISMs, the D mesh (4 LODs, screens 1/0.5/0.15/0.06),
+* every map that renders the forest (main, stills, flight, perf): HF_Forest has one HISM per (form, tint) of the instance file
+  ($ACW_HF_INSTANCES, default instances.json), the D mesh for form A / crown-B mesh for form B (4 LODs, screens 1/0.5/0.15/0.06),
   slot 0 resolves to M_TL_Bark and slot 1 to an MI_HF_Leaf_V* whose base material is M_TL_LeafCards (MASKED), never a default /
   WorldGrid material, total instances == instances.json, and 32 sampled instance transforms match instances.json (location <= 1 cm, scale <= 0.05 %);
 * the MICs carry the intended parameter overrides; the Landscape exists with 64 components and M_HF_Ground.
@@ -29,12 +30,15 @@ from tl_common import MAT_DIR, OUT, find_actor, lib, write_report  # noqa: E402
 
 HF_DIR = Path(os.environ["ACW_HF_DIR"])
 build = json.loads((OUT / "reports" / "hf_build.report.json").read_text(encoding="utf-8"))
-I = json.loads((HF_DIR / "instances.json").read_text(encoding="utf-8"))["instances"]
+INSTANCES = os.environ.get("ACW_HF_INSTANCES", "instances.json")
+I = json.loads((HF_DIR / INSTANCES).read_text(encoding="utf-8"))["instances"]
+FORM_MESH = {"A": PATH["D"], "B": "/Game/HillsideForest/Trees/CrownB/machilus_balanced_lod0/StaticMeshes/machilus_balanced_lod0"}
+GROUPS = sorted({(it.get("form", "A"), it["variant"]) for it in I})
 levels = unreal.get_editor_subsystem(unreal.LevelEditorSubsystem)
 actors = unreal.get_editor_subsystem(unreal.EditorActorSubsystem)
 sms = unreal.get_editor_subsystem(unreal.StaticMeshEditorSubsystem)
 DEFAULTS = ("/Engine/EngineMaterials/WorldGridMaterial", "/Engine/EngineMaterials/DefaultMaterial", "/Engine/EngineMaterials/DefaultDeferredDecalMaterial")
-rep = {"status": "FAIL_HF_VERIFY", "checks": [], "materials": {}, "maps": {}, "error": None}
+rep = {"status": "FAIL_HF_VERIFY", "instances_file": INSTANCES, "checks": [], "materials": {}, "maps": {}, "error": None}
 
 
 def check(name, ok, detail=None):
@@ -109,7 +113,8 @@ def forest_gate(key, path, expect_forest):
     if not check(key + " forest present", holder is not None):
         return
     hisms = holder.get_components_by_class(unreal.HierarchicalInstancedStaticMeshComponent)
-    check(key + " 3 HISMs", len(hisms) == 3, len(hisms))
+    check(key + " one HISM per (form, tint)", len(hisms) == len(GROUPS), {"hisms": len(hisms), "groups": GROUPS})
+    per_mesh = {}
     total, comps = 0, []
     world_xf = []
     for h in hisms:
@@ -127,7 +132,8 @@ def forest_gate(key, path, expect_forest):
         comps.append({"name": h.get_name(), "mesh": mp, "lods": mesh.get_num_lods() if mesh else None, "screens": screens,
                       "triangles": [mesh.get_num_triangles(i) for i in range(mesh.get_num_lods())] if mesh else None,
                       "instances": n, "materials": mats, "cast_shadow": bool(h.get_editor_property("cast_shadow"))})
-        check("%s %s mesh = D balanced" % (key, h.get_name()), mp == PATH["D"], mp)
+        check("%s %s mesh = D balanced or crown B" % (key, h.get_name()), mp in FORM_MESH.values(), mp)
+        per_mesh[mp] = per_mesh.get(mp, 0) + n
         check("%s %s 4 LODs 1/0.5/0.15/0.06" % (key, h.get_name()), screens == [1.0, 0.5, 0.15, 0.06], screens)
         check("%s %s slot0 bark" % (key, h.get_name()), mats[0]["base"] == MAT_DIR + "/M_TL_Bark" and mats[0]["base_ism_usage"], mats[0])
         check("%s %s slot1 masked leaf MIC" % (key, h.get_name()),
@@ -138,6 +144,9 @@ def forest_gate(key, path, expect_forest):
             world_xf.append(h.get_instance_transform(i, True))
     m["hisms"] = comps
     m["instances_total"] = total
+    m["instances_per_mesh"] = per_mesh
+    want = {FORM_MESH[f]: sum(1 for it in I if it.get("form", "A") == f) for f in {it.get("form", "A") for it in I}}
+    check(key + " instances per form", per_mesh == want, {"got": per_mesh, "want": want})
     check(key + " instance total", total == len(I), {"got": total, "want": len(I)})
     # transform spot check against instances.json (match by nearest location)
     rng = random.Random(7)

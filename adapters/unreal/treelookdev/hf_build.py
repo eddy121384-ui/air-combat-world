@@ -36,16 +36,22 @@ LEAF_VARIANTS = {  # existing M_TL_LeafCards parameters only (parent defaults: T
     0: {},
     1: {"TintHi": (1.34, 1.26, 0.80), "TintLo": (0.90, 0.94, 0.70), "Brightness": 0.50},  # lighter, yellower (new-leaf flush / sunlit crowns)
     2: {"TintHi": (0.98, 1.04, 1.00), "TintLo": (0.66, 0.76, 0.78), "Brightness": 0.34},  # darker, bluer (older foliage / shaded crowns)
+    # mix v0, crown form B only: a lighter, yellower family (light-gap / ridge crowns, new flush) so the two forms differ in tone as well
+    3: {"TintHi": (1.42, 1.34, 0.72), "TintLo": (0.92, 0.96, 0.66), "Brightness": 0.52},
+    4: {"TintHi": (1.30, 1.26, 0.82), "TintLo": (0.84, 0.92, 0.66), "Brightness": 0.44},
 }
+# instance file: instances.json = version A (single 紅楠 D); instances_mix.json = version B (mix v0: form A = D, form B = crown B)
+INSTANCES = os.environ.get("ACW_HF_INSTANCES", "instances.json")
+FORM_MESH = {"A": PATH["D"], "B": "/Game/HillsideForest/Trees/CrownB/machilus_balanced_lod0/StaticMeshes/machilus_balanced_lod0"}
 # inside the block the floor stands in for the understory (shrubs / ferns / saplings - not modelled): two dark greens mottled by a ~6 m
 # world-space noise; outside the block a flat placeholder olive-grey that is visibly NOT forest (test terrain only)
 GROUND = {"inside": ((0.016, 0.024, 0.009), (0.034, 0.040, 0.017)), "outside": (0.060, 0.062, 0.040)}
 
 levels = unreal.get_editor_subsystem(unreal.LevelEditorSubsystem)
 actors = unreal.get_editor_subsystem(unreal.EditorActorSubsystem)
-report = {"status": "FAIL_HF_BUILD", "rev": REV, "maps": {}, "materials": {}, "error": None}
+report = {"status": "FAIL_HF_BUILD", "rev": REV, "instances_file": INSTANCES, "maps": {}, "materials": {}, "error": None}
 T = json.loads((HF_DIR / "terrain.json").read_text(encoding="utf-8"))
-I = json.loads((HF_DIR / "instances.json").read_text(encoding="utf-8"))
+I = json.loads((HF_DIR / INSTANCES).read_text(encoding="utf-8"))
 V = json.loads((HF_DIR / "views.json").read_text(encoding="utf-8"))
 
 
@@ -78,7 +84,10 @@ def assert_ism_usage():
 
 def leaf_instances(parent):
     out = {}
+    used = {it["variant"] for it in I["instances"]}
     for v, params in LEAF_VARIANTS.items():
+        if v not in used:
+            continue
         name = "MI_HF_Leaf_V%d" % v
         mic = tools.create_asset(name, DIR, unreal.MaterialInstanceConstant, unreal.MaterialInstanceConstantFactoryNew())
         mel.set_material_instance_parent(mic, parent)
@@ -206,13 +215,15 @@ def terrain(m_ground):
 
 
 def forest(mics):
-    mesh = lib.load_asset(PATH["D"])
-    if mesh is None or mesh.get_num_lods() != 4:
-        raise RuntimeError("D balanced mesh missing or not 4 LODs: %s" % PATH["D"])
     bark = lib.load_asset(MAT_DIR + "/M_TL_Bark")
     holder = spawn(unreal.Actor, "HF_Forest")
     comps, counts = {}, {}
-    for v, mic in mics.items():
+    groups = sorted({(it.get("form", "A"), it["variant"]) for it in I["instances"]})
+    for form, v in groups:
+        mesh = lib.load_asset(FORM_MESH[form])
+        if mesh is None or mesh.get_num_lods() != 4:
+            raise RuntimeError("form %s mesh missing or not 4 LODs: %s" % (form, FORM_MESH[form]))
+        mic = mics[v]
         h = add_hism(holder, mesh)
         h.set_material(0, bark)
         h.set_material(1, mic)
@@ -220,15 +231,15 @@ def forest(mics):
         h.set_cast_shadow(True)
         xf = []
         for it in I["instances"]:
-            if it["variant"] != v:
+            if it["variant"] != v or it.get("form", "A") != form:
                 continue
             z_up = unreal.Vector(math.tan(math.radians(it["lean_east_deg"])), -math.tan(math.radians(it["lean_north_deg"])), 1.0)
             yaw = math.radians(it["yaw_deg"])
             rot = unreal.MathLibrary.make_rot_from_zx(z_up, unreal.Vector(math.cos(yaw), math.sin(yaw), 0.0))
             xf.append(unreal.Transform(unreal.Vector(*it["ue_cm"]), rot, unreal.Vector(it["scale_x"], it["scale_y"], it["scale_z"])))
         h.add_instances(xf, False, True)
-        comps[v] = h
-        counts[v] = h.get_instance_count()
+        comps["%s%d" % (form, v)] = h
+        counts["%s%d" % (form, v)] = h.get_instance_count()
     return holder, counts
 
 

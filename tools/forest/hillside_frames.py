@@ -1,6 +1,6 @@
 """Hillside forest look-dev v1: evidence from the NATIVE standalone -game MRQ frames (numpy + Pillow; ffmpeg on PATH for the videos).
 
-    python tools/forest/hillside_frames.py <terrain_dir> <movies_dir> <rev> <out_dir>
+    python tools/forest/hillside_frames.py <terrain_dir> <movies_dir> <rev> <out_dir> [views_file instances_file]
 
 1. Stills: frames still_hold-1, 2*hold-1, 3*hold-1 of hf_stills_{forest,empty}_<rev>_01 -> still_<view>.png (native 1920x1080, lossless),
    still_<view>.jpg (q92) and crop_<view>.png (native-pixel 640x360 centre crop).
@@ -31,8 +31,8 @@ from hillside_views import ASPECT, HFOV, LOD_CUTS, dir_from  # noqa: E402
 
 TD, MOV, REV, OUT = Path(sys.argv[1]), Path(sys.argv[2]), sys.argv[3], Path(sys.argv[4])
 OUT.mkdir(parents=True, exist_ok=True)
-V = json.loads((TD / "views.json").read_text(encoding="utf-8"))
-INST = json.loads((TD / "instances.json").read_text(encoding="utf-8"))["instances"]
+V = json.loads((TD / (sys.argv[5] if len(sys.argv) > 5 else "views.json")).read_text(encoding="utf-8"))
+INST = json.loads((TD / (sys.argv[6] if len(sys.argv) > 6 else "instances.json")).read_text(encoding="utf-8"))["instances"]
 T = Terrain(TD)
 rep = {"rev": REV, "stills": {}, "guard": {}, "flight": {}}
 
@@ -136,8 +136,8 @@ fdir = MOV / tag / "frames"
 if fdir.is_dir():
     n = FL["frames"] + 1
     # calculated LOD per instance per frame (in-frustum) -> switch counts
-    C = np.array([[it["x_m"], it["y_m"], it["z_m"] + 7.1 * it["scale_z"]] for it in INST])
-    R = MESH_SPHERE_R * np.array([max(it["scale_x"], it["scale_y"], it["scale_z"]) for it in INST])
+    C = np.array([[it["x_m"], it["y_m"], it["z_m"] + it.get("crown_z_m", 7.1) * it["scale_z"]] for it in INST])
+    R = np.array([it.get("sphere_r_m", MESH_SPHERE_R) * max(it["scale_x"], it["scale_y"], it["scale_z"]) for it in INST])
     prev, lod_counts, switches = None, [], []
     for k in FL["keys"]:
         cam = np.array(k["pos_local_m"])
