@@ -30,11 +30,17 @@ sys.path.insert(0, str(HERE))
 
 from geometry import extrude_geos_polygon, repair_worldmodel_polygon  # noqa: E402
 from serialization_space import prepare_footprint, tile_origin, tile_transform  # noqa: E402
+from source_lock import verify_frozen_source  # noqa: E402
 from strict_qa import strict_mesh_gate  # noqa: E402
 from worldmodel import build_worldmodel  # noqa: E402
 
 SOURCE = REPO / "data/generated/taipei/sample_buildings_epsg3826.geojson"
 CITY = REPO / "cities/taipei/city.yaml"
+PIPELINE_DESCRIPTION = (
+    "EPSG:3826 -> WorldModel/ENU -> GEOS repair -> 500m tile-local -> "
+    "float32 footprint -> GEOS revalidate -> GEOS constrained Delaunay/trimesh -> "
+    "GLB reload -> strict QA"
+)
 
 
 def _rss_mb():
@@ -81,6 +87,7 @@ def build(output_dir: Path) -> dict:
         raise RuntimeError("Projected source missing; run node tools/citygen_v2/fetch_projected_sample.mjs")
 
     source_sha = hashlib.sha256(SOURCE.read_bytes()).hexdigest()
+    verify_frozen_source(source_sha)
     wm = build_worldmodel(SOURCE, CITY, source_crs="EPSG:3826")
 
     repair_outcomes = Counter()
@@ -344,10 +351,7 @@ def build(output_dir: Path) -> dict:
 
     report = {
         "gate": "Full Xinyi v2 serialization-space tiled geometry gate",
-        "pipeline": (
-            "EPSG:3826 -> WorldModel/ENU -> GEOS repair -> 500m tile-local -> "
-            "float32 footprint -> GEOS revalidate -> earcut/trimesh -> GLB reload -> strict QA"
-        ),
+        "pipeline": PIPELINE_DESCRIPTION,
         "source": {
             "path": str(SOURCE),
             "crs": "EPSG:3826",
