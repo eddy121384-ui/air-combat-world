@@ -1,0 +1,50 @@
+{
+  "status": "PASS_HF_IMPORT_CROWN_B",
+  "error": null,
+  "import_lods": {
+    "1": 1,
+    "2": 2,
+    "3": 3
+  },
+  "asset": "/Game/HillsideForest/Trees/A_CSide100/machilus_budget_side100_lod0/StaticMeshes/machilus_budget_side100_lod0",
+  "mesh": {
+    "lods": 4,
+    "screens": [
+      1.0,
+      0.5,
+      0.15,
+      0.06
+    ],
+    "triangles": [
+      34272,
+      8578,
+      1400,
+      534
+    ],
+    "vertices": [
+      55437,
+      15572,
+      2578,
+      846
+    ],
+    "sections": [
+      2,
+      2,
+      2,
+      2
+    ],
+    "sphere_radius_cm": 837.6590598130069,
+    "bounds_origin_cm": [
+      -3.00250244140625,
+      -33.317169189453125,
+      715.3153266906738
+    ],
+    "bounds_extent_cm": [
+      792.8860473632812,
+      729.2262878417969,
+      720.4173393249512
+    ]
+  },
+  "profile": "budget_side100",
+  "dest": "/Game/HillsideForest/Trees/A_CSide100"
+}

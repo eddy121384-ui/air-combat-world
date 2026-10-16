@@ -15,7 +15,10 @@ import unreal  # noqa: E402
 from tl_common import MAT_DIR, ensure_dir, lib, write_report  # noqa: E402
 
 GAME_B = Path(os.environ["ACW_HF_CROWN_B_GAME"])
-DEST = "/Game/HillsideForest/Trees/CrownB"
+# also used for the LOD1 visual-recovery chain: ACW_HF_IMPORT_PROFILE=budget_side ACW_HF_IMPORT_DEST=/Game/HillsideForest/Trees/A_CSide
+PROFILE = os.environ.get("ACW_HF_IMPORT_PROFILE", "balanced")
+DEST = os.environ.get("ACW_HF_IMPORT_DEST", "/Game/HillsideForest/Trees/CrownB")
+REPORT = os.environ.get("ACW_HF_IMPORT_REPORT", "hf_import_crown_b.report.json")
 SCREENS = [1.0, 0.5, 0.15, 0.06]
 sub = unreal.get_editor_subsystem(unreal.StaticMeshEditorSubsystem)
 rep = {"status": "FAIL_HF_IMPORT_CROWN_B", "error": None}
@@ -38,7 +41,7 @@ try:
     mgr = unreal.InterchangeManager.get_interchange_manager_scripted()
     params = unreal.ImportAssetParameters()
     params.set_editor_property("is_automated", True)
-    if not mgr.import_asset(DEST, unreal.InterchangeManager.create_source_data(str(GAME_B / "glb" / "machilus_balanced_lod0.glb")), params):
+    if not mgr.import_asset(DEST, unreal.InterchangeManager.create_source_data(str(GAME_B / "glb" / ("machilus_%s_lod0.glb" % PROFILE))), params):
         raise RuntimeError("Interchange import failed")
     found = [(str(p).split(".")[0], lib.load_asset(p)) for p in lib.list_assets(DEST, recursive=True)]
     meshes = [(p, o) for p, o in found if o is not None and o.get_class().get_name() == "StaticMesh"]
@@ -49,7 +52,7 @@ try:
     if ns.get_editor_property("enabled"):
         ns.set_editor_property("enabled", False)
         sub.set_nanite_settings(mesh, ns, True)
-    rep["import_lods"] = {lod: sub.import_lod(mesh, lod, str(GAME_B / "glb" / ("machilus_balanced_lod%d.glb" % lod))) for lod in (1, 2, 3)}
+    rep["import_lods"] = {lod: sub.import_lod(mesh, lod, str(GAME_B / "glb" / ("machilus_%s_lod%d.glb" % (PROFILE, lod)))) for lod in (1, 2, 3)}
     for lod in range(mesh.get_num_lods()):
         bs = sub.get_lod_build_settings(mesh, lod)
         for prop, val in (("recompute_normals", False), ("recompute_tangents", True), ("use_mikk_t_space", True),
@@ -74,5 +77,6 @@ try:
 except Exception:  # noqa: BLE001
     rep["error"] = traceback.format_exc()
     unreal.log_error(rep["error"])
-write_report("hf_import_crown_b.report.json", rep)
+rep["profile"], rep["dest"] = PROFILE, DEST
+write_report(REPORT, rep)
 unreal.SystemLibrary.quit_editor()

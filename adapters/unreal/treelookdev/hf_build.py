@@ -42,11 +42,14 @@ LEAF_VARIANTS = {  # existing M_TL_LeafCards parameters only (parent defaults: T
 }
 # instance file: instances.json = version A (single 紅楠 D); instances_mix.json = version B (mix v0: form A = D, form B = crown B)
 INSTANCES = os.environ.get("ACW_HF_INSTANCES", "instances.json")
-# form A LOD chain: D balanced (default, Mix D) or PR #31's aggressive C (Mix C low-precision tolerance test); form B is always crown B
+# form A LOD chain: D balanced (default, Mix D), PR #31's aggressive C (Mix C) or S (C + LOD1 side cards); form B is always crown B
+# S = C with side cards restored on LOD1 (LOD1 visual recovery v0; LOD0/2/3 byte-identical to C)
+A_CHAINS = dict(PATH, S="/Game/HillsideForest/Trees/A_CSide/machilus_budget_side_lod0/StaticMeshes/machilus_budget_side_lod0",
+                T="/Game/HillsideForest/Trees/A_CSide100/machilus_budget_side100_lod0/StaticMeshes/machilus_budget_side100_lod0")
 A_CHAIN = os.environ.get("ACW_HF_A_CHAIN", "D")
-if A_CHAIN not in ("C", "D"):
-    raise RuntimeError("ACW_HF_A_CHAIN must be C or D")
-FORM_MESH = {"A": PATH[A_CHAIN], "B": "/Game/HillsideForest/Trees/CrownB/machilus_balanced_lod0/StaticMeshes/machilus_balanced_lod0"}
+if A_CHAIN not in ("C", "D", "S", "T"):
+    raise RuntimeError("ACW_HF_A_CHAIN must be C, D, S or T (S = side cards on half the LOD1 sprays, T = on all)")
+FORM_MESH = {"A": A_CHAINS[A_CHAIN], "B": "/Game/HillsideForest/Trees/CrownB/machilus_balanced_lod0/StaticMeshes/machilus_balanced_lod0"}
 # inside the block the floor stands in for the understory (shrubs / ferns / saplings - not modelled): two dark greens mottled by a ~6 m
 # world-space noise; outside the block a flat placeholder olive-grey that is visibly NOT forest (test terrain only)
 GROUND = {"inside": ((0.016, 0.024, 0.009), (0.034, 0.040, 0.017)), "outside": (0.060, 0.062, 0.040)}
@@ -168,12 +171,16 @@ def setp(obj, props, tag):
 
 
 def stage():
-    sun_az, sun_el = math.radians(V["sun"]["azimuth_deg"]), math.radians(V["sun"]["elevation_deg"])
+    sun = dict(V["sun"])
+    # optional lighting check (LOD1 visual recovery): ACW_HF_SUN_AZ / ACW_HF_SUN_EL override the views.json sun for this revision only
+    if os.environ.get("ACW_HF_SUN_AZ"):
+        sun = {"azimuth_deg": float(os.environ["ACW_HF_SUN_AZ"]), "elevation_deg": float(os.environ["ACW_HF_SUN_EL"])}
+    sun_az, sun_el = math.radians(sun["azimuth_deg"]), math.radians(sun["elevation_deg"])
     to_sun = unreal.Vector(math.sin(sun_az) * math.cos(sun_el), -math.cos(sun_az) * math.cos(sun_el), math.sin(sun_el))
-    sun = spawn(unreal.DirectionalLight, "HF_Sun", (0, 0, 50000))
-    sc = sun.get_component_by_class(unreal.DirectionalLightComponent)
+    sun_actor = spawn(unreal.DirectionalLight, "HF_Sun", (0, 0, 50000))
+    sc = sun_actor.get_component_by_class(unreal.DirectionalLightComponent)
     sc.set_mobility(unreal.ComponentMobility.MOVABLE)
-    sun.set_actor_rotation(unreal.MathLibrary.make_rot_from_x(unreal.Vector(-to_sun.x, -to_sun.y, -to_sun.z)), False)
+    sun_actor.set_actor_rotation(unreal.MathLibrary.make_rot_from_x(unreal.Vector(-to_sun.x, -to_sun.y, -to_sun.z)), False)
     setp(sc, {"atmosphere_sun_light": True, "light_source_angle": 0.6, "dynamic_shadow_distance_movable_light": SHADOW_M * 100.0,
               "dynamic_shadow_cascades": 4, "cascade_distribution_exponent": 2.5, "contact_shadow_length": 0.03}, "sun")
     sc.set_intensity(11.0)
@@ -200,7 +207,7 @@ def stage():
              "override_motion_blur_amount": True, "motion_blur_amount": 0.0, "override_vignette_intensity": True, "vignette_intensity": 0.0,
              "override_color_saturation": True, "color_saturation": unreal.Vector4(0.9, 0.9, 0.9, 1.0)}, "pp")
     pp.set_editor_property("settings", s)
-    return {"sun": V["sun"], "sun_lux": 11.0, "sky": 4.0, "exposure_ev": EV, "shadow_distance_m": SHADOW_M, "fog_density": 0.012}
+    return {"sun": sun, "sun_lux": 11.0, "sky": 4.0, "exposure_ev": EV, "shadow_distance_m": SHADOW_M, "fog_density": 0.012}
 
 
 def terrain(m_ground):

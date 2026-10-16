@@ -5,6 +5,8 @@ forms, tints), cameras, flight, sun and render settings. **One change:** the 593
 instead of D balanced; the 396 crown-B trees are unchanged. No new tree, atlas, shader or LOD system; the A, B and Mix V0 baselines
 (`/Game/HillsideForest/r6`, `m1`) are untouched. Mix C is built as `m2`.
 
+> **Follow-up: LOD1 visual recovery v0** (C + side cards, chosen chain T) → `taiwan-hillside-forest-lod1-recovery-v0.md`.
+
 > Draft for visual review. Host: **Intel UHD 770 iGPU, UE 5.8, standalone `-game` 1080p**. GPU numbers are exploratory, 2 interleaved rounds.
 
 | form A chain | LOD0 | LOD1 (≈ 52–172 m) | LOD2 (≈ 172–430 m) | LOD3 (> ≈ 430 m) |

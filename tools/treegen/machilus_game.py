@@ -79,6 +79,14 @@ PROFILES = {
              sides=lambda r: 4, sub=lambda r: 1),
     ],
 }
+# hillside forest LOD1 visual recovery v0: "budget" (PR #31 candidate C) with side cards restored on LOD1 only. The kept LOD1 sprays are the
+# same (same keep / rng draw); the half of them whose crown-surface normal is most horizontal (the crown's sides, seen edge-on by top-only
+# cards from an oblique flight view) also get their "end" card. LOD0 / LOD2 / LOD3 are identical to "budget".
+PROFILES["budget_side"] = [PROFILES["budget"][0], dict(PROFILES["budget"][1], views=("top", "end"), end_frac=0.5),
+                           PROFILES["budget"][2], PROFILES["budget"][3]]
+# second step: end cards on every kept LOD1 spray (card area back to ~D's with C's fewer, larger cards)
+PROFILES["budget_side100"] = [PROFILES["budget"][0], dict(PROFILES["budget"][1], views=("top", "end")),
+                              PROFILES["budget"][2], PROFILES["budget"][3]]
 PROFILE = os.environ.get("ACW_TL_PROFILE", "v1")
 LODS = PROFILES[PROFILE]
 REUSE_BAKE = os.environ.get("ACW_TL_REUSE_BAKE") == "1"  # reuse <out>/bake/frames.json + the committed atlas (non-default profiles)
@@ -302,6 +310,11 @@ def choose(lod, rng):
 
 def build_cards(lod, frames, rng):
     idx, enlarge = choose(lod, rng)
+    end_ok = None
+    if lod.get("end_frac") is not None:  # end cards only on the crown sides (most horizontal crown normal); deterministic, no rng
+        cn_s, _ = crown_normal_depth(I_pos[idx].astype(np.float64))
+        side = np.abs(cn_s[:, 2])
+        end_ok = set(idx[np.argsort(side, kind="stable")[: int(round(lod["end_frac"] * len(idx)))]].tolist())
     V, N, UV, COL, Fc = [], [], [], [], []
     corners_out, uv_out = [], []
     for i in idx:
@@ -311,6 +324,8 @@ def build_cards(lod, frames, rng):
         pos = Vector(I_pos[i])
         k = int(I_proto[i])
         for view in lod["views"]:
+            if view == "end" and end_ok is not None and i not in end_ok:
+                continue
             fr = frames[(k, view)]
             h = fr["s"] * 0.5 * enlarge
             # LOD1/2 enlarge each card about its centre (area-preserving for the dropped sprays); the corners are pulled

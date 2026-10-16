@@ -1,12 +1,13 @@
 # Hillside forest look-dev v1: EXPLORATORY GPU cost (standalone -game 1080p, UE CSV profiler, fixed 60 fps step). Not a benchmark.
 # Per round: for each still view (static camera) and the flyover (auto-play sequence) one forest and one empty-forest run of the same map
 # pair; the order inside a pair reverses every round (capture-harness lesson: "layer on first" reads +1-2 ms of fake cost).
-# -MixRev adds a third condition "mix" (the forest maps of that revision, e.g. the mix v0 build m1), interleaved in the same session.
-#   run_hf_perf.ps1 -Rev r3 -Prefix p1 -Rounds 2 [-Views agl50,flight] [-MixRev m1]
+# -MixRev adds a condition "mix" (the forest maps of that revision, e.g. the mix v0 build m1); -ExtraRevs adds one condition per revision
+# ("x<rev>", e.g. xm3), all interleaved in the same session.
+#   run_hf_perf.ps1 -Rev r3 -Prefix p1 -Rounds 2 [-Views agl50,flight] [-MixRev m1] [-ExtraRevs m3,m7]
 # Host: Intel UHD 770 only. One UE process at a time; nothing else heavy running (shared package power).
 param([Parameter(Mandatory)][ValidatePattern('^[rm][0-9]+$')][string]$Rev, [Parameter(Mandatory)][ValidatePattern('^[A-Za-z0-9]+$')][string]$Prefix,
       [int]$Rounds = 2, [int]$StillFrames = 260, [string[]]$Views = @('agl50', 'agl200', 'agl500', 'flight'),
-      [ValidatePattern('^([rm][0-9]+)?$')][string]$MixRev = '', [string]$EngineRoot = 'C:\Program Files\Epic Games\UE_5.8')
+      [ValidatePattern('^([rm][0-9]+)?$')][string]$MixRev = '', [string[]]$ExtraRevs = @(), [string]$EngineRoot = 'C:\Program Files\Epic Games\UE_5.8')
 $ErrorActionPreference = 'Stop'
 $RepoRoot = (Resolve-Path (Join-Path $PSScriptRoot '..\..')).Path
 $project = Join-Path $RepoRoot 'unreal\TreeLookdev\TreeLookdev.uproject'
@@ -15,14 +16,14 @@ $exec = 'r.VSync 0,t.MaxFPS 0,r.ScreenPercentage 100,r.MotionBlurQuality 0,r.GPU
 $V = Get-Content (Join-Path $RepoRoot 'out\forest\hillside\views.json') -Raw | ConvertFrom-Json
 $plan = @(@('agl50', 'L_HFP_agl50', $StillFrames), @('agl200', 'L_HFP_agl200', $StillFrames), @('agl500', 'L_HFP_agl500', $StillFrames),
           @('flight', 'L_HF_Flight', ($V.flight.frames + 40)))
-$base = if ($MixRev) { @('empty', 'forest', 'mix') } else { @('empty', 'forest') }
+$base = @('empty', 'forest') + $(if ($MixRev) { @('mix') } else { @() }) + @($ExtraRevs | ForEach-Object { "x$_" })
 for ($r = 1; $r -le $Rounds; $r++) {
     foreach ($p in @($plan | Where-Object { $Views -contains $_[0] })) {
-        $conds = $base.Clone()
+        $conds = [string[]]$base.Clone()
         if ($r % 2 -eq 0) { [array]::Reverse($conds) }
         foreach ($c in $conds) {
             if (Get-Process UnrealEditor* -ErrorAction SilentlyContinue) { throw 'An UnrealEditor process is already running' }
-            $level = if ($c -eq 'mix') { "$MixRev/$($p[1])_forest" } else { "$Rev/$($p[1])_$c" }
+            $level = if ($c -eq 'mix') { "$MixRev/$($p[1])_forest" } elseif ($c -like 'x*') { "$($c.Substring(1))/$($p[1])_forest" } else { "$Rev/$($p[1])_$c" }
             $out = Join-Path $RepoRoot "unreal\TreeLookdev\Saved\TreeLookdev\hillside\perf\${Prefix}r${r}__${Rev}__$($p[0])__$c"
             if (Test-Path -LiteralPath $out) { throw "Refusing to overwrite prior run: $out" }
             New-Item -ItemType Directory -Path $out | Out-Null

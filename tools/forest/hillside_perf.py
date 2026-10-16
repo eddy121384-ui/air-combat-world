@@ -2,8 +2,8 @@
 
     python tools/forest/hillside_perf.py <perf_dir> <prefix> <out.json>
 
-Runs: <perf_dir>/<prefix>r<round>__<rev>__<view>__<forest|empty|mix>/profile.csv (mix = run_hf_perf.ps1 -MixRev; also reported as
-mix - empty and mix - forest).
+Runs: <perf_dir>/<prefix>r<round>__<rev>__<view>__<forest|empty|mix>/profile.csv (mix = run_hf_perf.ps1 -MixRev, x<rev> = -ExtraRevs;
+every extra condition is also reported minus empty and minus forest).
 Still views: median of GPUTime / FrameTime / GPU/<pass> over frames 60-209 (GPU/<pass> columns stop updating after ~209 frames on heavy
 levels, PR #31). Flight: GPUTime / FrameTime median and p95 over CSV rows 20-620 (auto-play sequence, fixed 60 fps step; boot offset not
 measured, see tools/treegen/flight_perf_analyze.py). Forest cost = forest - empty of the same round and view; mean [min..max] over rounds.
@@ -56,7 +56,8 @@ for d in sorted(os.listdir(root)):
         m = {k: {"median": round(float(np.nanmedian(v[w])), 2)} for k, v in c.items()}
     runs[d] = {"round": rnd[len(prefix):], "rev": rev, "view": view, "cond": cond, "rows": int(len(c["FrameTime"])), "stats": m}
 
-PAIRS = (("forest", "empty"), ("mix", "empty"), ("mix", "forest"))  # (a, b) -> a - b of the same round and view
+CONDS = sorted({r["cond"] for r in runs.values()} - {"empty", "forest"})
+PAIRS = (("forest", "empty"),) + tuple((c, b) for c in CONDS for b in ("empty", "forest"))  # (a, b) -> a - b of the same round and view
 delta = defaultdict(lambda: defaultdict(lambda: defaultdict(list)))
 absval = defaultdict(lambda: defaultdict(list))
 for d, r in runs.items():
@@ -80,7 +81,7 @@ for view in absval:
     summary[view]["absolute"] = {k: round(float(np.mean(v)), 2) for k, v in absval[view].items()}
 json.dump({"runs": runs, "summary": summary}, open(out, "w", encoding="utf-8"), indent=1)
 for view, s_ in summary.items():
-    for pair in ("forest_minus_empty", "mix_minus_empty", "mix_minus_forest"):
+    for pair in ["forest_minus_empty"] + ["%s_minus_%s" % (c, b) for c in CONDS for b in ("empty", "forest")]:
         g = s_.get(pair, {}).get("GPUTime.median")
         if g:
             print(view, pair, "GPU median %.2f [%.2f..%.2f] ms (n=%d)" % (g["mean"], g["min"], g["max"], g["n"]))
