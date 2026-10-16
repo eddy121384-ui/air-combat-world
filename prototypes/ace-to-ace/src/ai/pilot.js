@@ -64,7 +64,11 @@ export class PilotAI {
     this.extendCooldown = 0;
     this.breakSide = 0;
     this.jinkT = 0;
-    this.brakeT = 0;
+    this.brakeTrap = null;
+    this.brakeAttempts = 0;
+    this.brakeSuccesses = 0;
+    this.lastBrakeT = -99;
+    this.onTactic = opts.onTactic || null;
     this.burstT = 0;
     this.holdAfterShot = 0;
     this.flareAt = null;
@@ -345,6 +349,9 @@ export class PilotAI {
       case 'ATTACK': cmd = this.doAttack(S, dt); break;
       default: cmd = this.doEngage(S);
     }
+    // The pass can change our strategic mode; finish the tactical action only if safe.
+    const trapCmd = this.brakeTrapCommand(S, match);
+    if (trapCmd) cmd = trapCmd;
     cmd = this.safety(cmd, S);
     const out = this.steer(cmd.dir, cmd.g ?? 1, cmd);
     this.throttle(out, cmd);
@@ -355,6 +362,7 @@ export class PilotAI {
       aspect: S.aspect / DEG, vc: S.vc, dE: S.dE, aggr: this.aggr, pk: S.pk, speed: me.speed,
       g: me.nCur, stale: this.stale.flag ? this.stale.breaker : '', maneuver: cmd.name || '',
       threats: S.threats.length, flares: me.flares, missiles: me.missiles, oppEvades: this.oppEvades,
+      brakeTrap: this.brakeTrap?.phase || '', brakeAttempts: this.brakeAttempts, brakeSuccesses: this.brakeSuccesses,
     };
     return out;
   }
@@ -456,23 +464,19 @@ export class PilotAI {
     let name = 'break turn';
     let speed = S.corner;
     let g = sk.gUse;
-    let brake = false;
     // nose-low break uses gravity when there's altitude to spare
     if (me.pos.y > 2200) dir = addScaled(dir, UP, -0.35);
     // big energy edge: go vertical where a slower bandit can't follow
     if (S.dE > 900 && me.speed > S.corner && S.R > 700) {
       dir = add(scale(UP, 2), scale(side, 0.6)); name = 'vertical escape'; speed = 400;
     }
-    // glued or overtaking pursuer at close range: brake hard + go out of plane to force
-    // an overshoot, then reverse. Classic defensive BFM; costs energy, so not spammed.
-    const glued = S.R < 600 && S.vc > -15 && S.tgtAta < 25 * DEG && me.speed > 115;
-    if (glued && this.brakeT <= 0 && this.t - (this.lastBrakeT ?? -99) > 6 && this.rng() < sk.smart * dt * 2 && this.useTactic('brake', 6)) {
-      this.brakeT = 1.6; this.lastBrakeT = this.t;
-    }
-    if (this.brakeT > 0) {
-      this.brakeT -= dt; brake = true; name = 'brake: force overshoot';
-      dir = add(scale(side, 1.2), scale(UP, 1.4));
-      if (S.R < 120 || S.tgtAta > 60 * DEG) this.brakeT = 0;
+    // Trigger only if a *faster* pursuer really closes from behind.
+    if (!this.brakeTrap && this.canBrakeTrap(S)) {
+      this.brakeTrap = { phase: 'brake', start: this.t, forward: { ...f } };
+      this.lastBrakeT = this.t;
+      this.brakeAttempts++;
+      this.transitions.push({ t: this.t, from: 'DEFEND', to: 'DEFEND', why: 'brake trap: faster pursuer from six' });
+      if (this.onTactic) this.onTactic({ type: 'brakeStart', time: this.t, range: S.R });
     }
     // inside gun range: jink (periodic reversals) to spoil the solution
     if (S.R < 1000 && S.tgtAta < 12 * DEG) {
@@ -480,7 +484,60 @@ export class PilotAI {
       if (this.jinkT <= 0) { this.jinkT = this.rng.range(0.7, 1.4); this.jinkSign = -(this.jinkSign || 1); }
       if (this.jinkSign < 0) { dir = add(scale(side, -1.5), addScaled(f, UP, 0.6)); name = 'guns jink'; }
     }
-    return { dir, g, speed, name, brake, nose: false };
+    return { dir, g, speed, name, nose: false };
+  }
+
+  // Airbrake overshoot: shared physical limits, no forced animation or scripted win.
+  canBrakeTrap(S) {
+    const me = this.ac;
+    return this.mode === 'DEFEND' && !this.brakeTrap && this.t - this.lastBrakeT > 18 &&
+      S.threats.length === 0 && S.R > 150 && S.R < 700 &&
+      S.ata > 115 * DEG && S.tgtAta < 25 * DEG &&
+      S.vc > 35 && S.tg.speed > me.speed + 32 &&
+      me.speed > 135 && me.pos.y > 700 && this.useTactic('brakeTrap', 6);
+  }
+
+  brakeTrapCommand(S, match) {
+    const trap = this.brakeTrap;
+    if (!trap) return null;
+    // Missile evasion and survival override showmanship.
+    if (this.mode === 'EVADE' || S.threats.length || !this.ac.alive) {
+      this.brakeTrap = null;
+      return null;
+    }
+    if (trap.phase === 'brake') {
+      // Confirm that the pursuer crossed the defender's ORIGINAL forward plane.
+      // Otherwise a defender rolling its own nose cannot create a fake reversal.
+      const passed = dot(sub(S.tg.pos, this.ac.pos), trap.forward) > 60 && S.R < 1000;
+      if (passed) {
+        trap.phase = 'reverse';
+        trap.reversedAt = this.t;
+        this.brakeSuccesses++;
+        this.transitions.push({ t: this.t, from: this.mode, to: this.mode, why: 'brake trap: observed actual overshoot' });
+        this.say('reversal', match, true);
+        if (this.onTactic) this.onTactic({ type: 'overshoot', time: this.t, range: S.R });
+      } else if (this.t - trap.start > 1.8 || this.ac.speed < 105) {
+        // Failed trap costs energy; no success notification and no free reversal.
+        this.brakeTrap = null;
+        return null;
+      }
+    }
+    if (trap.phase === 'reverse') {
+      if (this.t - trap.reversedAt > 2.5 || S.R > 1700) {
+        this.brakeTrap = null;
+        return null;
+      }
+      const lead = addScaled(S.tg.pos, S.tg.vel, clamp(S.R / 750, 0, 1.1));
+      return { dir: sub(lead, this.ac.pos), g: this.skill.gUse, speed: S.corner * 1.1,
+        name: 'brake trap: reverse pursuit', nose: true };
+    }
+    const f = S.f, toward = norm(sub(S.tg.pos, this.ac.pos));
+    let side = perp(toward, f);
+    if (len(side) < 0.15) side = rightOf(this.ac.q);
+    side = norm(side);
+    return { dir: add(add(scale(f, 0.9), scale(side, 0.55)), scale(UP, 0.2)),
+      g: this.skill.gUse, speed: S.corner * 0.9, brake: true,
+      name: 'brake trap: baiting overshoot', nose: false };
   }
 
   doEvade(S, match) {
