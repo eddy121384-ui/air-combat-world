@@ -80,6 +80,26 @@ def _iter_polygons(geom: dict):
         yield from geom["coordinates"]
 
 
+def _finite_optional_number(value):
+    if value is None or isinstance(value, bool):
+        return None
+    try:
+        number = float(value)
+    except (TypeError, ValueError):
+        return None
+    return number if math.isfinite(number) else None
+
+
+def _normalized_floors(value):
+    number = _finite_optional_number(value)
+    if number is None or number < 1 or number > 150:
+        return None
+    rounded = int(round(number))
+    if not math.isclose(number, rounded, rel_tol=0.0, abs_tol=1.0e-6):
+        return None
+    return rounded
+
+
 def build_worldmodel(sample_geojson: Path, city_yaml: Path, source_crs: str = "EPSG:4326") -> dict:
     """Normalize sample buildings to WorldModel v0 records.
 
@@ -105,6 +125,9 @@ def build_worldmodel(sample_geojson: Path, city_yaml: Path, source_crs: str = "E
         if not isinstance(height, (int, float)) or not math.isfinite(height) or height <= 0:
             continue  # invalid heights never enter the WorldModel
         fid = str(f.get("id", f"noid-{len(buildings)}"))
+        floors = _normalized_floors(props.get("floors"))
+        ground_elev_m = _finite_optional_number(props.get("ground_elev_m"))
+        top_elev_m = _finite_optional_number(props.get("top_elev_m"))
         polys = []
         for polygon_index, poly in enumerate(_iter_polygons(f["geometry"])):
             outer_source = poly[0]
@@ -150,6 +173,9 @@ def build_worldmodel(sample_geojson: Path, city_yaml: Path, source_crs: str = "E
             "id": fid,
             "height_m": float(height),
             "height_source": props.get("height_source"),
+            "floors": floors,
+            "ground_elev_m": ground_elev_m,
+            "top_elev_m": top_elev_m,
             "source": "taipei_wfs_tp_building_height",
             "origin_lonlat": [lon0, lat0],
             "polygons": polys,
