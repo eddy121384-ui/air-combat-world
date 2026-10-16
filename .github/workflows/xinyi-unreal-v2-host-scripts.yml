@@ -129,6 +129,7 @@ jobs:
           for token in required:
               assert token in text, token
           forbidden = (
+              "get_actor_descs_for_actors",
               "save_current_level",
               "save_asset",
               "spawn_actor",
