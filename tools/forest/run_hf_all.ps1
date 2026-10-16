@@ -3,6 +3,7 @@
 #   run_hf_all.ps1 -Rev m1 -Instances instances_mix.json   (mix v0 = Mix D: form A on the D balanced chain)
 #   run_hf_all.ps1 -Rev m2 -Instances instances_mix.json -AChain C -Renders stills_forest,stills_empty,flight_forest,flight_empty   (Mix C)
 # 1 hf_build (content + maps)  2 hf_verify (fresh process, fail-closed persisted-material gate)  3 hf_mrq_configs  4 MRQ renders
+# NOTE: native frames are ~0.3-1.5 GB per movie folder; D: filled up once (see tools/forest/prune_hf_movies.ps1 - run it after the analysis scripts).
 param([Parameter(Mandatory)][ValidatePattern('^[rm][0-9]+$')][string]$Rev, [string]$Instances = 'instances.json',
       [ValidateSet('C', 'D', 'S', 'T')][string]$AChain = 'D', [string[]]$Renders = @('stills_forest', 'stills_empty', 'flight_forest'), [string]$SunAz = '', [string]$SunEl = '', [switch]$SkipRenders)
 $ErrorActionPreference = 'Stop'
