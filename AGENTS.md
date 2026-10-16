@@ -1,150 +1,59 @@
-# AGENTS.md
+# Skyfront Homeland — Agent Guide
 
-## Read this before touching Taipei / Xinyi city generation
+Applies repo-wide to Claude Code, Codex, and other coding agents. Keep this file short; task-specific contracts belong in `docs/`.
 
-The current production-candidate geometry method is documented in:
+## Start with the current state
 
-1. `docs/architecture/xinyi-citygen-v2.md`
-2. `docs/architecture/xinyi-citygen-guardrails.md`
-3. `docs/xinyi-v2-full-xinyi-cloud-result.md`
-4. `docs/architecture/xinyi-whitebox-preview-pipeline.md`
-5. `docs/xinyi-v2-whitebox-preview-status.md`
-6. `docs/architecture/xinyi-terrain-integration-plan.md`
-7. `docs/xinyi-v2-serialization-space-result.md` — historical representative evidence
+- This is a mobile-first air-combat game; Unreal Engine 5.8 and Taipei/Xinyi are active development tracks.
+- Inspect the current branch, working tree, relevant issues/PRs, and latest test evidence before changing anything.
+- Treat dated status reports as evidence, not timeless instructions; never promote a historical FAIL to PASS.
+- For city geometry, read `docs/architecture/xinyi-citygen-v2.md` and `docs/architecture/xinyi-citygen-guardrails.md`.
+- For terrain/placement, read `docs/architecture/xinyi-terrain-integration-plan.md` and newer accepted evidence.
 
-These documents override older experimental assumptions for city geometry work.
+## Engineering style
 
-## Current validated status
+- Do the smallest change that solves the assigned problem. Prefer established libraries and existing scripts.
+- Avoid speculative refactors, new abstractions, elaborate harnesses, and unrelated cleanup.
+- Do not expand scope or change accepted geometry, art, runtime policy, or test thresholds without justification and approval.
+- Keep reproducible inputs, provenance, source hashes, and useful failure evidence.
+- Do not weaken QA, add building-specific exceptions, or tune acceptance criteria merely to pass a gate.
 
-As of commit `4438d82fe2006710b0fda08e8a06989fba4c09a8`, workflow run
-`35557915078` passed the complete cloud gate:
+## Branches, worktrees, and concurrent agents
 
-- locked representative geometry: PASS;
-- full Xinyi numerical/GLB gate: PASS twice with identical deterministic hashes;
-- 11,128 ordinary source polygon parts accounted for and emitted;
-- 8 hero-suppressed source parts;
-- 25 deterministic 500 m tiles;
-- 485,936 triangles;
-- Blender 5.2.0 LTS imported all 25 tiles / 11,130 mesh components: PASS;
-- zero-area, non-manifold, winding, cap-normal, wall, nonfinite, volume and tile-transform errors: all 0.
+- Work on the assigned branch/worktree; use a separate branch for unrelated work. Do not merge PRs without authorization.
+- Before host-heavy work, check for other Unreal processes and concurrent sessions.
+- Do not reset, stash, discard, overwrite, or delete another agent's files, builds, or worktree.
+- Protect accepted Unreal world assets, source GLBs, manifests, and local Git stashes, including uncommitted assets.
+- If required input is missing or ownership is unclear, stop and ask instead of regenerating or restoring blindly.
 
-The next gate is **Unreal XinyiV2 import / performance validation**. Do not restart the geometry
-research unless a source/dependency/policy change invalidates the evidence above.
+## Validation and reporting
 
-## Non-negotiable rules
+- Run proportionate tests for the change; distinguish local tests, CI, packaged Unreal runtime, visual QA, and performance.
+- A test PASS proves only the gate it actually exercised. Record failures, unknowns, contamination, and inherited evidence explicitly.
+- Predefine bounded repeat tests when diagnosing intermittent failures; do not retry until green or change rules after failures.
+- Keep PRs Draft while their required acceptance gates remain open; never claim unverified correctness or performance.
+- Report concise results: changed files, commit/PR, tests, unresolved risks, and next action.
 
-- Do **not** use the pinned EPSG:4326 snapshot as production geometry input. It is forensic / regression evidence only.
-- Production input must preserve projected-coordinate precision. The validated route is EPSG:3826 -> pyproj -> WorldModel / ENU.
-- Ordinary buildings are owned by deterministic 500 m ENU tiles.
-- Convert repaired footprints to tile-local coordinates and quantize their horizontal coordinates through float32 **before triangulation**.
-- Revalidate the quantized footprint with GEOS before meshing.
-- Production cap triangulation uses **GEOS constrained Delaunay triangulation** via Shapely.
-- Trimesh owns extrusion / mesh assembly / GLB export. Mapbox-earcut remains only as a historical regression dependency and must not be silently restored as the production triangulator.
-- Preserve holes / courtyards and multipart provenance.
-- Never add per-building fixes, hidden skips, hand-edited footprints, deleted triangles, or building-ID-specific exceptions to make a gate pass.
-- Never relax a QA tolerance after seeing a failing building unless the tolerance change is independently justified and applied globally.
-- A generated mesh is not accepted merely because it is watertight or has positive volume. Run the strict geometry gates.
-- Full-Xinyi generation must fail closed on any unaccounted or failed source part.
-- Unreal import is downstream of geometry validation. Do not use Unreal to hide or repair source/mesh defects.
-- Preserve historical evidence and the legacy compiler/assets unless a separate migration task explicitly removes them.
+## Xinyi production invariants
 
-## Mandatory validation order
+- Production building inputs use precision-preserving EPSG:3826 → ENU, not the coarse EPSG:4326 forensic snapshot.
+- Preserve deterministic 500 m tile ownership, holes/courtyards, hero suppression, and full source-part accounting.
+- Float32-quantize tile-local footprints before GEOS revalidation and constrained Delaunay triangulation.
+- Validate actual exported GLBs and Blender-imported meshes before Unreal; do not repair upstream defects inside Unreal.
+- Source, CRS, dependency, tile, or QA-policy changes require the regression gates specified by the citygen guardrails.
 
-For representative or full-city work:
+## Unreal build and disk hygiene
 
-```text
-projected source
--> GEOS repair
--> deterministic 500 m tile ownership
--> tile-local coordinates
--> float32 serialization-space quantization
--> GEOS revalidation
--> GEOS constrained Delaunay triangulation
--> trimesh extrusion
--> actual GLB export + reload
--> strict QA
--> Blender 5.2 headless imported-mesh QA + overview renders
--> only then Unreal
-```
+- Check available disk space and estimate peak temporary usage before large Cook/Build/test batches.
+- Reuse hash-verified packages; avoid repeated gigabyte-scale copies. Hardlink only immutable payloads on the same volume.
+- Keep per-run writable `Saved`, logs, and receipts separate; never modify a shared hardlinked package in place.
+- After a batch, retain necessary raw evidence and at least one verified reproducible package for an active gate.
+- Inventory obsolete duplicate packages, staged builds, and temporary Cook outputs; clean only confirmed-safe artifacts.
+- Check active processes, other worktrees, hardlink references, and protected-file hashes before deletion.
+- Do not silently purge accepted assets, source data, stashes, historical evidence, or shared caches.
+- Report disk space reclaimed and what was deliberately retained; do not rebuild merely to verify a cleanup.
 
-Historical evidence that must remain understandable:
+## Handoff
 
-- `3b963a4`: 76/80 after post-triangulation float32 cast — proves serialization-space meshing is required.
-- `cc057996...`: 80/80 representative serialization-space PASS using earcut.
-- Full-Xinyi earcut cloud run: numerical PASS but Blender exposed 5 degenerate sliver triangles.
-- `4438d82...`: production switched to GEOS constrained Delaunay; full numerical + Blender gate PASS.
-- Blender signed volume is accumulated after recentering vertices around a local reference origin. This is a numerically stable, translation-invariant calculation, not a tolerance relaxation.
-
-## Whitebox preview and terrain are separate layers
-
-The current district whitebox preview consumes the already validated 25 Full-Xinyi GLB tiles.
-
-It is a visualization layer, not a second production geometry path.
-
-- Preview workflow: `.github/workflows/xinyi-preview.yml`
-- Preview renderer: `tools/preview/xinyi_blender_preview.py`
-- Preview contract: `docs/architecture/xinyi-whitebox-preview-pipeline.md`
-- Terrain candidate result: `docs/xinyi-terrain-v0-dtm-result.md`
-- Current visible milestone: `docs/xinyi-v2-whitebox-preview-status.md`
-
-The original building-only whitebox did not contain terrain. Terrain v0 now has a passing
-candidate using a cloud-readable derivative mirror of the official MOI 2025 bare-earth 20 m DTM.
-
-The earlier Copernicus GLO-30 DSM prototype is rejected as urban ground because its surface sat
-roughly +17 m above surveyed building ground at the median. Do not restore it as production terrain.
-
-The accepted candidate terrain uses the same Xinyi ENU / 500 m tile contract and a single documented
-vertical-datum alignment. Blender-imported building bases are measured in world Z and snapped to
-surveyed WFS `ground_elev_m`, with a fail-closed base-Z regression guard.
-
-See `docs/xinyi-terrain-v0-dtm-result.md` and
-`docs/architecture/xinyi-terrain-integration-plan.md`.
-
-The building meshes remain immutable. Terrain integration may add terrain geometry and a documented
-building world-Z offset policy, but it must not remesh ordinary buildings or introduce
-building-specific Z hacks.
-
-There are now two downstream tracks:
-
-- **world-completeness track:** MOI 2025 bare-earth DTM derivative source audit -> 25 terrain tiles -> surveyed building base-Z anchoring -> terrain + building preview — PASS candidate;
-- **engine track:** isolated Unreal `XinyiV2` import / placement / performance validation.
-
-Do not confuse a preview render failure with a geometry-gate failure, and do not treat an attractive
-preview as evidence that geometry or Unreal runtime validation has passed.
-
-## Historical branches / PRs
-
-- PR #3: older custom-geometry experiment. Do not treat it as the production path.
-- PR #6: Xinyi robust whitebox v2 production-candidate work.
-- PR #7: forensic audit of the coarse pinned EPSG:4326 source. Useful QA evidence, not a production replacement.
-
-When old reports disagree with `docs/xinyi-v2-full-xinyi-cloud-result.md`, use the newer full-Xinyi
-validated method unless an even newer documented gate explicitly supersedes it.
-
-## Source / policy drift
-
-If the WFS response, source hash, CRS, height semantics, dependency versions, tile policy,
-coordinate transform, triangulation policy, or strict QA logic changes, do not silently continue
-city expansion. Re-run the locked representative gate and full-Xinyi regression gate before
-trusting the change.
-
-## Hero buildings
-
-Keep hero suppression separate from ordinary-building geometry. Do not duplicate the Taipei 101
-ordinary-source records underneath the hero asset. The existing known hero anchor and 508 m
-reference must not be silently changed by ordinary city generation.
-
-## Scope discipline
-
-Current sequence:
-
-1. representative geometry — PASS
-2. full Xinyi numerical / serialization gate — PASS
-3. Blender full-area cloud QA — PASS
-4. building-only Xinyi whitebox preview — AVAILABLE
-5. terrain source / tile / building-elevation integration — NEXT WORLD-COMPLETENESS LAYER
-6. Unreal XinyiV2 import / placement / performance spike — NEXT ENGINE GATE
-7. only after these contracts are stable, scale the same tile pipeline toward wider Taipei
-
-Do not mix facade polish, materials, gameplay, Taipei-wide expansion, or production-tool winner
-decisions into the Unreal import gate unless the task explicitly asks for them.
+- Leave the repository understandable: scope, status, exact verification, known failures, and how to resume.
+- Prefer a short PR/issue update over another large process document.
