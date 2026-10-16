@@ -1,0 +1,78 @@
+{
+ "stats": {
+  "trees": 3,
+  "ground_m": 12.671875
+ },
+ "h_ref_m": 96.0,
+ "instances": [
+  {
+   "id": 0,
+   "form": "A",
+   "variant": 0,
+   "x_m": -446.0,
+   "y_m": -324.0,
+   "z_m": 12.297,
+   "ue_cm": [
+    -44600.0,
+    32400.0,
+    -8370.3
+   ],
+   "yaw_deg": 0.0,
+   "lean_east_deg": 0.0,
+   "lean_north_deg": 0.0,
+   "scale_xy": 1.0,
+   "scale_x": 1.0,
+   "scale_y": 1.0,
+   "scale_z": 1.0,
+   "crown_r_m": 7.0,
+   "sphere_r_m": 8.377,
+   "crown_z_m": 7.1
+  },
+  {
+   "id": 1,
+   "form": "B",
+   "variant": 3,
+   "x_m": -424.0,
+   "y_m": -324.0,
+   "z_m": 12.422,
+   "ue_cm": [
+    -42400.0,
+    32400.0,
+    -8357.8
+   ],
+   "yaw_deg": 0.0,
+   "lean_east_deg": 0.0,
+   "lean_north_deg": 0.0,
+   "scale_xy": 1.0,
+   "scale_x": 1.0,
+   "scale_y": 1.0,
+   "scale_z": 1.0,
+   "crown_r_m": 7.0,
+   "sphere_r_m": 9.067,
+   "crown_z_m": 6.07
+  },
+  {
+   "id": 2,
+   "form": "C",
+   "variant": 5,
+   "x_m": -402.0,
+   "y_m": -324.0,
+   "z_m": 12.516,
+   "ue_cm": [
+    -40200.0,
+    32400.0,
+    -8348.4
+   ],
+   "yaw_deg": 180.0,
+   "lean_east_deg": 0.0,
+   "lean_north_deg": 0.0,
+   "scale_xy": 1.0,
+   "scale_x": 1.0,
+   "scale_y": 1.0,
+   "scale_z": 1.0,
+   "crown_r_m": 7.0,
+   "sphere_r_m": 8.22,
+   "crown_z_m": 6.69
+  }
+ ]
+}

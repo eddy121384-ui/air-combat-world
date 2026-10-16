@@ -1,0 +1,16 @@
+{
+  "status": "PASS_AC_TUNE",
+  "error": null,
+  "before": {
+    "dither_opacity_mask": false,
+    "opacity_mask_clip_value": 0.4000000059604645,
+    "do_scale_mips_for_alpha_coverage": true
+  },
+  "after": {
+    "dither_opacity_mask": true,
+    "opacity_mask_clip_value": 0.4000000059604645,
+    "do_scale_mips_for_alpha_coverage": true,
+    "alpha_coverage_threshold_a": 0.4,
+    "used_with_instanced_static_meshes": true
+  }
+}

@@ -1,6 +1,6 @@
-"""Contact sheets for review: iteration history and the final view set (PIL, run with the project venv).
+﻿"""Contact sheets for review: iteration history and the final view set (PIL, run with the project venv).
 
-python tools/treegen/make_sheets.py <machilus_out_dir> <evidence_dir>
+python tools/treegen/make_sheets.py <machilus_out_dir> <evidence_dir> [sheet_stem=machilus]
 """
 import os
 import sys
@@ -8,6 +8,7 @@ import sys
 from PIL import Image, ImageDraw, ImageFont
 
 src, dst = sys.argv[1], sys.argv[2]
+stem = sys.argv[3] if len(sys.argv) > 3 else "machilus"
 os.makedirs(dst, exist_ok=True)
 try:
     font = ImageFont.truetype("arial.ttf", 22)
@@ -36,7 +37,7 @@ for r, it in enumerate(its):
             continue
         im = Image.open(p).convert("RGB").resize((W, H), Image.LANCZOS)
         sheet.paste(label(im, f"{it} {v}"), (c * W, r * H))
-sheet.save(os.path.join(dst, "machilus_iterations_sheet.jpg"), quality=88)
+sheet.save(os.path.join(dst, f"{stem}_iterations_sheet.jpg"), quality=88)
 print("iterations:", its)
 
 # final set: native-resolution JPEGs + turntable sheet

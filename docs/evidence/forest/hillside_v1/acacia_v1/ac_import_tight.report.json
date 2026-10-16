@@ -1,0 +1,109 @@
+{
+  "status": "PASS_AC_IMPORT",
+  "textures": {},
+  "materials": {},
+  "error": null,
+  "import_lods": {
+    "1": 1,
+    "2": 2,
+    "3": 3
+  },
+  "asset": "/Game/HillsideForest/Trees/AcaciaTight/acacia_acacia_tight_lod0/StaticMeshes/acacia_acacia_tight_lod0",
+  "mesh": {
+    "lods": 4,
+    "screens": [
+      1.0,
+      0.5,
+      0.15,
+      0.06
+    ],
+    "triangles": [
+      38156,
+      16752,
+      1477,
+      452
+    ],
+    "vertices": [
+      60869,
+      29054,
+      1697,
+      671
+    ],
+    "sections": [
+      2,
+      2,
+      2,
+      2
+    ],
+    "section_slots": [
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        1
+      ]
+    ],
+    "slots": [
+      "Bark=/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+      "LeafCards=/Game/TreeLookdev/Materials/M_TL_AcaciaW_LeafCards"
+    ],
+    "sphere_radius_cm": 807.3078246084605,
+    "bounds_origin_cm": [
+      57.678741455078125,
+      -12.371856689453125,
+      671.7505602836609
+    ],
+    "bounds_extent_cm": [
+      735.1061096191406,
+      628.2983093261719,
+      685.3328137397766
+    ]
+  },
+  "leaf_defaults": {
+    "TintLo": [
+      0.86,
+      0.88,
+      0.8
+    ],
+    "TintHi": [
+      1.14,
+      1.1,
+      0.96
+    ],
+    "OcclMin": 0.3,
+    "Brightness": 0.42,
+    "SSSColor": [
+      0.8,
+      0.95,
+      0.3
+    ],
+    "SSS": 0.45,
+    "NormalFlatten": 0.4,
+    "Roughness": 0.7,
+    "Specular": 0.18
+  },
+  "bark_defaults": {
+    "TwigColor": [
+      0.07,
+      0.045,
+      0.025
+    ],
+    "BarkBrightness": 0.5,
+    "Roughness": 0.9
+  },
+  "dest": "/Game/HillsideForest/Trees/AcaciaTight",
+  "profile": "acacia_tight",
+  "mesh_only": true,
+  "leaf_tag": null,
+  "clip": 0.4
+}

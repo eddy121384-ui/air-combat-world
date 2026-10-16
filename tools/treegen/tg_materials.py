@@ -1,6 +1,8 @@
-"""Procedural materials for the golden-reference trees (Cycles). All patterns are UV-driven so they can
+﻿"""Procedural materials for the golden-reference trees (Cycles). All patterns are UV-driven so they can
 later be baked to game textures. Colours are linear-RGB values chosen against reference photos."""
 from __future__ import annotations
+
+import math
 
 import bpy
 
@@ -222,7 +224,151 @@ def leaf(
     return m
 
 
+def phyllode(
+    name="M_Phyllode",
+    upper=(0.05, 0.092, 0.015),
+    upper_var=(0.11, 0.15, 0.026),
+    young=(0.13, 0.17, 0.045),
+    vein=(0.07, 0.1, 0.03),
+    trans=(0.26, 0.3, 0.035),
+    rough=0.52,
+    trans_w=0.38,
+):
+    """相思樹 phyllode: isobilateral (both faces alike, the back only a little paler and rougher), matte-satin, lighter and
+    yellower than the 紅楠 leaf; 3 faint parallel longitudinal veins instead of a midrib + chevrons; young tips pale lime."""
+    m, nt, out = _new(name)
+    tc = nt.nodes.new("ShaderNodeTexCoord")
+    sep = _n(nt, "ShaderNodeSeparateXYZ", (-1100, 300))
+    nt.links.new(tc.outputs["UV"], sep.inputs[0])
+    a_rand = nt.nodes.new("ShaderNodeAttribute")
+    a_rand.attribute_name = "leaf_rand"
+    a_age = nt.nodes.new("ShaderNodeAttribute")
+    a_age.attribute_name = "leaf_age"
+    a_tint = nt.nodes.new("ShaderNodeAttribute")
+    a_tint.attribute_type = "INSTANCER"
+    a_tint.attribute_name = "tint"
+    vsum = _n(nt, "ShaderNodeMath", (-850, 0))
+    vsum.operation = "MULTIPLY_ADD"
+    nt.links.new(a_rand.outputs["Fac"], vsum.inputs[0])
+    vsum.inputs[1].default_value = 0.55
+    nt.links.new(a_tint.outputs["Fac"], vsum.inputs[2])
+    vclamp = _n(nt, "ShaderNodeClamp", (-650, 0))
+    nt.links.new(vsum.outputs[0], vclamp.inputs["Value"])
+    up_mix = _n(nt, "ShaderNodeMix", (-450, 100))
+    up_mix.data_type = "RGBA"
+    nt.links.new(vclamp.outputs[0], up_mix.inputs["Factor"])
+    up_mix.inputs[6].default_value = (*upper, 1)
+    up_mix.inputs[7].default_value = (*upper_var, 1)
+    # parallel veins: |sin(3 pi v)| peaks at v = 1/6, 1/2, 5/6 -> thin lines along the blade
+    vm = _n(nt, "ShaderNodeMath", (-850, 400))
+    vm.operation = "MULTIPLY"
+    nt.links.new(sep.outputs["Y"], vm.inputs[0])
+    vm.inputs[1].default_value = 3 * math.pi
+    vs = _n(nt, "ShaderNodeMath", (-700, 400))
+    vs.operation = "SINE"
+    nt.links.new(vm.outputs[0], vs.inputs[0])
+    va = _n(nt, "ShaderNodeMath", (-550, 400))
+    va.operation = "ABSOLUTE"
+    nt.links.new(vs.outputs[0], va.inputs[0])
+    vr = _n(nt, "ShaderNodeMapRange", (-400, 400))
+    vr.inputs["From Min"].default_value = 0.93
+    vr.inputs["From Max"].default_value = 1.0
+    vr.inputs["To Max"].default_value = 0.45
+    nt.links.new(va.outputs[0], vr.inputs["Value"])
+    with_vein = _n(nt, "ShaderNodeMix", (-200, 200))
+    with_vein.data_type = "RGBA"
+    nt.links.new(vr.outputs[0], with_vein.inputs["Factor"])
+    nt.links.new(up_mix.outputs[2], with_vein.inputs[6])
+    with_vein.inputs[7].default_value = (*vein, 1)
+    age_mix = _n(nt, "ShaderNodeMix", (0, 200))
+    age_mix.data_type = "RGBA"
+    nt.links.new(a_age.outputs["Fac"], age_mix.inputs["Factor"])
+    nt.links.new(with_vein.outputs[2], age_mix.inputs[6])
+    age_mix.inputs[7].default_value = (*young, 1)
+    geo = nt.nodes.new("ShaderNodeNewGeometry")
+    back = _n(nt, "ShaderNodeMix", (200, 100))
+    back.data_type = "RGBA"
+    nt.links.new(geo.outputs["Backfacing"], back.inputs["Factor"])
+    nt.links.new(age_mix.outputs[2], back.inputs[6])
+    nt.links.new(age_mix.outputs[2], back.inputs[7])
+    bright = _n(nt, "ShaderNodeMix", (350, 100))
+    bright.data_type = "RGBA"
+    bright.blend_type = "MULTIPLY"
+    nt.links.new(geo.outputs["Backfacing"], bright.inputs["Factor"])
+    nt.links.new(back.outputs[2], bright.inputs[6])
+    bright.inputs[7].default_value = (1.12, 1.12, 1.15, 1)
+    rr = _n(nt, "ShaderNodeMapRange", (350, -150))
+    nt.links.new(geo.outputs["Backfacing"], rr.inputs["Value"])
+    rr.inputs["To Min"].default_value = rough
+    rr.inputs["To Max"].default_value = rough + 0.1
+    bsdf = _n(nt, "ShaderNodeBsdfPrincipled", (550, 100))
+    nt.links.new(bright.outputs[2], bsdf.inputs["Base Color"])
+    nt.links.new(rr.outputs[0], bsdf.inputs["Roughness"])
+    bsdf.inputs["Specular IOR Level"].default_value = 0.3
+    tr = _n(nt, "ShaderNodeBsdfTranslucent", (550, -250))
+    tr.inputs["Color"].default_value = (*trans, 1)
+    mixs = _n(nt, "ShaderNodeMixShader", (750, 0), Fac=trans_w)
+    nt.links.new(bsdf.outputs[0], mixs.inputs[1])
+    nt.links.new(tr.outputs[0], mixs.inputs[2])
+    nt.links.new(mixs.outputs[0], out.inputs["Surface"])
+    return m
 
 
-
-
+def fissured_bark(
+    name="M_Bark_Fissured",
+    base=(0.07, 0.056, 0.044),
+    dark=(0.022, 0.018, 0.015),
+    pale=(0.12, 0.112, 0.098),
+    twig=(0.07, 0.052, 0.03),
+    twig_radius=(0.006, 0.022),
+):
+    """相思樹 bark: grey-brown with shallow, wandering LONGITUDINAL fissures (u wraps the circumference, v runs along the branch),
+    pale grey-lichen patches; thin shoots red-brown. (bark() keeps the 紅楠 lenticel look and is unchanged.)"""
+    m, nt, out = _new(name)
+    uv = nt.nodes.new("ShaderNodeTexCoord")
+    mott = _n(nt, "ShaderNodeTexNoise", (-650, 250), Scale=2.6, Detail=5.0, Roughness=0.6)
+    nt.links.new(uv.outputs["UV"], mott.inputs["Vector"])
+    mr = _ramp(nt, [(0.4, base), (0.62, pale)], (-400, 250))
+    nt.links.new(mott.outputs["Fac"], mr.inputs[0])
+    # fissures: bands across u (circumference), strongly distorted so they wander and anastomose along v
+    fmap = _n(nt, "ShaderNodeMapping", (-650, -50))
+    fmap.inputs["Scale"].default_value = (1.0, 0.18, 1.0)
+    nt.links.new(uv.outputs["UV"], fmap.inputs["Vector"])
+    wave = _n(nt, "ShaderNodeTexWave", (-450, -50), Scale=9.0, Distortion=7.0, Detail=4.0)
+    wave.bands_direction = "X"
+    wave.wave_profile = "SAW"
+    nt.links.new(fmap.outputs[0], wave.inputs["Vector"])
+    fis = _ramp(nt, [(0.0, (1, 1, 1)), (0.12, (0, 0, 0))], (-250, -50))
+    nt.links.new(wave.outputs["Fac"], fis.inputs[0])
+    mix = _n(nt, "ShaderNodeMix", (-50, 150))
+    mix.data_type = "RGBA"
+    nt.links.new(fis.outputs[0], mix.inputs["Factor"])
+    nt.links.new(mr.outputs[0], mix.inputs[6])
+    mix.inputs[7].default_value = (*dark, 1)
+    fine = _n(nt, "ShaderNodeTexNoise", (-450, -300), Scale=30.0, Detail=10.0, Roughness=0.65)
+    nt.links.new(uv.outputs["UV"], fine.inputs["Vector"])
+    hs = _n(nt, "ShaderNodeMath", (-200, -300))
+    hs.operation = "MULTIPLY_ADD"
+    nt.links.new(fis.outputs[0], hs.inputs[0])
+    hs.inputs[1].default_value = -1.0
+    nt.links.new(fine.outputs["Fac"], hs.inputs[2])
+    bump = _n(nt, "ShaderNodeBump", (100, -250), Strength=0.7, Distance=0.006)
+    nt.links.new(hs.outputs[0], bump.inputs["Height"])
+    a_r = nt.nodes.new("ShaderNodeAttribute")
+    a_r.attribute_name = "radius"
+    young = _n(nt, "ShaderNodeMapRange", (-50, 400))
+    young.inputs["From Min"].default_value = twig_radius[0]
+    young.inputs["From Max"].default_value = twig_radius[1]
+    young.inputs["To Min"].default_value = 1.0
+    young.inputs["To Max"].default_value = 0.0
+    nt.links.new(a_r.outputs["Fac"], young.inputs["Value"])
+    tmix = _n(nt, "ShaderNodeMix", (150, 250))
+    tmix.data_type = "RGBA"
+    nt.links.new(young.outputs[0], tmix.inputs["Factor"])
+    nt.links.new(mix.outputs[2], tmix.inputs[6])
+    tmix.inputs[7].default_value = (*twig, 1)
+    bsdf = _n(nt, "ShaderNodeBsdfPrincipled", (400, 0), Roughness=0.9)
+    nt.links.new(tmix.outputs[2], bsdf.inputs["Base Color"])
+    nt.links.new(bump.outputs[0], bsdf.inputs["Normal"])
+    nt.links.new(bsdf.outputs[0], out.inputs["Surface"])
+    return m
