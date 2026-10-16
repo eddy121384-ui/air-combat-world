@@ -67,6 +67,17 @@ double Percentile(TArray<double> Values, double Fraction)
     return FMath::Lerp(Values[Lower], Values[Upper], Position - Lower);
 }
 
+// The step-completion predicate, kept term by term for stall diagnosis.
+struct FStreamingPredicate
+{
+    bool bSourceObserved = false;
+    bool bSourceCompleted = false;
+    bool bAllCompleted = false;
+    int32 SourceCount = 0;
+    double NearestSourceCm = -1.0;
+    bool IsComplete() const { return bSourceObserved && bSourceCompleted && bAllCompleted; }
+};
+
 struct FStep
 {
     FString Id;
@@ -193,11 +204,26 @@ private:
             Source->EnableStreamingSource();
             StepAt = Now;
             CompleteSince = 0;
+            LastWaitLogAt = Now;
+            WaitTicks = FalseObservedTicks = FalseSourceCompletedTicks = FalseAllCompletedTicks = 0;
             Moving = true;
             UE_LOG(LogTemp, Display, TEXT("XINYI_COMPLEX_MOVE %s mode=%s"), *Step.Id, *Mode);
             return true;
         }
-        const bool Complete = IsStreamingComplete(Step.Source);
+        // Each term is evaluated separately so a stalled step records which one stayed false.
+        LastPredicate = EvaluateStreaming(Step.Source);
+        ++WaitTicks;
+        FalseObservedTicks += !LastPredicate.bSourceObserved;
+        FalseSourceCompletedTicks += !LastPredicate.bSourceCompleted;
+        FalseAllCompletedTicks += !LastPredicate.bAllCompleted;
+        if (Now - LastWaitLogAt >= 10.0)
+        {
+            LastWaitLogAt = Now;
+            UE_LOG(LogTemp, Display, TEXT("XINYI_COMPLEX_WAIT %s mode=%s wait_s=%.1f source_observed=%d source_completed=%d all_completed=%d sources=%d nearest_source_cm=%.3f"),
+                *Step.Id, *Mode, Now - StepAt, LastPredicate.bSourceObserved ? 1 : 0, LastPredicate.bSourceCompleted ? 1 : 0,
+                LastPredicate.bAllCompleted ? 1 : 0, LastPredicate.SourceCount, LastPredicate.NearestSourceCm);
+        }
+        const bool Complete = LastPredicate.IsComplete();
         CompleteSince = Complete ? (CompleteSince == 0 ? Now : CompleteSince) : 0;
         if (CompleteSince && Now - CompleteSince >= 0.25)
         {
@@ -209,6 +235,16 @@ private:
         }
         else if (Now - StepAt > 90.0)
         {
+            TSharedRef<FJsonObject> Stall = PredicateTicks();
+            Stall->SetStringField(TEXT("step_id"), Step.Id);
+            Stall->SetNumberField(TEXT("step_index"), Index);
+            Stall->SetNumberField(TEXT("wait_seconds"), Now - StepAt);
+            Stall->SetBoolField(TEXT("source_observed_at_target"), LastPredicate.bSourceObserved);
+            Stall->SetBoolField(TEXT("source_streaming_completed"), LastPredicate.bSourceCompleted);
+            Stall->SetBoolField(TEXT("subsystem_all_streaming_completed"), LastPredicate.bAllCompleted);
+            Stall->SetNumberField(TEXT("runtime_streaming_source_count"), LastPredicate.SourceCount);
+            Stall->SetNumberField(TEXT("nearest_runtime_source_cm"), LastPredicate.NearestSourceCm);
+            Report->SetObjectField(TEXT("step_timeout_diagnostics"), Stall);
             Finish(TEXT("FAIL_STEP_TIMEOUT"));
             return false;
         }
@@ -238,13 +274,30 @@ private:
         return Subsystem->IsStreamingSourceProviderRegistered(Source);
     }
 
-    bool IsStreamingComplete(const FVector& Position) const
+    FStreamingPredicate EvaluateStreaming(const FVector& Position) const
     {
-        bool Observed = false;
+        FStreamingPredicate Result;
         for (const FWorldPartitionStreamingSource& RuntimeSource : Partition->GetStreamingSources())
-            if (FVector::Distance(RuntimeSource.Location, Position) <= 1.0 &&
-                RuntimeSource.TargetState == EStreamingSourceTargetState::Activated) Observed = true;
-        return Observed && Source->IsStreamingCompleted() && Subsystem->IsAllStreamingCompleted();
+        {
+            const double Distance = FVector::Distance(RuntimeSource.Location, Position);
+            Result.NearestSourceCm = Result.SourceCount == 0 ? Distance : FMath::Min(Result.NearestSourceCm, Distance);
+            ++Result.SourceCount;
+            if (Distance <= 1.0 && RuntimeSource.TargetState == EStreamingSourceTargetState::Activated)
+                Result.bSourceObserved = true;
+        }
+        Result.bSourceCompleted = Source->IsStreamingCompleted();
+        Result.bAllCompleted = Subsystem->IsAllStreamingCompleted();
+        return Result;
+    }
+
+    TSharedRef<FJsonObject> PredicateTicks() const
+    {
+        TSharedRef<FJsonObject> Ticks = MakeShared<FJsonObject>();
+        Ticks->SetNumberField(TEXT("wait_ticks"), WaitTicks);
+        Ticks->SetNumberField(TEXT("source_observed_false_ticks"), FalseObservedTicks);
+        Ticks->SetNumberField(TEXT("source_completed_false_ticks"), FalseSourceCompletedTicks);
+        Ticks->SetNumberField(TEXT("all_completed_false_ticks"), FalseAllCompletedTicks);
+        return Ticks;
     }
 
     FString TileForActor(const AActor* Actor) const
@@ -328,6 +381,7 @@ private:
         Row->SetStringField(TEXT("kind"), Step.Kind);
         Row->SetNumberField(TEXT("streaming_wait_ms"), WaitMs);
         Row->SetBoolField(TEXT("streaming_completed"), true);
+        Row->SetObjectField(TEXT("streaming_predicate"), PredicateTicks());
         TSet<FString> Loaded;
         ApplyPolicyAndAudit(Loaded);
         Row->SetArrayField(TEXT("loaded_tiles"), StringSet(Loaded));
@@ -389,7 +443,7 @@ private:
         }
         if (DynamicPhase == 1)
         {
-            const bool Complete = IsStreamingComplete(DynamicSource);
+            const bool Complete = EvaluateStreaming(DynamicSource).IsComplete();
             CompleteSince = Complete ? (CompleteSince == 0 ? Now : CompleteSince) : 0;
             if (!(CompleteSince && Now - CompleteSince >= 0.25))
             {
@@ -490,6 +544,9 @@ private:
     FString DynamicExpectedTile;
     int32 Index = 0, DynamicPhase = 0;
     double StartedAt = 0, StepAt = 0, CompleteSince = 0, DynamicAt = 0, MaxStreamingWaitMs = 0;
+    double LastWaitLogAt = 0;
+    int32 WaitTicks = 0, FalseObservedTicks = 0, FalseSourceCompletedTicks = 0, FalseAllCompletedTicks = 0;
+    FStreamingPredicate LastPredicate;
     uint64 PeakProcessMemoryBytes = 0;
 };
 

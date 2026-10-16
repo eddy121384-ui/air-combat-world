@@ -35,8 +35,23 @@ def load_run(run: Path, mode: str):
     if host['mode']!=mode or raw['mode']!=mode or host['process_id']!=str(raw['process_id']):
         raise ValueError(f'{mode} process identity mismatch')
     if host['timed_out'] or host['exit_code']!=0 or raw['status']!='ENGINE_COMPLEX_CANDIDATE_COMPLETE':
-        raise ValueError(f'{mode} runtime did not complete')
+        raise ValueError(f'{mode} runtime did not complete: status={raw["status"]} '
+                         f'false_streaming_terms={streaming_stall_terms(raw)}')
     return raw,host,log_path
+
+
+STREAMING_TERMS=('source_observed_at_target','source_streaming_completed','subsystem_all_streaming_completed')
+
+
+def streaming_stall_terms(raw):
+    """Name the step-completion predicate terms that were false when a step timed out.
+
+    Diagnosis only: a stalled run is never eligible for PASS, whatever these terms say.
+    """
+    stall=raw.get('step_timeout_diagnostics')
+    if not isinstance(stall,dict) or any(not isinstance(stall.get(t),bool) for t in STREAMING_TERMS):
+        return ['unrecorded']
+    return [t for t in STREAMING_TERMS if not stall[t]]
 
 
 def summarize(raw,host,log_path):

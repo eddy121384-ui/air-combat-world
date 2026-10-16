@@ -9,6 +9,8 @@ on:
       - "tools/unreal_xinyi_v2/**"
       - "tests/test_unreal_xinyi_v2_host_gate_contract.py"
       - "tests/test_unreal_xinyi_v2_first_hit_oracle.py"
+      - "tests/test_unreal_xinyi_v2_complex_streaming_diagnostics.py"
+      - "unreal/Plugins/XinyiHostStreamingProbe/**"
       - ".github/workflows/xinyi-unreal-v2-host-scripts.yml"
   push:
     branches:
@@ -48,7 +50,7 @@ jobs:
       - name: Validate workstation host-gate contracts
         run: |
           python -m py_compile tools/unreal_xinyi_v2/first_hit_oracle.py tools/unreal_xinyi_v2/prepare_collision_plan.py tools/unreal_xinyi_v2/validate_complex_candidate.py tools/unreal_xinyi_v2/host_gate_common.py tools/unreal_xinyi_v2/snapshot_host_state.py tools/unreal_xinyi_v2/verify_snapshot_unchanged.py tools/unreal_xinyi_v2/prepare_streaming_route.py tools/unreal_xinyi_v2/validate_host_receipt.py tools/unreal_xinyi_v2/analyze_streaming_observations.py tools/unreal_xinyi_v2/validate_trace_observations.py tools/unreal_xinyi_v2/summarize_performance_capture.py adapters/unreal/audit_xinyi_v2_landscape_ownership.py
-          python -m pytest -q tests/test_unreal_xinyi_v2_host_gate_contract.py tests/test_unreal_xinyi_v2_first_hit_oracle.py
+          python -m pytest -q tests/test_unreal_xinyi_v2_host_gate_contract.py tests/test_unreal_xinyi_v2_first_hit_oracle.py tests/test_unreal_xinyi_v2_complex_streaming_diagnostics.py
 
       - name: Parse PowerShell gate scripts without executing them
         shell: pwsh
