@@ -3,6 +3,7 @@
 import assert from 'node:assert/strict';
 import { PilotAI } from '../src/ai/pilot.js';
 import { createAircraft } from '../src/sim/aircraft.js';
+import { Match } from '../src/sim/world.js';
 
 const fwd = { x: 0, y: 0, z: -1 };
 function fixture(skill = 'ace') {
@@ -84,4 +85,29 @@ function fixture(skill = 'ace') {
   assert.equal(ai.brakeSuccesses, 0, 'cancel ongoing trick for missile defense');
 }
 
-console.log('Brake trap: conditions, confirmation, false positives, timeout, cooldown, safety PASS');
+// Integration: no teleport/forced state. A recklessly fast pursuer can genuinely fly
+// past an AI J-16 in the shared stepAircraft() flight model.
+for (const gap of [180, 220, 280]) {
+  const match = new Match({
+    seed: 3,
+    blue: { type: 'F16V', name: 'fast pursuer' },
+    red: { type: 'J16', name: 'defender' },
+    spawn: {
+      blue: { pos: { x: 0, y: 2500, z: gap }, fwd, speed: 380 },
+      red: { pos: { x: 0, y: 2500, z: 0 }, fwd, speed: 190 },
+    },
+  });
+  match.setController(match.blue, {
+    update: () => ({ pitch: 0, roll: 0, yaw: 0, throttle: 1, boost: true,
+      brake: false, fireMissile: false, fireGun: false, flare: false }),
+  });
+  const defender = new PilotAI(match.red, { skill: 'ace', seed: 34 });
+  defender.mode = 'DEFEND';
+  match.setController(match.red, defender);
+  for (let i = 0; i < 180 && !defender.brakeSuccesses && !match.result; i++)
+    match.step(1 / 60);
+  assert.equal(defender.brakeAttempts, 1, 'defender should bait a reckless closer');
+  assert.equal(defender.brakeSuccesses, 1, 'real flight-model chase should allow an earned overshoot');
+}
+
+console.log('Brake trap: geometry, confirmation, timeout, cooldown, safety, physical integration PASS');
