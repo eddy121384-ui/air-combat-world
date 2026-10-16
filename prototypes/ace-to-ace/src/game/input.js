@@ -6,6 +6,7 @@ import { bankAngle, pitchAngle, pitchForG, neutralG, availableG } from '../sim/a
 export class Input {
   constructor(root) {
     this.stick = { x: 0, y: 0 };        // x: right +, y: up + (screen)
+    this.stickOffset = { x: 0, y: 0 }; // visual stick deflection persists after touch release
     this.keys = new Set();
     this.btn = { msl: false, gun: false, brake: false, flare: false, look: false, boost: false };
     this.pressed = new Set();           // one-shot presses this frame
@@ -47,10 +48,12 @@ export class Input {
       if (this.stickTouch != null) return;
       const t = e.changedTouches[0];
       this.stickTouch = t.identifier;
-      this.origin = { x: t.clientX, y: t.clientY };
-      base.style.left = `${t.clientX}px`; base.style.top = `${t.clientY}px`;
+      // Keep the last stick deflection. Re-anchor the floating base so a new
+      // touch continues from that value instead of snapping to neutral.
+      this.origin = { x: t.clientX - this.stickOffset.x, y: t.clientY - this.stickOffset.y };
+      base.style.left = `${this.origin.x}px`; base.style.top = `${this.origin.y}px`;
       base.classList.add('on');
-      setKnob(0, 0);
+      setKnob(this.stickOffset.x, this.stickOffset.y);
     }, { passive: false });
     const move = (e) => {
       for (const t of e.changedTouches) {
@@ -59,6 +62,7 @@ export class Input {
         let dx = t.clientX - this.origin.x, dy = t.clientY - this.origin.y;
         const l = Math.hypot(dx, dy);
         if (l > R) { dx *= R / l; dy *= R / l; }
+        this.stickOffset.x = dx; this.stickOffset.y = dy;
         setKnob(dx, dy);
         // small dead zone, then a gentle expo curve for fine aiming
         const shape = (v) => { const a = Math.max(0, Math.abs(v) - 0.06) / 0.94; return Math.sign(v) * (0.35 * a + 0.65 * a * a); };
@@ -68,8 +72,10 @@ export class Input {
     const end = (e) => {
       for (const t of e.changedTouches) {
         if (t.identifier !== this.stickTouch) continue;
-        this.stickTouch = null; this.stick.x = 0; this.stick.y = 0;
-        base.classList.remove('on'); setKnob(0, 0);
+        // A lifted finger is NOT a neutral-stick command: maintain the
+        // player's chosen turn / pitch until the next drag or a new match.
+        this.stickTouch = null;
+        base.classList.remove('on');
       }
     };
     zone.addEventListener('touchmove', move, { passive: false });
@@ -98,6 +104,17 @@ export class Input {
     }
   }
 
+  resetStick() {
+    // Explicit neutral only at the start of a fresh match.
+    this.stickTouch = null;
+    this.stick.x = 0; this.stick.y = 0;
+    this.stickOffset.x = 0; this.stickOffset.y = 0;
+    const base = this.root.querySelector('#stickBase');
+    base.style.left = ''; base.style.top = '';
+    base.classList.remove('on');
+    this.root.querySelector('#stickKnob').style.transform = 'translate(0px, 0px)';
+  }
+
   consume(name) { const had = this.pressed.has(name); this.pressed.delete(name); return had; }
   clearPresses() { this.pressed.clear(); }
 
@@ -123,7 +140,8 @@ export class Input {
 /**
  * Player pilot: converts Input into the same controls structure the AI produces.
  * settings.assist: stick-x banks to an angle and the turn is held level automatically;
- * releasing the stick rolls wings-level. settings.invert: stick-up = climb.
+ * neutral input rolls wings-level, but releasing touch holds the last stick setting.
+ * settings.invert: stick-up = climb.
  */
 export class PlayerController {
   constructor(ac, input, settings) {
