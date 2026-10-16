@@ -61,8 +61,40 @@ Validator receipt: `candidate_correctness=PASS`, `source_geometry_first_hit_cert
 
 The P95 query cost rises (1.27x here; 1.79x in September). Frame and memory figures are flat. Absolute host timings differ from September, so only within-run ratios are comparable. No performance threshold is applied.
 
+## Instrumented repeats
+
+Commit `89416b4` makes the probe evaluate the three step-completion terms separately: source observed at target, source `IsStreamingCompleted`, and subsystem `IsAllStreamingCompleted`. The completion rule itself is unchanged. The probe records false-tick counts per step, logs `XINYI_COMPLEX_WAIT` every 10 s and writes `step_timeout_diagnostics` on timeout. The validator names the false terms when it refuses a run. Regression test: `tests/test_unreal_xinyi_v2_complex_streaming_diagnostics.py`.
+
+The package was rebuilt with the documented BuildCookRun command (run `20261016T071453Z-89416b47`: 638 cooked packages, 0 errors, 0 warnings). The new executable is `ba4865f6…`. The cooked IoStore containers (`AirCombatWorld-Windows.ucas/.utoc`, `global.ucas/.utoc`) are byte-identical to the September package. The loose pak differs only by the probe's `.uplugin` text (397 → 410 bytes) and a missing 19-byte `FilterPlugin.ini`.
+
+The five repeats were pre-registered before any instrumented launch ([instrumented-repeat-preregistration.json](evidence/xinyi-complex-as-simple-20261016/instrumented-repeat-preregistration.json)). All five were run and are reported here ([instrumented-repeats-summary.json](evidence/xinyi-complex-as-simple-20261016/instrumented-repeats-summary.json)).
+
+| Repeat | Run | Other editor samples | Baseline | Candidate | Result |
+|---|---|---|---|---|---|
+| 1 | `20261016T072003Z-89416b47` | 4/67 | complete | not launched: runner refused because an editor process started between modes | FAIL (harness abort) |
+| 2 | `20261016T072424Z-89416b47` | 137/283 | complete | `FAIL_STEP_TIMEOUT` step 76 `open_area_+000_+000` | FAIL |
+| 3 | `20261016T072900Z-89416b47` | 0/124 | complete | complete; validator PASS | PASS |
+| 4 | `20261016T075849Z-89416b47` | 0/132 | complete | complete; validator PASS | PASS |
+| 5 | `20261016T080100Z-89416b47` | 0/297 | complete | `FAIL_STEP_TIMEOUT` step 76 `open_area_+000_+000` | FAIL |
+
+Source immutability passed in all five. Repeats 3 and 4 reproduce run 2 exactly: 15/15 first-hit tiles within 2 cm, 27/27 negatives clear (baseline 10/27), 4/4 sweeps, dynamic PASS, 25/25 enum 3, 101/101 streaming.
+
+Both instrumented stalls have the same signature:
+
+- `source_observed_at_target=false`, `source_streaming_completed=false`, `subsystem_all_streaming_completed=true` for the full 90 s;
+- one runtime streaming source, 45,069.391 cm from the target. That is exactly the distance from the previous step's source (`open_area_+000_-001`, [27500, 25000, 1000]) to the target ([25000, -20000, 1000]);
+- no World Partition log line after the move. Every completed move logs `Streaming performance changed`.
+
+Across every completed step of every process, baseline and candidate, `source_observed_false_ticks` is 0. A moved source is normally visible to World Partition on the first tick.
+
+The streaming policy's cached source list still holds the previous step position. The source component reports `Actor->GetActorLocation()` only when World Partition updates its streaming state. So either the transient source actor did not move, or World Partition stopped refreshing streaming state after that move. This instrumentation cannot separate the two.
+
+Counting run 1, three runs used this probe without the new logging. Run 1, run 2 and the September run produced 3 of 3 complete baselines and 1 stall in 3 candidates (September and run 2 completed). The instrumented repeats produced 5 of 5 complete baselines and 2 stalls in 4 launched candidates. Every candidate stall, with or without the new logging, happened at the same transition, and none has occurred in a baseline. The stall happens with and without host contention.
+
+Performance in the two passing idle repeats (candidate/baseline): P95 query 2.758x and 1.110x, median query 0.958x and 0.962x, frame P95 1.131x and 1.011x, peak working set 0.966x and 0.950x. P95 query cost varies widely between otherwise identical idle pairs (run 2: 1.272x). No threshold is applied.
+
 ## Verdict
 
-Under the v2 source-geometry oracle, run 2 passes every collision correctness gate, with Chaos hit distances within 0.001 cm of the source mesh. One of two fresh candidate processes, run 1, failed World Partition streaming completion, and that failure is not explained. Under the policy registered before the repeat, this session does **not** issue `COMPLEX_AS_SIMPLE_CORRECTNESS_PASS`. The gate stays **FAIL**: the cause is an intermittent candidate-run streaming stall (gate 7), not a collision identity, distance, negative-space, sweep or dynamic failure.
+Under the v2 source-geometry oracle, every candidate process that completed (runs 2, 3 and 4) passes all collision correctness gates, with Chaos hit distances within 0.001 cm of the source mesh. Three of seven fresh candidate processes stalled at the `open_area_+000_+000` streaming step, where World Partition kept the previous source position; no baseline stalled in eight processes. This session does **not** issue `COMPLEX_AS_SIMPLE_CORRECTNESS_PASS`. The gate stays **FAIL** on gate 7, through a reproducible candidate-only streaming-source stall. It is not a collision identity, distance, negative-space, sweep or dynamic failure.
 
 No accepted asset, collision policy, terrain, geometry, placement, source lock or GLB was changed. Raw package, logs, raw JSON and host launch receipts remain under `unreal/Saved/XinyiHostGates/<run>` on the validation host. Evidence: [evidence/xinyi-complex-as-simple-20261016/](evidence/xinyi-complex-as-simple-20261016/).

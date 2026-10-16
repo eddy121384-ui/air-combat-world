@@ -1,0 +1,20 @@
+{
+  "schema": "xinyi-complex-as-simple-repeat-preregistration/v1",
+  "written_utc": "2026-10-16T07:15:28Z",
+  "written_before_package_completion_and_before_any_instrumented_launch": true,
+  "code_head": "89416b4",
+  "package_run_id": "20261016T071453Z-89416b47",
+  "package_pipeline": "RunUAT BuildCookRun Development Win64, explicit /Game/XinyiV2/L_XinyiV2_Contract_WP (documented command)",
+  "repeat_count": 5,
+  "repeat_protocol": [
+    "Each repeat is its own run ID: fresh snapshot, regenerated v2 plan (must equal SHA 235bfd9573c84b3ddab7da5b588d33c3f1263f50b6f24f1cdbbc8490a46b6531), copy of this run's package without runtime Saved.",
+    "Before each pair: wait for 30 s with no UnrealEditor/UnrealEditor-Cmd process; record other-editor samples during the pair.",
+    "Order within each pair: Baseline then ComplexAsSimple, via tools/unreal_xinyi_v2/run_complex_candidate.ps1.",
+    "After each pair: validate_complex_candidate.py and verify_snapshot_unchanged.ps1.",
+    "All 5 repeats are run and reported regardless of earlier outcomes; none is discarded or rerun."
+  ],
+  "per_repeat_classification": "PASS only if both processes complete, validator candidate_correctness=PASS (15/15 first-hit tile and 2 cm distance, 27/27 negatives, 4/4 sweeps, dynamic, 25/25 enum 3, 101/101 streaming) and source immutability PASS.",
+  "stall_reporting": "Any FAIL_STEP_TIMEOUT / FAIL_DYNAMIC_STREAM_TIMEOUT in either mode is reported with step_timeout_diagnostics false terms. Per-step streaming_predicate false-tick counts and the longest wait are summarised for all processes.",
+  "verdict_policy": "Run 20261016T065302Z-07740159 stays FAIL and unexplained. Consistent with its disposition, this session does not issue COMPLEX_AS_SIMPLE_CORRECTNESS_PASS from these repeats; it reports the per-repeat results and the observed stall rate for the owner's decision. Any instrumented stall is itself a correctness FAIL for that repeat.",
+  "performance": "Within-pair candidate/baseline ratios only; no thresholds; pairs with other-editor contention flagged."
+}
