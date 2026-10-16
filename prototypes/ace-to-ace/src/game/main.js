@@ -112,6 +112,7 @@ function start(k) {
   showScreen(null);
   $('#touch').classList.toggle('hidden', !(isTouch && k === 'pvai'));
   $('#pauseBtn').classList.remove('hidden');
+  input.resetStick();
   input.clearPresses();
   hud.msgs = [];
   hud.flash(k === 'aivai' ? 'AI vs AI — 觀戰模式' : 'ENGAGE', '#7dffb0', 2.2, true);
