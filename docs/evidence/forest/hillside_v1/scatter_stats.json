@@ -1,0 +1,50 @@
+{
+ "seed": 20261016,
+ "block_m": 250.0,
+ "trees": 989,
+ "trees_pass1_canopy": 697,
+ "trees_pass2_closure": 292,
+ "trees_per_ha": 158.24,
+ "variants": {
+  "0": 396,
+  "1": 299,
+  "2": 294
+ },
+ "crown_r_m": {
+  "min": 3.4,
+  "median": 4.708499927324211,
+  "max": 8.6,
+  "p10": 3.4,
+  "p90": 7.02097273374708
+ },
+ "crown_width_m_median": 9.416999854648422,
+ "scale_xy": {
+  "min": 0.4533333333333333,
+  "max": 1.1466666666666667
+ },
+ "tree_height_m_est": {
+  "min": 5.9901425714664525,
+  "median": 9.778094650181297,
+  "max": 20.957891329365818
+ },
+ "planned_crown_cover": 0.911352,
+ "gap_area_fraction_rule": 0.08,
+ "gap_area_fraction_raster": 0.079476,
+ "nearest_neighbour_m": {
+  "mean": 6.190164395111372,
+  "min": 3.284460002970372
+ },
+ "clark_evans_R": 1.5573646612326812,
+ "slope_deg_at_trees": {
+  "mean": 32.795939050169586,
+  "max": 62.134438941950776
+ },
+ "rules": {
+  "overlap_k": 0.5,
+  "fill_min_hole_m": 3.0,
+  "mesh_crown_r_m": 7.5,
+  "mesh_sphere_r_m": 8.377,
+  "candidates": 2500,
+  "accepted_after_gaps_and_density": 1565
+ }
+}

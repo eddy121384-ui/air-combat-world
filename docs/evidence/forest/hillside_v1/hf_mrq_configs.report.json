@@ -1,0 +1,47 @@
+{
+  "status": "PASS_HF_MRQ_CONFIGS",
+  "configs": [
+    {
+      "tag": "hf_stills_forest_r6_01",
+      "key": "stills_forest",
+      "config": "/Game/HillsideForest/r6/MRQ_hf_stills_forest_r6_01.MRQ_hf_stills_forest_r6_01",
+      "map": "/Game/HillsideForest/r6/L_HF_Stills_forest",
+      "sequence": "/Game/HillsideForest/r6/LS_HF_Stills_forest.LS_HF_Stills_forest",
+      "frames": 144,
+      "still_frames": [
+        47,
+        95,
+        143
+      ],
+      "output_directory": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world-hillside-forest\\unreal\\TreeLookdev\\Saved\\TreeLookdev\\hillside\\movies\\hf_stills_forest_r6_01\\frames",
+      "game_overrides_enabled": false
+    },
+    {
+      "tag": "hf_stills_empty_r6_01",
+      "key": "stills_empty",
+      "config": "/Game/HillsideForest/r6/MRQ_hf_stills_empty_r6_01.MRQ_hf_stills_empty_r6_01",
+      "map": "/Game/HillsideForest/r6/L_HF_Stills_empty",
+      "sequence": "/Game/HillsideForest/r6/LS_HF_Stills_empty.LS_HF_Stills_empty",
+      "frames": 144,
+      "still_frames": [
+        47,
+        95,
+        143
+      ],
+      "output_directory": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world-hillside-forest\\unreal\\TreeLookdev\\Saved\\TreeLookdev\\hillside\\movies\\hf_stills_empty_r6_01\\frames",
+      "game_overrides_enabled": false
+    },
+    {
+      "tag": "hf_flight_forest_r6_01",
+      "key": "flight_forest",
+      "config": "/Game/HillsideForest/r6/MRQ_hf_flight_forest_r6_01.MRQ_hf_flight_forest_r6_01",
+      "map": "/Game/HillsideForest/r6/L_HF_Flight_forest",
+      "sequence": "/Game/HillsideForest/r6/LS_HF_Flight_forest.LS_HF_Flight_forest",
+      "frames": 451,
+      "still_frames": null,
+      "output_directory": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world-hillside-forest\\unreal\\TreeLookdev\\Saved\\TreeLookdev\\hillside\\movies\\hf_flight_forest_r6_01\\frames",
+      "game_overrides_enabled": false
+    }
+  ],
+  "error": null
+}

@@ -1,0 +1,21 @@
+{
+ "_doc": "紅楠 second crown form for the hillside Forest Mix V0 (ACW_TG_PARAMS for tools/treegen/machilus_thunbergii.py / machilus_game.py). Same species, leaves, atlas and materials as the PR #30 golden; only the branch / crown architecture changes: a lower, broader, lopsided, looser crown (fewer, larger foliage clumps with deeper gaps), lower fork, 4 spreading limbs, leaning trunk - the shape of a slope-grown / light-gap 紅楠 rather than the open-grown dome.",
+ "seed": 20261017,
+ "height_fork": 2.1,
+ "trunk_lean": [0.55, -0.25],
+ "n_limbs": 4,
+ "limb_len": [4.0, 5.8],
+ "limb_elev": [20, 44],
+ "shell_c": [0.6, -0.3, 6.0],
+ "shell_r": [7.6, 6.4, 4.0],
+ "n_lobes": 14,
+ "lobe_r": [2.2, 3.4],
+ "lobe_elev": [-40, 80],
+ "lobe_frac": [0.62, 0.96],
+ "core_frac": 0.7,
+ "dome": {"c": [0.6, -0.3, 4.4], "r_xy": [8.8, 7.0], "rz_up": 6.6, "rz_dn": 2.6, "q_up": 1.15,
+          "asym": {"r1": 0.22, "a1": 0.4, "r2": 0.12, "a2": 2.1, "z1": 0.18, "az": 0.9}},
+ "attr_n": 42000,
+ "surface_bias": 0.62,
+ "interior_keep": 0.32
+}

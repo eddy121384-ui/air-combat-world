@@ -1,0 +1,27 @@
+{
+  "status": "PASS",
+  "error": null,
+  "vector": [
+    "TintLo",
+    "TintHi",
+    "SSSColor"
+  ],
+  "scalar": [
+    "OcclMin",
+    "Brightness",
+    "SSS",
+    "NormalFlatten",
+    "Roughness",
+    "Specular"
+  ],
+  "parent_after_set": "/Game/TreeLookdev/Materials/M_TL_LeafCards.M_TL_LeafCards",
+  "set_vec": false,
+  "set_vec_name": false,
+  "set_scalar": false,
+  "get_vec": "<Struct 'LinearColor' (0x0000016A2B592660) {r: 1.000000, g: 1.000000, b: 1.000000, a: 1.000000}>",
+  "mic_vector_names": [
+    "TintLo",
+    "TintHi",
+    "SSSColor"
+  ]
+}

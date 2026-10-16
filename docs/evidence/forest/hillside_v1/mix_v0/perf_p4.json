@@ -1,0 +1,1213 @@
+{
+ "runs": {
+  "p4r1__r6__agl200__empty": {
+   "round": "r1",
+   "rev": "r6",
+   "view": "agl200",
+   "cond": "empty",
+   "rows": 260,
+   "stats": {
+    "FrameTime": {
+     "median": 47.16
+    },
+    "GPUTime": {
+     "median": 45.34
+    },
+    "GPU/Prepass": {
+     "median": 0.28
+    },
+    "GPU/Basepass": {
+     "median": 9.88
+    },
+    "GPU/ShadowDepths": {
+     "median": 1.19
+    },
+    "GPU/Lights": {
+     "median": 5.06
+    },
+    "GPU/Postprocessing": {
+     "median": 0.95
+    }
+   }
+  },
+  "p4r1__r6__agl200__forest": {
+   "round": "r1",
+   "rev": "r6",
+   "view": "agl200",
+   "cond": "forest",
+   "rows": 260,
+   "stats": {
+    "FrameTime": {
+     "median": 143.73
+    },
+    "GPUTime": {
+     "median": 142.11
+    },
+    "GPU/Prepass": {
+     "median": 16.1
+    },
+    "GPU/Basepass": {
+     "median": 49.23
+    },
+    "GPU/ShadowDepths": {
+     "median": 38.55
+    },
+    "GPU/Lights": {
+     "median": 5.69
+    },
+    "GPU/Postprocessing": {
+     "median": 1.04
+    }
+   }
+  },
+  "p4r1__r6__agl200__mix": {
+   "round": "r1",
+   "rev": "r6",
+   "view": "agl200",
+   "cond": "mix",
+   "rows": 260,
+   "stats": {
+    "FrameTime": {
+     "median": 136.12
+    },
+    "GPUTime": {
+     "median": 134.26
+    },
+    "GPU/Prepass": {
+     "median": 14.83
+    },
+    "GPU/Basepass": {
+     "median": 45.54
+    },
+    "GPU/ShadowDepths": {
+     "median": 34.19
+    },
+    "GPU/Lights": {
+     "median": 5.79
+    },
+    "GPU/Postprocessing": {
+     "median": 1.16
+    }
+   }
+  },
+  "p4r1__r6__agl500__empty": {
+   "round": "r1",
+   "rev": "r6",
+   "view": "agl500",
+   "cond": "empty",
+   "rows": 260,
+   "stats": {
+    "FrameTime": {
+     "median": 47.73
+    },
+    "GPUTime": {
+     "median": 45.91
+    },
+    "GPU/Prepass": {
+     "median": 0.26
+    },
+    "GPU/Basepass": {
+     "median": 10.34
+    },
+    "GPU/ShadowDepths": {
+     "median": 0.87
+    },
+    "GPU/Lights": {
+     "median": 5.09
+    },
+    "GPU/Postprocessing": {
+     "median": 1.03
+    }
+   }
+  },
+  "p4r1__r6__agl500__forest": {
+   "round": "r1",
+   "rev": "r6",
+   "view": "agl500",
+   "cond": "forest",
+   "rows": 260,
+   "stats": {
+    "FrameTime": {
+     "median": 67.37
+    },
+    "GPUTime": {
+     "median": 65.62
+    },
+    "GPU/Prepass": {
+     "median": 5.51
+    },
+    "GPU/Basepass": {
+     "median": 17.37
+    },
+    "GPU/ShadowDepths": {
+     "median": 7.23
+    },
+    "GPU/Lights": {
+     "median": 5.25
+    },
+    "GPU/Postprocessing": {
+     "median": 1.0
+    }
+   }
+  },
+  "p4r1__r6__agl500__mix": {
+   "round": "r1",
+   "rev": "r6",
+   "view": "agl500",
+   "cond": "mix",
+   "rows": 260,
+   "stats": {
+    "FrameTime": {
+     "median": 64.29
+    },
+    "GPUTime": {
+     "median": 62.26
+    },
+    "GPU/Prepass": {
+     "median": 4.92
+    },
+    "GPU/Basepass": {
+     "median": 16.04
+    },
+    "GPU/ShadowDepths": {
+     "median": 5.94
+    },
+    "GPU/Lights": {
+     "median": 5.26
+    },
+    "GPU/Postprocessing": {
+     "median": 1.0
+    }
+   }
+  },
+  "p4r1__r6__agl50__empty": {
+   "round": "r1",
+   "rev": "r6",
+   "view": "agl50",
+   "cond": "empty",
+   "rows": 260,
+   "stats": {
+    "FrameTime": {
+     "median": 44.7
+    },
+    "GPUTime": {
+     "median": 42.93
+    },
+    "GPU/Prepass": {
+     "median": 0.21
+    },
+    "GPU/Basepass": {
+     "median": 6.38
+    },
+    "GPU/ShadowDepths": {
+     "median": 1.35
+    },
+    "GPU/Lights": {
+     "median": 5.14
+    },
+    "GPU/Postprocessing": {
+     "median": 1.12
+    }
+   }
+  },
+  "p4r1__r6__agl50__forest": {
+   "round": "r1",
+   "rev": "r6",
+   "view": "agl50",
+   "cond": "forest",
+   "rows": 260,
+   "stats": {
+    "FrameTime": {
+     "median": 208.41
+    },
+    "GPUTime": {
+     "median": 206.7
+    },
+    "GPU/Prepass": {
+     "median": 0.0
+    },
+    "GPU/Basepass": {
+     "median": 0.0
+    },
+    "GPU/ShadowDepths": {
+     "median": 0.0
+    },
+    "GPU/Lights": {
+     "median": 0.0
+    },
+    "GPU/Postprocessing": {
+     "median": 0.0
+    }
+   }
+  },
+  "p4r1__r6__agl50__mix": {
+   "round": "r1",
+   "rev": "r6",
+   "view": "agl50",
+   "cond": "mix",
+   "rows": 260,
+   "stats": {
+    "FrameTime": {
+     "median": 187.35
+    },
+    "GPUTime": {
+     "median": 185.59
+    },
+    "GPU/Prepass": {
+     "median": 21.11
+    },
+    "GPU/Basepass": {
+     "median": 65.35
+    },
+    "GPU/ShadowDepths": {
+     "median": 58.21
+    },
+    "GPU/Lights": {
+     "median": 6.19
+    },
+    "GPU/Postprocessing": {
+     "median": 1.27
+    }
+   }
+  },
+  "p4r1__r6__flight__empty": {
+   "round": "r1",
+   "rev": "r6",
+   "view": "flight",
+   "cond": "empty",
+   "rows": 490,
+   "stats": {
+    "GPUTime": {
+     "median": 42.74,
+     "p95": 45.94
+    },
+    "FrameTime": {
+     "median": 44.46,
+     "p95": 47.87
+    }
+   }
+  },
+  "p4r1__r6__flight__forest": {
+   "round": "r1",
+   "rev": "r6",
+   "view": "flight",
+   "cond": "forest",
+   "rows": 490,
+   "stats": {
+    "GPUTime": {
+     "median": 159.14,
+     "p95": 196.57
+    },
+    "FrameTime": {
+     "median": 161.91,
+     "p95": 198.13
+    }
+   }
+  },
+  "p4r1__r6__flight__mix": {
+   "round": "r1",
+   "rev": "r6",
+   "view": "flight",
+   "cond": "mix",
+   "rows": 490,
+   "stats": {
+    "GPUTime": {
+     "median": 147.97,
+     "p95": 178.86
+    },
+    "FrameTime": {
+     "median": 149.34,
+     "p95": 181.09
+    }
+   }
+  },
+  "p4r2__r6__agl200__empty": {
+   "round": "r2",
+   "rev": "r6",
+   "view": "agl200",
+   "cond": "empty",
+   "rows": 260,
+   "stats": {
+    "FrameTime": {
+     "median": 48.09
+    },
+    "GPUTime": {
+     "median": 46.56
+    },
+    "GPU/Prepass": {
+     "median": 0.29
+    },
+    "GPU/Basepass": {
+     "median": 9.89
+    },
+    "GPU/ShadowDepths": {
+     "median": 1.24
+    },
+    "GPU/Lights": {
+     "median": 5.13
+    },
+    "GPU/Postprocessing": {
+     "median": 1.06
+    }
+   }
+  },
+  "p4r2__r6__agl200__forest": {
+   "round": "r2",
+   "rev": "r6",
+   "view": "agl200",
+   "cond": "forest",
+   "rows": 260,
+   "stats": {
+    "FrameTime": {
+     "median": 146.1
+    },
+    "GPUTime": {
+     "median": 144.11
+    },
+    "GPU/Prepass": {
+     "median": 16.13
+    },
+    "GPU/Basepass": {
+     "median": 49.56
+    },
+    "GPU/ShadowDepths": {
+     "median": 38.69
+    },
+    "GPU/Lights": {
+     "median": 5.81
+    },
+    "GPU/Postprocessing": {
+     "median": 1.16
+    }
+   }
+  },
+  "p4r2__r6__agl200__mix": {
+   "round": "r2",
+   "rev": "r6",
+   "view": "agl200",
+   "cond": "mix",
+   "rows": 260,
+   "stats": {
+    "FrameTime": {
+     "median": 135.43
+    },
+    "GPUTime": {
+     "median": 133.87
+    },
+    "GPU/Prepass": {
+     "median": 14.82
+    },
+    "GPU/Basepass": {
+     "median": 45.5
+    },
+    "GPU/ShadowDepths": {
+     "median": 34.19
+    },
+    "GPU/Lights": {
+     "median": 5.82
+    },
+    "GPU/Postprocessing": {
+     "median": 1.11
+    }
+   }
+  },
+  "p4r2__r6__agl500__empty": {
+   "round": "r2",
+   "rev": "r6",
+   "view": "agl500",
+   "cond": "empty",
+   "rows": 260,
+   "stats": {
+    "FrameTime": {
+     "median": 47.87
+    },
+    "GPUTime": {
+     "median": 45.61
+    },
+    "GPU/Prepass": {
+     "median": 0.27
+    },
+    "GPU/Basepass": {
+     "median": 10.28
+    },
+    "GPU/ShadowDepths": {
+     "median": 0.9
+    },
+    "GPU/Lights": {
+     "median": 5.08
+    },
+    "GPU/Postprocessing": {
+     "median": 1.03
+    }
+   }
+  },
+  "p4r2__r6__agl500__forest": {
+   "round": "r2",
+   "rev": "r6",
+   "view": "agl500",
+   "cond": "forest",
+   "rows": 260,
+   "stats": {
+    "FrameTime": {
+     "median": 68.25
+    },
+    "GPUTime": {
+     "median": 66.0
+    },
+    "GPU/Prepass": {
+     "median": 0.0
+    },
+    "GPU/Basepass": {
+     "median": 0.0
+    },
+    "GPU/ShadowDepths": {
+     "median": 0.0
+    },
+    "GPU/Lights": {
+     "median": 0.0
+    },
+    "GPU/Postprocessing": {
+     "median": 0.0
+    }
+   }
+  },
+  "p4r2__r6__agl500__mix": {
+   "round": "r2",
+   "rev": "r6",
+   "view": "agl500",
+   "cond": "mix",
+   "rows": 260,
+   "stats": {
+    "FrameTime": {
+     "median": 65.79
+    },
+    "GPUTime": {
+     "median": 63.53
+    },
+    "GPU/Prepass": {
+     "median": 4.92
+    },
+    "GPU/Basepass": {
+     "median": 16.04
+    },
+    "GPU/ShadowDepths": {
+     "median": 5.91
+    },
+    "GPU/Lights": {
+     "median": 5.34
+    },
+    "GPU/Postprocessing": {
+     "median": 1.01
+    }
+   }
+  },
+  "p4r2__r6__agl50__empty": {
+   "round": "r2",
+   "rev": "r6",
+   "view": "agl50",
+   "cond": "empty",
+   "rows": 260,
+   "stats": {
+    "FrameTime": {
+     "median": 42.72
+    },
+    "GPUTime": {
+     "median": 40.86
+    },
+    "GPU/Prepass": {
+     "median": 0.24
+    },
+    "GPU/Basepass": {
+     "median": 6.38
+    },
+    "GPU/ShadowDepths": {
+     "median": 1.22
+    },
+    "GPU/Lights": {
+     "median": 5.0
+    },
+    "GPU/Postprocessing": {
+     "median": 0.98
+    }
+   }
+  },
+  "p4r2__r6__agl50__forest": {
+   "round": "r2",
+   "rev": "r6",
+   "view": "agl50",
+   "cond": "forest",
+   "rows": 260,
+   "stats": {
+    "FrameTime": {
+     "median": 207.61
+    },
+    "GPUTime": {
+     "median": 206.02
+    },
+    "GPU/Prepass": {
+     "median": 23.87
+    },
+    "GPU/Basepass": {
+     "median": 74.51
+    },
+    "GPU/ShadowDepths": {
+     "median": 66.97
+    },
+    "GPU/Lights": {
+     "median": 6.13
+    },
+    "GPU/Postprocessing": {
+     "median": 1.19
+    }
+   }
+  },
+  "p4r2__r6__agl50__mix": {
+   "round": "r2",
+   "rev": "r6",
+   "view": "agl50",
+   "cond": "mix",
+   "rows": 260,
+   "stats": {
+    "FrameTime": {
+     "median": 185.21
+    },
+    "GPUTime": {
+     "median": 183.5
+    },
+    "GPU/Prepass": {
+     "median": 21.05
+    },
+    "GPU/Basepass": {
+     "median": 65.01
+    },
+    "GPU/ShadowDepths": {
+     "median": 57.8
+    },
+    "GPU/Lights": {
+     "median": 6.02
+    },
+    "GPU/Postprocessing": {
+     "median": 1.18
+    }
+   }
+  },
+  "p4r2__r6__flight__empty": {
+   "round": "r2",
+   "rev": "r6",
+   "view": "flight",
+   "cond": "empty",
+   "rows": 490,
+   "stats": {
+    "GPUTime": {
+     "median": 42.31,
+     "p95": 45.39
+    },
+    "FrameTime": {
+     "median": 44.55,
+     "p95": 49.45
+    }
+   }
+  },
+  "p4r2__r6__flight__forest": {
+   "round": "r2",
+   "rev": "r6",
+   "view": "flight",
+   "cond": "forest",
+   "rows": 490,
+   "stats": {
+    "GPUTime": {
+     "median": 160.48,
+     "p95": 198.76
+    },
+    "FrameTime": {
+     "median": 164.59,
+     "p95": 203.3
+    }
+   }
+  },
+  "p4r2__r6__flight__mix": {
+   "round": "r2",
+   "rev": "r6",
+   "view": "flight",
+   "cond": "mix",
+   "rows": 490,
+   "stats": {
+    "GPUTime": {
+     "median": 150.55,
+     "p95": 180.01
+    },
+    "FrameTime": {
+     "median": 152.53,
+     "p95": 181.89
+    }
+   }
+  }
+ },
+ "summary": {
+  "agl200": {
+   "forest_minus_empty": {
+    "FrameTime.median": {
+     "mean": 97.29,
+     "min": 96.57,
+     "max": 98.01,
+     "n": 2
+    },
+    "GPUTime.median": {
+     "mean": 97.16,
+     "min": 96.77,
+     "max": 97.55,
+     "n": 2
+    },
+    "GPU/Prepass.median": {
+     "mean": 15.83,
+     "min": 15.82,
+     "max": 15.84,
+     "n": 2
+    },
+    "GPU/Basepass.median": {
+     "mean": 39.51,
+     "min": 39.35,
+     "max": 39.67,
+     "n": 2
+    },
+    "GPU/ShadowDepths.median": {
+     "mean": 37.41,
+     "min": 37.36,
+     "max": 37.45,
+     "n": 2
+    },
+    "GPU/Lights.median": {
+     "mean": 0.66,
+     "min": 0.63,
+     "max": 0.68,
+     "n": 2
+    },
+    "GPU/Postprocessing.median": {
+     "mean": 0.09,
+     "min": 0.09,
+     "max": 0.1,
+     "n": 2
+    }
+   },
+   "mix_minus_empty": {
+    "FrameTime.median": {
+     "mean": 88.15,
+     "min": 87.34,
+     "max": 88.96,
+     "n": 2
+    },
+    "GPUTime.median": {
+     "mean": 88.11,
+     "min": 87.31,
+     "max": 88.92,
+     "n": 2
+    },
+    "GPU/Prepass.median": {
+     "mean": 14.54,
+     "min": 14.53,
+     "max": 14.55,
+     "n": 2
+    },
+    "GPU/Basepass.median": {
+     "mean": 35.63,
+     "min": 35.61,
+     "max": 35.66,
+     "n": 2
+    },
+    "GPU/ShadowDepths.median": {
+     "mean": 32.97,
+     "min": 32.95,
+     "max": 33.0,
+     "n": 2
+    },
+    "GPU/Lights.median": {
+     "mean": 0.71,
+     "min": 0.69,
+     "max": 0.73,
+     "n": 2
+    },
+    "GPU/Postprocessing.median": {
+     "mean": 0.13,
+     "min": 0.05,
+     "max": 0.21,
+     "n": 2
+    }
+   },
+   "mix_minus_forest": {
+    "FrameTime.median": {
+     "mean": -9.14,
+     "min": -10.67,
+     "max": -7.61,
+     "n": 2
+    },
+    "GPUTime.median": {
+     "mean": -9.05,
+     "min": -10.24,
+     "max": -7.85,
+     "n": 2
+    },
+    "GPU/Prepass.median": {
+     "mean": -1.29,
+     "min": -1.31,
+     "max": -1.27,
+     "n": 2
+    },
+    "GPU/Basepass.median": {
+     "mean": -3.88,
+     "min": -4.06,
+     "max": -3.69,
+     "n": 2
+    },
+    "GPU/ShadowDepths.median": {
+     "mean": -4.43,
+     "min": -4.5,
+     "max": -4.36,
+     "n": 2
+    },
+    "GPU/Lights.median": {
+     "mean": 0.06,
+     "min": 0.01,
+     "max": 0.1,
+     "n": 2
+    },
+    "GPU/Postprocessing.median": {
+     "mean": 0.04,
+     "min": -0.05,
+     "max": 0.12,
+     "n": 2
+    }
+   },
+   "absolute": {
+    "empty FrameTime.median": 47.62,
+    "empty GPUTime.median": 45.95,
+    "empty GPU/Prepass.median": 0.29,
+    "empty GPU/Basepass.median": 9.89,
+    "empty GPU/ShadowDepths.median": 1.21,
+    "empty GPU/Lights.median": 5.09,
+    "empty GPU/Postprocessing.median": 1.0,
+    "forest FrameTime.median": 144.91,
+    "forest GPUTime.median": 143.11,
+    "forest GPU/Prepass.median": 16.12,
+    "forest GPU/Basepass.median": 49.39,
+    "forest GPU/ShadowDepths.median": 38.62,
+    "forest GPU/Lights.median": 5.75,
+    "forest GPU/Postprocessing.median": 1.1,
+    "mix FrameTime.median": 135.78,
+    "mix GPUTime.median": 134.06,
+    "mix GPU/Prepass.median": 14.82,
+    "mix GPU/Basepass.median": 45.52,
+    "mix GPU/ShadowDepths.median": 34.19,
+    "mix GPU/Lights.median": 5.8,
+    "mix GPU/Postprocessing.median": 1.14
+   }
+  },
+  "agl500": {
+   "forest_minus_empty": {
+    "FrameTime.median": {
+     "mean": 20.01,
+     "min": 19.64,
+     "max": 20.38,
+     "n": 2
+    },
+    "GPUTime.median": {
+     "mean": 20.05,
+     "min": 19.71,
+     "max": 20.39,
+     "n": 2
+    },
+    "GPU/Prepass.median": {
+     "mean": 2.49,
+     "min": -0.27,
+     "max": 5.25,
+     "n": 2
+    },
+    "GPU/Basepass.median": {
+     "mean": -1.62,
+     "min": -10.28,
+     "max": 7.03,
+     "n": 2
+    },
+    "GPU/ShadowDepths.median": {
+     "mean": 2.73,
+     "min": -0.9,
+     "max": 6.36,
+     "n": 2
+    },
+    "GPU/Lights.median": {
+     "mean": -2.46,
+     "min": -5.08,
+     "max": 0.16,
+     "n": 2
+    },
+    "GPU/Postprocessing.median": {
+     "mean": -0.53,
+     "min": -1.03,
+     "max": -0.03,
+     "n": 2
+    }
+   },
+   "mix_minus_empty": {
+    "FrameTime.median": {
+     "mean": 17.24,
+     "min": 16.56,
+     "max": 17.92,
+     "n": 2
+    },
+    "GPUTime.median": {
+     "mean": 17.14,
+     "min": 16.35,
+     "max": 17.92,
+     "n": 2
+    },
+    "GPU/Prepass.median": {
+     "mean": 4.66,
+     "min": 4.65,
+     "max": 4.66,
+     "n": 2
+    },
+    "GPU/Basepass.median": {
+     "mean": 5.73,
+     "min": 5.7,
+     "max": 5.76,
+     "n": 2
+    },
+    "GPU/ShadowDepths.median": {
+     "mean": 5.04,
+     "min": 5.01,
+     "max": 5.07,
+     "n": 2
+    },
+    "GPU/Lights.median": {
+     "mean": 0.21,
+     "min": 0.17,
+     "max": 0.26,
+     "n": 2
+    },
+    "GPU/Postprocessing.median": {
+     "mean": -0.03,
+     "min": -0.03,
+     "max": -0.02,
+     "n": 2
+    }
+   },
+   "mix_minus_forest": {
+    "FrameTime.median": {
+     "mean": -2.77,
+     "min": -3.08,
+     "max": -2.46,
+     "n": 2
+    },
+    "GPUTime.median": {
+     "mean": -2.92,
+     "min": -3.36,
+     "max": -2.47,
+     "n": 2
+    },
+    "GPU/Prepass.median": {
+     "mean": 2.17,
+     "min": -0.59,
+     "max": 4.92,
+     "n": 2
+    },
+    "GPU/Basepass.median": {
+     "mean": 7.35,
+     "min": -1.33,
+     "max": 16.04,
+     "n": 2
+    },
+    "GPU/ShadowDepths.median": {
+     "mean": 2.31,
+     "min": -1.29,
+     "max": 5.91,
+     "n": 2
+    },
+    "GPU/Lights.median": {
+     "mean": 2.67,
+     "min": 0.01,
+     "max": 5.34,
+     "n": 2
+    },
+    "GPU/Postprocessing.median": {
+     "mean": 0.51,
+     "min": 0.0,
+     "max": 1.01,
+     "n": 2
+    }
+   },
+   "absolute": {
+    "empty FrameTime.median": 47.8,
+    "empty GPUTime.median": 45.76,
+    "empty GPU/Prepass.median": 0.27,
+    "empty GPU/Basepass.median": 10.31,
+    "empty GPU/ShadowDepths.median": 0.89,
+    "empty GPU/Lights.median": 5.08,
+    "empty GPU/Postprocessing.median": 1.03,
+    "forest FrameTime.median": 67.81,
+    "forest GPUTime.median": 65.81,
+    "forest GPU/Prepass.median": 2.75,
+    "forest GPU/Basepass.median": 8.69,
+    "forest GPU/ShadowDepths.median": 3.62,
+    "forest GPU/Lights.median": 2.62,
+    "forest GPU/Postprocessing.median": 0.5,
+    "mix FrameTime.median": 65.04,
+    "mix GPUTime.median": 62.89,
+    "mix GPU/Prepass.median": 4.92,
+    "mix GPU/Basepass.median": 16.04,
+    "mix GPU/ShadowDepths.median": 5.93,
+    "mix GPU/Lights.median": 5.3,
+    "mix GPU/Postprocessing.median": 1.0
+   }
+  },
+  "agl50": {
+   "forest_minus_empty": {
+    "FrameTime.median": {
+     "mean": 164.3,
+     "min": 163.71,
+     "max": 164.89,
+     "n": 2
+    },
+    "GPUTime.median": {
+     "mean": 164.47,
+     "min": 163.77,
+     "max": 165.16,
+     "n": 2
+    },
+    "GPU/Prepass.median": {
+     "mean": 11.71,
+     "min": -0.21,
+     "max": 23.63,
+     "n": 2
+    },
+    "GPU/Basepass.median": {
+     "mean": 30.88,
+     "min": -6.38,
+     "max": 68.13,
+     "n": 2
+    },
+    "GPU/ShadowDepths.median": {
+     "mean": 32.2,
+     "min": -1.35,
+     "max": 65.75,
+     "n": 2
+    },
+    "GPU/Lights.median": {
+     "mean": -2.0,
+     "min": -5.14,
+     "max": 1.13,
+     "n": 2
+    },
+    "GPU/Postprocessing.median": {
+     "mean": -0.46,
+     "min": -1.12,
+     "max": 0.21,
+     "n": 2
+    }
+   },
+   "mix_minus_empty": {
+    "FrameTime.median": {
+     "mean": 142.57,
+     "min": 142.49,
+     "max": 142.65,
+     "n": 2
+    },
+    "GPUTime.median": {
+     "mean": 142.65,
+     "min": 142.64,
+     "max": 142.66,
+     "n": 2
+    },
+    "GPU/Prepass.median": {
+     "mean": 20.86,
+     "min": 20.81,
+     "max": 20.9,
+     "n": 2
+    },
+    "GPU/Basepass.median": {
+     "mean": 58.8,
+     "min": 58.63,
+     "max": 58.97,
+     "n": 2
+    },
+    "GPU/ShadowDepths.median": {
+     "mean": 56.72,
+     "min": 56.58,
+     "max": 56.86,
+     "n": 2
+    },
+    "GPU/Lights.median": {
+     "mean": 1.04,
+     "min": 1.02,
+     "max": 1.05,
+     "n": 2
+    },
+    "GPU/Postprocessing.median": {
+     "mean": 0.17,
+     "min": 0.15,
+     "max": 0.2,
+     "n": 2
+    }
+   },
+   "mix_minus_forest": {
+    "FrameTime.median": {
+     "mean": -21.73,
+     "min": -22.4,
+     "max": -21.06,
+     "n": 2
+    },
+    "GPUTime.median": {
+     "mean": -21.81,
+     "min": -22.52,
+     "max": -21.11,
+     "n": 2
+    },
+    "GPU/Prepass.median": {
+     "mean": 9.14,
+     "min": -2.82,
+     "max": 21.11,
+     "n": 2
+    },
+    "GPU/Basepass.median": {
+     "mean": 27.92,
+     "min": -9.5,
+     "max": 65.35,
+     "n": 2
+    },
+    "GPU/ShadowDepths.median": {
+     "mean": 24.52,
+     "min": -9.17,
+     "max": 58.21,
+     "n": 2
+    },
+    "GPU/Lights.median": {
+     "mean": 3.04,
+     "min": -0.11,
+     "max": 6.19,
+     "n": 2
+    },
+    "GPU/Postprocessing.median": {
+     "mean": 0.63,
+     "min": -0.01,
+     "max": 1.27,
+     "n": 2
+    }
+   },
+   "absolute": {
+    "empty FrameTime.median": 43.71,
+    "empty GPUTime.median": 41.89,
+    "empty GPU/Prepass.median": 0.22,
+    "empty GPU/Basepass.median": 6.38,
+    "empty GPU/ShadowDepths.median": 1.29,
+    "empty GPU/Lights.median": 5.07,
+    "empty GPU/Postprocessing.median": 1.05,
+    "forest FrameTime.median": 208.01,
+    "forest GPUTime.median": 206.36,
+    "forest GPU/Prepass.median": 11.94,
+    "forest GPU/Basepass.median": 37.26,
+    "forest GPU/ShadowDepths.median": 33.48,
+    "forest GPU/Lights.median": 3.06,
+    "forest GPU/Postprocessing.median": 0.59,
+    "mix FrameTime.median": 186.28,
+    "mix GPUTime.median": 184.55,
+    "mix GPU/Prepass.median": 21.08,
+    "mix GPU/Basepass.median": 65.18,
+    "mix GPU/ShadowDepths.median": 58.0,
+    "mix GPU/Lights.median": 6.11,
+    "mix GPU/Postprocessing.median": 1.23
+   }
+  },
+  "flight": {
+   "forest_minus_empty": {
+    "GPUTime.median": {
+     "mean": 117.28,
+     "min": 116.4,
+     "max": 118.17,
+     "n": 2
+    },
+    "GPUTime.p95": {
+     "mean": 152.0,
+     "min": 150.63,
+     "max": 153.37,
+     "n": 2
+    },
+    "FrameTime.median": {
+     "mean": 118.75,
+     "min": 117.45,
+     "max": 120.04,
+     "n": 2
+    },
+    "FrameTime.p95": {
+     "mean": 152.06,
+     "min": 150.26,
+     "max": 153.85,
+     "n": 2
+    }
+   },
+   "mix_minus_empty": {
+    "GPUTime.median": {
+     "mean": 106.73,
+     "min": 105.23,
+     "max": 108.24,
+     "n": 2
+    },
+    "GPUTime.p95": {
+     "mean": 133.77,
+     "min": 132.92,
+     "max": 134.62,
+     "n": 2
+    },
+    "FrameTime.median": {
+     "mean": 106.43,
+     "min": 104.88,
+     "max": 107.98,
+     "n": 2
+    },
+    "FrameTime.p95": {
+     "mean": 132.83,
+     "min": 132.44,
+     "max": 133.22,
+     "n": 2
+    }
+   },
+   "mix_minus_forest": {
+    "GPUTime.median": {
+     "mean": -10.55,
+     "min": -11.17,
+     "max": -9.93,
+     "n": 2
+    },
+    "GPUTime.p95": {
+     "mean": -18.23,
+     "min": -18.75,
+     "max": -17.71,
+     "n": 2
+    },
+    "FrameTime.median": {
+     "mean": -12.31,
+     "min": -12.57,
+     "max": -12.06,
+     "n": 2
+    },
+    "FrameTime.p95": {
+     "mean": -19.23,
+     "min": -21.41,
+     "max": -17.04,
+     "n": 2
+    }
+   },
+   "absolute": {
+    "empty GPUTime.median": 42.53,
+    "empty GPUTime.p95": 45.66,
+    "empty FrameTime.median": 44.5,
+    "empty FrameTime.p95": 48.66,
+    "forest GPUTime.median": 159.81,
+    "forest GPUTime.p95": 197.66,
+    "forest FrameTime.median": 163.25,
+    "forest FrameTime.p95": 200.72,
+    "mix GPUTime.median": 149.26,
+    "mix GPUTime.p95": 179.44,
+    "mix FrameTime.median": 150.94,
+    "mix FrameTime.p95": 181.49
+   }
+  }
+ }
+}
