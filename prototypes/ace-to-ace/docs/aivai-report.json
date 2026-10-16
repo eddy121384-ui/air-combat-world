@@ -1,0 +1,564 @@
+[
+ {
+  "label": "veteran F-16V vs veteran J-16 (arcade head-on start)",
+  "n": 100,
+  "winBlue": "48%",
+  "winRed": "52%",
+  "draws": "0%",
+  "reasons": {
+   "gun": 38,
+   "missile": 59,
+   "timeDecision": 3
+  },
+  "medianTime": 109.2,
+  "p10Time": 55.1,
+  "p90Time": 215.9,
+  "firstShooterWins": "58%",
+  "avgMissiles": {
+   "blue": 3.3,
+   "red": 3.6
+  },
+  "missileHitRate": {
+   "blue": "27%",
+   "red": "24%"
+  },
+  "circlingSecPerMatch": 0.3,
+  "matchesWithCircling20s": 5,
+  "farSecPerMatch": 5,
+  "maxQuietSec": "94",
+  "avgMaxQuietSec": "33",
+  "oppWindowsPerMinBlue": 1.09,
+  "oppWindowsPerMinRed": 1.25,
+  "stalemateBreaks": 7.21,
+  "flaresPerMatch": 6.2,
+  "modeShareBlue": {
+   "ENGAGE": 31,
+   "ATTACK": 35,
+   "DEFEND": 10,
+   "EVADE": 7,
+   "EXTEND": 17
+  },
+  "modeShareRed": {
+   "ENGAGE": 31,
+   "ATTACK": 39,
+   "DEFEND": 7,
+   "EVADE": 6,
+   "EXTEND": 17
+  }
+ },
+ {
+  "label": "veteran vs veteran (random geometry)",
+  "n": 100,
+  "winBlue": "44%",
+  "winRed": "56%",
+  "draws": "0%",
+  "reasons": {
+   "missile": 69,
+   "gun": 27,
+   "timeDecision": 4
+  },
+  "medianTime": 106.9,
+  "p10Time": 51.9,
+  "p90Time": 195.7,
+  "firstShooterWins": "62%",
+  "avgMissiles": {
+   "blue": 3.3,
+   "red": 3.1
+  },
+  "missileHitRate": {
+   "blue": "32%",
+   "red": "34%"
+  },
+  "circlingSecPerMatch": 0.1,
+  "matchesWithCircling20s": 3,
+  "farSecPerMatch": 6,
+  "maxQuietSec": "69",
+  "avgMaxQuietSec": "33",
+  "oppWindowsPerMinBlue": 0.78,
+  "oppWindowsPerMinRed": 0.94,
+  "stalemateBreaks": 6.26,
+  "flaresPerMatch": 5.9,
+  "modeShareBlue": {
+   "ENGAGE": 34,
+   "ATTACK": 34,
+   "DEFEND": 9,
+   "EVADE": 7,
+   "EXTEND": 16
+  },
+  "modeShareRed": {
+   "ENGAGE": 34,
+   "ATTACK": 37,
+   "DEFEND": 6,
+   "EVADE": 7,
+   "EXTEND": 17
+  }
+ },
+ {
+  "label": "veteran vs veteran, aircraft swapped (J-16 blue)",
+  "n": 100,
+  "winBlue": "50%",
+  "winRed": "50%",
+  "draws": "0%",
+  "reasons": {
+   "missile": 62,
+   "gun": 36,
+   "timeDecision": 2
+  },
+  "medianTime": 96.6,
+  "p10Time": 55.1,
+  "p90Time": 198.2,
+  "firstShooterWins": "59%",
+  "avgMissiles": {
+   "blue": 3,
+   "red": 3.2
+  },
+  "missileHitRate": {
+   "blue": "30%",
+   "red": "32%"
+  },
+  "circlingSecPerMatch": 0.6,
+  "matchesWithCircling20s": 9,
+  "farSecPerMatch": 6,
+  "maxQuietSec": "73",
+  "avgMaxQuietSec": "33",
+  "oppWindowsPerMinBlue": 0.95,
+  "oppWindowsPerMinRed": 0.79,
+  "stalemateBreaks": 6.32,
+  "flaresPerMatch": 5.8,
+  "modeShareBlue": {
+   "ENGAGE": 35,
+   "ATTACK": 36,
+   "DEFEND": 7,
+   "EVADE": 7,
+   "EXTEND": 16
+  },
+  "modeShareRed": {
+   "ENGAGE": 34,
+   "ATTACK": 34,
+   "DEFEND": 10,
+   "EVADE": 6,
+   "EXTEND": 16
+  }
+ },
+ {
+  "label": "ace vs rookie (skill gradient)",
+  "n": 100,
+  "winBlue": "84%",
+  "winRed": "16%",
+  "draws": "0%",
+  "reasons": {
+   "missile": 72,
+   "gun": 28
+  },
+  "medianTime": 81.1,
+  "p10Time": 50.5,
+  "p90Time": 172.2,
+  "firstShooterWins": "58%",
+  "avgMissiles": {
+   "blue": 3.8,
+   "red": 1.1
+  },
+  "missileHitRate": {
+   "blue": "42%",
+   "red": "26%"
+  },
+  "circlingSecPerMatch": 0.3,
+  "matchesWithCircling20s": 5,
+  "farSecPerMatch": 4.9,
+  "maxQuietSec": "62",
+  "avgMaxQuietSec": "31",
+  "oppWindowsPerMinBlue": 1.05,
+  "oppWindowsPerMinRed": 0.85,
+  "stalemateBreaks": 5.11,
+  "flaresPerMatch": 4.3,
+  "modeShareBlue": {
+   "ENGAGE": 37,
+   "ATTACK": 38,
+   "DEFEND": 5,
+   "EVADE": 3,
+   "EXTEND": 16
+  },
+  "modeShareRed": {
+   "ENGAGE": 36,
+   "ATTACK": 31,
+   "DEFEND": 8,
+   "EVADE": 7,
+   "EXTEND": 17
+  }
+ },
+ {
+  "label": "naive chaser F-16V vs veteran J-16 (proxy: aggressive new player)",
+  "n": 100,
+  "winBlue": "67%",
+  "winRed": "32%",
+  "draws": "1%",
+  "reasons": {
+   "missile": 17,
+   "gun": 69,
+   "timeDecision": 12,
+   "crash": 1,
+   "draw": 1
+  },
+  "medianTime": 177.5,
+  "p10Time": 56.4,
+  "p90Time": 300,
+  "firstShooterWins": "68%",
+  "avgMissiles": {
+   "blue": 10.8,
+   "red": 1.2
+  },
+  "missileHitRate": {
+   "blue": "7%",
+   "red": "44%"
+  },
+  "circlingSecPerMatch": 4.5,
+  "matchesWithCircling20s": 33,
+  "farSecPerMatch": 4.7,
+  "maxQuietSec": "154",
+  "avgMaxQuietSec": "48",
+  "oppWindowsPerMinBlue": 2.03,
+  "oppWindowsPerMinRed": 0.49,
+  "stalemateBreaks": 5.14,
+  "flaresPerMatch": 3.7,
+  "modeShareBlue": {},
+  "modeShareRed": {
+   "ENGAGE": 10,
+   "ATTACK": 43,
+   "DEFEND": 27,
+   "EVADE": 10,
+   "EXTEND": 11
+  }
+ },
+ {
+  "label": "perfect zero-latency chaser vs veteran J-16 (superhuman stress test)",
+  "n": 100,
+  "winBlue": "100%",
+  "winRed": "0%",
+  "draws": "0%",
+  "reasons": {
+   "gun": 88,
+   "missile": 12
+  },
+  "medianTime": 26.7,
+  "p10Time": 22.4,
+  "p90Time": 91.2,
+  "firstShooterWins": "100%",
+  "avgMissiles": {
+   "blue": 7.3,
+   "red": 1
+  },
+  "missileHitRate": {
+   "blue": "7%",
+   "red": "56%"
+  },
+  "circlingSecPerMatch": 0.2,
+  "matchesWithCircling20s": 1,
+  "farSecPerMatch": 4.7,
+  "maxQuietSec": "79",
+  "avgMaxQuietSec": "17",
+  "oppWindowsPerMinBlue": 3.94,
+  "oppWindowsPerMinRed": 0,
+  "stalemateBreaks": 0.86,
+  "flaresPerMatch": 2.5,
+  "modeShareBlue": {},
+  "modeShareRed": {
+   "ENGAGE": 34,
+   "ATTACK": 10,
+   "DEFEND": 30,
+   "EVADE": 25,
+   "EXTEND": 2
+  }
+ },
+ {
+  "label": "human proxy (average) vs ROOKIE J-16 — via real player input path",
+  "n": 100,
+  "winBlue": "82%",
+  "winRed": "18%",
+  "draws": "0%",
+  "reasons": {
+   "missile": 79,
+   "outOfBounds": 1,
+   "timeDecision": 14,
+   "gun": 5,
+   "crash": 1
+  },
+  "medianTime": 97.8,
+  "p10Time": 31.5,
+  "p90Time": 300,
+  "firstShooterWins": "48%",
+  "avgMissiles": {
+   "blue": 7,
+   "red": 2.3
+  },
+  "missileHitRate": {
+   "blue": "24%",
+   "red": "16%"
+  },
+  "circlingSecPerMatch": 0.2,
+  "matchesWithCircling20s": 4,
+  "farSecPerMatch": 4.7,
+  "maxQuietSec": "132",
+  "avgMaxQuietSec": "36",
+  "oppWindowsPerMinBlue": 0.17,
+  "oppWindowsPerMinRed": 0.69,
+  "stalemateBreaks": 4.86,
+  "flaresPerMatch": 6.2,
+  "modeShareBlue": {},
+  "modeShareRed": {
+   "ENGAGE": 24,
+   "ATTACK": 40,
+   "DEFEND": 10,
+   "EVADE": 9,
+   "EXTEND": 17
+  }
+ },
+ {
+  "label": "human proxy (average) vs VETERAN J-16",
+  "n": 100,
+  "winBlue": "63%",
+  "winRed": "37%",
+  "draws": "0%",
+  "reasons": {
+   "missile": 67,
+   "timeDecision": 26,
+   "gun": 7
+  },
+  "medianTime": 162.3,
+  "p10Time": 43.5,
+  "p90Time": 300,
+  "firstShooterWins": "34%",
+  "avgMissiles": {
+   "blue": 8.1,
+   "red": 3.5
+  },
+  "missileHitRate": {
+   "blue": "16%",
+   "red": "15%"
+  },
+  "circlingSecPerMatch": 2.6,
+  "matchesWithCircling20s": 18,
+  "farSecPerMatch": 4.7,
+  "maxQuietSec": "113",
+  "avgMaxQuietSec": "45",
+  "oppWindowsPerMinBlue": 0.2,
+  "oppWindowsPerMinRed": 0.69,
+  "stalemateBreaks": 6.92,
+  "flaresPerMatch": 8,
+  "modeShareBlue": {},
+  "modeShareRed": {
+   "ENGAGE": 16,
+   "ATTACK": 47,
+   "DEFEND": 10,
+   "EVADE": 8,
+   "EXTEND": 19
+  }
+ },
+ {
+  "label": "human proxy (average) vs ACE J-16",
+  "n": 100,
+  "winBlue": "39%",
+  "winRed": "59%",
+  "draws": "2%",
+  "reasons": {
+   "missile": 45,
+   "gun": 30,
+   "timeDecision": 23,
+   "draw": 2
+  },
+  "medianTime": 186.7,
+  "p10Time": 49.7,
+  "p90Time": 300,
+  "firstShooterWins": "59%",
+  "avgMissiles": {
+   "blue": 8.4,
+   "red": 3.8
+  },
+  "missileHitRate": {
+   "blue": "11%",
+   "red": "14%"
+  },
+  "circlingSecPerMatch": 6.3,
+  "matchesWithCircling20s": 16,
+  "farSecPerMatch": 4.7,
+  "maxQuietSec": "157",
+  "avgMaxQuietSec": "48",
+  "oppWindowsPerMinBlue": 0.11,
+  "oppWindowsPerMinRed": 0.74,
+  "stalemateBreaks": 6.92,
+  "flaresPerMatch": 8.2,
+  "modeShareBlue": {},
+  "modeShareRed": {
+   "ENGAGE": 13,
+   "ATTACK": 52,
+   "DEFEND": 10,
+   "EVADE": 8,
+   "EXTEND": 17
+  }
+ },
+ {
+  "label": "human proxy (good) vs VETERAN J-16",
+  "n": 100,
+  "winBlue": "49%",
+  "winRed": "49%",
+  "draws": "2%",
+  "reasons": {
+   "timeDecision": 21,
+   "gun": 10,
+   "missile": 66,
+   "draw": 2,
+   "outOfBounds": 1
+  },
+  "medianTime": 164.1,
+  "p10Time": 42.1,
+  "p90Time": 300,
+  "firstShooterWins": "40%",
+  "avgMissiles": {
+   "blue": 6.2,
+   "red": 3.6
+  },
+  "missileHitRate": {
+   "blue": "15%",
+   "red": "19%"
+  },
+  "circlingSecPerMatch": 3.6,
+  "matchesWithCircling20s": 36,
+  "farSecPerMatch": 4.7,
+  "maxQuietSec": "106",
+  "avgMaxQuietSec": "46",
+  "oppWindowsPerMinBlue": 0.36,
+  "oppWindowsPerMinRed": 0.77,
+  "stalemateBreaks": 6.73,
+  "flaresPerMatch": 7,
+  "modeShareBlue": {},
+  "modeShareRed": {
+   "ENGAGE": 15,
+   "ATTACK": 54,
+   "DEFEND": 10,
+   "EVADE": 6,
+   "EXTEND": 16
+  }
+ },
+ {
+  "label": "human proxy (good) vs ACE J-16",
+  "n": 100,
+  "winBlue": "39%",
+  "winRed": "61%",
+  "draws": "0%",
+  "reasons": {
+   "timeDecision": 23,
+   "missile": 50,
+   "gun": 26,
+   "outOfBounds": 1
+  },
+  "medianTime": 163.6,
+  "p10Time": 35.6,
+  "p90Time": 300,
+  "firstShooterWins": "53%",
+  "avgMissiles": {
+   "blue": 5.6,
+   "red": 4.2
+  },
+  "missileHitRate": {
+   "blue": "14%",
+   "red": "16%"
+  },
+  "circlingSecPerMatch": 6.7,
+  "matchesWithCircling20s": 30,
+  "farSecPerMatch": 4.7,
+  "maxQuietSec": "239",
+  "avgMaxQuietSec": "47",
+  "oppWindowsPerMinBlue": 0.24,
+  "oppWindowsPerMinRed": 0.97,
+  "stalemateBreaks": 5.95,
+  "flaresPerMatch": 7,
+  "modeShareBlue": {},
+  "modeShareRed": {
+   "ENGAGE": 16,
+   "ATTACK": 55,
+   "DEFEND": 9,
+   "EVADE": 5,
+   "EXTEND": 15
+  }
+ },
+ {
+  "label": "straight drone vs veteran J-16 (sanity: must kill quickly)",
+  "n": 100,
+  "winBlue": "0%",
+  "winRed": "100%",
+  "draws": "0%",
+  "reasons": {
+   "missile": 97,
+   "gun": 3
+  },
+  "medianTime": 45.3,
+  "p10Time": 24.8,
+  "p90Time": 60.8,
+  "firstShooterWins": "100%",
+  "avgMissiles": {
+   "blue": 0,
+   "red": 2.6
+  },
+  "missileHitRate": {
+   "blue": "0%",
+   "red": "76%"
+  },
+  "circlingSecPerMatch": 0,
+  "matchesWithCircling20s": 0,
+  "farSecPerMatch": 15.4,
+  "maxQuietSec": "46",
+  "avgMaxQuietSec": "30",
+  "oppWindowsPerMinBlue": 0,
+  "oppWindowsPerMinRed": 1.62,
+  "stalemateBreaks": 0,
+  "flaresPerMatch": 0,
+  "modeShareBlue": {},
+  "modeShareRed": {
+   "ENGAGE": 23,
+   "ATTACK": 77,
+   "DEFEND": 0,
+   "EVADE": 0,
+   "EXTEND": 0
+  }
+ },
+ {
+  "label": "max-G circler vs veteran J-16 (sanity: must break the circle)",
+  "n": 100,
+  "winBlue": "0%",
+  "winRed": "100%",
+  "draws": "0%",
+  "reasons": {
+   "crash": 33,
+   "missile": 63,
+   "gun": 4
+  },
+  "medianTime": 54.6,
+  "p10Time": 24.9,
+  "p90Time": 103.5,
+  "firstShooterWins": "100%",
+  "avgMissiles": {
+   "blue": 0,
+   "red": 2.1
+  },
+  "missileHitRate": {
+   "blue": "0%",
+   "red": "76%"
+  },
+  "circlingSecPerMatch": 2.1,
+  "matchesWithCircling20s": 20,
+  "farSecPerMatch": 9,
+  "maxQuietSec": "65",
+  "avgMaxQuietSec": "29",
+  "oppWindowsPerMinBlue": 0,
+  "oppWindowsPerMinRed": 1.83,
+  "stalemateBreaks": 0.73,
+  "flaresPerMatch": 0,
+  "modeShareBlue": {},
+  "modeShareRed": {
+   "ENGAGE": 31,
+   "ATTACK": 63,
+   "DEFEND": 2,
+   "EVADE": 0,
+   "EXTEND": 5
+  }
+ }
+]
