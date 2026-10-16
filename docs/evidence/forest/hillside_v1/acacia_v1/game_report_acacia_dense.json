@@ -1,0 +1,57 @@
+{
+ "golden": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world-acacia\\out\\treegen\\acacia\\v1\\v1_acacia_confusa.blend",
+ "skeleton_nodes": 10403,
+ "instances": 8461,
+ "bake_s": "reused",
+ "lods": [
+  {
+   "name": "lod0",
+   "branch_tris": 11080,
+   "card_tris": 27076,
+   "cards": 13538,
+   "sprays": 6769,
+   "card_enlarge": 1.118,
+   "total_tris": 38156,
+   "verts": 60869,
+   "glb_option": "{'export_vertex_color': 'ACTIVE'}",
+   "glb_bytes": 2666204
+  },
+  {
+   "name": "lod1",
+   "branch_tris": 3216,
+   "card_tris": 13536,
+   "cards": 6768,
+   "sprays": 3384,
+   "card_enlarge": 1.581,
+   "total_tris": 16752,
+   "verts": 29054,
+   "glb_option": "{'export_vertex_color': 'ACTIVE'}",
+   "glb_bytes": 1265172
+  },
+  {
+   "name": "lod2",
+   "branch_tris": 917,
+   "card_tris": 4740,
+   "cards": 2370,
+   "sprays": 1185,
+   "card_enlarge": 2.673,
+   "total_tris": 5657,
+   "verts": 10057,
+   "glb_option": "{'export_vertex_color': 'ACTIVE'}",
+   "glb_bytes": 438708
+  },
+  {
+   "name": "lod3",
+   "branch_tris": 172,
+   "card_tris": 1524,
+   "cards": 762,
+   "sprays": 381,
+   "card_enlarge": 4.714,
+   "total_tris": 1696,
+   "verts": 3159,
+   "glb_option": "{'export_vertex_color': 'ACTIVE'}",
+   "glb_bytes": 139008
+  }
+ ],
+ "elapsed_s": 14.9
+}

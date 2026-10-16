@@ -1,0 +1,164 @@
+{
+ "atlas_coverage": [
+  {
+   "proto": 0,
+   "view": "top",
+   "coverage": 0.04296875
+  },
+  {
+   "proto": 0,
+   "view": "end",
+   "coverage": 0.08012008666992188
+  },
+  {
+   "proto": 1,
+   "view": "top",
+   "coverage": 0.041683197021484375
+  },
+  {
+   "proto": 1,
+   "view": "end",
+   "coverage": 0.108001708984375
+  },
+  {
+   "proto": 2,
+   "view": "top",
+   "coverage": 0.0440673828125
+  },
+  {
+   "proto": 2,
+   "view": "end",
+   "coverage": 0.08382034301757812
+  },
+  {
+   "proto": 3,
+   "view": "top",
+   "coverage": 0.038669586181640625
+  },
+  {
+   "proto": 3,
+   "view": "end",
+   "coverage": 0.14908218383789062
+  },
+  {
+   "proto": 4,
+   "view": "top",
+   "coverage": 0.040401458740234375
+  },
+  {
+   "proto": 4,
+   "view": "end",
+   "coverage": 0.13676071166992188
+  },
+  {
+   "proto": 5,
+   "view": "top",
+   "coverage": 0.050411224365234375
+  },
+  {
+   "proto": 5,
+   "view": "end",
+   "coverage": 0.09196090698242188
+  },
+  {
+   "proto": 6,
+   "view": "top",
+   "coverage": 0.057445526123046875
+  },
+  {
+   "proto": 6,
+   "view": "end",
+   "coverage": 0.11059188842773438
+  },
+  {
+   "proto": 7,
+   "view": "top",
+   "coverage": 0.036502838134765625
+  },
+  {
+   "proto": 7,
+   "view": "end",
+   "coverage": 0.14303970336914062
+  },
+  {
+   "proto": "clump0",
+   "view": "ctop",
+   "coverage": 0.2492828369140625
+  },
+  {
+   "proto": "clump0",
+   "view": "cside",
+   "coverage": 0.22229766845703125
+  },
+  {
+   "proto": "clump1",
+   "view": "ctop",
+   "coverage": 0.17800140380859375
+  },
+  {
+   "proto": "clump1",
+   "view": "cside",
+   "coverage": 0.19968414306640625
+  },
+  {
+   "proto": "clump2",
+   "view": "ctop",
+   "coverage": 0.2234344482421875
+  },
+  {
+   "proto": "clump2",
+   "view": "cside",
+   "coverage": 0.24416351318359375
+  },
+  {
+   "proto": "clump3",
+   "view": "ctop",
+   "coverage": 0.2028656005859375
+  },
+  {
+   "proto": "clump3",
+   "view": "cside",
+   "coverage": 0.18974685668945312
+  },
+  {
+   "proto": "clump4",
+   "view": "ctop",
+   "coverage": 0.13776397705078125
+  },
+  {
+   "proto": "clump4",
+   "view": "cside",
+   "coverage": 0.1412506103515625
+  },
+  {
+   "proto": "clump5",
+   "view": "ctop",
+   "coverage": 0.2393798828125
+  },
+  {
+   "proto": "clump5",
+   "view": "cside",
+   "coverage": 0.235382080078125
+  },
+  {
+   "proto": "clump6",
+   "view": "ctop",
+   "coverage": 0.22632217407226562
+  },
+  {
+   "proto": "clump6",
+   "view": "cside",
+   "coverage": 0.19768524169921875
+  },
+  {
+   "proto": "clump7",
+   "view": "ctop",
+   "coverage": 0.2103424072265625
+  },
+  {
+   "proto": "clump7",
+   "view": "cside",
+   "coverage": 0.19818878173828125
+  }
+ ]
+}

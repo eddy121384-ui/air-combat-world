@@ -1,0 +1,5844 @@
+{
+  "status": "PASS_HF_VERIFY",
+  "instances_file": "instances_acacia.json",
+  "a_chain": "T",
+  "checks": [
+    {
+      "check": "M_TL_LeafCards saved with ISM usage",
+      "ok": true,
+      "detail": {
+        "used_with_instanced_static_meshes": true,
+        "blend_mode": "<BlendMode.BLEND_MASKED: 1>",
+        "two_sided": true,
+        "shading_model": "<MaterialShadingModel.MSM_TWO_SIDED_FOLIAGE: 6>",
+        "package_dirty_after_load": false
+      }
+    },
+    {
+      "check": "M_TL_LeafCards package clean after load",
+      "ok": true,
+      "detail": {
+        "used_with_instanced_static_meshes": true,
+        "blend_mode": "<BlendMode.BLEND_MASKED: 1>",
+        "two_sided": true,
+        "shading_model": "<MaterialShadingModel.MSM_TWO_SIDED_FOLIAGE: 6>",
+        "package_dirty_after_load": false
+      }
+    },
+    {
+      "check": "M_TL_LeafCards leaf MASKED",
+      "ok": true,
+      "detail": "<BlendMode.BLEND_MASKED: 1>"
+    },
+    {
+      "check": "M_TL_LeafCards leaf two-sided",
+      "ok": true,
+      "detail": {
+        "used_with_instanced_static_meshes": true,
+        "blend_mode": "<BlendMode.BLEND_MASKED: 1>",
+        "two_sided": true,
+        "shading_model": "<MaterialShadingModel.MSM_TWO_SIDED_FOLIAGE: 6>",
+        "package_dirty_after_load": false
+      }
+    },
+    {
+      "check": "M_TL_LeafCards leaf foliage shading",
+      "ok": true,
+      "detail": "<MaterialShadingModel.MSM_TWO_SIDED_FOLIAGE: 6>"
+    },
+    {
+      "check": "M_TL_Bark saved with ISM usage",
+      "ok": true,
+      "detail": {
+        "used_with_instanced_static_meshes": true,
+        "blend_mode": "<BlendMode.BLEND_OPAQUE: 0>",
+        "two_sided": false,
+        "shading_model": "<MaterialShadingModel.MSM_DEFAULT_LIT: 1>",
+        "package_dirty_after_load": false
+      }
+    },
+    {
+      "check": "M_TL_Bark package clean after load",
+      "ok": true,
+      "detail": {
+        "used_with_instanced_static_meshes": true,
+        "blend_mode": "<BlendMode.BLEND_OPAQUE: 0>",
+        "two_sided": false,
+        "shading_model": "<MaterialShadingModel.MSM_DEFAULT_LIT: 1>",
+        "package_dirty_after_load": false
+      }
+    },
+    {
+      "check": "M_TL_AcaciaW_LeafCards saved with ISM usage",
+      "ok": true,
+      "detail": {
+        "used_with_instanced_static_meshes": true,
+        "blend_mode": "<BlendMode.BLEND_MASKED: 1>",
+        "two_sided": true,
+        "shading_model": "<MaterialShadingModel.MSM_TWO_SIDED_FOLIAGE: 6>",
+        "package_dirty_after_load": false
+      }
+    },
+    {
+      "check": "M_TL_AcaciaW_LeafCards package clean after load",
+      "ok": true,
+      "detail": {
+        "used_with_instanced_static_meshes": true,
+        "blend_mode": "<BlendMode.BLEND_MASKED: 1>",
+        "two_sided": true,
+        "shading_model": "<MaterialShadingModel.MSM_TWO_SIDED_FOLIAGE: 6>",
+        "package_dirty_after_load": false
+      }
+    },
+    {
+      "check": "M_TL_AcaciaW_LeafCards leaf MASKED",
+      "ok": true,
+      "detail": "<BlendMode.BLEND_MASKED: 1>"
+    },
+    {
+      "check": "M_TL_AcaciaW_LeafCards leaf two-sided",
+      "ok": true,
+      "detail": {
+        "used_with_instanced_static_meshes": true,
+        "blend_mode": "<BlendMode.BLEND_MASKED: 1>",
+        "two_sided": true,
+        "shading_model": "<MaterialShadingModel.MSM_TWO_SIDED_FOLIAGE: 6>",
+        "package_dirty_after_load": false
+      }
+    },
+    {
+      "check": "M_TL_AcaciaW_LeafCards leaf foliage shading",
+      "ok": true,
+      "detail": "<MaterialShadingModel.MSM_TWO_SIDED_FOLIAGE: 6>"
+    },
+    {
+      "check": "M_TL_Acacia_Bark saved with ISM usage",
+      "ok": true,
+      "detail": {
+        "used_with_instanced_static_meshes": true,
+        "blend_mode": "<BlendMode.BLEND_OPAQUE: 0>",
+        "two_sided": false,
+        "shading_model": "<MaterialShadingModel.MSM_DEFAULT_LIT: 1>",
+        "package_dirty_after_load": false
+      }
+    },
+    {
+      "check": "M_TL_Acacia_Bark package clean after load",
+      "ok": true,
+      "detail": {
+        "used_with_instanced_static_meshes": true,
+        "blend_mode": "<BlendMode.BLEND_OPAQUE: 0>",
+        "two_sided": false,
+        "shading_model": "<MaterialShadingModel.MSM_DEFAULT_LIT: 1>",
+        "package_dirty_after_load": false
+      }
+    },
+    {
+      "check": "MI_HF_Leaf_V0 base is M_TL_LeafCards",
+      "ok": true,
+      "detail": "/Game/TreeLookdev/Materials/M_TL_LeafCards"
+    },
+    {
+      "check": "MI_HF_Leaf_V1 TintHi",
+      "ok": true,
+      "detail": {
+        "want": [
+          1.34,
+          1.26,
+          0.8
+        ],
+        "got": [
+          1.34,
+          1.26,
+          0.8
+        ]
+      }
+    },
+    {
+      "check": "MI_HF_Leaf_V1 TintLo",
+      "ok": true,
+      "detail": {
+        "want": [
+          0.9,
+          0.94,
+          0.7
+        ],
+        "got": [
+          0.9,
+          0.94,
+          0.7
+        ]
+      }
+    },
+    {
+      "check": "MI_HF_Leaf_V1 Brightness",
+      "ok": true,
+      "detail": {
+        "want": 0.5,
+        "got": 0.5
+      }
+    },
+    {
+      "check": "MI_HF_Leaf_V1 base is M_TL_LeafCards",
+      "ok": true,
+      "detail": "/Game/TreeLookdev/Materials/M_TL_LeafCards"
+    },
+    {
+      "check": "MI_HF_Leaf_V2 TintHi",
+      "ok": true,
+      "detail": {
+        "want": [
+          0.98,
+          1.04,
+          1.0
+        ],
+        "got": [
+          0.98,
+          1.04,
+          1.0
+        ]
+      }
+    },
+    {
+      "check": "MI_HF_Leaf_V2 TintLo",
+      "ok": true,
+      "detail": {
+        "want": [
+          0.66,
+          0.76,
+          0.78
+        ],
+        "got": [
+          0.66,
+          0.76,
+          0.78
+        ]
+      }
+    },
+    {
+      "check": "MI_HF_Leaf_V2 Brightness",
+      "ok": true,
+      "detail": {
+        "want": 0.34,
+        "got": 0.34
+      }
+    },
+    {
+      "check": "MI_HF_Leaf_V2 base is M_TL_LeafCards",
+      "ok": true,
+      "detail": "/Game/TreeLookdev/Materials/M_TL_LeafCards"
+    },
+    {
+      "check": "MI_HF_Leaf_V3 TintHi",
+      "ok": true,
+      "detail": {
+        "want": [
+          1.42,
+          1.34,
+          0.72
+        ],
+        "got": [
+          1.42,
+          1.34,
+          0.72
+        ]
+      }
+    },
+    {
+      "check": "MI_HF_Leaf_V3 TintLo",
+      "ok": true,
+      "detail": {
+        "want": [
+          0.92,
+          0.96,
+          0.66
+        ],
+        "got": [
+          0.92,
+          0.96,
+          0.66
+        ]
+      }
+    },
+    {
+      "check": "MI_HF_Leaf_V3 Brightness",
+      "ok": true,
+      "detail": {
+        "want": 0.52,
+        "got": 0.52
+      }
+    },
+    {
+      "check": "MI_HF_Leaf_V3 base is M_TL_LeafCards",
+      "ok": true,
+      "detail": "/Game/TreeLookdev/Materials/M_TL_LeafCards"
+    },
+    {
+      "check": "MI_HF_Leaf_V4 TintHi",
+      "ok": true,
+      "detail": {
+        "want": [
+          1.3,
+          1.26,
+          0.82
+        ],
+        "got": [
+          1.3,
+          1.26,
+          0.82
+        ]
+      }
+    },
+    {
+      "check": "MI_HF_Leaf_V4 TintLo",
+      "ok": true,
+      "detail": {
+        "want": [
+          0.84,
+          0.92,
+          0.66
+        ],
+        "got": [
+          0.84,
+          0.92,
+          0.66
+        ]
+      }
+    },
+    {
+      "check": "MI_HF_Leaf_V4 Brightness",
+      "ok": true,
+      "detail": {
+        "want": 0.44,
+        "got": 0.44
+      }
+    },
+    {
+      "check": "MI_HF_Leaf_V4 base is M_TL_LeafCards",
+      "ok": true,
+      "detail": "/Game/TreeLookdev/Materials/M_TL_LeafCards"
+    },
+    {
+      "check": "MI_HF_Leaf_V5 TintHi",
+      "ok": true,
+      "detail": {
+        "want": [
+          1.24,
+          1.16,
+          0.84
+        ],
+        "got": [
+          1.24,
+          1.16,
+          0.84
+        ]
+      }
+    },
+    {
+      "check": "MI_HF_Leaf_V5 TintLo",
+      "ok": true,
+      "detail": {
+        "want": [
+          0.92,
+          0.92,
+          0.74
+        ],
+        "got": [
+          0.92,
+          0.92,
+          0.74
+        ]
+      }
+    },
+    {
+      "check": "MI_HF_Leaf_V5 Brightness",
+      "ok": true,
+      "detail": {
+        "want": 0.44,
+        "got": 0.44
+      }
+    },
+    {
+      "check": "MI_HF_Leaf_V5 base is M_TL_AcaciaW_LeafCards",
+      "ok": true,
+      "detail": "/Game/TreeLookdev/Materials/M_TL_AcaciaW_LeafCards"
+    },
+    {
+      "check": "MI_HF_Leaf_V6 TintHi",
+      "ok": true,
+      "detail": {
+        "want": [
+          1.36,
+          1.26,
+          0.74
+        ],
+        "got": [
+          1.36,
+          1.26,
+          0.74
+        ]
+      }
+    },
+    {
+      "check": "MI_HF_Leaf_V6 TintLo",
+      "ok": true,
+      "detail": {
+        "want": [
+          1.0,
+          0.98,
+          0.7
+        ],
+        "got": [
+          1.0,
+          0.98,
+          0.7
+        ]
+      }
+    },
+    {
+      "check": "MI_HF_Leaf_V6 Brightness",
+      "ok": true,
+      "detail": {
+        "want": 0.48,
+        "got": 0.48
+      }
+    },
+    {
+      "check": "MI_HF_Leaf_V6 base is M_TL_AcaciaW_LeafCards",
+      "ok": true,
+      "detail": "/Game/TreeLookdev/Materials/M_TL_AcaciaW_LeafCards"
+    },
+    {
+      "check": "MI_HF_Leaf_V7 TintHi",
+      "ok": true,
+      "detail": {
+        "want": [
+          1.08,
+          1.06,
+          0.9
+        ],
+        "got": [
+          1.08,
+          1.06,
+          0.9
+        ]
+      }
+    },
+    {
+      "check": "MI_HF_Leaf_V7 TintLo",
+      "ok": true,
+      "detail": {
+        "want": [
+          0.8,
+          0.84,
+          0.74
+        ],
+        "got": [
+          0.8,
+          0.84,
+          0.74
+        ]
+      }
+    },
+    {
+      "check": "MI_HF_Leaf_V7 Brightness",
+      "ok": true,
+      "detail": {
+        "want": 0.4,
+        "got": 0.4
+      }
+    },
+    {
+      "check": "MI_HF_Leaf_V7 base is M_TL_AcaciaW_LeafCards",
+      "ok": true,
+      "detail": "/Game/TreeLookdev/Materials/M_TL_AcaciaW_LeafCards"
+    },
+    {
+      "check": "main landscape present",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "check": "main landscape 64 components",
+      "ok": true,
+      "detail": 64
+    },
+    {
+      "check": "main landscape material",
+      "ok": true,
+      "detail": "/Game/HillsideForest/a8/M_HF_Ground.M_HF_Ground"
+    },
+    {
+      "check": "main forest present",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "check": "main one HISM per (form, tint)",
+      "ok": true,
+      "detail": {
+        "hisms": 8,
+        "groups": [
+          [
+            "A",
+            0
+          ],
+          [
+            "A",
+            1
+          ],
+          [
+            "A",
+            2
+          ],
+          [
+            "B",
+            3
+          ],
+          [
+            "B",
+            4
+          ],
+          [
+            "C",
+            5
+          ],
+          [
+            "C",
+            6
+          ],
+          [
+            "C",
+            7
+          ]
+        ]
+      }
+    },
+    {
+      "check": "main HierarchicalInstancedStaticMesh mesh = form-A chain (D / C / S / T), crown B or \u76f8\u601d\u6a39",
+      "ok": true,
+      "detail": "/Game/HillsideForest/Trees/A_CSide100/machilus_budget_side100_lod0/StaticMeshes/machilus_budget_side100_lod0"
+    },
+    {
+      "check": "main HierarchicalInstancedStaticMesh 4 LODs 1/0.5/0.15/0.06",
+      "ok": true,
+      "detail": [
+        1.0,
+        0.5,
+        0.15,
+        0.06
+      ]
+    },
+    {
+      "check": "main HierarchicalInstancedStaticMesh slot0 bark (M_TL_Bark)",
+      "ok": true,
+      "detail": {
+        "slot": 0,
+        "material": "/Game/TreeLookdev/Materials/M_TL_Bark",
+        "base": "/Game/TreeLookdev/Materials/M_TL_Bark",
+        "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+        "base_ism_usage": true
+      }
+    },
+    {
+      "check": "main HierarchicalInstancedStaticMesh slot1 masked leaf MIC (M_TL_LeafCards)",
+      "ok": true,
+      "detail": {
+        "slot": 1,
+        "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V0",
+        "base": "/Game/TreeLookdev/Materials/M_TL_LeafCards",
+        "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+        "base_ism_usage": true
+      }
+    },
+    {
+      "check": "main HierarchicalInstancedStaticMesh no default material",
+      "ok": true,
+      "detail": [
+        {
+          "slot": 0,
+          "material": "/Game/TreeLookdev/Materials/M_TL_Bark",
+          "base": "/Game/TreeLookdev/Materials/M_TL_Bark",
+          "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+          "base_ism_usage": true
+        },
+        {
+          "slot": 1,
+          "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V0",
+          "base": "/Game/TreeLookdev/Materials/M_TL_LeafCards",
+          "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+          "base_ism_usage": true
+        }
+      ]
+    },
+    {
+      "check": "main HierarchicalInstancedStaticMesh1 mesh = form-A chain (D / C / S / T), crown B or \u76f8\u601d\u6a39",
+      "ok": true,
+      "detail": "/Game/HillsideForest/Trees/A_CSide100/machilus_budget_side100_lod0/StaticMeshes/machilus_budget_side100_lod0"
+    },
+    {
+      "check": "main HierarchicalInstancedStaticMesh1 4 LODs 1/0.5/0.15/0.06",
+      "ok": true,
+      "detail": [
+        1.0,
+        0.5,
+        0.15,
+        0.06
+      ]
+    },
+    {
+      "check": "main HierarchicalInstancedStaticMesh1 slot0 bark (M_TL_Bark)",
+      "ok": true,
+      "detail": {
+        "slot": 0,
+        "material": "/Game/TreeLookdev/Materials/M_TL_Bark",
+        "base": "/Game/TreeLookdev/Materials/M_TL_Bark",
+        "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+        "base_ism_usage": true
+      }
+    },
+    {
+      "check": "main HierarchicalInstancedStaticMesh1 slot1 masked leaf MIC (M_TL_LeafCards)",
+      "ok": true,
+      "detail": {
+        "slot": 1,
+        "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V1",
+        "base": "/Game/TreeLookdev/Materials/M_TL_LeafCards",
+        "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+        "base_ism_usage": true
+      }
+    },
+    {
+      "check": "main HierarchicalInstancedStaticMesh1 no default material",
+      "ok": true,
+      "detail": [
+        {
+          "slot": 0,
+          "material": "/Game/TreeLookdev/Materials/M_TL_Bark",
+          "base": "/Game/TreeLookdev/Materials/M_TL_Bark",
+          "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+          "base_ism_usage": true
+        },
+        {
+          "slot": 1,
+          "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V1",
+          "base": "/Game/TreeLookdev/Materials/M_TL_LeafCards",
+          "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+          "base_ism_usage": true
+        }
+      ]
+    },
+    {
+      "check": "main HierarchicalInstancedStaticMesh2 mesh = form-A chain (D / C / S / T), crown B or \u76f8\u601d\u6a39",
+      "ok": true,
+      "detail": "/Game/HillsideForest/Trees/A_CSide100/machilus_budget_side100_lod0/StaticMeshes/machilus_budget_side100_lod0"
+    },
+    {
+      "check": "main HierarchicalInstancedStaticMesh2 4 LODs 1/0.5/0.15/0.06",
+      "ok": true,
+      "detail": [
+        1.0,
+        0.5,
+        0.15,
+        0.06
+      ]
+    },
+    {
+      "check": "main HierarchicalInstancedStaticMesh2 slot0 bark (M_TL_Bark)",
+      "ok": true,
+      "detail": {
+        "slot": 0,
+        "material": "/Game/TreeLookdev/Materials/M_TL_Bark",
+        "base": "/Game/TreeLookdev/Materials/M_TL_Bark",
+        "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+        "base_ism_usage": true
+      }
+    },
+    {
+      "check": "main HierarchicalInstancedStaticMesh2 slot1 masked leaf MIC (M_TL_LeafCards)",
+      "ok": true,
+      "detail": {
+        "slot": 1,
+        "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V2",
+        "base": "/Game/TreeLookdev/Materials/M_TL_LeafCards",
+        "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+        "base_ism_usage": true
+      }
+    },
+    {
+      "check": "main HierarchicalInstancedStaticMesh2 no default material",
+      "ok": true,
+      "detail": [
+        {
+          "slot": 0,
+          "material": "/Game/TreeLookdev/Materials/M_TL_Bark",
+          "base": "/Game/TreeLookdev/Materials/M_TL_Bark",
+          "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+          "base_ism_usage": true
+        },
+        {
+          "slot": 1,
+          "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V2",
+          "base": "/Game/TreeLookdev/Materials/M_TL_LeafCards",
+          "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+          "base_ism_usage": true
+        }
+      ]
+    },
+    {
+      "check": "main HierarchicalInstancedStaticMesh3 mesh = form-A chain (D / C / S / T), crown B or \u76f8\u601d\u6a39",
+      "ok": true,
+      "detail": "/Game/HillsideForest/Trees/CrownB/machilus_balanced_lod0/StaticMeshes/machilus_balanced_lod0"
+    },
+    {
+      "check": "main HierarchicalInstancedStaticMesh3 4 LODs 1/0.5/0.15/0.06",
+      "ok": true,
+      "detail": [
+        1.0,
+        0.5,
+        0.15,
+        0.06
+      ]
+    },
+    {
+      "check": "main HierarchicalInstancedStaticMesh3 slot0 bark (M_TL_Bark)",
+      "ok": true,
+      "detail": {
+        "slot": 0,
+        "material": "/Game/TreeLookdev/Materials/M_TL_Bark",
+        "base": "/Game/TreeLookdev/Materials/M_TL_Bark",
+        "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+        "base_ism_usage": true
+      }
+    },
+    {
+      "check": "main HierarchicalInstancedStaticMesh3 slot1 masked leaf MIC (M_TL_LeafCards)",
+      "ok": true,
+      "detail": {
+        "slot": 1,
+        "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V3",
+        "base": "/Game/TreeLookdev/Materials/M_TL_LeafCards",
+        "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+        "base_ism_usage": true
+      }
+    },
+    {
+      "check": "main HierarchicalInstancedStaticMesh3 no default material",
+      "ok": true,
+      "detail": [
+        {
+          "slot": 0,
+          "material": "/Game/TreeLookdev/Materials/M_TL_Bark",
+          "base": "/Game/TreeLookdev/Materials/M_TL_Bark",
+          "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+          "base_ism_usage": true
+        },
+        {
+          "slot": 1,
+          "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V3",
+          "base": "/Game/TreeLookdev/Materials/M_TL_LeafCards",
+          "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+          "base_ism_usage": true
+        }
+      ]
+    },
+    {
+      "check": "main HierarchicalInstancedStaticMesh4 mesh = form-A chain (D / C / S / T), crown B or \u76f8\u601d\u6a39",
+      "ok": true,
+      "detail": "/Game/HillsideForest/Trees/CrownB/machilus_balanced_lod0/StaticMeshes/machilus_balanced_lod0"
+    },
+    {
+      "check": "main HierarchicalInstancedStaticMesh4 4 LODs 1/0.5/0.15/0.06",
+      "ok": true,
+      "detail": [
+        1.0,
+        0.5,
+        0.15,
+        0.06
+      ]
+    },
+    {
+      "check": "main HierarchicalInstancedStaticMesh4 slot0 bark (M_TL_Bark)",
+      "ok": true,
+      "detail": {
+        "slot": 0,
+        "material": "/Game/TreeLookdev/Materials/M_TL_Bark",
+        "base": "/Game/TreeLookdev/Materials/M_TL_Bark",
+        "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+        "base_ism_usage": true
+      }
+    },
+    {
+      "check": "main HierarchicalInstancedStaticMesh4 slot1 masked leaf MIC (M_TL_LeafCards)",
+      "ok": true,
+      "detail": {
+        "slot": 1,
+        "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V4",
+        "base": "/Game/TreeLookdev/Materials/M_TL_LeafCards",
+        "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+        "base_ism_usage": true
+      }
+    },
+    {
+      "check": "main HierarchicalInstancedStaticMesh4 no default material",
+      "ok": true,
+      "detail": [
+        {
+          "slot": 0,
+          "material": "/Game/TreeLookdev/Materials/M_TL_Bark",
+          "base": "/Game/TreeLookdev/Materials/M_TL_Bark",
+          "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+          "base_ism_usage": true
+        },
+        {
+          "slot": 1,
+          "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V4",
+          "base": "/Game/TreeLookdev/Materials/M_TL_LeafCards",
+          "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+          "base_ism_usage": true
+        }
+      ]
+    },
+    {
+      "check": "main HierarchicalInstancedStaticMesh5 mesh = form-A chain (D / C / S / T), crown B or \u76f8\u601d\u6a39",
+      "ok": true,
+      "detail": "/Game/HillsideForest/Trees/AcaciaTight/acacia_acacia_tight_lod0/StaticMeshes/acacia_acacia_tight_lod0"
+    },
+    {
+      "check": "main HierarchicalInstancedStaticMesh5 4 LODs 1/0.5/0.15/0.06",
+      "ok": true,
+      "detail": [
+        1.0,
+        0.5,
+        0.15,
+        0.06
+      ]
+    },
+    {
+      "check": "main HierarchicalInstancedStaticMesh5 slot0 bark (M_TL_Acacia_Bark)",
+      "ok": true,
+      "detail": {
+        "slot": 0,
+        "material": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+        "base": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+        "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+        "base_ism_usage": true
+      }
+    },
+    {
+      "check": "main HierarchicalInstancedStaticMesh5 slot1 masked leaf MIC (M_TL_AcaciaW_LeafCards)",
+      "ok": true,
+      "detail": {
+        "slot": 1,
+        "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V5",
+        "base": "/Game/TreeLookdev/Materials/M_TL_AcaciaW_LeafCards",
+        "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+        "base_ism_usage": true
+      }
+    },
+    {
+      "check": "main HierarchicalInstancedStaticMesh5 no default material",
+      "ok": true,
+      "detail": [
+        {
+          "slot": 0,
+          "material": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+          "base": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+          "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+          "base_ism_usage": true
+        },
+        {
+          "slot": 1,
+          "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V5",
+          "base": "/Game/TreeLookdev/Materials/M_TL_AcaciaW_LeafCards",
+          "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+          "base_ism_usage": true
+        }
+      ]
+    },
+    {
+      "check": "main HierarchicalInstancedStaticMesh6 mesh = form-A chain (D / C / S / T), crown B or \u76f8\u601d\u6a39",
+      "ok": true,
+      "detail": "/Game/HillsideForest/Trees/AcaciaTight/acacia_acacia_tight_lod0/StaticMeshes/acacia_acacia_tight_lod0"
+    },
+    {
+      "check": "main HierarchicalInstancedStaticMesh6 4 LODs 1/0.5/0.15/0.06",
+      "ok": true,
+      "detail": [
+        1.0,
+        0.5,
+        0.15,
+        0.06
+      ]
+    },
+    {
+      "check": "main HierarchicalInstancedStaticMesh6 slot0 bark (M_TL_Acacia_Bark)",
+      "ok": true,
+      "detail": {
+        "slot": 0,
+        "material": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+        "base": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+        "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+        "base_ism_usage": true
+      }
+    },
+    {
+      "check": "main HierarchicalInstancedStaticMesh6 slot1 masked leaf MIC (M_TL_AcaciaW_LeafCards)",
+      "ok": true,
+      "detail": {
+        "slot": 1,
+        "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V6",
+        "base": "/Game/TreeLookdev/Materials/M_TL_AcaciaW_LeafCards",
+        "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+        "base_ism_usage": true
+      }
+    },
+    {
+      "check": "main HierarchicalInstancedStaticMesh6 no default material",
+      "ok": true,
+      "detail": [
+        {
+          "slot": 0,
+          "material": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+          "base": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+          "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+          "base_ism_usage": true
+        },
+        {
+          "slot": 1,
+          "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V6",
+          "base": "/Game/TreeLookdev/Materials/M_TL_AcaciaW_LeafCards",
+          "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+          "base_ism_usage": true
+        }
+      ]
+    },
+    {
+      "check": "main HierarchicalInstancedStaticMesh7 mesh = form-A chain (D / C / S / T), crown B or \u76f8\u601d\u6a39",
+      "ok": true,
+      "detail": "/Game/HillsideForest/Trees/AcaciaTight/acacia_acacia_tight_lod0/StaticMeshes/acacia_acacia_tight_lod0"
+    },
+    {
+      "check": "main HierarchicalInstancedStaticMesh7 4 LODs 1/0.5/0.15/0.06",
+      "ok": true,
+      "detail": [
+        1.0,
+        0.5,
+        0.15,
+        0.06
+      ]
+    },
+    {
+      "check": "main HierarchicalInstancedStaticMesh7 slot0 bark (M_TL_Acacia_Bark)",
+      "ok": true,
+      "detail": {
+        "slot": 0,
+        "material": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+        "base": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+        "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+        "base_ism_usage": true
+      }
+    },
+    {
+      "check": "main HierarchicalInstancedStaticMesh7 slot1 masked leaf MIC (M_TL_AcaciaW_LeafCards)",
+      "ok": true,
+      "detail": {
+        "slot": 1,
+        "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V7",
+        "base": "/Game/TreeLookdev/Materials/M_TL_AcaciaW_LeafCards",
+        "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+        "base_ism_usage": true
+      }
+    },
+    {
+      "check": "main HierarchicalInstancedStaticMesh7 no default material",
+      "ok": true,
+      "detail": [
+        {
+          "slot": 0,
+          "material": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+          "base": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+          "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+          "base_ism_usage": true
+        },
+        {
+          "slot": 1,
+          "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V7",
+          "base": "/Game/TreeLookdev/Materials/M_TL_AcaciaW_LeafCards",
+          "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+          "base_ism_usage": true
+        }
+      ]
+    },
+    {
+      "check": "main instances per form",
+      "ok": true,
+      "detail": {
+        "got": {
+          "/Game/HillsideForest/Trees/A_CSide100/machilus_budget_side100_lod0/StaticMeshes/machilus_budget_side100_lod0": 482,
+          "/Game/HillsideForest/Trees/CrownB/machilus_balanced_lod0/StaticMeshes/machilus_balanced_lod0": 259,
+          "/Game/HillsideForest/Trees/AcaciaTight/acacia_acacia_tight_lod0/StaticMeshes/acacia_acacia_tight_lod0": 248
+        },
+        "want": {
+          "/Game/HillsideForest/Trees/AcaciaTight/acacia_acacia_tight_lod0/StaticMeshes/acacia_acacia_tight_lod0": 248,
+          "/Game/HillsideForest/Trees/A_CSide100/machilus_budget_side100_lod0/StaticMeshes/machilus_budget_side100_lod0": 482,
+          "/Game/HillsideForest/Trees/CrownB/machilus_balanced_lod0/StaticMeshes/machilus_balanced_lod0": 259
+        }
+      }
+    },
+    {
+      "check": "main instance total",
+      "ok": true,
+      "detail": {
+        "got": 989,
+        "want": 989
+      }
+    },
+    {
+      "check": "main transforms match instances.json",
+      "ok": true,
+      "detail": {
+        "worst_location_cm": 0.0,
+        "worst_scale_err_pct": 0.0
+      }
+    },
+    {
+      "check": "stills_forest landscape present",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "check": "stills_forest landscape 64 components",
+      "ok": true,
+      "detail": 64
+    },
+    {
+      "check": "stills_forest landscape material",
+      "ok": true,
+      "detail": "/Game/HillsideForest/a8/M_HF_Ground.M_HF_Ground"
+    },
+    {
+      "check": "stills_forest forest present",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "check": "stills_forest one HISM per (form, tint)",
+      "ok": true,
+      "detail": {
+        "hisms": 8,
+        "groups": [
+          [
+            "A",
+            0
+          ],
+          [
+            "A",
+            1
+          ],
+          [
+            "A",
+            2
+          ],
+          [
+            "B",
+            3
+          ],
+          [
+            "B",
+            4
+          ],
+          [
+            "C",
+            5
+          ],
+          [
+            "C",
+            6
+          ],
+          [
+            "C",
+            7
+          ]
+        ]
+      }
+    },
+    {
+      "check": "stills_forest HierarchicalInstancedStaticMesh mesh = form-A chain (D / C / S / T), crown B or \u76f8\u601d\u6a39",
+      "ok": true,
+      "detail": "/Game/HillsideForest/Trees/A_CSide100/machilus_budget_side100_lod0/StaticMeshes/machilus_budget_side100_lod0"
+    },
+    {
+      "check": "stills_forest HierarchicalInstancedStaticMesh 4 LODs 1/0.5/0.15/0.06",
+      "ok": true,
+      "detail": [
+        1.0,
+        0.5,
+        0.15,
+        0.06
+      ]
+    },
+    {
+      "check": "stills_forest HierarchicalInstancedStaticMesh slot0 bark (M_TL_Bark)",
+      "ok": true,
+      "detail": {
+        "slot": 0,
+        "material": "/Game/TreeLookdev/Materials/M_TL_Bark",
+        "base": "/Game/TreeLookdev/Materials/M_TL_Bark",
+        "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+        "base_ism_usage": true
+      }
+    },
+    {
+      "check": "stills_forest HierarchicalInstancedStaticMesh slot1 masked leaf MIC (M_TL_LeafCards)",
+      "ok": true,
+      "detail": {
+        "slot": 1,
+        "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V0",
+        "base": "/Game/TreeLookdev/Materials/M_TL_LeafCards",
+        "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+        "base_ism_usage": true
+      }
+    },
+    {
+      "check": "stills_forest HierarchicalInstancedStaticMesh no default material",
+      "ok": true,
+      "detail": [
+        {
+          "slot": 0,
+          "material": "/Game/TreeLookdev/Materials/M_TL_Bark",
+          "base": "/Game/TreeLookdev/Materials/M_TL_Bark",
+          "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+          "base_ism_usage": true
+        },
+        {
+          "slot": 1,
+          "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V0",
+          "base": "/Game/TreeLookdev/Materials/M_TL_LeafCards",
+          "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+          "base_ism_usage": true
+        }
+      ]
+    },
+    {
+      "check": "stills_forest HierarchicalInstancedStaticMesh1 mesh = form-A chain (D / C / S / T), crown B or \u76f8\u601d\u6a39",
+      "ok": true,
+      "detail": "/Game/HillsideForest/Trees/A_CSide100/machilus_budget_side100_lod0/StaticMeshes/machilus_budget_side100_lod0"
+    },
+    {
+      "check": "stills_forest HierarchicalInstancedStaticMesh1 4 LODs 1/0.5/0.15/0.06",
+      "ok": true,
+      "detail": [
+        1.0,
+        0.5,
+        0.15,
+        0.06
+      ]
+    },
+    {
+      "check": "stills_forest HierarchicalInstancedStaticMesh1 slot0 bark (M_TL_Bark)",
+      "ok": true,
+      "detail": {
+        "slot": 0,
+        "material": "/Game/TreeLookdev/Materials/M_TL_Bark",
+        "base": "/Game/TreeLookdev/Materials/M_TL_Bark",
+        "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+        "base_ism_usage": true
+      }
+    },
+    {
+      "check": "stills_forest HierarchicalInstancedStaticMesh1 slot1 masked leaf MIC (M_TL_LeafCards)",
+      "ok": true,
+      "detail": {
+        "slot": 1,
+        "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V1",
+        "base": "/Game/TreeLookdev/Materials/M_TL_LeafCards",
+        "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+        "base_ism_usage": true
+      }
+    },
+    {
+      "check": "stills_forest HierarchicalInstancedStaticMesh1 no default material",
+      "ok": true,
+      "detail": [
+        {
+          "slot": 0,
+          "material": "/Game/TreeLookdev/Materials/M_TL_Bark",
+          "base": "/Game/TreeLookdev/Materials/M_TL_Bark",
+          "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+          "base_ism_usage": true
+        },
+        {
+          "slot": 1,
+          "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V1",
+          "base": "/Game/TreeLookdev/Materials/M_TL_LeafCards",
+          "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+          "base_ism_usage": true
+        }
+      ]
+    },
+    {
+      "check": "stills_forest HierarchicalInstancedStaticMesh2 mesh = form-A chain (D / C / S / T), crown B or \u76f8\u601d\u6a39",
+      "ok": true,
+      "detail": "/Game/HillsideForest/Trees/A_CSide100/machilus_budget_side100_lod0/StaticMeshes/machilus_budget_side100_lod0"
+    },
+    {
+      "check": "stills_forest HierarchicalInstancedStaticMesh2 4 LODs 1/0.5/0.15/0.06",
+      "ok": true,
+      "detail": [
+        1.0,
+        0.5,
+        0.15,
+        0.06
+      ]
+    },
+    {
+      "check": "stills_forest HierarchicalInstancedStaticMesh2 slot0 bark (M_TL_Bark)",
+      "ok": true,
+      "detail": {
+        "slot": 0,
+        "material": "/Game/TreeLookdev/Materials/M_TL_Bark",
+        "base": "/Game/TreeLookdev/Materials/M_TL_Bark",
+        "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+        "base_ism_usage": true
+      }
+    },
+    {
+      "check": "stills_forest HierarchicalInstancedStaticMesh2 slot1 masked leaf MIC (M_TL_LeafCards)",
+      "ok": true,
+      "detail": {
+        "slot": 1,
+        "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V2",
+        "base": "/Game/TreeLookdev/Materials/M_TL_LeafCards",
+        "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+        "base_ism_usage": true
+      }
+    },
+    {
+      "check": "stills_forest HierarchicalInstancedStaticMesh2 no default material",
+      "ok": true,
+      "detail": [
+        {
+          "slot": 0,
+          "material": "/Game/TreeLookdev/Materials/M_TL_Bark",
+          "base": "/Game/TreeLookdev/Materials/M_TL_Bark",
+          "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+          "base_ism_usage": true
+        },
+        {
+          "slot": 1,
+          "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V2",
+          "base": "/Game/TreeLookdev/Materials/M_TL_LeafCards",
+          "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+          "base_ism_usage": true
+        }
+      ]
+    },
+    {
+      "check": "stills_forest HierarchicalInstancedStaticMesh3 mesh = form-A chain (D / C / S / T), crown B or \u76f8\u601d\u6a39",
+      "ok": true,
+      "detail": "/Game/HillsideForest/Trees/CrownB/machilus_balanced_lod0/StaticMeshes/machilus_balanced_lod0"
+    },
+    {
+      "check": "stills_forest HierarchicalInstancedStaticMesh3 4 LODs 1/0.5/0.15/0.06",
+      "ok": true,
+      "detail": [
+        1.0,
+        0.5,
+        0.15,
+        0.06
+      ]
+    },
+    {
+      "check": "stills_forest HierarchicalInstancedStaticMesh3 slot0 bark (M_TL_Bark)",
+      "ok": true,
+      "detail": {
+        "slot": 0,
+        "material": "/Game/TreeLookdev/Materials/M_TL_Bark",
+        "base": "/Game/TreeLookdev/Materials/M_TL_Bark",
+        "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+        "base_ism_usage": true
+      }
+    },
+    {
+      "check": "stills_forest HierarchicalInstancedStaticMesh3 slot1 masked leaf MIC (M_TL_LeafCards)",
+      "ok": true,
+      "detail": {
+        "slot": 1,
+        "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V3",
+        "base": "/Game/TreeLookdev/Materials/M_TL_LeafCards",
+        "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+        "base_ism_usage": true
+      }
+    },
+    {
+      "check": "stills_forest HierarchicalInstancedStaticMesh3 no default material",
+      "ok": true,
+      "detail": [
+        {
+          "slot": 0,
+          "material": "/Game/TreeLookdev/Materials/M_TL_Bark",
+          "base": "/Game/TreeLookdev/Materials/M_TL_Bark",
+          "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+          "base_ism_usage": true
+        },
+        {
+          "slot": 1,
+          "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V3",
+          "base": "/Game/TreeLookdev/Materials/M_TL_LeafCards",
+          "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+          "base_ism_usage": true
+        }
+      ]
+    },
+    {
+      "check": "stills_forest HierarchicalInstancedStaticMesh4 mesh = form-A chain (D / C / S / T), crown B or \u76f8\u601d\u6a39",
+      "ok": true,
+      "detail": "/Game/HillsideForest/Trees/CrownB/machilus_balanced_lod0/StaticMeshes/machilus_balanced_lod0"
+    },
+    {
+      "check": "stills_forest HierarchicalInstancedStaticMesh4 4 LODs 1/0.5/0.15/0.06",
+      "ok": true,
+      "detail": [
+        1.0,
+        0.5,
+        0.15,
+        0.06
+      ]
+    },
+    {
+      "check": "stills_forest HierarchicalInstancedStaticMesh4 slot0 bark (M_TL_Bark)",
+      "ok": true,
+      "detail": {
+        "slot": 0,
+        "material": "/Game/TreeLookdev/Materials/M_TL_Bark",
+        "base": "/Game/TreeLookdev/Materials/M_TL_Bark",
+        "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+        "base_ism_usage": true
+      }
+    },
+    {
+      "check": "stills_forest HierarchicalInstancedStaticMesh4 slot1 masked leaf MIC (M_TL_LeafCards)",
+      "ok": true,
+      "detail": {
+        "slot": 1,
+        "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V4",
+        "base": "/Game/TreeLookdev/Materials/M_TL_LeafCards",
+        "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+        "base_ism_usage": true
+      }
+    },
+    {
+      "check": "stills_forest HierarchicalInstancedStaticMesh4 no default material",
+      "ok": true,
+      "detail": [
+        {
+          "slot": 0,
+          "material": "/Game/TreeLookdev/Materials/M_TL_Bark",
+          "base": "/Game/TreeLookdev/Materials/M_TL_Bark",
+          "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+          "base_ism_usage": true
+        },
+        {
+          "slot": 1,
+          "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V4",
+          "base": "/Game/TreeLookdev/Materials/M_TL_LeafCards",
+          "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+          "base_ism_usage": true
+        }
+      ]
+    },
+    {
+      "check": "stills_forest HierarchicalInstancedStaticMesh5 mesh = form-A chain (D / C / S / T), crown B or \u76f8\u601d\u6a39",
+      "ok": true,
+      "detail": "/Game/HillsideForest/Trees/AcaciaTight/acacia_acacia_tight_lod0/StaticMeshes/acacia_acacia_tight_lod0"
+    },
+    {
+      "check": "stills_forest HierarchicalInstancedStaticMesh5 4 LODs 1/0.5/0.15/0.06",
+      "ok": true,
+      "detail": [
+        1.0,
+        0.5,
+        0.15,
+        0.06
+      ]
+    },
+    {
+      "check": "stills_forest HierarchicalInstancedStaticMesh5 slot0 bark (M_TL_Acacia_Bark)",
+      "ok": true,
+      "detail": {
+        "slot": 0,
+        "material": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+        "base": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+        "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+        "base_ism_usage": true
+      }
+    },
+    {
+      "check": "stills_forest HierarchicalInstancedStaticMesh5 slot1 masked leaf MIC (M_TL_AcaciaW_LeafCards)",
+      "ok": true,
+      "detail": {
+        "slot": 1,
+        "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V5",
+        "base": "/Game/TreeLookdev/Materials/M_TL_AcaciaW_LeafCards",
+        "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+        "base_ism_usage": true
+      }
+    },
+    {
+      "check": "stills_forest HierarchicalInstancedStaticMesh5 no default material",
+      "ok": true,
+      "detail": [
+        {
+          "slot": 0,
+          "material": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+          "base": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+          "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+          "base_ism_usage": true
+        },
+        {
+          "slot": 1,
+          "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V5",
+          "base": "/Game/TreeLookdev/Materials/M_TL_AcaciaW_LeafCards",
+          "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+          "base_ism_usage": true
+        }
+      ]
+    },
+    {
+      "check": "stills_forest HierarchicalInstancedStaticMesh6 mesh = form-A chain (D / C / S / T), crown B or \u76f8\u601d\u6a39",
+      "ok": true,
+      "detail": "/Game/HillsideForest/Trees/AcaciaTight/acacia_acacia_tight_lod0/StaticMeshes/acacia_acacia_tight_lod0"
+    },
+    {
+      "check": "stills_forest HierarchicalInstancedStaticMesh6 4 LODs 1/0.5/0.15/0.06",
+      "ok": true,
+      "detail": [
+        1.0,
+        0.5,
+        0.15,
+        0.06
+      ]
+    },
+    {
+      "check": "stills_forest HierarchicalInstancedStaticMesh6 slot0 bark (M_TL_Acacia_Bark)",
+      "ok": true,
+      "detail": {
+        "slot": 0,
+        "material": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+        "base": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+        "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+        "base_ism_usage": true
+      }
+    },
+    {
+      "check": "stills_forest HierarchicalInstancedStaticMesh6 slot1 masked leaf MIC (M_TL_AcaciaW_LeafCards)",
+      "ok": true,
+      "detail": {
+        "slot": 1,
+        "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V6",
+        "base": "/Game/TreeLookdev/Materials/M_TL_AcaciaW_LeafCards",
+        "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+        "base_ism_usage": true
+      }
+    },
+    {
+      "check": "stills_forest HierarchicalInstancedStaticMesh6 no default material",
+      "ok": true,
+      "detail": [
+        {
+          "slot": 0,
+          "material": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+          "base": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+          "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+          "base_ism_usage": true
+        },
+        {
+          "slot": 1,
+          "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V6",
+          "base": "/Game/TreeLookdev/Materials/M_TL_AcaciaW_LeafCards",
+          "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+          "base_ism_usage": true
+        }
+      ]
+    },
+    {
+      "check": "stills_forest HierarchicalInstancedStaticMesh7 mesh = form-A chain (D / C / S / T), crown B or \u76f8\u601d\u6a39",
+      "ok": true,
+      "detail": "/Game/HillsideForest/Trees/AcaciaTight/acacia_acacia_tight_lod0/StaticMeshes/acacia_acacia_tight_lod0"
+    },
+    {
+      "check": "stills_forest HierarchicalInstancedStaticMesh7 4 LODs 1/0.5/0.15/0.06",
+      "ok": true,
+      "detail": [
+        1.0,
+        0.5,
+        0.15,
+        0.06
+      ]
+    },
+    {
+      "check": "stills_forest HierarchicalInstancedStaticMesh7 slot0 bark (M_TL_Acacia_Bark)",
+      "ok": true,
+      "detail": {
+        "slot": 0,
+        "material": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+        "base": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+        "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+        "base_ism_usage": true
+      }
+    },
+    {
+      "check": "stills_forest HierarchicalInstancedStaticMesh7 slot1 masked leaf MIC (M_TL_AcaciaW_LeafCards)",
+      "ok": true,
+      "detail": {
+        "slot": 1,
+        "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V7",
+        "base": "/Game/TreeLookdev/Materials/M_TL_AcaciaW_LeafCards",
+        "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+        "base_ism_usage": true
+      }
+    },
+    {
+      "check": "stills_forest HierarchicalInstancedStaticMesh7 no default material",
+      "ok": true,
+      "detail": [
+        {
+          "slot": 0,
+          "material": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+          "base": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+          "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+          "base_ism_usage": true
+        },
+        {
+          "slot": 1,
+          "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V7",
+          "base": "/Game/TreeLookdev/Materials/M_TL_AcaciaW_LeafCards",
+          "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+          "base_ism_usage": true
+        }
+      ]
+    },
+    {
+      "check": "stills_forest instances per form",
+      "ok": true,
+      "detail": {
+        "got": {
+          "/Game/HillsideForest/Trees/A_CSide100/machilus_budget_side100_lod0/StaticMeshes/machilus_budget_side100_lod0": 482,
+          "/Game/HillsideForest/Trees/CrownB/machilus_balanced_lod0/StaticMeshes/machilus_balanced_lod0": 259,
+          "/Game/HillsideForest/Trees/AcaciaTight/acacia_acacia_tight_lod0/StaticMeshes/acacia_acacia_tight_lod0": 248
+        },
+        "want": {
+          "/Game/HillsideForest/Trees/AcaciaTight/acacia_acacia_tight_lod0/StaticMeshes/acacia_acacia_tight_lod0": 248,
+          "/Game/HillsideForest/Trees/A_CSide100/machilus_budget_side100_lod0/StaticMeshes/machilus_budget_side100_lod0": 482,
+          "/Game/HillsideForest/Trees/CrownB/machilus_balanced_lod0/StaticMeshes/machilus_balanced_lod0": 259
+        }
+      }
+    },
+    {
+      "check": "stills_forest instance total",
+      "ok": true,
+      "detail": {
+        "got": 989,
+        "want": 989
+      }
+    },
+    {
+      "check": "stills_forest transforms match instances.json",
+      "ok": true,
+      "detail": {
+        "worst_location_cm": 0.0,
+        "worst_scale_err_pct": 0.0
+      }
+    },
+    {
+      "check": "flight_forest landscape present",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "check": "flight_forest landscape 64 components",
+      "ok": true,
+      "detail": 64
+    },
+    {
+      "check": "flight_forest landscape material",
+      "ok": true,
+      "detail": "/Game/HillsideForest/a8/M_HF_Ground.M_HF_Ground"
+    },
+    {
+      "check": "flight_forest forest present",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "check": "flight_forest one HISM per (form, tint)",
+      "ok": true,
+      "detail": {
+        "hisms": 8,
+        "groups": [
+          [
+            "A",
+            0
+          ],
+          [
+            "A",
+            1
+          ],
+          [
+            "A",
+            2
+          ],
+          [
+            "B",
+            3
+          ],
+          [
+            "B",
+            4
+          ],
+          [
+            "C",
+            5
+          ],
+          [
+            "C",
+            6
+          ],
+          [
+            "C",
+            7
+          ]
+        ]
+      }
+    },
+    {
+      "check": "flight_forest HierarchicalInstancedStaticMesh mesh = form-A chain (D / C / S / T), crown B or \u76f8\u601d\u6a39",
+      "ok": true,
+      "detail": "/Game/HillsideForest/Trees/A_CSide100/machilus_budget_side100_lod0/StaticMeshes/machilus_budget_side100_lod0"
+    },
+    {
+      "check": "flight_forest HierarchicalInstancedStaticMesh 4 LODs 1/0.5/0.15/0.06",
+      "ok": true,
+      "detail": [
+        1.0,
+        0.5,
+        0.15,
+        0.06
+      ]
+    },
+    {
+      "check": "flight_forest HierarchicalInstancedStaticMesh slot0 bark (M_TL_Bark)",
+      "ok": true,
+      "detail": {
+        "slot": 0,
+        "material": "/Game/TreeLookdev/Materials/M_TL_Bark",
+        "base": "/Game/TreeLookdev/Materials/M_TL_Bark",
+        "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+        "base_ism_usage": true
+      }
+    },
+    {
+      "check": "flight_forest HierarchicalInstancedStaticMesh slot1 masked leaf MIC (M_TL_LeafCards)",
+      "ok": true,
+      "detail": {
+        "slot": 1,
+        "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V0",
+        "base": "/Game/TreeLookdev/Materials/M_TL_LeafCards",
+        "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+        "base_ism_usage": true
+      }
+    },
+    {
+      "check": "flight_forest HierarchicalInstancedStaticMesh no default material",
+      "ok": true,
+      "detail": [
+        {
+          "slot": 0,
+          "material": "/Game/TreeLookdev/Materials/M_TL_Bark",
+          "base": "/Game/TreeLookdev/Materials/M_TL_Bark",
+          "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+          "base_ism_usage": true
+        },
+        {
+          "slot": 1,
+          "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V0",
+          "base": "/Game/TreeLookdev/Materials/M_TL_LeafCards",
+          "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+          "base_ism_usage": true
+        }
+      ]
+    },
+    {
+      "check": "flight_forest HierarchicalInstancedStaticMesh1 mesh = form-A chain (D / C / S / T), crown B or \u76f8\u601d\u6a39",
+      "ok": true,
+      "detail": "/Game/HillsideForest/Trees/A_CSide100/machilus_budget_side100_lod0/StaticMeshes/machilus_budget_side100_lod0"
+    },
+    {
+      "check": "flight_forest HierarchicalInstancedStaticMesh1 4 LODs 1/0.5/0.15/0.06",
+      "ok": true,
+      "detail": [
+        1.0,
+        0.5,
+        0.15,
+        0.06
+      ]
+    },
+    {
+      "check": "flight_forest HierarchicalInstancedStaticMesh1 slot0 bark (M_TL_Bark)",
+      "ok": true,
+      "detail": {
+        "slot": 0,
+        "material": "/Game/TreeLookdev/Materials/M_TL_Bark",
+        "base": "/Game/TreeLookdev/Materials/M_TL_Bark",
+        "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+        "base_ism_usage": true
+      }
+    },
+    {
+      "check": "flight_forest HierarchicalInstancedStaticMesh1 slot1 masked leaf MIC (M_TL_LeafCards)",
+      "ok": true,
+      "detail": {
+        "slot": 1,
+        "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V1",
+        "base": "/Game/TreeLookdev/Materials/M_TL_LeafCards",
+        "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+        "base_ism_usage": true
+      }
+    },
+    {
+      "check": "flight_forest HierarchicalInstancedStaticMesh1 no default material",
+      "ok": true,
+      "detail": [
+        {
+          "slot": 0,
+          "material": "/Game/TreeLookdev/Materials/M_TL_Bark",
+          "base": "/Game/TreeLookdev/Materials/M_TL_Bark",
+          "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+          "base_ism_usage": true
+        },
+        {
+          "slot": 1,
+          "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V1",
+          "base": "/Game/TreeLookdev/Materials/M_TL_LeafCards",
+          "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+          "base_ism_usage": true
+        }
+      ]
+    },
+    {
+      "check": "flight_forest HierarchicalInstancedStaticMesh2 mesh = form-A chain (D / C / S / T), crown B or \u76f8\u601d\u6a39",
+      "ok": true,
+      "detail": "/Game/HillsideForest/Trees/A_CSide100/machilus_budget_side100_lod0/StaticMeshes/machilus_budget_side100_lod0"
+    },
+    {
+      "check": "flight_forest HierarchicalInstancedStaticMesh2 4 LODs 1/0.5/0.15/0.06",
+      "ok": true,
+      "detail": [
+        1.0,
+        0.5,
+        0.15,
+        0.06
+      ]
+    },
+    {
+      "check": "flight_forest HierarchicalInstancedStaticMesh2 slot0 bark (M_TL_Bark)",
+      "ok": true,
+      "detail": {
+        "slot": 0,
+        "material": "/Game/TreeLookdev/Materials/M_TL_Bark",
+        "base": "/Game/TreeLookdev/Materials/M_TL_Bark",
+        "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+        "base_ism_usage": true
+      }
+    },
+    {
+      "check": "flight_forest HierarchicalInstancedStaticMesh2 slot1 masked leaf MIC (M_TL_LeafCards)",
+      "ok": true,
+      "detail": {
+        "slot": 1,
+        "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V2",
+        "base": "/Game/TreeLookdev/Materials/M_TL_LeafCards",
+        "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+        "base_ism_usage": true
+      }
+    },
+    {
+      "check": "flight_forest HierarchicalInstancedStaticMesh2 no default material",
+      "ok": true,
+      "detail": [
+        {
+          "slot": 0,
+          "material": "/Game/TreeLookdev/Materials/M_TL_Bark",
+          "base": "/Game/TreeLookdev/Materials/M_TL_Bark",
+          "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+          "base_ism_usage": true
+        },
+        {
+          "slot": 1,
+          "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V2",
+          "base": "/Game/TreeLookdev/Materials/M_TL_LeafCards",
+          "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+          "base_ism_usage": true
+        }
+      ]
+    },
+    {
+      "check": "flight_forest HierarchicalInstancedStaticMesh3 mesh = form-A chain (D / C / S / T), crown B or \u76f8\u601d\u6a39",
+      "ok": true,
+      "detail": "/Game/HillsideForest/Trees/CrownB/machilus_balanced_lod0/StaticMeshes/machilus_balanced_lod0"
+    },
+    {
+      "check": "flight_forest HierarchicalInstancedStaticMesh3 4 LODs 1/0.5/0.15/0.06",
+      "ok": true,
+      "detail": [
+        1.0,
+        0.5,
+        0.15,
+        0.06
+      ]
+    },
+    {
+      "check": "flight_forest HierarchicalInstancedStaticMesh3 slot0 bark (M_TL_Bark)",
+      "ok": true,
+      "detail": {
+        "slot": 0,
+        "material": "/Game/TreeLookdev/Materials/M_TL_Bark",
+        "base": "/Game/TreeLookdev/Materials/M_TL_Bark",
+        "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+        "base_ism_usage": true
+      }
+    },
+    {
+      "check": "flight_forest HierarchicalInstancedStaticMesh3 slot1 masked leaf MIC (M_TL_LeafCards)",
+      "ok": true,
+      "detail": {
+        "slot": 1,
+        "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V3",
+        "base": "/Game/TreeLookdev/Materials/M_TL_LeafCards",
+        "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+        "base_ism_usage": true
+      }
+    },
+    {
+      "check": "flight_forest HierarchicalInstancedStaticMesh3 no default material",
+      "ok": true,
+      "detail": [
+        {
+          "slot": 0,
+          "material": "/Game/TreeLookdev/Materials/M_TL_Bark",
+          "base": "/Game/TreeLookdev/Materials/M_TL_Bark",
+          "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+          "base_ism_usage": true
+        },
+        {
+          "slot": 1,
+          "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V3",
+          "base": "/Game/TreeLookdev/Materials/M_TL_LeafCards",
+          "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+          "base_ism_usage": true
+        }
+      ]
+    },
+    {
+      "check": "flight_forest HierarchicalInstancedStaticMesh4 mesh = form-A chain (D / C / S / T), crown B or \u76f8\u601d\u6a39",
+      "ok": true,
+      "detail": "/Game/HillsideForest/Trees/CrownB/machilus_balanced_lod0/StaticMeshes/machilus_balanced_lod0"
+    },
+    {
+      "check": "flight_forest HierarchicalInstancedStaticMesh4 4 LODs 1/0.5/0.15/0.06",
+      "ok": true,
+      "detail": [
+        1.0,
+        0.5,
+        0.15,
+        0.06
+      ]
+    },
+    {
+      "check": "flight_forest HierarchicalInstancedStaticMesh4 slot0 bark (M_TL_Bark)",
+      "ok": true,
+      "detail": {
+        "slot": 0,
+        "material": "/Game/TreeLookdev/Materials/M_TL_Bark",
+        "base": "/Game/TreeLookdev/Materials/M_TL_Bark",
+        "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+        "base_ism_usage": true
+      }
+    },
+    {
+      "check": "flight_forest HierarchicalInstancedStaticMesh4 slot1 masked leaf MIC (M_TL_LeafCards)",
+      "ok": true,
+      "detail": {
+        "slot": 1,
+        "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V4",
+        "base": "/Game/TreeLookdev/Materials/M_TL_LeafCards",
+        "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+        "base_ism_usage": true
+      }
+    },
+    {
+      "check": "flight_forest HierarchicalInstancedStaticMesh4 no default material",
+      "ok": true,
+      "detail": [
+        {
+          "slot": 0,
+          "material": "/Game/TreeLookdev/Materials/M_TL_Bark",
+          "base": "/Game/TreeLookdev/Materials/M_TL_Bark",
+          "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+          "base_ism_usage": true
+        },
+        {
+          "slot": 1,
+          "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V4",
+          "base": "/Game/TreeLookdev/Materials/M_TL_LeafCards",
+          "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+          "base_ism_usage": true
+        }
+      ]
+    },
+    {
+      "check": "flight_forest HierarchicalInstancedStaticMesh5 mesh = form-A chain (D / C / S / T), crown B or \u76f8\u601d\u6a39",
+      "ok": true,
+      "detail": "/Game/HillsideForest/Trees/AcaciaTight/acacia_acacia_tight_lod0/StaticMeshes/acacia_acacia_tight_lod0"
+    },
+    {
+      "check": "flight_forest HierarchicalInstancedStaticMesh5 4 LODs 1/0.5/0.15/0.06",
+      "ok": true,
+      "detail": [
+        1.0,
+        0.5,
+        0.15,
+        0.06
+      ]
+    },
+    {
+      "check": "flight_forest HierarchicalInstancedStaticMesh5 slot0 bark (M_TL_Acacia_Bark)",
+      "ok": true,
+      "detail": {
+        "slot": 0,
+        "material": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+        "base": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+        "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+        "base_ism_usage": true
+      }
+    },
+    {
+      "check": "flight_forest HierarchicalInstancedStaticMesh5 slot1 masked leaf MIC (M_TL_AcaciaW_LeafCards)",
+      "ok": true,
+      "detail": {
+        "slot": 1,
+        "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V5",
+        "base": "/Game/TreeLookdev/Materials/M_TL_AcaciaW_LeafCards",
+        "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+        "base_ism_usage": true
+      }
+    },
+    {
+      "check": "flight_forest HierarchicalInstancedStaticMesh5 no default material",
+      "ok": true,
+      "detail": [
+        {
+          "slot": 0,
+          "material": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+          "base": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+          "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+          "base_ism_usage": true
+        },
+        {
+          "slot": 1,
+          "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V5",
+          "base": "/Game/TreeLookdev/Materials/M_TL_AcaciaW_LeafCards",
+          "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+          "base_ism_usage": true
+        }
+      ]
+    },
+    {
+      "check": "flight_forest HierarchicalInstancedStaticMesh6 mesh = form-A chain (D / C / S / T), crown B or \u76f8\u601d\u6a39",
+      "ok": true,
+      "detail": "/Game/HillsideForest/Trees/AcaciaTight/acacia_acacia_tight_lod0/StaticMeshes/acacia_acacia_tight_lod0"
+    },
+    {
+      "check": "flight_forest HierarchicalInstancedStaticMesh6 4 LODs 1/0.5/0.15/0.06",
+      "ok": true,
+      "detail": [
+        1.0,
+        0.5,
+        0.15,
+        0.06
+      ]
+    },
+    {
+      "check": "flight_forest HierarchicalInstancedStaticMesh6 slot0 bark (M_TL_Acacia_Bark)",
+      "ok": true,
+      "detail": {
+        "slot": 0,
+        "material": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+        "base": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+        "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+        "base_ism_usage": true
+      }
+    },
+    {
+      "check": "flight_forest HierarchicalInstancedStaticMesh6 slot1 masked leaf MIC (M_TL_AcaciaW_LeafCards)",
+      "ok": true,
+      "detail": {
+        "slot": 1,
+        "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V6",
+        "base": "/Game/TreeLookdev/Materials/M_TL_AcaciaW_LeafCards",
+        "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+        "base_ism_usage": true
+      }
+    },
+    {
+      "check": "flight_forest HierarchicalInstancedStaticMesh6 no default material",
+      "ok": true,
+      "detail": [
+        {
+          "slot": 0,
+          "material": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+          "base": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+          "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+          "base_ism_usage": true
+        },
+        {
+          "slot": 1,
+          "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V6",
+          "base": "/Game/TreeLookdev/Materials/M_TL_AcaciaW_LeafCards",
+          "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+          "base_ism_usage": true
+        }
+      ]
+    },
+    {
+      "check": "flight_forest HierarchicalInstancedStaticMesh7 mesh = form-A chain (D / C / S / T), crown B or \u76f8\u601d\u6a39",
+      "ok": true,
+      "detail": "/Game/HillsideForest/Trees/AcaciaTight/acacia_acacia_tight_lod0/StaticMeshes/acacia_acacia_tight_lod0"
+    },
+    {
+      "check": "flight_forest HierarchicalInstancedStaticMesh7 4 LODs 1/0.5/0.15/0.06",
+      "ok": true,
+      "detail": [
+        1.0,
+        0.5,
+        0.15,
+        0.06
+      ]
+    },
+    {
+      "check": "flight_forest HierarchicalInstancedStaticMesh7 slot0 bark (M_TL_Acacia_Bark)",
+      "ok": true,
+      "detail": {
+        "slot": 0,
+        "material": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+        "base": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+        "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+        "base_ism_usage": true
+      }
+    },
+    {
+      "check": "flight_forest HierarchicalInstancedStaticMesh7 slot1 masked leaf MIC (M_TL_AcaciaW_LeafCards)",
+      "ok": true,
+      "detail": {
+        "slot": 1,
+        "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V7",
+        "base": "/Game/TreeLookdev/Materials/M_TL_AcaciaW_LeafCards",
+        "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+        "base_ism_usage": true
+      }
+    },
+    {
+      "check": "flight_forest HierarchicalInstancedStaticMesh7 no default material",
+      "ok": true,
+      "detail": [
+        {
+          "slot": 0,
+          "material": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+          "base": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+          "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+          "base_ism_usage": true
+        },
+        {
+          "slot": 1,
+          "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V7",
+          "base": "/Game/TreeLookdev/Materials/M_TL_AcaciaW_LeafCards",
+          "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+          "base_ism_usage": true
+        }
+      ]
+    },
+    {
+      "check": "flight_forest instances per form",
+      "ok": true,
+      "detail": {
+        "got": {
+          "/Game/HillsideForest/Trees/A_CSide100/machilus_budget_side100_lod0/StaticMeshes/machilus_budget_side100_lod0": 482,
+          "/Game/HillsideForest/Trees/CrownB/machilus_balanced_lod0/StaticMeshes/machilus_balanced_lod0": 259,
+          "/Game/HillsideForest/Trees/AcaciaTight/acacia_acacia_tight_lod0/StaticMeshes/acacia_acacia_tight_lod0": 248
+        },
+        "want": {
+          "/Game/HillsideForest/Trees/AcaciaTight/acacia_acacia_tight_lod0/StaticMeshes/acacia_acacia_tight_lod0": 248,
+          "/Game/HillsideForest/Trees/A_CSide100/machilus_budget_side100_lod0/StaticMeshes/machilus_budget_side100_lod0": 482,
+          "/Game/HillsideForest/Trees/CrownB/machilus_balanced_lod0/StaticMeshes/machilus_balanced_lod0": 259
+        }
+      }
+    },
+    {
+      "check": "flight_forest instance total",
+      "ok": true,
+      "detail": {
+        "got": 989,
+        "want": 989
+      }
+    },
+    {
+      "check": "flight_forest transforms match instances.json",
+      "ok": true,
+      "detail": {
+        "worst_location_cm": 0.0,
+        "worst_scale_err_pct": 0.0
+      }
+    },
+    {
+      "check": "perf_agl50_forest landscape present",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "check": "perf_agl50_forest landscape 64 components",
+      "ok": true,
+      "detail": 64
+    },
+    {
+      "check": "perf_agl50_forest landscape material",
+      "ok": true,
+      "detail": "/Game/HillsideForest/a8/M_HF_Ground.M_HF_Ground"
+    },
+    {
+      "check": "perf_agl50_forest forest present",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "check": "perf_agl50_forest one HISM per (form, tint)",
+      "ok": true,
+      "detail": {
+        "hisms": 8,
+        "groups": [
+          [
+            "A",
+            0
+          ],
+          [
+            "A",
+            1
+          ],
+          [
+            "A",
+            2
+          ],
+          [
+            "B",
+            3
+          ],
+          [
+            "B",
+            4
+          ],
+          [
+            "C",
+            5
+          ],
+          [
+            "C",
+            6
+          ],
+          [
+            "C",
+            7
+          ]
+        ]
+      }
+    },
+    {
+      "check": "perf_agl50_forest HierarchicalInstancedStaticMesh mesh = form-A chain (D / C / S / T), crown B or \u76f8\u601d\u6a39",
+      "ok": true,
+      "detail": "/Game/HillsideForest/Trees/A_CSide100/machilus_budget_side100_lod0/StaticMeshes/machilus_budget_side100_lod0"
+    },
+    {
+      "check": "perf_agl50_forest HierarchicalInstancedStaticMesh 4 LODs 1/0.5/0.15/0.06",
+      "ok": true,
+      "detail": [
+        1.0,
+        0.5,
+        0.15,
+        0.06
+      ]
+    },
+    {
+      "check": "perf_agl50_forest HierarchicalInstancedStaticMesh slot0 bark (M_TL_Bark)",
+      "ok": true,
+      "detail": {
+        "slot": 0,
+        "material": "/Game/TreeLookdev/Materials/M_TL_Bark",
+        "base": "/Game/TreeLookdev/Materials/M_TL_Bark",
+        "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+        "base_ism_usage": true
+      }
+    },
+    {
+      "check": "perf_agl50_forest HierarchicalInstancedStaticMesh slot1 masked leaf MIC (M_TL_LeafCards)",
+      "ok": true,
+      "detail": {
+        "slot": 1,
+        "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V0",
+        "base": "/Game/TreeLookdev/Materials/M_TL_LeafCards",
+        "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+        "base_ism_usage": true
+      }
+    },
+    {
+      "check": "perf_agl50_forest HierarchicalInstancedStaticMesh no default material",
+      "ok": true,
+      "detail": [
+        {
+          "slot": 0,
+          "material": "/Game/TreeLookdev/Materials/M_TL_Bark",
+          "base": "/Game/TreeLookdev/Materials/M_TL_Bark",
+          "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+          "base_ism_usage": true
+        },
+        {
+          "slot": 1,
+          "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V0",
+          "base": "/Game/TreeLookdev/Materials/M_TL_LeafCards",
+          "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+          "base_ism_usage": true
+        }
+      ]
+    },
+    {
+      "check": "perf_agl50_forest HierarchicalInstancedStaticMesh1 mesh = form-A chain (D / C / S / T), crown B or \u76f8\u601d\u6a39",
+      "ok": true,
+      "detail": "/Game/HillsideForest/Trees/A_CSide100/machilus_budget_side100_lod0/StaticMeshes/machilus_budget_side100_lod0"
+    },
+    {
+      "check": "perf_agl50_forest HierarchicalInstancedStaticMesh1 4 LODs 1/0.5/0.15/0.06",
+      "ok": true,
+      "detail": [
+        1.0,
+        0.5,
+        0.15,
+        0.06
+      ]
+    },
+    {
+      "check": "perf_agl50_forest HierarchicalInstancedStaticMesh1 slot0 bark (M_TL_Bark)",
+      "ok": true,
+      "detail": {
+        "slot": 0,
+        "material": "/Game/TreeLookdev/Materials/M_TL_Bark",
+        "base": "/Game/TreeLookdev/Materials/M_TL_Bark",
+        "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+        "base_ism_usage": true
+      }
+    },
+    {
+      "check": "perf_agl50_forest HierarchicalInstancedStaticMesh1 slot1 masked leaf MIC (M_TL_LeafCards)",
+      "ok": true,
+      "detail": {
+        "slot": 1,
+        "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V1",
+        "base": "/Game/TreeLookdev/Materials/M_TL_LeafCards",
+        "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+        "base_ism_usage": true
+      }
+    },
+    {
+      "check": "perf_agl50_forest HierarchicalInstancedStaticMesh1 no default material",
+      "ok": true,
+      "detail": [
+        {
+          "slot": 0,
+          "material": "/Game/TreeLookdev/Materials/M_TL_Bark",
+          "base": "/Game/TreeLookdev/Materials/M_TL_Bark",
+          "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+          "base_ism_usage": true
+        },
+        {
+          "slot": 1,
+          "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V1",
+          "base": "/Game/TreeLookdev/Materials/M_TL_LeafCards",
+          "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+          "base_ism_usage": true
+        }
+      ]
+    },
+    {
+      "check": "perf_agl50_forest HierarchicalInstancedStaticMesh2 mesh = form-A chain (D / C / S / T), crown B or \u76f8\u601d\u6a39",
+      "ok": true,
+      "detail": "/Game/HillsideForest/Trees/A_CSide100/machilus_budget_side100_lod0/StaticMeshes/machilus_budget_side100_lod0"
+    },
+    {
+      "check": "perf_agl50_forest HierarchicalInstancedStaticMesh2 4 LODs 1/0.5/0.15/0.06",
+      "ok": true,
+      "detail": [
+        1.0,
+        0.5,
+        0.15,
+        0.06
+      ]
+    },
+    {
+      "check": "perf_agl50_forest HierarchicalInstancedStaticMesh2 slot0 bark (M_TL_Bark)",
+      "ok": true,
+      "detail": {
+        "slot": 0,
+        "material": "/Game/TreeLookdev/Materials/M_TL_Bark",
+        "base": "/Game/TreeLookdev/Materials/M_TL_Bark",
+        "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+        "base_ism_usage": true
+      }
+    },
+    {
+      "check": "perf_agl50_forest HierarchicalInstancedStaticMesh2 slot1 masked leaf MIC (M_TL_LeafCards)",
+      "ok": true,
+      "detail": {
+        "slot": 1,
+        "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V2",
+        "base": "/Game/TreeLookdev/Materials/M_TL_LeafCards",
+        "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+        "base_ism_usage": true
+      }
+    },
+    {
+      "check": "perf_agl50_forest HierarchicalInstancedStaticMesh2 no default material",
+      "ok": true,
+      "detail": [
+        {
+          "slot": 0,
+          "material": "/Game/TreeLookdev/Materials/M_TL_Bark",
+          "base": "/Game/TreeLookdev/Materials/M_TL_Bark",
+          "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+          "base_ism_usage": true
+        },
+        {
+          "slot": 1,
+          "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V2",
+          "base": "/Game/TreeLookdev/Materials/M_TL_LeafCards",
+          "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+          "base_ism_usage": true
+        }
+      ]
+    },
+    {
+      "check": "perf_agl50_forest HierarchicalInstancedStaticMesh3 mesh = form-A chain (D / C / S / T), crown B or \u76f8\u601d\u6a39",
+      "ok": true,
+      "detail": "/Game/HillsideForest/Trees/CrownB/machilus_balanced_lod0/StaticMeshes/machilus_balanced_lod0"
+    },
+    {
+      "check": "perf_agl50_forest HierarchicalInstancedStaticMesh3 4 LODs 1/0.5/0.15/0.06",
+      "ok": true,
+      "detail": [
+        1.0,
+        0.5,
+        0.15,
+        0.06
+      ]
+    },
+    {
+      "check": "perf_agl50_forest HierarchicalInstancedStaticMesh3 slot0 bark (M_TL_Bark)",
+      "ok": true,
+      "detail": {
+        "slot": 0,
+        "material": "/Game/TreeLookdev/Materials/M_TL_Bark",
+        "base": "/Game/TreeLookdev/Materials/M_TL_Bark",
+        "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+        "base_ism_usage": true
+      }
+    },
+    {
+      "check": "perf_agl50_forest HierarchicalInstancedStaticMesh3 slot1 masked leaf MIC (M_TL_LeafCards)",
+      "ok": true,
+      "detail": {
+        "slot": 1,
+        "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V3",
+        "base": "/Game/TreeLookdev/Materials/M_TL_LeafCards",
+        "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+        "base_ism_usage": true
+      }
+    },
+    {
+      "check": "perf_agl50_forest HierarchicalInstancedStaticMesh3 no default material",
+      "ok": true,
+      "detail": [
+        {
+          "slot": 0,
+          "material": "/Game/TreeLookdev/Materials/M_TL_Bark",
+          "base": "/Game/TreeLookdev/Materials/M_TL_Bark",
+          "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+          "base_ism_usage": true
+        },
+        {
+          "slot": 1,
+          "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V3",
+          "base": "/Game/TreeLookdev/Materials/M_TL_LeafCards",
+          "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+          "base_ism_usage": true
+        }
+      ]
+    },
+    {
+      "check": "perf_agl50_forest HierarchicalInstancedStaticMesh4 mesh = form-A chain (D / C / S / T), crown B or \u76f8\u601d\u6a39",
+      "ok": true,
+      "detail": "/Game/HillsideForest/Trees/CrownB/machilus_balanced_lod0/StaticMeshes/machilus_balanced_lod0"
+    },
+    {
+      "check": "perf_agl50_forest HierarchicalInstancedStaticMesh4 4 LODs 1/0.5/0.15/0.06",
+      "ok": true,
+      "detail": [
+        1.0,
+        0.5,
+        0.15,
+        0.06
+      ]
+    },
+    {
+      "check": "perf_agl50_forest HierarchicalInstancedStaticMesh4 slot0 bark (M_TL_Bark)",
+      "ok": true,
+      "detail": {
+        "slot": 0,
+        "material": "/Game/TreeLookdev/Materials/M_TL_Bark",
+        "base": "/Game/TreeLookdev/Materials/M_TL_Bark",
+        "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+        "base_ism_usage": true
+      }
+    },
+    {
+      "check": "perf_agl50_forest HierarchicalInstancedStaticMesh4 slot1 masked leaf MIC (M_TL_LeafCards)",
+      "ok": true,
+      "detail": {
+        "slot": 1,
+        "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V4",
+        "base": "/Game/TreeLookdev/Materials/M_TL_LeafCards",
+        "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+        "base_ism_usage": true
+      }
+    },
+    {
+      "check": "perf_agl50_forest HierarchicalInstancedStaticMesh4 no default material",
+      "ok": true,
+      "detail": [
+        {
+          "slot": 0,
+          "material": "/Game/TreeLookdev/Materials/M_TL_Bark",
+          "base": "/Game/TreeLookdev/Materials/M_TL_Bark",
+          "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+          "base_ism_usage": true
+        },
+        {
+          "slot": 1,
+          "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V4",
+          "base": "/Game/TreeLookdev/Materials/M_TL_LeafCards",
+          "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+          "base_ism_usage": true
+        }
+      ]
+    },
+    {
+      "check": "perf_agl50_forest HierarchicalInstancedStaticMesh5 mesh = form-A chain (D / C / S / T), crown B or \u76f8\u601d\u6a39",
+      "ok": true,
+      "detail": "/Game/HillsideForest/Trees/AcaciaTight/acacia_acacia_tight_lod0/StaticMeshes/acacia_acacia_tight_lod0"
+    },
+    {
+      "check": "perf_agl50_forest HierarchicalInstancedStaticMesh5 4 LODs 1/0.5/0.15/0.06",
+      "ok": true,
+      "detail": [
+        1.0,
+        0.5,
+        0.15,
+        0.06
+      ]
+    },
+    {
+      "check": "perf_agl50_forest HierarchicalInstancedStaticMesh5 slot0 bark (M_TL_Acacia_Bark)",
+      "ok": true,
+      "detail": {
+        "slot": 0,
+        "material": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+        "base": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+        "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+        "base_ism_usage": true
+      }
+    },
+    {
+      "check": "perf_agl50_forest HierarchicalInstancedStaticMesh5 slot1 masked leaf MIC (M_TL_AcaciaW_LeafCards)",
+      "ok": true,
+      "detail": {
+        "slot": 1,
+        "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V5",
+        "base": "/Game/TreeLookdev/Materials/M_TL_AcaciaW_LeafCards",
+        "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+        "base_ism_usage": true
+      }
+    },
+    {
+      "check": "perf_agl50_forest HierarchicalInstancedStaticMesh5 no default material",
+      "ok": true,
+      "detail": [
+        {
+          "slot": 0,
+          "material": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+          "base": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+          "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+          "base_ism_usage": true
+        },
+        {
+          "slot": 1,
+          "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V5",
+          "base": "/Game/TreeLookdev/Materials/M_TL_AcaciaW_LeafCards",
+          "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+          "base_ism_usage": true
+        }
+      ]
+    },
+    {
+      "check": "perf_agl50_forest HierarchicalInstancedStaticMesh6 mesh = form-A chain (D / C / S / T), crown B or \u76f8\u601d\u6a39",
+      "ok": true,
+      "detail": "/Game/HillsideForest/Trees/AcaciaTight/acacia_acacia_tight_lod0/StaticMeshes/acacia_acacia_tight_lod0"
+    },
+    {
+      "check": "perf_agl50_forest HierarchicalInstancedStaticMesh6 4 LODs 1/0.5/0.15/0.06",
+      "ok": true,
+      "detail": [
+        1.0,
+        0.5,
+        0.15,
+        0.06
+      ]
+    },
+    {
+      "check": "perf_agl50_forest HierarchicalInstancedStaticMesh6 slot0 bark (M_TL_Acacia_Bark)",
+      "ok": true,
+      "detail": {
+        "slot": 0,
+        "material": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+        "base": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+        "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+        "base_ism_usage": true
+      }
+    },
+    {
+      "check": "perf_agl50_forest HierarchicalInstancedStaticMesh6 slot1 masked leaf MIC (M_TL_AcaciaW_LeafCards)",
+      "ok": true,
+      "detail": {
+        "slot": 1,
+        "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V6",
+        "base": "/Game/TreeLookdev/Materials/M_TL_AcaciaW_LeafCards",
+        "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+        "base_ism_usage": true
+      }
+    },
+    {
+      "check": "perf_agl50_forest HierarchicalInstancedStaticMesh6 no default material",
+      "ok": true,
+      "detail": [
+        {
+          "slot": 0,
+          "material": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+          "base": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+          "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+          "base_ism_usage": true
+        },
+        {
+          "slot": 1,
+          "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V6",
+          "base": "/Game/TreeLookdev/Materials/M_TL_AcaciaW_LeafCards",
+          "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+          "base_ism_usage": true
+        }
+      ]
+    },
+    {
+      "check": "perf_agl50_forest HierarchicalInstancedStaticMesh7 mesh = form-A chain (D / C / S / T), crown B or \u76f8\u601d\u6a39",
+      "ok": true,
+      "detail": "/Game/HillsideForest/Trees/AcaciaTight/acacia_acacia_tight_lod0/StaticMeshes/acacia_acacia_tight_lod0"
+    },
+    {
+      "check": "perf_agl50_forest HierarchicalInstancedStaticMesh7 4 LODs 1/0.5/0.15/0.06",
+      "ok": true,
+      "detail": [
+        1.0,
+        0.5,
+        0.15,
+        0.06
+      ]
+    },
+    {
+      "check": "perf_agl50_forest HierarchicalInstancedStaticMesh7 slot0 bark (M_TL_Acacia_Bark)",
+      "ok": true,
+      "detail": {
+        "slot": 0,
+        "material": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+        "base": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+        "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+        "base_ism_usage": true
+      }
+    },
+    {
+      "check": "perf_agl50_forest HierarchicalInstancedStaticMesh7 slot1 masked leaf MIC (M_TL_AcaciaW_LeafCards)",
+      "ok": true,
+      "detail": {
+        "slot": 1,
+        "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V7",
+        "base": "/Game/TreeLookdev/Materials/M_TL_AcaciaW_LeafCards",
+        "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+        "base_ism_usage": true
+      }
+    },
+    {
+      "check": "perf_agl50_forest HierarchicalInstancedStaticMesh7 no default material",
+      "ok": true,
+      "detail": [
+        {
+          "slot": 0,
+          "material": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+          "base": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+          "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+          "base_ism_usage": true
+        },
+        {
+          "slot": 1,
+          "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V7",
+          "base": "/Game/TreeLookdev/Materials/M_TL_AcaciaW_LeafCards",
+          "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+          "base_ism_usage": true
+        }
+      ]
+    },
+    {
+      "check": "perf_agl50_forest instances per form",
+      "ok": true,
+      "detail": {
+        "got": {
+          "/Game/HillsideForest/Trees/A_CSide100/machilus_budget_side100_lod0/StaticMeshes/machilus_budget_side100_lod0": 482,
+          "/Game/HillsideForest/Trees/CrownB/machilus_balanced_lod0/StaticMeshes/machilus_balanced_lod0": 259,
+          "/Game/HillsideForest/Trees/AcaciaTight/acacia_acacia_tight_lod0/StaticMeshes/acacia_acacia_tight_lod0": 248
+        },
+        "want": {
+          "/Game/HillsideForest/Trees/AcaciaTight/acacia_acacia_tight_lod0/StaticMeshes/acacia_acacia_tight_lod0": 248,
+          "/Game/HillsideForest/Trees/A_CSide100/machilus_budget_side100_lod0/StaticMeshes/machilus_budget_side100_lod0": 482,
+          "/Game/HillsideForest/Trees/CrownB/machilus_balanced_lod0/StaticMeshes/machilus_balanced_lod0": 259
+        }
+      }
+    },
+    {
+      "check": "perf_agl50_forest instance total",
+      "ok": true,
+      "detail": {
+        "got": 989,
+        "want": 989
+      }
+    },
+    {
+      "check": "perf_agl50_forest transforms match instances.json",
+      "ok": true,
+      "detail": {
+        "worst_location_cm": 0.0,
+        "worst_scale_err_pct": 0.0
+      }
+    },
+    {
+      "check": "perf_agl200_forest landscape present",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "check": "perf_agl200_forest landscape 64 components",
+      "ok": true,
+      "detail": 64
+    },
+    {
+      "check": "perf_agl200_forest landscape material",
+      "ok": true,
+      "detail": "/Game/HillsideForest/a8/M_HF_Ground.M_HF_Ground"
+    },
+    {
+      "check": "perf_agl200_forest forest present",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "check": "perf_agl200_forest one HISM per (form, tint)",
+      "ok": true,
+      "detail": {
+        "hisms": 8,
+        "groups": [
+          [
+            "A",
+            0
+          ],
+          [
+            "A",
+            1
+          ],
+          [
+            "A",
+            2
+          ],
+          [
+            "B",
+            3
+          ],
+          [
+            "B",
+            4
+          ],
+          [
+            "C",
+            5
+          ],
+          [
+            "C",
+            6
+          ],
+          [
+            "C",
+            7
+          ]
+        ]
+      }
+    },
+    {
+      "check": "perf_agl200_forest HierarchicalInstancedStaticMesh mesh = form-A chain (D / C / S / T), crown B or \u76f8\u601d\u6a39",
+      "ok": true,
+      "detail": "/Game/HillsideForest/Trees/A_CSide100/machilus_budget_side100_lod0/StaticMeshes/machilus_budget_side100_lod0"
+    },
+    {
+      "check": "perf_agl200_forest HierarchicalInstancedStaticMesh 4 LODs 1/0.5/0.15/0.06",
+      "ok": true,
+      "detail": [
+        1.0,
+        0.5,
+        0.15,
+        0.06
+      ]
+    },
+    {
+      "check": "perf_agl200_forest HierarchicalInstancedStaticMesh slot0 bark (M_TL_Bark)",
+      "ok": true,
+      "detail": {
+        "slot": 0,
+        "material": "/Game/TreeLookdev/Materials/M_TL_Bark",
+        "base": "/Game/TreeLookdev/Materials/M_TL_Bark",
+        "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+        "base_ism_usage": true
+      }
+    },
+    {
+      "check": "perf_agl200_forest HierarchicalInstancedStaticMesh slot1 masked leaf MIC (M_TL_LeafCards)",
+      "ok": true,
+      "detail": {
+        "slot": 1,
+        "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V0",
+        "base": "/Game/TreeLookdev/Materials/M_TL_LeafCards",
+        "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+        "base_ism_usage": true
+      }
+    },
+    {
+      "check": "perf_agl200_forest HierarchicalInstancedStaticMesh no default material",
+      "ok": true,
+      "detail": [
+        {
+          "slot": 0,
+          "material": "/Game/TreeLookdev/Materials/M_TL_Bark",
+          "base": "/Game/TreeLookdev/Materials/M_TL_Bark",
+          "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+          "base_ism_usage": true
+        },
+        {
+          "slot": 1,
+          "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V0",
+          "base": "/Game/TreeLookdev/Materials/M_TL_LeafCards",
+          "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+          "base_ism_usage": true
+        }
+      ]
+    },
+    {
+      "check": "perf_agl200_forest HierarchicalInstancedStaticMesh1 mesh = form-A chain (D / C / S / T), crown B or \u76f8\u601d\u6a39",
+      "ok": true,
+      "detail": "/Game/HillsideForest/Trees/A_CSide100/machilus_budget_side100_lod0/StaticMeshes/machilus_budget_side100_lod0"
+    },
+    {
+      "check": "perf_agl200_forest HierarchicalInstancedStaticMesh1 4 LODs 1/0.5/0.15/0.06",
+      "ok": true,
+      "detail": [
+        1.0,
+        0.5,
+        0.15,
+        0.06
+      ]
+    },
+    {
+      "check": "perf_agl200_forest HierarchicalInstancedStaticMesh1 slot0 bark (M_TL_Bark)",
+      "ok": true,
+      "detail": {
+        "slot": 0,
+        "material": "/Game/TreeLookdev/Materials/M_TL_Bark",
+        "base": "/Game/TreeLookdev/Materials/M_TL_Bark",
+        "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+        "base_ism_usage": true
+      }
+    },
+    {
+      "check": "perf_agl200_forest HierarchicalInstancedStaticMesh1 slot1 masked leaf MIC (M_TL_LeafCards)",
+      "ok": true,
+      "detail": {
+        "slot": 1,
+        "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V1",
+        "base": "/Game/TreeLookdev/Materials/M_TL_LeafCards",
+        "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+        "base_ism_usage": true
+      }
+    },
+    {
+      "check": "perf_agl200_forest HierarchicalInstancedStaticMesh1 no default material",
+      "ok": true,
+      "detail": [
+        {
+          "slot": 0,
+          "material": "/Game/TreeLookdev/Materials/M_TL_Bark",
+          "base": "/Game/TreeLookdev/Materials/M_TL_Bark",
+          "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+          "base_ism_usage": true
+        },
+        {
+          "slot": 1,
+          "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V1",
+          "base": "/Game/TreeLookdev/Materials/M_TL_LeafCards",
+          "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+          "base_ism_usage": true
+        }
+      ]
+    },
+    {
+      "check": "perf_agl200_forest HierarchicalInstancedStaticMesh2 mesh = form-A chain (D / C / S / T), crown B or \u76f8\u601d\u6a39",
+      "ok": true,
+      "detail": "/Game/HillsideForest/Trees/A_CSide100/machilus_budget_side100_lod0/StaticMeshes/machilus_budget_side100_lod0"
+    },
+    {
+      "check": "perf_agl200_forest HierarchicalInstancedStaticMesh2 4 LODs 1/0.5/0.15/0.06",
+      "ok": true,
+      "detail": [
+        1.0,
+        0.5,
+        0.15,
+        0.06
+      ]
+    },
+    {
+      "check": "perf_agl200_forest HierarchicalInstancedStaticMesh2 slot0 bark (M_TL_Bark)",
+      "ok": true,
+      "detail": {
+        "slot": 0,
+        "material": "/Game/TreeLookdev/Materials/M_TL_Bark",
+        "base": "/Game/TreeLookdev/Materials/M_TL_Bark",
+        "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+        "base_ism_usage": true
+      }
+    },
+    {
+      "check": "perf_agl200_forest HierarchicalInstancedStaticMesh2 slot1 masked leaf MIC (M_TL_LeafCards)",
+      "ok": true,
+      "detail": {
+        "slot": 1,
+        "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V2",
+        "base": "/Game/TreeLookdev/Materials/M_TL_LeafCards",
+        "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+        "base_ism_usage": true
+      }
+    },
+    {
+      "check": "perf_agl200_forest HierarchicalInstancedStaticMesh2 no default material",
+      "ok": true,
+      "detail": [
+        {
+          "slot": 0,
+          "material": "/Game/TreeLookdev/Materials/M_TL_Bark",
+          "base": "/Game/TreeLookdev/Materials/M_TL_Bark",
+          "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+          "base_ism_usage": true
+        },
+        {
+          "slot": 1,
+          "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V2",
+          "base": "/Game/TreeLookdev/Materials/M_TL_LeafCards",
+          "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+          "base_ism_usage": true
+        }
+      ]
+    },
+    {
+      "check": "perf_agl200_forest HierarchicalInstancedStaticMesh3 mesh = form-A chain (D / C / S / T), crown B or \u76f8\u601d\u6a39",
+      "ok": true,
+      "detail": "/Game/HillsideForest/Trees/CrownB/machilus_balanced_lod0/StaticMeshes/machilus_balanced_lod0"
+    },
+    {
+      "check": "perf_agl200_forest HierarchicalInstancedStaticMesh3 4 LODs 1/0.5/0.15/0.06",
+      "ok": true,
+      "detail": [
+        1.0,
+        0.5,
+        0.15,
+        0.06
+      ]
+    },
+    {
+      "check": "perf_agl200_forest HierarchicalInstancedStaticMesh3 slot0 bark (M_TL_Bark)",
+      "ok": true,
+      "detail": {
+        "slot": 0,
+        "material": "/Game/TreeLookdev/Materials/M_TL_Bark",
+        "base": "/Game/TreeLookdev/Materials/M_TL_Bark",
+        "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+        "base_ism_usage": true
+      }
+    },
+    {
+      "check": "perf_agl200_forest HierarchicalInstancedStaticMesh3 slot1 masked leaf MIC (M_TL_LeafCards)",
+      "ok": true,
+      "detail": {
+        "slot": 1,
+        "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V3",
+        "base": "/Game/TreeLookdev/Materials/M_TL_LeafCards",
+        "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+        "base_ism_usage": true
+      }
+    },
+    {
+      "check": "perf_agl200_forest HierarchicalInstancedStaticMesh3 no default material",
+      "ok": true,
+      "detail": [
+        {
+          "slot": 0,
+          "material": "/Game/TreeLookdev/Materials/M_TL_Bark",
+          "base": "/Game/TreeLookdev/Materials/M_TL_Bark",
+          "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+          "base_ism_usage": true
+        },
+        {
+          "slot": 1,
+          "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V3",
+          "base": "/Game/TreeLookdev/Materials/M_TL_LeafCards",
+          "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+          "base_ism_usage": true
+        }
+      ]
+    },
+    {
+      "check": "perf_agl200_forest HierarchicalInstancedStaticMesh4 mesh = form-A chain (D / C / S / T), crown B or \u76f8\u601d\u6a39",
+      "ok": true,
+      "detail": "/Game/HillsideForest/Trees/CrownB/machilus_balanced_lod0/StaticMeshes/machilus_balanced_lod0"
+    },
+    {
+      "check": "perf_agl200_forest HierarchicalInstancedStaticMesh4 4 LODs 1/0.5/0.15/0.06",
+      "ok": true,
+      "detail": [
+        1.0,
+        0.5,
+        0.15,
+        0.06
+      ]
+    },
+    {
+      "check": "perf_agl200_forest HierarchicalInstancedStaticMesh4 slot0 bark (M_TL_Bark)",
+      "ok": true,
+      "detail": {
+        "slot": 0,
+        "material": "/Game/TreeLookdev/Materials/M_TL_Bark",
+        "base": "/Game/TreeLookdev/Materials/M_TL_Bark",
+        "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+        "base_ism_usage": true
+      }
+    },
+    {
+      "check": "perf_agl200_forest HierarchicalInstancedStaticMesh4 slot1 masked leaf MIC (M_TL_LeafCards)",
+      "ok": true,
+      "detail": {
+        "slot": 1,
+        "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V4",
+        "base": "/Game/TreeLookdev/Materials/M_TL_LeafCards",
+        "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+        "base_ism_usage": true
+      }
+    },
+    {
+      "check": "perf_agl200_forest HierarchicalInstancedStaticMesh4 no default material",
+      "ok": true,
+      "detail": [
+        {
+          "slot": 0,
+          "material": "/Game/TreeLookdev/Materials/M_TL_Bark",
+          "base": "/Game/TreeLookdev/Materials/M_TL_Bark",
+          "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+          "base_ism_usage": true
+        },
+        {
+          "slot": 1,
+          "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V4",
+          "base": "/Game/TreeLookdev/Materials/M_TL_LeafCards",
+          "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+          "base_ism_usage": true
+        }
+      ]
+    },
+    {
+      "check": "perf_agl200_forest HierarchicalInstancedStaticMesh5 mesh = form-A chain (D / C / S / T), crown B or \u76f8\u601d\u6a39",
+      "ok": true,
+      "detail": "/Game/HillsideForest/Trees/AcaciaTight/acacia_acacia_tight_lod0/StaticMeshes/acacia_acacia_tight_lod0"
+    },
+    {
+      "check": "perf_agl200_forest HierarchicalInstancedStaticMesh5 4 LODs 1/0.5/0.15/0.06",
+      "ok": true,
+      "detail": [
+        1.0,
+        0.5,
+        0.15,
+        0.06
+      ]
+    },
+    {
+      "check": "perf_agl200_forest HierarchicalInstancedStaticMesh5 slot0 bark (M_TL_Acacia_Bark)",
+      "ok": true,
+      "detail": {
+        "slot": 0,
+        "material": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+        "base": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+        "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+        "base_ism_usage": true
+      }
+    },
+    {
+      "check": "perf_agl200_forest HierarchicalInstancedStaticMesh5 slot1 masked leaf MIC (M_TL_AcaciaW_LeafCards)",
+      "ok": true,
+      "detail": {
+        "slot": 1,
+        "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V5",
+        "base": "/Game/TreeLookdev/Materials/M_TL_AcaciaW_LeafCards",
+        "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+        "base_ism_usage": true
+      }
+    },
+    {
+      "check": "perf_agl200_forest HierarchicalInstancedStaticMesh5 no default material",
+      "ok": true,
+      "detail": [
+        {
+          "slot": 0,
+          "material": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+          "base": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+          "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+          "base_ism_usage": true
+        },
+        {
+          "slot": 1,
+          "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V5",
+          "base": "/Game/TreeLookdev/Materials/M_TL_AcaciaW_LeafCards",
+          "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+          "base_ism_usage": true
+        }
+      ]
+    },
+    {
+      "check": "perf_agl200_forest HierarchicalInstancedStaticMesh6 mesh = form-A chain (D / C / S / T), crown B or \u76f8\u601d\u6a39",
+      "ok": true,
+      "detail": "/Game/HillsideForest/Trees/AcaciaTight/acacia_acacia_tight_lod0/StaticMeshes/acacia_acacia_tight_lod0"
+    },
+    {
+      "check": "perf_agl200_forest HierarchicalInstancedStaticMesh6 4 LODs 1/0.5/0.15/0.06",
+      "ok": true,
+      "detail": [
+        1.0,
+        0.5,
+        0.15,
+        0.06
+      ]
+    },
+    {
+      "check": "perf_agl200_forest HierarchicalInstancedStaticMesh6 slot0 bark (M_TL_Acacia_Bark)",
+      "ok": true,
+      "detail": {
+        "slot": 0,
+        "material": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+        "base": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+        "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+        "base_ism_usage": true
+      }
+    },
+    {
+      "check": "perf_agl200_forest HierarchicalInstancedStaticMesh6 slot1 masked leaf MIC (M_TL_AcaciaW_LeafCards)",
+      "ok": true,
+      "detail": {
+        "slot": 1,
+        "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V6",
+        "base": "/Game/TreeLookdev/Materials/M_TL_AcaciaW_LeafCards",
+        "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+        "base_ism_usage": true
+      }
+    },
+    {
+      "check": "perf_agl200_forest HierarchicalInstancedStaticMesh6 no default material",
+      "ok": true,
+      "detail": [
+        {
+          "slot": 0,
+          "material": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+          "base": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+          "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+          "base_ism_usage": true
+        },
+        {
+          "slot": 1,
+          "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V6",
+          "base": "/Game/TreeLookdev/Materials/M_TL_AcaciaW_LeafCards",
+          "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+          "base_ism_usage": true
+        }
+      ]
+    },
+    {
+      "check": "perf_agl200_forest HierarchicalInstancedStaticMesh7 mesh = form-A chain (D / C / S / T), crown B or \u76f8\u601d\u6a39",
+      "ok": true,
+      "detail": "/Game/HillsideForest/Trees/AcaciaTight/acacia_acacia_tight_lod0/StaticMeshes/acacia_acacia_tight_lod0"
+    },
+    {
+      "check": "perf_agl200_forest HierarchicalInstancedStaticMesh7 4 LODs 1/0.5/0.15/0.06",
+      "ok": true,
+      "detail": [
+        1.0,
+        0.5,
+        0.15,
+        0.06
+      ]
+    },
+    {
+      "check": "perf_agl200_forest HierarchicalInstancedStaticMesh7 slot0 bark (M_TL_Acacia_Bark)",
+      "ok": true,
+      "detail": {
+        "slot": 0,
+        "material": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+        "base": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+        "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+        "base_ism_usage": true
+      }
+    },
+    {
+      "check": "perf_agl200_forest HierarchicalInstancedStaticMesh7 slot1 masked leaf MIC (M_TL_AcaciaW_LeafCards)",
+      "ok": true,
+      "detail": {
+        "slot": 1,
+        "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V7",
+        "base": "/Game/TreeLookdev/Materials/M_TL_AcaciaW_LeafCards",
+        "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+        "base_ism_usage": true
+      }
+    },
+    {
+      "check": "perf_agl200_forest HierarchicalInstancedStaticMesh7 no default material",
+      "ok": true,
+      "detail": [
+        {
+          "slot": 0,
+          "material": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+          "base": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+          "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+          "base_ism_usage": true
+        },
+        {
+          "slot": 1,
+          "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V7",
+          "base": "/Game/TreeLookdev/Materials/M_TL_AcaciaW_LeafCards",
+          "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+          "base_ism_usage": true
+        }
+      ]
+    },
+    {
+      "check": "perf_agl200_forest instances per form",
+      "ok": true,
+      "detail": {
+        "got": {
+          "/Game/HillsideForest/Trees/A_CSide100/machilus_budget_side100_lod0/StaticMeshes/machilus_budget_side100_lod0": 482,
+          "/Game/HillsideForest/Trees/CrownB/machilus_balanced_lod0/StaticMeshes/machilus_balanced_lod0": 259,
+          "/Game/HillsideForest/Trees/AcaciaTight/acacia_acacia_tight_lod0/StaticMeshes/acacia_acacia_tight_lod0": 248
+        },
+        "want": {
+          "/Game/HillsideForest/Trees/AcaciaTight/acacia_acacia_tight_lod0/StaticMeshes/acacia_acacia_tight_lod0": 248,
+          "/Game/HillsideForest/Trees/A_CSide100/machilus_budget_side100_lod0/StaticMeshes/machilus_budget_side100_lod0": 482,
+          "/Game/HillsideForest/Trees/CrownB/machilus_balanced_lod0/StaticMeshes/machilus_balanced_lod0": 259
+        }
+      }
+    },
+    {
+      "check": "perf_agl200_forest instance total",
+      "ok": true,
+      "detail": {
+        "got": 989,
+        "want": 989
+      }
+    },
+    {
+      "check": "perf_agl200_forest transforms match instances.json",
+      "ok": true,
+      "detail": {
+        "worst_location_cm": 0.0,
+        "worst_scale_err_pct": 0.0
+      }
+    },
+    {
+      "check": "perf_agl500_forest landscape present",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "check": "perf_agl500_forest landscape 64 components",
+      "ok": true,
+      "detail": 64
+    },
+    {
+      "check": "perf_agl500_forest landscape material",
+      "ok": true,
+      "detail": "/Game/HillsideForest/a8/M_HF_Ground.M_HF_Ground"
+    },
+    {
+      "check": "perf_agl500_forest forest present",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "check": "perf_agl500_forest one HISM per (form, tint)",
+      "ok": true,
+      "detail": {
+        "hisms": 8,
+        "groups": [
+          [
+            "A",
+            0
+          ],
+          [
+            "A",
+            1
+          ],
+          [
+            "A",
+            2
+          ],
+          [
+            "B",
+            3
+          ],
+          [
+            "B",
+            4
+          ],
+          [
+            "C",
+            5
+          ],
+          [
+            "C",
+            6
+          ],
+          [
+            "C",
+            7
+          ]
+        ]
+      }
+    },
+    {
+      "check": "perf_agl500_forest HierarchicalInstancedStaticMesh mesh = form-A chain (D / C / S / T), crown B or \u76f8\u601d\u6a39",
+      "ok": true,
+      "detail": "/Game/HillsideForest/Trees/A_CSide100/machilus_budget_side100_lod0/StaticMeshes/machilus_budget_side100_lod0"
+    },
+    {
+      "check": "perf_agl500_forest HierarchicalInstancedStaticMesh 4 LODs 1/0.5/0.15/0.06",
+      "ok": true,
+      "detail": [
+        1.0,
+        0.5,
+        0.15,
+        0.06
+      ]
+    },
+    {
+      "check": "perf_agl500_forest HierarchicalInstancedStaticMesh slot0 bark (M_TL_Bark)",
+      "ok": true,
+      "detail": {
+        "slot": 0,
+        "material": "/Game/TreeLookdev/Materials/M_TL_Bark",
+        "base": "/Game/TreeLookdev/Materials/M_TL_Bark",
+        "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+        "base_ism_usage": true
+      }
+    },
+    {
+      "check": "perf_agl500_forest HierarchicalInstancedStaticMesh slot1 masked leaf MIC (M_TL_LeafCards)",
+      "ok": true,
+      "detail": {
+        "slot": 1,
+        "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V0",
+        "base": "/Game/TreeLookdev/Materials/M_TL_LeafCards",
+        "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+        "base_ism_usage": true
+      }
+    },
+    {
+      "check": "perf_agl500_forest HierarchicalInstancedStaticMesh no default material",
+      "ok": true,
+      "detail": [
+        {
+          "slot": 0,
+          "material": "/Game/TreeLookdev/Materials/M_TL_Bark",
+          "base": "/Game/TreeLookdev/Materials/M_TL_Bark",
+          "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+          "base_ism_usage": true
+        },
+        {
+          "slot": 1,
+          "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V0",
+          "base": "/Game/TreeLookdev/Materials/M_TL_LeafCards",
+          "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+          "base_ism_usage": true
+        }
+      ]
+    },
+    {
+      "check": "perf_agl500_forest HierarchicalInstancedStaticMesh1 mesh = form-A chain (D / C / S / T), crown B or \u76f8\u601d\u6a39",
+      "ok": true,
+      "detail": "/Game/HillsideForest/Trees/A_CSide100/machilus_budget_side100_lod0/StaticMeshes/machilus_budget_side100_lod0"
+    },
+    {
+      "check": "perf_agl500_forest HierarchicalInstancedStaticMesh1 4 LODs 1/0.5/0.15/0.06",
+      "ok": true,
+      "detail": [
+        1.0,
+        0.5,
+        0.15,
+        0.06
+      ]
+    },
+    {
+      "check": "perf_agl500_forest HierarchicalInstancedStaticMesh1 slot0 bark (M_TL_Bark)",
+      "ok": true,
+      "detail": {
+        "slot": 0,
+        "material": "/Game/TreeLookdev/Materials/M_TL_Bark",
+        "base": "/Game/TreeLookdev/Materials/M_TL_Bark",
+        "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+        "base_ism_usage": true
+      }
+    },
+    {
+      "check": "perf_agl500_forest HierarchicalInstancedStaticMesh1 slot1 masked leaf MIC (M_TL_LeafCards)",
+      "ok": true,
+      "detail": {
+        "slot": 1,
+        "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V1",
+        "base": "/Game/TreeLookdev/Materials/M_TL_LeafCards",
+        "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+        "base_ism_usage": true
+      }
+    },
+    {
+      "check": "perf_agl500_forest HierarchicalInstancedStaticMesh1 no default material",
+      "ok": true,
+      "detail": [
+        {
+          "slot": 0,
+          "material": "/Game/TreeLookdev/Materials/M_TL_Bark",
+          "base": "/Game/TreeLookdev/Materials/M_TL_Bark",
+          "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+          "base_ism_usage": true
+        },
+        {
+          "slot": 1,
+          "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V1",
+          "base": "/Game/TreeLookdev/Materials/M_TL_LeafCards",
+          "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+          "base_ism_usage": true
+        }
+      ]
+    },
+    {
+      "check": "perf_agl500_forest HierarchicalInstancedStaticMesh2 mesh = form-A chain (D / C / S / T), crown B or \u76f8\u601d\u6a39",
+      "ok": true,
+      "detail": "/Game/HillsideForest/Trees/A_CSide100/machilus_budget_side100_lod0/StaticMeshes/machilus_budget_side100_lod0"
+    },
+    {
+      "check": "perf_agl500_forest HierarchicalInstancedStaticMesh2 4 LODs 1/0.5/0.15/0.06",
+      "ok": true,
+      "detail": [
+        1.0,
+        0.5,
+        0.15,
+        0.06
+      ]
+    },
+    {
+      "check": "perf_agl500_forest HierarchicalInstancedStaticMesh2 slot0 bark (M_TL_Bark)",
+      "ok": true,
+      "detail": {
+        "slot": 0,
+        "material": "/Game/TreeLookdev/Materials/M_TL_Bark",
+        "base": "/Game/TreeLookdev/Materials/M_TL_Bark",
+        "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+        "base_ism_usage": true
+      }
+    },
+    {
+      "check": "perf_agl500_forest HierarchicalInstancedStaticMesh2 slot1 masked leaf MIC (M_TL_LeafCards)",
+      "ok": true,
+      "detail": {
+        "slot": 1,
+        "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V2",
+        "base": "/Game/TreeLookdev/Materials/M_TL_LeafCards",
+        "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+        "base_ism_usage": true
+      }
+    },
+    {
+      "check": "perf_agl500_forest HierarchicalInstancedStaticMesh2 no default material",
+      "ok": true,
+      "detail": [
+        {
+          "slot": 0,
+          "material": "/Game/TreeLookdev/Materials/M_TL_Bark",
+          "base": "/Game/TreeLookdev/Materials/M_TL_Bark",
+          "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+          "base_ism_usage": true
+        },
+        {
+          "slot": 1,
+          "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V2",
+          "base": "/Game/TreeLookdev/Materials/M_TL_LeafCards",
+          "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+          "base_ism_usage": true
+        }
+      ]
+    },
+    {
+      "check": "perf_agl500_forest HierarchicalInstancedStaticMesh3 mesh = form-A chain (D / C / S / T), crown B or \u76f8\u601d\u6a39",
+      "ok": true,
+      "detail": "/Game/HillsideForest/Trees/CrownB/machilus_balanced_lod0/StaticMeshes/machilus_balanced_lod0"
+    },
+    {
+      "check": "perf_agl500_forest HierarchicalInstancedStaticMesh3 4 LODs 1/0.5/0.15/0.06",
+      "ok": true,
+      "detail": [
+        1.0,
+        0.5,
+        0.15,
+        0.06
+      ]
+    },
+    {
+      "check": "perf_agl500_forest HierarchicalInstancedStaticMesh3 slot0 bark (M_TL_Bark)",
+      "ok": true,
+      "detail": {
+        "slot": 0,
+        "material": "/Game/TreeLookdev/Materials/M_TL_Bark",
+        "base": "/Game/TreeLookdev/Materials/M_TL_Bark",
+        "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+        "base_ism_usage": true
+      }
+    },
+    {
+      "check": "perf_agl500_forest HierarchicalInstancedStaticMesh3 slot1 masked leaf MIC (M_TL_LeafCards)",
+      "ok": true,
+      "detail": {
+        "slot": 1,
+        "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V3",
+        "base": "/Game/TreeLookdev/Materials/M_TL_LeafCards",
+        "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+        "base_ism_usage": true
+      }
+    },
+    {
+      "check": "perf_agl500_forest HierarchicalInstancedStaticMesh3 no default material",
+      "ok": true,
+      "detail": [
+        {
+          "slot": 0,
+          "material": "/Game/TreeLookdev/Materials/M_TL_Bark",
+          "base": "/Game/TreeLookdev/Materials/M_TL_Bark",
+          "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+          "base_ism_usage": true
+        },
+        {
+          "slot": 1,
+          "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V3",
+          "base": "/Game/TreeLookdev/Materials/M_TL_LeafCards",
+          "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+          "base_ism_usage": true
+        }
+      ]
+    },
+    {
+      "check": "perf_agl500_forest HierarchicalInstancedStaticMesh4 mesh = form-A chain (D / C / S / T), crown B or \u76f8\u601d\u6a39",
+      "ok": true,
+      "detail": "/Game/HillsideForest/Trees/CrownB/machilus_balanced_lod0/StaticMeshes/machilus_balanced_lod0"
+    },
+    {
+      "check": "perf_agl500_forest HierarchicalInstancedStaticMesh4 4 LODs 1/0.5/0.15/0.06",
+      "ok": true,
+      "detail": [
+        1.0,
+        0.5,
+        0.15,
+        0.06
+      ]
+    },
+    {
+      "check": "perf_agl500_forest HierarchicalInstancedStaticMesh4 slot0 bark (M_TL_Bark)",
+      "ok": true,
+      "detail": {
+        "slot": 0,
+        "material": "/Game/TreeLookdev/Materials/M_TL_Bark",
+        "base": "/Game/TreeLookdev/Materials/M_TL_Bark",
+        "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+        "base_ism_usage": true
+      }
+    },
+    {
+      "check": "perf_agl500_forest HierarchicalInstancedStaticMesh4 slot1 masked leaf MIC (M_TL_LeafCards)",
+      "ok": true,
+      "detail": {
+        "slot": 1,
+        "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V4",
+        "base": "/Game/TreeLookdev/Materials/M_TL_LeafCards",
+        "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+        "base_ism_usage": true
+      }
+    },
+    {
+      "check": "perf_agl500_forest HierarchicalInstancedStaticMesh4 no default material",
+      "ok": true,
+      "detail": [
+        {
+          "slot": 0,
+          "material": "/Game/TreeLookdev/Materials/M_TL_Bark",
+          "base": "/Game/TreeLookdev/Materials/M_TL_Bark",
+          "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+          "base_ism_usage": true
+        },
+        {
+          "slot": 1,
+          "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V4",
+          "base": "/Game/TreeLookdev/Materials/M_TL_LeafCards",
+          "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+          "base_ism_usage": true
+        }
+      ]
+    },
+    {
+      "check": "perf_agl500_forest HierarchicalInstancedStaticMesh5 mesh = form-A chain (D / C / S / T), crown B or \u76f8\u601d\u6a39",
+      "ok": true,
+      "detail": "/Game/HillsideForest/Trees/AcaciaTight/acacia_acacia_tight_lod0/StaticMeshes/acacia_acacia_tight_lod0"
+    },
+    {
+      "check": "perf_agl500_forest HierarchicalInstancedStaticMesh5 4 LODs 1/0.5/0.15/0.06",
+      "ok": true,
+      "detail": [
+        1.0,
+        0.5,
+        0.15,
+        0.06
+      ]
+    },
+    {
+      "check": "perf_agl500_forest HierarchicalInstancedStaticMesh5 slot0 bark (M_TL_Acacia_Bark)",
+      "ok": true,
+      "detail": {
+        "slot": 0,
+        "material": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+        "base": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+        "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+        "base_ism_usage": true
+      }
+    },
+    {
+      "check": "perf_agl500_forest HierarchicalInstancedStaticMesh5 slot1 masked leaf MIC (M_TL_AcaciaW_LeafCards)",
+      "ok": true,
+      "detail": {
+        "slot": 1,
+        "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V5",
+        "base": "/Game/TreeLookdev/Materials/M_TL_AcaciaW_LeafCards",
+        "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+        "base_ism_usage": true
+      }
+    },
+    {
+      "check": "perf_agl500_forest HierarchicalInstancedStaticMesh5 no default material",
+      "ok": true,
+      "detail": [
+        {
+          "slot": 0,
+          "material": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+          "base": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+          "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+          "base_ism_usage": true
+        },
+        {
+          "slot": 1,
+          "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V5",
+          "base": "/Game/TreeLookdev/Materials/M_TL_AcaciaW_LeafCards",
+          "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+          "base_ism_usage": true
+        }
+      ]
+    },
+    {
+      "check": "perf_agl500_forest HierarchicalInstancedStaticMesh6 mesh = form-A chain (D / C / S / T), crown B or \u76f8\u601d\u6a39",
+      "ok": true,
+      "detail": "/Game/HillsideForest/Trees/AcaciaTight/acacia_acacia_tight_lod0/StaticMeshes/acacia_acacia_tight_lod0"
+    },
+    {
+      "check": "perf_agl500_forest HierarchicalInstancedStaticMesh6 4 LODs 1/0.5/0.15/0.06",
+      "ok": true,
+      "detail": [
+        1.0,
+        0.5,
+        0.15,
+        0.06
+      ]
+    },
+    {
+      "check": "perf_agl500_forest HierarchicalInstancedStaticMesh6 slot0 bark (M_TL_Acacia_Bark)",
+      "ok": true,
+      "detail": {
+        "slot": 0,
+        "material": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+        "base": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+        "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+        "base_ism_usage": true
+      }
+    },
+    {
+      "check": "perf_agl500_forest HierarchicalInstancedStaticMesh6 slot1 masked leaf MIC (M_TL_AcaciaW_LeafCards)",
+      "ok": true,
+      "detail": {
+        "slot": 1,
+        "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V6",
+        "base": "/Game/TreeLookdev/Materials/M_TL_AcaciaW_LeafCards",
+        "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+        "base_ism_usage": true
+      }
+    },
+    {
+      "check": "perf_agl500_forest HierarchicalInstancedStaticMesh6 no default material",
+      "ok": true,
+      "detail": [
+        {
+          "slot": 0,
+          "material": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+          "base": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+          "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+          "base_ism_usage": true
+        },
+        {
+          "slot": 1,
+          "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V6",
+          "base": "/Game/TreeLookdev/Materials/M_TL_AcaciaW_LeafCards",
+          "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+          "base_ism_usage": true
+        }
+      ]
+    },
+    {
+      "check": "perf_agl500_forest HierarchicalInstancedStaticMesh7 mesh = form-A chain (D / C / S / T), crown B or \u76f8\u601d\u6a39",
+      "ok": true,
+      "detail": "/Game/HillsideForest/Trees/AcaciaTight/acacia_acacia_tight_lod0/StaticMeshes/acacia_acacia_tight_lod0"
+    },
+    {
+      "check": "perf_agl500_forest HierarchicalInstancedStaticMesh7 4 LODs 1/0.5/0.15/0.06",
+      "ok": true,
+      "detail": [
+        1.0,
+        0.5,
+        0.15,
+        0.06
+      ]
+    },
+    {
+      "check": "perf_agl500_forest HierarchicalInstancedStaticMesh7 slot0 bark (M_TL_Acacia_Bark)",
+      "ok": true,
+      "detail": {
+        "slot": 0,
+        "material": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+        "base": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+        "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+        "base_ism_usage": true
+      }
+    },
+    {
+      "check": "perf_agl500_forest HierarchicalInstancedStaticMesh7 slot1 masked leaf MIC (M_TL_AcaciaW_LeafCards)",
+      "ok": true,
+      "detail": {
+        "slot": 1,
+        "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V7",
+        "base": "/Game/TreeLookdev/Materials/M_TL_AcaciaW_LeafCards",
+        "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+        "base_ism_usage": true
+      }
+    },
+    {
+      "check": "perf_agl500_forest HierarchicalInstancedStaticMesh7 no default material",
+      "ok": true,
+      "detail": [
+        {
+          "slot": 0,
+          "material": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+          "base": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+          "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+          "base_ism_usage": true
+        },
+        {
+          "slot": 1,
+          "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V7",
+          "base": "/Game/TreeLookdev/Materials/M_TL_AcaciaW_LeafCards",
+          "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+          "base_ism_usage": true
+        }
+      ]
+    },
+    {
+      "check": "perf_agl500_forest instances per form",
+      "ok": true,
+      "detail": {
+        "got": {
+          "/Game/HillsideForest/Trees/A_CSide100/machilus_budget_side100_lod0/StaticMeshes/machilus_budget_side100_lod0": 482,
+          "/Game/HillsideForest/Trees/CrownB/machilus_balanced_lod0/StaticMeshes/machilus_balanced_lod0": 259,
+          "/Game/HillsideForest/Trees/AcaciaTight/acacia_acacia_tight_lod0/StaticMeshes/acacia_acacia_tight_lod0": 248
+        },
+        "want": {
+          "/Game/HillsideForest/Trees/AcaciaTight/acacia_acacia_tight_lod0/StaticMeshes/acacia_acacia_tight_lod0": 248,
+          "/Game/HillsideForest/Trees/A_CSide100/machilus_budget_side100_lod0/StaticMeshes/machilus_budget_side100_lod0": 482,
+          "/Game/HillsideForest/Trees/CrownB/machilus_balanced_lod0/StaticMeshes/machilus_balanced_lod0": 259
+        }
+      }
+    },
+    {
+      "check": "perf_agl500_forest instance total",
+      "ok": true,
+      "detail": {
+        "got": 989,
+        "want": 989
+      }
+    },
+    {
+      "check": "perf_agl500_forest transforms match instances.json",
+      "ok": true,
+      "detail": {
+        "worst_location_cm": 0.0,
+        "worst_scale_err_pct": 0.0
+      }
+    },
+    {
+      "check": "stills_empty landscape present",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "check": "stills_empty landscape 64 components",
+      "ok": true,
+      "detail": 64
+    },
+    {
+      "check": "stills_empty landscape material",
+      "ok": true,
+      "detail": "/Game/HillsideForest/a8/M_HF_Ground.M_HF_Ground"
+    },
+    {
+      "check": "stills_empty empty map has no forest",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "check": "flight_empty landscape present",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "check": "flight_empty landscape 64 components",
+      "ok": true,
+      "detail": 64
+    },
+    {
+      "check": "flight_empty landscape material",
+      "ok": true,
+      "detail": "/Game/HillsideForest/a8/M_HF_Ground.M_HF_Ground"
+    },
+    {
+      "check": "flight_empty empty map has no forest",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "check": "perf_agl50_empty landscape present",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "check": "perf_agl50_empty landscape 64 components",
+      "ok": true,
+      "detail": 64
+    },
+    {
+      "check": "perf_agl50_empty landscape material",
+      "ok": true,
+      "detail": "/Game/HillsideForest/a8/M_HF_Ground.M_HF_Ground"
+    },
+    {
+      "check": "perf_agl50_empty empty map has no forest",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "check": "perf_agl200_empty landscape present",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "check": "perf_agl200_empty landscape 64 components",
+      "ok": true,
+      "detail": 64
+    },
+    {
+      "check": "perf_agl200_empty landscape material",
+      "ok": true,
+      "detail": "/Game/HillsideForest/a8/M_HF_Ground.M_HF_Ground"
+    },
+    {
+      "check": "perf_agl200_empty empty map has no forest",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "check": "perf_agl500_empty landscape present",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "check": "perf_agl500_empty landscape 64 components",
+      "ok": true,
+      "detail": 64
+    },
+    {
+      "check": "perf_agl500_empty landscape material",
+      "ok": true,
+      "detail": "/Game/HillsideForest/a8/M_HF_Ground.M_HF_Ground"
+    },
+    {
+      "check": "perf_agl500_empty empty map has no forest",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "check": "no material / forest package dirtied by loading every map",
+      "ok": true,
+      "detail": []
+    }
+  ],
+  "materials": {
+    "M_TL_LeafCards": {
+      "used_with_instanced_static_meshes": true,
+      "blend_mode": "<BlendMode.BLEND_MASKED: 1>",
+      "two_sided": true,
+      "shading_model": "<MaterialShadingModel.MSM_TWO_SIDED_FOLIAGE: 6>",
+      "package_dirty_after_load": false
+    },
+    "M_TL_Bark": {
+      "used_with_instanced_static_meshes": true,
+      "blend_mode": "<BlendMode.BLEND_OPAQUE: 0>",
+      "two_sided": false,
+      "shading_model": "<MaterialShadingModel.MSM_DEFAULT_LIT: 1>",
+      "package_dirty_after_load": false
+    },
+    "M_TL_AcaciaW_LeafCards": {
+      "used_with_instanced_static_meshes": true,
+      "blend_mode": "<BlendMode.BLEND_MASKED: 1>",
+      "two_sided": true,
+      "shading_model": "<MaterialShadingModel.MSM_TWO_SIDED_FOLIAGE: 6>",
+      "package_dirty_after_load": false
+    },
+    "M_TL_Acacia_Bark": {
+      "used_with_instanced_static_meshes": true,
+      "blend_mode": "<BlendMode.BLEND_OPAQUE: 0>",
+      "two_sided": false,
+      "shading_model": "<MaterialShadingModel.MSM_DEFAULT_LIT: 1>",
+      "package_dirty_after_load": false
+    },
+    "MI_HF_Leaf_V0": {
+      "base": "/Game/TreeLookdev/Materials/M_TL_LeafCards",
+      "overrides": {},
+      "package_dirty_after_load": false
+    },
+    "MI_HF_Leaf_V1": {
+      "base": "/Game/TreeLookdev/Materials/M_TL_LeafCards",
+      "overrides": {
+        "TintHi": [
+          1.34,
+          1.26,
+          0.8
+        ],
+        "TintLo": [
+          0.9,
+          0.94,
+          0.7
+        ],
+        "Brightness": 0.5
+      },
+      "package_dirty_after_load": false
+    },
+    "MI_HF_Leaf_V2": {
+      "base": "/Game/TreeLookdev/Materials/M_TL_LeafCards",
+      "overrides": {
+        "TintHi": [
+          0.98,
+          1.04,
+          1.0
+        ],
+        "TintLo": [
+          0.66,
+          0.76,
+          0.78
+        ],
+        "Brightness": 0.34
+      },
+      "package_dirty_after_load": false
+    },
+    "MI_HF_Leaf_V3": {
+      "base": "/Game/TreeLookdev/Materials/M_TL_LeafCards",
+      "overrides": {
+        "TintHi": [
+          1.42,
+          1.34,
+          0.72
+        ],
+        "TintLo": [
+          0.92,
+          0.96,
+          0.66
+        ],
+        "Brightness": 0.52
+      },
+      "package_dirty_after_load": false
+    },
+    "MI_HF_Leaf_V4": {
+      "base": "/Game/TreeLookdev/Materials/M_TL_LeafCards",
+      "overrides": {
+        "TintHi": [
+          1.3,
+          1.26,
+          0.82
+        ],
+        "TintLo": [
+          0.84,
+          0.92,
+          0.66
+        ],
+        "Brightness": 0.44
+      },
+      "package_dirty_after_load": false
+    },
+    "MI_HF_Leaf_V5": {
+      "base": "/Game/TreeLookdev/Materials/M_TL_AcaciaW_LeafCards",
+      "overrides": {
+        "TintHi": [
+          1.24,
+          1.16,
+          0.84
+        ],
+        "TintLo": [
+          0.92,
+          0.92,
+          0.74
+        ],
+        "Brightness": 0.44
+      },
+      "package_dirty_after_load": false
+    },
+    "MI_HF_Leaf_V6": {
+      "base": "/Game/TreeLookdev/Materials/M_TL_AcaciaW_LeafCards",
+      "overrides": {
+        "TintHi": [
+          1.36,
+          1.26,
+          0.74
+        ],
+        "TintLo": [
+          1.0,
+          0.98,
+          0.7
+        ],
+        "Brightness": 0.48
+      },
+      "package_dirty_after_load": false
+    },
+    "MI_HF_Leaf_V7": {
+      "base": "/Game/TreeLookdev/Materials/M_TL_AcaciaW_LeafCards",
+      "overrides": {
+        "TintHi": [
+          1.08,
+          1.06,
+          0.9
+        ],
+        "TintLo": [
+          0.8,
+          0.84,
+          0.74
+        ],
+        "Brightness": 0.4
+      },
+      "package_dirty_after_load": false
+    }
+  },
+  "maps": {
+    "main": {
+      "map": "/Game/HillsideForest/a8/L_HF_Xiangshan",
+      "landscape": {
+        "material": "/Game/HillsideForest/a8/M_HF_Ground.M_HF_Ground",
+        "components": 64
+      },
+      "hisms": [
+        {
+          "name": "HierarchicalInstancedStaticMesh",
+          "mesh": "/Game/HillsideForest/Trees/A_CSide100/machilus_budget_side100_lod0/StaticMeshes/machilus_budget_side100_lod0",
+          "lods": 4,
+          "screens": [
+            1.0,
+            0.5,
+            0.15,
+            0.06
+          ],
+          "triangles": [
+            34272,
+            8578,
+            1400,
+            534
+          ],
+          "instances": 207,
+          "materials": [
+            {
+              "slot": 0,
+              "material": "/Game/TreeLookdev/Materials/M_TL_Bark",
+              "base": "/Game/TreeLookdev/Materials/M_TL_Bark",
+              "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+              "base_ism_usage": true
+            },
+            {
+              "slot": 1,
+              "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V0",
+              "base": "/Game/TreeLookdev/Materials/M_TL_LeafCards",
+              "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+              "base_ism_usage": true
+            }
+          ],
+          "cast_shadow": true
+        },
+        {
+          "name": "HierarchicalInstancedStaticMesh1",
+          "mesh": "/Game/HillsideForest/Trees/A_CSide100/machilus_budget_side100_lod0/StaticMeshes/machilus_budget_side100_lod0",
+          "lods": 4,
+          "screens": [
+            1.0,
+            0.5,
+            0.15,
+            0.06
+          ],
+          "triangles": [
+            34272,
+            8578,
+            1400,
+            534
+          ],
+          "instances": 149,
+          "materials": [
+            {
+              "slot": 0,
+              "material": "/Game/TreeLookdev/Materials/M_TL_Bark",
+              "base": "/Game/TreeLookdev/Materials/M_TL_Bark",
+              "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+              "base_ism_usage": true
+            },
+            {
+              "slot": 1,
+              "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V1",
+              "base": "/Game/TreeLookdev/Materials/M_TL_LeafCards",
+              "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+              "base_ism_usage": true
+            }
+          ],
+          "cast_shadow": true
+        },
+        {
+          "name": "HierarchicalInstancedStaticMesh2",
+          "mesh": "/Game/HillsideForest/Trees/A_CSide100/machilus_budget_side100_lod0/StaticMeshes/machilus_budget_side100_lod0",
+          "lods": 4,
+          "screens": [
+            1.0,
+            0.5,
+            0.15,
+            0.06
+          ],
+          "triangles": [
+            34272,
+            8578,
+            1400,
+            534
+          ],
+          "instances": 126,
+          "materials": [
+            {
+              "slot": 0,
+              "material": "/Game/TreeLookdev/Materials/M_TL_Bark",
+              "base": "/Game/TreeLookdev/Materials/M_TL_Bark",
+              "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+              "base_ism_usage": true
+            },
+            {
+              "slot": 1,
+              "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V2",
+              "base": "/Game/TreeLookdev/Materials/M_TL_LeafCards",
+              "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+              "base_ism_usage": true
+            }
+          ],
+          "cast_shadow": true
+        },
+        {
+          "name": "HierarchicalInstancedStaticMesh3",
+          "mesh": "/Game/HillsideForest/Trees/CrownB/machilus_balanced_lod0/StaticMeshes/machilus_balanced_lod0",
+          "lods": 4,
+          "screens": [
+            1.0,
+            0.5,
+            0.15,
+            0.06
+          ],
+          "triangles": [
+            28850,
+            11500,
+            1598,
+            470
+          ],
+          "instances": 167,
+          "materials": [
+            {
+              "slot": 0,
+              "material": "/Game/TreeLookdev/Materials/M_TL_Bark",
+              "base": "/Game/TreeLookdev/Materials/M_TL_Bark",
+              "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+              "base_ism_usage": true
+            },
+            {
+              "slot": 1,
+              "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V3",
+              "base": "/Game/TreeLookdev/Materials/M_TL_LeafCards",
+              "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+              "base_ism_usage": true
+            }
+          ],
+          "cast_shadow": true
+        },
+        {
+          "name": "HierarchicalInstancedStaticMesh4",
+          "mesh": "/Game/HillsideForest/Trees/CrownB/machilus_balanced_lod0/StaticMeshes/machilus_balanced_lod0",
+          "lods": 4,
+          "screens": [
+            1.0,
+            0.5,
+            0.15,
+            0.06
+          ],
+          "triangles": [
+            28850,
+            11500,
+            1598,
+            470
+          ],
+          "instances": 92,
+          "materials": [
+            {
+              "slot": 0,
+              "material": "/Game/TreeLookdev/Materials/M_TL_Bark",
+              "base": "/Game/TreeLookdev/Materials/M_TL_Bark",
+              "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+              "base_ism_usage": true
+            },
+            {
+              "slot": 1,
+              "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V4",
+              "base": "/Game/TreeLookdev/Materials/M_TL_LeafCards",
+              "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+              "base_ism_usage": true
+            }
+          ],
+          "cast_shadow": true
+        },
+        {
+          "name": "HierarchicalInstancedStaticMesh5",
+          "mesh": "/Game/HillsideForest/Trees/AcaciaTight/acacia_acacia_tight_lod0/StaticMeshes/acacia_acacia_tight_lod0",
+          "lods": 4,
+          "screens": [
+            1.0,
+            0.5,
+            0.15,
+            0.06
+          ],
+          "triangles": [
+            38156,
+            16752,
+            1477,
+            452
+          ],
+          "instances": 93,
+          "materials": [
+            {
+              "slot": 0,
+              "material": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+              "base": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+              "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+              "base_ism_usage": true
+            },
+            {
+              "slot": 1,
+              "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V5",
+              "base": "/Game/TreeLookdev/Materials/M_TL_AcaciaW_LeafCards",
+              "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+              "base_ism_usage": true
+            }
+          ],
+          "cast_shadow": true
+        },
+        {
+          "name": "HierarchicalInstancedStaticMesh6",
+          "mesh": "/Game/HillsideForest/Trees/AcaciaTight/acacia_acacia_tight_lod0/StaticMeshes/acacia_acacia_tight_lod0",
+          "lods": 4,
+          "screens": [
+            1.0,
+            0.5,
+            0.15,
+            0.06
+          ],
+          "triangles": [
+            38156,
+            16752,
+            1477,
+            452
+          ],
+          "instances": 85,
+          "materials": [
+            {
+              "slot": 0,
+              "material": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+              "base": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+              "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+              "base_ism_usage": true
+            },
+            {
+              "slot": 1,
+              "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V6",
+              "base": "/Game/TreeLookdev/Materials/M_TL_AcaciaW_LeafCards",
+              "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+              "base_ism_usage": true
+            }
+          ],
+          "cast_shadow": true
+        },
+        {
+          "name": "HierarchicalInstancedStaticMesh7",
+          "mesh": "/Game/HillsideForest/Trees/AcaciaTight/acacia_acacia_tight_lod0/StaticMeshes/acacia_acacia_tight_lod0",
+          "lods": 4,
+          "screens": [
+            1.0,
+            0.5,
+            0.15,
+            0.06
+          ],
+          "triangles": [
+            38156,
+            16752,
+            1477,
+            452
+          ],
+          "instances": 70,
+          "materials": [
+            {
+              "slot": 0,
+              "material": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+              "base": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+              "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+              "base_ism_usage": true
+            },
+            {
+              "slot": 1,
+              "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V7",
+              "base": "/Game/TreeLookdev/Materials/M_TL_AcaciaW_LeafCards",
+              "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+              "base_ism_usage": true
+            }
+          ],
+          "cast_shadow": true
+        }
+      ],
+      "instances_total": 989,
+      "instances_per_mesh": {
+        "/Game/HillsideForest/Trees/A_CSide100/machilus_budget_side100_lod0/StaticMeshes/machilus_budget_side100_lod0": 482,
+        "/Game/HillsideForest/Trees/CrownB/machilus_balanced_lod0/StaticMeshes/machilus_balanced_lod0": 259,
+        "/Game/HillsideForest/Trees/AcaciaTight/acacia_acacia_tight_lod0/StaticMeshes/acacia_acacia_tight_lod0": 248
+      },
+      "spot_check": {
+        "worst_location_cm": 0.0,
+        "worst_scale_err_pct": 0.0
+      }
+    },
+    "stills_forest": {
+      "map": "/Game/HillsideForest/a8/L_HF_Stills_forest",
+      "landscape": {
+        "material": "/Game/HillsideForest/a8/M_HF_Ground.M_HF_Ground",
+        "components": 64
+      },
+      "hisms": [
+        {
+          "name": "HierarchicalInstancedStaticMesh",
+          "mesh": "/Game/HillsideForest/Trees/A_CSide100/machilus_budget_side100_lod0/StaticMeshes/machilus_budget_side100_lod0",
+          "lods": 4,
+          "screens": [
+            1.0,
+            0.5,
+            0.15,
+            0.06
+          ],
+          "triangles": [
+            34272,
+            8578,
+            1400,
+            534
+          ],
+          "instances": 207,
+          "materials": [
+            {
+              "slot": 0,
+              "material": "/Game/TreeLookdev/Materials/M_TL_Bark",
+              "base": "/Game/TreeLookdev/Materials/M_TL_Bark",
+              "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+              "base_ism_usage": true
+            },
+            {
+              "slot": 1,
+              "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V0",
+              "base": "/Game/TreeLookdev/Materials/M_TL_LeafCards",
+              "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+              "base_ism_usage": true
+            }
+          ],
+          "cast_shadow": true
+        },
+        {
+          "name": "HierarchicalInstancedStaticMesh1",
+          "mesh": "/Game/HillsideForest/Trees/A_CSide100/machilus_budget_side100_lod0/StaticMeshes/machilus_budget_side100_lod0",
+          "lods": 4,
+          "screens": [
+            1.0,
+            0.5,
+            0.15,
+            0.06
+          ],
+          "triangles": [
+            34272,
+            8578,
+            1400,
+            534
+          ],
+          "instances": 149,
+          "materials": [
+            {
+              "slot": 0,
+              "material": "/Game/TreeLookdev/Materials/M_TL_Bark",
+              "base": "/Game/TreeLookdev/Materials/M_TL_Bark",
+              "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+              "base_ism_usage": true
+            },
+            {
+              "slot": 1,
+              "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V1",
+              "base": "/Game/TreeLookdev/Materials/M_TL_LeafCards",
+              "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+              "base_ism_usage": true
+            }
+          ],
+          "cast_shadow": true
+        },
+        {
+          "name": "HierarchicalInstancedStaticMesh2",
+          "mesh": "/Game/HillsideForest/Trees/A_CSide100/machilus_budget_side100_lod0/StaticMeshes/machilus_budget_side100_lod0",
+          "lods": 4,
+          "screens": [
+            1.0,
+            0.5,
+            0.15,
+            0.06
+          ],
+          "triangles": [
+            34272,
+            8578,
+            1400,
+            534
+          ],
+          "instances": 126,
+          "materials": [
+            {
+              "slot": 0,
+              "material": "/Game/TreeLookdev/Materials/M_TL_Bark",
+              "base": "/Game/TreeLookdev/Materials/M_TL_Bark",
+              "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+              "base_ism_usage": true
+            },
+            {
+              "slot": 1,
+              "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V2",
+              "base": "/Game/TreeLookdev/Materials/M_TL_LeafCards",
+              "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+              "base_ism_usage": true
+            }
+          ],
+          "cast_shadow": true
+        },
+        {
+          "name": "HierarchicalInstancedStaticMesh3",
+          "mesh": "/Game/HillsideForest/Trees/CrownB/machilus_balanced_lod0/StaticMeshes/machilus_balanced_lod0",
+          "lods": 4,
+          "screens": [
+            1.0,
+            0.5,
+            0.15,
+            0.06
+          ],
+          "triangles": [
+            28850,
+            11500,
+            1598,
+            470
+          ],
+          "instances": 167,
+          "materials": [
+            {
+              "slot": 0,
+              "material": "/Game/TreeLookdev/Materials/M_TL_Bark",
+              "base": "/Game/TreeLookdev/Materials/M_TL_Bark",
+              "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+              "base_ism_usage": true
+            },
+            {
+              "slot": 1,
+              "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V3",
+              "base": "/Game/TreeLookdev/Materials/M_TL_LeafCards",
+              "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+              "base_ism_usage": true
+            }
+          ],
+          "cast_shadow": true
+        },
+        {
+          "name": "HierarchicalInstancedStaticMesh4",
+          "mesh": "/Game/HillsideForest/Trees/CrownB/machilus_balanced_lod0/StaticMeshes/machilus_balanced_lod0",
+          "lods": 4,
+          "screens": [
+            1.0,
+            0.5,
+            0.15,
+            0.06
+          ],
+          "triangles": [
+            28850,
+            11500,
+            1598,
+            470
+          ],
+          "instances": 92,
+          "materials": [
+            {
+              "slot": 0,
+              "material": "/Game/TreeLookdev/Materials/M_TL_Bark",
+              "base": "/Game/TreeLookdev/Materials/M_TL_Bark",
+              "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+              "base_ism_usage": true
+            },
+            {
+              "slot": 1,
+              "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V4",
+              "base": "/Game/TreeLookdev/Materials/M_TL_LeafCards",
+              "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+              "base_ism_usage": true
+            }
+          ],
+          "cast_shadow": true
+        },
+        {
+          "name": "HierarchicalInstancedStaticMesh5",
+          "mesh": "/Game/HillsideForest/Trees/AcaciaTight/acacia_acacia_tight_lod0/StaticMeshes/acacia_acacia_tight_lod0",
+          "lods": 4,
+          "screens": [
+            1.0,
+            0.5,
+            0.15,
+            0.06
+          ],
+          "triangles": [
+            38156,
+            16752,
+            1477,
+            452
+          ],
+          "instances": 93,
+          "materials": [
+            {
+              "slot": 0,
+              "material": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+              "base": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+              "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+              "base_ism_usage": true
+            },
+            {
+              "slot": 1,
+              "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V5",
+              "base": "/Game/TreeLookdev/Materials/M_TL_AcaciaW_LeafCards",
+              "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+              "base_ism_usage": true
+            }
+          ],
+          "cast_shadow": true
+        },
+        {
+          "name": "HierarchicalInstancedStaticMesh6",
+          "mesh": "/Game/HillsideForest/Trees/AcaciaTight/acacia_acacia_tight_lod0/StaticMeshes/acacia_acacia_tight_lod0",
+          "lods": 4,
+          "screens": [
+            1.0,
+            0.5,
+            0.15,
+            0.06
+          ],
+          "triangles": [
+            38156,
+            16752,
+            1477,
+            452
+          ],
+          "instances": 85,
+          "materials": [
+            {
+              "slot": 0,
+              "material": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+              "base": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+              "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+              "base_ism_usage": true
+            },
+            {
+              "slot": 1,
+              "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V6",
+              "base": "/Game/TreeLookdev/Materials/M_TL_AcaciaW_LeafCards",
+              "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+              "base_ism_usage": true
+            }
+          ],
+          "cast_shadow": true
+        },
+        {
+          "name": "HierarchicalInstancedStaticMesh7",
+          "mesh": "/Game/HillsideForest/Trees/AcaciaTight/acacia_acacia_tight_lod0/StaticMeshes/acacia_acacia_tight_lod0",
+          "lods": 4,
+          "screens": [
+            1.0,
+            0.5,
+            0.15,
+            0.06
+          ],
+          "triangles": [
+            38156,
+            16752,
+            1477,
+            452
+          ],
+          "instances": 70,
+          "materials": [
+            {
+              "slot": 0,
+              "material": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+              "base": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+              "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+              "base_ism_usage": true
+            },
+            {
+              "slot": 1,
+              "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V7",
+              "base": "/Game/TreeLookdev/Materials/M_TL_AcaciaW_LeafCards",
+              "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+              "base_ism_usage": true
+            }
+          ],
+          "cast_shadow": true
+        }
+      ],
+      "instances_total": 989,
+      "instances_per_mesh": {
+        "/Game/HillsideForest/Trees/A_CSide100/machilus_budget_side100_lod0/StaticMeshes/machilus_budget_side100_lod0": 482,
+        "/Game/HillsideForest/Trees/CrownB/machilus_balanced_lod0/StaticMeshes/machilus_balanced_lod0": 259,
+        "/Game/HillsideForest/Trees/AcaciaTight/acacia_acacia_tight_lod0/StaticMeshes/acacia_acacia_tight_lod0": 248
+      },
+      "spot_check": {
+        "worst_location_cm": 0.0,
+        "worst_scale_err_pct": 0.0
+      }
+    },
+    "flight_forest": {
+      "map": "/Game/HillsideForest/a8/L_HF_Flight_forest",
+      "landscape": {
+        "material": "/Game/HillsideForest/a8/M_HF_Ground.M_HF_Ground",
+        "components": 64
+      },
+      "hisms": [
+        {
+          "name": "HierarchicalInstancedStaticMesh",
+          "mesh": "/Game/HillsideForest/Trees/A_CSide100/machilus_budget_side100_lod0/StaticMeshes/machilus_budget_side100_lod0",
+          "lods": 4,
+          "screens": [
+            1.0,
+            0.5,
+            0.15,
+            0.06
+          ],
+          "triangles": [
+            34272,
+            8578,
+            1400,
+            534
+          ],
+          "instances": 207,
+          "materials": [
+            {
+              "slot": 0,
+              "material": "/Game/TreeLookdev/Materials/M_TL_Bark",
+              "base": "/Game/TreeLookdev/Materials/M_TL_Bark",
+              "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+              "base_ism_usage": true
+            },
+            {
+              "slot": 1,
+              "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V0",
+              "base": "/Game/TreeLookdev/Materials/M_TL_LeafCards",
+              "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+              "base_ism_usage": true
+            }
+          ],
+          "cast_shadow": true
+        },
+        {
+          "name": "HierarchicalInstancedStaticMesh1",
+          "mesh": "/Game/HillsideForest/Trees/A_CSide100/machilus_budget_side100_lod0/StaticMeshes/machilus_budget_side100_lod0",
+          "lods": 4,
+          "screens": [
+            1.0,
+            0.5,
+            0.15,
+            0.06
+          ],
+          "triangles": [
+            34272,
+            8578,
+            1400,
+            534
+          ],
+          "instances": 149,
+          "materials": [
+            {
+              "slot": 0,
+              "material": "/Game/TreeLookdev/Materials/M_TL_Bark",
+              "base": "/Game/TreeLookdev/Materials/M_TL_Bark",
+              "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+              "base_ism_usage": true
+            },
+            {
+              "slot": 1,
+              "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V1",
+              "base": "/Game/TreeLookdev/Materials/M_TL_LeafCards",
+              "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+              "base_ism_usage": true
+            }
+          ],
+          "cast_shadow": true
+        },
+        {
+          "name": "HierarchicalInstancedStaticMesh2",
+          "mesh": "/Game/HillsideForest/Trees/A_CSide100/machilus_budget_side100_lod0/StaticMeshes/machilus_budget_side100_lod0",
+          "lods": 4,
+          "screens": [
+            1.0,
+            0.5,
+            0.15,
+            0.06
+          ],
+          "triangles": [
+            34272,
+            8578,
+            1400,
+            534
+          ],
+          "instances": 126,
+          "materials": [
+            {
+              "slot": 0,
+              "material": "/Game/TreeLookdev/Materials/M_TL_Bark",
+              "base": "/Game/TreeLookdev/Materials/M_TL_Bark",
+              "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+              "base_ism_usage": true
+            },
+            {
+              "slot": 1,
+              "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V2",
+              "base": "/Game/TreeLookdev/Materials/M_TL_LeafCards",
+              "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+              "base_ism_usage": true
+            }
+          ],
+          "cast_shadow": true
+        },
+        {
+          "name": "HierarchicalInstancedStaticMesh3",
+          "mesh": "/Game/HillsideForest/Trees/CrownB/machilus_balanced_lod0/StaticMeshes/machilus_balanced_lod0",
+          "lods": 4,
+          "screens": [
+            1.0,
+            0.5,
+            0.15,
+            0.06
+          ],
+          "triangles": [
+            28850,
+            11500,
+            1598,
+            470
+          ],
+          "instances": 167,
+          "materials": [
+            {
+              "slot": 0,
+              "material": "/Game/TreeLookdev/Materials/M_TL_Bark",
+              "base": "/Game/TreeLookdev/Materials/M_TL_Bark",
+              "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+              "base_ism_usage": true
+            },
+            {
+              "slot": 1,
+              "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V3",
+              "base": "/Game/TreeLookdev/Materials/M_TL_LeafCards",
+              "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+              "base_ism_usage": true
+            }
+          ],
+          "cast_shadow": true
+        },
+        {
+          "name": "HierarchicalInstancedStaticMesh4",
+          "mesh": "/Game/HillsideForest/Trees/CrownB/machilus_balanced_lod0/StaticMeshes/machilus_balanced_lod0",
+          "lods": 4,
+          "screens": [
+            1.0,
+            0.5,
+            0.15,
+            0.06
+          ],
+          "triangles": [
+            28850,
+            11500,
+            1598,
+            470
+          ],
+          "instances": 92,
+          "materials": [
+            {
+              "slot": 0,
+              "material": "/Game/TreeLookdev/Materials/M_TL_Bark",
+              "base": "/Game/TreeLookdev/Materials/M_TL_Bark",
+              "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+              "base_ism_usage": true
+            },
+            {
+              "slot": 1,
+              "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V4",
+              "base": "/Game/TreeLookdev/Materials/M_TL_LeafCards",
+              "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+              "base_ism_usage": true
+            }
+          ],
+          "cast_shadow": true
+        },
+        {
+          "name": "HierarchicalInstancedStaticMesh5",
+          "mesh": "/Game/HillsideForest/Trees/AcaciaTight/acacia_acacia_tight_lod0/StaticMeshes/acacia_acacia_tight_lod0",
+          "lods": 4,
+          "screens": [
+            1.0,
+            0.5,
+            0.15,
+            0.06
+          ],
+          "triangles": [
+            38156,
+            16752,
+            1477,
+            452
+          ],
+          "instances": 93,
+          "materials": [
+            {
+              "slot": 0,
+              "material": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+              "base": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+              "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+              "base_ism_usage": true
+            },
+            {
+              "slot": 1,
+              "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V5",
+              "base": "/Game/TreeLookdev/Materials/M_TL_AcaciaW_LeafCards",
+              "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+              "base_ism_usage": true
+            }
+          ],
+          "cast_shadow": true
+        },
+        {
+          "name": "HierarchicalInstancedStaticMesh6",
+          "mesh": "/Game/HillsideForest/Trees/AcaciaTight/acacia_acacia_tight_lod0/StaticMeshes/acacia_acacia_tight_lod0",
+          "lods": 4,
+          "screens": [
+            1.0,
+            0.5,
+            0.15,
+            0.06
+          ],
+          "triangles": [
+            38156,
+            16752,
+            1477,
+            452
+          ],
+          "instances": 85,
+          "materials": [
+            {
+              "slot": 0,
+              "material": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+              "base": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+              "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+              "base_ism_usage": true
+            },
+            {
+              "slot": 1,
+              "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V6",
+              "base": "/Game/TreeLookdev/Materials/M_TL_AcaciaW_LeafCards",
+              "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+              "base_ism_usage": true
+            }
+          ],
+          "cast_shadow": true
+        },
+        {
+          "name": "HierarchicalInstancedStaticMesh7",
+          "mesh": "/Game/HillsideForest/Trees/AcaciaTight/acacia_acacia_tight_lod0/StaticMeshes/acacia_acacia_tight_lod0",
+          "lods": 4,
+          "screens": [
+            1.0,
+            0.5,
+            0.15,
+            0.06
+          ],
+          "triangles": [
+            38156,
+            16752,
+            1477,
+            452
+          ],
+          "instances": 70,
+          "materials": [
+            {
+              "slot": 0,
+              "material": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+              "base": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+              "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+              "base_ism_usage": true
+            },
+            {
+              "slot": 1,
+              "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V7",
+              "base": "/Game/TreeLookdev/Materials/M_TL_AcaciaW_LeafCards",
+              "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+              "base_ism_usage": true
+            }
+          ],
+          "cast_shadow": true
+        }
+      ],
+      "instances_total": 989,
+      "instances_per_mesh": {
+        "/Game/HillsideForest/Trees/A_CSide100/machilus_budget_side100_lod0/StaticMeshes/machilus_budget_side100_lod0": 482,
+        "/Game/HillsideForest/Trees/CrownB/machilus_balanced_lod0/StaticMeshes/machilus_balanced_lod0": 259,
+        "/Game/HillsideForest/Trees/AcaciaTight/acacia_acacia_tight_lod0/StaticMeshes/acacia_acacia_tight_lod0": 248
+      },
+      "spot_check": {
+        "worst_location_cm": 0.0,
+        "worst_scale_err_pct": 0.0
+      }
+    },
+    "perf_agl50_forest": {
+      "map": "/Game/HillsideForest/a8/L_HFP_agl50_forest",
+      "landscape": {
+        "material": "/Game/HillsideForest/a8/M_HF_Ground.M_HF_Ground",
+        "components": 64
+      },
+      "hisms": [
+        {
+          "name": "HierarchicalInstancedStaticMesh",
+          "mesh": "/Game/HillsideForest/Trees/A_CSide100/machilus_budget_side100_lod0/StaticMeshes/machilus_budget_side100_lod0",
+          "lods": 4,
+          "screens": [
+            1.0,
+            0.5,
+            0.15,
+            0.06
+          ],
+          "triangles": [
+            34272,
+            8578,
+            1400,
+            534
+          ],
+          "instances": 207,
+          "materials": [
+            {
+              "slot": 0,
+              "material": "/Game/TreeLookdev/Materials/M_TL_Bark",
+              "base": "/Game/TreeLookdev/Materials/M_TL_Bark",
+              "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+              "base_ism_usage": true
+            },
+            {
+              "slot": 1,
+              "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V0",
+              "base": "/Game/TreeLookdev/Materials/M_TL_LeafCards",
+              "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+              "base_ism_usage": true
+            }
+          ],
+          "cast_shadow": true
+        },
+        {
+          "name": "HierarchicalInstancedStaticMesh1",
+          "mesh": "/Game/HillsideForest/Trees/A_CSide100/machilus_budget_side100_lod0/StaticMeshes/machilus_budget_side100_lod0",
+          "lods": 4,
+          "screens": [
+            1.0,
+            0.5,
+            0.15,
+            0.06
+          ],
+          "triangles": [
+            34272,
+            8578,
+            1400,
+            534
+          ],
+          "instances": 149,
+          "materials": [
+            {
+              "slot": 0,
+              "material": "/Game/TreeLookdev/Materials/M_TL_Bark",
+              "base": "/Game/TreeLookdev/Materials/M_TL_Bark",
+              "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+              "base_ism_usage": true
+            },
+            {
+              "slot": 1,
+              "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V1",
+              "base": "/Game/TreeLookdev/Materials/M_TL_LeafCards",
+              "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+              "base_ism_usage": true
+            }
+          ],
+          "cast_shadow": true
+        },
+        {
+          "name": "HierarchicalInstancedStaticMesh2",
+          "mesh": "/Game/HillsideForest/Trees/A_CSide100/machilus_budget_side100_lod0/StaticMeshes/machilus_budget_side100_lod0",
+          "lods": 4,
+          "screens": [
+            1.0,
+            0.5,
+            0.15,
+            0.06
+          ],
+          "triangles": [
+            34272,
+            8578,
+            1400,
+            534
+          ],
+          "instances": 126,
+          "materials": [
+            {
+              "slot": 0,
+              "material": "/Game/TreeLookdev/Materials/M_TL_Bark",
+              "base": "/Game/TreeLookdev/Materials/M_TL_Bark",
+              "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+              "base_ism_usage": true
+            },
+            {
+              "slot": 1,
+              "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V2",
+              "base": "/Game/TreeLookdev/Materials/M_TL_LeafCards",
+              "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+              "base_ism_usage": true
+            }
+          ],
+          "cast_shadow": true
+        },
+        {
+          "name": "HierarchicalInstancedStaticMesh3",
+          "mesh": "/Game/HillsideForest/Trees/CrownB/machilus_balanced_lod0/StaticMeshes/machilus_balanced_lod0",
+          "lods": 4,
+          "screens": [
+            1.0,
+            0.5,
+            0.15,
+            0.06
+          ],
+          "triangles": [
+            28850,
+            11500,
+            1598,
+            470
+          ],
+          "instances": 167,
+          "materials": [
+            {
+              "slot": 0,
+              "material": "/Game/TreeLookdev/Materials/M_TL_Bark",
+              "base": "/Game/TreeLookdev/Materials/M_TL_Bark",
+              "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+              "base_ism_usage": true
+            },
+            {
+              "slot": 1,
+              "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V3",
+              "base": "/Game/TreeLookdev/Materials/M_TL_LeafCards",
+              "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+              "base_ism_usage": true
+            }
+          ],
+          "cast_shadow": true
+        },
+        {
+          "name": "HierarchicalInstancedStaticMesh4",
+          "mesh": "/Game/HillsideForest/Trees/CrownB/machilus_balanced_lod0/StaticMeshes/machilus_balanced_lod0",
+          "lods": 4,
+          "screens": [
+            1.0,
+            0.5,
+            0.15,
+            0.06
+          ],
+          "triangles": [
+            28850,
+            11500,
+            1598,
+            470
+          ],
+          "instances": 92,
+          "materials": [
+            {
+              "slot": 0,
+              "material": "/Game/TreeLookdev/Materials/M_TL_Bark",
+              "base": "/Game/TreeLookdev/Materials/M_TL_Bark",
+              "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+              "base_ism_usage": true
+            },
+            {
+              "slot": 1,
+              "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V4",
+              "base": "/Game/TreeLookdev/Materials/M_TL_LeafCards",
+              "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+              "base_ism_usage": true
+            }
+          ],
+          "cast_shadow": true
+        },
+        {
+          "name": "HierarchicalInstancedStaticMesh5",
+          "mesh": "/Game/HillsideForest/Trees/AcaciaTight/acacia_acacia_tight_lod0/StaticMeshes/acacia_acacia_tight_lod0",
+          "lods": 4,
+          "screens": [
+            1.0,
+            0.5,
+            0.15,
+            0.06
+          ],
+          "triangles": [
+            38156,
+            16752,
+            1477,
+            452
+          ],
+          "instances": 93,
+          "materials": [
+            {
+              "slot": 0,
+              "material": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+              "base": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+              "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+              "base_ism_usage": true
+            },
+            {
+              "slot": 1,
+              "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V5",
+              "base": "/Game/TreeLookdev/Materials/M_TL_AcaciaW_LeafCards",
+              "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+              "base_ism_usage": true
+            }
+          ],
+          "cast_shadow": true
+        },
+        {
+          "name": "HierarchicalInstancedStaticMesh6",
+          "mesh": "/Game/HillsideForest/Trees/AcaciaTight/acacia_acacia_tight_lod0/StaticMeshes/acacia_acacia_tight_lod0",
+          "lods": 4,
+          "screens": [
+            1.0,
+            0.5,
+            0.15,
+            0.06
+          ],
+          "triangles": [
+            38156,
+            16752,
+            1477,
+            452
+          ],
+          "instances": 85,
+          "materials": [
+            {
+              "slot": 0,
+              "material": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+              "base": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+              "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+              "base_ism_usage": true
+            },
+            {
+              "slot": 1,
+              "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V6",
+              "base": "/Game/TreeLookdev/Materials/M_TL_AcaciaW_LeafCards",
+              "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+              "base_ism_usage": true
+            }
+          ],
+          "cast_shadow": true
+        },
+        {
+          "name": "HierarchicalInstancedStaticMesh7",
+          "mesh": "/Game/HillsideForest/Trees/AcaciaTight/acacia_acacia_tight_lod0/StaticMeshes/acacia_acacia_tight_lod0",
+          "lods": 4,
+          "screens": [
+            1.0,
+            0.5,
+            0.15,
+            0.06
+          ],
+          "triangles": [
+            38156,
+            16752,
+            1477,
+            452
+          ],
+          "instances": 70,
+          "materials": [
+            {
+              "slot": 0,
+              "material": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+              "base": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+              "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+              "base_ism_usage": true
+            },
+            {
+              "slot": 1,
+              "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V7",
+              "base": "/Game/TreeLookdev/Materials/M_TL_AcaciaW_LeafCards",
+              "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+              "base_ism_usage": true
+            }
+          ],
+          "cast_shadow": true
+        }
+      ],
+      "instances_total": 989,
+      "instances_per_mesh": {
+        "/Game/HillsideForest/Trees/A_CSide100/machilus_budget_side100_lod0/StaticMeshes/machilus_budget_side100_lod0": 482,
+        "/Game/HillsideForest/Trees/CrownB/machilus_balanced_lod0/StaticMeshes/machilus_balanced_lod0": 259,
+        "/Game/HillsideForest/Trees/AcaciaTight/acacia_acacia_tight_lod0/StaticMeshes/acacia_acacia_tight_lod0": 248
+      },
+      "spot_check": {
+        "worst_location_cm": 0.0,
+        "worst_scale_err_pct": 0.0
+      }
+    },
+    "perf_agl200_forest": {
+      "map": "/Game/HillsideForest/a8/L_HFP_agl200_forest",
+      "landscape": {
+        "material": "/Game/HillsideForest/a8/M_HF_Ground.M_HF_Ground",
+        "components": 64
+      },
+      "hisms": [
+        {
+          "name": "HierarchicalInstancedStaticMesh",
+          "mesh": "/Game/HillsideForest/Trees/A_CSide100/machilus_budget_side100_lod0/StaticMeshes/machilus_budget_side100_lod0",
+          "lods": 4,
+          "screens": [
+            1.0,
+            0.5,
+            0.15,
+            0.06
+          ],
+          "triangles": [
+            34272,
+            8578,
+            1400,
+            534
+          ],
+          "instances": 207,
+          "materials": [
+            {
+              "slot": 0,
+              "material": "/Game/TreeLookdev/Materials/M_TL_Bark",
+              "base": "/Game/TreeLookdev/Materials/M_TL_Bark",
+              "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+              "base_ism_usage": true
+            },
+            {
+              "slot": 1,
+              "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V0",
+              "base": "/Game/TreeLookdev/Materials/M_TL_LeafCards",
+              "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+              "base_ism_usage": true
+            }
+          ],
+          "cast_shadow": true
+        },
+        {
+          "name": "HierarchicalInstancedStaticMesh1",
+          "mesh": "/Game/HillsideForest/Trees/A_CSide100/machilus_budget_side100_lod0/StaticMeshes/machilus_budget_side100_lod0",
+          "lods": 4,
+          "screens": [
+            1.0,
+            0.5,
+            0.15,
+            0.06
+          ],
+          "triangles": [
+            34272,
+            8578,
+            1400,
+            534
+          ],
+          "instances": 149,
+          "materials": [
+            {
+              "slot": 0,
+              "material": "/Game/TreeLookdev/Materials/M_TL_Bark",
+              "base": "/Game/TreeLookdev/Materials/M_TL_Bark",
+              "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+              "base_ism_usage": true
+            },
+            {
+              "slot": 1,
+              "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V1",
+              "base": "/Game/TreeLookdev/Materials/M_TL_LeafCards",
+              "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+              "base_ism_usage": true
+            }
+          ],
+          "cast_shadow": true
+        },
+        {
+          "name": "HierarchicalInstancedStaticMesh2",
+          "mesh": "/Game/HillsideForest/Trees/A_CSide100/machilus_budget_side100_lod0/StaticMeshes/machilus_budget_side100_lod0",
+          "lods": 4,
+          "screens": [
+            1.0,
+            0.5,
+            0.15,
+            0.06
+          ],
+          "triangles": [
+            34272,
+            8578,
+            1400,
+            534
+          ],
+          "instances": 126,
+          "materials": [
+            {
+              "slot": 0,
+              "material": "/Game/TreeLookdev/Materials/M_TL_Bark",
+              "base": "/Game/TreeLookdev/Materials/M_TL_Bark",
+              "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+              "base_ism_usage": true
+            },
+            {
+              "slot": 1,
+              "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V2",
+              "base": "/Game/TreeLookdev/Materials/M_TL_LeafCards",
+              "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+              "base_ism_usage": true
+            }
+          ],
+          "cast_shadow": true
+        },
+        {
+          "name": "HierarchicalInstancedStaticMesh3",
+          "mesh": "/Game/HillsideForest/Trees/CrownB/machilus_balanced_lod0/StaticMeshes/machilus_balanced_lod0",
+          "lods": 4,
+          "screens": [
+            1.0,
+            0.5,
+            0.15,
+            0.06
+          ],
+          "triangles": [
+            28850,
+            11500,
+            1598,
+            470
+          ],
+          "instances": 167,
+          "materials": [
+            {
+              "slot": 0,
+              "material": "/Game/TreeLookdev/Materials/M_TL_Bark",
+              "base": "/Game/TreeLookdev/Materials/M_TL_Bark",
+              "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+              "base_ism_usage": true
+            },
+            {
+              "slot": 1,
+              "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V3",
+              "base": "/Game/TreeLookdev/Materials/M_TL_LeafCards",
+              "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+              "base_ism_usage": true
+            }
+          ],
+          "cast_shadow": true
+        },
+        {
+          "name": "HierarchicalInstancedStaticMesh4",
+          "mesh": "/Game/HillsideForest/Trees/CrownB/machilus_balanced_lod0/StaticMeshes/machilus_balanced_lod0",
+          "lods": 4,
+          "screens": [
+            1.0,
+            0.5,
+            0.15,
+            0.06
+          ],
+          "triangles": [
+            28850,
+            11500,
+            1598,
+            470
+          ],
+          "instances": 92,
+          "materials": [
+            {
+              "slot": 0,
+              "material": "/Game/TreeLookdev/Materials/M_TL_Bark",
+              "base": "/Game/TreeLookdev/Materials/M_TL_Bark",
+              "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+              "base_ism_usage": true
+            },
+            {
+              "slot": 1,
+              "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V4",
+              "base": "/Game/TreeLookdev/Materials/M_TL_LeafCards",
+              "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+              "base_ism_usage": true
+            }
+          ],
+          "cast_shadow": true
+        },
+        {
+          "name": "HierarchicalInstancedStaticMesh5",
+          "mesh": "/Game/HillsideForest/Trees/AcaciaTight/acacia_acacia_tight_lod0/StaticMeshes/acacia_acacia_tight_lod0",
+          "lods": 4,
+          "screens": [
+            1.0,
+            0.5,
+            0.15,
+            0.06
+          ],
+          "triangles": [
+            38156,
+            16752,
+            1477,
+            452
+          ],
+          "instances": 93,
+          "materials": [
+            {
+              "slot": 0,
+              "material": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+              "base": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+              "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+              "base_ism_usage": true
+            },
+            {
+              "slot": 1,
+              "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V5",
+              "base": "/Game/TreeLookdev/Materials/M_TL_AcaciaW_LeafCards",
+              "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+              "base_ism_usage": true
+            }
+          ],
+          "cast_shadow": true
+        },
+        {
+          "name": "HierarchicalInstancedStaticMesh6",
+          "mesh": "/Game/HillsideForest/Trees/AcaciaTight/acacia_acacia_tight_lod0/StaticMeshes/acacia_acacia_tight_lod0",
+          "lods": 4,
+          "screens": [
+            1.0,
+            0.5,
+            0.15,
+            0.06
+          ],
+          "triangles": [
+            38156,
+            16752,
+            1477,
+            452
+          ],
+          "instances": 85,
+          "materials": [
+            {
+              "slot": 0,
+              "material": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+              "base": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+              "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+              "base_ism_usage": true
+            },
+            {
+              "slot": 1,
+              "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V6",
+              "base": "/Game/TreeLookdev/Materials/M_TL_AcaciaW_LeafCards",
+              "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+              "base_ism_usage": true
+            }
+          ],
+          "cast_shadow": true
+        },
+        {
+          "name": "HierarchicalInstancedStaticMesh7",
+          "mesh": "/Game/HillsideForest/Trees/AcaciaTight/acacia_acacia_tight_lod0/StaticMeshes/acacia_acacia_tight_lod0",
+          "lods": 4,
+          "screens": [
+            1.0,
+            0.5,
+            0.15,
+            0.06
+          ],
+          "triangles": [
+            38156,
+            16752,
+            1477,
+            452
+          ],
+          "instances": 70,
+          "materials": [
+            {
+              "slot": 0,
+              "material": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+              "base": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+              "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+              "base_ism_usage": true
+            },
+            {
+              "slot": 1,
+              "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V7",
+              "base": "/Game/TreeLookdev/Materials/M_TL_AcaciaW_LeafCards",
+              "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+              "base_ism_usage": true
+            }
+          ],
+          "cast_shadow": true
+        }
+      ],
+      "instances_total": 989,
+      "instances_per_mesh": {
+        "/Game/HillsideForest/Trees/A_CSide100/machilus_budget_side100_lod0/StaticMeshes/machilus_budget_side100_lod0": 482,
+        "/Game/HillsideForest/Trees/CrownB/machilus_balanced_lod0/StaticMeshes/machilus_balanced_lod0": 259,
+        "/Game/HillsideForest/Trees/AcaciaTight/acacia_acacia_tight_lod0/StaticMeshes/acacia_acacia_tight_lod0": 248
+      },
+      "spot_check": {
+        "worst_location_cm": 0.0,
+        "worst_scale_err_pct": 0.0
+      }
+    },
+    "perf_agl500_forest": {
+      "map": "/Game/HillsideForest/a8/L_HFP_agl500_forest",
+      "landscape": {
+        "material": "/Game/HillsideForest/a8/M_HF_Ground.M_HF_Ground",
+        "components": 64
+      },
+      "hisms": [
+        {
+          "name": "HierarchicalInstancedStaticMesh",
+          "mesh": "/Game/HillsideForest/Trees/A_CSide100/machilus_budget_side100_lod0/StaticMeshes/machilus_budget_side100_lod0",
+          "lods": 4,
+          "screens": [
+            1.0,
+            0.5,
+            0.15,
+            0.06
+          ],
+          "triangles": [
+            34272,
+            8578,
+            1400,
+            534
+          ],
+          "instances": 207,
+          "materials": [
+            {
+              "slot": 0,
+              "material": "/Game/TreeLookdev/Materials/M_TL_Bark",
+              "base": "/Game/TreeLookdev/Materials/M_TL_Bark",
+              "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+              "base_ism_usage": true
+            },
+            {
+              "slot": 1,
+              "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V0",
+              "base": "/Game/TreeLookdev/Materials/M_TL_LeafCards",
+              "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+              "base_ism_usage": true
+            }
+          ],
+          "cast_shadow": true
+        },
+        {
+          "name": "HierarchicalInstancedStaticMesh1",
+          "mesh": "/Game/HillsideForest/Trees/A_CSide100/machilus_budget_side100_lod0/StaticMeshes/machilus_budget_side100_lod0",
+          "lods": 4,
+          "screens": [
+            1.0,
+            0.5,
+            0.15,
+            0.06
+          ],
+          "triangles": [
+            34272,
+            8578,
+            1400,
+            534
+          ],
+          "instances": 149,
+          "materials": [
+            {
+              "slot": 0,
+              "material": "/Game/TreeLookdev/Materials/M_TL_Bark",
+              "base": "/Game/TreeLookdev/Materials/M_TL_Bark",
+              "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+              "base_ism_usage": true
+            },
+            {
+              "slot": 1,
+              "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V1",
+              "base": "/Game/TreeLookdev/Materials/M_TL_LeafCards",
+              "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+              "base_ism_usage": true
+            }
+          ],
+          "cast_shadow": true
+        },
+        {
+          "name": "HierarchicalInstancedStaticMesh2",
+          "mesh": "/Game/HillsideForest/Trees/A_CSide100/machilus_budget_side100_lod0/StaticMeshes/machilus_budget_side100_lod0",
+          "lods": 4,
+          "screens": [
+            1.0,
+            0.5,
+            0.15,
+            0.06
+          ],
+          "triangles": [
+            34272,
+            8578,
+            1400,
+            534
+          ],
+          "instances": 126,
+          "materials": [
+            {
+              "slot": 0,
+              "material": "/Game/TreeLookdev/Materials/M_TL_Bark",
+              "base": "/Game/TreeLookdev/Materials/M_TL_Bark",
+              "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+              "base_ism_usage": true
+            },
+            {
+              "slot": 1,
+              "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V2",
+              "base": "/Game/TreeLookdev/Materials/M_TL_LeafCards",
+              "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+              "base_ism_usage": true
+            }
+          ],
+          "cast_shadow": true
+        },
+        {
+          "name": "HierarchicalInstancedStaticMesh3",
+          "mesh": "/Game/HillsideForest/Trees/CrownB/machilus_balanced_lod0/StaticMeshes/machilus_balanced_lod0",
+          "lods": 4,
+          "screens": [
+            1.0,
+            0.5,
+            0.15,
+            0.06
+          ],
+          "triangles": [
+            28850,
+            11500,
+            1598,
+            470
+          ],
+          "instances": 167,
+          "materials": [
+            {
+              "slot": 0,
+              "material": "/Game/TreeLookdev/Materials/M_TL_Bark",
+              "base": "/Game/TreeLookdev/Materials/M_TL_Bark",
+              "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+              "base_ism_usage": true
+            },
+            {
+              "slot": 1,
+              "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V3",
+              "base": "/Game/TreeLookdev/Materials/M_TL_LeafCards",
+              "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+              "base_ism_usage": true
+            }
+          ],
+          "cast_shadow": true
+        },
+        {
+          "name": "HierarchicalInstancedStaticMesh4",
+          "mesh": "/Game/HillsideForest/Trees/CrownB/machilus_balanced_lod0/StaticMeshes/machilus_balanced_lod0",
+          "lods": 4,
+          "screens": [
+            1.0,
+            0.5,
+            0.15,
+            0.06
+          ],
+          "triangles": [
+            28850,
+            11500,
+            1598,
+            470
+          ],
+          "instances": 92,
+          "materials": [
+            {
+              "slot": 0,
+              "material": "/Game/TreeLookdev/Materials/M_TL_Bark",
+              "base": "/Game/TreeLookdev/Materials/M_TL_Bark",
+              "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+              "base_ism_usage": true
+            },
+            {
+              "slot": 1,
+              "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V4",
+              "base": "/Game/TreeLookdev/Materials/M_TL_LeafCards",
+              "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+              "base_ism_usage": true
+            }
+          ],
+          "cast_shadow": true
+        },
+        {
+          "name": "HierarchicalInstancedStaticMesh5",
+          "mesh": "/Game/HillsideForest/Trees/AcaciaTight/acacia_acacia_tight_lod0/StaticMeshes/acacia_acacia_tight_lod0",
+          "lods": 4,
+          "screens": [
+            1.0,
+            0.5,
+            0.15,
+            0.06
+          ],
+          "triangles": [
+            38156,
+            16752,
+            1477,
+            452
+          ],
+          "instances": 93,
+          "materials": [
+            {
+              "slot": 0,
+              "material": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+              "base": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+              "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+              "base_ism_usage": true
+            },
+            {
+              "slot": 1,
+              "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V5",
+              "base": "/Game/TreeLookdev/Materials/M_TL_AcaciaW_LeafCards",
+              "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+              "base_ism_usage": true
+            }
+          ],
+          "cast_shadow": true
+        },
+        {
+          "name": "HierarchicalInstancedStaticMesh6",
+          "mesh": "/Game/HillsideForest/Trees/AcaciaTight/acacia_acacia_tight_lod0/StaticMeshes/acacia_acacia_tight_lod0",
+          "lods": 4,
+          "screens": [
+            1.0,
+            0.5,
+            0.15,
+            0.06
+          ],
+          "triangles": [
+            38156,
+            16752,
+            1477,
+            452
+          ],
+          "instances": 85,
+          "materials": [
+            {
+              "slot": 0,
+              "material": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+              "base": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+              "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+              "base_ism_usage": true
+            },
+            {
+              "slot": 1,
+              "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V6",
+              "base": "/Game/TreeLookdev/Materials/M_TL_AcaciaW_LeafCards",
+              "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+              "base_ism_usage": true
+            }
+          ],
+          "cast_shadow": true
+        },
+        {
+          "name": "HierarchicalInstancedStaticMesh7",
+          "mesh": "/Game/HillsideForest/Trees/AcaciaTight/acacia_acacia_tight_lod0/StaticMeshes/acacia_acacia_tight_lod0",
+          "lods": 4,
+          "screens": [
+            1.0,
+            0.5,
+            0.15,
+            0.06
+          ],
+          "triangles": [
+            38156,
+            16752,
+            1477,
+            452
+          ],
+          "instances": 70,
+          "materials": [
+            {
+              "slot": 0,
+              "material": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+              "base": "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+              "base_blend": "<BlendMode.BLEND_OPAQUE: 0>",
+              "base_ism_usage": true
+            },
+            {
+              "slot": 1,
+              "material": "/Game/HillsideForest/a8/MI_HF_Leaf_V7",
+              "base": "/Game/TreeLookdev/Materials/M_TL_AcaciaW_LeafCards",
+              "base_blend": "<BlendMode.BLEND_MASKED: 1>",
+              "base_ism_usage": true
+            }
+          ],
+          "cast_shadow": true
+        }
+      ],
+      "instances_total": 989,
+      "instances_per_mesh": {
+        "/Game/HillsideForest/Trees/A_CSide100/machilus_budget_side100_lod0/StaticMeshes/machilus_budget_side100_lod0": 482,
+        "/Game/HillsideForest/Trees/CrownB/machilus_balanced_lod0/StaticMeshes/machilus_balanced_lod0": 259,
+        "/Game/HillsideForest/Trees/AcaciaTight/acacia_acacia_tight_lod0/StaticMeshes/acacia_acacia_tight_lod0": 248
+      },
+      "spot_check": {
+        "worst_location_cm": 0.0,
+        "worst_scale_err_pct": 0.0
+      }
+    },
+    "stills_empty": {
+      "map": "/Game/HillsideForest/a8/L_HF_Stills_empty",
+      "landscape": {
+        "material": "/Game/HillsideForest/a8/M_HF_Ground.M_HF_Ground",
+        "components": 64
+      }
+    },
+    "flight_empty": {
+      "map": "/Game/HillsideForest/a8/L_HF_Flight_empty",
+      "landscape": {
+        "material": "/Game/HillsideForest/a8/M_HF_Ground.M_HF_Ground",
+        "components": 64
+      }
+    },
+    "perf_agl50_empty": {
+      "map": "/Game/HillsideForest/a8/L_HFP_agl50_empty",
+      "landscape": {
+        "material": "/Game/HillsideForest/a8/M_HF_Ground.M_HF_Ground",
+        "components": 64
+      }
+    },
+    "perf_agl200_empty": {
+      "map": "/Game/HillsideForest/a8/L_HFP_agl200_empty",
+      "landscape": {
+        "material": "/Game/HillsideForest/a8/M_HF_Ground.M_HF_Ground",
+        "components": 64
+      }
+    },
+    "perf_agl500_empty": {
+      "map": "/Game/HillsideForest/a8/L_HFP_agl500_empty",
+      "landscape": {
+        "material": "/Game/HillsideForest/a8/M_HF_Ground.M_HF_Ground",
+        "components": 64
+      }
+    }
+  },
+  "error": null,
+  "n_checks": 352,
+  "n_failed": 0
+}

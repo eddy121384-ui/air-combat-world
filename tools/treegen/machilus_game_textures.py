@@ -17,6 +17,11 @@ import numpy as np
 from PIL import Image
 
 OUT = sys.argv[1]
+# optional 2nd argument "acacia" (相思樹 lookdev v1): T_Acacia_* names + fissured bark; default = 紅楠, unchanged
+SPECIES = sys.argv[2] if len(sys.argv) > 2 else "machilus"
+TEX_STEM = "T_Acacia" if SPECIES == "acacia" else "T_Machilus"
+# optional 3rd argument "wide": 2:1 atlas with the clump tiles of a machilus_game.py clump profile in columns 4-7 -> <stem>_LeafAtlasW_*
+WIDE = len(sys.argv) > 3 and sys.argv[3] == "wide"
 BAKE = os.path.join(OUT, "bake")
 TEX = os.path.join(OUT, "textures")
 os.makedirs(TEX, exist_ok=True)
@@ -56,14 +61,18 @@ def dilate(rgb, alpha, iters=24):
 
 
 def atlas():
-    bc = np.zeros((ATLAS, ATLAS, 4), np.float32)
-    nm = np.zeros((ATLAS, ATLAS, 3), np.float32)
+    W = ATLAS * (2 if WIDE else 1)
+    bc = np.zeros((ATLAS, W, 4), np.float32)
+    nm = np.zeros((ATLAS, W, 3), np.float32)
     cover = []
-    for k in range(8):
-        for vi, view in enumerate(("top", "end")):
-            alb = load(os.path.join(BAKE, "p%d_%s_alb.png" % (k, view)))
-            nrm = load(os.path.join(BAKE, "p%d_%s_nrm.png" % (k, view)))
-            ao = load(os.path.join(BAKE, "p%d_%s_ao.png" % (k, view)))[..., 0]
+    tiles = [("p", k, v) for k in range(8) for v in ("top", "end")]
+    if WIDE:
+        tiles += [("c", k, v) for k in range(8) for v in ("ctop", "cside")]
+    for pre, k, view in tiles:
+        if True:  # (indent kept from the single-atlas loop)
+            alb = load(os.path.join(BAKE, "%s%d_%s_alb.png" % (pre, k, view)))
+            nrm = load(os.path.join(BAKE, "%s%d_%s_nrm.png" % (pre, k, view)))
+            ao = load(os.path.join(BAKE, "%s%d_%s_ao.png" % (pre, k, view)))[..., 0]
             a = alb[..., 3]
             # albedo pass was rendered with the Standard view transform (sRGB); AO / normal with Raw (linear)
             col = srgb_to_lin(alb[..., :3]) * (0.55 + 0.45 * ao[..., None])
@@ -76,15 +85,16 @@ def atlas():
             n = dilate(n, a)
             n /= np.linalg.norm(n, axis=-1, keepdims=True) + 1e-6
             dx = np.stack([n[..., 0], -n[..., 1], n[..., 2]], -1)  # OpenGL -> DirectX (UE)
-            row = (k // 4) + (0 if view == "top" else 2)
-            col_i = k % 4
+            row = (k // 4) + (0 if view in ("top", "ctop") else 2)
+            col_i = k % 4 + (4 if pre == "c" else 0)
             ys, xs = row * TILE, col_i * TILE
             bc[ys:ys + TILE, xs:xs + TILE, :3] = lin_to_srgb(col)
             bc[ys:ys + TILE, xs:xs + TILE, 3] = a
             nm[ys:ys + TILE, xs:xs + TILE] = dx * 0.5 + 0.5
-            cover.append(dict(proto=k, view=view, coverage=float((a > 0.4).mean())))
-    Image.fromarray((bc * 255 + 0.5).astype(np.uint8), "RGBA").save(os.path.join(TEX, "T_Machilus_LeafAtlas_BC.png"))
-    Image.fromarray((nm * 255 + 0.5).astype(np.uint8), "RGB").save(os.path.join(TEX, "T_Machilus_LeafAtlas_N.png"))
+            cover.append(dict(proto=("clump%d" % k) if pre == "c" else k, view=view, coverage=float((a > 0.4).mean())))
+    stem = TEX_STEM + ("_LeafAtlasW" if WIDE else "_LeafAtlas")
+    Image.fromarray((bc * 255 + 0.5).astype(np.uint8), "RGBA").save(os.path.join(TEX, stem + "_BC.png"))
+    Image.fromarray((nm * 255 + 0.5).astype(np.uint8), "RGB").save(os.path.join(TEX, stem + "_N.png"))
     return cover
 
 
@@ -140,7 +150,31 @@ def bark(size=512, seed=7):
     Image.fromarray(((n * 0.5 + 0.5) * 255 + 0.5).astype(np.uint8), "RGB").save(os.path.join(TEX, "T_Machilus_Bark_N.png"))
 
 
+def bark_fissured(size=512, seed=11):
+    """相思樹 bark tile (golden tg_materials.fissured_bark palette): grey-brown with pale patches and wandering longitudinal
+    fissures (dark grooves along v = along the branch), tileable."""
+    rng = np.random.default_rng(seed)
+    base, pale, dark = (0.07, 0.056, 0.044), (0.12, 0.112, 0.098), (0.022, 0.018, 0.015)
+    mott = 0.5 + 0.08 * periodic_noise(rng, size, beta=2.2, f_lo=1.0, f_hi=12.0)
+    col = ramp(mott, [(0.4, base), (0.62, pale)])
+    # fissures: 9 periodic grooves around the circumference, displaced by a smooth noise that varies mostly along v
+    warp = periodic_noise(rng, size, beta=2.6, f_lo=1.0, f_hi=10.0, aspect=(4.0, 1.0))
+    yy, xx = np.mgrid[0:size, 0:size]
+    ph = (xx + 0.5) / size * 9.0 + 0.55 * warp
+    saw = ph - np.floor(ph)
+    groove = np.clip(1.0 - saw / 0.14, 0.0, 1.0) ** 1.5
+    col = col * (1 - groove[..., None]) + np.array(dark) * groove[..., None]
+    fine = 0.5 + 0.15 * periodic_noise(rng, size, beta=1.0, f_lo=6.0, f_hi=120.0)
+    h = fine - 0.9 * groove
+    gx = (np.roll(h, -1, 1) - np.roll(h, 1, 1)) * 0.5
+    gy = (np.roll(h, -1, 0) - np.roll(h, 1, 0)) * 0.5
+    n = np.stack([-gx * 2.4, gy * 2.4, np.ones_like(h)], -1)
+    n /= np.linalg.norm(n, axis=-1, keepdims=True)
+    Image.fromarray((lin_to_srgb(col) * 255 + 0.5).astype(np.uint8), "RGB").save(os.path.join(TEX, "T_Acacia_Bark_BC.png"))
+    Image.fromarray(((n * 0.5 + 0.5) * 255 + 0.5).astype(np.uint8), "RGB").save(os.path.join(TEX, "T_Acacia_Bark_N.png"))
+
+
 cover = atlas()
-bark()
+bark_fissured() if SPECIES == "acacia" else bark()
 json.dump(dict(atlas_coverage=cover), open(os.path.join(TEX, "textures_report.json"), "w"), indent=1)
 print("TEXTURES_OK", os.listdir(TEX))

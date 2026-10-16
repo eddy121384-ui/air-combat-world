@@ -1,4 +1,4 @@
-"""Hillside forest look-dev v1, stage 1 (UnrealEditor-Cmd, TreeLookdev project): Xiangshan test terrain + 紅楠 D balanced HISM forest.
+﻿"""Hillside forest look-dev v1, stage 1 (UnrealEditor-Cmd, TreeLookdev project): Xiangshan test terrain + 紅楠 D balanced HISM forest.
 
 Inputs (tools/forest/hillside_{terrain,scatter,views}.py): $ACW_HF_DIR/{terrain.r16, terrain.json, instances.json, views.json}.
 Needs the prebuilt editor plugin XinyiLandscapeBridge (only ALandscape::Import; see unreal/TreeLookdev/Plugins, gitignored).
@@ -39,7 +39,16 @@ LEAF_VARIANTS = {  # existing M_TL_LeafCards parameters only (parent defaults: T
     # mix v0, crown form B only: a lighter, yellower family (light-gap / ridge crowns, new flush) so the two forms differ in tone as well
     3: {"TintHi": (1.42, 1.34, 0.72), "TintLo": (0.92, 0.96, 0.66), "Brightness": 0.52},
     4: {"TintHi": (1.30, 1.26, 0.82), "TintLo": (0.84, 0.92, 0.66), "Brightness": 0.44},
+    # 相思樹 lookdev v1, form C only: instances of M_TL_Acacia_LeafCards (ac_import.py defaults TintLo 0.86/0.88/0.80, TintHi 1.14/1.10/0.96,
+    # Brightness 0.42): 5 = as imported, 6 = sunnier yellow-olive (ridge / south-facing crowns), 7 = greyer, darker (older / leeward crowns)
+    # (after the first UE lineup a1: natively the acacia read cooler than the Cycles golden -> all three pushed toward yellow-olive)
+    5: {"TintHi": (1.24, 1.16, 0.84), "TintLo": (0.92, 0.92, 0.74), "Brightness": 0.44},
+    6: {"TintHi": (1.36, 1.26, 0.74), "TintLo": (1.00, 0.98, 0.70), "Brightness": 0.48},
+    7: {"TintHi": (1.08, 1.06, 0.90), "TintLo": (0.80, 0.84, 0.74), "Brightness": 0.40},
 }
+ACACIA_VARIANTS = (5, 6, 7)
+# views file: views.json (default, the PR #33 cameras / flight); a different file only for the species lineup check (ACW_HF_VIEWS)
+VIEWS_FILE = os.environ.get("ACW_HF_VIEWS", "views.json")
 # instance file: instances.json = version A (single 紅楠 D); instances_mix.json = version B (mix v0: form A = D, form B = crown B)
 INSTANCES = os.environ.get("ACW_HF_INSTANCES", "instances.json")
 # form A LOD chain: D balanced (default, Mix D), PR #31's aggressive C (Mix C) or S (C + LOD1 side cards); form B is always crown B
@@ -49,17 +58,26 @@ A_CHAINS = dict(PATH, S="/Game/HillsideForest/Trees/A_CSide/machilus_budget_side
 A_CHAIN = os.environ.get("ACW_HF_A_CHAIN", "D")
 if A_CHAIN not in ("C", "D", "S", "T"):
     raise RuntimeError("ACW_HF_A_CHAIN must be C, D, S or T (S = side cards on half the LOD1 sprays, T = on all)")
-FORM_MESH = {"A": A_CHAINS[A_CHAIN], "B": "/Game/HillsideForest/Trees/CrownB/machilus_balanced_lod0/StaticMeshes/machilus_balanced_lod0"}
+FORM_MESH = {"A": A_CHAINS[A_CHAIN], "B": "/Game/HillsideForest/Trees/CrownB/machilus_balanced_lod0/StaticMeshes/machilus_balanced_lod0",
+             # 相思樹 (ac_import.py); its own bark and leaf materials, see FORM_BARK / leaf_parent
+             "C": os.environ.get("ACW_HF_C_MESH", "/Game/HillsideForest/Trees/Acacia/acacia_acacia_lod0/StaticMeshes/acacia_acacia_lod0")}
+# 相思樹 leaf material: M_TL_Acacia_LeafCards (first chains) or the clump chain's M_TL_AcaciaW_LeafCards (2:1 atlas)
+C_LEAF = os.environ.get("ACW_HF_C_LEAF", "M_TL_Acacia_LeafCards")
+FORM_BARK = {"A": "M_TL_Bark", "B": "M_TL_Bark", "C": "M_TL_Acacia_Bark"}
 # inside the block the floor stands in for the understory (shrubs / ferns / saplings - not modelled): two dark greens mottled by a ~6 m
 # world-space noise; outside the block a flat placeholder olive-grey that is visibly NOT forest (test terrain only)
 GROUND = {"inside": ((0.016, 0.024, 0.009), (0.034, 0.040, 0.017)), "outside": (0.060, 0.062, 0.040)}
 
 levels = unreal.get_editor_subsystem(unreal.LevelEditorSubsystem)
 actors = unreal.get_editor_subsystem(unreal.EditorActorSubsystem)
-report = {"status": "FAIL_HF_BUILD", "rev": REV, "instances_file": INSTANCES, "a_chain": A_CHAIN, "maps": {}, "materials": {}, "error": None}
+report = {"status": "FAIL_HF_BUILD", "rev": REV, "instances_file": INSTANCES, "views_file": VIEWS_FILE, "a_chain": A_CHAIN, "maps": {},
+          "materials": {}, "error": None}
 T = json.loads((HF_DIR / "terrain.json").read_text(encoding="utf-8"))
 I = json.loads((HF_DIR / INSTANCES).read_text(encoding="utf-8"))
-V = json.loads((HF_DIR / "views.json").read_text(encoding="utf-8"))
+V = json.loads((HF_DIR / VIEWS_FILE).read_text(encoding="utf-8"))
+HAS_ACACIA = any(it.get("form", "A") == "C" for it in I["instances"])
+if any((it.get("form", "A") == "C") != (it["variant"] in ACACIA_VARIANTS) for it in I["instances"]):
+    raise RuntimeError("form C (相思樹) must use leaf variants %s and only form C may use them" % (ACACIA_VARIANTS,))
 
 
 def E(mat, cls, x, y, **props):
@@ -76,7 +94,7 @@ def link(a, out, b, pin):
 
 def assert_ism_usage():
     out = {}
-    for name in ("M_TL_LeafCards", "M_TL_Bark"):
+    for name in ("M_TL_LeafCards", "M_TL_Bark") + ((C_LEAF, "M_TL_Acacia_Bark") if HAS_ACACIA else ()):
         m = lib.load_asset(MAT_DIR + "/" + name)
         before = bool(m.get_editor_property("used_with_instanced_static_meshes"))
         if not before:
@@ -92,12 +110,13 @@ def assert_ism_usage():
 def leaf_instances(parent):
     out = {}
     used = {it["variant"] for it in I["instances"]}
+    acacia_parent = lib.load_asset(MAT_DIR + "/" + C_LEAF) if HAS_ACACIA else None
     for v, params in LEAF_VARIANTS.items():
         if v not in used:
             continue
         name = "MI_HF_Leaf_V%d" % v
         mic = tools.create_asset(name, DIR, unreal.MaterialInstanceConstant, unreal.MaterialInstanceConstantFactoryNew())
-        mel.set_material_instance_parent(mic, parent)
+        mel.set_material_instance_parent(mic, acacia_parent if v in ACACIA_VARIANTS else parent)
         for k, val in params.items():
             # UE 5.8: the set_* return value is False even when the value is applied (hf_probe_params.py), so read it back instead
             if isinstance(val, tuple):
@@ -113,7 +132,7 @@ def leaf_instances(parent):
         if not lib.save_asset(DIR + "/" + name):
             raise RuntimeError("save " + name)
         out[v] = mic
-        report["materials"][name] = {"parent": parent.get_path_name(), "overrides": {k: list(x) if isinstance(x, tuple) else x for k, x in params.items()}}
+        report["materials"][name] = {"parent": (acacia_parent if v in ACACIA_VARIANTS else parent).get_path_name(), "overrides": {k: list(x) if isinstance(x, tuple) else x for k, x in params.items()}}
     return out
 
 
@@ -226,7 +245,7 @@ def terrain(m_ground):
 
 
 def forest(mics):
-    bark = lib.load_asset(MAT_DIR + "/M_TL_Bark")
+    barks = {f: lib.load_asset(MAT_DIR + "/" + n) for f, n in FORM_BARK.items() if f != "C" or HAS_ACACIA}
     holder = spawn(unreal.Actor, "HF_Forest")
     comps, counts = {}, {}
     groups = sorted({(it.get("form", "A"), it["variant"]) for it in I["instances"]})
@@ -236,7 +255,7 @@ def forest(mics):
             raise RuntimeError("form %s mesh missing or not 4 LODs: %s" % (form, FORM_MESH[form]))
         mic = mics[v]
         h = add_hism(holder, mesh)
-        h.set_material(0, bark)
+        h.set_material(0, barks[form])
         h.set_material(1, mic)
         h.set_collision_enabled(unreal.CollisionEnabled.NO_COLLISION)
         h.set_cast_shadow(True)

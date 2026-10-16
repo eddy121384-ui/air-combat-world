@@ -1,0 +1,132 @@
+{
+  "status": "PASS_AC_IMPORT",
+  "textures": {
+    "T_AcaciaW_LeafAtlas_BC": {
+      "path": "/Game/TreeLookdev/Textures/T_AcaciaW_LeafAtlas_BC",
+      "size": [
+        4096,
+        2048
+      ],
+      "srgb": true
+    },
+    "T_AcaciaW_LeafAtlas_N": {
+      "path": "/Game/TreeLookdev/Textures/T_AcaciaW_LeafAtlas_N",
+      "size": [
+        4096,
+        2048
+      ],
+      "srgb": false
+    }
+  },
+  "materials": {
+    "/Game/TreeLookdev/Materials/M_TL_AcaciaW_LeafCards": {
+      "used_with_instanced_static_meshes": true,
+      "blend_mode": "<BlendMode.BLEND_MASKED: 1>",
+      "two_sided": true
+    }
+  },
+  "error": null,
+  "import_lods": {
+    "1": 1,
+    "2": 2,
+    "3": 3
+  },
+  "asset": "/Game/HillsideForest/Trees/AcaciaClump/acacia_acacia_clump_lod0/StaticMeshes/acacia_acacia_clump_lod0",
+  "mesh": {
+    "lods": 4,
+    "screens": [
+      1.0,
+      0.5,
+      0.15,
+      0.06
+    ],
+    "triangles": [
+      38156,
+      16752,
+      1477,
+      452
+    ],
+    "vertices": [
+      60869,
+      29054,
+      1697,
+      671
+    ],
+    "sections": [
+      2,
+      2,
+      2,
+      2
+    ],
+    "section_slots": [
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        1
+      ]
+    ],
+    "slots": [
+      "Bark=/Game/TreeLookdev/Materials/M_TL_Acacia_Bark",
+      "LeafCards=/Game/TreeLookdev/Materials/M_TL_AcaciaW_LeafCards"
+    ],
+    "sphere_radius_cm": 810.8032087142433,
+    "bounds_origin_cm": [
+      56.961456298828125,
+      -13.23101806640625,
+      674.8313097953796
+    ],
+    "bounds_extent_cm": [
+      739.9324645996094,
+      631.0156860351562,
+      688.4135632514954
+    ]
+  },
+  "leaf_defaults": {
+    "TintLo": [
+      0.86,
+      0.88,
+      0.8
+    ],
+    "TintHi": [
+      1.14,
+      1.1,
+      0.96
+    ],
+    "OcclMin": 0.3,
+    "Brightness": 0.42,
+    "SSSColor": [
+      0.8,
+      0.95,
+      0.3
+    ],
+    "SSS": 0.45,
+    "NormalFlatten": 0.4,
+    "Roughness": 0.7,
+    "Specular": 0.18
+  },
+  "bark_defaults": {
+    "TwigColor": [
+      0.07,
+      0.045,
+      0.025
+    ],
+    "BarkBrightness": 0.5,
+    "Roughness": 0.9
+  },
+  "dest": "/Game/HillsideForest/Trees/AcaciaClump",
+  "profile": "acacia_clump",
+  "mesh_only": false,
+  "leaf_tag": "AcaciaW",
+  "clip": 0.25
+}

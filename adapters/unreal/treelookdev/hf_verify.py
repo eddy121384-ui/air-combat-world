@@ -1,4 +1,4 @@
-"""Hillside forest look-dev v1, stage 2 (FRESH UnrealEditor-Cmd process): persisted-material / content gate. Fails closed.
+﻿"""Hillside forest look-dev v1, stage 2 (FRESH UnrealEditor-Cmd process): persisted-material / content gate. Fails closed.
 
 Why a separate process: the editor sets "Used with Instanced Static Meshes" in memory the first time a HISM draws a material, so a check in
 the build process can pass while the saved asset is still wrong (PR #31 q1: standalone -game then drew the engine default grey material).
@@ -39,8 +39,16 @@ A_CHAINS = dict(PATH, S="/Game/HillsideForest/Trees/A_CSide/machilus_budget_side
 A_CHAIN = os.environ.get("ACW_HF_A_CHAIN", "D")
 if A_CHAIN not in ("C", "D", "S", "T"):
     raise RuntimeError("ACW_HF_A_CHAIN must be C, D, S or T (S = side cards on half the LOD1 sprays, T = on all)")
-FORM_MESH = {"A": A_CHAINS[A_CHAIN], "B": "/Game/HillsideForest/Trees/CrownB/machilus_balanced_lod0/StaticMeshes/machilus_balanced_lod0"}
+FORM_MESH = {"A": A_CHAINS[A_CHAIN], "B": "/Game/HillsideForest/Trees/CrownB/machilus_balanced_lod0/StaticMeshes/machilus_balanced_lod0",
+             "C": os.environ.get("ACW_HF_C_MESH", "/Game/HillsideForest/Trees/Acacia/acacia_acacia_lod0/StaticMeshes/acacia_acacia_lod0")}  # C = 相思樹 (ac_import.py)
+# 相思樹 leaf material: M_TL_Acacia_LeafCards (first chains) or the clump chain's M_TL_AcaciaW_LeafCards (2:1 atlas)
+C_LEAF = os.environ.get("ACW_HF_C_LEAF", "M_TL_Acacia_LeafCards")
+# expected base materials per form (相思樹 has its own); a form-C HISM drawing any 紅楠 material, or the reverse, fails
+FORM_BARK = {"A": "M_TL_Bark", "B": "M_TL_Bark", "C": "M_TL_Acacia_Bark"}
+FORM_LEAF = {"A": "M_TL_LeafCards", "B": "M_TL_LeafCards", "C": C_LEAF}
+MESH_FORM = {v: k for k, v in FORM_MESH.items()}
 GROUPS = sorted({(it.get("form", "A"), it["variant"]) for it in I})
+HAS_ACACIA = any(f == "C" for f, _ in GROUPS)
 levels = unreal.get_editor_subsystem(unreal.LevelEditorSubsystem)
 actors = unreal.get_editor_subsystem(unreal.EditorActorSubsystem)
 sms = unreal.get_editor_subsystem(unreal.StaticMeshEditorSubsystem)
@@ -69,7 +77,7 @@ def base_path(m):
 
 
 def material_gate():
-    for name in ("M_TL_LeafCards", "M_TL_Bark"):
+    for name in ("M_TL_LeafCards", "M_TL_Bark") + ((C_LEAF, "M_TL_Acacia_Bark") if HAS_ACACIA else ()):
         m = lib.load_asset(MAT_DIR + "/" + name)
         d = {"used_with_instanced_static_meshes": bool(m.get_editor_property("used_with_instanced_static_meshes")),
              "blend_mode": str(m.get_editor_property("blend_mode")), "two_sided": bool(m.get_editor_property("two_sided")),
@@ -77,10 +85,10 @@ def material_gate():
         rep["materials"][name] = d
         check(name + " saved with ISM usage", d["used_with_instanced_static_meshes"], d)
         check(name + " package clean after load", d["package_dirty_after_load"] is False, d)
-        if name == "M_TL_LeafCards":
-            check("leaf MASKED", "MASKED" in d["blend_mode"].upper(), d["blend_mode"])
-            check("leaf two-sided", d["two_sided"], d)
-            check("leaf foliage shading", "FOLIAGE" in d["shading_model"].upper(), d["shading_model"])
+        if name.endswith("LeafCards"):
+            check(name + " leaf MASKED", "MASKED" in d["blend_mode"].upper(), d["blend_mode"])
+            check(name + " leaf two-sided", d["two_sided"], d)
+            check(name + " leaf foliage shading", "FOLIAGE" in d["shading_model"].upper(), d["shading_model"])
     for name, want in build["materials"].items():
         if not name.startswith("MI_HF_Leaf_"):
             continue
@@ -96,7 +104,8 @@ def material_gate():
                 ok = abs(got[k] - v) < 1e-3
             check("%s %s" % (name, k), ok, {"want": v, "got": got[k]})
         bp, _ = base_path(mic)
-        check(name + " base is M_TL_LeafCards", bp == MAT_DIR + "/M_TL_LeafCards", bp)
+        want_base = MAT_DIR + "/" + (C_LEAF if int(name.rsplit("V", 1)[1]) in (5, 6, 7) else "M_TL_LeafCards")
+        check(name + " base is " + want_base.rsplit("/", 1)[1], bp == want_base, bp)
         rep["materials"][name] = {"base": bp, "overrides": got, "package_dirty_after_load": pkg_dirty(mic)}
 
 
@@ -139,12 +148,14 @@ def forest_gate(key, path, expect_forest):
         comps.append({"name": h.get_name(), "mesh": mp, "lods": mesh.get_num_lods() if mesh else None, "screens": screens,
                       "triangles": [mesh.get_num_triangles(i) for i in range(mesh.get_num_lods())] if mesh else None,
                       "instances": n, "materials": mats, "cast_shadow": bool(h.get_editor_property("cast_shadow"))})
-        check("%s %s mesh = form-A chain (D / C / S / T) or crown B" % (key, h.get_name()), mp in FORM_MESH.values(), mp)
+        check("%s %s mesh = form-A chain (D / C / S / T), crown B or 相思樹" % (key, h.get_name()), mp in FORM_MESH.values(), mp)
         per_mesh[mp] = per_mesh.get(mp, 0) + n
+        form = MESH_FORM.get(mp, "A")
         check("%s %s 4 LODs 1/0.5/0.15/0.06" % (key, h.get_name()), screens == [1.0, 0.5, 0.15, 0.06], screens)
-        check("%s %s slot0 bark" % (key, h.get_name()), mats[0]["base"] == MAT_DIR + "/M_TL_Bark" and mats[0]["base_ism_usage"], mats[0])
-        check("%s %s slot1 masked leaf MIC" % (key, h.get_name()),
-              mats[1]["material"].split("/")[-1].startswith("MI_HF_Leaf_V") and mats[1]["base"] == MAT_DIR + "/M_TL_LeafCards"
+        check("%s %s slot0 bark (%s)" % (key, h.get_name(), FORM_BARK[form]),
+              mats[0]["base"] == MAT_DIR + "/" + FORM_BARK[form] and mats[0]["base_ism_usage"], mats[0])
+        check("%s %s slot1 masked leaf MIC (%s)" % (key, h.get_name(), FORM_LEAF[form]),
+              mats[1]["material"].split("/")[-1].startswith("MI_HF_Leaf_V") and mats[1]["base"] == MAT_DIR + "/" + FORM_LEAF[form]
               and "MASKED" in mats[1]["base_blend"].upper() and mats[1]["base_ism_usage"], mats[1])
         check("%s %s no default material" % (key, h.get_name()), not any(x["material"] in DEFAULTS or x["base"] in DEFAULTS for x in mats), mats)
         for i in range(n):
@@ -159,7 +170,7 @@ def forest_gate(key, path, expect_forest):
     rng = random.Random(7)
     worst_cm, worst_scale = 0.0, 0.0
     locs = [(t.translation.x, t.translation.y, t.translation.z, t) for t in world_xf]
-    for it in rng.sample(I, 32):
+    for it in rng.sample(I, min(32, len(I))):  # every instance when the file is smaller (3-tree species lineup)
         x, y, z = it["ue_cm"]
         best = min(locs, key=lambda q: (q[0] - x) ** 2 + (q[1] - y) ** 2 + (q[2] - z) ** 2)
         worst_cm = max(worst_cm, math.dist(best[:3], (x, y, z)))

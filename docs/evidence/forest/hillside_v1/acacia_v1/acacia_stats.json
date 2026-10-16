@@ -1,0 +1,64 @@
+{
+ "seed": 20261018,
+ "trees": 989,
+ "per_form": {
+  "A": 482,
+  "B": 259,
+  "C": 248
+ },
+ "acacia_share_trees": 0.251,
+ "crown_area_share": {
+  "A": 0.506,
+  "B": 0.254,
+  "C": 0.24
+ },
+ "replaced_from": {
+  "A": 111,
+  "B": 137
+ },
+ "variants": {
+  "0": 207,
+  "1": 149,
+  "2": 126,
+  "3": 167,
+  "4": 92,
+  "5": 93,
+  "6": 85,
+  "7": 70
+ },
+ "height_m_est": {
+  "A": {
+   "median": 10.42,
+   "p90": 15.15
+  },
+  "B": {
+   "median": 7.84,
+   "p90": 12.25
+  },
+  "C": {
+   "median": 10.31,
+   "p90": 15.29
+  }
+ },
+ "acacia_on": {
+  "ridge_tpi_gt2": 0.657258064516129,
+  "valley_tpi_lt-2": 0.0,
+  "sunny_gt0.35": 0.7338709677419355,
+  "near_gap": 0.07661290322580645
+ },
+ "others_on": {
+  "ridge_tpi_gt2": 0.22807017543859648,
+  "valley_tpi_lt-2": 0.2496626180836707,
+  "sunny_gt0.35": 0.3292847503373819,
+  "near_gap": 0.15114709851551958
+ },
+ "acacia_with_2of3_nearest_acacia": 0.907,
+ "rules": {
+  "share": 0.25,
+  "patch_m": 30.0,
+  "neighbour_m": 11.0,
+  "c_crown_r_m": 6.95,
+  "c_sphere_r_m": 8.22,
+  "sunny_azimuth_ccw_from_east_deg": -115.0
+ }
+}
