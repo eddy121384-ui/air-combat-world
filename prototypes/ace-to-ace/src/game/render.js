@@ -530,9 +530,9 @@ export class Renderer {
       }
       if (!this.camState) { cam.position.copy(wantPos); cam.up.copy(wantUp); }
       this.camState = true;
-      // Responsive chase camera: do not add a second slow feeling on top of real jet inertia.
-      cam.position.lerp(wantPos, 1 - Math.exp(-dt * 16));
-      cam.up.lerp(wantUp, 1 - Math.exp(-dt * 9)).normalize();
+      // follow tightly in position (plane is fast) and smooth the roll
+      cam.position.lerp(wantPos, 1 - Math.exp(-dt * 12));
+      cam.up.lerp(wantUp, 1 - Math.exp(-dt * 5)).normalize();
       cam.lookAt(wantLook);
     }
     if (this.shake > 0) {
