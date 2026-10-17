@@ -138,6 +138,33 @@ if (scenario === 'all' || scenario === 'touch') {
   report.perf.touch = await state(p);
   await ctx.close();
 }
+if (scenario === 'all' || scenario === 'manualtouch') {
+  // Real mobile-touch input path: MANUAL must settle into held bank, not spin forever.
+  const { ctx, p } = await page(iphone, '?seed=7', 'manualtouch');
+  await p.evaluate(() => localStorage.setItem('ace2ace.settings',
+    JSON.stringify({ difficulty: 'rookie', assist: false, invert: false, muted: true })));
+  await p.reload();
+  await p.tap('#btnStart');
+  await sleep(700);
+  if (!(await p.locator('[data-btn="acro"]').isVisible()))
+    throw new Error('ACRO control must appear in manual on touch devices');
+  const cdp = await ctx.newCDPSession(p);
+  const touch = (type, pts) => cdp.send('Input.dispatchTouchEvent', { type, touchPoints: pts });
+  await touch('touchStart', [{ x: 135, y: 260, id: 10 }]);
+  await touch('touchMove', [{ x: 197, y: 260, id: 10 }]);
+  await touch('touchEnd', []);
+  await sleep(1500);
+  const state = await p.evaluate(() => ({
+    x: window.__game.input.stick.x,
+    rollRate: window.__game.match.blue.rollRateCur,
+  }));
+  if (state.x < 0.95 || Math.abs(state.rollRate) > 0.2)
+    throw new Error('MANUAL touch-release must maintain bank-angle without perpetual roll: ' + JSON.stringify(state));
+  await shot(p, '09a-manual-bank-hold');
+  report.perf.manualTouch = state;
+  await ctx.close();
+}
+
 if (scenario === 'all' || scenario === 'aivai') {
   const { ctx, p } = await page(desktop, '?mode=aivai&seed=11&debug', 'aivai');
   await sleep(12000); await shot(p, '10-aivai');
