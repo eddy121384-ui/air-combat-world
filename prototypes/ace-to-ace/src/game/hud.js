@@ -60,10 +60,12 @@ export class Hud {
       // Draw it beneath target locks, pippers, and weapon symbology.
       this.attitude(me, S);
 
-      // boresight (gun cross) far ahead of the nose
+      // Waterline / Whiskey Mark: point the W along the actual nose axis.
+      // Camera projection keeps it aligned with the old boresight without
+      // inventing a second (false) flight-path marker in the point-mass sim.
       const f = forwardOf(me.q);
       const bs = rend.project(addScaled(me.pos, f, 1500));
-      this.cross(bs.x, bs.y, 10 * S, GREEN);
+      if (!bs.behind) this.waterline(bs.x, bs.y, 10 * S, GREEN);
 
       // target box
       if (tg && tg.alive) {
@@ -292,7 +294,7 @@ export class Hud {
     for (let deg = minimum; deg <= maximum; deg += 5) {
       const y = (pitch - deg) * pxPerDegree;
       const zero = deg === 0, major = deg % 10 === 0;
-      const inner = zero ? 13 * S : 31 * S;
+      const inner = zero ? 20 * S : 31 * S; // central gap leaves room for W
       const outer = (zero ? 77 : major ? 65 : 51) * S;
       g.strokeStyle = zero ? ink : major ? soft : faint;
       g.lineWidth = zero ? 1.3 * S : 1 * S;
@@ -320,16 +322,31 @@ export class Hud {
     g.restore();
   }
 
-  // AC whiskey mark: tiny circular nose reference, not a large white gunsight cross.
-  cross(x, y, s, color) {
+  /**
+   * Waterline / Whiskey Mark (small flying W).
+   *
+   * Aircraft nose reference only; unlike the velocity-vector/FPM it does not
+   * claim to show angle of attack or side slip. The separate, existing gun
+   * lead pipper remains the weapon-aiming cue.
+   */
+  waterline(x, y, s, color) {
+    if (!Number.isFinite(x) || !Number.isFinite(y)) return;
     const g = this.g;
     g.save();
-    g.strokeStyle = color; g.lineWidth = Math.max(1.1, s * 0.11);
+    g.strokeStyle = color;
+    g.lineWidth = Math.max(1.1, 1.35 * s / 10);
+    g.lineJoin = 'miter';
+    g.lineCap = 'square';
     g.beginPath();
-    g.arc(x, y, s * 0.35, 0, Math.PI * 2);
-    g.moveTo(x - s * 1.3, y); g.lineTo(x - s * 0.5, y);
-    g.moveTo(x + s * 0.5, y); g.lineTo(x + s * 1.3, y);
-    g.moveTo(x, y + s * 0.45); g.lineTo(x, y + s * 1.05);
+    // Long, unobtrusive shoulders + two shallow valleys + high center peak.
+    // The open silhouette remains legible on a compact iPhone HUD.
+    g.moveTo(x - 1.35 * s, y - 0.32 * s);
+    g.lineTo(x - 0.91 * s, y - 0.32 * s);
+    g.lineTo(x - 0.50 * s, y + 0.37 * s);
+    g.lineTo(x, y - 0.54 * s);
+    g.lineTo(x + 0.50 * s, y + 0.37 * s);
+    g.lineTo(x + 0.91 * s, y - 0.32 * s);
+    g.lineTo(x + 1.35 * s, y - 0.32 * s);
     g.stroke();
     g.restore();
   }
