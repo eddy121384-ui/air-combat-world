@@ -371,13 +371,37 @@ export class Hud {
     g.font = `600 ${Math.round(12 * S)}px ui-monospace, Menlo, monospace`;
   }
   box(x, y, value, label, S, color) {
-    const g = this.g;
-    g.font = `700 ${Math.round(18 * S)}px ui-monospace, Menlo, monospace`;
-    g.fillStyle = color; g.textAlign = 'center';
-    g.fillText(value, x, y);
-    g.font = `600 ${Math.round(9 * S)}px ui-monospace, Menlo, monospace`;
-    g.fillStyle = 'rgba(244,251,255,0.7)';
-    g.fillText(label, x, y - 15 * S);
+    // AC7's small green speed/altitude chevron, not a giant detached number.
+    const g = this.g, speed = label.startsWith('SPD');
+    const ink = color === RED ? RED : GREEN;
+    g.save();
+    g.fillStyle = ink; g.strokeStyle = ink; g.textAlign = 'center';
+    g.font = `600 ${Math.max(9, Math.round(10 * S))}px ui-monospace, Menlo, monospace`;
+    g.fillText(speed ? 'SPEED' : 'ALT', x, y - 17 * S);
+    g.font = `600 ${Math.max(12, Math.round(13 * S))}px ui-monospace, Menlo, monospace`;
+    const valueText = String(value);
+    const halfW = Math.max(28 * S, g.measureText(valueText).width / 2 + 7 * S);
+    const h = 8 * S, tip = 8 * S;
+    g.lineWidth = Math.max(1, 1.1 * S);
+    g.beginPath();
+    if (speed) {
+      g.moveTo(x - halfW, y - h);
+      g.lineTo(x + halfW - tip, y - h);
+      g.lineTo(x + halfW, y);
+      g.lineTo(x + halfW - tip, y + h);
+      g.lineTo(x - halfW, y + h);
+      g.closePath();
+    } else {
+      g.moveTo(x + halfW, y - h);
+      g.lineTo(x - halfW + tip, y - h);
+      g.lineTo(x - halfW, y);
+      g.lineTo(x - halfW + tip, y + h);
+      g.lineTo(x + halfW, y + h);
+      g.closePath();
+    }
+    g.stroke();
+    g.fillText(valueText, x, y);
+    g.restore();
     g.font = `600 ${Math.round(12 * S)}px ui-monospace, Menlo, monospace`;
   }
   hpBar(x, y, w, k, label, color, S) {
