@@ -3,7 +3,7 @@
 // lift vector and pull G. Turn rate peaks at corner speed, high-G turns bleed speed, climbing
 // trades speed for altitude. The AI flies with exactly the same limits as the player.
 import {
-  v3, copy, add, scale, addScaled, dot, cross, len, norm, clamp, perp, G, UP,
+  v3, copy, add, sub, scale, addScaled, dot, cross, len, norm, clamp, perp, G, UP,
   qMul, qAxisAngle, qNormalize, forwardOf, upOf, rightOf, qLook,
 } from './math.js';
 
@@ -35,6 +35,10 @@ export const AIRCRAFT = {
 export const MIN_SPEED = 45;
 export const MAX_SPEED = 430;
 export const MAX_ROT_RATE = 1.3; // rad/s, hard sanity cap on flight-path rotation
+// Small airframe/velocity response time. The nose may lead the actual movement
+// during a hard pull or rudder input (an arcade AoA/slip approximation), but the
+// same kinematics apply to AI and player. 0.14s gives a few degrees at high G.
+export const FLIGHT_PATH_LAG = 0.14; // seconds, not a free HUD-only animation
 
 export function makeControls() {
   // pitch: +1 pull (nose up in body frame), roll: +1 roll right, yaw: +1 nose right
@@ -131,9 +135,20 @@ export function stepAircraft(ac, dt) {
   q = qMul(q, qAxisAngle({ x: 0, y: -1, z: 0 }, yawRate * dt));
   ac.q = qNormalize(q);
 
-  const nf = forwardOf(ac.q);
-  ac.vel = scale(nf, ac.speed);
+  // --- independent flight-path direction ---
+  // Previously velocity was forcibly snapped onto the nose every tick,
+  // making the flight-path marker (FPM) identical to the waterline W.
+  // Preserve the existing nose/roll/G controller and scalar energy model, but
+  // let actual displacement catch up to the nose with a short response time.
+  // The HUD reads this genuine velocity, not a fabricated screen offset.
+  const nose = forwardOf(ac.q);
+  const path = norm(ac.vel);
+  const response = 1 - Math.exp(-dt / FLIGHT_PATH_LAG); // frame-rate independent
+  const travel = norm(addScaled(path, sub(nose, path), response));
+  ac.vel = scale(travel, ac.speed);
   ac.pos = addScaled(ac.pos, ac.vel, dt);
+  // For debug/visualisation: unsigned divergence in radians (not a CFD AoA).
+  ac.aoaVisual = Math.acos(clamp(dot(nose, travel), -1, 1));
   ac.gLoad = ac.nCur;
 }
 
