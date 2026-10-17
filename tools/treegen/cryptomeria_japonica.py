@@ -52,7 +52,22 @@ P = dict(
     spray_step=0.045,  # m between sprays along secondaries
     spray_scale=(1.15, 1.6),
     shell_depth=0.9,
+    # v2 crown-mass knobs (PR #40 review 5557826475); the defaults reproduce v1 exactly (no extra rng draws when off)
+    inner_step=0.0,  # m between pads on the inner half of every primary (0 = off)
+    hang_frac=0.0,  # share of secondary pads that hang down-outward
+    low_scale=1.0,  # pad size multiplier at the crown base (-> 1 at the top)
+    clump_amp=0.0,  # amplitude of the along-branch bundling wave
+    inner_start=0.3,  # m off the stem where the inner pads start
+    leader_len=1.4,  # m of terminal tuft column below the top (9 pads per 1.4 m)
 )
+if os.environ.get("ACW_TG_PARAMS"):  # same opt-in override contract as the 紅楠 / 相思樹 generators
+    with open(os.environ["ACW_TG_PARAMS"], encoding="utf-8-sig") as _fh:  # tolerate a BOM (files saved by PowerShell)
+        for _k, _v in json.load(_fh).items():
+            if _k.startswith("_"):
+                continue
+            if _k not in P:
+                raise KeyError("ACW_TG_PARAMS: unknown parameter %s" % _k)
+            P[_k] = tuple(_v) if isinstance(_v, list) else _v
 SPRAY_KINDS = tg_needle.SPRAY_KINDS
 
 
@@ -171,10 +186,15 @@ def spray_points(sk, rng, secs, prims):
     up = Vector((0, 0, 1))
     out = ([], [], [], [], [])
 
-    def emit(p, d, scale=1.0):
+    span = P["height"] - P["crown_base"]
+
+    def emit(p, d, scale=1.0, hang=False):
         rad = Vector((p.x, p.y, 0.0))
         rad = rad.normalized() if rad.length > 1e-4 else Vector((1, 0, 0))
-        z = (d * 0.6 + rad * 0.4 + up * 0.25).normalized()
+        # v2: hanging pads drape down-outward and fill the gap below their branch (breaks the "ladder" of horizontal tiers)
+        z = (d * 0.4 + rad * 0.55 - up * 0.75).normalized() if hang else (d * 0.6 + rad * 0.4 + up * 0.25).normalized()
+        if P["low_scale"] != 1.0:  # v2: bigger pads in the mid-lower crown, tapering to v1 size at the top
+            scale *= 1.0 + (P["low_scale"] - 1.0) * max(0.0, 1.0 - (p.z - P["crown_base"]) / span)
         y = up - z * up.dot(z)
         y = y.normalized() if y.length > 1e-4 else z.orthogonal().normalized()
         m = Matrix((y.cross(z), y, z)).transposed()
@@ -186,12 +206,21 @@ def spray_points(sk, rng, secs, prims):
         # per-spray tone: a little bronze / lighter on the sunny upper crown, darker low inside
         out[4].append(float(0.15 * (p.z - 16.0) / 8.0 + rng.normal(0, 0.1)))
 
+    amp = P["clump_amp"]
+
+    def clump(s, phase):
+        """v2: foliage bundles along a branch - density / size follow a ~0.9 m wave instead of an even fur (1.0 when off)."""
+        return 1.0 + amp * math.sin(2 * math.pi * s / 0.9 + phase) if amp else 1.0
+
     for nodes in secs:
         pts = [sk.pos[i] for i in nodes]
         L = sum((pts[k + 1] - pts[k]).length for k in range(len(pts) - 1))
         d_end = (pts[-1] - pts[-2]).normalized()
         emit(pts[-1], d_end, 1.1)  # tip tuft
         emit(pts[-1], (d_end + Vector(rng.normal(0, 0.5, 3))).normalized(), 0.9)
+        if P["hang_frac"]:
+            emit(pts[-1], d_end, 1.0, hang=True)
+        ph = rng.uniform(0, 2 * math.pi) if amp else 0.0
         s = P["spray_step"] * rng.uniform(0.5, 1.0)
         sgn = 1
         while s < L - 0.05:
@@ -202,15 +231,28 @@ def spray_points(sk, rng, secs, prims):
             side = bd.cross(up)
             side = side.normalized() if side.length > 1e-4 else bd.orthogonal()
             sgn = -sgn
-            emit(p, (bd + side * sgn * 0.8 + up * 0.2).normalized(), rng.uniform(0.75, 1.0))
+            c = clump(s, ph)
+            if not amp or rng.uniform() < min(1.0, c):
+                hang = bool(P["hang_frac"]) and rng.uniform() < P["hang_frac"]
+                emit(p, (bd + side * sgn * 0.8 + up * 0.2).normalized(), rng.uniform(0.75, 1.0) * max(0.6, c), hang=hang)
             s += P["spray_step"] * rng.uniform(0.8, 1.2)
     for nodes, rel, L in prims:  # leading tuft at every primary tip and along its outer half
         pts = [sk.pos[i] for i in nodes]
         emit(pts[-1], (pts[-1] - pts[-2]).normalized(), 1.2)
         for k in range(len(pts) // 2, len(pts) - 1):
             emit(pts[k], ((pts[k + 1] - pts[k]).normalized() + up * 0.3).normalized(), 1.0)
-    # leader: a dense terminal tuft column on the top metre
-    for t in np.linspace(P["height"] - 1.4, P["height"] - 0.05, 9):
+        if P["inner_step"]:  # v2: pads along the inner half too (from 0.3 m off the stem) -> the trunk is no longer exposed
+            Lp = sum((pts[j + 1] - pts[j]).length for j in range(len(pts) - 1))
+            s = P["inner_start"]
+            while s < 0.55 * Lp:
+                f = s / Lp
+                k = min(len(pts) - 2, int(f * (len(pts) - 1)))
+                p = pts[k].lerp(pts[k + 1], f * (len(pts) - 1) - k)
+                bd = (pts[k + 1] - pts[k]).normalized()
+                emit(p, (bd + Vector(rng.normal(0, 0.5, 3))).normalized(), rng.uniform(0.9, 1.2), hang=rng.uniform() < P["hang_frac"])
+                s += P["inner_step"] * rng.uniform(0.8, 1.2)
+    # leader: a dense terminal tuft column on the top metre(s) (v2: longer, covers the stem in the upper crown / top-view void)
+    for t in np.linspace(P["height"] - P["leader_len"], P["height"] - 0.05, max(9, int(round(9 * P["leader_len"] / 1.4)))):
         emit(Vector((0.12 * math.sin(t / 6.5) + 0.03 * math.sin(t * 1.3), 0.08 * math.sin(t / 4.7 + 1.0), t)),
              Vector((rng.normal(0, 0.4), rng.normal(0, 0.4), 1.0)).normalized(), 0.9)
     return out

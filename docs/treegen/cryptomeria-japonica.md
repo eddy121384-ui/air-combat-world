@@ -60,6 +60,35 @@ pointed crown (no flat / open mature crown); from **cartoon**: no clean cone env
 | it4 | oblique reads as a dark narrow conifer; front still airy | denser secondary network, sprays every 4.5 cm |
 | it5 | tall narrow dark blue-green cone, irregular outline, upturned tips, bristly cords → **v1** | — |
 
+## 4b. v2 candidate — crown-mass correction (PR #40 review 5557826475)
+
+Review finding on v1: front / flight / top read as an open, **ladder-like** set of horizontal branches with the **stem visible for most of
+the crown height**, foliage as thin dark wisps, and a **central void from above** — a Norfolk-pine-like decorative tree rather than a
+plantation crown mass. Correction scope: foliage-pad distribution / shape only. **Same skeleton, trunk, branch directions and materials;
+v1 is kept as the baseline** (`cryptomeria_japonica_v1.blend` untouched; the v1 defaults still reproduce it exactly: 4,492 pads /
+7,386,054 needles re-checked). v2 = `ACW_TG_PARAMS=tools/treegen/params/cryptomeria_v2.json`:
+
+| knob (default = v1) | v2 | aims at |
+|---|---|---|
+| `inner_step` 0 → **0.13 m**, `inner_start` → **0.12 m** | pads along the inner half of every primary, from 0.12 m off the stem | exposed stem |
+| `hang_frac` 0 → **0.35** | a third of the secondary pads hang down-outward | ladder gaps between tiers |
+| `low_scale` 1 → **1.5** | pads up to 1.5× larger at the crown base, tapering to v1 size at the top | thin mid-lower crown |
+| `clump_amp` 0 → **0.45** | along-branch ~0.9 m density / size wave | even "fur" → irregular bundles |
+| `leader_len` 1.4 → **4.5 m** | terminal tuft column on the top 4.5 m | stem through the upper crown, top-view central void |
+| `spray_step` 0.045 → **0.06 m** | fewer, larger secondary pads | needle count does not balloon |
+
+| | v1 | **v2** |
+|---|---:|---:|
+| pads | 4,492 | 4,313 |
+| needles / instanced triangles | 7.39 M / 8.98 M | **7.03 M / 8.52 M** (fewer) |
+
+Two rounds, both judged on v1 | v2 side by side on the same stage (`v2_cmp_*.jpg`): round 1 (inner pads, hanging pads, bigger low
+pads, bundling) closed the ladder and most of the stem; round 2 (pads nearer the stem, 4.5 m leader column) closed the remaining stem
+line through the upper crown and the top-view void. Result: a substantial, layered, irregular dark crown mass on the same tall narrow
+cone — not a solid cone (gaps, hanging clumps and branch tips still break the outline). Stopped after round 2 as agreed.
+Evidence: `v2_front.jpg`, `v2_oblique.jpg`, `v2_top.jpg`, `v2_close.jpg`; comparison `v2_cmp_front.jpg`, `v2_cmp_oblique.jpg`,
+`v2_cmp_flight.jpg` (~200 m), `v2_cmp_top.jpg` (v1 left, v2 right).
+
 ## 5. Known defects (honest list)
 
 1. **Lower crown edge is still a little airy from eye level** (the crown is denser from above than from the side); a mature stand tree
@@ -69,13 +98,17 @@ pointed crown (no flat / open mature crown); from **cartoon**: no clean cone env
 4. One seed, one form: a plantation 柳杉 (high crown base). An open-grown / ridge tree (crown to the ground, broader base) would be a
    second form.
 5. Golden colour is dark blue-green at all heights; no winter bronzing variant.
-6. The game exporter is not run yet: `build()` already returns the skeleton, crown lobes (spheres stacked along the cone) and
-   `P["shell_depth"]` so `machilus_game.py` can be pointed at it with a species switch next round.
+6. The game exporter has **not** been run and compatibility is **not verified**: `build()` returns the skeleton, crown lobes and
+   `P["shell_depth"]`, but `machilus_game.py`'s species switch has no cryptomeria branch yet, and its clump-tile code reads
+   `mt.P["shell_c"]`, which this generator does not define (review 5557826475). Treat "mostly a species switch" as a hypothesis until
+   the exporter actually runs and the UE import passes the fresh-process gate.
+7. v1 defect 1 (airy lower crown edge) is addressed by v2 (§4b); a faint stem line remains in the top ~2 m from eye level in v2.
 
 ## 6. Not done this round (by design — weekly budget ~8 %)
 
-* Unreal game version (cards / LODs / import / fresh-process gate): **recommended as the next round** — the generator is export-ready,
-  and the 相思樹 lessons apply directly (tight cards; conifer cords are long thin tiles, so expect clump tiles for LOD2/3).
+* Unreal game version (cards / LODs / import / fresh-process gate): **recommended as the next round, from v2** — first make the
+  exporter actually run for this species (species switch + `shell_c`), then the 相思樹 lessons (tight cards; conifer cords are long thin
+  tiles, so expect clump tiles for LOD2/3) still need real native tests.
 * Forest integration (頂山–石梯嶺 plantation blocks): after the game version; plantation = regular spacing, even age, sharp edges.
 
 ## 7. Reproduce
@@ -84,6 +117,9 @@ pointed crown (no flat / open mature crown); from **cartoon**: no clean cone env
 $b = "C:\Program Files\Blender Foundation\Blender 5.2\blender.exe"; $o = "$PWD\out\treegen\cryptomeria"   # absolute output paths
 & $b -b --factory-startup -noaudio --python tools/treegen/cryptomeria_japonica.py -- $o/it9 --res 960x540 --samples 24 --tag it9   # preview
 & $b -b --factory-startup -noaudio --python tools/treegen/cryptomeria_japonica.py -- $o/v1 --no-render --tag v1
+$env:ACW_TG_PARAMS = "$PWD\tools\treegen\params\cryptomeria_v2.json"   # v2 candidate (crown-mass correction)
+& $b -b --factory-startup -noaudio --python tools/treegen/cryptomeria_japonica.py -- $o/v2 --no-render --tag v2; Remove-Item Env:ACW_TG_PARAMS
+& $b -b docs/evidence/treegen/cryptomeria/cryptomeria_japonica_v1.blend -noaudio --python tools/treegen/species_lineup.py -- $o/cmp_v2 1920x1080 48 "$o/v2/v2_cryptomeria_japonica.blend:CryptomeriaJaponica:12"
 & $b -b $o/v1/v1_cryptomeria_japonica.blend -noaudio --python tools/treegen/tg_render_saved.py -- $o/v1 v1 64 1920x1080
 & $b -b $o/v1/v1_cryptomeria_japonica.blend -noaudio --python tools/treegen/tg_turntable.py -- $o/v1/tt 6 30 16 960x540 12 58
 & $b -b $o/v1/v1_cryptomeria_japonica.blend -noaudio --python tools/treegen/species_lineup.py -- $o/lineup 1920x1080 48 `

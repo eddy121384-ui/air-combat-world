@@ -1,0 +1,86 @@
+{
+ "params": {
+  "seed": 20261017,
+  "height": 24.0,
+  "crown_base": 9.5,
+  "crown_r": 3.3,
+  "crown_power": 0.9,
+  "branch_step": [
+   0.18,
+   0.32
+  ],
+  "elev_low": [
+   -12.0,
+   2.0
+  ],
+  "elev_top": [
+   30.0,
+   50.0
+  ],
+  "droop": 14.0,
+  "upturn": 30.0,
+  "sec_step": [
+   0.11,
+   0.18
+  ],
+  "sec_len": [
+   0.35,
+   0.85
+  ],
+  "sec_angle": [
+   45,
+   70
+  ],
+  "stubs": 7,
+  "r_root": 0.36,
+  "r_tip": 0.005,
+  "pipe_exp": 2.3,
+  "spray_step": 0.06,
+  "spray_scale": [
+   1.15,
+   1.6
+  ],
+  "shell_depth": 0.9,
+  "inner_step": 0.13,
+  "hang_frac": 0.35,
+  "low_scale": 1.5,
+  "clump_amp": 0.45,
+  "inner_start": 0.12,
+  "leader_len": 4.5
+ },
+ "stats": {
+  "nodes": 2035,
+  "primaries": 55,
+  "secondaries": 602,
+  "lobes": 13,
+  "trunk_radius_base_m": 0.3599999999999999,
+  "build_skeleton_s": 0.0,
+  "branch_tris": 32304,
+  "sprays": 4313,
+  "proto_tris": [
+   2355,
+   1362,
+   2858,
+   1187,
+   1996,
+   2053,
+   1620,
+   2487
+  ],
+  "proto_needles": [
+   1971,
+   1074,
+   2426,
+   923,
+   1660,
+   1669,
+   1332,
+   2079
+  ],
+  "instanced_spray_tris": 8524093,
+  "needles": 7029445,
+  "total_tris": 8556397,
+  "height_m": 24.32,
+  "spread_m": 7.28
+ }
+}
