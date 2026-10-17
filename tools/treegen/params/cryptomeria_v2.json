@@ -1,0 +1,10 @@
+﻿{
+ "_doc": "柳杉 golden v2 candidate (PR #40 review 5557826475): same skeleton, trunk, branch directions and materials as v1; only the foliage-pad distribution / shape: pads on the inner half of every primary (hide the stem), part of the secondary pads hang down-outward (fill the gaps between tiers), bigger pads in the mid-lower crown, along-branch bundling into clumps; slightly sparser secondary pads so the needle count does not balloon. Round 2: inner pads start nearer the stem and a 4.5 m terminal tuft column (stem visible through the upper crown / top-view central void in round 1).",
+ "inner_step": 0.13,
+ "inner_start": 0.12,
+ "leader_len": 4.5,
+ "hang_frac": 0.35,
+ "low_scale": 1.5,
+ "clump_amp": 0.45,
+ "spray_step": 0.06
+}
