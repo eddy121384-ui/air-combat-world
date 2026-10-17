@@ -228,8 +228,11 @@ export class Hud {
     const safeText = (value) => String(value).padStart(3, '0');
 
     g.save();
+    // Soft dark halo keeps the green ladder visible against bright clouds.
+    g.shadowColor = 'rgba(4,20,30,0.85)';
+    g.shadowBlur = 3 * S;
     g.lineWidth = Math.max(1.15, 1.25 * S);
-    g.strokeStyle = 'rgba(125,255,176,0.52)';
+    g.strokeStyle = 'rgba(125,255,176,0.62)';
     g.strokeRect(left, top, ww, hh);
 
     // Square cockpit-HUD corner emphasis without an opaque panel blocking enemies.
