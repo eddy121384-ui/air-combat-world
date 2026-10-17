@@ -37,8 +37,8 @@ export const MAX_SPEED = 430;
 export const MAX_ROT_RATE = 1.3; // rad/s, hard sanity cap on flight-path rotation
 // Small airframe/velocity response time. The nose may lead the actual movement
 // during a hard pull or rudder input (an arcade AoA/slip approximation), but the
-// same kinematics apply to AI and player. 0.14s gives a few degrees at high G.
-export const FLIGHT_PATH_LAG = 0.14; // seconds, not a free HUD-only animation
+// same kinematics apply to AI and player. 0.09s provides modest separation at high G.
+export const FLIGHT_PATH_LAG = 0.09; // seconds, not a free HUD-only animation
 
 export function makeControls() {
   // pitch: +1 pull (nose up in body frame), roll: +1 roll right, yaw: +1 nose right
