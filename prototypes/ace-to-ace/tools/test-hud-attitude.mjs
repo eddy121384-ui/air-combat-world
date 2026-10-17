@@ -74,4 +74,26 @@ for (const [p, b, h] of [[0,0,0],[25,40,90],[-30,-70,270],[80,180,0]]) {
     calls.filter((x) => x.op === 'restore').length, 'restore drawing context');
 }
 
-console.log('HUD PASS: AC-style open guides, pitch/roll horizon, compass, inverted flight, clip and no boxed dashboard');
+// The player's permanent nose reference is a little W, not the old ring.
+for (const symbolSize of [7.5, 9.375, 12]) {
+  calls.length = 0;
+  hud.waterline(406, 180, symbolSize, '#7dffb0');
+  const moves = calls.filter((x) => x.op === 'moveTo');
+  const segments = calls.filter((x) => x.op === 'lineTo');
+  assert.equal(moves.length, 1, 'one continuous W silhouette');
+  assert.equal(segments.length, 6, 'six line segments form the flying W');
+  approx(moves[0].args[0], 406 - 1.35 * symbolSize, 1e-4);
+  approx(segments[2].args[0], 406, 1e-4); // center peak
+  assert.ok(segments[2].args[1] < segments[1].args[1],
+    'center peak must sit above the adjacent W valley');
+  approx(segments[5].args[0], 406 + 1.35 * symbolSize, 1e-4);
+  assert.equal(calls.filter((x) => x.op === 'save').length, 1);
+  assert.equal(calls.filter((x) => x.op === 'restore').length, 1);
+  assert.ok(!calls.some((x) => x.op === 'arc'),
+    'nose reference is no longer a confusing circular velocity symbol');
+}
+calls.length = 0;
+hud.waterline(NaN, 180, 10, '#7dffb0');
+assert.equal(calls.length, 0, 'never draw invalid screen projection');
+
+console.log('HUD PASS: AC-style guides, pitch/roll, heading, gun boxes, 3-size W waterline geometry');
