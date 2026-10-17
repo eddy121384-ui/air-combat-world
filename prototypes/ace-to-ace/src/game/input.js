@@ -174,7 +174,13 @@ export class PlayerController {
       const nearVertical = Math.abs(pitchAngle(ac)) > 60 * DEG;
       const nAvail = availableG(ac), n0 = neutralG(ac);
       const turning = Math.abs(x) > 0.05;
-      if (nearVertical) { c.roll = x; c.pitch = y; }
+      if (nearVertical) {
+        // At steep pitch the horizon-referenced bank angle becomes ill-defined.
+        // Never convert a held touch-x into continuous spin in ASSIST.
+        c.roll = clamp(-ac.rollRateCur * 0.35, -1, 1);
+        c.pitch = y;
+        c.yaw += x * 0.7;
+      }
       else if (turning) {
         let nTurn = 1 + (nAvail - 1) * Math.min(1, Math.abs(x)) * 0.92;
         if (y > 0) nTurn += (nAvail - nTurn) * y;
