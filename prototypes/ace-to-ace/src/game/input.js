@@ -8,7 +8,7 @@ export class Input {
     this.stick = { x: 0, y: 0 };        // x: right +, y: up + (screen)
     this.stickOffset = { x: 0, y: 0 }; // visual stick deflection persists after touch release
     this.keys = new Set();
-    this.btn = { msl: false, gun: false, brake: false, flare: false, look: false, boost: false };
+    this.btn = { msl: false, gun: false, brake: false, flare: false, look: false, boost: false, acro: false };
     this.pressed = new Set();           // one-shot presses this frame
     this.boostToggle = false;
     this.touchActive = false;
@@ -65,7 +65,7 @@ export class Input {
         this.stickOffset.x = dx; this.stickOffset.y = dy;
         setKnob(dx, dy);
         // small dead zone, then a gentle expo curve for fine aiming
-        const shape = (v) => { const a = Math.max(0, Math.abs(v) - 0.06) / 0.94; return Math.sign(v) * (0.35 * a + 0.65 * a * a); };
+        const shape = (v) => { const a = Math.max(0, Math.abs(v) - 0.05) / 0.95; return Math.sign(v) * (0.62 * a + 0.38 * a * a); };
         this.stick.x = shape(dx / R); this.stick.y = shape(-dy / R);
       }
     };
@@ -109,6 +109,9 @@ export class Input {
     this.stickTouch = null;
     this.stick.x = 0; this.stick.y = 0;
     this.stickOffset.x = 0; this.stickOffset.y = 0;
+    this.btn.acro = false;
+    const acroButton = this.root.querySelector('[data-btn="acro"]');
+    if (acroButton) acroButton.classList.remove('down');
     const base = this.root.querySelector('#stickBase');
     base.style.left = ''; base.style.top = '';
     base.classList.remove('on');
@@ -133,6 +136,7 @@ export class Input {
   }
   boost() { return this.keys.has('KeyW') || this.boostToggle; }
   brake() { return this.keys.has('KeyS') || this.btn.brake; }
+  acro() { return this.keys.has('KeyZ') || this.btn.acro; }
   gun() { return this.keys.has('ShiftLeft') || this.keys.has('ShiftRight') || this.keys.has('KeyF') || this.btn.gun; }
   look() { return this.keys.has('KeyE') || this.btn.look; }
 }
@@ -141,11 +145,16 @@ export class Input {
  * Player pilot: converts Input into the same controls structure the AI produces.
  * settings.assist: stick-x banks to an angle and the turn is held level automatically;
  * neutral input rolls wings-level, but releasing touch holds the last stick setting.
+ * MANUAL: stick-x commands a held bank ANGLE, rather than a roll RATE.
+ * ACRO (hold) temporarily restores raw roll-rate control for rolls / aerobatics.
  * settings.invert: stick-up = climb.
  */
 export class PlayerController {
   constructor(ac, input, settings) {
     this.ac = ac; this.input = input; this.settings = settings;
+    this.manualBankTarget = 0;
+    this.acroWasHeld = false;
+    this.acroReleaseX = null;
   }
   update() {
     const ac = this.ac, s = this.settings, inp = this.input;
@@ -167,12 +176,12 @@ export class PlayerController {
       const turning = Math.abs(x) > 0.05;
       if (nearVertical) { c.roll = x; c.pitch = y; }
       else if (turning) {
-        let nTurn = 1 + (nAvail - 1) * Math.min(1, Math.abs(x)) * 0.85;
+        let nTurn = 1 + (nAvail - 1) * Math.min(1, Math.abs(x)) * 0.92;
         if (y > 0) nTurn += (nAvail - nTurn) * y;
         nTurn = clamp(nTurn, 1.05, Math.max(1.05, nAvail));
         const bankT = Math.sign(x) * Math.acos(clamp(1 / nTurn, 0, 1));
         const rollErr = Math.atan2(Math.sin(bankT - bank), Math.cos(bankT - bank));
-        c.roll = clamp(rollErr * 3.2 - ac.rollRateCur * 0.12, -1, 1);
+        c.roll = clamp(rollErr * 4.2 - ac.rollRateCur * 0.16, -1, 1);
         // roll first, then pull (pulling while the lift vector points elsewhere loops the nose)
         const align = Math.max(0, Math.cos(Math.min(Math.abs(rollErr), Math.PI / 2)));
         let n = n0 + (nTurn - n0) * align;
@@ -189,7 +198,29 @@ export class PlayerController {
       // auto-burner when slow (keeps a thumb-only player out of the stall spiral)
       if (ac.speed < 0.7 * ac.type.cornerSpeed && !c.brake) c.boost = true;
     } else {
-      c.roll = x;
+      // MANUAL = bank-angle hold. The persistent touch stick commands a persistent
+      // bank angle, NOT a perpetual roll rate (which previously made holding a
+      // turn spin the aircraft like a drill). Pitch remains a direct G command.
+      const bank = bankAngle(ac);
+      if (inp.acro?.()) {
+        // Hold ACRO/Z to fly true continuous barrel/aileron rolls on demand.
+        c.roll = x;
+        this.acroWasHeld = true;
+      } else {
+        if (this.acroWasHeld) {
+          // Releasing ACRO captures the current bank rather than snapping to
+          // the stick's old angle. The next deliberate stick adjustment exits hold.
+          this.manualBankTarget = bank;
+          this.acroReleaseX = x;
+          this.acroWasHeld = false;
+        }
+        if (this.acroReleaseX === null || Math.abs(x - this.acroReleaseX) > 0.04) {
+          this.manualBankTarget = clamp(x, -1, 1) * 85 * DEG;
+          this.acroReleaseX = null;
+        }
+        const rollErr = Math.atan2(Math.sin(this.manualBankTarget - bank), Math.cos(this.manualBankTarget - bank));
+        c.roll = clamp(rollErr * 4.2 - ac.rollRateCur * 0.16, -1, 1);
+      }
       c.pitch = y;
     }
     return c;
