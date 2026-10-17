@@ -35,7 +35,7 @@ for (const [p, b, h] of [
 const calls = [];
 const ctx = { textAlign: 'center', measureText: (txt) => ({ width: String(txt).length * 7 }) };
 for (const op of ['save','restore','beginPath','rect','clip','translate',
-  'rotate','moveTo','lineTo','stroke','strokeRect','fill','closePath','fillText']) {
+  'rotate','moveTo','lineTo','stroke','strokeRect','fill','closePath','fillText','arc']) {
   ctx[op] = (...args) => {
     if (args.some((v) => typeof v === 'number' && !Number.isFinite(v)))
       throw new Error(`nonfinite ${op}`);
