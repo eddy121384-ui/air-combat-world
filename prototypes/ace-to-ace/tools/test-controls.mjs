@@ -89,4 +89,15 @@ function fixture(assist, startSpeed = 230) {
   assert.ok(Math.abs(bankAngle(m.ac) / DEG) < 3, 'acro hold exits on a new stick command');
 }
 
-console.log('Controls PASS: manual bank hold, neutral, high-G energy, assist, ACRO roll/release');
+// Steep ASSIST pitch must not turn persistent touch input into infinite aileron roll.
+{
+  const ac = createAircraft('F16V', 'blue', { x: 0, y: 4500, z: 0 },
+    { x: 0, y: 0.97, z: -0.243 }, 230);
+  const input = { axes: () => ({ x: 1, y: 0, yaw: 0 }), acro: () => false,
+    boost: () => true, brake: () => false, gun: () => false, consume: () => false };
+  const pilot = new PlayerController(ac, input, { assist: true, invert: false });
+  const cmd = pilot.update();
+  assert.ok(Math.abs(cmd.roll) < 0.15, 'steep assist never maps held X to raw spin');
+}
+
+console.log('Controls PASS: manual bank hold, neutral, high-G energy, assist steep climb, ACRO roll/release');
