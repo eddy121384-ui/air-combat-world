@@ -63,7 +63,7 @@ export class Hud {
       // boresight (gun cross) far ahead of the nose
       const f = forwardOf(me.q);
       const bs = rend.project(addScaled(me.pos, f, 1500));
-      this.cross(bs.x, bs.y, 10 * S, WHITE);
+      this.cross(bs.x, bs.y, 10 * S, GREEN);
 
       // target box
       if (tg && tg.alive) {
@@ -213,116 +213,125 @@ export class Hud {
   }
 
   /**
-   * AC-style rectangular attitude reference for third-person flight.
-   *
-   * The world-stabilized pitch ladder rotates against the aircraft (NOT the
-   * smoothed chase camera), while the square and nose/gun sight stay fixed.
-   * This is essential when the sky and sea are indistinguishable.
+   * Ace Combat 7 cockpit HUD reference, adapted for an unobstructed chase view.
+   * Open-corner side guides, compass ribbon, sparse pitch ladder and whiskey mark.
+   * There is deliberately NO enclosed square or dashboard of numeric labels.
+   * The ladder rotates with actual aircraft attitude, not smoothed camera motion.
    */
   attitude(me, S) {
     const g = this.g;
     const { pitch, bank, heading } = attitudeOf(me.q);
-    const cx = this.w * 0.5, cy = this.h * 0.5 - 16 * S;
-    const ww = 186 * S, hh = 138 * S;
-    const left = cx - ww * 0.5, top = cy - hh * 0.5;
-    const safeText = (value) => String(value).padStart(3, '0');
-
+    const cx = this.w * 0.5, cy = this.h * 0.5 - 10 * S;
+    const halfW = 102 * S, halfH = 67 * S;
+    const top = cy - halfH, bottom = cy + halfH;
+    const ink = 'rgba(170,255,193,0.77)';
+    const soft = 'rgba(170,255,193,0.5)';
+    const faint = 'rgba(170,255,193,0.32)';
     g.save();
-    // Soft dark halo keeps the green ladder visible against bright clouds.
-    g.shadowColor = 'rgba(4,20,30,0.85)';
-    g.shadowBlur = 3 * S;
-    g.lineWidth = Math.max(1.15, 1.25 * S);
-    g.strokeStyle = 'rgba(125,255,176,0.62)';
-    g.strokeRect(left, top, ww, hh);
+    g.lineWidth = Math.max(1, 1.2 * S);
+    g.strokeStyle = ink;
+    g.fillStyle = ink;
+    g.font = `600 ${Math.max(9, Math.round(10 * S))}px ui-monospace, Menlo, monospace`;
 
-    // Square cockpit-HUD corner emphasis without an opaque panel blocking enemies.
-    g.strokeStyle = GREEN;
+    // Only four very short corners and discreet side bars: no picture frame.
     g.beginPath();
-    const corner = 12 * S;
-    for (const [x, sx] of [[left, 1], [left + ww, -1]]) {
-      for (const [y, sy] of [[top, 1], [top + hh, -1]]) {
-        g.moveTo(x, y + sy * corner); g.lineTo(x, y); g.lineTo(x + sx * corner, y);
+    for (const side of [-1, 1]) {
+      const x = cx + side * halfW;
+      const inward = -side * 11 * S;
+      g.moveTo(x, top + 7 * S);
+      g.lineTo(x, top);
+      g.lineTo(x + inward, top);
+      g.moveTo(x, top + 7 * S);
+      g.lineTo(x, bottom - 11 * S);
+      g.moveTo(x, bottom - 11 * S);
+      g.lineTo(x, bottom);
+      g.lineTo(x + inward, bottom);
+    }
+    g.stroke();
+
+    // AC-style heading ribbon across the top, with a fixed central index.
+    // These ticks move as heading changes; horizon/pitch ladder does not affect it.
+    const hY = top - 12 * S, pixelsPerHeadingDeg = 2.55 * S;
+    const nearest5 = Math.round(heading / 5) * 5;
+    g.textAlign = 'center';
+    for (let diff = -45; diff <= 45; diff += 5) {
+      const compass = nearest5 + diff;
+      const d = ((compass - heading + 540) % 360) - 180;
+      const x = cx + d * pixelsPerHeadingDeg;
+      if (Math.abs(x - cx) > halfW - 9 * S) continue;
+      const major = ((compass % 30) + 30) % 30 === 0;
+      g.strokeStyle = major ? ink : faint;
+      g.beginPath(); g.moveTo(x, hY); g.lineTo(x, hY + (major ? 5 : 3) * S); g.stroke();
+      if (major) {
+        const value = ((compass % 360) + 360) % 360;
+        g.fillStyle = ink;
+        g.fillText(String(value).padStart(3, '0'), x, hY - 8 * S);
       }
     }
-    g.stroke();
+    g.strokeStyle = ink;
+    g.beginPath(); g.moveTo(cx, hY - 2 * S); g.lineTo(cx, hY + 7 * S); g.stroke();
 
-    // HUD heading / pitch / bank readouts remain fixed and never rotate.
-    g.font = `700 ${Math.round(10 * S)}px ui-monospace, Menlo, monospace`;
-    g.textAlign = 'center'; g.fillStyle = GREEN;
-    g.fillText(`HDG ${safeText(Math.round(heading) % 360)}`, cx, top - 12 * S);
-    const pitchSign = pitch >= 0 ? '+' : '−';
-    g.fillText(`PITCH ${pitchSign}${Math.abs(Math.round(pitch))}°`, cx, top + hh + 13 * S);
-    const side = bank < -0.5 ? 'L' : bank > 0.5 ? 'R' : ' ';
-    g.fillText(`BANK ${side}${Math.round(Math.abs(bank))}°`, cx, top + hh + 25 * S);
+    // Roll does not require a giant BANK box: the whole horizontal reference
+    // tilts, and a tiny top-side bank readout stays legible during inversion.
+    g.font = `500 ${Math.max(8, Math.round(9 * S))}px ui-monospace, Menlo, monospace`;
+    g.textAlign = 'right'; g.fillStyle = soft;
+    g.fillText(`${Math.round(Math.abs(bank))}°${bank > 1 ? 'R' : bank < -1 ? 'L' : ''}`,
+      cx + halfW - 3 * S, hY - 8 * S);
 
-    // Short bank scale above the pitch ladder: center is wings-level; moving
-    // caret shows the bank direction. At >90°, numerical bank remains exact.
-    const scaleY = top + 6 * S, span = 67 * S;
-    g.strokeStyle = 'rgba(125,255,176,0.6)';
+    // The ladder is cut by the side guides. No translucent background panel.
     g.beginPath();
-    for (const angle of [-90, -45, 0, 45, 90]) {
-      const xx = cx + angle / 90 * span;
-      g.moveTo(xx, scaleY); g.lineTo(xx, scaleY + (angle === 0 ? 7 : 4) * S);
-    }
-    g.stroke();
-    const indicatorX = cx + Math.max(-1, Math.min(1, bank / 90)) * span;
-    g.fillStyle = GREEN;
-    g.beginPath();
-    g.moveTo(indicatorX - 3 * S, scaleY + 10 * S);
-    g.lineTo(indicatorX + 3 * S, scaleY + 10 * S);
-    g.lineTo(indicatorX, scaleY + 5 * S);
-    g.closePath(); g.fill();
-
-    // Clip: no attitude tick may spill onto side-mounted speed/altitude data.
-    g.beginPath(); g.rect(left + 3 * S, top + 17 * S, ww - 6 * S, hh - 24 * S); g.clip();
+    g.rect(cx - halfW + 5 * S, top + 9 * S, 2 * (halfW - 5 * S), 2 * halfH - 18 * S);
+    g.clip();
     g.translate(cx, cy);
-    // Right wing down -> the outside world/horizon tilts left relative to us.
     g.rotate(-bank * DEG);
 
-    const pxPerDeg = 3.3 * S;
-    const first = Math.max(-90, Math.ceil((pitch - 37) / 5) * 5);
-    const last = Math.min(90, Math.floor((pitch + 37) / 5) * 5);
-    g.font = `600 ${Math.round(9 * S)}px ui-monospace, Menlo, monospace`;
-    g.lineWidth = Math.max(1, 1.2 * S);
-    for (let deg = first; deg <= last; deg += 5) {
-      const y = (pitch - deg) * pxPerDeg;
-      const major = deg % 10 === 0;
-      const len = (deg === 0 ? 70 : major ? 46 : 22) * S;
-      const gap = deg === 0 ? 13 * S : 24 * S;
-      g.strokeStyle = deg === 0 ? 'rgba(125,255,176,0.9)' : 'rgba(125,255,176,0.72)';
+    const pxPerDegree = 4 * S;
+    const minimum = Math.max(-90, Math.ceil((pitch - 40) / 5) * 5);
+    const maximum = Math.min(90, Math.floor((pitch + 40) / 5) * 5);
+    g.font = `500 ${Math.max(8, Math.round(9 * S))}px ui-monospace, Menlo, monospace`;
+    for (let deg = minimum; deg <= maximum; deg += 5) {
+      const y = (pitch - deg) * pxPerDegree;
+      const zero = deg === 0, major = deg % 10 === 0;
+      const inner = zero ? 13 * S : 31 * S;
+      const outer = (zero ? 77 : major ? 65 : 51) * S;
+      g.strokeStyle = zero ? ink : major ? soft : faint;
+      g.lineWidth = zero ? 1.3 * S : 1 * S;
       g.beginPath();
-      for (const sign of [-1, 1]) {
-        const a = sign * gap, b = sign * len;
+      for (const side of [-1, 1]) {
         if (deg < 0) {
-          // Downward pitch bars are dashed, per fighter pitch-ladder convention.
-          for (let p = gap; p < len; p += 11 * S) {
-            const x0 = sign * p, x1 = sign * Math.min(p + 6 * S, len);
-            g.moveTo(x0, y); g.lineTo(x1, y);
+          // Broken lines under the horizon, as in the AC cockpit pitch scale.
+          for (let a = inner; a < outer; a += 11 * S) {
+            g.moveTo(side * a, y);
+            g.lineTo(side * Math.min(a + 6 * S, outer), y);
           }
         } else {
-          g.moveTo(a, y); g.lineTo(b, y);
+          g.moveTo(side * inner, y);
+          g.lineTo(side * outer, y);
         }
       }
       g.stroke();
-      if (major && deg !== 0) {
-        g.textAlign = 'right'; g.fillStyle = GREEN;
-        g.fillText(`${deg > 0 ? '+' : ''}${deg}`, -len - 3 * S, y);
+      if (major && !zero) {
+        g.textAlign = 'right'; g.fillStyle = soft;
+        g.fillText(String(deg), -outer - 3 * S, y);
         g.textAlign = 'left';
-        g.fillText(`${deg > 0 ? '+' : ''}${deg}`, len + 3 * S, y);
+        g.fillText(String(deg), outer + 3 * S, y);
       }
     }
     g.restore();
   }
 
+  // AC whiskey mark: tiny circular nose reference, not a large white gunsight cross.
   cross(x, y, s, color) {
     const g = this.g;
-    g.strokeStyle = color;
+    g.save();
+    g.strokeStyle = color; g.lineWidth = Math.max(1.1, s * 0.11);
     g.beginPath();
-    g.moveTo(x - s * 2, y); g.lineTo(x - s * 0.6, y);
-    g.moveTo(x + s * 0.6, y); g.lineTo(x + s * 2, y);
-    g.moveTo(x, y - s * 0.6); g.lineTo(x, y - s * 1.4);
+    g.arc(x, y, s * 0.35, 0, Math.PI * 2);
+    g.moveTo(x - s * 1.3, y); g.lineTo(x - s * 0.5, y);
+    g.moveTo(x + s * 0.5, y); g.lineTo(x + s * 1.3, y);
+    g.moveTo(x, y + s * 0.45); g.lineTo(x, y + s * 1.05);
     g.stroke();
-    g.beginPath(); g.arc(x, y, 1.5, 0, Math.PI * 2); g.stroke();
+    g.restore();
   }
   diamond(x, y, s) {
     const g = this.g;
