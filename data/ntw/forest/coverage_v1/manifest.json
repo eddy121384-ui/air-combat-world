@@ -1,0 +1,206 @@
+{
+  "schema": "ntw-forest-coverage-v1",
+  "world": {
+    "name": "north_taiwan_224",
+    "size_km": [
+      224.0,
+      224.0
+    ],
+    "cell_km": 8.0,
+    "cells": [
+      28,
+      28
+    ],
+    "cell_count": 784,
+    "l2_tiles_per_cell": 256,
+    "bounds_epsg3826": [
+      184000.0,
+      2648000.0,
+      408000.0,
+      2872000.0
+    ],
+    "runtime_origin_epsg3826": [
+      296000.0,
+      2760000.0
+    ],
+    "bounds_ntw_frame": [
+      -40000.0,
+      -40000.0,
+      184000.0,
+      184000.0
+    ],
+    "ue_extent_cm": {
+      "x": [
+        -11200000.0,
+        11200000.0
+      ],
+      "y": [
+        -11200000.0,
+        11200000.0
+      ]
+    },
+    "max_abs_ue_coordinate_km": 112.0
+  },
+  "pixel_m": 20,
+  "far_pixel_m": 160,
+  "classes": {
+    "0": "unknown",
+    "1": "tree_cover_candidate",
+    "2": "grass_or_rangeland",
+    "3": "agriculture",
+    "4": "urban",
+    "5": "water",
+    "6": "bare",
+    "7": "flooded_vegetation",
+    "8": "other_open_shrub",
+    "9": "snow_ice"
+  },
+  "restriction_bits": {
+    "1": "unknown_cover",
+    "2": "non_tree_cover",
+    "4": "coast_review",
+    "8": "terrain_BLOCKED_cell",
+    "16": "accepted_Xinyi_hold",
+    "32": "unresolved_species",
+    "64": "outside_flyable_core",
+    "128": "forest_edge_clearance"
+  },
+  "species_rules": {
+    "0": {
+      "name": "not_tree_cover",
+      "assets": []
+    },
+    "1": {
+      "name": "lowland_broadleaf_REVIEW",
+      "assets_available_for_review": [
+        "Machilus_thunbergii",
+        "Acacia_confusa"
+      ],
+      "mapped_species": false,
+      "default_spawn": false,
+      "note": "Land-cover + conservative cell-height screen only. Machilus is an art palette candidate. Acacia needs independently reviewed plantation/history and sunny upper-slope evidence. No 25% target; no automatic Acacia mask."
+    },
+    "2": {
+      "name": "yangmingshan_mosaic_UNRESOLVED",
+      "assets": [],
+      "default_spawn": false
+    },
+    "3": {
+      "name": "montane_forest_UNRESOLVED",
+      "assets": [],
+      "default_spawn": false
+    },
+    "4": {
+      "name": "coastal_tree_cover_UNRESOLVED",
+      "assets": [],
+      "default_spawn": false
+    },
+    "5": {
+      "name": "tree_cover_UNRESOLVED",
+      "assets": [],
+      "default_spawn": false
+    },
+    "6": {
+      "name": "urban_edge_tree_cover_UNRESOLVED",
+      "assets": [],
+      "default_spawn": false
+    }
+  },
+  "zone_cells": {
+    "far_field": 528,
+    "production_halo": 60,
+    "flyable": 196
+  },
+  "class_area_km2": {
+    "far_field": {
+      "unknown": 4.6444,
+      "tree_cover_candidate": 6562.1664,
+      "grass_or_rangeland": 315.9724,
+      "agriculture": 210.1964,
+      "urban": 1672.382,
+      "water": 24961.9316,
+      "bare": 64.224,
+      "flooded_vegetation": 0.396,
+      "other_open_shrub": 0.0,
+      "snow_ice": 0.0868
+    },
+    "production_halo": {
+      "unknown": 0.0032,
+      "tree_cover_candidate": 868.7776,
+      "grass_or_rangeland": 17.328,
+      "agriculture": 32.2356,
+      "urban": 123.2912,
+      "water": 2792.9928,
+      "bare": 5.366,
+      "flooded_vegetation": 0.0056,
+      "other_open_shrub": 0.0,
+      "snow_ice": 0.0
+    },
+    "flyable": {
+      "unknown": 0.5204,
+      "tree_cover_candidate": 2886.986,
+      "grass_or_rangeland": 85.052,
+      "agriculture": 294.5848,
+      "urban": 1584.2292,
+      "water": 7683.3484,
+      "bare": 8.6392,
+      "flooded_vegetation": 0.64,
+      "other_open_shrub": 0.0,
+      "snow_ice": 0.0
+    }
+  },
+  "reviewable_lowland_km2": 826.3888,
+  "terrain_hold_cells": [
+    "C+0024+0336",
+    "C+0031+0338",
+    "C+0032+0338",
+    "C+0031+0339",
+    "C+0032+0339",
+    "C+0043+0343",
+    "C+0043+0351",
+    "C+0045+0352",
+    "C+0044+0354"
+  ],
+  "default_spawn": false,
+  "engine_validation": "NOT TESTED; data/texture interface only",
+  "inputs_sha256": {
+    "worlds/vegetation/north_taiwan_forest_v1.json": "6b1134a4ce449eceb373ca79ac4b28a84363ed2d91e83d350545de9e45ee10d7",
+    "tools/ntw/forest_coverage.py": "9a6965bf978b5456fea88f040dfbab4dcd96fb3093d8a3cc808519ef6bd0b6ec",
+    "requirements-ntw-forest.txt": "3408d755e372f60b6193fc376e4624f3406ad4c03ea59466ada9cc150f62a2b6",
+    "worlds/north_taiwan_224.json": "7873ebea779c270983bdb8932017d64c36a24744c93bb16a96781c842557630c",
+    "data/ntw/battlefield/north_core_v1_zones.json": "ec2e1fd0e997f57bae369752a9486d21e692ffb37aad33f6790480672935c68c",
+    "data/ntw/world/north_taiwan_224_cells_epsg3826.geojson": "8b337cac11a6849170dedd044f9c0d19deec2ef0fffb0b78cb2fb4e0af649b76",
+    "data/ntw/world/xinyi_l3_mask_epsg3826.geojson": "6183badd18947e894ecde93861cfa5ddab6033805a74c20482634248ea7f145a",
+    "data/ntw/world/features.json": "ce322f535c3ebc0d524d17e8b505e20956602ae6750b3d374517ef18f276f257",
+    "data/ntw/forest/inputs_v1/coast_epsg3826.geojson": "0d2aaa5b051526369a4e8c985295a6fff82ed14a4fbe55cbcd0883b936f66712",
+    "data/ntw/forest/inputs_v1/esri2021_20m.tif": "b8d00abd2178fd0c377267226983964b8986b8ef204ff752f005347ded6ff058",
+    "data/ntw/forest/inputs_v1/provenance.json": "72aa671127fe43d7631d8dcdad7cc673a9543730ae98685cd8be4c99c0bdecba"
+  },
+  "masks_rgba": {
+    "R": "2021 tree-cover candidate",
+    "G": "interior tree-cover >40m from nonforest",
+    "B": "core lowland palette REVIEW area, not approved species placement",
+    "A": "known land-cover class (including inferred ocean)"
+  },
+  "uv": "u=(E-cell_west)/cell_m; v=(cell_north-N)/cell_m; pixel centres=(col+0.5,row+0.5)/pixels; clamp/nearest/no mipmaps",
+  "far_layer": "160m mean area fraction of 20m tree-cover labels. Multiply by 1-far_hold; project to accepted terrain. No generated 3D trees/heights.",
+  "official_forest_attempt": {
+    "catalog": "https://data.gov.tw/dataset/57873",
+    "resource": "https://data.moa.gov.tw/api/FileToJson.ashx?DataId=E31&DataTable=OpenDataList",
+    "observed_utc": "2026-10-17",
+    "catalog_status": 200,
+    "resource_status": 403,
+    "used": false
+  },
+  "outputs_sha256": {
+    "cells.csv": "2cd095f03fb2b2f434de703fb9adba25d9e80ced8148d4a0eb7e63499895d5d5",
+    "cells_epsg3826.geojson": "78609296ac761c2e96f85cfb7be859d28a491d06ece1190c0dca8af4c7c70b9f",
+    "core_review.png": "5e581d5c195e061967584dedb44b5e569b9b5dc512c5b22a3ae96c2c79ed96d2",
+    "coverage.tif": "ca73389b2a8c5a4c8597439aed4b2e8ef32ee54a93c157b49a24900a93d1e4c2",
+    "far_canopy_density.png": "19850cde299d6a685bf31d4f477960d6bcdaf5924844675f43932659eb3afe66",
+    "far_hold.png": "49a3057b257eb2dc43bc1008ffbc0f8d27d4266c87b71aa573fb6aa91ba7e5cd",
+    "overview.png": "07cc9dea88673421354803a0aefda4906f6ce0f295f43cf3d28633be69ae4eab",
+    "runtime_chunks.csv": "0c60b5602d676712d08250981fbc9cf04945f96fea7bc2b7eef5c2beabb06159",
+    "unreal_masks.zip": "3fdc958159d361321dbfc51e147cf6437fd31e00ec6098cf6d9b5ffbafdc4de0"
+  }
+}
