@@ -1,0 +1,8 @@
+# Small offline GIS pipeline; does not install the city compiler or Unreal.
+numpy==2.3.5
+pyproj==3.7.2
+shapely==2.1.2
+rasterio==1.4.3
+scipy==1.16.3
+Pillow==12.0.0
+pytest==9.0.2

@@ -1,0 +1,14 @@
+# Forest source/output hashes must survive checkout on the Unreal Windows host.
+data/ntw/forest/coverage_v1/** linguist-generated=true
+data/ntw/forest/**/*.json text eol=lf
+data/ntw/forest/**/*.geojson text eol=lf
+data/ntw/forest/**/*.csv text eol=lf
+tools/ntw/forest_coverage.py text eol=lf
+requirements-ntw-forest.txt text eol=lf
+worlds/vegetation/north_taiwan_forest_v1.json text eol=lf
+# Existing read-only inputs included in the forest manifest (content unchanged).
+worlds/north_taiwan_224.json text eol=lf
+data/ntw/battlefield/north_core_v1_zones.json text eol=lf
+data/ntw/world/north_taiwan_224_cells_epsg3826.geojson text eol=lf
+data/ntw/world/xinyi_l3_mask_epsg3826.geojson text eol=lf
+data/ntw/world/features.json text eol=lf
