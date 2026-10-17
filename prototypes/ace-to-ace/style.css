@@ -50,6 +50,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
 #btns .b-brake { right: 102px; bottom: 92px; }
 #btns .b-flare { right: 172px; bottom: 150px; }
 #btns .b-look { right: 74px; bottom: 172px; }
+#btns .b-acro { right: 10px; bottom: 180px; border-color: rgba(127,227,255,.85); background: rgba(20,65,85,.55); }
 
 #pauseBtn, #dbgBtn {
   position: fixed; top: calc(8px + var(--sat)); width: 40px; height: 34px; border-radius: 8px;
