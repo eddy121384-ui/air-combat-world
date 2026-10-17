@@ -60,11 +60,14 @@ export class Hud {
       // Draw it beneath target locks, pippers, and weapon symbology.
       this.attitude(me, S);
 
-      // Waterline / Whiskey Mark: point the W along the actual nose axis.
-      // Camera projection keeps it aligned with the old boresight without
-      // inventing a second (false) flight-path marker in the point-mass sim.
+      // Waterline W = nose; winged-circle FPM = actual travel direction.
+      // Both use real camera projections; no fabricated pixel displacement.
       const f = forwardOf(me.q);
       const bs = rend.project(addScaled(me.pos, f, 1500));
+      const travel = norm(me.vel);
+      const fp = rend.project(addScaled(me.pos, travel, 1500));
+      if (!fp.behind) this.flightPathMarker(fp.x, fp.y, 9 * S, GREEN);
+      // Draw the nose last, remaining legible when straight flight overlaps FPM.
       if (!bs.behind) this.waterline(bs.x, bs.y, 10 * S, GREEN);
 
       // target box
@@ -350,6 +353,32 @@ export class Hud {
     g.stroke();
     g.restore();
   }
+  /**
+   * Flight Path Marker / Velocity Vector (winged circle).
+   * Its position is projected from ac.vel, which also drives displacement.
+   * No angle-of-attack estimate, fake screen offset or extra pilot control.
+   */
+  flightPathMarker(x, y, s, color) {
+    if (!Number.isFinite(x) || !Number.isFinite(y)) return;
+    const g = this.g;
+    g.save();
+    g.globalAlpha *= 0.83;
+    g.strokeStyle = color;
+    g.lineWidth = Math.max(1, 1.15 * s / 10);
+    g.lineCap = 'square';
+    g.beginPath();
+    const radius = 0.40 * s;
+    g.arc(x, y, radius, 0, Math.PI * 2);
+    g.moveTo(x - radius, y);
+    g.lineTo(x - 1.20 * s, y);
+    g.moveTo(x + radius, y);
+    g.lineTo(x + 1.20 * s, y);
+    g.moveTo(x, y - radius);
+    g.lineTo(x, y - 1.16 * s);
+    g.stroke();
+    g.restore();
+  }
+
   diamond(x, y, s) {
     const g = this.g;
     g.beginPath(); g.moveTo(x, y - s); g.lineTo(x + s, y); g.lineTo(x, y + s); g.lineTo(x - s, y); g.closePath(); g.stroke();
