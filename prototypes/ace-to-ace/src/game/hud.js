@@ -2,6 +2,7 @@
 import { sub, norm, addScaled, forwardOf, DEG, angleBetween, dist } from '../sim/math.js';
 import { LOCK, GUN } from '../sim/weapons.js';
 import { gunLead, missilePk } from '../sim/fire.js';
+import { attitudeOf } from './attitude.js';
 
 const GREEN = '#7dffb0', RED = '#ff4d5e', AMBER = '#ffc04d', WHITE = '#f4fbff', CYAN = '#7fe3ff';
 
@@ -55,6 +56,10 @@ export class Hud {
     if (speedK > 0.05 && me.alive) this.speedLines(speedK);
 
     if (me.alive) {
+      // Aircraft-referenced HUD is readable even when there is no natural horizon.
+      // Draw it beneath target locks, pippers, and weapon symbology.
+      this.attitude(me, S);
+
       // boresight (gun cross) far ahead of the nose
       const f = forwardOf(me.q);
       const bs = rend.project(addScaled(me.pos, f, 1500));
@@ -205,6 +210,105 @@ export class Hud {
         g.globalAlpha = 1;
       }
     }
+  }
+
+  /**
+   * AC-style rectangular attitude reference for third-person flight.
+   *
+   * The world-stabilized pitch ladder rotates against the aircraft (NOT the
+   * smoothed chase camera), while the square and nose/gun sight stay fixed.
+   * This is essential when the sky and sea are indistinguishable.
+   */
+  attitude(me, S) {
+    const g = this.g;
+    const { pitch, bank, heading } = attitudeOf(me.q);
+    const cx = this.w * 0.5, cy = this.h * 0.5 - 16 * S;
+    const ww = 186 * S, hh = 138 * S;
+    const left = cx - ww * 0.5, top = cy - hh * 0.5;
+    const safeText = (value) => String(value).padStart(3, '0');
+
+    g.save();
+    g.lineWidth = Math.max(1.15, 1.25 * S);
+    g.strokeStyle = 'rgba(125,255,176,0.52)';
+    g.strokeRect(left, top, ww, hh);
+
+    // Square cockpit-HUD corner emphasis without an opaque panel blocking enemies.
+    g.strokeStyle = GREEN;
+    g.beginPath();
+    const corner = 12 * S;
+    for (const [x, sx] of [[left, 1], [left + ww, -1]]) {
+      for (const [y, sy] of [[top, 1], [top + hh, -1]]) {
+        g.moveTo(x, y + sy * corner); g.lineTo(x, y); g.lineTo(x + sx * corner, y);
+      }
+    }
+    g.stroke();
+
+    // HUD heading / pitch / bank readouts remain fixed and never rotate.
+    g.font = `700 ${Math.round(10 * S)}px ui-monospace, Menlo, monospace`;
+    g.textAlign = 'center'; g.fillStyle = GREEN;
+    g.fillText(`HDG ${safeText(Math.round(heading) % 360)}`, cx, top - 12 * S);
+    const pitchSign = pitch >= 0 ? '+' : '−';
+    g.fillText(`PITCH ${pitchSign}${Math.abs(Math.round(pitch))}°`, cx, top + hh + 13 * S);
+    const side = bank < -0.5 ? 'L' : bank > 0.5 ? 'R' : ' ';
+    g.fillText(`BANK ${side}${Math.round(Math.abs(bank))}°`, cx, top + hh + 25 * S);
+
+    // Short bank scale above the pitch ladder: center is wings-level; moving
+    // caret shows the bank direction. At >90°, numerical bank remains exact.
+    const scaleY = top + 6 * S, span = 67 * S;
+    g.strokeStyle = 'rgba(125,255,176,0.6)';
+    g.beginPath();
+    for (const angle of [-90, -45, 0, 45, 90]) {
+      const xx = cx + angle / 90 * span;
+      g.moveTo(xx, scaleY); g.lineTo(xx, scaleY + (angle === 0 ? 7 : 4) * S);
+    }
+    g.stroke();
+    const indicatorX = cx + Math.max(-1, Math.min(1, bank / 90)) * span;
+    g.fillStyle = GREEN;
+    g.beginPath();
+    g.moveTo(indicatorX - 3 * S, scaleY + 10 * S);
+    g.lineTo(indicatorX + 3 * S, scaleY + 10 * S);
+    g.lineTo(indicatorX, scaleY + 5 * S);
+    g.closePath(); g.fill();
+
+    // Clip: no attitude tick may spill onto side-mounted speed/altitude data.
+    g.beginPath(); g.rect(left + 3 * S, top + 17 * S, ww - 6 * S, hh - 24 * S); g.clip();
+    g.translate(cx, cy);
+    // Right wing down -> the outside world/horizon tilts left relative to us.
+    g.rotate(-bank * DEG);
+
+    const pxPerDeg = 3.3 * S;
+    const first = Math.max(-90, Math.ceil((pitch - 37) / 5) * 5);
+    const last = Math.min(90, Math.floor((pitch + 37) / 5) * 5);
+    g.font = `600 ${Math.round(9 * S)}px ui-monospace, Menlo, monospace`;
+    g.lineWidth = Math.max(1, 1.2 * S);
+    for (let deg = first; deg <= last; deg += 5) {
+      const y = (pitch - deg) * pxPerDeg;
+      const major = deg % 10 === 0;
+      const len = (deg === 0 ? 70 : major ? 46 : 22) * S;
+      const gap = deg === 0 ? 13 * S : 24 * S;
+      g.strokeStyle = deg === 0 ? 'rgba(125,255,176,0.9)' : 'rgba(125,255,176,0.72)';
+      g.beginPath();
+      for (const sign of [-1, 1]) {
+        const a = sign * gap, b = sign * len;
+        if (deg < 0) {
+          // Downward pitch bars are dashed, per fighter pitch-ladder convention.
+          for (let p = gap; p < len; p += 11 * S) {
+            const x0 = sign * p, x1 = sign * Math.min(p + 6 * S, len);
+            g.moveTo(x0, y); g.lineTo(x1, y);
+          }
+        } else {
+          g.moveTo(a, y); g.lineTo(b, y);
+        }
+      }
+      g.stroke();
+      if (major && deg !== 0) {
+        g.textAlign = 'right'; g.fillStyle = GREEN;
+        g.fillText(`${deg > 0 ? '+' : ''}${deg}`, -len - 3 * S, y);
+        g.textAlign = 'left';
+        g.fillText(`${deg > 0 ? '+' : ''}${deg}`, len + 3 * S, y);
+      }
+    }
+    g.restore();
   }
 
   cross(x, y, s, color) {
