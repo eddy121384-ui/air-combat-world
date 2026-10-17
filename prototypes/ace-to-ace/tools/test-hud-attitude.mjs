@@ -49,20 +49,18 @@ const hud = new Hud(canvas);
 for (const [p, b, h] of [[0,0,0],[25,40,90],[-30,-70,270],[80,180,0]]) {
   calls.length = 0;
   hud.attitude({ q: orient(p,b,h) }, 375 / 400);
-  assert.equal(calls.filter((x) => x.op === 'strokeRect').length, 1,
-    'draw exactly one bounded HUD square');
+  assert.equal(calls.filter((x) => x.op === 'strokeRect').length, 0,
+    'AC-style open corner guides must never draw a full HUD square');
   assert.equal(calls.filter((x) => x.op === 'clip').length, 1,
-    'pitch ticks must be clipped to square');
+    'pitch ticks must not spill across speed and altitude boxes');
   assert.ok(calls.some((x) => x.op === 'fillText' &&
-    String(x.args[0]).startsWith('HDG')), 'heading must be present');
-  assert.ok(calls.some((x) => x.op === 'fillText' &&
-    String(x.args[0]).startsWith('PITCH')), 'pitch must be present');
-  assert.ok(calls.some((x) => x.op === 'fillText' &&
-    String(x.args[0]).startsWith('BANK')), 'bank must be present');
+    /^\\d{3}$/.test(String(x.args[0]))), 'moving three-digit compass ticks');
+  assert.ok(!calls.some((x) => x.op === 'fillText' &&
+    /^(HDG|PITCH|BANK) /.test(String(x.args[0]))), 'no large instrument labels');
   const rotation = calls.find((x) => x.op === 'rotate');
   approx(rotation.args[0], -attitudeOf(orient(p,b,h)).bank * DEG, 0.01);
   assert.equal(calls.filter((x) => x.op === 'save').length,
     calls.filter((x) => x.op === 'restore').length, 'restore drawing context');
 }
 
-console.log('HUD PASS: pitch, bank, heading, inverted flight, square clip, correct horizon rotation');
+console.log('HUD PASS: AC-style open guides, pitch/roll horizon, compass, inverted flight, clip and no boxed dashboard');
