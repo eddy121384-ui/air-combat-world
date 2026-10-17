@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#2b6fca">
+<title>Ace to Ace — Skyfront Homeland</title>
+<link rel="stylesheet" href="style.css">
+<script type="importmap">{ "imports": { "three": "./vendor/three.module.min.js" } }</script>
+</head>
+<body>
+<canvas id="gl"></canvas>
+<canvas id="hud"></canvas>
+
+<div id="touch" class="hidden">
+  <div id="stickZone"></div>
+  <div id="stickBase"><div id="stickKnob"></div></div>
+  <div id="btns">
+    <button data-btn="flare" class="sm b-flare">FLR</button>
+    <button data-btn="look" class="sm b-look">LOOK</button>
+    <button data-btn="boost" class="md b-boost">AB</button>
+    <button data-btn="brake" class="md b-brake">BRK</button>
+    <button data-btn="gun" class="lg b-gun">GUN</button>
+    <button data-btn="msl" class="lg b-msl">MSL</button>
+  </div>
+</div>
+<button id="pauseBtn" class="hidden" aria-label="pause">II</button>
+<button id="dbgBtn" aria-label="AI debug">AI</button>
+<div id="debug" class="hidden"></div>
+
+<div id="title" class="screen hidden">
+  <div class="card">
+    <div class="kicker">SKYFRONT HOMELAND · AIR COMBAT AI LAB</div>
+    <h1>ACE <em>to</em> ACE</h1>
+    <div class="vs"><span class="blue">F-16V</span> <i>vs</i> <span class="red">J-16</span></div>
+    <p class="lede">一片海、一片天、兩架戰機。對手是一名會思考的 AI 飛行員：它會搶位置、用速度與高度、閃避你的飛彈，也會讀你的習慣。</p>
+    <div class="row seg">
+      <button data-diff="rookie">ROOKIE</button><button data-diff="veteran">VETERAN</button><button data-diff="ace">ACE</button>
+    </div>
+    <div id="diffDesc" class="help"></div>
+    <div class="row opts">
+      <button id="optAssist"></button><button id="optInvert"></button><button id="optSound"></button>
+    </div>
+    <div class="row">
+      <button id="btnStart" class="primary">出擊 SORTIE</button>
+      <button id="btnWatch">AI vs AI 觀戰</button>
+    </div>
+    <div id="keysHelp" class="help">
+      方向鍵 俯仰/滾轉 · W 後燃器 · S 減速板 · A/D 方向舵 · Space 飛彈 · Shift/F 機砲 · Q 熱焰彈 · E 看向敵機 · Tab AI 狀態 · Esc 暫停
+    </div>
+    <div id="touchHelp" class="help hidden">
+      左半螢幕：虛擬搖桿（左右＝轉彎；放手保持原桿量，重新觸碰可微調）· 右側：MSL 飛彈 / GUN 機砲 / AB 後燃器（切換）/ BRK 減速板 / FLR 熱焰彈 / LOOK 看向敵機
+    </div>
+  </div>
+</div>
+
+<div id="pause" class="screen hidden">
+  <div class="card small">
+    <h2>PAUSED</h2>
+    <div class="row"><button id="btnResume" class="primary">繼續</button><button id="btnQuit">回到標題</button></div>
+  </div>
+</div>
+
+<div id="result" class="screen hidden">
+  <div class="card">
+    <h2 id="resTitle"></h2>
+    <div id="resSub" class="sub"></div>
+    <div id="resStats" class="stats"></div>
+    <div id="resAI" class="ai"></div>
+    <div class="row">
+      <button id="btnRematch" class="primary">再戰一局 REMATCH</button>
+      <button id="btnTitle">標題</button>
+    </div>
+  </div>
+</div>
+
+<div id="rotate">請把手機轉成橫向 ⟲</div>
+<script type="module" src="src/game/main.js"></script>
+</body>
+</html>

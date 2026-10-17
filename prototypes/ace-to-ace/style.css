@@ -1,0 +1,107 @@
+:root {
+  --ink: #f4fbff;
+  --dim: rgba(244, 251, 255, 0.72);
+  --panel: rgba(12, 28, 48, 0.72);
+  --edge: rgba(127, 227, 255, 0.45);
+  --blue: #6fc3ff;
+  --red: #ff6a6a;
+  --go: #7dffb0;
+  --sat: env(safe-area-inset-top, 0px);
+  --sab: env(safe-area-inset-bottom, 0px);
+  --sal: env(safe-area-inset-left, 0px);
+  --sar: env(safe-area-inset-right, 0px);
+}
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html, body {
+  margin: 0; height: 100%; overflow: hidden; background: #8fc3ea; color: var(--ink);
+  font-family: ui-sans-serif, system-ui, -apple-system, "PingFang TC", "Noto Sans TC", sans-serif;
+  -webkit-user-select: none; user-select: none; touch-action: none; overscroll-behavior: none;
+}
+#gl, #hud { position: fixed; inset: 0; display: block; }
+#hud { pointer-events: none; }
+.hidden { display: none !important; }
+button { font: inherit; color: inherit; cursor: pointer; }
+
+/* ---------- touch controls ---------- */
+#stickZone { position: fixed; left: 0; top: 0; bottom: 0; width: 48%; }
+#stickBase {
+  position: fixed; width: 132px; height: 132px; margin: -66px 0 0 -66px; border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.45); background: rgba(10, 30, 50, 0.18);
+  left: calc(110px + var(--sal)); top: calc(100% - 120px - var(--sab)); opacity: 0.45; pointer-events: none;
+}
+#stickBase.on { opacity: 1; }
+#stickKnob {
+  position: absolute; left: 50%; top: 50%; width: 56px; height: 56px; margin: -28px 0 0 -28px; border-radius: 50%;
+  background: rgba(255, 255, 255, 0.55); box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.6);
+}
+#btns { position: fixed; right: calc(14px + var(--sar)); bottom: calc(14px + var(--sab)); width: 230px; height: 250px; }
+#btns button {
+  position: absolute; border-radius: 50%; border: 2px solid rgba(255, 255, 255, 0.6);
+  background: rgba(10, 30, 50, 0.35); font-weight: 800; letter-spacing: 0.04em; touch-action: none;
+}
+#btns button.down { background: rgba(255, 255, 255, 0.45); }
+#btns button.lit { background: rgba(255, 170, 60, 0.6); border-color: #ffc04d; }
+#btns .lg { width: 84px; height: 84px; font-size: 17px; }
+#btns .md { width: 62px; height: 62px; font-size: 14px; }
+#btns .sm { width: 50px; height: 50px; font-size: 11px; }
+#btns .b-msl { right: 0; bottom: 6px; border-color: #ff8f8f; }
+#btns .b-gun { right: 94px; bottom: 0; }
+#btns .b-boost { right: 10px; bottom: 102px; }
+#btns .b-brake { right: 102px; bottom: 92px; }
+#btns .b-flare { right: 172px; bottom: 150px; }
+#btns .b-look { right: 74px; bottom: 172px; }
+
+#pauseBtn, #dbgBtn {
+  position: fixed; top: calc(8px + var(--sat)); width: 40px; height: 34px; border-radius: 8px;
+  border: 1px solid var(--edge); background: rgba(10, 30, 50, 0.45); font-weight: 800; font-size: 13px; z-index: 5;
+}
+#pauseBtn { left: calc(10px + var(--sal)); }
+#dbgBtn { left: calc(56px + var(--sal)); opacity: 0.7; }
+#debug {
+  position: fixed; left: calc(8px + var(--sal)); top: calc(48px + var(--sat)); max-width: min(460px, 70vw);
+  font: 11px/1.35 ui-monospace, Menlo, monospace; background: rgba(5, 15, 30, 0.62); padding: 8px 10px;
+  border-radius: 8px; pointer-events: none; z-index: 4;
+}
+#debug .m { color: #7fe3ff; font-weight: 700; }
+#debug .dim, .dim { color: var(--dim); }
+#debug .dbgblk { margin-bottom: 6px; }
+
+/* ---------- screens ---------- */
+.screen { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; padding: 16px; z-index: 10; background: linear-gradient(180deg, rgba(20, 60, 110, 0.25), rgba(10, 30, 60, 0.55)); }
+.card {
+  width: min(640px, 100%); max-height: 100%; overflow: auto; background: var(--panel); border: 1px solid var(--edge);
+  border-radius: 16px; padding: 18px 22px; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+  box-shadow: 0 10px 40px rgba(0, 20, 50, 0.35); touch-action: pan-y;
+}
+.card.small { width: min(360px, 100%); text-align: center; }
+.kicker { font-size: 11px; letter-spacing: 0.18em; color: var(--dim); }
+h1 { margin: 4px 0 2px; font-size: clamp(34px, 7vw, 56px); letter-spacing: 0.06em; font-weight: 900; font-style: italic; line-height: 1; text-shadow: 0 3px 0 rgba(0, 30, 70, 0.4); }
+h1 em { font-size: 0.55em; color: var(--go); }
+h2 { margin: 0 0 4px; font-size: clamp(22px, 4.6vw, 34px); font-weight: 900; letter-spacing: 0.05em; font-style: italic; }
+h2.win { color: var(--go); } h2.lose { color: var(--red); }
+.vs { font-weight: 800; letter-spacing: 0.08em; margin: 6px 0; }
+.vs .blue { color: var(--blue); } .vs .red { color: var(--red); } .vs i { color: var(--dim); font-weight: 400; }
+.lede { margin: 6px 0 10px; color: var(--dim); font-size: 14px; line-height: 1.5; }
+.row { display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0; }
+.row button { flex: 1 1 auto; min-height: 42px; padding: 8px 14px; border-radius: 10px; border: 1px solid var(--edge); background: rgba(255, 255, 255, 0.08); font-weight: 700; }
+.row button.primary { background: linear-gradient(180deg, #ffb347, #ff7a2e); border-color: #ffd28a; color: #1d1206; font-size: 17px; }
+.seg button.sel { background: rgba(127, 227, 255, 0.28); border-color: #7fe3ff; }
+.opts button { font-size: 12px; font-weight: 600; }
+.help { font-size: 12px; color: var(--dim); line-height: 1.5; margin-top: 6px; }
+.sub { color: var(--dim); margin-bottom: 10px; }
+.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 8px 0; }
+.stats div { background: rgba(255, 255, 255, 0.06); border-radius: 10px; padding: 8px; text-align: center; }
+.stats b { display: block; font-size: 20px; }
+.stats span { font-size: 11px; color: var(--dim); }
+.ai { font-size: 12.5px; line-height: 1.5; }
+.ai p { margin: 4px 0; }
+
+#rotate { display: none; position: fixed; inset: 0; z-index: 20; align-items: center; justify-content: center; background: rgba(10, 30, 60, 0.85); font-size: 20px; font-weight: 800; }
+@media (pointer: coarse) and (orientation: portrait) { #rotate { display: flex; } }
+@media (max-height: 420px) {
+  .card { padding: 12px 16px; }
+  .lede { display: none; }
+  h1 { font-size: 34px; }
+  .stats { grid-template-columns: repeat(6, 1fr); }
+  .stats b { font-size: 16px; }
+}
