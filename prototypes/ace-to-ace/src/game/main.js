@@ -120,7 +120,6 @@ function start(k) {
   mode = 'playing';
   showScreen(null);
   $('#touch').classList.toggle('hidden', !(isTouch && k === 'pvai'));
-  $('#touch [data-btn="acro"]').classList.toggle('hidden', settings.assist);
   $('#pauseBtn').classList.remove('hidden');
   input.resetStick();
   input.clearPresses();
