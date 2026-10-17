@@ -1,6 +1,6 @@
-"""Quick silhouette check: render a saved tree .blend from N azimuths at a given elevation (low cost).
+﻿"""Quick silhouette check: render a saved tree .blend from N azimuths at a given elevation (low cost).
 
-blender -b <file.blend> --python tools/treegen/tg_turntable.py -- <out_prefix> [n=6] [elev_deg=35] [samples=12] [res=640x360]
+blender -b <file.blend> --python tools/treegen/tg_turntable.py -- <out_prefix> [n=6] [elev_deg=35] [samples=12] [res=640x360] [target_z=7] [dist=36]
 """
 import math
 import sys
@@ -18,8 +18,8 @@ sc = bpy.context.scene
 sc.cycles.samples = samples
 sc.render.resolution_x, sc.render.resolution_y = int(w), int(h)
 br = bpy.data.objects["MachilusThunbergii_branches"] if "MachilusThunbergii_branches" in bpy.data.objects else None
-target = Vector((0, 0, 7.0))
-dist = 36.0
+target = Vector((0, 0, float(a[5]) if len(a) > 5 else 7.0))  # optional target height / distance (tall 柳杉: 12 / 58)
+dist = float(a[6]) if len(a) > 6 else 36.0
 cam = bpy.data.objects.new("CAM_tt", bpy.data.cameras.new("CAM_tt"))
 cam.data.lens = 35
 sc.collection.objects.link(cam)
