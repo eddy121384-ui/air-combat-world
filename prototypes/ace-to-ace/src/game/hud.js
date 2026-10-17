@@ -137,6 +137,7 @@ export class Hud {
       if (me.pos.y < 600 && sink > 20 || me.pos.y < 250) {
         if (Math.floor(this.t * 5) % 2 === 0) this.banner('PULL UP', RED, h * 0.66, S);
       } else if (me.speed < 95) this.banner('STALL', AMBER, h * 0.66, S * 0.8);
+      else if (me.speed < 0.75 * me.type.cornerSpeed && me.nCur > 3) this.banner('LOW ENERGY · RELEASE G', AMBER, h * 0.7, S * 0.7);
       if (me.oob > 0) this.banner(`RETURN TO COMBAT AREA ${Math.max(0, 12 - me.oob).toFixed(0)}`, AMBER, h * 0.32, S * 0.75);
 
       // left: speed + G, right: altitude
