@@ -1,0 +1,32 @@
+name: Ace to Ace regressions
+
+on:
+  push:
+    branches: [claude/vibrant-dirac-kmsuin]
+    paths:
+      - "prototypes/ace-to-ace/**"
+      - ".github/workflows/ace-to-ace-regression.yml"
+  pull_request:
+    paths:
+      - "prototypes/ace-to-ace/**"
+      - ".github/workflows/ace-to-ace-regression.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Node flight and AI regression tests
+        working-directory: prototypes/ace-to-ace
+        run: |
+          node tools/test-airbrake-throttle.mjs
+          node tools/test-brake-trap.mjs
+          node tools/test-flight-path.mjs
+          node tools/test-hud-attitude.mjs

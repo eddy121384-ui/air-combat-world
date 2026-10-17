@@ -89,9 +89,10 @@ export function stepAircraft(ac, dt) {
   const fwd = forwardOf(ac.q);
 
   // --- engine ---
-  const thrCmd = c.brake ? 0 : clamp(c.boost ? 1 : c.throttle, 0, 1);
+  // Airbrake adds drag independently; engine/afterburner obey their own commands.
+  const thrCmd = clamp(c.boost ? 1 : c.throttle, 0, 1);
   ac.thrustCur += (thrCmd - ac.thrustCur) * Math.min(1, dt / t.spool);
-  ac.abCur += ((c.boost && !c.brake ? 1 : 0) - ac.abCur) * Math.min(1, dt / (t.spool * 1.2));
+  ac.abCur += ((c.boost ? 1 : 0) - ac.abCur) * Math.min(1, dt / (t.spool * 1.2));
   const altFactor = clamp(1 - ac.pos.y / 16000, 0.35, 1);
   const thrust = (ac.thrustCur * t.thrustMil + ac.abCur * t.thrustAB) * altFactor;
 

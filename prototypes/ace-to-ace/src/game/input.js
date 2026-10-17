@@ -91,7 +91,7 @@ export class Input {
         if (name === 'boost') { this.boostToggle = !this.boostToggle; el.classList.toggle('lit', this.boostToggle); return; }
         if (name === 'msl' || name === 'flare') this.pressed.add(name);
         this.btn[name] = true;
-        if (name === 'brake') { this.boostToggle = false; this.root.querySelector('[data-btn="boost"]').classList.remove('lit'); }
+        // BRK is momentary; do not change the pilot's latched AB setting.
       };
       const off = (e) => { e.preventDefault(); el.classList.remove('down'); if (name !== 'boost') this.btn[name] = false; };
       el.addEventListener('touchstart', on, { passive: false });
@@ -154,7 +154,6 @@ export class PlayerController {
     const c = { pitch: 0, roll: 0, yaw: yaw * 0.9, throttle: 0.72, boost: inp.boost(), brake: inp.brake(), fireMissile: false, fireGun: inp.gun(), flare: false };
     if (inp.consume('msl')) c.fireMissile = true;
     if (inp.consume('flare')) c.flare = true;
-    if (c.brake) c.boost = false;
     if (s.assist) {
       // ASSIST = level-turn controller. Stick sideways asks for turn G; the bank angle is solved
       // from that G (bank = acos(1/n)) so a hard turn stays level instead of becoming a
