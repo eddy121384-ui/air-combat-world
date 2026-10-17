@@ -96,4 +96,18 @@ calls.length = 0;
 hud.waterline(NaN, 180, 10, '#7dffb0');
 assert.equal(calls.length, 0, 'never draw invalid screen projection');
 
-console.log('HUD PASS: AC-style guides, pitch/roll, heading, gun boxes, 3-size W waterline geometry');
+// Velocity-vector/FPM has a winged circle, distinct from the W nose marker.
+for (const symbolSize of [7.5, 9.375, 12]) {
+  calls.length = 0;
+  hud.flightPathMarker(406, 190, symbolSize, '#7dffb0');
+  assert.equal(calls.filter(c => c.op === 'arc').length, 1, 'FPM center circle exists');
+  assert.equal(calls.filter(c => c.op === 'moveTo').length, 3, 'FPM has left/right wings and mast');
+  assert.equal(calls.filter(c => c.op === 'lineTo').length, 3, 'FPM has three straight reference strokes');
+  assert.equal(calls.filter(c => c.op === 'save').length, 1);
+  assert.equal(calls.filter(c => c.op === 'restore').length, 1);
+}
+calls.length = 0;
+hud.flightPathMarker(NaN, 180, 10, '#7dffb0');
+assert.equal(calls.length, 0, 'invalid FPM projection safely ignored');
+
+console.log('HUD PASS: AC-style references, independent Waterline W and velocity-vector FPM at 3 sizes');
