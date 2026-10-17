@@ -33,7 +33,7 @@ for (const [p, b, h] of [
 // Fake Canvas2D checks that the square stays clipped, the horizon follows
 // true attitude, and the code doesn't depend on the chase camera or renderer.
 const calls = [];
-const ctx = { textAlign: 'center' };
+const ctx = { textAlign: 'center', measureText: (txt) => ({ width: String(txt).length * 7 }) };
 for (const op of ['save','restore','beginPath','rect','clip','translate',
   'rotate','moveTo','lineTo','stroke','strokeRect','fill','closePath','fillText']) {
   ctx[op] = (...args) => {
@@ -54,9 +54,20 @@ for (const [p, b, h] of [[0,0,0],[25,40,90],[-30,-70,270],[80,180,0]]) {
   assert.equal(calls.filter((x) => x.op === 'clip').length, 1,
     'pitch ticks must not spill across speed and altitude boxes');
   assert.ok(calls.some((x) => x.op === 'fillText' &&
-    /^\\d{3}$/.test(String(x.args[0]))), 'moving three-digit compass ticks');
+    /^\d{3}$/.test(String(x.args[0]))), 'moving three-digit compass ticks');
   assert.ok(!calls.some((x) => x.op === 'fillText' &&
     /^(HDG|PITCH|BANK) /.test(String(x.args[0]))), 'no large instrument labels');
+  calls.length = 0;
+  hud.box(270, 188, 680, 'SPD km/h', 375 / 400, '#f4fbff');
+  assert.ok(calls.some((x) => x.op === 'fillText' && x.args[0] === 'SPEED'),
+    'speed uses the AC-style readout');
+  assert.ok(calls.some((x) => x.op === 'stroke'), 'speed chevron outline exists');
+  calls.length = 0;
+  hud.box(545, 188, 3000, 'ALT m', 375 / 400, '#f4fbff');
+  assert.ok(calls.some((x) => x.op === 'fillText' && x.args[0] === 'ALT'),
+    'altitude uses the AC-style readout');
+  calls.length = 0;
+  hud.attitude({ q: orient(p,b,h) }, 375 / 400);
   const rotation = calls.find((x) => x.op === 'rotate');
   approx(rotation.args[0], -attitudeOf(orient(p,b,h)).bank * DEG, 0.01);
   assert.equal(calls.filter((x) => x.op === 'save').length,
