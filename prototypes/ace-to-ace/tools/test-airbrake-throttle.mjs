@@ -35,7 +35,7 @@ assert.ok(burnerBrake.abCur > 0.5, 'AB and BRK can operate together');
 
 // PlayerController passes through both explicit buttons without changing the stick logic.
 function playerInput(boost, brake) {
-  return { axes: () => ({ x: 0, y: 0, yaw: 0 }), boost: () => boost,
+  return { axes: () => ({ x: 0, y: 0, yaw: 0 }), throttle: () => 0.72, boost: () => boost,
     brake: () => brake, gun: () => false, consume: () => false };
 }
 const player = new PlayerController(aircraft(), playerInput(true, true), { invert: true, assist: false });

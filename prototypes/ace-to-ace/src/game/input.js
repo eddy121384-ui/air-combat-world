@@ -11,6 +11,8 @@ export class Input {
     this.btn = { msl: false, gun: false, brake: false, flare: false, look: false, boost: false };
     this.pressed = new Set();           // one-shot presses this frame
     this.boostToggle = false;
+    this.throttleValue = 0.72;  // latched 0..1, independent of AB and airbrake
+    this.powerPointer = null;
     this.touchActive = false;
     this.root = root;
     this.stickTouch = null;
@@ -82,13 +84,52 @@ export class Input {
     zone.addEventListener('touchend', end);
     zone.addEventListener('touchcancel', end);
 
+    // Power strip: track is absolute throttle (no spring return). One finger can
+    // adjust it while the other controls flight; the two end buttons stay independent.
+    const track = this.root.querySelector('#throttleTrack');
+    if (track) {
+      const drag = (y) => {
+        const rect = track.getBoundingClientRect();
+        const travel = Math.max(1, rect.height - 18);
+        this.setThrottle(1 - (y - rect.top - 9) / travel);
+      };
+      track.addEventListener('pointerdown', (e) => {
+        if (this.powerPointer !== null) return;
+        e.preventDefault(); this.touchActive = true;
+        this.powerPointer = e.pointerId;
+        track.setPointerCapture?.(e.pointerId);
+        drag(e.clientY);
+      });
+      track.addEventListener('pointermove', (e) => {
+        if (e.pointerId === this.powerPointer) { e.preventDefault(); drag(e.clientY); }
+      });
+      const endPower = (e) => {
+        if (e.pointerId === this.powerPointer) this.powerPointer = null;
+      };
+      track.addEventListener('pointerup', endPower);
+      track.addEventListener('pointercancel', endPower);
+      track.addEventListener('keydown', (e) => {
+        const steps = { ArrowUp: 0.05, ArrowDown: -0.05, PageUp: 0.2, PageDown: -0.2 };
+        if (e.code in steps) { e.preventDefault(); this.setThrottle(this.throttleValue + steps[e.code]); }
+        else if (e.code === 'Home' || e.code === 'End') {
+          e.preventDefault(); this.setThrottle(e.code === 'Home' ? 0 : 1);
+        }
+      });
+      this.setThrottle(this.throttleValue);
+    }
+
     // buttons: hold-type and tap-type
     for (const el of this.root.querySelectorAll('[data-btn]')) {
       const name = el.dataset.btn;
       const on = (e) => {
         e.preventDefault(); this.touchActive = true;
         el.classList.add('down');
-        if (name === 'boost') { this.boostToggle = !this.boostToggle; el.classList.toggle('lit', this.boostToggle); return; }
+        if (name === 'boost') {
+          this.boostToggle = !this.boostToggle;
+          el.classList.toggle('lit', this.boostToggle);
+          el.setAttribute?.('aria-pressed', String(this.boostToggle));
+          return;
+        }
         if (name === 'msl' || name === 'flare') this.pressed.add(name);
         this.btn[name] = true;
         // BRK is momentary; do not change the pilot's latched AB setting.
@@ -102,6 +143,34 @@ export class Input {
       el.addEventListener('mouseup', off);
       el.addEventListener('mouseleave', (e) => { if (el.classList.contains('down')) off(e); });
     }
+  }
+
+  setThrottle(value) {
+    this.throttleValue = clamp(value, 0, 1);
+    const track = this.root.querySelector('#throttleTrack');
+    const handle = this.root.querySelector('#throttleHandle');
+    const fill = this.root.querySelector('#throttleFill');
+    const readout = this.root.querySelector('#throttleValue');
+    if (handle) {
+      const inverse = 1 - this.throttleValue;
+      handle.style.top = `calc(${inverse * 100}% - ${inverse * 18}px)`;
+    }
+    if (fill) fill.style.height = `${Math.round(this.throttleValue * 100)}%`;
+    if (readout) readout.textContent = `${Math.round(this.throttleValue * 100)}%`;
+    track?.setAttribute?.('aria-valuenow', String(Math.round(this.throttleValue * 100)));
+  }
+
+  resetPower() {
+    // Each sortie starts at the familiar 72% cruise setting; no surprise AB.
+    this.setThrottle(0.72);
+    this.boostToggle = false;
+    this.powerPointer = null;
+    this.btn.brake = false;
+    const boost = this.root.querySelector('[data-btn="boost"]');
+    const brake = this.root.querySelector('[data-btn="brake"]');
+    boost?.classList.remove('lit');
+    boost?.setAttribute?.('aria-pressed', 'false');
+    brake?.classList.remove('down');
   }
 
   resetStick() {
@@ -131,6 +200,7 @@ export class Input {
     if (k.has('KeyD')) yaw += 1;
     return { x, y, yaw };
   }
+  throttle() { return this.throttleValue; }
   boost() { return this.keys.has('KeyW') || this.boostToggle; }
   brake() { return this.keys.has('KeyS') || this.btn.brake; }
   gun() { return this.keys.has('ShiftLeft') || this.keys.has('ShiftRight') || this.keys.has('KeyF') || this.btn.gun; }
@@ -151,7 +221,7 @@ export class PlayerController {
     const ac = this.ac, s = this.settings, inp = this.input;
     const { x, y: yRaw, yaw } = inp.axes();
     const y = s.invert ? yRaw : -yRaw; // default: stick up = nose down (flight convention)
-    const c = { pitch: 0, roll: 0, yaw: yaw * 0.9, throttle: 0.72, boost: inp.boost(), brake: inp.brake(), fireMissile: false, fireGun: inp.gun(), flare: false };
+    const c = { pitch: 0, roll: 0, yaw: yaw * 0.9, throttle: inp.throttle?.() ?? 0.72, boost: inp.boost(), brake: inp.brake(), fireMissile: false, fireGun: inp.gun(), flare: false };
     if (inp.consume('msl')) c.fireMissile = true;
     if (inp.consume('flare')) c.flare = true;
     if (s.assist) {

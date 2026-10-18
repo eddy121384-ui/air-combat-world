@@ -34,7 +34,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
   position: absolute; left: 50%; top: 50%; width: 56px; height: 56px; margin: -28px 0 0 -28px; border-radius: 50%;
   background: rgba(255, 255, 255, 0.55); box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.6);
 }
-#btns { position: fixed; right: calc(14px + var(--sar)); bottom: calc(14px + var(--sab)); width: 230px; height: 250px; }
+#btns { position: fixed; right: calc(14px + var(--sar)); bottom: calc(14px + var(--sab)); width: 246px; height: 246px; }
 #btns button {
   position: absolute; border-radius: 50%; border: 2px solid rgba(255, 255, 255, 0.6);
   background: rgba(10, 30, 50, 0.35); font-weight: 800; letter-spacing: 0.04em; touch-action: none;
@@ -46,10 +46,45 @@ button { font: inherit; color: inherit; cursor: pointer; }
 #btns .sm { width: 50px; height: 50px; font-size: 11px; }
 #btns .b-msl { right: 0; bottom: 6px; border-color: #ff8f8f; }
 #btns .b-gun { right: 94px; bottom: 0; }
-#btns .b-boost { right: 10px; bottom: 102px; }
-#btns .b-brake { right: 102px; bottom: 92px; }
-#btns .b-flare { right: 172px; bottom: 150px; }
-#btns .b-look { right: 74px; bottom: 172px; }
+#btns .b-flare { right: 118px; bottom: 180px; }
+#btns .b-look { right: 26px; bottom: 180px; }
+
+/* One compact power strip: AB toggle, latched throttle, momentary brake.
+   Weapon controls keep their existing large touch targets. */
+#powerControl {
+  position: absolute; left: 0; top: 0; width: 64px; height: 246px;
+  border: 1px solid rgba(155, 203, 222, 0.52); border-radius: 12px;
+  background: rgba(9, 31, 51, 0.46);
+}
+#btns #powerControl button {
+  left: 5px; width: 54px; border-radius: 9px; font-size: 13px;
+}
+#powerControl .p-ab { top: 5px; height: 39px; border-color: #e5ac6e; }
+#powerControl .p-ab.lit { background: rgba(255, 170, 60, 0.65); border-color: #ffc04d; }
+#powerControl .p-brake { bottom: 5px; height: 46px; border-color: #e89e96; }
+#powerControl .p-brake.down { background: rgba(222, 88, 77, 0.55); }
+#throttleTrack {
+  position: absolute; left: 6px; top: 52px; width: 50px; height: 112px;
+  border: 1px solid rgba(182, 227, 237, 0.6); border-radius: 7px;
+  background: rgba(8, 25, 43, 0.64); touch-action: none;
+}
+#throttleTrack:focus-visible { outline: 2px solid #b8fff0; outline-offset: 2px; }
+#throttleFill {
+  position: absolute; left: 0; right: 0; bottom: 0; height: 72%;
+  background: linear-gradient(0deg, rgba(72, 182, 171, 0.3), rgba(111, 225, 195, 0.55));
+  pointer-events: none; border-radius: 5px;
+}
+#throttleHandle {
+  position: absolute; left: 5px; right: 5px; top: calc(28% - 5.04px);
+  height: 18px; border-radius: 5px; border: 1px solid #e3fff8;
+  background: #85cfc8; box-shadow: 0 0 7px rgba(128, 235, 213, 0.45);
+  pointer-events: none;
+}
+#throttleValue {
+  position: absolute; top: 171px; width: 100%; text-align: center;
+  font-size: 13px; font-weight: 800; color: #d8f7f1;
+  font-variant-numeric: tabular-nums; pointer-events: none;
+}
 
 #pauseBtn, #dbgBtn {
   position: fixed; top: calc(8px + var(--sat)); width: 40px; height: 34px; border-radius: 8px;

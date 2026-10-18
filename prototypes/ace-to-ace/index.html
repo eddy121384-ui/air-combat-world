@@ -21,8 +21,14 @@
   <div id="btns">
     <button data-btn="flare" class="sm b-flare">FLR</button>
     <button data-btn="look" class="sm b-look">LOOK</button>
-    <button data-btn="boost" class="md b-boost">AB</button>
-    <button data-btn="brake" class="md b-brake">BRK</button>
+    <div id="powerControl" aria-label="動力控制">
+      <button data-btn="boost" class="p-ab" aria-label="後燃器，點按切換" aria-pressed="false">AB</button>
+      <div id="throttleTrack" role="slider" aria-label="油門" aria-valuemin="0" aria-valuemax="100" aria-valuenow="72" tabindex="0">
+        <div id="throttleFill"></div><div id="throttleHandle"></div>
+      </div>
+      <div id="throttleValue" aria-hidden="true">72%</div>
+      <button data-btn="brake" class="p-brake" aria-label="減速板，按住啟動">BRK</button>
+    </div>
     <button data-btn="gun" class="lg b-gun">GUN</button>
     <button data-btn="msl" class="lg b-msl">MSL</button>
   </div>
@@ -52,7 +58,7 @@
       方向鍵 俯仰/滾轉 · W 後燃器 · S 減速板 · A/D 方向舵 · Space 飛彈 · Shift/F 機砲 · Q 熱焰彈 · E 看向敵機 · Tab AI 狀態 · Esc 暫停
     </div>
     <div id="touchHelp" class="help hidden">
-      左半螢幕：虛擬搖桿（左右＝轉彎；放手保持原桿量，重新觸碰可微調）· 右側：MSL 飛彈 / GUN 機砲 / AB 後燃器（切換）/ BRK 減速板 / FLR 熱焰彈 / LOOK 看向敵機
+      左半螢幕：虛擬搖桿（放手保留桿量）· 右側：動力條上下滑調整 0–100% 油門（放手保留）；頂端 AB 點按切換；底端 BRK 按住減速（不改變油門）；MSL 飛彈 / GUN 機砲 / FLR 熱焰彈 / LOOK 看向敵機
     </div>
   </div>
 </div>
