@@ -85,7 +85,8 @@ for (const [name, point] of Object.entries(points)) {
   }
   cpu.workloads[name] = rounds.sort((a, b) => a - b);
 }
-const out = new URL('../docs/cloud-engine-b0/', import.meta.url);
+const outArg=process.argv.indexOf('--out');
+const out = new URL('../'+(outArg>=0?process.argv[outArg+1]:'docs/cloud-engine-b0')+'/', import.meta.url);
 await mkdir(out, { recursive: true });
 await writeFile(new URL('field-validation.json', out), JSON.stringify({ passed: true, reports, cpu, checksum }, null, 2) + '\n');
 console.log(JSON.stringify({ passed: true, reports, cpu }, null, 2));
