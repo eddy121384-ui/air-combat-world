@@ -2,6 +2,7 @@
 // (one draw call) plus an inverted-hull outline mesh. Nose points to -Z, up is +Y.
 // Silhouettes aim for "instantly recognisable", not engineering accuracy.
 import * as THREE from 'three';
+import { AIRFRAME_VS, AIRFRAME_FRAGMENT, SUN_VECTOR, INK_HEX, INK_WIDTH } from './lookdev.js';
 
 class Builder {
   constructor() { this.pos = []; this.col = []; }
@@ -120,8 +121,8 @@ function addSmoothNormals(g) {
 // ---------------------------------------------------------------- F-16V
 export function buildF16(palette = {}) {
   const P = {
-    body: C(palette.body ?? 0xaebbc8), top: C(palette.top ?? 0x8d9bab), dark: C(0x3a4452),
-    radome: C(0x8b96a2), canopy: C(0x2a3b5c), glint: C(0xbfe3ff), accent: C(palette.accent ?? 0x2f7ae5),
+    body: C(palette.body ?? 0xbac4c9), top: C(palette.top ?? 0xa2afb9), dark: C(0x3a4452),
+    radome: C(0x929dab), canopy: C(0x293c52), glint: C(0xd4e7e3), accent: C(palette.accent ?? 0x4a7e9b),
     nozzle: C(0x4a4f57), intake: C(0x1c2128), missile: C(0xe8ecef),
   };
   const b = new Builder();
@@ -185,8 +186,8 @@ export function buildF16(palette = {}) {
 // ---------------------------------------------------------------- J-16 (Flanker family)
 export function buildJ16(palette = {}) {
   const P = {
-    body: C(palette.body ?? 0x6f7f90), top: C(palette.top ?? 0x56636f), under: C(0x8d9aa7), dark: C(0x2c333c),
-    radome: C(0x9aa4ad), canopy: C(0x253553), glint: C(0xbfe3ff), accent: C(palette.accent ?? 0xd8463c),
+    body: C(palette.body ?? 0x81909f), top: C(palette.top ?? 0x718095), under: C(0xa2afb9), dark: C(0x2c333c),
+    radome: C(0xa9afb8), canopy: C(0x29394e), glint: C(0xd4e7e3), accent: C(palette.accent ?? 0xb76a60),
     nozzle: C(0x44484f), intake: C(0x161a20), missile: C(0xe6e9ec),
   };
   const b = new Builder();
@@ -263,7 +264,10 @@ const OUTLINE_VS = /* glsl */`
   }`;
 const OUTLINE_FS = /* glsl */`
   uniform vec3 color;
-  void main() { gl_FragColor = vec4(color, 1.0); }`;
+  void main() {
+    gl_FragColor = vec4(color, 1.0);
+    #include <colorspace_fragment>
+  }`;
 
 let gradientMap = null;
 export function toonGradient() {
@@ -277,7 +281,7 @@ export function toonGradient() {
   return gradientMap;
 }
 
-export function outlineMaterial(color = 0x18202b, thickness = 1.6) {
+export function outlineMaterial(color = INK_HEX, thickness = INK_WIDTH) {
   return new THREE.ShaderMaterial({
     uniforms: { color: { value: new THREE.Color(color) }, thickness: { value: thickness }, resolution: { value: new THREE.Vector2(1280, 720) } },
     vertexShader: OUTLINE_VS, fragmentShader: OUTLINE_FS, side: THREE.BackSide,
@@ -287,7 +291,15 @@ export function outlineMaterial(color = 0x18202b, thickness = 1.6) {
 /** Aircraft group: toon body + outline hull. `scale` enlarges for readability. */
 export function makeAircraftMesh(typeId, outline, scale = 1.35) {
   const geo = typeId === 'J16' ? buildJ16() : buildF16();
-  const mat = new THREE.MeshToonMaterial({ vertexColors: true, gradientMap: toonGradient() });
+  const mat = new THREE.ShaderMaterial({
+    uniforms: THREE.UniformsUtils.merge([THREE.UniformsLib.fog, {
+      sunDir: { value: new THREE.Vector3(...SUN_VECTOR).normalize() },
+      tint: { value: new THREE.Vector3(1, 1, 1) },
+    }]),
+    vertexShader: AIRFRAME_VS, fragmentShader: AIRFRAME_FRAGMENT,
+    vertexColors: true, fog: true,
+  });
+  mat.userData.airframe = true;
   const body = new THREE.Mesh(geo, mat);
   const hull = new THREE.Mesh(geo, outline);
   const g = new THREE.Group();

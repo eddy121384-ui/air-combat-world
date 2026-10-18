@@ -6,12 +6,13 @@
 // Art check: both airframes from four angles, same lights/outline as the game.
 import * as THREE from 'three';
 import { makeAircraftMesh, outlineMaterial } from '../src/game/models.js';
+import { INK_WIDTH, SUN_VECTOR } from '../src/game/lookdev.js';
 const r = new THREE.WebGLRenderer({ antialias: true }); r.setSize(innerWidth, innerHeight); r.setClearColor(0x9cc8ec); document.body.appendChild(r.domElement);
 r.setScissorTest(true);
 const scene = new THREE.Scene();
 scene.add(new THREE.HemisphereLight(0xdfefff, 0x5d7d99, 1.25));
-const sun = new THREE.DirectionalLight(0xfff4e0, 2.4); sun.position.set(-0.45, 0.62, -0.64).multiplyScalar(100); scene.add(sun);
-const ol = outlineMaterial(0x16202c, 1.25); ol.uniforms.resolution.value.set(innerWidth / 4, innerHeight / 2);
+const sun = new THREE.DirectionalLight(0xffe9c6, 1.7); sun.position.set(...SUN_VECTOR).multiplyScalar(100); scene.add(sun);
+const ol = outlineMaterial(); ol.uniforms.thickness.value = INK_WIDTH; ol.uniforms.resolution.value.set(innerWidth / 4, innerHeight / 2);
 const f16 = makeAircraftMesh('F16V', ol, 1); f16.position.x = -14; scene.add(f16);
 const j16 = makeAircraftMesh('J16', ol, 1); j16.position.x = 14; scene.add(j16);
 const cams = [[0, 18, 45], [0, 45, 2], [40, 10, 0], [-25, -12, -35]].map((p) => { const c = new THREE.PerspectiveCamera(40, (innerWidth / 4) / (innerHeight / 2), 1, 1000); c.position.set(...p); c.lookAt(0, 0, 0); return c; });

@@ -1,9 +1,11 @@
 # Ace to Ace — 1v1 arcade air-combat AI lab (browser prototype)
 
 Skyfront Homeland 的第一個可玩入口（Issue #34）。一片海、一片天、F-16V 對 J-16。
-目標是驗證「飛行員 AI 本身好不好玩」，不是美術或擬真度。
+主要目標是驗證「飛行員 AI 本身好不好玩」，不是擬真度。
+另有一輪僅限本網頁原型的 [anime film 2D-look / NPR LookDev 小型風格實驗](docs/anime-film-lookdev.md)，
+不代表 Skyfront Homeland / Unreal 主專案的正式美術方向。
 
-- **真 3D**：低多邊形、cel / toon shading、inverted-hull 描邊；機型輪廓可辨識但非精確建模。
+- **3D 渲染成 2D 的視覺實驗**：三階冷暖明暗、克制的細色線、自製雲畫片與插畫海天；機型輪廓可辨識但非精確建模。
 - **街機空戰**：能量制飛行模型（轉彎速率在角速度峰值、拉 G 掉速、爬升換高度），簡化的飛彈 / 機砲 / 熱焰彈。
 - **AI 完全本機**：傳統遊戲 AI（狀態評估 + 戰術模式 + 機動控制器），runtime 無 LLM、無網路。
 - 與 `unreal/`、`cities/`、`tools/`（城市管線）完全隔離；本目錄不依賴也不修改它們。
@@ -106,6 +108,7 @@ AI 輸出與玩家完全相同的控制量（俯仰 / 滾轉 / 方向舵 / 油�
 node tools/aivai.mjs --suite --n 100 --write docs/aivai-report.json   # 無頭對戰與校準（約數分鐘）
 node tools/aivai.mjs --n 40 --blue human --red veteran --verbose        # 單一組合 + 決策紀錄
 node tools/browser-check.mjs                                             # Chromium 實際啟動遊戲並截圖
+node tools/browser-check.mjs --scenario lookdev                           # 固定追機 / 側傾 / 近雲 / 海面 / 俯衝 / 雙機型
 ```
 
 - **AI vs AI**：同一套 AI 對打（正面開局 / 隨機幾何 / 交換機型）、ACE vs ROOKIE 技術梯度、

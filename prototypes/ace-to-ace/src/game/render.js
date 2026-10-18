@@ -3,84 +3,19 @@ import * as THREE from 'three';
 import { makeAircraftMesh, outlineMaterial } from './models.js';
 import { makeRng } from '../sim/math.js';
 
-const SKY_HORIZON = [0.82, 0.91, 0.97];
-const FOG_HEX = 0xd1e8f7;
-const SUN_DIR = new THREE.Vector3(-0.45, 0.62, -0.64).normalize();
+import { SKY_HORIZON, FOG_HEX, SUN_VECTOR, INK_HEX, INK_WIDTH,
+  SKY_VS, SKY_FS, SEA_VS, SEA_FS, CLOUD_VS, CLOUD_FS } from './lookdev.js';
+
+const SUN_DIR = new THREE.Vector3(...SUN_VECTOR).normalize();
 const v3 = (a) => new THREE.Vector3(a.x, a.y, a.z);
 
 // ------------------------------------------------------------------ shaders
-const SKY_VS = `varying vec3 vDir; void main(){ vDir = position; vec4 p = projectionMatrix * modelViewMatrix * vec4(position,1.0); gl_Position = p.xyww; }`;
-const SKY_FS = `
-  varying vec3 vDir; uniform vec3 sunDir; uniform vec3 horizon;
-  void main(){
-    vec3 d = normalize(vDir);
-    float h = max(d.y, 0.0);
-    vec3 zenith = vec3(0.17, 0.43, 0.82);
-    vec3 col = mix(horizon, zenith, pow(smoothstep(0.0, 0.75, h), 0.65));
-    // soft anime band just above the horizon
-    col = mix(col, vec3(0.93, 0.96, 1.0), (1.0 - smoothstep(0.0, 0.06, h)) * 0.5);
-    float s = dot(d, sunDir);
-    col += vec3(1.0, 0.94, 0.78) * (smoothstep(0.9993, 0.9996, s) + pow(max(s, 0.0), 48.0) * 0.28);
-    gl_FragColor = vec4(col, 1.0);
-  }`;
-const SEA_VS = `varying vec3 vWorld; void main(){ vec4 w = modelMatrix * vec4(position,1.0); vWorld = w.xyz; gl_Position = projectionMatrix * viewMatrix * w; }`;
-const SEA_FS = `
-  varying vec3 vWorld; uniform vec3 camPos; uniform float time; uniform vec3 sunDir; uniform vec3 fogColor; uniform float fogNear; uniform float fogFar;
-  float hash(vec2 p){ return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
-  float noise(vec2 p){ vec2 i = floor(p), f = fract(p); vec2 u = f*f*(3.0-2.0*f);
-    return mix(mix(hash(i), hash(i+vec2(1.0,0.0)), u.x), mix(hash(i+vec2(0.0,1.0)), hash(i+vec2(1.0,1.0)), u.x), u.y); }
-  void main(){
-    vec2 p = vWorld.xz;
-    float d = length(vWorld - camPos);
-    float n = noise(p * 0.0021 + time * 0.01) * 0.6 + noise(p * 0.0073 - time * 0.02) * 0.4;
-    vec3 deep = vec3(0.07, 0.33, 0.60);
-    vec3 light = vec3(0.12, 0.43, 0.70);
-    vec3 col = mix(deep, light, smoothstep(0.54, 0.58, n));
-    // toon wave crests near the camera (speed reference when low)
-    float near = 1.0 - smoothstep(700.0, 2600.0, d);
-    float w = noise(p * 0.035 + vec2(time * 0.25, time * 0.05));
-    col = mix(col, vec3(0.80, 0.93, 1.0), smoothstep(0.80, 0.83, w) * near * 0.75);
-    float w2 = noise(p * 0.009 + vec2(-time * 0.04, time * 0.03));
-    col = mix(col, vec3(0.30, 0.62, 0.85), smoothstep(0.74, 0.76, w2) * (1.0 - smoothstep(2000.0, 9000.0, d)) * 0.6);
-    vec3 V = normalize(camPos - vWorld);
-    vec3 H = normalize(V + sunDir);
-    float spec = pow(max(H.y, 0.0), 260.0) * (0.4 + n);
-    col += step(0.35, spec) * vec3(1.0, 0.96, 0.85) * 0.55;
-    float fres = pow(1.0 - max(V.y, 0.0), 5.0);
-    col = mix(col, vec3(0.55, 0.76, 0.90), fres * 0.6);
-    col = mix(col, fogColor, smoothstep(fogNear, fogFar, d));
-    gl_FragColor = vec4(col, 1.0);
-  }`;
-const CLOUD_VS = `
-  varying vec3 vN; varying vec3 vWorld;
-  void main(){
-    vec4 p = vec4(position, 1.0);
-    vec3 n = normal;
-    #ifdef USE_INSTANCING
-      p = instanceMatrix * p; n = mat3(instanceMatrix) * n;
-    #endif
-    vec4 w = modelMatrix * p; vWorld = w.xyz; vN = normalize(mat3(modelMatrix) * n);
-    gl_Position = projectionMatrix * viewMatrix * w;
-  }`;
-const CLOUD_FS = `
-  varying vec3 vN; varying vec3 vWorld; uniform vec3 sunDir; uniform vec3 camPos; uniform vec3 fogColor; uniform float fogNear; uniform float fogFar;
-  void main(){
-    float d = length(vWorld - camPos);
-    float r = fract(sin(dot(gl_FragCoord.xy, vec2(12.9898, 78.233))) * 43758.5453);
-    if (r > smoothstep(30.0, 240.0, d)) discard; // dissolve when flying through
-    float l = dot(normalize(vN), sunDir);
-    vec3 col = l > 0.2 ? vec3(1.0) : l > -0.25 ? vec3(0.87, 0.91, 0.98) : vec3(0.70, 0.77, 0.91);
-    float rim = pow(1.0 - abs(dot(normalize(vN), normalize(camPos - vWorld))), 3.0);
-    col = mix(col, vec3(1.0), rim * 0.25);
-    col = mix(col, fogColor, smoothstep(fogNear, fogFar, d) * 0.9);
-    gl_FragColor = vec4(col, 1.0);
-  }`;
 const RIBBON_VS = `
   attribute float aAlpha; attribute float aSide; varying float vA; varying float vS;
   void main(){ vA = aAlpha; vS = aSide; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }`;
 const RIBBON_FS = `
   uniform vec3 color; varying float vA; varying float vS;
-  void main(){ float e = 1.0 - vS * vS; gl_FragColor = vec4(color, vA * (0.35 + 0.65 * e)); }`;
+  void main(){ float e = 1.0 - smoothstep(0.45, 1.0, abs(vS)); gl_FragColor = vec4(color, vA * e); }`;
 const FLAME_FS = `
   uniform vec3 color; uniform float t; varying vec2 vUv;
   void main(){ float a = (1.0 - vUv.y) * (0.75 + 0.25 * sin(t * 60.0 + vUv.y * 20.0)); gl_FragColor = vec4(color * a, a); }`;
@@ -172,12 +107,12 @@ export class Renderer {
     this.scene = new THREE.Scene();
     this.scene.fog = new THREE.Fog(FOG_HEX, 4000, 32000);
     this.camera = new THREE.PerspectiveCamera(62, 1, 2, 80000);
-    this.outline = outlineMaterial(0x16202c, 1.7);
+    this.outline = outlineMaterial(INK_HEX, INK_WIDTH);
     this.clock = 0;
 
     // lights (toon ramp does the stylisation)
-    this.scene.add(new THREE.HemisphereLight(0xdfefff, 0x5d7d99, 1.25));
-    const sun = new THREE.DirectionalLight(0xfff4e0, 2.4);
+    this.scene.add(new THREE.HemisphereLight(0xdde5ee, 0x66748c, 1.0));
+    const sun = new THREE.DirectionalLight(0xffe9c6, 1.7);
     sun.position.copy(SUN_DIR).multiplyScalar(1000);
     this.scene.add(sun);
 
@@ -229,38 +164,45 @@ export class Renderer {
   }
 
   buildClouds() {
-    const rng = makeRng(20261016);
-    const g2 = new THREE.IcosahedronGeometry(1, 1); // already non-indexed => flat facets
-    g2.computeVertexNormals();
+    const rng = makeRng(20261018);
+    const atlas = new THREE.TextureLoader().load(new URL('../../assets/lookdev/cloud-atlas.png', import.meta.url).href);
+    // Artist-authored display colours: sampled directly by the background shader.
+    atlas.anisotropy = Math.min(4, this.renderer.capabilities.getMaxAnisotropy());
     this.cloudMat = new THREE.ShaderMaterial({
-      uniforms: { sunDir: { value: SUN_DIR }, camPos: { value: new THREE.Vector3() }, fogColor: { value: new THREE.Vector3(...SKY_HORIZON) }, fogNear: { value: 6000 }, fogFar: { value: 42000 } },
+      uniforms: { cloudMap: { value: atlas }, camPos: { value: new THREE.Vector3() },
+        fogColor: { value: new THREE.Vector3(...SKY_HORIZON) }, fogNear: { value: 7000 }, fogFar: { value: 42000 } },
       vertexShader: CLOUD_VS, fragmentShader: CLOUD_FS,
+      alphaToCoverage: true, side: THREE.DoubleSide,
     });
-    const puffs = [];
-    const add = (cx, cy, cz, size, count) => {
-      for (let i = 0; i < count; i++) {
-        const r = size * rng.range(0.45, 0.9);
-        puffs.push([cx + rng.range(-1, 1) * size * 1.3, cy + rng.range(0, 0.6) * size * 0.6 + r * 0.2, cz + rng.range(-1, 1) * size * 1.1, r * 1.25, r * 0.85, r]);
-      }
-    };
-    // mid-level cumulus field around the arena: altitude references for 3D flight
-    for (let i = 0; i < 70; i++) {
-      const a = rng() * Math.PI * 2, d = Math.sqrt(rng()) * 16000;
-      add(Math.cos(a) * d, rng.range(1300, 3400), Math.sin(a) * d, rng.range(160, 420), 5 + Math.floor(rng() * 4));
+    const cards = [];
+    const add = (x, y, z, w, h) => cards.push([x, y, z, w, h]);
+    // Sparse middle layer preserves open combat lanes and supplies real parallax.
+    for (let i = 0; i < 48; i++) {
+      const a = rng() * Math.PI * 2, d = Math.sqrt(rng()) * 17000;
+      const w = rng.range(1300, 2800);
+      add(Math.cos(a) * d, rng.range(1400, 3300), Math.sin(a) * d, w, w * rng.range(0.40, 0.55));
     }
-    // a few high towers and a distant ring of big clouds for the anime horizon
-    for (let i = 0; i < 6; i++) {
-      const a = rng() * Math.PI * 2, d = rng.range(6000, 14000);
-      for (let k = 0; k < 5; k++) add(Math.cos(a) * d, 900 + k * 900, Math.sin(a) * d, 650 - k * 60, 4);
+    // Low cloud sea and layered distant banks read like background paintings.
+    for (let i = 0; i < 40; i++) {
+      const a = i / 40 * Math.PI * 2, d = rng.range(19500, 29000);
+      const w = rng.range(5500, 9000);
+      add(Math.cos(a) * d, rng.range(450, 950), Math.sin(a) * d, w, w * rng.range(0.36, 0.48));
     }
-    for (let i = 0; i < 26; i++) {
-      const a = (i / 26) * Math.PI * 2 + rng() * 0.2, d = rng.range(24000, 30000);
-      add(Math.cos(a) * d, rng.range(600, 1400), Math.sin(a) * d, rng.range(1400, 2400), 4);
+    for (let i = 0; i < 12; i++) {
+      const a = rng() * Math.PI * 2, d = rng.range(11000, 23000);
+      add(Math.cos(a) * d, rng.range(3600, 4900), Math.sin(a) * d, rng.range(3800, 6400), rng.range(1900, 2900));
     }
-    const mesh = new THREE.InstancedMesh(g2, this.cloudMat, puffs.length);
+    const geo = new THREE.PlaneGeometry(1, 1);
+    const tiles = new Float32Array(cards.length * 2);
+    const mesh = new THREE.InstancedMesh(geo, this.cloudMat, cards.length);
     const m = new THREE.Matrix4();
-    puffs.forEach((p, i) => { m.makeScale(p[3], p[4], p[5]); m.setPosition(p[0], p[1], p[2]); mesh.setMatrixAt(i, m); });
+    cards.forEach((p, i) => {
+      m.makeScale(p[3], p[4], 1); m.setPosition(p[0], p[1], p[2]); mesh.setMatrixAt(i, m);
+      tiles[i * 2] = (i % 2) * 0.5; tiles[i * 2 + 1] = (Math.floor(i / 2) % 2) * 0.5;
+    });
+    geo.setAttribute('aTile', new THREE.InstancedBufferAttribute(tiles, 2));
     mesh.instanceMatrix.needsUpdate = true;
+    // Shader billboarding differs from the CPU geometry; avoid incorrect CPU culling.
     mesh.frustumCulled = false;
     this.scene.add(mesh);
     this.clouds = mesh;
@@ -276,7 +218,7 @@ export class Renderer {
     this.baseFov = Math.min(68, Math.max(44, 2 * Math.atan(Math.tan(hFov / 2) / this.camera.aspect) * 180 / Math.PI));
     this.camera.updateProjectionMatrix();
     this.outline.uniforms.resolution.value.set(w * this.dpr, h * this.dpr);
-    this.outline.uniforms.thickness.value = 1.25 * this.dpr;
+    this.outline.uniforms.thickness.value = INK_WIDTH * this.dpr;
   }
 
   setDpr(d) {
@@ -315,7 +257,7 @@ export class Renderer {
     });
     // two alternating ribbons per wingtip so a new vapour burst never bridges to the old one
     const trails = group.userData.wingtips.map(() => {
-      const pair = [0, 1].map(() => { const r = new Ribbon(this.scene, 70, [1, 1, 1], 0.55); r.life = 1.6; r.minStep = 8; return r; });
+      const pair = [0, 1].map(() => { const r = new Ribbon(this.scene, 70, [0.95, 0.93, 0.85], 0.48); r.life = 1.6; r.minStep = 8; return r; });
       return { pair, cur: 0, active: false };
     });
     this.planes.set(ac, { group, flames, trails, prev: null });
@@ -357,7 +299,7 @@ export class Renderer {
     pl.group.visible = false;
     pl.trails.forEach((t) => t.pair.forEach((r) => r.breakTrail()));
     const g = pl.group.clone(true);
-    g.traverse((o) => { if (o.material && o.material.isMeshToonMaterial) { o.material = o.material.clone(); o.material.color = new THREE.Color(0x5a5550); } });
+    g.traverse((o) => { if (o.material && o.material.userData.airframe) { o.material = o.material.clone(); o.material.uniforms.tint.value.set(0.48, 0.42, 0.40); } });
     g.visible = true;
     this.scene.add(g);
     const smoke = new Ribbon(this.scene, 120, [0.22, 0.22, 0.25], 0.85);
@@ -412,7 +354,7 @@ export class Renderer {
         mesh.add(body, glow);
         this.scene.add(mesh);
         this.missileMeshes.set(m.id, mesh);
-        const trail = new Ribbon(this.scene, 140, m.owner.side === 'blue' ? [0.97, 0.98, 1.0] : [0.98, 0.95, 0.93], 0.8);
+        const trail = new Ribbon(this.scene, 140, m.owner.side === 'blue' ? [0.96, 0.94, 0.86] : [0.87, 0.89, 0.94], 0.82);
         trail.life = 5.5; trail.grow = 2.2; trail.minStep = 7;
         trail.missileId = m.id;
         this.missileTrails.push(trail);

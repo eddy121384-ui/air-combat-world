@@ -4,9 +4,10 @@
 // iPhone: headless Chromium renders WebGL in software (SwiftShader), so FPS here is pessimistic
 // for GPU cost and says nothing about Safari/WebKit specifics.
 //
-//   node tools/browser-check.mjs [--out tools/out/shots] [--scenario all|title|fight|touch|aivai]
+//   node tools/browser-check.mjs [--out tools/out/shots] [--scenario all|lookdev|title|fight|manual|touch|aivai|result]
 import http from 'node:http';
-import { readFile, mkdir } from 'node:fs/promises';
+import { readFile, mkdir, writeFile } from 'node:fs/promises';
+import assert from 'node:assert/strict';
 import { createRequire } from 'node:module';
 import { execSync } from 'node:child_process';
 import { dirname, join, extname } from 'node:path';
@@ -49,6 +50,8 @@ async function page(ctxOpts, url, label) {
   const p = await ctx.newPage();
   p.on('console', (m) => { if (m.type() === 'error') report.errors.push(`[${label}] ${m.text()}`); });
   p.on('pageerror', (e) => report.errors.push(`[${label}] pageerror: ${e.message}`));
+  p.on('requestfailed', (r) => report.errors.push(`[${label}] request failed: ${r.url()}`));
+  p.on('response', (r) => { if (r.status() >= 400) report.errors.push(`[${label}] HTTP ${r.status()}: ${r.url()}`); });
   await p.goto(base + url);
   return { ctx, p };
 }
@@ -69,6 +72,40 @@ const state = (p) => p.evaluate(() => {
 
 const desktop = { viewport: { width: 1280, height: 720 }, deviceScaleFactor: 1 };
 const iphone = { ...devices['iPhone 13 Mini'], viewport: { width: 812, height: 375 }, isMobile: true, hasTouch: true };
+
+if (scenario === 'all' || scenario === 'lookdev') {
+  report.perf.lookdev = {};
+  for (const view of ['chase', 'bank', 'cloud', 'ocean', 'dive']) {
+    const { ctx, p } = await page(desktop, `tools/lookdev-viewer.html?view=${view}`, `lookdev-${view}`);
+    await p.waitForFunction(() => window.__lookdev?.ready).catch(e => {
+      throw new Error(report.errors.join('\n') || e.message);
+    });
+    const stats = await p.evaluate(() => window.__lookdev);
+    assert.equal(stats.textureWidth, 1024, 'painted cloud atlas loaded');
+    assert.equal(stats.clouds, 100, 'bounded cloud instance count');
+    assert.ok(stats.calls < 40 && stats.triangles < 10000, 'bounded art-scene geometry');
+    assert.ok(stats.programs.every(p => p.runnable), 'all lookdev shaders link');
+    report.perf.lookdev[view] = stats;
+    await shot(p, `00-lookdev-${view}`);
+    await ctx.close();
+  }
+  const { ctx, p } = await page(desktop, 'tools/model-viewer.html', 'lookdev-models');
+  await p.waitForFunction(() => window.__done);
+  await shot(p, '00-lookdev-models');
+  await ctx.close();
+  // Controlled destruction checks the new airframe tint on cloned wreck
+  // materials, independently of whether an AI smoke match ends by gun or timer.
+  const wreck = await page(desktop, '?mode=pvai&seed=21', 'lookdev-wreck');
+  await wreck.p.waitForFunction(() => window.__game?.mode === 'playing');
+  await wreck.p.evaluate(() => {
+    const m = window.__game.match; m.damage(m.red, 100, m.blue, 'gun');
+  });
+  await sleep(700);
+  assert.equal(await wreck.p.evaluate(() => window.__game.match.red.alive), false);
+  await shot(wreck.p, '00-lookdev-wreck');
+  report.perf.wreck = { controlledDestruction: true };
+  await wreck.ctx.close();
+}
 
 if (scenario === 'all' || scenario === 'title') {
   const { ctx, p } = await page(desktop, '', 'title');
@@ -133,6 +170,33 @@ if (scenario === 'all' || scenario === 'touch') {
   const afterSecondRelease = await p.evaluate(() => ({ ...window.__game.input.stick }));
   if (!equalStick(adjusted, afterSecondRelease))
     throw new Error('Second touch release must also hold the adjusted command');
+  // Real CDP touches, including simultaneous stick + throttle. The style pass
+  // must leave latched throttle, AB toggle and momentary BRK independent.
+  const track = await p.locator('#throttleTrack').boundingBox();
+  const tx = track.x + track.width / 2;
+  await touch('touchStart', [{ x: 150, y: 260, id: 3 }]);
+  await touch('touchMove', [{ x: 175, y: 250, id: 3 }]);
+  await touch('touchStart', [{ x: 175, y: 250, id: 3 }, { x: tx, y: track.y + track.height / 2, id: 4 }]);
+  await touch('touchMove', [{ x: 175, y: 250, id: 3 }, { x: tx, y: track.y + track.height * 0.65, id: 4 }]);
+  const heldPower = await p.evaluate(() => ({ throttle: window.__game.input.throttle(), stick: { ...window.__game.input.stick } }));
+  await touch('touchEnd', []);
+  const powerState = () => p.evaluate(() => ({ throttle: window.__game.input.throttle(), boost: window.__game.input.boost(), brake: window.__game.input.brake() }));
+  assert.ok(heldPower.throttle > 0.1 && heldPower.throttle < 0.6, 'touch drag changes throttle');
+  assert.ok(equalStick(heldPower.stick, await p.evaluate(() => ({ ...window.__game.input.stick }))), 'throttle touch leaves stick latched');
+  assert.equal((await powerState()).throttle, heldPower.throttle, 'release holds throttle');
+  await p.tap('[data-btn="boost"]');
+  assert.equal((await powerState()).boost, true, 'AB toggles on');
+  const brake = await p.locator('[data-btn="brake"]').boundingBox();
+  await touch('touchStart', [{ x: brake.x + brake.width / 2, y: brake.y + brake.height / 2, id: 5 }]);
+  const braking = await powerState();
+  assert.ok(braking.brake && braking.boost, 'BRK coexists with latched AB');
+  assert.equal(braking.throttle, heldPower.throttle, 'BRK preserves throttle');
+  await touch('touchEnd', []);
+  assert.equal((await powerState()).brake, false, 'release clears BRK');
+  assert.equal((await powerState()).boost, true, 'release preserves AB');
+  await p.tap('[data-btn="boost"]');
+  assert.equal((await powerState()).boost, false, 'AB toggles off');
+  report.perf.powerStrip = { passed: true, throttle: heldPower.throttle };
   await p.tap('[data-btn="msl"]');
   await sleep(500); await shot(p, '09-touch-msl');
   report.perf.touch = await state(p);
@@ -159,13 +223,16 @@ if (scenario === 'all' || scenario === 'result') {
   }
   await sleep(500); await shot(p, '12-result');
   report.perf.result = await state(p);
+  assert.equal(report.perf.result.mode, 'result', 'full match reaches result');
   await p.keyboard.press('Enter'); await sleep(1500);
   report.perf.rematch = await state(p);
+  assert.equal(report.perf.rematch.mode, 'playing', 'Enter restarts the match');
   await shot(p, '13-rematch');
   await ctx.close();
 }
 
 await browser.close();
 server.close();
+await writeFile(join(OUT, 'report.json'), JSON.stringify(report, null, 2) + '\n');
 console.log(JSON.stringify(report, null, 1));
 if (report.errors.length) process.exitCode = 1;
