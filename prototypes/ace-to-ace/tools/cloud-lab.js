@@ -1,14 +1,25 @@
 import * as THREE from 'three';
 import { createCloudField, CLOUD_PRESETS } from '../src/cloud/cloud-field.js';
 import { createCloudDebugRenderer } from '../src/cloud/cloud-debug-renderer.js';
+import { createCloudAnimeRenderer } from '../src/cloud/cloud-anime-renderer.js';
 import { makeAircraftMesh, outlineMaterial } from '../src/game/models.js';
+import { SKY_VS, SKY_FS, SEA_VS, SEA_FS } from '../src/game/lookdev.js';
 
 const $ = id => document.getElementById(id);
+const requestedRenderer=new URLSearchParams(location.search).get('renderer');
+if(requestedRenderer==='debug')$('renderer').value='debug';
 const canvas = $('gl'), scene = new THREE.Scene();
-scene.background = new THREE.Color('#8eb3ce'); // Diagnostic sky, R2 art is never loaded or edited.
+scene.background = new THREE.Color('#8eb3ce'); // Fallback behind the shared, read-only R2 sky.
 const camera = new THREE.PerspectiveCamera(60, 1, 1, 24000);
 const debug = createCloudDebugRenderer(canvas, scene, camera);
-const sea = new THREE.Mesh(new THREE.PlaneGeometry(50000, 50000), new THREE.MeshBasicMaterial({ color: '#416e85' }));
+const anime = createCloudAnimeRenderer(debug.renderer,scene,camera);
+const skyPainting=new THREE.TextureLoader().load('../assets/lookdev/sky-painting-r2.jpg');skyPainting.colorSpace=THREE.SRGBColorSpace;
+const sunDirection=new THREE.Vector3(-0.64,0.3,-0.69).normalize();
+const sky=new THREE.Mesh(new THREE.SphereGeometry(10000,32,16),new THREE.ShaderMaterial({vertexShader:SKY_VS,fragmentShader:SKY_FS,
+  uniforms:{skyMap:{value:skyPainting},sunDir:{value:sunDirection},horizon:{value:new THREE.Vector3(0.76,0.82,0.88)}},side:THREE.BackSide,depthWrite:false}));
+sky.renderOrder=-1000;scene.add(sky);
+const sea = new THREE.Mesh(new THREE.PlaneGeometry(50000, 50000), new THREE.ShaderMaterial({vertexShader:SEA_VS,fragmentShader:SEA_FS,
+  uniforms:{skyMap:{value:skyPainting},sunDir:{value:sunDirection},camPos:{value:camera.position},time:{value:0},fogColor:{value:new THREE.Vector3(0.76,0.82,0.88)},fogNear:{value:3500},fogFar:{value:18000}}}));
 sea.rotation.x = -Math.PI / 2; scene.add(sea);
 const grid = new THREE.GridHelper(24000, 48, '#9eb6b8', '#628fa2'); grid.position.y = 1; scene.add(grid);
 const aircraft = makeAircraftMesh('F16V', outlineMaterial(), 1.35); scene.add(aircraft);
@@ -22,7 +33,7 @@ for (const [x, z, color] of [[0, -2100, '#e48155'], [0, 1700, '#73e8b2'], [-1700
   beacon.position.y = 3000; group.add(mast, beacon); scene.add(group); beacons.push(group);
 }
 
-let field, mode = 'traverse', progress = 0, playing = false, time = 0, yaw = 0, pitch = 0;
+let field, debugField=null, mode = 'traverse', progress = 0, playing = false, time = 0, yaw = 0, pitch = 0, animation=true,inspectAircraft=false;
 let last = performance.now(), stats = {}, diagnostic = {}, lastText = 0, explicitPose = false;
 const keys = new Set(), forward = new THREE.Vector3(), right = new THREE.Vector3();
 const planePosition = new THREE.Vector3(), target = new THREE.Vector3(), baseQuaternion = new THREE.Quaternion();
@@ -32,11 +43,11 @@ function rebuild() {
   const next = createCloudField({ kind: $('kind').value, seed: +$('seed').value,
     ...Object.fromEntries(['base', 'top', 'width', 'depth', 'cellSize', 'density'].map(k => [k, +$(k).value])),
     wind: { x: +$('windX').value, z: +$('windZ').value } });
-  debug.setField(next); field = next; time = 0; explicitPose = false;
+  anime.setField(next); field = next; time = 0; explicitPose = false;
 }
 function setRoute(next) {
   if (next === 'free') baseQuaternion.copy(camera.quaternion);
-  mode = next; explicitPose = false; yaw = pitch = 0; progress = 0; $('timeline').value = 0;
+  mode = next; explicitPose = false;inspectAircraft=false; yaw = pitch = 0; progress = 0; $('timeline').value = 0;
 }
 function setProgress(next) { progress = Math.max(0, Math.min(1, next)); $('timeline').value = progress; explicitPose = false; }
 function placeCamera() {
@@ -44,9 +55,10 @@ function placeCamera() {
   const mid = (field.params.base + field.params.top) / 2;
   const dx = field.params.wind.x * time, dz = field.params.wind.z * time;
   // Routes stay fixed in world space when wind is enabled, rather than riding the cloud.
-  if (mode === 'traverse') {
+  if (mode === 'traverse' || mode === 'skim') {
     const length = field.params.depth + 2400;
     planePosition.set(0, mid, length * (0.5 - progress));
+    if(mode==='skim')planePosition.x=field.params.width*0.40;
     camera.position.copy(planePosition).add(new THREE.Vector3(0, 12, 60));
     target.copy(planePosition).add(new THREE.Vector3(0, 0, -800));
   } else {
@@ -60,7 +72,7 @@ function placeCamera() {
   offsetQuaternion.setFromEuler(offsetEuler.set(pitch, yaw, 0));
   camera.quaternion.multiply(offsetQuaternion);
 }
-function resize() { debug.resize(innerWidth, innerHeight, +$('quality').value); }
+function resize() { debug.resize(innerWidth, innerHeight, +$('quality').value);const size=debug.renderer.getDrawingBufferSize(new THREE.Vector2());anime.resize(size.x,size.y); }
 window.addEventListener('resize', resize); $('quality').onchange = resize;
 $('kind').onchange = () => {
   for (const [k, v] of Object.entries(CLOUD_PRESETS[$('kind').value])) $(k).value = v;
@@ -104,10 +116,16 @@ function frame(dt = 0) {
     camera.position.addScaledVector(right, ((keys.has('KeyD') ? 1 : 0) - (keys.has('KeyA') ? 1 : 0)) * speed * dt);
     camera.position.y += ((keys.has('KeyE') ? 1 : 0) - (keys.has('KeyQ') ? 1 : 0)) * speed * dt;
   }
-  aircraft.visible = mode === 'traverse'; aircraft.position.copy(planePosition); aircraft.rotation.set(0, 0, 0);
+  aircraft.visible = mode === 'traverse'||mode==='skim'; aircraft.position.copy(planePosition); aircraft.rotation.set(0, 0, 0);
+  if(inspectAircraft){aircraft.visible=true;aircraft.position.set(0,-12,-65).applyQuaternion(camera.quaternion).add(camera.position);aircraft.quaternion.copy(camera.quaternion);}
   debug.uniforms.enabled.value = $('clouds').checked ? 1 : 0;
   const sun = +$('sun').value * Math.PI / 180;
-  debug.uniforms.sun.value.set(Math.sin(sun), 0.6, -Math.cos(sun)).normalize();
+  const elevation=+$('sunHeight').value*Math.PI/180;
+  sunDirection.set(Math.sin(sun)*Math.cos(elevation),Math.sin(elevation),-Math.cos(sun)*Math.cos(elevation));
+  debug.uniforms.sun.value.copy(sunDirection);anime.uniforms.sun.value.copy(sunDirection);
+  aircraft.children[0].material.uniforms.sunDir.value.copy(sunDirection);
+  sky.position.copy(camera.position);sea.material.uniforms.time.value=time;
+  grid.visible=$('guides').checked;beacons.forEach(b=>{b.visible=$('guides').checked;});
   const cpuBegin = performance.now();
   camera.getWorldDirection(forward);
   const end = camera.position.clone().addScaledVector(forward, 500);
@@ -115,26 +133,33 @@ function frame(dt = 0) {
   const density = field.sampleDensity(camera.position.x, camera.position.y, camera.position.z, time);
   const planeDensity = field.sampleDensity(aircraft.position.x, aircraft.position.y, aircraft.position.z, time);
   diagnostic = { density, planeDensity, transmittance500: sightline.transmittance, cpuQueryMs: performance.now() - cpuBegin };
-  stats = debug.render(time);
+  const rendererMode=$('renderer').value;
+  if(rendererMode==='debug'){
+    anime.clouds.visible=false;if(debugField!==field){debug.setField(field);debugField=field;}
+    stats=debug.render(time);
+  }else stats=anime.render(time,{enabled:$('clouds').checked,wire:$('wire').checked,fogEnabled:$('fog').checked});
   if (performance.now() - lastText > 125 || dt === 0) {
     const p = camera.position;
     $('readout').textContent = `路線 ${mode}  ${(progress * 100).toFixed(1)}%  t=${time.toFixed(1)} s\n`
       + `XYZ ${p.x.toFixed(0)}, ${p.y.toFixed(0)}, ${p.z.toFixed(0)} m\n`
       + `密度 eye ${density.toFixed(3)} / plane ${planeDensity.toFixed(3)}\nT500 ${sightline.transmittance.toFixed(3)}\n`
       + `CPU 查詢 ${diagnostic.cpuQueryMs.toFixed(3)} ms\n提交 ${stats.renderSubmitMs.toFixed(2)} ms / GPU ${stats.gpuMs?.toFixed(2) ?? 'N/A'} ms\n`
-      + `${stats.width}×${stats.height} · ${stats.calls} calls · cache ${(stats.cacheBytes / 1024).toFixed(0)} KiB`;
+      + `${rendererMode} · ${stats.width}×${stats.height} · ${stats.calls} calls\n${stats.layers?.triangles??stats.triangles} triangles · ${stats.fogCpuMs?.toFixed(2)??'—'} ms fog CPU`;
     lastText = performance.now();
   }
   return snapshot();
 }
-function snapshot() { return { ready: true, mode, progress, time, position: camera.position.toArray(),
+function snapshot() { return { ready: anime.ready&&!!skyPainting.image, rendererMode:$('renderer').value, mode, progress, time, position: camera.position.toArray(),
+  field:{kind:field.params.kind,seed:field.params.seed,base:field.params.base,top:field.params.top},
   planePosition: aircraft.position.toArray(), direction: camera.getWorldDirection(new THREE.Vector3()).toArray(),
   ...diagnostic, ...stats }; }
 rebuild(); resize(); frame();
 // Explicit inspection API for reproducible real-browser tests. Never imported by the game.
 window.__cloudLab = { get field() { return field; }, snapshot, frame, setRoute, setProgress,
-  setPose(position, lookAt) { mode = 'inspect'; explicitPose = true; camera.position.fromArray(position); camera.lookAt(...lookAt); },
+  setPose(position, lookAt,{aircraft:showAircraft=false}={}) { mode = 'inspect'; explicitPose = true;inspectAircraft=showAircraft; camera.position.fromArray(position); camera.lookAt(...lookAt); },
   rebuild, setTime(value) { time = value; },
+  setRenderer(value){$('renderer').value=value;return frame();},
+  setAnimation(value){animation=value;},
 };
-function animate(now) { const dt = Math.min(0.05, (now - last) / 1000); last = now; frame(dt); requestAnimationFrame(animate); }
+function animate(now) { const dt = Math.min(0.05, (now - last) / 1000); last = now;if(animation)frame(dt);requestAnimationFrame(animate); }
 requestAnimationFrame(animate);

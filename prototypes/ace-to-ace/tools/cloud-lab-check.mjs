@@ -8,7 +8,11 @@ import { resolve, extname, sep } from 'node:path';
 import { createHash } from 'node:crypto';
 const req = createRequire(import.meta.url), { chromium } = req('playwright');
 const root = fileURLToPath(new URL('../', import.meta.url));
-const out = new URL('../docs/cloud-engine-b0/', import.meta.url);
+const outArg=process.argv.indexOf('--out');
+const rendererArg=process.argv.indexOf('--renderer');
+const rendererMode=rendererArg>=0?process.argv[rendererArg+1]:'debug';
+assert.ok(['debug','anime'].includes(rendererMode));
+const out = new URL('../'+(outArg>=0?process.argv[outArg+1]:'docs/cloud-engine-b0')+'/', import.meta.url);
 await mkdir(new URL('screens/', out), { recursive: true });
 const mime = { '.html': 'text/html', '.js': 'text/javascript', '.jpg': 'image/jpeg', '.png': 'image/png' };
 const server = http.createServer(async (request, response) => {
@@ -21,7 +25,7 @@ const server = http.createServer(async (request, response) => {
 });
 await new Promise(r => server.listen(0, '127.0.0.1', r));
 let browser;
-const report = { errors: [], views: {}, spatial: {}, perf: {}, discardedFirstQueryAfterStateChange: true,
+const report = { rendererMode, errors: [], views: {}, spatial: {}, perf: {}, discardedFirstQueryAfterStateChange: true,
   runtime: 'Chromium / ANGLE SwiftShader; desktop diagnostic only, no iPhone GPU claim' };
 report.provenance = { baseline: '0db84b5953eaffd75c3256ad0579f3c098dd0147', capturedAt: new Date().toISOString(), sourceSha256: {} };
 for (const path of ['src/cloud/cloud-field.js', 'src/cloud/cloud-debug-renderer.js', 'tools/cloud-lab.html', 'tools/cloud-lab.js'])
@@ -34,7 +38,7 @@ try {
   page.on('console', m => { if (m.type() === 'error') report.errors.push(m.text()); });
   page.on('response', r => { if (r.status() >= 400) report.errors.push(`HTTP ${r.status()}: ${r.url()}`); });
   page.on('requestfailed', r => report.errors.push(`requestfailed: ${r.url()}`));
-  await page.goto(`http://127.0.0.1:${server.address().port}/tools/cloud-lab.html`);
+  await page.goto(`http://127.0.0.1:${server.address().port}/tools/cloud-lab.html?renderer=${rendererMode}`);
   await page.waitForFunction(() => window.__cloudLab?.snapshot().ready, null, { timeout: 60000 });
   async function capture(name, mode, progress) {
     const s = await page.evaluate(({ mode, progress }) => {
@@ -112,7 +116,7 @@ try {
   const sc = await capture('08-stratocumulus-inside', 'traverse', 0.5);
   assert.ok(sc.density > 0.5 && sc.transmittance500 < 0.1);
   // Timer-query GPU cost is separate from JS render submission and CPU field benchmark.
-  for (const quality of ['0.25', '0.5', '1']) {
+  for (const quality of process.argv.includes('--skip-perf')?[]:['0.25', '0.5', '1']) {
     // The current route is through Sc, providing a full cloud-covered workload.
     await page.locator('details').last().evaluate(el => { el.open = true; });
     await page.locator('#quality').selectOption(quality);

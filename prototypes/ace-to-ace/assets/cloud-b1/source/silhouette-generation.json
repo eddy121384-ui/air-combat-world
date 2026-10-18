@@ -1,0 +1,9 @@
+{
+  "tool": "built-in image_gen",
+  "date": "2026-10-19",
+  "generationReceipt": "exec-cb1df8e5-0d89-40a6-a0d5-505b90967819.png",
+  "sourceFile": "cloud-silhouettes-b1.png",
+  "promptFile": "cloud-silhouettes-b1.prompt.txt",
+  "derivedFile": "../cloud-silhouettes-b1.webp",
+  "notes": "Original generated RGBA asset for this project. No movie frame or third-party artwork supplied. Runtime derivative is resizing, atlas padding, alpha guard fade and WebP encoding. No exclusive-copyright warranty is claimed."
+}

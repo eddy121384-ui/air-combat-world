@@ -1,0 +1,16 @@
+<!doctype html><html lang="zh-Hant"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>B1 Runtime 比較</title>
+<style>body{margin:24px;background:#102131;color:#e8edf7;font:15px/1.6 system-ui;max-width:1400px}a{color:#b9dafa}select,button,input{font:inherit;margin:4px}img,video{max-width:100%}#pair{display:grid;grid-template-columns:1fr 1fr;gap:12px}figure{margin:0}figcaption{padding:5px}#strip{display:flex;overflow:auto;gap:8px}#strip img{width:280px;object-fit:contain}pre{white-space:pre-wrap}@media(max-width:800px){#pair{grid-template-columns:1fr}}</style>
+<h1>B0 / B1 · 同一世界與相機</h1><p>全部是實際 Chromium WebGL Runtime 截圖。<a href="README.md">文件</a> · <a href="../../tools/cloud-lab.html">操作 Cloud Lab</a></p>
+<select id="view" aria-label="固定視角"></select><div id="pair"><figure><figcaption>B0 Debug</figcaption><img id="debug" alt="同一視角的 B0 密度診斷"></figure><figure><figcaption>B1 Anime</figcaption><img id="anime" alt="同一視角的 B1 手繪雲"></figure></div><pre id="metadata"></pre>
+<h2>連續穿雲</h2><p>固定模擬步進的實際 WebGL 錄影，不能用作 iPhone FPS 證據。</p><video controls preload="metadata" src="final/traversal.webm"></video>
+<p>25 個連續位置：接近 → 進入 → 雲內 → 穿出</p><div id="strip"></div>
+<script type="module">
+const names=['01-wall','02-side','03-cloud-sea','04-base','05-skim','06-entry','07-interior','08-exit','09-turn90','10-turn180'];
+const labels=['遠方雲牆','側面繞行','雲海俯瞰','雲底仰視','擦邊','進入','雲內','離開','轉90°','轉180°'];
+const select=document.querySelector('#view');names.forEach((name,i)=>select.add(new Option(labels[i],name)));
+const report=await fetch('final/report.json').then(r=>r.json());
+function show(){for(const mode of ['debug','anime'])document.querySelector('#'+mode).src=`final/${select.value}-${mode}.jpg`;
+ const s=report.views[select.value].anime;document.querySelector('#metadata').textContent=`${s.field.kind} · seed ${s.field.seed} · XYZ ${s.position.join(', ')} m · density ${s.density.toFixed(4)} · T500 ${s.transmittance500.toFixed(4)}`;}
+select.onchange=show;show();
+for(let i=0;i<25;i++){const img=new Image();img.src=`final/flight-${String(i).padStart(2,'0')}.jpg`;img.alt=`穿雲連續位置 ${i}`;img.loading='lazy';document.querySelector('#strip').append(img);}
+</script></html>
