@@ -14,6 +14,9 @@ Skyfront Homeland 的第一個可玩入口（Issue #34）。一片海、一片�
 
 ## 啟動
 
+Cloud Engine B0 的獨立三維雲場實驗入口：[Cloud Lab](tools/cloud-lab.html)。
+操作、研究來源、驗證與真實截圖見 [B0 文件](docs/cloud-engine-b0/README.md)；原 R2 遊戲入口未接入此實驗。
+
 不需要建置步驟（three.js r180 已 vendored 在 `vendor/`）。任何靜態伺服器即可：
 
 ```bash

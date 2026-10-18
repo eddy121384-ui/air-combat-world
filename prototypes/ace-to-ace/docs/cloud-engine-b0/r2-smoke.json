@@ -1,0 +1,615 @@
+{
+  "errors": [],
+  "shots": [
+    "cloud-b0-r2-smoke/00-lookdev-chase.png",
+    "cloud-b0-r2-smoke/00-lookdev-bank.png",
+    "cloud-b0-r2-smoke/00-lookdev-cloud.png",
+    "cloud-b0-r2-smoke/00-lookdev-ocean.png",
+    "cloud-b0-r2-smoke/00-lookdev-dive.png",
+    "cloud-b0-r2-smoke/00-lookdev-seam.png",
+    "cloud-b0-r2-smoke/00-lookdev-zenith.png",
+    "cloud-b0-r2-smoke/00-lookdev-models.png",
+    "cloud-b0-r2-smoke/00-lookdev-wreck.png",
+    "cloud-b0-r2-smoke/01-title-desktop.png",
+    "cloud-b0-r2-smoke/02-fight-0.png",
+    "cloud-b0-r2-smoke/02-fight-1.png",
+    "cloud-b0-r2-smoke/02-fight-2.png",
+    "cloud-b0-r2-smoke/02-fight-3.png",
+    "cloud-b0-r2-smoke/02-fight-4.png",
+    "cloud-b0-r2-smoke/02-fight-5.png",
+    "cloud-b0-r2-smoke/03-manual-turn.png",
+    "cloud-b0-r2-smoke/04-manual-fox2.png",
+    "cloud-b0-r2-smoke/05-look-at-target.png",
+    "cloud-b0-r2-smoke/06-title-iphone.png",
+    "cloud-b0-r2-smoke/07-touch-hud.png",
+    "cloud-b0-r2-smoke/08-touch-stick-turn.png",
+    "cloud-b0-r2-smoke/09-touch-msl.png",
+    "cloud-b0-r2-smoke/10-aivai.png",
+    "cloud-b0-r2-smoke/12-result.png",
+    "cloud-b0-r2-smoke/13-rematch.png"
+  ],
+  "perf": {
+    "lookdev": {
+      "chase": {
+        "ready": true,
+        "calls": 16,
+        "triangles": 3236,
+        "clouds": 8,
+        "textureWidth": 1024,
+        "skyWidth": 1536,
+        "msaa": true,
+        "programs": [
+          {
+            "runnable": true
+          },
+          {
+            "runnable": true
+          },
+          {
+            "runnable": true
+          },
+          {
+            "runnable": true
+          },
+          {
+            "runnable": true
+          },
+          {
+            "runnable": true
+          },
+          {
+            "runnable": true
+          },
+          {
+            "runnable": true
+          },
+          {
+            "runnable": true
+          }
+        ]
+      },
+      "bank": {
+        "ready": true,
+        "calls": 16,
+        "triangles": 3236,
+        "clouds": 8,
+        "textureWidth": 1024,
+        "skyWidth": 1536,
+        "msaa": true,
+        "programs": [
+          {
+            "runnable": true
+          },
+          {
+            "runnable": true
+          },
+          {
+            "runnable": true
+          },
+          {
+            "runnable": true
+          },
+          {
+            "runnable": true
+          },
+          {
+            "runnable": true
+          },
+          {
+            "runnable": true
+          },
+          {
+            "runnable": true
+          },
+          {
+            "runnable": true
+          }
+        ]
+      },
+      "cloud": {
+        "ready": true,
+        "calls": 13,
+        "triangles": 2082,
+        "clouds": 8,
+        "textureWidth": 1024,
+        "skyWidth": 1536,
+        "msaa": true,
+        "programs": [
+          {
+            "runnable": true
+          },
+          {
+            "runnable": true
+          },
+          {
+            "runnable": true
+          },
+          {
+            "runnable": true
+          },
+          {
+            "runnable": true
+          },
+          {
+            "runnable": true
+          }
+        ]
+      },
+      "ocean": {
+        "ready": true,
+        "calls": 13,
+        "triangles": 2082,
+        "clouds": 8,
+        "textureWidth": 1024,
+        "skyWidth": 1536,
+        "msaa": true,
+        "programs": [
+          {
+            "runnable": true
+          },
+          {
+            "runnable": true
+          },
+          {
+            "runnable": true
+          },
+          {
+            "runnable": true
+          },
+          {
+            "runnable": true
+          },
+          {
+            "runnable": true
+          }
+        ]
+      },
+      "dive": {
+        "ready": true,
+        "calls": 20,
+        "triangles": 4712,
+        "clouds": 8,
+        "textureWidth": 1024,
+        "skyWidth": 1536,
+        "msaa": true,
+        "programs": [
+          {
+            "runnable": true
+          },
+          {
+            "runnable": true
+          },
+          {
+            "runnable": true
+          },
+          {
+            "runnable": true
+          },
+          {
+            "runnable": true
+          },
+          {
+            "runnable": true
+          },
+          {
+            "runnable": true
+          },
+          {
+            "runnable": true
+          },
+          {
+            "runnable": true
+          }
+        ]
+      },
+      "seam": {
+        "ready": true,
+        "calls": 13,
+        "triangles": 2082,
+        "clouds": 8,
+        "textureWidth": 1024,
+        "skyWidth": 1536,
+        "msaa": true,
+        "programs": [
+          {
+            "runnable": true
+          },
+          {
+            "runnable": true
+          },
+          {
+            "runnable": true
+          },
+          {
+            "runnable": true
+          },
+          {
+            "runnable": true
+          },
+          {
+            "runnable": true
+          }
+        ]
+      },
+      "zenith": {
+        "ready": true,
+        "calls": 13,
+        "triangles": 2082,
+        "clouds": 8,
+        "textureWidth": 1024,
+        "skyWidth": 1536,
+        "msaa": true,
+        "programs": [
+          {
+            "runnable": true
+          },
+          {
+            "runnable": true
+          },
+          {
+            "runnable": true
+          },
+          {
+            "runnable": true
+          },
+          {
+            "runnable": true
+          },
+          {
+            "runnable": true
+          }
+        ]
+      }
+    },
+    "wreck": {
+      "controlledDestruction": true
+    },
+    "fightDesktop": [
+      {
+        "mode": "playing",
+        "t": 1.5,
+        "blue": {
+          "hp": 100,
+          "alive": true,
+          "v": 232,
+          "alt": 3052
+        },
+        "red": {
+          "hp": 100,
+          "alive": true,
+          "v": 222,
+          "alt": 2745
+        },
+        "ai": "ENGAGE/intercept",
+        "missiles": 0,
+        "result": null,
+        "perf": {
+          "fps": 37.7,
+          "ms": 26.5,
+          "calls": 20,
+          "tris": 4712,
+          "dpr": 1
+        }
+      },
+      {
+        "mode": "playing",
+        "t": 8.9,
+        "blue": {
+          "hp": 100,
+          "alive": true,
+          "v": 240,
+          "alt": 3004
+        },
+        "red": {
+          "hp": 100,
+          "alive": true,
+          "v": 242,
+          "alt": 3183
+        },
+        "ai": "ENGAGE/intercept",
+        "missiles": 0,
+        "result": null,
+        "perf": {
+          "fps": 19.7,
+          "ms": 50.1,
+          "calls": 20,
+          "tris": 4712,
+          "dpr": 1
+        }
+      },
+      {
+        "mode": "playing",
+        "t": 15,
+        "blue": {
+          "hp": 42,
+          "alive": true,
+          "v": 235,
+          "alt": 3188
+        },
+        "red": {
+          "hp": 36,
+          "alive": true,
+          "v": 225,
+          "alt": 3403
+        },
+        "ai": "EVADE/last-ditch break",
+        "missiles": 3,
+        "result": null,
+        "perf": {
+          "fps": 19,
+          "ms": 50,
+          "calls": 33,
+          "tris": 5936,
+          "dpr": 1
+        }
+      },
+      {
+        "mode": "playing",
+        "t": 21.5,
+        "blue": {
+          "hp": 42,
+          "alive": true,
+          "v": 188,
+          "alt": 2829
+        },
+        "red": {
+          "hp": 36,
+          "alive": true,
+          "v": 169,
+          "alt": 2604
+        },
+        "ai": "DEFEND/break turn",
+        "missiles": 3,
+        "result": null,
+        "perf": {
+          "fps": 17,
+          "ms": 55,
+          "calls": 21,
+          "tris": 5526,
+          "dpr": 1
+        }
+      },
+      {
+        "mode": "playing",
+        "t": 29,
+        "blue": {
+          "hp": 42,
+          "alive": true,
+          "v": 176,
+          "alt": 1871
+        },
+        "red": {
+          "hp": 36,
+          "alive": true,
+          "v": 163,
+          "alt": 1708
+        },
+        "ai": "DEFEND/break turn",
+        "missiles": 2,
+        "result": null,
+        "perf": {
+          "fps": 16.5,
+          "ms": 60.4,
+          "calls": 20,
+          "tris": 4348,
+          "dpr": 1
+        }
+      },
+      {
+        "mode": "playing",
+        "t": 38.5,
+        "blue": {
+          "hp": 42,
+          "alive": true,
+          "v": 181,
+          "alt": 513
+        },
+        "red": {
+          "hp": 36,
+          "alive": true,
+          "v": 157,
+          "alt": 536
+        },
+        "ai": "ATTACK/gun pursuit +PULL UP",
+        "missiles": 0,
+        "result": null,
+        "perf": {
+          "fps": 16.7,
+          "ms": 61.2,
+          "calls": 17,
+          "tris": 3514,
+          "dpr": 1
+        }
+      }
+    ],
+    "manual": {
+      "mode": "playing",
+      "t": 11.6,
+      "blue": {
+        "hp": 100,
+        "alive": true,
+        "v": 177,
+        "alt": 3454
+      },
+      "red": {
+        "hp": 100,
+        "alive": true,
+        "v": 258,
+        "alt": 3623
+      },
+      "ai": "ENGAGE/offset lead-turn setup",
+      "missiles": 1,
+      "result": null,
+      "perf": {
+        "fps": 19.7,
+        "ms": 40.1,
+        "calls": 23,
+        "tris": 5016,
+        "dpr": 1
+      }
+    },
+    "powerStrip": {
+      "passed": true,
+      "throttle": 0.31666659131462194
+    },
+    "touch": {
+      "mode": "playing",
+      "t": 11.5,
+      "blue": {
+        "hp": 100,
+        "alive": true,
+        "v": 138,
+        "alt": 3558
+      },
+      "red": {
+        "hp": 100,
+        "alive": true,
+        "v": 251,
+        "alt": 3824
+      },
+      "ai": "ATTACK/lead pursuit",
+      "missiles": 2,
+      "result": null,
+      "perf": {
+        "fps": 25.2,
+        "ms": 31.5,
+        "calls": 18,
+        "tris": 3792,
+        "dpr": 1
+      }
+    },
+    "aivai": {
+      "mode": "playing",
+      "t": 11.8,
+      "blue": {
+        "hp": 100,
+        "alive": true,
+        "v": 237,
+        "alt": 4115
+      },
+      "red": {
+        "hp": 100,
+        "alive": true,
+        "v": 240,
+        "alt": 4134
+      },
+      "ai": "ENGAGE/intercept",
+      "missiles": 0,
+      "result": null,
+      "perf": {
+        "fps": 18.1,
+        "ms": 62.8,
+        "calls": 16,
+        "tris": 3236,
+        "dpr": 1
+      }
+    },
+    "result": {
+      "mode": "result",
+      "t": 309.2,
+      "blue": {
+        "hp": 100,
+        "alive": true,
+        "v": 142,
+        "alt": 796
+      },
+      "red": {
+        "hp": 5,
+        "alive": true,
+        "v": 148,
+        "alt": 471
+      },
+      "ai": "ATTACK/gun pursuit",
+      "missiles": 0,
+      "result": {
+        "winner": "blue",
+        "reason": "timeDecision",
+        "time": 300.0000000000558,
+        "stats": {
+          "missilesFired": 12,
+          "missileHits": 1,
+          "roundsFired": 393,
+          "roundHits": 11,
+          "damageDealt": 95,
+          "flaresUsed": 0
+        },
+        "foe": {
+          "missilesFired": 2,
+          "missileHits": 0,
+          "roundsFired": 0,
+          "roundHits": 0,
+          "damageDealt": 0,
+          "flaresUsed": 3
+        },
+        "aiModes": {
+          "ENGAGE": 10.400000000000096,
+          "ATTACK": 127.19999999999406,
+          "DEFEND": 115.96666666666137,
+          "EVADE": 11.316666666666809,
+          "EXTEND": 35.11666666666596
+        }
+      },
+      "perf": {
+        "fps": 17,
+        "ms": 55.3,
+        "calls": 16,
+        "tris": 3236,
+        "dpr": 1
+      }
+    },
+    "rematch": {
+      "mode": "playing",
+      "t": 1.5,
+      "blue": {
+        "hp": 100,
+        "alive": true,
+        "v": 233,
+        "alt": 2841
+      },
+      "red": {
+        "hp": 100,
+        "alive": true,
+        "v": 230,
+        "alt": 2909
+      },
+      "ai": "ENGAGE/offset lead-turn setup",
+      "missiles": 0,
+      "result": {
+        "winner": "blue",
+        "reason": "timeDecision",
+        "time": 300.0000000000558,
+        "stats": {
+          "missilesFired": 12,
+          "missileHits": 1,
+          "roundsFired": 393,
+          "roundHits": 11,
+          "damageDealt": 95,
+          "flaresUsed": 0
+        },
+        "foe": {
+          "missilesFired": 2,
+          "missileHits": 0,
+          "roundsFired": 0,
+          "roundHits": 0,
+          "damageDealt": 0,
+          "flaresUsed": 3
+        },
+        "aiModes": {
+          "ENGAGE": 10.400000000000096,
+          "ATTACK": 127.19999999999406,
+          "DEFEND": 115.96666666666137,
+          "EVADE": 11.316666666666809,
+          "EXTEND": 35.11666666666596
+        }
+      },
+      "perf": {
+        "fps": 24.8,
+        "ms": 54.5,
+        "calls": 20,
+        "tris": 4712,
+        "dpr": 1
+      }
+    }
+  },
+  "evidenceDirectory": "tools/out/"
+}

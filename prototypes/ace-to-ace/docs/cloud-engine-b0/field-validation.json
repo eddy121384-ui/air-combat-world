@@ -1,0 +1,65 @@
+{
+  "passed": true,
+  "reports": [
+    {
+      "kind": "cumulus",
+      "deterministicProbes": 5000,
+      "maxDensityDeltaHalfMetre": {
+        "x": 0.0026441136738373228,
+        "y": 0.006459928383994895,
+        "z": 0.0034809673374308625
+      },
+      "maxFrameDelta": 0.01833775217477107,
+      "maxTransmittanceDeltaFrame": 0.016113962304354135,
+      "sightline": {
+        "distance": 4200,
+        "samples": 210,
+        "columnDensity": 3086.302833508984,
+        "opticalDepth": 37.035634002107805,
+        "transmittance": 8.234334763724726e-17
+      }
+    },
+    {
+      "kind": "stratocumulus",
+      "deterministicProbes": 5000,
+      "maxDensityDeltaHalfMetre": {
+        "x": 0.002934722448771243,
+        "y": 0.007065445943274851,
+        "z": 0.003068104770529323
+      },
+      "maxFrameDelta": 0.02083032170199345,
+      "maxTransmittanceDeltaFrame": 0.01696527853390528,
+      "sightline": {
+        "distance": 4200,
+        "samples": 210,
+        "columnDensity": 2915.3424689484345,
+        "opticalDepth": 34.984109627381216,
+        "transmittance": 6.406107681514958e-16
+      }
+    }
+  ],
+  "cpu": {
+    "node": "v22.23.1",
+    "platform": "win32",
+    "cpu": "12th Gen Intel(R) Core(TM) i7-12700",
+    "count": 100000,
+    "units": "microseconds/query",
+    "workloads": {
+      "mixed": [
+        0.4899460000000005,
+        0.526954,
+        0.6377999999999997,
+        0.6442740000000003,
+        0.7132710000000003
+      ],
+      "interior": [
+        1.217145999999999,
+        1.2263819999999999,
+        1.2583470000000012,
+        1.2932810000000006,
+        1.4985749999999998
+      ]
+    }
+  },
+  "checksum": 454288.89676666143
+}

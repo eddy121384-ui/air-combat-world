@@ -6,6 +6,9 @@
   "scripts": {
     "start": "python3 -m http.server 8080",
     "aivai": "node tools/aivai.mjs --suite --n 60",
-    "test": "node tools/test-brake-trap.mjs && node tools/test-hud-attitude.mjs && node tools/test-flight-path.mjs"
+    "test": "npm run test:regression && npm run test:cloud",
+    "test:regression": "node tools/test-brake-trap.mjs && node tools/test-hud-attitude.mjs && node tools/test-flight-path.mjs && node tools/test-airbrake-throttle.mjs && node tools/test-power-strip.mjs",
+    "test:cloud": "node tools/test-cloud-field.mjs",
+    "test:cloud-browser": "node tools/cloud-lab-check.mjs"
   }
 }

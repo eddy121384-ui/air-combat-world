@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="zh-Hant"><head><meta charset="utf-8"><title>Ace to Ace — Cloud Lab B0</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<script type="importmap">{"imports":{"three":"../vendor/three.module.min.js"}}</script>
+<style>
+html,body{margin:0;height:100%;overflow:hidden;background:#46677b;color:#eef6fc;font:13px/1.5 system-ui}canvas{display:block;width:100%;height:100%;touch-action:none}aside{position:absolute;left:12px;top:12px;max-width:330px;padding:14px;background:#102131df;border:1px solid #9eb4c5;border-radius:5px}h1{font-size:17px;margin:0 0 7px}p{margin:5px 0}label{display:inline-block;margin:3px 6px 3px 0}input[type=number]{width:70px}input,select,button{font:inherit}button{margin:3px 3px 3px 0;cursor:pointer}#readout{white-space:pre;font:12px/1.5 monospace;margin-top:9px}#timeline{width:100%}details{margin-top:5px}a{color:#c0e8ff}#reticle{position:absolute;top:50%;left:50%;pointer-events:none;color:#f4cb76} @media(max-width:700px){aside{font-size:11px;max-width:265px;padding:8px}h1{font-size:14px}#readout{font-size:10px}details:not([open]){margin:0}}
+aside{max-height:calc(100vh - 48px);overflow:auto}
+</style></head><body>
+<canvas id="gl" aria-label="可拖曳改變方向的三維雲場"></canvas><span id="reticle">+</span>
+<aside><h1>Cloud Lab · B0 空間驗證</h1>
+<p>公尺 · Y 向上 · 海面 0 · 固定世界座標</p>
+<label>雲形 <select id="kind"><option value="cumulus">積雲</option><option value="stratocumulus">層積雲（抬高實驗）</option></select></label>
+<label>Seed <input id="seed" type="number" value="73" step="1"></label>
+<details><summary>雲場參數（套用後重建）</summary>
+<label>雲底 <input id="base" type="number" value="2450"></label><label>雲頂 <input id="top" type="number" value="3650"></label>
+<label>寬 <input id="width" type="number" value="6000"></label><label>深 <input id="depth" type="number" value="5000"></label>
+<label>雲團尺度 <input id="cellSize" type="number" value="1700"></label><label>密度 <input id="density" type="number" value="0.9" step="0.05"></label>
+<label>風 X m/s <input id="windX" type="number" value="8"></label><label>風 Z m/s <input id="windZ" type="number" value="3"></label>
+<button id="apply">套用</button></details>
+<p><button data-view="traverse">穿越</button><button data-view="orbit">側面繞行</button><button data-view="above">上方</button><button data-view="below">下方</button><button data-view="free">自由飛行</button></p>
+<button id="play">播放路線</button><button id="reset">回到起點</button>
+<label><input id="wind" type="checkbox">風隨時間移動</label>
+<input id="timeline" type="range" min="0" max="1" step="0.001" value="0" aria-label="路線進度">
+<p>拖曳：環視。自由飛行：W/S 前後，A/D 左右，Q/E 升降，Shift 加速；觸控可拖曳環視、拖動路線。</p>
+<div id="readout" role="status">建立密度快取…</div>
+<details><summary>診斷顯示選項</summary><label><input id="clouds" type="checkbox" checked>雲遮蔽</label>
+<label>解析度 <select id="quality"><option value="0.5">½（預設）</option><option value="1">1×</option><option value="0.25">¼</option></select></label>
+<label>日光方位 <input id="sun" type="range" min="-180" max="180" value="-40"></label>
+<p>單一密度積分 pass；簡化亮暗。彩色信標固定在世界中；白色機體沿路線移動。T500 是前方 500 m 的診斷透射率。</p>
+<a href="../index.html">返回原 R2 遊戲</a></details>
+</aside><script type="module" src="cloud-lab.js"></script></body></html>
