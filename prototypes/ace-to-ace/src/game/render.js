@@ -116,9 +116,13 @@ export class Renderer {
     sun.position.copy(SUN_DIR).multiplyScalar(1000);
     this.scene.add(sun);
 
+    // One original background painting is shared by sky and sea reflection.
+    this.skyPainting = new THREE.TextureLoader().load(new URL('../../assets/lookdev/sky-painting-r2.jpg', import.meta.url).href);
+    this.skyPainting.wrapS = THREE.RepeatWrapping;
+    // Painting shaders work in display colour, keeping the source art's palette.
     // sky
     this.sky = new THREE.Mesh(new THREE.SphereGeometry(60000, 32, 16), new THREE.ShaderMaterial({
-      uniforms: { sunDir: { value: SUN_DIR }, horizon: { value: new THREE.Vector3(...SKY_HORIZON) } },
+      uniforms: { skyMap: { value: this.skyPainting }, sunDir: { value: SUN_DIR }, horizon: { value: new THREE.Vector3(...SKY_HORIZON) } },
       vertexShader: SKY_VS, fragmentShader: SKY_FS, side: THREE.BackSide, depthWrite: false,
     }));
     this.sky.renderOrder = -10;
@@ -127,8 +131,8 @@ export class Renderer {
     // sea
     this.seaMat = new THREE.ShaderMaterial({
       uniforms: {
-        camPos: { value: new THREE.Vector3() }, time: { value: 0 }, sunDir: { value: SUN_DIR },
-        fogColor: { value: new THREE.Vector3(...SKY_HORIZON) }, fogNear: { value: 3000 }, fogFar: { value: 45000 },
+        skyMap: { value: this.skyPainting }, camPos: { value: new THREE.Vector3() }, time: { value: 0 }, sunDir: { value: SUN_DIR },
+        fogColor: { value: new THREE.Vector3(...SKY_HORIZON) }, fogNear: { value: 4500 }, fogFar: { value: 55000 },
       }, vertexShader: SEA_VS, fragmentShader: SEA_FS,
     });
     this.sea = new THREE.Mesh(new THREE.PlaneGeometry(140000, 140000, 1, 1), this.seaMat);
@@ -164,41 +168,34 @@ export class Renderer {
   }
 
   buildClouds() {
-    const rng = makeRng(20261018);
-    const atlas = new THREE.TextureLoader().load(new URL('../../assets/lookdev/cloud-atlas.png', import.meta.url).href);
-    // Artist-authored display colours: sampled directly by the background shader.
+    const atlas = new THREE.TextureLoader().load(new URL('../../assets/lookdev/cloud-paintings-r2.png', import.meta.url).href);
     atlas.anisotropy = Math.min(4, this.renderer.capabilities.getMaxAnisotropy());
     this.cloudMat = new THREE.ShaderMaterial({
-      uniforms: { cloudMap: { value: atlas }, camPos: { value: new THREE.Vector3() },
-        fogColor: { value: new THREE.Vector3(...SKY_HORIZON) }, fogNear: { value: 7000 }, fogFar: { value: 42000 } },
+      uniforms: { cloudMap: { value: atlas }, skyMap: { value: this.skyPainting }, camPos: { value: new THREE.Vector3() },
+        fogColor: { value: new THREE.Vector3(...SKY_HORIZON) }, fogNear: { value: 6000 }, fogFar: { value: 38000 } },
       vertexShader: CLOUD_VS, fragmentShader: CLOUD_FS,
-      alphaToCoverage: true, side: THREE.DoubleSide,
+      transparent: true, depthWrite: false, side: THREE.DoubleSide, forceSinglePass: true,
     });
-    const cards = [];
-    const add = (x, y, z, w, h) => cards.push([x, y, z, w, h]);
-    // Sparse middle layer preserves open combat lanes and supplies real parallax.
-    for (let i = 0; i < 48; i++) {
-      const a = rng() * Math.PI * 2, d = Math.sqrt(rng()) * 17000;
-      const w = rng.range(1300, 2800);
-      add(Math.cos(a) * d, rng.range(1400, 3300), Math.sin(a) * d, w, w * rng.range(0.40, 0.55));
-    }
-    // Low cloud sea and layered distant banks read like background paintings.
-    for (let i = 0; i < 40; i++) {
-      const a = i / 40 * Math.PI * 2, d = rng.range(19500, 29000);
-      const w = rng.range(5500, 9000);
-      add(Math.cos(a) * d, rng.range(450, 950), Math.sin(a) * d, w, w * rng.range(0.36, 0.48));
-    }
-    for (let i = 0; i < 12; i++) {
-      const a = rng() * Math.PI * 2, d = rng.range(11000, 23000);
-      add(Math.cos(a) * d, rng.range(3600, 4900), Math.sin(a) * d, rng.range(3800, 6400), rng.range(1900, 2900));
-    }
+    // The skydome carries the distant composition. Eight large painted masses
+    // supply middle-distance parallax; opposite sectors avoid adjacent repeats.
+    // [x, y, z, width, height, atlas tile (top-left image order)]
+    const cards = [
+      [-14000, 4800, -23000, 19000, 7000, 0],
+      [18000, 6500, -24000, 12000, 12000, 1],
+      [-2000, 6500, -13000, 16000, 3600, 2],
+      [4500, 2000, -22000, 23000, 3500, 3],
+      [14500, 5000, 11000, 18000, 7300, 0],
+      [-19000, 6800, 17000, 14500, 12500, 1],
+      [1300, 6500, 16000, 18000, 4000, 2],
+      [-15000, 2200, 1000, 25000, 4000, 3],
+    ];
     const geo = new THREE.PlaneGeometry(1, 1);
     const tiles = new Float32Array(cards.length * 2);
     const mesh = new THREE.InstancedMesh(geo, this.cloudMat, cards.length);
     const m = new THREE.Matrix4();
     cards.forEach((p, i) => {
       m.makeScale(p[3], p[4], 1); m.setPosition(p[0], p[1], p[2]); mesh.setMatrixAt(i, m);
-      tiles[i * 2] = (i % 2) * 0.5; tiles[i * 2 + 1] = (Math.floor(i / 2) % 2) * 0.5;
+      tiles[i * 2] = (p[5] % 2) * 0.5; tiles[i * 2 + 1] = (1 - Math.floor(p[5] / 2)) * 0.5;
     });
     geo.setAttribute('aTile', new THREE.InstancedBufferAttribute(tiles, 2));
     mesh.instanceMatrix.needsUpdate = true;
@@ -206,6 +203,8 @@ export class Renderer {
     mesh.frustumCulled = false;
     this.scene.add(mesh);
     this.clouds = mesh;
+    this.cloudCards = cards;
+    this.cloudMatrix = new THREE.Matrix4();
   }
 
   resize() {
@@ -491,7 +490,22 @@ export class Renderer {
     this.cloudMat.uniforms.camPos.value.copy(cam.position);
   }
 
-  render() { this.renderer.render(this.scene, this.camera); }
+  render() {
+    // Eight translucent paintings: sort their centres back-to-front without
+    // adding meshes or a second pass. The sim and gameplay camera are untouched.
+    const cam = this.camera.position;
+    const distance = p => (p[0]-cam.x)**2 + (p[1]-cam.y)**2 + (p[2]-cam.z)**2;
+    this.cloudCards.sort((a, b) => distance(b) - distance(a));
+    const tiles = this.clouds.geometry.attributes.aTile;
+    this.cloudCards.forEach((p, i) => {
+      this.cloudMatrix.makeScale(p[3], p[4], 1).setPosition(p[0], p[1], p[2]);
+      this.clouds.setMatrixAt(i, this.cloudMatrix);
+      tiles.setXY(i, (p[5] % 2) * 0.5, (1 - Math.floor(p[5] / 2)) * 0.5);
+    });
+    tiles.needsUpdate = true;
+    this.clouds.instanceMatrix.needsUpdate = true;
+    this.renderer.render(this.scene, this.camera);
+  }
 
   /** World -> screen (CSS px). Returns {x, y, behind}. */
   project(p) {

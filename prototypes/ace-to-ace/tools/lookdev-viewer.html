@@ -29,11 +29,15 @@ if (view === 'bank') {
   r.camera.position.set(0, 300, 50);
 } else if (view === 'dive') {
   r.camera.position.set(0, 4100, 1); r.camera.up.set(0, 0, -1);
+} else if (view === 'seam' || view === 'zenith') {
+  r.camera.position.set(0, 4000, 0);
 } else {
   r.camera.position.set(27, 2813, 40);
 }
 if (view === 'cloud') r.camera.lookAt(r.camera.position.clone().add(new THREE.Vector3(0, 0, -1000)));
 else if (view === 'ocean') r.camera.lookAt(-1800, 0, -3500);
+else if (view === 'seam') r.camera.lookAt(1000 * Math.cos(0.01 * Math.PI * 2), 4100, 1000 * Math.sin(0.01 * Math.PI * 2));
+else if (view === 'zenith') { r.camera.up.set(0, 0, -1); r.camera.lookAt(0, 5000, 0); }
 else r.camera.lookAt(0, 2800, -16);
 r.camera.updateProjectionMatrix();
 r.sky.position.copy(r.camera.position);
@@ -45,6 +49,7 @@ r.render();
 window.__lookdev = {
   ready: true, calls: r.renderer.info.render.calls, triangles: r.renderer.info.render.triangles,
   clouds: r.clouds.count, textureWidth: r.cloudMat.uniforms.cloudMap.value.image.width,
+  skyWidth: r.skyPainting.image.width,
   msaa: r.renderer.getContext().getContextAttributes().antialias,
   programs: r.renderer.info.programs.map(p => ({ runnable: p.diagnostics?.runnable !== false })),
 };

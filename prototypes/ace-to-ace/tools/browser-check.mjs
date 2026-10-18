@@ -26,7 +26,7 @@ function loadPlaywright() {
 }
 const { chromium, devices } = loadPlaywright();
 
-const MIME = { '.html': 'text/html', '.js': 'text/javascript', '.mjs': 'text/javascript', '.css': 'text/css', '.json': 'application/json', '.png': 'image/png' };
+const MIME = { '.html': 'text/html', '.js': 'text/javascript', '.mjs': 'text/javascript', '.css': 'text/css', '.json': 'application/json', '.png': 'image/png', '.jpg': 'image/jpeg' };
 const server = http.createServer(async (req, res) => {
   try {
     const p = decodeURIComponent(new URL(req.url, 'http://x').pathname);
@@ -75,14 +75,15 @@ const iphone = { ...devices['iPhone 13 Mini'], viewport: { width: 812, height: 3
 
 if (scenario === 'all' || scenario === 'lookdev') {
   report.perf.lookdev = {};
-  for (const view of ['chase', 'bank', 'cloud', 'ocean', 'dive']) {
+  for (const view of ['chase', 'bank', 'cloud', 'ocean', 'dive', 'seam', 'zenith']) {
     const { ctx, p } = await page(desktop, `tools/lookdev-viewer.html?view=${view}`, `lookdev-${view}`);
     await p.waitForFunction(() => window.__lookdev?.ready).catch(e => {
       throw new Error(report.errors.join('\n') || e.message);
     });
     const stats = await p.evaluate(() => window.__lookdev);
     assert.equal(stats.textureWidth, 1024, 'painted cloud atlas loaded');
-    assert.equal(stats.clouds, 100, 'bounded cloud instance count');
+    assert.equal(stats.clouds, 8, 'bounded painted mid-cloud instance count');
+    assert.equal(stats.skyWidth, 1536, 'painted sky and sea environment loaded');
     assert.ok(stats.calls < 40 && stats.triangles < 10000, 'bounded art-scene geometry');
     assert.ok(stats.programs.every(p => p.runnable), 'all lookdev shaders link');
     report.perf.lookdev[view] = stats;

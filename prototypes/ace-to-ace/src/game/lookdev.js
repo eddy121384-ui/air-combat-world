@@ -1,42 +1,51 @@
-// Ace to Ace only: anime film 2D-look / NPR experiment, display-referred palettes.
-// One forward pass: no render targets, bloom, screen-space outlines or LUT chain.
-export const SKY_HORIZON = [0.81, 0.80, 0.78];
-export const FOG_HEX = 0xcfccc7;
-export const SUN_VECTOR = [-0.64, 0.34, -0.69];
-export const INK_HEX = 0x38475c;
-export const INK_WIDTH = 0.65; // CSS px, independent of adaptive DPR
+// Ace to Ace R2: painted environment + restrained continuous airframe lighting.
+// One forward pass, with no extra render targets or full-screen post effects.
+export const SKY_HORIZON = [0.76, 0.82, 0.88];
+export const FOG_HEX = 0xc2d1e0;
+export const SUN_VECTOR = [-0.64, 0.30, -0.69];
+export const INK_HEX = 0x71859a;
+export const INK_WIDTH = 0.24; // CSS px, independent of adaptive DPR
 
 const PAINT = `
   float hash(vec2 p){ return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453); }
   float noise(vec2 p){ vec2 i=floor(p), f=fract(p), u=f*f*(3.0-2.0*f);
     return mix(mix(hash(i),hash(i+vec2(1,0)),u.x),mix(hash(i+vec2(0,1)),hash(i+vec2(1,1)),u.x),u.y); }
 `;
-
+// This painting has an authored horizon, rather than photographic HDR mapping.
+const PAINTED_SKY = `
+  uniform sampler2D skyMap;
+  vec3 paintedSky(vec3 ray){
+    vec3 d=normalize(ray);
+    float u=fract(atan(d.z,d.x+0.000001)/6.2831853+0.99);
+    float v=clamp(0.18+sqrt(max(d.y,0.0))*0.80,0.18,0.98);
+    vec3 c=texture2D(skyMap,vec2(u,v)).rgb;
+    // End the authored panorama in a quiet clear-air sector. Mirroring the
+    // two painted edges would create an obvious chevron when turning through it.
+    float seam=1.0-smoothstep(0.0,0.075,min(u,1.0-u));
+    vec3 clearAir=mix(vec3(0.76,0.82,0.88),vec3(0.28,0.47,0.70),smoothstep(0.02,0.80,d.y));
+    c=mix(c,clearAir,seam);
+    c=mix(c,vec3(0.25,0.43,0.66),smoothstep(0.82,0.99,d.y));
+    // Dissolve the image's low edge rather than stretching it below the horizon.
+    c=mix(vec3(0.76,0.82,0.88),c,smoothstep(-0.015,0.055,d.y));
+    return c;
+  }
+`;
 export const SKY_VS = `
   varying vec3 vDir;
   void main(){ vDir=position; vec4 p=projectionMatrix*modelViewMatrix*vec4(position,1); gl_Position=p.xyww; }
 `;
 export const SKY_FS = `
   varying vec3 vDir; uniform vec3 sunDir; uniform vec3 horizon;
-  ${PAINT}
+  ${PAINTED_SKY}
   void main(){
-    vec3 d=normalize(vDir);
-    float h=max(d.y,0.0), facing=pow(max(dot(d,sunDir),0.0),5.0);
-    vec3 col=mix(horizon,vec3(0.25,0.43,0.62),pow(smoothstep(0.0,0.9,h),0.7));
-    col=mix(col,vec3(0.93,0.78,0.60),facing*(1.0-smoothstep(0.15,0.65,h))*0.55);
-    col+=vec3(0.13,0.075,0.025)*pow(max(dot(d,sunDir),0.0),24.0);
-    // High, brushed cirrus: long strokes, anchored in sky direction, never to screen roll.
-    vec2 p=d.xz/max(0.18,h+0.2);
-    float strokes=noise(p*vec2(3.0,38.0))+noise(p*vec2(8.0,75.0))*0.22;
-    float cirrus=smoothstep(0.73,0.91,strokes)*smoothstep(0.15,0.5,h)*(1.0-smoothstep(0.72,0.95,h));
-    col=mix(col,vec3(0.85,0.85,0.83),cirrus*0.07);
-    float s=dot(d,sunDir);
-    col=mix(col,vec3(1.0,0.94,0.78),smoothstep(0.9992,0.99965,s));
-    col+=(hash(floor(gl_FragCoord.xy))-0.5)*0.003;
+    vec3 d=normalize(vDir), col=paintedSky(d);
+    float solar=max(dot(d,sunDir),0.0);
+    col=mix(col,vec3(0.98,0.86,0.70),pow(solar,24.0)*0.12);
+    col=mix(col,vec3(1.0,0.97,0.86),smoothstep(0.99986,0.99994,solar)*0.55);
+    col=mix(col,horizon,(1.0-smoothstep(0.0,0.08,d.y))*0.26);
     gl_FragColor=vec4(col,1);
   }
 `;
-
 export const SEA_VS = `
   varying vec3 vWorld;
   void main(){ vec4 w=modelMatrix*vec4(position,1); vWorld=w.xyz; gl_Position=projectionMatrix*viewMatrix*w; }
@@ -45,41 +54,36 @@ export const SEA_FS = `
   varying vec3 vWorld; uniform vec3 camPos; uniform float time; uniform vec3 sunDir;
   uniform vec3 fogColor; uniform float fogNear; uniform float fogFar;
   ${PAINT}
+  ${PAINTED_SKY}
   void main(){
     vec2 p=vWorld.xz; float d=length(vWorld-camPos);
-    float wash=noise(p*vec2(0.00055,0.0018));
-    vec3 col=mix(vec3(0.20,0.34,0.43),vec3(0.32,0.49,0.56),smoothstep(0.35,0.64,wash));
+    vec3 V=normalize(camPos-vWorld), R=reflect(-V,vec3(0,1,0));
+    float wash=noise(p*0.00018)*0.65+noise(p*0.00047)*0.35;
+    vec3 deep=mix(vec3(0.075,0.23,0.34),vec3(0.16,0.35,0.43),wash);
+    float fres=pow(1.0-clamp(V.y,0.0,1.0),3.0);
+    vec3 reflected=paintedSky(R);
+    // Broad reflected sky values replace the R1 directional brush bars.
+    vec3 col=mix(deep,reflected,0.20+fres*0.46);
+    float solar=max(dot(R,sunDir),0.0), road=pow(solar,72.0);
     float footprint=max(length(dFdx(p)),length(dFdy(p)));
-    float detail=1.0-smoothstep(18.0,100.0,footprint);
-    float bands=noise(p*vec2(0.0013,0.014)+vec2(time*0.008,0));
-    col=mix(col,vec3(0.50,0.63,0.65),smoothstep(0.60,0.78,bands)*0.14*detail);
-    // Broken horizontal gold strokes, instead of a metallic PBR highlight.
-    vec3 V=normalize(camPos-vWorld);
-    float align=dot(normalize(V.xz),normalize(-sunDir.xz));
-    float path=pow(max(align,0.0),32.0)*(1.0-smoothstep(0.12,0.9,V.y));
-    float marks=noise(p*vec2(0.0015,0.012)+vec2(time*0.018,0));
-    col=mix(col,vec3(0.93,0.79,0.58),path*smoothstep(0.52,0.78,marks)*0.65*detail);
-    float crests=noise(p*vec2(0.025,0.16)+vec2(time*0.07,0));
-    col=mix(col,vec3(0.74,0.80,0.77),smoothstep(0.77,0.83,crests)*(1.0-smoothstep(700.0,3500.0,d))*0.45);
+    float detail=1.0-smoothstep(4.0,40.0,footprint);
+    float shimmer=noise(p*0.008+vec2(time*0.018,0.0));
+    col=mix(col,vec3(0.99,0.89,0.70),road*(0.34+smoothstep(0.48,0.78,shimmer)*detail*0.32));
+    col+=vec3(0.11,0.075,0.035)*pow(solar,12.0);
+    float ripple=pow(noise(p*0.035+time*0.04),12.0);
+    col+=vec3(0.10,0.14,0.15)*ripple*(1.0-smoothstep(250.0,1500.0,d))*detail;
     vec3 ray=normalize(vWorld-camPos);
-    float facing=pow(max(dot(ray,sunDir),0.0),5.0);
-    vec3 haze=mix(fogColor,vec3(0.93,0.78,0.60),facing*0.55);
-    haze+=vec3(0.13,0.075,0.025)*pow(max(dot(ray,sunDir),0.0),24.0);
+    vec3 haze=mix(fogColor,paintedSky(vec3(ray.x,0.0,ray.z)),0.72);
     col=mix(col,haze,smoothstep(fogNear,fogFar,d));
-    col+=(hash(floor(gl_FragCoord.xy))-0.5)*0.003;
     gl_FragColor=vec4(col,1);
   }
 `;
-
 export const CLOUD_VS = `
-  attribute vec2 aTile;
-  uniform vec3 camPos;
+  attribute vec2 aTile; uniform vec3 camPos;
   varying vec2 vUv; varying vec3 vWorld;
   void main(){
-    // Face the camera with world-up projected onto the card. This preserves the
-    // horizon under roll, while clouds also remain visible in steep dives.
     vec3 center=(modelMatrix*instanceMatrix*vec4(0,0,0,1)).xyz;
-    vec3 toCam=normalize(camPos-center);
+    vec3 toCam=normalize(camPos-center+vec3(0,0,0.0001));
     vec3 right=cross(vec3(0,1,0),toCam);
     if(length(right)<0.02) right=vec3(viewMatrix[0][0],viewMatrix[1][0],viewMatrix[2][0]);
     right=normalize(right);
@@ -94,48 +98,57 @@ export const CLOUD_FS = `
   uniform sampler2D cloudMap; uniform vec3 camPos; uniform vec3 fogColor;
   uniform float fogNear; uniform float fogFar;
   varying vec2 vUv; varying vec3 vWorld;
+  ${PAINTED_SKY}
   void main(){
     vec4 paint=texture2D(cloudMap,vUv);
     float d=length(vWorld-camPos);
-    // MSAA alpha coverage supplies soft edges with depth writes, avoiding unsorted
-    // translucent billboards. Fade near the aircraft so a cloud never hides combat.
-    float a=smoothstep(0.06,0.85,paint.a)*smoothstep(180.0,950.0,d);
+    float a=paint.a*smoothstep(350.0,1500.0,d)*0.72;
     if(a<0.025) discard;
-    vec3 col=mix(paint.rgb,fogColor,smoothstep(fogNear,fogFar,d)*0.72);
-    gl_FragColor=vec4(col,a);
+    vec3 background=paintedSky(vWorld-camPos);
+    vec3 haze=mix(fogColor,background,0.62);
+    float edge=(1.0-smoothstep(0.18,0.88,paint.a))*0.72;
+    vec3 col=mix(paint.rgb,background,edge);
+    col=mix(col,haze,smoothstep(fogNear,fogFar,d)*0.60);
+    gl_FragColor=vec4(col,a*(1.0-smoothstep(fogNear,fogFar,d)*0.20));
   }
 `;
-
 export const AIRFRAME_VS = `
-  varying vec3 vPaint; varying vec3 vNormal; varying vec3 vEye;
+  attribute vec3 smoothNormal;
+  varying vec3 vPaint; varying vec3 vNormal; varying vec3 vEye; varying vec3 vWorldNormal;
   #include <fog_pars_vertex>
   void main(){
     vPaint=color;
-    vNormal=normalize(normalMatrix*normal);
+    // Keep flat wing planes while smoothing the fuselage shoulders.
+    float curve=0.65*(1.0-pow(abs(normal.y),6.0));
+    vec3 n=normalize(mix(normal,smoothNormal,curve));
+    vNormal=normalize(normalMatrix*n); vWorldNormal=normalize(mat3(modelMatrix)*n);
     vec4 mvPosition=modelViewMatrix*vec4(position,1);
-    vEye=-mvPosition.xyz;
-    gl_Position=projectionMatrix*mvPosition;
+    vEye=-mvPosition.xyz; gl_Position=projectionMatrix*mvPosition;
     #include <fog_vertex>
   }
 `;
 export const AIRFRAME_FRAGMENT = `
   uniform vec3 sunDir; uniform vec3 tint;
-  varying vec3 vPaint; varying vec3 vNormal; varying vec3 vEye;
+  varying vec3 vPaint; varying vec3 vNormal; varying vec3 vEye; varying vec3 vWorldNormal;
   #include <fog_pars_fragment>
   void main(){
     vec3 N=normalize(vNormal), V=normalize(vEye);
     vec3 L=normalize((viewMatrix*vec4(sunDir,0)).xyz);
     float l=dot(N,L);
-    vec3 shade=mix(vec3(0.38,0.47,0.65),vec3(0.73,0.78,0.85),smoothstep(-0.18,-0.12,l));
-    shade=mix(shade,vec3(1.15,1.08,0.92),smoothstep(0.38,0.44,l));
-    vec3 col=vPaint*shade*tint;
-    float rim=smoothstep(0.72,0.94,1.0-max(dot(N,V),0.0))*smoothstep(0.05,0.55,l);
-    col=mix(col,vec3(0.83,0.77,0.62),rim*0.23);
-    // A deliberate narrow canopy glint; no metallic/specular BRDF.
-    float dark=1.0-smoothstep(0.035,0.10,dot(vPaint,vec3(0.21,0.72,0.07)));
-    float glint=smoothstep(0.94,0.965,dot(reflect(-L,N),V));
-    col=mix(col,vec3(0.70,0.82,0.85),glint*dark*0.55);
-    gl_FragColor=vec4(col,1);
+    // Continuous warm/cool areas with a broad, gentle terminator.
+    vec3 shade=mix(vec3(0.33,0.44,0.64),vec3(0.70,0.80,0.94),smoothstep(-0.65,0.35,l));
+    shade=mix(shade,vec3(1.15,1.06,0.90),smoothstep(0.04,0.88,l));
+    vec3 col=vPaint*shade;
+    float skyFacing=clamp(normalize(vWorldNormal).y*0.5+0.5,0.0,1.0);
+    float fres=pow(1.0-max(dot(N,V),0.0),3.0);
+    col+=vPaint*vec3(0.12,0.19,0.30)*skyFacing*(0.25+fres*0.65);
+    float dark=1.0-smoothstep(0.025,0.085,dot(vPaint,vec3(0.21,0.72,0.07)));
+    float shoulder=pow(max(dot(N,normalize(L+V)),0.0),mix(28.0,64.0,dark));
+    col+=vec3(0.84,0.78,0.65)*shoulder*mix(0.11,0.54,dark)*smoothstep(-0.10,0.45,l);
+    float rim=smoothstep(0.86,0.99,1.0-max(dot(N,V),0.0))*smoothstep(0.0,0.5,l);
+    col+=vec3(0.30,0.24,0.15)*rim*0.18;
+    col=mix(col,vec3(0.10,0.24,0.34),dark*fres*0.30);
+    gl_FragColor=vec4(col*tint,1);
     #include <fog_fragment>
     #include <tonemapping_fragment>
     #include <colorspace_fragment>

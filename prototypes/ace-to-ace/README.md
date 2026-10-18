@@ -2,10 +2,10 @@
 
 Skyfront Homeland 的第一個可玩入口（Issue #34）。一片海、一片天、F-16V 對 J-16。
 主要目標是驗證「飛行員 AI 本身好不好玩」，不是擬真度。
-另有一輪僅限本網頁原型的 [anime film 2D-look / NPR LookDev 小型風格實驗](docs/anime-film-lookdev.md)，
+目前進行僅限本網頁原型的 [anime film 2D-look / NPR LookDev 第二輪小型風格實驗](docs/anime-film-lookdev-r2.md)，
 不代表 Skyfront Homeland / Unreal 主專案的正式美術方向。
 
-- **3D 渲染成 2D 的視覺實驗**：三階冷暖明暗、克制的細色線、自製雲畫片與插畫海天；機型輪廓可辨識但非精確建模。
+- **背景美術 + 3D 空戰的視覺實驗**：原創天空畫、少量大型雲畫片、天空反射海面、柔和冷暖受光與極淡細色線；機型輪廓可辨識但非精確建模。
 - **街機空戰**：能量制飛行模型（轉彎速率在角速度峰值、拉 G 掉速、爬升換高度），簡化的飛彈 / 機砲 / 熱焰彈。
 - **AI 完全本機**：傳統遊戲 AI（狀態評估 + 戰術模式 + 機動控制器），runtime 無 LLM、無網路。
 - 與 `unreal/`、`cities/`、`tools/`（城市管線）完全隔離；本目錄不依賴也不修改它們。

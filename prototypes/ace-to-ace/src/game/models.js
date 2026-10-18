@@ -121,8 +121,8 @@ function addSmoothNormals(g) {
 // ---------------------------------------------------------------- F-16V
 export function buildF16(palette = {}) {
   const P = {
-    body: C(palette.body ?? 0xbac4c9), top: C(palette.top ?? 0xa2afb9), dark: C(0x3a4452),
-    radome: C(0x929dab), canopy: C(0x293c52), glint: C(0xd4e7e3), accent: C(palette.accent ?? 0x4a7e9b),
+    body: C(palette.body ?? 0x98a8b8), top: C(palette.top ?? 0x8396ab), dark: C(0x3a4452),
+    radome: C(0x7f8c9d), canopy: C(0x243c50), glint: C(0xc3d9de), accent: C(palette.accent ?? 0x4a7e9b),
     nozzle: C(0x4a4f57), intake: C(0x1c2128), missile: C(0xe8ecef),
   };
   const b = new Builder();
@@ -186,8 +186,8 @@ export function buildF16(palette = {}) {
 // ---------------------------------------------------------------- J-16 (Flanker family)
 export function buildJ16(palette = {}) {
   const P = {
-    body: C(palette.body ?? 0x81909f), top: C(palette.top ?? 0x718095), under: C(0xa2afb9), dark: C(0x2c333c),
-    radome: C(0xa9afb8), canopy: C(0x29394e), glint: C(0xd4e7e3), accent: C(palette.accent ?? 0xb76a60),
+    body: C(palette.body ?? 0x778ba1), top: C(palette.top ?? 0x627a96), under: C(0x8c9eaf), dark: C(0x2c333c),
+    radome: C(0x92a0ae), canopy: C(0x24384e), glint: C(0xc3d9de), accent: C(palette.accent ?? 0xb76a60),
     nozzle: C(0x44484f), intake: C(0x161a20), missile: C(0xe6e9ec),
   };
   const b = new Builder();
