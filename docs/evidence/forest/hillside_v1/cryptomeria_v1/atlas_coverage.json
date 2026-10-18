@@ -1,0 +1,164 @@
+{
+ "atlas_coverage": [
+  {
+   "proto": 0,
+   "view": "top",
+   "coverage": 0.036540985107421875
+  },
+  {
+   "proto": 0,
+   "view": "end",
+   "coverage": 0.085052490234375
+  },
+  {
+   "proto": 1,
+   "view": "top",
+   "coverage": 0.0342864990234375
+  },
+  {
+   "proto": 1,
+   "view": "end",
+   "coverage": 0.07030868530273438
+  },
+  {
+   "proto": 2,
+   "view": "top",
+   "coverage": 0.032787322998046875
+  },
+  {
+   "proto": 2,
+   "view": "end",
+   "coverage": 0.06746673583984375
+  },
+  {
+   "proto": 3,
+   "view": "top",
+   "coverage": 0.037139892578125
+  },
+  {
+   "proto": 3,
+   "view": "end",
+   "coverage": 0.11680984497070312
+  },
+  {
+   "proto": 4,
+   "view": "top",
+   "coverage": 0.03066253662109375
+  },
+  {
+   "proto": 4,
+   "view": "end",
+   "coverage": 0.10140228271484375
+  },
+  {
+   "proto": 5,
+   "view": "top",
+   "coverage": 0.02651214599609375
+  },
+  {
+   "proto": 5,
+   "view": "end",
+   "coverage": 0.0597991943359375
+  },
+  {
+   "proto": 6,
+   "view": "top",
+   "coverage": 0.04312896728515625
+  },
+  {
+   "proto": 6,
+   "view": "end",
+   "coverage": 0.11385345458984375
+  },
+  {
+   "proto": 7,
+   "view": "top",
+   "coverage": 0.031475067138671875
+  },
+  {
+   "proto": 7,
+   "view": "end",
+   "coverage": 0.09592819213867188
+  },
+  {
+   "proto": "clump0",
+   "view": "ctop",
+   "coverage": 0.237701416015625
+  },
+  {
+   "proto": "clump0",
+   "view": "cside",
+   "coverage": 0.2623710632324219
+  },
+  {
+   "proto": "clump1",
+   "view": "ctop",
+   "coverage": 0.2346038818359375
+  },
+  {
+   "proto": "clump1",
+   "view": "cside",
+   "coverage": 0.23882675170898438
+  },
+  {
+   "proto": "clump2",
+   "view": "ctop",
+   "coverage": 0.2772064208984375
+  },
+  {
+   "proto": "clump2",
+   "view": "cside",
+   "coverage": 0.261810302734375
+  },
+  {
+   "proto": "clump3",
+   "view": "ctop",
+   "coverage": 0.23256301879882812
+  },
+  {
+   "proto": "clump3",
+   "view": "cside",
+   "coverage": 0.22301864624023438
+  },
+  {
+   "proto": "clump4",
+   "view": "ctop",
+   "coverage": 0.24761199951171875
+  },
+  {
+   "proto": "clump4",
+   "view": "cside",
+   "coverage": 0.22464752197265625
+  },
+  {
+   "proto": "clump5",
+   "view": "ctop",
+   "coverage": 0.24065399169921875
+  },
+  {
+   "proto": "clump5",
+   "view": "cside",
+   "coverage": 0.2240447998046875
+  },
+  {
+   "proto": "clump6",
+   "view": "ctop",
+   "coverage": 0.2861213684082031
+  },
+  {
+   "proto": "clump6",
+   "view": "cside",
+   "coverage": 0.3107757568359375
+  },
+  {
+   "proto": "clump7",
+   "view": "ctop",
+   "coverage": 0.23547744750976562
+  },
+  {
+   "proto": "clump7",
+   "view": "cside",
+   "coverage": 0.22730636596679688
+  }
+ ]
+}

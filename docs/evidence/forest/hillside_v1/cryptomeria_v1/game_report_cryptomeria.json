@@ -1,0 +1,123 @@
+{
+ "golden": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world-cryptounreal\\out\\treegen\\cryptomeria\\v2\\v2_cryptomeria_japonica.blend",
+ "skeleton_nodes": 2035,
+ "instances": 4313,
+ "bake_s": "reused",
+ "clumps": {
+  "0_ctop": {
+   "sprays": 96,
+   "tile_m": 3.473
+  },
+  "0_cside": {
+   "sprays": 96,
+   "tile_m": 3.473
+  },
+  "1_ctop": {
+   "sprays": 75,
+   "tile_m": 3.417
+  },
+  "1_cside": {
+   "sprays": 75,
+   "tile_m": 3.417
+  },
+  "2_ctop": {
+   "sprays": 169,
+   "tile_m": 3.83
+  },
+  "2_cside": {
+   "sprays": 169,
+   "tile_m": 4.064
+  },
+  "3_ctop": {
+   "sprays": 81,
+   "tile_m": 3.902
+  },
+  "3_cside": {
+   "sprays": 81,
+   "tile_m": 3.902
+  },
+  "4_ctop": {
+   "sprays": 85,
+   "tile_m": 3.957
+  },
+  "4_cside": {
+   "sprays": 85,
+   "tile_m": 3.957
+  },
+  "5_ctop": {
+   "sprays": 62,
+   "tile_m": 3.6
+  },
+  "5_cside": {
+   "sprays": 62,
+   "tile_m": 3.6
+  },
+  "6_ctop": {
+   "sprays": 81,
+   "tile_m": 3.385
+  },
+  "6_cside": {
+   "sprays": 81,
+   "tile_m": 3.385
+  },
+  "7_ctop": {
+   "sprays": 70,
+   "tile_m": 3.3
+  },
+  "7_cside": {
+   "sprays": 70,
+   "tile_m": 3.3
+  }
+ },
+ "lods": [
+  {
+   "name": "lod0",
+   "branch_tris": 4728,
+   "card_tris": 10352,
+   "cards": 5176,
+   "sprays": 2588,
+   "card_enlarge": 1.291,
+   "total_tris": 15080,
+   "verts": 23568,
+   "glb_option": "{'export_vertex_color': 'ACTIVE'}",
+   "glb_bytes": 1035704
+  },
+  {
+   "name": "lod1",
+   "branch_tris": 920,
+   "card_tris": 460,
+   "cards": 230,
+   "sprays": 115,
+   "card_enlarge": 1.0,
+   "total_tris": 1380,
+   "verts": 1443,
+   "glb_option": "{'export_vertex_color': 'ACTIVE'}",
+   "glb_bytes": 68472
+  },
+  {
+   "name": "lod2",
+   "branch_tris": 630,
+   "card_tris": 268,
+   "cards": 134,
+   "sprays": 67,
+   "card_enlarge": 1.0,
+   "total_tris": 898,
+   "verts": 908,
+   "glb_option": "{'export_vertex_color': 'ACTIVE'}",
+   "glb_bytes": 44172
+  },
+  {
+   "name": "lod3",
+   "branch_tris": 455,
+   "card_tris": 152,
+   "cards": 76,
+   "sprays": 38,
+   "card_enlarge": 1.124,
+   "total_tris": 607,
+   "verts": 581,
+   "glb_option": "{'export_vertex_color': 'ACTIVE'}",
+   "glb_bytes": 29348
+  }
+ ],
+ "elapsed_s": 0.7
+}

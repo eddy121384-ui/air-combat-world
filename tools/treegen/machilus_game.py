@@ -41,13 +41,18 @@ SPECIES = os.environ.get("ACW_TL_SPECIES", "machilus")
 if SPECIES == "acacia":
     import acacia_confusa as mt  # noqa: E402
     OBJ, STEM = "AcaciaConfusa", "acacia"
+elif SPECIES == "cryptomeria":  # 柳杉 unreal v1; set ACW_TG_PARAMS to the golden's params file (v2) so mt.build() reproduces it
+    import cryptomeria_japonica as mt  # noqa: E402
+    OBJ, STEM = "CryptomeriaJaponica", "cryptomeria"
 else:
     import machilus_thunbergii as mt  # noqa: E402
     OBJ, STEM = "MachilusThunbergii", "machilus"
 
 argv = sys.argv[sys.argv.index("--") + 1 :]
 GOLDEN, OUT = os.path.abspath(argv[0]), os.path.abspath(argv[1])
-GOLDEN_STATS = os.path.join(os.path.dirname(GOLDEN), "v1_stats.json")
+# golden stats: "<tag>_stats.json" beside "<tag>_<species>.blend" (v2 柳杉); else the v1 name every earlier golden uses
+_tag_stats = os.path.join(os.path.dirname(GOLDEN), os.path.basename(GOLDEN).split("_")[0] + "_stats.json")
+GOLDEN_STATS = _tag_stats if os.path.exists(_tag_stats) else os.path.join(os.path.dirname(GOLDEN), "v1_stats.json")
 TILE = 512
 ATLAS = 4 * TILE
 for d in ("glb", "textures", "bake"):
@@ -130,6 +135,20 @@ PROFILES["acacia_clump"] = [
 # fourth 相思樹 chain after the first perf run (p8: B costs +31-39 % over Mix T at 50-200 m, shadow depths half of it): acacia_clump with
 # "tight" cards - each quad / UV rect cropped to its foliage extent (spray tiles are long and thin inside square tiles); same pixels.
 PROFILES["acacia_tight"] = [dict(lod, tight=True) for lod in PROFILES["acacia_clump"]]
+# 柳杉 unreal v1 (one chain, built from the 相思樹 lessons, no parameter search): tight cards everywhere; LOD0 = cord-pad cards with
+# top + end views; LOD1 / LOD2 / LOD3 = clump cards of real crown chunks (thin cords would turn into speckle, PR #36 a5) at 2.4x /
+# 1.4x / 0.8x one full clump cover.
+PROFILES["cryptomeria"] = [
+    dict(name="lod0", keep=0.6, views=("top", "end"), crown_w=0.5, min_r=0.02, tight=True,
+         sides=lambda r: 10 if r > 0.2 else 8 if r > 0.08 else 6 if r > 0.03 else 4, sub=lambda r: 2 if r > 0.1 else 1),
+    # LOD1 also from clump tiles: single cord-pad tiles are 3-12 % covered and would speckle at 52-135 m once enlarged (相思樹 a1 / a5)
+    dict(name="lod1", clump_cover=2.4, keep=0.0, views=("top", "end"), crown_w=0.65, min_r=0.04, tight=True,
+         sides=lambda r: 8 if r > 0.15 else 6 if r > 0.06 else 4, sub=lambda r: 1),
+    dict(name="lod2", clump_cover=1.4, keep=0.0, views=("top", "end"), crown_w=0.8, min_r=0.1, tight=True,
+         sides=lambda r: 6 if r > 0.2 else 4, sub=lambda r: 1),
+    dict(name="lod3", clump_cover=0.8, keep=0.0, views=("top",), crown_w=0.9, min_r=0.2, tight=True,
+         sides=lambda r: 5 if r > 0.25 else 4, sub=lambda r: 1),
+]
 PROFILE = os.environ.get("ACW_TL_PROFILE", "v1")
 LODS = PROFILES[PROFILE]
 REUSE_BAKE = os.environ.get("ACW_TL_REUSE_BAKE") == "1"  # reuse <out>/bake/frames.json + the committed atlas (non-default profiles)
@@ -332,7 +351,7 @@ def tile_rect(k, view):
 # of a clump profile place a few hundred clump cards instead of single-spray cards.
 CLUMP_VIEWS = ("ctop", "cside")
 CLUMP_K, CLUMP_R = 8, 1.2
-ATLAS_COLS = 8 if any(lod.get("n_clumps") for lod in LODS) else 4
+ATLAS_COLS = 8 if any(lod.get("n_clumps") or lod.get("clump_cover") for lod in LODS) else 4
 
 
 def outward_h(p):
@@ -427,7 +446,9 @@ def build_clump_cards(lod, frames, rng):
     a full clump cover (n_inst / mean sprays per clump clumps)."""
     _, depth = crown_normal_depth(I_pos.astype(np.float64))
     w = np.where(depth < mt.P["shell_depth"], 1.0, 0.25)
-    M = int(lod["n_clumps"])
+    n_bar0 = float(np.mean([frames[(k, "ctop")]["n"] for k in range(CLUMP_K)]))
+    # n_clumps (absolute, 相思樹) or clump_cover (multiple of one full clump cover = n_inst / sprays per clump, 柳杉)
+    M = int(lod["n_clumps"]) if lod.get("n_clumps") else int(round(lod["clump_cover"] * n_inst / n_bar0))
     idx = np.sort(rng.choice(n_inst, size=M, replace=False, p=w / w.sum()))
     n_bar = float(np.mean([frames[(k, "ctop")]["n"] for k in range(CLUMP_K)]))
     enlarge = max(1.0, math.sqrt(n_inst / n_bar / M))
@@ -570,7 +591,7 @@ def build_branches(lod):
 
 def make_lod_object(lod, frames, rng, m_bark, m_leaf):
     bv, bn, buv, bcol, bf, btris = build_branches(lod)
-    cv, cn, cuv, ccol, cf, cinfo = (build_clump_cards if lod.get("n_clumps") else build_cards)(lod, frames, rng)
+    cv, cn, cuv, ccol, cf, cinfo = (build_clump_cards if lod.get("n_clumps") or lod.get("clump_cover") else build_cards)(lod, frames, rng)
     off = len(bv)
     verts = np.vstack([bv, cv])
     faces = list(bf) + [tuple(i + off for i in fc) for fc in cf]

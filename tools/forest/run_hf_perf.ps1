@@ -1,13 +1,13 @@
-# Hillside forest look-dev v1: EXPLORATORY GPU cost (standalone -game 1080p, UE CSV profiler, fixed 60 fps step). Not a benchmark.
+﻿# Hillside forest look-dev v1: EXPLORATORY GPU cost (standalone -game 1080p, UE CSV profiler, fixed 60 fps step). Not a benchmark.
 # Per round: for each still view (static camera) and the flyover (auto-play sequence) one forest and one empty-forest run of the same map
 # pair; the order inside a pair reverses every round (capture-harness lesson: "layer on first" reads +1-2 ms of fake cost).
 # -MixRev adds a condition "mix" (the forest maps of that revision, e.g. the mix v0 build m1); -ExtraRevs adds one condition per revision
 # ("x<rev>", e.g. xm3), all interleaved in the same session.
 #   run_hf_perf.ps1 -Rev r3 -Prefix p1 -Rounds 2 [-Views agl50,flight] [-MixRev m1] [-ExtraRevs m3,m7]
 # Host: Intel UHD 770 only. One UE process at a time; nothing else heavy running (shared package power).
-param([Parameter(Mandatory)][ValidatePattern('^[rm][0-9]+$')][string]$Rev, [Parameter(Mandatory)][ValidatePattern('^[A-Za-z0-9]+$')][string]$Prefix,
+param([Parameter(Mandatory)][ValidatePattern('^[rmaj][0-9]+$')][string]$Rev, [Parameter(Mandatory)][ValidatePattern('^[A-Za-z0-9]+$')][string]$Prefix,
       [int]$Rounds = 2, [int]$StillFrames = 260, [string[]]$Views = @('agl50', 'agl200', 'agl500', 'flight'),
-      [ValidatePattern('^([rm][0-9]+)?$')][string]$MixRev = '', [string[]]$ExtraRevs = @(), [string]$EngineRoot = 'C:\Program Files\Epic Games\UE_5.8')
+      [ValidatePattern('^([rmaj][0-9]+)?$')][string]$MixRev = '', [string[]]$ExtraRevs = @(), [string]$EngineRoot = 'C:\Program Files\Epic Games\UE_5.8')
 $ErrorActionPreference = 'Stop'
 $RepoRoot = (Resolve-Path (Join-Path $PSScriptRoot '..\..')).Path
 $project = Join-Path $RepoRoot 'unreal\TreeLookdev\TreeLookdev.uproject'

@@ -1,0 +1,49 @@
+{
+ "rev": "j1",
+ "stills": {
+  "lineup_eye": {
+   "frame": 47,
+   "agl_m": 5.0,
+   "pitch_deg": 6.0,
+   "tree_pixel_share": 0.0937,
+   "block_pixel_share": 0.0,
+   "canopy_cover_in_block_screen": 0.0,
+   "tree_px_median_saturation": 0.232,
+   "tree_px_green_hue_share": 0.842,
+   "tree_px_median_value": 0.384,
+   "lod_calc_in_frustum": [],
+   "native_material_guard": "PASS"
+  },
+  "lineup_oblique": {
+   "frame": 95,
+   "agl_m": 58.48902556038351,
+   "pitch_deg": -32.0,
+   "tree_pixel_share": 0.0866,
+   "block_pixel_share": 0.0,
+   "canopy_cover_in_block_screen": 0.0,
+   "tree_px_median_saturation": 0.265,
+   "tree_px_green_hue_share": 0.753,
+   "tree_px_median_value": 0.333,
+   "lod_calc_in_frustum": [],
+   "native_material_guard": "PASS"
+  },
+  "lineup_aerial": {
+   "frame": 143,
+   "agl_m": 145.99999999999997,
+   "pitch_deg": -45.0,
+   "tree_pixel_share": 0.0282,
+   "block_pixel_share": 0.0,
+   "canopy_cover_in_block_screen": 0.0,
+   "tree_px_median_saturation": 0.233,
+   "tree_px_green_hue_share": 0.62,
+   "tree_px_median_value": 0.361,
+   "lod_calc_in_frustum": [],
+   "native_material_guard": "FAIL"
+  }
+ },
+ "guard": {
+  "native_material_guard": "FAIL",
+  "rule": "tree pixels: median saturation >= 0.12 and >= 70 % hue 50-170 deg, tree share > 2 %"
+ },
+ "flight": {}
+}

@@ -1,4 +1,4 @@
-"""Assemble the game textures for the 紅楠 game version (run with the project venv: numpy + Pillow).
+﻿"""Assemble the game textures for the 紅楠 game version (run with the project venv: numpy + Pillow).
 
 python tools/treegen/machilus_game_textures.py <game_out_dir>
 
@@ -19,7 +19,7 @@ from PIL import Image
 OUT = sys.argv[1]
 # optional 2nd argument "acacia" (相思樹 lookdev v1): T_Acacia_* names + fissured bark; default = 紅楠, unchanged
 SPECIES = sys.argv[2] if len(sys.argv) > 2 else "machilus"
-TEX_STEM = "T_Acacia" if SPECIES == "acacia" else "T_Machilus"
+TEX_STEM = {"acacia": "T_Acacia", "cryptomeria": "T_Cryptomeria"}.get(SPECIES, "T_Machilus")  # cryptomeria: 柳杉 unreal v1
 # optional 3rd argument "wide": 2:1 atlas with the clump tiles of a machilus_game.py clump profile in columns 4-7 -> <stem>_LeafAtlasW_*
 WIDE = len(sys.argv) > 3 and sys.argv[3] == "wide"
 BAKE = os.path.join(OUT, "bake")
@@ -150,11 +150,11 @@ def bark(size=512, seed=7):
     Image.fromarray(((n * 0.5 + 0.5) * 255 + 0.5).astype(np.uint8), "RGB").save(os.path.join(TEX, "T_Machilus_Bark_N.png"))
 
 
-def bark_fissured(size=512, seed=11):
+def bark_fissured(size=512, seed=11, palette=None):
     """相思樹 bark tile (golden tg_materials.fissured_bark palette): grey-brown with pale patches and wandering longitudinal
     fissures (dark grooves along v = along the branch), tileable."""
     rng = np.random.default_rng(seed)
-    base, pale, dark = (0.07, 0.056, 0.044), (0.12, 0.112, 0.098), (0.022, 0.018, 0.015)
+    base, pale, dark = palette or ((0.07, 0.056, 0.044), (0.12, 0.112, 0.098), (0.022, 0.018, 0.015))
     mott = 0.5 + 0.08 * periodic_noise(rng, size, beta=2.2, f_lo=1.0, f_hi=12.0)
     col = ramp(mott, [(0.4, base), (0.62, pale)])
     # fissures: 9 periodic grooves around the circumference, displaced by a smooth noise that varies mostly along v
@@ -170,11 +170,16 @@ def bark_fissured(size=512, seed=11):
     gy = (np.roll(h, -1, 0) - np.roll(h, 1, 0)) * 0.5
     n = np.stack([-gx * 2.4, gy * 2.4, np.ones_like(h)], -1)
     n /= np.linalg.norm(n, axis=-1, keepdims=True)
-    Image.fromarray((lin_to_srgb(col) * 255 + 0.5).astype(np.uint8), "RGB").save(os.path.join(TEX, "T_Acacia_Bark_BC.png"))
-    Image.fromarray(((n * 0.5 + 0.5) * 255 + 0.5).astype(np.uint8), "RGB").save(os.path.join(TEX, "T_Acacia_Bark_N.png"))
+    Image.fromarray((lin_to_srgb(col) * 255 + 0.5).astype(np.uint8), "RGB").save(os.path.join(TEX, TEX_STEM + "_Bark_BC.png"))
+    Image.fromarray(((n * 0.5 + 0.5) * 255 + 0.5).astype(np.uint8), "RGB").save(os.path.join(TEX, TEX_STEM + "_Bark_N.png"))
 
 
 cover = atlas()
-bark_fissured() if SPECIES == "acacia" else bark()
+if SPECIES == "acacia":
+    bark_fissured()
+elif SPECIES == "cryptomeria":  # 柳杉 reddish-brown stringy bark (golden fissured_bark palette)
+    bark_fissured(seed=13, palette=((0.10, 0.048, 0.028), (0.15, 0.10, 0.075), (0.03, 0.015, 0.01)))
+else:
+    bark()
 json.dump(dict(atlas_coverage=cover), open(os.path.join(TEX, "textures_report.json"), "w"), indent=1)
 print("TEXTURES_OK", os.listdir(TEX))
