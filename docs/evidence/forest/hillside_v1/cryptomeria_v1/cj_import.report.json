@@ -1,0 +1,154 @@
+{
+  "status": "PASS_AC_IMPORT",
+  "textures": {
+    "T_Cryptomeria_LeafAtlas_BC": {
+      "path": "/Game/TreeLookdev/Textures/T_Cryptomeria_LeafAtlas_BC",
+      "size": [
+        4096,
+        2048
+      ],
+      "srgb": true
+    },
+    "T_Cryptomeria_LeafAtlas_N": {
+      "path": "/Game/TreeLookdev/Textures/T_Cryptomeria_LeafAtlas_N",
+      "size": [
+        4096,
+        2048
+      ],
+      "srgb": false
+    },
+    "T_Cryptomeria_Bark_BC": {
+      "path": "/Game/TreeLookdev/Textures/T_Cryptomeria_Bark_BC",
+      "size": [
+        512,
+        512
+      ],
+      "srgb": true
+    },
+    "T_Cryptomeria_Bark_N": {
+      "path": "/Game/TreeLookdev/Textures/T_Cryptomeria_Bark_N",
+      "size": [
+        512,
+        512
+      ],
+      "srgb": false
+    }
+  },
+  "materials": {
+    "/Game/TreeLookdev/Materials/M_TL_Cryptomeria_LeafCards": {
+      "used_with_instanced_static_meshes": true,
+      "blend_mode": "<BlendMode.BLEND_MASKED: 1>",
+      "two_sided": true
+    },
+    "/Game/TreeLookdev/Materials/M_TL_Cryptomeria_Bark": {
+      "used_with_instanced_static_meshes": true,
+      "blend_mode": "<BlendMode.BLEND_OPAQUE: 0>",
+      "two_sided": false
+    }
+  },
+  "error": null,
+  "import_lods": {
+    "1": 1,
+    "2": 2,
+    "3": 3
+  },
+  "asset": "/Game/HillsideForest/Trees/Cryptomeria/cryptomeria_cryptomeria_lod0/StaticMeshes/cryptomeria_cryptomeria_lod0",
+  "mesh": {
+    "lods": 4,
+    "screens": [
+      1.0,
+      0.5,
+      0.15,
+      0.06
+    ],
+    "triangles": [
+      15080,
+      1380,
+      898,
+      607
+    ],
+    "vertices": [
+      23568,
+      1443,
+      908,
+      581
+    ],
+    "sections": [
+      2,
+      2,
+      2,
+      2
+    ],
+    "section_slots": [
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        1
+      ]
+    ],
+    "slots": [
+      "Bark=/Game/TreeLookdev/Materials/M_TL_Cryptomeria_Bark",
+      "LeafCards=/Game/TreeLookdev/Materials/M_TL_Cryptomeria_LeafCards"
+    ],
+    "sphere_radius_cm": 1278.2136178705605,
+    "bounds_origin_cm": [
+      25.531143188476562,
+      -45.192108154296875,
+      1265.7576298713684
+    ],
+    "bounds_extent_cm": [
+      529.1584320068359,
+      498.0546569824219,
+      1275.8947138786316
+    ]
+  },
+  "leaf_defaults": {
+    "TintLo": [
+      0.86,
+      0.88,
+      0.8
+    ],
+    "TintHi": [
+      1.14,
+      1.1,
+      0.96
+    ],
+    "OcclMin": 0.3,
+    "Brightness": 0.42,
+    "SSSColor": [
+      0.8,
+      0.95,
+      0.3
+    ],
+    "SSS": 0.45,
+    "NormalFlatten": 0.4,
+    "Roughness": 0.7,
+    "Specular": 0.18
+  },
+  "bark_defaults": {
+    "TwigColor": [
+      0.07,
+      0.045,
+      0.025
+    ],
+    "BarkBrightness": 0.5,
+    "Roughness": 0.9
+  },
+  "dest": "/Game/HillsideForest/Trees/Cryptomeria",
+  "profile": "cryptomeria",
+  "mesh_only": false,
+  "leaf_tag": null,
+  "clip": 0.25,
+  "species": "cryptomeria"
+}

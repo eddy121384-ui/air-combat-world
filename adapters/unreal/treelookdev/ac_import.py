@@ -20,13 +20,16 @@ import unreal  # noqa: E402
 from tl_common import MAT_DIR, TEX_DIR, ensure_dir, lib, mel, tools, write_report  # noqa: E402
 
 GAME = Path(os.environ["ACW_AC_GAME"])
+# species (柳杉 unreal v1): ACW_AC_SPECIES=cryptomeria -> T_Cryptomeria_* / M_TL_Cryptomeria_* / cryptomeria_<profile>_lod*.glb; default 相思樹
+SPECIES = os.environ.get("ACW_AC_SPECIES", "acacia")
+CAP = SPECIES.capitalize()
 DEST = os.environ.get("ACW_AC_DEST", "/Game/HillsideForest/Trees/Acacia")
 # LOD chain = machilus_game.py profile (acacia = first chain, acacia_dense = second); MESH_ONLY: reuse the saved acacia textures / materials
 PROFILE = os.environ.get("ACW_AC_PROFILE", "acacia")
 MESH_ONLY = os.environ.get("ACW_AC_MESH_ONLY") == "1"
 # LEAF_TAG (clump chain): import <stem>_LeafAtlasW_* as T_<tag>_LeafAtlas_* and create M_TL_<tag>_LeafCards; the bark material is reused
 LEAF_TAG = os.environ.get("ACW_AC_LEAF_TAG")
-ATLAS_STEM = os.environ.get("ACW_AC_ATLAS_STEM", "T_Acacia_LeafAtlas")
+ATLAS_STEM = os.environ.get("ACW_AC_ATLAS_STEM", "T_%s_LeafAtlas" % CAP)
 CLIP = float(os.environ.get("ACW_AC_CLIP", "0.4"))  # opacity mask clip and alpha-coverage threshold (lineup a4: 0.25 slightly fuller)
 SCREENS = [1.0, 0.5, 0.15, 0.06]
 # leaf defaults: the acacia atlas is already lighter / yellower than the 紅楠 one, so the tint pair is near-neutral; same stage brightness
@@ -108,7 +111,7 @@ def finish(mat, path):
         raise RuntimeError("ISM usage flag did not stick on " + path)
 
 
-def leaf_material(bc, nm, name="M_TL_Acacia_LeafCards"):
+def leaf_material(bc, nm, name="M_TL_%s_LeafCards" % CAP):
     """Same graph as tl_build.leaf_material (M_TL_LeafCards), acacia textures / defaults."""
     mat, path = new_material(name)
     foliage = next(getattr(unreal.MaterialShadingModel, n) for n in dir(unreal.MaterialShadingModel) if "FOLIAGE" in n.upper())
@@ -155,7 +158,7 @@ def leaf_material(bc, nm, name="M_TL_Acacia_LeafCards"):
 
 def bark_material(bc, nm):
     """Same graph as tl_build.bark_material (M_TL_Bark), acacia textures / twig colour."""
-    mat, path = new_material("M_TL_Acacia_Bark")
+    mat, path = new_material("M_TL_%s_Bark" % CAP)
     t = tex_param(mat, "BarkBC", bc, -900, 0)
     n = tex_param(mat, "BarkN", nm, -900, 400, normal=True)
     vc = E(mat, unreal.MaterialExpressionVertexColor, -900, -300)
@@ -190,7 +193,7 @@ def import_mesh(m_bark, m_leaf):
     mgr = unreal.InterchangeManager.get_interchange_manager_scripted()
     params = unreal.ImportAssetParameters()
     params.set_editor_property("is_automated", True)
-    glb = lambda k: str(GAME / "glb" / ("acacia_%s_lod%d.glb" % (PROFILE, k)))  # noqa: E731
+    glb = lambda k: str(GAME / "glb" / ("%s_%s_lod%d.glb" % (SPECIES, PROFILE, k)))  # noqa: E731
     if not mgr.import_asset(DEST, unreal.InterchangeManager.create_source_data(glb(0)), params):
         raise RuntimeError("Interchange import failed")
     found = [(str(p).split(".")[0], lib.load_asset(p)) for p in lib.list_assets(DEST, recursive=True)]
@@ -232,20 +235,20 @@ try:
         bc = import_texture(T / (ATLAS_STEM + "_BC.png"), "T_%s_LeafAtlas_BC" % LEAF_TAG, True, alpha_coverage=CLIP)
         nm = import_texture(T / (ATLAS_STEM + "_N.png"), "T_%s_LeafAtlas_N" % LEAF_TAG, False, normal=True)
         m_leaf = leaf_material(bc, nm, "M_TL_%s_LeafCards" % LEAF_TAG)
-        m_bark = lib.load_asset(MAT_DIR + "/M_TL_Acacia_Bark")
+        m_bark = lib.load_asset(MAT_DIR + "/M_TL_%s_Bark" % CAP)
         if m_bark is None:
-            raise RuntimeError("M_TL_Acacia_Bark missing")
+            raise RuntimeError("M_TL_%s_Bark missing" % CAP)
     elif MESH_ONLY:
-        m_leaf = lib.load_asset(MAT_DIR + "/" + os.environ.get("ACW_AC_LEAF_MAT", "M_TL_Acacia_LeafCards"))
-        m_bark = lib.load_asset(MAT_DIR + "/M_TL_Acacia_Bark")
+        m_leaf = lib.load_asset(MAT_DIR + "/" + os.environ.get("ACW_AC_LEAF_MAT", "M_TL_%s_LeafCards" % CAP))
+        m_bark = lib.load_asset(MAT_DIR + "/M_TL_%s_Bark" % CAP)
         if m_leaf is None or m_bark is None:
             raise RuntimeError("ACW_AC_MESH_ONLY: acacia materials missing")
     else:
         T = GAME / "textures"
-        bc = import_texture(T / "T_Acacia_LeafAtlas_BC.png", "T_Acacia_LeafAtlas_BC", True, alpha_coverage=0.4)
-        nm = import_texture(T / "T_Acacia_LeafAtlas_N.png", "T_Acacia_LeafAtlas_N", False, normal=True)
-        bbc = import_texture(T / "T_Acacia_Bark_BC.png", "T_Acacia_Bark_BC", True)
-        bnm = import_texture(T / "T_Acacia_Bark_N.png", "T_Acacia_Bark_N", False, normal=True)
+        bc = import_texture(T / (ATLAS_STEM + "_BC.png"), "T_%s_LeafAtlas_BC" % CAP, True, alpha_coverage=CLIP)
+        nm = import_texture(T / (ATLAS_STEM + "_N.png"), "T_%s_LeafAtlas_N" % CAP, False, normal=True)
+        bbc = import_texture(T / ("T_%s_Bark_BC.png" % CAP), "T_%s_Bark_BC" % CAP, True)
+        bnm = import_texture(T / ("T_%s_Bark_N.png" % CAP), "T_%s_Bark_N" % CAP, False, normal=True)
         m_leaf = leaf_material(bc, nm)
         m_bark = bark_material(bbc, bnm)
     import_mesh(m_bark, m_leaf)
@@ -254,6 +257,6 @@ try:
 except Exception:  # noqa: BLE001
     rep["error"] = traceback.format_exc()
     unreal.log_error(rep["error"])
-rep["dest"], rep["profile"], rep["mesh_only"], rep["leaf_tag"], rep["clip"] = DEST, PROFILE, MESH_ONLY, LEAF_TAG, CLIP
+rep["dest"], rep["profile"], rep["mesh_only"], rep["leaf_tag"], rep["clip"], rep["species"] = DEST, PROFILE, MESH_ONLY, LEAF_TAG, CLIP, SPECIES
 write_report("ac_import.report.json", rep)
 unreal.SystemLibrary.quit_editor()

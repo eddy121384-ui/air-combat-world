@@ -52,6 +52,7 @@ P = dict(
     spray_step=0.045,  # m between sprays along secondaries
     spray_scale=(1.15, 1.6),
     shell_depth=0.9,
+    shell_c=(0.0, 0.0, 16.0),  # crown axis point for the game exporter's outward direction (clump tiles); unused by the golden
     # v2 crown-mass knobs (PR #40 review 5557826475); the defaults reproduce v1 exactly (no extra rng draws when off)
     inner_step=0.0,  # m between pads on the inner half of every primary (0 = off)
     hang_frac=0.0,  # share of secondary pads that hang down-outward

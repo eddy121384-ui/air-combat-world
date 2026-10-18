@@ -1,0 +1,30 @@
+{
+ "centre_m": [
+  5.0,
+  -25.0
+ ],
+ "size_m": [
+  46.0,
+  40.0
+ ],
+ "rotation_deg": 20.0,
+ "spacing_m": [
+  4.0,
+  4.0
+ ],
+ "removed_by_form": {
+  "B": 11,
+  "C": 8,
+  "A": 1
+ },
+ "cryptomeria_added": 101,
+ "variants": {
+  "8": 77,
+  "9": 24
+ },
+ "trees_total": 1070,
+ "height_m": [
+  18.1,
+  23.1
+ ]
+}

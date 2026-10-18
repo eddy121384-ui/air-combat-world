@@ -40,15 +40,18 @@ A_CHAIN = os.environ.get("ACW_HF_A_CHAIN", "D")
 if A_CHAIN not in ("C", "D", "S", "T"):
     raise RuntimeError("ACW_HF_A_CHAIN must be C, D, S or T (S = side cards on half the LOD1 sprays, T = on all)")
 FORM_MESH = {"A": A_CHAINS[A_CHAIN], "B": "/Game/HillsideForest/Trees/CrownB/machilus_balanced_lod0/StaticMeshes/machilus_balanced_lod0",
-             "C": os.environ.get("ACW_HF_C_MESH", "/Game/HillsideForest/Trees/Acacia/acacia_acacia_lod0/StaticMeshes/acacia_acacia_lod0")}  # C = 相思樹 (ac_import.py)
+             "C": os.environ.get("ACW_HF_C_MESH", "/Game/HillsideForest/Trees/Acacia/acacia_acacia_lod0/StaticMeshes/acacia_acacia_lod0"),  # C = 相思樹 (ac_import.py)
+             "J": os.environ.get("ACW_HF_J_MESH", "/Game/HillsideForest/Trees/Cryptomeria/cryptomeria_cryptomeria_lod0/StaticMeshes/cryptomeria_cryptomeria_lod0")}  # J = 柳杉
 # 相思樹 leaf material: M_TL_Acacia_LeafCards (first chains) or the clump chain's M_TL_AcaciaW_LeafCards (2:1 atlas)
 C_LEAF = os.environ.get("ACW_HF_C_LEAF", "M_TL_Acacia_LeafCards")
 # expected base materials per form (相思樹 has its own); a form-C HISM drawing any 紅楠 material, or the reverse, fails
-FORM_BARK = {"A": "M_TL_Bark", "B": "M_TL_Bark", "C": "M_TL_Acacia_Bark"}
-FORM_LEAF = {"A": "M_TL_LeafCards", "B": "M_TL_LeafCards", "C": C_LEAF}
+J_LEAF = os.environ.get("ACW_HF_J_LEAF", "M_TL_Cryptomeria_LeafCards")
+FORM_BARK = {"A": "M_TL_Bark", "B": "M_TL_Bark", "C": "M_TL_Acacia_Bark", "J": "M_TL_Cryptomeria_Bark"}
+FORM_LEAF = {"A": "M_TL_LeafCards", "B": "M_TL_LeafCards", "C": C_LEAF, "J": J_LEAF}
 MESH_FORM = {v: k for k, v in FORM_MESH.items()}
 GROUPS = sorted({(it.get("form", "A"), it["variant"]) for it in I})
 HAS_ACACIA = any(f == "C" for f, _ in GROUPS)
+HAS_CRYPTO = any(f == "J" for f, _ in GROUPS)
 levels = unreal.get_editor_subsystem(unreal.LevelEditorSubsystem)
 actors = unreal.get_editor_subsystem(unreal.EditorActorSubsystem)
 sms = unreal.get_editor_subsystem(unreal.StaticMeshEditorSubsystem)
@@ -77,7 +80,7 @@ def base_path(m):
 
 
 def material_gate():
-    for name in ("M_TL_LeafCards", "M_TL_Bark") + ((C_LEAF, "M_TL_Acacia_Bark") if HAS_ACACIA else ()):
+    for name in ("M_TL_LeafCards", "M_TL_Bark") + ((C_LEAF, "M_TL_Acacia_Bark") if HAS_ACACIA else ()) + ((J_LEAF, "M_TL_Cryptomeria_Bark") if HAS_CRYPTO else ()):
         m = lib.load_asset(MAT_DIR + "/" + name)
         d = {"used_with_instanced_static_meshes": bool(m.get_editor_property("used_with_instanced_static_meshes")),
              "blend_mode": str(m.get_editor_property("blend_mode")), "two_sided": bool(m.get_editor_property("two_sided")),
@@ -104,7 +107,8 @@ def material_gate():
                 ok = abs(got[k] - v) < 1e-3
             check("%s %s" % (name, k), ok, {"want": v, "got": got[k]})
         bp, _ = base_path(mic)
-        want_base = MAT_DIR + "/" + (C_LEAF if int(name.rsplit("V", 1)[1]) in (5, 6, 7) else "M_TL_LeafCards")
+        _v = int(name.rsplit("V", 1)[1])
+        want_base = MAT_DIR + "/" + (C_LEAF if _v in (5, 6, 7) else J_LEAF if _v in (8, 9) else "M_TL_LeafCards")
         check(name + " base is " + want_base.rsplit("/", 1)[1], bp == want_base, bp)
         rep["materials"][name] = {"base": bp, "overrides": got, "package_dirty_after_load": pkg_dirty(mic)}
 

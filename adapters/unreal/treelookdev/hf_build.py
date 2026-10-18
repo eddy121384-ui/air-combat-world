@@ -45,8 +45,13 @@ LEAF_VARIANTS = {  # existing M_TL_LeafCards parameters only (parent defaults: T
     5: {"TintHi": (1.24, 1.16, 0.84), "TintLo": (0.92, 0.92, 0.74), "Brightness": 0.44},
     6: {"TintHi": (1.36, 1.26, 0.74), "TintLo": (1.00, 0.98, 0.70), "Brightness": 0.48},
     7: {"TintHi": (1.08, 1.06, 0.90), "TintLo": (0.80, 0.84, 0.74), "Brightness": 0.40},
+    # 柳杉 unreal v1, form J only: instances of M_TL_Cryptomeria_LeafCards; 8 = as imported (dark blue-green), 9 = a little lighter /
+    # bronzer (sunny / exposed crowns)
+    8: {},
+    9: {"TintHi": (1.16, 1.12, 0.92), "TintLo": (0.90, 0.92, 0.84), "Brightness": 0.47},
 }
 ACACIA_VARIANTS = (5, 6, 7)
+CRYPTO_VARIANTS = (8, 9)
 # views file: views.json (default, the PR #33 cameras / flight); a different file only for the species lineup check (ACW_HF_VIEWS)
 VIEWS_FILE = os.environ.get("ACW_HF_VIEWS", "views.json")
 # instance file: instances.json = version A (single 紅楠 D); instances_mix.json = version B (mix v0: form A = D, form B = crown B)
@@ -60,10 +65,13 @@ if A_CHAIN not in ("C", "D", "S", "T"):
     raise RuntimeError("ACW_HF_A_CHAIN must be C, D, S or T (S = side cards on half the LOD1 sprays, T = on all)")
 FORM_MESH = {"A": A_CHAINS[A_CHAIN], "B": "/Game/HillsideForest/Trees/CrownB/machilus_balanced_lod0/StaticMeshes/machilus_balanced_lod0",
              # 相思樹 (ac_import.py); its own bark and leaf materials, see FORM_BARK / leaf_parent
-             "C": os.environ.get("ACW_HF_C_MESH", "/Game/HillsideForest/Trees/Acacia/acacia_acacia_lod0/StaticMeshes/acacia_acacia_lod0")}
+             "C": os.environ.get("ACW_HF_C_MESH", "/Game/HillsideForest/Trees/Acacia/acacia_acacia_lod0/StaticMeshes/acacia_acacia_lod0"),
+             # 柳杉 (ac_import.py ACW_AC_SPECIES=cryptomeria); own bark / leaf materials
+             "J": os.environ.get("ACW_HF_J_MESH", "/Game/HillsideForest/Trees/Cryptomeria/cryptomeria_cryptomeria_lod0/StaticMeshes/cryptomeria_cryptomeria_lod0")}
 # 相思樹 leaf material: M_TL_Acacia_LeafCards (first chains) or the clump chain's M_TL_AcaciaW_LeafCards (2:1 atlas)
 C_LEAF = os.environ.get("ACW_HF_C_LEAF", "M_TL_Acacia_LeafCards")
-FORM_BARK = {"A": "M_TL_Bark", "B": "M_TL_Bark", "C": "M_TL_Acacia_Bark"}
+J_LEAF = os.environ.get("ACW_HF_J_LEAF", "M_TL_Cryptomeria_LeafCards")
+FORM_BARK = {"A": "M_TL_Bark", "B": "M_TL_Bark", "C": "M_TL_Acacia_Bark", "J": "M_TL_Cryptomeria_Bark"}
 # inside the block the floor stands in for the understory (shrubs / ferns / saplings - not modelled): two dark greens mottled by a ~6 m
 # world-space noise; outside the block a flat placeholder olive-grey that is visibly NOT forest (test terrain only)
 GROUND = {"inside": ((0.016, 0.024, 0.009), (0.034, 0.040, 0.017)), "outside": (0.060, 0.062, 0.040)}
@@ -78,6 +86,9 @@ V = json.loads((HF_DIR / VIEWS_FILE).read_text(encoding="utf-8"))
 HAS_ACACIA = any(it.get("form", "A") == "C" for it in I["instances"])
 if any((it.get("form", "A") == "C") != (it["variant"] in ACACIA_VARIANTS) for it in I["instances"]):
     raise RuntimeError("form C (相思樹) must use leaf variants %s and only form C may use them" % (ACACIA_VARIANTS,))
+HAS_CRYPTO = any(it.get("form", "A") == "J" for it in I["instances"])
+if any((it.get("form", "A") == "J") != (it["variant"] in CRYPTO_VARIANTS) for it in I["instances"]):
+    raise RuntimeError("form J (柳杉) must use leaf variants %s and only form J may use them" % (CRYPTO_VARIANTS,))
 
 
 def E(mat, cls, x, y, **props):
@@ -94,7 +105,7 @@ def link(a, out, b, pin):
 
 def assert_ism_usage():
     out = {}
-    for name in ("M_TL_LeafCards", "M_TL_Bark") + ((C_LEAF, "M_TL_Acacia_Bark") if HAS_ACACIA else ()):
+    for name in ("M_TL_LeafCards", "M_TL_Bark") + ((C_LEAF, "M_TL_Acacia_Bark") if HAS_ACACIA else ()) + ((J_LEAF, "M_TL_Cryptomeria_Bark") if HAS_CRYPTO else ()):
         m = lib.load_asset(MAT_DIR + "/" + name)
         before = bool(m.get_editor_property("used_with_instanced_static_meshes"))
         if not before:
@@ -111,12 +122,14 @@ def leaf_instances(parent):
     out = {}
     used = {it["variant"] for it in I["instances"]}
     acacia_parent = lib.load_asset(MAT_DIR + "/" + C_LEAF) if HAS_ACACIA else None
+    crypto_parent = lib.load_asset(MAT_DIR + "/" + J_LEAF) if HAS_CRYPTO else None
+    pick = lambda v: acacia_parent if v in ACACIA_VARIANTS else crypto_parent if v in CRYPTO_VARIANTS else parent  # noqa: E731
     for v, params in LEAF_VARIANTS.items():
         if v not in used:
             continue
         name = "MI_HF_Leaf_V%d" % v
         mic = tools.create_asset(name, DIR, unreal.MaterialInstanceConstant, unreal.MaterialInstanceConstantFactoryNew())
-        mel.set_material_instance_parent(mic, acacia_parent if v in ACACIA_VARIANTS else parent)
+        mel.set_material_instance_parent(mic, pick(v))
         for k, val in params.items():
             # UE 5.8: the set_* return value is False even when the value is applied (hf_probe_params.py), so read it back instead
             if isinstance(val, tuple):
@@ -132,7 +145,7 @@ def leaf_instances(parent):
         if not lib.save_asset(DIR + "/" + name):
             raise RuntimeError("save " + name)
         out[v] = mic
-        report["materials"][name] = {"parent": (acacia_parent if v in ACACIA_VARIANTS else parent).get_path_name(), "overrides": {k: list(x) if isinstance(x, tuple) else x for k, x in params.items()}}
+        report["materials"][name] = {"parent": pick(v).get_path_name(), "overrides": {k: list(x) if isinstance(x, tuple) else x for k, x in params.items()}}
     return out
 
 
@@ -245,7 +258,7 @@ def terrain(m_ground):
 
 
 def forest(mics):
-    barks = {f: lib.load_asset(MAT_DIR + "/" + n) for f, n in FORM_BARK.items() if f != "C" or HAS_ACACIA}
+    barks = {f: lib.load_asset(MAT_DIR + "/" + n) for f, n in FORM_BARK.items() if (f != "C" or HAS_ACACIA) and (f != "J" or HAS_CRYPTO)}
     holder = spawn(unreal.Actor, "HF_Forest")
     comps, counts = {}, {}
     groups = sorted({(it.get("form", "A"), it["variant"]) for it in I["instances"]})
