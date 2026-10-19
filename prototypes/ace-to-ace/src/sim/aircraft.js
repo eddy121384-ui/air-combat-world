@@ -75,6 +75,11 @@ export const specificEnergy = (ac) => ac.pos.y + (ac.speed * ac.speed) / (2 * G)
 /** Max load factor available at the current speed (lift-limited below corner speed). */
 export function availableG(ac, speed = ac.speed) {
   const t = ac.type;
+  if (ac.flightFeel === 'B') {
+    // B is more forgiving below corner speed; no extra lift above the airframe maxG.
+    const fraction = Math.min(1, Math.pow(Math.max(speed, MIN_SPEED) / t.cornerSpeed, 1.7));
+    return t.maxG * (0.18 + 0.82 * fraction);
+  }
   const r = speed / t.cornerSpeed;
   return Math.max(0.35, t.maxG * Math.min(1, r * r));
 }
@@ -82,7 +87,7 @@ export function availableG(ac, speed = ac.speed) {
 /** Rough sustained/instantaneous turn rate (rad/s) at a given G and speed. */
 export const turnRate = (n, speed) => (n * G) / Math.max(speed, MIN_SPEED);
 
-export function stepAircraft(ac, dt) {
+function stepLegacyAircraft(ac, dt) {
   if (!ac.alive) return;
   const t = ac.type;
   const c = ac.controls;
@@ -190,3 +195,79 @@ export function headingOf(ac) {
 }
 
 export { add, v3 };
+
+
+// Flight-feel experiment: A routes through the original, byte-for-byte legacy integration
+// above. B is a separate integration, applied identically to the player and both AI aircraft.
+// No orientation teleport, arbitrary nose steering, or HUD-only FPM substitution.
+export function stepAircraft(ac, dt) {
+  return ac.flightFeel === 'B' ? stepArcadeAircraft(ac, dt) : stepLegacyAircraft(ac, dt);
+}
+function stepArcadeAircraft(ac, dt) {
+  if (!ac.alive) return;
+  const t = ac.type, c = ac.controls;
+  const fwd = forwardOf(ac.q);
+  // Same independent throttle / AB / airbrake semantics as A.
+  const thrCmd = clamp(c.boost ? 1 : c.throttle, 0, 1);
+  ac.thrustCur += (thrCmd - ac.thrustCur) * Math.min(1, dt / (t.spool * 0.78));
+  ac.abCur += ((c.boost ? 1 : 0) - ac.abCur) * Math.min(1, dt / (t.spool * 1.0));
+  const altitude = clamp(1 - ac.pos.y / 16000, 0.35, 1);
+  const thrust = (ac.thrustCur * t.thrustMil * 1.1 + ac.abCur * t.thrustAB * 1.1) * altitude;
+
+  const pitchIn = clamp(c.pitch, -1, 1), nAvail = availableG(ac);
+  const nMin = t.minG * Math.min(1, nAvail / t.maxG), n0 = neutralG(ac);
+  // Normal full pull deliberately stops short of instantaneous maxG. BRK + a deep
+  // pull gives a short high-G burst, then requires release (and cooldown) to rearm.
+  ac.highGCooldown = Math.max(0, (ac.highGCooldown ?? 0) - dt);
+  if (!(c.brake && pitchIn > 0.72)) ac.highGArmed = true;
+  const eligible = c.brake && pitchIn > 0.72 && ac.speed > 110 && ac.highGCooldown === 0;
+  const highG = eligible && ac.highGArmed !== false;
+  if (highG) {
+    ac.highGTime = (ac.highGTime ?? 0) + dt;
+    if (ac.highGTime >= 1.25) {
+      ac.highGArmed = false;
+      ac.highGCooldown = 1.4;
+    }
+  } else ac.highGTime = 0;
+  const normalLimit = Math.min(nAvail, t.maxG * 0.78);
+  const nLimit = highG ? nAvail : normalLimit;
+  const nCmd = pitchIn >= 0
+    ? n0 + pitchIn * (nLimit - n0)
+    : n0 + pitchIn * (n0 - nMin);
+  // Faster G onset and more decisive roll stop without snapping orientation.
+  ac.nCur += (nCmd - ac.nCur) * Math.min(1, dt / (t.gOnset * 0.56));
+
+  const v = ac.speed;
+  const drag = t.dragK * 0.75 * v * v * (c.brake ? 2.6 : 1)
+    + t.inducedK * (highG ? 0.96 : 0.57) * ac.nCur * ac.nCur
+      * (200 / Math.max(v, MIN_SPEED)) ** 1.5
+    + Math.abs(c.yaw) * 1.2 + (highG ? 2.4 : 0);
+  ac.speed = clamp(v + (thrust - drag - G * fwd.y) * dt, MIN_SPEED, MAX_SPEED);
+
+  const rollCmd = clamp(c.roll, -1, 1);
+  const rollOnset = rollCmd === 0 ? t.rollOnset * 0.42 : t.rollOnset * 0.64;
+  ac.rollRateCur += (rollCmd * t.rollRate * 1.08 - ac.rollRateCur)
+    * Math.min(1, dt / rollOnset);
+  let q = qMul(ac.q, qAxisAngle({ x: 0, y: 0, z: -1 }, ac.rollRateCur * dt));
+  const up = upOf(q), f = forwardOf(q);
+  const gPerp = perp({ x: 0, y: -G, z: 0 }, f);
+  const acceleration = addScaled(gPerp, up, ac.nCur * G);
+  const aMag = len(acceleration);
+  if (aMag > 1e-4) {
+    const rate = Math.min(aMag / Math.max(ac.speed, MIN_SPEED), MAX_ROT_RATE);
+    q = qMul(qAxisAngle(norm(cross(f, acceleration)), rate * dt), q);
+  }
+  const yawRate = clamp(c.yaw, -1, 1) * t.yawRate * clamp(ac.speed / 120, 0.3, 1);
+  q = qMul(q, qAxisAngle({ x: 0, y: -1, z: 0 }, yawRate * dt));
+  ac.q = qNormalize(q);
+
+  // The true world-space velocity follows the nose over a short finite lag;
+  // FPM continues to report the direction of actual displacement.
+  const nose = forwardOf(ac.q), path = norm(ac.vel);
+  const response = 1 - Math.exp(-dt / 0.075);
+  const travel = norm(addScaled(path, sub(nose, path), response));
+  ac.vel = scale(travel, ac.speed);
+  ac.pos = addScaled(ac.pos, ac.vel, dt);
+  ac.aoaVisual = Math.acos(clamp(dot(nose, travel), -1, 1));
+  ac.gLoad = ac.nCur;
+}

@@ -31,3 +31,5 @@ jobs:
           node tools/test-brake-trap.mjs
           node tools/test-flight-path.mjs
           node tools/test-hud-attitude.mjs
+          node tools/test-flight-feel-ab.mjs
+          node tools/aivai.mjs --n 3 --blue chaser --red veteran --feel B

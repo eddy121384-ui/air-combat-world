@@ -12,6 +12,10 @@ import { Audio } from './audio.js';
 const $ = (s) => document.querySelector(s);
 const params = new URLSearchParams(location.search);
 const isTouch = matchMedia('(pointer: coarse)').matches || 'ontouchstart' in window;
+let flightFeel = params.get('feel') === 'A' ? 'A' : 'B';
+// Identical opening geometry, skills and RNG seed for A/B and every rematch.
+const experimentSeed = Number.isFinite(Number(params.get('seed'))) && params.has('seed')
+  ? Number(params.get('seed')) : 71429;
 
 const settings = Object.assign({ difficulty: 'veteran', assist: true, invert: false, muted: false },
   (() => { try { return JSON.parse(localStorage.getItem('ace2ace.settings') || '{}'); } catch { return {}; } })());
@@ -46,14 +50,28 @@ function syncTitle() {
     ace: 'ACE：全套戰術、極限機動與精準射擊。雙方傷害對等',
   };
   $('#diffDesc').textContent = desc[settings.difficulty];
-  $('#optAssist').textContent = settings.assist ? '操縱：輔助 ASSIST' : '操縱：手動 MANUAL';
+  $('#optAssist').classList.add('hidden'); // A/B always Expert; keep stored legacy preference intact
+  for (const b of document.querySelectorAll('[data-feel]')) {
+    b.classList.toggle('sel', b.dataset.feel === flightFeel);
+    b.setAttribute('aria-pressed', String(b.dataset.feel === flightFeel));
+  }
+  $('#feelDesc').textContent = flightFeel === 'A'
+    ? 'A · Legacy Expert：原始 MANUAL 飛行物理（對照組）'
+    : 'B · Arcade Expert：敏捷滾轉、一般轉向保速、BRK＋深拉桿短暫 High-G';
   $('#optInvert').textContent = settings.invert ? '俯仰：上推＝爬升' : '俯仰：上推＝俯衝（搖桿式）';
   $('#optSound').textContent = settings.muted ? '音效：關' : '音效：開';
   $('#keysHelp').classList.toggle('hidden', isTouch);
   $('#touchHelp').classList.toggle('hidden', !isTouch);
 }
+for (const b of document.querySelectorAll('[data-feel]')) b.addEventListener('click', () => {
+  flightFeel = b.dataset.feel;
+  params.set('feel', flightFeel);
+  params.set('seed', String(experimentSeed));
+  history.replaceState(null, '', location.pathname + '?' + params.toString());
+  syncTitle(); audio.ui();
+});
 for (const b of document.querySelectorAll('[data-diff]')) b.addEventListener('click', () => { settings.difficulty = b.dataset.diff; saveSettings(); syncTitle(); audio.unlock(); audio.ui(); });
-$('#optAssist').addEventListener('click', () => { settings.assist = !settings.assist; saveSettings(); syncTitle(); });
+// Keep legacy ASSIST setting untouched; A/B uses MANUAL on both variants.
 $('#optInvert').addEventListener('click', () => { settings.invert = !settings.invert; saveSettings(); syncTitle(); });
 $('#optSound').addEventListener('click', () => { settings.muted = !settings.muted; audio.setMuted(settings.muted); saveSettings(); syncTitle(); });
 $('#btnStart').addEventListener('click', () => start('pvai'));
@@ -83,11 +101,11 @@ function start(k) {
   audio.unlock();
   kind = k;
   matchCount += 1;
-  const seed = params.has('seed') ? +params.get('seed') + matchCount - 1 : (Date.now() & 0xffffff);
+  const seed = experimentSeed;
   rend.reset();
   const diff = params.get('skill') || settings.difficulty;
   const playerScale = k === 'pvai' ? PLAYER_DAMAGE_SCALE[diff] ?? 1 : 1;
-  match = new Match({ seed, blue: { type: 'F16V', name: 'F-16V', damageScale: playerScale }, red: { type: 'J16', name: 'J-16' } });
+  match = new Match({ seed, flightFeel, blue: { type: 'F16V', name: 'F-16V', damageScale: playerScale }, red: { type: 'J16', name: 'J-16' } });
   rend.addAircraft(match.blue); rend.addAircraft(match.red);
   enemyAI = new PilotAI(match.red, {
     skill: diff, seed: seed + 7,
@@ -111,7 +129,7 @@ function start(k) {
     match.setController(match.blue, player);
   } else {
     blueAI = null;
-    player = new PlayerController(match.blue, input, settings);
+    player = new PlayerController(match.blue, input, { ...settings, assist: false });
     match.setController(match.blue, player);
   }
   match.on(onEvent);
@@ -308,7 +326,7 @@ function drawDebug() {
 
 // test hooks (Playwright)
 window.__game = {
-  get match() { return match; }, get mode() { return mode; }, get enemyAI() { return enemyAI; }, settings, start, input,
+  get match() { return match; }, get mode() { return mode; }, get enemyAI() { return enemyAI; }, get flightFeel() { return flightFeel; }, get experimentSeed() { return experimentSeed; }, settings, start, input,
   setTimeScale(s) { timeScale = s; },
 };
 

@@ -32,13 +32,13 @@ function makeCtrl(kind, ac, seed) {
   return new PilotAI(ac, { skill: kind, seed });
 }
 
-export function runMatch({ seed, blue = 'veteran', red = 'veteran', spawn = 'default', swap = false, timeLimit }) {
+export function runMatch({ seed, blue = 'veteran', red = 'veteran', spawn = 'default', swap = false, timeLimit, flightFeel = 'A' }) {
   const rng = makeRng(seed * 7919 + 13);
   const sp = spawn === 'random' ? randomSpawn(rng) : defaultSpawn(rng);
   // a human-proxy "player" gets the player's difficulty damage rule, like in the game
   const humanBlue = String(blue).startsWith('human');
   const m = new Match({
-    seed, timeLimit,
+    seed, timeLimit, flightFeel,
     blue: { type: swap ? 'J16' : 'F16V', name: 'BLUE', damageScale: humanBlue ? PLAYER_DAMAGE_SCALE[red] ?? 1 : 1 },
     red: { type: swap ? 'F16V' : 'J16', name: 'RED' }, spawn: sp,
   });
@@ -198,13 +198,13 @@ if (isMain) {
   ] : [{ label: `${args.blue || 'veteran'} vs ${args.red || 'veteran'} (${args.spawn || 'default'})`, blue: args.blue || 'veteran', red: args.red || 'veteran', spawn: args.spawn || 'default', swap: !!args.swap }];
   const report = [];
   for (const s of suites) {
-    const rs = runBatch({ ...s, n, seed: +(args.seed || 1) });
+    const rs = runBatch({ ...s, n, seed: +(args.seed || 1), flightFeel: args.feel === 'B' ? 'B' : 'A' });
     const sum = summarize(s.label, rs);
     printSummary(sum);
     report.push({ ...sum, matches: rs.map(({ modesBlue, modesRed, ...r }) => r) });
   }
   if (args.verbose) {
-    const r = runMatch({ seed: +(args.seed || 1), blue: args.blue || 'veteran', red: args.red || 'veteran', spawn: args.spawn || 'default' });
+    const r = runMatch({ seed: +(args.seed || 1), blue: args.blue || 'veteran', red: args.red || 'veteran', spawn: args.spawn || 'default', flightFeel: args.feel === 'B' ? 'B' : 'A' });
     console.log(`\nmatch seed ${r.seed}: winner ${r.winner} by ${r.reason} at ${r.time}s`);
     for (const [name, c] of [['BLUE', r._ctrl.cb], ['RED', r._ctrl.cr]]) {
       if (!c.transitions) continue;
