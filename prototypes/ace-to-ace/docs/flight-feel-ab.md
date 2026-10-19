@@ -57,11 +57,27 @@ using missiles and guns. Rate directness, overshoot, target dwell time,
 post-turn responsiveness, and fun separately from numeric metrics. Keep this
 Draft until real-device review; avoid declaring B the winner from CI alone.
 
-## Independently verified remote preview
+## B v2 web preview (device acceptance pending)
 
 Vercel static preview (separate from the production alias):
 
-- [A — Legacy Expert](https://skyfront-ace-to-f9dqaci6z-eddy121384-1385s-projects.vercel.app/?feel=A&seed=71429)
-- [B — Arcade Expert](https://skyfront-ace-to-f9dqaci6z-eddy121384-1385s-projects.vercel.app/?feel=B&seed=71429)
+- [A — Legacy Expert](https://skyfront-ace-to-boqge2bak-eddy121384-1385s-projects.vercel.app/?feel=A&seed=71429)
+- [B — Arcade Expert](https://skyfront-ace-to-boqge2bak-eddy121384-1385s-projects.vercel.app/?feel=B&seed=71429)
 
-The links above point to the previous B v1 until the B v2 commit is redeployed and checked. Do not evaluate new physics using an old preview. Actual iPhone Safari hardware playthrough remains unverified.
+B v2 commit `777267a11` was deployed independently via Vercel API and reports READY. Deployment source tree was inspected: index, simulation and AI modules, HUD/input/render code, vendored Three.js and original sky/cloud textures are all present at expected paths. The external web fetcher could not establish a live HTTP success code; **iPhone Safari hardware playthrough and clickable URL response are not verified**. Do not confuse deployment state with real-device validation.
+
+### Headless comparison (60 Hz, same seed and initial state)
+
+| Maneuver | A original | B v2 |
+|---|---:|---:|
+| 90-degree roll command | 0.467 s | 0.417 s |
+| bank settling error after 0.45 s | 16.89 deg | 8.23 deg |
+| 1 s full-pull peak G | 10 G (legacy game value) | 9 G |
+| 1 s full-pull airspeed loss | 18.91 m/s | 15.97 m/s |
+| B moderate (55% pull) 1 s loss | — | 4.43 m/s |
+| B BRK + full pull 1 s loss | — | 24.10 m/s (no extra G) |
+| 90-degree heading turn | 3.78 s | 4.22 s |
+| 180-degree heading turn | 8.13 s | 8.85 s |
+| B lift-available at 85 m/s | — | ~1.90 G |
+
+Numeric tests are not a guarantee of better dogfighting feel; target tracking, iPhone touch and fun must be evaluated by a player.
