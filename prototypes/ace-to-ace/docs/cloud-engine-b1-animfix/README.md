@@ -45,12 +45,12 @@
 | [cloud-animation-paths.js](../../tools/cloud-animation-paths.js) | 九條共用、連續、可重現路線 |
 | [cloud-lab.html](../../tools/cloud-lab.html)、[cloud-lab.js](../../tools/cloud-lab.js) | 比較模式、動畫播放及檢查 API，僅 Lab |
 | [test-cloud-animfix.mjs](../../tools/test-cloud-animfix.mjs) | 新增 cache deterministic、誤差、風移動、路線與採樣區域測試 |
-| [cloud-animfix-check.mjs](../../tools/cloud-animfix-check.mjs) | 真實 WebGL 逐幀、影片、視線對照、CPU／GPU 比較與邊界檢查 |
+| [cloud-animfix-check.mjs](../../tools/cloud-animfix-check.mjs) | 真實 WebGL 逐幀、影片、視線對照與入雲邊界檢查 |
 | [cloud-animfix-motion.py](../../tools/cloud-animfix-motion.py) | 檢查完整連續幀，定位最大畫面變化並產生密集／相鄰幀 QA 接觸表 |
 | [cloud-animfix-perf.mjs](../../tools/cloud-animfix-perf.mjs) | 獨立 raw GL timer；等待 query 時不重畫，分列 CPU／GPU |
 | [cloud-lab-check.mjs](../../tools/cloud-lab-check.mjs) | 增加 stable 模式及真實動畫選單／模式切換 smoke |
 | [test-cloud-b1.mjs](../../tools/test-cloud-b1.mjs) | 增加 `--out`，避免改寫舊 B1 證據 |
-| [package.json](../../package.json) | 新增兩個 animfix 測試命令，無新依賴 |
+| [package.json](../../package.json) | 新增三個 animfix 測試命令，無新依賴 |
 | `docs/cloud-engine-b1-animfix/` | 原因分析、錄影、逐格接觸表、驗證與成本紀錄 |
 
 ## 研究與驗證
