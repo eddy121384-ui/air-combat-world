@@ -234,7 +234,8 @@ export class Renderer {
     // Aircraft, missiles and trails use the scene's linear fog: pull it in while inside cloud.
     const k = Math.min(1, st.fogSigma / 0.03), fog = this.scene.fog;
     fog.near = 4000 * (1 - k); fog.far = 32000 + (90 / Math.max(st.fogSigma, 1e-4) - 32000) * k;
-    fog.color.copy(this.opusBaseFog).lerp(this.opusFogColor, k);
+    const mist = this.opusSky.fogUniforms.uFog.value;   // same lavender/white mist the clouds use
+    fog.color.copy(this.opusBaseFog).lerp(this.opusFogColor.setRGB(mist.x, mist.y, mist.z, THREE.SRGBColorSpace), k);
   }
 
   resize() {

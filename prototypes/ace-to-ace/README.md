@@ -14,6 +14,10 @@ Skyfront Homeland 的第一個可玩入口（Issue #34）。一片海、一片�
 
 ## 啟動
 
+**Opus Sky（雲的美術方向重新設計，spike）**：[Sky Lab](tools/sky-lab.html)，或在遊戲網址加 `?sky=opus`
+用真正的飛行模型在新天空中作戰；手機實測用 `tools/sky-lab.html?bench&quality=mobile`。
+做法、動畫證據、成本與限制見 [docs/cloud-opus](docs/cloud-opus/README.md)。不加參數時遊戲維持 R2。
+
 Cloud Engine B0 的獨立三維雲場實驗入口：[Cloud Lab](tools/cloud-lab.html)。
 操作、研究來源、驗證與真實截圖見 [B0 文件](docs/cloud-engine-b0/README.md)；原 R2 遊戲入口未接入此實驗。
 

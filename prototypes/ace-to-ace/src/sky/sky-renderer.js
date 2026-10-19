@@ -47,7 +47,7 @@ export function createOpusSky({ renderer, scene, camera, skyTexture, cloudscape,
   sea.rotation.x = -Math.PI / 2; sea.frustumCulled = false;
   scene.add(sea);
 
-  // ---- puffs: one instanced draw of camera-facing quads ray-cast into exact spheres
+  // ---- puffs: one instanced draw of camera-facing quads ray-cast into exact ellipsoids
   const geo = new THREE.InstancedBufferGeometry();
   geo.setAttribute('position', new THREE.Float32BufferAttribute([-1, -1, 0, 1, -1, 0, 1, 1, 0, -1, 1, 0], 3));
   geo.setIndex([0, 1, 2, 0, 2, 3]);
@@ -56,9 +56,9 @@ export function createOpusSky({ renderer, scene, camera, skyTexture, cloudscape,
   geo.instanceCount = cloudscape.count;
   const sunDepth = renderSunDepth(renderer, geo, cloudscape, sun, o.sunDepthSize);
   const noiseTex = makeNoiseTexture();
-  const puffUniforms = { ...shared, uNoise: { value: noiseTex }, uWindF: { value: wind }, uSunDepth: { value: sunDepth.texture }, uSunMat: { value: sunDepth.matrix },
+  const puffUniforms = { ...shared, uNoise: { value: noiseTex }, uSunDepth: { value: sunDepth.texture }, uSunMat: { value: sunDepth.matrix },
     uSunDepthInfo: { value: new THREE.Vector4(1 / sunDepth.width, sunDepth.range, ...o.sunSoft) }, uWind: { value: wind }, uTime: { value: 0 }, uPxScale: { value: 1 }, uPxAngle: { value: 0.001 },
-    uLodPx: { value: o.lodPx }, uBump: { value: o.bump }, uProj: { value: camera.projectionMatrix }, uNearFade: { value: new THREE.Vector2(...o.nearFade) }, uHazeDist: { value: o.hazeDistance },
+    uLodPx: { value: o.lodPx }, uFogCull: { value: 1e9 }, uBump: { value: o.bump }, uProj: { value: camera.projectionMatrix }, uNearFade: { value: new THREE.Vector2(...o.nearFade) }, uHazeDist: { value: o.hazeDistance },
     uBands: { value: new THREE.Vector4(...o.bands) }, uMix: { value: new THREE.Vector4(...o.normalMix) },
     cLit: { value: v3(palette.lit) }, cWarm: { value: v3(palette.warm) }, cShadow: { value: v3(palette.shadow) },
     cDeep: { value: v3(palette.deep) }, cBase: { value: v3(palette.base) }, cSkyShade: { value: v3(palette.skyShade) },
@@ -149,11 +149,14 @@ export function createOpusSky({ renderer, scene, camera, skyTexture, cloudscape,
     fog.uFog.value.y = fogShade.y + (fogLit.y - fogShade.y) * smoothed.sunVis;
     fog.uFog.value.z = fogShade.z + (fogLit.z - fogShade.z) * smoothed.sunVis;
     fog.uFogGlow.value.fromArray(palette.fogGlow).multiplyScalar(smoothed.sunVis);
-    // Inside cloud, nearby billow walls dissolve completely so only fog and wisps remain.
+    // Inside cloud the nearest walls dissolve a little further out; mist covers the rest.
     const k = sigma / o.fogSigma;
     puffUniforms.uNearFade.value.set(o.nearFade[0] + 25 * k, o.nearFade[1] + 60 * k);
     if (d > 0) { const g = cloudscape.gradient(cx, cy, cz); fog.uFogDir.value.set(g[0], g[1], g[2], Math.max(0, 1 - d * 1.15)); }
     else fog.uFogDir.value.w = 0;
+    // Skip billows hidden behind ≥99% mist (directional thinning taken into account).
+    const sigmaMin = sigma * (1 - 0.78 * fog.uFogDir.value.w);
+    puffUniforms.uFogCull.value = d > 0.05 && sigmaMin > 0.004 ? 4.6 / sigmaMin : 1e9;
 
     // Stateless world lattice: the same wisps are found again when you fly back.
     let n = 0, nm = 0;
@@ -219,7 +222,8 @@ function renderSunDepth(renderer, puffGeometry, scape, sun, [width, height]) {
     box.expandByPoint(new THREE.Vector3(x, y, z).applyMatrix4(cam.matrixWorldInverse));
   cam.left = box.min.x - 300; cam.right = box.max.x + 300; cam.bottom = box.min.y - 300; cam.top = box.max.y + 300;
   cam.near = -box.max.z - 2000; cam.far = -box.min.z + 2000; cam.updateProjectionMatrix();
-  const target = new THREE.WebGLRenderTarget(width, height, { depthBuffer: true });
+  // Only the depth attachment is sampled; keep the required colour attachment at one byte per texel.
+  const target = new THREE.WebGLRenderTarget(width, height, { depthBuffer: true, format: THREE.RedFormat, type: THREE.UnsignedByteType });
   target.depthTexture = new THREE.DepthTexture(width, height);
   target.depthTexture.type = THREE.UnsignedIntType;
   const mat = new THREE.ShaderMaterial({ vertexShader: SUNDEPTH_VS, fragmentShader: SUNDEPTH_FS, side: THREE.DoubleSide,

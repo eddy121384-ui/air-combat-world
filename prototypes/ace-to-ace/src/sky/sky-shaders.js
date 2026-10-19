@@ -45,6 +45,7 @@ const NOISE3 = `
 export const PUFF_VS = `
   attribute vec4 iA; attribute vec4 iB; attribute vec4 iC; attribute vec4 iD;
   uniform vec3 uCam; uniform vec3 uWind; uniform float uTime; uniform float uPxScale; uniform float uLodPx;
+  uniform float uFogCull;   // inside cloud: billows beyond ~99% mist are not drawn at all
   varying vec3 vW;
   flat varying vec4 vA; flat varying vec4 vB; flat varying vec4 vC; flat varying vec4 vD;
   flat varying float vMode;
@@ -63,7 +64,7 @@ export const PUFF_VS = `
     vA=vec4(C,r); vB=vec4(iB.xyz+uWind,iB.w); vC=vec4(iC.xyz+uWind,iC.w); vD=iD;
     float base=iD.x;
     vMode=0.0;
-    if(r<0.5){ gl_Position=vec4(2.0,2.0,2.0,1.0); return; }
+    if(r<0.5||d-r>uFogCull){ gl_Position=vec4(2.0,2.0,2.0,1.0); return; }
     vec3 W;
     if(dq<1.002){
       // Inside the ellipsoid: only its flat base can be seen, from below.
@@ -88,7 +89,7 @@ export const PUFF_VS = `
 `;
 
 export const PUFF_FS = `
-  uniform vec3 uCam; uniform vec3 uSun; uniform float uPxAngle; uniform vec2 uNearFade; uniform vec3 uWindF;
+  uniform vec3 uCam; uniform vec3 uSun; uniform float uPxAngle; uniform vec2 uNearFade; uniform vec3 uWind;
   uniform vec3 cLit; uniform vec3 cWarm; uniform vec3 cShadow; uniform vec3 cDeep; uniform vec3 cBase;
   uniform vec3 cSkyShade; uniform vec3 cHalf; uniform vec3 cGlow; uniform vec3 cSilver; uniform vec3 uHorizon; uniform float uHazeDist;
   uniform vec4 uBands;    // lit edge lo/hi, mid edge lo/hi
@@ -156,12 +157,12 @@ export const PUFF_FS = `
     vec3 so=(P-C)*sq3, sd=L*sq3;
     float sA=dot(sd,sd), sB=dot(so,sd);
     float selfChord=flatFace?0.0:max(0.0,-2.0*sB/sA);
-    vec4 sc=uSunMat*vec4(P-uWindF,1.0);
+    vec4 sc=uSunMat*vec4(P-uWind,1.0);
     vec2 suv=sc.xy*0.5+0.5; float dR=sc.z*0.5+0.5;
     // Taps rotated by world-anchored noise: up close, shadow edges break up organically instead
     // of showing the sun map's texel staircase.
     float occ=0.0;
-    float ang=noise3((P-uWindF)*0.045)*6.2831;
+    float ang=noise3((P-uWind)*0.045)*6.2831;
     mat2 rot=mat2(cos(ang),sin(ang),-sin(ang),cos(ang));
     for(int k=0;k<5;k++){
       vec2 o=k==0?vec2(0):rot*vec2(k<3?1.0:-1.0,(k==1||k==3)?1.0:-1.0)*uSunDepthInfo.x*2.4;
@@ -176,7 +177,7 @@ export const PUFF_FS = `
     float bumpFade=(1.0-smoothstep(900.0,2600.0,dist))*(flatFace?0.0:1.0);
     float relief=0.0;
     if(bumpFade>0.0){
-      vec3 bq=(P-uWindF)*(1.0/30.0);
+      vec3 bq=(P-uWind)*(1.0/30.0);
       float n0=noise3(bq), n1=noise3(bq+L*0.33);
       vec3 bq2=bq*0.37+11.0;
       float m0=noise3(bq2), m1=noise3(bq2+L*0.13);
@@ -207,7 +208,7 @@ export const PUFF_FS = `
     vec3 col=mix(shade,cLit,lit);
     if(flatFace){
       // Cloud-sea ceiling: brighter where thin (light leaks through), darker under thick cover.
-      float mott=noise3((P-uWindF)*vec3(0.004,0.0,0.004))*0.6+noise3((P-uWindF)*vec3(0.013,0.0,0.013))*0.4;
+      float mott=noise3((P-uWind)*vec3(0.004,0.0,0.004))*0.6+noise3((P-uWind)*vec3(0.013,0.0,0.013))*0.4;
       col=mix(vec3(0.74,0.75,0.86),vec3(0.44,0.48,0.63),clamp(occ*1.1+(mott-0.5)*0.8,0.0,1.0));
     }
     float band=lit*(1.0-smoothstep(uBands.y,uBands.y+0.18,sunL));
@@ -241,13 +242,13 @@ export const PUFF_FS = `
     col=cloudFog(col,rd,dist,L);
     // Condensation base reads flat but slightly ragged from the side, never a ruled line.
     if(!flatFace){
-      float bn=noise3((P-uWindF)*vec3(0.02,0.0,0.02)+vec3(0.0,3.7,0.0));
+      float bn=noise3((P-uWind)*vec3(0.02,0.0,0.02)+vec3(0.0,3.7,0.0));
       alpha*=smoothstep(0.0,1.0,(P.y-base)/22.0+0.35-bn*0.9);
     }
     // Near the camera the wall breaks into world-anchored wisps instead of a screen dither.
     float nf=smoothstep(uNearFade.x,uNearFade.y,dist);
     if(nf<1.0){
-      vec3 wq=(P-uWindF)*0.032;
+      vec3 wq=(P-uWind)*0.032;
       float wisp=noise3(wq)*0.62+noise3(wq*2.7+3.1)*0.38;
       alpha*=smoothstep(wisp-0.10,wisp+0.10,nf);
     }

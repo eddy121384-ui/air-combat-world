@@ -1,0 +1,220 @@
+{
+ "method": "additive per-pixel fragment counting on real frames (SwiftShader); scaled to target drawing buffers",
+ "size": [
+  640,
+  360
+ ],
+ "shots": [
+  {
+   "route": "approach",
+   "at": 1,
+   "invocationsPerPixel": 5.98,
+   "invocationsMaxPixel": 250,
+   "survivorsPerPixel": 4.49,
+   "cloudCoverage": 0.85,
+   "calls": 5,
+   "triangles": 42054,
+   "cpuUpdateMs": 0.3,
+   "streaks": 0,
+   "perTarget": {
+    "iPhone 13 mini @2x": {
+     "invocationsM": 7.28,
+     "survivorsM": 5.47
+    },
+    "iPhone 15 @2x": {
+     "invocationsM": 8,
+     "survivorsM": 6.01
+    },
+    "iPhone 15 Pro Max @2x": {
+     "invocationsM": 9.58,
+     "survivorsM": 7.2
+    },
+    "iPhone 15 @1.5x": {
+     "invocationsM": 4.5,
+     "survivorsM": 3.38
+    }
+   }
+  },
+  {
+   "route": "approach",
+   "at": 0.5,
+   "invocationsPerPixel": 2.9,
+   "invocationsMaxPixel": 253,
+   "survivorsPerPixel": 2.3,
+   "cloudCoverage": 0.432,
+   "calls": 5,
+   "triangles": 42054,
+   "cpuUpdateMs": 0.1,
+   "streaks": 0,
+   "perTarget": {
+    "iPhone 13 mini @2x": {
+     "invocationsM": 3.54,
+     "survivorsM": 2.8
+    },
+    "iPhone 15 @2x": {
+     "invocationsM": 3.89,
+     "survivorsM": 3.08
+    },
+    "iPhone 15 Pro Max @2x": {
+     "invocationsM": 4.65,
+     "survivorsM": 3.69
+    },
+    "iPhone 15 @1.5x": {
+     "invocationsM": 2.19,
+     "survivorsM": 1.73
+    }
+   }
+  },
+  {
+   "route": "sidepass",
+   "at": 0.5,
+   "invocationsPerPixel": 2.84,
+   "invocationsMaxPixel": 168,
+   "survivorsPerPixel": 2.1,
+   "cloudCoverage": 0.365,
+   "calls": 7,
+   "triangles": 42078,
+   "cpuUpdateMs": 0.9,
+   "streaks": 7,
+   "perTarget": {
+    "iPhone 13 mini @2x": {
+     "invocationsM": 3.46,
+     "survivorsM": 2.56
+    },
+    "iPhone 15 @2x": {
+     "invocationsM": 3.81,
+     "survivorsM": 2.81
+    },
+    "iPhone 15 Pro Max @2x": {
+     "invocationsM": 4.56,
+     "survivorsM": 3.37
+    },
+    "iPhone 15 @1.5x": {
+     "invocationsM": 2.14,
+     "survivorsM": 1.58
+    }
+   }
+  },
+  {
+   "route": "orbit180",
+   "at": 0.5,
+   "invocationsPerPixel": 1.36,
+   "invocationsMaxPixel": 152,
+   "survivorsPerPixel": 1.07,
+   "cloudCoverage": 0.203,
+   "calls": 5,
+   "triangles": 42054,
+   "cpuUpdateMs": 0.4,
+   "streaks": 0,
+   "perTarget": {
+    "iPhone 13 mini @2x": {
+     "invocationsM": 1.65,
+     "survivorsM": 1.3
+    },
+    "iPhone 15 @2x": {
+     "invocationsM": 1.82,
+     "survivorsM": 1.43
+    },
+    "iPhone 15 Pro Max @2x": {
+     "invocationsM": 2.17,
+     "survivorsM": 1.71
+    },
+    "iPhone 15 @1.5x": {
+     "invocationsM": 1.02,
+     "survivorsM": 0.8
+    }
+   }
+  },
+  {
+   "route": "traverse",
+   "at": 0.5,
+   "invocationsPerPixel": 1.49,
+   "invocationsMaxPixel": 245,
+   "survivorsPerPixel": 1.49,
+   "cloudCoverage": 0.039,
+   "calls": 7,
+   "triangles": 42672,
+   "cpuUpdateMs": 1.1,
+   "streaks": 149,
+   "perTarget": {
+    "iPhone 13 mini @2x": {
+     "invocationsM": 1.82,
+     "survivorsM": 1.82
+    },
+    "iPhone 15 @2x": {
+     "invocationsM": 2,
+     "survivorsM": 2
+    },
+    "iPhone 15 Pro Max @2x": {
+     "invocationsM": 2.39,
+     "survivorsM": 2.39
+    },
+    "iPhone 15 @1.5x": {
+     "invocationsM": 1.12,
+     "survivorsM": 1.12
+    }
+   }
+  },
+  {
+   "route": "deck",
+   "at": 0.3,
+   "invocationsPerPixel": 4.1,
+   "invocationsMaxPixel": 221,
+   "survivorsPerPixel": 3.84,
+   "cloudCoverage": 0.71,
+   "calls": 7,
+   "triangles": 42736,
+   "cpuUpdateMs": 0.5,
+   "streaks": 181,
+   "perTarget": {
+    "iPhone 13 mini @2x": {
+     "invocationsM": 4.99,
+     "survivorsM": 4.68
+    },
+    "iPhone 15 @2x": {
+     "invocationsM": 5.49,
+     "survivorsM": 5.14
+    },
+    "iPhone 15 Pro Max @2x": {
+     "invocationsM": 6.57,
+     "survivorsM": 6.15
+    },
+    "iPhone 15 @1.5x": {
+     "invocationsM": 3.09,
+     "survivorsM": 2.89
+    }
+   }
+  },
+  {
+   "route": "deck",
+   "at": 0.5,
+   "invocationsPerPixel": 4.23,
+   "invocationsMaxPixel": 226,
+   "survivorsPerPixel": 2.09,
+   "cloudCoverage": 0.969,
+   "calls": 5,
+   "triangles": 42054,
+   "cpuUpdateMs": 0.2,
+   "streaks": 0,
+   "perTarget": {
+    "iPhone 13 mini @2x": {
+     "invocationsM": 5.15,
+     "survivorsM": 2.55
+    },
+    "iPhone 15 @2x": {
+     "invocationsM": 5.66,
+     "survivorsM": 2.8
+    },
+    "iPhone 15 Pro Max @2x": {
+     "invocationsM": 6.78,
+     "survivorsM": 3.35
+    },
+    "iPhone 15 @1.5x": {
+     "invocationsM": 3.19,
+     "survivorsM": 1.57
+    }
+   }
+  }
+ ],
+ "puffs": 19974
+}

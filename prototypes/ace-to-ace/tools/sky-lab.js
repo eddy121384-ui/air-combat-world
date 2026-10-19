@@ -155,11 +155,13 @@ async function runBench() {
   const results = { userAgent: navigator.userAgent, tier: tierName, dpr: renderer.getPixelRatio(), routes: {} };
   const wait = ms => new Promise(r => setTimeout(r, ms));
   await new Promise(r => { const k = () => skyTexture.image ? r() : setTimeout(k, 50); k(); });
+  const quick = params.get('bench') === 'quick'; // CI smoke only: 30 frames from mid-route
   for (const key of Object.keys(routes)) {
     setRoute(key); playing = true; await wait(600);           // warm-up, shader compile
     setRoute(key); playing = true;
+    if (quick) time = routes[key].duration * 0.45;
     const dts = []; let prev = performance.now();
-    await new Promise(r => { const tick = now => { dts.push(now - prev); prev = now; if (playing) requestAnimationFrame(tick); else r(); }; requestAnimationFrame(tick); });
+    await new Promise(r => { const tick = now => { dts.push(now - prev); prev = now; if (quick && dts.length >= 30) playing = false; if (playing) requestAnimationFrame(tick); else r(); }; requestAnimationFrame(tick); });
     dts.sort((a, b) => a - b);
     const q = f => dts[Math.min(dts.length - 1, Math.floor(f * dts.length))];
     results.routes[key] = { frames: dts.length, medianMs: +q(0.5).toFixed(2), p95Ms: +q(0.95).toFixed(2), worstMs: +dts.at(-1).toFixed(2) };
