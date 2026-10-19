@@ -12,7 +12,7 @@
 
 | 證明什麼 | 影片（真實 Chromium WebGL 逐格渲染，24 fps） | 八格接觸表 |
 |---|---|---|
-| 飛近主塔（4.2 km → 0.6 km） | [approach.mp4](final/approach.mp4) | [sheet](final/approach-sheet.jpg) |
+| 飛近主塔（離外緣 billow 4.8 km → 0.6 km） | [approach.mp4](final/approach.mp4) | [sheet](final/approach-sheet.jpg) |
 | 側掠受光雲牆（離 billow 約 140 m，壓坡度） | [sidepass.mp4](final/sidepass.mp4) | [sheet](final/sidepass-sheet.jpg) |
 | 180° 繞行：順光 → 側光 → 逆光 | [orbit180.mp4](final/orbit180.mp4) | [sheet](final/orbit180-sheet.jpg) |
 | 穿入、雲內、穿出積雲 | [traverse.mp4](final/traverse.mp4) | [sheet](final/traverse-sheet.jpg) |
