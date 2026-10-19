@@ -5,6 +5,11 @@ import { makeRng } from '../sim/math.js';
 
 import { SKY_HORIZON, FOG_HEX, SUN_VECTOR, INK_HEX, INK_WIDTH,
   SKY_VS, SKY_FS, SEA_VS, SEA_FS, CLOUD_VS, CLOUD_FS } from './lookdev.js';
+import { createCloudscape } from '../sky/cloudscape.js';
+import { createOpusSky } from '../sky/sky-renderer.js';
+
+// Opt-in art-direction spike (?sky=opus): replaces only what is drawn for sky, sea and clouds.
+const OPUS_SKY = typeof location !== 'undefined' && new URLSearchParams(location.search).get('sky') === 'opus';
 
 const SUN_DIR = new THREE.Vector3(...SUN_VECTOR).normalize();
 const v3 = (a) => new THREE.Vector3(a.x, a.y, a.z);
@@ -140,6 +145,7 @@ export class Renderer {
     this.scene.add(this.sea);
 
     this.buildClouds();
+    if (OPUS_SKY) this.buildOpusSky();
 
     // pools
     this.planes = new Map();
@@ -205,6 +211,30 @@ export class Renderer {
     this.clouds = mesh;
     this.cloudCards = cards;
     this.cloudMatrix = new THREE.Matrix4();
+  }
+
+  buildOpusSky() {
+    // Same painting, sun and camera; the R2 sky/sea/cards stay built but hidden so the rest of
+    // the game (title backdrop, HUD, AI, physics) is untouched. Clouds sit in the combat band.
+    this.sky.visible = this.sea.visible = this.clouds.visible = false;
+    const mobile = /iPhone|iPad|Android/.test(navigator.userAgent);
+    this.opusSky = createOpusSky({ renderer: this.renderer, scene: this.scene, camera: this.camera, skyTexture: this.skyPainting,
+      cloudscape: createCloudscape({ lift: 900 }),
+      options: mobile ? { sunDepthSize: [1024, 512], lodPx: 3.0, maxStreaks: 160 } : {} });
+    this.opusPrev = new THREE.Vector3(); this.opusVel = new THREE.Vector3(); this.opusClock = -1;
+    this.opusFogColor = new THREE.Color(0xdcdff2); this.opusBaseFog = this.scene.fog.color.clone();
+  }
+
+  updateOpusSky() {
+    const cam = this.camera.position, dt = this.clock - this.opusClock;
+    if (this.opusClock >= 0 && dt > 1e-4) this.opusVel.subVectors(cam, this.opusPrev).divideScalar(dt);
+    this.opusPrev.copy(cam); this.opusClock = this.clock;
+    const size = this.renderer.getDrawingBufferSize(new THREE.Vector2());
+    const st = this.opusSky.update({ time: this.clock, velocity: this.opusVel, viewportHeight: size.y });
+    // Aircraft, missiles and trails use the scene's linear fog: pull it in while inside cloud.
+    const k = Math.min(1, st.fogSigma / 0.03), fog = this.scene.fog;
+    fog.near = 4000 * (1 - k); fog.far = 32000 + (90 / Math.max(st.fogSigma, 1e-4) - 32000) * k;
+    fog.color.copy(this.opusBaseFog).lerp(this.opusFogColor, k);
   }
 
   resize() {
@@ -491,6 +521,7 @@ export class Renderer {
   }
 
   render() {
+    if (this.opusSky) { this.updateOpusSky(); this.renderer.render(this.scene, this.camera); return; }
     // Eight translucent paintings: sort their centres back-to-front without
     // adding meshes or a second pass. The sim and gameplay camera are untouched.
     const cam = this.camera.position;
