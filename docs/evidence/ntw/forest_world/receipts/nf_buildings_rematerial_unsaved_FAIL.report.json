@@ -1,0 +1,5 @@
+{
+  "status": "FAIL_NF_BUILDINGS",
+  "error": "Traceback (most recent call last):\n  File \"D:/Users/EDDY/Documents/GitHub/air-combat-world-ntwforest/adapters/unreal/ntwforest/nf_buildings.py\", line 106, in <module>\n    raise RuntimeError(\"re-material %d / %d, dirty %d\" % (n, len(idx[\"tiles\"]), len(dirty)))\nRuntimeError: re-material 543 / 543, dirty 0\n",
+  "dirty_packages": 0
+}

@@ -1,0 +1,58 @@
+{
+ "source": {
+  "dataset": "MOI 2025 20 m DEM sheets (TGOS, data.gov.tw 176927)",
+  "packages": [
+   "臺北市",
+   "新北市"
+  ],
+  "sheets": 124,
+  "duplicate_nodes": {
+   "duplicate_nodes": 532856,
+   "duplicate_max_abs_diff_m": 0.0
+  },
+  "tgos_dir": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world-ntw\\data\\generated\\ntw\\tgos"
+ },
+ "crs": "EPSG:3826 / TWVD2001",
+ "bbox_3826": [
+  289540.0,
+  2773540.0,
+  316000.0,
+  2800000.0
+ ],
+ "spacing_m": 10.0,
+ "size": [
+  2647,
+  2647
+ ],
+ "landscape": {
+  "components": [
+   21,
+   21
+  ],
+  "num_subsections": 2,
+  "subsection_quads": 63,
+  "scale_xyz": [
+   1000.0,
+   1000.0,
+   256.0
+  ],
+  "location_cm": [
+   -646000.0,
+   -4000000.0,
+   54000.0
+  ],
+  "h_ref_m": 540.0,
+  "z_rule": "UE Z cm = location.z + (raw - 32768) / 128 * scale_z  (= TWVD2001 height * 100)"
+ },
+ "ue_frame": "WorldSpec north_taiwan_224: UE X = (E - 296000) * 100, UE Y = -(N - 2760000) * 100, UE Z = height * 100",
+ "official_nodes_in_region": 1395457,
+ "landcover_land_px_without_dem_node": 0,
+ "land_fraction": 0.7960502596726937,
+ "official_node_max_abs_diff_m": 0.010058593750045475,
+ "quantisation_m": 0.02,
+ "sea_fill": "no official node = sea (outside DEM coverage): min(coast height, 0) - min(2 + 0.03*dist, 45) m",
+ "height_m": {
+  "min": -45.7400016784668,
+  "max": 1117.4200439453125
+ }
+}

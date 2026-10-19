@@ -1,0 +1,24 @@
+{
+  "status": "PASS_NF_MRQ_CONFIGS",
+  "configs": [
+    {
+      "tag": "nf_stills_09",
+      "sequence": "/Game/NorthForest/Sequences/LS_NF_Stills.LS_NF_Stills",
+      "frames": 540,
+      "config": "/Game/NorthForest/Sequences/MRQ_nf_stills_09.MRQ_nf_stills_09",
+      "map": "/Game/NorthForest/Maps/L_NF_Yangmingshan",
+      "output_directory": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world-ntwforest\\unreal\\TreeLookdev\\Saved\\NorthForest\\movies\\nf_stills_09\\frames",
+      "cvars": {}
+    },
+    {
+      "tag": "nf_flight_n_09",
+      "sequence": "/Game/NorthForest/Sequences/LS_NF_Flight_N.LS_NF_Flight_N",
+      "frames": 3519,
+      "config": "/Game/NorthForest/Sequences/MRQ_nf_flight_n_09.MRQ_nf_flight_n_09",
+      "map": "/Game/NorthForest/Maps/L_NF_Yangmingshan",
+      "output_directory": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world-ntwforest\\unreal\\TreeLookdev\\Saved\\NorthForest\\movies\\nf_flight_n_09\\frames",
+      "cvars": {}
+    }
+  ],
+  "error": null
+}

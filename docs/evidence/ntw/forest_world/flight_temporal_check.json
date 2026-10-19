@@ -1,0 +1,7 @@
+{
+ "frames": 3518,
+ "mean_abs_diff_median": 5.263418197631836,
+ "p99": 10.302444152832036,
+ "max": 10.874475479125977,
+ "spikes_gt3x_local_median": []
+}
