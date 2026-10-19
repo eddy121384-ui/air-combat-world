@@ -230,7 +230,7 @@ export class Renderer {
     if (this.opusClock >= 0 && dt > 1e-4) this.opusVel.subVectors(cam, this.opusPrev).divideScalar(dt);
     this.opusPrev.copy(cam); this.opusClock = this.clock;
     const size = this.renderer.getDrawingBufferSize(new THREE.Vector2());
-    const st = this.opusSky.update({ time: this.clock, velocity: this.opusVel, viewportHeight: size.y });
+    const st = this.opusSky.update({ time: this.clock, velocity: this.opusVel, viewportHeight: size.y, dt: dt > 1e-4 ? Math.min(dt, 0.1) : 1 / 60 });
     // Aircraft, missiles and trails use the scene's linear fog: pull it in while inside cloud.
     const k = Math.min(1, st.fogSigma / 0.03), fog = this.scene.fog;
     fog.near = 4000 * (1 - k); fog.far = 32000 + (90 / Math.max(st.fogSigma, 1e-4) - 32000) * k;
