@@ -80,6 +80,18 @@ try {
   assert.equal(input.throttle(), 0);
   el.track.fire('pointercancel', { pointerId: 3 });
 
+  // Expert joystick: lifting a finger keeps the selected deflection; new
+  // touch resumes from it. Do not convert this to auto-center in A or B.
+  const t = { identifier: 10, clientX: 120, clientY: 120 };
+  el.zone.fire('touchstart', { changedTouches: [t] });
+  el.zone.fire('touchmove', { changedTouches: [{ ...t, clientX: 158 }] });
+  const heldRoll = input.axes().x;
+  assert.ok(heldRoll > 0.05, 'touch drag must command roll');
+  el.zone.fire('touchend', { changedTouches: [t] });
+  assert.equal(input.axes().x, heldRoll, 'release must preserve roll bias');
+  input.resetStick();
+  assert.equal(input.axes().x, 0, 'fresh sortie may explicitly neutralize the stick');
+
   // Controls consumed by the real player controller, not just UI decoration.
   input.setThrottle(0.35);
   const ac = createAircraft('F16V', 'blue', {x:0,y:2500,z:0}, {x:0,y:0,z:-1}, 250);

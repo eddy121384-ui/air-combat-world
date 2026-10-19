@@ -50,3 +50,12 @@ and regain speed and altitude; recover from low-speed turns; fight full 1v1
 using missiles and guns. Rate directness, overshoot, target dwell time,
 post-turn responsiveness, and fun separately from numeric metrics. Keep this
 Draft until real-device review; avoid declaring B the winner from CI alone.
+
+## Independently verified remote preview
+
+Vercel static preview (separate from the production alias):
+
+- [A — Legacy Expert](https://skyfront-ace-to-f9dqaci6z-eddy121384-1385s-projects.vercel.app/?feel=A&seed=71429)
+- [B — Arcade Expert](https://skyfront-ace-to-f9dqaci6z-eddy121384-1385s-projects.vercel.app/?feel=B&seed=71429)
+
+Vercel READY plus explicit GET 200 checks for each entry point, simulation modules, render/HUD/input JS, CSS, vendored Three.js, and sky/cloud images. Actual iPhone Safari hardware playthrough remains unverified; no claim of player-validated feel.

@@ -138,7 +138,30 @@ for (const feel of ['A', 'B']) {
   for (let i = 0; i < 120; i++) m.step();
   assert.ok(Number.isFinite(m.blue.speed) && Number.isFinite(m.red.speed));
 }
+
+// Fixed-slope, unloaded energy exchange: gravity, not a scripted speed boost,
+// must slow the climb and accelerate the dive. Test both flight integrations.
+function slopeExchange(feel, angleDeg) {
+  const a = angleDeg * DEG;
+  const ac = createAircraft('F16V', 'blue', { x: 0, y: 3400, z: 0 },
+    { x: 0, y: Math.sin(a), z: -Math.cos(a) }, 230);
+  ac.flightFeel = feel;
+  ac.controls.throttle = 0.72;
+  step(ac, 3);
+  return { heightDeltaM: ac.pos.y - 3400, speedDeltaMps: ac.speed - 230 };
+}
+const slopes = {};
+for (const feel of ['A', 'B']) {
+  const climb = slopeExchange(feel, 18), dive = slopeExchange(feel, -18);
+  assert.ok(climb.heightDeltaM > 100, feel + ' climb must actually gain altitude');
+  assert.ok(dive.heightDeltaM < -100, feel + ' dive must actually lose altitude');
+  assert.ok(dive.speedDeltaMps > climb.speedDeltaMps + 12,
+    feel + ' descending must retain more speed than climbing');
+  slopes[feel] = { climb, dive };
+}
+
 const data = {
+  climbDive: slopes,
   roll90: { A: normalA.bank, B: normalB.bank },
   normalTurn1s: { A: normalA, B: normalB },
   highGTurn1s: highB,
