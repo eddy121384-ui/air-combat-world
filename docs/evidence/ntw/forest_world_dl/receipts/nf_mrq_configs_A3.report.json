@@ -1,0 +1,15 @@
+{
+  "status": "PASS_NF_MRQ_CONFIGS",
+  "configs": [
+    {
+      "tag": "nf_stills_dl_A3",
+      "sequence": "/Game/NorthForest/Sequences/LS_NF_Stills_DL.LS_NF_Stills_DL",
+      "frames": 900,
+      "config": "/Game/NorthForest/Sequences/MRQ_nf_stills_dl_A3.MRQ_nf_stills_dl_A3",
+      "map": "/Game/NorthForest/Maps/L_NF_Yangmingshan",
+      "output_directory": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world-ntwforest-dl\\unreal\\TreeLookdev\\Saved\\NorthForest\\movies\\nf_stills_dl_A3\\frames",
+      "cvars": {}
+    }
+  ],
+  "error": null
+}

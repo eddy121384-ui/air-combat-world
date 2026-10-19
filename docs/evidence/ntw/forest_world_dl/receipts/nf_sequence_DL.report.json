@@ -1,0 +1,35 @@
+{
+  "status": "PASS_NF_SEQUENCE",
+  "sequences": {
+    "LS_NF_Flight_DL": {
+      "path": "/Game/NorthForest/Sequences/LS_NF_Flight_DL.LS_NF_Flight_DL",
+      "frames": 3519
+    },
+    "LS_NF_Stills_DL": {
+      "path": "/Game/NorthForest/Sequences/LS_NF_Stills_DL.LS_NF_Stills_DL",
+      "frames": 900
+    },
+    "LS_NF_Perf_DL": {
+      "path": "/Game/NorthForest/Sequences/LS_NF_Perf_DL.LS_NF_Perf_DL",
+      "frames": 5919
+    }
+  },
+  "error": null,
+  "perf_layout": {
+    "still_hold_frames": 240,
+    "stills": [
+      "agl300_qixing",
+      "alt1500_overview",
+      "agl120_plantation",
+      "agl200_qingtiangang",
+      "alt3000_wide",
+      "agl400_basin_edge",
+      "dl_layers_north",
+      "dl_far_range",
+      "dl_mid_ridge",
+      "dl_datun_west"
+    ],
+    "flight_start_frame": 2400,
+    "fps": 30
+  }
+}

@@ -8,6 +8,7 @@ frames > 50 ms, and memory columns when present. Exploratory, single host (Intel
 """
 import csv
 import json
+import os
 import sys
 from pathlib import Path
 
@@ -15,6 +16,8 @@ import numpy as np
 
 csv.field_size_limit(2**31 - 1)
 STILLS = ["agl300_qixing", "alt1500_overview", "agl120_plantation", "agl200_qingtiangang", "alt3000_wide", "agl400_basin_edge"]
+if os.environ.get("ACW_NF_PERF_VIEWS"):   # perf sequence built from another views file (e.g. views_dl.json: 10 stills)
+    STILLS = [s["name"] for s in json.loads(Path(os.environ["ACW_NF_PERF_VIEWS"]).read_text(encoding="utf-8"))["stills"]]
 HOLD_S, FLIGHT_S = 8.0, 3519 / 30.0
 COLS = ("FrameTime", "GPUTime", "GameThreadTime", "RenderThreadTime", "RHIThreadTime")
 

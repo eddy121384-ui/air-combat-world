@@ -1,0 +1,1138 @@
+{
+ "dl_pc_r1": {
+  "load_hitch_ms": 34848.3,
+  "sequence_start_s": 34.85,
+  "csv_rows": 4000,
+  "csv_seconds": 507.6,
+  "process": {
+   "csv": true,
+   "seconds": 512,
+   "peak_working_set_mb": 2002,
+   "exit_code": 0
+  },
+  "segments": {
+   "still_agl300_qixing": {
+    "FrameTime": {
+     "median": 522.09,
+     "p95": 607.32,
+     "p99": 608.58
+    },
+    "GPUTime": {
+     "median": 531.16,
+     "p95": 610.13,
+     "p99": 611.74
+    },
+    "GameThreadTime": {
+     "median": 102.84,
+     "p95": 124.53,
+     "p99": 131.37
+    },
+    "RenderThreadTime": {
+     "median": 521.95,
+     "p95": 606.93,
+     "p99": 607.89
+    },
+    "RHIThreadTime": {
+     "median": 7.86,
+     "p95": 26.36,
+     "p99": 32.75
+    },
+    "frames": 12,
+    "frames_over_50ms": 12,
+    "fps_median": 1.9,
+    "TransientMemoryUsedMB": {
+     "median": 128.0,
+     "max": 128.0
+    },
+    "TransientMemoryAliasedMB": {
+     "median": 54.1,
+     "max": 54.1
+    },
+    "GPUMem/LocalBudgetMB": {
+     "median": 7354.9,
+     "max": 7354.9
+    },
+    "GPUMem/LocalUsedMB": {
+     "median": 920.2,
+     "max": 922.3
+    },
+    "HttpManager/DownloadedMB": {
+     "median": 0.0,
+     "max": 0.0
+    },
+    "Shaders/ShaderMemoryMB": {
+     "median": 3.4,
+     "max": 3.5
+    },
+    "MemoryFreeMB": {
+     "median": 1114.7,
+     "max": 1195.4
+    },
+    "PhysicalUsedMB": {
+     "median": 3434.0,
+     "max": 3486.8
+    },
+    "VirtualUsedMB": {
+     "median": 3421.4,
+     "max": 3469.2
+    },
+    "ExtendedUsedMB": {
+     "median": 0.0,
+     "max": 0.0
+    },
+    "SystemMaxMB": {
+     "median": 4552.6,
+     "max": 4561.5
+    },
+    "RayTracingGeometry/ReferencedSizeMB": {
+     "median": 0.0,
+     "max": 0.0
+    },
+    "RayTracingGeometry/RequestedSizeMB": {
+     "median": 0.0,
+     "max": 0.0
+    },
+    "RayTracingGeometry/TotalResidentSizeMB": {
+     "median": 0.0,
+     "max": 0.0
+    },
+    "RayTracingGeometry/TotalAlwaysResidentSizeMB": {
+     "median": 0.0,
+     "max": 0.0
+    },
+    "RenderTargetPool/UnusedMB": {
+     "median": 0.0,
+     "max": 0.0
+    },
+    "RenderTargetPool/PeakUsedMB": {
+     "median": 38.3,
+     "max": 38.3
+    },
+    "ShadowCacheUsageMB": {
+     "median": 0.0,
+     "max": 0.0
+    }
+   },
+   "still_alt1500_overview": {
+    "FrameTime": {
+     "median": 62.53,
+     "p95": 547.12,
+     "p99": 550.09
+    },
+    "GPUTime": {
+     "median": 60.06,
+     "p95": 544.45,
+     "p99": 547.02
+    },
+    "GameThreadTime": {
+     "median": 8.9,
+     "p95": 15.7,
+     "p99": 17.32
+    },
+    "RenderThreadTime": {
+     "median": 62.51,
+     "p95": 547.44,
+     "p99": 549.64
+    },
+    "RHIThreadTime": {
+     "median": 4.65,
+     "p95": 7.37,
+     "p99": 10.18
+    },
+    "frames": 60,
+    "frames_over_50ms": 60,
+    "fps_median": 16.0,
+    "TransientMemoryUsedMB": {
+     "median": 128.0,
+     "max": 128.0
+    },
+    "TransientMemoryAliasedMB": {
+     "median": 54.1,
+     "max": 54.1
+    },
+    "GPUMem/LocalBudgetMB": {
+     "median": 7354.9,
+     "max": 7354.9
+    },
+    "GPUMem/LocalUsedMB": {
+     "median": 775.0,
+     "max": 993.1
+    },
+    "HttpManager/DownloadedMB": {
+     "median": 0.0,
+     "max": 0.0
+    },
+    "Shaders/ShaderMemoryMB": {
+     "median": 3.3,
+     "max": 3.3
+    },
+    "MemoryFreeMB": {
+     "median": 1037.4,
+     "max": 1058.0
+    },
+    "PhysicalUsedMB": {
+     "median": 3549.2,
+     "max": 3571.3
+    },
+    "VirtualUsedMB": {
+     "median": 3525.2,
+     "max": 3556.4
+    },
+    "ExtendedUsedMB": {
+     "median": 0.0,
+     "max": 0.0
+    },
+    "SystemMaxMB": {
+     "median": 4587.5,
+     "max": 4606.0
+    },
+    "RayTracingGeometry/ReferencedSizeMB": {
+     "median": 0.0,
+     "max": 0.0
+    },
+    "RayTracingGeometry/RequestedSizeMB": {
+     "median": 0.0,
+     "max": 0.0
+    },
+    "RayTracingGeometry/TotalResidentSizeMB": {
+     "median": 0.0,
+     "max": 0.0
+    },
+    "RayTracingGeometry/TotalAlwaysResidentSizeMB": {
+     "median": 0.0,
+     "max": 0.0
+    },
+    "RenderTargetPool/UnusedMB": {
+     "median": 0.0,
+     "max": 0.0
+    },
+    "RenderTargetPool/PeakUsedMB": {
+     "median": 38.3,
+     "max": 38.3
+    },
+    "ShadowCacheUsageMB": {
+     "median": 0.0,
+     "max": 0.0
+    }
+   },
+   "still_agl120_plantation": {
+    "FrameTime": {
+     "median": 35.56,
+     "p95": 366.44,
+     "p99": 478.94
+    },
+    "GPUTime": {
+     "median": 33.29,
+     "p95": 349.83,
+     "p99": 473.21
+    },
+    "GameThreadTime": {
+     "median": 9.35,
+     "p95": 21.1,
+     "p99": 41.03
+    },
+    "RenderThreadTime": {
+     "median": 35.47,
+     "p95": 366.32,
+     "p99": 479.47
+    },
+    "RHIThreadTime": {
+     "median": 4.23,
+     "p95": 5.66,
+     "p99": 6.69
+    },
+    "frames": 84,
+    "frames_over_50ms": 33,
+    "fps_median": 28.1,
+    "TransientMemoryUsedMB": {
+     "median": 128.0,
+     "max": 128.0
+    },
+    "TransientMemoryAliasedMB": {
+     "median": 54.1,
+     "max": 54.1
+    },
+    "GPUMem/LocalBudgetMB": {
+     "median": 7354.9,
+     "max": 7354.9
+    },
+    "GPUMem/LocalUsedMB": {
+     "median": 746.2,
+     "max": 779.4
+    },
+    "HttpManager/DownloadedMB": {
+     "median": 0.0,
+     "max": 0.0
+    },
+    "Shaders/ShaderMemoryMB": {
+     "median": 3.3,
+     "max": 3.3
+    },
+    "MemoryFreeMB": {
+     "median": 1036.8,
+     "max": 1114.1
+    },
+    "PhysicalUsedMB": {
+     "median": 3533.5,
+     "max": 3589.8
+    },
+    "VirtualUsedMB": {
+     "median": 3437.6,
+     "max": 3527.6
+    },
+    "ExtendedUsedMB": {
+     "median": 0.0,
+     "max": 0.0
+    },
+    "SystemMaxMB": {
+     "median": 4582.1,
+     "max": 4597.9
+    },
+    "RayTracingGeometry/ReferencedSizeMB": {
+     "median": 0.0,
+     "max": 0.0
+    },
+    "RayTracingGeometry/RequestedSizeMB": {
+     "median": 0.0,
+     "max": 0.0
+    },
+    "RayTracingGeometry/TotalResidentSizeMB": {
+     "median": 0.0,
+     "max": 0.0
+    },
+    "RayTracingGeometry/TotalAlwaysResidentSizeMB": {
+     "median": 0.0,
+     "max": 0.0
+    },
+    "RenderTargetPool/UnusedMB": {
+     "median": 0.0,
+     "max": 0.0
+    },
+    "RenderTargetPool/PeakUsedMB": {
+     "median": 38.3,
+     "max": 38.3
+    },
+    "ShadowCacheUsageMB": {
+     "median": 0.0,
+     "max": 0.0
+    }
+   },
+   "still_agl200_qingtiangang": {
+    "FrameTime": {
+     "median": 442.09,
+     "p95": 468.28,
+     "p99": 470.83
+    },
+    "GPUTime": {
+     "median": 454.12,
+     "p95": 457.45,
+     "p99": 459.01
+    },
+    "GameThreadTime": {
+     "median": 9.6,
+     "p95": 11.13,
+     "p99": 11.32
+    },
+    "RenderThreadTime": {
+     "median": 441.9,
+     "p95": 468.32,
+     "p99": 471.01
+    },
+    "RHIThreadTime": {
+     "median": 4.26,
+     "p95": 5.16,
+     "p99": 5.39
+    },
+    "frames": 15,
+    "frames_over_50ms": 15,
+    "fps_median": 2.3,
+    "TransientMemoryUsedMB": {
+     "median": 128.0,
+     "max": 128.0
+    },
+    "TransientMemoryAliasedMB": {
+     "median": 54.1,
+     "max": 54.1
+    },
+    "GPUMem/LocalBudgetMB": {
+     "median": 7354.9,
+     "max": 7354.9
+    },
+    "GPUMem/LocalUsedMB": {
+     "median": 779.7,
+     "max": 779.8
+    },
+    "HttpManager/DownloadedMB": {
+     "median": 0.0,
+     "max": 0.0
+    },
+    "Shaders/ShaderMemoryMB": {
+     "median": 3.3,
+     "max": 3.3
+    },
+    "MemoryFreeMB": {
+     "median": 873.3,
+     "max": 1016.2
+    },
+    "PhysicalUsedMB": {
+     "median": 3487.9,
+     "max": 3537.6
+    },
+    "VirtualUsedMB": {
+     "median": 3375.3,
+     "max": 3418.2
+    },
+    "ExtendedUsedMB": {
+     "median": 0.0,
+     "max": 0.0
+    },
+    "SystemMaxMB": {
+     "median": 4386.4,
+     "max": 4504.2
+    },
+    "RayTracingGeometry/ReferencedSizeMB": {
+     "median": 0.0,
+     "max": 0.0
+    },
+    "RayTracingGeometry/RequestedSizeMB": {
+     "median": 0.0,
+     "max": 0.0
+    },
+    "RayTracingGeometry/TotalResidentSizeMB": {
+     "median": 0.0,
+     "max": 0.0
+    },
+    "RayTracingGeometry/TotalAlwaysResidentSizeMB": {
+     "median": 0.0,
+     "max": 0.0
+    },
+    "RenderTargetPool/UnusedMB": {
+     "median": 0.0,
+     "max": 0.0
+    },
+    "RenderTargetPool/PeakUsedMB": {
+     "median": 38.3,
+     "max": 38.3
+    },
+    "ShadowCacheUsageMB": {
+     "median": 0.0,
+     "max": 0.0
+    }
+   },
+   "still_alt3000_wide": {
+    "FrameTime": {
+     "median": 37.54,
+     "p95": 365.61,
+     "p99": 367.6
+    },
+    "GPUTime": {
+     "median": 35.66,
+     "p95": 362.63,
+     "p99": 364.37
+    },
+    "GameThreadTime": {
+     "median": 6.9,
+     "p95": 28.01,
+     "p99": 65.03
+    },
+    "RenderThreadTime": {
+     "median": 37.58,
+     "p95": 365.63,
+     "p99": 366.94
+    },
+    "RHIThreadTime": {
+     "median": 4.32,
+     "p95": 5.46,
+     "p99": 6.03
+    },
+    "frames": 79,
+    "frames_over_50ms": 11,
+    "fps_median": 26.6,
+    "TransientMemoryUsedMB": {
+     "median": 128.0,
+     "max": 128.0
+    },
+    "TransientMemoryAliasedMB": {
+     "median": 54.1,
+     "max": 54.1
+    },
+    "GPUMem/LocalBudgetMB": {
+     "median": 7354.9,
+     "max": 7354.9
+    },
+    "GPUMem/LocalUsedMB": {
+     "median": 749.0,
+     "max": 780.8
+    },
+    "HttpManager/DownloadedMB": {
+     "median": 0.0,
+     "max": 0.0
+    },
+    "Shaders/ShaderMemoryMB": {
+     "median": 3.3,
+     "max": 3.3
+    },
+    "MemoryFreeMB": {
+     "median": 829.6,
+     "max": 945.8
+    },
+    "PhysicalUsedMB": {
+     "median": 3523.5,
+     "max": 3524.5
+    },
+    "VirtualUsedMB": {
+     "median": 3410.5,
+     "max": 3412.3
+    },
+    "ExtendedUsedMB": {
+     "median": 0.0,
+     "max": 0.0
+    },
+    "SystemMaxMB": {
+     "median": 4352.6,
+     "max": 4452.7
+    },
+    "RayTracingGeometry/ReferencedSizeMB": {
+     "median": 0.0,
+     "max": 0.0
+    },
+    "RayTracingGeometry/RequestedSizeMB": {
+     "median": 0.0,
+     "max": 0.0
+    },
+    "RayTracingGeometry/TotalResidentSizeMB": {
+     "median": 0.0,
+     "max": 0.0
+    },
+    "RayTracingGeometry/TotalAlwaysResidentSizeMB": {
+     "median": 0.0,
+     "max": 0.0
+    },
+    "RenderTargetPool/UnusedMB": {
+     "median": 0.0,
+     "max": 0.0
+    },
+    "RenderTargetPool/PeakUsedMB": {
+     "median": 38.3,
+     "max": 38.3
+    },
+    "ShadowCacheUsageMB": {
+     "median": 0.0,
+     "max": 0.0
+    }
+   },
+   "still_agl400_basin_edge": {
+    "FrameTime": {
+     "median": 39.14,
+     "p95": 58.15,
+     "p99": 59.07
+    },
+    "GPUTime": {
+     "median": 36.28,
+     "p95": 56.17,
+     "p99": 56.48
+    },
+    "GameThreadTime": {
+     "median": 7.79,
+     "p95": 14.33,
+     "p99": 18.94
+    },
+    "RenderThreadTime": {
+     "median": 38.58,
+     "p95": 58.13,
+     "p99": 59.03
+    },
+    "RHIThreadTime": {
+     "median": 4.24,
+     "p95": 5.44,
+     "p99": 6.03
+    },
+    "frames": 139,
+    "frames_over_50ms": 44,
+    "fps_median": 25.5,
+    "TransientMemoryUsedMB": {
+     "median": 128.0,
+     "max": 128.0
+    },
+    "TransientMemoryAliasedMB": {
+     "median": 54.1,
+     "max": 54.1
+    },
+    "GPUMem/LocalBudgetMB": {
+     "median": 7354.9,
+     "max": 7354.9
+    },
+    "GPUMem/LocalUsedMB": {
+     "median": 718.6,
+     "max": 751.0
+    },
+    "HttpManager/DownloadedMB": {
+     "median": 0.0,
+     "max": 0.0
+    },
+    "Shaders/ShaderMemoryMB": {
+     "median": 3.3,
+     "max": 3.3
+    },
+    "MemoryFreeMB": {
+     "median": 1023.3,
+     "max": 1046.5
+    },
+    "PhysicalUsedMB": {
+     "median": 3498.6,
+     "max": 3526.6
+    },
+    "VirtualUsedMB": {
+     "median": 3377.6,
+     "max": 3409.9
+    },
+    "ExtendedUsedMB": {
+     "median": 0.0,
+     "max": 0.0
+    },
+    "SystemMaxMB": {
+     "median": 4527.7,
+     "max": 4544.6
+    },
+    "RayTracingGeometry/ReferencedSizeMB": {
+     "median": 0.0,
+     "max": 0.0
+    },
+    "RayTracingGeometry/RequestedSizeMB": {
+     "median": 0.0,
+     "max": 0.0
+    },
+    "RayTracingGeometry/TotalResidentSizeMB": {
+     "median": 0.0,
+     "max": 0.0
+    },
+    "RayTracingGeometry/TotalAlwaysResidentSizeMB": {
+     "median": 0.0,
+     "max": 0.0
+    },
+    "RenderTargetPool/UnusedMB": {
+     "median": 0.0,
+     "max": 0.0
+    },
+    "RenderTargetPool/PeakUsedMB": {
+     "median": 38.3,
+     "max": 38.3
+    },
+    "ShadowCacheUsageMB": {
+     "median": 0.0,
+     "max": 0.0
+    }
+   },
+   "still_dl_layers_north": {
+    "FrameTime": {
+     "median": 58.66,
+     "p95": 113.12,
+     "p99": 127.64
+    },
+    "GPUTime": {
+     "median": 56.44,
+     "p95": 110.52,
+     "p99": 111.0
+    },
+    "GameThreadTime": {
+     "median": 8.51,
+     "p95": 11.21,
+     "p99": 17.45
+    },
+    "RenderThreadTime": {
+     "median": 58.87,
+     "p95": 112.79,
+     "p99": 114.07
+    },
+    "RHIThreadTime": {
+     "median": 4.23,
+     "p95": 5.15,
+     "p99": 5.4
+    },
+    "frames": 89,
+    "frames_over_50ms": 66,
+    "fps_median": 17.0,
+    "TransientMemoryUsedMB": {
+     "median": 128.0,
+     "max": 128.0
+    },
+    "TransientMemoryAliasedMB": {
+     "median": 54.1,
+     "max": 54.1
+    },
+    "GPUMem/LocalBudgetMB": {
+     "median": 7354.9,
+     "max": 7354.9
+    },
+    "GPUMem/LocalUsedMB": {
+     "median": 723.9,
+     "max": 756.3
+    },
+    "HttpManager/DownloadedMB": {
+     "median": 0.0,
+     "max": 0.0
+    },
+    "Shaders/ShaderMemoryMB": {
+     "median": 3.3,
+     "max": 3.3
+    },
+    "MemoryFreeMB": {
+     "median": 1028.7,
+     "max": 1071.0
+    },
+    "PhysicalUsedMB": {
+     "median": 3497.8,
+     "max": 3501.4
+    },
+    "VirtualUsedMB": {
+     "median": 3373.6,
+     "max": 3377.6
+    },
+    "ExtendedUsedMB": {
+     "median": 0.0,
+     "max": 0.0
+    },
+    "SystemMaxMB": {
+     "median": 4524.4,
+     "max": 4571.1
+    },
+    "RayTracingGeometry/ReferencedSizeMB": {
+     "median": 0.0,
+     "max": 0.0
+    },
+    "RayTracingGeometry/RequestedSizeMB": {
+     "median": 0.0,
+     "max": 0.0
+    },
+    "RayTracingGeometry/TotalResidentSizeMB": {
+     "median": 0.0,
+     "max": 0.0
+    },
+    "RayTracingGeometry/TotalAlwaysResidentSizeMB": {
+     "median": 0.0,
+     "max": 0.0
+    },
+    "RenderTargetPool/UnusedMB": {
+     "median": 0.0,
+     "max": 0.0
+    },
+    "RenderTargetPool/PeakUsedMB": {
+     "median": 42.8,
+     "max": 42.8
+    },
+    "ShadowCacheUsageMB": {
+     "median": 0.0,
+     "max": 0.0
+    }
+   },
+   "still_dl_far_range": {
+    "FrameTime": {
+     "median": 33.94,
+     "p95": 489.83,
+     "p99": 494.01
+    },
+    "GPUTime": {
+     "median": 31.86,
+     "p95": 489.72,
+     "p99": 492.29
+    },
+    "GameThreadTime": {
+     "median": 9.12,
+     "p95": 16.78,
+     "p99": 23.17
+    },
+    "RenderThreadTime": {
+     "median": 33.95,
+     "p95": 489.84,
+     "p99": 493.95
+    },
+    "RHIThreadTime": {
+     "median": 4.15,
+     "p95": 4.99,
+     "p99": 5.44
+    },
+    "frames": 63,
+    "frames_over_50ms": 9,
+    "fps_median": 29.5,
+    "TransientMemoryUsedMB": {
+     "median": 128.0,
+     "max": 128.0
+    },
+    "TransientMemoryAliasedMB": {
+     "median": 54.1,
+     "max": 54.1
+    },
+    "GPUMem/LocalBudgetMB": {
+     "median": 7354.9,
+     "max": 7354.9
+    },
+    "GPUMem/LocalUsedMB": {
+     "median": 789.0,
+     "max": 789.6
+    },
+    "HttpManager/DownloadedMB": {
+     "median": 0.0,
+     "max": 0.0
+    },
+    "Shaders/ShaderMemoryMB": {
+     "median": 3.3,
+     "max": 3.4
+    },
+    "MemoryFreeMB": {
+     "median": 1133.3,
+     "max": 1145.8
+    },
+    "PhysicalUsedMB": {
+     "median": 3489.2,
+     "max": 3494.4
+    },
+    "VirtualUsedMB": {
+     "median": 3390.7,
+     "max": 3397.8
+    },
+    "ExtendedUsedMB": {
+     "median": 0.0,
+     "max": 0.0
+    },
+    "SystemMaxMB": {
+     "median": 4626.3,
+     "max": 4635.6
+    },
+    "RayTracingGeometry/ReferencedSizeMB": {
+     "median": 0.0,
+     "max": 0.0
+    },
+    "RayTracingGeometry/RequestedSizeMB": {
+     "median": 0.0,
+     "max": 0.0
+    },
+    "RayTracingGeometry/TotalResidentSizeMB": {
+     "median": 0.0,
+     "max": 0.0
+    },
+    "RayTracingGeometry/TotalAlwaysResidentSizeMB": {
+     "median": 0.0,
+     "max": 0.0
+    },
+    "RenderTargetPool/UnusedMB": {
+     "median": 0.0,
+     "max": 0.0
+    },
+    "RenderTargetPool/PeakUsedMB": {
+     "median": 42.8,
+     "max": 42.8
+    },
+    "ShadowCacheUsageMB": {
+     "median": 0.0,
+     "max": 0.0
+    }
+   },
+   "still_dl_mid_ridge": {
+    "FrameTime": {
+     "median": 32.12,
+     "p95": 269.42,
+     "p99": 339.91
+    },
+    "GPUTime": {
+     "median": 29.73,
+     "p95": 266.91,
+     "p99": 297.44
+    },
+    "GameThreadTime": {
+     "median": 9.35,
+     "p95": 23.58,
+     "p99": 37.41
+    },
+    "RenderThreadTime": {
+     "median": 31.81,
+     "p95": 269.51,
+     "p99": 339.79
+    },
+    "RHIThreadTime": {
+     "median": 4.27,
+     "p95": 5.67,
+     "p99": 6.06
+    },
+    "frames": 61,
+    "frames_over_50ms": 17,
+    "fps_median": 31.1,
+    "TransientMemoryUsedMB": {
+     "median": 128.0,
+     "max": 128.0
+    },
+    "TransientMemoryAliasedMB": {
+     "median": 54.1,
+     "max": 54.1
+    },
+    "GPUMem/LocalBudgetMB": {
+     "median": 7354.9,
+     "max": 7354.9
+    },
+    "GPUMem/LocalUsedMB": {
+     "median": 758.1,
+     "max": 790.3
+    },
+    "HttpManager/DownloadedMB": {
+     "median": 0.0,
+     "max": 0.0
+    },
+    "Shaders/ShaderMemoryMB": {
+     "median": 3.3,
+     "max": 3.3
+    },
+    "MemoryFreeMB": {
+     "median": 1101.8,
+     "max": 1108.4
+    },
+    "PhysicalUsedMB": {
+     "median": 3524.6,
+     "max": 3532.2
+    },
+    "VirtualUsedMB": {
+     "median": 3392.7,
+     "max": 3428.6
+    },
+    "ExtendedUsedMB": {
+     "median": 0.0,
+     "max": 0.0
+    },
+    "SystemMaxMB": {
+     "median": 4625.9,
+     "max": 4632.9
+    },
+    "RayTracingGeometry/ReferencedSizeMB": {
+     "median": 0.0,
+     "max": 0.0
+    },
+    "RayTracingGeometry/RequestedSizeMB": {
+     "median": 0.0,
+     "max": 0.0
+    },
+    "RayTracingGeometry/TotalResidentSizeMB": {
+     "median": 0.0,
+     "max": 0.0
+    },
+    "RayTracingGeometry/TotalAlwaysResidentSizeMB": {
+     "median": 0.0,
+     "max": 0.0
+    },
+    "RenderTargetPool/UnusedMB": {
+     "median": 2.2,
+     "max": 2.2
+    },
+    "RenderTargetPool/PeakUsedMB": {
+     "median": 40.5,
+     "max": 42.8
+    },
+    "ShadowCacheUsageMB": {
+     "median": 0.0,
+     "max": 0.0
+    }
+   },
+   "still_dl_datun_west": {
+    "FrameTime": {
+     "median": 533.28,
+     "p95": 537.4,
+     "p99": 537.79
+    },
+    "GPUTime": {
+     "median": 531.58,
+     "p95": 535.84,
+     "p99": 537.55
+    },
+    "GameThreadTime": {
+     "median": 9.28,
+     "p95": 10.11,
+     "p99": 10.58
+    },
+    "RenderThreadTime": {
+     "median": 533.27,
+     "p95": 537.29,
+     "p99": 537.78
+    },
+    "RHIThreadTime": {
+     "median": 4.2,
+     "p95": 4.47,
+     "p99": 4.6
+    },
+    "frames": 12,
+    "frames_over_50ms": 12,
+    "fps_median": 1.9,
+    "TransientMemoryUsedMB": {
+     "median": 128.0,
+     "max": 128.0
+    },
+    "TransientMemoryAliasedMB": {
+     "median": 54.1,
+     "max": 54.1
+    },
+    "GPUMem/LocalBudgetMB": {
+     "median": 7354.9,
+     "max": 7354.9
+    },
+    "GPUMem/LocalUsedMB": {
+     "median": 854.7,
+     "max": 854.7
+    },
+    "HttpManager/DownloadedMB": {
+     "median": 0.0,
+     "max": 0.0
+    },
+    "Shaders/ShaderMemoryMB": {
+     "median": 3.3,
+     "max": 3.3
+    },
+    "MemoryFreeMB": {
+     "median": 1056.1,
+     "max": 1097.6
+    },
+    "PhysicalUsedMB": {
+     "median": 3578.3,
+     "max": 3581.1
+    },
+    "VirtualUsedMB": {
+     "median": 3473.7,
+     "max": 3477.3
+    },
+    "ExtendedUsedMB": {
+     "median": 0.0,
+     "max": 0.0
+    },
+    "SystemMaxMB": {
+     "median": 4615.5,
+     "max": 4641.8
+    },
+    "RayTracingGeometry/ReferencedSizeMB": {
+     "median": 0.0,
+     "max": 0.0
+    },
+    "RayTracingGeometry/RequestedSizeMB": {
+     "median": 0.0,
+     "max": 0.0
+    },
+    "RayTracingGeometry/TotalResidentSizeMB": {
+     "median": 0.0,
+     "max": 0.0
+    },
+    "RayTracingGeometry/TotalAlwaysResidentSizeMB": {
+     "median": 0.0,
+     "max": 0.0
+    },
+    "RenderTargetPool/UnusedMB": {
+     "median": 2.2,
+     "max": 2.2
+    },
+    "RenderTargetPool/PeakUsedMB": {
+     "median": 40.5,
+     "max": 40.5
+    },
+    "ShadowCacheUsageMB": {
+     "median": 0.0,
+     "max": 0.0
+    }
+   },
+   "flight": {
+    "FrameTime": {
+     "median": 206.66,
+     "p95": 581.39,
+     "p99": 738.99
+    },
+    "GPUTime": {
+     "median": 206.19,
+     "p95": 574.7,
+     "p99": 708.38
+    },
+    "GameThreadTime": {
+     "median": 9.65,
+     "p95": 27.86,
+     "p99": 36.25
+    },
+    "RenderThreadTime": {
+     "median": 208.67,
+     "p95": 575.9,
+     "p99": 694.63
+    },
+    "RHIThreadTime": {
+     "median": 4.33,
+     "p95": 5.71,
+     "p99": 6.5
+    },
+    "frames": 464,
+    "frames_over_50ms": 366,
+    "fps_median": 4.8,
+    "TransientMemoryUsedMB": {
+     "median": 128.0,
+     "max": 128.0
+    },
+    "TransientMemoryAliasedMB": {
+     "median": 54.1,
+     "max": 54.1
+    },
+    "GPUMem/LocalBudgetMB": {
+     "median": 7354.9,
+     "max": 7354.9
+    },
+    "GPUMem/LocalUsedMB": {
+     "median": 855.6,
+     "max": 923.0
+    },
+    "HttpManager/DownloadedMB": {
+     "median": 0.0,
+     "max": 0.0
+    },
+    "Shaders/ShaderMemoryMB": {
+     "median": 3.3,
+     "max": 3.4
+    },
+    "MemoryFreeMB": {
+     "median": 1097.9,
+     "max": 1647.9
+    },
+    "PhysicalUsedMB": {
+     "median": 3558.1,
+     "max": 3632.2
+    },
+    "VirtualUsedMB": {
+     "median": 3468.4,
+     "max": 3628.0
+    },
+    "ExtendedUsedMB": {
+     "median": 0.0,
+     "max": 0.0
+    },
+    "SystemMaxMB": {
+     "median": 4666.7,
+     "max": 4931.1
+    },
+    "RayTracingGeometry/ReferencedSizeMB": {
+     "median": 0.0,
+     "max": 0.0
+    },
+    "RayTracingGeometry/RequestedSizeMB": {
+     "median": 0.0,
+     "max": 0.0
+    },
+    "RayTracingGeometry/TotalResidentSizeMB": {
+     "median": 0.0,
+     "max": 0.0
+    },
+    "RayTracingGeometry/TotalAlwaysResidentSizeMB": {
+     "median": 0.0,
+     "max": 0.0
+    },
+    "RenderTargetPool/UnusedMB": {
+     "median": 2.2,
+     "max": 2.2
+    },
+    "RenderTargetPool/PeakUsedMB": {
+     "median": 40.5,
+     "max": 42.8
+    },
+    "ShadowCacheUsageMB": {
+     "median": 0.0,
+     "max": 0.0
+    }
+   }
+  }
+ }
+}

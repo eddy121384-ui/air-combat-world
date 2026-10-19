@@ -1,0 +1,47 @@
+{
+  "status": "PASS_NF_TREES_DL",
+  "preset": {
+    "NearFull": 100000.0,
+    "ThinEnd": 400000.0,
+    "FadeWidth": 15000.0,
+    "ThinGamma": 2.2,
+    "ShellStart": 120000.0,
+    "ShellEnd": 300000.0,
+    "ShellScale": 0.8,
+    "ClumpGain": 0.7
+  },
+  "error": null,
+  "mpc": {
+    "NearFull": 100000.0,
+    "ThinEnd": 400000.0,
+    "FadeWidth": 15000.0,
+    "ThinGamma": 2.200000047683716,
+    "ShellStart": 120000.0,
+    "ShellEnd": 300000.0,
+    "ShellScale": 0.800000011920929,
+    "ClumpGain": 0.699999988079071
+  },
+  "materials": {
+    "/Game/NorthForest/Materials/M_NF_AcaciaW_LeafCards": "already",
+    "/Game/NorthForest/Materials/M_NF_Acacia_Bark": "already",
+    "/Game/NorthForest/Materials/M_NF_Bark": "already",
+    "/Game/NorthForest/Materials/M_NF_Cryptomeria_Bark": "already",
+    "/Game/NorthForest/Materials/M_NF_Cryptomeria_LeafCards": "already",
+    "/Game/NorthForest/Materials/M_NF_LeafCards": "already"
+  },
+  "tree_actor_descs": 573,
+  "load_actors_returned": false,
+  "hism_recull": 4454,
+  "grid": {
+    "hash_class": "WorldPartitionRuntimeHashSet",
+    "partitions": [
+      {
+        "name": "MainGrid",
+        "layer_class": "RuntimePartitionLHGrid",
+        "old_cell_size_cm": 100000,
+        "old_loading_range_cm": 320000
+      }
+    ]
+  },
+  "dirty_packages": 574
+}
