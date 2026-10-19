@@ -1,0 +1,1908 @@
+{
+  "baseline": "996329258379383f6ed1d8bdb4ea992589be6c14",
+  "animfix": "abab83a84212c20406494784e7a3ea5ab4342630",
+  "round": "iteration-5",
+  "frames": 7,
+  "modes": [
+    "hybrid"
+  ],
+  "capturedAt": "2026-10-19T01:10:39.756Z",
+  "errors": [],
+  "scenes": {
+    "approach": {
+      "hybrid": {
+        "states": [
+          {
+            "position": [
+              1848.9868665880028,
+              3150,
+              4158.502970314236
+            ],
+            "direction": [
+              0,
+              -0.03996803834887158,
+              -0.9992009587217896
+            ],
+            "density": 0,
+            "field": {
+              "kind": "cumulus",
+              "seed": 73,
+              "base": 2450,
+              "top": 3650
+            },
+            "T500": 1,
+            "builds": 1,
+            "calls": 10,
+            "triangles": 72214,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          },
+          {
+            "position": [
+              1848.9868665880028,
+              3150,
+              3811.8363036475694
+            ],
+            "direction": [
+              0,
+              -0.046389632576658714,
+              -0.9989234214840508
+            ],
+            "density": 0,
+            "field": {
+              "kind": "cumulus",
+              "seed": 73,
+              "base": 2450,
+              "top": 3650
+            },
+            "T500": 1,
+            "builds": 1,
+            "calls": 10,
+            "triangles": 72214,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          },
+          {
+            "position": [
+              1848.9868665880028,
+              3150,
+              3465.169636980903
+            ],
+            "direction": [
+              0,
+              -0.05526595953655178,
+              -0.9984716689603688
+            ],
+            "density": 0,
+            "field": {
+              "kind": "cumulus",
+              "seed": 73,
+              "base": 2450,
+              "top": 3650
+            },
+            "T500": 1,
+            "builds": 1,
+            "calls": 10,
+            "triangles": 72214,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          },
+          {
+            "position": [
+              1848.9868665880028,
+              3150,
+              3118.5029703142363
+            ],
+            "direction": [
+              0,
+              -0.06833305240913978,
+              -0.9976625651734409
+            ],
+            "density": 0,
+            "field": {
+              "kind": "cumulus",
+              "seed": 73,
+              "base": 2450,
+              "top": 3650
+            },
+            "T500": 1,
+            "builds": 1,
+            "calls": 10,
+            "triangles": 72214,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          },
+          {
+            "position": [
+              1848.9868665880028,
+              3150,
+              2771.8363036475694
+            ],
+            "direction": [
+              0,
+              -0.08946021525298778,
+              -0.9959903964832638
+            ],
+            "density": 0,
+            "field": {
+              "kind": "cumulus",
+              "seed": 73,
+              "base": 2450,
+              "top": 3650
+            },
+            "T500": 0.3212347621953849,
+            "builds": 1,
+            "calls": 10,
+            "triangles": 72214,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          },
+          {
+            "position": [
+              1848.9868665880028,
+              3150,
+              2425.1696369809024
+            ],
+            "direction": [
+              0,
+              -0.12933918406776812,
+              -0.9916004111862218
+            ],
+            "density": 0.19405321707111645,
+            "field": {
+              "kind": "cumulus",
+              "seed": 73,
+              "base": 2450,
+              "top": 3650
+            },
+            "T500": 0.01650884422576173,
+            "builds": 1,
+            "calls": 10,
+            "triangles": 72214,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          },
+          {
+            "position": [
+              1848.9868665880028,
+              3150,
+              2078.5029703142363
+            ],
+            "direction": [
+              0,
+              -0.2316205273060396,
+              -0.9728062146853669
+            ],
+            "density": 0.765680582664984,
+            "field": {
+              "kind": "cumulus",
+              "seed": 73,
+              "base": 2450,
+              "top": 3650
+            },
+            "T500": 0.012717468088882977,
+            "builds": 1,
+            "calls": 10,
+            "triangles": 72214,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          }
+        ]
+      }
+    },
+    "side-pass": {
+      "hybrid": {
+        "states": [
+          {
+            "position": [
+              2668.986866588003,
+              3080,
+              3358.5029703142363
+            ],
+            "direction": [
+              -0.6768915805923377,
+              -0.022072551541054485,
+              -0.7357517180351496
+            ],
+            "density": 0,
+            "field": {
+              "kind": "cumulus",
+              "seed": 73,
+              "base": 2450,
+              "top": 3650
+            },
+            "T500": 1,
+            "builds": 1,
+            "calls": 10,
+            "triangles": 72214,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          },
+          {
+            "position": [
+              2668.986866588003,
+              3080,
+              2791.8363036475694
+            ],
+            "direction": [
+              -0.6768915805923377,
+              -0.022072551541054485,
+              -0.7357517180351496
+            ],
+            "density": 0,
+            "field": {
+              "kind": "cumulus",
+              "seed": 73,
+              "base": 2450,
+              "top": 3650
+            },
+            "T500": 0.9901857950939944,
+            "builds": 1,
+            "calls": 10,
+            "triangles": 72214,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          },
+          {
+            "position": [
+              2668.986866588003,
+              3080,
+              2225.169636980903
+            ],
+            "direction": [
+              -0.6768915805923377,
+              -0.022072551541054485,
+              -0.7357517180351496
+            ],
+            "density": 0,
+            "field": {
+              "kind": "cumulus",
+              "seed": 73,
+              "base": 2450,
+              "top": 3650
+            },
+            "T500": 0.06829806196286912,
+            "builds": 1,
+            "calls": 10,
+            "triangles": 72214,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          },
+          {
+            "position": [
+              2668.986866588003,
+              3080,
+              1658.502970314236
+            ],
+            "direction": [
+              -0.6768915805923377,
+              -0.022072551541054485,
+              -0.7357517180351496
+            ],
+            "density": 0.02500070913348049,
+            "field": {
+              "kind": "cumulus",
+              "seed": 73,
+              "base": 2450,
+              "top": 3650
+            },
+            "T500": 0.04129761877632322,
+            "builds": 1,
+            "calls": 10,
+            "triangles": 72214,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          },
+          {
+            "position": [
+              2668.986866588003,
+              3080,
+              1091.8363036475696
+            ],
+            "direction": [
+              -0.6768915805923377,
+              -0.022072551541054485,
+              -0.7357517180351496
+            ],
+            "density": 0,
+            "field": {
+              "kind": "cumulus",
+              "seed": 73,
+              "base": 2450,
+              "top": 3650
+            },
+            "T500": 0.7775676420340661,
+            "builds": 1,
+            "calls": 10,
+            "triangles": 72214,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          },
+          {
+            "position": [
+              2668.986866588003,
+              3080,
+              525.1696369809026
+            ],
+            "direction": [
+              -0.6768915805923377,
+              -0.022072551541054485,
+              -0.7357517180351496
+            ],
+            "density": 0.40086646654207153,
+            "field": {
+              "kind": "cumulus",
+              "seed": 73,
+              "base": 2450,
+              "top": 3650
+            },
+            "T500": 0.011917020205043498,
+            "builds": 1,
+            "calls": 10,
+            "triangles": 72214,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          },
+          {
+            "position": [
+              2668.986866588003,
+              3080,
+              -41.49702968576389
+            ],
+            "direction": [
+              -0.6768915805923377,
+              -0.022072551541054485,
+              -0.7357517180351496
+            ],
+            "density": 0.8405203244777113,
+            "field": {
+              "kind": "cumulus",
+              "seed": 73,
+              "base": 2450,
+              "top": 3650
+            },
+            "T500": 0.008571811852838623,
+            "builds": 1,
+            "calls": 10,
+            "triangles": 72214,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          }
+        ]
+      }
+    },
+    "climb": {
+      "hybrid": {
+        "states": [
+          {
+            "position": [
+              2148.986866588003,
+              1950,
+              1908.502970314236
+            ],
+            "direction": [
+              -0.12105437531103974,
+              0.21789787555987156,
+              -0.9684350024883182
+            ],
+            "density": 0,
+            "field": {
+              "kind": "cumulus",
+              "seed": 73,
+              "base": 2450,
+              "top": 3650
+            },
+            "T500": 1,
+            "builds": 1,
+            "calls": 10,
+            "triangles": 72214,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          },
+          {
+            "position": [
+              2148.986866588003,
+              2341.6666666666665,
+              1908.502970314236
+            ],
+            "direction": [
+              -0.12105437531103974,
+              0.21789787555987156,
+              -0.9684350024883182
+            ],
+            "density": 0,
+            "field": {
+              "kind": "cumulus",
+              "seed": 73,
+              "base": 2450,
+              "top": 3650
+            },
+            "T500": 1,
+            "builds": 1,
+            "calls": 10,
+            "triangles": 72214,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          },
+          {
+            "position": [
+              2148.986866588003,
+              2733.333333333333,
+              1908.502970314236
+            ],
+            "direction": [
+              -0.12105437531103974,
+              0.21789787555987156,
+              -0.9684350024883182
+            ],
+            "density": 0.754527370316126,
+            "field": {
+              "kind": "cumulus",
+              "seed": 73,
+              "base": 2450,
+              "top": 3650
+            },
+            "T500": 0.011812637935311314,
+            "builds": 1,
+            "calls": 10,
+            "triangles": 72214,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          },
+          {
+            "position": [
+              2148.986866588003,
+              3125,
+              1908.502970314236
+            ],
+            "direction": [
+              -0.12105437531103974,
+              0.21789787555987156,
+              -0.9684350024883182
+            ],
+            "density": 0.7890526359499794,
+            "field": {
+              "kind": "cumulus",
+              "seed": 73,
+              "base": 2450,
+              "top": 3650
+            },
+            "T500": 0.009948687255571543,
+            "builds": 1,
+            "calls": 10,
+            "triangles": 72214,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          },
+          {
+            "position": [
+              2148.986866588003,
+              3516.6666666666665,
+              1908.502970314236
+            ],
+            "direction": [
+              -0.12105437531103974,
+              0.21789787555987156,
+              -0.9684350024883182
+            ],
+            "density": 0.22697862123264245,
+            "field": {
+              "kind": "cumulus",
+              "seed": 73,
+              "base": 2450,
+              "top": 3650
+            },
+            "T500": 0.7091514417388807,
+            "builds": 1,
+            "calls": 10,
+            "triangles": 72214,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          },
+          {
+            "position": [
+              2148.986866588003,
+              3908.3333333333335,
+              1908.502970314236
+            ],
+            "direction": [
+              -0.12105437531103974,
+              0.21789787555987156,
+              -0.9684350024883182
+            ],
+            "density": 0,
+            "field": {
+              "kind": "cumulus",
+              "seed": 73,
+              "base": 2450,
+              "top": 3650
+            },
+            "T500": 1,
+            "builds": 1,
+            "calls": 10,
+            "triangles": 72214,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          },
+          {
+            "position": [
+              2148.986866588003,
+              4300,
+              1908.502970314236
+            ],
+            "direction": [
+              -0.12105437531103974,
+              0.21789787555987156,
+              -0.9684350024883182
+            ],
+            "density": 0,
+            "field": {
+              "kind": "cumulus",
+              "seed": 73,
+              "base": 2450,
+              "top": 3650
+            },
+            "T500": 1,
+            "builds": 1,
+            "calls": 10,
+            "triangles": 72214,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          }
+        ]
+      }
+    },
+    "sea-wall": {
+      "hybrid": {
+        "states": [
+          {
+            "position": [
+              2300,
+              4200,
+              3400
+            ],
+            "direction": [
+              -0.41483549035714967,
+              -0.216435908012426,
+              -0.883779957717406
+            ],
+            "density": 0,
+            "field": {
+              "kind": "stratocumulus",
+              "seed": 73,
+              "base": 2650,
+              "top": 3350
+            },
+            "T500": 1,
+            "builds": 2,
+            "calls": 10,
+            "triangles": 76726,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          },
+          {
+            "position": [
+              1766.6666666666667,
+              4200,
+              2933.3333333333335
+            ],
+            "direction": [
+              -0.35901070312619243,
+              -0.24385632665175336,
+              -0.9009136512412
+            ],
+            "density": 0,
+            "field": {
+              "kind": "stratocumulus",
+              "seed": 73,
+              "base": 2650,
+              "top": 3350
+            },
+            "T500": 1,
+            "builds": 2,
+            "calls": 10,
+            "triangles": 76726,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          },
+          {
+            "position": [
+              1233.3333333333335,
+              4200,
+              2466.666666666667
+            ],
+            "direction": [
+              -0.2852405608995907,
+              -0.2775313565509531,
+              -0.9173953174878728
+            ],
+            "density": 0,
+            "field": {
+              "kind": "stratocumulus",
+              "seed": 73,
+              "base": 2650,
+              "top": 3350
+            },
+            "T500": 1,
+            "builds": 2,
+            "calls": 10,
+            "triangles": 76726,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          },
+          {
+            "position": [
+              700,
+              4200,
+              2000
+            ],
+            "direction": [
+              -0.18589166810485064,
+              -0.31867143103688683,
+              -0.9294583405242532
+            ],
+            "density": 0,
+            "field": {
+              "kind": "stratocumulus",
+              "seed": 73,
+              "base": 2650,
+              "top": 3350
+            },
+            "T500": 1,
+            "builds": 2,
+            "calls": 10,
+            "triangles": 76726,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          },
+          {
+            "position": [
+              166.66666666666697,
+              4200,
+              1533.3333333333335
+            ],
+            "direction": [
+              -0.05102572140547332,
+              -0.36738519411940723,
+              -0.9286681295796129
+            ],
+            "density": 0,
+            "field": {
+              "kind": "stratocumulus",
+              "seed": 73,
+              "base": 2650,
+              "top": 3350
+            },
+            "T500": 1,
+            "builds": 2,
+            "calls": 10,
+            "triangles": 76726,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          },
+          {
+            "position": [
+              -366.66666666666697,
+              4200,
+              1066.6666666666665
+            ],
+            "direction": [
+              0.12834153319323577,
+              -0.4200268359051349,
+              -0.8983907323526498
+            ],
+            "density": 0,
+            "field": {
+              "kind": "stratocumulus",
+              "seed": 73,
+              "base": 2650,
+              "top": 3350
+            },
+            "T500": 1,
+            "builds": 2,
+            "calls": 10,
+            "triangles": 76726,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          },
+          {
+            "position": [
+              -900,
+              4200,
+              600
+            ],
+            "direction": [
+              0.34874291623145787,
+              -0.46499055497527725,
+              -0.813733471206735
+            ],
+            "density": 0,
+            "field": {
+              "kind": "stratocumulus",
+              "seed": 73,
+              "base": 2650,
+              "top": 3350
+            },
+            "T500": 1,
+            "builds": 2,
+            "calls": 10,
+            "triangles": 76726,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          }
+        ]
+      }
+    },
+    "edge": {
+      "hybrid": {
+        "states": [
+          {
+            "position": [
+              2698.986866588003,
+              3130,
+              2958.5029703142363
+            ],
+            "direction": [
+              -0.1319637809125272,
+              -0.054984908713552993,
+              -0.989728356843954
+            ],
+            "density": 0,
+            "field": {
+              "kind": "cumulus",
+              "seed": 73,
+              "base": 2450,
+              "top": 3650
+            },
+            "T500": 1,
+            "builds": 3,
+            "calls": 10,
+            "triangles": 72214,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          },
+          {
+            "position": [
+              2632.320199921336,
+              3130,
+              2575.169636980903
+            ],
+            "direction": [
+              -0.1319637809125272,
+              -0.054984908713552993,
+              -0.989728356843954
+            ],
+            "density": 0,
+            "field": {
+              "kind": "cumulus",
+              "seed": 73,
+              "base": 2450,
+              "top": 3650
+            },
+            "T500": 0.7654725183072058,
+            "builds": 3,
+            "calls": 10,
+            "triangles": 72214,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          },
+          {
+            "position": [
+              2565.6535332546696,
+              3130,
+              2191.8363036475694
+            ],
+            "direction": [
+              -0.1319637809125272,
+              -0.054984908713552993,
+              -0.989728356843954
+            ],
+            "density": 0.10532649278329592,
+            "field": {
+              "kind": "cumulus",
+              "seed": 73,
+              "base": 2450,
+              "top": 3650
+            },
+            "T500": 0.06362605247715525,
+            "builds": 3,
+            "calls": 10,
+            "triangles": 72214,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          },
+          {
+            "position": [
+              2498.986866588003,
+              3130,
+              1808.502970314236
+            ],
+            "direction": [
+              -0.1319637809125272,
+              -0.054984908713552993,
+              -0.989728356843954
+            ],
+            "density": 0.6503375136291502,
+            "field": {
+              "kind": "cumulus",
+              "seed": 73,
+              "base": 2450,
+              "top": 3650
+            },
+            "T500": 0.015464755116715996,
+            "builds": 3,
+            "calls": 10,
+            "triangles": 72214,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          },
+          {
+            "position": [
+              2432.320199921336,
+              3130,
+              1425.1696369809029
+            ],
+            "direction": [
+              -0.1319637809125272,
+              -0.054984908713552993,
+              -0.989728356843954
+            ],
+            "density": 0.7292324138258718,
+            "field": {
+              "kind": "cumulus",
+              "seed": 73,
+              "base": 2450,
+              "top": 3650
+            },
+            "T500": 0.08189562910688988,
+            "builds": 3,
+            "calls": 10,
+            "triangles": 72214,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          },
+          {
+            "position": [
+              2365.6535332546696,
+              3130,
+              1041.8363036475694
+            ],
+            "direction": [
+              -0.1319637809125272,
+              -0.054984908713552993,
+              -0.989728356843954
+            ],
+            "density": 0.13872555414911902,
+            "field": {
+              "kind": "cumulus",
+              "seed": 73,
+              "base": 2450,
+              "top": 3650
+            },
+            "T500": 0.21346008265816654,
+            "builds": 3,
+            "calls": 10,
+            "triangles": 72214,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          },
+          {
+            "position": [
+              2298.986866588003,
+              3130,
+              658.5029703142361
+            ],
+            "direction": [
+              -0.1319637809125272,
+              -0.054984908713552993,
+              -0.989728356843954
+            ],
+            "density": 0.5232747685838967,
+            "field": {
+              "kind": "cumulus",
+              "seed": 73,
+              "base": 2450,
+              "top": 3650
+            },
+            "T500": 0.010484197309137345,
+            "builds": 3,
+            "calls": 10,
+            "triangles": 72214,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          }
+        ]
+      }
+    },
+    "entry": {
+      "hybrid": {
+        "states": [
+          {
+            "position": [
+              1848.9868665880028,
+              3062,
+              2908.5029703142363
+            ],
+            "direction": [
+              0,
+              -0.005853558250426232,
+              -0.999982867781148
+            ],
+            "density": 0,
+            "field": {
+              "kind": "cumulus",
+              "seed": 73,
+              "base": 2450,
+              "top": 3650
+            },
+            "T500": 0.8923840056970029,
+            "builds": 3,
+            "calls": 10,
+            "triangles": 72214,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          },
+          {
+            "position": [
+              1848.9868665880028,
+              3062,
+              2725.169636980903
+            ],
+            "direction": [
+              0,
+              -0.006428438597411536,
+              -0.9999793373751277
+            ],
+            "density": 0,
+            "field": {
+              "kind": "cumulus",
+              "seed": 73,
+              "base": 2450,
+              "top": 3650
+            },
+            "T500": 0.20550780930100873,
+            "builds": 3,
+            "calls": 10,
+            "triangles": 72214,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          },
+          {
+            "position": [
+              1848.9868665880028,
+              3062,
+              2541.8363036475694
+            ],
+            "direction": [
+              0,
+              -0.007128531742774849,
+              -0.9999745916948052
+            ],
+            "density": 0,
+            "field": {
+              "kind": "cumulus",
+              "seed": 73,
+              "base": 2450,
+              "top": 3650
+            },
+            "T500": 0.0406888777906134,
+            "builds": 3,
+            "calls": 10,
+            "triangles": 72214,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          },
+          {
+            "position": [
+              1848.9868665880028,
+              3062,
+              2358.5029703142363
+            ],
+            "direction": [
+              0,
+              -0.007999744012287344,
+              -0.9999680015359181
+            ],
+            "density": 0.6384052559535871,
+            "field": {
+              "kind": "cumulus",
+              "seed": 73,
+              "base": 2450,
+              "top": 3650
+            },
+            "T500": 0.013025291658481814,
+            "builds": 3,
+            "calls": 10,
+            "triangles": 72214,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          },
+          {
+            "position": [
+              1848.9868665880028,
+              3062,
+              2175.169636980903
+            ],
+            "direction": [
+              0,
+              -0.009113545556488314,
+              -0.9999584707813569
+            ],
+            "density": 0.7227587008256549,
+            "field": {
+              "kind": "cumulus",
+              "seed": 73,
+              "base": 2450,
+              "top": 3650
+            },
+            "T500": 0.013922702398302279,
+            "builds": 3,
+            "calls": 10,
+            "triangles": 72214,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          },
+          {
+            "position": [
+              1848.9868665880028,
+              3062,
+              1991.8363036475694
+            ],
+            "direction": [
+              0,
+              -0.010587641816642226,
+              -0.9999439493495436
+            ],
+            "density": 0.7180309340562967,
+            "field": {
+              "kind": "cumulus",
+              "seed": 73,
+              "base": 2450,
+              "top": 3650
+            },
+            "T500": 0.012328125922239376,
+            "builds": 3,
+            "calls": 10,
+            "triangles": 72214,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          },
+          {
+            "position": [
+              1848.9868665880028,
+              3062,
+              1808.502970314236
+            ],
+            "direction": [
+              0,
+              -0.012630571340870738,
+              -0.999920231152267
+            ],
+            "density": 0.6954036605922891,
+            "field": {
+              "kind": "cumulus",
+              "seed": 73,
+              "base": 2450,
+              "top": 3650
+            },
+            "T500": 0.009636160464997661,
+            "builds": 3,
+            "calls": 10,
+            "triangles": 72214,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          }
+        ]
+      }
+    },
+    "inside": {
+      "hybrid": {
+        "states": [
+          {
+            "position": [
+              0,
+              3062,
+              1100
+            ],
+            "direction": [
+              0,
+              -0.014998312784712243,
+              -0.9998875189808162
+            ],
+            "density": 0.8442327592330038,
+            "field": {
+              "kind": "cumulus",
+              "seed": 73,
+              "base": 2450,
+              "top": 3650
+            },
+            "T500": 0.010646623728870411,
+            "builds": 3,
+            "calls": 10,
+            "triangles": 72214,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          },
+          {
+            "position": [
+              0,
+              3062,
+              750
+            ],
+            "direction": [
+              0,
+              -0.014998312784712243,
+              -0.9998875189808162
+            ],
+            "density": 0.7275480381513313,
+            "field": {
+              "kind": "cumulus",
+              "seed": 73,
+              "base": 2450,
+              "top": 3650
+            },
+            "T500": 0.01203168281971594,
+            "builds": 3,
+            "calls": 10,
+            "triangles": 72214,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          },
+          {
+            "position": [
+              0,
+              3062,
+              400
+            ],
+            "direction": [
+              0,
+              -0.014998312784712243,
+              -0.9998875189808162
+            ],
+            "density": 0.7253753997899223,
+            "field": {
+              "kind": "cumulus",
+              "seed": 73,
+              "base": 2450,
+              "top": 3650
+            },
+            "T500": 0.0076479817094330885,
+            "builds": 3,
+            "calls": 10,
+            "triangles": 72214,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          },
+          {
+            "position": [
+              0,
+              3062,
+              50
+            ],
+            "direction": [
+              0,
+              -0.014998312784712243,
+              -0.9998875189808162
+            ],
+            "density": 0.8370390515755307,
+            "field": {
+              "kind": "cumulus",
+              "seed": 73,
+              "base": 2450,
+              "top": 3650
+            },
+            "T500": 0.007988982440268457,
+            "builds": 3,
+            "calls": 10,
+            "triangles": 72214,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          },
+          {
+            "position": [
+              0,
+              3062,
+              -300
+            ],
+            "direction": [
+              0,
+              -0.014998312784712243,
+              -0.9998875189808162
+            ],
+            "density": 0.8017529615077237,
+            "field": {
+              "kind": "cumulus",
+              "seed": 73,
+              "base": 2450,
+              "top": 3650
+            },
+            "T500": 0.011189804576017256,
+            "builds": 3,
+            "calls": 10,
+            "triangles": 72214,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          },
+          {
+            "position": [
+              0,
+              3062,
+              -650
+            ],
+            "direction": [
+              0,
+              -0.014998312784712243,
+              -0.9998875189808162
+            ],
+            "density": 0.7388389806921297,
+            "field": {
+              "kind": "cumulus",
+              "seed": 73,
+              "base": 2450,
+              "top": 3650
+            },
+            "T500": 0.010882015064797931,
+            "builds": 3,
+            "calls": 10,
+            "triangles": 72214,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          },
+          {
+            "position": [
+              0,
+              3062,
+              -1000
+            ],
+            "direction": [
+              0,
+              -0.014998312784712243,
+              -0.9998875189808162
+            ],
+            "density": 0.7951712200153009,
+            "field": {
+              "kind": "cumulus",
+              "seed": 73,
+              "base": 2450,
+              "top": 3650
+            },
+            "T500": 0.0102458777423336,
+            "builds": 3,
+            "calls": 10,
+            "triangles": 72214,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          }
+        ]
+      }
+    },
+    "exit": {
+      "hybrid": {
+        "states": [
+          {
+            "position": [
+              0,
+              3062,
+              -1700
+            ],
+            "direction": [
+              0,
+              -0.014998312784712243,
+              -0.9998875189808162
+            ],
+            "density": 0.6597099394383714,
+            "field": {
+              "kind": "cumulus",
+              "seed": 73,
+              "base": 2450,
+              "top": 3650
+            },
+            "T500": 0.0830004847245499,
+            "builds": 3,
+            "calls": 10,
+            "triangles": 72214,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          },
+          {
+            "position": [
+              0,
+              3062,
+              -1991.6666666666665
+            ],
+            "direction": [
+              0,
+              -0.014998312784712243,
+              -0.9998875189808162
+            ],
+            "density": 0.43351537038770643,
+            "field": {
+              "kind": "cumulus",
+              "seed": 73,
+              "base": 2450,
+              "top": 3650
+            },
+            "T500": 0.7725469051671147,
+            "builds": 3,
+            "calls": 10,
+            "triangles": 72214,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          },
+          {
+            "position": [
+              0,
+              3062,
+              -2283.333333333333
+            ],
+            "direction": [
+              0,
+              -0.014998312784712243,
+              -0.9998875189808162
+            ],
+            "density": 0,
+            "field": {
+              "kind": "cumulus",
+              "seed": 73,
+              "base": 2450,
+              "top": 3650
+            },
+            "T500": 1,
+            "builds": 3,
+            "calls": 10,
+            "triangles": 72214,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          },
+          {
+            "position": [
+              0,
+              3062,
+              -2575
+            ],
+            "direction": [
+              0,
+              -0.014998312784712243,
+              -0.9998875189808162
+            ],
+            "density": 0,
+            "field": {
+              "kind": "cumulus",
+              "seed": 73,
+              "base": 2450,
+              "top": 3650
+            },
+            "T500": 1,
+            "builds": 3,
+            "calls": 10,
+            "triangles": 72214,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          },
+          {
+            "position": [
+              0,
+              3062,
+              -2866.6666666666665
+            ],
+            "direction": [
+              0,
+              -0.014998312784712243,
+              -0.9998875189808162
+            ],
+            "density": 0,
+            "field": {
+              "kind": "cumulus",
+              "seed": 73,
+              "base": 2450,
+              "top": 3650
+            },
+            "T500": 1,
+            "builds": 3,
+            "calls": 10,
+            "triangles": 72214,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          },
+          {
+            "position": [
+              0,
+              3062,
+              -3158.3333333333335
+            ],
+            "direction": [
+              0,
+              -0.014998312784712243,
+              -0.9998875189808162
+            ],
+            "density": 0,
+            "field": {
+              "kind": "cumulus",
+              "seed": 73,
+              "base": 2450,
+              "top": 3650
+            },
+            "T500": 1,
+            "builds": 3,
+            "calls": 10,
+            "triangles": 72214,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          },
+          {
+            "position": [
+              0,
+              3062,
+              -3450
+            ],
+            "direction": [
+              0,
+              -0.014998312784712243,
+              -0.9998875189808162
+            ],
+            "density": 0,
+            "field": {
+              "kind": "cumulus",
+              "seed": 73,
+              "base": 2450,
+              "top": 3650
+            },
+            "T500": 1,
+            "builds": 3,
+            "calls": 10,
+            "triangles": 72214,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          }
+        ]
+      }
+    },
+    "turn90": {
+      "hybrid": {
+        "states": [
+          {
+            "position": [
+              1848.9868665880028,
+              3850,
+              3108.5029703142363
+            ],
+            "direction": [
+              0,
+              -0.4830773429113349,
+              -0.8755776840267944
+            ],
+            "density": 0,
+            "field": {
+              "kind": "cumulus",
+              "seed": 73,
+              "base": 2450,
+              "top": 3650
+            },
+            "T500": 1,
+            "builds": 3,
+            "calls": 10,
+            "triangles": 72214,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          },
+          {
+            "position": [
+              2224.274481986658,
+              3850,
+              3059.095418433385
+            ],
+            "direction": [
+              -0.22661618009289158,
+              -0.4830773429113348,
+              -0.8457430979238499
+            ],
+            "density": 0,
+            "field": {
+              "kind": "cumulus",
+              "seed": 73,
+              "base": 2450,
+              "top": 3650
+            },
+            "T500": 1,
+            "builds": 3,
+            "calls": 10,
+            "triangles": 72214,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          },
+          {
+            "position": [
+              2573.9868665880026,
+              3850,
+              2914.2398058016724
+            ],
+            "direction": [
+              -0.437788842013397,
+              -0.48307734291133486,
+              -0.7582725173539484
+            ],
+            "density": 0,
+            "field": {
+              "kind": "cumulus",
+              "seed": 73,
+              "base": 2450,
+              "top": 3650
+            },
+            "T500": 1,
+            "builds": 3,
+            "calls": 10,
+            "triangles": 72214,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          },
+          {
+            "position": [
+              2874.2916993084964,
+              3850,
+              2683.80780303473
+            ],
+            "direction": [
+              -0.6191269178309583,
+              -0.48307734291133486,
+              -0.6191269178309587
+            ],
+            "density": 0,
+            "field": {
+              "kind": "cumulus",
+              "seed": 73,
+              "base": 2450,
+              "top": 3650
+            },
+            "T500": 1,
+            "builds": 3,
+            "calls": 10,
+            "triangles": 72214,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          },
+          {
+            "position": [
+              3104.7237020754387,
+              3850,
+              2383.5029703142363
+            ],
+            "direction": [
+              -0.7582725173539481,
+              -0.48307734291133475,
+              -0.4377888420133975
+            ],
+            "density": 0,
+            "field": {
+              "kind": "cumulus",
+              "seed": 73,
+              "base": 2450,
+              "top": 3650
+            },
+            "T500": 1,
+            "builds": 3,
+            "calls": 10,
+            "triangles": 72214,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          },
+          {
+            "position": [
+              3249.5793147071518,
+              3850,
+              2033.7905857128912
+            ],
+            "direction": [
+              -0.8457430979238502,
+              -0.48307734291133486,
+              -0.22661618009289158
+            ],
+            "density": 0,
+            "field": {
+              "kind": "cumulus",
+              "seed": 73,
+              "base": 2450,
+              "top": 3650
+            },
+            "T500": 1,
+            "builds": 3,
+            "calls": 10,
+            "triangles": 72214,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          },
+          {
+            "position": [
+              3298.986866588003,
+              3850,
+              1658.502970314236
+            ],
+            "direction": [
+              -0.8755776840267943,
+              -0.48307734291133475,
+              0
+            ],
+            "density": 0,
+            "field": {
+              "kind": "cumulus",
+              "seed": 73,
+              "base": 2450,
+              "top": 3650
+            },
+            "T500": 1,
+            "builds": 3,
+            "calls": 10,
+            "triangles": 72214,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          }
+        ]
+      }
+    },
+    "turn180": {
+      "hybrid": {
+        "states": [
+          {
+            "position": [
+              1848.9868665880028,
+              3850,
+              3108.5029703142363
+            ],
+            "direction": [
+              0,
+              -0.4830773429113349,
+              -0.8755776840267944
+            ],
+            "density": 0,
+            "field": {
+              "kind": "cumulus",
+              "seed": 73,
+              "base": 2450,
+              "top": 3650
+            },
+            "T500": 1,
+            "builds": 3,
+            "calls": 10,
+            "triangles": 72214,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          },
+          {
+            "position": [
+              2573.9868665880026,
+              3850,
+              2914.2398058016724
+            ],
+            "direction": [
+              -0.437788842013397,
+              -0.48307734291133486,
+              -0.7582725173539484
+            ],
+            "density": 0,
+            "field": {
+              "kind": "cumulus",
+              "seed": 73,
+              "base": 2450,
+              "top": 3650
+            },
+            "T500": 1,
+            "builds": 3,
+            "calls": 10,
+            "triangles": 72214,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          },
+          {
+            "position": [
+              3104.7237020754387,
+              3850,
+              2383.5029703142363
+            ],
+            "direction": [
+              -0.7582725173539481,
+              -0.48307734291133475,
+              -0.4377888420133975
+            ],
+            "density": 0,
+            "field": {
+              "kind": "cumulus",
+              "seed": 73,
+              "base": 2450,
+              "top": 3650
+            },
+            "T500": 1,
+            "builds": 3,
+            "calls": 10,
+            "triangles": 72214,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          },
+          {
+            "position": [
+              3298.986866588003,
+              3850,
+              1658.502970314236
+            ],
+            "direction": [
+              -0.8755776840267943,
+              -0.48307734291133475,
+              0
+            ],
+            "density": 0,
+            "field": {
+              "kind": "cumulus",
+              "seed": 73,
+              "base": 2450,
+              "top": 3650
+            },
+            "T500": 1,
+            "builds": 3,
+            "calls": 10,
+            "triangles": 72214,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          },
+          {
+            "position": [
+              3104.723702075439,
+              3850,
+              933.5029703142364
+            ],
+            "direction": [
+              -0.7582725173539484,
+              -0.48307734291133486,
+              0.43778884201339674
+            ],
+            "density": 0,
+            "field": {
+              "kind": "cumulus",
+              "seed": 73,
+              "base": 2450,
+              "top": 3650
+            },
+            "T500": 1,
+            "builds": 3,
+            "calls": 10,
+            "triangles": 72214,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          },
+          {
+            "position": [
+              2573.9868665880026,
+              3850,
+              402.7661348268
+            ],
+            "direction": [
+              -0.4377888420133971,
+              -0.48307734291133486,
+              0.7582725173539482
+            ],
+            "density": 0,
+            "field": {
+              "kind": "cumulus",
+              "seed": 73,
+              "base": 2450,
+              "top": 3650
+            },
+            "T500": 1,
+            "builds": 3,
+            "calls": 10,
+            "triangles": 72214,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          },
+          {
+            "position": [
+              1848.986866588003,
+              3850,
+              208.5029703142361
+            ],
+            "direction": [
+              -1.3729883872637593e-16,
+              -0.48307734291133475,
+              0.8755776840267944
+            ],
+            "density": 0,
+            "field": {
+              "kind": "cumulus",
+              "seed": 73,
+              "base": 2450,
+              "top": 3650
+            },
+            "T500": 1,
+            "builds": 3,
+            "calls": 10,
+            "triangles": 72214,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          }
+        ]
+      }
+    }
+  },
+  "sha256": {
+    "src/cloud/cloud-field.js": "91d1e5253a4cb9975ecd10467f65973077562574d8e3860a43c00b53c1966589",
+    "src/cloud/cloud-layout.js": "bfc7490bcb5ad3e0f828b9b2d440321d875516958dcc81562df386928328204d",
+    "src/cloud/cloud-anime-renderer.js": "4dfe6e4fd600d59ec1721e5d0bab083c5b374fc32b778a15d4e0658c0dee0030",
+    "src/cloud/cloud-stable-renderer.js": "0ae22e5d85defed08cb2f42aab003688747b89703000668fd6361ab85b52d7a0",
+    "src/cloud/cloud-volume.js": "82a1da6c6f1385fa56e722d1257aaaff40a4ce57eef578ed3692a084fdfa43bf",
+    "src/cloud/cloud-hull.js": "460e68ea005cbf7a36e7750ecb0c7773e5c9219efb80b146a216257948603767",
+    "src/cloud/cloud-hybrid-renderer.js": "b7ca512a12066bde0180c663a5950b9cb76bf130f31d6ad851fbeb57661d0af9",
+    "tools/cloud-lab.js": "1f31d5be18fed51992cd84e583e92ee2168be75c50b7583ad8f718f59c1a60b0",
+    "tools/cloud-animation-paths.js": "c793eca1c67bc0a5640072695c6610f8502f6119e22810ddd62f2498393578ce"
+  },
+  "video": "15fps offline encoding of actual runtime frames, no interpolation; not device FPS",
+  "runtime": "Chromium ANGLE SwiftShader, no iPhone claim",
+  "browser": "151.0.7922.34",
+  "passed": true
+}

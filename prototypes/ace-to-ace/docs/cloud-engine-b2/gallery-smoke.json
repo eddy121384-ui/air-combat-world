@@ -1,0 +1,72 @@
+{
+  "errors": [],
+  "videos": {
+    "overview": [
+      59.999,
+      59.999,
+      59.999
+    ],
+    "traverse": [
+      16,
+      16,
+      16
+    ],
+    "side-clear": [
+      6,
+      6,
+      6
+    ],
+    "side-pass": [
+      6,
+      6,
+      6
+    ],
+    "turn90": [
+      6,
+      6,
+      6
+    ],
+    "turn180": [
+      6,
+      6,
+      6
+    ],
+    "entry": [
+      6,
+      6,
+      6
+    ],
+    "inside": [
+      6,
+      6,
+      6
+    ],
+    "exit": [
+      6,
+      6,
+      6
+    ],
+    "approach": [
+      6,
+      6,
+      6
+    ],
+    "climb": [
+      6,
+      6,
+      6
+    ],
+    "sea-wall": [
+      6,
+      6,
+      6
+    ],
+    "edge": [
+      6,
+      6,
+      6
+    ]
+  },
+  "passed": true,
+  "cleanup": "Kill owned headless BrowserServer after assertions; graceful media-browser close stalled on this Windows host"
+}

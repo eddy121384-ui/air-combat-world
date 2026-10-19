@@ -126,5 +126,5 @@ export function createCloudAnimeRenderer(renderer,scene,camera){
    renderer:gl.getExtension('WEBGL_debug_renderer_info')?gl.getParameter(gl.getExtension('WEBGL_debug_renderer_info').UNMASKED_RENDERER_WEBGL):gl.getParameter(gl.RENDERER),
    programsRunnable:renderer.info.programs.every(p=>p.diagnostics?.runnable!==false)};
  }
- return {uniforms,clouds,setField,resize,render,get ready(){return !!atlas.image&&!!silhouettes.image;},get builds(){return builds;}};
+ return {uniforms,clouds,setField,resize,render,atlas,get ready(){return !!atlas.image&&!!silhouettes.image;},get builds(){return builds;}};
 }

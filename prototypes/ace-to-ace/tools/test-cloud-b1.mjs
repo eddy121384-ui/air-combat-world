@@ -29,6 +29,7 @@ for(const kind of ['cumulus','stratocumulus']){
  }
  reports.push({kind,layers:layers.length,triangles:layers.length*2,fogQueriesPerFrame:108,fogCpuMs:times.sort((a,b)=>a-b)});
 }
-const output=new URL('../docs/cloud-engine-b1/',import.meta.url);await mkdir(output,{recursive:true});
+const outArg=process.argv.indexOf('--out');
+const output=new URL('../'+(outArg>=0?process.argv[outArg+1]:'docs/cloud-engine-b1')+'/',import.meta.url);await mkdir(output,{recursive:true});
 await writeFile(new URL('layout-validation.json',output),JSON.stringify({passed:true,reports},null,2)+'\n');
 console.log(JSON.stringify({passed:true,reports},null,2));

@@ -1,0 +1,37 @@
+{
+  "reports": [
+    {
+      "kind": "cumulus",
+      "passed": true,
+      "hash": "9ba25ea87b3cf552ab07086eedbbc1babd93ee6cbd3e225f98cbc1ab32171ccb",
+      "triangles": 68000,
+      "vertices": 34008,
+      "bytes": 1632192,
+      "buildMs": 672.9107,
+      "openEdges": 0,
+      "badWinding": 0,
+      "volume": 11319184813.790247,
+      "minArea": 0.002420956998739544,
+      "minRho": 0.005672922893897844,
+      "minCentreRho": 0.006938422600915091,
+      "maxResidual": 0.23432033386688697
+    },
+    {
+      "kind": "stratocumulus",
+      "passed": true,
+      "hash": "b9623be5ac3ba6d438fce7157ce6a17741401f364a627deb09e023f0d6ec6f08",
+      "triangles": 72512,
+      "vertices": 36258,
+      "bytes": 1740336,
+      "buildMs": 684.8775999999998,
+      "openEdges": 0,
+      "badWinding": 0,
+      "volume": 11289320374.441936,
+      "minArea": 0.0030178400393533577,
+      "minRho": 0.012249587325349105,
+      "minCentreRho": 0.019974361113317636,
+      "maxResidual": 0.15852719869838788
+    }
+  ],
+  "paths": 10
+}

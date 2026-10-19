@@ -1,0 +1,24 @@
+<!doctype html><html lang="zh-Hant"><meta charset="utf-8">
+<title>Cloud B2 — 動畫對照</title><meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<style>body{margin:24px;background:#132333;color:#e3edf4;font:15px/1.6 system-ui}a{color:#bde4ff}h1{font-size:22px}main{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}video{width:100%;background:#000}button,select,input{font:inherit;margin:5px}input{width:60%}section{min-width:0}small{display:block} @media(max-width:950px){main{grid-template-columns:1fr}}</style>
+<h1>B2 Hybrid · 同場、同鏡頭、同路線</h1>
+<p>三維一致性與成本實驗；尚未達最終動畫電影美術。全部為真實 WebGL 逐幀錄影，沒有插幀。主比較每段 90 幀、15fps、6秒播放；完整連續穿雲另有240幀、16秒、7,400m路線。播放率不是裝置 FPS。</p>
+<select id="scene"></select><button id="play">同步播放／暫停</button><button id="back">上一格</button><button id="next">下一格</button><input id="time" type="range" min="0" max="1" step="0.0001" value="0"><span id="readout"></span>
+<main><section><b>B1 原版 billboard</b><video muted playsinline preload="metadata"></video></section><section><b>Animfix 固定體積</b><video muted playsinline preload="metadata"></video></section><section><b>B2 固定雲殼＋局部霧</b><video muted playsinline preload="metadata"></video></section></main>
+<p id="notes"></p><p><a href="../../tools/cloud-lab.html">可操作 Cloud Lab（四模式）</a> · <a href="README.md">研究、檔案與限制</a> · <a href="performance.md">成本紀錄</a> · <a href="verification.md">測試與逐場判斷</a></p>
+<script>
+const scenes=[['overview','總覽'],['traverse','完整連續穿雲（無剪接）'],['side-clear','純外側掠過（補充）'],['side-pass','側面掠過／擦入'],['turn90','繞同一雲團 90°'],['turn180','繞同一雲團 180°'],['entry','進雲'],['inside','雲內前飛'],['exit','出雲'],['approach','正面接近雲牆'],['climb','雲底爬升至雲頂'],['sea-wall','上方看雲海'],['edge','擦過雲邊']];
+const select=document.querySelector('#scene'),videos=[...document.querySelectorAll('video')],slider=document.querySelector('#time');let playing=false;
+for(const [id,name]of scenes)select.add(new Option(name,id));
+function pause(){videos.forEach(v=>v.pause());playing=false;}
+function load(){pause();videos.forEach((v,i)=>{v.src=select.value==='side-clear'?`side-review/side-pass-${['anime','stable','hybrid'][i]}.webm`:select.value==='traverse'?`traverse-review/traverse-${['anime','stable','hybrid'][i]}.webm`:`final/${select.value}-${['anime','stable','hybrid'][i]}.webm`;v.load();});slider.value=0;
+document.querySelector('#notes').textContent=select.value==='overview'?'總覽每6秒切換場景，切點是剪接；另選「完整連續穿雲」檢查無剪接路線。':select.value.startsWith('turn')?'繞行高度在雲頂上 200m，避免鄰雲遮住目標；低視角由側掠與爬升路線檢查。':'請同時比較剪影、視差、筆觸與霧的連續性。雲內低反差不能當成動畫品質改善的證據。';}
+select.onchange=load;
+document.querySelector('#play').onclick=async()=>{if(playing)pause();else{videos.forEach(v=>v.currentTime=videos[0].currentTime);await Promise.all(videos.map(v=>v.play()));playing=true;}};
+function seek(t){pause();videos.forEach(v=>{v.currentTime=Math.max(0,Math.min(v.duration||6,t));});}
+slider.oninput=()=>seek(slider.value*(videos[0].duration||6));
+document.querySelector('#back').onclick=()=>seek(videos[0].currentTime-1/15);document.querySelector('#next').onclick=()=>seek(videos[0].currentTime+1/15);
+videos[0].ontimeupdate=()=>{if(playing){slider.value=videos[0].currentTime/videos[0].duration;for(const v of videos.slice(1))if(Math.abs(v.currentTime-videos[0].currentTime)>0.10)v.currentTime=videos[0].currentTime;}document.querySelector('#readout').textContent=`${videos[0].currentTime.toFixed(2)}s`;};
+videos[0].onended=pause;load();
+</script></html>

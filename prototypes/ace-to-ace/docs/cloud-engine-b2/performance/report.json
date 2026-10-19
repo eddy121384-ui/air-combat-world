@@ -1,0 +1,3008 @@
+{
+  "capturedAt": "2026-10-19T01:28:34.898Z",
+  "runtime": "Chromium ANGLE SwiftShader; no iPhone hardware claim",
+  "method": "external timer, internal timer disabled, no redraw while waiting",
+  "errors": [],
+  "perf": {
+    "approach-0.5-anime": [
+      {
+        "ready": true,
+        "rendererMode": "anime",
+        "mode": "approach",
+        "progress": 0.5,
+        "time": 0,
+        "position": [
+          1848.9868665880028,
+          3150,
+          3118.5029703142363
+        ],
+        "field": {
+          "kind": "cumulus",
+          "seed": 73,
+          "base": 2450,
+          "top": 3650
+        },
+        "planePosition": [
+          1848.9868665880028,
+          3133.5864008113244,
+          3054.4749002068725
+        ],
+        "direction": [
+          0,
+          -0.06833305240913978,
+          -0.9976625651734409
+        ],
+        "density": 0,
+        "planeDensity": 0,
+        "transmittance500": 1,
+        "cpuQueryMs": 0,
+        "renderSubmitMs": 0.4000000059604645,
+        "fogCpuMs": 0,
+        "gpuMs": 85.9797,
+        "gpuSample": 0,
+        "gpuTimerAvailable": true,
+        "disjointSamples": 0,
+        "calls": 6,
+        "triangles": 2162,
+        "width": 640,
+        "height": 360,
+        "layers": {
+          "triangles": 54,
+          "count": 27,
+          "buildMs": 0.4000000059604645,
+          "bytes": 864
+        },
+        "geometryBuilds": 1,
+        "cacheBuildMs": 0,
+        "cacheBytes": 0,
+        "textureBytes": 11184810.666666666,
+        "textureWidth": 1024,
+        "renderTargetBytes": 9216000,
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "programsRunnable": true,
+        "disjoint": false,
+        "finishWallMs": 3.4000000059604645
+      },
+      {
+        "ready": true,
+        "rendererMode": "anime",
+        "mode": "approach",
+        "progress": 0.5,
+        "time": 0,
+        "position": [
+          1848.9868665880028,
+          3150,
+          3118.5029703142363
+        ],
+        "field": {
+          "kind": "cumulus",
+          "seed": 73,
+          "base": 2450,
+          "top": 3650
+        },
+        "planePosition": [
+          1848.9868665880028,
+          3133.5864008113244,
+          3054.4749002068725
+        ],
+        "direction": [
+          0,
+          -0.06833305240913978,
+          -0.9976625651734409
+        ],
+        "density": 0,
+        "planeDensity": 0,
+        "transmittance500": 1,
+        "cpuQueryMs": 0.20000001788139343,
+        "renderSubmitMs": 0.800000011920929,
+        "fogCpuMs": 0.19999998807907104,
+        "gpuMs": 87.1929,
+        "gpuSample": 0,
+        "gpuTimerAvailable": true,
+        "disjointSamples": 0,
+        "calls": 6,
+        "triangles": 2162,
+        "width": 640,
+        "height": 360,
+        "layers": {
+          "triangles": 54,
+          "count": 27,
+          "buildMs": 0.4000000059604645,
+          "bytes": 864
+        },
+        "geometryBuilds": 1,
+        "cacheBuildMs": 0,
+        "cacheBytes": 0,
+        "textureBytes": 11184810.666666666,
+        "textureWidth": 1024,
+        "renderTargetBytes": 9216000,
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "programsRunnable": true,
+        "disjoint": false,
+        "finishWallMs": 2.5
+      },
+      {
+        "ready": true,
+        "rendererMode": "anime",
+        "mode": "approach",
+        "progress": 0.5,
+        "time": 0,
+        "position": [
+          1848.9868665880028,
+          3150,
+          3118.5029703142363
+        ],
+        "field": {
+          "kind": "cumulus",
+          "seed": 73,
+          "base": 2450,
+          "top": 3650
+        },
+        "planePosition": [
+          1848.9868665880028,
+          3133.5864008113244,
+          3054.4749002068725
+        ],
+        "direction": [
+          0,
+          -0.06833305240913978,
+          -0.9976625651734409
+        ],
+        "density": 0,
+        "planeDensity": 0,
+        "transmittance500": 1,
+        "cpuQueryMs": 0,
+        "renderSubmitMs": 0.5,
+        "fogCpuMs": 0.09999999403953552,
+        "gpuMs": 75.6013,
+        "gpuSample": 0,
+        "gpuTimerAvailable": true,
+        "disjointSamples": 0,
+        "calls": 6,
+        "triangles": 2162,
+        "width": 640,
+        "height": 360,
+        "layers": {
+          "triangles": 54,
+          "count": 27,
+          "buildMs": 0.4000000059604645,
+          "bytes": 864
+        },
+        "geometryBuilds": 1,
+        "cacheBuildMs": 0,
+        "cacheBytes": 0,
+        "textureBytes": 11184810.666666666,
+        "textureWidth": 1024,
+        "renderTargetBytes": 9216000,
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "programsRunnable": true,
+        "disjoint": false,
+        "finishWallMs": 1.5
+      }
+    ],
+    "approach-0.5-stable": [
+      {
+        "ready": true,
+        "rendererMode": "stable",
+        "mode": "approach",
+        "progress": 0.5,
+        "time": 0,
+        "position": [
+          1848.9868665880028,
+          3150,
+          3118.5029703142363
+        ],
+        "field": {
+          "kind": "cumulus",
+          "seed": 73,
+          "base": 2450,
+          "top": 3650
+        },
+        "planePosition": [
+          1848.9868665880028,
+          3133.5864008113244,
+          3054.4749002068725
+        ],
+        "direction": [
+          0,
+          -0.06833305240913978,
+          -0.9976625651734409
+        ],
+        "density": 0,
+        "planeDensity": 0,
+        "transmittance500": 1,
+        "cpuQueryMs": 0,
+        "representation": "fixed-volume",
+        "renderSubmitMs": 0.5,
+        "updateCpuMs": 0,
+        "fogCpuMs": 0,
+        "gpuMs": 549.375,
+        "gpuSample": 0,
+        "gpuTimerAvailable": true,
+        "disjointSamples": 0,
+        "calls": 5,
+        "triangles": 2108,
+        "width": 640,
+        "height": 360,
+        "volume": {
+          "grid": [
+            96,
+            32,
+            80
+          ],
+          "bytes": 983040,
+          "buildMs": 194.30000001192093,
+          "spacing": [
+            63.1578947368421,
+            38.70967741935484,
+            63.29113924050633
+          ]
+        },
+        "geometryBuilds": 1,
+        "cacheBuildMs": 194.30000001192093,
+        "cacheBytes": 983040,
+        "transparentLayers": 0,
+        "volumeSteps": [
+          8,
+          12,
+          12
+        ],
+        "textureBytes": 6575445.333333333,
+        "textureWidth": 1024,
+        "renderTargetBytes": 1843200,
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "programsRunnable": true,
+        "disjoint": false,
+        "finishWallMs": 3
+      },
+      {
+        "ready": true,
+        "rendererMode": "stable",
+        "mode": "approach",
+        "progress": 0.5,
+        "time": 0,
+        "position": [
+          1848.9868665880028,
+          3150,
+          3118.5029703142363
+        ],
+        "field": {
+          "kind": "cumulus",
+          "seed": 73,
+          "base": 2450,
+          "top": 3650
+        },
+        "planePosition": [
+          1848.9868665880028,
+          3133.5864008113244,
+          3054.4749002068725
+        ],
+        "direction": [
+          0,
+          -0.06833305240913978,
+          -0.9976625651734409
+        ],
+        "density": 0,
+        "planeDensity": 0,
+        "transmittance500": 1,
+        "cpuQueryMs": 0.09999999403953552,
+        "representation": "fixed-volume",
+        "renderSubmitMs": 0.5999999940395355,
+        "updateCpuMs": 0,
+        "fogCpuMs": 0,
+        "gpuMs": 585.272,
+        "gpuSample": 0,
+        "gpuTimerAvailable": true,
+        "disjointSamples": 0,
+        "calls": 5,
+        "triangles": 2108,
+        "width": 640,
+        "height": 360,
+        "volume": {
+          "grid": [
+            96,
+            32,
+            80
+          ],
+          "bytes": 983040,
+          "buildMs": 194.30000001192093,
+          "spacing": [
+            63.1578947368421,
+            38.70967741935484,
+            63.29113924050633
+          ]
+        },
+        "geometryBuilds": 1,
+        "cacheBuildMs": 194.30000001192093,
+        "cacheBytes": 983040,
+        "transparentLayers": 0,
+        "volumeSteps": [
+          8,
+          12,
+          12
+        ],
+        "textureBytes": 6575445.333333333,
+        "textureWidth": 1024,
+        "renderTargetBytes": 1843200,
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "programsRunnable": true,
+        "disjoint": false,
+        "finishWallMs": 1.199999988079071
+      },
+      {
+        "ready": true,
+        "rendererMode": "stable",
+        "mode": "approach",
+        "progress": 0.5,
+        "time": 0,
+        "position": [
+          1848.9868665880028,
+          3150,
+          3118.5029703142363
+        ],
+        "field": {
+          "kind": "cumulus",
+          "seed": 73,
+          "base": 2450,
+          "top": 3650
+        },
+        "planePosition": [
+          1848.9868665880028,
+          3133.5864008113244,
+          3054.4749002068725
+        ],
+        "direction": [
+          0,
+          -0.06833305240913978,
+          -0.9976625651734409
+        ],
+        "density": 0,
+        "planeDensity": 0,
+        "transmittance500": 1,
+        "cpuQueryMs": 0,
+        "representation": "fixed-volume",
+        "renderSubmitMs": 0.4000000059604645,
+        "updateCpuMs": 0.09999999403953552,
+        "fogCpuMs": 0,
+        "gpuMs": 553.4749,
+        "gpuSample": 0,
+        "gpuTimerAvailable": true,
+        "disjointSamples": 0,
+        "calls": 5,
+        "triangles": 2108,
+        "width": 640,
+        "height": 360,
+        "volume": {
+          "grid": [
+            96,
+            32,
+            80
+          ],
+          "bytes": 983040,
+          "buildMs": 194.30000001192093,
+          "spacing": [
+            63.1578947368421,
+            38.70967741935484,
+            63.29113924050633
+          ]
+        },
+        "geometryBuilds": 1,
+        "cacheBuildMs": 194.30000001192093,
+        "cacheBytes": 983040,
+        "transparentLayers": 0,
+        "volumeSteps": [
+          8,
+          12,
+          12
+        ],
+        "textureBytes": 6575445.333333333,
+        "textureWidth": 1024,
+        "renderTargetBytes": 1843200,
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "programsRunnable": true,
+        "disjoint": false,
+        "finishWallMs": 1.300000011920929
+      }
+    ],
+    "approach-0.5-hybrid": [
+      {
+        "ready": true,
+        "rendererMode": "hybrid",
+        "mode": "approach",
+        "progress": 0.5,
+        "time": 0,
+        "position": [
+          1848.9868665880028,
+          3150,
+          3118.5029703142363
+        ],
+        "field": {
+          "kind": "cumulus",
+          "seed": 73,
+          "base": 2450,
+          "top": 3650
+        },
+        "planePosition": [
+          1848.9868665880028,
+          3133.5864008113244,
+          3054.4749002068725
+        ],
+        "direction": [
+          0,
+          -0.06833305240913978,
+          -0.9976625651734409
+        ],
+        "density": 0,
+        "planeDensity": 0,
+        "transmittance500": 1,
+        "cpuQueryMs": 0,
+        "representation": "fixed-painted-hull",
+        "hull": {
+          "grid": [
+            60,
+            26,
+            50
+          ],
+          "triangles": 68000,
+          "vertices": 34008,
+          "bytes": 1632192,
+          "buildMs": 451.5
+        },
+        "geometryBuilds": 1,
+        "cacheBuildMs": 451.5,
+        "cacheBytes": 1632192,
+        "updateCpuMs": 0.09999999403953552,
+        "fogCpuMs": 0.09999999403953552,
+        "renderSubmitMs": 0.5999999940395355,
+        "gpuMs": 199.6488,
+        "gpuSample": 0,
+        "gpuTimerAvailable": true,
+        "calls": 10,
+        "triangles": 72214,
+        "width": 640,
+        "height": 360,
+        "transparentLayers": 0,
+        "alphaCoverageShells": 1,
+        "fogIntervals": 4,
+        "densityQueries": 108,
+        "textureBytes": 5592405.333333333,
+        "renderTargetBytes": 11059200,
+        "programsRunnable": true,
+        "disjoint": false,
+        "finishWallMs": 0.7999999821186066
+      },
+      {
+        "ready": true,
+        "rendererMode": "hybrid",
+        "mode": "approach",
+        "progress": 0.5,
+        "time": 0,
+        "position": [
+          1848.9868665880028,
+          3150,
+          3118.5029703142363
+        ],
+        "field": {
+          "kind": "cumulus",
+          "seed": 73,
+          "base": 2450,
+          "top": 3650
+        },
+        "planePosition": [
+          1848.9868665880028,
+          3133.5864008113244,
+          3054.4749002068725
+        ],
+        "direction": [
+          0,
+          -0.06833305240913978,
+          -0.9976625651734409
+        ],
+        "density": 0,
+        "planeDensity": 0,
+        "transmittance500": 1,
+        "cpuQueryMs": 0.10000002384185791,
+        "representation": "fixed-painted-hull",
+        "hull": {
+          "grid": [
+            60,
+            26,
+            50
+          ],
+          "triangles": 68000,
+          "vertices": 34008,
+          "bytes": 1632192,
+          "buildMs": 451.5
+        },
+        "geometryBuilds": 1,
+        "cacheBuildMs": 451.5,
+        "cacheBytes": 1632192,
+        "updateCpuMs": 0.09999999403953552,
+        "fogCpuMs": 0.09999999403953552,
+        "renderSubmitMs": 0.5999999940395355,
+        "gpuMs": 206.0964,
+        "gpuSample": 0,
+        "gpuTimerAvailable": true,
+        "calls": 10,
+        "triangles": 72214,
+        "width": 640,
+        "height": 360,
+        "transparentLayers": 0,
+        "alphaCoverageShells": 1,
+        "fogIntervals": 4,
+        "densityQueries": 108,
+        "textureBytes": 5592405.333333333,
+        "renderTargetBytes": 11059200,
+        "programsRunnable": true,
+        "disjoint": false,
+        "finishWallMs": 1
+      },
+      {
+        "ready": true,
+        "rendererMode": "hybrid",
+        "mode": "approach",
+        "progress": 0.5,
+        "time": 0,
+        "position": [
+          1848.9868665880028,
+          3150,
+          3118.5029703142363
+        ],
+        "field": {
+          "kind": "cumulus",
+          "seed": 73,
+          "base": 2450,
+          "top": 3650
+        },
+        "planePosition": [
+          1848.9868665880028,
+          3133.5864008113244,
+          3054.4749002068725
+        ],
+        "direction": [
+          0,
+          -0.06833305240913978,
+          -0.9976625651734409
+        ],
+        "density": 0,
+        "planeDensity": 0,
+        "transmittance500": 1,
+        "cpuQueryMs": 0.09999999403953552,
+        "representation": "fixed-painted-hull",
+        "hull": {
+          "grid": [
+            60,
+            26,
+            50
+          ],
+          "triangles": 68000,
+          "vertices": 34008,
+          "bytes": 1632192,
+          "buildMs": 451.5
+        },
+        "geometryBuilds": 1,
+        "cacheBuildMs": 451.5,
+        "cacheBytes": 1632192,
+        "updateCpuMs": 0,
+        "fogCpuMs": 0,
+        "renderSubmitMs": 0.699999988079071,
+        "gpuMs": 205.2811,
+        "gpuSample": 0,
+        "gpuTimerAvailable": true,
+        "calls": 10,
+        "triangles": 72214,
+        "width": 640,
+        "height": 360,
+        "transparentLayers": 0,
+        "alphaCoverageShells": 1,
+        "fogIntervals": 4,
+        "densityQueries": 108,
+        "textureBytes": 5592405.333333333,
+        "renderTargetBytes": 11059200,
+        "programsRunnable": true,
+        "disjoint": false,
+        "finishWallMs": 1
+      }
+    ],
+    "approach-1-anime": [
+      {
+        "ready": true,
+        "rendererMode": "anime",
+        "mode": "approach",
+        "progress": 0.5,
+        "time": 0,
+        "position": [
+          1848.9868665880028,
+          3150,
+          3118.5029703142363
+        ],
+        "field": {
+          "kind": "cumulus",
+          "seed": 73,
+          "base": 2450,
+          "top": 3650
+        },
+        "planePosition": [
+          1848.9868665880028,
+          3133.5864008113244,
+          3054.4749002068725
+        ],
+        "direction": [
+          0,
+          -0.06833305240913978,
+          -0.9976625651734409
+        ],
+        "density": 0,
+        "planeDensity": 0,
+        "transmittance500": 1,
+        "cpuQueryMs": 0,
+        "renderSubmitMs": 1.0999999940395355,
+        "fogCpuMs": 0,
+        "gpuMs": 318.7972,
+        "gpuSample": 0,
+        "gpuTimerAvailable": true,
+        "disjointSamples": 0,
+        "calls": 6,
+        "triangles": 2162,
+        "width": 1280,
+        "height": 720,
+        "layers": {
+          "triangles": 54,
+          "count": 27,
+          "buildMs": 0.4000000059604645,
+          "bytes": 864
+        },
+        "geometryBuilds": 1,
+        "cacheBuildMs": 0,
+        "cacheBytes": 0,
+        "textureBytes": 11184810.666666666,
+        "textureWidth": 1024,
+        "renderTargetBytes": 36864000,
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "programsRunnable": true,
+        "disjoint": false,
+        "finishWallMs": 2.9000000059604645
+      },
+      {
+        "ready": true,
+        "rendererMode": "anime",
+        "mode": "approach",
+        "progress": 0.5,
+        "time": 0,
+        "position": [
+          1848.9868665880028,
+          3150,
+          3118.5029703142363
+        ],
+        "field": {
+          "kind": "cumulus",
+          "seed": 73,
+          "base": 2450,
+          "top": 3650
+        },
+        "planePosition": [
+          1848.9868665880028,
+          3133.5864008113244,
+          3054.4749002068725
+        ],
+        "direction": [
+          0,
+          -0.06833305240913978,
+          -0.9976625651734409
+        ],
+        "density": 0,
+        "planeDensity": 0,
+        "transmittance500": 1,
+        "cpuQueryMs": 0,
+        "renderSubmitMs": 0.6000000238418579,
+        "fogCpuMs": 0.09999999403953552,
+        "gpuMs": 332.063,
+        "gpuSample": 0,
+        "gpuTimerAvailable": true,
+        "disjointSamples": 0,
+        "calls": 6,
+        "triangles": 2162,
+        "width": 1280,
+        "height": 720,
+        "layers": {
+          "triangles": 54,
+          "count": 27,
+          "buildMs": 0.4000000059604645,
+          "bytes": 864
+        },
+        "geometryBuilds": 1,
+        "cacheBuildMs": 0,
+        "cacheBytes": 0,
+        "textureBytes": 11184810.666666666,
+        "textureWidth": 1024,
+        "renderTargetBytes": 36864000,
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "programsRunnable": true,
+        "disjoint": false,
+        "finishWallMs": 1.699999988079071
+      },
+      {
+        "ready": true,
+        "rendererMode": "anime",
+        "mode": "approach",
+        "progress": 0.5,
+        "time": 0,
+        "position": [
+          1848.9868665880028,
+          3150,
+          3118.5029703142363
+        ],
+        "field": {
+          "kind": "cumulus",
+          "seed": 73,
+          "base": 2450,
+          "top": 3650
+        },
+        "planePosition": [
+          1848.9868665880028,
+          3133.5864008113244,
+          3054.4749002068725
+        ],
+        "direction": [
+          0,
+          -0.06833305240913978,
+          -0.9976625651734409
+        ],
+        "density": 0,
+        "planeDensity": 0,
+        "transmittance500": 1,
+        "cpuQueryMs": 0,
+        "renderSubmitMs": 0.3999999761581421,
+        "fogCpuMs": 0.10000002384185791,
+        "gpuMs": 335.1405,
+        "gpuSample": 0,
+        "gpuTimerAvailable": true,
+        "disjointSamples": 0,
+        "calls": 6,
+        "triangles": 2162,
+        "width": 1280,
+        "height": 720,
+        "layers": {
+          "triangles": 54,
+          "count": 27,
+          "buildMs": 0.4000000059604645,
+          "bytes": 864
+        },
+        "geometryBuilds": 1,
+        "cacheBuildMs": 0,
+        "cacheBytes": 0,
+        "textureBytes": 11184810.666666666,
+        "textureWidth": 1024,
+        "renderTargetBytes": 36864000,
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "programsRunnable": true,
+        "disjoint": false,
+        "finishWallMs": 1.7000000178813934
+      }
+    ],
+    "approach-1-stable": [
+      {
+        "ready": true,
+        "rendererMode": "stable",
+        "mode": "approach",
+        "progress": 0.5,
+        "time": 0,
+        "position": [
+          1848.9868665880028,
+          3150,
+          3118.5029703142363
+        ],
+        "field": {
+          "kind": "cumulus",
+          "seed": 73,
+          "base": 2450,
+          "top": 3650
+        },
+        "planePosition": [
+          1848.9868665880028,
+          3133.5864008113244,
+          3054.4749002068725
+        ],
+        "direction": [
+          0,
+          -0.06833305240913978,
+          -0.9976625651734409
+        ],
+        "density": 0,
+        "planeDensity": 0,
+        "transmittance500": 1,
+        "cpuQueryMs": 0,
+        "representation": "fixed-volume",
+        "renderSubmitMs": 0.4000000059604645,
+        "updateCpuMs": 0,
+        "fogCpuMs": 0,
+        "gpuMs": 1104.5561,
+        "gpuSample": 0,
+        "gpuTimerAvailable": true,
+        "disjointSamples": 0,
+        "calls": 5,
+        "triangles": 2108,
+        "width": 1280,
+        "height": 720,
+        "volume": {
+          "grid": [
+            96,
+            32,
+            80
+          ],
+          "bytes": 983040,
+          "buildMs": 194.30000001192093,
+          "spacing": [
+            63.1578947368421,
+            38.70967741935484,
+            63.29113924050633
+          ]
+        },
+        "geometryBuilds": 1,
+        "cacheBuildMs": 194.30000001192093,
+        "cacheBytes": 983040,
+        "transparentLayers": 0,
+        "volumeSteps": [
+          8,
+          12,
+          12
+        ],
+        "textureBytes": 6575445.333333333,
+        "textureWidth": 1024,
+        "renderTargetBytes": 7372800,
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "programsRunnable": true,
+        "disjoint": false,
+        "finishWallMs": 3.0999999940395355
+      },
+      {
+        "ready": true,
+        "rendererMode": "stable",
+        "mode": "approach",
+        "progress": 0.5,
+        "time": 0,
+        "position": [
+          1848.9868665880028,
+          3150,
+          3118.5029703142363
+        ],
+        "field": {
+          "kind": "cumulus",
+          "seed": 73,
+          "base": 2450,
+          "top": 3650
+        },
+        "planePosition": [
+          1848.9868665880028,
+          3133.5864008113244,
+          3054.4749002068725
+        ],
+        "direction": [
+          0,
+          -0.06833305240913978,
+          -0.9976625651734409
+        ],
+        "density": 0,
+        "planeDensity": 0,
+        "transmittance500": 1,
+        "cpuQueryMs": 0,
+        "representation": "fixed-volume",
+        "renderSubmitMs": 0.4000000059604645,
+        "updateCpuMs": 0,
+        "fogCpuMs": 0,
+        "gpuMs": 1176.8612,
+        "gpuSample": 0,
+        "gpuTimerAvailable": true,
+        "disjointSamples": 0,
+        "calls": 5,
+        "triangles": 2108,
+        "width": 1280,
+        "height": 720,
+        "volume": {
+          "grid": [
+            96,
+            32,
+            80
+          ],
+          "bytes": 983040,
+          "buildMs": 194.30000001192093,
+          "spacing": [
+            63.1578947368421,
+            38.70967741935484,
+            63.29113924050633
+          ]
+        },
+        "geometryBuilds": 1,
+        "cacheBuildMs": 194.30000001192093,
+        "cacheBytes": 983040,
+        "transparentLayers": 0,
+        "volumeSteps": [
+          8,
+          12,
+          12
+        ],
+        "textureBytes": 6575445.333333333,
+        "textureWidth": 1024,
+        "renderTargetBytes": 7372800,
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "programsRunnable": true,
+        "disjoint": false,
+        "finishWallMs": 1.2999999821186066
+      },
+      {
+        "ready": true,
+        "rendererMode": "stable",
+        "mode": "approach",
+        "progress": 0.5,
+        "time": 0,
+        "position": [
+          1848.9868665880028,
+          3150,
+          3118.5029703142363
+        ],
+        "field": {
+          "kind": "cumulus",
+          "seed": 73,
+          "base": 2450,
+          "top": 3650
+        },
+        "planePosition": [
+          1848.9868665880028,
+          3133.5864008113244,
+          3054.4749002068725
+        ],
+        "direction": [
+          0,
+          -0.06833305240913978,
+          -0.9976625651734409
+        ],
+        "density": 0,
+        "planeDensity": 0,
+        "transmittance500": 1,
+        "cpuQueryMs": 0,
+        "representation": "fixed-volume",
+        "renderSubmitMs": 0.5,
+        "updateCpuMs": 0,
+        "fogCpuMs": 0,
+        "gpuMs": 1173.4508,
+        "gpuSample": 0,
+        "gpuTimerAvailable": true,
+        "disjointSamples": 0,
+        "calls": 5,
+        "triangles": 2108,
+        "width": 1280,
+        "height": 720,
+        "volume": {
+          "grid": [
+            96,
+            32,
+            80
+          ],
+          "bytes": 983040,
+          "buildMs": 194.30000001192093,
+          "spacing": [
+            63.1578947368421,
+            38.70967741935484,
+            63.29113924050633
+          ]
+        },
+        "geometryBuilds": 1,
+        "cacheBuildMs": 194.30000001192093,
+        "cacheBytes": 983040,
+        "transparentLayers": 0,
+        "volumeSteps": [
+          8,
+          12,
+          12
+        ],
+        "textureBytes": 6575445.333333333,
+        "textureWidth": 1024,
+        "renderTargetBytes": 7372800,
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "programsRunnable": true,
+        "disjoint": false,
+        "finishWallMs": 1.600000023841858
+      }
+    ],
+    "approach-1-hybrid": [
+      {
+        "ready": true,
+        "rendererMode": "hybrid",
+        "mode": "approach",
+        "progress": 0.5,
+        "time": 0,
+        "position": [
+          1848.9868665880028,
+          3150,
+          3118.5029703142363
+        ],
+        "field": {
+          "kind": "cumulus",
+          "seed": 73,
+          "base": 2450,
+          "top": 3650
+        },
+        "planePosition": [
+          1848.9868665880028,
+          3133.5864008113244,
+          3054.4749002068725
+        ],
+        "direction": [
+          0,
+          -0.06833305240913978,
+          -0.9976625651734409
+        ],
+        "density": 0,
+        "planeDensity": 0,
+        "transmittance500": 1,
+        "cpuQueryMs": 0,
+        "representation": "fixed-painted-hull",
+        "hull": {
+          "grid": [
+            60,
+            26,
+            50
+          ],
+          "triangles": 68000,
+          "vertices": 34008,
+          "bytes": 1632192,
+          "buildMs": 451.5
+        },
+        "geometryBuilds": 1,
+        "cacheBuildMs": 451.5,
+        "cacheBytes": 1632192,
+        "updateCpuMs": 0,
+        "fogCpuMs": 0,
+        "renderSubmitMs": 0.5999999940395355,
+        "gpuMs": 485.882,
+        "gpuSample": 0,
+        "gpuTimerAvailable": true,
+        "calls": 10,
+        "triangles": 72214,
+        "width": 1280,
+        "height": 720,
+        "transparentLayers": 0,
+        "alphaCoverageShells": 1,
+        "fogIntervals": 4,
+        "densityQueries": 108,
+        "textureBytes": 5592405.333333333,
+        "renderTargetBytes": 44236800,
+        "programsRunnable": true,
+        "disjoint": false,
+        "finishWallMs": 0.9000000059604645
+      },
+      {
+        "ready": true,
+        "rendererMode": "hybrid",
+        "mode": "approach",
+        "progress": 0.5,
+        "time": 0,
+        "position": [
+          1848.9868665880028,
+          3150,
+          3118.5029703142363
+        ],
+        "field": {
+          "kind": "cumulus",
+          "seed": 73,
+          "base": 2450,
+          "top": 3650
+        },
+        "planePosition": [
+          1848.9868665880028,
+          3133.5864008113244,
+          3054.4749002068725
+        ],
+        "direction": [
+          0,
+          -0.06833305240913978,
+          -0.9976625651734409
+        ],
+        "density": 0,
+        "planeDensity": 0,
+        "transmittance500": 1,
+        "cpuQueryMs": 0,
+        "representation": "fixed-painted-hull",
+        "hull": {
+          "grid": [
+            60,
+            26,
+            50
+          ],
+          "triangles": 68000,
+          "vertices": 34008,
+          "bytes": 1632192,
+          "buildMs": 451.5
+        },
+        "geometryBuilds": 1,
+        "cacheBuildMs": 451.5,
+        "cacheBytes": 1632192,
+        "updateCpuMs": 0.10000002384185791,
+        "fogCpuMs": 0.10000002384185791,
+        "renderSubmitMs": 0.5999999940395355,
+        "gpuMs": 491.4842,
+        "gpuSample": 0,
+        "gpuTimerAvailable": true,
+        "calls": 10,
+        "triangles": 72214,
+        "width": 1280,
+        "height": 720,
+        "transparentLayers": 0,
+        "alphaCoverageShells": 1,
+        "fogIntervals": 4,
+        "densityQueries": 108,
+        "textureBytes": 5592405.333333333,
+        "renderTargetBytes": 44236800,
+        "programsRunnable": true,
+        "disjoint": false,
+        "finishWallMs": 1
+      },
+      {
+        "ready": true,
+        "rendererMode": "hybrid",
+        "mode": "approach",
+        "progress": 0.5,
+        "time": 0,
+        "position": [
+          1848.9868665880028,
+          3150,
+          3118.5029703142363
+        ],
+        "field": {
+          "kind": "cumulus",
+          "seed": 73,
+          "base": 2450,
+          "top": 3650
+        },
+        "planePosition": [
+          1848.9868665880028,
+          3133.5864008113244,
+          3054.4749002068725
+        ],
+        "direction": [
+          0,
+          -0.06833305240913978,
+          -0.9976625651734409
+        ],
+        "density": 0,
+        "planeDensity": 0,
+        "transmittance500": 1,
+        "cpuQueryMs": 0.10000002384185791,
+        "representation": "fixed-painted-hull",
+        "hull": {
+          "grid": [
+            60,
+            26,
+            50
+          ],
+          "triangles": 68000,
+          "vertices": 34008,
+          "bytes": 1632192,
+          "buildMs": 451.5
+        },
+        "geometryBuilds": 1,
+        "cacheBuildMs": 451.5,
+        "cacheBytes": 1632192,
+        "updateCpuMs": 0.09999999403953552,
+        "fogCpuMs": 0.09999999403953552,
+        "renderSubmitMs": 0.5999999940395355,
+        "gpuMs": 480.4165,
+        "gpuSample": 0,
+        "gpuTimerAvailable": true,
+        "calls": 10,
+        "triangles": 72214,
+        "width": 1280,
+        "height": 720,
+        "transparentLayers": 0,
+        "alphaCoverageShells": 1,
+        "fogIntervals": 4,
+        "densityQueries": 108,
+        "textureBytes": 5592405.333333333,
+        "renderTargetBytes": 44236800,
+        "programsRunnable": true,
+        "disjoint": false,
+        "finishWallMs": 0.9000000059604645
+      }
+    ],
+    "inside-0.5-anime": [
+      {
+        "ready": true,
+        "rendererMode": "anime",
+        "mode": "inside",
+        "progress": 0.5,
+        "time": 0,
+        "position": [
+          0,
+          3062,
+          50
+        ],
+        "field": {
+          "kind": "cumulus",
+          "seed": 73,
+          "base": 2450,
+          "top": 3650
+        },
+        "planePosition": [
+          0,
+          3049.026459441224,
+          -14.812708980336495
+        ],
+        "direction": [
+          0,
+          -0.014998312784712243,
+          -0.9998875189808162
+        ],
+        "density": 0.8370390515755307,
+        "planeDensity": 0.8722886562089853,
+        "transmittance500": 0.007988982440268457,
+        "cpuQueryMs": 0,
+        "renderSubmitMs": 0.4000000059604645,
+        "fogCpuMs": 0.19999998807907104,
+        "gpuMs": 87.233,
+        "gpuSample": 0,
+        "gpuTimerAvailable": true,
+        "disjointSamples": 0,
+        "calls": 6,
+        "triangles": 2162,
+        "width": 640,
+        "height": 360,
+        "layers": {
+          "triangles": 54,
+          "count": 27,
+          "buildMs": 0.4000000059604645,
+          "bytes": 864
+        },
+        "geometryBuilds": 1,
+        "cacheBuildMs": 0,
+        "cacheBytes": 0,
+        "textureBytes": 11184810.666666666,
+        "textureWidth": 1024,
+        "renderTargetBytes": 9216000,
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "programsRunnable": true,
+        "disjoint": false,
+        "finishWallMs": 2.2999999821186066
+      },
+      {
+        "ready": true,
+        "rendererMode": "anime",
+        "mode": "inside",
+        "progress": 0.5,
+        "time": 0,
+        "position": [
+          0,
+          3062,
+          50
+        ],
+        "field": {
+          "kind": "cumulus",
+          "seed": 73,
+          "base": 2450,
+          "top": 3650
+        },
+        "planePosition": [
+          0,
+          3049.026459441224,
+          -14.812708980336495
+        ],
+        "direction": [
+          0,
+          -0.014998312784712243,
+          -0.9998875189808162
+        ],
+        "density": 0.8370390515755307,
+        "planeDensity": 0.8722886562089853,
+        "transmittance500": 0.007988982440268457,
+        "cpuQueryMs": 0,
+        "renderSubmitMs": 0.5,
+        "fogCpuMs": 0.19999998807907104,
+        "gpuMs": 63.9733,
+        "gpuSample": 0,
+        "gpuTimerAvailable": true,
+        "disjointSamples": 0,
+        "calls": 6,
+        "triangles": 2162,
+        "width": 640,
+        "height": 360,
+        "layers": {
+          "triangles": 54,
+          "count": 27,
+          "buildMs": 0.4000000059604645,
+          "bytes": 864
+        },
+        "geometryBuilds": 1,
+        "cacheBuildMs": 0,
+        "cacheBytes": 0,
+        "textureBytes": 11184810.666666666,
+        "textureWidth": 1024,
+        "renderTargetBytes": 9216000,
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "programsRunnable": true,
+        "disjoint": false,
+        "finishWallMs": 1.800000011920929
+      },
+      {
+        "ready": true,
+        "rendererMode": "anime",
+        "mode": "inside",
+        "progress": 0.5,
+        "time": 0,
+        "position": [
+          0,
+          3062,
+          50
+        ],
+        "field": {
+          "kind": "cumulus",
+          "seed": 73,
+          "base": 2450,
+          "top": 3650
+        },
+        "planePosition": [
+          0,
+          3049.026459441224,
+          -14.812708980336495
+        ],
+        "direction": [
+          0,
+          -0.014998312784712243,
+          -0.9998875189808162
+        ],
+        "density": 0.8370390515755307,
+        "planeDensity": 0.8722886562089853,
+        "transmittance500": 0.007988982440268457,
+        "cpuQueryMs": 0,
+        "renderSubmitMs": 0.29999998211860657,
+        "fogCpuMs": 0.10000002384185791,
+        "gpuMs": 70.2882,
+        "gpuSample": 0,
+        "gpuTimerAvailable": true,
+        "disjointSamples": 0,
+        "calls": 6,
+        "triangles": 2162,
+        "width": 640,
+        "height": 360,
+        "layers": {
+          "triangles": 54,
+          "count": 27,
+          "buildMs": 0.4000000059604645,
+          "bytes": 864
+        },
+        "geometryBuilds": 1,
+        "cacheBuildMs": 0,
+        "cacheBytes": 0,
+        "textureBytes": 11184810.666666666,
+        "textureWidth": 1024,
+        "renderTargetBytes": 9216000,
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "programsRunnable": true,
+        "disjoint": false,
+        "finishWallMs": 1.199999988079071
+      }
+    ],
+    "inside-0.5-stable": [
+      {
+        "ready": true,
+        "rendererMode": "stable",
+        "mode": "inside",
+        "progress": 0.5,
+        "time": 0,
+        "position": [
+          0,
+          3062,
+          50
+        ],
+        "field": {
+          "kind": "cumulus",
+          "seed": 73,
+          "base": 2450,
+          "top": 3650
+        },
+        "planePosition": [
+          0,
+          3049.026459441224,
+          -14.812708980336495
+        ],
+        "direction": [
+          0,
+          -0.014998312784712243,
+          -0.9998875189808162
+        ],
+        "density": 0.8370390515755307,
+        "planeDensity": 0.8722886562089853,
+        "transmittance500": 0.007988982440268457,
+        "cpuQueryMs": 0,
+        "representation": "fixed-volume",
+        "renderSubmitMs": 0.4000000059604645,
+        "updateCpuMs": 0,
+        "fogCpuMs": 0,
+        "gpuMs": 168.1096,
+        "gpuSample": 0,
+        "gpuTimerAvailable": true,
+        "disjointSamples": 0,
+        "calls": 5,
+        "triangles": 2108,
+        "width": 640,
+        "height": 360,
+        "volume": {
+          "grid": [
+            96,
+            32,
+            80
+          ],
+          "bytes": 983040,
+          "buildMs": 194.30000001192093,
+          "spacing": [
+            63.1578947368421,
+            38.70967741935484,
+            63.29113924050633
+          ]
+        },
+        "geometryBuilds": 1,
+        "cacheBuildMs": 194.30000001192093,
+        "cacheBytes": 983040,
+        "transparentLayers": 0,
+        "volumeSteps": [
+          8,
+          12,
+          12
+        ],
+        "textureBytes": 6575445.333333333,
+        "textureWidth": 1024,
+        "renderTargetBytes": 1843200,
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "programsRunnable": true,
+        "disjoint": false,
+        "finishWallMs": 2.5999999940395355
+      },
+      {
+        "ready": true,
+        "rendererMode": "stable",
+        "mode": "inside",
+        "progress": 0.5,
+        "time": 0,
+        "position": [
+          0,
+          3062,
+          50
+        ],
+        "field": {
+          "kind": "cumulus",
+          "seed": 73,
+          "base": 2450,
+          "top": 3650
+        },
+        "planePosition": [
+          0,
+          3049.026459441224,
+          -14.812708980336495
+        ],
+        "direction": [
+          0,
+          -0.014998312784712243,
+          -0.9998875189808162
+        ],
+        "density": 0.8370390515755307,
+        "planeDensity": 0.8722886562089853,
+        "transmittance500": 0.007988982440268457,
+        "cpuQueryMs": 0,
+        "representation": "fixed-volume",
+        "renderSubmitMs": 0.3999999761581421,
+        "updateCpuMs": 0.10000002384185791,
+        "fogCpuMs": 0,
+        "gpuMs": 172.3109,
+        "gpuSample": 0,
+        "gpuTimerAvailable": true,
+        "disjointSamples": 0,
+        "calls": 5,
+        "triangles": 2108,
+        "width": 640,
+        "height": 360,
+        "volume": {
+          "grid": [
+            96,
+            32,
+            80
+          ],
+          "bytes": 983040,
+          "buildMs": 194.30000001192093,
+          "spacing": [
+            63.1578947368421,
+            38.70967741935484,
+            63.29113924050633
+          ]
+        },
+        "geometryBuilds": 1,
+        "cacheBuildMs": 194.30000001192093,
+        "cacheBytes": 983040,
+        "transparentLayers": 0,
+        "volumeSteps": [
+          8,
+          12,
+          12
+        ],
+        "textureBytes": 6575445.333333333,
+        "textureWidth": 1024,
+        "renderTargetBytes": 1843200,
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "programsRunnable": true,
+        "disjoint": false,
+        "finishWallMs": 1.300000011920929
+      },
+      {
+        "ready": true,
+        "rendererMode": "stable",
+        "mode": "inside",
+        "progress": 0.5,
+        "time": 0,
+        "position": [
+          0,
+          3062,
+          50
+        ],
+        "field": {
+          "kind": "cumulus",
+          "seed": 73,
+          "base": 2450,
+          "top": 3650
+        },
+        "planePosition": [
+          0,
+          3049.026459441224,
+          -14.812708980336495
+        ],
+        "direction": [
+          0,
+          -0.014998312784712243,
+          -0.9998875189808162
+        ],
+        "density": 0.8370390515755307,
+        "planeDensity": 0.8722886562089853,
+        "transmittance500": 0.007988982440268457,
+        "cpuQueryMs": 0,
+        "representation": "fixed-volume",
+        "renderSubmitMs": 0.3999999761581421,
+        "updateCpuMs": 0,
+        "fogCpuMs": 0,
+        "gpuMs": 164.6718,
+        "gpuSample": 0,
+        "gpuTimerAvailable": true,
+        "disjointSamples": 0,
+        "calls": 5,
+        "triangles": 2108,
+        "width": 640,
+        "height": 360,
+        "volume": {
+          "grid": [
+            96,
+            32,
+            80
+          ],
+          "bytes": 983040,
+          "buildMs": 194.30000001192093,
+          "spacing": [
+            63.1578947368421,
+            38.70967741935484,
+            63.29113924050633
+          ]
+        },
+        "geometryBuilds": 1,
+        "cacheBuildMs": 194.30000001192093,
+        "cacheBytes": 983040,
+        "transparentLayers": 0,
+        "volumeSteps": [
+          8,
+          12,
+          12
+        ],
+        "textureBytes": 6575445.333333333,
+        "textureWidth": 1024,
+        "renderTargetBytes": 1843200,
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "programsRunnable": true,
+        "disjoint": false,
+        "finishWallMs": 1.7000000178813934
+      }
+    ],
+    "inside-0.5-hybrid": [
+      {
+        "ready": true,
+        "rendererMode": "hybrid",
+        "mode": "inside",
+        "progress": 0.5,
+        "time": 0,
+        "position": [
+          0,
+          3062,
+          50
+        ],
+        "field": {
+          "kind": "cumulus",
+          "seed": 73,
+          "base": 2450,
+          "top": 3650
+        },
+        "planePosition": [
+          0,
+          3049.026459441224,
+          -14.812708980336495
+        ],
+        "direction": [
+          0,
+          -0.014998312784712243,
+          -0.9998875189808162
+        ],
+        "density": 0.8370390515755307,
+        "planeDensity": 0.8722886562089853,
+        "transmittance500": 0.007988982440268457,
+        "cpuQueryMs": 0,
+        "representation": "fixed-painted-hull",
+        "hull": {
+          "grid": [
+            60,
+            26,
+            50
+          ],
+          "triangles": 68000,
+          "vertices": 34008,
+          "bytes": 1632192,
+          "buildMs": 451.5
+        },
+        "geometryBuilds": 1,
+        "cacheBuildMs": 451.5,
+        "cacheBytes": 1632192,
+        "updateCpuMs": 0.09999999403953552,
+        "fogCpuMs": 0.09999999403953552,
+        "renderSubmitMs": 0.5,
+        "gpuMs": 125.7541,
+        "gpuSample": 0,
+        "gpuTimerAvailable": true,
+        "calls": 10,
+        "triangles": 72214,
+        "width": 640,
+        "height": 360,
+        "transparentLayers": 0,
+        "alphaCoverageShells": 1,
+        "fogIntervals": 4,
+        "densityQueries": 108,
+        "textureBytes": 5592405.333333333,
+        "renderTargetBytes": 11059200,
+        "programsRunnable": true,
+        "disjoint": false,
+        "finishWallMs": 0.8999999761581421
+      },
+      {
+        "ready": true,
+        "rendererMode": "hybrid",
+        "mode": "inside",
+        "progress": 0.5,
+        "time": 0,
+        "position": [
+          0,
+          3062,
+          50
+        ],
+        "field": {
+          "kind": "cumulus",
+          "seed": 73,
+          "base": 2450,
+          "top": 3650
+        },
+        "planePosition": [
+          0,
+          3049.026459441224,
+          -14.812708980336495
+        ],
+        "direction": [
+          0,
+          -0.014998312784712243,
+          -0.9998875189808162
+        ],
+        "density": 0.8370390515755307,
+        "planeDensity": 0.8722886562089853,
+        "transmittance500": 0.007988982440268457,
+        "cpuQueryMs": 0.09999999403953552,
+        "representation": "fixed-painted-hull",
+        "hull": {
+          "grid": [
+            60,
+            26,
+            50
+          ],
+          "triangles": 68000,
+          "vertices": 34008,
+          "bytes": 1632192,
+          "buildMs": 451.5
+        },
+        "geometryBuilds": 1,
+        "cacheBuildMs": 451.5,
+        "cacheBytes": 1632192,
+        "updateCpuMs": 0.09999999403953552,
+        "fogCpuMs": 0.09999999403953552,
+        "renderSubmitMs": 0.5,
+        "gpuMs": 124.769,
+        "gpuSample": 0,
+        "gpuTimerAvailable": true,
+        "calls": 10,
+        "triangles": 72214,
+        "width": 640,
+        "height": 360,
+        "transparentLayers": 0,
+        "alphaCoverageShells": 1,
+        "fogIntervals": 4,
+        "densityQueries": 108,
+        "textureBytes": 5592405.333333333,
+        "renderTargetBytes": 11059200,
+        "programsRunnable": true,
+        "disjoint": false,
+        "finishWallMs": 0.7999999821186066
+      },
+      {
+        "ready": true,
+        "rendererMode": "hybrid",
+        "mode": "inside",
+        "progress": 0.5,
+        "time": 0,
+        "position": [
+          0,
+          3062,
+          50
+        ],
+        "field": {
+          "kind": "cumulus",
+          "seed": 73,
+          "base": 2450,
+          "top": 3650
+        },
+        "planePosition": [
+          0,
+          3049.026459441224,
+          -14.812708980336495
+        ],
+        "direction": [
+          0,
+          -0.014998312784712243,
+          -0.9998875189808162
+        ],
+        "density": 0.8370390515755307,
+        "planeDensity": 0.8722886562089853,
+        "transmittance500": 0.007988982440268457,
+        "cpuQueryMs": 0.09999999403953552,
+        "representation": "fixed-painted-hull",
+        "hull": {
+          "grid": [
+            60,
+            26,
+            50
+          ],
+          "triangles": 68000,
+          "vertices": 34008,
+          "bytes": 1632192,
+          "buildMs": 451.5
+        },
+        "geometryBuilds": 1,
+        "cacheBuildMs": 451.5,
+        "cacheBytes": 1632192,
+        "updateCpuMs": 0.20000001788139343,
+        "fogCpuMs": 0.20000001788139343,
+        "renderSubmitMs": 0.4000000059604645,
+        "gpuMs": 134.3685,
+        "gpuSample": 0,
+        "gpuTimerAvailable": true,
+        "calls": 10,
+        "triangles": 72214,
+        "width": 640,
+        "height": 360,
+        "transparentLayers": 0,
+        "alphaCoverageShells": 1,
+        "fogIntervals": 4,
+        "densityQueries": 108,
+        "textureBytes": 5592405.333333333,
+        "renderTargetBytes": 11059200,
+        "programsRunnable": true,
+        "disjoint": false,
+        "finishWallMs": 0.9000000059604645
+      }
+    ],
+    "inside-1-anime": [
+      {
+        "ready": true,
+        "rendererMode": "anime",
+        "mode": "inside",
+        "progress": 0.5,
+        "time": 0,
+        "position": [
+          0,
+          3062,
+          50
+        ],
+        "field": {
+          "kind": "cumulus",
+          "seed": 73,
+          "base": 2450,
+          "top": 3650
+        },
+        "planePosition": [
+          0,
+          3049.026459441224,
+          -14.812708980336495
+        ],
+        "direction": [
+          0,
+          -0.014998312784712243,
+          -0.9998875189808162
+        ],
+        "density": 0.8370390515755307,
+        "planeDensity": 0.8722886562089853,
+        "transmittance500": 0.007988982440268457,
+        "cpuQueryMs": 0,
+        "renderSubmitMs": 0.30000001192092896,
+        "fogCpuMs": 0.19999998807907104,
+        "gpuMs": 320.76,
+        "gpuSample": 0,
+        "gpuTimerAvailable": true,
+        "disjointSamples": 0,
+        "calls": 6,
+        "triangles": 2162,
+        "width": 1280,
+        "height": 720,
+        "layers": {
+          "triangles": 54,
+          "count": 27,
+          "buildMs": 0.4000000059604645,
+          "bytes": 864
+        },
+        "geometryBuilds": 1,
+        "cacheBuildMs": 0,
+        "cacheBytes": 0,
+        "textureBytes": 11184810.666666666,
+        "textureWidth": 1024,
+        "renderTargetBytes": 36864000,
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "programsRunnable": true,
+        "disjoint": false,
+        "finishWallMs": 2.199999988079071
+      },
+      {
+        "ready": true,
+        "rendererMode": "anime",
+        "mode": "inside",
+        "progress": 0.5,
+        "time": 0,
+        "position": [
+          0,
+          3062,
+          50
+        ],
+        "field": {
+          "kind": "cumulus",
+          "seed": 73,
+          "base": 2450,
+          "top": 3650
+        },
+        "planePosition": [
+          0,
+          3049.026459441224,
+          -14.812708980336495
+        ],
+        "direction": [
+          0,
+          -0.014998312784712243,
+          -0.9998875189808162
+        ],
+        "density": 0.8370390515755307,
+        "planeDensity": 0.8722886562089853,
+        "transmittance500": 0.007988982440268457,
+        "cpuQueryMs": 0,
+        "renderSubmitMs": 0.4000000059604645,
+        "fogCpuMs": 0.19999998807907104,
+        "gpuMs": 311.0117,
+        "gpuSample": 0,
+        "gpuTimerAvailable": true,
+        "disjointSamples": 0,
+        "calls": 6,
+        "triangles": 2162,
+        "width": 1280,
+        "height": 720,
+        "layers": {
+          "triangles": 54,
+          "count": 27,
+          "buildMs": 0.4000000059604645,
+          "bytes": 864
+        },
+        "geometryBuilds": 1,
+        "cacheBuildMs": 0,
+        "cacheBytes": 0,
+        "textureBytes": 11184810.666666666,
+        "textureWidth": 1024,
+        "renderTargetBytes": 36864000,
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "programsRunnable": true,
+        "disjoint": false,
+        "finishWallMs": 1.5999999940395355
+      },
+      {
+        "ready": true,
+        "rendererMode": "anime",
+        "mode": "inside",
+        "progress": 0.5,
+        "time": 0,
+        "position": [
+          0,
+          3062,
+          50
+        ],
+        "field": {
+          "kind": "cumulus",
+          "seed": 73,
+          "base": 2450,
+          "top": 3650
+        },
+        "planePosition": [
+          0,
+          3049.026459441224,
+          -14.812708980336495
+        ],
+        "direction": [
+          0,
+          -0.014998312784712243,
+          -0.9998875189808162
+        ],
+        "density": 0.8370390515755307,
+        "planeDensity": 0.8722886562089853,
+        "transmittance500": 0.007988982440268457,
+        "cpuQueryMs": 0,
+        "renderSubmitMs": 0.29999998211860657,
+        "fogCpuMs": 0.20000001788139343,
+        "gpuMs": 331.7745,
+        "gpuSample": 0,
+        "gpuTimerAvailable": true,
+        "disjointSamples": 0,
+        "calls": 6,
+        "triangles": 2162,
+        "width": 1280,
+        "height": 720,
+        "layers": {
+          "triangles": 54,
+          "count": 27,
+          "buildMs": 0.4000000059604645,
+          "bytes": 864
+        },
+        "geometryBuilds": 1,
+        "cacheBuildMs": 0,
+        "cacheBytes": 0,
+        "textureBytes": 11184810.666666666,
+        "textureWidth": 1024,
+        "renderTargetBytes": 36864000,
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "programsRunnable": true,
+        "disjoint": false,
+        "finishWallMs": 1.300000011920929
+      }
+    ],
+    "inside-1-stable": [
+      {
+        "ready": true,
+        "rendererMode": "stable",
+        "mode": "inside",
+        "progress": 0.5,
+        "time": 0,
+        "position": [
+          0,
+          3062,
+          50
+        ],
+        "field": {
+          "kind": "cumulus",
+          "seed": 73,
+          "base": 2450,
+          "top": 3650
+        },
+        "planePosition": [
+          0,
+          3049.026459441224,
+          -14.812708980336495
+        ],
+        "direction": [
+          0,
+          -0.014998312784712243,
+          -0.9998875189808162
+        ],
+        "density": 0.8370390515755307,
+        "planeDensity": 0.8722886562089853,
+        "transmittance500": 0.007988982440268457,
+        "cpuQueryMs": 0.19999998807907104,
+        "representation": "fixed-volume",
+        "renderSubmitMs": 0.4000000059604645,
+        "updateCpuMs": 0.09999999403953552,
+        "fogCpuMs": 0,
+        "gpuMs": 685.6848,
+        "gpuSample": 0,
+        "gpuTimerAvailable": true,
+        "disjointSamples": 0,
+        "calls": 5,
+        "triangles": 2108,
+        "width": 1280,
+        "height": 720,
+        "volume": {
+          "grid": [
+            96,
+            32,
+            80
+          ],
+          "bytes": 983040,
+          "buildMs": 194.30000001192093,
+          "spacing": [
+            63.1578947368421,
+            38.70967741935484,
+            63.29113924050633
+          ]
+        },
+        "geometryBuilds": 1,
+        "cacheBuildMs": 194.30000001192093,
+        "cacheBytes": 983040,
+        "transparentLayers": 0,
+        "volumeSteps": [
+          8,
+          12,
+          12
+        ],
+        "textureBytes": 6575445.333333333,
+        "textureWidth": 1024,
+        "renderTargetBytes": 7372800,
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "programsRunnable": true,
+        "disjoint": false,
+        "finishWallMs": 3.0999999940395355
+      },
+      {
+        "ready": true,
+        "rendererMode": "stable",
+        "mode": "inside",
+        "progress": 0.5,
+        "time": 0,
+        "position": [
+          0,
+          3062,
+          50
+        ],
+        "field": {
+          "kind": "cumulus",
+          "seed": 73,
+          "base": 2450,
+          "top": 3650
+        },
+        "planePosition": [
+          0,
+          3049.026459441224,
+          -14.812708980336495
+        ],
+        "direction": [
+          0,
+          -0.014998312784712243,
+          -0.9998875189808162
+        ],
+        "density": 0.8370390515755307,
+        "planeDensity": 0.8722886562089853,
+        "transmittance500": 0.007988982440268457,
+        "cpuQueryMs": 0.10000002384185791,
+        "representation": "fixed-volume",
+        "renderSubmitMs": 0.5999999940395355,
+        "updateCpuMs": 0,
+        "fogCpuMs": 0,
+        "gpuMs": 679.2278,
+        "gpuSample": 0,
+        "gpuTimerAvailable": true,
+        "disjointSamples": 0,
+        "calls": 5,
+        "triangles": 2108,
+        "width": 1280,
+        "height": 720,
+        "volume": {
+          "grid": [
+            96,
+            32,
+            80
+          ],
+          "bytes": 983040,
+          "buildMs": 194.30000001192093,
+          "spacing": [
+            63.1578947368421,
+            38.70967741935484,
+            63.29113924050633
+          ]
+        },
+        "geometryBuilds": 1,
+        "cacheBuildMs": 194.30000001192093,
+        "cacheBytes": 983040,
+        "transparentLayers": 0,
+        "volumeSteps": [
+          8,
+          12,
+          12
+        ],
+        "textureBytes": 6575445.333333333,
+        "textureWidth": 1024,
+        "renderTargetBytes": 7372800,
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "programsRunnable": true,
+        "disjoint": false,
+        "finishWallMs": 1.300000011920929
+      },
+      {
+        "ready": true,
+        "rendererMode": "stable",
+        "mode": "inside",
+        "progress": 0.5,
+        "time": 0,
+        "position": [
+          0,
+          3062,
+          50
+        ],
+        "field": {
+          "kind": "cumulus",
+          "seed": 73,
+          "base": 2450,
+          "top": 3650
+        },
+        "planePosition": [
+          0,
+          3049.026459441224,
+          -14.812708980336495
+        ],
+        "direction": [
+          0,
+          -0.014998312784712243,
+          -0.9998875189808162
+        ],
+        "density": 0.8370390515755307,
+        "planeDensity": 0.8722886562089853,
+        "transmittance500": 0.007988982440268457,
+        "cpuQueryMs": 0,
+        "representation": "fixed-volume",
+        "renderSubmitMs": 0.3999999761581421,
+        "updateCpuMs": 0.10000002384185791,
+        "fogCpuMs": 0,
+        "gpuMs": 679.8518,
+        "gpuSample": 0,
+        "gpuTimerAvailable": true,
+        "disjointSamples": 0,
+        "calls": 5,
+        "triangles": 2108,
+        "width": 1280,
+        "height": 720,
+        "volume": {
+          "grid": [
+            96,
+            32,
+            80
+          ],
+          "bytes": 983040,
+          "buildMs": 194.30000001192093,
+          "spacing": [
+            63.1578947368421,
+            38.70967741935484,
+            63.29113924050633
+          ]
+        },
+        "geometryBuilds": 1,
+        "cacheBuildMs": 194.30000001192093,
+        "cacheBytes": 983040,
+        "transparentLayers": 0,
+        "volumeSteps": [
+          8,
+          12,
+          12
+        ],
+        "textureBytes": 6575445.333333333,
+        "textureWidth": 1024,
+        "renderTargetBytes": 7372800,
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "programsRunnable": true,
+        "disjoint": false,
+        "finishWallMs": 1.300000011920929
+      }
+    ],
+    "inside-1-hybrid": [
+      {
+        "ready": true,
+        "rendererMode": "hybrid",
+        "mode": "inside",
+        "progress": 0.5,
+        "time": 0,
+        "position": [
+          0,
+          3062,
+          50
+        ],
+        "field": {
+          "kind": "cumulus",
+          "seed": 73,
+          "base": 2450,
+          "top": 3650
+        },
+        "planePosition": [
+          0,
+          3049.026459441224,
+          -14.812708980336495
+        ],
+        "direction": [
+          0,
+          -0.014998312784712243,
+          -0.9998875189808162
+        ],
+        "density": 0.8370390515755307,
+        "planeDensity": 0.8722886562089853,
+        "transmittance500": 0.007988982440268457,
+        "cpuQueryMs": 0.09999999403953552,
+        "representation": "fixed-painted-hull",
+        "hull": {
+          "grid": [
+            60,
+            26,
+            50
+          ],
+          "triangles": 68000,
+          "vertices": 34008,
+          "bytes": 1632192,
+          "buildMs": 451.5
+        },
+        "geometryBuilds": 1,
+        "cacheBuildMs": 451.5,
+        "cacheBytes": 1632192,
+        "updateCpuMs": 0.19999998807907104,
+        "fogCpuMs": 0.19999998807907104,
+        "renderSubmitMs": 0.4000000059604645,
+        "gpuMs": 371.8464,
+        "gpuSample": 0,
+        "gpuTimerAvailable": true,
+        "calls": 10,
+        "triangles": 72214,
+        "width": 1280,
+        "height": 720,
+        "transparentLayers": 0,
+        "alphaCoverageShells": 1,
+        "fogIntervals": 4,
+        "densityQueries": 108,
+        "textureBytes": 5592405.333333333,
+        "renderTargetBytes": 44236800,
+        "programsRunnable": true,
+        "disjoint": false,
+        "finishWallMs": 1
+      },
+      {
+        "ready": true,
+        "rendererMode": "hybrid",
+        "mode": "inside",
+        "progress": 0.5,
+        "time": 0,
+        "position": [
+          0,
+          3062,
+          50
+        ],
+        "field": {
+          "kind": "cumulus",
+          "seed": 73,
+          "base": 2450,
+          "top": 3650
+        },
+        "planePosition": [
+          0,
+          3049.026459441224,
+          -14.812708980336495
+        ],
+        "direction": [
+          0,
+          -0.014998312784712243,
+          -0.9998875189808162
+        ],
+        "density": 0.8370390515755307,
+        "planeDensity": 0.8722886562089853,
+        "transmittance500": 0.007988982440268457,
+        "cpuQueryMs": 0.09999999403953552,
+        "representation": "fixed-painted-hull",
+        "hull": {
+          "grid": [
+            60,
+            26,
+            50
+          ],
+          "triangles": 68000,
+          "vertices": 34008,
+          "bytes": 1632192,
+          "buildMs": 451.5
+        },
+        "geometryBuilds": 1,
+        "cacheBuildMs": 451.5,
+        "cacheBytes": 1632192,
+        "updateCpuMs": 0.20000001788139343,
+        "fogCpuMs": 0.20000001788139343,
+        "renderSubmitMs": 0.699999988079071,
+        "gpuMs": 356.3359,
+        "gpuSample": 0,
+        "gpuTimerAvailable": true,
+        "calls": 10,
+        "triangles": 72214,
+        "width": 1280,
+        "height": 720,
+        "transparentLayers": 0,
+        "alphaCoverageShells": 1,
+        "fogIntervals": 4,
+        "densityQueries": 108,
+        "textureBytes": 5592405.333333333,
+        "renderTargetBytes": 44236800,
+        "programsRunnable": true,
+        "disjoint": false,
+        "finishWallMs": 1.199999988079071
+      },
+      {
+        "ready": true,
+        "rendererMode": "hybrid",
+        "mode": "inside",
+        "progress": 0.5,
+        "time": 0,
+        "position": [
+          0,
+          3062,
+          50
+        ],
+        "field": {
+          "kind": "cumulus",
+          "seed": 73,
+          "base": 2450,
+          "top": 3650
+        },
+        "planePosition": [
+          0,
+          3049.026459441224,
+          -14.812708980336495
+        ],
+        "direction": [
+          0,
+          -0.014998312784712243,
+          -0.9998875189808162
+        ],
+        "density": 0.8370390515755307,
+        "planeDensity": 0.8722886562089853,
+        "transmittance500": 0.007988982440268457,
+        "cpuQueryMs": 0.09999999403953552,
+        "representation": "fixed-painted-hull",
+        "hull": {
+          "grid": [
+            60,
+            26,
+            50
+          ],
+          "triangles": 68000,
+          "vertices": 34008,
+          "bytes": 1632192,
+          "buildMs": 451.5
+        },
+        "geometryBuilds": 1,
+        "cacheBuildMs": 451.5,
+        "cacheBytes": 1632192,
+        "updateCpuMs": 0.19999998807907104,
+        "fogCpuMs": 0.19999998807907104,
+        "renderSubmitMs": 0.5,
+        "gpuMs": 350.7295,
+        "gpuSample": 0,
+        "gpuTimerAvailable": true,
+        "calls": 10,
+        "triangles": 72214,
+        "width": 1280,
+        "height": 720,
+        "transparentLayers": 0,
+        "alphaCoverageShells": 1,
+        "fogIntervals": 4,
+        "densityQueries": 108,
+        "textureBytes": 5592405.333333333,
+        "renderTargetBytes": 44236800,
+        "programsRunnable": true,
+        "disjoint": false,
+        "finishWallMs": 1
+      }
+    ]
+  },
+  "sha256": {
+    "src/cloud/cloud-field.js": "91d1e5253a4cb9975ecd10467f65973077562574d8e3860a43c00b53c1966589",
+    "src/cloud/cloud-anime-renderer.js": "4dfe6e4fd600d59ec1721e5d0bab083c5b374fc32b778a15d4e0658c0dee0030",
+    "src/cloud/cloud-stable-renderer.js": "0ae22e5d85defed08cb2f42aab003688747b89703000668fd6361ab85b52d7a0",
+    "src/cloud/cloud-volume.js": "82a1da6c6f1385fa56e722d1257aaaff40a4ce57eef578ed3692a084fdfa43bf",
+    "src/cloud/cloud-hull.js": "460e68ea005cbf7a36e7750ecb0c7773e5c9219efb80b146a216257948603767",
+    "src/cloud/cloud-hybrid-renderer.js": "b7ca512a12066bde0180c663a5950b9cb76bf130f31d6ad851fbeb57661d0af9",
+    "tools/cloud-lab.js": "1f31d5be18fed51992cd84e583e92ee2168be75c50b7583ad8f718f59c1a60b0",
+    "tools/cloud-animation-paths.js": "c793eca1c67bc0a5640072695c6610f8502f6119e22810ddd62f2498393578ce"
+  },
+  "browser": "151.0.7922.34",
+  "boundary": {
+    "frames": 120,
+    "width": 320,
+    "height": 180,
+    "buildsBefore": 1,
+    "buildsAfter": 1,
+    "maxCentreRgbDelta": 0.004134894698620162
+  },
+  "mistRays": [
+    {
+      "id": "approach",
+      "u": 0.2,
+      "v": 0.2,
+      "reference": 0.9756568424961796,
+      "actual": 0.7725490196078432,
+      "error": 0.2031078228883364
+    },
+    {
+      "id": "approach",
+      "u": 0.2,
+      "v": 0.5,
+      "reference": 0.8022967565666411,
+      "actual": 0.5333333333333333,
+      "error": 0.2689634232333078
+    },
+    {
+      "id": "approach",
+      "u": 0.2,
+      "v": 0.8,
+      "reference": 0.990236596023442,
+      "actual": 0.7803921568627451,
+      "error": 0.20984443916069695
+    },
+    {
+      "id": "approach",
+      "u": 0.5,
+      "v": 0.2,
+      "reference": 0.39584097457446477,
+      "actual": 0.5254901960784314,
+      "error": 0.12964922150396663
+    },
+    {
+      "id": "approach",
+      "u": 0.5,
+      "v": 0.5,
+      "reference": 0.19987281599739837,
+      "actual": 0.21176470588235294,
+      "error": 0.01189188988495457
+    },
+    {
+      "id": "approach",
+      "u": 0.5,
+      "v": 0.8,
+      "reference": 0.4811905910139959,
+      "actual": 0.5411764705882353,
+      "error": 0.05998587957423934
+    },
+    {
+      "id": "approach",
+      "u": 0.8,
+      "v": 0.2,
+      "reference": 0.9839129741505018,
+      "actual": 0.7764705882352941,
+      "error": 0.2074423859152077
+    },
+    {
+      "id": "approach",
+      "u": 0.8,
+      "v": 0.5,
+      "reference": 0.8384473408314724,
+      "actual": 0.5411764705882353,
+      "error": 0.2972708702432372
+    },
+    {
+      "id": "approach",
+      "u": 0.8,
+      "v": 0.8,
+      "reference": 0.9965167300193369,
+      "actual": 0.7843137254901961,
+      "error": 0.21220300452914087
+    },
+    {
+      "id": "side-pass",
+      "u": 0.2,
+      "v": 0.2,
+      "reference": 0.0008935116816523453,
+      "actual": 0,
+      "error": 0.0008935116816523453
+    },
+    {
+      "id": "side-pass",
+      "u": 0.2,
+      "v": 0.5,
+      "reference": 0.0006895279529362486,
+      "actual": 0,
+      "error": 0.0006895279529362486
+    },
+    {
+      "id": "side-pass",
+      "u": 0.2,
+      "v": 0.8,
+      "reference": 0.0007038695056325114,
+      "actual": 0.00392156862745098,
+      "error": 0.003217699121818469
+    },
+    {
+      "id": "side-pass",
+      "u": 0.5,
+      "v": 0.2,
+      "reference": 0.0014131331716821407,
+      "actual": 0.00392156862745098,
+      "error": 0.0025084354557688396
+    },
+    {
+      "id": "side-pass",
+      "u": 0.5,
+      "v": 0.5,
+      "reference": 0.0015311515781798696,
+      "actual": 0,
+      "error": 0.0015311515781798696
+    },
+    {
+      "id": "side-pass",
+      "u": 0.5,
+      "v": 0.8,
+      "reference": 0.014856103559976125,
+      "actual": 0.0196078431372549,
+      "error": 0.0047517395772787765
+    },
+    {
+      "id": "side-pass",
+      "u": 0.8,
+      "v": 0.2,
+      "reference": 0.5794937596445955,
+      "actual": 0.08235294117647059,
+      "error": 0.4971408184681249
+    },
+    {
+      "id": "side-pass",
+      "u": 0.8,
+      "v": 0.5,
+      "reference": 0.691211112780264,
+      "actual": 0.07450980392156863,
+      "error": 0.6167013088586955
+    },
+    {
+      "id": "side-pass",
+      "u": 0.8,
+      "v": 0.8,
+      "reference": 0.858261525167078,
+      "actual": 0.20392156862745098,
+      "error": 0.6543399565396271
+    },
+    {
+      "id": "climb",
+      "u": 0.2,
+      "v": 0.2,
+      "reference": 0.00020922158546405072,
+      "actual": 0,
+      "error": 0.00020922158546405072
+    },
+    {
+      "id": "climb",
+      "u": 0.2,
+      "v": 0.5,
+      "reference": 0.00019688557093941271,
+      "actual": 0,
+      "error": 0.00019688557093941271
+    },
+    {
+      "id": "climb",
+      "u": 0.2,
+      "v": 0.8,
+      "reference": 0.0017683622935357897,
+      "actual": 0,
+      "error": 0.0017683622935357897
+    },
+    {
+      "id": "climb",
+      "u": 0.5,
+      "v": 0.2,
+      "reference": 0.00036853691551886106,
+      "actual": 0,
+      "error": 0.00036853691551886106
+    },
+    {
+      "id": "climb",
+      "u": 0.5,
+      "v": 0.5,
+      "reference": 0.0005794642943912997,
+      "actual": 0,
+      "error": 0.0005794642943912997
+    },
+    {
+      "id": "climb",
+      "u": 0.5,
+      "v": 0.8,
+      "reference": 0.004098413845400844,
+      "actual": 0.00392156862745098,
+      "error": 0.000176845217949864
+    },
+    {
+      "id": "climb",
+      "u": 0.8,
+      "v": 0.2,
+      "reference": 0.000551559850119127,
+      "actual": 0,
+      "error": 0.000551559850119127
+    },
+    {
+      "id": "climb",
+      "u": 0.8,
+      "v": 0.5,
+      "reference": 0.0019008381179077515,
+      "actual": 0.00392156862745098,
+      "error": 0.002020730509543229
+    },
+    {
+      "id": "climb",
+      "u": 0.8,
+      "v": 0.8,
+      "reference": 0.007050808188082191,
+      "actual": 0.00784313725490196,
+      "error": 0.0007923290668197698
+    },
+    {
+      "id": "sea-wall",
+      "u": 0.2,
+      "v": 0.2,
+      "reference": 1,
+      "actual": 1,
+      "error": 0
+    },
+    {
+      "id": "sea-wall",
+      "u": 0.2,
+      "v": 0.5,
+      "reference": 1,
+      "actual": 1,
+      "error": 0
+    },
+    {
+      "id": "sea-wall",
+      "u": 0.2,
+      "v": 0.8,
+      "reference": 1,
+      "actual": 1,
+      "error": 0
+    },
+    {
+      "id": "sea-wall",
+      "u": 0.5,
+      "v": 0.2,
+      "reference": 1,
+      "actual": 1,
+      "error": 0
+    },
+    {
+      "id": "sea-wall",
+      "u": 0.5,
+      "v": 0.5,
+      "reference": 1,
+      "actual": 1,
+      "error": 0
+    },
+    {
+      "id": "sea-wall",
+      "u": 0.5,
+      "v": 0.8,
+      "reference": 1,
+      "actual": 1,
+      "error": 0
+    },
+    {
+      "id": "sea-wall",
+      "u": 0.8,
+      "v": 0.2,
+      "reference": 1,
+      "actual": 1,
+      "error": 0
+    },
+    {
+      "id": "sea-wall",
+      "u": 0.8,
+      "v": 0.5,
+      "reference": 1,
+      "actual": 1,
+      "error": 0
+    },
+    {
+      "id": "sea-wall",
+      "u": 0.8,
+      "v": 0.8,
+      "reference": 1,
+      "actual": 1,
+      "error": 0
+    },
+    {
+      "id": "entry",
+      "u": 0.2,
+      "v": 0.2,
+      "reference": 0.0002845923293034321,
+      "actual": 0,
+      "error": 0.0002845923293034321
+    },
+    {
+      "id": "entry",
+      "u": 0.2,
+      "v": 0.5,
+      "reference": 0.0003569997714132828,
+      "actual": 0,
+      "error": 0.0003569997714132828
+    },
+    {
+      "id": "entry",
+      "u": 0.2,
+      "v": 0.8,
+      "reference": 0.0003502867992446589,
+      "actual": 0,
+      "error": 0.0003502867992446589
+    },
+    {
+      "id": "entry",
+      "u": 0.5,
+      "v": 0.2,
+      "reference": 0.00026062466039174096,
+      "actual": 0,
+      "error": 0.00026062466039174096
+    },
+    {
+      "id": "entry",
+      "u": 0.5,
+      "v": 0.5,
+      "reference": 0.00034542258539330204,
+      "actual": 0,
+      "error": 0.00034542258539330204
+    },
+    {
+      "id": "entry",
+      "u": 0.5,
+      "v": 0.8,
+      "reference": 0.00033394794085252655,
+      "actual": 0,
+      "error": 0.00033394794085252655
+    },
+    {
+      "id": "entry",
+      "u": 0.8,
+      "v": 0.2,
+      "reference": 0.00021271898781589338,
+      "actual": 0,
+      "error": 0.00021271898781589338
+    },
+    {
+      "id": "entry",
+      "u": 0.8,
+      "v": 0.5,
+      "reference": 0.00018895332329219762,
+      "actual": 0,
+      "error": 0.00018895332329219762
+    },
+    {
+      "id": "entry",
+      "u": 0.8,
+      "v": 0.8,
+      "reference": 0.00019724009691150711,
+      "actual": 0,
+      "error": 0.00019724009691150711
+    },
+    {
+      "id": "inside",
+      "u": 0.2,
+      "v": 0.2,
+      "reference": 0.0012123240795603204,
+      "actual": 0,
+      "error": 0.0012123240795603204
+    },
+    {
+      "id": "inside",
+      "u": 0.2,
+      "v": 0.5,
+      "reference": 0.0006848909580738541,
+      "actual": 0,
+      "error": 0.0006848909580738541
+    },
+    {
+      "id": "inside",
+      "u": 0.2,
+      "v": 0.8,
+      "reference": 0.0010928762819332354,
+      "actual": 0,
+      "error": 0.0010928762819332354
+    },
+    {
+      "id": "inside",
+      "u": 0.5,
+      "v": 0.2,
+      "reference": 0.00038178161725080655,
+      "actual": 0,
+      "error": 0.00038178161725080655
+    },
+    {
+      "id": "inside",
+      "u": 0.5,
+      "v": 0.5,
+      "reference": 0.000237557109068037,
+      "actual": 0,
+      "error": 0.000237557109068037
+    },
+    {
+      "id": "inside",
+      "u": 0.5,
+      "v": 0.8,
+      "reference": 0.00030226309927123597,
+      "actual": 0,
+      "error": 0.00030226309927123597
+    },
+    {
+      "id": "inside",
+      "u": 0.8,
+      "v": 0.2,
+      "reference": 0.00048657213162695066,
+      "actual": 0,
+      "error": 0.00048657213162695066
+    },
+    {
+      "id": "inside",
+      "u": 0.8,
+      "v": 0.5,
+      "reference": 0.0004000170952709298,
+      "actual": 0,
+      "error": 0.0004000170952709298
+    },
+    {
+      "id": "inside",
+      "u": 0.8,
+      "v": 0.8,
+      "reference": 0.0006115855085913696,
+      "actual": 0,
+      "error": 0.0006115855085913696
+    },
+    {
+      "id": "exit",
+      "u": 0.2,
+      "v": 0.2,
+      "reference": 1,
+      "actual": 1,
+      "error": 0
+    },
+    {
+      "id": "exit",
+      "u": 0.2,
+      "v": 0.5,
+      "reference": 1,
+      "actual": 1,
+      "error": 0
+    },
+    {
+      "id": "exit",
+      "u": 0.2,
+      "v": 0.8,
+      "reference": 1,
+      "actual": 1,
+      "error": 0
+    },
+    {
+      "id": "exit",
+      "u": 0.5,
+      "v": 0.2,
+      "reference": 1,
+      "actual": 1,
+      "error": 0
+    },
+    {
+      "id": "exit",
+      "u": 0.5,
+      "v": 0.5,
+      "reference": 1,
+      "actual": 1,
+      "error": 0
+    },
+    {
+      "id": "exit",
+      "u": 0.5,
+      "v": 0.8,
+      "reference": 1,
+      "actual": 1,
+      "error": 0
+    },
+    {
+      "id": "exit",
+      "u": 0.8,
+      "v": 0.2,
+      "reference": 1,
+      "actual": 1,
+      "error": 0
+    },
+    {
+      "id": "exit",
+      "u": 0.8,
+      "v": 0.5,
+      "reference": 1,
+      "actual": 1,
+      "error": 0
+    },
+    {
+      "id": "exit",
+      "u": 0.8,
+      "v": 0.8,
+      "reference": 1,
+      "actual": 1,
+      "error": 0
+    },
+    {
+      "id": "turn180",
+      "u": 0.2,
+      "v": 0.2,
+      "reference": 1,
+      "actual": 1,
+      "error": 0
+    },
+    {
+      "id": "turn180",
+      "u": 0.2,
+      "v": 0.5,
+      "reference": 1,
+      "actual": 1,
+      "error": 0
+    },
+    {
+      "id": "turn180",
+      "u": 0.2,
+      "v": 0.8,
+      "reference": 1,
+      "actual": 1,
+      "error": 0
+    },
+    {
+      "id": "turn180",
+      "u": 0.5,
+      "v": 0.2,
+      "reference": 1,
+      "actual": 1,
+      "error": 0
+    },
+    {
+      "id": "turn180",
+      "u": 0.5,
+      "v": 0.5,
+      "reference": 1,
+      "actual": 1,
+      "error": 0
+    },
+    {
+      "id": "turn180",
+      "u": 0.5,
+      "v": 0.8,
+      "reference": 1,
+      "actual": 1,
+      "error": 0
+    },
+    {
+      "id": "turn180",
+      "u": 0.8,
+      "v": 0.2,
+      "reference": 1,
+      "actual": 1,
+      "error": 0
+    },
+    {
+      "id": "turn180",
+      "u": 0.8,
+      "v": 0.5,
+      "reference": 1,
+      "actual": 1,
+      "error": 0
+    },
+    {
+      "id": "turn180",
+      "u": 0.8,
+      "v": 0.8,
+      "reference": 1,
+      "actual": 1,
+      "error": 0
+    }
+  ],
+  "mistMaxError": 0.6543399565396271,
+  "mistMeanError": 0.04717691216453774,
+  "passed": true
+}
