@@ -20,14 +20,17 @@ SEQ_DIR = MAP.replace("/Maps", "/Sequences")
 PERF_HOLD_S = 8
 les = unreal.get_editor_subsystem(unreal.LevelEditorSubsystem)
 ues = unreal.get_editor_subsystem(unreal.EditorActorSubsystem)
-V = json.loads((RUN / "views.json").read_text(encoding="utf-8"))
+V = json.loads((RUN / os.environ.get("ACW_NF_VIEWS", "views.json")).read_text(encoding="utf-8"))
+SUFFIX = os.environ.get("ACW_NF_SEQ_SUFFIX", "")   # revision: new LS_NF_Flight<suffix> / LS_NF_Perf<suffix>, camera reused
 rep = {"status": "FAIL_NF_SEQUENCE", "sequences": {}, "error": None}
 
 
 def camera():
     old = find_actor("NF_Cam")
     if old is not None:
-        raise RuntimeError("NF_Cam exists: the map already has sequences")
+        if not SUFFIX:
+            raise RuntimeError("NF_Cam exists: the map already has sequences (set ACW_NF_SEQ_SUFFIX for a revision)")
+        return old
     s0 = V["stills"][0]
     cam = ues.spawn_actor_from_class(unreal.CameraActor, unreal.Vector(*s0["ue_loc_cm"]), unreal.Rotator(*s0["ue_rot"]))
     cam.set_actor_label("NF_Cam")
@@ -84,17 +87,18 @@ try:
     if not les.load_level(LEVEL):
         raise RuntimeError("load " + LEVEL)
     cam = camera()
-    sequence("LS_NF_Flight", V["flight"]["keys"], unreal.MovieSceneKeyInterpolation.LINEAR, cam)
+    sequence("LS_NF_Flight" + SUFFIX, V["flight"]["keys"], unreal.MovieSceneKeyInterpolation.LINEAR, cam)
     hold = V["still_hold_frames"]
-    sequence("LS_NF_Stills", held(V["stills"], hold), unreal.MovieSceneKeyInterpolation.CONSTANT, cam)
+    if not SUFFIX:
+        sequence("LS_NF_Stills", held(V["stills"], hold), unreal.MovieSceneKeyInterpolation.CONSTANT, cam)
     ph = PERF_HOLD_S * V["fps"]
     pk = held(V["stills"], ph)
     off = len(V["stills"]) * ph
     pk += [dict(frame=k["frame"] + off, ue_loc_cm=k["ue_loc_cm"], ue_rot=k["ue_rot"]) for k in V["flight"]["keys"]]
-    perf = sequence("LS_NF_Perf", pk, unreal.MovieSceneKeyInterpolation.CONSTANT, cam)
+    perf = sequence("LS_NF_Perf" + SUFFIX, pk, unreal.MovieSceneKeyInterpolation.CONSTANT, cam)
     # the flight part of the perf sequence must interpolate: CONSTANT keys every frame are equivalent at a fixed frame step
     rep["perf_layout"] = {"still_hold_frames": ph, "stills": [s["name"] for s in V["stills"]], "flight_start_frame": off, "fps": V["fps"]}
-    lsa = ues.spawn_actor_from_class(unreal.LevelSequenceActor, unreal.Vector(0, 0, 0))
+    lsa = find_actor("NF_PerfSequence") or ues.spawn_actor_from_class(unreal.LevelSequenceActor, unreal.Vector(0, 0, 0))
     lsa.set_actor_label("NF_PerfSequence")
     lsa.set_editor_property("level_sequence_asset", perf)
     ps = lsa.get_editor_property("playback_settings")
@@ -109,5 +113,5 @@ try:
 except Exception:  # noqa: BLE001
     rep["error"] = traceback.format_exc()
     unreal.log_error(rep["error"])
-write_report("nf_sequence.report.json", rep)
+write_report("nf_sequence%s.report.json" % SUFFIX, rep)
 unreal.SystemLibrary.quit_editor()

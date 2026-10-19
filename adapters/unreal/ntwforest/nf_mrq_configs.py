@@ -18,6 +18,8 @@ REV = os.environ.get("ACW_NF_MRQ_REV", "01")
 ONLY = os.environ.get("ACW_NF_MRQ_ONLY", "LS_NF_Stills,LS_NF_Flight").split(",")
 CVARS = {k: float(v) for k, v in (kv.split("=") for kv in os.environ.get("ACW_NF_MRQ_CVARS", "").split(",") if kv)}
 seqs = json.loads((OUT / "reports" / "nf_sequence.report.json").read_text(encoding="utf-8"))
+for extra in sorted((OUT / "reports").glob("nf_sequence_*.report.json")):   # sequence revisions
+    seqs["sequences"].update(json.loads(extra.read_text(encoding="utf-8"))["sequences"])
 configs, err = [], None
 try:
     for name in ONLY:

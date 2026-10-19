@@ -8,7 +8,7 @@ Three 96 m tiles (toroidal placement: trees crossing an edge are repeated on the
   broad  = 紅楠 A 65 % / crown B 35 %, variants 0-4;  acacia = 相思樹 C 70 % + A/B;  crypt = 柳杉 J rows 6 m.
 Ground under the trees = the Landscape understory colour. Trees are StaticMeshActors forced to LOD1 (the far LODs are clump cards of the
 same atlas). Captures (SceneCapture2D, orthographic, 1024 px = 9.4 cm / px): BaseColor, world Normal, SceneDepth -> canopy height.
-Written to <ACW_NF_OUT>/bake/<tile>_{basecolor,normal,depth}.exr|png via RenderingLibrary.export_render_target; the 8-bit packing for
+Written to <ACW_NF_OUT>/bake/<tile>_{basecolor,normal,depth} (OpenEXR, half float; no extension) via RenderingLibrary.export_render_target; the 8-bit packing for
 import is done offline (tools/ntw/forest_world/pack_canopy.py). Receipt: reports/nf_bake.report.json.
 """
 import math
@@ -23,7 +23,7 @@ from nf_common import FORM_BARK_SRC, FORM_MESH, MAP, MAT, OUT, VARIANT_FORM, lib
 
 TILE_M = 96.0
 PX = 1024
-BAKE = MAP + "/L_NF_CanopyBake"
+BAKE = MAP + "/L_NF_CanopyBake_" + os.environ.get("ACW_NF_BAKE_REV", "2")   # one map per bake attempt
 les = unreal.get_editor_subsystem(unreal.LevelEditorSubsystem)
 ues = unreal.get_editor_subsystem(unreal.EditorActorSubsystem)
 rl = unreal.RenderingLibrary
@@ -112,20 +112,22 @@ def capture(label, ox, oy, source, fmt, name):
 try:
     (OUT / "bake").mkdir(parents=True, exist_ok=True)
     if lib.does_asset_exist(BAKE):
-        raise RuntimeError(BAKE + " exists")
+        raise RuntimeError(BAKE + " exists: use a new ACW_NF_BAKE_REV")
     if not les.new_level(BAKE):
         raise RuntimeError("new_level")
     meshes = {f: lib.load_asset(p) for f, p in FORM_MESH.items()}
     barks = {f: lib.load_asset(MAT + "/" + s.replace("M_TL_", "M_NF_")) for f, s in FORM_BARK_SRC.items()}
     leaves = {v: lib.load_asset(MAT + "/MI_NF_Leaf_V%d" % v) for v in VARIANT_FORM}
     # ground: understory colour of M_NF_Landscape (dark, mottled average), a big plane under all tiles
-    gm = unreal.AssetToolsHelpers.get_asset_tools().create_asset("M_NF_BakeGround", MAT, unreal.Material, unreal.MaterialFactoryNew())
-    mel = unreal.MaterialEditingLibrary
-    col = mel.create_material_expression(gm, unreal.MaterialExpressionConstant3Vector, -300, 0)
-    col.set_editor_property("constant", unreal.LinearColor(0.0235, 0.0285, 0.013, 1))
-    mel.connect_material_property(col, "", unreal.MaterialProperty.MP_BASE_COLOR)
-    mel.recompile_material(gm)
-    lib.save_asset(MAT + "/M_NF_BakeGround")
+    gm = lib.load_asset(MAT + "/M_NF_BakeGround")
+    if gm is None:
+        gm = unreal.AssetToolsHelpers.get_asset_tools().create_asset("M_NF_BakeGround", MAT, unreal.Material, unreal.MaterialFactoryNew())
+        mel = unreal.MaterialEditingLibrary
+        col = mel.create_material_expression(gm, unreal.MaterialExpressionConstant3Vector, -300, 0)
+        col.set_editor_property("constant", unreal.LinearColor(0.0235, 0.0285, 0.013, 1))
+        mel.connect_material_property(col, "", unreal.MaterialProperty.MP_BASE_COLOR)
+        mel.recompile_material(gm)
+        lib.save_asset(MAT + "/M_NF_BakeGround")
     g = ues.spawn_actor_from_object(lib.load_asset("/Engine/BasicShapes/Plane"), unreal.Vector(30000, 0, -30), unreal.Rotator(0, 0, 0))
     g.set_actor_scale3d(unreal.Vector(1200, 400, 1))
     g.get_component_by_class(unreal.StaticMeshComponent).set_material(0, gm)
@@ -141,7 +143,7 @@ try:
         rep["tiles"][kind]["files"] = [
             capture(kind, ox, oy, unreal.SceneCaptureSource.SCS_BASE_COLOR, unreal.TextureRenderTargetFormat.RTF_RGBA16F, kind + "_basecolor"),
             capture(kind, ox, oy, unreal.SceneCaptureSource.SCS_NORMAL, unreal.TextureRenderTargetFormat.RTF_RGBA16F, kind + "_normal"),
-            capture(kind, ox, oy, unreal.SceneCaptureSource.SCS_SCENE_DEPTH, unreal.TextureRenderTargetFormat.RTF_R32F, kind + "_depth")]
+            capture(kind, ox, oy, unreal.SceneCaptureSource.SCS_SCENE_DEPTH, unreal.TextureRenderTargetFormat.RTF_RGBA16F, kind + "_depth")]
     rep["tile_m"], rep["px"], rep["capture_height_cm"] = TILE_M, PX, 20000.0
     les.save_current_level()
     rep["status"] = "PASS_NF_BAKE"

@@ -7,60 +7,62 @@ colour per tile, used to check the far canopy against the near trees).
     python tools/ntw/forest_world/pack_canopy.py <bake_dir> <out_dir>
 """
 import json
-import os
+import struct
 import sys
+import zlib
 from pathlib import Path
 
-os.environ.setdefault("OPENCV_IO_ENABLE_OPENEXR", "1")
 import numpy as np
 from PIL import Image
 
 CAM_Z_CM = 20000.0
+NUL = bytes([0])
+EXR_MAGIC = bytes([0x76, 0x2F, 0x31, 0x01])
 
 
-def load(p):
-    p = Path(p)
-    for ext in (".exr", ".hdr", ".png"):
-        q = p.with_suffix(ext)
-        if q.exists():
-            if ext == ".exr":
-                import imageio.v3 as iio  # noqa: PLC0415
-                return iio.imread(q).astype(np.float32)
-            if ext == ".hdr":
-                return read_hdr(q)
-            return np.asarray(Image.open(q)).astype(np.float32) / 255.0
-    raise FileNotFoundError(p)
-
-
-def read_hdr(path):
-    """Minimal Radiance RGBE reader (new-style RLE)."""
-    data = Path(path).read_bytes()
-    i = data.index(b"\n\n") + 2
-    j = data.index(b"\n", i)
-    dims = data[i:j].split()
-    h, w = int(dims[1]), int(dims[3])
-    pos = j + 1
-    img = np.zeros((h, w, 4), np.uint8)
-    for y in range(h):
-        if data[pos] != 2 or data[pos + 1] != 2:
-            raise ValueError("unsupported HDR encoding")
-        pos += 4
-        for c in range(4):
-            x = 0
-            while x < w:
-                n = data[pos]
-                pos += 1
-                if n > 128:
-                    n -= 128
-                    img[y, x:x + n, c] = data[pos]
-                    pos += 1
-                else:
-                    img[y, x:x + n, c] = np.frombuffer(data[pos:pos + n], np.uint8)
-                    pos += n
-                x += n
-    e = img[..., 3].astype(np.int32)
-    f = np.where(e > 0, np.ldexp(1.0, e - 136), 0.0)
-    return (img[..., :3] * f[..., None]).astype(np.float32)
+def read_exr(path):
+    """Minimal OpenEXR reader: scanline, ZIP (16 lines) / ZIPS / NONE compression, HALF / FLOAT channels -> HxWxC float32 in R,G,B,A order."""
+    b = Path(path).read_bytes()
+    if b[:4] != EXR_MAGIC:
+        raise ValueError("not an OpenEXR file: %s" % path)
+    p, attrs = 8, {}
+    while b[p] != 0:
+        e = b.index(NUL, p); name = b[p:e].decode(); p = e + 1
+        e = b.index(NUL, p); p = e + 1
+        (sz,) = struct.unpack_from("<i", b, p); p += 4
+        attrs[name] = b[p:p + sz]; p += sz
+    p += 1
+    chans, q, cl = [], 0, attrs["channels"]
+    while cl[q] != 0:
+        e = cl.index(NUL, q); nm = cl[q:e].decode(); q = e + 1
+        (pt,) = struct.unpack_from("<i", cl, q); q += 16
+        chans.append((nm, pt))
+    x0, y0, x1, y1 = struct.unpack("<4i", attrs["dataWindow"])
+    w, h = x1 - x0 + 1, y1 - y0 + 1
+    comp = attrs["compression"][0]
+    lines = {0: 1, 2: 1, 3: 16}[comp]
+    nblk = (h + lines - 1) // lines
+    offs = struct.unpack_from("<%dQ" % nblk, b, p)
+    out = {nm: np.zeros((h, w), np.float32) for nm, _ in chans}
+    for o in offs:
+        y, size = struct.unpack_from("<ii", b, o)
+        raw = b[o + 8:o + 8 + size]
+        n = min(lines, h - (y - y0))
+        expect = sum(n * w * (2 if pt == 1 else 4) for _, pt in chans)
+        if comp in (2, 3) and size < expect:
+            t = np.frombuffer(zlib.decompress(raw), np.uint8).astype(np.int64)
+            t = (np.cumsum(np.r_[t[0], t[1:] - 128]) & 0xFF).astype(np.uint8)   # undo the delta predictor
+            half = (len(t) + 1) // 2
+            r = np.empty_like(t)
+            r[0::2], r[1::2] = t[:half], t[half:]                               # undo the byte split
+            raw = r.tobytes()
+        off = 0
+        for yy in range(n):
+            for nm, pt in chans:
+                nb = w * (2 if pt == 1 else 4)
+                out[nm][y - y0 + yy] = np.frombuffer(raw[off:off + nb], np.float16 if pt == 1 else np.float32)
+                off += nb
+    return np.dstack([out[c] for c in ("R", "G", "B", "A") if c in out])
 
 
 def srgb(x):
@@ -72,21 +74,21 @@ def main(bake, out):
     bake, out = Path(bake), Path(out)
     stats, sheet = {}, []
     for t in ("broad", "acacia", "crypt"):
-        bc = load(bake / f"{t}_basecolor")[..., :3]
-        nm = load(bake / f"{t}_normal")[..., :3]
-        dp = load(bake / f"{t}_depth")[..., 0]
+        bc = read_exr(bake / f"{t}_basecolor")[..., :3]
+        nm = read_exr(bake / f"{t}_normal")[..., :3]
+        dp = read_exr(bake / f"{t}_depth")[..., 0]
         h = np.clip((CAM_Z_CM - dp) / 100.0, 0, 40)
         a = np.clip(h / 32.0, 0, 1)
         rgba = np.dstack([srgb(bc), a])
         Image.fromarray(np.round(rgba * 255).astype(np.uint8), "RGBA").save(out / f"T_NF_Canopy_{t.capitalize()}_BC.png")
         n = nm / np.maximum(np.linalg.norm(nm, axis=-1, keepdims=True), 1e-6)
         Image.fromarray(np.round(np.clip(0.5 + 0.5 * n, 0, 1) * 255).astype(np.uint8), "RGB").save(out / f"T_NF_Canopy_{t.capitalize()}_N.png")
-        cover = float((h > 2.0).mean())
-        stats[t] = {"mean_linear_rgb": [float(x) for x in bc.reshape(-1, 3).mean(0)], "canopy_cover_gt2m": cover,
+        stats[t] = {"mean_linear_rgb": [float(x) for x in bc.reshape(-1, 3).mean(0)], "canopy_cover_gt2m": float((h > 2.0).mean()),
                     "height_m": {"p50": float(np.median(h)), "p90": float(np.percentile(h, 90)), "max": float(h.max())},
-                    "normal_z_mean": float(n[..., 2].mean())}
-        sheet.append(np.round(srgb(bc * 4.0) * 255).astype(np.uint8))
-    Image.fromarray(np.hstack(sheet)).save(out / "bake_sheet.png")
+                    "normal_mean": [float(x) for x in n.reshape(-1, 3).mean(0)]}
+        sheet.append(np.round(srgb(bc * 3.0) * 255).astype(np.uint8))
+        sheet.append(np.round(np.dstack([a, a, a]) * 255).astype(np.uint8))
+    Image.fromarray(np.vstack([np.hstack(sheet[0::2]), np.hstack(sheet[1::2])])).resize((1536, 1024)).save(out / "bake_sheet.png")
     (out / "canopy_stats.json").write_text(json.dumps(stats, indent=1) + "\n", encoding="utf-8")
     print(json.dumps(stats, indent=1))
 

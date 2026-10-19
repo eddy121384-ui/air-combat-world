@@ -18,11 +18,17 @@ from scipy import ndimage
 
 E0, N1, SP = 289_540.0, 2_800_000.0, 10.0
 ORIGIN = (296_000.0, 2_760_000.0)
-WAYPOINTS = [  # E, N, AGL m
-    (291_200, 2_778_900, 330), (294_000, 2_780_200, 260), (296_800, 2_781_700, 190), (299_700, 2_783_700, 170),
-    (302_100, 2_784_500, 150), (304_100, 2_784_150, 140), (306_300, 2_783_700, 150), (307_900, 2_784_050, 120),
-    (309_600, 2_785_200, 170), (311_300, 2_787_300, 160), (312_700, 2_789_300, 170), (314_200, 2_791_300, 260),
-]
+ROUTES = {
+    # v1: Tamsui river -> Beitou west hills -> Datun south flank -> Zhuzihu -> Qingtiangang -> Jinshan (too much built-up foothill)
+    "south": [(291_200, 2_778_900, 330), (294_000, 2_780_200, 260), (296_800, 2_781_700, 190), (299_700, 2_783_700, 170),
+              (302_100, 2_784_500, 150), (304_100, 2_784_150, 140), (306_300, 2_783_700, 150), (307_900, 2_784_050, 120),
+              (309_600, 2_785_200, 170), (311_300, 2_787_300, 160), (312_700, 2_789_300, 170), (314_200, 2_791_300, 260)],
+    # v2 (hero): Sanzhi coast -> forested north flank of Datun / Zhuzishan -> saddle between Qixingshan and Zhuzishan ->
+    # Qingtiangang grassland -> Huangzuishan ridge -> forested valleys -> Jinshan coast
+    "north": [(295_600, 2_797_600, 260), (297_900, 2_794_400, 150), (300_200, 2_791_300, 130), (302_500, 2_789_100, 120),
+              (304_400, 2_787_700, 120), (305_900, 2_786_400, 120), (307_400, 2_785_000, 110), (308_600, 2_784_300, 110),
+              (310_000, 2_785_300, 130), (311_400, 2_787_400, 130), (312_600, 2_789_500, 150), (313_700, 2_791_900, 220)],
+}
 
 
 def ue(e, n, z):
@@ -62,10 +68,13 @@ def main():
     ap.add_argument("run")
     ap.add_argument("--speed", type=float, default=240.0)
     ap.add_argument("--fps", type=int, default=30)
+    ap.add_argument("--route", default="north", choices=sorted(ROUTES))
+    ap.add_argument("--envelope-m", type=float, default=100.0)
     a = ap.parse_args()
     run = Path(a.run)
     h = np.load(run / "height_q.npy").astype(np.float64)
-    hmax = ndimage.maximum_filter(np.maximum(h, 0.0), size=31)            # 150 m radius envelope, sea = 0
+    WAYPOINTS = ROUTES[a.route]
+    hmax = ndimage.maximum_filter(np.maximum(h, 0.0), size=int(2 * a.envelope_m / SP) + 1)   # terrain envelope radius, sea = 0
     wp = np.array([(w[0], w[1]) for w in WAYPOINTS])
     dense = catmull(wp, 400)
     seg = np.r_[0, np.cumsum(np.linalg.norm(np.diff(dense, axis=0), axis=1))]
@@ -130,9 +139,9 @@ def main():
     views = {"fps": a.fps, "speed_mps": a.speed, "hfov_deg": 70.0, "still_hold_frames": 90,
              "flight": {"keys": keys, "frames": len(keys), "length_km": float(s[-1] / 1000.0),
                         "agl_m": {"min": float(agl_true.min()), "median": float(np.median(agl_true)), "max": float(agl_true.max())},
-                        "waypoints_3826": WAYPOINTS},
+                        "waypoints_3826": WAYPOINTS, "route": a.route},
              "stills": meta["stills"]}
-    (run / "views.json").write_text(json.dumps(views) + "\n", encoding="utf-8")
+    (run / ("views.json" if a.route == "south" else "views_%s.json" % a.route)).write_text(json.dumps(views) + "\n", encoding="utf-8")
     print(json.dumps({"frames": len(keys), "seconds": len(keys) / a.fps, "length_km": views["flight"]["length_km"], "agl": views["flight"]["agl_m"],
                       "stills": [(x["name"], round(x["cam_z_m"]), round(x["ground_m"])) for x in meta["stills"]]}, indent=1))
 
