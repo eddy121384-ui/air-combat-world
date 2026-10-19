@@ -14,7 +14,7 @@
    "cloudCoverage": 0.85,
    "calls": 5,
    "triangles": 42054,
-   "cpuUpdateMs": 0.5,
+   "cpuUpdateMs": 0.3,
    "streaks": 0,
    "perTarget": {
     "iPhone 13 mini @2x": {
@@ -74,7 +74,7 @@
    "cloudCoverage": 0.364,
    "calls": 7,
    "triangles": 42078,
-   "cpuUpdateMs": 0.3,
+   "cpuUpdateMs": 0.4,
    "streaks": 7,
    "perTarget": {
     "iPhone 13 mini @2x": {
@@ -128,60 +128,60 @@
   {
    "route": "traverse",
    "at": 0.5,
-   "invocationsPerPixel": 5.86,
+   "invocationsPerPixel": 1.49,
    "invocationsMaxPixel": 245,
-   "survivorsPerPixel": 4.57,
-   "cloudCoverage": 0.877,
+   "survivorsPerPixel": 1.49,
+   "cloudCoverage": 0.039,
    "calls": 7,
    "triangles": 42672,
-   "cpuUpdateMs": 0.5,
+   "cpuUpdateMs": 1.3,
    "streaks": 149,
    "perTarget": {
     "iPhone 13 mini @2x": {
-     "invocationsM": 7.14,
-     "survivorsM": 5.56
+     "invocationsM": 1.82,
+     "survivorsM": 1.82
     },
     "iPhone 15 @2x": {
-     "invocationsM": 7.85,
-     "survivorsM": 6.12
+     "invocationsM": 2,
+     "survivorsM": 2
     },
     "iPhone 15 Pro Max @2x": {
-     "invocationsM": 9.39,
-     "survivorsM": 7.32
+     "invocationsM": 2.39,
+     "survivorsM": 2.39
     },
     "iPhone 15 @1.5x": {
-     "invocationsM": 4.41,
-     "survivorsM": 3.44
+     "invocationsM": 1.12,
+     "survivorsM": 1.12
     }
    }
   },
   {
    "route": "deck",
    "at": 0.3,
-   "invocationsPerPixel": 4.27,
+   "invocationsPerPixel": 4.02,
    "invocationsMaxPixel": 221,
-   "survivorsPerPixel": 3.83,
-   "cloudCoverage": 0.738,
+   "survivorsPerPixel": 3.76,
+   "cloudCoverage": 0.71,
    "calls": 7,
    "triangles": 42672,
-   "cpuUpdateMs": 0.3,
+   "cpuUpdateMs": 1.1,
    "streaks": 160,
    "perTarget": {
     "iPhone 13 mini @2x": {
-     "invocationsM": 5.2,
-     "survivorsM": 4.67
+     "invocationsM": 4.9,
+     "survivorsM": 4.58
     },
     "iPhone 15 @2x": {
-     "invocationsM": 5.72,
-     "survivorsM": 5.13
+     "invocationsM": 5.38,
+     "survivorsM": 5.04
     },
     "iPhone 15 Pro Max @2x": {
-     "invocationsM": 6.85,
-     "survivorsM": 6.14
+     "invocationsM": 6.44,
+     "survivorsM": 6.03
     },
     "iPhone 15 @1.5x": {
-     "invocationsM": 3.22,
-     "survivorsM": 2.89
+     "invocationsM": 3.03,
+     "survivorsM": 2.83
     }
    }
   },
@@ -194,7 +194,7 @@
    "cloudCoverage": 0.969,
    "calls": 5,
    "triangles": 42054,
-   "cpuUpdateMs": 0.1,
+   "cpuUpdateMs": 0.3,
    "streaks": 0,
    "perTarget": {
     "iPhone 13 mini @2x": {

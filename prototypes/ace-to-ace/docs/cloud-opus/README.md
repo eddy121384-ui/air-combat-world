@@ -19,7 +19,8 @@
 | 雲海：俯衝穿層、雲下、拉起再穿出 | [deck.mp4](final/deck.mp4) | [sheet](final/deck-sheet.jpg) |
 
 - 每一格都在路線的精確時間點渲染（`tools/sky-capture.mjs`），影片播放速度＝模擬速度；這是畫面證據，**不是裝置 FPS**。
-- 正式遊戲實機流程（真的飛行模型、AI、HUD、自動駕駛，`?sky=opus`）：[game/](game/)。
+- 正式遊戲實機流程（真的飛行模型、AI、HUD、自動駕駛，`?sky=opus`）：[game/](game/)，含 iPhone 13 mini 尺寸觸控 HUD 畫面。
+- 本機同步看五段影片：[gallery.html](gallery.html)。
 - 迭代過程（同視角、各輪對照）：[iterations/](iterations/)，說明在 [iterations.md](iterations.md)。
 
 ## 自己飛

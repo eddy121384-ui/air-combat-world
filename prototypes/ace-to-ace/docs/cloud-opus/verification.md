@@ -14,6 +14,9 @@
 | `node tools/sky-cost.mjs` | 真實畫面逐像素片段計數 | [cost-high.json](cost-high.json)、[cost-mobile.json](cost-mobile.json) |
 | `node tools/sky-bench-check.mjs` | 實機量測頁 `?bench=quick&quality=mobile` 跑完五條路線並輸出可複製結果 | PASS |
 | `npm run test:sky-game` | 正式遊戲 `?sky=opus`：自動駕駛 pvai 對戰 30 秒，6 張截圖、狀態、console | 0 錯誤；AI `ENGAGE/intercept` 正常、玩家機 2.99–3.06 km 高度飛行 |
+| `browser-check.mjs --scenario touch --query sky=opus` | iPhone 13 mini 尺寸觸控：搖桿放手保持、重觸、油門＋搖桿同時、AB／BRK、飛彈 | PASS，0 錯誤（[畫面](game/iphone-touch-stick-turn.jpg)） |
+| `browser-check.mjs --scenario lookdev`（不加參數） | 原 R2 路徑：天空／雲圖載入、shader、近雲、俯衝、接縫、天頂、殘骸 | PASS，0 錯誤：預設遊戲未受影響 |
+| `npm test` | regression ＋ B0 cloud field ＋ Opus Sky | PASS |
 
 ## 確認沒有動到的東西
 
