@@ -1,0 +1,929 @@
+{
+  "rendererMode": "hybrid",
+  "errors": [],
+  "views": {
+    "01-approach": {
+      "ready": true,
+      "rendererMode": "hybrid",
+      "mode": "traverse",
+      "progress": 0.08,
+      "time": 0,
+      "position": [
+        0,
+        3062,
+        3168
+      ],
+      "field": {
+        "kind": "cumulus",
+        "seed": 73,
+        "base": 2450,
+        "top": 3650
+      },
+      "planePosition": [
+        0,
+        3050,
+        3108
+      ],
+      "direction": [
+        0,
+        -0.013952130199455754,
+        -0.999902664294329
+      ],
+      "density": 0,
+      "planeDensity": 0,
+      "transmittance500": 1,
+      "cpuQueryMs": 0,
+      "representation": "fixed-painted-hull",
+      "hull": {
+        "grid": [
+          60,
+          26,
+          50
+        ],
+        "triangles": 68000,
+        "vertices": 34008,
+        "bytes": 1632192,
+        "buildMs": 416.09999999403954
+      },
+      "geometryBuilds": 1,
+      "cacheBuildMs": 416.09999999403954,
+      "cacheBytes": 1632192,
+      "updateCpuMs": 0,
+      "fogCpuMs": 0,
+      "renderSubmitMs": 0.699999988079071,
+      "gpuMs": null,
+      "gpuSample": 0,
+      "gpuTimerAvailable": true,
+      "calls": 10,
+      "triangles": 72214,
+      "width": 640,
+      "height": 360,
+      "transparentLayers": 0,
+      "alphaCoverageShells": 1,
+      "fogIntervals": 4,
+      "densityQueries": 108,
+      "textureBytes": 5592405.333333333,
+      "renderTargetBytes": 11059200,
+      "programsRunnable": true
+    },
+    "02-inside": {
+      "ready": true,
+      "rendererMode": "hybrid",
+      "mode": "traverse",
+      "progress": 0.5,
+      "time": 0,
+      "position": [
+        0,
+        3062,
+        60
+      ],
+      "field": {
+        "kind": "cumulus",
+        "seed": 73,
+        "base": 2450,
+        "top": 3650
+      },
+      "planePosition": [
+        0,
+        3050,
+        0
+      ],
+      "direction": [
+        0,
+        -0.013952130199455754,
+        -0.999902664294329
+      ],
+      "density": 0.8252926934953799,
+      "planeDensity": 0.8745526171523951,
+      "transmittance500": 0.007897241518403006,
+      "cpuQueryMs": 0,
+      "representation": "fixed-painted-hull",
+      "hull": {
+        "grid": [
+          60,
+          26,
+          50
+        ],
+        "triangles": 68000,
+        "vertices": 34008,
+        "bytes": 1632192,
+        "buildMs": 416.09999999403954
+      },
+      "geometryBuilds": 1,
+      "cacheBuildMs": 416.09999999403954,
+      "cacheBytes": 1632192,
+      "updateCpuMs": 0.19999998807907104,
+      "fogCpuMs": 0.19999998807907104,
+      "renderSubmitMs": 0.5,
+      "gpuMs": 340.5705,
+      "gpuSample": 1,
+      "gpuTimerAvailable": true,
+      "calls": 10,
+      "triangles": 72214,
+      "width": 640,
+      "height": 360,
+      "transparentLayers": 0,
+      "alphaCoverageShells": 1,
+      "fogIntervals": 4,
+      "densityQueries": 108,
+      "textureBytes": 5592405.333333333,
+      "renderTargetBytes": 11059200,
+      "programsRunnable": true
+    },
+    "03-exit": {
+      "ready": true,
+      "rendererMode": "hybrid",
+      "mode": "traverse",
+      "progress": 0.96,
+      "time": 0,
+      "position": [
+        0,
+        3062,
+        -3343.9999999999995
+      ],
+      "field": {
+        "kind": "cumulus",
+        "seed": 73,
+        "base": 2450,
+        "top": 3650
+      },
+      "planePosition": [
+        0,
+        3050,
+        -3403.9999999999995
+      ],
+      "direction": [
+        0,
+        -0.013952130199455744,
+        -0.999902664294329
+      ],
+      "density": 0,
+      "planeDensity": 0,
+      "transmittance500": 1,
+      "cpuQueryMs": 0,
+      "representation": "fixed-painted-hull",
+      "hull": {
+        "grid": [
+          60,
+          26,
+          50
+        ],
+        "triangles": 68000,
+        "vertices": 34008,
+        "bytes": 1632192,
+        "buildMs": 416.09999999403954
+      },
+      "geometryBuilds": 1,
+      "cacheBuildMs": 416.09999999403954,
+      "cacheBytes": 1632192,
+      "updateCpuMs": 0,
+      "fogCpuMs": 0,
+      "renderSubmitMs": 0.5,
+      "gpuMs": 206.5143,
+      "gpuSample": 2,
+      "gpuTimerAvailable": true,
+      "calls": 10,
+      "triangles": 72214,
+      "width": 640,
+      "height": 360,
+      "transparentLayers": 0,
+      "alphaCoverageShells": 1,
+      "fogIntervals": 4,
+      "densityQueries": 108,
+      "textureBytes": 5592405.333333333,
+      "renderTargetBytes": 11059200,
+      "programsRunnable": true
+    },
+    "04-side": {
+      "ready": true,
+      "rendererMode": "hybrid",
+      "mode": "orbit",
+      "progress": 0.25,
+      "time": 0,
+      "position": [
+        4800,
+        3050,
+        2.9391523179536476e-13
+      ],
+      "field": {
+        "kind": "cumulus",
+        "seed": 73,
+        "base": 2450,
+        "top": 3650
+      },
+      "planePosition": [
+        4800,
+        3050,
+        2.9391523179536476e-13
+      ],
+      "direction": [
+        -1,
+        0,
+        -2.220446049250313e-16
+      ],
+      "density": 0,
+      "planeDensity": 0,
+      "transmittance500": 1,
+      "cpuQueryMs": 0.10000002384185791,
+      "representation": "fixed-painted-hull",
+      "hull": {
+        "grid": [
+          60,
+          26,
+          50
+        ],
+        "triangles": 68000,
+        "vertices": 34008,
+        "bytes": 1632192,
+        "buildMs": 416.09999999403954
+      },
+      "geometryBuilds": 1,
+      "cacheBuildMs": 416.09999999403954,
+      "cacheBytes": 1632192,
+      "updateCpuMs": 0,
+      "fogCpuMs": 0,
+      "renderSubmitMs": 0.19999998807907104,
+      "gpuMs": 119.7808,
+      "gpuSample": 3,
+      "gpuTimerAvailable": true,
+      "calls": 6,
+      "triangles": 69926,
+      "width": 640,
+      "height": 360,
+      "transparentLayers": 0,
+      "alphaCoverageShells": 1,
+      "fogIntervals": 4,
+      "densityQueries": 108,
+      "textureBytes": 5592405.333333333,
+      "renderTargetBytes": 11059200,
+      "programsRunnable": true
+    },
+    "05-above": {
+      "ready": true,
+      "rendererMode": "hybrid",
+      "mode": "above",
+      "progress": 0.125,
+      "time": 0,
+      "position": [
+        1555.6349186104044,
+        4500,
+        1555.6349186104046
+      ],
+      "field": {
+        "kind": "cumulus",
+        "seed": 73,
+        "base": 2450,
+        "top": 3650
+      },
+      "planePosition": [
+        1555.6349186104044,
+        4500,
+        1555.6349186104046
+      ],
+      "direction": [
+        -0.5904046084919087,
+        -0.5503133621338229,
+        -0.5904046084919087
+      ],
+      "density": 0,
+      "planeDensity": 0,
+      "transmittance500": 1,
+      "cpuQueryMs": 0,
+      "representation": "fixed-painted-hull",
+      "hull": {
+        "grid": [
+          60,
+          26,
+          50
+        ],
+        "triangles": 68000,
+        "vertices": 34008,
+        "bytes": 1632192,
+        "buildMs": 416.09999999403954
+      },
+      "geometryBuilds": 1,
+      "cacheBuildMs": 416.09999999403954,
+      "cacheBytes": 1632192,
+      "updateCpuMs": 0,
+      "fogCpuMs": 0,
+      "renderSubmitMs": 0.3999999761581421,
+      "gpuMs": 133.7878,
+      "gpuSample": 5,
+      "gpuTimerAvailable": true,
+      "calls": 6,
+      "triangles": 69926,
+      "width": 640,
+      "height": 360,
+      "transparentLayers": 0,
+      "alphaCoverageShells": 1,
+      "fogIntervals": 4,
+      "densityQueries": 108,
+      "textureBytes": 5592405.333333333,
+      "renderTargetBytes": 11059200,
+      "programsRunnable": true
+    },
+    "06-below": {
+      "ready": true,
+      "rendererMode": "hybrid",
+      "mode": "below",
+      "progress": 0.125,
+      "time": 0,
+      "position": [
+        1555.6349186104044,
+        1700,
+        1555.6349186104046
+      ],
+      "field": {
+        "kind": "cumulus",
+        "seed": 73,
+        "base": 2450,
+        "top": 3650
+      },
+      "planePosition": [
+        1555.6349186104044,
+        1700,
+        1555.6349186104046
+      ],
+      "direction": [
+        -0.602683181186893,
+        0.5230162198525903,
+        -0.6026831811868932
+      ],
+      "density": 0,
+      "planeDensity": 0,
+      "transmittance500": 1,
+      "cpuQueryMs": 0,
+      "representation": "fixed-painted-hull",
+      "hull": {
+        "grid": [
+          60,
+          26,
+          50
+        ],
+        "triangles": 68000,
+        "vertices": 34008,
+        "bytes": 1632192,
+        "buildMs": 416.09999999403954
+      },
+      "geometryBuilds": 1,
+      "cacheBuildMs": 416.09999999403954,
+      "cacheBytes": 1632192,
+      "updateCpuMs": 0.09999999403953552,
+      "fogCpuMs": 0.09999999403953552,
+      "renderSubmitMs": 0.30000001192092896,
+      "gpuMs": 137.3387,
+      "gpuSample": 6,
+      "gpuTimerAvailable": true,
+      "calls": 6,
+      "triangles": 69926,
+      "width": 640,
+      "height": 360,
+      "transparentLayers": 0,
+      "alphaCoverageShells": 1,
+      "fogIntervals": 4,
+      "densityQueries": 108,
+      "textureBytes": 5592405.333333333,
+      "renderTargetBytes": 11059200,
+      "programsRunnable": true
+    },
+    "07-stratocumulus": {
+      "ready": true,
+      "rendererMode": "hybrid",
+      "mode": "above",
+      "progress": 0.125,
+      "time": 0,
+      "position": [
+        1555.6349186104044,
+        4200,
+        1555.6349186104046
+      ],
+      "field": {
+        "kind": "stratocumulus",
+        "seed": 73,
+        "base": 2650,
+        "top": 3350
+      },
+      "planePosition": [
+        1555.6349186104044,
+        4200,
+        1555.6349186104046
+      ],
+      "direction": [
+        -0.6207659127814104,
+        -0.47885213068057325,
+        -0.6207659127814105
+      ],
+      "density": 0,
+      "planeDensity": 0,
+      "transmittance500": 1,
+      "cpuQueryMs": 0,
+      "representation": "fixed-painted-hull",
+      "hull": {
+        "grid": [
+          60,
+          26,
+          50
+        ],
+        "triangles": 72512,
+        "vertices": 36258,
+        "bytes": 1740336,
+        "buildMs": 619.6000000238419
+      },
+      "geometryBuilds": 2,
+      "cacheBuildMs": 619.6000000238419,
+      "cacheBytes": 1740336,
+      "updateCpuMs": 0,
+      "fogCpuMs": 0,
+      "renderSubmitMs": 0.20000001788139343,
+      "gpuMs": 122.8955,
+      "gpuSample": 14,
+      "gpuTimerAvailable": true,
+      "calls": 6,
+      "triangles": 74438,
+      "width": 320,
+      "height": 180,
+      "transparentLayers": 0,
+      "alphaCoverageShells": 1,
+      "fogIntervals": 4,
+      "densityQueries": 108,
+      "textureBytes": 5592405.333333333,
+      "renderTargetBytes": 2764800,
+      "programsRunnable": true
+    },
+    "08-stratocumulus-inside": {
+      "ready": true,
+      "rendererMode": "hybrid",
+      "mode": "traverse",
+      "progress": 0.5,
+      "time": 0,
+      "position": [
+        0,
+        3012,
+        60
+      ],
+      "field": {
+        "kind": "stratocumulus",
+        "seed": 73,
+        "base": 2650,
+        "top": 3350
+      },
+      "planePosition": [
+        0,
+        3000,
+        0
+      ],
+      "direction": [
+        0,
+        -0.013952130199455754,
+        -0.999902664294329
+      ],
+      "density": 0.7565447109291197,
+      "planeDensity": 0.7773087137883921,
+      "transmittance500": 0.013278727403992873,
+      "cpuQueryMs": 0,
+      "representation": "fixed-painted-hull",
+      "hull": {
+        "grid": [
+          60,
+          26,
+          50
+        ],
+        "triangles": 72512,
+        "vertices": 36258,
+        "bytes": 1740336,
+        "buildMs": 619.6000000238419
+      },
+      "geometryBuilds": 2,
+      "cacheBuildMs": 619.6000000238419,
+      "cacheBytes": 1740336,
+      "updateCpuMs": 0.20000001788139343,
+      "fogCpuMs": 0.20000001788139343,
+      "renderSubmitMs": 0.3999999761581421,
+      "gpuMs": 112.613,
+      "gpuSample": 15,
+      "gpuTimerAvailable": true,
+      "calls": 10,
+      "triangles": 76726,
+      "width": 320,
+      "height": 180,
+      "transparentLayers": 0,
+      "alphaCoverageShells": 1,
+      "fogIntervals": 4,
+      "densityQueries": 108,
+      "textureBytes": 5592405.333333333,
+      "renderTargetBytes": 2764800,
+      "programsRunnable": true
+    }
+  },
+  "spatial": {
+    "directions": [
+      {
+        "ready": true,
+        "rendererMode": "hybrid",
+        "mode": "inspect",
+        "progress": 0.125,
+        "time": 0,
+        "position": [
+          0,
+          3020,
+          0
+        ],
+        "field": {
+          "kind": "cumulus",
+          "seed": 73,
+          "base": 2450,
+          "top": 3650
+        },
+        "planePosition": [
+          1555.6349186104044,
+          1700,
+          1555.6349186104046
+        ],
+        "direction": [
+          1,
+          0,
+          -2.220446049250313e-16
+        ],
+        "density": 0.8646452604770689,
+        "planeDensity": 0,
+        "transmittance500": 0.007585459356178052,
+        "cpuQueryMs": 0.09999999403953552,
+        "representation": "fixed-painted-hull",
+        "hull": {
+          "grid": [
+            60,
+            26,
+            50
+          ],
+          "triangles": 68000,
+          "vertices": 34008,
+          "bytes": 1632192,
+          "buildMs": 416.09999999403954
+        },
+        "geometryBuilds": 1,
+        "cacheBuildMs": 416.09999999403954,
+        "cacheBytes": 1632192,
+        "updateCpuMs": 0.19999998807907104,
+        "fogCpuMs": 0.19999998807907104,
+        "renderSubmitMs": 0.5,
+        "gpuMs": 178.4816,
+        "gpuSample": 7,
+        "gpuTimerAvailable": true,
+        "calls": 6,
+        "triangles": 69926,
+        "width": 640,
+        "height": 360,
+        "transparentLayers": 0,
+        "alphaCoverageShells": 1,
+        "fogIntervals": 4,
+        "densityQueries": 108,
+        "textureBytes": 5592405.333333333,
+        "renderTargetBytes": 11059200,
+        "programsRunnable": true
+      },
+      {
+        "ready": true,
+        "rendererMode": "hybrid",
+        "mode": "inspect",
+        "progress": 0.125,
+        "time": 0,
+        "position": [
+          0,
+          3020,
+          0
+        ],
+        "field": {
+          "kind": "cumulus",
+          "seed": 73,
+          "base": 2450,
+          "top": 3650
+        },
+        "planePosition": [
+          1555.6349186104044,
+          1700,
+          1555.6349186104046
+        ],
+        "direction": [
+          -1,
+          0,
+          -2.220446049250313e-16
+        ],
+        "density": 0.8646452604770689,
+        "planeDensity": 0,
+        "transmittance500": 0.0076652195004479114,
+        "cpuQueryMs": 0.09999999403953552,
+        "representation": "fixed-painted-hull",
+        "hull": {
+          "grid": [
+            60,
+            26,
+            50
+          ],
+          "triangles": 68000,
+          "vertices": 34008,
+          "bytes": 1632192,
+          "buildMs": 416.09999999403954
+        },
+        "geometryBuilds": 1,
+        "cacheBuildMs": 416.09999999403954,
+        "cacheBytes": 1632192,
+        "updateCpuMs": 0.19999998807907104,
+        "fogCpuMs": 0.19999998807907104,
+        "renderSubmitMs": 0.9000000059604645,
+        "gpuMs": 178.4816,
+        "gpuSample": 7,
+        "gpuTimerAvailable": true,
+        "calls": 6,
+        "triangles": 69926,
+        "width": 640,
+        "height": 360,
+        "transparentLayers": 0,
+        "alphaCoverageShells": 1,
+        "fogIntervals": 4,
+        "densityQueries": 108,
+        "textureBytes": 5592405.333333333,
+        "renderTargetBytes": 11059200,
+        "programsRunnable": true
+      },
+      {
+        "ready": true,
+        "rendererMode": "hybrid",
+        "mode": "inspect",
+        "progress": 0.125,
+        "time": 0,
+        "position": [
+          0,
+          3020,
+          0
+        ],
+        "field": {
+          "kind": "cumulus",
+          "seed": 73,
+          "base": 2450,
+          "top": 3650
+        },
+        "planePosition": [
+          1555.6349186104044,
+          1700,
+          1555.6349186104046
+        ],
+        "direction": [
+          0,
+          0.999999995,
+          -0.00009999999949994454
+        ],
+        "density": 0.8646452604770689,
+        "planeDensity": 0,
+        "transmittance500": 0.008932725808950529,
+        "cpuQueryMs": 0,
+        "representation": "fixed-painted-hull",
+        "hull": {
+          "grid": [
+            60,
+            26,
+            50
+          ],
+          "triangles": 68000,
+          "vertices": 34008,
+          "bytes": 1632192,
+          "buildMs": 416.09999999403954
+        },
+        "geometryBuilds": 1,
+        "cacheBuildMs": 416.09999999403954,
+        "cacheBytes": 1632192,
+        "updateCpuMs": 0.29999998211860657,
+        "fogCpuMs": 0.29999998211860657,
+        "renderSubmitMs": 0.20000001788139343,
+        "gpuMs": 178.4816,
+        "gpuSample": 7,
+        "gpuTimerAvailable": true,
+        "calls": 6,
+        "triangles": 69926,
+        "width": 640,
+        "height": 360,
+        "transparentLayers": 0,
+        "alphaCoverageShells": 1,
+        "fogIntervals": 4,
+        "densityQueries": 108,
+        "textureBytes": 5592405.333333333,
+        "renderTargetBytes": 11059200,
+        "programsRunnable": true
+      },
+      {
+        "ready": true,
+        "rendererMode": "hybrid",
+        "mode": "inspect",
+        "progress": 0.125,
+        "time": 0,
+        "position": [
+          0,
+          3020,
+          0
+        ],
+        "field": {
+          "kind": "cumulus",
+          "seed": 73,
+          "base": 2450,
+          "top": 3650
+        },
+        "planePosition": [
+          1555.6349186104044,
+          1700,
+          1555.6349186104046
+        ],
+        "direction": [
+          0,
+          -0.999999995,
+          -0.00009999999949994454
+        ],
+        "density": 0.8646452604770689,
+        "planeDensity": 0,
+        "transmittance500": 0.0128612233675522,
+        "cpuQueryMs": 0.19999998807907104,
+        "representation": "fixed-painted-hull",
+        "hull": {
+          "grid": [
+            60,
+            26,
+            50
+          ],
+          "triangles": 68000,
+          "vertices": 34008,
+          "bytes": 1632192,
+          "buildMs": 416.09999999403954
+        },
+        "geometryBuilds": 1,
+        "cacheBuildMs": 416.09999999403954,
+        "cacheBytes": 1632192,
+        "updateCpuMs": 0.20000001788139343,
+        "fogCpuMs": 0.20000001788139343,
+        "renderSubmitMs": 0.29999998211860657,
+        "gpuMs": 178.4816,
+        "gpuSample": 7,
+        "gpuTimerAvailable": true,
+        "calls": 6,
+        "triangles": 69926,
+        "width": 640,
+        "height": 360,
+        "transparentLayers": 0,
+        "alphaCoverageShells": 1,
+        "fogIntervals": 4,
+        "densityQueries": 108,
+        "textureBytes": 5592405.333333333,
+        "renderTargetBytes": 11059200,
+        "programsRunnable": true
+      },
+      {
+        "ready": true,
+        "rendererMode": "hybrid",
+        "mode": "inspect",
+        "progress": 0.125,
+        "time": 0,
+        "position": [
+          0,
+          3020,
+          0
+        ],
+        "field": {
+          "kind": "cumulus",
+          "seed": 73,
+          "base": 2450,
+          "top": 3650
+        },
+        "planePosition": [
+          1555.6349186104044,
+          1700,
+          1555.6349186104046
+        ],
+        "direction": [
+          0,
+          0,
+          1
+        ],
+        "density": 0.8646452604770689,
+        "planeDensity": 0,
+        "transmittance500": 0.008892512195163713,
+        "cpuQueryMs": 0,
+        "representation": "fixed-painted-hull",
+        "hull": {
+          "grid": [
+            60,
+            26,
+            50
+          ],
+          "triangles": 68000,
+          "vertices": 34008,
+          "bytes": 1632192,
+          "buildMs": 416.09999999403954
+        },
+        "geometryBuilds": 1,
+        "cacheBuildMs": 416.09999999403954,
+        "cacheBytes": 1632192,
+        "updateCpuMs": 0.09999999403953552,
+        "fogCpuMs": 0.09999999403953552,
+        "renderSubmitMs": 0.30000001192092896,
+        "gpuMs": 178.4816,
+        "gpuSample": 7,
+        "gpuTimerAvailable": true,
+        "calls": 6,
+        "triangles": 69926,
+        "width": 640,
+        "height": 360,
+        "transparentLayers": 0,
+        "alphaCoverageShells": 1,
+        "fogIntervals": 4,
+        "densityQueries": 108,
+        "textureBytes": 5592405.333333333,
+        "renderTargetBytes": 11059200,
+        "programsRunnable": true
+      },
+      {
+        "ready": true,
+        "rendererMode": "hybrid",
+        "mode": "inspect",
+        "progress": 0.125,
+        "time": 0,
+        "position": [
+          0,
+          3020,
+          0
+        ],
+        "field": {
+          "kind": "cumulus",
+          "seed": 73,
+          "base": 2450,
+          "top": 3650
+        },
+        "planePosition": [
+          1555.6349186104044,
+          1700,
+          1555.6349186104046
+        ],
+        "direction": [
+          0,
+          0,
+          -1
+        ],
+        "density": 0.8646452604770689,
+        "planeDensity": 0,
+        "transmittance500": 0.00920051306343853,
+        "cpuQueryMs": 0.09999999403953552,
+        "representation": "fixed-painted-hull",
+        "hull": {
+          "grid": [
+            60,
+            26,
+            50
+          ],
+          "triangles": 68000,
+          "vertices": 34008,
+          "bytes": 1632192,
+          "buildMs": 416.09999999403954
+        },
+        "geometryBuilds": 1,
+        "cacheBuildMs": 416.09999999403954,
+        "cacheBytes": 1632192,
+        "updateCpuMs": 0.09999999403953552,
+        "fogCpuMs": 0.09999999403953552,
+        "renderSubmitMs": 0.4000000059604645,
+        "gpuMs": 178.4816,
+        "gpuSample": 7,
+        "gpuTimerAvailable": true,
+        "calls": 6,
+        "triangles": 69926,
+        "width": 640,
+        "height": 360,
+        "transparentLayers": 0,
+        "alphaCoverageShells": 1,
+        "fogIntervals": 4,
+        "densityQueries": 108,
+        "textureBytes": 5592405.333333333,
+        "renderTargetBytes": 11059200,
+        "programsRunnable": true
+      }
+    ],
+    "returnToPosePixelsIdentical": true,
+    "interactiveControlsPassed": true,
+    "animationRouteAndModeSwitchPassed": true,
+    "boundaryPixelSweep": {
+      "samples": 96,
+      "maxMeanRgbDelta": 0.00583639705882355
+    },
+    "touchDragPassed": true
+  },
+  "perf": {},
+  "discardedFirstQueryAfterStateChange": true,
+  "runtime": "Chromium / ANGLE SwiftShader; desktop diagnostic only, no iPhone GPU claim",
+  "provenance": {
+    "baseline": "0db84b5953eaffd75c3256ad0579f3c098dd0147",
+    "capturedAt": "2026-10-19T01:29:18.607Z",
+    "sourceSha256": {
+      "src/cloud/cloud-field.js": "91d1e5253a4cb9975ecd10467f65973077562574d8e3860a43c00b53c1966589",
+      "src/cloud/cloud-debug-renderer.js": "826723e7e77f6a5528c49300d24f51b437f47886470510bc2cf3c2ec700ef86a",
+      "tools/cloud-lab.html": "8e7db8f29c9265fcee609582477f7a16bf133444dce6e90c40403f97c3a95ded",
+      "tools/cloud-lab.js": "1f31d5be18fed51992cd84e583e92ee2168be75c50b7583ad8f718f59c1a60b0"
+    },
+    "browser": "151.0.7922.34"
+  },
+  "passed": true
+}

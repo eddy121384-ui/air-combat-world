@@ -11,7 +11,7 @@ const root = fileURLToPath(new URL('../', import.meta.url));
 const outArg=process.argv.indexOf('--out');
 const rendererArg=process.argv.indexOf('--renderer');
 const rendererMode=rendererArg>=0?process.argv[rendererArg+1]:'debug';
-assert.ok(['debug','anime'].includes(rendererMode));
+assert.ok(['debug','anime','stable','hybrid'].includes(rendererMode));
 const out = new URL('../'+(outArg>=0?process.argv[outArg+1]:'docs/cloud-engine-b0')+'/', import.meta.url);
 await mkdir(new URL('screens/', out), { recursive: true });
 const mime = { '.html': 'text/html', '.js': 'text/javascript', '.jpg': 'image/jpeg', '.png': 'image/png' };
@@ -94,6 +94,15 @@ try {
   await page.locator('#wind').check(); await page.waitForTimeout(500); await page.locator('#wind').uncheck();
   assert.ok((await page.evaluate(() => window.__cloudLab.snapshot())).time > 0);
   report.spatial.interactiveControlsPassed = true;
+  if(rendererMode==='stable'||rendererMode==='hybrid'){
+    await page.locator('#scenario').selectOption('turn90');
+    await page.locator('#scenarioPlay').click();await page.waitForTimeout(500);await page.locator('#play').click();
+    const pose=await page.evaluate(()=>window.__cloudLab.snapshot());
+    assert.equal(pose.mode,'turn90');assert.ok(pose.progress>0);
+    await page.locator('#renderer').selectOption('anime');await page.waitForTimeout(100);
+    const other=await page.evaluate(()=>window.__cloudLab.snapshot());assert.deepEqual(pose.position,other.position);assert.equal(pose.density,other.density);
+    await page.locator('#renderer').selectOption(rendererMode);report.spatial.animationRouteAndModeSwitchPassed=true;
+  }
   // Display continuity at the actual front boundary, 220 m/s at 60 Hz.
   // Read the framebuffer after each render, excluding HTML overlays and timing text.
   await page.locator('details').last().evaluate(el => { el.open = true; });
