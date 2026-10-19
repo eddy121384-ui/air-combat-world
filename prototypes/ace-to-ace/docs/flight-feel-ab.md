@@ -18,34 +18,40 @@ yaw-to-turn; both turn through physical banked lift, bounded G, gravity, drag an
 finite velocity-vector response. The HUD W and FPM still read the actual nose and
 displacement vectors.
 
-## Design hypotheses to evaluate on device
+## B v2 hypothesis — realistic principles, arcade responsiveness
 
-B: quicker onset and roll stop, ~8% greater roll-rate envelope; normal-pull cap
-is 78% of aircraft max G, less induced drag and faster throttle spool; low-speed
-lift falls off more gently; AB response has moderately stronger authority.
-At **BRK + deep pull (>72%) above 110 m/s**, B may briefly use full airframe G
-for up to 1.25 s with a 1.4 s cooldown and must release the input to rearm.
-BRK's original independent parasite drag remains and high G increases induced
-drag too. Max load factor and flight-path angular cap still apply.
+The B-mode flight controls retain responsive Expert roll, rapid roll stop and
+load-factor response, bank-to-turn, and the actual lagging velocity vector.
+Neither mode auto-levels. Full aft stick now requests all **available** G
+without any BRK modifier. The B envelope uses a **nominal 9G ceiling** for
+both simulated aircraft and a speed-squared lift limit below corner speed.
+The F-16 9G value is an approximate clean-airframe baseline. **The J-16
+9G in B is a deliberate game benchmark, not a verified real-world spec**.
 
-B may be *too* responsive with the existing **release-to-hold virtual stick**:
-any small remaining x input keeps rolling after the finger leaves the glass,
-while an exact neutral command stops the aircraft without leveling it. Do not
-auto-center the stick or change input gestures in this spike. Play 90° roll +
-stop and near-lock fine-aim on real iPhone Safari to measure accidental overshoot,
-thumb fatigue and ability to find neutral.
+Induced drag scales with the square of the current G load: an aggressive turn
+buys nose position and costs substantial airspeed. Moderate pull preserves
+energy. BRK adds parasite drag only; no G unlock, timer or cooldown remains.
+Throttle and AB stay independent and BRK never changes either. Faster throttle
+spool and a modest parasite drag discount retain the Arcade Expert flavor,
+while the previous arbitrary +10% thrust buff is removed.
+
+This is an arcade point-mass approximation, **not** a certified F-16 flight
+model. Actual envelope and sustained-turn behavior depend on altitude,
+weight, external stores, angle of attack, engine conditions, etc.
+B may still overshoot with the existing release-to-hold virtual stick;
+evaluate on real iPhone Safari before calling the feel accepted.
 
 ## Measurements and acceptance
 
 Run `node tools/test-flight-feel-ab.mjs` for measured 90° bank time, stopped-bank
-error, 90° and 180° turn time, peak angular rate/G, normal and BRK turn speed
-loss, low-speed heading response, and AB recovery. The test prints JSON rather
+error, 90° and 180° turn time, peak angular rate/G, full vs moderate pull and brake-on/off speed
+loss, low-speed lift limits, and AB recovery. The test prints JSON rather
 than fabricating expected numbers. Existing test suite and headless AI tests
 must also run. The benchmark runs no real iOS browser, so ***iPhone feel,
 target acquisition and 1v1 aiming remain human acceptance items***.
 
 iPhone play-check sequence: A and B, same seed and difficulty; 90° roll-stop;
-bank-and-pull 90°/180°; repeat normal turns; engage BRK + deep pull; extend
+bank-and-pull 90°/180°; repeat normal turns; compare BRK on/off at the same pull; extend
 and regain speed and altitude; recover from low-speed turns; fight full 1v1
 using missiles and guns. Rate directness, overshoot, target dwell time,
 post-turn responsiveness, and fun separately from numeric metrics. Keep this
@@ -58,4 +64,4 @@ Vercel static preview (separate from the production alias):
 - [A — Legacy Expert](https://skyfront-ace-to-f9dqaci6z-eddy121384-1385s-projects.vercel.app/?feel=A&seed=71429)
 - [B — Arcade Expert](https://skyfront-ace-to-f9dqaci6z-eddy121384-1385s-projects.vercel.app/?feel=B&seed=71429)
 
-Vercel READY plus explicit GET 200 checks for each entry point, simulation modules, render/HUD/input JS, CSS, vendored Three.js, and sky/cloud images. Actual iPhone Safari hardware playthrough remains unverified; no claim of player-validated feel.
+The links above point to the previous B v1 until the B v2 commit is redeployed and checked. Do not evaluate new physics using an old preview. Actual iPhone Safari hardware playthrough remains unverified.

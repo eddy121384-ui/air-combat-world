@@ -76,9 +76,11 @@ export const specificEnergy = (ac) => ac.pos.y + (ac.speed * ac.speed) / (2 * G)
 export function availableG(ac, speed = ac.speed) {
   const t = ac.type;
   if (ac.flightFeel === 'B') {
-    // B is more forgiving below corner speed; no extra lift above the airframe maxG.
-    const fraction = Math.min(1, Math.pow(Math.max(speed, MIN_SPEED) / t.cornerSpeed, 1.7));
-    return t.maxG * (0.18 + 0.82 * fraction);
+    // B's nominal 9G envelope is a prototype rule, not a verified J-16 spec.
+    // Available lift follows speed squared below corner speed; no free low-speed G.
+    const envelopeG = Math.min(t.maxG, 9);
+    const ratio = Math.max(speed, MIN_SPEED) / t.cornerSpeed;
+    return Math.max(0.35, envelopeG * Math.min(1, ratio * ratio));
   }
   const r = speed / t.cornerSpeed;
   return Math.max(0.35, t.maxG * Math.min(1, r * r));
@@ -212,36 +214,26 @@ function stepArcadeAircraft(ac, dt) {
   ac.thrustCur += (thrCmd - ac.thrustCur) * Math.min(1, dt / (t.spool * 0.78));
   ac.abCur += ((c.boost ? 1 : 0) - ac.abCur) * Math.min(1, dt / (t.spool * 1.0));
   const altitude = clamp(1 - ac.pos.y / 16000, 0.35, 1);
-  const thrust = (ac.thrustCur * t.thrustMil * 1.1 + ac.abCur * t.thrustAB * 1.1) * altitude;
+  // Faster control response, without inventing additional engine power.
+  const thrust = (ac.thrustCur * t.thrustMil + ac.abCur * t.thrustAB) * altitude;
 
   const pitchIn = clamp(c.pitch, -1, 1), nAvail = availableG(ac);
   const nMin = t.minG * Math.min(1, nAvail / t.maxG), n0 = neutralG(ac);
-  // Normal full pull deliberately stops short of instantaneous maxG. BRK + a deep
-  // pull gives a short high-G burst, then requires release (and cooldown) to rearm.
-  ac.highGCooldown = Math.max(0, (ac.highGCooldown ?? 0) - dt);
-  if (!(c.brake && pitchIn > 0.72)) ac.highGArmed = true;
-  const eligible = c.brake && pitchIn > 0.72 && ac.speed > 110 && ac.highGCooldown === 0;
-  const highG = eligible && ac.highGArmed !== false;
-  if (highG) {
-    ac.highGTime = (ac.highGTime ?? 0) + dt;
-    if (ac.highGTime >= 1.25) {
-      ac.highGArmed = false;
-      ac.highGCooldown = 1.4;
-    }
-  } else ac.highGTime = 0;
-  const normalLimit = Math.min(nAvail, t.maxG * 0.78);
-  const nLimit = highG ? nAvail : normalLimit;
+  // Stick directly requests the G currently available from the airframe.
+  // No brake-triggered G unlock: at low speed, full pull is still lift-limited.
   const nCmd = pitchIn >= 0
-    ? n0 + pitchIn * (nLimit - n0)
+    ? n0 + pitchIn * (nAvail - n0)
     : n0 + pitchIn * (n0 - nMin);
   // Faster G onset and more decisive roll stop without snapping orientation.
   ac.nCur += (nCmd - ac.nCur) * Math.min(1, dt / (t.gOnset * 0.56));
 
   const v = ac.speed;
-  const drag = t.dragK * 0.75 * v * v * (c.brake ? 2.6 : 1)
-    + t.inducedK * (highG ? 0.96 : 0.57) * ac.nCur * ac.nCur
+  // Induced drag grows ~G squared: instant nose authority costs energy.
+  // BRK is independent parasite drag, not a source of extra lift or turn G.
+  const drag = t.dragK * 0.85 * v * v * (c.brake ? 2.6 : 1)
+    + t.inducedK * ac.nCur * ac.nCur
       * (200 / Math.max(v, MIN_SPEED)) ** 1.5
-    + Math.abs(c.yaw) * 1.2 + (highG ? 2.4 : 0);
+    + Math.abs(c.yaw) * 1.2;
   ac.speed = clamp(v + (thrust - drag - G * fwd.y) * dt, MIN_SPEED, MAX_SPEED);
 
   const rollCmd = clamp(c.roll, -1, 1);

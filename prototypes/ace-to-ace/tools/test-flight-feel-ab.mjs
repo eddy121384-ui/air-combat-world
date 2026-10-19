@@ -32,12 +32,12 @@ function bank90(ac) {
   assert.ok(settleError < 28, 'roll stop must stay reasonably precise, not spring-level or spin');
   return { elapsed, settleError };
 }
-function turning(feel, highG = false, duration = 1.0) {
+function turning(feel, brake = false, duration = 1.0, pull = 1) {
   const ac = craft(feel);
   const bank = bank90(ac);
   const startHeading = headingOf(ac), initialSpeed = ac.speed;
-  ac.controls.pitch = 1;
-  ac.controls.brake = highG;
+  ac.controls.pitch = pull;
+  ac.controls.brake = brake;
   let peakG = 0, maxTurnRate = 0, previous = headingOf(ac);
   for (let i = 0; i < Math.round(duration / dt); i++) {
     stepAircraft(ac, dt);
@@ -104,25 +104,36 @@ function lowSpeed(feel) {
   assert.ok(noPitch < 12, 'banked zero-pitch should not secretly command a coordinated turn');
 }
 
-// The High-G modifier is genuinely a finite-time load-factor burst with energy cost.
-const normalA = turning('A'), normalB = turning('B'), highB = turning('B', true);
-assert.ok(normalB.peakG < highB.peakG - 0.4, 'BRK + hard pull must briefly offer additional G');
-assert.ok(highB.lostMps > normalB.lostMps + 1, 'High-G must pay a real speed price');
-assert.ok(highB.peakG <= 10.001, 'High-G must respect the shared airframe maximum');
-assert.ok(normalB.lostMps < normalA.lostMps, 'normal B turn should conserve more speed than legacy');
+// A full pull requests available G directly, while airbrake ONLY adds drag.
+const normalA = turning('A'), normalB = turning('B');
+const brakeB = turning('B', true), moderateB = turning('B', false, 1, 0.55);
+assert.ok(normalB.peakG > 8.8 && normalB.peakG <= 9.001,
+  'B F-16 full pull should reach nominal 9G without any BRK modifier');
+assert.ok(brakeB.peakG <= normalB.peakG + 0.001,
+  'BRK must never unlock more G');
+assert.ok(brakeB.lostMps > normalB.lostMps + 1,
+  'BRK must cost additional speed, independently of the G command');
+assert.ok(normalB.lostMps > moderateB.lostMps + 4,
+  'hard 9G pull must pay more speed than moderate 5G pull');
+assert.ok(normalB.headingDeg > moderateB.headingDeg + 2,
+  'high-G pull must yield more heading response than moderate pull');
+assert.ok(availableG(craft('B', 85), 85) < 3,
+  'low speed cannot provide almost 9G of lift');
+assert.ok(availableG(craft('B', 230), 230) <= 9,
+  'F-16 B-mode must respect its nominal 9G envelope');
 {
   const ac = craft('B');
   bank90(ac);
   ac.controls.pitch = 1; ac.controls.brake = true;
   step(ac, 2.3);
-  assert.ok(ac.highGCooldown >= 0 && ac.gLoad <= 10.001, 'High-G cannot be indefinite / exceed airframe max');
-  assert.equal(ac.controls.throttle, 0.72, 'BRK may not change the latched throttle');
-  assert.equal(ac.controls.boost, false, 'BRK may not secretly enable AB');
-  const before = ac.speed;
+  assert.ok(ac.gLoad <= 9.001, 'sustained BRK and pitch cannot exceed airframe G');
+  assert.equal(ac.highGCooldown, undefined, 'no arbitrary High-G unlock/cooldown');
+  assert.equal(ac.controls.throttle, 0.72, 'BRK must not overwrite throttle');
+  assert.equal(ac.controls.boost, false, 'BRK must not enable AB');
   ac.controls.pitch = 0; ac.controls.brake = false; ac.controls.boost = true;
   step(ac, 2);
-  assert.ok(ac.abCur > 0, 'AB is an independent engine control');
-  assert.ok(Number.isFinite(ac.speed) && ac.speed >= 45, 'energy model must stay finite');
+  assert.ok(ac.abCur > 0, 'AB remains separate from brake');
+  assert.ok(Number.isFinite(ac.speed) && ac.speed >= 45, 'physics must stay finite');
 }
 
 // Same seed/spawn/difficulty and flight performance shared by AI and player.
@@ -164,7 +175,8 @@ const data = {
   climbDive: slopes,
   roll90: { A: normalA.bank, B: normalB.bank },
   normalTurn1s: { A: normalA, B: normalB },
-  highGTurn1s: highB,
+  brakeTurn1s: brakeB,
+  moderateTurn1s: moderateB,
   turn90: { A: turnMilestone('A', 90), B: turnMilestone('B', 90) },
   turn180: { A: turnMilestone('A', 180), B: turnMilestone('B', 180) },
   recoveryFrom85: { A: recover('A', 85), B: recover('B', 85) },
