@@ -1,0 +1,81 @@
+{
+  "status": "PASS_NF_PROBE",
+  "error": null,
+  "bridge": true,
+  "gate_lib": true,
+  "meshes": {
+    "A": {
+      "lods": 4,
+      "bounds_r_cm": 837.6590598130069,
+      "tris": [
+        34272,
+        8578,
+        1400,
+        534
+      ],
+      "screens": [
+        "1.0",
+        "0.5",
+        "0.15000000596046448",
+        "0.05999999865889549"
+      ]
+    },
+    "B": {
+      "lods": 4,
+      "bounds_r_cm": 906.6936474308533,
+      "tris": [
+        28850,
+        11500,
+        1598,
+        470
+      ],
+      "screens": [
+        "1.0",
+        "0.5",
+        "0.15000000596046448",
+        "0.05999999865889549"
+      ]
+    },
+    "C": {
+      "lods": 4,
+      "bounds_r_cm": 807.3078246084605,
+      "tris": [
+        38156,
+        16752,
+        1477,
+        452
+      ],
+      "screens": [
+        "1.0",
+        "0.5",
+        "0.15000000596046448",
+        "0.05999999865889549"
+      ]
+    },
+    "J": {
+      "lods": 4,
+      "bounds_r_cm": 1278.2136178705605,
+      "tris": [
+        15080,
+        1380,
+        898,
+        607
+      ],
+      "screens": [
+        "1.0",
+        "0.5",
+        "0.15000000596046448",
+        "0.05999999865889549"
+      ]
+    }
+  },
+  "materials": {
+    "M_TL_Bark": true,
+    "M_TL_Cryptomeria_Bark": true,
+    "M_TL_AcaciaW_LeafCards": true,
+    "M_TL_Cryptomeria_LeafCards": true,
+    "M_TL_Acacia_Bark": true,
+    "M_TL_LeafCards": true
+  },
+  "leaf_opacity_node": "MaterialExpressionTextureSampleParameter2D"
+}

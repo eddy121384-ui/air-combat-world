@@ -1,0 +1,111 @@
+{
+ "schema": "ntw-forest-world-v1",
+ "seed": 20261019,
+ "bbox_3826": [
+  289540.0,
+  2773540.0,
+  316000.0,
+  2800000.0
+ ],
+ "tile_m": 1000.0,
+ "tiles": [
+  27,
+  27
+ ],
+ "tile_files": 573,
+ "terrain": {
+  "source": {
+   "dataset": "MOI 2025 20 m DEM sheets (TGOS, data.gov.tw 176927)",
+   "packages": [
+    "臺北市",
+    "新北市"
+   ],
+   "sheets": 124,
+   "duplicate_nodes": {
+    "duplicate_nodes": 532856,
+    "duplicate_max_abs_diff_m": 0.0
+   },
+   "tgos_dir": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world-ntw\\data\\generated\\ntw\\tgos"
+  },
+  "crs": "EPSG:3826 / TWVD2001",
+  "bbox_3826": [
+   289540.0,
+   2773540.0,
+   316000.0,
+   2800000.0
+  ],
+  "spacing_m": 10.0,
+  "size": [
+   2647,
+   2647
+  ],
+  "landscape": {
+   "components": [
+    21,
+    21
+   ],
+   "num_subsections": 2,
+   "subsection_quads": 63,
+   "scale_xyz": [
+    1000.0,
+    1000.0,
+    256.0
+   ],
+   "location_cm": [
+    -646000.0,
+    -4000000.0,
+    54000.0
+   ],
+   "h_ref_m": 540.0,
+   "z_rule": "UE Z cm = location.z + (raw - 32768) / 128 * scale_z  (= TWVD2001 height * 100)"
+  },
+  "ue_frame": "WorldSpec north_taiwan_224: UE X = (E - 296000) * 100, UE Y = -(N - 2760000) * 100, UE Z = height * 100",
+  "official_nodes_in_region": 1395457,
+  "landcover_land_px_without_dem_node": 0,
+  "land_fraction": 0.7960502596726937,
+  "official_node_max_abs_diff_m": 0.010058593750045475,
+  "quantisation_m": 0.02,
+  "sea_fill": "no official node = sea (outside DEM coverage): min(coast height, 0) - min(2 + 0.03*dist, 45) m",
+  "height_m": {
+   "min": -45.7400016784668,
+   "max": 1117.4200439453125
+  }
+ },
+ "landcover_km2": {
+  "water": 167.2776,
+  "trees": 316.4876,
+  "flooded": 0.0748,
+  "crops": 13.7788,
+  "built": 191.54,
+  "bare": 0.3392,
+  "unknown": 0.3732,
+  "range": 10.2604
+ },
+ "forest_km2": 316.6646,
+ "cryptomeria_stand_km2": 27.5637,
+ "acacia_zone_km2": 58.4949,
+ "parcels": {
+  "total": 9025,
+  "eligible": 1167,
+  "chosen": 357
+ },
+ "trees": {
+  "total": 3859205,
+  "per_form": {
+   "A": 1622907,
+   "B": 871960,
+   "C": 630548,
+   "J": 733790
+  },
+  "per_ha_forest": 121.870426943839
+ },
+ "species_policy": "art-direction v1 (see module docstring); NOT a forest-type survey",
+ "outputs": {
+  "height_q.npy": "1c51cff02bc33b537ed2bc25b6bd5a8e7e2010cc2f98d594acc999d8a909e279",
+  "preview_species.png": "9f436e17791bd3bc2894227e472683dc4eb24a884b860d5f322042902300a94e",
+  "T_NF_Mask1.png": "560437c3c895ac352df7972cbb5e7a37866d2de16c5cbecd1bd8a19c3871c63e",
+  "T_NF_Mask2.png": "39b5faa327fe39784f62341dd4cf64eeeb81903702bca43c90a64ed0cad2951a",
+  "terrain.r16": "2b7c1fe9635c29dcbb8c1691f746d7c9c8308eaf1703d02fbc20c2250f2718c9"
+ },
+ "build_s": 48.3
+}

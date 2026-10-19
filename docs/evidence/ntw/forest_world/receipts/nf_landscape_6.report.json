@@ -1,0 +1,16 @@
+{
+  "status": "PASS_NF_LANDSCAPE",
+  "rev": "6",
+  "error": null,
+  "material": "/Game/NorthForest/Materials/M_NF_Landscape_R6",
+  "params": {
+    "CanopyBright": 1.25,
+    "NormalStrength": 1.0,
+    "CanopyTint": [
+      0.92,
+      1.0,
+      1.18
+    ]
+  },
+  "landscape_actors": 1
+}

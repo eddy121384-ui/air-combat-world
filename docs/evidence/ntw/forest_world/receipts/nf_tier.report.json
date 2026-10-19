@@ -1,0 +1,14 @@
+{
+  "status": "PASS_NF_TIER",
+  "tier": "pc",
+  "error": null,
+  "values": {
+    "NearFull": 45000.0,
+    "ThinEnd": 240000.0,
+    "FadeWidth": 12000.0,
+    "ThinGamma": 1.600000023841858,
+    "ShellStart": 70000.0,
+    "ShellEnd": 200000.0,
+    "ShellScale": 0.800000011920929
+  }
+}

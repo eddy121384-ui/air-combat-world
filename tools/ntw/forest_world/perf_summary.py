@@ -15,7 +15,7 @@ import numpy as np
 
 csv.field_size_limit(2**31 - 1)
 STILLS = ["agl300_qixing", "alt1500_overview", "agl120_plantation", "agl200_qingtiangang", "alt3000_wide", "agl400_basin_edge"]
-HOLD_S, FLIGHT_S = 8.0, 3499 / 30.0
+HOLD_S, FLIGHT_S = 8.0, 3519 / 30.0
 COLS = ("FrameTime", "GPUTime", "GameThreadTime", "RenderThreadTime", "RHIThreadTime")
 
 
@@ -23,7 +23,7 @@ def read(path):
     with open(path, newline="", encoding="utf-8", errors="replace") as fh:
         rows = list(csv.reader(fh))
     head = rows[0]
-    end = next((i for i, r in enumerate(rows) if r and r[0] == "EVENTS"), len(rows))
+    end = next((i for i, r in enumerate(rows) if i > 0 and r and r[0] == "EVENTS"), len(rows))   # header row repeats at the end
     data = {}
     for j, k in enumerate(head):
         if k in COLS or "Memory" in k or k.endswith("MB"):

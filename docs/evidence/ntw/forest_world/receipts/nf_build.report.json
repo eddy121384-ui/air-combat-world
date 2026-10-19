@@ -1,0 +1,192 @@
+{
+  "status": "PASS_NF_BUILD",
+  "level": "/Game/NorthForest/Maps/L_NF_Yangmingshan",
+  "steps": [
+    {
+      "name": "template_cleaned",
+      "t": 13.4,
+      "removed": [
+        "Landscape",
+        "LandscapeStreamingProxy",
+        "StaticMeshActor",
+        "VolumetricCloud",
+        "WorldPartitionHLOD",
+        "WorldPartitionMiniMap"
+      ]
+    },
+    {
+      "name": "lighting",
+      "t": 13.4
+    },
+    {
+      "name": "landscape",
+      "t": 16.8,
+      "Landscape": 1
+    },
+    {
+      "name": "forest_progress",
+      "t": 30.2,
+      "tiles": 50,
+      "instances": 272659
+    },
+    {
+      "name": "forest_progress",
+      "t": 47.9,
+      "tiles": 100,
+      "instances": 643592
+    },
+    {
+      "name": "forest_progress",
+      "t": 69.9,
+      "tiles": 150,
+      "instances": 1026684
+    },
+    {
+      "name": "forest_progress",
+      "t": 88.1,
+      "tiles": 200,
+      "instances": 1418292
+    },
+    {
+      "name": "forest_progress",
+      "t": 109.7,
+      "tiles": 250,
+      "instances": 1894894
+    },
+    {
+      "name": "forest_progress",
+      "t": 134.7,
+      "tiles": 300,
+      "instances": 2348679
+    },
+    {
+      "name": "forest_progress",
+      "t": 153.7,
+      "tiles": 350,
+      "instances": 2761157
+    },
+    {
+      "name": "forest_progress",
+      "t": 168.6,
+      "tiles": 400,
+      "instances": 3065947
+    },
+    {
+      "name": "forest_progress",
+      "t": 184.3,
+      "tiles": 450,
+      "instances": 3342291
+    },
+    {
+      "name": "forest_progress",
+      "t": 197.7,
+      "tiles": 500,
+      "instances": 3615771
+    },
+    {
+      "name": "forest_progress",
+      "t": 208.4,
+      "tiles": 550,
+      "instances": 3828258
+    },
+    {
+      "name": "forest",
+      "t": 210.4,
+      "tiles": 573,
+      "components": 4454,
+      "instances": 3859205,
+      "expected": 3859205,
+      "end_cull_cm": 260000
+    },
+    {
+      "name": "saved",
+      "t": 302.9
+    }
+  ],
+  "error": null,
+  "grid": {
+    "before": {
+      "hash_class": "WorldPartitionRuntimeHashSet",
+      "partitions": [
+        {
+          "name": "MainGrid",
+          "layer_class": "RuntimePartitionLHGrid",
+          "old_cell_size_cm": 25200,
+          "old_loading_range_cm": 76800
+        }
+      ]
+    },
+    "after": {
+      "hash_class": "WorldPartitionRuntimeHashSet",
+      "partitions": [
+        {
+          "name": "MainGrid",
+          "layer_class": "RuntimePartitionLHGrid",
+          "old_cell_size_cm": 100000,
+          "old_loading_range_cm": 320000
+        }
+      ]
+    }
+  },
+  "lighting": {
+    "sun": {
+      "azimuth_deg": 222.0,
+      "elevation_deg": 34.0
+    }
+  },
+  "landscape": {
+    "bridge": {
+      "pass": true,
+      "status": "PASS_CREATED",
+      "label": "NF_Terrain",
+      "path": "/Game/NorthForest/Maps/L_NF_Yangmingshan.L_NF_Yangmingshan:PersistentLevel.Landscape_UAID_00155D2CFED3940C03_1683391552",
+      "component_count": 441,
+      "num_subsections": 2,
+      "subsection_size_quads": 63,
+      "component_size_quads": 126,
+      "location_cm": [
+        -646000,
+        -4000000,
+        54000
+      ],
+      "scale_xyz": [
+        1000,
+        1000,
+        256
+      ],
+      "bounds_min_cm": [
+        -646000,
+        -4000000,
+        -4574
+      ],
+      "bounds_max_cm": [
+        2000000,
+        -1354000,
+        111742
+      ],
+      "landscape_info_valid": true,
+      "has_landscape_extent": true,
+      "landscape_extent_quads": [
+        0,
+        0,
+        2646,
+        2646
+      ],
+      "size_x": 2647,
+      "size_y": 2647,
+      "components_x": 21,
+      "components_y": 21,
+      "raw16_path": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world-ntwforest\\data\\generated\\ntw\\forest_world\\v1\\terrain.r16"
+    },
+    "actors": {
+      "Landscape": 1
+    }
+  },
+  "forest": {
+    "tiles": 573,
+    "components": 4454,
+    "instances": 3859205,
+    "expected": 3859205,
+    "end_cull_cm": 260000
+  }
+}

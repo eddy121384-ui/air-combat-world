@@ -1,0 +1,85 @@
+{
+  "status": "PASS_NF_ASSETS",
+  "textures": {
+    "T_NF_Mask1": {
+      "path": "/Game/NorthForest/Textures/T_NF_Mask1",
+      "size": [
+        2048,
+        2048
+      ]
+    },
+    "T_NF_Mask2": {
+      "path": "/Game/NorthForest/Textures/T_NF_Mask2",
+      "size": [
+        2048,
+        2048
+      ]
+    },
+    "T_NF_Noise": {
+      "path": "/Game/NorthForest/Textures/T_NF_Noise",
+      "size": [
+        512,
+        512
+      ]
+    }
+  },
+  "materials": {
+    "/Game/NorthForest/Materials/M_NF_AcaciaW_LeafCards": {
+      "ism": true,
+      "blend": "<BlendMode.BLEND_MASKED: 1>"
+    },
+    "/Game/NorthForest/Materials/M_NF_Acacia_Bark": {
+      "ism": true,
+      "blend": "<BlendMode.BLEND_MASKED: 1>"
+    },
+    "/Game/NorthForest/Materials/M_NF_Bark": {
+      "ism": true,
+      "blend": "<BlendMode.BLEND_MASKED: 1>"
+    },
+    "/Game/NorthForest/Materials/M_NF_Cryptomeria_Bark": {
+      "ism": true,
+      "blend": "<BlendMode.BLEND_MASKED: 1>"
+    },
+    "/Game/NorthForest/Materials/M_NF_Cryptomeria_LeafCards": {
+      "ism": true,
+      "blend": "<BlendMode.BLEND_MASKED: 1>"
+    },
+    "/Game/NorthForest/Materials/M_NF_LeafCards": {
+      "ism": true,
+      "blend": "<BlendMode.BLEND_MASKED: 1>"
+    },
+    "/Game/NorthForest/Materials/M_NF_Landscape": {
+      "uv_origin_cm": [
+        -646000.0,
+        -4000000.0
+      ],
+      "extent_cm": 2646000.0
+    },
+    "/Game/NorthForest/Materials/M_NF_Water": {}
+  },
+  "error": null,
+  "mpc": {
+    "path": "/Game/NorthForest/Materials/MPC_NF_Forest",
+    "defaults_cm": {
+      "NearFull": 45000.0,
+      "ThinEnd": 240000.0,
+      "FadeWidth": 12000.0,
+      "ThinGamma": 1.6,
+      "ShellStart": 70000.0,
+      "ShellEnd": 200000.0,
+      "ShellScale": 0.8
+    }
+  },
+  "leaf_instances": {
+    "0": "MI_NF_Leaf_V0",
+    "1": "MI_NF_Leaf_V1",
+    "2": "MI_NF_Leaf_V2",
+    "3": "MI_NF_Leaf_V3",
+    "4": "MI_NF_Leaf_V4",
+    "5": "MI_NF_Leaf_V5",
+    "6": "MI_NF_Leaf_V6",
+    "7": "MI_NF_Leaf_V7",
+    "8": "MI_NF_Leaf_V8",
+    "9": "MI_NF_Leaf_V9"
+  }
+}

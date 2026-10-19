@@ -1,0 +1,45 @@
+{
+  "status": "PASS_NF_BAKE",
+  "tiles": {
+    "broad": {
+      "actors": 183,
+      "origin_cm": [
+        0.0,
+        0.0
+      ],
+      "files": [
+        "broad_basecolor",
+        "broad_normal",
+        "broad_depth"
+      ]
+    },
+    "acacia": {
+      "actors": 187,
+      "origin_cm": [
+        25000.0,
+        0.0
+      ],
+      "files": [
+        "acacia_basecolor",
+        "acacia_normal",
+        "acacia_depth"
+      ]
+    },
+    "crypt": {
+      "actors": 390,
+      "origin_cm": [
+        50000.0,
+        0.0
+      ],
+      "files": [
+        "crypt_basecolor",
+        "crypt_normal",
+        "crypt_depth"
+      ]
+    }
+  },
+  "error": null,
+  "tile_m": 96.0,
+  "px": 1024,
+  "capture_height_cm": 20000.0
+}
