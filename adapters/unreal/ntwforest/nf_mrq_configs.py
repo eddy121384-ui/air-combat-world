@@ -39,6 +39,10 @@ try:
                      "output_resolution": unreal.IntPoint(1920, 1080), "use_custom_frame_rate": False, "override_existing_output": False,
                      "zero_pad_frame_numbers": 4, "handle_frame_count": 0, "output_frame_step": 1}.items():
             out.set_editor_property(k, v)
+        if os.environ.get("ACW_NF_MRQ_RANGE"):   # diagnostic renders of a sub-range (e.g. one held still)
+            r0, r1 = (int(x) for x in os.environ["ACW_NF_MRQ_RANGE"].split(","))
+            for k, v in {"use_custom_playback_range": True, "custom_start_frame": r0, "custom_end_frame": r1}.items():
+                out.set_editor_property(k, v)
         game = c.find_or_add_setting_by_class(unreal.MoviePipelineGameOverrideSetting)
         for k in ["cinematic_quality_settings", "use_lod_zero", "disable_hlods", "use_high_quality_shadows", "override_view_distance_scale",
                   "flush_grass_streaming", "override_grass_cull_distance_scale", "override_grass_density_scale", "flush_streaming_managers",

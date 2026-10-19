@@ -1,0 +1,17 @@
+{
+  "status": "PASS_NF_LEAF_SPEC",
+  "specular": 0.1,
+  "instances": {
+    "/Game/NorthForest/Materials/MI_NF_Leaf_V0": 0.10000000149011612,
+    "/Game/NorthForest/Materials/MI_NF_Leaf_V1": 0.10000000149011612,
+    "/Game/NorthForest/Materials/MI_NF_Leaf_V2": 0.10000000149011612,
+    "/Game/NorthForest/Materials/MI_NF_Leaf_V3": 0.10000000149011612,
+    "/Game/NorthForest/Materials/MI_NF_Leaf_V4": 0.10000000149011612,
+    "/Game/NorthForest/Materials/MI_NF_Leaf_V5": 0.10000000149011612,
+    "/Game/NorthForest/Materials/MI_NF_Leaf_V6": 0.10000000149011612,
+    "/Game/NorthForest/Materials/MI_NF_Leaf_V7": 0.10000000149011612,
+    "/Game/NorthForest/Materials/MI_NF_Leaf_V8": 0.10000000149011612,
+    "/Game/NorthForest/Materials/MI_NF_Leaf_V9": 0.10000000149011612
+  },
+  "error": null
+}

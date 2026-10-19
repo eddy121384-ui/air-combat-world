@@ -1,0 +1,24 @@
+{
+  "status": "PASS_NF_LANDSCAPE",
+  "rev": "3",
+  "error": null,
+  "material": "/Game/NorthForest/Materials/M_NF_LandscapeDL_R3",
+  "params": {
+    "CanopyBright": 1.25,
+    "NormalStrength": 1.0,
+    "CanopyTint": [
+      0.92,
+      1.0,
+      1.18
+    ],
+    "bands": {
+      "FA0": 350000.0,
+      "FA1": 600000.0,
+      "FB0": 700000.0,
+      "FB1": 1100000.0,
+      "SK0": 0.3,
+      "SK1": 1.0
+    }
+  },
+  "landscape_actors": 1
+}

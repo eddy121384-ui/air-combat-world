@@ -89,8 +89,8 @@ try:
     cam = camera()
     sequence("LS_NF_Flight" + SUFFIX, V["flight"]["keys"], unreal.MovieSceneKeyInterpolation.LINEAR, cam)
     hold = V["still_hold_frames"]
-    if not SUFFIX:
-        sequence("LS_NF_Stills", held(V["stills"], hold), unreal.MovieSceneKeyInterpolation.CONSTANT, cam)
+    if not SUFFIX or os.environ.get("ACW_NF_STILLS_TOO") == "1":   # revisions may add their own stills list (views_dl.json)
+        sequence("LS_NF_Stills" + SUFFIX, held(V["stills"], hold), unreal.MovieSceneKeyInterpolation.CONSTANT, cam)
     ph = PERF_HOLD_S * V["fps"]
     pk = held(V["stills"], ph)
     off = len(V["stills"]) * ph
