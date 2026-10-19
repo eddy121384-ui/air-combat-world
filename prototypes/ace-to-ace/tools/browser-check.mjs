@@ -4,7 +4,7 @@
 // iPhone: headless Chromium renders WebGL in software (SwiftShader), so FPS here is pessimistic
 // for GPU cost and says nothing about Safari/WebKit specifics.
 //
-//   node tools/browser-check.mjs [--out tools/out/shots] [--scenario all|lookdev|title|fight|manual|touch|aivai|result]
+//   node tools/browser-check.mjs [--out tools/out/shots] [--scenario all|lookdev|title|fight|manual|touch|aivai|result] [--query sky=opus]
 import http from 'node:http';
 import { readFile, mkdir, writeFile } from 'node:fs/promises';
 import assert from 'node:assert/strict';
@@ -52,7 +52,9 @@ async function page(ctxOpts, url, label) {
   p.on('pageerror', (e) => report.errors.push(`[${label}] pageerror: ${e.message}`));
   p.on('requestfailed', (r) => report.errors.push(`[${label}] request failed: ${r.url()}`));
   p.on('response', (r) => { if (r.status() >= 400) report.errors.push(`[${label}] HTTP ${r.status()}: ${r.url()}`); });
-  await p.goto(base + url);
+  // --query sky=opus appends an opt-in flag to every game URL (e.g. the Opus Sky spike).
+  const extra = typeof args.query === 'string' ? args.query : '';
+  await p.goto(base + url + (extra ? (url.includes('?') ? '&' : '?') + extra : ''));
   return { ctx, p };
 }
 async function shot(p, name) {

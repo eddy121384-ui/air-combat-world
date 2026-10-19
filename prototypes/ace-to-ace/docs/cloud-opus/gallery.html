@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="zh-Hant"><head><meta charset="utf-8"><title>Opus Sky — route videos</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body{margin:0;background:#0f1724;color:#e8eef6;font:14px/1.5 system-ui,-apple-system,sans-serif;padding:16px}
+h1{font-size:18px;margin:0 0 4px}p{margin:0 0 14px;color:#b7c4d6}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,460px),1fr));gap:14px}
+figure{margin:0;background:#18243a;border-radius:8px;overflow:hidden}video{display:block;width:100%;height:auto;background:#000}
+figcaption{padding:8px 10px;font-size:13px}button{font:inherit;margin:0 0 12px;padding:4px 10px;border-radius:5px;border:1px solid #ffffff55;background:#ffffff14;color:inherit}
+</style></head><body>
+<h1>Opus Sky · 五條路線</h1>
+<p>真實 Chromium WebGL 逐格渲染（24 fps，960×540）；影片速度＝模擬速度，不是裝置 FPS。本機開啟：在 <code>prototypes/ace-to-ace</code> 執行 <code>python3 -m http.server</code>。</p>
+<button id="all">全部同步播放</button>
+<div class="grid">
+<figure><video src="final/approach.mp4" controls muted playsinline preload="metadata"></video><figcaption>飛近主塔（離外緣 billow 4.8 km → 0.6 km）</figcaption></figure>
+<figure><video src="final/sidepass.mp4" controls muted playsinline preload="metadata"></video><figcaption>側掠受光雲牆（離 billow 約 140 m）</figcaption></figure>
+<figure><video src="final/orbit180.mp4" controls muted playsinline preload="metadata"></video><figcaption>180° 繞行：順光 → 側光 → 逆光</figcaption></figure>
+<figure><video src="final/traverse.mp4" controls muted playsinline preload="metadata"></video><figcaption>穿入、雲內、穿出積雲</figcaption></figure>
+<figure><video src="final/deck.mp4" controls muted playsinline preload="metadata"></video><figcaption>雲海：俯衝穿層、雲下、拉起穿出</figcaption></figure>
+</div>
+<script>
+document.getElementById('all').onclick = () => document.querySelectorAll('video').forEach(v => { v.currentTime = 0; v.play(); });
+</script>
+</body></html>

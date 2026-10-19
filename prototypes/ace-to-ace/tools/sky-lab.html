@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="zh-Hant"><head><meta charset="utf-8"><title>Ace to Ace — Opus Sky Lab</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="icon" href="data:,">
+<script type="importmap">{"imports":{"three":"../vendor/three.module.min.js"}}</script>
+<style>
+html,body{margin:0;height:100%;overflow:hidden;background:#8fb0cc;color:#f3f7fb;font:13px/1.45 system-ui,-apple-system,sans-serif}
+canvas{display:block;width:100%;height:100%;touch-action:none}
+aside{position:absolute;left:10px;top:10px;max-width:310px;max-height:calc(100vh - 40px);overflow:auto;padding:10px 12px;background:#14243acc;border:1px solid #ffffff40;border-radius:8px;backdrop-filter:blur(6px)}
+aside.min>*:not(h1){display:none}
+h1{font-size:15px;margin:0 0 6px;cursor:pointer}button,select{font:inherit;margin:2px 2px 2px 0;padding:3px 7px;border-radius:5px;border:1px solid #ffffff55;background:#ffffff1a;color:inherit;cursor:pointer}
+button.on{background:#f4c27a55;border-color:#f4c27a}#timeline{width:100%}#readout{white-space:pre;font:11px/1.45 ui-monospace,monospace;margin-top:6px;opacity:.9}
+label{display:inline-block;margin:2px 8px 2px 0}p{margin:4px 0}
+#stick{position:absolute;left:0;bottom:0;width:50%;height:60%;touch-action:none}
+</style></head><body>
+<canvas id="gl" aria-label="Opus Sky 三維雲場飛行實驗"></canvas>
+<div id="stick" aria-hidden="true"></div>
+<aside id="panel"><h1 id="title">Opus Sky Lab ▾</h1>
+<p id="routes"></p>
+<p><button id="play">▶ 播放</button><button id="free">自由飛行</button></p>
+<input id="timeline" type="range" min="0" max="1" step="0.0005" value="0" aria-label="路線時間">
+<p><label>解析度 <select id="dpr"><option value="auto">自動</option><option value="1">1×</option><option value="0.75">0.75×</option><option value="0.5">0.5×</option></select></label>
+<label><input id="wind" type="checkbox">風</label><label><input id="streaks" type="checkbox" checked>雲絲</label><label><input id="plane" type="checkbox" checked>戰機</label></p>
+<p>自由飛行：方向鍵／WASD 俯仰滾轉，Shift 加速；觸控左下拖曳。</p>
+<div id="readout" role="status">建立雲場…</div>
+<p><a style="color:#cfe8ff" href="../index.html">返回 R2 遊戲</a></p>
+</aside>
+<script type="module" src="sky-lab.js"></script></body></html>
