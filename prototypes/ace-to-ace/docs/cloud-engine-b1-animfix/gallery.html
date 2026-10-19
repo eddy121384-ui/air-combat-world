@@ -1,0 +1,24 @@
+<!doctype html><html lang="zh-Hant"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>B1 動畫空間比較</title>
+<style>body{margin:24px;background:#102131;color:#e9eef5;font:15px/1.6 system-ui;max-width:1600px}a{color:#b8dafa}select,button,input{font:inherit;margin:4px}#pair,#sheets{display:grid;grid-template-columns:1fr 1fr;gap:14px}video,img{width:100%}figure{margin:0}figcaption{margin:6px 0}#seek{width:min(90%,900px)}@media(max-width:850px){#pair,#sheets{grid-template-columns:1fr}}</style>
+<h1>B1 動畫修正 · 相同世界路線</h1><p>左：B1 原版，右：Animfix。全部由真實 WebGL 逐幀擷取，以 15 fps 編碼；影片播放幀率不代表執行效能。<a href="README.md">研究／成本／限制</a> · <a href="../../tools/cloud-lab.html">操作 Cloud Lab</a></p>
+<select id="scene" aria-label="動畫場景"><option value="overview">九場景總覽（108 秒）</option></select>
+<button id="play">同步播放／暫停</button><button id="prev">前一格</button><button id="next">後一格</button><input id="seek" type="range" min="0" max="108" step="0.0666667" value="0" aria-label="動畫進度"><span id="time"></span>
+<div id="pair"><figure><figcaption>B1 原版：billboard／角度混合／中心距離 fade</figcaption><video id="anime" playsinline muted preload="metadata"></video></figure><figure><figcaption>Animfix：固定三維密度／世界筆觸／同一介質</figcaption><video id="stable" playsinline muted preload="metadata"></video></figure></div>
+<p id="caption"></p><div id="sheets"><img id="aSheet" alt="原版六個連續時刻"><img id="sSheet" alt="Animfix 六個連續時刻"></div>
+<p>比較重點：繞行時表面是否追隨相機、爬升時是否換剪影、進出時有沒有整片消失。Animfix 的柔化輪廓與較弱插畫細節也請一起評估。<a id="download" href="final/overview-stable.webm">下載本段 Animfix</a> · <a href="final/report.json">實際幀座標／密度／成本紀錄</a></p>
+<script type="module">
+import {CLOUD_ANIMATION_PATHS} from '../../tools/cloud-animation-paths.js';
+const $=id=>document.getElementById(id),videos=[$('anime'),$('stable')];
+for(const p of CLOUD_ANIMATION_PATHS)$('scene').add(new Option(p.label,p.id));
+$('scene').add(new Option('180° 較高視點複核','clear-turn180'));
+function select(){const id=$('scene').value,base=id==='clear-turn180'?'orbit-review/turn180':`final/${id}`;videos.forEach((v,i)=>{v.pause();v.src=`${base}-${i?'stable':'anime'}.webm`;});
+ $('seek').value=0;$('seek').max=id==='overview'?108:12;$('download').href=`${base}-stable.webm`;
+ const sheet=id==='overview'?'final/turn180':base;$('aSheet').src=`${sheet}-anime.jpg`;$('sSheet').src=`${sheet}-stable.jpg`;}
+$('scene').onchange=select;select();
+$('play').onclick=()=>{if(videos[0].paused)videos.forEach(v=>v.play());else videos.forEach(v=>v.pause());};
+function seek(t){videos.forEach(v=>{v.pause();v.currentTime=Math.max(0,Math.min(t,v.duration||108));});}
+$('seek').oninput=()=>seek(+$('seek').value);$('prev').onclick=()=>seek(videos[0].currentTime-1/15);$('next').onclick=()=>seek(videos[0].currentTime+1/15);
+videos[0].ontimeupdate=()=>{const t=videos[0].currentTime;$('seek').value=t;$('time').textContent=t.toFixed(2)+' s';
+ if(Math.abs(videos[1].currentTime-t)>0.15)videos[1].currentTime=t;
+ const path=$('scene').value==='overview'?CLOUD_ANIMATION_PATHS[Math.min(8,Math.floor(t/12))]:CLOUD_ANIMATION_PATHS.find(p=>p.id===$('scene').value);$('caption').textContent=path?.label||'180° 較高視點複核';};
+</script></html>

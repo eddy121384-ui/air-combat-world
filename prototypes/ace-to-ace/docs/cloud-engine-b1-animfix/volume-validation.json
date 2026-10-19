@@ -1,0 +1,33 @@
+{
+  "passed": true,
+  "reports": [
+    {
+      "kind": "cumulus",
+      "buildMs": 229.4269,
+      "bytes": 983040,
+      "grid": [
+        96,
+        32,
+        80
+      ],
+      "sha256": "1abcf5457adf799556757851784de3125f599253563425f20c26dbff6a0e56f3",
+      "maxDensityError": 0.060125181149158546,
+      "p95DensityError": 0.010460831892779472,
+      "advectionError": 8.881784197001252e-16
+    },
+    {
+      "kind": "stratocumulus",
+      "buildMs": 207.1427,
+      "bytes": 983040,
+      "grid": [
+        96,
+        32,
+        80
+      ],
+      "sha256": "7930a3cf890d4b9aca16ae011bc1722022262dc9b29a8525e6ee9fba0b5439fb",
+      "maxDensityError": 0.04368050492858644,
+      "p95DensityError": 0.008410683729330612,
+      "advectionError": 4.996003610813204e-16
+    }
+  ]
+}

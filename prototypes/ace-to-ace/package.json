@@ -11,6 +11,9 @@
     "test:cloud": "node tools/test-cloud-field.mjs",
     "test:cloud-browser": "node tools/cloud-lab-check.mjs",
     "test:cloud-b1": "node tools/test-cloud-b1.mjs",
-    "test:cloud-b1-browser": "node tools/cloud-b1-check.mjs --round final"
+    "test:cloud-b1-browser": "node tools/cloud-b1-check.mjs --round final",
+    "test:cloud-animfix": "node tools/test-cloud-animfix.mjs",
+    "test:cloud-animfix-browser": "node tools/cloud-animfix-check.mjs --round final",
+    "test:cloud-animfix-perf": "node tools/cloud-animfix-perf.mjs"
   }
 }
