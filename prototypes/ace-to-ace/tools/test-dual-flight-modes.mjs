@@ -92,7 +92,7 @@ for (const mode of ['arcade','tactical']) {
   const expert = new PlayerController(e, stub(), { invert: false, assist: false }).update();
   const assisted = new PlayerController(as, stub(), { invert: false, assist: true }).update();
   assert.equal(expert.roll, .65);
-  assert.equal(expert.pitch, 0);
+  assert.ok(Math.abs(expert.pitch) < 1e-9, 'neutral expert pitch may be signed zero');
   assert.ok(assisted.pitch > 0, 'Assisted must coordinate bank-and-pull');
   assert.notDeepEqual([expert.roll,expert.pitch],[assisted.roll,assisted.pitch]);
   assert.equal(assisted.boost, false, 'Assisted must not secretly enable AB');
