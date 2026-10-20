@@ -1,0 +1,12 @@
+{
+  "status": "PASS_NF_TREES_VANISH",
+  "materials": {
+    "/Game/NorthForest/Materials/M_NF_AcaciaW_LeafCards": "vanish_collapse_added",
+    "/Game/NorthForest/Materials/M_NF_Acacia_Bark": "vanish_collapse_added",
+    "/Game/NorthForest/Materials/M_NF_Bark": "vanish_collapse_added",
+    "/Game/NorthForest/Materials/M_NF_Cryptomeria_Bark": "vanish_collapse_added",
+    "/Game/NorthForest/Materials/M_NF_Cryptomeria_LeafCards": "vanish_collapse_added",
+    "/Game/NorthForest/Materials/M_NF_LeafCards": "vanish_collapse_added"
+  },
+  "error": null
+}

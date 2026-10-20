@@ -15,6 +15,7 @@ $Adapters = Join-Path $RepoRoot "adapters\unreal\ntwforest"
 $Out = Join-Path $RepoRoot "unreal\TreeLookdev\Saved\NorthForest"
 $Logs = Join-Path $Out "logs"
 New-Item -ItemType Directory -Force -Path $Out, $Logs, (Join-Path $Out "reports") | Out-Null
+for ($w = 0; $w -lt 60 -and (Get-Process UnrealEditor* -ErrorAction SilentlyContinue); $w++) { Start-Sleep -Seconds 2 }   # previous session still exiting
 if (Get-Process UnrealEditor* -ErrorAction SilentlyContinue) { throw "an UnrealEditor process is already running" }
 $exe = Join-Path $EngineRoot "Engine\Binaries\Win64\UnrealEditor-Cmd.exe"
 $env:ACW_REPO_ROOT = $RepoRoot

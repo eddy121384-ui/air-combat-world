@@ -1,0 +1,51 @@
+{
+  "status": "PASS_NF_PERFCFG",
+  "cfg": {
+    "mpc": {
+      "NearFull": 100000,
+      "ThinEnd": 400000,
+      "FadeWidth": 15000,
+      "ThinGamma": 2.2,
+      "ShellStart": 120000,
+      "ShellEnd": 300000,
+      "ClumpGain": 0.7
+    },
+    "wp_range_cm": 460000,
+    "landscape": "M_NF_LandscapeDL_R3"
+  },
+  "error": null,
+  "mpc": {
+    "NearFull": 100000.0,
+    "ThinEnd": 400000.0,
+    "FadeWidth": 15000.0,
+    "ThinGamma": 2.200000047683716,
+    "ShellStart": 120000.0,
+    "ShellEnd": 300000.0,
+    "ShellScale": 0.800000011920929,
+    "ClumpGain": 0.699999988079071
+  },
+  "grid": {
+    "hash_class": "WorldPartitionRuntimeHashSet",
+    "partitions": [
+      {
+        "name": "MainGrid",
+        "layer_class": "RuntimePartitionLHGrid",
+        "old_cell_size_cm": 100000,
+        "old_loading_range_cm": 320000
+      }
+    ]
+  },
+  "grid_now": {
+    "hash_class": "WorldPartitionRuntimeHashSet",
+    "partitions": [
+      {
+        "name": "MainGrid",
+        "layer_class": "RuntimePartitionLHGrid",
+        "old_cell_size_cm": 100000,
+        "old_loading_range_cm": 460000
+      }
+    ]
+  },
+  "landscape_material": "M_NF_LandscapeDL_R3",
+  "sun_shadow_cm": 300000.0
+}

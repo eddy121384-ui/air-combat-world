@@ -17,7 +17,7 @@ from nf_common import MAP, RUN, find_actor, lib, tools, write_report  # noqa: E4
 
 LEVEL = MAP + "/L_NF_Yangmingshan"
 SEQ_DIR = MAP.replace("/Maps", "/Sequences")
-PERF_HOLD_S = 8
+PERF_HOLD_S = int(os.environ.get("ACW_NF_PERF_HOLD_S", "8"))
 les = unreal.get_editor_subsystem(unreal.LevelEditorSubsystem)
 ues = unreal.get_editor_subsystem(unreal.EditorActorSubsystem)
 V = json.loads((RUN / os.environ.get("ACW_NF_VIEWS", "views.json")).read_text(encoding="utf-8"))

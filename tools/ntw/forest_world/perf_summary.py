@@ -18,7 +18,8 @@ csv.field_size_limit(2**31 - 1)
 STILLS = ["agl300_qixing", "alt1500_overview", "agl120_plantation", "agl200_qingtiangang", "alt3000_wide", "agl400_basin_edge"]
 if os.environ.get("ACW_NF_PERF_VIEWS"):   # perf sequence built from another views file (e.g. views_dl.json: 10 stills)
     STILLS = [s["name"] for s in json.loads(Path(os.environ["ACW_NF_PERF_VIEWS"]).read_text(encoding="utf-8"))["stills"]]
-HOLD_S, FLIGHT_S = 8.0, 3519 / 30.0
+HOLD_S, FLIGHT_S = float(os.environ.get("ACW_NF_PERF_HOLD_S", "8")), 3519 / 30.0
+FIXED_FPS = float(os.environ.get("ACW_NF_PERF_FIXED_FPS", "0"))   # -benchmark -fps=N runs: sequence time = frames / N
 COLS = ("FrameTime", "GPUTime", "GameThreadTime", "RenderThreadTime", "RHIThreadTime")
 
 
@@ -66,7 +67,7 @@ def main():
         t = np.cumsum(d["FrameTime"]) / 1000.0
         early = t < 60
         k0 = int(np.nanargmax(np.where(early, d["FrameTime"], -1)))   # longest hitch in the first 60 s = map load / initial streaming
-        ts = t - t[k0]
+        ts = (np.arange(len(t)) - k0) / FIXED_FPS if FIXED_FPS else t - t[k0]
         seg = {}
         for i, name in enumerate(STILLS):
             seg["still_" + name] = stats(d, (ts >= HOLD_S * i + 2) & (ts < HOLD_S * (i + 1)))

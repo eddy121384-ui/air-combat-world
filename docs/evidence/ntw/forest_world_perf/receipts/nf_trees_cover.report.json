@@ -1,0 +1,13 @@
+{
+  "status": "PASS_NF_TREES_COVER",
+  "materials": {
+    "/Game/NorthForest/Materials/M_NF_AcaciaW_LeafCards": "coverage_preserving",
+    "/Game/NorthForest/Materials/M_NF_Acacia_Bark": "coverage_preserving",
+    "/Game/NorthForest/Materials/M_NF_Bark": "coverage_preserving",
+    "/Game/NorthForest/Materials/M_NF_Cryptomeria_Bark": "coverage_preserving",
+    "/Game/NorthForest/Materials/M_NF_Cryptomeria_LeafCards": "coverage_preserving",
+    "/Game/NorthForest/Materials/M_NF_LeafCards": "coverage_preserving"
+  },
+  "error": null,
+  "mode": "linear"
+}

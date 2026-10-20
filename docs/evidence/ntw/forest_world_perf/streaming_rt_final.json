@@ -1,0 +1,33 @@
+{
+ "run": "rt_final",
+ "events": [
+  {
+   "t_s": 4.2,
+   "from": "Good",
+   "to": "Critical",
+   "segment": "still1"
+  },
+  {
+   "t_s": 6.3,
+   "from": "Critical",
+   "to": "Slow",
+   "segment": "still1"
+  },
+  {
+   "t_s": 12.3,
+   "from": "Slow",
+   "to": "Good",
+   "segment": "flight"
+  }
+ ],
+ "flight_events": [
+  {
+   "t_s": 12.3,
+   "from": "Slow",
+   "to": "Good",
+   "segment": "flight"
+  }
+ ],
+ "flight_degraded": false,
+ "flight_fps_median": 6.01
+}
