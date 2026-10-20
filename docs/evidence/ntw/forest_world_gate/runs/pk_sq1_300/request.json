@@ -1,0 +1,20 @@
+﻿{
+    "args":  [
+                 "TreeLookdev",
+                 "-windowed",
+                 "-ResX=1920",
+                 "-ResY=1080",
+                 "-ForceRes",
+                 "-nosound",
+                 "-nosplash",
+                 "-unattended",
+                 "-ExecCmds=\"r.VSync 0,sg.ShadowQuality 1,slomo 1.25,csv.Category Memory 1,r.GPUCsvStatsEnabled 1\"",
+                 "-csvCaptureFrames=2400",
+                 "-ExitAfterCsvProfiling",
+                 "-llm",
+                 "-abslog=\"D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world-ntwforest-gate\\unreal\\TreeLookdev\\Saved\\NorthForest\\gate\\runs\\pk_sq1_300\\game.log\""
+             ],
+    "started":  "2026-10-20T15:42:29.4936441+08:00",
+    "exe":  "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world-ntwforest-gate\\unreal\\TreeLookdev\\Saved\\StagedBuilds\\Windows\\TreeLookdev\\Binaries\\Win64\\TreeLookdev.exe",
+    "tag":  "pk_sq1_300"
+}

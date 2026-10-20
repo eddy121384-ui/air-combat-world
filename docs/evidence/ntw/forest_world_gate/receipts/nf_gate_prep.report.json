@@ -1,0 +1,9 @@
+{
+  "status": "PASS_NF_GATE_PREP",
+  "error": null,
+  "tree_hism": 17351,
+  "velocity_flag_before": [
+    true
+  ],
+  "auto_play_sequence": "/Game/NorthForest/Sequences/LS_NF_Perf_P.LS_NF_Perf_P"
+}

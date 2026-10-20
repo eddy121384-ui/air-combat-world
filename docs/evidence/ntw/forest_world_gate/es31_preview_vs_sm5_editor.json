@@ -1,0 +1,110 @@
+{
+ "ed_gate_velcomp": {
+  "flight": {
+   "GPUTime_median": 282.6,
+   "GPUTime_p95": 383.4,
+   "FrameTime_median": 285.2,
+   "FrameTime_p95": 386.0,
+   "Basepass": 155.3,
+   "Prepass": 83.6,
+   "RenderVelocities": 1.3,
+   "ShadowDepths": 15.1,
+   "TAA": 5.7,
+   "SSAO": 3.2,
+   "Lights": 1.3,
+   "SkyAtmosphere": 0.9,
+   "Postprocessing": 2.2
+  },
+  "dl_layers_north": {
+   "GPUTime_median": 180.4,
+   "GPUTime_p95": 193.0,
+   "FrameTime_median": 174.9,
+   "FrameTime_p95": 230.4,
+   "Basepass": 92.6,
+   "Prepass": 51.5,
+   "RenderVelocities": 1.5,
+   "ShadowDepths": 1.6,
+   "TAA": 6.0,
+   "SSAO": 3.2,
+   "Lights": 1.1,
+   "SkyAtmosphere": 0.9,
+   "Postprocessing": 2.4
+  },
+  "agl200_qingtiangang": {
+   "GPUTime_median": 31.4,
+   "GPUTime_p95": 274.3,
+   "FrameTime_median": 58.4,
+   "FrameTime_p95": 279.6,
+   "Basepass": 57.6,
+   "Prepass": 28.2,
+   "RenderVelocities": 1.5,
+   "ShadowDepths": 6.4,
+   "TAA": 5.5,
+   "SSAO": 3.1,
+   "Lights": 1.2,
+   "SkyAtmosphere": 0.9,
+   "Postprocessing": 2.2
+  },
+  "agl120_plantation": {
+   "GPUTime_median": 363.4,
+   "GPUTime_p95": 395.8,
+   "FrameTime_median": 372.2,
+   "FrameTime_p95": 400.4,
+   "Basepass": 176.3,
+   "Prepass": 128.7,
+   "RenderVelocities": 0.9,
+   "ShadowDepths": 64.9,
+   "TAA": 5.5,
+   "SSAO": 3.3,
+   "Lights": 1.4,
+   "SkyAtmosphere": 0.8,
+   "Postprocessing": 2.1
+  }
+ },
+ "es31_full": {
+  "flight": {
+   "GPUTime_median": 168.3,
+   "GPUTime_p95": 255.3,
+   "FrameTime_median": 641.5,
+   "FrameTime_p95": 1062.4,
+   "Basepass": 67.0,
+   "RenderVelocities": 0.9,
+   "ShadowDepths": 1.0,
+   "TAA": 5.5,
+   "Postprocessing": 1.6
+  },
+  "dl_layers_north": {
+   "GPUTime_median": 106.5,
+   "GPUTime_p95": 110.9,
+   "FrameTime_median": 486.5,
+   "FrameTime_p95": 502.3,
+   "Basepass": 85.1,
+   "RenderVelocities": 1.3,
+   "ShadowDepths": 1.4,
+   "TAA": 5.5,
+   "Postprocessing": 1.6
+  },
+  "agl200_qingtiangang": {
+   "GPUTime_median": 154.3,
+   "GPUTime_p95": 169.8,
+   "FrameTime_median": 552.4,
+   "FrameTime_p95": 581.4,
+   "Basepass": 123.5,
+   "RenderVelocities": 1.4,
+   "ShadowDepths": 9.6,
+   "TAA": 5.6,
+   "Postprocessing": 1.8
+  },
+  "agl120_plantation": {
+   "GPUTime_median": 295.7,
+   "GPUTime_p95": 300.5,
+   "FrameTime_median": 722.6,
+   "FrameTime_p95": 727.6,
+   "Basepass": 216.8,
+   "RenderVelocities": 0.9,
+   "ShadowDepths": 56.2,
+   "TAA": 5.6,
+   "Postprocessing": 1.7
+  }
+ }
+}
