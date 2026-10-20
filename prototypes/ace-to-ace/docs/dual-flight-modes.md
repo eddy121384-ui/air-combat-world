@@ -45,3 +45,36 @@ check rolling, stopping precisely, tracking target, high-G turns, stalled/low-sp
 handling, AB recovery, aim assistance and full 1v1 victory/defeat conditions.
 Measure learning effort and fun; do not infer user preference from headless results.
 Keep this in Draft until visually and physically verified.
+
+## Independent preview (Vercel READY, iPhone Safari NOT device-tested)
+
+Deployment: `dpl_GLc2Yn9CtGhjefYcH7Mwobc3NkSY`, source commit
+`9b55f21f359464eeeedcb86ef0248ef769bfe444` (runtime identical to
+the later test-only assertion-fix commit).
+
+- [Arcade × Expert](https://skyfront-ace-to-kao5v9bld-eddy121384-1385s-projects.vercel.app/?mode=arcade&control=expert&seed=71429)
+- [Arcade × Assisted](https://skyfront-ace-to-kao5v9bld-eddy121384-1385s-projects.vercel.app/?mode=arcade&control=assisted&seed=71429)
+- [Tactical × Expert](https://skyfront-ace-to-kao5v9bld-eddy121384-1385s-projects.vercel.app/?mode=tactical&control=expert&seed=71429)
+- [Tactical × Assisted](https://skyfront-ace-to-kao5v9bld-eddy121384-1385s-projects.vercel.app/?mode=tactical&control=assisted&seed=71429)
+
+Vercel API confirms READY and inspected deployed source tree includes the
+root index.html, aircraft physics, AI, HUD/input/render JS, two vendored Three.js
+scripts, and original sky/cloud paintings. An independent outside HTTP success
+check was not available through the browsing environment. Real iPhone Safari
+touch/play acceptance remains OPEN.
+
+## Deterministic headless measurements
+
+At 60Hz, F-16V, same bank-to-90 setup, 1 second at full aft stick:
+
+| Measurement | Arcade | Tactical |
+|---|---:|---:|
+| heading gain | 24.74 deg | 21.52 deg |
+| end load factor | 10.5 G | 9.0 G |
+| airspeed loss | 5.52 m/s | 15.97 m/s |
+| available G at 85 m/s | 5.70 G | 1.90 G |
+| airspeed loss at 55% pull | 0.25 m/s | 4.43 m/s |
+
+These numbers are algorithmic arcade experiments, not real aircraft
+performance data. We still need human comparisons to decide whether either
+mode actually feels enjoyable.
