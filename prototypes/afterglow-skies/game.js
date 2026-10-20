@@ -1,4 +1,4 @@
-import * as THREE from './vendor/three.module.min.js';
+import { THREE } from './vendor/three.module.js';
 const boot = window.__aceBoot;
 boot.stage('正在建立場景…');
 // 頂點焊接（取代 BufferGeometryUtils.mergeVertices）
