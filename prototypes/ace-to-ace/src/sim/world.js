@@ -41,9 +41,10 @@ export class Match {
     const sp = o.spawn || defaultSpawn(this.rng);
     this.blue = createAircraft(o.blue.type, 'blue', sp.blue.pos, sp.blue.fwd, sp.blue.speed);
     this.red = createAircraft(o.red.type, 'red', sp.red.pos, sp.red.fwd, sp.red.speed);
-    // A is the untouched legacy default; B affects both combatants equally.
-    this.blue.flightFeel = o.flightFeel === 'B' ? 'B' : 'A';
-    this.red.flightFeel = this.blue.flightFeel;
+    // Legacy A remains the regression default; modes apply to both AI and human.
+    const feel = ['arcade', 'tactical', 'B', 'A'].includes(o.flightFeel) ? o.flightFeel : 'A';
+    this.blue.flightFeel = feel;
+    this.red.flightFeel = feel;
     this.blue.callsign = o.blue.name || 'BLUE';
     this.red.callsign = o.red.name || 'RED';
     this.blue.enemy = this.red; this.red.enemy = this.blue;

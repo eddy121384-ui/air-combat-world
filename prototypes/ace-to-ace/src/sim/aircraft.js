@@ -40,6 +40,16 @@ export const MAX_ROT_RATE = 1.3; // rad/s, hard sanity cap on flight-path rotati
 // same kinematics apply to AI and player. 0.09s provides modest separation at high G.
 export const FLIGHT_PATH_LAG = 0.09; // seconds, not a free HUD-only animation
 
+// Same integrator, different arcade-tuned performance envelopes. Not aircraft data.
+export const FLIGHT_PROFILES = Object.freeze({
+  arcade: Object.freeze({ engine: 1.12, parasite: 0.65, induced: 0.35,
+    spool: 0.70, abSpool: 0.85, gOnset: 0.45,
+    roll: 1.16, rollOnset: 0.55, rollStop: 0.38, pathLag: 0.065 }),
+  tactical: Object.freeze({ engine: 1.0, parasite: 0.85, induced: 1.0,
+    spool: 0.78, abSpool: 1.0, gOnset: 0.56,
+    roll: 1.08, rollOnset: 0.64, rollStop: 0.42, pathLag: 0.075 }),
+});
+
 export function makeControls() {
   // pitch: +1 pull (nose up in body frame), roll: +1 roll right, yaw: +1 nose right
   // throttle 0..1 (1 = military power), boost = afterburner, brake = airbrake
@@ -75,12 +85,15 @@ export const specificEnergy = (ac) => ac.pos.y + (ac.speed * ac.speed) / (2 * G)
 /** Max load factor available at the current speed (lift-limited below corner speed). */
 export function availableG(ac, speed = ac.speed) {
   const t = ac.type;
-  if (ac.flightFeel === 'B') {
-    // B's nominal 9G envelope is a prototype rule, not a verified J-16 spec.
-    // Available lift follows speed squared below corner speed; no free low-speed G.
-    const envelopeG = Math.min(t.maxG, 9);
-    const ratio = Math.max(speed, MIN_SPEED) / t.cornerSpeed;
-    return Math.max(0.35, envelopeG * Math.min(1, ratio * ratio));
+  if (ac.flightFeel === 'arcade') {
+    // Wider corner-speed band and gentler low-speed loss of turning authority.
+    const r = Math.max(speed, MIN_SPEED) / (t.cornerSpeed * 0.90);
+    return t.maxG * 1.05 * (0.25 + 0.75 * Math.min(1, Math.pow(r, 1.4)));
+  }
+  if (ac.flightFeel === 'tactical' || ac.flightFeel === 'B') {
+    // RB-inspired speed-squared lift limit. No real AoA/stall computation yet.
+    const r = Math.max(speed, MIN_SPEED) / t.cornerSpeed;
+    return Math.max(0.35, Math.min(t.maxG, 9) * Math.min(1, r * r));
   }
   const r = speed / t.cornerSpeed;
   return Math.max(0.35, t.maxG * Math.min(1, r * r));
@@ -203,19 +216,21 @@ export { add, v3 };
 // above. B is a separate integration, applied identically to the player and both AI aircraft.
 // No orientation teleport, arbitrary nose steering, or HUD-only FPM substitution.
 export function stepAircraft(ac, dt) {
-  return ac.flightFeel === 'B' ? stepArcadeAircraft(ac, dt) : stepLegacyAircraft(ac, dt);
+  return ['arcade', 'tactical', 'B'].includes(ac.flightFeel)
+    ? stepModeAircraft(ac, dt) : stepLegacyAircraft(ac, dt);
 }
-function stepArcadeAircraft(ac, dt) {
+function stepModeAircraft(ac, dt) {
   if (!ac.alive) return;
   const t = ac.type, c = ac.controls;
+  const profile = ac.flightFeel === 'arcade' ? FLIGHT_PROFILES.arcade : FLIGHT_PROFILES.tactical;
   const fwd = forwardOf(ac.q);
-  // Same independent throttle / AB / airbrake semantics as A.
+  // AB, throttle and brake remain independent in both physics profiles.
   const thrCmd = clamp(c.boost ? 1 : c.throttle, 0, 1);
-  ac.thrustCur += (thrCmd - ac.thrustCur) * Math.min(1, dt / (t.spool * 0.78));
-  ac.abCur += ((c.boost ? 1 : 0) - ac.abCur) * Math.min(1, dt / (t.spool * 1.0));
+  ac.thrustCur += (thrCmd - ac.thrustCur) * Math.min(1, dt / (t.spool * profile.spool));
+  ac.abCur += ((c.boost ? 1 : 0) - ac.abCur) * Math.min(1, dt / (t.spool * profile.abSpool));
   const altitude = clamp(1 - ac.pos.y / 16000, 0.35, 1);
-  // Faster control response, without inventing additional engine power.
-  const thrust = (ac.thrustCur * t.thrustMil + ac.abCur * t.thrustAB) * altitude;
+  const thrust = (ac.thrustCur * t.thrustMil + ac.abCur * t.thrustAB)
+    * profile.engine * altitude;
 
   const pitchIn = clamp(c.pitch, -1, 1), nAvail = availableG(ac);
   const nMin = t.minG * Math.min(1, nAvail / t.maxG), n0 = neutralG(ac);
@@ -225,20 +240,20 @@ function stepArcadeAircraft(ac, dt) {
     ? n0 + pitchIn * (nAvail - n0)
     : n0 + pitchIn * (n0 - nMin);
   // Faster G onset and more decisive roll stop without snapping orientation.
-  ac.nCur += (nCmd - ac.nCur) * Math.min(1, dt / (t.gOnset * 0.56));
+  ac.nCur += (nCmd - ac.nCur) * Math.min(1, dt / (t.gOnset * profile.gOnset));
 
   const v = ac.speed;
   // Induced drag grows ~G squared: instant nose authority costs energy.
   // BRK is independent parasite drag, not a source of extra lift or turn G.
-  const drag = t.dragK * 0.85 * v * v * (c.brake ? 2.6 : 1)
-    + t.inducedK * ac.nCur * ac.nCur
+  const drag = t.dragK * profile.parasite * v * v * (c.brake ? 2.6 : 1)
+    + t.inducedK * profile.induced * ac.nCur * ac.nCur
       * (200 / Math.max(v, MIN_SPEED)) ** 1.5
     + Math.abs(c.yaw) * 1.2;
   ac.speed = clamp(v + (thrust - drag - G * fwd.y) * dt, MIN_SPEED, MAX_SPEED);
 
   const rollCmd = clamp(c.roll, -1, 1);
-  const rollOnset = rollCmd === 0 ? t.rollOnset * 0.42 : t.rollOnset * 0.64;
-  ac.rollRateCur += (rollCmd * t.rollRate * 1.08 - ac.rollRateCur)
+  const rollOnset = t.rollOnset * (rollCmd === 0 ? profile.rollStop : profile.rollOnset);
+  ac.rollRateCur += (rollCmd * t.rollRate * profile.roll - ac.rollRateCur)
     * Math.min(1, dt / rollOnset);
   let q = qMul(ac.q, qAxisAngle({ x: 0, y: 0, z: -1 }, ac.rollRateCur * dt));
   const up = upOf(q), f = forwardOf(q);
@@ -256,7 +271,7 @@ function stepArcadeAircraft(ac, dt) {
   // The true world-space velocity follows the nose over a short finite lag;
   // FPM continues to report the direction of actual displacement.
   const nose = forwardOf(ac.q), path = norm(ac.vel);
-  const response = 1 - Math.exp(-dt / 0.075);
+  const response = 1 - Math.exp(-dt / profile.pathLag);
   const travel = norm(addScaled(path, sub(nose, path), response));
   ac.vel = scale(travel, ac.speed);
   ac.pos = addScaled(ac.pos, ac.vel, dt);
