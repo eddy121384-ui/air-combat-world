@@ -1,0 +1,14 @@
+<!doctype html><html lang="zh-Hant"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>One Cloud — Research evidence</title><style>
+body{margin:24px;background:#172231;color:#edf1f5;font:16px/1.6 system-ui}main{max-width:1500px;margin:auto}h1{font-size:26px}h2{font-size:21px;margin-top:36px}a{color:#c4dcff}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}figure{margin:0}video,img{display:block;width:100%;background:#111}figcaption{margin:8px 0}.note{border-left:4px solid #e7bd83;padding:10px 16px;background:#243348}button{padding:9px 16px;font:inherit;cursor:pointer}@media(max-width:800px){.grid{grid-template-columns:1fr}body{margin:16px}}
+</style><main><h1>One Cloud · 商業 NPR 技術研究</h1>
+<p class="note"><strong>美術 Gate：FAIL，停止擴展。</strong>固定體積解決表示法的旋轉／硬殼交接問題，但這次預烘雲仍偏泡棉，未達手繪電影背景品質。影片是每一格實際 WebGL 渲染後，以 12 fps 離線編碼的固定時間回放；不是裝置 FPS。沒有 iPhone Safari 實測。</p>
+<p><a href="research.md">來源、頁碼與候選方案</a> · <a href="README.md">結果與成本</a> · <a href="../../tools/cloud-lab.html?oneCloud=1">開啟單雲 Cloud Lab</a></p>
+<p>同 seed 73、同一朵設計雲、同場景／鏡頭／光照、640×360 渲染。B1／B2 僅換入共同單雲輸入，演算法未修改。90° 在繞行影片中點，180° 在結尾。轉向含高度變化與 roll。</p><div id="routes"></div></main>
+<script>
+const modes=[['anime','B1 · Billboard'],['hybrid','B2 · 固定雲殼'],['prelit','研究 · 預烘局部體積']];
+for(const [id,title] of [['approach-skim','正面接近與側掠 · 10 秒'],['orbit','0° → 90° → 180° 繞行 · 12 秒'],['entry','穿入 · 6 秒'],['exit','穿出 · 6 秒']]){
+ const section=document.createElement('section');section.innerHTML=`<h2>${title}</h2><button>同步播放此列</button><div class="grid">${modes.map(([mode,name])=>`<figure><figcaption>${name}</figcaption><video controls muted playsinline preload="metadata" poster="motion/${id}-${mode}.jpg" src="motion/${id}-${mode}.mp4"></video><a href="motion/${id}-${mode}.jpg">起點／中點／終點截圖</a></figure>`).join('')}</div>`;
+ section.querySelector('button').onclick=()=>section.querySelectorAll('video').forEach(v=>{v.currentTime=0;v.play();});document.querySelector('#routes').append(section);
+}
+</script></html>

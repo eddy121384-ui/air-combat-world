@@ -1,0 +1,809 @@
+{
+  "seed": 73,
+  "sourceBase": "75db0dc3189cc9501210b4580521815d57b7a9cb",
+  "errors": [],
+  "sha256": {
+    "src/cloud/one-cloud.js": "aef59613d0d75f0b9071d98d589812e4d502b053036a8121344df80eecc099e8",
+    "src/cloud/cloud-prelit-renderer.js": "fa4fa2b55bba9fd9949e388b851e88c53911d6977c67a9c06c9f435cfd924036",
+    "src/cloud/cloud-anime-renderer.js": "4dfe6e4fd600d59ec1721e5d0bab083c5b374fc32b778a15d4e0658c0dee0030",
+    "src/cloud/cloud-hybrid-renderer.js": "2919a3eb4f5d5adf98b64623a9a3e87c0a81997f786be78fb0d52c443f706022",
+    "tools/cloud-lab.js": "19206fb001cbb68a66c54048f0e5b5cfffaa12cf0420fa83e0d057996c827c4a"
+  },
+  "scenes": {
+    "approach-skim": {
+      "anime": {
+        "frames": 3,
+        "states": [
+          {
+            "position": [
+              0,
+              3100,
+              2600
+            ],
+            "direction": [
+              -0.030754448529237942,
+              -0.0038443060661547423,
+              -0.999519577200233
+            ],
+            "density": 0,
+            "T500": 1,
+            "builds": 1,
+            "calls": 4,
+            "triangles": 988,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          },
+          {
+            "position": [
+              900,
+              3100,
+              200
+            ],
+            "direction": [
+              -0.9797550918367355,
+              -0.009997500937109546,
+              -0.19995001874219087
+            ],
+            "density": 0,
+            "T500": 0.028964320839317874,
+            "builds": 1,
+            "calls": 4,
+            "triangles": 988,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          },
+          {
+            "position": [
+              900,
+              3100,
+              -2200
+            ],
+            "direction": [
+              0,
+              -0.009999500037496875,
+              -0.9999500037496876
+            ],
+            "density": 0,
+            "T500": 1,
+            "builds": 1,
+            "calls": 4,
+            "triangles": 988,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          }
+        ]
+      },
+      "hybrid": {
+        "frames": 3,
+        "states": [
+          {
+            "position": [
+              0,
+              3100,
+              2600
+            ],
+            "direction": [
+              -0.030754448529237942,
+              -0.0038443060661547423,
+              -0.999519577200233
+            ],
+            "density": 0,
+            "T500": 1,
+            "builds": 1,
+            "calls": 6,
+            "triangles": 31382,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          },
+          {
+            "position": [
+              900,
+              3100,
+              200
+            ],
+            "direction": [
+              -0.9797550918367355,
+              -0.009997500937109546,
+              -0.19995001874219087
+            ],
+            "density": 0,
+            "T500": 0.028964320839317874,
+            "builds": 1,
+            "calls": 6,
+            "triangles": 31382,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          },
+          {
+            "position": [
+              900,
+              3100,
+              -2200
+            ],
+            "direction": [
+              0,
+              -0.009999500037496875,
+              -0.9999500037496876
+            ],
+            "density": 0,
+            "T500": 1,
+            "builds": 1,
+            "calls": 6,
+            "triangles": 31382,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          }
+        ]
+      },
+      "prelit": {
+        "frames": 3,
+        "states": [
+          {
+            "position": [
+              0,
+              3100,
+              2600
+            ],
+            "direction": [
+              -0.030754448529237942,
+              -0.0038443060661547423,
+              -0.999519577200233
+            ],
+            "density": 0,
+            "T500": 1,
+            "builds": 1,
+            "calls": 3,
+            "triangles": 964,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          },
+          {
+            "position": [
+              900,
+              3100,
+              200
+            ],
+            "direction": [
+              -0.9797550918367355,
+              -0.009997500937109546,
+              -0.19995001874219087
+            ],
+            "density": 0,
+            "T500": 0.028964320839317874,
+            "builds": 1,
+            "calls": 3,
+            "triangles": 964,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          },
+          {
+            "position": [
+              900,
+              3100,
+              -2200
+            ],
+            "direction": [
+              0,
+              -0.009999500037496875,
+              -0.9999500037496876
+            ],
+            "density": 0,
+            "T500": 1,
+            "builds": 1,
+            "calls": 3,
+            "triangles": 964,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          }
+        ]
+      }
+    },
+    "orbit": {
+      "anime": {
+        "frames": 3,
+        "states": [
+          {
+            "position": [
+              -80,
+              3250,
+              2000
+            ],
+            "direction": [
+              0,
+              -0.07974522228289001,
+              -0.9968152785361252
+            ],
+            "density": 0,
+            "T500": 1,
+            "builds": 1,
+            "calls": 4,
+            "triangles": 988,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          },
+          {
+            "position": [
+              1920,
+              3250,
+              1.2246467991473532e-13
+            ],
+            "direction": [
+              -0.9968152785361252,
+              -0.07974522228289,
+              2.220446049250313e-16
+            ],
+            "density": 0,
+            "T500": 1,
+            "builds": 1,
+            "calls": 4,
+            "triangles": 988,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          },
+          {
+            "position": [
+              -79.99999999999976,
+              3250,
+              -2000
+            ],
+            "direction": [
+              -1.2040757535994916e-16,
+              -0.07974522228288998,
+              0.9968152785361251
+            ],
+            "density": 0,
+            "T500": 1,
+            "builds": 1,
+            "calls": 4,
+            "triangles": 988,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          }
+        ]
+      },
+      "hybrid": {
+        "frames": 3,
+        "states": [
+          {
+            "position": [
+              -80,
+              3250,
+              2000
+            ],
+            "direction": [
+              0,
+              -0.07974522228289001,
+              -0.9968152785361252
+            ],
+            "density": 0,
+            "T500": 1,
+            "builds": 1,
+            "calls": 6,
+            "triangles": 31382,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          },
+          {
+            "position": [
+              1920,
+              3250,
+              1.2246467991473532e-13
+            ],
+            "direction": [
+              -0.9968152785361252,
+              -0.07974522228289,
+              2.220446049250313e-16
+            ],
+            "density": 0,
+            "T500": 1,
+            "builds": 1,
+            "calls": 6,
+            "triangles": 31382,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          },
+          {
+            "position": [
+              -79.99999999999976,
+              3250,
+              -2000
+            ],
+            "direction": [
+              -1.2040757535994916e-16,
+              -0.07974522228288998,
+              0.9968152785361251
+            ],
+            "density": 0,
+            "T500": 1,
+            "builds": 1,
+            "calls": 6,
+            "triangles": 31382,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          }
+        ]
+      },
+      "prelit": {
+        "frames": 3,
+        "states": [
+          {
+            "position": [
+              -80,
+              3250,
+              2000
+            ],
+            "direction": [
+              0,
+              -0.07974522228289001,
+              -0.9968152785361252
+            ],
+            "density": 0,
+            "T500": 1,
+            "builds": 1,
+            "calls": 3,
+            "triangles": 964,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          },
+          {
+            "position": [
+              1920,
+              3250,
+              1.2246467991473532e-13
+            ],
+            "direction": [
+              -0.9968152785361252,
+              -0.07974522228289,
+              2.220446049250313e-16
+            ],
+            "density": 0,
+            "T500": 1,
+            "builds": 1,
+            "calls": 3,
+            "triangles": 964,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          },
+          {
+            "position": [
+              -79.99999999999976,
+              3250,
+              -2000
+            ],
+            "direction": [
+              -1.2040757535994916e-16,
+              -0.07974522228288998,
+              0.9968152785361251
+            ],
+            "density": 0,
+            "T500": 1,
+            "builds": 1,
+            "calls": 3,
+            "triangles": 964,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          }
+        ]
+      }
+    },
+    "entry": {
+      "anime": {
+        "frames": 3,
+        "states": [
+          {
+            "position": [
+              -80,
+              3060,
+              1450
+            ],
+            "direction": [
+              0,
+              0,
+              -1
+            ],
+            "density": 0,
+            "T500": 1,
+            "builds": 1,
+            "calls": 4,
+            "triangles": 988,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          },
+          {
+            "position": [
+              -80,
+              3060,
+              700
+            ],
+            "direction": [
+              0,
+              0,
+              -1
+            ],
+            "density": 0,
+            "T500": 0.0545065600115487,
+            "builds": 1,
+            "calls": 4,
+            "triangles": 988,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          },
+          {
+            "position": [
+              -80,
+              3060,
+              -50
+            ],
+            "direction": [
+              0,
+              0,
+              -1
+            ],
+            "density": 0.9,
+            "T500": 0.005528784210967531,
+            "builds": 1,
+            "calls": 4,
+            "triangles": 988,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          }
+        ]
+      },
+      "hybrid": {
+        "frames": 3,
+        "states": [
+          {
+            "position": [
+              -80,
+              3060,
+              1450
+            ],
+            "direction": [
+              0,
+              0,
+              -1
+            ],
+            "density": 0,
+            "T500": 1,
+            "builds": 1,
+            "calls": 6,
+            "triangles": 31382,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          },
+          {
+            "position": [
+              -80,
+              3060,
+              700
+            ],
+            "direction": [
+              0,
+              0,
+              -1
+            ],
+            "density": 0,
+            "T500": 0.0545065600115487,
+            "builds": 1,
+            "calls": 6,
+            "triangles": 31382,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          },
+          {
+            "position": [
+              -80,
+              3060,
+              -50
+            ],
+            "direction": [
+              0,
+              0,
+              -1
+            ],
+            "density": 0.9,
+            "T500": 0.005528784210967531,
+            "builds": 1,
+            "calls": 6,
+            "triangles": 31382,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          }
+        ]
+      },
+      "prelit": {
+        "frames": 3,
+        "states": [
+          {
+            "position": [
+              -80,
+              3060,
+              1450
+            ],
+            "direction": [
+              0,
+              0,
+              -1
+            ],
+            "density": 0,
+            "T500": 1,
+            "builds": 1,
+            "calls": 3,
+            "triangles": 964,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          },
+          {
+            "position": [
+              -80,
+              3060,
+              700
+            ],
+            "direction": [
+              0,
+              0,
+              -1
+            ],
+            "density": 0,
+            "T500": 0.0545065600115487,
+            "builds": 1,
+            "calls": 3,
+            "triangles": 964,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          },
+          {
+            "position": [
+              -80,
+              3060,
+              -50
+            ],
+            "direction": [
+              0,
+              0,
+              -1
+            ],
+            "density": 0.9,
+            "T500": 0.005528784210967531,
+            "builds": 1,
+            "calls": 3,
+            "triangles": 964,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          }
+        ]
+      }
+    },
+    "exit": {
+      "anime": {
+        "frames": 3,
+        "states": [
+          {
+            "position": [
+              -80,
+              3060,
+              -50
+            ],
+            "direction": [
+              0,
+              0,
+              -1
+            ],
+            "density": 0.9,
+            "T500": 0.005528784210967531,
+            "builds": 1,
+            "calls": 4,
+            "triangles": 988,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          },
+          {
+            "position": [
+              -80,
+              3060,
+              -800
+            ],
+            "direction": [
+              0,
+              0,
+              -1
+            ],
+            "density": 0,
+            "T500": 1,
+            "builds": 1,
+            "calls": 4,
+            "triangles": 988,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          },
+          {
+            "position": [
+              -80,
+              3060,
+              -1550
+            ],
+            "direction": [
+              0,
+              0,
+              -1
+            ],
+            "density": 0,
+            "T500": 1,
+            "builds": 1,
+            "calls": 4,
+            "triangles": 988,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          }
+        ]
+      },
+      "hybrid": {
+        "frames": 3,
+        "states": [
+          {
+            "position": [
+              -80,
+              3060,
+              -50
+            ],
+            "direction": [
+              0,
+              0,
+              -1
+            ],
+            "density": 0.9,
+            "T500": 0.005528784210967531,
+            "builds": 1,
+            "calls": 6,
+            "triangles": 31382,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          },
+          {
+            "position": [
+              -80,
+              3060,
+              -800
+            ],
+            "direction": [
+              0,
+              0,
+              -1
+            ],
+            "density": 0,
+            "T500": 1,
+            "builds": 1,
+            "calls": 6,
+            "triangles": 31382,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          },
+          {
+            "position": [
+              -80,
+              3060,
+              -1550
+            ],
+            "direction": [
+              0,
+              0,
+              -1
+            ],
+            "density": 0,
+            "T500": 1,
+            "builds": 1,
+            "calls": 6,
+            "triangles": 31382,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          }
+        ]
+      },
+      "prelit": {
+        "frames": 3,
+        "states": [
+          {
+            "position": [
+              -80,
+              3060,
+              -50
+            ],
+            "direction": [
+              0,
+              0,
+              -1
+            ],
+            "density": 0.9,
+            "T500": 0.005528784210967531,
+            "builds": 1,
+            "calls": 3,
+            "triangles": 964,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          },
+          {
+            "position": [
+              -80,
+              3060,
+              -800
+            ],
+            "direction": [
+              0,
+              0,
+              -1
+            ],
+            "density": 0,
+            "T500": 1,
+            "builds": 1,
+            "calls": 3,
+            "triangles": 964,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          },
+          {
+            "position": [
+              -80,
+              3060,
+              -1550
+            ],
+            "direction": [
+              0,
+              0,
+              -1
+            ],
+            "density": 0,
+            "T500": 1,
+            "builds": 1,
+            "calls": 3,
+            "triangles": 964,
+            "width": 640,
+            "height": 360,
+            "programsRunnable": true
+          }
+        ]
+      }
+    }
+  },
+  "perf": {},
+  "runtime": "Chromium ANGLE SwiftShader; software relative test only; no iPhone Safari data",
+  "video": "12 fps offline exact-time runtime frames; not measured FPS",
+  "capturedAt": "2026-10-20T09:16:42.796Z",
+  "browser": "151.0.7922.34",
+  "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+  "passed": true
+}

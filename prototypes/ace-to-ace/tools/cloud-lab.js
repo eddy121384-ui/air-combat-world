@@ -4,13 +4,21 @@ import { createCloudDebugRenderer } from '../src/cloud/cloud-debug-renderer.js';
 import { createCloudAnimeRenderer } from '../src/cloud/cloud-anime-renderer.js';
 import { createCloudStableRenderer } from '../src/cloud/cloud-stable-renderer.js';
 import { createCloudHybridRenderer } from '../src/cloud/cloud-hybrid-renderer.js';
+import { createCloudPrelitRenderer } from '../src/cloud/cloud-prelit-renderer.js';
+import { createOneCloud,ONE_CLOUD_PATHS,oneCloudPose } from '../src/cloud/one-cloud.js';
 import { CLOUD_ANIMATION_PATHS,cloudAnimationPose } from './cloud-animation-paths.js';
 import { makeAircraftMesh, outlineMaterial } from '../src/game/models.js';
 import { SKY_VS, SKY_FS, SEA_VS, SEA_FS } from '../src/game/lookdev.js';
 
 const $ = id => document.getElementById(id);
+const oneCloud=new URLSearchParams(location.search).get('oneCloud')==='1';
+if(oneCloud){$('renderer').add(new Option('研究：單雲預烘體積','prelit'));$('renderer').value='prelit';
+  document.querySelector('h1').textContent='Cloud Lab · One Cloud Research';
+  for(const id of ['kind','base','top','width','depth','cellSize','density','windX','windZ','wind','sun','sunHeight'])$(id).disabled=true;
+  document.querySelectorAll('[data-view]').forEach(b=>b.hidden=true);
+}
 const requestedRenderer=new URLSearchParams(location.search).get('renderer');
-if(['debug','anime','stable','hybrid'].includes(requestedRenderer))$('renderer').value=requestedRenderer;
+if(['debug','anime','stable','hybrid',...(oneCloud?['prelit']:[])].includes(requestedRenderer))$('renderer').value=requestedRenderer;
 const canvas = $('gl'), scene = new THREE.Scene();
 scene.background = new THREE.Color('#8eb3ce'); // Fallback behind the shared, read-only R2 sky.
 const camera = new THREE.PerspectiveCamera(60, 1, 1, 24000);
@@ -18,6 +26,7 @@ const debug = createCloudDebugRenderer(canvas, scene, camera);
 const anime = createCloudAnimeRenderer(debug.renderer,scene,camera);
 const stable = createCloudStableRenderer(debug.renderer,scene,camera,anime.atlas);
 const hybrid = createCloudHybridRenderer(debug.renderer,scene,camera,anime.atlas);
+const prelit=oneCloud?createCloudPrelitRenderer(debug.renderer,scene,camera):null;
 const skyPainting=new THREE.TextureLoader().load('../assets/lookdev/sky-painting-r2.jpg');skyPainting.colorSpace=THREE.SRGBColorSpace;
 const sunDirection=new THREE.Vector3(-0.64,0.3,-0.69).normalize();
 const sky=new THREE.Mesh(new THREE.SphereGeometry(10000,32,16),new THREE.ShaderMaterial({vertexShader:SKY_VS,fragmentShader:SKY_FS,
@@ -46,10 +55,10 @@ const planePosition = new THREE.Vector3(), target = new THREE.Vector3(), baseQua
 const offsetQuaternion = new THREE.Quaternion(), offsetEuler = new THREE.Euler(0, 0, 0, 'YXZ');
 
 function rebuild() {
-  const next = createCloudField({ kind: $('kind').value, seed: +$('seed').value,
+  const next = oneCloud?createOneCloud(+$('seed').value):createCloudField({ kind: $('kind').value, seed: +$('seed').value,
     ...Object.fromEntries(['base', 'top', 'width', 'depth', 'cellSize', 'density'].map(k => [k, +$(k).value])),
     wind: { x: +$('windX').value, z: +$('windZ').value } });
-  anime.setField(next);stable.setField(next);hybrid.setField(next);field = next; time = 0; explicitPose = false;
+  anime.setField(next);stable.setField(next);hybrid.setField(next);prelit?.setField(next);field = next; time = 0; explicitPose = false;
 }
 function setRoute(next) {
   if (next === 'free') baseQuaternion.copy(camera.quaternion);
@@ -61,7 +70,9 @@ function placeCamera() {
   const mid = (field.params.base + field.params.top) / 2;
   const dx = field.params.wind.x * time, dz = field.params.wind.z * time;
   // Routes stay fixed in world space when wind is enabled, rather than riding the cloud.
-  if(isAnimationPath(mode)){
+  if(oneCloud&&ONE_CLOUD_PATHS.some(p=>p.id===mode)){
+    const pose=oneCloudPose(mode,progress);camera.position.fromArray(pose.eye);target.fromArray(pose.target);planePosition.copy(camera.position);
+  }else if(isAnimationPath(mode)){
     const pose=cloudAnimationPose(field,mode,progress);camera.position.fromArray(pose.eye);target.fromArray(pose.target);planePosition.copy(camera.position);
   }else if (mode === 'traverse' || mode === 'skim') {
     const length = field.params.depth + 2400;
@@ -79,8 +90,9 @@ function placeCamera() {
   camera.up.set(0, 1, 0); camera.lookAt(target); baseQuaternion.copy(camera.quaternion);
   offsetQuaternion.setFromEuler(offsetEuler.set(pitch, yaw, 0));
   camera.quaternion.multiply(offsetQuaternion);
+  if(oneCloud&&ONE_CLOUD_PATHS.some(p=>p.id===mode))camera.rotateZ(oneCloudPose(mode,progress).roll);
 }
-function resize() { debug.resize(innerWidth, innerHeight, +$('quality').value);const size=debug.renderer.getDrawingBufferSize(new THREE.Vector2());anime.resize(size.x,size.y);stable.resize(size.x,size.y);hybrid.resize(size.x,size.y); }
+function resize() { debug.resize(innerWidth, innerHeight, +$('quality').value);const size=debug.renderer.getDrawingBufferSize(new THREE.Vector2());anime.resize(size.x,size.y);stable.resize(size.x,size.y);hybrid.resize(size.x,size.y);prelit?.resize(size.x,size.y); }
 window.addEventListener('resize', resize); $('quality').onchange = resize;
 $('kind').onchange = () => {
   for (const [k, v] of Object.entries(CLOUD_PRESETS[$('kind').value])) $(k).value = v;
@@ -88,8 +100,9 @@ $('kind').onchange = () => {
 };
 $('apply').onclick = () => { try { rebuild(); } catch (e) { $('readout').textContent = e.message; } };
 document.querySelectorAll('[data-view]').forEach(button => { button.onclick = () => setRoute(button.dataset.view); });
-for(const path of CLOUD_ANIMATION_PATHS)$('scenario').add(new Option(path.label,path.id));
+for(const path of (oneCloud?ONE_CLOUD_PATHS:CLOUD_ANIMATION_PATHS))$('scenario').add(new Option(path.label??path.id,path.id));
 function setScenario(id){
+ if(oneCloud){if(!ONE_CLOUD_PATHS.some(p=>p.id===id))throw new RangeError('unknown one-cloud route');$('scenario').value=id;setRoute(id);inspectAircraft=false;return;}
  const path=CLOUD_ANIMATION_PATHS.find(p=>p.id===id);if(!path)throw new RangeError('unknown scenario');
  if($('kind').value!==path.kind){$('kind').value=path.kind;$('kind').onchange();}
  $('scenario').value=id;setRoute(id);
@@ -120,7 +133,7 @@ canvas.onpointerup = canvas.onpointercancel = () => { pointer = null; };
 function frame(dt = 0) {
   if ($('wind').checked) time += dt;
   if (playing && mode !== 'free') {
-    progress = Math.min(1, progress + dt * (isAnimationPath(mode)?1/12:220 / (field.params.depth + 2400))); $('timeline').value = progress;
+    progress = Math.min(1, progress + dt * (oneCloud?1/(ONE_CLOUD_PATHS.find(p=>p.id===mode)?.seconds??12):isAnimationPath(mode)?1/12:220 / (field.params.depth + 2400))); $('timeline').value = progress;
     if (progress === 1) { playing = false; $('play').textContent = '播放路線'; }
   }
   placeCamera();
@@ -158,6 +171,8 @@ function frame(dt = 0) {
     stats=debug.render(time);
   }else if(rendererMode==='stable'){
     anime.clouds.visible=false;stats=stable.render(time,{enabled:$('clouds').checked,wire:$('wire').checked,diagnostic:densityView});
+  }else if(rendererMode==='prelit'&&prelit){
+    anime.clouds.visible=false;stats=prelit.render(time,{enabled:$('clouds').checked,diagnostic:densityView});
   }else if(rendererMode==='hybrid'){
     anime.clouds.visible=false;stats=hybrid.render(time,{enabled:$('clouds').checked,wire:$('wire').checked,diagnostic:densityView});
   }else stats=anime.render(time,{enabled:$('clouds').checked,wire:$('wire').checked,fogEnabled:$('fog').checked});
@@ -168,16 +183,16 @@ function frame(dt = 0) {
       + `密度 eye ${density.toFixed(3)} / plane ${planeDensity.toFixed(3)}\nT500 ${sightline.transmittance.toFixed(3)}\n`
       + `CPU 查詢 ${diagnostic.cpuQueryMs.toFixed(3)} ms\n提交 ${stats.renderSubmitMs.toFixed(2)} ms / GPU ${stats.gpuMs?.toFixed(2) ?? 'N/A'} ms\n`
       + `${rendererMode} · ${stats.width}×${stats.height} · ${stats.calls} calls\n`
-      + (stats.hull?`固定雲殼 ${stats.hull.triangles} triangles · 4 fog intervals\nCPU update ${stats.updateCpuMs.toFixed(2)} ms`:stats.volume?`固定體積 ${stats.volume.grid.join('×')} · 32 probes\nCPU update ${stats.updateCpuMs.toFixed(2)} ms`:`${stats.layers?.triangles??stats.triangles} triangles · ${stats.fogCpuMs?.toFixed(2)??'—'} ms fog CPU`);
+      + (stats.hull?`固定雲殼 ${stats.hull.triangles} triangles · 4 fog intervals\nCPU update ${stats.updateCpuMs.toFixed(2)} ms`:stats.volume?`固定體積 ${stats.volume.grid.join('×')} · ${stats.representation==='one-cloud-prelit'?24:32} probes\nCPU update ${stats.updateCpuMs.toFixed(2)} ms`:`${stats.layers?.triangles??stats.triangles} triangles · ${stats.fogCpuMs?.toFixed(2)??'—'} ms fog CPU`);
     lastText = performance.now();
   }
   return snapshot();
 }
-function snapshot() { return { ready: anime.ready&&stable.ready&&hybrid.ready&&!!skyPainting.image, rendererMode:$('renderer').value, mode, progress, time, position: camera.position.toArray(),
+function snapshot() { return { ready: anime.ready&&stable.ready&&hybrid.ready&&(!prelit||prelit.ready)&&!!skyPainting.image, oneCloud, rendererMode:$('renderer').value, mode, progress, time, position: camera.position.toArray(),
   field:{kind:field.params.kind,seed:field.params.seed,base:field.params.base,top:field.params.top},
   planePosition: aircraft.position.toArray(), direction: camera.getWorldDirection(new THREE.Vector3()).toArray(),
   ...diagnostic, ...stats }; }
-rebuild(); resize(); frame();
+rebuild();if(oneCloud)setScenario('approach-skim');resize(); frame();
 // Explicit inspection API for reproducible real-browser tests. Never imported by the game.
 window.__cloudLab = { get field() { return field; }, get camera(){return camera;}, snapshot, frame, setRoute, setProgress,
   setPose(position, lookAt,{aircraft:showAircraft=false}={}) { mode = 'inspect'; explicitPose = true;inspectAircraft=showAircraft; camera.position.fromArray(position); camera.lookAt(...lookAt); },

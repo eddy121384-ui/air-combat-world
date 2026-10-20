@@ -26,6 +26,8 @@ The preceding raymarch section, entries 89–98, explicitly lists skipping misse
 
 [Official session](https://cedec.cesa.or.jp/2017/session/ENG/s5922ab3980408.html), 2017-08-30: **V** it covers arbitrary shape, hand-drawn NPR, noise, raymarch and optimization; the speakers explicitly describe reconciling illustration style with transparency and volume. The page says materials were planned for CEDiL, and no time-shift video. Searches of the official blog, Cygames Speaker Deck and CEDiL did **not** yield an accessible complete deck in this run. No CEDEC slide page numbers or shader details can responsibly be supplied.
 
+Follow-up verification: the official Speaker Deck player visually confirms the single-cloud support diagram at 116 and light-direction multi-cloud diagram at 122. CEDiL's own `雲` search returned the Xenoblade 2018 and Ace Combat 2019 sessions, not this Cygames session; this is an access/search gap, not proof that the CEDEC materials never existed.
+
 Consequently **Unknown**: their exact NPR transfer function, silhouette breakup, normal manipulation, light cache, sample count, and optimization timings. Do not substitute GCC slides or a press recap and label them CEDEC evidence. Hand-authored asymmetric masses + subtractive edge erosion + a broad warm/cool lighting ramp + precomputed light transmittance is **E/H**, a testable WebGL2 variant, not an authenticated Cygames recipe. Smooth balls plus a cel ramp alone are not sufficient.
 
 ## 2. Other commercial references: borrow only what is established
@@ -38,6 +40,8 @@ Consequently **Unknown**: their exact NPR transfer function, silhouette breakup,
 | Horizon Zero Dawn · [Guerrilla original publication](https://www.guerrilla-games.com/read/the-real-time-volumetric-cloudscapes-of-horizon-zero-dawn), [Schneider/Vos 99-page PDF](https://d3d3g8mu99pzk9.cloudfront.net/AndrewSchneider/The-Real-time-Volumetric-Cloudscapes-of-Horizon-Zero-Dawn.pdf) | V: low-frequency shape plus edge erosion/detail; cheap sampling until occupied, opacity exits, reduced-resolution temporal updates. PDF pages 31–39, 80–85, 91–95 (1-based PDF pages; printed slide labels are offset). | Borrow shape/detail separation and doing expensive work only in occupied regions. The 1-of-16 temporal strategy needs disocclusion handling; it is risky during fast 6DoF motion. Do not port their 64–128 view steps plus light samples or their console timing target. |
 
 Three strongest borrowings: **art-directed support separate from detail** (GCC/Horizon); **bounded front-to-back extinction with empty-space rejection/opacity exit** (GCC/Horizon); **reduce runtime light/pixel work instead of endlessly adding steps** (Horizon). Our prelight bake is a different E adaptation of the last principle. These are verified research techniques, not a claim that all four shipped games use our hybrid.
+
+Additional original AC7 source: [Kanno, CEDEC 2019 / CEDiL 2023](https://cedil.cesa.or.jp/cedil_sessions/view/2023) confirms UE4 + trueSKY and art/gameplay cloud definition; its listed PPTX requires login. WebGL2 has core 3D texture and depth texture facilities ([Khronos specification](https://registry.khronos.org/webgl/specs/2.0.0/)); API availability is not a Safari performance guarantee.
 
 ## 3. Local audit and failure causes
 

@@ -1,0 +1,1978 @@
+{
+  "seed": 73,
+  "sourceBase": "75db0dc3189cc9501210b4580521815d57b7a9cb",
+  "errors": [],
+  "sha256": {
+    "src/cloud/one-cloud.js": "aef59613d0d75f0b9071d98d589812e4d502b053036a8121344df80eecc099e8",
+    "src/cloud/cloud-prelit-renderer.js": "fa4fa2b55bba9fd9949e388b851e88c53911d6977c67a9c06c9f435cfd924036",
+    "src/cloud/cloud-anime-renderer.js": "4dfe6e4fd600d59ec1721e5d0bab083c5b374fc32b778a15d4e0658c0dee0030",
+    "src/cloud/cloud-hybrid-renderer.js": "2919a3eb4f5d5adf98b64623a9a3e87c0a81997f786be78fb0d52c443f706022",
+    "tools/cloud-lab.js": "19206fb001cbb68a66c54048f0e5b5cfffaa12cf0420fa83e0d057996c827c4a"
+  },
+  "scenes": {},
+  "perf": {
+    "approach-skim-anime-off": [
+      {
+        "elapsedMs": 43.4196,
+        "finishWallMs": 768.6999999880791,
+        "submitMs": 0.30000001192092896,
+        "updateCpuMs": 0,
+        "calls": 3,
+        "triangles": 964,
+        "cacheBytes": 0,
+        "textureBytes": 11184810.666666666,
+        "renderTargetBytes": 9216000,
+        "cacheBuildMs": 0,
+        "width": 640,
+        "height": 360
+      },
+      {
+        "elapsedMs": 45.5892,
+        "finishWallMs": 50.80000001192093,
+        "submitMs": 0.3999999761581421,
+        "updateCpuMs": 0,
+        "calls": 3,
+        "triangles": 964,
+        "cacheBytes": 0,
+        "textureBytes": 11184810.666666666,
+        "renderTargetBytes": 9216000,
+        "cacheBuildMs": 0,
+        "width": 640,
+        "height": 360
+      },
+      {
+        "elapsedMs": 39.9447,
+        "finishWallMs": 45.60000002384186,
+        "submitMs": 0.3999999761581421,
+        "updateCpuMs": 0,
+        "calls": 3,
+        "triangles": 964,
+        "cacheBytes": 0,
+        "textureBytes": 11184810.666666666,
+        "renderTargetBytes": 9216000,
+        "cacheBuildMs": 0,
+        "width": 640,
+        "height": 360
+      },
+      {
+        "elapsedMs": 42.2022,
+        "finishWallMs": 46.60000002384186,
+        "submitMs": 0.30000001192092896,
+        "updateCpuMs": 0.10000002384185791,
+        "calls": 3,
+        "triangles": 964,
+        "cacheBytes": 0,
+        "textureBytes": 11184810.666666666,
+        "renderTargetBytes": 9216000,
+        "cacheBuildMs": 0,
+        "width": 640,
+        "height": 360
+      },
+      {
+        "elapsedMs": 30.1469,
+        "finishWallMs": 35.39999997615814,
+        "submitMs": 0.2999999523162842,
+        "updateCpuMs": 0.10000002384185791,
+        "calls": 3,
+        "triangles": 964,
+        "cacheBytes": 0,
+        "textureBytes": 11184810.666666666,
+        "renderTargetBytes": 9216000,
+        "cacheBuildMs": 0,
+        "width": 640,
+        "height": 360
+      },
+      {
+        "elapsedMs": 31.7597,
+        "finishWallMs": 35.90000003576279,
+        "submitMs": 0.30000001192092896,
+        "updateCpuMs": 0,
+        "calls": 3,
+        "triangles": 964,
+        "cacheBytes": 0,
+        "textureBytes": 11184810.666666666,
+        "renderTargetBytes": 9216000,
+        "cacheBuildMs": 0,
+        "width": 640,
+        "height": 360
+      },
+      {
+        "elapsedMs": 30.3433,
+        "finishWallMs": 34.700000047683716,
+        "submitMs": 0.30000001192092896,
+        "updateCpuMs": 0,
+        "calls": 3,
+        "triangles": 964,
+        "cacheBytes": 0,
+        "textureBytes": 11184810.666666666,
+        "renderTargetBytes": 9216000,
+        "cacheBuildMs": 0,
+        "width": 640,
+        "height": 360
+      }
+    ],
+    "approach-skim-anime-on": [
+      {
+        "elapsedMs": 48.1457,
+        "finishWallMs": 378.69999998807907,
+        "submitMs": 0.30000001192092896,
+        "updateCpuMs": 0.09999996423721313,
+        "calls": 4,
+        "triangles": 988,
+        "cacheBytes": 0,
+        "textureBytes": 11184810.666666666,
+        "renderTargetBytes": 9216000,
+        "cacheBuildMs": 0,
+        "width": 640,
+        "height": 360
+      },
+      {
+        "elapsedMs": 40.9925,
+        "finishWallMs": 42.60000002384186,
+        "submitMs": 0.40000003576278687,
+        "updateCpuMs": 0.09999996423721313,
+        "calls": 4,
+        "triangles": 988,
+        "cacheBytes": 0,
+        "textureBytes": 11184810.666666666,
+        "renderTargetBytes": 9216000,
+        "cacheBuildMs": 0,
+        "width": 640,
+        "height": 360
+      },
+      {
+        "elapsedMs": 51.8598,
+        "finishWallMs": 56.80000001192093,
+        "submitMs": 0.30000001192092896,
+        "updateCpuMs": 0.09999996423721313,
+        "calls": 4,
+        "triangles": 988,
+        "cacheBytes": 0,
+        "textureBytes": 11184810.666666666,
+        "renderTargetBytes": 9216000,
+        "cacheBuildMs": 0,
+        "width": 640,
+        "height": 360
+      },
+      {
+        "elapsedMs": 54.6476,
+        "finishWallMs": 60.30000001192093,
+        "submitMs": 0.40000003576278687,
+        "updateCpuMs": 0,
+        "calls": 4,
+        "triangles": 988,
+        "cacheBytes": 0,
+        "textureBytes": 11184810.666666666,
+        "renderTargetBytes": 9216000,
+        "cacheBuildMs": 0,
+        "width": 640,
+        "height": 360
+      },
+      {
+        "elapsedMs": 40.1922,
+        "finishWallMs": 45.30000001192093,
+        "submitMs": 0.2999999523162842,
+        "updateCpuMs": 0,
+        "calls": 4,
+        "triangles": 988,
+        "cacheBytes": 0,
+        "textureBytes": 11184810.666666666,
+        "renderTargetBytes": 9216000,
+        "cacheBuildMs": 0,
+        "width": 640,
+        "height": 360
+      },
+      {
+        "elapsedMs": 54.1986,
+        "finishWallMs": 58.30000001192093,
+        "submitMs": 0.20000004768371582,
+        "updateCpuMs": 0.09999996423721313,
+        "calls": 4,
+        "triangles": 988,
+        "cacheBytes": 0,
+        "textureBytes": 11184810.666666666,
+        "renderTargetBytes": 9216000,
+        "cacheBuildMs": 0,
+        "width": 640,
+        "height": 360
+      },
+      {
+        "elapsedMs": 53.1069,
+        "finishWallMs": 58.60000002384186,
+        "submitMs": 0.3999999761581421,
+        "updateCpuMs": 0,
+        "calls": 4,
+        "triangles": 988,
+        "cacheBytes": 0,
+        "textureBytes": 11184810.666666666,
+        "renderTargetBytes": 9216000,
+        "cacheBuildMs": 0,
+        "width": 640,
+        "height": 360
+      }
+    ],
+    "approach-skim-hybrid-off": [
+      {
+        "elapsedMs": 28.4295,
+        "finishWallMs": 273.60000002384186,
+        "submitMs": 0.30000001192092896,
+        "updateCpuMs": 0.09999996423721313,
+        "calls": 5,
+        "triangles": 1926,
+        "cacheBytes": 706992,
+        "textureBytes": 5592405.333333333,
+        "renderTargetBytes": 11059200,
+        "cacheBuildMs": 312.69999998807907,
+        "width": 640,
+        "height": 360
+      },
+      {
+        "elapsedMs": 36.8666,
+        "finishWallMs": 41.30000001192093,
+        "submitMs": 0.30000001192092896,
+        "updateCpuMs": 0,
+        "calls": 5,
+        "triangles": 1926,
+        "cacheBytes": 706992,
+        "textureBytes": 5592405.333333333,
+        "renderTargetBytes": 11059200,
+        "cacheBuildMs": 312.69999998807907,
+        "width": 640,
+        "height": 360
+      },
+      {
+        "elapsedMs": 38.3023,
+        "finishWallMs": 43.10000002384186,
+        "submitMs": 0.2999999523162842,
+        "updateCpuMs": 0,
+        "calls": 5,
+        "triangles": 1926,
+        "cacheBytes": 706992,
+        "textureBytes": 5592405.333333333,
+        "renderTargetBytes": 11059200,
+        "cacheBuildMs": 312.69999998807907,
+        "width": 640,
+        "height": 360
+      },
+      {
+        "elapsedMs": 32.2027,
+        "finishWallMs": 37.30000001192093,
+        "submitMs": 0.30000001192092896,
+        "updateCpuMs": 0.09999996423721313,
+        "calls": 5,
+        "triangles": 1926,
+        "cacheBytes": 706992,
+        "textureBytes": 5592405.333333333,
+        "renderTargetBytes": 11059200,
+        "cacheBuildMs": 312.69999998807907,
+        "width": 640,
+        "height": 360
+      },
+      {
+        "elapsedMs": 36.6522,
+        "finishWallMs": 42.299999952316284,
+        "submitMs": 0.40000003576278687,
+        "updateCpuMs": 0,
+        "calls": 5,
+        "triangles": 1926,
+        "cacheBytes": 706992,
+        "textureBytes": 5592405.333333333,
+        "renderTargetBytes": 11059200,
+        "cacheBuildMs": 312.69999998807907,
+        "width": 640,
+        "height": 360
+      },
+      {
+        "elapsedMs": 36.3162,
+        "finishWallMs": 41.59999996423721,
+        "submitMs": 0.3999999761581421,
+        "updateCpuMs": 0,
+        "calls": 5,
+        "triangles": 1926,
+        "cacheBytes": 706992,
+        "textureBytes": 5592405.333333333,
+        "renderTargetBytes": 11059200,
+        "cacheBuildMs": 312.69999998807907,
+        "width": 640,
+        "height": 360
+      },
+      {
+        "elapsedMs": 29.0816,
+        "finishWallMs": 34.30000001192093,
+        "submitMs": 0.40000003576278687,
+        "updateCpuMs": 0,
+        "calls": 5,
+        "triangles": 1926,
+        "cacheBytes": 706992,
+        "textureBytes": 5592405.333333333,
+        "renderTargetBytes": 11059200,
+        "cacheBuildMs": 312.69999998807907,
+        "width": 640,
+        "height": 360
+      }
+    ],
+    "approach-skim-hybrid-on": [
+      {
+        "elapsedMs": 128.6771,
+        "finishWallMs": 721.8999999761581,
+        "submitMs": 0.5,
+        "updateCpuMs": 0,
+        "calls": 6,
+        "triangles": 31382,
+        "cacheBytes": 706992,
+        "textureBytes": 5592405.333333333,
+        "renderTargetBytes": 11059200,
+        "cacheBuildMs": 312.69999998807907,
+        "width": 640,
+        "height": 360
+      },
+      {
+        "elapsedMs": 126.6091,
+        "finishWallMs": 133.19999998807907,
+        "submitMs": 0.5,
+        "updateCpuMs": 0.09999996423721313,
+        "calls": 6,
+        "triangles": 31382,
+        "cacheBytes": 706992,
+        "textureBytes": 5592405.333333333,
+        "renderTargetBytes": 11059200,
+        "cacheBuildMs": 312.69999998807907,
+        "width": 640,
+        "height": 360
+      },
+      {
+        "elapsedMs": 127.3692,
+        "finishWallMs": 133.5,
+        "submitMs": 0.3999999761581421,
+        "updateCpuMs": 0.10000002384185791,
+        "calls": 6,
+        "triangles": 31382,
+        "cacheBytes": 706992,
+        "textureBytes": 5592405.333333333,
+        "renderTargetBytes": 11059200,
+        "cacheBuildMs": 312.69999998807907,
+        "width": 640,
+        "height": 360
+      },
+      {
+        "elapsedMs": 125.4871,
+        "finishWallMs": 131.30000001192093,
+        "submitMs": 0.3999999761581421,
+        "updateCpuMs": 0.10000002384185791,
+        "calls": 6,
+        "triangles": 31382,
+        "cacheBytes": 706992,
+        "textureBytes": 5592405.333333333,
+        "renderTargetBytes": 11059200,
+        "cacheBuildMs": 312.69999998807907,
+        "width": 640,
+        "height": 360
+      },
+      {
+        "elapsedMs": 118.1261,
+        "finishWallMs": 123,
+        "submitMs": 0.2999999523162842,
+        "updateCpuMs": 0.10000002384185791,
+        "calls": 6,
+        "triangles": 31382,
+        "cacheBytes": 706992,
+        "textureBytes": 5592405.333333333,
+        "renderTargetBytes": 11059200,
+        "cacheBuildMs": 312.69999998807907,
+        "width": 640,
+        "height": 360
+      },
+      {
+        "elapsedMs": 121.9854,
+        "finishWallMs": 127.19999998807907,
+        "submitMs": 0.6000000238418579,
+        "updateCpuMs": 0,
+        "calls": 6,
+        "triangles": 31382,
+        "cacheBytes": 706992,
+        "textureBytes": 5592405.333333333,
+        "renderTargetBytes": 11059200,
+        "cacheBuildMs": 312.69999998807907,
+        "width": 640,
+        "height": 360
+      },
+      {
+        "elapsedMs": 123.8,
+        "finishWallMs": 128.39999997615814,
+        "submitMs": 0.5,
+        "updateCpuMs": 0,
+        "calls": 6,
+        "triangles": 31382,
+        "cacheBytes": 706992,
+        "textureBytes": 5592405.333333333,
+        "renderTargetBytes": 11059200,
+        "cacheBuildMs": 312.69999998807907,
+        "width": 640,
+        "height": 360
+      }
+    ],
+    "approach-skim-prelit-off": [
+      {
+        "elapsedMs": 14.077,
+        "finishWallMs": 67.09999996423721,
+        "submitMs": 0.30000001192092896,
+        "updateCpuMs": 0,
+        "calls": 3,
+        "triangles": 964,
+        "cacheBytes": 1048576,
+        "textureBytes": 1048576,
+        "renderTargetBytes": 1843200,
+        "cacheBuildMs": 799.4000000357628,
+        "width": 640,
+        "height": 360
+      },
+      {
+        "elapsedMs": 13.9731,
+        "finishWallMs": 19.19999998807907,
+        "submitMs": 0.30000001192092896,
+        "updateCpuMs": 0,
+        "calls": 3,
+        "triangles": 964,
+        "cacheBytes": 1048576,
+        "textureBytes": 1048576,
+        "renderTargetBytes": 1843200,
+        "cacheBuildMs": 799.4000000357628,
+        "width": 640,
+        "height": 360
+      },
+      {
+        "elapsedMs": 14.4738,
+        "finishWallMs": 20.5,
+        "submitMs": 0.3999999761581421,
+        "updateCpuMs": 0,
+        "calls": 3,
+        "triangles": 964,
+        "cacheBytes": 1048576,
+        "textureBytes": 1048576,
+        "renderTargetBytes": 1843200,
+        "cacheBuildMs": 799.4000000357628,
+        "width": 640,
+        "height": 360
+      },
+      {
+        "elapsedMs": 14.2182,
+        "finishWallMs": 19.900000035762787,
+        "submitMs": 0.30000001192092896,
+        "updateCpuMs": 0,
+        "calls": 3,
+        "triangles": 964,
+        "cacheBytes": 1048576,
+        "textureBytes": 1048576,
+        "renderTargetBytes": 1843200,
+        "cacheBuildMs": 799.4000000357628,
+        "width": 640,
+        "height": 360
+      },
+      {
+        "elapsedMs": 13.4603,
+        "finishWallMs": 18.900000035762787,
+        "submitMs": 0.19999998807907104,
+        "updateCpuMs": 0,
+        "calls": 3,
+        "triangles": 964,
+        "cacheBytes": 1048576,
+        "textureBytes": 1048576,
+        "renderTargetBytes": 1843200,
+        "cacheBuildMs": 799.4000000357628,
+        "width": 640,
+        "height": 360
+      },
+      {
+        "elapsedMs": 14.5792,
+        "finishWallMs": 20.399999976158142,
+        "submitMs": 0.30000001192092896,
+        "updateCpuMs": 0,
+        "calls": 3,
+        "triangles": 964,
+        "cacheBytes": 1048576,
+        "textureBytes": 1048576,
+        "renderTargetBytes": 1843200,
+        "cacheBuildMs": 799.4000000357628,
+        "width": 640,
+        "height": 360
+      },
+      {
+        "elapsedMs": 17.3184,
+        "finishWallMs": 23.69999998807907,
+        "submitMs": 0.5,
+        "updateCpuMs": 0.09999996423721313,
+        "calls": 3,
+        "triangles": 964,
+        "cacheBytes": 1048576,
+        "textureBytes": 1048576,
+        "renderTargetBytes": 1843200,
+        "cacheBuildMs": 799.4000000357628,
+        "width": 640,
+        "height": 360
+      }
+    ],
+    "approach-skim-prelit-on": [
+      {
+        "elapsedMs": 66.3458,
+        "finishWallMs": 389.69999998807907,
+        "submitMs": 1.5999999642372131,
+        "updateCpuMs": 0.10000002384185791,
+        "calls": 3,
+        "triangles": 964,
+        "cacheBytes": 1048576,
+        "textureBytes": 1048576,
+        "renderTargetBytes": 1843200,
+        "cacheBuildMs": 799.4000000357628,
+        "width": 640,
+        "height": 360
+      },
+      {
+        "elapsedMs": 43.116,
+        "finishWallMs": 47.80000001192093,
+        "submitMs": 0.3999999761581421,
+        "updateCpuMs": 0,
+        "calls": 3,
+        "triangles": 964,
+        "cacheBytes": 1048576,
+        "textureBytes": 1048576,
+        "renderTargetBytes": 1843200,
+        "cacheBuildMs": 799.4000000357628,
+        "width": 640,
+        "height": 360
+      },
+      {
+        "elapsedMs": 64.3677,
+        "finishWallMs": 65.80000001192093,
+        "submitMs": 0.19999998807907104,
+        "updateCpuMs": 0.10000002384185791,
+        "calls": 3,
+        "triangles": 964,
+        "cacheBytes": 1048576,
+        "textureBytes": 1048576,
+        "renderTargetBytes": 1843200,
+        "cacheBuildMs": 799.4000000357628,
+        "width": 640,
+        "height": 360
+      },
+      {
+        "elapsedMs": 54.2982,
+        "finishWallMs": 60.39999997615814,
+        "submitMs": 0.40000003576278687,
+        "updateCpuMs": 0,
+        "calls": 3,
+        "triangles": 964,
+        "cacheBytes": 1048576,
+        "textureBytes": 1048576,
+        "renderTargetBytes": 1843200,
+        "cacheBuildMs": 799.4000000357628,
+        "width": 640,
+        "height": 360
+      },
+      {
+        "elapsedMs": 68.646,
+        "finishWallMs": 75.30000001192093,
+        "submitMs": 0.3999999761581421,
+        "updateCpuMs": 0,
+        "calls": 3,
+        "triangles": 964,
+        "cacheBytes": 1048576,
+        "textureBytes": 1048576,
+        "renderTargetBytes": 1843200,
+        "cacheBuildMs": 799.4000000357628,
+        "width": 640,
+        "height": 360
+      },
+      {
+        "elapsedMs": 69.2717,
+        "finishWallMs": 75.69999998807907,
+        "submitMs": 0.3999999761581421,
+        "updateCpuMs": 0.10000002384185791,
+        "calls": 3,
+        "triangles": 964,
+        "cacheBytes": 1048576,
+        "textureBytes": 1048576,
+        "renderTargetBytes": 1843200,
+        "cacheBuildMs": 799.4000000357628,
+        "width": 640,
+        "height": 360
+      },
+      {
+        "elapsedMs": 71.45,
+        "finishWallMs": 78.90000003576279,
+        "submitMs": 0.3999999761581421,
+        "updateCpuMs": 0,
+        "calls": 3,
+        "triangles": 964,
+        "cacheBytes": 1048576,
+        "textureBytes": 1048576,
+        "renderTargetBytes": 1843200,
+        "cacheBuildMs": 799.4000000357628,
+        "width": 640,
+        "height": 360
+      }
+    ],
+    "entry-anime-off": [
+      {
+        "elapsedMs": 50.2616,
+        "finishWallMs": 245.10000002384186,
+        "submitMs": 0.5,
+        "updateCpuMs": 0.30000001192092896,
+        "calls": 3,
+        "triangles": 964,
+        "cacheBytes": 0,
+        "textureBytes": 11184810.666666666,
+        "renderTargetBytes": 9216000,
+        "cacheBuildMs": 0,
+        "width": 640,
+        "height": 360
+      },
+      {
+        "elapsedMs": 62.402,
+        "finishWallMs": 69.70000004768372,
+        "submitMs": 0.30000001192092896,
+        "updateCpuMs": 0.19999998807907104,
+        "calls": 3,
+        "triangles": 964,
+        "cacheBytes": 0,
+        "textureBytes": 11184810.666666666,
+        "renderTargetBytes": 9216000,
+        "cacheBuildMs": 0,
+        "width": 640,
+        "height": 360
+      },
+      {
+        "elapsedMs": 52.9402,
+        "finishWallMs": 61.299999952316284,
+        "submitMs": 0.7000000476837158,
+        "updateCpuMs": 0.30000001192092896,
+        "calls": 3,
+        "triangles": 964,
+        "cacheBytes": 0,
+        "textureBytes": 11184810.666666666,
+        "renderTargetBytes": 9216000,
+        "cacheBuildMs": 0,
+        "width": 640,
+        "height": 360
+      },
+      {
+        "elapsedMs": 49.229,
+        "finishWallMs": 55.90000003576279,
+        "submitMs": 0.5,
+        "updateCpuMs": 0.19999998807907104,
+        "calls": 3,
+        "triangles": 964,
+        "cacheBytes": 0,
+        "textureBytes": 11184810.666666666,
+        "renderTargetBytes": 9216000,
+        "cacheBuildMs": 0,
+        "width": 640,
+        "height": 360
+      },
+      {
+        "elapsedMs": 49.5548,
+        "finishWallMs": 56.700000047683716,
+        "submitMs": 0.30000001192092896,
+        "updateCpuMs": 0.2999999523162842,
+        "calls": 3,
+        "triangles": 964,
+        "cacheBytes": 0,
+        "textureBytes": 11184810.666666666,
+        "renderTargetBytes": 9216000,
+        "cacheBuildMs": 0,
+        "width": 640,
+        "height": 360
+      },
+      {
+        "elapsedMs": 47.4878,
+        "finishWallMs": 54.80000001192093,
+        "submitMs": 0.40000003576278687,
+        "updateCpuMs": 0.19999998807907104,
+        "calls": 3,
+        "triangles": 964,
+        "cacheBytes": 0,
+        "textureBytes": 11184810.666666666,
+        "renderTargetBytes": 9216000,
+        "cacheBuildMs": 0,
+        "width": 640,
+        "height": 360
+      },
+      {
+        "elapsedMs": 49.9207,
+        "finishWallMs": 57,
+        "submitMs": 0.5,
+        "updateCpuMs": 0.30000001192092896,
+        "calls": 3,
+        "triangles": 964,
+        "cacheBytes": 0,
+        "textureBytes": 11184810.666666666,
+        "renderTargetBytes": 9216000,
+        "cacheBuildMs": 0,
+        "width": 640,
+        "height": 360
+      }
+    ],
+    "entry-anime-on": [
+      {
+        "elapsedMs": 77.0624,
+        "finishWallMs": 399.69999998807907,
+        "submitMs": 0.5999999642372131,
+        "updateCpuMs": 0.40000003576278687,
+        "calls": 4,
+        "triangles": 988,
+        "cacheBytes": 0,
+        "textureBytes": 11184810.666666666,
+        "renderTargetBytes": 9216000,
+        "cacheBuildMs": 0,
+        "width": 640,
+        "height": 360
+      },
+      {
+        "elapsedMs": 78.1736,
+        "finishWallMs": 84.60000002384186,
+        "submitMs": 0.3999999761581421,
+        "updateCpuMs": 0.20000004768371582,
+        "calls": 4,
+        "triangles": 988,
+        "cacheBytes": 0,
+        "textureBytes": 11184810.666666666,
+        "renderTargetBytes": 9216000,
+        "cacheBuildMs": 0,
+        "width": 640,
+        "height": 360
+      },
+      {
+        "elapsedMs": 78.546,
+        "finishWallMs": 85.10000002384186,
+        "submitMs": 0.3999999761581421,
+        "updateCpuMs": 0.10000002384185791,
+        "calls": 4,
+        "triangles": 988,
+        "cacheBytes": 0,
+        "textureBytes": 11184810.666666666,
+        "renderTargetBytes": 9216000,
+        "cacheBuildMs": 0,
+        "width": 640,
+        "height": 360
+      },
+      {
+        "elapsedMs": 77.476,
+        "finishWallMs": 84.19999998807907,
+        "submitMs": 0.30000001192092896,
+        "updateCpuMs": 0.19999998807907104,
+        "calls": 4,
+        "triangles": 988,
+        "cacheBytes": 0,
+        "textureBytes": 11184810.666666666,
+        "renderTargetBytes": 9216000,
+        "cacheBuildMs": 0,
+        "width": 640,
+        "height": 360
+      },
+      {
+        "elapsedMs": 76.1946,
+        "finishWallMs": 82.5,
+        "submitMs": 0.40000003576278687,
+        "updateCpuMs": 0.19999998807907104,
+        "calls": 4,
+        "triangles": 988,
+        "cacheBytes": 0,
+        "textureBytes": 11184810.666666666,
+        "renderTargetBytes": 9216000,
+        "cacheBuildMs": 0,
+        "width": 640,
+        "height": 360
+      },
+      {
+        "elapsedMs": 80.9894,
+        "finishWallMs": 87.5,
+        "submitMs": 0.30000001192092896,
+        "updateCpuMs": 0.10000002384185791,
+        "calls": 4,
+        "triangles": 988,
+        "cacheBytes": 0,
+        "textureBytes": 11184810.666666666,
+        "renderTargetBytes": 9216000,
+        "cacheBuildMs": 0,
+        "width": 640,
+        "height": 360
+      },
+      {
+        "elapsedMs": 64.0722,
+        "finishWallMs": 70.89999997615814,
+        "submitMs": 0.3999999761581421,
+        "updateCpuMs": 0.10000002384185791,
+        "calls": 4,
+        "triangles": 988,
+        "cacheBytes": 0,
+        "textureBytes": 11184810.666666666,
+        "renderTargetBytes": 9216000,
+        "cacheBuildMs": 0,
+        "width": 640,
+        "height": 360
+      }
+    ],
+    "entry-hybrid-off": [
+      {
+        "elapsedMs": 44.5163,
+        "finishWallMs": 228.5,
+        "submitMs": 0.699999988079071,
+        "updateCpuMs": 0.30000001192092896,
+        "calls": 5,
+        "triangles": 1926,
+        "cacheBytes": 706992,
+        "textureBytes": 5592405.333333333,
+        "renderTargetBytes": 11059200,
+        "cacheBuildMs": 312.69999998807907,
+        "width": 640,
+        "height": 360
+      },
+      {
+        "elapsedMs": 32.387,
+        "finishWallMs": 39.19999998807907,
+        "submitMs": 0.3999999761581421,
+        "updateCpuMs": 0.30000001192092896,
+        "calls": 5,
+        "triangles": 1926,
+        "cacheBytes": 706992,
+        "textureBytes": 5592405.333333333,
+        "renderTargetBytes": 11059200,
+        "cacheBuildMs": 312.69999998807907,
+        "width": 640,
+        "height": 360
+      },
+      {
+        "elapsedMs": 42.6983,
+        "finishWallMs": 49.19999998807907,
+        "submitMs": 0.6000000238418579,
+        "updateCpuMs": 0.19999998807907104,
+        "calls": 5,
+        "triangles": 1926,
+        "cacheBytes": 706992,
+        "textureBytes": 5592405.333333333,
+        "renderTargetBytes": 11059200,
+        "cacheBuildMs": 312.69999998807907,
+        "width": 640,
+        "height": 360
+      },
+      {
+        "elapsedMs": 46.351,
+        "finishWallMs": 53.39999997615814,
+        "submitMs": 0.5,
+        "updateCpuMs": 0.30000001192092896,
+        "calls": 5,
+        "triangles": 1926,
+        "cacheBytes": 706992,
+        "textureBytes": 5592405.333333333,
+        "renderTargetBytes": 11059200,
+        "cacheBuildMs": 312.69999998807907,
+        "width": 640,
+        "height": 360
+      },
+      {
+        "elapsedMs": 30.0026,
+        "finishWallMs": 36.60000002384186,
+        "submitMs": 0.5,
+        "updateCpuMs": 0.20000004768371582,
+        "calls": 5,
+        "triangles": 1926,
+        "cacheBytes": 706992,
+        "textureBytes": 5592405.333333333,
+        "renderTargetBytes": 11059200,
+        "cacheBuildMs": 312.69999998807907,
+        "width": 640,
+        "height": 360
+      },
+      {
+        "elapsedMs": 31.7542,
+        "finishWallMs": 37.30000001192093,
+        "submitMs": 0.800000011920929,
+        "updateCpuMs": 0.19999998807907104,
+        "calls": 5,
+        "triangles": 1926,
+        "cacheBytes": 706992,
+        "textureBytes": 5592405.333333333,
+        "renderTargetBytes": 11059200,
+        "cacheBuildMs": 312.69999998807907,
+        "width": 640,
+        "height": 360
+      },
+      {
+        "elapsedMs": 43.5737,
+        "finishWallMs": 48.5,
+        "submitMs": 0.7000000476837158,
+        "updateCpuMs": 0.19999998807907104,
+        "calls": 5,
+        "triangles": 1926,
+        "cacheBytes": 706992,
+        "textureBytes": 5592405.333333333,
+        "renderTargetBytes": 11059200,
+        "cacheBuildMs": 312.69999998807907,
+        "width": 640,
+        "height": 360
+      }
+    ],
+    "entry-hybrid-on": [
+      {
+        "elapsedMs": 91.6005,
+        "finishWallMs": 449.30000001192093,
+        "submitMs": 0.699999988079071,
+        "updateCpuMs": 0.09999996423721313,
+        "calls": 6,
+        "triangles": 31382,
+        "cacheBytes": 706992,
+        "textureBytes": 5592405.333333333,
+        "renderTargetBytes": 11059200,
+        "cacheBuildMs": 312.69999998807907,
+        "width": 640,
+        "height": 360
+      },
+      {
+        "elapsedMs": 90.8651,
+        "finishWallMs": 98.10000002384186,
+        "submitMs": 0.9000000357627869,
+        "updateCpuMs": 0.19999998807907104,
+        "calls": 6,
+        "triangles": 31382,
+        "cacheBytes": 706992,
+        "textureBytes": 5592405.333333333,
+        "renderTargetBytes": 11059200,
+        "cacheBuildMs": 312.69999998807907,
+        "width": 640,
+        "height": 360
+      },
+      {
+        "elapsedMs": 92.9101,
+        "finishWallMs": 100.30000001192093,
+        "submitMs": 0.6000000238418579,
+        "updateCpuMs": 0.30000001192092896,
+        "calls": 6,
+        "triangles": 31382,
+        "cacheBytes": 706992,
+        "textureBytes": 5592405.333333333,
+        "renderTargetBytes": 11059200,
+        "cacheBuildMs": 312.69999998807907,
+        "width": 640,
+        "height": 360
+      },
+      {
+        "elapsedMs": 90.9572,
+        "finishWallMs": 98.5,
+        "submitMs": 0.699999988079071,
+        "updateCpuMs": 0.20000004768371582,
+        "calls": 6,
+        "triangles": 31382,
+        "cacheBytes": 706992,
+        "textureBytes": 5592405.333333333,
+        "renderTargetBytes": 11059200,
+        "cacheBuildMs": 312.69999998807907,
+        "width": 640,
+        "height": 360
+      },
+      {
+        "elapsedMs": 87.392,
+        "finishWallMs": 94.59999996423721,
+        "submitMs": 0.699999988079071,
+        "updateCpuMs": 0.19999998807907104,
+        "calls": 6,
+        "triangles": 31382,
+        "cacheBytes": 706992,
+        "textureBytes": 5592405.333333333,
+        "renderTargetBytes": 11059200,
+        "cacheBuildMs": 312.69999998807907,
+        "width": 640,
+        "height": 360
+      },
+      {
+        "elapsedMs": 90.2074,
+        "finishWallMs": 97.10000002384186,
+        "submitMs": 0.699999988079071,
+        "updateCpuMs": 0.19999998807907104,
+        "calls": 6,
+        "triangles": 31382,
+        "cacheBytes": 706992,
+        "textureBytes": 5592405.333333333,
+        "renderTargetBytes": 11059200,
+        "cacheBuildMs": 312.69999998807907,
+        "width": 640,
+        "height": 360
+      },
+      {
+        "elapsedMs": 90.3562,
+        "finishWallMs": 97,
+        "submitMs": 0.800000011920929,
+        "updateCpuMs": 0.19999998807907104,
+        "calls": 6,
+        "triangles": 31382,
+        "cacheBytes": 706992,
+        "textureBytes": 5592405.333333333,
+        "renderTargetBytes": 11059200,
+        "cacheBuildMs": 312.69999998807907,
+        "width": 640,
+        "height": 360
+      }
+    ],
+    "entry-prelit-off": [
+      {
+        "elapsedMs": 14.7542,
+        "finishWallMs": 76,
+        "submitMs": 0.30000001192092896,
+        "updateCpuMs": 0,
+        "calls": 3,
+        "triangles": 964,
+        "cacheBytes": 1048576,
+        "textureBytes": 1048576,
+        "renderTargetBytes": 1843200,
+        "cacheBuildMs": 799.4000000357628,
+        "width": 640,
+        "height": 360
+      },
+      {
+        "elapsedMs": 15.4684,
+        "finishWallMs": 22.400000035762787,
+        "submitMs": 0.5,
+        "updateCpuMs": 0,
+        "calls": 3,
+        "triangles": 964,
+        "cacheBytes": 1048576,
+        "textureBytes": 1048576,
+        "renderTargetBytes": 1843200,
+        "cacheBuildMs": 799.4000000357628,
+        "width": 640,
+        "height": 360
+      },
+      {
+        "elapsedMs": 15.5863,
+        "finishWallMs": 22.600000023841858,
+        "submitMs": 0.699999988079071,
+        "updateCpuMs": 0,
+        "calls": 3,
+        "triangles": 964,
+        "cacheBytes": 1048576,
+        "textureBytes": 1048576,
+        "renderTargetBytes": 1843200,
+        "cacheBuildMs": 799.4000000357628,
+        "width": 640,
+        "height": 360
+      },
+      {
+        "elapsedMs": 15.5929,
+        "finishWallMs": 21.899999976158142,
+        "submitMs": 0.40000003576278687,
+        "updateCpuMs": 0,
+        "calls": 3,
+        "triangles": 964,
+        "cacheBytes": 1048576,
+        "textureBytes": 1048576,
+        "renderTargetBytes": 1843200,
+        "cacheBuildMs": 799.4000000357628,
+        "width": 640,
+        "height": 360
+      },
+      {
+        "elapsedMs": 15.8414,
+        "finishWallMs": 22.700000047683716,
+        "submitMs": 0.30000001192092896,
+        "updateCpuMs": 0,
+        "calls": 3,
+        "triangles": 964,
+        "cacheBytes": 1048576,
+        "textureBytes": 1048576,
+        "renderTargetBytes": 1843200,
+        "cacheBuildMs": 799.4000000357628,
+        "width": 640,
+        "height": 360
+      },
+      {
+        "elapsedMs": 16.2087,
+        "finishWallMs": 22.399999976158142,
+        "submitMs": 0.699999988079071,
+        "updateCpuMs": 0,
+        "calls": 3,
+        "triangles": 964,
+        "cacheBytes": 1048576,
+        "textureBytes": 1048576,
+        "renderTargetBytes": 1843200,
+        "cacheBuildMs": 799.4000000357628,
+        "width": 640,
+        "height": 360
+      },
+      {
+        "elapsedMs": 16.1735,
+        "finishWallMs": 22.5,
+        "submitMs": 0.19999998807907104,
+        "updateCpuMs": 0,
+        "calls": 3,
+        "triangles": 964,
+        "cacheBytes": 1048576,
+        "textureBytes": 1048576,
+        "renderTargetBytes": 1843200,
+        "cacheBuildMs": 799.4000000357628,
+        "width": 640,
+        "height": 360
+      }
+    ],
+    "entry-prelit-on": [
+      {
+        "elapsedMs": 35.8871,
+        "finishWallMs": 181,
+        "submitMs": 0.19999998807907104,
+        "updateCpuMs": 0,
+        "calls": 3,
+        "triangles": 964,
+        "cacheBytes": 1048576,
+        "textureBytes": 1048576,
+        "renderTargetBytes": 1843200,
+        "cacheBuildMs": 799.4000000357628,
+        "width": 640,
+        "height": 360
+      },
+      {
+        "elapsedMs": 34.1047,
+        "finishWallMs": 40.10000002384186,
+        "submitMs": 0.30000001192092896,
+        "updateCpuMs": 0,
+        "calls": 3,
+        "triangles": 964,
+        "cacheBytes": 1048576,
+        "textureBytes": 1048576,
+        "renderTargetBytes": 1843200,
+        "cacheBuildMs": 799.4000000357628,
+        "width": 640,
+        "height": 360
+      },
+      {
+        "elapsedMs": 35.983,
+        "finishWallMs": 41.5,
+        "submitMs": 0.30000001192092896,
+        "updateCpuMs": 0,
+        "calls": 3,
+        "triangles": 964,
+        "cacheBytes": 1048576,
+        "textureBytes": 1048576,
+        "renderTargetBytes": 1843200,
+        "cacheBuildMs": 799.4000000357628,
+        "width": 640,
+        "height": 360
+      },
+      {
+        "elapsedMs": 34.9512,
+        "finishWallMs": 39.89999997615814,
+        "submitMs": 0.19999998807907104,
+        "updateCpuMs": 0,
+        "calls": 3,
+        "triangles": 964,
+        "cacheBytes": 1048576,
+        "textureBytes": 1048576,
+        "renderTargetBytes": 1843200,
+        "cacheBuildMs": 799.4000000357628,
+        "width": 640,
+        "height": 360
+      },
+      {
+        "elapsedMs": 35.7819,
+        "finishWallMs": 41.39999997615814,
+        "submitMs": 0.30000001192092896,
+        "updateCpuMs": 0,
+        "calls": 3,
+        "triangles": 964,
+        "cacheBytes": 1048576,
+        "textureBytes": 1048576,
+        "renderTargetBytes": 1843200,
+        "cacheBuildMs": 799.4000000357628,
+        "width": 640,
+        "height": 360
+      },
+      {
+        "elapsedMs": 23.9672,
+        "finishWallMs": 29.80000001192093,
+        "submitMs": 0.19999998807907104,
+        "updateCpuMs": 0,
+        "calls": 3,
+        "triangles": 964,
+        "cacheBytes": 1048576,
+        "textureBytes": 1048576,
+        "renderTargetBytes": 1843200,
+        "cacheBuildMs": 799.4000000357628,
+        "width": 640,
+        "height": 360
+      },
+      {
+        "elapsedMs": 30.4337,
+        "finishWallMs": 36.40000003576279,
+        "submitMs": 0.19999998807907104,
+        "updateCpuMs": 0,
+        "calls": 3,
+        "triangles": 964,
+        "cacheBytes": 1048576,
+        "textureBytes": 1048576,
+        "renderTargetBytes": 1843200,
+        "cacheBuildMs": 799.4000000357628,
+        "width": 640,
+        "height": 360
+      }
+    ]
+  },
+  "runtime": "Chromium ANGLE SwiftShader; software relative test only; no iPhone Safari data",
+  "video": "12 fps offline exact-time runtime frames; not measured FPS",
+  "capturedAt": "2026-10-20T09:21:16.056Z",
+  "browser": "151.0.7922.34",
+  "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+  "transmittance": {
+    "samples": [
+      {
+        "id": "entry",
+        "t": 0,
+        "reference": 0.000021414137134217717,
+        "actual": 0.00784313725490196,
+        "error": 0.007821723117767743
+      },
+      {
+        "id": "entry",
+        "t": 0.020833333333333332,
+        "reference": 0.00002139064550390236,
+        "actual": 0.00784313725490196,
+        "error": 0.007821746609398059
+      },
+      {
+        "id": "entry",
+        "t": 0.041666666666666664,
+        "reference": 0.00002136722005506021,
+        "actual": 0.00784313725490196,
+        "error": 0.0078217700348469
+      },
+      {
+        "id": "entry",
+        "t": 0.0625,
+        "reference": 0.0000213437648360421,
+        "actual": 0.00784313725490196,
+        "error": 0.007821793490065919
+      },
+      {
+        "id": "entry",
+        "t": 0.08333333333333333,
+        "reference": 0.000021320460522049632,
+        "actual": 0.00784313725490196,
+        "error": 0.007821816794379911
+      },
+      {
+        "id": "entry",
+        "t": 0.10416666666666667,
+        "reference": 0.000021297096667196864,
+        "actual": 0.00784313725490196,
+        "error": 0.007821840158234764
+      },
+      {
+        "id": "entry",
+        "t": 0.125,
+        "reference": 0.000021273819312330963,
+        "actual": 0.00784313725490196,
+        "error": 0.00782186343558963
+      },
+      {
+        "id": "entry",
+        "t": 0.14583333333333334,
+        "reference": 0.0000212506201950558,
+        "actual": 0.00784313725490196,
+        "error": 0.007821886634706905
+      },
+      {
+        "id": "entry",
+        "t": 0.16666666666666666,
+        "reference": 0.00002122734939218789,
+        "actual": 0.00784313725490196,
+        "error": 0.007821909905509773
+      },
+      {
+        "id": "entry",
+        "t": 0.1875,
+        "reference": 0.000021204268853439287,
+        "actual": 0.00784313725490196,
+        "error": 0.00782193298604852
+      },
+      {
+        "id": "entry",
+        "t": 0.20833333333333334,
+        "reference": 0.00002118111026835837,
+        "actual": 0.00784313725490196,
+        "error": 0.007821956144633602
+      },
+      {
+        "id": "entry",
+        "t": 0.22916666666666666,
+        "reference": 0.00002115804629931668,
+        "actual": 0.00784313725490196,
+        "error": 0.007821979208602644
+      },
+      {
+        "id": "entry",
+        "t": 0.25,
+        "reference": 0.000021135024722428264,
+        "actual": 0.00784313725490196,
+        "error": 0.007822002230179533
+      },
+      {
+        "id": "entry",
+        "t": 0.2708333333333333,
+        "reference": 0.000021111986858146428,
+        "actual": 0.00784313725490196,
+        "error": 0.007822025268043814
+      },
+      {
+        "id": "entry",
+        "t": 0.2916666666666667,
+        "reference": 0.000021089069140867803,
+        "actual": 0.00784313725490196,
+        "error": 0.007822048185761092
+      },
+      {
+        "id": "entry",
+        "t": 0.3125,
+        "reference": 0.000021066128571378077,
+        "actual": 0.00784313725490196,
+        "error": 0.007822071126330583
+      },
+      {
+        "id": "entry",
+        "t": 0.3333333333333333,
+        "reference": 0.000021043266774485906,
+        "actual": 0.00784313725490196,
+        "error": 0.007822093988127474
+      },
+      {
+        "id": "entry",
+        "t": 0.3541666666666667,
+        "reference": 0.00002102040427355286,
+        "actual": 0.00392156862745098,
+        "error": 0.0039005482231774273
+      },
+      {
+        "id": "entry",
+        "t": 0.375,
+        "reference": 0.00002099761667557044,
+        "actual": 0.00392156862745098,
+        "error": 0.00390057101077541
+      },
+      {
+        "id": "entry",
+        "t": 0.3958333333333333,
+        "reference": 0.000020974838924080394,
+        "actual": 0.00392156862745098,
+        "error": 0.0039005937885269
+      },
+      {
+        "id": "entry",
+        "t": 0.4166666666666667,
+        "reference": 0.00002095210330557625,
+        "actual": 0.00784313725490196,
+        "error": 0.007822185151596384
+      },
+      {
+        "id": "entry",
+        "t": 0.4375,
+        "reference": 0.00002092943658040756,
+        "actual": 0.00392156862745098,
+        "error": 0.003900639190870573
+      },
+      {
+        "id": "entry",
+        "t": 0.4583333333333333,
+        "reference": 0.000020906746019774533,
+        "actual": 0.00392156862745098,
+        "error": 0.003900661881431206
+      },
+      {
+        "id": "entry",
+        "t": 0.4791666666666667,
+        "reference": 0.000020884154729731406,
+        "actual": 0.00392156862745098,
+        "error": 0.003900684472721249
+      },
+      {
+        "id": "entry",
+        "t": 0.5,
+        "reference": 0.000020861559061985154,
+        "actual": 0.00784313725490196,
+        "error": 0.007822275695839976
+      },
+      {
+        "id": "entry",
+        "t": 0.5208333333333334,
+        "reference": 0.000020838985370788677,
+        "actual": 0.00784313725490196,
+        "error": 0.007822298269531172
+      },
+      {
+        "id": "entry",
+        "t": 0.5416666666666666,
+        "reference": 0.000020816507477701685,
+        "actual": 0.00392156862745098,
+        "error": 0.0039007521199732787
+      },
+      {
+        "id": "entry",
+        "t": 0.5625,
+        "reference": 0.000020793995980292467,
+        "actual": 0.00392156862745098,
+        "error": 0.003900774631470688
+      },
+      {
+        "id": "entry",
+        "t": 0.5833333333333334,
+        "reference": 0.000020771580820011578,
+        "actual": 0.00784313725490196,
+        "error": 0.00782236567408195
+      },
+      {
+        "id": "entry",
+        "t": 0.6041666666666666,
+        "reference": 0.00002074915186069962,
+        "actual": 0.00392156862745098,
+        "error": 0.0039008194755902805
+      },
+      {
+        "id": "entry",
+        "t": 0.625,
+        "reference": 0.0000207470272927645,
+        "actual": 0.00392156862745098,
+        "error": 0.0039008216001582157
+      },
+      {
+        "id": "entry",
+        "t": 0.6458333333333334,
+        "reference": 0.000021998091088158838,
+        "actual": 0.00784313725490196,
+        "error": 0.007821139163813802
+      },
+      {
+        "id": "entry",
+        "t": 0.6666666666666666,
+        "reference": 0.000026650497576475178,
+        "actual": 0.00784313725490196,
+        "error": 0.007816486757325486
+      },
+      {
+        "id": "entry",
+        "t": 0.6875,
+        "reference": 0.00003570998665176067,
+        "actual": 0.00784313725490196,
+        "error": 0.0078074272682502
+      },
+      {
+        "id": "entry",
+        "t": 0.7083333333333334,
+        "reference": 0.000049942265790603127,
+        "actual": 0.00392156862745098,
+        "error": 0.0038716263616603774
+      },
+      {
+        "id": "entry",
+        "t": 0.7291666666666666,
+        "reference": 0.0000699166416689708,
+        "actual": 0.00392156862745098,
+        "error": 0.0038516519857820096
+      },
+      {
+        "id": "entry",
+        "t": 0.75,
+        "reference": 0.00009787977399553756,
+        "actual": 0.00392156862745098,
+        "error": 0.0038236888534554426
+      },
+      {
+        "id": "entry",
+        "t": 0.7708333333333334,
+        "reference": 0.0001370263276493979,
+        "actual": 0.00784313725490196,
+        "error": 0.0077061109272525624
+      },
+      {
+        "id": "entry",
+        "t": 0.7916666666666666,
+        "reference": 0.00019183024149500795,
+        "actual": 0.00784313725490196,
+        "error": 0.007651307013406953
+      },
+      {
+        "id": "entry",
+        "t": 0.8125,
+        "reference": 0.0002685515945922647,
+        "actual": 0.00392156862745098,
+        "error": 0.0036530170328587155
+      },
+      {
+        "id": "entry",
+        "t": 0.8333333333333334,
+        "reference": 0.0003759587771901061,
+        "actual": 0.00392156862745098,
+        "error": 0.003545609850260874
+      },
+      {
+        "id": "entry",
+        "t": 0.8541666666666666,
+        "reference": 0.0005263217237536523,
+        "actual": 0.00784313725490196,
+        "error": 0.0073168155311483084
+      },
+      {
+        "id": "entry",
+        "t": 0.875,
+        "reference": 0.0007368217792581078,
+        "actual": 0.00784313725490196,
+        "error": 0.007106315475643853
+      },
+      {
+        "id": "entry",
+        "t": 0.8958333333333334,
+        "reference": 0.001031512253437728,
+        "actual": 0.00392156862745098,
+        "error": 0.002890056374013252
+      },
+      {
+        "id": "entry",
+        "t": 0.9166666666666666,
+        "reference": 0.0014440583059898396,
+        "actual": 0.00784313725490196,
+        "error": 0.0063990789489121215
+      },
+      {
+        "id": "entry",
+        "t": 0.9375,
+        "reference": 0.002021606458541282,
+        "actual": 0.00784313725490196,
+        "error": 0.005821530796360679
+      },
+      {
+        "id": "entry",
+        "t": 0.9583333333333334,
+        "reference": 0.0028301330523316645,
+        "actual": 0.00392156862745098,
+        "error": 0.0010914355751193159
+      },
+      {
+        "id": "entry",
+        "t": 0.9791666666666666,
+        "reference": 0.003962029748161349,
+        "actual": 0.00784313725490196,
+        "error": 0.003881107506740612
+      },
+      {
+        "id": "entry",
+        "t": 1,
+        "reference": 0.005546622432236456,
+        "actual": 0.00784313725490196,
+        "error": 0.0022965148226655047
+      },
+      {
+        "id": "exit",
+        "t": 0,
+        "reference": 0.005546622432236456,
+        "actual": 0.00784313725490196,
+        "error": 0.0022965148226655047
+      },
+      {
+        "id": "exit",
+        "t": 0.020833333333333332,
+        "reference": 0.007764948446197189,
+        "actual": 0.00784313725490196,
+        "error": 0.00007818880870477142
+      },
+      {
+        "id": "exit",
+        "t": 0.041666666666666664,
+        "reference": 0.010870503078855703,
+        "actual": 0.011764705882352941,
+        "error": 0.0008942028034972377
+      },
+      {
+        "id": "exit",
+        "t": 0.0625,
+        "reference": 0.01521806192005966,
+        "actual": 0.01568627450980392,
+        "error": 0.0004682125897442612
+      },
+      {
+        "id": "exit",
+        "t": 0.08333333333333333,
+        "reference": 0.021304415558157062,
+        "actual": 0.023529411764705882,
+        "error": 0.0022249962065488196
+      },
+      {
+        "id": "exit",
+        "t": 0.10416666666666667,
+        "reference": 0.029824944430404576,
+        "actual": 0.03137254901960784,
+        "error": 0.001547604589203267
+      },
+      {
+        "id": "exit",
+        "t": 0.125,
+        "reference": 0.04175310823337956,
+        "actual": 0.043137254901960784,
+        "error": 0.001384146668581221
+      },
+      {
+        "id": "exit",
+        "t": 0.14583333333333334,
+        "reference": 0.058451981072233254,
+        "actual": 0.058823529411764705,
+        "error": 0.0003715483395314509
+      },
+      {
+        "id": "exit",
+        "t": 0.16666666666666666,
+        "reference": 0.08182914450720269,
+        "actual": 0.08235294117647059,
+        "error": 0.000523796669267898
+      },
+      {
+        "id": "exit",
+        "t": 0.1875,
+        "reference": 0.11455600790525561,
+        "actual": 0.11764705882352941,
+        "error": 0.003091050918273802
+      },
+      {
+        "id": "exit",
+        "t": 0.20833333333333334,
+        "reference": 0.16037139693264674,
+        "actual": 0.16470588235294117,
+        "error": 0.004334485420294437
+      },
+      {
+        "id": "exit",
+        "t": 0.22916666666666666,
+        "reference": 0.2245098448379075,
+        "actual": 0.23137254901960785,
+        "error": 0.0068627041817003465
+      },
+      {
+        "id": "exit",
+        "t": 0.25,
+        "reference": 0.31430057255139454,
+        "actual": 0.3215686274509804,
+        "error": 0.007268054899585874
+      },
+      {
+        "id": "exit",
+        "t": 0.2708333333333333,
+        "reference": 0.4400000990323178,
+        "actual": 0.4470588235294118,
+        "error": 0.007058724497093993
+      },
+      {
+        "id": "exit",
+        "t": 0.2916666666666667,
+        "reference": 0.6159740239308288,
+        "actual": 0.611764705882353,
+        "error": 0.004209318048475796
+      },
+      {
+        "id": "exit",
+        "t": 0.3125,
+        "reference": 0.8351292299755929,
+        "actual": 0.803921568627451,
+        "error": 0.031207661348141902
+      },
+      {
+        "id": "exit",
+        "t": 0.3333333333333333,
+        "reference": 0.9839803004168586,
+        "actual": 0.9529411764705882,
+        "error": 0.031039123946270397
+      },
+      {
+        "id": "exit",
+        "t": 0.3541666666666667,
+        "reference": 1,
+        "actual": 1,
+        "error": 0
+      },
+      {
+        "id": "exit",
+        "t": 0.375,
+        "reference": 1,
+        "actual": 1,
+        "error": 0
+      },
+      {
+        "id": "exit",
+        "t": 0.3958333333333333,
+        "reference": 1,
+        "actual": 1,
+        "error": 0
+      },
+      {
+        "id": "exit",
+        "t": 0.4166666666666667,
+        "reference": 1,
+        "actual": 1,
+        "error": 0
+      },
+      {
+        "id": "exit",
+        "t": 0.4375,
+        "reference": 1,
+        "actual": 1,
+        "error": 0
+      },
+      {
+        "id": "exit",
+        "t": 0.4583333333333333,
+        "reference": 1,
+        "actual": 1,
+        "error": 0
+      },
+      {
+        "id": "exit",
+        "t": 0.4791666666666667,
+        "reference": 1,
+        "actual": 1,
+        "error": 0
+      },
+      {
+        "id": "exit",
+        "t": 0.5,
+        "reference": 1,
+        "actual": 1,
+        "error": 0
+      },
+      {
+        "id": "exit",
+        "t": 0.5208333333333334,
+        "reference": 1,
+        "actual": 1,
+        "error": 0
+      },
+      {
+        "id": "exit",
+        "t": 0.5416666666666666,
+        "reference": 1,
+        "actual": 1,
+        "error": 0
+      },
+      {
+        "id": "exit",
+        "t": 0.5625,
+        "reference": 1,
+        "actual": 1,
+        "error": 0
+      },
+      {
+        "id": "exit",
+        "t": 0.5833333333333334,
+        "reference": 1,
+        "actual": 1,
+        "error": 0
+      },
+      {
+        "id": "exit",
+        "t": 0.6041666666666666,
+        "reference": 1,
+        "actual": 1,
+        "error": 0
+      },
+      {
+        "id": "exit",
+        "t": 0.625,
+        "reference": 1,
+        "actual": 1,
+        "error": 0
+      },
+      {
+        "id": "exit",
+        "t": 0.6458333333333334,
+        "reference": 1,
+        "actual": 1,
+        "error": 0
+      },
+      {
+        "id": "exit",
+        "t": 0.6666666666666666,
+        "reference": 1,
+        "actual": 1,
+        "error": 0
+      },
+      {
+        "id": "exit",
+        "t": 0.6875,
+        "reference": 1,
+        "actual": 1,
+        "error": 0
+      },
+      {
+        "id": "exit",
+        "t": 0.7083333333333334,
+        "reference": 1,
+        "actual": 1,
+        "error": 0
+      },
+      {
+        "id": "exit",
+        "t": 0.7291666666666666,
+        "reference": 1,
+        "actual": 1,
+        "error": 0
+      },
+      {
+        "id": "exit",
+        "t": 0.75,
+        "reference": 1,
+        "actual": 1,
+        "error": 0
+      },
+      {
+        "id": "exit",
+        "t": 0.7708333333333334,
+        "reference": 1,
+        "actual": 1,
+        "error": 0
+      },
+      {
+        "id": "exit",
+        "t": 0.7916666666666666,
+        "reference": 1,
+        "actual": 1,
+        "error": 0
+      },
+      {
+        "id": "exit",
+        "t": 0.8125,
+        "reference": 1,
+        "actual": 1,
+        "error": 0
+      },
+      {
+        "id": "exit",
+        "t": 0.8333333333333334,
+        "reference": 1,
+        "actual": 1,
+        "error": 0
+      },
+      {
+        "id": "exit",
+        "t": 0.8541666666666666,
+        "reference": 1,
+        "actual": 1,
+        "error": 0
+      },
+      {
+        "id": "exit",
+        "t": 0.875,
+        "reference": 1,
+        "actual": 1,
+        "error": 0
+      },
+      {
+        "id": "exit",
+        "t": 0.8958333333333334,
+        "reference": 1,
+        "actual": 1,
+        "error": 0
+      },
+      {
+        "id": "exit",
+        "t": 0.9166666666666666,
+        "reference": 1,
+        "actual": 1,
+        "error": 0
+      },
+      {
+        "id": "exit",
+        "t": 0.9375,
+        "reference": 1,
+        "actual": 1,
+        "error": 0
+      },
+      {
+        "id": "exit",
+        "t": 0.9583333333333334,
+        "reference": 1,
+        "actual": 1,
+        "error": 0
+      },
+      {
+        "id": "exit",
+        "t": 0.9791666666666666,
+        "reference": 1,
+        "actual": 1,
+        "error": 0
+      },
+      {
+        "id": "exit",
+        "t": 1,
+        "reference": 1,
+        "actual": 1,
+        "error": 0
+      }
+    ],
+    "buildsBefore": 1,
+    "buildsAfter": 1
+  },
+  "defaultLab": {
+    "ready": true,
+    "oneCloud": false,
+    "rendererMode": "hybrid",
+    "mode": "traverse",
+    "progress": 0,
+    "time": 0,
+    "position": [
+      0,
+      3062,
+      3760
+    ],
+    "field": {
+      "kind": "cumulus",
+      "seed": 73,
+      "base": 2450,
+      "top": 3650
+    },
+    "planePosition": [
+      0,
+      3050,
+      3700
+    ],
+    "direction": [
+      0,
+      -0.013952130199455754,
+      -0.999902664294329
+    ],
+    "density": 0,
+    "planeDensity": 0,
+    "transmittance500": 1,
+    "cpuQueryMs": 0,
+    "representation": "fixed-painted-hull",
+    "hull": {
+      "grid": [
+        60,
+        26,
+        50
+      ],
+      "triangles": 68000,
+      "vertices": 34008,
+      "bytes": 1632192,
+      "buildMs": 384.19999998807907
+    },
+    "geometryBuilds": 1,
+    "cacheBuildMs": 384.19999998807907,
+    "cacheBytes": 1632192,
+    "updateCpuMs": 0,
+    "fogCpuMs": 0,
+    "renderSubmitMs": 0.6000000238418579,
+    "gpuMs": null,
+    "gpuSample": 0,
+    "gpuTimerAvailable": false,
+    "calls": 10,
+    "triangles": 72214,
+    "width": 640,
+    "height": 360,
+    "transparentLayers": 0,
+    "alphaCoverageShells": 1,
+    "fogIntervals": 4,
+    "densityQueries": 108,
+    "textureBytes": 5592405.333333333,
+    "renderTargetBytes": 11059200,
+    "programsRunnable": true
+  },
+  "passed": true
+}
