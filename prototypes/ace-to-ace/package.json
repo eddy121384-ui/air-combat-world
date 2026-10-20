@@ -6,6 +6,6 @@
   "scripts": {
     "start": "python3 -m http.server 8080",
     "aivai": "node tools/aivai.mjs --suite --n 60",
-    "test": "node tools/test-brake-trap.mjs && node tools/test-hud-attitude.mjs && node tools/test-flight-path.mjs && node tools/test-flight-feel-ab.mjs"
+    "test": "node tools/test-brake-trap.mjs && node tools/test-hud-attitude.mjs && node tools/test-flight-path.mjs && node tools/test-flight-feel-ab.mjs && node tools/test-dual-flight-modes.mjs"
   }
 }
