@@ -255,8 +255,7 @@ export class PlayerController {
       }
       // fine aim: small sideways stick also yaws the nose a little
       if (Math.abs(x) < 0.3) c.yaw += x * 1.6;
-      // auto-burner when slow (keeps a thumb-only player out of the stall spiral)
-      if (ac.speed < 0.7 * ac.type.cornerSpeed && !c.brake) c.boost = true;
+      // No hidden afterburner override: Assisted and Expert share the same engine inputs.
     } else {
       c.roll = x;
       c.pitch = y;

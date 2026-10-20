@@ -12,7 +12,12 @@ import { Audio } from './audio.js';
 const $ = (s) => document.querySelector(s);
 const params = new URLSearchParams(location.search);
 const isTouch = matchMedia('(pointer: coarse)').matches || 'ontouchstart' in window;
-let flightFeel = params.get('feel') === 'A' ? 'A' : 'B';
+// Physics and controls are independent. Legacy ?feel=A/B remain QA aliases.
+let flightFeel = ['arcade', 'tactical'].includes(params.get('mode'))
+  ? params.get('mode')
+  : params.get('feel') === 'A' ? 'A' : params.get('feel') === 'B' ? 'tactical' : 'arcade';
+let controlMode = ['assisted', 'expert'].includes(params.get('control'))
+  ? params.get('control') : 'expert';
 // Identical opening geometry, skills and RNG seed for A/B and every rematch.
 const experimentSeed = Number.isFinite(Number(params.get('seed'))) && params.has('seed')
   ? Number(params.get('seed')) : 71429;
@@ -50,25 +55,41 @@ function syncTitle() {
     ace: 'ACE：全套戰術、極限機動與精準射擊。雙方傷害對等',
   };
   $('#diffDesc').textContent = desc[settings.difficulty];
-  $('#optAssist').classList.add('hidden'); // A/B always Expert; keep stored legacy preference intact
-  for (const b of document.querySelectorAll('[data-feel]')) {
-    b.classList.toggle('sel', b.dataset.feel === flightFeel);
-    b.setAttribute('aria-pressed', String(b.dataset.feel === flightFeel));
+  for (const b of document.querySelectorAll('[data-flight-mode]')) {
+    b.classList.toggle('sel', b.dataset.flightMode === flightFeel);
+    b.setAttribute('aria-pressed', String(b.dataset.flightMode === flightFeel));
   }
-  $('#feelDesc').textContent = flightFeel === 'A'
-    ? 'A · Legacy Expert：原始 MANUAL 飛行物理（對照組）'
-    : 'B · Arcade Expert：敏捷滾轉、一般轉向保速、BRK＋深拉桿短暫 High-G';
+  for (const b of document.querySelectorAll('[data-control-mode]')) {
+    b.classList.toggle('sel', b.dataset.controlMode === controlMode);
+    b.setAttribute('aria-pressed', String(b.dataset.controlMode === controlMode));
+  }
+  $('#feelDesc').textContent = flightFeel === 'arcade'
+    ? 'ARCADE：Ace Combat 式敏捷滾轉、低速仍有機動能力，高 G 不容易掉光速度。'
+    : flightFeel === 'tactical'
+      ? 'TACTICAL：War Thunder RB 式速度升力限制、強烈高 G 能量代價（簡化模型，並非完整擬真）。'
+      : 'LEGACY：原始飛行物理，僅供相容性測試。';
+  $('#controlDesc').textContent = controlMode === 'expert'
+    ? 'EXPERT：左右滾轉，上下俯仰；不自動放平機翼。'
+    : 'ASSISTED：左右命令轉向，由飛控協調傾斜與拉 G；置中時協助放平。';
   $('#optInvert').textContent = settings.invert ? '俯仰：上推＝爬升' : '俯仰：上推＝俯衝（搖桿式）';
   $('#optSound').textContent = settings.muted ? '音效：關' : '音效：開';
   $('#keysHelp').classList.toggle('hidden', isTouch);
   $('#touchHelp').classList.toggle('hidden', !isTouch);
 }
-for (const b of document.querySelectorAll('[data-feel]')) b.addEventListener('click', () => {
-  flightFeel = b.dataset.feel;
-  params.set('feel', flightFeel);
+function saveModeQuery() {
+  params.set('mode', flightFeel);
+  params.set('control', controlMode);
+  params.delete('feel');
   params.set('seed', String(experimentSeed));
   history.replaceState(null, '', location.pathname + '?' + params.toString());
-  syncTitle(); audio.ui();
+}
+for (const b of document.querySelectorAll('[data-flight-mode]')) b.addEventListener('click', () => {
+  flightFeel = b.dataset.flightMode;
+  saveModeQuery(); syncTitle(); audio.ui();
+});
+for (const b of document.querySelectorAll('[data-control-mode]')) b.addEventListener('click', () => {
+  controlMode = b.dataset.controlMode;
+  saveModeQuery(); syncTitle(); audio.ui();
 });
 for (const b of document.querySelectorAll('[data-diff]')) b.addEventListener('click', () => { settings.difficulty = b.dataset.diff; saveSettings(); syncTitle(); audio.unlock(); audio.ui(); });
 // Keep legacy ASSIST setting untouched; A/B uses MANUAL on both variants.
@@ -129,7 +150,7 @@ function start(k) {
     match.setController(match.blue, player);
   } else {
     blueAI = null;
-    player = new PlayerController(match.blue, input, { ...settings, assist: false });
+    player = new PlayerController(match.blue, input, { ...settings, assist: controlMode === 'assisted' });
     match.setController(match.blue, player);
   }
   match.on(onEvent);
@@ -145,6 +166,7 @@ function start(k) {
   hud.msgs = [];
   hud.flash(k === 'aivai' ? 'AI vs AI — 觀戰模式' : 'ENGAGE', '#7dffb0', 2.2, true);
   if (k === 'pvai') hud.flash('J-16 從正前方接近', '#f4fbff', 2.4);
+  if (k === 'pvai') hud.flash(`${flightFeel.toUpperCase()} / ${controlMode.toUpperCase()}`, '#7fe3ff', 2.2);
   last = performance.now();
 }
 

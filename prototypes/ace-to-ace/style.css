@@ -141,3 +141,12 @@ h2.win { color: var(--go); } h2.lose { color: var(--red); }
   .stats { grid-template-columns: repeat(6, 1fr); }
   .stats b { font-size: 16px; }
 }
+
+/* Flight-physics and piloting controls are separate, readable landscape selectors. */
+.modeLabel { margin-top: 10px; font-size: 11px; font-weight: 800; letter-spacing: .1em; color: #b8e6fc; }
+[data-flight-mode], [data-control-mode] { min-width: 115px; }
+@media (max-height: 420px) {
+  .modeLabel { margin-top: 6px; }
+  .row { margin: 5px 0; }
+  .help { font-size: 11px; }
+}

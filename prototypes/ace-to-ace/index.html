@@ -47,19 +47,27 @@
       <button data-diff="rookie">ROOKIE</button><button data-diff="veteran">VETERAN</button><button data-diff="ace">ACE</button>
     </div>
     <div id="diffDesc" class="help"></div>
-    <div class="row seg" role="group" aria-label="Expert 飛行手感 A/B">
-      <button data-feel="A" aria-pressed="false">A · LEGACY EXPERT</button><button data-feel="B" aria-pressed="true">B · ARCADE EXPERT</button>
+    <div class="modeLabel">飛行物理 · FLIGHT MODEL</div>
+    <div class="row seg" role="group" aria-label="飛行物理模式">
+      <button data-flight-mode="arcade" aria-pressed="true">ARCADE · 王牌</button>
+      <button data-flight-mode="tactical" aria-pressed="false">TACTICAL · 戰術</button>
     </div>
     <div id="feelDesc" class="help"></div>
+    <div class="modeLabel">操控方式 · CONTROLS</div>
+    <div class="row seg" role="group" aria-label="操控方式">
+      <button data-control-mode="assisted" aria-pressed="false">ASSISTED · 輔助</button>
+      <button data-control-mode="expert" aria-pressed="true">EXPERT · 專家</button>
+    </div>
+    <div id="controlDesc" class="help"></div>
     <div class="row opts">
-      <button id="optAssist"></button><button id="optInvert"></button><button id="optSound"></button>
+      <button id="optInvert"></button><button id="optSound"></button>
     </div>
     <div class="row">
       <button id="btnStart" class="primary">出擊 SORTIE</button>
       <button id="btnWatch">AI vs AI 觀戰</button>
     </div>
     <div id="keysHelp" class="help">
-      方向鍵 俯仰/滾轉 · W 後燃器 · S 減速板 · A/D 方向舵 · Space 飛彈 · Shift/F 機砲 · Q 熱焰彈 · E 看向敵機 · Tab AI 狀態 · Esc 暫停
+      Expert：方向鍵 俯仰/滾轉；Assisted：左右轉向、上下俯仰 · W 後燃器 · S 減速板 · A/D 方向舵 · Space 飛彈 · Shift/F 機砲 · Q 熱焰彈 · E 看向敵機 · Tab AI 狀態 · Esc 暫停
     </div>
     <div id="touchHelp" class="help hidden">
       左半螢幕：虛擬搖桿（放手保留桿量）· 右側：動力條上下滑調整 0–100% 油門（放手保留）；頂端 AB 點按切換；底端 BRK 按住減速（不改變油門）；MSL 飛彈 / GUN 機砲 / FLR 熱焰彈 / LOOK 看向敵機
