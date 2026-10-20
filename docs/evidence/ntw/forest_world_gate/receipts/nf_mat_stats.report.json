@@ -1,0 +1,83 @@
+{
+  "status": "PASS_NF_MAT_STATS",
+  "materials": {
+    "M_NF_LandscapeDL_R3": {
+      "num_vertex_shader_instructions": 168,
+      "num_pixel_shader_instructions": 446,
+      "num_samplers": 12,
+      "num_vertex_texture_samples": 1,
+      "num_pixel_texture_samples": 9,
+      "num_virtual_texture_samples": 0,
+      "num_uv_scalars": 0,
+      "num_interpolator_scalars": 0,
+      "blend_mode": "<BlendMode.BLEND_OPAQUE: 0>"
+    },
+    "M_NF_LeafCards": {
+      "num_vertex_shader_instructions": 220,
+      "num_pixel_shader_instructions": 243,
+      "num_samplers": 3,
+      "num_vertex_texture_samples": 3,
+      "num_pixel_texture_samples": 2,
+      "num_virtual_texture_samples": 0,
+      "num_uv_scalars": 2,
+      "num_interpolator_scalars": 0,
+      "blend_mode": "<BlendMode.BLEND_MASKED: 1>"
+    },
+    "M_NF_AcaciaW_LeafCards": {
+      "num_vertex_shader_instructions": 220,
+      "num_pixel_shader_instructions": 243,
+      "num_samplers": 3,
+      "num_vertex_texture_samples": 3,
+      "num_pixel_texture_samples": 2,
+      "num_virtual_texture_samples": 0,
+      "num_uv_scalars": 2,
+      "num_interpolator_scalars": 0,
+      "blend_mode": "<BlendMode.BLEND_MASKED: 1>"
+    },
+    "M_NF_Cryptomeria_LeafCards": {
+      "num_vertex_shader_instructions": 220,
+      "num_pixel_shader_instructions": 243,
+      "num_samplers": 3,
+      "num_vertex_texture_samples": 3,
+      "num_pixel_texture_samples": 2,
+      "num_virtual_texture_samples": 0,
+      "num_uv_scalars": 2,
+      "num_interpolator_scalars": 0,
+      "blend_mode": "<BlendMode.BLEND_MASKED: 1>"
+    },
+    "M_NF_Bark": {
+      "num_vertex_shader_instructions": 220,
+      "num_pixel_shader_instructions": 221,
+      "num_samplers": 3,
+      "num_vertex_texture_samples": 3,
+      "num_pixel_texture_samples": 2,
+      "num_virtual_texture_samples": 0,
+      "num_uv_scalars": 2,
+      "num_interpolator_scalars": 0,
+      "blend_mode": "<BlendMode.BLEND_MASKED: 1>"
+    },
+    "M_NF_Building_R6": {
+      "num_vertex_shader_instructions": 136,
+      "num_pixel_shader_instructions": 190,
+      "num_samplers": 1,
+      "num_vertex_texture_samples": 0,
+      "num_pixel_texture_samples": 3,
+      "num_virtual_texture_samples": 0,
+      "num_uv_scalars": 0,
+      "num_interpolator_scalars": 0,
+      "blend_mode": "<BlendMode.BLEND_OPAQUE: 0>"
+    },
+    "M_NF_Water": {
+      "num_vertex_shader_instructions": 136,
+      "num_pixel_shader_instructions": 147,
+      "num_samplers": 1,
+      "num_vertex_texture_samples": 0,
+      "num_pixel_texture_samples": 3,
+      "num_virtual_texture_samples": 0,
+      "num_uv_scalars": 0,
+      "num_interpolator_scalars": 0,
+      "blend_mode": "<BlendMode.BLEND_OPAQUE: 0>"
+    }
+  },
+  "error": null
+}

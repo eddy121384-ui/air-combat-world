@@ -20,7 +20,8 @@ def main():
     t = np.cumsum(d["FrameTime"]) / 1000.0
     k0 = int(np.nanargmax(np.where(t < 60, d["FrameTime"], -1)))
     ev = []
-    for line in open(run / "engine.log", encoding="utf-8", errors="replace"):
+    log = run / "engine.log" if (run / "engine.log").exists() else run / "game.log"
+    for line in open(log, encoding="utf-8", errors="replace"):
         m = re.search(r"\]\[\s*(\d+)\]LogWorldPartition: Streaming performance changed: (\w+) -> (\w+)", line)
         if m:
             ts = float(t[min(int(m.group(1)), len(t) - 1)] - t[k0])
