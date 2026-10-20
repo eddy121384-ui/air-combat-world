@@ -1,0 +1,54 @@
+[
+ {
+  "tag": "van_vel0",
+  "cfg": {
+   "mpc": {
+    "NearFull": 100000,
+    "ThinEnd": 400000,
+    "FadeWidth": 15000,
+    "ThinGamma": 2.2,
+    "ShellStart": 120000,
+    "ShellEnd": 300000,
+    "ClumpGain": 0.7
+   },
+   "wp_range_cm": 460000,
+   "landscape": "M_NF_LandscapeDL_R3"
+  },
+  "args": "-dpcvars=r.Velocity.EnableVertexDeformation=0"
+ },
+ {
+  "tag": "van_vel0_ez1",
+  "cfg": {
+   "mpc": {
+    "NearFull": 100000,
+    "ThinEnd": 400000,
+    "FadeWidth": 15000,
+    "ThinGamma": 2.2,
+    "ShellStart": 120000,
+    "ShellEnd": 300000,
+    "ClumpGain": 0.7
+   },
+   "wp_range_cm": 460000,
+   "landscape": "M_NF_LandscapeDL_R3"
+  },
+  "args": "-dpcvars=r.Velocity.EnableVertexDeformation=0,r.EarlyZPass=1"
+ },
+ {
+  "tag": "van_vel0_ez1_lod15",
+  "cfg": {
+   "mpc": {
+    "NearFull": 100000,
+    "ThinEnd": 400000,
+    "FadeWidth": 15000,
+    "ThinGamma": 2.2,
+    "ShellStart": 120000,
+    "ShellEnd": 300000,
+    "ClumpGain": 0.7
+   },
+   "wp_range_cm": 460000,
+   "landscape": "M_NF_LandscapeDL_R3"
+  },
+  "args": "-dpcvars=r.Velocity.EnableVertexDeformation=0,r.EarlyZPass=1",
+  "exec": "r.StaticMeshLODDistanceScale 1.5"
+ }
+]

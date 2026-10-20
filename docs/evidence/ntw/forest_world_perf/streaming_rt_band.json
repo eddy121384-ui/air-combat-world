@@ -1,0 +1,171 @@
+{
+ "run": "rt_band",
+ "events": [
+  {
+   "t_s": 5.1,
+   "from": "Good",
+   "to": "Critical",
+   "segment": "still1"
+  },
+  {
+   "t_s": 12.9,
+   "from": "Critical",
+   "to": "Good",
+   "segment": "flight"
+  },
+  {
+   "t_s": 55.6,
+   "from": "Good",
+   "to": "Slow",
+   "segment": "flight"
+  },
+  {
+   "t_s": 56.0,
+   "from": "Slow",
+   "to": "Good",
+   "segment": "flight"
+  },
+  {
+   "t_s": 62.7,
+   "from": "Good",
+   "to": "Slow",
+   "segment": "flight"
+  },
+  {
+   "t_s": 68.6,
+   "from": "Slow",
+   "to": "Critical",
+   "segment": "flight"
+  },
+  {
+   "t_s": 75.3,
+   "from": "Critical",
+   "to": "Immediate",
+   "segment": "flight"
+  },
+  {
+   "t_s": 76.3,
+   "from": "Immediate",
+   "to": "Critical",
+   "segment": "flight"
+  },
+  {
+   "t_s": 93.7,
+   "from": "Critical",
+   "to": "Slow",
+   "segment": "flight"
+  },
+  {
+   "t_s": 96.4,
+   "from": "Slow",
+   "to": "Critical",
+   "segment": "flight"
+  },
+  {
+   "t_s": 105.1,
+   "from": "Critical",
+   "to": "Immediate",
+   "segment": "flight"
+  },
+  {
+   "t_s": 106.3,
+   "from": "Immediate",
+   "to": "Slow",
+   "segment": "flight"
+  },
+  {
+   "t_s": 117.0,
+   "from": "Slow",
+   "to": "Critical",
+   "segment": "flight"
+  },
+  {
+   "t_s": 132.8,
+   "from": "Critical",
+   "to": "Slow",
+   "segment": "after"
+  },
+  {
+   "t_s": 134.0,
+   "from": "Slow",
+   "to": "Good",
+   "segment": "after"
+  }
+ ],
+ "flight_events": [
+  {
+   "t_s": 12.9,
+   "from": "Critical",
+   "to": "Good",
+   "segment": "flight"
+  },
+  {
+   "t_s": 55.6,
+   "from": "Good",
+   "to": "Slow",
+   "segment": "flight"
+  },
+  {
+   "t_s": 56.0,
+   "from": "Slow",
+   "to": "Good",
+   "segment": "flight"
+  },
+  {
+   "t_s": 62.7,
+   "from": "Good",
+   "to": "Slow",
+   "segment": "flight"
+  },
+  {
+   "t_s": 68.6,
+   "from": "Slow",
+   "to": "Critical",
+   "segment": "flight"
+  },
+  {
+   "t_s": 75.3,
+   "from": "Critical",
+   "to": "Immediate",
+   "segment": "flight"
+  },
+  {
+   "t_s": 76.3,
+   "from": "Immediate",
+   "to": "Critical",
+   "segment": "flight"
+  },
+  {
+   "t_s": 93.7,
+   "from": "Critical",
+   "to": "Slow",
+   "segment": "flight"
+  },
+  {
+   "t_s": 96.4,
+   "from": "Slow",
+   "to": "Critical",
+   "segment": "flight"
+  },
+  {
+   "t_s": 105.1,
+   "from": "Critical",
+   "to": "Immediate",
+   "segment": "flight"
+  },
+  {
+   "t_s": 106.3,
+   "from": "Immediate",
+   "to": "Slow",
+   "segment": "flight"
+  },
+  {
+   "t_s": 117.0,
+   "from": "Slow",
+   "to": "Critical",
+   "segment": "flight"
+  }
+ ],
+ "flight_degraded": true,
+ "flight_fps_median": 7.67
+}

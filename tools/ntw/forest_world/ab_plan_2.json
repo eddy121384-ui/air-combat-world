@@ -1,0 +1,53 @@
+[
+ {
+  "tag": "c49",
+  "cfg": {
+   "mpc": {
+    "NearFull": 100000,
+    "ThinEnd": 400000,
+    "FadeWidth": 15000,
+    "ThinGamma": 2.2,
+    "ShellStart": 120000,
+    "ShellEnd": 300000,
+    "ClumpGain": 0.7
+   },
+   "wp_range_cm": 460000,
+   "landscape": "M_NF_LandscapeDL_R3"
+  }
+ },
+ {
+  "tag": "c49_vel0",
+  "cfg": {
+   "mpc": {
+    "NearFull": 100000,
+    "ThinEnd": 400000,
+    "FadeWidth": 15000,
+    "ThinGamma": 2.2,
+    "ShellStart": 120000,
+    "ShellEnd": 300000,
+    "ClumpGain": 0.7
+   },
+   "wp_range_cm": 460000,
+   "landscape": "M_NF_LandscapeDL_R3"
+  },
+  "args": "-dpcvars=r.Velocity.EnableVertexDeformation=0"
+ },
+ {
+  "tag": "c46t_vel0",
+  "cfg": {
+   "mpc": {
+    "NearFull": 45000,
+    "ThinEnd": 240000,
+    "FadeWidth": 12000,
+    "ThinGamma": 1.6,
+    "ShellStart": 70000,
+    "ShellEnd": 200000,
+    "ClumpGain": 0.0
+   },
+   "wp_range_cm": 320000,
+   "landscape": "M_NF_LandscapeDL_R3"
+  },
+  "exec": "foliage.MaxEndCullDistance 260000",
+  "args": "-dpcvars=r.Velocity.EnableVertexDeformation=0"
+ }
+]

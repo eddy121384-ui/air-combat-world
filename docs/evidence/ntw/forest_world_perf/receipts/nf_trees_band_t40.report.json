@@ -1,0 +1,36 @@
+{
+  "status": "PASS_NF_TREES_BAND",
+  "materials": {
+    "/Game/NorthForest/Materials/M_NF_AcaciaW_LeafCards": "rank_from_custom_data",
+    "/Game/NorthForest/Materials/M_NF_Acacia_Bark": "rank_from_custom_data",
+    "/Game/NorthForest/Materials/M_NF_Bark": "rank_from_custom_data",
+    "/Game/NorthForest/Materials/M_NF_Cryptomeria_Bark": "rank_from_custom_data",
+    "/Game/NorthForest/Materials/M_NF_Cryptomeria_LeafCards": "rank_from_custom_data",
+    "/Game/NorthForest/Materials/M_NF_LeafCards": "rank_from_custom_data"
+  },
+  "error": null,
+  "mpc": {
+    "NearFull": 100000.0,
+    "ThinEnd": 400000.0,
+    "FadeWidth": 15000.0,
+    "ThinGamma": 2.200000047683716,
+    "ShellStart": 120000.0,
+    "ShellEnd": 300000.0,
+    "ShellScale": 0.800000011920929,
+    "ClumpGain": 0.699999988079071
+  },
+  "band_culls_cm": [
+    146222,
+    205522,
+    298671,
+    425000
+  ],
+  "instances": 3859205,
+  "components": 17351,
+  "per_band": [
+    1157160,
+    964663,
+    889853,
+    847529
+  ]
+}

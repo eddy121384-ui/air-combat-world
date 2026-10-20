@@ -1,0 +1,45 @@
+{
+ "run": "rt_t28_stream",
+ "events": [
+  {
+   "t_s": 4.8,
+   "from": "Good",
+   "to": "Critical",
+   "segment": "still1"
+  },
+  {
+   "t_s": 8.2,
+   "from": "Critical",
+   "to": "Good",
+   "segment": "still2"
+  },
+  {
+   "t_s": 65.7,
+   "from": "Good",
+   "to": "Slow",
+   "segment": "flight"
+  },
+  {
+   "t_s": 67.2,
+   "from": "Slow",
+   "to": "Good",
+   "segment": "flight"
+  }
+ ],
+ "flight_events": [
+  {
+   "t_s": 65.7,
+   "from": "Good",
+   "to": "Slow",
+   "segment": "flight"
+  },
+  {
+   "t_s": 67.2,
+   "from": "Slow",
+   "to": "Good",
+   "segment": "flight"
+  }
+ ],
+ "flight_degraded": true,
+ "flight_fps_median": 8.16
+}
