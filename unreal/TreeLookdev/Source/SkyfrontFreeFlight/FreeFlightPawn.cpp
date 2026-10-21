@@ -123,6 +123,16 @@ void AFreeFlightPawn::ResetFlight()
 	UpdateAgl();
 }
 
+void AFreeFlightPawn::HoldAtPose(const FVector& Location, const FRotator& Rotation)
+{
+	SetActorLocationAndRotation(Location, Rotation, false, nullptr, ETeleportType::TeleportPhysics);
+	bHold = true;
+	bFrozen = false;
+	CameraArm->bEnableCameraLag = false;           // snap the chase camera to the new pose
+	CameraArm->bEnableCameraRotationLag = false;
+	UpdateAgl();
+}
+
 void AFreeFlightPawn::BeginReset(const FString& Why, float Delay)
 {
 	bFrozen = true;
@@ -151,6 +161,12 @@ void AFreeFlightPawn::Tick(float DeltaSeconds)
 		{
 			ResetFlight();
 		}
+		return;
+	}
+
+	if (bHold)
+	{
+		UpdateAgl();
 		return;
 	}
 

@@ -8,18 +8,70 @@
 #include "InputCoreTypes.h"
 #include "LevelSequenceActor.h"
 #include "LevelSequencePlayer.h"
+#include "Misc/App.h"
+#include "RHI.h"
+#include "SkyfrontGameUserSettings.h"
+#include "WorldPartition/WorldPartitionSubsystem.h"
+#if WITH_EDITOR
+#include "ShaderCompiler.h"
+#endif
 
 AFreeFlightPlayerController::AFreeFlightPlayerController()
 {
 	bShowMouseCursor = false;
 	bAutoTest = FParse::Param(FCommandLine::Get(), TEXT("ffautotest"));
 	bCrashTest = FParse::Param(FCommandLine::Get(), TEXT("ffcrash"));
+	bGfxTest = FParse::Param(FCommandLine::Get(), TEXT("ffgfxtest"));
 }
 
 void AFreeFlightPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
 	SetInputMode(FInputModeGameOnly());
+	ApplyGraphics();   // restore the saved graphics settings (GameUserSettings.ini) on every launch
+}
+
+void AFreeFlightPlayerController::ApplyGraphics()
+{
+	if (USkyfrontGameUserSettings* S = USkyfrontGameUserSettings::Get())
+	{
+		S->ApplyGraphics(GetWorld());
+		LastApplyTime = FPlatformTime::Seconds();
+	}
+}
+
+void AFreeFlightPlayerController::SetMenuOpen(bool bOpen)
+{
+	bMenuOpen = bOpen;
+	if (AFreeFlightPawn* Plane = Cast<AFreeFlightPawn>(GetPawn()))
+	{
+		Plane->SetHold(bOpen);   // hold the view still so the change is visible; the world keeps streaming
+	}
+	StickFinger = ThrottleFinger = INDEX_NONE;
+	StickDeflection = FVector2D::ZeroVector;
+	RudderTouch = 0.f;
+}
+
+bool AFreeFlightPlayerController::HandleMenuPress(const FVector2D& P)
+{
+	USkyfrontGameUserSettings* S = USkyfrontGameUserSettings::Get();
+	if (!S)
+	{
+		return false;
+	}
+	for (int32 i = 0; i < 4; ++i)
+	{
+		if (Menu.Presets[i].IsInside(P)) { S->SetPreset(i); ApplyGraphics(); return true; }
+	}
+	for (int32 r = 0; r < USkyfrontGameUserSettings::NumRows; ++r)
+	{
+		if (Menu.RowMinus[r].IsInside(P)) { S->StepRow(r, -1); ApplyGraphics(); return true; }
+		if (Menu.RowPlus[r].IsInside(P)) { S->StepRow(r, +1); ApplyGraphics(); return true; }
+	}
+	if (Menu.Defaults.IsInside(P)) { S->ResetToDefaults(); ApplyGraphics(); return true; }
+	if (Menu.Diag.IsInside(P)) { S->SetShowDiagnostics(!S->GetShowDiagnostics()); S->SaveSettings(); return true; }
+	if (Menu.Close.IsInside(P)) { SetMenuOpen(false); return true; }
+	return Menu.Panel.IsInside(P);
 }
 
 void AFreeFlightPlayerController::KeepCamera()
@@ -54,6 +106,30 @@ void AFreeFlightPlayerController::UpdateLayout()
 	Layout.ResetButton = FBox2D(ResetMin, ResetMin + Button);
 	const FVector2D InvertMin(ResetMin.X - 0.03f * Hf - Button.X, ResetMin.Y);
 	Layout.InvertButton = FBox2D(InvertMin, InvertMin + Button);
+	const FVector2D GfxMin(InvertMin.X - 0.03f * Hf - Button.X, ResetMin.Y);
+	Layout.GfxButton = FBox2D(GfxMin, GfxMin + Button);
+
+	// Menu: a column on the right, 0.98 H wide; touch targets >= 0.068 H (~10 mm on an 11" tablet).
+	const float X0 = Wf - 1.0f * Hf, X1 = Wf - 0.02f * Hf;
+	Menu.Panel = FBox2D(FVector2D(X0, 0.02f * Hf), FVector2D(X1, 0.98f * Hf));
+	const float Pw = (X1 - X0 - 0.05f * Hf) / 4.f;
+	for (int32 i = 0; i < 4; ++i)
+	{
+		const FVector2D Min(X0 + 0.01f * Hf + i * (Pw + 0.01f * Hf), 0.11f * Hf);
+		Menu.Presets[i] = FBox2D(Min, Min + FVector2D(Pw, 0.09f * Hf));
+	}
+	for (int32 r = 0; r < 8; ++r)
+	{
+		const float Y = 0.235f * Hf + r * 0.077f * Hf;
+		Menu.RowLabel[r] = FVector2D(X0 + 0.02f * Hf, Y + 0.02f * Hf);
+		Menu.RowMinus[r] = FBox2D(FVector2D(X0 + 0.44f * Hf, Y), FVector2D(X0 + 0.55f * Hf, Y + 0.068f * Hf));
+		Menu.RowValue[r] = FVector2D(X0 + 0.705f * Hf, Y + 0.034f * Hf);
+		Menu.RowPlus[r] = FBox2D(FVector2D(X0 + 0.86f * Hf, Y), FVector2D(X0 + 0.97f * Hf, Y + 0.068f * Hf));
+	}
+	const float Bw = (X1 - X0 - 0.04f * Hf) / 3.f, By = 0.86f * Hf;
+	Menu.Defaults = FBox2D(FVector2D(X0 + 0.01f * Hf, By), FVector2D(X0 + 0.01f * Hf + Bw, By + 0.10f * Hf));
+	Menu.Diag = FBox2D(FVector2D(X0 + 0.02f * Hf + Bw, By), FVector2D(X0 + 0.02f * Hf + 2.f * Bw, By + 0.10f * Hf));
+	Menu.Close = FBox2D(FVector2D(X0 + 0.03f * Hf + 2.f * Bw, By), FVector2D(X0 + 0.03f * Hf + 3.f * Bw, By + 0.10f * Hf));
 	Layout.StickRadius = 0.13f * Hf;
 	Layout.ThrottleTravel = 0.45f * Hf;
 }
@@ -75,10 +151,22 @@ void AFreeFlightPlayerController::PollTouches()
 		}
 		const FVector2D P(X, Y);
 
-		if (bPressed && !WasPressed[Finger])
+		if (bMenuOpen)
+		{
+			if (bPressed && !WasPressed[Finger])
+			{
+				bUsedTouch = true;
+				HandleMenuPress(P);   // flight controls are off while the menu is open
+			}
+		}
+		else if (bPressed && !WasPressed[Finger])
 		{
 			bUsedTouch = true;
-			if (Layout.ResetButton.IsInside(P))
+			if (Layout.GfxButton.IsInside(P))
+			{
+				SetMenuOpen(true);
+			}
+			else if (Layout.ResetButton.IsInside(P))
 			{
 				if (Plane)
 				{
@@ -152,9 +240,17 @@ void AFreeFlightPlayerController::PlayerTick(float DeltaTime)
 	{
 		AutoTestTick();
 	}
+	if (bGfxTest)
+	{
+		GfxTestTick(DeltaTime);
+	}
+	if (WasInputKeyJustPressed(EKeys::G))
+	{
+		SetMenuOpen(!bMenuOpen);
+	}
 
 	AFreeFlightPawn* Plane = Cast<AFreeFlightPawn>(GetPawn());
-	if (!Plane)
+	if (!Plane || bMenuOpen)
 	{
 		return;
 	}
@@ -254,4 +350,138 @@ void AFreeFlightPlayerController::AutoTestTick()
 	{
 		ConsoleCommand(TEXT("quit"));
 	}
+}
+
+// -ffgfxtest: same-view graphics comparison.
+// Phase A: for each fixed pose the plane holds still, each preset is applied LIVE (as from the menu); once World Partition streaming and
+// shader compiles are done, 5 s of frame / GPU time are sampled, then a HUD screenshot is taken and the next preset follows 3 frames LATER
+// (so the capture shows the measured preset). One SKYGFXTEST line per (view, preset). Order Power Saver -> Ultra -> Balanced (repeat).
+// Phase B: hitch attribution at the first pose from Balanced: each settings row stepped up and back down alone, worst frame over 4 s
+// (SKYGFXROW lines). Then quit.
+void AFreeFlightPlayerController::GfxTestTick(float DeltaTime)
+{
+	struct FView { const TCHAR* Name; FVector Loc; FRotator Rot; };
+	static const FView Views[] = {
+		// 250 m above the Sanzhi north slope looking 8.6 km across the forest bands to Qixingshan (PR #55 dl_layers_north)
+		{TEXT("forest_layers"), FVector(420000.0, -3130000.0, 43216.0), FRotator(3.1f, 49.3f, 0.f)},
+		// north hills looking 7 km south over Tianmu / Shilin / Beitou (densest town tiles of the map)
+		{TEXT("towns_south"), FVector(750000.0, -2300000.0, 90000.0), FRotator(5.0f, 107.1f, 0.f)},
+	};
+	static const int32 Order[] = {0, 1, 2, 3, 1};
+	constexpr int32 NumViews = UE_ARRAY_COUNT(Views), NumPresets = UE_ARRAY_COUNT(Order);
+	constexpr int32 NumA = NumViews * NumPresets, NumB = 1 + 2 * USkyfrontGameUserSettings::NumRows;   // B0 = baseline (teleport + Balanced)
+	AFreeFlightPawn* Plane = Cast<AFreeFlightPawn>(GetPawn());
+	USkyfrontGameUserSettings* S = USkyfrontGameUserSettings::Get();
+	if (!Plane || !S)
+	{
+		return;
+	}
+	const float FrameMs = FApp::GetDeltaTime() * 1000.f;
+	GfxStepTime += FApp::GetDeltaTime();
+	bool bAdvance = GfxStep < 0;
+
+	if (GfxShotFrames > 0)
+	{
+		bAdvance = --GfxShotFrames == 0;   // screenshot taken, now switch
+	}
+	else if (GfxStep >= NumA)
+	{
+		// phase B: worst frame of a single-row change
+		if (GfxStepTime - FApp::GetDeltaTime() < 4.f)
+		{
+			GfxWorstAfterApply = FMath::Max(GfxWorstAfterApply, FrameMs);
+		}
+		else
+		{
+			const int32 B = GfxStep - NumA - 1, Row = FMath::Max(B, 0) / 2;
+			UE_LOG(LogTemp, Display, TEXT("SKYGFXROW row=%s dir=%s value=%s worst_first_4s_ms=%.1f"), B < 0 ? TEXT("baseline") : USkyfrontGameUserSettings::RowName(Row),
+				B < 0 ? TEXT("-") : (B % 2 ? TEXT("down") : TEXT("up")), B < 0 ? TEXT("Balanced") : *S->RowValueText(Row), GfxWorstAfterApply);
+			bAdvance = true;
+		}
+	}
+	else if (GfxStep >= 0)
+	{
+		const float Settle = GfxStep == 0 ? 15.f : 8.f, Measure = 5.f;
+		if (GfxReadyAt < 0.f)
+		{
+			// measure only once World Partition streaming (the loading range changes with the preset) and shader compiles have finished
+			const UWorldPartitionSubsystem* Wp = GetWorld()->GetSubsystem<UWorldPartitionSubsystem>();
+			bool bReady = !Wp || Wp->IsStreamingCompleted();
+#if WITH_EDITOR
+			bReady &= !GShaderCompilingManager || GShaderCompilingManager->GetNumRemainingJobs() == 0;
+#endif
+			if (bReady && GfxStreamDoneAt < 0.f)
+			{
+				GfxStreamDoneAt = GfxStepTime;
+			}
+			if ((bReady && GfxStepTime >= Settle) || GfxStepTime >= Settle + 120.f)
+			{
+				GfxReadyAt = GfxStepTime;
+			}
+			if (GfxStepTime - FApp::GetDeltaTime() < 3.f)   // frames that STARTED in the first 3 s (a multi-second hitch counts too)
+			{
+				GfxWorstAfterApply = FMath::Max(GfxWorstAfterApply, FrameMs);
+			}
+		}
+		else if (GfxStepTime < GfxReadyAt + Measure)
+		{
+			GfxFrameMs.Add(FrameMs);
+			GfxGpuMs.Add(FPlatformTime::ToMilliseconds(RHIGetGPUFrameCycles(0)));
+		}
+		else
+		{
+			const FView& V = Views[GfxStep / NumPresets];
+			GfxFrameMs.Sort();
+			GfxGpuMs.Sort();
+			auto Pct = [](const TArray<float>& A, float Q) { return A.Num() ? A[FMath::Min(A.Num() - 1, FMath::FloorToInt(A.Num() * Q))] : 0.f; };
+			float Sum = 0.f;
+			for (float F : GfxFrameMs) { Sum += F; }
+			const USkyfrontGameUserSettings::FEffective& E = S->GetEffective();
+			UE_LOG(LogTemp, Display, TEXT("SKYGFXTEST view=%s preset=%s frames=%d avg_ms=%.1f p50_ms=%.1f p95_ms=%.1f gpu_p50_ms=%.1f worst_first_3s_ms=%.1f stream_done_s=%.1f tree_end_m=%.0f dm=%d vds=%.3f bld_m=%.0f res=%.0f shadow_m=%.0f cascades=%d ao=%d apply_ms=%.1f"),
+				V.Name, USkyfrontGameUserSettings::PresetName(S->GetPreset()), GfxFrameMs.Num(), GfxFrameMs.Num() ? Sum / GfxFrameMs.Num() : 0.f,
+				Pct(GfxFrameMs, 0.5f), Pct(GfxFrameMs, 0.95f), Pct(GfxGpuMs, 0.5f), GfxWorstAfterApply, GfxStreamDoneAt, E.TreeEndM, E.DetailMode,
+				E.ViewDistanceScale, E.BuildingCullM, E.ScreenPercentage, E.ShadowDistanceM, E.Cascades, E.AoLevels, E.ApplyMs);
+			FScreenshotRequest::RequestScreenshot(FString::Printf(TEXT("skygfx_%s_%d_%s"), V.Name, GfxStep % NumPresets,
+				USkyfrontGameUserSettings::PresetName(S->GetPreset())).Replace(TEXT(" "), TEXT("_")), true, false);
+			GfxShotFrames = 3;
+		}
+	}
+	if (!bAdvance)
+	{
+		return;
+	}
+
+	++GfxStep;
+	GfxStepTime = 0.f;
+	GfxWorstAfterApply = 0.f;
+	GfxReadyAt = GfxStreamDoneAt = -1.f;
+	GfxFrameMs.Reset();
+	GfxGpuMs.Reset();
+	if (GfxStep >= NumA + NumB)
+	{
+		S->ResetToDefaults();
+		S->SaveSettings();
+		ConsoleCommand(TEXT("quit"));
+		return;
+	}
+	if (GfxStep < NumA)
+	{
+		const FView& V = Views[GfxStep / NumPresets];
+		Plane->HoldAtPose(V.Loc, V.Rot);
+		S->SetPreset(Order[GfxStep % NumPresets]);
+	}
+	else
+	{
+		const int32 B = GfxStep - NumA - 1;
+		if (B < 0)
+		{
+			Plane->HoldAtPose(Views[0].Loc, Views[0].Rot);   // baseline: its hitch is not attributed to a row
+			S->SetPreset(USkyfrontGameUserSettings::Balanced);
+		}
+		else
+		{
+			S->StepRow(B / 2, B % 2 ? -1 : +1);
+		}
+	}
+	ApplyGraphics();
 }

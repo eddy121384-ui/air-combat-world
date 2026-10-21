@@ -7,6 +7,6 @@ public class SkyfrontFreeFlight : ModuleRules
 	public SkyfrontFreeFlight(ReadOnlyTargetRules Target) : base(Target)
 	{
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
-		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "ProceduralMeshComponent", "LevelSequence", "MovieScene" });
+		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "ProceduralMeshComponent", "LevelSequence", "MovieScene", "RHI" });
 	}
 }
