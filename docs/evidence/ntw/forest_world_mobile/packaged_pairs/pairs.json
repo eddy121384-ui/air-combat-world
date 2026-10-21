@@ -1,0 +1,13 @@
+{
+ "t020s": {
+  "pkm_sm5_movie": {
+   "frame": "MovieFrame00028.png",
+   "sequence_time_s": 20.37
+  },
+  "pkm_es31_movie": {
+   "frame": "MovieFrame00039.png",
+   "sequence_time_s": 20.14
+  }
+ },
+ "note": "held still agl120_plantation only; flight times from -dumpmovie CSVs did not give matching views (see the doc, section 3)"
+}

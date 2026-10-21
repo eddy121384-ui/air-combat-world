@@ -1,0 +1,30 @@
+{
+  "status": "PASS_NF_LANDSCAPE",
+  "rev": "4",
+  "error": null,
+  "never_stream": [
+    "T_NF_Mask1",
+    "T_NF_Mask2",
+    "T_NF_Roofs",
+    "T_NF_Terrain"
+  ],
+  "material": "/Game/NorthForest/Materials/M_NF_LandscapeDL_R4",
+  "params": {
+    "CanopyBright": 1.25,
+    "NormalStrength": 1.0,
+    "CanopyTint": [
+      0.92,
+      1.0,
+      1.18
+    ],
+    "bands": {
+      "FA0": 350000.0,
+      "FA1": 600000.0,
+      "FB0": 700000.0,
+      "FB1": 1100000.0,
+      "SK0": 0.3,
+      "SK1": 1.0
+    }
+  },
+  "landscape_actors": 1
+}

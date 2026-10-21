@@ -1,0 +1,22 @@
+﻿{
+    "args":  [
+                 "TreeLookdev",
+                 "-windowed",
+                 "-ResX=1920",
+                 "-ResY=1080",
+                 "-ForceRes",
+                 "-nosound",
+                 "-nosplash",
+                 "-unattended",
+                 "-ExecCmds=\"r.VSync 0,csv.Category Memory 1,r.GPUCsvStatsEnabled 1\"",
+                 "-csvCaptureFrames=900",
+                 "-ExitAfterCsvProfiling",
+                 "-llm",
+                 "-abslog=\"D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world-ntwforest-mobile\\unreal\\TreeLookdev\\Saved\\NorthForest\\gate\\runs\\pkm_es31_movie\\game.log\"",
+                 "-dumpmovie",
+                 "-featureleveles31 -dpcvars=r.DetailMode=0,r.CookOutUnusedDetailModeComponents=1,foliage.MaxEndCullDistance=165000,r.Shadow.DistanceScale=0.2,r.Shadow.CSM.MaxMobileCascades=2,r.Shadow.MaxCSMResolution=1024"
+             ],
+    "started":  "2026-10-21T10:20:52.7557003+08:00",
+    "exe":  "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world-ntwforest-mobile\\unreal\\TreeLookdev\\Saved\\StagedBuilds\\Windows\\TreeLookdev\\Binaries\\Win64\\TreeLookdev.exe",
+    "tag":  "pkm_es31_movie"
+}

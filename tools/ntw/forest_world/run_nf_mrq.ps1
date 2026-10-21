@@ -1,7 +1,8 @@
 # North Taiwan forest world v1: native Movie Render Queue frames of one config (standalone -game; recipe of tools/forest/run_hf_mrq.ps1).
 #   run_nf_mrq.ps1 -Rev 01 -Tag nf_flight_01      (configs from adapters/unreal/ntwforest/nf_mrq_configs.py)   Host: Intel UHD 770 only.
+#   -ExtraArgs @('-featureleveles31', (& mobile_cvars.ps1))   mobile forest profile in the ES3.1 mobile-renderer preview
 param([Parameter(Mandatory)][string]$Rev, [Parameter(Mandatory)][ValidatePattern('^[A-Za-z0-9_-]+$')][string]$Tag,
-      [string]$ExecCmds = '', [string]$EngineRoot = 'C:\Program Files\Epic Games\UE_5.8')
+      [string]$ExecCmds = '', [string[]]$ExtraArgs = @(), [string]$EngineRoot = 'C:\Program Files\Epic Games\UE_5.8')
 $ErrorActionPreference = 'Stop'
 if (Get-Process UnrealEditor* -ErrorAction SilentlyContinue) { throw 'An UnrealEditor process is already running' }
 $RepoRoot = (Resolve-Path (Join-Path $PSScriptRoot '..\..\..')).Path
@@ -16,6 +17,7 @@ $a = @("`"$(Join-Path $RepoRoot 'unreal\TreeLookdev\TreeLookdev.uproject')`"", $
     '-NoScreenMessages', '-unattended', "-MoviePipelineConfig=$($cfg.config)", "-LevelSequence=$($cfg.sequence)",
     '-MoviePipelineLocalExecutorClass=/Script/MovieRenderPipelineCore.MoviePipelineInProcessExecutor', "-abslog=`"$log`"")
 if ($ExecCmds) { $a += "-ExecCmds=`"$ExecCmds`"" }
+$a += $ExtraArgs
 @{ tag = $Tag; config = $cfg; args = $a; started = (Get-Date).ToString('o') } | ConvertTo-Json -Depth 6 | Set-Content (Join-Path $out 'request.json') -Encoding utf8
 $sw = [Diagnostics.Stopwatch]::StartNew()
 $proc = Start-Process -FilePath (Join-Path $EngineRoot 'Engine\Binaries\Win64\UnrealEditor.exe') -ArgumentList $a -WindowStyle Hidden -Wait -PassThru

@@ -1,0 +1,21 @@
+﻿{
+    "args":  [
+                 "TreeLookdev",
+                 "-windowed",
+                 "-ResX=1920",
+                 "-ResY=1080",
+                 "-ForceRes",
+                 "-nosound",
+                 "-nosplash",
+                 "-unattended",
+                 "-ExecCmds=\"r.VSync 0,csv.Category Memory 1,r.GPUCsvStatsEnabled 1\"",
+                 "-csvCaptureFrames=200",
+                 "-ExitAfterCsvProfiling",
+                 "-llm",
+                 "-abslog=\"D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world-ntwforest-mobile\\unreal\\TreeLookdev\\Saved\\NorthForest\\gate\\runs\\pkm_sm5_movie\\game.log\"",
+                 "-dumpmovie"
+             ],
+    "started":  "2026-10-21T10:28:00.2374371+08:00",
+    "exe":  "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world-ntwforest-mobile\\unreal\\TreeLookdev\\Saved\\StagedBuilds\\Windows\\TreeLookdev\\Binaries\\Win64\\TreeLookdev.exe",
+    "tag":  "pkm_sm5_movie"
+}

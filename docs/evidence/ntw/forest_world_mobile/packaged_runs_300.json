@@ -1,0 +1,187 @@
+{
+ "pkm_es31_300": {
+  "segments": {
+   "flight": {
+    "FrameTime": {
+     "median": 63.69,
+     "p95": 90.56,
+     "p99": 106.06,
+     "max": 124.95
+    },
+    "GPUTime": {
+     "median": 62.66,
+     "p95": 89.48,
+     "p99": 103.9,
+     "max": 123.22
+    },
+    "GameThreadTime": {
+     "median": 3.92,
+     "p95": 7.19,
+     "p99": 9.54,
+     "max": 16.88
+    },
+    "RenderThreadTime": {
+     "median": 63.65,
+     "p95": 90.9,
+     "p99": 106.06,
+     "max": 127.39
+    },
+    "frames": 1507,
+    "fps_median": 15.7,
+    "passes_median": {
+     "Basepass": 43.8,
+     "TAA": 5.9,
+     "MobileSceneRender": 2.5,
+     "Postprocessing": 2.1,
+     "ReflectionEnvironment": 1.9,
+     "RenderVelocities": 1.7,
+     "DeferredShading": 1.4,
+     "MobileFog": 1.1
+    }
+   },
+   "flight_steady": {
+    "FrameTime": {
+     "median": 66.33,
+     "p95": 92.48,
+     "p99": 106.12,
+     "max": 119.85
+    },
+    "GPUTime": {
+     "median": 64.98,
+     "p95": 91.51,
+     "p99": 104.14,
+     "max": 117.49
+    },
+    "GameThreadTime": {
+     "median": 3.99,
+     "p95": 7.38,
+     "p99": 9.55,
+     "max": 14.63
+    },
+    "RenderThreadTime": {
+     "median": 65.96,
+     "p95": 92.79,
+     "p99": 106.49,
+     "max": 120.35
+    },
+    "frames": 1079,
+    "fps_median": 15.08,
+    "passes_median": {
+     "Basepass": 46.3,
+     "TAA": 5.9,
+     "MobileSceneRender": 2.5,
+     "Postprocessing": 2.1,
+     "ReflectionEnvironment": 1.7,
+     "RenderVelocities": 1.5,
+     "DeferredShading": 1.3,
+     "MobileFog": 1.0
+    }
+   }
+  },
+  "streaming_cost_ms_flight": {
+   "AddToWorld": {
+    "median": 0.0,
+    "p95": 0.0,
+    "p99": 3.07,
+    "max": 9.28
+   },
+   "UpdateLevelStreaming": {
+    "median": 0.0,
+    "p95": 0.08,
+    "p99": 0.13,
+    "max": 0.35
+   },
+   "AsyncLoading": {
+    "median": 0.01,
+    "p95": 0.03,
+    "p99": 1.8,
+    "max": 3.61
+   },
+   "FlushAsyncLoading": {
+    "median": 0.0,
+    "p95": 0.0,
+    "p99": 0.0,
+    "max": 0.0
+   },
+   "InitRenderResource": {
+    "median": 0.0,
+    "p95": 0.0,
+    "p99": 0.0,
+    "max": 0.0
+   },
+   "UpdateStreamingState": {
+    "median": 0.09,
+    "p95": 0.15,
+    "p99": 0.2,
+    "max": 0.41
+   },
+   "UpdatePrimitiveInstances": {
+    "median": 0.0,
+    "p95": 0.0,
+    "p99": 0.0,
+    "max": 0.03
+   },
+   "UpdateGPUScene": {
+    "median": 0.02,
+    "p95": 0.8,
+    "p99": 1.82,
+    "max": 7.23
+   },
+   "AsyncLoadingTime": {
+    "median": 0.0,
+    "p95": 0.0,
+    "p99": 0.0,
+    "max": 0.0
+   }
+  },
+  "game_thread_frames_over_50ms_flight": 0,
+  "gpuscene_instances": {
+   "median": 452330.0,
+   "p95": 661170.0,
+   "p99": 675842.72,
+   "max": 681155.0
+  },
+  "physical_used_mb": {
+   "median": 1922.57,
+   "p95": 2046.12,
+   "p99": 2078.8,
+   "max": 2105.18
+  },
+  "llm_peak_mb_top": {
+   "WorkingSetSize": 2105.2,
+   "PagefileUsed": 2048.9,
+   "Total": 2010.4,
+   "TrackedTotal": 1238.1,
+   "Untracked": 799.5,
+   "Meshes": 543.9,
+   "Meshes/InstancedMesh": 469.1,
+   "Textures": 137.3,
+   "RenderTargets": 118.4,
+   "FMallocUnused": 117.8,
+   "Meshes/StaticMesh": 74.6,
+   "AsyncLoading": 57.8,
+   "UObject": 54.7,
+   "ThreadStack": 42.1,
+   "UObject/StaticAllocateObject": 33.1
+  },
+  "loadmap_ms": 936.0,
+  "streaming_events": [
+   {
+    "t_s": 4.0,
+    "to": "Critical"
+   },
+   {
+    "t_s": 4.6,
+    "to": "Good"
+   }
+  ],
+  "flight_events": [],
+  "process": {
+   "peak_private_mb": 1988,
+   "seconds": 144,
+   "csv": true,
+   "peak_working_set_mb": 2047,
+   "exit_code": 777003
+  }
+ }
+}
