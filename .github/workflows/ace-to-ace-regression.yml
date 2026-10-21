@@ -23,6 +23,12 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
+      - name: Check browser module syntax
+        working-directory: prototypes/ace-to-ace
+        run: |
+          node --check src/game/main.js
+          node --check src/game/input.js
+          node --check src/sim/aircraft.js
       - name: Node flight and AI regression tests
         working-directory: prototypes/ace-to-ace
         run: |

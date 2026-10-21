@@ -325,8 +325,11 @@ function frame(now) {
     if (settingsVisible()) closeFlightSettings();
     else setPaused(mode !== 'paused');
   }
-  if (mode === 'result' && input.consume('restart')) start(kind);
-  if (mode === 'title' && !settingsVisible() && input.consume('restart')) start('pvai');
+  // Always consume restart presses, even while the settings dialog is open.
+  // Otherwise an Enter tap can unexpectedly launch a sortie after Cancel.
+  const restart = input.consume('restart');
+  if (mode === 'result' && restart) start(kind);
+  if (mode === 'title' && !settingsVisible() && restart) start('pvai');
   if (input.consume('camera') && kind === 'aivai' && match) {
     spectateTarget = spectateTarget === 'blue' ? 'red' : 'blue';
     view.ac = spectateTarget === 'blue' ? match.blue : match.red;
