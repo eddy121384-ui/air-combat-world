@@ -9,6 +9,11 @@ Creates M_NF_LandscapeDL_R<rev> and assigns it to NF_Terrain (+ optional fog val
 and a terrain SKIN on every band, stronger with distance, from terrain_skin.py (T_NF_Terrain): ridges warmer / lighter, valleys cooler,
 gullies darker, low openness darker, steep open slopes showing soil; grass golden on ridges, greener in hollows; volcanic bare ground.
 Canopy normals fade out with distance (with them, backlit far forest read grey-white); vegetation specular lowered.
+ACW_NF_DL_MOBILE=1 (mobile forest profile, rev 4+): the same graph gains `#if SHADING_PATH_MOBILE` branches that the mobile renderer
+compiles - canopy shell / canopy colour on the MPC mobile distances (ShellStartM / ShellEndM), the baked canopy also UNDER the thinner
+near trees (NearCanopyM: gaps between kept trees read as crowns, not as understory) and single-scale canopy normals (3 texture fetches
+instead of 6). The world-sized masks (T_NF_Mask1 / Mask2 / Terrain / Roofs) are made never-stream: they cover the whole map, are
+always on screen, and when they streamed in late after a cut the far forest showed blurred low-mip colour blocks.
 Receipt: reports/nf_landscape_dl_<rev>.report.json.
 """
 import os
@@ -30,6 +35,11 @@ BANDS = {k: float(os.environ.get("ACW_NF_DL_" + k, v)) for k, v in (("FA0", 3500
                                                                    ("FB1", 1100000.0), ("SK0", 0.30), ("SK1", 1.0))}
 CANOPY_TINT = tuple(float(x) for x in os.environ.get("ACW_NF_CANOPY_TINT", "0.92,1.0,1.18").split(","))
 
+MOBILE = os.environ.get("ACW_NF_DL_MOBILE") == "1"
+MPRE = """#if SHADING_PATH_MOBILE
+SS = SSm; SE = SEm;
+#endif
+"""
 COMMON = """float shell = saturate((D - SS) / (SE - SS));
 float bias = (NB.g - 0.5) * 2.0 + (NA.a - 0.5);
 float2 o2 = float2(0.37, 0.61);
@@ -43,6 +53,9 @@ float sc = saturate((c1.a - c2.a) * 4.0 + bias * 1.5 + 0.5);
 float wc = saturate(M2.r * 1.5 - 0.25);
 float wa = saturate(M2.g * 1.5 - 0.25) * (1.0 - wc);
 """
+
+if MOBILE:
+    COMMON = MPRE + COMMON
 
 BASE = COMMON + """float far1 = saturate((D - FA0) / (FA1 - FA0));
 float far2 = saturate((D - FB0) / (FB1 - FB0));
@@ -63,7 +76,11 @@ float lum = dot(macro, float3(0.3, 0.59, 0.11));
 float3 mount = lerp(macro, lum * float3(0.80, 1.05, 1.02), 0.15);
 float3 farForest = lerp(lerp(canopy, macro, far1), mount, far2);
 float3 under = lerp(float3(0.017, 0.023, 0.010), float3(0.030, 0.034, 0.016), NB.b);
-float3 forestC = lerp(under, farForest, shell);
+float sh = shell;
+#if SHADING_PATH_MOBILE
+sh = max(shell, NC);
+#endif
+float3 forestC = lerp(under, farForest, sh);
 float3 grass = lerp(float3(0.058, 0.074, 0.026), float3(0.11, 0.105, 0.046), saturate(NB.g * 0.8 + NB.a * 0.4)) * lerp(0.85, 1.12, NA.b);
 grass = lerp(grass, grass * float3(1.18, 1.05, 0.80), saturate(rg));
 grass = lerp(grass, grass * float3(0.85, 1.05, 0.95), saturate(-rg));
@@ -98,9 +115,15 @@ c = lerp(c, float3(0.16, 0.14, 0.11), beach * 0.8);
 if (Z < -60.0) { c = float3(0.018, 0.028, 0.030); rough = 0.3; }
 return float4(c, rough);"""
 
-NORMAL = COMMON + """float3 n1 = lerp(lerp(lerp(Texture2DSample(NBr, NBrSampler, u2).xyz, Texture2DSample(NBr, NBrSampler, UVC).xyz, sb),
+NORMAL = COMMON + """#if SHADING_PATH_MOBILE
+float3 n1 = lerp(lerp(Texture2DSample(NBr, NBrSampler, UVC).xyz, Texture2DSample(NAc, NAcSampler, UVC).xyz, wa),
+                 Texture2DSample(NCr, NCrSampler, UVC).xyz, wc);
+shell = max(shell, NC);
+#else
+float3 n1 = lerp(lerp(lerp(Texture2DSample(NBr, NBrSampler, u2).xyz, Texture2DSample(NBr, NBrSampler, UVC).xyz, sb),
                         lerp(Texture2DSample(NAc, NAcSampler, u2).xyz, Texture2DSample(NAc, NAcSampler, UVC).xyz, sa), wa),
                    lerp(Texture2DSample(NCr, NCrSampler, UVC + o2).xyz, Texture2DSample(NCr, NCrSampler, UVC).xyz, sc), wc);
+#endif
 float3 cn = n1 * 2.0 - 1.0;
 float k = saturate(M1.r * 1.3) * shell * NS * (1.0 - saturate((D - 250000.0) / 250000.0));   // far: geometric relief only
 return normalize(VN + float3(cn.xy, 0.0) * k / max(cn.z, 0.25));"""
@@ -144,6 +167,11 @@ def build():
     tex = {k: lib.load_asset(TEX + "/" + k) for k in ("T_NF_Mask1", "T_NF_Mask2", "T_NF_Noise")}
     tex["T_NF_Roofs"] = import_tex("T_NF_Roofs", False)
     tex["T_NF_Terrain"] = import_tex("T_NF_Terrain", False)
+    if MOBILE:   # world-sized masks: always resident
+        for k in ("T_NF_Mask1", "T_NF_Mask2", "T_NF_Roofs", "T_NF_Terrain"):
+            tex[k].set_editor_property("never_stream", True)
+            lib.save_asset(TEX + "/" + k, only_if_is_dirty=False)
+        rep["never_stream"] = ["T_NF_Mask1", "T_NF_Mask2", "T_NF_Roofs", "T_NF_Terrain"]
     for t in ("Broad", "Acacia", "Crypt"):
         tex["BC" + t] = import_tex("T_NF_Canopy_%s_BC" % t, True)
         tex["N" + t] = import_tex("T_NF_Canopy_%s_N" % t, False, True)
@@ -205,6 +233,9 @@ def build():
 
     common_in = {"M1": (m1, "RGBA"), "M2": (m2, "RGBA"), "NA": (na, "RGBA"), "NB": (nb, "RGBA"), "UVC": (uvc, ""), "D": (dist, ""),
                  "SS": (cp("ShellStart", -1500, 1400), ""), "SE": (cp("ShellEnd", -1500, 1480), "")}
+    if MOBILE:
+        common_in.update({"SSm": (cp("ShellStartM", -1500, 1560), ""), "SEm": (cp("ShellEndM", -1500, 1640), ""),
+                          "NC": (cp("NearCanopyM", -1500, 1720), "")})
     texin = {"CB": tobj("CanopyBroad", tex["BCBroad"], -1300, 1600), "CA": tobj("CanopyAcacia", tex["BCAcacia"], -1300, 1700),
              "CC": tobj("CanopyCrypt", tex["BCCrypt"], -1300, 1800)}
     base = custom(mat, -700, 0, BASE, list(common_in) + list(texin) + ["UVB", "Z", "Bright", "Tint", "RF", "TS"] + list(BANDS), unreal.CustomMaterialOutputType.CMOT_FLOAT4)
@@ -242,7 +273,11 @@ def build():
     link(E(mat, unreal.MaterialExpressionVertexNormalWS, -1300, 2500), "", nrm, "VN")
     link(E(mat, unreal.MaterialExpressionScalarParameter, -1300, 2600, parameter_name="NormalStrength", default_value=PARAMS["NormalStrength"]), "", nrm, "NS")
     mel.connect_material_property(nrm, "", unreal.MaterialProperty.MP_NORMAL)
-    wpo = custom(mat, -700, 1200, WPO, ["M2A", "D", "SS", "SE", "SK"], unreal.CustomMaterialOutputType.CMOT_FLOAT3)
+    wpo = custom(mat, -700, 1200, (MPRE if MOBILE else "") + WPO, ["M2A", "D", "SS", "SE", "SK"] + (["SSm", "SEm"] if MOBILE else []),
+                 unreal.CustomMaterialOutputType.CMOT_FLOAT3)
+    if MOBILE:
+        link(cp("ShellStartM", -1000, 1540), "", wpo, "SSm")
+        link(cp("ShellEndM", -1000, 1620), "", wpo, "SEm")
     link(m2, "A", wpo, "M2A")
     link(dist, "", wpo, "D")
     link(cp("ShellStart", -1000, 1300), "", wpo, "SS")

@@ -1,0 +1,462 @@
+{
+ "pr52_ed_gate_velcomp": {
+  "segments": {
+   "dl_layers_north": {
+    "GPUTime": 180.39,
+    "FrameTime": 174.86,
+    "RHI/DrawCalls": 2924.5,
+    "RHI/PrimitivesDrawn": 790719.0,
+    "GPUSceneInstanceCount": 736652.0,
+    "GPUTime_p95": 193.01,
+    "frames": 30,
+    "passes": {
+     "Basepass": 92.63,
+     "Prepass": 51.51,
+     "TAA": 6.03,
+     "Unaccounted": 4.85,
+     "SSAO": 3.17,
+     "Postprocessing": 2.37,
+     "ShadowDepths": 1.62,
+     "RenderVelocities": 1.53
+    }
+   },
+   "agl200_qingtiangang": {
+    "GPUTime": 31.42,
+    "FrameTime": 58.39,
+    "RHI/DrawCalls": 753.0,
+    "RHI/PrimitivesDrawn": 703068.0,
+    "GPUSceneInstanceCount": 75354.0,
+    "GPUTime_p95": 274.33,
+    "frames": 30,
+    "passes": {
+     "Basepass": 57.65,
+     "Prepass": 28.25,
+     "ShadowDepths": 6.37,
+     "TAA": 5.55,
+     "SSAO": 3.15,
+     "Postprocessing": 2.23,
+     "ReflectionEnvironment": 1.65,
+     "RenderVelocities": 1.52
+    }
+   },
+   "agl120_plantation": {
+    "GPUTime": 363.35,
+    "FrameTime": 372.17,
+    "RHI/DrawCalls": 2237.0,
+    "RHI/PrimitivesDrawn": 497218.0,
+    "GPUSceneInstanceCount": 748389.5,
+    "GPUTime_p95": 395.76,
+    "frames": 30,
+    "passes": {
+     "Basepass": 176.27,
+     "Prepass": 128.71,
+     "ShadowDepths": 64.9,
+     "TAA": 5.53,
+     "SSAO": 3.29,
+     "Postprocessing": 2.13,
+     "ReflectionEnvironment": 2.05,
+     "BuildRenderingCommandsDeferred": 1.52
+    }
+   },
+   "flight": {
+    "GPUTime": 282.47,
+    "FrameTime": 285.05,
+    "RHI/DrawCalls": 2508.0,
+    "RHI/PrimitivesDrawn": 730060.5,
+    "GPUSceneInstanceCount": 805778.0,
+    "GPUTime_p95": 383.86,
+    "frames": 1760,
+    "passes": {
+     "Basepass": 155.12,
+     "Prepass": 83.48,
+     "ShadowDepths": 15.02,
+     "TAA": 5.69,
+     "SSAO": 3.19,
+     "Postprocessing": 2.16,
+     "ReflectionEnvironment": 1.87,
+     "RenderVelocities": 1.33
+    }
+   }
+  },
+  "physical_used_mb_max": 3821.0,
+  "llm_peak_mb": {},
+  "gpuscene_instances_max": 1177801.0
+ },
+ "ed_m_sm5": {
+  "segments": {
+   "dl_layers_north": {
+    "GPUTime": 177.57,
+    "FrameTime": 178.28,
+    "RHI/DrawCalls": 2891.0,
+    "RHI/PrimitivesDrawn": 658678.0,
+    "GPUSceneInstanceCount": 736653.0,
+    "GPUTime_p95": 192.19,
+    "frames": 30,
+    "passes": {
+     "Basepass": 94.87,
+     "Prepass": 51.9,
+     "TAA": 5.87,
+     "SSAO": 3.1,
+     "Postprocessing": 2.16,
+     "ShadowDepths": 1.65,
+     "RenderVelocities": 1.53,
+     "ReflectionEnvironment": 1.45
+    }
+   },
+   "agl200_qingtiangang": {
+    "GPUTime": 33.51,
+    "FrameTime": 36.46,
+    "RHI/DrawCalls": 674.5,
+    "RHI/PrimitivesDrawn": 709907.0,
+    "GPUSceneInstanceCount": 161753.0,
+    "GPUTime_p95": 276.73,
+    "frames": 30,
+    "passes": {
+     "Basepass": 9.88,
+     "TAA": 5.54,
+     "SSAO": 3.2,
+     "Postprocessing": 2.27,
+     "ReflectionEnvironment": 1.69,
+     "RenderVelocities": 1.62,
+     "Lights": 1.17,
+     "SkyAtmosphereEditor": 1.12
+    }
+   },
+   "agl120_plantation": {
+    "GPUTime": 338.85,
+    "FrameTime": 343.43,
+    "RHI/DrawCalls": 1644.0,
+    "RHI/PrimitivesDrawn": 498267.0,
+    "GPUSceneInstanceCount": 509632.0,
+    "GPUTime_p95": 392.68,
+    "frames": 30,
+    "passes": {
+     "Basepass": 137.83,
+     "Prepass": 109.81,
+     "ShadowDepths": 65.63,
+     "TAA": 5.54,
+     "SSAO": 3.31,
+     "Postprocessing": 2.16,
+     "ReflectionEnvironment": 2.06,
+     "Lights": 1.39
+    }
+   },
+   "flight": {
+    "GPUTime": 286.56,
+    "FrameTime": 290.06,
+    "RHI/DrawCalls": 2510.0,
+    "RHI/PrimitivesDrawn": 733556.5,
+    "GPUSceneInstanceCount": 781876.0,
+    "GPUTime_p95": 390.17,
+    "frames": 1760,
+    "passes": {
+     "Basepass": 156.23,
+     "Prepass": 84.14,
+     "ShadowDepths": 15.29,
+     "TAA": 5.78,
+     "SSAO": 3.22,
+     "Postprocessing": 2.2,
+     "ReflectionEnvironment": 1.89,
+     "RenderVelocities": 1.33
+    }
+   }
+  },
+  "physical_used_mb_max": 4189.0,
+  "llm_peak_mb": {
+   "WorkingSetSize": 4188.6,
+   "PagefileUsed": 4149.8,
+   "Total": 3910.6,
+   "TrackedTotal": 3092.8,
+   "FMallocUnused": 1205.8,
+   "Untracked": 1153.7,
+   "Meshes": 561.7,
+   "Meshes/InstancedMesh": 429.4,
+   "UObject": 241.7,
+   "Textures": 211.6,
+   "InitUObject": 195.7,
+   "Meshes/StaticMesh": 131.3,
+   "RenderTargets": 118.4,
+   "LoadMapMisc": 117.9
+  },
+  "gpuscene_instances_max": 1177802.0
+ },
+ "pr52_es31_full": {
+  "segments": {
+   "dl_layers_north": {
+    "GPUTime": 106.62,
+    "FrameTime": 486.9,
+    "RHI/DrawCalls": 2248.0,
+    "RHI/PrimitivesDrawn": 557067.0,
+    "GPUSceneInstanceCount": 736652.0,
+    "GPUTime_p95": 110.89,
+    "frames": 30,
+    "passes": {
+     "Basepass": 85.19,
+     "TAA": 5.46,
+     "MobileSceneRender": 2.99,
+     "Postprocessing": 1.64,
+     "Unaccounted": 1.56,
+     "ShadowDepths": 1.39,
+     "ReflectionEnvironment": 1.36,
+     "RenderVelocities": 1.34
+    }
+   },
+   "agl200_qingtiangang": {
+    "GPUTime": 154.29,
+    "FrameTime": 552.16,
+    "RHI/DrawCalls": 1545.0,
+    "RHI/PrimitivesDrawn": 707996.0,
+    "GPUSceneInstanceCount": 509631.0,
+    "GPUTime_p95": 169.76,
+    "frames": 30,
+    "passes": {
+     "Basepass": 123.21,
+     "ShadowDepths": 9.64,
+     "TAA": 5.56,
+     "MobileSceneRender": 2.77,
+     "Postprocessing": 1.76,
+     "ReflectionEnvironment": 1.68,
+     "Unaccounted": 1.57,
+     "DeferredShading": 1.55
+    }
+   },
+   "agl120_plantation": {
+    "GPUTime": 295.67,
+    "FrameTime": 722.64,
+    "RHI/DrawCalls": 2030.0,
+    "RHI/PrimitivesDrawn": 499063.0,
+    "GPUSceneInstanceCount": 890640.0,
+    "GPUTime_p95": 298.82,
+    "frames": 30,
+    "passes": {
+     "Basepass": 216.94,
+     "ShadowDepths": 56.25,
+     "TAA": 5.58,
+     "MobileSceneRender": 3.1,
+     "ReflectionEnvironment": 1.98,
+     "DeferredShading": 1.84,
+     "Postprocessing": 1.7,
+     "Unaccounted": 1.63
+    }
+   },
+   "flight": {
+    "GPUTime": 168.15,
+    "FrameTime": 641.04,
+    "RHI/DrawCalls": 1970.0,
+    "RHI/PrimitivesDrawn": 733663.0,
+    "GPUSceneInstanceCount": 809218.0,
+    "GPUTime_p95": 255.35,
+    "frames": 1760,
+    "passes": {
+     "Basepass": 64.08,
+     "TAA": 5.47,
+     "MobileSceneRender": 2.75,
+     "Postprocessing": 1.63,
+     "Unaccounted": 1.54,
+     "ReflectionEnvironment": 1.45,
+     "MobileFog": 1.29,
+     "DeferredShading": 1.25
+    }
+   }
+  },
+  "physical_used_mb_max": 3458.0,
+  "llm_peak_mb": {},
+  "gpuscene_instances_max": 1177801.0
+ },
+ "ed_m_es31_mat": {
+  "segments": {
+   "dl_layers_north": {
+    "GPUTime": 93.43,
+    "FrameTime": 94.58,
+    "RHI/DrawCalls": 2250.0,
+    "RHI/PrimitivesDrawn": 572701.0,
+    "GPUSceneInstanceCount": 736653.0,
+    "GPUTime_p95": 98.19,
+    "frames": 30,
+    "passes": {
+     "Basepass": 73.75,
+     "TAA": 5.88,
+     "MobileSceneRender": 3.07,
+     "Postprocessing": 2.1,
+     "RenderVelocities": 1.5,
+     "ShadowDepths": 1.41,
+     "ReflectionEnvironment": 1.41,
+     "DeferredShading": 1.03
+    }
+   },
+   "agl200_qingtiangang": {
+    "GPUTime": 140.38,
+    "FrameTime": 141.86,
+    "RHI/DrawCalls": 1545.0,
+    "RHI/PrimitivesDrawn": 711992.0,
+    "GPUSceneInstanceCount": 509632.0,
+    "GPUTime_p95": 143.97,
+    "frames": 30,
+    "passes": {
+     "Basepass": 111.12,
+     "ShadowDepths": 9.91,
+     "TAA": 5.85,
+     "MobileSceneRender": 2.87,
+     "Postprocessing": 2.18,
+     "ReflectionEnvironment": 1.72,
+     "RenderVelocities": 1.57,
+     "DeferredShading": 1.49
+    }
+   },
+   "agl120_plantation": {
+    "GPUTime": 279.55,
+    "FrameTime": 280.74,
+    "RHI/DrawCalls": 2031.0,
+    "RHI/PrimitivesDrawn": 503073.0,
+    "GPUSceneInstanceCount": 890641.0,
+    "GPUTime_p95": 282.8,
+    "frames": 30,
+    "passes": {
+     "Basepass": 201.12,
+     "ShadowDepths": 57.89,
+     "TAA": 5.84,
+     "MobileSceneRender": 3.07,
+     "Postprocessing": 2.02,
+     "ReflectionEnvironment": 1.98,
+     "DeferredShading": 1.77,
+     "MobileFog": 1.07
+    }
+   },
+   "flight": {
+    "GPUTime": 151.73,
+    "FrameTime": 152.88,
+    "RHI/DrawCalls": 1976.0,
+    "RHI/PrimitivesDrawn": 735126.0,
+    "GPUSceneInstanceCount": 762330.5,
+    "GPUTime_p95": 235.32,
+    "frames": 1760,
+    "passes": {
+     "Basepass": 118.45,
+     "ShadowDepths": 12.59,
+     "TAA": 5.8,
+     "MobileSceneRender": 3.01,
+     "Postprocessing": 2.12,
+     "ReflectionEnvironment": 1.91,
+     "RenderVelocities": 1.5,
+     "DeferredShading": 1.45
+    }
+   }
+  },
+  "physical_used_mb_max": 4171.0,
+  "llm_peak_mb": {
+   "WorkingSetSize": 4171.2,
+   "PagefileUsed": 4076.2,
+   "Total": 3835.5,
+   "TrackedTotal": 3012.0,
+   "FMallocUnused": 1161.6,
+   "Untracked": 1064.2,
+   "Meshes": 563.8,
+   "Meshes/InstancedMesh": 429.5,
+   "UObject": 241.6,
+   "Textures": 204.2,
+   "InitUObject": 195.7,
+   "Meshes/StaticMesh": 133.3,
+   "RenderTargets": 118.4,
+   "LoadMapMisc": 112.9
+  },
+  "gpuscene_instances_max": 1177802.0
+ },
+ "ed_m_es31_full": {
+  "segments": {
+   "dl_layers_north": {
+    "GPUTime": 44.55,
+    "FrameTime": 45.4,
+    "RHI/DrawCalls": 921.5,
+    "RHI/PrimitivesDrawn": 352015.0,
+    "GPUSceneInstanceCount": 438711.0,
+    "GPUTime_p95": 48.14,
+    "frames": 30,
+    "passes": {
+     "Basepass": 27.51,
+     "TAA": 5.79,
+     "MobileSceneRender": 2.53,
+     "Postprocessing": 2.01,
+     "RenderVelocities": 1.59,
+     "ReflectionEnvironment": 1.37,
+     "DeferredShading": 0.97,
+     "MobileFog": 0.87
+    }
+   },
+   "agl200_qingtiangang": {
+    "GPUTime": 65.24,
+    "FrameTime": 66.58,
+    "RHI/DrawCalls": 686.5,
+    "RHI/PrimitivesDrawn": 472319.0,
+    "GPUSceneInstanceCount": 313807.0,
+    "GPUTime_p95": 68.92,
+    "frames": 30,
+    "passes": {
+     "Basepass": 46.75,
+     "TAA": 5.89,
+     "MobileSceneRender": 2.46,
+     "Postprocessing": 2.1,
+     "RenderVelocities": 1.64,
+     "ReflectionEnvironment": 1.61,
+     "DeferredShading": 1.26,
+     "MobileFog": 1.0
+    }
+   },
+   "agl120_plantation": {
+    "GPUTime": 120.02,
+    "FrameTime": 121.25,
+    "RHI/DrawCalls": 571.5,
+    "RHI/PrimitivesDrawn": 139164.0,
+    "GPUSceneInstanceCount": 523146.0,
+    "GPUTime_p95": 122.0,
+    "frames": 30,
+    "passes": {
+     "Basepass": 100.79,
+     "TAA": 5.98,
+     "MobileSceneRender": 2.59,
+     "ReflectionEnvironment": 2.01,
+     "Postprocessing": 1.99,
+     "DeferredShading": 1.77,
+     "MobileFog": 1.09,
+     "RenderVelocities": 1.08
+    }
+   },
+   "flight": {
+    "GPUTime": 67.16,
+    "FrameTime": 68.18,
+    "RHI/DrawCalls": 750.0,
+    "RHI/PrimitivesDrawn": 383071.0,
+    "GPUSceneInstanceCount": 478716.0,
+    "GPUTime_p95": 92.08,
+    "frames": 1760,
+    "passes": {
+     "Basepass": 49.32,
+     "TAA": 5.83,
+     "MobileSceneRender": 2.46,
+     "Postprocessing": 1.98,
+     "ReflectionEnvironment": 1.86,
+     "RenderVelocities": 1.58,
+     "DeferredShading": 1.33,
+     "MobileFog": 1.11
+    }
+   }
+  },
+  "physical_used_mb_max": 3988.0,
+  "llm_peak_mb": {
+   "WorkingSetSize": 3988.4,
+   "PagefileUsed": 3853.8,
+   "Total": 3609.9,
+   "TrackedTotal": 2919.1,
+   "FMallocUnused": 1099.4,
+   "Untracked": 1000.2,
+   "Meshes": 489.9,
+   "Meshes/InstancedMesh": 424.5,
+   "UObject": 241.2,
+   "Textures": 201.2,
+   "InitUObject": 195.7,
+   "LoadMapMisc": 118.8,
+   "RenderTargets": 118.4,
+   "UObject/UObjectBase": 110.9
+  },
+  "gpuscene_instances_max": 681155.0
+ }
+}

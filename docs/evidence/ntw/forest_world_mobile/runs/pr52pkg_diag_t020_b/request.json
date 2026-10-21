@@ -1,0 +1,21 @@
+﻿{
+    "args":  [
+                 "TreeLookdev",
+                 "-windowed",
+                 "-ResX=1920",
+                 "-ResY=1080",
+                 "-ForceRes",
+                 "-nosound",
+                 "-nosplash",
+                 "-unattended",
+                 "-ExecCmds=\"r.VSync 0,r.Streaming.FullyLoadUsedTextures 1,csv.Category Memory 1,r.GPUCsvStatsEnabled 1\"",
+                 "-csvCaptureFrames=48",
+                 "-ExitAfterCsvProfiling",
+                 "-llm",
+                 "-abslog=\"D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world-ntwforest-gate\\unreal\\TreeLookdev\\Saved\\NorthForest\\gate\\runs\\diag_t020_b\\game.log\"",
+                 "-dumpmovie"
+             ],
+    "started":  "2026-10-21T09:14:58.3860989+08:00",
+    "exe":  "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world-ntwforest-gate\\unreal\\TreeLookdev\\Saved\\StagedBuilds\\Windows\\TreeLookdev\\Binaries\\Win64\\TreeLookdev.exe",
+    "tag":  "diag_t020_b"
+}

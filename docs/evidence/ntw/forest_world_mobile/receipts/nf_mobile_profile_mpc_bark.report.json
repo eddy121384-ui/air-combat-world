@@ -1,0 +1,34 @@
+{
+  "status": "PASS_NF_MOBILE_PROFILE",
+  "parts": [
+    "mpc",
+    "bark"
+  ],
+  "error": null,
+  "mpc": {
+    "NearFull": 100000.0,
+    "ThinEnd": 340000.0,
+    "FadeWidth": 15000.0,
+    "ThinGamma": 2.200000047683716,
+    "ShellStart": 120000.0,
+    "ShellEnd": 300000.0,
+    "ShellScale": 0.800000011920929,
+    "ClumpGain": 0.699999988079071,
+    "NearFullM": 45000.0,
+    "ThinEndM": 150000.0,
+    "FadeWidthM": 10000.0,
+    "ThinGammaM": 1.600000023841858,
+    "ShellStartM": 50000.0,
+    "ShellEndM": 130000.0,
+    "ClumpGainM": 0.5,
+    "RankKeepM": 0.550000011920929,
+    "CrownGainM": 0.10000000149011612,
+    "NearCanopyM": 0.6000000238418579,
+    "BarkAOM": 0.44999998807907104
+  },
+  "bark": {
+    "/Game/NorthForest/Materials/M_NF_Acacia_Bark": "base colour x BarkAOM on mobile (was MaterialExpressionMultiply_0.)",
+    "/Game/NorthForest/Materials/M_NF_Bark": "base colour x BarkAOM on mobile (was MaterialExpressionMultiply_0.)",
+    "/Game/NorthForest/Materials/M_NF_Cryptomeria_Bark": "base colour x BarkAOM on mobile (was MaterialExpressionMultiply_0.)"
+  }
+}

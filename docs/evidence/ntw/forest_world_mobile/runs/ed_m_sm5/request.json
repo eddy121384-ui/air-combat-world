@@ -1,0 +1,23 @@
+﻿{
+    "args":  [
+                 "\"D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world-ntwforest-mobile\\unreal\\TreeLookdev\\TreeLookdev.uproject\"",
+                 "/Game/NorthForest/Maps/L_NF_Yangmingshan",
+                 "-game",
+                 "-windowed",
+                 "-ResX=1920",
+                 "-ResY=1080",
+                 "-ForceRes",
+                 "-nosound",
+                 "-nosplash",
+                 "-unattended",
+                 "-ExecCmds=\"r.VSync 0,t.MaxFPS 0,r.MotionBlurQuality 0,r.GPUCsvStatsEnabled 1,csv.Category Memory 1\"",
+                 "-csvCaptureFrames=2150",
+                 "-ExitAfterCsvProfiling",
+                 "-abslog=\"D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world-ntwforest-mobile\\unreal\\TreeLookdev\\Saved\\NorthForest\\perf\\ed_m_sm5\\engine.log\"",
+                 "-llm",
+                 "-benchmark",
+                 "-fps=15"
+             ],
+    "started":  "2026-10-21T09:44:55.7102618+08:00",
+    "tag":  "ed_m_sm5"
+}

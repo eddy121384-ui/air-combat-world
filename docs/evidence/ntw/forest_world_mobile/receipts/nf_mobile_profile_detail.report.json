@@ -1,0 +1,33 @@
+{
+  "status": "PASS_NF_MOBILE_PROFILE",
+  "parts": [
+    "detail"
+  ],
+  "error": null,
+  "detail": {
+    "band_culls_cm": [
+      141977.0,
+      189418.0,
+      263937.0,
+      365000.0
+    ],
+    "components_per_band": [
+      4365,
+      4334,
+      4328,
+      4324
+    ],
+    "instances_per_band": [
+      1157160,
+      964663,
+      889853,
+      847529
+    ],
+    "band_detail_mode": [
+      "<DetailMode.DM_LOW: 0>",
+      "<DetailMode.DM_LOW: 0>",
+      "<DetailMode.DM_MEDIUM: 1>",
+      "<DetailMode.DM_HIGH: 2>"
+    ]
+  }
+}
