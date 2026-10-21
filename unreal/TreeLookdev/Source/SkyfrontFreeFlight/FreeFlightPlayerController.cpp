@@ -396,7 +396,15 @@ void AFreeFlightPlayerController::GfxTestTick(float DeltaTime)
 			const int32 B = GfxStep - NumA - 1, Row = FMath::Max(B, 0) / 2;
 			UE_LOG(LogTemp, Display, TEXT("SKYGFXROW row=%s dir=%s value=%s worst_first_4s_ms=%.1f"), B < 0 ? TEXT("baseline") : USkyfrontGameUserSettings::RowName(Row),
 				B < 0 ? TEXT("-") : (B % 2 ? TEXT("down") : TEXT("up")), B < 0 ? TEXT("Balanced") : *S->RowValueText(Row), GfxWorstAfterApply);
-			bAdvance = true;
+			if (B < 0)
+			{
+				FScreenshotRequest::RequestScreenshot(TEXT("skygfx_menu_open"), true, false);   // the baseline step shows the GFX panel
+				GfxShotFrames = 3;
+			}
+			else
+			{
+				bAdvance = true;
+			}
 		}
 	}
 	else if (GfxStep >= 0)
@@ -477,9 +485,15 @@ void AFreeFlightPlayerController::GfxTestTick(float DeltaTime)
 		{
 			Plane->HoldAtPose(Views[0].Loc, Views[0].Rot);   // baseline: its hitch is not attributed to a row
 			S->SetPreset(USkyfrontGameUserSettings::Balanced);
+			SetMenuOpen(true);
 		}
 		else
 		{
+			if (bMenuOpen)
+			{
+				SetMenuOpen(false);
+				Plane->SetHold(true);
+			}
 			S->StepRow(B / 2, B % 2 ? -1 : +1);
 		}
 	}
