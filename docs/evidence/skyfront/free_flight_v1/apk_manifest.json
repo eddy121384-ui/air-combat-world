@@ -1,0 +1,18 @@
+{
+  "file": "SkyfrontFreeFlight-0.1.0-dev-arm64.apk (UAT archive name TreeLookdev-arm64.apk)",
+  "bytes": 551634430,
+  "sha256": "877ad2a9587cbd758d0a35991a44d79d1589a5ec1985ac997aa449b624923157",
+  "source_commit": "65ba183708b7444102a3fc603b12058703927f63",
+  "package": "com.skyfront.homeland.freeflight",
+  "versionName": "0.1.0", "versionCode": 1,
+  "minSdk": 29, "targetSdk": 34, "native_code": ["arm64-v8a"],
+  "config": "Development",
+  "rhi": "Vulkan only (bBuildForES31=False), mobile renderer, shader format SF_VULKAN_ES31_ANDROID",
+  "cook_flavor": "Android_ASTC",
+  "data": "inside the APK: assets/main.obb.png 427 MB (IoStore TreeLookdev-Android_ASTC.ucas 407 MB)",
+  "signature": "APK Signature Scheme v2, Android Debug certificate (SHA-256 269f7e2c06a835ec76a11570d9c3df1b4af3449f7c1dec497b226d5eccdf4c1e)",
+  "toolchain": {"engine": "UE 5.8.0 Launcher build + Android target platform", "ndk": "r27c 27.2.12479018", "sdk_platform": "android-34",
+                "build_tools": "35.0.1", "cmake": "3.22.1", "jdk": "Microsoft OpenJDK 17.0.20"},
+  "cook": {"packages": 821, "errors": 0, "warnings": 1, "cook_seconds": 288},
+  "device_tested": false
+}
