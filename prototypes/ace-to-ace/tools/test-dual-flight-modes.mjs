@@ -112,13 +112,15 @@ for (const id of ['flightSettings', 'btnTitleSettings', 'btnPauseSettings',
   'btnSettingsCancel', 'btnSettingsApply', 'currentFlightPreset']) {
   assert.ok(html.includes('id="'+id+'"'), 'settings UI missing '+id);
 }
-assert.match(main, /assist: controlMode === 'assisted'/);
-assert.match(main, /new Match\\(\\{ seed, flightFeel/);
-assert.match(main, /if \\(changed\\) start\\(kind\\)/, 'physics change must restart same sortie, not switch in flight');
-assert.match(main, /settings\\.flightMode = draftFlight/, 'flight selection must persist');
-assert.match(main, /settings\\.controlMode = draftControl/, 'control selection must persist');
-assert.match(main, /params\\.get\\('autostart'\\) === '1'/, 'mode=arcade must not auto-start');
-assert.match(main, /mode === 'title' && !settingsVisible\\(\\)/, 'title Enter must not bypass open settings');
+assert.ok(main.includes("assist: controlMode === 'assisted'"));
+assert.ok(main.includes('new Match({ seed, flightFeel'));
+assert.ok(main.includes('if (changed) start(kind)'),
+  'physics change must restart same sortie, not switch in flight');
+assert.ok(main.includes('settings.flightMode = draftFlight'), 'flight selection must persist');
+assert.ok(main.includes('settings.controlMode = draftControl'), 'control selection must persist');
+assert.ok(main.includes("params.get('autostart') === '1'"), 'mode=arcade must not auto-start');
+assert.ok(main.includes("mode === 'title' && !settingsVisible()"),
+  'title Enter must not bypass open settings');
 console.log(JSON.stringify({ slowG: { arcade:slowArcade,tactical:slowTactical },
   fullTurn1s: { arcade,tactical }, moderateTurn1s:{arcade:arcadeEasy,tactical:easy},
   brakeTactical:brake },null,2));
