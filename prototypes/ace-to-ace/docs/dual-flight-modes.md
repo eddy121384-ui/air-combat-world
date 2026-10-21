@@ -78,3 +78,27 @@ At 60Hz, F-16V, same bank-to-90 setup, 1 second at full aft stick:
 These numbers are algorithmic arcade experiments, not real aircraft
 performance data. We still need human comparisons to decide whether either
 mode actually feels enjoyable.
+
+## In-game flight settings (Oct 21, 2026)
+
+All four combinations now appear as large preset choices in one `飛行設定`
+dialog. Open from the title-screen gear shortcut or from `PAUSED →
+飛行設定` without leaving the game. The settings screen provides one
+selected state, a brief explanation and sound/pitch toggles. Cancel
+restores the previous configuration; Apply persists the full preset to
+`ace2ace.settings` in localStorage, updates URL query for shareable
+testing and updates both title and pause summaries.
+
+**No mid-air physics teleport:** changing physics or Assisted/Expert while
+paused applies by restarting the *same seeded sortie* (both pilots get
+the same flight envelope), whereas changing sound/inversion alone simply
+resumes play without a restart. The normal title screen still starts a
+sortie after settings Apply. The old `?mode=arcade` and
+`?mode=tactical` links now lead to the title screen rather than
+incorrectly auto-launching; explicit `?autostart=1` is retained for QA,
+and legacy `?mode=aivai` still launches the spectator.
+
+Verify on iPhone Safari landscape: title → flight settings → one of
+four preset cards → Apply → Sortie, then PAUSE → settings → change →
+restart same seed, PAUSE → settings → Cancel → original mode resumes.
+UI/source tests only verify wiring; device tapping is a separate gate.

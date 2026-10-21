@@ -99,14 +99,26 @@ for (const mode of ['arcade','tactical']) {
   assert.equal(assisted.throttle, .72);
 }
 
-// UI wiring: both selectors are present and carried into match/controller setup.
+// UI selection is now reachable from both the title and the in-fight PAUSE menu.
 const html = readFileSync(new URL('../index.html',import.meta.url),'utf8');
 const main = readFileSync(new URL('../src/game/main.js',import.meta.url),'utf8');
-for (const value of ['arcade','tactical']) assert.ok(html.includes('data-flight-mode="'+value+'"'));
-for (const value of ['assisted','expert']) assert.ok(html.includes('data-control-mode="'+value+'"'));
+for (const flight of ['arcade','tactical']) {
+  for (const ctrl of ['assisted','expert']) {
+    assert.ok(html.includes('data-flight-choice="'+flight+':'+ctrl+'"'),
+      'all four direct-choice preset buttons must exist');
+  }
+}
+for (const id of ['flightSettings', 'btnTitleSettings', 'btnPauseSettings',
+  'btnSettingsCancel', 'btnSettingsApply', 'currentFlightPreset']) {
+  assert.ok(html.includes('id="'+id+'"'), 'settings UI missing '+id);
+}
 assert.match(main, /assist: controlMode === 'assisted'/);
-assert.match(main, /new Match\(\{ seed, flightFeel/);
-
+assert.match(main, /new Match\\(\\{ seed, flightFeel/);
+assert.match(main, /if \\(changed\\) start\\(kind\\)/, 'physics change must restart same sortie, not switch in flight');
+assert.match(main, /settings\\.flightMode = draftFlight/, 'flight selection must persist');
+assert.match(main, /settings\\.controlMode = draftControl/, 'control selection must persist');
+assert.match(main, /params\\.get\\('autostart'\\) === '1'/, 'mode=arcade must not auto-start');
+assert.match(main, /mode === 'title' && !settingsVisible\\(\\)/, 'title Enter must not bypass open settings');
 console.log(JSON.stringify({ slowG: { arcade:slowArcade,tactical:slowTactical },
   fullTurn1s: { arcade,tactical }, moderateTurn1s:{arcade:arcadeEasy,tactical:easy},
   brakeTactical:brake },null,2));

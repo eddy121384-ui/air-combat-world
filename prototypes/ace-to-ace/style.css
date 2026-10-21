@@ -150,3 +150,37 @@ h2.win { color: var(--go); } h2.lose { color: var(--red); }
   .row { margin: 5px 0; }
   .help { font-size: 11px; }
 }
+
+/* In-game flight configuration: one menu for four independent physics/control pairs. */
+.mode-summary { display: flex; align-items: center; gap: 9px; padding: 9px 10px; margin: 9px 0;
+  border: 1px solid rgba(127,227,255,.36); border-radius: 11px; background: rgba(6,28,46,.42); }
+.mode-summary span { color: var(--dim); font-size: 11px; }
+.mode-summary strong { font-size: 12px; letter-spacing: .03em; }
+.mode-summary .settings-shortcut { margin-left: auto; border: 1px solid var(--edge); border-radius: 9px;
+  padding: 9px 11px; background: rgba(127,227,255,.13); font-size: 12px; font-weight: 700; min-height: 40px; }
+.mode-current { margin: 7px 0 10px; font-size: 13px; }
+.flight-settings-card { width: min(570px, 100%); }
+.settings-intro { margin: 5px 0 10px; }
+.flight-choice-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 9px; }
+.flight-choice { display: flex; flex-direction: column; justify-content: center; align-items: flex-start; text-align: left;
+  gap: 5px; min-height: 81px; padding: 11px 12px; color: var(--ink);
+  border: 1px solid rgba(127,227,255,.38); border-radius: 11px;
+  background: rgba(8,28,48,.55); touch-action: manipulation; }
+.flight-choice[aria-pressed="true"] { background: rgba(45,130,165,.38); border-color: #8bffee;
+  box-shadow: inset 0 0 0 1px #8bffee; }
+.flight-choice:focus-visible, .settings-shortcut:focus-visible { outline: 2px solid #8bffee; outline-offset: 2px; }
+.flight-choice-title { font-size: 13px; font-weight: 850; letter-spacing: .025em; }
+.flight-choice-desc { font-size: 11px; color: var(--dim); line-height: 1.4; }
+.settings-choice-description { min-height: 30px; padding: 7px 0; }
+.settings-apply-note { margin: 6px 0 0; }
+.settings-footer { margin: 8px 0 0; }
+@media (max-height: 430px) {
+  .flight-settings-card { padding: 10px 14px; }
+  .flight-settings-card h2 { font-size: 22px; }
+  .flight-choice-grid { gap: 6px; }
+  .flight-choice { min-height: 56px; padding: 7px 10px; gap: 3px; }
+  .flight-choice-title { font-size: 12px; }
+  .settings-choice-description { min-height: 0; padding: 3px 0; }
+  .settings-intro { margin: 3px 0 6px; }
+}
+@media (max-width: 450px) { .mode-summary { flex-wrap: wrap; } .mode-summary .settings-shortcut { flex: 1 1 100%; } }

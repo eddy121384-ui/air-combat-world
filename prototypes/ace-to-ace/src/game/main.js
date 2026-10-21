@@ -12,19 +12,26 @@ import { Audio } from './audio.js';
 const $ = (s) => document.querySelector(s);
 const params = new URLSearchParams(location.search);
 const isTouch = matchMedia('(pointer: coarse)').matches || 'ontouchstart' in window;
-// Physics and controls are independent. Legacy ?feel=A/B remain QA aliases.
-let flightFeel = ['arcade', 'tactical'].includes(params.get('mode'))
-  ? params.get('mode')
-  : params.get('feel') === 'A' ? 'A' : params.get('feel') === 'B' ? 'tactical' : 'arcade';
-let controlMode = ['assisted', 'expert'].includes(params.get('control'))
-  ? params.get('control') : 'expert';
 // Identical opening geometry, skills and RNG seed for A/B and every rematch.
 const experimentSeed = Number.isFinite(Number(params.get('seed'))) && params.has('seed')
   ? Number(params.get('seed')) : 71429;
 
-const settings = Object.assign({ difficulty: 'veteran', assist: true, invert: false, muted: false },
+const settings = Object.assign({ difficulty: 'veteran', assist: true, invert: false,
+    muted: false, flightMode: 'arcade', controlMode: 'expert' },
   (() => { try { return JSON.parse(localStorage.getItem('ace2ace.settings') || '{}'); } catch { return {}; } })());
 const saveSettings = () => { try { localStorage.setItem('ace2ace.settings', JSON.stringify(settings)); } catch { /* private mode */ } };
+// URL overrides persisted selections for shareable QA links. Legacy A/B remain
+// available to headless tests but do not appear as player-facing presets.
+let flightFeel = ['arcade', 'tactical'].includes(params.get('mode'))
+  ? params.get('mode') : params.get('feel') === 'A' ? 'A'
+    : params.get('feel') === 'B' ? 'tactical'
+    : ['arcade', 'tactical'].includes(settings.flightMode) ? settings.flightMode : 'arcade';
+let controlMode = ['assisted', 'expert'].includes(params.get('control'))
+  ? params.get('control')
+  : ['assisted', 'expert'].includes(settings.controlMode) ? settings.controlMode : 'expert';
+let settingsReturn = 'title';
+let draftFlight = flightFeel === 'A' ? 'arcade' : flightFeel;
+let draftControl = controlMode, draftInvert = !!settings.invert, draftMuted = !!settings.muted;
 
 const rend = new Renderer($('#gl'));
 const hud = new Hud($('#hud'));
@@ -55,24 +62,8 @@ function syncTitle() {
     ace: 'ACE：全套戰術、極限機動與精準射擊。雙方傷害對等',
   };
   $('#diffDesc').textContent = desc[settings.difficulty];
-  for (const b of document.querySelectorAll('[data-flight-mode]')) {
-    b.classList.toggle('sel', b.dataset.flightMode === flightFeel);
-    b.setAttribute('aria-pressed', String(b.dataset.flightMode === flightFeel));
-  }
-  for (const b of document.querySelectorAll('[data-control-mode]')) {
-    b.classList.toggle('sel', b.dataset.controlMode === controlMode);
-    b.setAttribute('aria-pressed', String(b.dataset.controlMode === controlMode));
-  }
-  $('#feelDesc').textContent = flightFeel === 'arcade'
-    ? 'ARCADE：Ace Combat 式敏捷滾轉、低速仍有機動能力，高 G 不容易掉光速度。'
-    : flightFeel === 'tactical'
-      ? 'TACTICAL：War Thunder RB 式速度升力限制、強烈高 G 能量代價（簡化模型，並非完整擬真）。'
-      : 'LEGACY：原始飛行物理，僅供相容性測試。';
-  $('#controlDesc').textContent = controlMode === 'expert'
-    ? 'EXPERT：左右滾轉，上下俯仰；不自動放平機翼。'
-    : 'ASSISTED：左右命令轉向，由飛控協調傾斜與拉 G；置中時協助放平。';
-  $('#optInvert').textContent = settings.invert ? '俯仰：上推＝爬升' : '俯仰：上推＝俯衝（搖桿式）';
-  $('#optSound').textContent = settings.muted ? '音效：關' : '音效：開';
+  $('#currentFlightPreset').textContent = formatFlight(flightFeel, controlMode);
+  $('#pauseFlightPreset').textContent = '目前：' + formatFlight(flightFeel, controlMode);
   $('#keysHelp').classList.toggle('hidden', isTouch);
   $('#touchHelp').classList.toggle('hidden', !isTouch);
 }
@@ -83,25 +74,79 @@ function saveModeQuery() {
   params.set('seed', String(experimentSeed));
   history.replaceState(null, '', location.pathname + '?' + params.toString());
 }
-for (const b of document.querySelectorAll('[data-flight-mode]')) b.addEventListener('click', () => {
-  flightFeel = b.dataset.flightMode;
-  saveModeQuery(); syncTitle(); audio.ui();
+const formatFlight = (flight, control) =>
+  (flight === 'A' ? 'LEGACY' : flight.toUpperCase()) + ' / ' + control.toUpperCase();
+const flightChoiceNotes = {
+  'arcade:assisted': '爽快轉彎、速度更寬容；由飛控協調滾轉與拉桿，適合快速上手。',
+  'arcade:expert': '爽快飛行物理，自行控制滾轉與俯仰，適合追求 AC 式操作自由的玩家。',
+  'tactical:assisted': '高 G 急轉會顯著流失速度；飛控幫你協調轉向，專心管理能量。',
+  'tactical:expert': '高 G 與低速升力限制更明顯，親自控制機體，重視能量管理。'
+};
+const settingsVisible = () => !$('#flightSettings').classList.contains('hidden');
+function syncFlightSettings() {
+  const key = draftFlight + ':' + draftControl;
+  for (const b of document.querySelectorAll('[data-flight-choice]')) {
+    const active = b.dataset.flightChoice === key;
+    b.setAttribute('aria-pressed', String(active));
+  }
+  $('#settingsChoiceDescription').textContent = flightChoiceNotes[key];
+  $('#optInvert').textContent = draftInvert ? '俯仰：上推＝爬升' : '俯仰：上推＝俯衝';
+  $('#optSound').textContent = draftMuted ? '音效：關' : '音效：開';
+  const changed = flightFeel !== draftFlight || controlMode !== draftControl;
+  const inFight = settingsReturn === 'pause';
+  $('#settingsApplyNote').textContent = inFight
+    ? changed ? '套用後將重新開始本局（相同起始條件），不會在空中突然變更物理。'
+      : '只修改音效／俯仰方向不會重開本局。'
+    : '儲存後回到主選單，下次出擊使用新設定。';
+  $('#btnSettingsApply').textContent = inFight
+    ? changed ? '套用並重新出擊' : '儲存並繼續'
+    : '儲存設定';
+}
+function openFlightSettings(from) {
+  settingsReturn = from;
+  draftFlight = flightFeel === 'A' ? 'arcade' : flightFeel;
+  draftControl = controlMode;
+  draftInvert = !!settings.invert;
+  draftMuted = !!settings.muted;
+  syncFlightSettings();
+  showScreen('flightSettings');
+}
+function closeFlightSettings() {
+  showScreen(settingsReturn);
+  last = performance.now();
+}
+function applyFlightSettings() {
+  const changed = flightFeel !== draftFlight || controlMode !== draftControl;
+  flightFeel = draftFlight; controlMode = draftControl;
+  settings.flightMode = draftFlight; settings.controlMode = draftControl;
+  settings.invert = draftInvert; settings.muted = draftMuted;
+  audio.setMuted(settings.muted);
+  saveSettings();
+  saveModeQuery();
+  syncTitle();
+  if (settingsReturn === 'pause') {
+    if (changed) start(kind); // Same seed and both AI/player get the new model.
+    else { mode = 'playing'; showScreen(null); last = performance.now(); }
+  } else showScreen('title');
+}
+for (const b of document.querySelectorAll('[data-flight-choice]')) b.addEventListener('click', () => {
+  [draftFlight, draftControl] = b.dataset.flightChoice.split(':');
+  syncFlightSettings(); audio.ui();
 });
-for (const b of document.querySelectorAll('[data-control-mode]')) b.addEventListener('click', () => {
-  controlMode = b.dataset.controlMode;
-  saveModeQuery(); syncTitle(); audio.ui();
-});
+$('#btnTitleSettings').addEventListener('click', () => openFlightSettings('title'));
+$('#btnPauseSettings').addEventListener('click', () => openFlightSettings('pause'));
+$('#btnSettingsCancel').addEventListener('click', closeFlightSettings);
+$('#btnSettingsApply').addEventListener('click', applyFlightSettings);
 for (const b of document.querySelectorAll('[data-diff]')) b.addEventListener('click', () => { settings.difficulty = b.dataset.diff; saveSettings(); syncTitle(); audio.unlock(); audio.ui(); });
-// Keep legacy ASSIST setting untouched; A/B uses MANUAL on both variants.
-$('#optInvert').addEventListener('click', () => { settings.invert = !settings.invert; saveSettings(); syncTitle(); });
-$('#optSound').addEventListener('click', () => { settings.muted = !settings.muted; audio.setMuted(settings.muted); saveSettings(); syncTitle(); });
+$('#optInvert').addEventListener('click', () => { draftInvert = !draftInvert; syncFlightSettings(); });
+$('#optSound').addEventListener('click', () => { draftMuted = !draftMuted; syncFlightSettings(); });
 $('#btnStart').addEventListener('click', () => start('pvai'));
 $('#btnWatch').addEventListener('click', () => start('aivai'));
 $('#btnRematch').addEventListener('click', () => start(kind));
 $('#btnTitle').addEventListener('click', toTitle);
 $('#btnResume').addEventListener('click', () => setPaused(false));
 $('#btnQuit').addEventListener('click', toTitle);
-$('#pauseBtn').addEventListener('click', () => setPaused(mode !== 'paused'));
+$('#pauseBtn').addEventListener('click', () => { if (settingsVisible()) closeFlightSettings(); else setPaused(mode !== 'paused'); });
 $('#dbgBtn').addEventListener('click', () => { debugOn = !debugOn; });
 syncTitle();
 
@@ -276,9 +321,12 @@ function frame(now) {
   }
 
   if (input.consume('debug')) debugOn = !debugOn;
-  if (input.consume('pause')) setPaused(mode !== 'paused');
+  if (input.consume('pause')) {
+    if (settingsVisible()) closeFlightSettings();
+    else setPaused(mode !== 'paused');
+  }
   if (mode === 'result' && input.consume('restart')) start(kind);
-  if (mode === 'title' && input.consume('restart')) start('pvai');
+  if (mode === 'title' && !settingsVisible() && input.consume('restart')) start('pvai');
   if (input.consume('camera') && kind === 'aivai' && match) {
     spectateTarget = spectateTarget === 'blue' ? 'red' : 'blue';
     view.ac = spectateTarget === 'blue' ? match.blue : match.red;
@@ -348,7 +396,8 @@ function drawDebug() {
 
 // test hooks (Playwright)
 window.__game = {
-  get match() { return match; }, get mode() { return mode; }, get enemyAI() { return enemyAI; }, get flightFeel() { return flightFeel; }, get experimentSeed() { return experimentSeed; }, settings, start, input,
+  get match() { return match; }, get mode() { return mode; }, get enemyAI() { return enemyAI; }, get flightFeel() { return flightFeel; }, get controlMode() { return controlMode; },
+  get experimentSeed() { return experimentSeed; }, settings, start, input, openFlightSettings,
   setTimeScale(s) { timeScale = s; },
 };
 
@@ -358,6 +407,9 @@ document.addEventListener('visibilitychange', () => { if (document.hidden && mod
 document.addEventListener('gesturestart', (e) => e.preventDefault());
 document.addEventListener('dblclick', (e) => e.preventDefault());
 
-if (params.has('mode')) setTimeout(() => start(params.get('mode') === 'aivai' ? 'aivai' : 'pvai'), 50);
+// ?mode=arcade/tactical describes physics, not a request to skip the menu.
+// Preserve explicit QA auto-start plus the legacy ?mode=aivai observer URL.
+if (params.get('autostart') === '1' || params.get('mode') === 'aivai')
+  setTimeout(() => start(params.get('mode') === 'aivai' ? 'aivai' : 'pvai'), 50);
 else showScreen('title');
 requestAnimationFrame(frame);

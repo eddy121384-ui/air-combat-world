@@ -47,20 +47,10 @@
       <button data-diff="rookie">ROOKIE</button><button data-diff="veteran">VETERAN</button><button data-diff="ace">ACE</button>
     </div>
     <div id="diffDesc" class="help"></div>
-    <div class="modeLabel">飛行物理 · FLIGHT MODEL</div>
-    <div class="row seg" role="group" aria-label="飛行物理模式">
-      <button data-flight-mode="arcade" aria-pressed="true">ARCADE · 王牌</button>
-      <button data-flight-mode="tactical" aria-pressed="false">TACTICAL · 戰術</button>
-    </div>
-    <div id="feelDesc" class="help"></div>
-    <div class="modeLabel">操控方式 · CONTROLS</div>
-    <div class="row seg" role="group" aria-label="操控方式">
-      <button data-control-mode="assisted" aria-pressed="false">ASSISTED · 輔助</button>
-      <button data-control-mode="expert" aria-pressed="true">EXPERT · 專家</button>
-    </div>
-    <div id="controlDesc" class="help"></div>
-    <div class="row opts">
-      <button id="optInvert"></button><button id="optSound"></button>
+    <div class="mode-summary">
+      <span>目前飛行設定</span>
+      <strong id="currentFlightPreset">ARCADE / EXPERT</strong>
+      <button id="btnTitleSettings" class="settings-shortcut" type="button">⚙ 飛行設定</button>
     </div>
     <div class="row">
       <button id="btnStart" class="primary">出擊 SORTIE</button>
@@ -78,7 +68,45 @@
 <div id="pause" class="screen hidden">
   <div class="card small">
     <h2>PAUSED</h2>
-    <div class="row"><button id="btnResume" class="primary">繼續</button><button id="btnQuit">回到標題</button></div>
+    <div id="pauseFlightPreset" class="help mode-current">目前：ARCADE / EXPERT</div>
+    <div class="row"><button id="btnResume" class="primary">繼續</button><button id="btnPauseSettings">⚙ 飛行設定</button></div>
+    <div class="row"><button id="btnQuit">回到標題</button></div>
+  </div>
+</div>
+
+<div id="flightSettings" class="screen hidden" role="dialog" aria-modal="true" aria-labelledby="flightSettingsTitle">
+  <div class="card flight-settings-card">
+    <div class="kicker">ACE TO ACE · CONFIGURATION</div>
+    <h2 id="flightSettingsTitle">飛行設定</h2>
+    <p class="help settings-intro">選擇你想要的空戰手感。四種模式共用相同任務與敵機 AI。</p>
+    <div class="flight-choice-grid" role="group" aria-label="選擇飛行模式">
+      <button type="button" class="flight-choice" data-flight-choice="arcade:assisted" aria-pressed="false">
+        <span class="flight-choice-title">ARCADE × ASSISTED</span>
+        <span class="flight-choice-desc">爽快機動 · 輔助轉向</span>
+      </button>
+      <button type="button" class="flight-choice" data-flight-choice="arcade:expert" aria-pressed="true">
+        <span class="flight-choice-title">ARCADE × EXPERT</span>
+        <span class="flight-choice-desc">爽快機動 · 手動滾轉</span>
+      </button>
+      <button type="button" class="flight-choice" data-flight-choice="tactical:assisted" aria-pressed="false">
+        <span class="flight-choice-title">TACTICAL × ASSISTED</span>
+        <span class="flight-choice-desc">能量戰 · 輔助轉向</span>
+      </button>
+      <button type="button" class="flight-choice" data-flight-choice="tactical:expert" aria-pressed="false">
+        <span class="flight-choice-title">TACTICAL × EXPERT</span>
+        <span class="flight-choice-desc">能量戰 · 手動滾轉</span>
+      </button>
+    </div>
+    <div id="settingsChoiceDescription" class="help settings-choice-description"></div>
+    <div class="row opts">
+      <button id="optInvert" type="button">俯仰方向</button>
+      <button id="optSound" type="button">音效</button>
+    </div>
+    <p class="help settings-apply-note" id="settingsApplyNote"></p>
+    <div class="row settings-footer">
+      <button id="btnSettingsCancel" type="button">取消</button>
+      <button id="btnSettingsApply" type="button" class="primary">儲存設定</button>
+    </div>
   </div>
 </div>
 
