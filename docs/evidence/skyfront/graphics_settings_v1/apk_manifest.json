@@ -1,0 +1,34 @@
+{
+  "file": "SkyfrontFreeFlight-0.2.0-dev-arm64.apk (UAT archive name TreeLookdev-arm64.apk)",
+  "bytes": 807215998,
+  "sha256": "6ac8d5e49e2754eb9a584ddb0ff3f02feac22ac8dce07db9529c6aea01b0d41d",
+  "source_commit": "4face0c",
+  "package": "com.skyfront.homeland.freeflight",
+  "versionName": "0.2.0",
+  "versionCode": 2,
+  "minSdk": 29,
+  "targetSdk": 34,
+  "native_code": [
+    "arm64-v8a"
+  ],
+  "config": "Development",
+  "rhi": "Vulkan only, mobile renderer, SF_VULKAN_ES31_ANDROID",
+  "cook_flavor": "Android_ASTC",
+  "data_in_apk_bytes": 682786359,
+  "signature": "APK Signature Scheme v2, Android Debug certificate SHA-256 269f7e2c06a835ec76a11570d9c3df1b4af3449f7c1dec497b226d5eccdf4c1e",
+  "cook": {
+    "packages": 821,
+    "errors": 0,
+    "warnings": 1,
+    "commandlet_seconds": 733
+  },
+  "project_changes": [
+    "r.CookOutUnusedDetailModeComponents removed",
+    "foliage.MaxEndCullDistance removed",
+    "r.MobileContentScaleFactor=0",
+    "r.Mobile.FloatPrecisionMode=1",
+    "r.Mobile.AmbientOcclusion=True",
+    "GameUserSettingsClassName=SkyfrontGameUserSettings"
+  ],
+  "device_tested": false
+}

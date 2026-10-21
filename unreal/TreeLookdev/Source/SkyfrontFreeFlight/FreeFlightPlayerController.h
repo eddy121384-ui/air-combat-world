@@ -9,7 +9,7 @@ class AFreeFlightPawn;
 // Tablet controls, polled every frame (no input assets):
 //   left side   floating virtual stick: left / right = roll, down / up = pitch (down = nose up, "pilot"; INVERT button flips)
 //   right side  throttle: slide up / down (relative to where the finger lands); left / right = rudder, springs back
-//   top right   RESET and INVERT buttons
+//   top right   GFX (graphics settings menu), PITCH STD/INV and RESET buttons
 // Keyboard / gamepad for desktop testing: W S / A D / Q E, Shift / Ctrl throttle, R reset; left stick, triggers, right stick X.
 UCLASS()
 class SKYFRONTFREEFLIGHT_API AFreeFlightPlayerController : public APlayerController
@@ -25,11 +25,21 @@ public:
 	// Layout + state for the HUD (viewport pixels).
 	struct FLayout
 	{
-		FBox2D StickZone, ThrottleZone, ResetButton, InvertButton;
+		FBox2D StickZone, ThrottleZone, ResetButton, InvertButton, GfxButton;
 		float StickRadius = 1.f;
 		float ThrottleTravel = 1.f;
 	};
 	const FLayout& GetLayout() const { return Layout; }
+
+	// Graphics settings panel (right side of the screen; the scene stays visible on the left while the plane holds its pose).
+	struct FMenuLayout
+	{
+		FBox2D Panel, Presets[4], RowMinus[8], RowPlus[8], Defaults, Diag, Close;
+		FVector2D RowLabel[8], RowValue[8];
+	};
+	const FMenuLayout& GetMenuLayout() const { return Menu; }
+	bool IsMenuOpen() const { return bMenuOpen; }
+	double GetLastApplyTime() const { return LastApplyTime; }
 	bool IsStickActive() const { return StickFinger != INDEX_NONE; }
 	FVector2D GetStickOrigin() const { return StickOrigin; }
 	FVector2D GetStickKnob() const { return StickOrigin + StickDeflection * Layout.StickRadius; }
@@ -47,6 +57,10 @@ private:
 	void KeepCamera();
 	void AutoTestTouch(int32 Finger, float& X, float& Y, bool& bPressed) const;
 	void AutoTestTick();
+	void SetMenuOpen(bool bOpen);
+	void ApplyGraphics();
+	bool HandleMenuPress(const FVector2D& P);
+	void GfxTestTick(float DeltaTime);
 	static float Shape(float V) { return 0.35f * V + 0.65f * V * V * V; }   // fine control near centre, full rate at the edge
 
 	FLayout Layout;
@@ -66,4 +80,16 @@ private:
 	bool bAutoTest = false;
 	bool bCrashTest = false;
 	int32 AutoTestSecond = -1;
+	FMenuLayout Menu;
+	bool bMenuOpen = false;
+	double LastApplyTime = -100.0;
+	// -ffgfxtest: same-view preset comparison (see GfxTestTick)
+	bool bGfxTest = false;
+	int32 GfxStep = -1;
+	float GfxStepTime = 0.f;
+	float GfxWorstAfterApply = 0.f;
+	float GfxReadyAt = -1.f;
+	int32 GfxShotFrames = 0;
+	float GfxStreamDoneAt = -1.f;
+	TArray<float> GfxFrameMs, GfxGpuMs;
 };

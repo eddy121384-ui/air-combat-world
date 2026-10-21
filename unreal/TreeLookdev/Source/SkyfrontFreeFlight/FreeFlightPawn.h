@@ -30,6 +30,11 @@ public:
 
 	void ResetFlight();
 
+	// Hold: freeze the plane in place (settings menu open, scripted same-view captures); the world keeps ticking and streaming.
+	void SetHold(bool bInHold) { bHold = bInHold; }
+	bool IsHeld() const { return bHold; }
+	void HoldAtPose(const FVector& Location, const FRotator& Rotation);
+
 	float GetSpeedMps() const { return SpeedMps; }
 	float GetAltitudeM() const { return GetActorLocation().Z / 100.f; }
 	float GetAglM() const { return AglM; }
@@ -108,6 +113,7 @@ private:
 	float AglM = 0.f;
 
 	bool bFrozen = false;          // crashed / out of area, waiting for the reset timer
+	bool bHold = false;
 	float ResetTimer = 0.f;
 	float StatusTimer = 0.f;
 	FString StatusText;

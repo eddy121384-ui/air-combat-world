@@ -1,0 +1,55 @@
+SKYGFX apply preset=BALANCED tree=2200m keep=0.78 dm=1 vds=0.917 bld=5000m(543 comps) res=62% shadow=600m/2/1024 ao=0 fps=30 wp=2800m lod=1.25 maxend=0 15.8ms
+SKYGFX apply preset=POWER SAVER tree=1500m keep=0.55 dm=0 vds=0.897 bld=3000m(543 comps) res=50% shadow=400m/1/1024 ao=0 fps=30 wp=2400m lod=1.00 maxend=0 6.7ms
+SKYGFXTEST view=forest_layers preset=POWER SAVER frames=93 avg_ms=53.3 p50_ms=53.1 p95_ms=55.0 gpu_p50_ms=51.6 worst_first_3s_ms=567.5 stream_done_s=3.0 tree_end_m=1500 dm=0 vds=0.897 bld_m=3000 res=50 shadow_m=400 cascades=1 ao=0 apply_ms=6.7
+SKYGFX apply preset=BALANCED tree=2200m keep=0.78 dm=1 vds=0.917 bld=5000m(543 comps) res=62% shadow=600m/2/1024 ao=0 fps=30 wp=2800m lod=1.25 maxend=0 7.8ms
+SKYGFXTEST view=forest_layers preset=BALANCED frames=58 avg_ms=85.1 p50_ms=84.9 p95_ms=87.7 gpu_p50_ms=83.5 worst_first_3s_ms=337.4 stream_done_s=0.3 tree_end_m=2200 dm=1 vds=0.917 bld_m=5000 res=62 shadow_m=600 cascades=2 ao=0 apply_ms=7.8
+SKYGFX apply preset=HIGH tree=3000m keep=1.00 dm=2 vds=0.943 bld=7000m(543 comps) res=75% shadow=1000m/2/2048 ao=1 fps=30 wp=3200m lod=1.50 maxend=0 9.8ms
+SKYGFXTEST view=forest_layers preset=HIGH frames=35 avg_ms=141.3 p50_ms=140.9 p95_ms=145.7 gpu_p50_ms=139.0 worst_first_3s_ms=436.4 stream_done_s=0.4 tree_end_m=3000 dm=2 vds=0.943 bld_m=7000 res=75 shadow_m=1000 cascades=2 ao=1 apply_ms=9.8
+SKYGFX apply preset=ULTRA tree=3400m keep=1.00 dm=2 vds=1.000 bld=9000m(543 comps) res=87% shadow=1500m/3/2048 ao=1 fps=30 wp=3600m lod=2.00 maxend=0 7.0ms
+SKYGFXTEST view=forest_layers preset=ULTRA frames=21 avg_ms=236.0 p50_ms=236.4 p95_ms=238.2 gpu_p50_ms=233.9 worst_first_3s_ms=272.7 stream_done_s=1.1 tree_end_m=3400 dm=2 vds=1.000 bld_m=9000 res=87 shadow_m=1500 cascades=3 ao=1 apply_ms=7.0
+SKYGFX apply preset=BALANCED tree=2200m keep=0.78 dm=1 vds=0.917 bld=5000m(543 comps) res=62% shadow=600m/2/1024 ao=0 fps=30 wp=2800m lod=1.25 maxend=0 6.6ms
+SKYGFXTEST view=forest_layers preset=BALANCED frames=58 avg_ms=85.9 p50_ms=85.6 p95_ms=88.4 gpu_p50_ms=84.3 worst_first_3s_ms=469.4 stream_done_s=0.5 tree_end_m=2200 dm=1 vds=0.917 bld_m=5000 res=62 shadow_m=600 cascades=2 ao=0 apply_ms=6.6
+SKYGFX apply preset=POWER SAVER tree=1500m keep=0.55 dm=0 vds=0.897 bld=3000m(543 comps) res=50% shadow=400m/1/1024 ao=0 fps=30 wp=2400m lod=1.00 maxend=0 8.5ms
+SKYGFXTEST view=towns_south preset=POWER SAVER frames=120 avg_ms=41.5 p50_ms=41.9 p95_ms=46.0 gpu_p50_ms=25.4 worst_first_3s_ms=295.0 stream_done_s=4.0 tree_end_m=1500 dm=0 vds=0.897 bld_m=3000 res=50 shadow_m=400 cascades=1 ao=0 apply_ms=8.5
+SKYGFX apply preset=BALANCED tree=2200m keep=0.78 dm=1 vds=0.917 bld=5000m(543 comps) res=62% shadow=600m/2/1024 ao=0 fps=30 wp=2800m lod=1.25 maxend=0 7.5ms
+SKYGFXTEST view=towns_south preset=BALANCED frames=117 avg_ms=42.4 p50_ms=42.3 p95_ms=44.6 gpu_p50_ms=40.7 worst_first_3s_ms=320.8 stream_done_s=0.3 tree_end_m=2200 dm=1 vds=0.917 bld_m=5000 res=62 shadow_m=600 cascades=2 ao=0 apply_ms=7.5
+SKYGFX apply preset=HIGH tree=3000m keep=1.00 dm=2 vds=0.943 bld=7000m(543 comps) res=75% shadow=1000m/2/2048 ao=1 fps=30 wp=3200m lod=1.50 maxend=0 7.2ms
+SKYGFXTEST view=towns_south preset=HIGH frames=68 avg_ms=73.3 p50_ms=73.1 p95_ms=76.3 gpu_p50_ms=71.6 worst_first_3s_ms=374.8 stream_done_s=0.4 tree_end_m=3000 dm=2 vds=0.943 bld_m=7000 res=75 shadow_m=1000 cascades=2 ao=1 apply_ms=7.2
+SKYGFX apply preset=ULTRA tree=3400m keep=1.00 dm=2 vds=1.000 bld=9000m(543 comps) res=87% shadow=1500m/3/2048 ao=1 fps=30 wp=3600m lod=2.00 maxend=0 7.3ms
+SKYGFXTEST view=towns_south preset=ULTRA frames=45 avg_ms=109.1 p50_ms=108.9 p95_ms=112.3 gpu_p50_ms=107.5 worst_first_3s_ms=129.6 stream_done_s=0.1 tree_end_m=3400 dm=2 vds=1.000 bld_m=9000 res=87 shadow_m=1500 cascades=3 ao=1 apply_ms=7.3
+SKYGFX apply preset=BALANCED tree=2200m keep=0.78 dm=1 vds=0.917 bld=5000m(543 comps) res=62% shadow=600m/2/1024 ao=0 fps=30 wp=2800m lod=1.25 maxend=0 7.1ms
+SKYGFXTEST view=towns_south preset=BALANCED frames=118 avg_ms=42.2 p50_ms=42.2 p95_ms=43.8 gpu_p50_ms=40.5 worst_first_3s_ms=331.9 stream_done_s=0.3 tree_end_m=2200 dm=1 vds=0.917 bld_m=5000 res=62 shadow_m=600 cascades=2 ao=0 apply_ms=7.1
+SKYGFX apply preset=BALANCED tree=2200m keep=0.78 dm=1 vds=0.917 bld=5000m(543 comps) res=62% shadow=600m/2/1024 ao=0 fps=30 wp=2800m lod=1.25 maxend=0 5.3ms
+SKYGFXROW row=baseline dir=- value=Balanced worst_first_4s_ms=90.8
+SKYGFX apply preset=CUSTOM tree=3000m keep=0.78 dm=1 vds=1.231 bld=5000m(543 comps) res=62% shadow=600m/2/1024 ao=0 fps=30 wp=3200m lod=1.25 maxend=0 7.0ms
+SKYGFXROW row=Tree distance dir=up value=3.0 km worst_first_4s_ms=127.8
+SKYGFX apply preset=BALANCED tree=2200m keep=0.78 dm=1 vds=0.917 bld=5000m(543 comps) res=62% shadow=600m/2/1024 ao=0 fps=30 wp=2800m lod=1.25 maxend=0 7.5ms
+SKYGFXROW row=Tree distance dir=down value=2.2 km worst_first_4s_ms=218.5
+SKYGFX apply preset=CUSTOM tree=2200m keep=1.00 dm=2 vds=0.769 bld=5000m(543 comps) res=62% shadow=600m/2/1024 ao=0 fps=30 wp=2800m lod=1.25 maxend=0 7.9ms
+SKYGFXROW row=Forest density dir=up value=100 % worst_first_4s_ms=506.0
+SKYGFX apply preset=BALANCED tree=2200m keep=0.78 dm=1 vds=0.917 bld=5000m(543 comps) res=62% shadow=600m/2/1024 ao=0 fps=30 wp=2800m lod=1.25 maxend=0 7.9ms
+SKYGFXROW row=Forest density dir=down value=78 % worst_first_4s_ms=443.0
+SKYGFX apply preset=CUSTOM tree=2200m keep=0.78 dm=1 vds=0.917 bld=7000m(543 comps) res=62% shadow=600m/2/1024 ao=0 fps=30 wp=2800m lod=1.25 maxend=0 7.4ms
+SKYGFXROW row=Building distance dir=up value=7 km worst_first_4s_ms=101.8
+SKYGFX apply preset=BALANCED tree=2200m keep=0.78 dm=1 vds=0.917 bld=5000m(543 comps) res=62% shadow=600m/2/1024 ao=0 fps=30 wp=2800m lod=1.25 maxend=0 7.9ms
+SKYGFXROW row=Building distance dir=down value=5 km worst_first_4s_ms=88.5
+SKYGFX apply preset=CUSTOM tree=2200m keep=0.78 dm=1 vds=0.917 bld=5000m(543 comps) res=62% shadow=600m/2/1024 ao=0 fps=30 wp=2800m lod=1.50 maxend=0 6.5ms
+SKYGFXROW row=Terrain detail dir=up value=LOD x1.50 worst_first_4s_ms=92.0
+SKYGFX apply preset=BALANCED tree=2200m keep=0.78 dm=1 vds=0.917 bld=5000m(543 comps) res=62% shadow=600m/2/1024 ao=0 fps=30 wp=2800m lod=1.25 maxend=0 6.2ms
+SKYGFXROW row=Terrain detail dir=down value=LOD x1.25 worst_first_4s_ms=92.6
+SKYGFX apply preset=CUSTOM tree=2200m keep=0.78 dm=1 vds=0.917 bld=5000m(543 comps) res=75% shadow=600m/2/1024 ao=0 fps=30 wp=2800m lod=1.25 maxend=0 6.6ms
+SKYGFXROW row=Render resolution dir=up value=75 % worst_first_4s_ms=103.6
+SKYGFX apply preset=BALANCED tree=2200m keep=0.78 dm=1 vds=0.917 bld=5000m(543 comps) res=62% shadow=600m/2/1024 ao=0 fps=30 wp=2800m lod=1.25 maxend=0 6.6ms
+SKYGFXROW row=Render resolution dir=down value=62 % worst_first_4s_ms=102.4
+SKYGFX apply preset=CUSTOM tree=2200m keep=0.78 dm=1 vds=0.917 bld=5000m(543 comps) res=62% shadow=1000m/2/2048 ao=0 fps=30 wp=2800m lod=1.25 maxend=0 5.9ms
+SKYGFXROW row=Shadows dir=up value=1000 m worst_first_4s_ms=179.4
+SKYGFX apply preset=BALANCED tree=2200m keep=0.78 dm=1 vds=0.917 bld=5000m(543 comps) res=62% shadow=600m/2/1024 ao=0 fps=30 wp=2800m lod=1.25 maxend=0 6.2ms
+SKYGFXROW row=Shadows dir=down value=600 m worst_first_4s_ms=180.1
+SKYGFX apply preset=CUSTOM tree=2200m keep=0.78 dm=1 vds=0.917 bld=5000m(543 comps) res=62% shadow=600m/2/1024 ao=1 fps=30 wp=2800m lod=1.25 maxend=0 6.2ms
+SKYGFXROW row=Ambient occlusion dir=up value=On worst_first_4s_ms=91.4
+SKYGFX apply preset=BALANCED tree=2200m keep=0.78 dm=1 vds=0.917 bld=5000m(543 comps) res=62% shadow=600m/2/1024 ao=0 fps=30 wp=2800m lod=1.25 maxend=0 6.2ms
+SKYGFXROW row=Ambient occlusion dir=down value=Off worst_first_4s_ms=88.9
+SKYGFX apply preset=BALANCED tree=2200m keep=0.78 dm=1 vds=0.917 bld=5000m(543 comps) res=62% shadow=600m/2/1024 ao=0 fps=60 wp=2800m lod=1.25 maxend=0 7.3ms
+SKYGFXROW row=Frame rate cap dir=up value=60 fps worst_first_4s_ms=88.8
+SKYGFX apply preset=BALANCED tree=2200m keep=0.78 dm=1 vds=0.917 bld=5000m(543 comps) res=62% shadow=600m/2/1024 ao=0 fps=30 wp=2800m lod=1.25 maxend=0 6.5ms
+SKYGFXROW row=Frame rate cap dir=down value=30 fps worst_first_4s_ms=88.6
