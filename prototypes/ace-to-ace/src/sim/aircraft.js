@@ -47,11 +47,12 @@ export const FLIGHT_PATH_LAG = 0.09; // seconds, not a free HUD-only animation
 // but sheds the excess drag that made MIL unable to sustain more than ~3.4G; the
 // roll stop is crisper in both. Historical values are in the baseline JSON.
 export const WAVE_DRAG_SPEED = 300; // m/s, ~M0.9 at the fight altitude
+export const STALL_PITCH_RATE = 0.9; // rad/s nose drop at the speed floor (profile.stall = onset speed)
 export const FLIGHT_PROFILES = Object.freeze({
-  arcade: Object.freeze({ engine: 1.12, parasite: 0.65, induced: 0.42, wave: 0.0011,
+  arcade: Object.freeze({ engine: 1.12, parasite: 0.65, induced: 0.42, wave: 0.0011, stall: 62,
     spool: 0.70, abSpool: 0.85, gOnset: 0.45,
     roll: 1.16, rollOnset: 0.55, rollStop: 0.2, pathLag: 0.065 }),
-  tactical: Object.freeze({ engine: 1.05, parasite: 0.72, induced: 0.82, wave: 0.0007,
+  tactical: Object.freeze({ engine: 1.05, parasite: 0.72, induced: 0.82, wave: 0.0007, stall: 75,
     spool: 0.78, abSpool: 1.0, gOnset: 0.56,
     roll: 1.08, rollOnset: 0.64, rollStop: 0.28, pathLag: 0.075 }),
 });
@@ -264,7 +265,9 @@ function stepModeAircraft(ac, dt) {
     * profile.engine * altitude;
 
   const pitchIn = clamp(c.pitch, -1, 1), nAvail = availableG(ac);
-  const nMin = t.minG * Math.min(1, nAvail / t.maxG), n0 = neutralG(ac);
+  // Near the speed floor the auto-trim gives up holding the flight path (see stall below).
+  const stall = clamp((profile.stall - ac.speed) / (profile.stall - MIN_SPEED), 0, 1);
+  const nMin = t.minG * Math.min(1, nAvail / t.maxG), n0 = neutralG(ac) * (1 - stall);
   // Stick directly requests the G currently available from the airframe.
   // No brake-triggered G unlock: at low speed, full pull is still lift-limited.
   const nCmd = pitchIn >= 0
@@ -298,6 +301,15 @@ function stepModeAircraft(ac, dt) {
   }
   const yawRate = clamp(c.yaw, -1, 1) * t.yawRate * clamp(ac.speed / 120, 0.3, 1);
   q = qMul(q, qAxisAngle({ x: 0, y: -1, z: 0 }, yawRate * dt));
+  // Stall: near the speed floor the wing can no longer hold the nose up, so it
+  // falls toward the ground. Without this the MIN_SPEED clamp was free energy: a
+  // vertical climb hung at 45 m/s forever (and out through the ceiling).
+  if (stall > 0) {
+    const nose = forwardOf(q);
+    let fall = perp({ x: 0, y: -1, z: 0 }, nose);
+    if (len(fall) < 0.2) fall = scale(upOf(q), -1); // vertical: push over
+    q = qMul(qAxisAngle(norm(cross(nose, norm(fall))), STALL_PITCH_RATE * stall * dt), q);
+  }
   ac.q = qNormalize(q);
 
   // The true world-space velocity follows the nose over a short finite lag;

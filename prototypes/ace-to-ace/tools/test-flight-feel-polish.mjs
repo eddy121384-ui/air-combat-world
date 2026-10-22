@@ -41,6 +41,16 @@ for (const feel of ['arcade', 'tactical']) {
   assert.ok(peak - 90 < 6, `${feel}: roll overshoot after release must stay under 6 deg (${(peak - 90).toFixed(1)})`);
 }
 
+// 4b. The speed floor is not free energy: a hands-off vertical MIL climb must
+//     run out of speed, stall and fall through instead of hanging at MIN_SPEED.
+for (const feel of ['arcade', 'tactical']) {
+  const v = createAircraft('F16V', 'blue', { x: 0, y: 3000, z: 0 }, { x: 0, y: 1, z: -1e-4 }, 120);
+  v.flightFeel = feel; v.controls.throttle = 1;
+  let peak = 0;
+  for (let i = 0; i < 40 * 60; i++) { stepAircraft(v, dt); peak = Math.max(peak, v.pos.y); }
+  assert.ok(v.vel.y < 0 && peak - 3000 < 2500, `${feel}: stalled vertical climb must fall through (vy ${v.vel.y.toFixed(0)})`);
+}
+
 // 5. Arcade is still the forgiving profile at low speed; Tactical remains lift-limited.
 assert.ok(availableG(craft('arcade', 85), 85) > 2 * availableG(craft('tactical', 85), 85));
 
