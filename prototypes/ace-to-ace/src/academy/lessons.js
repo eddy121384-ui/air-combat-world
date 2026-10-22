@@ -3,6 +3,11 @@
 // Every lesson cites what is real aeronautics, what is this game's simplified
 // model, and what is a pure game rule (docs/academy-curriculum.md).
 import { holdPhase, gatePhase, placeJet, pointAhead, wrapDeg, KMH } from './runner.js';
+import { StraightDrone, TurnDrone, scriptedLaunch } from './drones.js';
+import { PilotAI } from '../ai/pilot.js';
+import { sub, len, dot, norm, scale, cross, angleBetween, forwardOf, addScaled, UP, DEG } from '../sim/math.js';
+import { gunLead, gunError, missilePk } from '../sim/fire.js';
+import { FLARE, GUN } from '../sim/weapons.js';
 
 const fmt = (n) => Math.round(n).toLocaleString('en-US');
 const hdg3 = (h) => String(Math.round((h + 360) % 360)).padStart(3, '0');
@@ -500,6 +505,380 @@ const L06 = {
   },
 };
 
-export const LESSONS = [L01, L02, L03, L04, L05, L06];
+// =====================================================================
+// shared combat geometry
+// =====================================================================
+/** Range, my nose-to-target angle (ATA) and how far I am off its tail (AOT), degrees. */
+export function geometry(me, tg) {
+  const los = sub(tg.pos, me.pos), R = len(los);
+  const ata = angleBetween(forwardOf(me.q), los) / DEG;
+  const aot = angleBetween(scale(forwardOf(tg.q), -1), sub(me.pos, tg.pos)) / DEG; // 0 = dead six
+  const closure = -dot(sub(tg.vel, me.vel), scale(los, 1 / Math.max(R, 1)));     // + = closing
+  return { R, ata, aot, closure };
+}
+/** Lead / pure / lag classification of where my nose points relative to the target's travel. */
+export function pursuitType(me, tg) {
+  const nose = forwardOf(me.q), los = norm(sub(tg.pos, me.pos));
+  if (angleBetween(nose, los) < 6 * DEG) return 'pure';
+  const ahead = norm(sub(addScaled(tg.pos, tg.vel, 2), me.pos));
+  const behind = norm(sub(addScaled(tg.pos, tg.vel, -2), me.pos));
+  return angleBetween(nose, ahead) < angleBetween(nose, behind) ? 'lead' : 'lag';
+}
+function duoSetup(r, { me, foe, foeCtl, foeDamage = 0 }) {
+  r.match.timeLimit = 1e9;
+  placeJet(r.me, me);
+  placeJet(r.foe, foe);
+  r.foe.dormant = false;
+  r.foe.damageScale = foeDamage;
+  r.foe.flares = 0;
+  r.match.setController(r.foe, foeCtl(r));
+}
+const pct = (a, b) => (b > 0 ? Math.round((100 * a) / b) : 0);
+
+// =====================================================================
+// 07 — 空戰追蹤：Lead / Pure / Lag Pursuit
+// =====================================================================
+const L07 = {
+  id: 'L07', no: 7, title: '空戰追蹤', en: 'PURSUIT GEOMETRY',
+  principle: 'Lead（機頭在目標前方）縮短距離、機砲要用；Pure（機頭對準）最直覺但在轉彎戰會被甩到外側；Lag（機頭在目標後方）控制接近率、避免衝過頭。',
+  real: '依據：公開的基本戰鬥機動（BFM）教學慣例，非 FAA／NASA 規範。真實空戰還涉及轉彎圈、能量與武器包絡。',
+  model: '本遊戲：無人機以同一套物理做等速轉彎並定時反轉；追擊型態由「機頭指向目標的未來／過去位置」簡化判定。本課不給武器。',
+  goals: ['在目標尾後控制區（450–1400 m、45° 錐內、機頭大致對著它）累積 12 秒', '衝過頭（Overshoot）超過 3 次就失敗', '最後：把機頭放在機砲提前量上 1.5 秒（900 m 內）'],
+  timeLimit: 150,
+  setup: (r) => duoSetup(r, {
+    me: { pos: { x: 0, y: 3000, z: 4000 }, speed: 900 / KMH, heading: 0 },
+    foe: { pos: { x: 0, y: 3000, z: 2200 }, speed: 230, heading: 0 },
+    foeCtl: (rr) => new TurnDrone(rr.foe, { speed: 230, rate: 9, reverseEvery: 18 }),
+  }),
+  intro: ['今天不准開火。只准跟。追得住，下一課才有東西可打。'],
+  onEvent: () => {},
+  phases: [
+    {
+      id: 'cone',
+      enter: (r) => { r.d.held = 0; r.d.over = 0; r.d.armed = true; r.d.mix = { lead: 0, pure: 0, lag: 0 }; r.d.maxClose = 0; },
+      say: (r) => `跟上那架 J-16。它會轉彎、會反轉。待在它尾後 450 到 1,400 m。${r.pick('', '先滾轉把它放到座艙罩上方，再拉。')}接近太快就收油、把機頭放到它後面——那叫 lag。`,
+      text: (r) => { const g = geometry(r.me, r.foe); return `尾後控制區 ${(r.d.held).toFixed(1)}/12s　${fmt(g.R)} m　偏離機尾 ${Math.round(g.aot)}°　${{ lead: 'LEAD', pure: 'PURE', lag: 'LAG' }[pursuitType(r.me, r.foe)]}　衝過頭 ${r.d.over}/3`; },
+      progress: (r) => r.d.held / 12,
+      update(r, dt) {
+        const g = geometry(r.me, r.foe);
+        if (g.R < 3000) r.d.mix[pursuitType(r.me, r.foe)] += dt;
+        if (g.R >= 450 && g.R <= 1400 && g.aot < 45 && g.ata < 35) r.d.held += dt;
+        if (g.R < 1500) r.d.maxClose = Math.max(r.d.maxClose, g.closure * KMH);
+        if (r.d.armed && g.R < 500 && g.aot > 80) {
+          r.d.over += 1; r.d.armed = false;
+          r.d.lastClose = g.closure * KMH;
+          r.say(r.d.over < 3 ? `衝過頭了！接近率 ${fmt(g.closure * KMH)} km/h。收油、BRK，機頭放到它後面。` : '');
+        }
+        if (!r.d.armed && g.R > 800) r.d.armed = true;
+        if (r.d.over >= 3) {
+          const m = r.d.mix, tot = m.lead + m.pure + m.lag;
+          return { fail: `第 3 次衝過頭（最後一次接近率 ${fmt(r.d.lastClose)} km/h）。你 ${pct(m.lead + m.pure, tot)}% 的時間用 lead／pure 直衝——在轉彎戰裡那只會把你送到它前面。近距離改 lag：機頭放在它後方、速度跟它一樣。` };
+        }
+        if (r.d.held >= 12) { r.note('mix', { ...r.d.mix }); r.note('over', r.d.over); r.note('maxClose', r.d.maxClose); return 'done'; }
+        if (r.phaseT > 100) return { fail: `100 秒只在控制區待了 ${r.d.held.toFixed(1)} 秒。${g.R > 1400 ? '你一直離太遠：遠距離用 lead（機頭放在它前方）切內圈追上去。' : '你常常偏到它側面：跟著它的轉彎圈內側飛，別在外側繞。'}` };
+        return undefined;
+      },
+    },
+    {
+      id: 'lead',
+      enter: (r) => { r.d.held = 0; },
+      say: '很好。現在靠近到 900 m 內，把機頭放在橘色提前量圈上——機砲打的是它「將要」在的位置。',
+      text: (r) => { const g = geometry(r.me, r.foe); const e = gunError(r.me, gunLead(r.me, r.foe.pos, r.foe.vel).point) / DEG; return `機頭對準提前量圈 ${r.d.held.toFixed(1)}/1.5s　${fmt(g.R)} m（≤900）　誤差 ${e.toFixed(1)}°（<2.5°）`; },
+      progress: (r) => r.d.held / 1.5,
+      update(r, dt) {
+        const g = geometry(r.me, r.foe);
+        const e = gunError(r.me, gunLead(r.me, r.foe.pos, r.foe.vel).point) / DEG;
+        if (g.R < 900 && e < 2.5) r.d.held += dt;
+        if (r.d.held >= 1.5) { r.note('leadT', r.phaseT); return 'done'; }
+        if (r.phaseT > 45) return { fail: g.R > 900 ? '45 秒還沒進到 900 m：先用 lead 拉近，再放慢接近率。' : '機頭一直不在提前量上：轉彎中的目標，要把機頭拉到它前方。' };
+        return undefined;
+      },
+    },
+  ],
+  grade(r) { const o = r.notes.over || 0; return o === 0 && r.t < 70 ? 'S' : o <= 1 ? 'A' : 'B'; },
+  debrief(r) {
+    const m = r.notes.mix || { lead: 0, pure: 0, lag: 0 }, tot = m.lead + m.pure + m.lag;
+    const good = [], improve = [];
+    good.push(`追擊型態：Lead ${pct(m.lead, tot)}%、Pure ${pct(m.pure, tot)}%、Lag ${pct(m.lag, tot)}%。`);
+    (r.notes.over ? improve : good).push(r.notes.over ? `衝過頭 ${r.notes.over} 次：近距離時讓機頭落在它後方，接近率才控制得住。` : '沒有衝過頭——接近率控制得很好。');
+    if (r.notes.maxClose > 250) improve.push(`最高接近率 ${fmt(r.notes.maxClose)} km/h：1.5 km 內超過 200 km/h 就要開始減速。`);
+    return { good, improve,
+      stats: [['控制區', '12 秒'], ['衝過頭', `${r.notes.over ?? 0} 次`], ['Lag 比例', `${pct(m.lag, tot)}%`], ['提前量', r.notes.leadT ? `${r.notes.leadT.toFixed(1)} s` : '—']],
+      closing: '位置比火力重要。下一課，給你火力。' };
+  },
+};
+
+// =====================================================================
+// 08 — 武器控制：飛彈發射窗口、機砲提前量
+// =====================================================================
+const L08 = {
+  id: 'L08', no: 8, title: '武器控制', en: 'WEAPONS EMPLOYMENT',
+  principle: '飛彈要在「鎖定＋射程內＋好角度」時發射；機砲子彈要飛一段時間，必須瞄準目標將要在的位置（提前量）。',
+  real: '真實空戰：飛彈有發射包絡（最小／最大射程隨角度與相對速度變化）；機砲需要提前量與穩定追蹤。',
+  model: '本遊戲：鎖定需目標在機頭 30° 內 0.85 秒；SHOOT 提示＝遊戲的命中機率估計 Pk > 0.45（尾追近、正對遠、太近會失效）。本課目標無人機不會受損，也不會放熱焰彈。',
+  goals: ['用飛彈命中一次（最多 4 發）', '機砲命中 12 發（轉彎中的目標，45 秒內）'],
+  timeLimit: 150,
+  rules: { weapons: true },
+  setup: (r) => duoSetup(r, {
+    me: { pos: { x: 0, y: 3000, z: 4000 }, speed: 1000 / KMH, heading: 0 },
+    foe: { pos: { x: 0, y: 3000, z: 1800 }, speed: 230, heading: 0 },
+    foeCtl: (rr) => new StraightDrone(rr.foe, { speed: 230 }),
+  }),
+  intro: ['今天開火。目標不會還手——所以每一發沒中，都是你的問題。'],
+  onEvent(r, ev) {
+    if (ev.type === 'missileLaunch' && ev.ac === r.me) {
+      const g = geometry(r.me, r.foe);
+      const aspect = Math.PI - angleBetween(forwardOf(r.foe.q), scale(norm(sub(r.foe.pos, r.me.pos)), -1));
+      const pk = r.me.lock.locked ? missilePk({ R: g.R, ata: g.ata * DEG, aspect, mySpeed: r.me.speed, tgSpeed: r.foe.speed, tgG: r.foe.nCur }) : 0;
+      (r.notes.shots ||= []).push({ id: ev.missile.id, R: g.R, pk, locked: !!r.me.lock.locked, aot: g.aot });
+    }
+    if (ev.type === 'missileHit' && ev.missile.owner === r.me) r.note('mslHit', (r.notes.mslHit || 0) + 1);
+    if ((ev.type === 'missileMiss' || ev.type === 'missileExpire' || ev.type === 'missileLost') && ev.missile.owner === r.me) {
+      const shot = (r.notes.shots || []).find((x) => x.id === ev.missile.id);
+      if (shot && !shot.said && ev.missile.result !== 'hit') { shot.said = true; r.say(shotWhy(shot)); }
+    }
+    if (ev.type === 'gunHit' && ev.owner === r.me) r.d.gunHits = (r.d.gunHits || 0) + 1;
+  },
+  phases: [
+    {
+      id: 'missile',
+      say: '先用飛彈。把它放進機頭，等方框變成紅色菱形（LOCK），再等 SHOOT 閃——那時候按 MSL。',
+      text: (r) => { const g = geometry(r.me, r.foe); return `飛彈命中 1 次（已發射 ${(r.notes.shots || []).length}/4）　${fmt(g.R)} m　${r.me.lock.locked ? 'LOCK' : '未鎖定'}`; },
+      progress: (r) => (r.notes.mslHit ? 1 : 0),
+      update(r) {
+        if (r.notes.mslHit) return 'done';
+        const shots = r.notes.shots || [];
+        const wasted = shots.filter((x) => !x.locked || x.pk < 0.25);
+        if (wasted.length >= 2) {
+          return { fail: `教官叫停：兩發白打了——${wasted.map((x) => (x.locked ? `${fmt(x.R)} m、Pk ${x.pk.toFixed(2)}` : '未鎖定')).join('；')}。飛彈很貴：鎖定、靠近、等 SHOOT 再按。` };
+        }
+        const flying = r.match.missiles.some((m) => m.alive && m.owner === r.me);
+        if (shots.length >= 4 && !flying) {
+          const bad = shots.filter((x) => x.pk < 0.45);
+          return { fail: `4 發都沒中。其中 ${bad.length} 發是在 Pk 偏低時打的${bad.some((x) => !x.locked) ? '（有的根本沒鎖定）' : ''}。等 SHOOT 出現再按：尾追約 0.8–2 km 最穩。` };
+        }
+        if (r.phaseT > 70) return { fail: '70 秒沒命中。靠近到 2 km 內、在它正後方、鎖定後再發射。' };
+        return undefined;
+      },
+    },
+    {
+      id: 'guns',
+      enter: (r) => {
+        placeJet(r.foe, { pos: { x: r.me.pos.x, y: r.me.pos.y, z: r.me.pos.z - 650 }, speed: 220, heading: r.heading });
+        r.match.setController(r.foe, new TurnDrone(r.foe, { speed: 220, rate: 7, reverseEvery: 14 }));
+        r.d.gunHits = 0; r.d.fired = 0; r.d.atTarget = 0; r.d.goodAim = 0;
+        r.flash('目標轉彎中', '#7fe3ff');
+      },
+      say: '機砲。它在轉彎——把橘色提前量圈疊在它身上，不是瞄它本身。按住 GUN，短連射。',
+      text: (r) => `機砲命中 ${r.d.gunHits}/12（45 秒內）　${fmt(geometry(r.me, r.foe).R)} m`,
+      progress: (r) => r.d.gunHits / 12,
+      update(r) {
+        if (r.me.controls.fireGun) {
+          r.d.fired += 1;
+          const lead = gunLead(r.me, r.foe.pos, r.foe.vel).point;
+          const eLead = gunError(r.me, lead) / DEG, eTgt = angleBetween(forwardOf(r.me.q), sub(r.foe.pos, r.me.pos)) / DEG;
+          if (eLead < 2) r.d.goodAim += 1; else if (eTgt < eLead) r.d.atTarget += 1;
+        }
+        if (r.d.gunHits >= 12) { r.note('gunHits', r.d.gunHits); r.note('gunAim', pct(r.d.goodAim, r.d.fired)); return 'done'; }
+        if (r.phaseT > 45) {
+          return { fail: r.d.fired < 30 ? `只命中 ${r.d.gunHits} 發：幾乎沒開火。距離 1 km 內、提前量圈疊上目標就按住 GUN。`
+            : r.d.atTarget > r.d.goodAim ? `只命中 ${r.d.gunHits} 發：${pct(r.d.atTarget, r.d.fired)}% 的子彈是瞄著它本身打的——它在轉彎，子彈到的時候它已經不在那裡。瞄橘色圈。`
+              : `只命中 ${r.d.gunHits} 發：距離太遠或追蹤不穩。拉近到 600 m，讓提前量圈停在它身上再開火。` };
+        }
+        return undefined;
+      },
+    },
+  ],
+  grade(r) { const s = (r.notes.shots || []).length; return s <= 1 && (r.notes.gunAim || 0) > 50 ? 'S' : s <= 2 ? 'A' : 'B'; },
+  debrief(r) {
+    const shots = r.notes.shots || [], good = [], improve = [];
+    if (shots.length) (shots.length === 1 ? good : improve).push(shots.length === 1 ? `一發命中：發射時 ${fmt(shots[0].R)} m、Pk ${shots[0].pk.toFixed(2)}。` : `用了 ${shots.length} 發飛彈。第一發 Pk ${shots[0].pk.toFixed(2)}、${fmt(shots[0].R)} m。`);
+    if (r.notes.gunAim != null) (r.notes.gunAim > 40 ? good : improve).push(`機砲開火時，有 ${r.notes.gunAim}% 的時間機頭在提前量上。`);
+    return { good, improve,
+      stats: [['飛彈', `${r.notes.mslHit ? 1 : 0}/${shots.length}`], ['機砲命中', `${r.notes.gunHits ?? 0}`], ['提前量瞄準', `${r.notes.gunAim ?? 0}%`], ['用時', `${Math.round(r.t)} s`]],
+      closing: '武器只是最後一步。前面七課，都是為了讓這一步變簡單。' };
+  },
+};
+function shotWhy(s) {
+  if (!s.locked) return `那發沒有鎖定就發射——飛彈不知道要追誰。等紅色菱形。`;
+  if (s.R < 450) return `那發太近了（${fmt(s.R)} m）：飛彈來不及解除保險、轉不過來。拉開到 800 m 以上。`;
+  if (s.pk < 0.3) return `那發 Pk 只有 ${s.pk.toFixed(2)}（${fmt(s.R)} m、偏離機尾 ${Math.round(s.aot)}°）：太遠或角度太差。靠近、繞到它正後方再打。`;
+  return `那發 Pk ${s.pk.toFixed(2)}，運氣不好或目標正好轉向。下一發等 SHOOT 穩定再按。`;
+}
+
+// =====================================================================
+// 09 — 防守與反擊：飛彈警告、熱焰彈、Overshoot
+// =====================================================================
+const L09 = {
+  id: 'L09', no: 9, title: '防守與反擊', en: 'DEFENSE & REVERSAL',
+  principle: '飛彈有轉彎極限和反應延遲：在它最後一刻（約 0.5 km）往側面急轉，並在 2.6 km 內放熱焰彈。太早轉，它還來得及修正。被咬尾時，急轉＋減速逼對方衝過頭，再反咬。',
+  real: '真實空戰：飛彈防禦依賴機動（beam、break）與誘餌；被追擊時以減速、剪刀等機動迫使攻擊者 overshoot（公開 BFM 教學慣例）。',
+  model: '本遊戲規則：飛彈有 0.4 秒自動駕駛延遲與 G 上限；熱焰彈只在 2.6 km 內、每枚飛彈一次 40–55% 機率被誘騙；熱焰彈 2 組，25 秒回充。實測：熱焰彈＋剩 0.5 km 急轉 0/18 被命中，太早（1.6 km）急轉 7/18，不防守 12/18。飛彈段 AB 停用（遊戲規則）；本課機體不會損毀。',
+  goals: ['教官連發 3 枚飛彈：最多被命中 1 枚', '熱焰彈只有 2 組——第 3 枚只能靠急轉', '被 J-16 咬尾：逼它衝過頭，反咬到它尾後 3 秒'],
+  timeLimit: 170,
+  rules: { weapons: false, playerDamage: 0 },
+  setup: (r) => {
+    duoSetup(r, {
+      me: { pos: { x: 0, y: 3200, z: 9000 }, speed: 800 / KMH, heading: 0 },
+      foe: { pos: { x: 0, y: 3200, z: 11500 }, speed: 260, heading: 0 },
+      foeCtl: (rr) => new StraightDrone(rr.foe, { speed: 260 }),
+    });
+    r.me.damageScale = 0;
+  },
+  intro: ['今天換你被打。慌是正常的，慌了還照程序做，才叫飛行員。'],
+  onEvent(r, ev) {
+    if (ev.type === 'missileHit' && ev.target === r.me) { r.d.hits = (r.d.hits || 0) + 1; r.say(missileWhy(r, ev.missile, true)); }
+    if ((ev.type === 'missileMiss' || ev.type === 'missileExpire') && ev.missile.target === r.me && !ev.missile.reported) {
+      ev.missile.reported = true; r.d.misses = (r.d.misses || 0) + 1;
+      r.say(ev.missile.decoy ? '躲掉了——熱焰彈把它騙走了。' : `躲掉了！最後關頭你拉到 ${(ev.missile.defG || 0).toFixed(1)}G。`);
+    }
+    if (ev.type === 'flares' && ev.ac === r.me) {
+      for (const m of r.match.missiles) if (m.alive && m.target === r.me) m.flareAt ??= len(sub(m.pos, r.me.pos));
+    }
+  },
+  phases: [
+    {
+      id: 'missiles',
+      rules: { ab: false },
+      enter: (r) => { r.d.hits = 0; r.d.misses = 0; r.d.launched = 0; r.d.next = 3; },
+      say: (r) => `飛彈從後方來，AB 故障用不了，跑不掉。2 公里左右放熱焰彈（${r.pick('FLR', 'FLR／Q')}）；剩 0.5 公里——不到一秒——往側面${r.pick('推滿', '滾轉拉滿')}。太早轉，它還來得及修正。`,
+      text: (r) => {
+        const m = r.match.missiles.find((x) => x.alive && x.target === r.me);
+        return `飛彈防禦 ${r.d.launched}/3　被命中 ${r.d.hits}（最多 1）　熱焰彈 ${r.me.flares}${m ? `　來襲 ${(len(sub(m.pos, r.me.pos)) / 1000).toFixed(1)} km` : ''}`;
+      },
+      progress: (r) => (r.d.hits + r.d.misses) / 3,
+      update(r) {
+        for (const m of r.match.missiles) {
+          if (!m.alive || m.target !== r.me) continue;
+          const d = len(sub(m.pos, r.me.pos));
+          if (d < 1500) m.defG = Math.max(m.defG || 0, r.g);
+          if (d < 2600 && r.g > 5 && m.breakAt == null) m.breakAt = d;
+        }
+        const active = r.match.missiles.some((m) => m.alive && m.target === r.me);
+        if (r.d.launched < 3 && r.phaseT > r.d.next && !active) {
+          // 150 deg off the nose, 1.9 km, AB unavailable: running away is not a defence,
+          // and (measured, docs/academy-curriculum.md) flares + a last-second break are.
+          const side = r.d.launched % 2 ? -1 : 1, bearing = (r.heading + side * 150) * DEG;
+          const dist = 1900;
+          const lp = { x: r.me.pos.x + Math.sin(bearing) * dist, y: r.me.pos.y + 150, z: r.me.pos.z - Math.cos(bearing) * dist };
+          const toMe = Math.atan2(r.me.pos.x - lp.x, -(r.me.pos.z - lp.z)) / DEG;
+          placeJet(r.foe, { pos: lp, speed: 280, heading: toMe });
+          r.match.setController(r.foe, new StraightDrone(r.foe, { speed: 260 }));
+          scriptedLaunch(r.match, r.foe, r.me);
+          r.d.launched += 1; r.d.next = r.phaseT + 11;
+          r.flash(`MISSILE ${r.d.launched}/3`, '#ff6a6a');
+        }
+        if (r.d.hits >= 2) return { fail: `被命中 ${r.d.hits} 枚。${r.d.why || ''}` };
+        if (r.d.launched >= 3 && !active && r.d.hits + r.d.misses >= 3) { r.note('mslHits', r.d.hits); return 'done'; }
+        return undefined;
+      },
+    },
+    {
+      id: 'reverse',
+      enter: (r) => {
+        const h = r.heading * DEG;
+        placeJet(r.me, { pos: { ...r.me.pos, y: 3200 }, speed: 700 / KMH, heading: r.heading });
+        placeJet(r.foe, { pos: { x: r.me.pos.x - Math.sin(h) * 900, y: 3250, z: r.me.pos.z + Math.cos(h) * 900 }, speed: 260, heading: r.heading });
+        r.foe.missiles = 0; r.foe.gunRounds = 600;
+        r.foeAI = new PilotAI(r.foe, { skill: 'rookie', seed: 91 });
+        r.match.setController(r.foe, r.foeAI);
+        r.me.damageScale = 0; r.d.held = 0; r.d.overshoots = 0; r.d.armed = true; r.d.brakeUsed = 0;
+        r.flash('BANDIT ON YOUR SIX!', '#ff6a6a');
+      },
+      say: (r) => `J-16 咬在你六點鐘，900 m！${r.pick('搖桿往它那邊推到底', '朝它的方向滾轉、拉滿')}，必要時收油按 BRK——逼它衝過頭，再反咬回去。`,
+      text: (r) => { const g = geometry(r.me, r.foe); return `反咬：它的尾後 ${r.d.held.toFixed(1)}/3s　${fmt(g.R)} m　我機頭偏差 ${Math.round(g.ata)}°　偏離它機尾 ${Math.round(g.aot)}°`; },
+      progress: (r) => r.d.held / 3,
+      update(r, dt) {
+        const g = geometry(r.me, r.foe), rev = geometry(r.foe, r.me);
+        if (r.me.controls.brake) r.d.brakeUsed += dt;
+        if (r.d.armed && rev.R < 450 && rev.aot > 90) { r.d.overshoots += 1; r.d.armed = false; r.say('它衝過頭了！現在反咬！'); }
+        if (!r.d.armed && rev.R > 900) r.d.armed = true;
+        if (g.R < 1500 && g.ata < 30 && g.aot < 60) r.d.held += dt;
+        if (r.d.held >= 3) { r.note('revT', r.phaseT); r.note('overshoots', r.d.overshoots); r.note('revBrake', r.d.brakeUsed); return 'done'; }
+        if (r.phaseT > 75) {
+          return { fail: r.d.overshoots === 0 ? `75 秒還沒甩掉它，它一次都沒衝過頭。${r.d.brakeUsed < 1 ? '你沒用 BRK：' : ''}朝它急轉、適時減速，讓它的速度把它送到你前面。`
+            : `它衝過頭 ${r.d.overshoots} 次，你卻沒能咬住它的尾巴：衝過頭的瞬間就要反轉、追 lead。` };
+        }
+        return undefined;
+      },
+    },
+  ],
+  grade(r) { return r.notes.mslHits === 0 && r.notes.revT < 40 ? 'S' : r.notes.mslHits === 0 || r.notes.revT < 40 ? 'A' : 'B'; },
+  debrief(r) {
+    const good = [], improve = [];
+    (r.notes.mslHits ? improve : good).push(r.notes.mslHits ? `3 枚飛彈被命中 ${r.notes.mslHits} 枚。` : '3 枚飛彈全部躲掉。');
+    if (r.notes.revT != null) good.push(`反咬用了 ${Math.round(r.notes.revT)} 秒，逼它衝過頭 ${r.notes.overshoots} 次${r.notes.revBrake > 0.5 ? `，BRK ${r.notes.revBrake.toFixed(1)} 秒` : ''}。`);
+    improve.push('真實戰場不會有教官暫停：先看 MISSILE、再看距離、最後拉桿——順序要變成反射。');
+    return { good, improve,
+      stats: [['飛彈命中', `${r.notes.mslHits ?? 0}/3`], ['熱焰彈', `${r.me.stats.flaresUsed}`], ['Overshoot', `${r.notes.overshoots ?? 0}`], ['反咬', r.notes.revT ? `${Math.round(r.notes.revT)} s` : '—']],
+      closing: '活下來，然後反咬。這就是戰鬥機飛行員。' };
+  },
+};
+function missileWhy(r, m, hit) {
+  const parts = [];
+  if (m.flareAt == null) parts.push('沒放熱焰彈');
+  else if (m.flareAt > FLARE.decoyRange) parts.push(`熱焰彈在 ${(m.flareAt / 1000).toFixed(1)} km 就放了（2.6 km 外無效）`);
+  if (m.breakAt != null && m.breakAt > 1200) parts.push(`你在 ${(m.breakAt / 1000).toFixed(1)} km 就開始急轉，太早了，它修正得過來`);
+  else if ((m.defG || 0) < 5) parts.push(`最後 1.5 km 只拉了 ${(m.defG || 0).toFixed(1)}G`);
+  const why = parts.length ? `命中！${parts.join('、')}。` : '命中！這枚運氣好——時機都對，下一枚照做。';
+  r.d.why = parts.length ? `${parts.join('、')}。2 km 放熱焰彈，剩 0.5 km 往側面拉滿。` : '';
+  return why;
+}
+
+// =====================================================================
+// 10 — ACE QUALIFICATION：完整 1v1 畢業考核
+// =====================================================================
+const L10 = {
+  id: 'L10', no: 10, title: 'ACE QUALIFICATION', en: 'FINAL CHECKRIDE', final: true,
+  seed: 52036, // fixed opening so a retry is the same checkride (see docs/academy-curriculum.md)
+  principle: '完整 1v1：對手是 VETERAN AI，規則與自由對戰相同。用前九課的一切——能量、位置、武器、防守。',
+  real: '整合課程：真實的戰鬥機考核同樣看「決策」而不只是結果。',
+  model: '本遊戲：VETERAN AI 與你使用同一套物理與武器。評等依勝負、剩餘耐久、時間、命中率與能量管理計算（純遊戲化）。',
+  goals: ['擊落 VETERAN J-16（或時間到時耐久較高）', 'S：剩餘耐久 ≥ 70 且 150 秒內擊落', 'A：剩餘耐久 ≥ 40'],
+  timeLimit: null,
+  rules: { weapons: true },
+  setup: (r) => {
+    r.foe.dormant = false;
+    r.foeAI = new PilotAI(r.foe, { skill: 'veteran', seed: r.match.seed + 7 });
+    r.match.setController(r.foe, r.foeAI);
+  },
+  intro: ['這是畢業考。我不會再提示你了——除非你快死了。', '祝好運，菜鳥。'],
+  crashReason: () => '墜海。高度也是武器——別在海面上跟它纏鬥。',
+  phases: [
+    {
+      id: 'fight',
+      say: '',
+      text: (r) => { const g = geometry(r.me, r.foe); return `擊落 J-16　我 HP ${Math.round(r.me.hp)}　敵 HP ${Math.round(r.foe.hp)}　${fmt(g.R)} m`; },
+      progress: (r) => 1 - r.foe.hp / r.foe.type.hp,
+      update(r) {
+        const res = r.match.result;
+        if (!r.d.warned && r.me.hp <= 50 && r.me.alive) { r.d.warned = true; r.say('你中彈了。拉開、拿回能量，別硬拚。'); }
+        if (!res) return undefined;
+        if (res.winner === r.me) { r.note('reason', res.reason); return 'done'; }
+        if (res.winner === r.foe) return { fail: res.reason === 'timeDecision' ? `時間到：耐久 ${Math.round(r.me.hp)} 對 ${Math.round(r.foe.hp)}，判負。` : res.reason === 'crash' ? r.lesson.crashReason(r) : res.reason === 'outOfBounds' ? '脫離戰區判負。' : '你被擊落了。' };
+        return { fail: '平手。王牌不接受平手。' };
+      },
+    },
+  ],
+  grade(r) {
+    const hp = r.me.hp, t = r.t;
+    return hp >= 70 && t <= 150 ? 'S' : hp >= 40 ? 'A' : 'B';
+  },
+  debrief(r, success) {
+    const st = r.me.stats, good = [], improve = [];
+    const band = pct(r.tel.bandSec, r.tel.flightSec);
+    (band > 35 ? good : improve).push(`有 ${band}% 的時間速度在最佳轉彎區（綠色菱形）。`);
+    if (st.missilesFired) (st.missileHits / st.missilesFired >= 0.3 ? good : improve).push(`飛彈 ${st.missileHits}/${st.missilesFired}。${st.missileHits / st.missilesFired < 0.3 ? '等 SHOOT 再打。' : ''}`);
+    if (st.roundHits) good.push(`機砲命中 ${st.roundHits} 發。`);
+    const taken = 100 - Math.max(0, r.me.hp);
+    if (taken > 0) improve.push(`受到 ${Math.round(taken)} 點傷害${r.foe.stats.missileHits ? `（被飛彈命中 ${r.foe.stats.missileHits} 次）` : ''}。`);
+    if (r.tel.gHighSec > 25) improve.push(`超過 7G 的時間累積 ${Math.round(r.tel.gHighSec)} 秒：能量燒太多。`);
+    return { good, improve,
+      stats: [['剩餘耐久', `${Math.round(Math.max(0, r.me.hp))}`], ['時間', `${Math.round(r.t)} s`], ['飛彈', `${st.missileHits}/${st.missilesFired}`], ['最佳轉彎區', `${band}%`]],
+      closing: success ? '恭喜。從今天起，你是王牌——至少在這片海上。' : '再來一次。王牌也是從被擊落學起的。' };
+  },
+};
+
+export const LESSONS = [L01, L02, L03, L04, L05, L06, L07, L08, L09, L10];
 export const lessonById = (id) => LESSONS.find((l) => l.id === id);
 export { gatePhase, pointAhead };

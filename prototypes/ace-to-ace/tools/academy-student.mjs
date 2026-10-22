@@ -5,12 +5,18 @@
 import { sub, norm, toBody, clamp, DEG, UP } from '../src/sim/math.js';
 import { bankAngle, pitchForG } from '../src/sim/aircraft.js';
 import { hdgDeg, wrapDeg, gammaDeg, KMH } from '../src/academy/runner.js';
+import { geometry } from '../src/academy/lessons.js';
+import { gunLead, gunError, missilePk } from '../src/sim/fire.js';
+import { HumanProxy } from '../src/ai/bots.js';
+import { PilotAI } from '../src/ai/pilot.js';
+import { PlayerController } from '../src/game/input.js';
+import { addScaled, scale, cross, dot, len, angleBetween, forwardOf } from '../src/sim/math.js';
 
 /** Input object with the same surface the PlayerController reads. */
 export function makeStudentInput() {
-  const s = { stick: { x: 0, y: 0 }, thr: 0.72, ab: false, brk: false, gun: false, presses: new Set() };
+  const s = { stick: { x: 0, y: 0 }, thr: 0.72, ab: false, brk: false, gunOn: false, presses: new Set() };
   s.axes = () => ({ x: s.stick.x, y: s.stick.y, yaw: 0 });
-  s.throttle = () => s.thr; s.boost = () => s.ab; s.brake = () => s.brk; s.gun = () => s.gun;
+  s.throttle = () => s.thr; s.boost = () => s.ab; s.brake = () => s.brk; s.gun = () => s.gunOn;
   s.look = () => false;
   s.consume = (n) => { const h = s.presses.has(n); s.presses.delete(n); return h; };
   return s;
@@ -26,7 +32,7 @@ export const dirFor = (headingDeg, climbDeg = 0) => {
  * Stick for flying toward `dir` (world). pullLimit caps aft stick (0..1): a
  * "moderate" thumb uses ~0.5, a hard break uses 1.
  */
-export function stickToward(ac, dir, control, { pullLimit = 1, gain = 1 } = {}) {
+export function stickToward(ac, dir, control, { pullLimit = 1, gain = 1, ff = { x: 0, y: 0 } } = {}) {
   const b = toBody(ac.q, dir);
   const ahead = Math.max(-b.z, 1e-3);
   const ax = Math.atan2(b.x, ahead), ay = Math.atan2(b.y, ahead);
@@ -41,8 +47,9 @@ export function stickToward(ac, dir, control, { pullLimit = 1, gain = 1 } = {}) 
     // tilt the lift, and pull exactly the G a banked turn needs (n = 1/cos bank),
     // read off the G meter. Same stick the player has.
     const v = Math.max(ac.speed, 60), g = 9.81;
-    const latA = clamp(ax * 0.9 * gain, -0.2, 0.2) * v;          // m/s^2 sideways
-    const upA = clamp(ay * 1.2 * gain, -0.12, 0.12) * v + g * Math.cos(Math.asin(clamp(ac.vel.y / v, -1, 1)));
+    const lim = 0.2 * Math.max(1, gain);
+    const latA = (clamp(ax * 0.9 * gain, -lim, lim) + ff.x) * v;  // m/s^2 sideways (+ target turn feed-forward)
+    const upA = (clamp(ay * 1.2 * gain, -0.6 * lim, 0.6 * lim) + ff.y) * v + g * Math.cos(Math.asin(clamp(ac.vel.y / v, -1, 1)));
     const wantBank = clamp(Math.atan2(latA, upA), -75 * DEG, 75 * DEG);
     x = clamp((wantBank - bankAngle(ac)) * 2.5 - ac.rollRateCur * 0.08, -1, 1);
     const nReq = Math.hypot(latA, upA) / g * Math.cos(clamp(wantBank - bankAngle(ac), -1.5, 1.5));
@@ -149,6 +156,94 @@ Object.assign(PLANS, {
   },
 });
 
+const lerpPt = (p, v, t) => addScaled(p, v, t);
+/** Keep the nose out of the sea when chasing something below. */
+function safeDir(ac, dir) {
+  if (ac.pos.y < 1500 && dir.y < -0.1) return norm({ x: dir.x, y: -0.1 + (1500 - ac.pos.y) / 3000, z: dir.z });
+  return dir;
+}
+/**
+ * Expert tracking thumb: the AI's proven lift-vector controller, but ONLY its roll
+ * and pitch outputs (x = roll rate, y = pitch) — the touch Expert player has no
+ * rudder, so the AI's fine-aim yaw is dropped.
+ */
+function expertTrack(r, dir, gFrac = 1) {
+  r.__steer ||= new PilotAI(r.me, { skill: 'ace', seed: 3 });
+  const c = r.__steer.steer(dir, gFrac);
+  return { x: clamp(c.roll, -1, 1), y: clamp(-c.pitch, -1, 1) };
+}
+function chase(r, s, c, aim, closeTo = 900, gain = 1) {
+  const ac = r.me, foe = r.foe, g = geometry(ac, foe);
+  if (c === 'expert' && gain > 1) {
+    Object.assign(s.stick, expertTrack(r, safeDir(ac, norm(sub(aim, ac.pos)))));
+    speedControl(s, ac, foe.speed * KMH + clamp((g.R - closeTo) / 4, -200, 250));
+    return g;
+  }
+  // feed-forward: how fast the aim line rotates, in body axes (a thumb "leads" a turning target)
+  const los = norm(sub(aim, ac.pos));
+  const prev = r.__prevLos || los; r.__prevLos = los;
+  const dl = toBody(ac.q, sub(los, prev));
+  const ff = gain > 1 ? { x: dl.x * 60, y: dl.y * 60 } : { x: 0, y: 0 };
+  Object.assign(s.stick, stickToward(ac, safeDir(ac, los), c, { pullLimit: 1, gain, ff }));
+  speedControl(s, ac, foe.speed * KMH + clamp((g.R - closeTo) / 4, -200, 250));
+  return g;
+}
+Object.assign(PLANS, {
+  L07(r, s, c) {
+    const foe = r.foe, g = geometry(r.me, foe);
+    if (r.phase?.id === 'lead') { chase(r, s, c, gunLead(r.me, foe.pos, foe.vel).point, 600, 3); return; }
+    const aim = g.R > 1250 ? lerpPt(foe.pos, foe.vel, 2) : g.R < 750 ? lerpPt(foe.pos, foe.vel, -1.2) : foe.pos;
+    chase(r, s, c, aim, 950);
+  },
+  L08(r, s, c) {
+    const ac = r.me, foe = r.foe;
+    if (r.phase?.id === 'missile') {
+      const g = chase(r, s, c, foe.pos, 1200);
+      const aspect = Math.PI - angleBetween(forwardOf(foe.q), scale(norm(sub(foe.pos, ac.pos)), -1));
+      const pk = ac.lock.locked ? missilePk({ R: g.R, ata: ac.lock.ata, aspect, mySpeed: ac.speed, tgSpeed: foe.speed, tgG: foe.nCur }) : 0;
+      if (pk > 0.5 && r.t - (r.lastShotT ?? -9) > 3) { s.presses.add('msl'); r.lastShotT = r.t; }
+      s.gunOn = false;
+      return;
+    }
+    const lead = gunLead(ac, foe.pos, foe.vel).point;
+    const g = chase(r, s, c, lead, 500, 3);
+    s.gunOn = g.R < 850 && gunError(ac, lead) < 1.0 * DEG;
+  },
+  L09(r, s, c) {
+    const ac = r.me, foe = r.foe;
+    if (r.phase?.id === 'missiles') {
+      const m = r.match.missiles.find((x) => x.alive && x.target === ac);
+      s.thr = 1; s.ab = true; s.brk = false;
+      if (!m) { Object.assign(s.stick, holdHeadingAlt(ac, hdgDeg(ac), 3200, c, { pullLimit: 0.5 })); return; }
+      const rel = sub(m.pos, ac.pos), d = len(rel);
+      const T = globalThis.__L09 || { flare: 2300, brk: 500 };
+      if (d < T.flare && ac.flares > 0 && !m.flaredByStudent) { s.presses.add('flare'); m.flaredByStudent = true; }
+      if (d < T.brk) {
+        let side = norm(cross(UP, rel));
+        if (dot(side, forwardOf(ac.q)) < 0) side = scale(side, -1);
+        Object.assign(s.stick, stickToward(ac, norm(addScaled(side, UP, 0.05)), c, { pullLimit: 1 }));
+      } else Object.assign(s.stick, holdHeadingAlt(ac, hdgDeg(ac), 3200, c, { pullLimit: 0.5 }));
+      return;
+    }
+    const g = geometry(ac, foe), rev = geometry(foe, ac);
+    if (g.ata > 90) { // it is behind: break toward it, bleed speed when it is close
+      Object.assign(s.stick, stickToward(ac, safeDir(ac, norm(sub(foe.pos, ac.pos))), c, { pullLimit: 1 }));
+      s.ab = rev.R > 700; s.brk = rev.R < 700; s.thr = rev.R < 700 ? 0 : 1;
+      return;
+    }
+    chase(r, s, c, g.R > 900 ? lerpPt(foe.pos, foe.vel, 1.5) : foe.pos, 700);
+  },
+  L10(r, s, c) {
+    // the "good" human proxy (HUD cues only, reaction delay, thumb drift) driving OUR input
+    if (!r.__hp) r.__hp = new HumanProxy(r.me, { level: 'good', seed: 17, PlayerController, control: c });
+    const out = r.__hp.update(1 / 60, r.match);
+    Object.assign(s.stick, r.__hp.stick);
+    s.ab = r.__hp.buttons.boost; s.brk = r.__hp.buttons.brake; s.gunOn = r.__hp.buttons.gun; s.thr = 1;
+    if (out.fireMissile) s.presses.add('msl');
+    if (out.flare) s.presses.add('flare');
+  },
+});
+
 /** Deliberately wrong students: each should fail with a specific, causal reason. */
 export const BAD = {
   // Expert who rolls but never pulls: heading barely changes.
@@ -169,6 +264,14 @@ export const BAD = {
   'L05:yank'(r, s, c) { PLANS.L05(r, s, c); if (r.phase?.id === 'zoom') { Object.assign(s.stick, stickToward(r.me, dirFor(0, r.kmh > 430 ? 70 : 0), c, { pullLimit: 1 })); s.brk = r.phaseT < 2; } },
   // Hauls the zoom at full G but leaves the speedbrake alone: G alone must cost the gate.
   'L05:yankNoBrake'(r, s, c) { PLANS.L05(r, s, c); if (r.phase?.id === 'zoom') Object.assign(s.stick, stickToward(r.me, dirFor(0, r.kmh > 430 ? 70 : 0), c, { pullLimit: 1 })); },
+  // Pure pursuit at full burner: overshoots the turning target.
+  'L07:pure'(r, s, c) { Object.assign(s.stick, stickToward(r.me, norm(sub(r.foe.pos, r.me.pos)), c, { pullLimit: 1 })); s.thr = 1; s.ab = true; s.brk = false; },
+  // Fires missiles as soon as it can, locked or not, from far away.
+  'L08:spray'(r, s, c) { PLANS.L08(r, s, c); if (r.phase?.id === 'missile') { s.presses.clear(); if (r.t - (r.lastShotT ?? -9) > 2.5) { s.presses.add('msl'); r.lastShotT = r.t; } } },
+  // Breaks hard as soon as it sees the missile (too early) and never drops flares.
+  'L09:early'(r, s, c) { globalThis.__L09 = { flare: 0, brk: 2600 }; PLANS.L09(r, s, c); globalThis.__L09 = null; },
+  // Ignores the missile warning: no flares, no break.
+  'L09:ignore'(r, s, c) { Object.assign(s.stick, holdHeadingAlt(r.me, hdgDeg(r.me), 3200, c, { pullLimit: 0.5 })); s.thr = 1; s.ab = true; },
   // Keeps pulling during the stall instead of unloading.
   'L06:stallPull'(r, s, c) { PLANS.L06(r, s, c); if (r.phase?.id === 'stall') { s.stick.x = 0; s.stick.y = -1; s.thr = 0.72; s.ab = false; } },
   // Waits 1.5 s before reacting to the dive, then pulls without idle/brake.

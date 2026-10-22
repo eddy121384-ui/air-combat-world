@@ -37,6 +37,13 @@ export class TurnDrone {
   update(dt) {
     this.t += dt;
     if (this.reverseEvery && this.t > this.reverseEvery) { this.t = 0; this.side = -this.side; }
+    // stay near the middle of the training area (turn the long way home when far out)
+    const far = Math.hypot(this.ac.pos.x, this.ac.pos.z);
+    if (far > 6000) {
+      const home = Math.atan2(-this.ac.pos.x, this.ac.pos.z);
+      const err = Math.atan2(Math.sin(home - this.hdg), Math.cos(home - this.hdg));
+      if (Math.abs(err) > 0.3) this.side = Math.sign(err);
+    }
     this.hdg += this.side * this.rate * dt;
     const look = this.hdg + this.side * this.rate * 1.2;
     const climb = clamp((this.alt - this.ac.pos.y) / 300, -0.2, 0.2);

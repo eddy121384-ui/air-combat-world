@@ -16,10 +16,10 @@ const only = args.includes('--only') ? args[args.indexOf('--only') + 1] : null;
 const verbose = args.includes('--verbose');
 const MODES = ['arcade:assisted', 'arcade:expert', 'tactical:assisted', 'tactical:expert'];
 
-export function fly(lesson, mode, plan, { maxT = 600 } = {}) {
+export function fly(lesson, mode, plan, { maxT = 600, seed } = {}) {
   const [flight, control] = mode.split(':');
   const input = makeStudentInput();
-  const { match, runner } = createLessonSession(lesson, { flight, control, input });
+  const { match, runner } = createLessonSession(lesson, { flight, control, input, ...(seed != null ? { seed } : {}) });
   const dt = RULES.dt;
   while (!runner.result && runner.t < maxT) {
     plan(runner, input, control);
@@ -59,6 +59,10 @@ const EXPECT = {
   'L05:yankNoBrake': { modes: ['arcade:expert', 'tactical:expert'], match: /G，能量高度掉了/ },
   'L06:stallPull': { modes: MODES, match: /拉了/ },
   'L06:late': { modes: MODES, match: /墜海|最低/ },
+  'L07:pure': { modes: MODES, match: /衝過頭|lead|提前量/ },
+  'L08:spray': { modes: MODES, match: /Pk|鎖定/ },
+  'L09:ignore': { modes: MODES, match: /沒放熱焰彈/ },
+  'L09:early': { modes: MODES, match: /太早/ },
 };
 for (const [key, exp] of Object.entries(EXPECT)) {
   const [id] = key.split(':');
@@ -68,6 +72,18 @@ for (const [key, exp] of Object.entries(EXPECT)) {
     const ok = r.result && !r.result.success && exp.match.test(r.result.reason || '');
     table.push({ lesson: key, mode, ok, grade: 'fail-expected', t: +r.t.toFixed(1), reason: r.result?.reason ?? '(no result)' });
     if (!ok) { failures++; console.log(`${key} ${mode}: expected causal failure ${exp.match}, got ${JSON.stringify(r.result?.reason)} success=${r.result?.success}`); }
+  }
+}
+
+// The final checkride is a real 1v1 vs VETERAN: completable, not guaranteed. The
+// HUD-only "good" human proxy must win a fair share over 12 openings in every mode.
+if (!only || only === 'L10') {
+  for (const mode of MODES) {
+    let wins = 0;
+    for (let k = 0; k < 12; k++) if (fly(lessonById('L10'), mode, PLANS.L10, { seed: 52031 + k, maxT: 420 }).result?.success) wins++;
+    const ok = wins >= 4;
+    table.push({ lesson: 'L10 x12 seeds', mode, ok, grade: `${wins}/12 wins`, t: 0 });
+    if (!ok) { failures++; console.log(`L10 ${mode}: only ${wins}/12 wins for the good proxy`); }
   }
 }
 

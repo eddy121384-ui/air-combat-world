@@ -178,7 +178,7 @@ export class Hud {
     g.textAlign = 'center'; g.fillStyle = match.phase === 'sudden' ? RED : WHITE;
     g.font = `700 ${Math.round(16 * S)}px ui-monospace, Menlo, monospace`;
     const clock = `${Math.floor(t / 60)}:${String(Math.floor(t % 60)).padStart(2, '0')}`;
-    g.fillText(match.phase === 'sudden' ? 'SUDDEN DEATH' : opts.academy && opts.academy.timer == null ? 'TRAINING' : clock, w * 0.5, 16 * S);
+    g.fillText(match.phase === 'sudden' ? 'SUDDEN DEATH' : opts.academy && opts.academy.timer == null && match.timeLimit > 1e8 ? 'TRAINING' : clock, w * 0.5, 16 * S);
     g.font = `600 ${Math.round(11 * S)}px ui-monospace, Menlo, monospace`;
     this.hpBar(w * 0.5 - 175 * S, 14 * S, 120 * S, me.hp / me.type.hp, `${me.name}`, CYAN, S);
     if (tg) this.hpBar(w * 0.5 + 55 * S, 14 * S, 120 * S, tg.hp / tg.type.hp, `${tg.name}`, RED, S);

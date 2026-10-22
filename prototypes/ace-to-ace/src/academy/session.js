@@ -11,7 +11,7 @@ export const ACADEMY_SEED = 52031;
  * @param {object} o        { flight, control, input, settings, seed }
  * @returns {{ match, runner, player }}
  */
-export function createLessonSession(lesson, { flight, control, input, settings = {}, seed = ACADEMY_SEED }) {
+export function createLessonSession(lesson, { flight, control, input, settings = {}, seed = lesson.seed ?? ACADEMY_SEED }) {
   const match = new Match({
     seed, flightFeel: flight,
     blue: { type: 'F16V', name: 'F-16V', damageScale: lesson.rules?.playerDamage ?? 1 },
@@ -22,5 +22,5 @@ export function createLessonSession(lesson, { flight, control, input, settings =
   // Lesson rules filter the player's commands (e.g. "engine at idle"); the
   // aircraft itself is the unmodified shared flight model.
   match.setController(match.blue, { player, update: (dt, m) => runner.filter(player.update(dt, m)) });
-  return { match, runner, player };
+  return { match, runner, player, foeAI: runner.foeAI || null };
 }

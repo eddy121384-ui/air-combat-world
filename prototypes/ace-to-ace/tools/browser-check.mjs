@@ -320,7 +320,7 @@ if (scenario === 'all' || scenario === 'academy') {
       if (Math.abs(g.input.throttle() - st.thr) > 1e-3) g.input.setThrottle(st.thr);
       g.input.boostToggle = st.ab; g.input.btn.brake = st.brk;
       if (st.presses.size) { for (const k of st.presses) g.input.pressed.add(k); st.presses.clear(); }
-      if (st.gun !== undefined) g.input.btn.gun = !!st.gun;
+      g.input.btn.gun = !!st.gunOn;
       return orig(dt, mm);
     };
     g.setTimeScale(4);
