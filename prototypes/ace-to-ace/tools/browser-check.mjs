@@ -307,14 +307,29 @@ if (scenario === 'all' || scenario === 'academy') {
   // throttle strip, AB toggle, BRK) before every simulation step, i.e. the same
   // PlayerController path as a thumb. Flow: title -> academy -> briefing ->
   // sortie -> causal failure -> retry -> clear -> progress saved -> reload.
+  const { fly } = await import('./test-academy.mjs');
+  const { lessonById } = await import('../src/academy/lessons.js');
+  const { PLANS } = await import('./academy-student.mjs');
+  const l10Expect = {};
+  for (const m of ['arcade:expert', 'arcade:assisted']) {
+    const r = fly(lessonById('L10'), m, PLANS.L10, { maxT: 420 }).result;
+    l10Expect[m] = { success: r.success, reason: r.reason ?? null, grade: r.grade, t: +r.time.toFixed(2) };
+  }
   const { ctx, p } = await page(iphone, '?seed=3', 'academy');
-  const hook = (bad = null) => p.evaluate(async (badKey) => {
+  await p.waitForFunction(() => window.__game?.mode === 'title');
+  // The student is attached by the game's onLessonStart hook, i.e. BEFORE the first
+  // simulation step, so a browser lesson is the same fixed-step run as the Node
+  // test with the same seed. The lesson itself is still launched from the menus.
+  await p.evaluate(async () => {
     const S = await import('/tools/academy-student.mjs');
-    const g = window.__game, m = g.match, ctl = m.controllers.get(m.blue);
-    const st = S.makeStudentInput();
-    const plan = badKey ? S.BAD[badKey] : S.PLANS[g.lessonId];
-    const orig = ctl.update;
-    ctl.update = (dt, mm) => {
+    window.__studentMod = S;
+    window.__game.onLessonStart = () => {
+      const g = window.__game, m = g.match, ctl = m.controllers.get(m.blue);
+      const badKey = window.__studentBad || null;
+      const st = S.makeStudentInput();
+      const plan = badKey ? S.BAD[badKey] : S.PLANS[g.lessonId];
+      const orig = ctl.update;
+      ctl.update = (dt, mm) => {
       plan(g.lesson, st, g.controlMode);
       g.input.stick.x = st.stick.x; g.input.stick.y = st.stick.y;
       if (Math.abs(g.input.throttle() - st.thr) > 1e-3) g.input.setThrottle(st.thr);
@@ -322,9 +337,11 @@ if (scenario === 'all' || scenario === 'academy') {
       if (st.presses.size) { for (const k of st.presses) g.input.pressed.add(k); st.presses.clear(); }
       g.input.btn.gun = !!st.gunOn;
       return orig(dt, mm);
+      };
+      g.setTimeScale(4);
     };
-    g.setTimeScale(4);
-  }, bad);
+  });
+  const hook = (bad = null) => p.evaluate((b) => { window.__studentBad = b; }, bad);
   const waitDebrief = () => p.waitForFunction(() => window.__game.mode === 'debrief', null, { timeout: 240000 });
   const lessonIds = await p.evaluate(async () => (await import('/src/academy/lessons.js')).LESSONS.map((l) => l.id));
   await p.waitForFunction(() => window.__game?.mode === 'title');
@@ -334,18 +351,18 @@ if (scenario === 'all' || scenario === 'academy') {
   // L03 power: a student who dives for speed must fail with the causal reason
   await p.tap('[data-lesson="L03"]');
   await shot(p, '17-academy-briefing');
+  await hook('L03:dive');
   await p.tap('#btnBriefGo');
   await p.waitForFunction(() => window.__game.mode === 'playing');
-  await hook('L03:dive');
   await waitDebrief();
   const fail = await p.evaluate(() => window.__lastLesson);
   assert.equal(fail.success, false, 'diving student fails L03');
   assert.match(await p.textContent('#debSub'), /第五課/, 'failure explains WHY (thrust lesson, not a dive)');
   await shot(p, '18-academy-fail');
   // Retry the same lesson with a correct student
+  await hook();
   await p.tap('#btnDebRetry');
   await p.waitForFunction(() => window.__game.mode === 'playing' && window.__game.lesson && !window.__game.lesson.result);
-  await hook();
   await sleep(1500); await shot(p, '19-academy-flying');
   await waitDebrief();
   const clear = await p.evaluate(() => window.__lastLesson);
@@ -359,23 +376,39 @@ if (scenario === 'all' || scenario === 'academy') {
     await p.evaluate((lid) => window.__game.openBriefing(lid), id);
     if (id === 'L08' || id === 'L10') await shot(p, `22-academy-brief-${id}`);
     await p.tap('#btnBriefGo');
-    // The final checkride is a real 1v1 vs VETERAN (headless: the proxy wins 5-11 of
-    // 12 openings per mode). In the browser it may take a retry; a loss must still
-    // come with a concrete reason.
-    let res, attempts = 0;
-    do {
-      if (attempts) await p.tap('#btnDebRetry');
-      attempts++;
-      await p.waitForFunction(() => window.__game.mode === 'playing' && window.__game.lesson && !window.__game.lesson.result);
-      await hook();
-      if (id === 'L07' || id === 'L09') { await sleep(2500); await shot(p, `23-academy-fly-${id}`); }
-      await waitDebrief();
-      res = await p.evaluate(() => window.__lastLesson);
-      if (!res.success) assert.ok((res.reason || '').length > 4, `${id}: a failure explains why`);
-    } while (!res.success && id === 'L10' && attempts < 3);
-    assert.equal(res.success, true, `${id} clears in the browser (${res.reason || ''})`);
-    if (id === 'L10') { assert.match(await p.textContent('#debTitle'), /ACE RATING [SAB]/); await shot(p, '24-academy-ace-rating'); }
-    report.perf[`academy-${id}`] = { grade: res.grade, t: Math.round(res.time), attempts };
+    await p.waitForFunction(() => window.__game.mode === 'playing' && window.__game.lesson && !window.__game.lesson.result);
+    if (id === 'L07' || id === 'L09') { await sleep(2500); await shot(p, `23-academy-fly-${id}`); }
+    await waitDebrief();
+    const res = await p.evaluate(() => window.__lastLesson);
+    if (id === 'L10') {
+      // The checkride is a real 1v1 vs VETERAN with a fixed opening: it is completable
+      // (12-seed headless check), not guaranteed. The browser run must reproduce the
+      // headless fixed-step run of the same mode exactly (outcome, reason, time).
+      const want = l10Expect[res.mode];
+      assert.deepEqual([res.success, res.reason ?? null, +res.time.toFixed(2)], [want.success, want.reason, want.t],
+        `L10 ${res.mode}: browser run reproduces the headless run`);
+      if (!res.success) {
+        await shot(p, '24a-academy-checkride-lost');
+        // switch the airframe/control preset from the academy menu and fly it again
+        await p.tap('#btnDebAcademy');
+        await p.tap('#btnAcademySettings');
+        await p.tap('[data-flight-choice="arcade:assisted"]');
+        await p.tap('#btnSettingsApply');
+        assert.equal(await p.textContent('#academyMode'), 'ARCADE / ASSISTED', 'academy shows the new preset');
+        await p.tap('[data-lesson="L10"]');
+        await p.tap('#btnBriefGo');
+        await waitDebrief();
+        const win = await p.evaluate(() => window.__lastLesson);
+        const w2 = l10Expect[win.mode];
+        assert.deepEqual([win.mode, win.success, win.grade, +win.time.toFixed(2)], ['arcade:assisted', w2.success, w2.grade, w2.t],
+          'L10 arcade:assisted: browser run reproduces the headless win');
+        report.perf['academy-L10-lost'] = { mode: res.mode, t: Math.round(res.time), reason: res.reason };
+        Object.assign(res, win);
+      }
+      assert.equal(res.success, true, 'the checkride is cleared in at least one preset');
+      assert.match(await p.textContent('#debTitle'), /ACE RATING [SAB]/); await shot(p, '24-academy-ace-rating');
+    } else assert.equal(res.success, true, `${id} clears in the browser (${res.reason || ''})`);
+    report.perf[`academy-${id}`] = { grade: res.grade, t: Math.round(res.time), mode: res.mode };
   }
   await p.reload();
   await p.waitForFunction(() => window.__game?.mode === 'title');

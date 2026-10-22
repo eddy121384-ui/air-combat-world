@@ -308,6 +308,7 @@ function startLesson(id) {
   hud.flash(`LESSON ${String(lesson.no).padStart(2, '0')}`, '#ffe2a3', 2.0, true);
   hud.flash(lesson.title, '#f4fbff', 2.2);
   last = performance.now();
+  window.__game?.onLessonStart?.(); // test hook: runs before the first simulation step
 }
 /** Show lesson power rules on the touch strip (locked throttle, AB unavailable). */
 function syncLessonPower(rules) {
@@ -360,7 +361,10 @@ function onEvent(ev) {
     case 'missileMiss':
       if (ev.missile.owner === match.blue && kind === 'pvai') {
         hud.flash(ev.decoyed ? 'MISS — 熱焰彈誘餌' : 'MISS', '#ffc04d', 1.1);
-        if (enemyAI && Math.random() < 0.5) enemyAI.say('dodged', match);
+        // UI-only taunt: never call enemyAI.say() here — it draws from the AI's
+        // decision RNG and sets its radio cooldown, so the browser fight diverged
+        // from the same seed (rematch / headless / Academy retry).
+        if (enemyAI && enemyAI.radioCooldown <= 0 && Math.random() < 0.5) { hud.say('J-16', pickLine('dodged')); audio.radio(); }
       } else if (ev.missile.target === me) hud.flash('閃過飛彈', '#7fe3ff', 1.0);
       break;
     case 'gunFire': audio.gun(ev.ac === me); break;
