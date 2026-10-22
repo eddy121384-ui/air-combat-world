@@ -114,8 +114,10 @@ for (const id of ['flightSettings', 'btnTitleSettings', 'btnPauseSettings',
 }
 assert.ok(main.includes("assist: controlMode === 'assisted'"));
 assert.ok(main.includes('new Match({ seed, flightFeel'));
-assert.ok(main.includes('if (changed) start(kind)'),
+assert.ok(/if \(changed\)[^\n]*start\(kind\)/.test(main),
   'physics change must restart same sortie, not switch in flight');
+assert.ok(/if \(changed\)[^\n]*startLesson\(lessonId\)/.test(main),
+  'in an Academy lesson the same lesson restarts with the new model');
 assert.ok(main.includes('settings.flightMode = draftFlight'), 'flight selection must persist');
 assert.ok(main.includes('settings.controlMode = draftControl'), 'control selection must persist');
 assert.ok(main.includes("params.get('autostart') === '1'"), 'mode=arcade must not auto-start');
