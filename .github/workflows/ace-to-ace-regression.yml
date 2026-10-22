@@ -17,7 +17,7 @@ permissions:
 jobs:
   test:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -32,6 +32,7 @@ jobs:
           node --check src/game/render.js
           node --check src/game/hud.js
           node --check src/sim/warnings.js
+          for f in src/academy/*.js tools/academy-student.mjs; do node --check "$f"; done
       - name: Node flight and AI regression tests
         working-directory: prototypes/ace-to-ace
         run: |
@@ -43,6 +44,7 @@ jobs:
           node tools/test-flight-feel-ab.mjs
           node tools/test-dual-flight-modes.mjs
           node tools/test-flight-feel-polish.mjs
+          node tools/test-academy.mjs
           node tools/aivai.mjs --n 3 --blue chaser --red veteran --feel arcade
           node tools/aivai.mjs --n 3 --blue chaser --red veteran --feel tactical
           node tools/aivai.mjs --n 3 --blue chaser --red veteran --feel B
@@ -55,7 +57,7 @@ jobs:
     # keyboard and iPhone-sized touch input. Not a substitute for iPhone Safari.
     # Pinned: Playwright 1.56 has no Chromium build for ubuntu-latest (26.04).
     runs-on: ubuntu-24.04
-    timeout-minutes: 25
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -73,6 +75,7 @@ jobs:
           node tools/browser-check.mjs --scenario manual
           node tools/browser-check.mjs --scenario touch
           node tools/browser-check.mjs --scenario modes
+          node tools/browser-check.mjs --scenario academy
       - uses: actions/upload-artifact@v4
         if: always()
         with:
