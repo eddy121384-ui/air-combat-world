@@ -53,7 +53,8 @@ jobs:
   browser:
     # Real Chromium (SwiftShader WebGL): settings menu x4 modes, pause/resume,
     # keyboard and iPhone-sized touch input. Not a substitute for iPhone Safari.
-    runs-on: ubuntu-latest
+    # Pinned: Playwright 1.56 has no Chromium build for ubuntu-latest (26.04).
+    runs-on: ubuntu-24.04
     timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
