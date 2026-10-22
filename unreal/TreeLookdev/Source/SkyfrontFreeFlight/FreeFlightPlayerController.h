@@ -34,7 +34,7 @@ public:
 	// Graphics settings panel (right side of the screen; the scene stays visible on the left while the plane holds its pose).
 	struct FMenuLayout
 	{
-		FBox2D Panel, Presets[4], RowMinus[8], RowPlus[8], Defaults, Diag, Close;
+		FBox2D Panel, Presets[4], RowMinus[8], RowPlus[8], Defaults, Diag, Close, FarToggle, Bench;
 		FVector2D RowLabel[8], RowValue[8];
 	};
 	const FMenuLayout& GetMenuLayout() const { return Menu; }
@@ -47,6 +47,15 @@ public:
 	bool IsPitchInverted() const { return bInvertPitch; }
 	float GetTimeSinceStart() const { return TimeSinceStart; }
 	bool HasUsedTouch() const { return bUsedTouch; }
+
+	// Far-LOD research (FreeFlightFarLodTest.cpp): streamed tree-impostor layer toggle, resident-instance census, on-device bench.
+	struct FFarLodCensus { int64 NearInst = 0, FarInst = 0, FiBytes = 0, TreeInst = 0, TreeBytes = 0; int32 FiComps = 0; };
+	FFarLodCensus FarLodCensus() const;
+	bool IsFarImpostorOn() const { return FlFiMode != 0; }
+	bool IsBenchRunning() const { return bFarLodTest && bFlDeviceBench; }
+	FString GetBenchStatus() const;
+	const TArray<FString>& GetBenchLines() const { return FlBenchLines; }
+	bool ShowBenchResults() const { return bShowBenchResults && !bMenuOpen; }
 
 protected:
 	virtual void BeginPlay() override;
@@ -62,7 +71,10 @@ private:
 	bool HandleMenuPress(const FVector2D& P);
 	void GfxTestTick(float DeltaTime);
 	void FarLodTestTick();                 // FreeFlightFarLodTest.cpp
-	void SetFarImpostors(bool bOn);
+	void SetFarImpostors(int32 Mode);      // 0 off (not resident), 1 = PR #58 v5 parameters, 2 = v6
+	void ApplyFarImpostorVisibility();
+	void StartDeviceBench();               // BENCH button: the A/B on the device, results table on screen
+	void FinishDeviceBench();
 	static float Shape(float V) { return 0.35f * V + 0.65f * V * V * V; }   // fine control near centre, full rate at the edge
 
 	FLayout Layout;
@@ -108,5 +120,15 @@ private:
 	int32 FlFlyFrame = 0;
 	int32 FlFlyFrames = 360;
 	int32 FarImpostorActors = 0;
+	int32 FlFiMode = 0;
+	float FlVisTimer = 0.f;
+	bool bFlRealtime = false;
+	float FlFlySeconds = 40.f;
+	bool bFlDeviceBench = false;
+	bool bShowBenchResults = false;
+	int32 FlUserFiMode = 0;
+	TMap<FString, TArray<float>> FlBenchGpu, FlBenchFrame;
+	TMap<FString, FString> FlBenchMem;
+	TArray<FString> FlBenchLines;
 	TArray<float> FlFrameMs, FlGpuMs, FlDraws, FlPrims;
 };

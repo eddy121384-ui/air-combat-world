@@ -1,9 +1,10 @@
-﻿# Far-LOD research A/B in the Windows MOBILE-RENDERER preview (ES3.1 + the [Android DeviceProfile] cvars), editor -game offscreen.
+# Far-LOD research A/B in the Windows MOBILE-RENDERER preview (ES3.1 + the [Android DeviceProfile] cvars), editor -game offscreen.
 #   run_farlod_ab.ps1 -Tag ab1 [-Views 0,1,2,3] [-ResX 2560 -ResY 1600] [-Sm5]          same-view configs, both orders (-fffarlodtest)
-#   run_farlod_ab.ps1 -Tag fly1 -Fly [-FlyCfgs 0,1] [-FlyFrames 360] -ResX 1280 -ResY 800   frame-indexed 300 m/s flight, a PNG per frame
+#   run_farlod_ab.ps1 -Tag fly1 -Fly [-FlyCfgs 0,2] [-FlyFrames 360] -ResX 1280 -ResY 800   frame-indexed 10 m/frame flight, a PNG per frame
+#   run_farlod_ab.ps1 -Tag rt1 -Fly -Realtime [-FlySeconds 40] -ResX 1280 -ResY 800         300 m/s wall clock: World Partition must keep up
 # Output: unreal/TreeLookdev/Saved/Skyfront/<Tag>/ (farlod.log, SKYFL / SKYFLFLY lines, fl_*.png / fly_*.png). PC iGPU numbers only.
 param([string]$Tag = 'farlod', [string]$Views = '0,1,2,3', [int]$ResX = 2560, [int]$ResY = 1600, [switch]$Sm5, [switch]$Fly,
-      [switch]$Profile, [string]$FlyCfgs = '0,1', [int]$FlyFrames = 360, [string]$EngineRoot = 'C:\Program Files\Epic Games\UE_5.8')
+      [switch]$Profile, [string]$FlyCfgs = '0,2', [int]$FlyFrames = 360, [switch]$Realtime, [int]$FlySeconds = 40, [string]$EngineRoot = 'C:\Program Files\Epic Games\UE_5.8')
 $ErrorActionPreference = 'Stop'
 $RepoRoot = (Resolve-Path (Join-Path $PSScriptRoot '..\..')).Path
 $proj = Join-Path $RepoRoot 'unreal\TreeLookdev'
@@ -14,7 +15,7 @@ if (Test-Path $shots) { Remove-Item (Join-Path $shots 'fl*_*.png') -ErrorAction 
 if (Get-Process UnrealEditor* -ErrorAction SilentlyContinue) { throw 'an UnrealEditor process is already running' }
 $a = @((Join-Path $proj 'TreeLookdev.uproject'), '/Game/NorthForest/Maps/L_NF_Yangmingshan', '-game', '-RenderOffscreen', "-ResX=$ResX", "-ResY=$ResY",
        '-ForceRes', '-nosound', '-unattended', "-abslog=$(Join-Path $out 'farlod.log')", '-ExecCmds="r.VSync 0, r.ProfileGPU.ShowUI 0"')
-if ($Fly) { $a += @('-fffarlodfly', "-flflycfgs=$FlyCfgs", "-flflyframes=$FlyFrames") } else { $a += @('-fffarlodtest', "-flviews=$Views") }
+if ($Fly) { $a += @('-fffarlodfly', "-flflycfgs=$FlyCfgs", "-flflyframes=$FlyFrames", "-flflyseconds=$FlySeconds"); if ($Realtime) { $a += '-flflyrealtime' } } else { $a += @('-fffarlodtest', "-flviews=$Views") }
 if ($Profile) { $a += '-flprofile' }
 if (-not $Sm5) { $a += '-featureleveles31'; $a += (& (Join-Path $RepoRoot 'tools\ntw\forest_world\mobile_cvars.ps1')) }
 $sw = [Diagnostics.Stopwatch]::StartNew()

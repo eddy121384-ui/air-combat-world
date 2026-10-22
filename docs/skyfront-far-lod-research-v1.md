@@ -149,6 +149,45 @@ python tools/skyfront/farlod_fly.py unreal/TreeLookdev/Saved/Skyfront/fly2 <out>
 ```
 UE 內容（`/Game/FarLOD`、地圖中的 `FI_Imp_*` actor）與 PR #57 的其他內容一樣不進 git（`unreal/TreeLookdev/Content/` 被忽略），由上面的腳本重建。
 
+## 10. v2：手機整合準備（World Partition 距離串流、農田黑點、5–7 km 山形）
+
+日期：2026-10-22（同一分支，PR #58 延續）。基準保留：PR #57 High／Ultra 與 PR #58 v5 都在同一個 A/B 工具裡（v5 = v5 參數跑在 v6 資料上；它原本 6.2–7 km 的部分以 PR #58 提交的 `ab5` 畫面為準）。
+
+### 10a. 串流設計（全部是 UE 5.8 既有機制）
+
+| 項目 | 做法 |
+|---|---|
+| 範圍 | 整張地圖 573 個 1 km tile、3,859,205 棵樹全部有 impostor，但**沒有常駐**：依距離串流 |
+| Grid | 每個「遠處稀疏化 hash 段」一個 2D runtime grid：`FI_B0`／`FI_B1`（h < 0.40，2 km cell，6.8 km）、`FI_B2`（5.6 km）、`FI_B3`（4.6 km），`FI_ISO`（稀疏林／林緣／田間樹，3.6 km）。載入距離 = 該段最後可見距離 + 0.15 km 剔除餘量 + 0.5 km 串流預留（300 m/s 約 1.7 s） |
+| Cell 對齊 | Grid 原點對齊樹 tile 格（54000, 0 cm），且 `bIs2D = true` |
+| Actor | `AFarImpostorCell`（新增，一個 tile × 一個 hash 段，一個 ISM 元件）。**串流邊界 = tile 本身**（`GetStreamingBounds` override）；畫面剔除仍用真實邊界 |
+| 開關 | 關閉 = 用 `wp.Runtime.OverrideRuntimeLoadingRange -grid=<名稱>` 把各 grid 載入距離設成 1 cm（只留攝影機所在的格子，約 1 MB）＋隱藏 |
+| 參數 | `MPC_FI_Impostor`（v5／v6 同一份資料、執行中切換） |
+
+離線尺寸工具 `tools/ntw/forest_world/fi_stream_budget.py` 用真實樹位置估算每種 grid 佈局的常駐量，實測與模型誤差 < 10 %。
+
+### 10b. 過程中找到並修掉的問題（避免後續整合重踩）
+
+| 問題 | 現象 | 修正 |
+|---|---|---|
+| 1 km tile 的 actor 邊界（含樹冠）> 1 km | World Partition 依 `ceil(log2(邊界/cell))` 把 actor 升到 2 km（再加上 3D grid 的高度）→ 提早約 0.6 km 載入，常駐量 ×2 | `AFarImpostorCell` 串流邊界 = tile；grid 改 2D、原點對齊 |
+| Clone 出來的 partition 預設是 3D（`bIs2D=false`） | 地形起伏 1 km 也算進 cell 大小與距離 | `SetRuntimePartitionShape(…, bIs2D=true)` |
+| 編輯器裡刪不掉已串流的舊 actor | v2a 的 328 個 actor 沒被刪，`ab7` 畫了兩層（**該輪數據作廢**） | 先用 descriptor `load_actors` 再刪；收據記錄刪除數 |
+| MPC 重建產生新 GUID | 只重建 MPC 不重建材質 → 材質讀到 0 → impostor 全部消失（`ab9` **作廢**） | MPC 參數原地更新 |
+| HUD／`r.ProfileGPU` 等 | 已在 v1 記錄 | — |
+
+### 10c. 記憶體預算（實測常駐，CPU 實例資料 = 64 B 轉換 + 4 B × 3 custom float）
+
+<!-- V2MEM -->
+
+### 10d. 兩個畫面問題的修正
+
+**5–7 km 遠山輪廓被樹冠模糊**：根因是 v5 讓 impostor 一直畫到 7 km 並放大到 1.6 倍，蓋掉 PR #49 地形皮膚的稜線與溝谷明暗。v6：impostor 4.8→6.0 km 淡出（7 km 以外完全交回山形），放大上限 1.25，地形法線彎曲 2→5 km、最多 0.75。`ab/v2_crop_forest_layers.jpg`：上 PR #57 High、中 PR #58 v5、下 v6 —— 7 km 以外的山脊、溝谷明暗回來了，3–6 km 的樹冠立體感保留。
+
+**農田散生樹黑點**：根因有三。(1) v5 讓田間樹以放大 1.6 倍的 impostor 畫到 7 km；(2) 全域亮度校正來自密林（樹冠互相遮蔭），單株樹太暗；(3) 遠處稀疏化在**稀疏林**裡只留下零星幾棵 → 一顆顆點。v6 規則：一棵樹若「Landscape 在它底下不畫森林」（`T_NF_Mask1` R < 0.5）**或**「周圍 250 m 內的樹 < 550 棵」（森林中位數 686 的約 80 %，全圖 17.4 % 的樹），就歸為稀疏林：impostor 不放大、亮度 ×1.3、在 2.8 km（＝ 3D 田間樹在 High 的範圍）淡出，並放在自己的短距 grid（`FI_ISO`，3.6 km）。`ab/v2_crop_far_range.jpg`：4–6 km 谷底恢復成 PR #57 的乾淨農田；2.2–2.8 km 的田間樹仍在、色調接近 3D 樹。全部是全域規則，沒有逐棵、逐區修改。
+
+<!-- V2RESULTS -->
+
 ## 1. 文獻：業界已公開證實的做法 vs 我們的推論
 
 ### 1a. 已公開證實 [文獻]

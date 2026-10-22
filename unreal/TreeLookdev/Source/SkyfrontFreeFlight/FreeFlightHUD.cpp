@@ -79,6 +79,24 @@ void AFreeFlightHUD::DrawHUD()
 
 	UpdateFrameStats();
 	const USkyfrontGameUserSettings* Gfx = USkyfrontGameUserSettings::Get();
+	if (const AFreeFlightPlayerController* FlPc = Cast<AFreeFlightPlayerController>(PlayerOwner))
+	{
+		const float Sc = Canvas->SizeY / 1080.f;
+		if (FlPc->IsBenchRunning())
+		{
+			DrawLabel(FlPc->GetBenchStatus(), FVector2D(0.03f * Canvas->SizeY, 0.93f * Canvas->SizeY), FLinearColor::Yellow, 1.3f * Sc);
+		}
+		else if (FlPc->ShowBenchResults())
+		{
+			const TArray<FString>& BenchLines = FlPc->GetBenchLines();
+			const float Y0 = 0.30f * Canvas->SizeY, Lh = 0.034f * Canvas->SizeY;
+			DrawRect(FLinearColor(0.f, 0.f, 0.f, 0.72f), 0.02f * Canvas->SizeY, Y0 - 0.01f * Canvas->SizeY, 1.15f * Canvas->SizeY, (BenchLines.Num() + 0.6f) * Lh);
+			for (int32 i = 0; i < BenchLines.Num(); ++i)
+			{
+				DrawLabel(BenchLines[i], FVector2D(0.03f * Canvas->SizeY, Y0 + i * Lh), FLinearColor::White, 1.05f * Sc);
+			}
+		}
+	}
 	if (Gfx && Gfx->GetShowDiagnostics())
 	{
 		DrawDiagnostics(PC, S);
@@ -196,6 +214,8 @@ void AFreeFlightHUD::DrawMenu(const AFreeFlightPlayerController* PC, float S, fl
 	DrawButton(M.Defaults, TEXT("DEFAULTS"), false, 1.3f * S, T);
 	DrawButton(M.Diag, G->GetShowDiagnostics() ? TEXT("DIAG ON") : TEXT("DIAG OFF"), G->GetShowDiagnostics(), 1.3f * S, T);
 	DrawButton(M.Close, TEXT("FLY"), false, 1.5f * S, T);
+	DrawButton(M.FarToggle, PC->IsFarImpostorOn() ? TEXT("FAR ON") : TEXT("FAR OFF"), PC->IsFarImpostorOn(), 1.2f * S, T);
+	DrawButton(M.Bench, TEXT("BENCH"), false, 1.2f * S, T);
 }
 
 void AFreeFlightHUD::UpdateFrameStats()
@@ -239,6 +259,7 @@ void AFreeFlightHUD::DrawDiagnostics(const AFreeFlightPlayerController* PC, floa
 	if (CensusTimer <= 0.f)
 	{
 		CensusTimer = 2.f;
+		FarCensus = PC->FarLodCensus();
 		TreeComps = TreeCompsShown = BuildingComps = 0;
 		TreeInst = TreeInstShown = 0;
 		const int32 DetailMode = GetCachedScalabilityCVars().DetailMode;
@@ -289,6 +310,9 @@ void AFreeFlightHUD::DrawDiagnostics(const AFreeFlightPlayerController* PC, floa
 		E.ShadowDistanceM > 0.f ? *FString::Printf(TEXT("%.0f m x%d %d"), E.ShadowDistanceM, E.Cascades, E.ShadowRes) : TEXT("off"),
 		E.AoLevels > 0 ? TEXT("on") : TEXT("off"), E.LandscapeLodScale));
 	Lines.Add(FString::Printf(TEXT("%s  %s"), *Profile, *Rhi));
+	Lines.Add(FString::Printf(TEXT("FAR IMPOSTORS %s: %lld k near + %lld k far resident (%.0f MB)   3D trees %lld k (%.0f MB)"),
+		PC->IsFarImpostorOn() ? TEXT("ON") : TEXT("OFF"), FarCensus.NearInst / 1000, FarCensus.FarInst / 1000, FarCensus.FiBytes / 1048576.0,
+		FarCensus.TreeInst / 1000, FarCensus.TreeBytes / 1048576.0));
 	const float X = 0.03f * H;
 	float Y = PC->IsMenuOpen() ? 0.03f * H : 0.19f * H;
 	DrawRect(FLinearColor(0.f, 0.f, 0.f, 0.35f), X - 0.01f * H, Y - 0.005f * H, 0.70f * H, Lines.Num() * 0.027f * H + 0.01f * H);

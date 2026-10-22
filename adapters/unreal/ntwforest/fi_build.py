@@ -1,4 +1,4 @@
-﻿"""Far-LOD research: octahedral tree-impostor layer for the Yangmingshan forest (UnrealEditor-Cmd, WITH RHI).
+"""Far-LOD research: octahedral tree-impostor layer for the Yangmingshan forest (UnrealEditor-Cmd, WITH RHI).
 
 Parts (ACW_FI_PARTS, comma list, default all):
   tex   import the fi_pack.py atlases (T_FI_BC_V<v> sRGB + coverage, T_FI_ND_V<v> object normal + depth) and build two Texture2DArrays
@@ -48,21 +48,35 @@ def link(a, out, b, pin):
 
 ROOT = "/Game/FarLOD"
 PACK = OUT / "fi_pack" / os.environ.get("ACW_FI_PACK_REV", "3")
-PARTS = os.environ.get("ACW_FI_PARTS", "tex,mesh,mat,actors").split(",")
+PARTS = os.environ.get("ACW_FI_PARTS", "tex,mesh,mpc,mat,actors").split(",")
 S_CM = float(os.environ.get("ACW_FI_S_CM", "300000"))
 KMIN = float(os.environ.get("ACW_FI_KMIN", "0.15"))
 SCMAX = float(os.environ.get("ACW_FI_SCMAX", "1.6"))   # survivors grow at most this much; beyond S * SCMAX the layer thins out over the terrain relief
 TINT = [float(x) for x in os.environ.get("ACW_FI_TINT", "0.66,0.69,0.86").split(",")]   # 3D-vs-impostor calibration, docs section 3
 END1, END2 = (float(x) for x in os.environ.get("ACW_FI_END_CM", "550000,700000").split(","))   # layer dithers out; beyond = PR #49 mountain form
-BAND_EDGES = [0.0, KMIN, 0.25, 0.45, 0.70, 1.0]
-CELL_TILES = int(os.environ.get("ACW_FI_CELL_TILES", "2"))   # N x N one-km forest tiles per impostor actor
+BAND_EDGES = [0.0, 0.25, 0.397, 0.63, 1.0]   # v6b: geometric in the far-thinning hash between (S / End2)^2 and 1
+CELL_TILES = int(os.environ.get("ACW_FI_CELL_TILES", "1"))   # N x N one-km forest tiles per impostor actor
 # ism (default): UInstancedStaticMeshComponent, GPU-scene instance culling, one draw per component and pass, no per-cluster occlusion
 # queries; hism: hierarchical clusters (measured: ~13 draws + ~8 occlusion queries per component, docs section 3)
 COMP = os.environ.get("ACW_FI_COMP", "ism")
 # A/B poses (UE cm, yaw deg): -ffgfxtest forest_layers, views_dl dl_mid_ridge / agl400_basin_edge / dl_far_range, end of the flight leg
 CAMS = [(420000, -3130000, 49.3), (1130000, -2220000, -94.17), (550000, -1540000, -70.35), (1820000, -3260000, 141.84),
         (420000 + 450000 * math.cos(math.radians(49.3)), -3130000 + 450000 * math.sin(math.radians(49.3)), 49.3)]
-CAMS = [CAMS[int(i)] for i in os.environ.get("ACW_FI_CAMS", "0,1,2,3,4").split(",")]
+CAMS = None if os.environ.get("ACW_FI_CAMS", "all") == "all" else [CAMS[int(i)] for i in os.environ["ACW_FI_CAMS"].split(",")]
+# v2 streaming (docs section 10): every 2 km cell gets a NEAR actor (dense hash bands, culled <= 4.7 km) on runtime grid FI_Near and a
+# FAR actor (sparse bands that survive the far thinning, <= 7.1 km) on FI_Far. Loading range = largest band cull + 0.8 km headroom
+# (~2.7 s at 300 m/s), so a cell is resident before any of its impostors can be visible.
+# v6b (docs section 10): one runtime grid per hash band, 1 km cells, loading range = the band's last visible distance + 0.15 km cull slack
+# + 0.5 km streaming headroom (>= 1.6 s at 300 m/s). Offline sizing: tools/ntw/forest_world/fi_stream_budget.py.
+STREAM_MARGIN_CM = 65000
+ISO_CELL_CM, ISO_RADIUS, ISO_MIN = 5000.0, 2, 550   # sparse stand / edge / hedgerow: < 550 trees in its 5 x 5 block of 50 m cells
+#                                                    (~80 % of the forest median 686; 17 % of the trees), or not on Landscape forest cover
+ISO_CULL_CM = 300000                                 # sparse-stand impostors end with the 3D range (MPC IsoEnd 2.8 km + fade)
+# material parameters (MPC_FI_Impostor). V6 = this pass; V5 = PR #58 values, reproduced in-session for the A/B baseline.
+MPC_V6 = {"S": 300000.0, "Kmin": 0.15, "ScMax": 1.25, "End1": 480000.0, "End2": 600000.0, "TerrStart": 200000.0, "TerrEnd": 500000.0,
+          "TerrMax": 0.75, "IsoEnd": 280000.0, "IsoScale": 0.0, "IsoGain": 1.3}
+MPC_V5 = {"S": 300000.0, "Kmin": 0.15, "ScMax": 1.6, "End1": 550000.0, "End2": 700000.0, "TerrStart": 200000.0, "TerrEnd": 600000.0,
+          "TerrMax": 0.6, "IsoEnd": 1.0e7, "IsoScale": 1.0, "IsoGain": 1.0}
 ues = unreal.get_editor_subsystem(unreal.EditorActorSubsystem)
 les = unreal.get_editor_subsystem(unreal.LevelEditorSubsystem)
 rep = {"status": "FAIL_FI_BUILD", "parts": PARTS, "error": None, "warnings": []}
@@ -73,6 +87,9 @@ float4 FD[4] = { %(FD)s };
 float2 FE[4] = { %(FE)s };   // horizontal crown radius, vertical half extent (mesh bounds box)
 float slice = floor(CD + 1e-4);
 float r = saturate(CD - slice);
+// isolated field / hedgerow tree (fi_build.py density test): true size and gone by IsoEnd, so far farmland shows no dark blobs
+bool iso = slice > 9.5;
+slice -= iso ? 10.0 : 0.0;
 int f = slice < 2.5 ? 0 : (slice < 4.5 ? 1 : (slice < 7.5 ? 2 : 3));
 float3 C = FD[f].xyz;
 float R = FD[f].w;
@@ -85,6 +102,11 @@ float h = frac(r * 157.31 + 0.137);
 float k = clamp(S * S / max(Dist * Dist, 1.0), Kmin, 1.0);
 float fade = saturate((k - h) / 0.03) * saturate((End2 - Dist) / (End2 - End1));
 float sc = clamp(Dist / S, 1.0, ScMax);
+if (iso)
+{
+    fade *= saturate((IsoEnd - Dist) / 50000.0);
+    sc = lerp(1.0, sc, IsoScale);
+}
 float3 vn = Vl / max(length(Vl), 1e-3);
 float3 hv = vn;
 hv.z = max(hv.z, 0.0);
@@ -118,7 +140,7 @@ UVA = uvs[0]; UVB = uvs[1]; UVC = uvs[2];
 IAB = float2(fs[0].x + fs[0].y * N, fs[1].x + fs[1].y * N);
 ICS = float2(fs[2].x + fs[2].y * N, slice);
 WAB = w.xy;
-TF = float2(T, fade);
+TF = float2(T, iso ? -max(fade, 1e-3) : fade);   // sign carries the isolated flag to the pixel stage
 bool hidden = (Dist < T - Width - 3000.0) || (fade <= 0.0);
 return hidden ? float3(0, 0, 0) : (C + q) * sc;
 """
@@ -155,7 +177,9 @@ Width = WidthM;
 #endif
 float k3 = saturate((TF.x - D) / Width);
 float n = frac(52.9829189 * frac(dot(Pix + 5.588238 * (float)View.StateFrameIndexMod8, float2(0.06711056, 0.00583715))));
-Mask = (a > 0.5 && k3 <= n && n < TF.y) ? 1.0 : 0.0;
+Mask = (a > 0.5 && k3 <= n && n < abs(TF.y)) ? 1.0 : 0.0;
+// isolated trees are sunlit on all sides: the forest-mass tint (calibrated on dense canopy, docs section 3) is too dark for them
+col *= TF.y < 0.0 ? IsoGain : 1.0;
 return col * ColorGain * lerp(1.0, saturate(0.5 + 0.5 * dz) * 1.4, Occ);
 """
 
@@ -285,7 +309,7 @@ def part_mat():
     link(pivot, "", dist, "B")
     cd = E(mat, unreal.MaterialExpressionPerInstanceCustomData, -1800, -300, data_index=0)
     uv0 = E(mat, unreal.MaterialExpressionTextureCoordinate, -1800, -220, coordinate_index=0)
-    vs_ins = ["Vl", "UV", "CD", "Dist", "Near", "End", "Width", "Gamma", "NearM", "EndM", "WidthM", "GammaM", "KeepM", "S", "Kmin", "ScMax", "End1", "End2"]
+    vs_ins = ["Vl", "UV", "CD", "Dist", "Near", "End", "Width", "Gamma", "NearM", "EndM", "WidthM", "GammaM", "KeepM", "S", "Kmin", "ScMax", "End1", "End2", "IsoEnd", "IsoScale"]
     vs = custom(mat, -1300, -500, vs_code, vs_ins, F3,
                 [("UVA", F2), ("UVB", F2), ("UVC", F2), ("IAB", F2), ("ICS", F2), ("WAB", F2), ("TF", F2)])
     link(vl, "", vs, "Vl")
@@ -297,8 +321,9 @@ def part_mat():
                       ("EndM", "ThinEndM"), ("WidthM", "FadeWidthM"), ("GammaM", "ThinGammaM"), ("KeepM", "RankKeepM")):
         link(E(mat, unreal.MaterialExpressionCollectionParameter, -1800, y, collection=coll, parameter_name=name), "", vs, pin)
         y += 60
-    for pin, val in (("S", S_CM), ("Kmin", KMIN), ("ScMax", SCMAX), ("End1", END1), ("End2", END2)):
-        link(E(mat, unreal.MaterialExpressionScalarParameter, -1800, y, parameter_name="FI_" + pin, default_value=val), "", vs, pin)
+    fic = lib.load_asset(ROOT + "/Materials/MPC_FI_Impostor")
+    for pin in ("S", "Kmin", "ScMax", "End1", "End2", "IsoEnd", "IsoScale"):
+        link(E(mat, unreal.MaterialExpressionCollectionParameter, -1800, y, collection=fic, parameter_name=pin), "", vs, pin)
         y += 60
     l2w = E(mat, unreal.MaterialExpressionTransform, -900, -500, transform_source_type=unreal.MaterialVectorCoordTransformSource.TRANSFORMSOURCE_LOCAL,
             transform_type=unreal.MaterialVectorCoordTransform.TRANSFORM_WORLD)
@@ -322,7 +347,7 @@ def part_mat():
     yaw2 = E(mat, unreal.MaterialExpressionComponentMask, -700, -850, r=True, g=True, b=False, a=False)
     link(yaw, "", yaw2, "Input")
     # VS -> PS: four float4 Vertex Interpolators (UVA|UVB, UVC|IAB, ICS|WAB, YAW|TF)
-    ps_ins = ["P0", "P1", "P2", "P3", "P4", "TerrStart", "TerrEnd", "TerrMax", "D", "Pix", "BC", "ND", "Width", "WidthM", "FPX", "ColorGain", "Occ"]
+    ps_ins = ["P0", "P1", "P2", "P3", "P4", "TerrStart", "TerrEnd", "TerrMax", "IsoGain", "D", "Pix", "BC", "ND", "Width", "WidthM", "FPX", "ColorGain", "Occ"]
     ps = custom(mat, -300, 200, PS_HLSL, ps_ins, F3, [("Nrm", F3), ("Mask", F1)])
     for i, ((na, a), (nb, b)) in enumerate(((("UVA", vs), ("UVB", vs)), (("UVC", vs), ("IAB", vs)), (("ICS", vs), ("WAB", vs)), (("", yaw2), ("TF", vs)))):
         ap = E(mat, unreal.MaterialExpressionAppendVector, -500, -300 + 120 * i)
@@ -337,8 +362,8 @@ def part_mat():
     vi4 = E(mat, unreal.MaterialExpressionVertexInterpolator, -450, 300)
     link(tn, "", vi4, "VS")
     link(vi4, "PS", ps, "P4")
-    for i, (pin, val) in enumerate((("TerrStart", 200000.0), ("TerrEnd", 600000.0), ("TerrMax", 0.6))):
-        link(E(mat, unreal.MaterialExpressionScalarParameter, -700, 1100 + 60 * i, parameter_name="FI_" + pin, default_value=val), "", ps, pin)
+    for i, pin in enumerate(("TerrStart", "TerrEnd", "TerrMax", "IsoGain")):
+        link(E(mat, unreal.MaterialExpressionCollectionParameter, -700, 1100 + 60 * i, collection=fic, parameter_name=pin), "", ps, pin)
     pd = E(mat, unreal.MaterialExpressionDistance, -700, 520)
     link(E(mat, unreal.MaterialExpressionWorldPosition, -900, 500), "", pd, "A")
     link(E(mat, unreal.MaterialExpressionCameraPositionWS, -900, 560), "", pd, "B")
@@ -372,12 +397,35 @@ def part_mat():
     lib.save_asset(path, only_if_is_dirty=False)
     m2 = lib.load_asset(path)
     rep["mat"] = {"path": path, "ism": bool(m2.get_editor_property("used_with_instanced_static_meshes")),
-                  "vs_hlsl": vs_code, "s_cm": S_CM, "kmin": KMIN, "scmax": SCMAX, "tint": TINT}
+                  "vs_hlsl": vs_code, "mpc_v6": MPC_V6, "tint": TINT}
     stats = mel.get_statistics(m2)
     rep["mat"]["stats"] = {k: str(stats.get_editor_property(k)) for k in ("num_vertex_shader_instructions", "num_pixel_shader_instructions",
                                                                           "num_samplers", "num_vertex_texture_samples", "num_pixel_texture_samples")}
     if not rep["mat"]["ism"]:
         raise RuntimeError("ISM usage did not stick")
+
+
+def part_mpc():
+    path = ROOT + "/Materials/MPC_FI_Impostor"
+    c = lib.load_asset(path)
+    if c is None:
+        c = tools.create_asset("MPC_FI_Impostor", ROOT + "/Materials", unreal.MaterialParameterCollection, unreal.MaterialParameterCollectionFactoryNew())
+    # update in place: a material's collection-parameter node binds to the parameter's GUID, so recreating the entries (new GUIDs)
+    # silently turns every impostor parameter into 0 for materials not rebuilt in the same run (seen in run ab9 - discarded)
+    params = list(c.get_editor_property("scalar_parameters"))
+    have = {str(p.get_editor_property("parameter_name")): p for p in params}
+    for k, v in MPC_V6.items():
+        if k in have:
+            have[k].set_editor_property("default_value", v)
+        else:
+            p = unreal.CollectionScalarParameter()
+            p.set_editor_property("parameter_name", k)
+            p.set_editor_property("default_value", v)
+            params.append(p)
+    c.set_editor_property("scalar_parameters", params)
+    lib.save_asset(path, only_if_is_dirty=False)
+    rep["mpc"] = {"path": path, "defaults": {str(p.get_editor_property("parameter_name")): p.get_editor_property("default_value")
+                                             for p in lib.load_asset(path).get_editor_property("scalar_parameters")}, "v5": MPC_V5}
 
 
 def read_tile(path):
@@ -394,10 +442,12 @@ def read_tile(path):
 
 
 def in_region(cx, cy):
+    if CAMS is None:
+        return True
     for x, y, yaw in CAMS:
         dx, dy = cx - x, cy - y
         d = math.hypot(dx, dy)
-        if d > END2 + 50000:
+        if d > 700000 + 50000:
             continue
         a = (math.degrees(math.atan2(dy, dx)) - yaw + 180) % 360 - 180
         if d <= 150000 or abs(a) <= 70:
@@ -422,12 +472,36 @@ def add_hism(actor, mesh):
 def part_actors():
     if not les.load_level(MAP + "/L_NF_Yangmingshan"):
         raise RuntimeError("load level")
-    for a in ues.get_all_level_actors():   # rebuild: drop a previous impostor layer
-        if a.get_actor_label().startswith("FI_Imp_"):
+    # rebuild: drop every previous impostor actor. Spatially loaded World Partition actors are not in the editor world until loaded,
+    # so load them by descriptor first (the v2a layer survived a rebuild because of this).
+    wpl = unreal.WorldPartitionBlueprintLibrary
+    stale = [d.get_editor_property("guid") for d in wpl.get_actor_descs() if str(d.get_editor_property("label")).startswith("FI_Imp")]
+    if stale:
+        wpl.load_actors(stale)
+    n_del = 0
+    for a in ues.get_all_level_actors():
+        if a.get_actor_label().startswith("FI_Imp"):
             ues.destroy_actor(a)
+            n_del += 1
+    rep["deleted_actors"] = n_del
+    world = unreal.EditorLevelLibrary.get_editor_world()
+    rep["removed_partitions"] = [json.loads(unreal.SkyfrontFarLodLibrary.remove_runtime_partition(world, n)) .get("removed") for n in ("FI_Near", "FI_Far")]
+    end2 = MPC_V6["End2"]
+    last = [end2 if lo <= 0 else min(S_CM / math.sqrt(lo), end2) for lo in BAND_EDGES[:-1]]
+    culls = [int(v + 20000) for v in last]
+    grids = {"FI_B%d" % b: (100000, culls[b] + STREAM_MARGIN_CM - 5000) for b in range(len(culls))}
+    culls.append(ISO_CULL_CM)                      # band index 4 = sparse-stand trees, own short-range grid
+    grids["FI_ISO"] = (100000, ISO_CULL_CM + STREAM_MARGIN_CM - 5000)
+    rep["grids"] = [json.loads(unreal.SkyfrontFarLodLibrary.ensure_runtime_partition(world, n, c, r, 0)) for n, (c, r) in grids.items()]
+    # 2D grids (XY loading distance, like the forest's intent) whose cells coincide with the 1 km forest tiles
+    idx = json.loads((RUN / "trees.json").read_text(encoding="utf-8"))
+    t0 = idx["tiles"][0]["center_ue_cm"]
+    ox, oy = (t0[0] - 50000.0) % 100000.0, (t0[1] - 50000.0) % 100000.0
+    rep["grid_shape"] = [json.loads(unreal.SkyfrontFarLodLibrary.set_runtime_partition_shape(world, n, True, ox, oy)).get("set_ok") for n in grids]
+    rep["grid_origin_cm"] = [ox, oy]
+    rep["grids_now"] = json.loads(unreal.SkyfrontFarLodLibrary.describe_runtime_partitions(world))
     mesh = lib.load_asset(ROOT + "/Meshes/SM_FI_Card")
     mat = lib.load_asset(ROOT + "/Materials/M_FI_Impostor")
-    idx = json.loads((RUN / "trees.json").read_text(encoding="utf-8"))
     cells = {}
     for t in idx["tiles"]:
         if in_region(*t["center_ue_cm"]):
@@ -444,17 +518,36 @@ def part_actors():
         k = 2 * (r * tcols + c)
         return tnorm[k] / 127.0, tnorm[k + 1] / 127.0
 
-    culls = [int(END2 + 10000) if lo <= 0 else int(min(S_CM / math.sqrt(lo) + 20000, END2 + 10000)) for lo in BAND_EDGES[:-1]]
-    rep["band_edges"], rep["band_culls_cm"] = BAND_EDGES, culls
-    total, comps, per_band = 0, 0, [0] * (len(BAND_EDGES) - 1)
+    # (v5 in-session baseline ends at 7 km; on this layout its impostors stop at the v6 band culls, ~6.2 km - docs section 10)
+    # isolated trees: global 50 m cell counts
+    dens = {}
+    for t in idx["tiles"]:
+        if not in_region(*t["center_ue_cm"]):
+            continue
+        for form, var, n, rec in read_tile(RUN / "trees" / t["file"]):
+            for i in range(n):
+                key = (int(rec[i * 9] // ISO_CELL_CM), int(rec[i * 9 + 1] // ISO_CELL_CM))
+                dens[key] = dens.get(key, 0) + 1
+
+    fm_meta = json.loads((PACK / "fi_forest_mask.json").read_text(encoding="utf-8"))
+    fmask = (PACK / "fi_forest_mask.bin").read_bytes()
+    fm_n, (fm_x0, fm_y0), fm_ext = fm_meta["size"][0], fm_meta["origin_cm"], fm_meta["extent_cm"]
+
+    def isolated(x, y):
+        mx = min(max(int((x - fm_x0) / fm_ext * fm_n), 0), fm_n - 1)
+        my = min(max(int((y - fm_y0) / fm_ext * fm_n), 0), fm_n - 1)
+        if fmask[my * fm_n + mx] < 128:
+            return True
+        cx_, cy_ = int(x // ISO_CELL_CM), int(y // ISO_CELL_CM)
+        rr = range(-ISO_RADIUS, ISO_RADIUS + 1)
+        return sum(dens.get((cx_ + a, cy_ + b), 0) for a in rr for b in rr) < ISO_MIN
+    rep["band_edges"], rep["band_culls_cm"], rep["grid_ranges_cm"] = BAND_EDGES, culls, {k: v[1] for k, v in grids.items()}
+    total, comps, per_band, n_iso, actors = 0, 0, [0] * len(culls), 0, 0
     for (cx, cy), tiles in sorted(cells.items()):
         x0 = sum(t["center_ue_cm"][0] for t in tiles) / len(tiles)
         y0 = sum(t["center_ue_cm"][1] for t in tiles) / len(tiles)
-        holder = ues.spawn_actor_from_class(unreal.Actor, unreal.Vector(x0, y0, 0.0))
-        holder.set_actor_label("FI_Imp_%02d_%02d" % (cx, cy))
-        holder.set_folder_path(unreal.Name("FI_FarImpostors"))
-        holder.set_editor_property("tags", [unreal.Name("FarImpostor")])
-        holder.set_editor_property("is_spatially_loaded", False)
+        holders = {}   # created on first use: one actor per band present in the cell
+
         bands = [([], []) for _ in culls]
         for t in tiles:
             for gi, (form, var, n, rec) in enumerate(read_tile(RUN / "trees" / t["file"])):
@@ -463,17 +556,38 @@ def part_actors():
                 for i in range(n):
                     r = ranks[i]
                     hh = (r * 157.31 + 0.137) % 1.0
-                    b = next(k for k in range(len(culls)) if hh < BAND_EDGES[k + 1] or k == len(culls) - 1)
+                    nb = len(BAND_EDGES) - 1
+                    b = next(k for k in range(nb) if hh < BAND_EDGES[k + 1] or k == nb - 1)
                     x, y, z, yw, sx, sy, sz, le, ln = rec[i * 9:(i + 1) * 9]
+                    iso = isolated(x, y)
+                    n_iso += iso
+                    if iso:
+                        b = len(culls) - 1   # sparse-stand grid
                     z_up = unreal.Vector(math.tan(math.radians(le)), -math.tan(math.radians(ln)), 1.0)
                     yr = math.radians(yw)
                     rot = unreal.MathLibrary.make_rot_from_zx(z_up, unreal.Vector(math.cos(yr), math.sin(yr), 0.0))
                     bands[b][0].append(unreal.Transform(unreal.Vector(x, y, z), rot, unreal.Vector(sx, sy, sz)))
-                    bands[b][1].append((var + min(r, 0.9999),) + terrain_n(x, y))
+                    bands[b][1].append((var + (10 if iso else 0) + min(r, 0.9999),) + terrain_n(x, y))
         for b, (xf, data) in enumerate(bands):
             if not xf:
                 continue
-            h = add_hism(holder, mesh)
+            if b not in holders:
+                hd = ues.spawn_actor_from_class(unreal.FarImpostorCell, unreal.Vector(x0, y0, 0.0))
+                hd.set_actor_label("FI_ImpB%d_%02d_%02d" % (b, cx, cy))
+                # streaming bounds = the tile (1 cm inside), so it streams as exactly its own 1 km cell (FarImpostorCell.h)
+                fp = unreal.Box()
+                fp.set_editor_property("min", unreal.Vector(x0 - 49999.0, y0 - 49999.0, 0.0))
+                fp.set_editor_property("max", unreal.Vector(x0 + 49999.0, y0 + 49999.0, 0.0))
+                fp.set_editor_property("is_valid", True)
+                hd.set_editor_property("streaming_footprint", fp)
+                hd.set_folder_path(unreal.Name("FI_FarImpostors"))
+                # FarImpostorN = the near bands (census / overlay split); every impostor actor carries FarImpostor
+                tags = [unreal.Name("FarImpostor"), unreal.Name("FarImpostorB%d" % b)] + ([unreal.Name("FarImpostorN")] if b >= 2 else [])
+                hd.set_editor_property("tags", tags)
+                hd.set_editor_property("is_spatially_loaded", True)
+                hd.set_editor_property("runtime_grid", unreal.Name("FI_ISO" if b == len(culls) - 1 else "FI_B%d" % b))
+                holders[b] = hd
+            h = add_hism(holders[b], mesh)
             h.set_material(0, mat)
             h.set_collision_enabled(unreal.CollisionEnabled.NO_COLLISION)
             h.set_cast_shadow(False)
@@ -492,7 +606,7 @@ def part_actors():
             per_band[b] += len(xf)
             comps += 1
         unreal.log("FI_BUILD cell %d,%d tiles=%d total=%d" % (cx, cy, len(tiles), total))
-    rep["actors"] = {"component_class": COMP, "cell_tiles": CELL_TILES, "cells": len(cells), "components": comps, "instances": total, "per_band": per_band,
+    rep["actors"] = {"isolated_trees": n_iso, "component_class": COMP, "cell_tiles": CELL_TILES, "cells": len(cells), "components": comps, "instances": total, "per_band": per_band,
                      "tiles": sum(len(v) for v in cells.values())}
     if not unreal.EditorLoadingAndSavingUtils.save_dirty_packages(True, True):
         raise RuntimeError("save")
@@ -500,7 +614,7 @@ def part_actors():
 
 try:
     for p in PARTS:
-        {"tex": part_tex, "mesh": part_mesh, "mat": part_mat, "actors": part_actors}[p]()
+        {"tex": part_tex, "mesh": part_mesh, "mpc": part_mpc, "mat": part_mat, "actors": part_actors}[p]()
     rep["status"] = "PASS_FI_BUILD"
 except Exception:  # noqa: BLE001
     rep["error"] = traceback.format_exc()

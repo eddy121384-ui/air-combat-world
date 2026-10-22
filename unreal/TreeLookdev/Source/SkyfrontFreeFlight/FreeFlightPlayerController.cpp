@@ -31,6 +31,10 @@ void AFreeFlightPlayerController::BeginPlay()
 	Super::BeginPlay();
 	SetInputMode(FInputModeGameOnly());
 	ApplyGraphics();   // restore the saved graphics settings (GameUserSettings.ini) on every launch
+	if (!bFarLodTest)
+	{
+		SetFarImpostors(0);   // far-impostor layer off until the FAR button (the command-line A/B sets its own per step)
+	}
 }
 
 void AFreeFlightPlayerController::ApplyGraphics()
@@ -72,6 +76,8 @@ bool AFreeFlightPlayerController::HandleMenuPress(const FVector2D& P)
 	}
 	if (Menu.Defaults.IsInside(P)) { S->ResetToDefaults(); ApplyGraphics(); return true; }
 	if (Menu.Diag.IsInside(P)) { S->SetShowDiagnostics(!S->GetShowDiagnostics()); S->SaveSettings(); return true; }
+	if (Menu.FarToggle.IsInside(P)) { SetFarImpostors(IsFarImpostorOn() ? 0 : 2); return true; }
+	if (Menu.Bench.IsInside(P)) { StartDeviceBench(); return true; }
 	if (Menu.Close.IsInside(P)) { SetMenuOpen(false); return true; }
 	return Menu.Panel.IsInside(P);
 }
@@ -128,6 +134,9 @@ void AFreeFlightPlayerController::UpdateLayout()
 		Menu.RowValue[r] = FVector2D(X0 + 0.705f * Hf, Y + 0.034f * Hf);
 		Menu.RowPlus[r] = FBox2D(FVector2D(X0 + 0.86f * Hf, Y), FVector2D(X0 + 0.97f * Hf, Y + 0.068f * Hf));
 	}
+	// far-LOD research: FAR (impostor layer on / off) and BENCH (on-device A/B) in the title row
+	Menu.Bench = FBox2D(FVector2D(X1 - 0.01f * Hf - 0.17f * Hf, 0.028f * Hf), FVector2D(X1 - 0.01f * Hf, 0.095f * Hf));
+	Menu.FarToggle = FBox2D(FVector2D(Menu.Bench.Min.X - 0.01f * Hf - 0.21f * Hf, 0.028f * Hf), FVector2D(Menu.Bench.Min.X - 0.01f * Hf, 0.095f * Hf));
 	const float Bw = (X1 - X0 - 0.04f * Hf) / 3.f, By = 0.86f * Hf;
 	Menu.Defaults = FBox2D(FVector2D(X0 + 0.01f * Hf, By), FVector2D(X0 + 0.01f * Hf + Bw, By + 0.10f * Hf));
 	Menu.Diag = FBox2D(FVector2D(X0 + 0.02f * Hf + Bw, By), FVector2D(X0 + 0.02f * Hf + 2.f * Bw, By + 0.10f * Hf));

@@ -1,4 +1,4 @@
-﻿"""Far-LOD research: octahedral impostor bake of the world's tree variants (UnrealEditor-Cmd, WITH RHI).
+"""Far-LOD research: octahedral impostor bake of the world's tree variants (UnrealEditor-Cmd, WITH RHI).
 
 Method (published: Ryan Brucks' octahedral impostors, the basis of UE's experimental ImpostorBaker plugin; Kuro's Wuthering Waves
 mobile far forest is also a ring-of-cameras impostor bake): every tree variant is photographed by an orthographic camera from N x N
