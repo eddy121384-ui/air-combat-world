@@ -1,7 +1,7 @@
 // Touch + keyboard input -> abstract stick/buttons -> aircraft controls.
 // The assist layer only shapes stick input; the aircraft still flies the shared flight model.
-import { clamp, DEG } from '../sim/math.js';
-import { bankAngle, pitchAngle, pitchForG, neutralG, availableG } from '../sim/aircraft.js';
+import { clamp, smoothstep, DEG, G } from '../sim/math.js';
+import { bankAngle, pitchAngle, pitchForG, neutralG, availableG, MIN_SPEED } from '../sim/aircraft.js';
 
 export class Input {
   constructor(root) {
@@ -236,7 +236,13 @@ export class PlayerController {
       const turning = Math.abs(x) > 0.05;
       if (nearVertical) { c.roll = x; c.pitch = y; }
       else if (turning) {
-        let nTurn = 1 + (nAvail - 1) * Math.min(1, Math.abs(x)) * 0.85;
+        // Stick deflection is proportional to TURN RATE, not to G: G-linear mapping
+        // made 10% stick bank the jet ~56 degrees for a 4 deg/s turn. Full stick is
+        // unchanged (85% of available G); the G is still bounded by the airframe.
+        const nFull = 1 + (nAvail - 1) * 0.85;
+        const wFull = Math.sqrt(Math.max(0, nFull * nFull - 1)) * G / Math.max(ac.speed, MIN_SPEED);
+        const w = wFull * Math.min(1, Math.abs(x)) * Math.max(ac.speed, MIN_SPEED) / G;
+        let nTurn = Math.sqrt(1 + w * w);
         if (y > 0) nTurn += (nAvail - nTurn) * y;
         nTurn = clamp(nTurn, 1.05, Math.max(1.05, nAvail));
         const bankT = Math.sign(x) * Math.acos(clamp(1 / nTurn, 0, 1));
@@ -253,8 +259,9 @@ export class PlayerController {
         c.roll = clamp(rollErr * 2.5 - ac.rollRateCur * 0.12, -1, 1);
         c.pitch = y;
       }
-      // fine aim: small sideways stick also yaws the nose a little
-      if (Math.abs(x) < 0.3) c.yaw += x * 1.6;
+      // fine aim: small sideways stick also yaws the nose a little (faded out
+      // smoothly instead of switching off at |x| = 0.3 with a jolt)
+      c.yaw += x * 1.6 * (1 - smoothstep(0.18, 0.36, Math.abs(x)));
       // No hidden afterburner override: Assisted and Expert share the same engine inputs.
     } else {
       c.roll = x;

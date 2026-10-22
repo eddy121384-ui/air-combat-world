@@ -41,13 +41,19 @@ export const MAX_ROT_RATE = 1.3; // rad/s, hard sanity cap on flight-path rotati
 export const FLIGHT_PATH_LAG = 0.09; // seconds, not a free HUD-only animation
 
 // Same integrator, different arcade-tuned performance envelopes. Not aircraft data.
+// Flight-feel polish (Oct 2026, docs/flight-feel-polish.md): both profiles gained a
+// transonic drag rise so top speed is set by drag instead of the MAX_SPEED clamp;
+// Arcade hard turns now cost a little energy; Tactical keeps its corner-speed peak
+// but sheds the excess drag that made MIL unable to sustain more than ~3.4G; the
+// roll stop is crisper in both. Historical values are in the baseline JSON.
+export const WAVE_DRAG_SPEED = 300; // m/s, ~M0.9 at the fight altitude
 export const FLIGHT_PROFILES = Object.freeze({
-  arcade: Object.freeze({ engine: 1.12, parasite: 0.65, induced: 0.35,
+  arcade: Object.freeze({ engine: 1.12, parasite: 0.65, induced: 0.42, wave: 0.0011,
     spool: 0.70, abSpool: 0.85, gOnset: 0.45,
-    roll: 1.16, rollOnset: 0.55, rollStop: 0.38, pathLag: 0.065 }),
-  tactical: Object.freeze({ engine: 1.0, parasite: 0.85, induced: 1.0,
+    roll: 1.16, rollOnset: 0.55, rollStop: 0.2, pathLag: 0.065 }),
+  tactical: Object.freeze({ engine: 1.05, parasite: 0.72, induced: 0.82, wave: 0.0007,
     spool: 0.78, abSpool: 1.0, gOnset: 0.56,
-    roll: 1.08, rollOnset: 0.64, rollStop: 0.42, pathLag: 0.075 }),
+    roll: 1.08, rollOnset: 0.64, rollStop: 0.28, pathLag: 0.075 }),
 });
 
 export function makeControls() {
@@ -86,9 +92,13 @@ export const specificEnergy = (ac) => ac.pos.y + (ac.speed * ac.speed) / (2 * G)
 export function availableG(ac, speed = ac.speed) {
   const t = ac.type;
   if (ac.flightFeel === 'arcade') {
-    // Wider corner-speed band and gentler low-speed loss of turning authority.
+    // Wider corner-speed band and gentler low-speed loss of turning authority than
+    // Tactical. Exponent > 1 keeps the turn-RATE peak at corner speed: the former
+    // 0.25*maxG floor made the jet turn fastest (~47 deg/s) at the 45 m/s clamp,
+    // so braking to a crawl beat every other tactic. Slow now tightens the radius
+    // (an AC-style brake turn) but no longer adds turn rate.
     const r = Math.max(speed, MIN_SPEED) / (t.cornerSpeed * 0.90);
-    return t.maxG * 1.05 * (0.25 + 0.75 * Math.min(1, Math.pow(r, 1.4)));
+    return Math.max(0.35, t.maxG * 1.05 * Math.min(1, Math.pow(r, 1.3)));
   }
   if (ac.flightFeel === 'tactical' || ac.flightFeel === 'B') {
     // RB-inspired speed-squared lift limit. No real AoA/stall computation yet.
@@ -101,6 +111,27 @@ export function availableG(ac, speed = ac.speed) {
 
 /** Rough sustained/instantaneous turn rate (rad/s) at a given G and speed. */
 export const turnRate = (n, speed) => (n * G) / Math.max(speed, MIN_SPEED);
+
+/** Level-turn rate (rad/s) the airframe can pull right now at `speed`. */
+export function instantTurnRate(ac, speed = ac.speed) {
+  const n = availableG(ac, speed);
+  return Math.sqrt(Math.max(0, n * n - 1)) * G / Math.max(speed, MIN_SPEED);
+}
+const bestTurnCache = new Map();
+/** Best instantaneous level-turn rate over the speed range, and the speed band
+ *  where at least `share` of it is available (HUD "best turn speed" cue). */
+export function bestTurn(ac, share = 0.92) {
+  const key = `${ac.type.id}:${ac.flightFeel}:${share}`;
+  if (!bestTurnCache.has(key)) {
+    let best = 0;
+    const rates = [];
+    for (let v = MIN_SPEED; v <= MAX_SPEED; v += 2) { const w = instantTurnRate(ac, v); rates.push([v, w]); best = Math.max(best, w); }
+    const band = rates.filter(([, w]) => w >= best * share).map(([v]) => v);
+    bestTurnCache.set(key, { rate: best, lo: band[0], hi: band[band.length - 1] });
+  }
+  return bestTurnCache.get(key);
+}
+
 
 function stepLegacyAircraft(ac, dt) {
   if (!ac.alive) return;
@@ -248,6 +279,7 @@ function stepModeAircraft(ac, dt) {
   const drag = t.dragK * profile.parasite * v * v * (c.brake ? 2.6 : 1)
     + t.inducedK * profile.induced * ac.nCur * ac.nCur
       * (200 / Math.max(v, MIN_SPEED)) ** 1.5
+    + profile.wave * Math.max(0, v - WAVE_DRAG_SPEED) ** 2
     + Math.abs(c.yaw) * 1.2;
   ac.speed = clamp(v + (thrust - drag - G * fwd.y) * dt, MIN_SPEED, MAX_SPEED);
 

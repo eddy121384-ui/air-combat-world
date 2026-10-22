@@ -103,16 +103,16 @@
     "gAvail110": 7.03
    },
    "tracking12dps": {
-    "meanAtaDeg": 5.07,
-    "within2": 0,
-    "within5": 0.25,
-    "stickReversals": 0
+    "meanAtaDeg": 1.7,
+    "within2": 1,
+    "within5": 1,
+    "rollWorkDegPerS": 42.92
    },
    "tracking20dps": {
-    "meanAtaDeg": 8.23,
+    "meanAtaDeg": 2.75,
     "within2": 0,
-    "within5": 0,
-    "stickReversals": 0
+    "within5": 1,
+    "rollWorkDegPerS": 28.25
    },
    "entry": {
     "t30": 1.55,
@@ -123,6 +123,11 @@
     "t30": 2.68,
     "t90": null,
     "peakBankDeg": 78.57
+   },
+   "lightEntry15": {
+    "t30": null,
+    "t90": null,
+    "peakBankDeg": 63.1
    },
    "rollout": {
     "bankHeldDeg": 83.75,
@@ -177,16 +182,16 @@
     "gAvail110": 7.03
    },
    "tracking12dps": {
-    "meanAtaDeg": 5.36,
-    "within2": 0,
-    "within5": 0.18,
-    "stickReversals": 1
+    "meanAtaDeg": 2.54,
+    "within2": 0.45,
+    "within5": 0.95,
+    "rollWorkDegPerS": 145.52
    },
    "tracking20dps": {
-    "meanAtaDeg": 8.37,
-    "within2": 0,
-    "within5": 0,
-    "stickReversals": 1
+    "meanAtaDeg": 5.21,
+    "within2": 0.06,
+    "within5": 0.69,
+    "rollWorkDegPerS": 156.08
    }
   },
   "tactical": {
@@ -290,16 +295,16 @@
     "gAvail110": 3.18
    },
    "tracking12dps": {
-    "meanAtaDeg": 4.69,
-    "within2": 0,
-    "within5": 0.85,
-    "stickReversals": 0
+    "meanAtaDeg": 1.53,
+    "within2": 1,
+    "within5": 1,
+    "rollWorkDegPerS": 47.65
    },
    "tracking20dps": {
-    "meanAtaDeg": 8.84,
+    "meanAtaDeg": 2.66,
     "within2": 0,
-    "within5": 0,
-    "stickReversals": 0
+    "within5": 1,
+    "rollWorkDegPerS": 25.4
    },
    "entry": {
     "t30": 1.75,
@@ -310,6 +315,11 @@
     "t30": 3,
     "t90": null,
     "peakBankDeg": 76.88
+   },
+   "lightEntry15": {
+    "t30": null,
+    "t90": null,
+    "peakBankDeg": 60.32
    },
    "rollout": {
     "bankHeldDeg": 82.69,
@@ -364,16 +374,16 @@
     "gAvail110": 3.18
    },
    "tracking12dps": {
-    "meanAtaDeg": 5.03,
-    "within2": 0,
-    "within5": 0.41,
-    "stickReversals": 1
+    "meanAtaDeg": 2.54,
+    "within2": 0.46,
+    "within5": 0.97,
+    "rollWorkDegPerS": 149.52
    },
    "tracking20dps": {
-    "meanAtaDeg": 8.92,
+    "meanAtaDeg": 3.69,
     "within2": 0,
-    "within5": 0,
-    "stickReversals": 1
+    "within5": 1,
+    "rollWorkDegPerS": 78.21
    }
   }
  }

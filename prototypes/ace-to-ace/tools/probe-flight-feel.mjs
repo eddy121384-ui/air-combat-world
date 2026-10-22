@@ -167,16 +167,17 @@ function lowSpeed(feel, control) {
   return { sustainedDps: r.sustainedDps, endSpeed: r.endSpeed, altDeltaM: r.altDeltaM, gAvail110: r2(availableG(craft(feel, 110), 110)) };
 }
 
-// ---- tracking: human-like thumb keeps the nose on a target in a 12 deg/s level turn ----
-// Same reaction delay, gains and stick slew limit for every mode; only the
+// ---- tracking: human-like thumb keeps the nose on a target in a level turn ----
+// Same reaction delay, PI gains and stick slew limit for every mode; only the
 // control interpretation and the physics differ. ATA = nose-to-target angle.
+// The integral term models a player settling on "the stick position that works".
 function tracking(feel, control, { targetRate = 12, seconds = 14, delay = 0.15 } = {}) {
   const ac = craft(feel, 220), p = pilot(ac, control);
   Object.assign(p.stick, { throttle: 0.85, boost: false });
   const tv = 210, w = targetRate * DEG; // target kinematics (not a flown jet)
   let th = 0; const tp = { x: 30, y: 3240, z: -650 };
   const hist = [];
-  let on2 = 0, on5 = 0, sumAta = 0, n = 0, reversals = 0, lastSx = 0;
+  let on2 = 0, on5 = 0, sumAta = 0, n = 0, iy = 0, ix = 0, rollTravel = 0;
   for (let i = 0; i < Math.round(seconds / dt); i++) {
     th += w * dt;
     tp.x += Math.sin(th) * tv * dt; tp.z += -Math.cos(th) * tv * dt;
@@ -185,27 +186,30 @@ function tracking(feel, control, { targetRate = 12, seconds = 14, delay = 0.15 }
     const b = toBody(ac.q, sub(seen, ac.pos));
     const ahead = Math.max(-b.z, 1);
     const ax = Math.atan2(b.x, ahead), ay = Math.atan2(b.y, ahead);
+    iy = clamp(iy + (ay / (6 * DEG)) * dt * 1.5, -0.3, 1);
     let sx, pull;
-    if (control === 'assisted') { sx = clamp(ax / (20 * DEG), -1, 1); pull = clamp(ay / (8 * DEG), -1, 1); }
-    else {
-      // expert thumb: roll the target toward the canopy, pull on it once roughly aligned
-      const roll = Math.atan2(b.x, Math.max(b.y, 1e-3 + Math.abs(b.x) * 0.05));
+    if (control === 'assisted') {
+      ix = clamp(ix + (ax / (10 * DEG)) * dt * 1.5, -1, 1);
+      sx = clamp(ax / (10 * DEG) + ix, -1, 1); pull = clamp(ay / (6 * DEG) + iy, -1, 1);
+    } else {
+      // expert thumb: roll the target onto the canopy, pull on it
+      const rollErr = Math.atan2(b.x, Math.max(b.y, 1e-3));
       const off = Math.hypot(ax, ay);
-      sx = clamp(roll / (40 * DEG) * clamp(off / (3 * DEG), 0.2, 1), -1, 1);
-      pull = clamp(ay / (8 * DEG), -0.5, 1);
+      sx = clamp(rollErr / (40 * DEG) * clamp(off / (3 * DEG), 0.15, 1) - ac.rollRateCur * 0.05, -1, 1);
+      pull = clamp(ay / (6 * DEG) + iy, -0.5, 1);
     }
     // thumbs cannot teleport: ~0.12 s full-scale slew
     const slew = dt / 0.12;
     p.stick.x += clamp(sx - p.stick.x, -slew, slew);
-    const want = -pull, cur = p.stick.y; p.stick.y = cur + clamp(want - cur, -slew, slew);
-    if (Math.sign(p.stick.x) !== Math.sign(lastSx) && Math.abs(p.stick.x) > 0.15) { reversals++; lastSx = p.stick.x; }
+    const cur = p.stick.y; p.stick.y = cur + clamp(-pull - cur, -slew, slew);
     p.tick();
     if (i * dt < 4) continue; // acquisition phase excluded
+    rollTravel += Math.abs(ac.rollRateCur) * dt;
     const ata = deg(angleBetween(forwardOf(ac.q), sub(tp, ac.pos)));
     sumAta += ata; n++;
     if (ata < 2) on2++; if (ata < 5) on5++;
   }
-  return { meanAtaDeg: r2(sumAta / n), within2: r2(on2 / n), within5: r2(on5 / n), stickReversals: reversals };
+  return { meanAtaDeg: r2(sumAta / n), within2: r2(on2 / n), within5: r2(on5 / n), rollWorkDegPerS: r2(deg(rollTravel) / (n * dt)) };
 }
 
 const out = { generated: 'tools/probe-flight-feel.mjs', note: 'F-16V, 60 Hz, deterministic; not real aircraft data', modes: {} };
@@ -226,7 +230,7 @@ for (const feel of ['arcade', 'tactical']) {
       lowSpeed110: lowSpeed(feel, control),
       tracking12dps: tracking(feel, control),
       tracking20dps: tracking(feel, control, { targetRate: 20 }),
-      ...(control === 'assisted' ? { entry: assistedEntry(feel), halfEntry: assistedEntry(feel, 0.5), rollout: assistedRollout(feel) } : {}),
+      ...(control === 'assisted' ? { entry: assistedEntry(feel), halfEntry: assistedEntry(feel, 0.5), lightEntry15: assistedEntry(feel, 0.15), rollout: assistedRollout(feel) } : {}),
     };
   }
 }

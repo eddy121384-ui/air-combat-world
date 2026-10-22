@@ -690,7 +690,9 @@ export class PilotAI {
     n = clamp(n, t.minG, nMax);
     const pitch = pitchForG(me, n);
     const db = toBody(me.q, d);
-    const yaw = clamp(db.x * 25, -1, 1) * (1 - fine * 0.7);
+    // Rudder is for fine tracking only. Holding 30% rudder in a hard, steeply banked
+    // turn yawed the nose toward the ground and made sustained turns sink.
+    const yaw = clamp(db.x * 25, -1, 1) * (1 - fine);
     return { pitch, roll, yaw, throttle: 0.8, boost: false, brake: false, fireMissile: false, fireGun: false, flare: false };
   }
 

@@ -2,6 +2,7 @@
 import { sub, norm, addScaled, scale, cross, clamp, dist, toBody, angleBetween, DEG, UP } from '../sim/math.js';
 import { gunLead, gunError, missilePk } from '../sim/fire.js';
 import { PilotAI } from './pilot.js';
+import { pullUpWarning } from '../sim/warnings.js';
 
 /** Non-maneuvering drone: flies straight and level, gentle turn back at the arena edge. */
 export class StraightBot {
@@ -74,7 +75,7 @@ export class HumanProxy {
   constructor(ac, { level = 'average', seed = 9, PlayerController, control = 'assisted' } = {}) {
     this.ac = ac; this.mode = 'HUMAN'; this.control = control;
     const L = level === 'good'
-      ? { reaction: 0.25, noise: 0.1, think: 0.1, spam: 0.3, breakAt: 1700, flareAt: 1000, gunTol: 2.0 }
+      ? { reaction: 0.25, noise: 0.1, think: 0.1, spam: 0.3, breakAt: 1700, flareAt: 1000, gunTol: 2.0, energy: true }
       : { reaction: 0.4, noise: 0.2, think: 0.16, spam: 0.6, breakAt: 1300, flareAt: 700, gunTol: 3.0 };
     if (globalThis.process?.env?.HP_OVERRIDE) Object.assign(L, JSON.parse(process.env.HP_OVERRIDE));
     this.L = L;
@@ -122,7 +123,8 @@ export class HumanProxy {
         x = bm.x > 0 ? -1 : 1; pull = 1;
         if (inbound.d < L.flareAt && !this.flared.has(inbound.m.id) && me.flares > 0) { this.pressed.add('flare'); this.flared.add(inbound.m.id); }
       }
-      if (me.pos.y < 700 && me.vel.y < -15) { x = 0; pull = 1; } // PULL UP
+      const pullUp = pullUpWarning(me); // the same HUD cue a player sees
+      if (pullUp) { x = 0; pull = 1; }
       if (this.control === 'expert') {
         // Expert thumb: decide WHERE the lift vector should point (delayed, like
         // the Assisted proxy); the per-frame loop below rolls it there while
@@ -136,7 +138,7 @@ export class HumanProxy {
           if (toBody(me.q, want).x * toBody(me.q, sub(inbound.m.pos, me.pos)).x > 0) want = scale(want, -1);
           pullCmd = 1; precise = false;
         }
-        if (me.pos.y < 700 && me.vel.y < -15) { want = { ...UP }; pullCmd = 1; precise = false; }
+        if (pullUp) { want = { ...UP }; pullCmd = 1; precise = false; }
         this.expertGoal = { want, pull: pullCmd, precise };
       }
       const a = L.think / 0.6; // ~0.6 s correlation time
@@ -148,6 +150,14 @@ export class HumanProxy {
       // throttle habits: burner most of the time, brake if about to overshoot
       this.buttons.brake = R < 450 && ahead > 0 && me.speed > tg.speed + 40;
       this.buttons.boost = !this.buttons.brake;
+      // A skilled player's one energy habit: burner off when far above corner speed
+      // (turning wide and fast), back on when it bleeds near corner. Hysteresis band.
+      if (L.energy && !this.buttons.brake) {
+        const vc = me.type.cornerSpeed;
+        if (me.speed > vc * 1.3) this.abHold = false;
+        else if (me.speed < vc * 1.05) this.abHold = true;
+        this.buttons.boost = this.abHold ?? true;
+      }
       // weapons from HUD cues
       if (me.lock.locked && me.missiles > 0) {
         const los = scale(r, 1 / R);
