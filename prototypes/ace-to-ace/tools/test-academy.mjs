@@ -29,6 +29,8 @@ export function fly(lesson, mode, plan, { maxT = 600 } = {}) {
   return runner;
 }
 
+export const isMain = import.meta.url === `file://${process.argv[1]}`;
+if (isMain) {
 const table = [];
 let failures = 0;
 for (const lesson of LESSONS) {
@@ -52,6 +54,11 @@ const EXPECT = {
   'L03:noAB': { modes: MODES, match: /沒開 AB/ },
   'L03:noBrake': { modes: MODES, match: /BRK/ },
   'L03:dive': { modes: MODES, match: /第五課/ },
+  'L04:yank': { modes: MODES, match: /燒掉/ },
+  'L05:yank': { modes: ['arcade:expert', 'tactical:expert'], match: /BRK/ },
+  'L05:yankNoBrake': { modes: ['arcade:expert', 'tactical:expert'], match: /G，能量高度掉了/ },
+  'L06:stallPull': { modes: MODES, match: /拉了/ },
+  'L06:late': { modes: MODES, match: /墜海|最低/ },
 };
 for (const [key, exp] of Object.entries(EXPECT)) {
   const [id] = key.split(':');
@@ -84,3 +91,5 @@ for (const [key, exp] of Object.entries(EXPECT)) {
 console.table(table.map(({ reason, ...row }) => row));
 if (failures) { console.error(`${failures} academy check(s) failed`); process.exit(1); }
 console.log(`Academy PASS: ${LESSONS.length} lesson(s) x 4 modes cleared by the student; wrong students fail with causal feedback`);
+
+}

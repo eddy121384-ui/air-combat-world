@@ -242,6 +242,264 @@ const L03 = {
   },
 };
 
-export const LESSONS = [L01, L02, L03];
+
+// =====================================================================
+// 04 — G 力的代價：瞬間／持續轉率、轉彎半徑、最佳轉彎速度
+// =====================================================================
+/** Turn a given number of degrees; records rate, radius, speed and G. */
+function turnPhase({ id, deg, say, text, limit, check, armKmh, armedRules }) {
+  const begin = (r) => { r.d.h = r.heading; r.d.turned = 0; r.d.v0 = r.kmh; r.d.alt0 = r.alt; r.d.gSum = 0; r.d.vSum = 0; r.d.n = 0; r.d.t0 = r.phaseT; };
+  return {
+    id, say,
+    enter: (r) => { r.d.armed = !armKmh; begin(r); },
+    text: (r) => (!r.d.armed ? `先加速到 ${armKmh} km/h（AB 可用）　目前 ${fmt(r.kmh)}`
+      : text ? text(r) : `滿桿轉 ${deg}°　已轉 ${Math.round(r.d.turned)}°　${fmt(r.kmh)} km/h　${r.g.toFixed(1)}G`),
+    progress: (r) => r.d.turned / deg,
+    update(r) {
+      if (!r.d.armed) {
+        if (r.kmh < armKmh) { if (r.phaseT > 40) return { fail: `40 秒還沒加速到 ${armKmh} km/h：油門推滿、開 AB、別轉彎。` }; return undefined; }
+        r.d.armed = true; begin(r);
+        if (armedRules) Object.assign(r.rules, armedRules);
+        r.say('計時開始！');
+      }
+      const elapsed = r.phaseT - r.d.t0;
+      const h = r.heading;
+      r.d.turned += Math.abs(wrapDeg(h - r.d.h)); r.d.h = h;
+      r.d.gSum += r.g; r.d.vSum += r.me.speed; r.d.n += 1;
+      if (r.alt < r.d.alt0 - 900) return { fail: `轉彎時掉了 ${Math.round(r.d.alt0 - r.alt)} m：這一課要水平轉彎，機頭別往下栽。` };
+      if (limit && elapsed > limit) return { fail: `${limit} 秒只轉了 ${Math.round(r.d.turned)}°：坡度要夠、拉桿要滿。` };
+      if (r.d.turned >= deg) {
+        const res = { t: elapsed, dps: deg / elapsed, v0: r.d.v0, v1: r.kmh, g: r.d.gSum / r.d.n,
+          radius: (r.d.vSum / r.d.n) / ((deg / elapsed) * Math.PI / 180) };
+        r.note(id, res);
+        const c = check?.(r, res);
+        return c || 'done';
+      }
+      return undefined;
+    },
+  };
+}
+const L04 = {
+  id: 'L04', no: 4, title: 'G 力的代價', en: 'TURN RATE & G',
+  principle: '轉率 ω = g·√(n²−1)/V，半徑 r = V²/(g·√(n²−1))。太快時 G 到頂、轉得寬；最佳轉彎速度（corner）轉得最急；滿 G 會燒掉速度。',
+  real: '真實航空：轉率與半徑由速度和負載因子決定；結構 G 上限與低速升力上限交會處是最佳轉彎速度（E-M 理論，Boyd）。',
+  model: '本遊戲：可用 G 隨速度變化、誘導阻力隨 G² 增加，皆為簡化模型；HUD 綠色菱形＝目前速度能給出 ≥92% 最佳瞬間轉率。',
+  goals: ['高速（約 1050 km/h）滿桿轉 180°，記住轉率', '減速到綠色菱形出現', '在最佳轉彎速度再轉 180°，轉率至少快 15%', '從 750 km/h 起只用 MIL（AB 停用）轉 360°：準時轉完，又要守住結束速度'],
+  timeLimit: 170,
+  tune: {
+    // Calibrated with a level, altitude-held turn from 750 km/h under MIL:
+    // full stick ends at ~450 km/h (fails speed); a pilot who spends speed to a
+    // floor and then holds it finishes inside the time with margin.
+    arcade: { sustainT: 17, sustainV: 580 },
+    tactical: { sustainT: 26, sustainV: 560 },
+  },
+  setup: (r) => soloSetup(r, { kmh: 1050 }),
+  intro: ['G 力不是免費的。今天你會用自己的眼睛看到它的帳單。'],
+  phases: [
+    turnPhase({ id: 'fast', deg: 180, limit: 30,
+      say: (r) => r.pick('油門推滿、開 AB。搖桿推到底，轉 180°。看轉率和速度。', '油門推滿、開 AB。滾到 80° 以上、拉滿桿，轉 180°。') }),
+    holdPhase({ id: 'band', need: 2,
+      say: (r) => { const [lo, hi] = r.bestBandKmh; return `看到了嗎？太快，G 到頂了也轉不快。收油、BRK，降到 ${lo}–${hi} km/h，等綠色菱形亮。`; },
+      text: (r) => { const [lo, hi] = r.bestBandKmh; return `減速到最佳轉彎速度 ${lo}–${hi} km/h　目前 ${fmt(r.kmh)}　${r.inBestBand ? '◆ 保持' : ''}`; },
+      cond: (r) => r.inBestBand,
+      timeout: (r) => (r.kmh > r.bestBandKmh[1] ? '還是太快。收油到底、按住 BRK，速度才會掉進菱形區。' : '太慢了。推油門、開 AB，把速度帶回菱形區。') }),
+    turnPhase({ id: 'corner', deg: 180, limit: 25,
+      say: '就是這個速度。現在滿桿再轉 180°——比比看。',
+      check: (r, res) => {
+        const fast = r.notes.fast;
+        if (res.dps < fast.dps * 1.15) {
+          return { fail: `轉率 ${res.dps.toFixed(1)}°/s，只比高速時快 ${Math.round((res.dps / fast.dps - 1) * 100)}%。轉彎時速度跑到 ${fmt(res.v0)}，離菱形區太遠，或沒有拉滿。` };
+        }
+        return undefined;
+      } }),
+    turnPhase({ id: 'sustain', deg: 360,
+      armKmh: 750, armedRules: { ab: false },
+      say: (r) => `最後一題：先加速到 750 km/h。計時一開始 AB 就停用——用 MIL 推力轉 360°，${r.tune.sustainT} 秒內轉完，結束時還要有 ${r.tune.sustainV} km/h。${r.pick('搖桿推越多轉越急，也越燒速度。', '看趨勢條：一路滿桿會把速度燒光。')}`,
+      text: (r) => `MIL 轉 360°（AB 停用）　${Math.round(r.d.turned)}°　${r.tune.sustainT}s 內　${fmt(r.kmh)} km/h（≥${r.tune.sustainV}）`,
+      check: (r, res) => {
+        if (res.t > r.tune.sustainT) return { fail: `轉完 360° 用了 ${res.t.toFixed(1)} 秒（要 ${r.tune.sustainT} 秒內）：太保守了，拉多一點，讓 G 留在菱形區給你的轉率。` };
+        if (res.v1 < r.tune.sustainV) return { fail: `轉完只剩 ${fmt(res.v1)} km/h（要 ${r.tune.sustainV}）：平均 ${res.g.toFixed(1)}G，速度從 ${fmt(res.v0)} 被燒掉了。滿桿買到的是轉率，付的是速度——掉到 ${r.tune.sustainV + 30} 附近就要鬆桿守住。` };
+        return undefined;
+      } }),
+  ],
+  grade(r) {
+    const s = r.notes.sustain;
+    return s && s.t < r.tune.sustainT - 2 && s.v1 > r.tune.sustainV + 60 ? 'S' : s && s.v1 > r.tune.sustainV + 20 ? 'A' : 'B';
+  },
+  debrief(r) {
+    const f = r.notes.fast, c = r.notes.corner, s = r.notes.sustain;
+    const good = [], improve = [];
+    if (f && c) good.push(`同樣滿桿：${fmt(f.v0)} km/h 時 ${f.dps.toFixed(1)}°/s、半徑 ${fmt(f.radius)} m；${fmt(c.v0)} km/h 時 ${c.dps.toFixed(1)}°/s、半徑 ${fmt(c.radius)} m。`);
+    if (f) improve.push(`高速 180° 讓你從 ${fmt(f.v0)} 掉到 ${fmt(f.v1)} km/h（平均 ${f.g.toFixed(1)}G）——G 越高，帳單越大。`);
+    if (s) (s.v1 > r.tune.sustainV + 40 ? good : improve).push(`持續轉彎 360°：${s.t.toFixed(1)} 秒，結束速度 ${fmt(s.v1)} km/h。`);
+    improve.push(r.tactical ? 'Tactical：瞬間轉率靠滿桿，持續轉率靠「不掉速」。空戰會比的是第二圈。' : 'Arcade：BRK 讓圈變小，AB 讓速度回來——兩個都按，就是 AC 式急轉。');
+    return { good, improve,
+      stats: [['高速轉率', f ? `${f.dps.toFixed(1)}°/s` : '—'], ['最佳速轉率', c ? `${c.dps.toFixed(1)}°/s` : '—'], ['最大 G', `${r.tel.maxG.toFixed(1)}`], ['持續 360°', s ? `${s.t.toFixed(1)} s` : '—']],
+      closing: '你剛剛付的每一分速度，都是 G 力的帳單。' };
+  },
+};
+
+// =====================================================================
+// 05 — 能量交易：高度與速度互換，適度拉桿保存能量（引擎怠速）
+// =====================================================================
+const L05 = {
+  id: 'L05', no: 5, title: '能量交易', en: 'ENERGY TRADE',
+  principle: '總能量 E = 高度 + 速度²/2g（能量高度）。俯衝把高度換成速度，躍升把速度換回高度；猛拉桿的誘導阻力隨 G² 增加，是最貴的手續費。',
+  real: '真實航空：比能量與比剩餘功率 Ps = V(T−D)/W 是能量機動理論（Boyd、Christie）的核心；推力等於阻力時，能量只在高度與速度之間流動。',
+  model: '本課規則（純遊戲化）：油門鎖在「巡航推力」（推力約等於阻力，依物理模式換算）、AB 停用，讓 HUD 面板上的能量高度幾乎只受你的拉桿影響。阻力模型為簡化近似。',
+  goals: ['俯衝：把高度換成速度，在 2,200 m 以上達到 950 km/h', '躍升：把速度換回高度——爬到「你的能量高度 − 300 m」，同時保有 400 km/h', '看懂 HUD 面板的「能量高度」：平順時幾乎不變，猛拉時往下掉'],
+  timeLimit: 120,
+  // Cruise throttle: thrust ~ drag at ~900 km/h for each physics profile (game rule).
+  tune: { arcade: { cruise: 0.63 }, tactical: { cruise: 0.76 }, all: { budget: 300, keepKmh: 400 } },
+  rules: (r) => ({ throttle: r.tune.cruise, ab: false }),
+  setup: (r) => { soloSetup(r, { alt: 4500, kmh: 650 }); r.me.pos.z = 7000; r.note('E0', r.energyHeight); },
+  intro: ['今天油門被我鎖在巡航推力，AB 也關了。你手上只有高度和速度——看好面板上的「能量高度」。'],
+  phases: [
+    {
+      id: 'dive',
+      say: '機頭往下，俯衝到 950 km/h，但別低於 2,200 m。注意：能量高度幾乎沒變——你只是把高度換成了速度。',
+      text: (r) => `俯衝到 950 km/h（高度 ≥ 2,200）　${fmt(r.kmh)} km/h　${fmt(r.alt)} m　能量高度 ${fmt(r.energyHeight)} m`,
+      progress: (r) => (r.kmh - 650) / 300,
+      update(r) {
+        if (r.kmh >= 950 && r.alt >= 2200) { r.note('E1', r.energyHeight); r.note('v1', r.kmh); return 'done'; }
+        if (r.alt < 2200) return { fail: `掉到 ${fmt(r.alt)} m 還只有 ${fmt(r.kmh)} km/h：俯衝角太淺、拖太久，或拉了 BRK——高度沒有轉成速度，被阻力吃掉了。俯衝要果斷，30° 左右。` };
+        if (r.phaseT > 45) return { fail: '45 秒還沒到 950 km/h：機頭再往下壓一點，高度才會變成速度。' };
+        return undefined;
+      },
+    },
+    {
+      id: 'zoom',
+      enter: (r) => {
+        r.d.E = r.energyHeight; r.d.peakG = 0; r.d.brake0 = r.tel.brakeSec;
+        const keep = (r.tune.keepKmh / KMH) ** 2 / (2 * 9.81);
+        r.d.target = Math.round((r.d.E - keep - r.tune.budget) / 50) * 50;
+        r.note('zoomTarget', r.d.target);
+      },
+      say: (r) => `你的能量高度 ${fmt(r.d.E)} m。平順地拉起，應該能在保有 ${r.tune.keepKmh} km/h 時爬到 ${fmt(r.d.target)} m。猛拉的話……你自己看帳單。`,
+      text: (r) => `躍升到 ${fmt(r.d.target)} m（保有 ≥${r.tune.keepKmh} km/h）　${fmt(r.alt)} m　${fmt(r.kmh)} km/h　能量高度 ${fmt(r.energyHeight)} m`,
+      progress: (r) => (r.alt - (r.d.target - 2500)) / 2500,
+      update(r) {
+        r.d.peakG = Math.max(r.d.peakG, r.g);
+        if (r.alt >= r.d.target && r.kmh >= r.tune.keepKmh) { r.note('E2', r.energyHeight); r.note('peakG', r.d.peakG); r.note('zoomLoss', r.d.E - r.energyHeight); return 'done'; }
+        if (r.me.vel.y > 20) r.d.climbed = true;
+        if (r.phaseT > 30 && !r.d.climbed) return { fail: '30 秒還沒開始躍升：俯衝改出後就要拉起，速度不會等你。' };
+        if (r.kmh < r.tune.keepKmh - 20 || (r.d.climbed && r.me.vel.y < 0)) {
+          const lost = r.d.E - r.energyHeight, brake = r.tel.brakeSec - r.d.brake0;
+          return { fail: brake > 0.5 ? `只爬到 ${fmt(r.tel.maxAlt)} m：拉起時按了 ${brake.toFixed(1)} 秒 BRK，能量高度掉了 ${fmt(lost)} m。`
+            : r.d.peakG > 6.5 ? `只爬到 ${fmt(Math.max(r.alt, r.d.apex || 0))} m（目標 ${fmt(r.d.target)}）：你拉到 ${r.d.peakG.toFixed(1)}G，能量高度掉了 ${fmt(lost)} m。用 3–4G 平順地拉，同樣的能量會帶你飛得更高。`
+              : `只爬到 ${fmt(Math.max(r.alt, r.d.apex || 0))} m（目標 ${fmt(r.d.target)}）：爬升角太淺，速度被阻力慢慢吃掉。拉到 40° 左右再穩住。` };
+        }
+        r.d.apex = Math.max(r.d.apex || 0, r.alt);
+        return undefined;
+      },
+    },
+  ],
+  grade(r) {
+    const n = r.notes;
+    return n.peakG < 4.5 && n.zoomLoss < 0 ? 'S' : n.peakG < 6 ? 'A' : 'B';
+  },
+  debrief(r) {
+    const n = r.notes, good = [], improve = [];
+    if (n.E1 != null) good.push(`俯衝：能量高度 ${fmt(n.E0)} → ${fmt(n.E1)} m，你把 ${fmt(4500 - 2200)} m 左右的高度換成了 ${fmt(n.v1)} km/h。`);
+    if (n.E2 != null) (n.peakG < 5 ? good : improve).push(`躍升最大 ${n.peakG.toFixed(1)}G，能量高度${n.zoomLoss > 0 ? `損失 ${fmt(n.zoomLoss)}` : `還多了 ${fmt(-n.zoomLoss)}`} m（巡航推力在低速時略大於阻力）。`);
+    improve.push('空戰裡道理一樣：高度是存款，速度是現金，G 是手續費。手續費付在換到東西的時候。');
+    return { good, improve,
+      stats: [['起點 E', `${fmt(n.E0 || 0)} m`], ['俯衝後 E', n.E1 ? `${fmt(n.E1)} m` : '—'], ['躍升目標', n.zoomTarget ? `${fmt(n.zoomTarget)} m` : '—'], ['拉起 G', n.peakG ? n.peakG.toFixed(1) : '—']],
+      closing: '能量守恆不是口號。你剛剛親手驗證了。' };
+  },
+};
+
+// =====================================================================
+// 06 — 危險飛行狀態：低速升力、失速近似、俯衝與安全拉起
+// =====================================================================
+const L06 = {
+  id: 'L06', no: 6, title: '危險飛行狀態', en: 'STALL & DIVE RECOVERY',
+  principle: '升力 ∝ V²：速度一半，可用升力只剩四分之一。低速猛拉只會更慢；失速時先卸載（推桿）、加油門。俯衝越快，拉起需要的高度越多。',
+  real: '真實航空：升力方程 L = ½ρV²SC_L（NASA）；負載因子增加時失速速度按 √n 上升（FAA）。真實失速取決於攻角。',
+  model: '本遊戲沒有攻角模型：低速時可用 G 降低，速度低於失速門檻時自動配平失效、機頭下垂——這是「失速近似」，不是真實氣動。',
+  goals: ['低速轉彎：減速到 420 km/h 以下，轉 90°，速度不得低於 300 km/h', '失速改出：機頭過高、速度不足——恢復到 500 km/h 並平飛', '俯衝改出：75° 俯衝、1,150 km/h、1,500 m——安全拉起'],
+  timeLimit: 150,
+  tune: { all: { diveAlt: 1500, divePitch: -75, diveKmh: 1150, diveFloor: 150, stallLimit: 30 }, arcade: { stallLoss: 900 }, tactical: { stallLoss: 1200 } },
+  setup: (r) => soloSetup(r, { alt: 3500, kmh: 650 }),
+  crashReason: (r) => (r.phase?.id === 'dive'
+    ? (r.tel.pullUpReact != null && r.tel.pullUpReact > 0.6 ? `墜海。PULL UP 亮起後 ${r.tel.pullUpReact.toFixed(1)} 秒才拉滿——在這個速度，半秒就是幾十公尺。` : '墜海。拉起太晚，或沒收油、沒用 BRK：速度越快，拉起半徑越大（r = V²/(g(n−1))）。')
+    : '墜海。'),
+  intro: ['今天練的是活下來。這三種狀況，真正的飛行員都在模擬機裡練到反射。'],
+  phases: [
+    {
+      id: 'slowturn',
+      say: '收油、BRK，降到 420 km/h 以下，然後轉 90°。速度別掉到 300 以下——低速時拉滿，只會更慢。',
+      enter: (r) => { r.d.h = r.heading; r.d.turned = 0; r.d.armed = false; r.d.minV = 9999; },
+      text: (r) => (!r.d.armed ? `減速到 420 km/h 以下　目前 ${fmt(r.kmh)}` : `低速轉 90°　已轉 ${Math.round(r.d.turned)}°　${fmt(r.kmh)} km/h（≥300）　可用 ${r.availG.toFixed(1)}G`),
+      progress: (r) => (r.d.armed ? r.d.turned / 90 : 0),
+      update(r) {
+        const h = r.heading;
+        if (!r.d.armed) { if (r.kmh < 420) { r.d.armed = true; r.d.h = h; r.note('slowAvailG', r.availG); } r.d.h = h; return undefined; }
+        r.d.turned += Math.abs(wrapDeg(h - r.d.h)); r.d.h = h;
+        r.d.minV = Math.min(r.d.minV, r.kmh);
+        if (r.kmh < 300) return { fail: `速度掉到 ${fmt(r.kmh)} km/h。這個速度只剩 ${r.availG.toFixed(1)}G 可用，滿桿的阻力把速度吃光了——低速要淺坡度、輕拉、推油門。` };
+        if (r.d.turned >= 90) { r.note('slowMinV', r.d.minV); return 'done'; }
+        if (r.phaseT > 45) return { fail: '太久了：低速轉彎要有耐心，但不能不轉。' };
+        return undefined;
+      },
+    },
+    {
+      id: 'stall',
+      enter: (r) => {
+        placeJet(r.me, { pos: { ...r.me.pos, y: 3600 }, speed: 92, heading: r.heading, pitch: 50 });
+        r.d.alt0 = r.alt; r.d.pullSec = 0;
+        r.flash('情境：機頭過高、速度不足！', '#ffc04d');
+      },
+      say: (r) => r.pick('失速了！搖桿往前推讓機頭下來、推滿油門。速度回來再拉平。', '失速了！先推桿卸載、機頭朝下、推滿油門。速度回來之前別拉。'),
+      text: (r) => `失速改出：恢復到 500 km/h 並平飛　${fmt(r.kmh)} km/h　γ ${r.gamma.toFixed(0)}°　已掉 ${fmt(Math.max(0, r.d.alt0 - r.alt))} m`,
+      progress: (r) => (r.kmh - 330) / 170,
+      update(r, dt) {
+        if (r.me.speed < 100 && r.me.controls.pitch > 0.3) r.d.pullSec += dt;
+        if (r.kmh >= 500 && Math.abs(r.gamma) < 6) { r.note('stallLoss', r.d.alt0 - r.alt); r.note('stallPull', r.d.pullSec); return 'done'; }
+        if (r.d.alt0 - r.alt > r.tune.stallLoss || r.phaseT > r.tune.stallLimit) {
+          const lost = Math.max(0, r.d.alt0 - r.alt);
+          const head = r.phaseT > r.tune.stallLimit ? `${r.tune.stallLimit} 秒還沒改出` : `掉了 ${fmt(lost)} m`;
+          return { fail: r.d.pullSec > 1 ? `${head}。失速時你還拉了 ${r.d.pullSec.toFixed(1)} 秒桿——機翼沒有升力可給，拉桿只會讓它反覆失速。先推桿、讓速度回來。`
+            : r.phaseT > r.tune.stallLimit ? `${r.tune.stallLimit} 秒還沒改出：機頭要先朝下讓速度長回來，到 500 km/h 再把 FPM 拉回地平線。`
+              : `掉了 ${fmt(r.d.alt0 - r.alt)} m 才改出。速度回到 500 km/h 後要立刻把 FPM 拉回地平線。` };
+        }
+        return undefined;
+      },
+    },
+    {
+      id: 'dive',
+      enter: (r) => {
+        placeJet(r.me, { pos: { ...r.me.pos, y: r.tune.diveAlt }, speed: r.tune.diveKmh / KMH, heading: r.heading, pitch: r.tune.divePitch });
+        r.d.minAlt = r.alt; r.tel.pullUpAt = null; r.tel.pullUpReact = null;
+        r.flash(`情境：${-r.tune.divePitch}° 俯衝、${fmt(r.tune.diveKmh)} km/h！`, '#ff6a6a');
+      },
+      say: '俯衝！收油、按住 BRK、拉滿桿。現在！',
+      text: (r) => `俯衝改出：拉到平飛　高度 ${fmt(r.alt)} m　γ ${r.gamma.toFixed(0)}°　${fmt(r.kmh)} km/h`,
+      progress: (r) => (r.gamma - r.tune.divePitch) / -r.tune.divePitch,
+      update(r) {
+        r.d.minAlt = Math.min(r.d.minAlt, r.alt);
+        if (r.gamma > -1) { r.note('diveMin', r.d.minAlt); r.note('diveReact', r.tel.pullUpReact); return r.d.minAlt >= r.tune.diveFloor ? 'done'
+          : { fail: `改出了，但最低只剩 ${fmt(r.d.minAlt)} m（要 ${r.tune.diveFloor} m 以上）。更早拉、收油加 BRK，讓速度別再長。` }; }
+        return undefined;
+      },
+    },
+  ],
+  grade(r) {
+    const n = r.notes;
+    return n.diveMin > 500 && n.stallLoss < 600 ? 'S' : n.diveMin > 300 ? 'A' : 'B';
+  },
+  debrief(r) {
+    const n = r.notes, good = [], improve = [];
+    if (n.slowAvailG) good.push(`420 km/h 時可用 G 只有 ${n.slowAvailG.toFixed(1)}G——升力隨速度平方下降。`);
+    if (n.stallLoss != null) (n.stallPull > 1 ? improve : good).push(n.stallPull > 1 ? `失速時拉了 ${n.stallPull.toFixed(1)} 秒桿，改出掉了 ${fmt(Math.max(0, n.stallLoss))} m。`
+      : n.stallLoss <= 0 ? '失速改出果斷：先讓機頭朝下、速度回來，最後高度一點也沒少。' : `失速改出只掉 ${fmt(n.stallLoss)} m。`);
+    if (n.diveMin != null) (n.diveMin > 400 ? good : improve).push(`俯衝改出最低高度 ${fmt(n.diveMin)} m。`);
+    return { good, improve,
+      stats: [['低速最低', n.slowMinV ? `${fmt(n.slowMinV)} km/h` : '—'], ['失速掉高', n.stallLoss != null ? `${fmt(Math.max(0, n.stallLoss))} m` : '—'], ['俯衝最低', n.diveMin != null ? `${fmt(n.diveMin)} m` : '—'], ['最大 G', r.tel.maxG.toFixed(1)]],
+      closing: '活著回來，才有下一場空戰。' };
+  },
+};
+
+export const LESSONS = [L01, L02, L03, L04, L05, L06];
 export const lessonById = (id) => LESSONS.find((l) => l.id === id);
 export { gatePhase, pointAhead };

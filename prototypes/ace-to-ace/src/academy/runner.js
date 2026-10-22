@@ -57,7 +57,7 @@ export class LessonRunner {
     this.flight = flight; this.control = control;
     this.me = match.blue; this.foe = match.red;
     this.tune = { ...(lesson.tune?.all || {}), ...(lesson.tune?.[flight] || {}), ...(lesson.tune?.[`${flight}:${control}`] || {}) };
-    this.rules = { weapons: false, ...(lesson.rules || {}) };
+    this.rules = { weapons: false };
     this.t = 0; this.phaseIdx = -1; this.phase = null; this.phaseT = 0; this.d = {};
     this.lines = []; this.queue = []; this.nextLineT = 0; this.spoken = [];
     this.result = null; this.notes = {}; this.flashes = [];
@@ -107,6 +107,8 @@ export class LessonRunner {
     this.phase = this.lesson.phases[this.phaseIdx] || null;
     this.phaseT = 0; this.d = {};
     if (!this.phase) { this.finish(true); return; }
+    const rules = (x) => (typeof x === 'function' ? x(this) : x) || {};
+    this.rules = { weapons: false, ...rules(this.lesson.rules), ...rules(this.phase.rules) };
     this.phase.enter?.(this);
     const s = typeof this.phase.say === 'function' ? this.phase.say(this) : this.phase.say;
     this.say(s);

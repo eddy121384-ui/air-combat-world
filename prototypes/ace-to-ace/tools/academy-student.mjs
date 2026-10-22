@@ -95,6 +95,60 @@ export const PLANS = {
   },
 };
 
+/** Expert level turn at load factor n: bank = acos(1/n), pull exactly n (G meter). */
+export function levelTurnStick(ac, n, side = 1, altHold = null) {
+  const want = side * Math.acos(clamp(1 / Math.max(n, 1.01), 0, 1));
+  const x = clamp((want - bankAngle(ac)) * 2.5 - ac.rollRateCur * 0.08, -1, 1);
+  const climbFix = altHold == null ? 0 : clamp((altHold - ac.pos.y) / 300, -0.5, 0.5) - ac.vel.y / 120;
+  return { x, y: clamp(-pitchForG(ac, n + climbFix), -1, 1) };
+}
+function turnHard(r, s, c, { pull = 1, side = 1 } = {}) {
+  const ac = r.me;
+  if (c === 'assisted') { s.stick.x = side * pull; s.stick.y = 0; return; }
+  if (pull < 1) { Object.assign(s.stick, levelTurnStick(ac, 1 + (r.availG - 1) * pull, side, r.d.alt0 ?? 3000)); return; }
+  Object.assign(s.stick, stickToward(ac, dirFor(hdgDeg(ac) + side * 90, clamp((3000 - ac.pos.y) / 80, -6, 6)), c, { pullLimit: pull }));
+}
+const towards = (r, p) => norm(sub(p, r.me.pos));
+Object.assign(PLANS, {
+  L04(r, s, c) {
+    const id = r.phase?.id, [lo, hi] = r.bestBandKmh;
+    if (id === 'band') {
+      Object.assign(s.stick, holdHeadingAlt(r.me, hdgDeg(r.me), 3000, c, { pullLimit: 0.5 }));
+      speedControl(s, r.me, (lo + hi) / 2);
+      return;
+    }
+    s.thr = 1; s.ab = true; s.brk = false;
+    if (id === 'sustain' && !r.d.armed) { Object.assign(s.stick, holdHeadingAlt(r.me, hdgDeg(r.me), 3000, c, { pullLimit: 0.5 })); return; }
+    // MIL 360: spend speed down to a floor just above the requirement, then hold it
+    const pull = id === 'sustain' ? clamp((r.kmh - (r.tune.sustainV + 25)) / 40 + 0.35, 0.1, 1) : 1;
+    turnHard(r, s, c, { pull });
+  },
+  L05(r, s, c) {
+    const ac = r.me, id = r.phase?.id;
+    s.brk = false; s.ab = false;
+    if (id === 'dive') { Object.assign(s.stick, stickToward(ac, dirFor(0, r.alt > 2700 ? -32 : -8), c, { pullLimit: 0.4 })); return; }
+    // smooth zoom: ~40 degree climb at moderate G, wings level
+    Object.assign(s.stick, stickToward(ac, dirFor(0, r.kmh > 430 ? 40 : 0), c, { pullLimit: 0.35 }));
+  },
+  L06(r, s, c) {
+    const ac = r.me, id = r.phase?.id;
+    if (id === 'slowturn') {
+      if (!r.d.armed) { Object.assign(s.stick, holdHeadingAlt(ac, hdgDeg(ac), 3500, c, { pullLimit: 0.5 })); s.thr = 0; s.ab = false; s.brk = true; return; }
+      s.brk = false; speedControl(s, ac, 400, { allowBrake: false });
+      turnHard(r, s, c, { pull: 0.45 });
+      return;
+    }
+    if (id === 'stall') {
+      s.thr = 1; s.ab = true; s.brk = false;
+      const climb = r.kmh < 470 ? -35 : 0;
+      Object.assign(s.stick, stickToward(ac, dirFor(hdgDeg(ac), climb), c, { pullLimit: r.kmh < 470 ? 0.2 : 0.8 }));
+      return;
+    }
+    if (id === 'dive') { s.thr = 0; s.ab = false; s.brk = true; Object.assign(s.stick, stickToward(ac, dirFor(hdgDeg(ac), 10), c)); return; }
+    Object.assign(s.stick, holdHeadingAlt(ac, hdgDeg(ac), 3500, c));
+  },
+});
+
 /** Deliberately wrong students: each should fail with a specific, causal reason. */
 export const BAD = {
   // Expert who rolls but never pulls: heading barely changes.
@@ -109,6 +163,16 @@ export const BAD = {
   // Accelerates by diving instead of thrust.
   'L03:dive'(r, s, c) { Object.assign(s.stick, stickToward(r.me, dirFor(0, -20), c)); s.thr = 1; s.ab = true; },
   // Keeps a bank in "level flight": never satisfies wings-level.
+  // Full stick through the whole sustained 360: fast first half, no speed left.
+  'L04:yank'(r, s, c) { if (r.phase?.id === 'sustain' && r.d.armed) { s.thr = 1; s.brk = false; turnHard(r, s, c, { pull: 1 }); } else PLANS.L04(r, s, c); },
+  // Hauls the zoom climb at full G and rides the speedbrake.
+  'L05:yank'(r, s, c) { PLANS.L05(r, s, c); if (r.phase?.id === 'zoom') { Object.assign(s.stick, stickToward(r.me, dirFor(0, r.kmh > 430 ? 70 : 0), c, { pullLimit: 1 })); s.brk = r.phaseT < 2; } },
+  // Hauls the zoom at full G but leaves the speedbrake alone: G alone must cost the gate.
+  'L05:yankNoBrake'(r, s, c) { PLANS.L05(r, s, c); if (r.phase?.id === 'zoom') Object.assign(s.stick, stickToward(r.me, dirFor(0, r.kmh > 430 ? 70 : 0), c, { pullLimit: 1 })); },
+  // Keeps pulling during the stall instead of unloading.
+  'L06:stallPull'(r, s, c) { PLANS.L06(r, s, c); if (r.phase?.id === 'stall') { s.stick.x = 0; s.stick.y = -1; s.thr = 0.72; s.ab = false; } },
+  // Waits 1.5 s before reacting to the dive, then pulls without idle/brake.
+  'L06:late'(r, s, c) { PLANS.L06(r, s, c); if (r.phase?.id === 'dive') { s.thr = 1; s.brk = false; if (r.phaseT < 1.5) { s.stick.x = 0; s.stick.y = 0; } } },
   'L01:banked'(r, s, c) { Object.assign(s.stick, holdHeadingAlt(r.me, hdgDeg(r.me) + 4, 3000, c, { pullLimit: 0.5 })); },
 };
 export { gammaDeg, UP, norm, sub };
