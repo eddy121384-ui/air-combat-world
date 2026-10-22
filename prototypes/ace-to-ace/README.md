@@ -118,6 +118,10 @@ node tools/aivai.mjs --suite --n 100 --write docs/aivai-report.json   # 無頭�
 node tools/aivai.mjs --n 40 --blue human --red veteran --verbose        # 單一組合 + 決策紀錄
 node tools/browser-check.mjs                                             # Chromium 實際啟動遊戲並截圖
 node tools/browser-check.mjs --scenario lookdev                           # 固定追機 / 側傾 / 近雲 / 海面 / 俯衝 / 雙機型
+node tools/browser-check.mjs --scenario settings                          # 四模式設定選單：選擇/取消/儲存/重整/暫停切換/再戰
+node tools/browser-check.mjs --scenario modes                             # 四種組合的 iPhone 尺寸觸控操作 + 兩套物理各一場完整 1v1
+node tools/probe-flight-feel.mjs                                          # 四種組合的手感量測（滾轉停止、轉彎、能量、追蹤）
+node tools/aivai.mjs --n 40 --blue human --red veteran --feel tactical --control expert   # human proxy 走 Expert 操控
 ```
 
 - **AI vs AI**：同一套 AI 對打（正面開局 / 隨機幾何 / 交換機型）、ACE vs ROOKIE 技術梯度、

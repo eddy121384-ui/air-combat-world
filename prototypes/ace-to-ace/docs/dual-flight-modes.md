@@ -65,6 +65,11 @@ touch/play acceptance remains OPEN.
 
 ## Deterministic headless measurements
 
+> **Historical (pre-polish, Oct 20).** The Oct 22 flight-feel pass changed both
+> profiles (drag-limited top speed, Arcade corner speed, Tactical energy, roll
+> stop). Current numbers, the method and before/after tables are in
+> [`flight-feel-polish.md`](flight-feel-polish.md). Kept for comparison.
+
 At 60Hz, F-16V, same bank-to-90 setup, 1 second at full aft stick:
 
 | Measurement | Arcade | Tactical |
