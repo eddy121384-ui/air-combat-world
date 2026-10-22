@@ -2,6 +2,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/HUD.h"
+#include "FreeFlightPlayerController.h"
 #include "FreeFlightHUD.generated.h"
 
 // Canvas HUD: speed / altitude / AGL / heading / throttle readout, touch stick + throttle + buttons, status and help text,
@@ -32,4 +33,5 @@ private:
 	float CensusTimer = 0.f;
 	int32 TreeComps = 0, TreeCompsShown = 0, BuildingComps = 0;
 	int64 TreeInst = 0, TreeInstShown = 0;
+	AFreeFlightPlayerController::FFarLodCensus FarCensus;   // far-LOD research overlay line
 };

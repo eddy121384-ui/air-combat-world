@@ -1,0 +1,408 @@
+{
+  "status": "PASS_FI_PROBE",
+  "forms": {
+    "A": {
+      "path": "/Game/HillsideForest/Trees/A_CSide100/machilus_budget_side100_lod0/StaticMeshes/machilus_budget_side100_lod0",
+      "origin": [
+        -3.00250244140625,
+        -33.317169189453125,
+        715.3153266906738
+      ],
+      "extent": [
+        792.8860473632812,
+        729.2262878417969,
+        720.4173393249512
+      ],
+      "sphere": 837.6590598130069,
+      "lods": 4,
+      "tris": [
+        55437,
+        15572,
+        2578,
+        846
+      ],
+      "materials": [
+        "/Game/TreeLookdev/Materials/M_TL_Bark.M_TL_Bark",
+        "/Game/TreeLookdev/Materials/M_TL_LeafCards.M_TL_LeafCards"
+      ]
+    },
+    "B": {
+      "path": "/Game/HillsideForest/Trees/CrownB/machilus_balanced_lod0/StaticMeshes/machilus_balanced_lod0",
+      "origin": [
+        178.38760375976562,
+        -17.5531005859375,
+        606.568785905838
+      ],
+      "extent": [
+        873.4745788574219,
+        815.10986328125,
+        611.198059797287
+      ],
+      "sphere": 906.6936474308533,
+      "lods": 4,
+      "tris": [
+        43922,
+        20099,
+        2941,
+        685
+      ],
+      "materials": [
+        "/Game/TreeLookdev/Materials/M_TL_Bark.M_TL_Bark",
+        "/Game/TreeLookdev/Materials/M_TL_LeafCards.M_TL_LeafCards"
+      ]
+    },
+    "C": {
+      "path": "/Game/HillsideForest/Trees/AcaciaTight/acacia_acacia_tight_lod0/StaticMeshes/acacia_acacia_tight_lod0",
+      "origin": [
+        57.678741455078125,
+        -12.371856689453125,
+        671.7505602836609
+      ],
+      "extent": [
+        735.1061096191406,
+        628.2983093261719,
+        685.3328137397766
+      ],
+      "sphere": 807.3078246084605,
+      "lods": 4,
+      "tris": [
+        60869,
+        29054,
+        1697,
+        671
+      ],
+      "materials": [
+        "/Game/TreeLookdev/Materials/M_TL_Acacia_Bark.M_TL_Acacia_Bark",
+        "/Game/TreeLookdev/Materials/M_TL_AcaciaW_LeafCards.M_TL_AcaciaW_LeafCards"
+      ]
+    },
+    "J": {
+      "path": "/Game/HillsideForest/Trees/Cryptomeria/cryptomeria_cryptomeria_lod0/StaticMeshes/cryptomeria_cryptomeria_lod0",
+      "origin": [
+        25.531143188476562,
+        -45.192108154296875,
+        1265.7576298713684
+      ],
+      "extent": [
+        529.1584320068359,
+        498.0546569824219,
+        1275.8947138786316
+      ],
+      "sphere": 1278.2136178705605,
+      "lods": 4,
+      "tris": [
+        23568,
+        1443,
+        908,
+        581
+      ],
+      "materials": [
+        "/Game/TreeLookdev/Materials/M_TL_Cryptomeria_Bark.M_TL_Cryptomeria_Bark",
+        "/Game/TreeLookdev/Materials/M_TL_Cryptomeria_LeafCards.M_TL_Cryptomeria_LeafCards"
+      ]
+    }
+  },
+  "materials": {
+    "/Game/NorthForest/Materials/M_NF_AcaciaW_LeafCards": {
+      "shading": "<MaterialShadingModel.MSM_TWO_SIDED_FOLIAGE: 6>",
+      "blend": "<BlendMode.BLEND_MASKED: 1>",
+      "two_sided": true,
+      "customs": [
+        {
+          "prop": "<MaterialProperty.MP_OPACITY_MASK: 2>",
+          "desc": "NF",
+          "inputs": [
+            "D",
+            "R",
+            "Pix",
+            "Near",
+            "End",
+            "Width",
+            "Gamma",
+            "NearM",
+            "EndM",
+            "WidthM",
+            "GammaM",
+            "KeepM"
+          ],
+          "code": "#if SHADING_PATH_MOBILE\nNear = NearM; End = EndM; Width = WidthM; Gamma = GammaM; R = saturate(R / max(KeepM, 0.01));\n#endif\nfloat T = Near + (End - Near) * pow(saturate(R), Gamma);\nfloat k = saturate((T - D) / Width);\nfloat n = frac(52.9829189 * frac(dot(Pix + 5.588238 * (float)View.StateFrameIndexMod8, float2(0.06711056, 0.00583715))));\nreturn (k > n) ? 1.0 : 0.0;"
+        },
+        {
+          "prop": "<MaterialProperty.MP_WORLD_POSITION_OFFSET: 12>",
+          "desc": "NF clump",
+          "inputs": [
+            "LP",
+            "D",
+            "Near",
+            "End",
+            "CG",
+            "R",
+            "Gamma",
+            "Width",
+            "NearM",
+            "EndM",
+            "WidthM",
+            "GammaM",
+            "KeepM",
+            "CGM",
+            "CrownM"
+          ],
+          "code": "#if SHADING_PATH_MOBILE\nNear = NearM; End = EndM; Width = WidthM; Gamma = GammaM; CG = CGM; R = saturate(R / max(KeepM, 0.01));\n#endif\nfloat g = CG * saturate((D - Near) / max(End - Near, 1.0));\n#if SHADING_PATH_MOBILE\ng += CrownM * (1.0 - saturate((D - Near) / max(End - Near, 1.0)));\n#endif\nfloat T = Near + (End - Near) * pow(saturate(R), Gamma);\nif (D > T + Width + 3000.0) { return -LP; }\nreturn LP * float3(g, g, 0.35 * g);"
+        }
+      ]
+    },
+    "/Game/NorthForest/Materials/M_NF_Acacia_Bark": {
+      "shading": "<MaterialShadingModel.MSM_DEFAULT_LIT: 1>",
+      "blend": "<BlendMode.BLEND_MASKED: 1>",
+      "two_sided": false,
+      "customs": [
+        {
+          "prop": "<MaterialProperty.MP_OPACITY_MASK: 2>",
+          "desc": "NF",
+          "inputs": [
+            "D",
+            "R",
+            "Pix",
+            "Near",
+            "End",
+            "Width",
+            "Gamma",
+            "NearM",
+            "EndM",
+            "WidthM",
+            "GammaM",
+            "KeepM"
+          ],
+          "code": "#if SHADING_PATH_MOBILE\nNear = NearM; End = EndM; Width = WidthM; Gamma = GammaM; R = saturate(R / max(KeepM, 0.01));\n#endif\nfloat T = Near + (End - Near) * pow(saturate(R), Gamma);\nfloat k = saturate((T - D) / Width);\nfloat n = frac(52.9829189 * frac(dot(Pix + 5.588238 * (float)View.StateFrameIndexMod8, float2(0.06711056, 0.00583715))));\nreturn (k > n) ? 1.0 : 0.0;"
+        },
+        {
+          "prop": "<MaterialProperty.MP_WORLD_POSITION_OFFSET: 12>",
+          "desc": "NF clump",
+          "inputs": [
+            "LP",
+            "D",
+            "Near",
+            "End",
+            "CG",
+            "R",
+            "Gamma",
+            "Width",
+            "NearM",
+            "EndM",
+            "WidthM",
+            "GammaM",
+            "KeepM",
+            "CGM",
+            "CrownM"
+          ],
+          "code": "#if SHADING_PATH_MOBILE\nNear = NearM; End = EndM; Width = WidthM; Gamma = GammaM; CG = CGM; R = saturate(R / max(KeepM, 0.01));\n#endif\nfloat g = CG * saturate((D - Near) / max(End - Near, 1.0));\n#if SHADING_PATH_MOBILE\ng += CrownM * (1.0 - saturate((D - Near) / max(End - Near, 1.0)));\n#endif\nfloat T = Near + (End - Near) * pow(saturate(R), Gamma);\nif (D > T + Width + 3000.0) { return -LP; }\nreturn LP * float3(g, g, 0.35 * g);"
+        }
+      ]
+    },
+    "/Game/NorthForest/Materials/M_NF_Bark": {
+      "shading": "<MaterialShadingModel.MSM_DEFAULT_LIT: 1>",
+      "blend": "<BlendMode.BLEND_MASKED: 1>",
+      "two_sided": false,
+      "customs": [
+        {
+          "prop": "<MaterialProperty.MP_OPACITY_MASK: 2>",
+          "desc": "NF",
+          "inputs": [
+            "D",
+            "R",
+            "Pix",
+            "Near",
+            "End",
+            "Width",
+            "Gamma",
+            "NearM",
+            "EndM",
+            "WidthM",
+            "GammaM",
+            "KeepM"
+          ],
+          "code": "#if SHADING_PATH_MOBILE\nNear = NearM; End = EndM; Width = WidthM; Gamma = GammaM; R = saturate(R / max(KeepM, 0.01));\n#endif\nfloat T = Near + (End - Near) * pow(saturate(R), Gamma);\nfloat k = saturate((T - D) / Width);\nfloat n = frac(52.9829189 * frac(dot(Pix + 5.588238 * (float)View.StateFrameIndexMod8, float2(0.06711056, 0.00583715))));\nreturn (k > n) ? 1.0 : 0.0;"
+        },
+        {
+          "prop": "<MaterialProperty.MP_WORLD_POSITION_OFFSET: 12>",
+          "desc": "NF clump",
+          "inputs": [
+            "LP",
+            "D",
+            "Near",
+            "End",
+            "CG",
+            "R",
+            "Gamma",
+            "Width",
+            "NearM",
+            "EndM",
+            "WidthM",
+            "GammaM",
+            "KeepM",
+            "CGM",
+            "CrownM"
+          ],
+          "code": "#if SHADING_PATH_MOBILE\nNear = NearM; End = EndM; Width = WidthM; Gamma = GammaM; CG = CGM; R = saturate(R / max(KeepM, 0.01));\n#endif\nfloat g = CG * saturate((D - Near) / max(End - Near, 1.0));\n#if SHADING_PATH_MOBILE\ng += CrownM * (1.0 - saturate((D - Near) / max(End - Near, 1.0)));\n#endif\nfloat T = Near + (End - Near) * pow(saturate(R), Gamma);\nif (D > T + Width + 3000.0) { return -LP; }\nreturn LP * float3(g, g, 0.35 * g);"
+        }
+      ]
+    },
+    "/Game/NorthForest/Materials/M_NF_Cryptomeria_Bark": {
+      "shading": "<MaterialShadingModel.MSM_DEFAULT_LIT: 1>",
+      "blend": "<BlendMode.BLEND_MASKED: 1>",
+      "two_sided": false,
+      "customs": [
+        {
+          "prop": "<MaterialProperty.MP_OPACITY_MASK: 2>",
+          "desc": "NF",
+          "inputs": [
+            "D",
+            "R",
+            "Pix",
+            "Near",
+            "End",
+            "Width",
+            "Gamma",
+            "NearM",
+            "EndM",
+            "WidthM",
+            "GammaM",
+            "KeepM"
+          ],
+          "code": "#if SHADING_PATH_MOBILE\nNear = NearM; End = EndM; Width = WidthM; Gamma = GammaM; R = saturate(R / max(KeepM, 0.01));\n#endif\nfloat T = Near + (End - Near) * pow(saturate(R), Gamma);\nfloat k = saturate((T - D) / Width);\nfloat n = frac(52.9829189 * frac(dot(Pix + 5.588238 * (float)View.StateFrameIndexMod8, float2(0.06711056, 0.00583715))));\nreturn (k > n) ? 1.0 : 0.0;"
+        },
+        {
+          "prop": "<MaterialProperty.MP_WORLD_POSITION_OFFSET: 12>",
+          "desc": "NF clump",
+          "inputs": [
+            "LP",
+            "D",
+            "Near",
+            "End",
+            "CG",
+            "R",
+            "Gamma",
+            "Width",
+            "NearM",
+            "EndM",
+            "WidthM",
+            "GammaM",
+            "KeepM",
+            "CGM",
+            "CrownM"
+          ],
+          "code": "#if SHADING_PATH_MOBILE\nNear = NearM; End = EndM; Width = WidthM; Gamma = GammaM; CG = CGM; R = saturate(R / max(KeepM, 0.01));\n#endif\nfloat g = CG * saturate((D - Near) / max(End - Near, 1.0));\n#if SHADING_PATH_MOBILE\ng += CrownM * (1.0 - saturate((D - Near) / max(End - Near, 1.0)));\n#endif\nfloat T = Near + (End - Near) * pow(saturate(R), Gamma);\nif (D > T + Width + 3000.0) { return -LP; }\nreturn LP * float3(g, g, 0.35 * g);"
+        }
+      ]
+    },
+    "/Game/NorthForest/Materials/M_NF_Cryptomeria_LeafCards": {
+      "shading": "<MaterialShadingModel.MSM_TWO_SIDED_FOLIAGE: 6>",
+      "blend": "<BlendMode.BLEND_MASKED: 1>",
+      "two_sided": true,
+      "customs": [
+        {
+          "prop": "<MaterialProperty.MP_OPACITY_MASK: 2>",
+          "desc": "NF",
+          "inputs": [
+            "D",
+            "R",
+            "Pix",
+            "Near",
+            "End",
+            "Width",
+            "Gamma",
+            "NearM",
+            "EndM",
+            "WidthM",
+            "GammaM",
+            "KeepM"
+          ],
+          "code": "#if SHADING_PATH_MOBILE\nNear = NearM; End = EndM; Width = WidthM; Gamma = GammaM; R = saturate(R / max(KeepM, 0.01));\n#endif\nfloat T = Near + (End - Near) * pow(saturate(R), Gamma);\nfloat k = saturate((T - D) / Width);\nfloat n = frac(52.9829189 * frac(dot(Pix + 5.588238 * (float)View.StateFrameIndexMod8, float2(0.06711056, 0.00583715))));\nreturn (k > n) ? 1.0 : 0.0;"
+        },
+        {
+          "prop": "<MaterialProperty.MP_WORLD_POSITION_OFFSET: 12>",
+          "desc": "NF clump",
+          "inputs": [
+            "LP",
+            "D",
+            "Near",
+            "End",
+            "CG",
+            "R",
+            "Gamma",
+            "Width",
+            "NearM",
+            "EndM",
+            "WidthM",
+            "GammaM",
+            "KeepM",
+            "CGM",
+            "CrownM"
+          ],
+          "code": "#if SHADING_PATH_MOBILE\nNear = NearM; End = EndM; Width = WidthM; Gamma = GammaM; CG = CGM; R = saturate(R / max(KeepM, 0.01));\n#endif\nfloat g = CG * saturate((D - Near) / max(End - Near, 1.0));\n#if SHADING_PATH_MOBILE\ng += CrownM * (1.0 - saturate((D - Near) / max(End - Near, 1.0)));\n#endif\nfloat T = Near + (End - Near) * pow(saturate(R), Gamma);\nif (D > T + Width + 3000.0) { return -LP; }\nreturn LP * float3(g, g, 0.35 * g);"
+        }
+      ]
+    },
+    "/Game/NorthForest/Materials/M_NF_LeafCards": {
+      "shading": "<MaterialShadingModel.MSM_TWO_SIDED_FOLIAGE: 6>",
+      "blend": "<BlendMode.BLEND_MASKED: 1>",
+      "two_sided": true,
+      "customs": [
+        {
+          "prop": "<MaterialProperty.MP_OPACITY_MASK: 2>",
+          "desc": "NF",
+          "inputs": [
+            "D",
+            "R",
+            "Pix",
+            "Near",
+            "End",
+            "Width",
+            "Gamma",
+            "NearM",
+            "EndM",
+            "WidthM",
+            "GammaM",
+            "KeepM"
+          ],
+          "code": "#if SHADING_PATH_MOBILE\nNear = NearM; End = EndM; Width = WidthM; Gamma = GammaM; R = saturate(R / max(KeepM, 0.01));\n#endif\nfloat T = Near + (End - Near) * pow(saturate(R), Gamma);\nfloat k = saturate((T - D) / Width);\nfloat n = frac(52.9829189 * frac(dot(Pix + 5.588238 * (float)View.StateFrameIndexMod8, float2(0.06711056, 0.00583715))));\nreturn (k > n) ? 1.0 : 0.0;"
+        },
+        {
+          "prop": "<MaterialProperty.MP_WORLD_POSITION_OFFSET: 12>",
+          "desc": "NF clump",
+          "inputs": [
+            "LP",
+            "D",
+            "Near",
+            "End",
+            "CG",
+            "R",
+            "Gamma",
+            "Width",
+            "NearM",
+            "EndM",
+            "WidthM",
+            "GammaM",
+            "KeepM",
+            "CGM",
+            "CrownM"
+          ],
+          "code": "#if SHADING_PATH_MOBILE\nNear = NearM; End = EndM; Width = WidthM; Gamma = GammaM; CG = CGM; R = saturate(R / max(KeepM, 0.01));\n#endif\nfloat g = CG * saturate((D - Near) / max(End - Near, 1.0));\n#if SHADING_PATH_MOBILE\ng += CrownM * (1.0 - saturate((D - Near) / max(End - Near, 1.0)));\n#endif\nfloat T = Near + (End - Near) * pow(saturate(R), Gamma);\nif (D > T + Width + 3000.0) { return -LP; }\nreturn LP * float3(g, g, 0.35 * g);"
+        }
+      ]
+    }
+  },
+  "error": null,
+  "leaf_mi": {
+    "0": "/Game/NorthForest/Materials/M_NF_LeafCards.M_NF_LeafCards",
+    "1": "/Game/NorthForest/Materials/M_NF_LeafCards.M_NF_LeafCards",
+    "2": "/Game/NorthForest/Materials/M_NF_LeafCards.M_NF_LeafCards",
+    "3": "/Game/NorthForest/Materials/M_NF_LeafCards.M_NF_LeafCards",
+    "4": "/Game/NorthForest/Materials/M_NF_LeafCards.M_NF_LeafCards",
+    "5": "/Game/NorthForest/Materials/M_NF_AcaciaW_LeafCards.M_NF_AcaciaW_LeafCards",
+    "6": "/Game/NorthForest/Materials/M_NF_AcaciaW_LeafCards.M_NF_AcaciaW_LeafCards",
+    "7": "/Game/NorthForest/Materials/M_NF_AcaciaW_LeafCards.M_NF_AcaciaW_LeafCards",
+    "8": "/Game/NorthForest/Materials/M_NF_Cryptomeria_LeafCards.M_NF_Cryptomeria_LeafCards",
+    "9": "/Game/NorthForest/Materials/M_NF_Cryptomeria_LeafCards.M_NF_Cryptomeria_LeafCards"
+  }
+}

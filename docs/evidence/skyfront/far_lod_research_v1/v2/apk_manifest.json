@@ -1,0 +1,43 @@
+{
+  "file": "SkyfrontFarLODTest-0.3.0-farlod-dev-arm64.apk (UAT archive name TreeLookdev-arm64.apk)",
+  "bytes": 1201993474,
+  "sha256": "4180cf5d477add072c1c935807922a4de61fe2df62d4e169b8a928df60730112",
+  "source_commit": "4a53570",
+  "package": "com.skyfront.homeland.farlodtest",
+  "application_label": "Skyfront FarLOD Test",
+  "versionName": "0.3.0-farlod",
+  "versionCode": 3,
+  "installs_next_to": "com.skyfront.homeland.freeflight 0.2.0 (different package name: not an update, not a replacement)",
+  "minSdk": 29,
+  "targetSdk": 34,
+  "native_code": [
+    "arm64-v8a"
+  ],
+  "config": "Development (wp.Runtime.OverrideRuntimeLoadingRange needs a non-shipping build)",
+  "rhi": "Vulkan only, mobile renderer",
+  "cook_flavor": "Android_ASTC",
+  "signature": "Android Debug certificate SHA-256 269f7e2c06a835ec76a11570d9c3df1b4af3449f7c1dec497b226d5eccdf4c1e (same as 0.1.0 / 0.2.0)",
+  "cook": {
+    "packages_cooked": 2551,
+    "errors": 0,
+    "warnings": 1,
+    "commandlet_seconds": 277
+  },
+  "buildcookrun_minutes": 14,
+  "size_vs_0_2_0_bytes": 394777476,
+  "content": {
+    "impostor_trees": 3859205,
+    "impostor_actors": 2431,
+    "runtime_grids": [
+      "FI_B0 2 km/6.8 km",
+      "FI_B1 2 km/6.8 km",
+      "FI_B2 1 km/5.56 km",
+      "FI_B3 1 km/4.58 km",
+      "FI_ISO 1 km/3.6 km"
+    ],
+    "impostor_layer_default": "OFF (FAR button)",
+    "bench": "BENCH button: 4 poses x 5 configs, both orders, results on screen + Saved/FarLodBench.txt"
+  },
+  "delivered_to": "D:\\Users\\EDDY\\SkyfrontBuilds\\SkyfrontFarLODTest-0.3.0-farlod-dev-arm64.apk (+ .sha256)",
+  "device_tested": false
+}

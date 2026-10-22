@@ -2,8 +2,8 @@
 # sideloadable Android APK: arm64, Vulkan only, ASTC cook, Development config, cooked data inside the APK (one file to install).
 # Toolchain (Android_SDK.json of UE 5.8): SDK platform android-34, build-tools 35.0.1, NDK r27c 27.2.12479018, CMake 3.22.1, JDK 17.
 # Environment variables are set for this process only. Requires the "Android" target platform of UE 5.8 (Epic Games Launcher option).
-#   package_android.ps1 [-Sdk C:\Android\Sdk] [-Jdk <jdk17 dir>] [-Config Development] [-Log <path>]
-param([string]$Sdk = 'C:\Android\Sdk', [string]$Jdk = '', [string]$Config = 'Development', [string]$Log = '',
+#   package_android.ps1 [-Sdk C:\Android\Sdk] [-Jdk <jdk17 dir>] [-Config Development] [-Log <path>] [-ArchiveName android_archive_farlod]
+param([string]$Sdk = 'C:\Android\Sdk', [string]$Jdk = '', [string]$Config = 'Development', [string]$Log = '', [string]$ArchiveName = 'android_archive',
       [string]$EngineRoot = 'C:\Program Files\Epic Games\UE_5.8')
 $ErrorActionPreference = 'Stop'
 if (Get-Process UnrealEditor* -ErrorAction SilentlyContinue) { throw 'An UnrealEditor process is already running' }
@@ -16,7 +16,7 @@ $env:PATH = "$Jdk\bin;$Sdk\platform-tools;$env:PATH"
 
 $RepoRoot = (Resolve-Path (Join-Path $PSScriptRoot '..\..')).Path
 $proj = Join-Path $RepoRoot 'unreal\TreeLookdev'
-$archive = Join-Path $proj 'Saved\Skyfront\android_archive'
+$archive = Join-Path $proj "Saved\Skyfront\$ArchiveName"
 if (-not $Log) { $Log = Join-Path $proj 'Saved\Skyfront\logs\buildcookrun_android.log' }
 New-Item -ItemType Directory -Force -Path (Split-Path $Log), $archive | Out-Null
 $sw = [Diagnostics.Stopwatch]::StartNew()
