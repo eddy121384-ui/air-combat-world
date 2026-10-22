@@ -4,18 +4,18 @@
 // iPhone: headless Chromium renders WebGL in software (SwiftShader), so FPS here is pessimistic
 // for GPU cost and says nothing about Safari/WebKit specifics.
 //
-//   node tools/browser-check.mjs [--out tools/out/shots] [--scenario all|lookdev|title|fight|manual|touch|aivai|result]
+//   node tools/browser-check.mjs [--out tools/out/shots] [--scenario all|lookdev|title|settings|fight|manual|touch|aivai|result]
 import http from 'node:http';
 import { readFile, mkdir, writeFile } from 'node:fs/promises';
 import assert from 'node:assert/strict';
 import { createRequire } from 'node:module';
 import { execSync } from 'node:child_process';
-import { dirname, join, extname } from 'node:path';
+import { dirname, join, resolve, extname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const args = Object.fromEntries(process.argv.slice(2).map((a, i, arr) => a.startsWith('--') ? [a.slice(2), arr[i + 1] && !arr[i + 1].startsWith('--') ? arr[i + 1] : true] : null).filter(Boolean));
-const OUT = join(ROOT, args.out || 'tools/out/shots');
+const OUT = resolve(ROOT, args.out || 'tools/out/shots');
 const scenario = args.scenario || 'all';
 
 function loadPlaywright() {
@@ -112,6 +112,110 @@ if (scenario === 'all' || scenario === 'title') {
   const { ctx, p } = await page(desktop, '', 'title');
   await sleep(1500); await shot(p, '01-title-desktop');
   await ctx.close();
+}
+if (scenario === 'all' || scenario === 'settings') {
+  // Four-mode flight settings, driven through the real DOM: select, cancel,
+  // save, reload persistence, pause-menu change (same-seed restart) and a
+  // pitch-only change that must resume the SAME sortie with the new convention.
+  for (const [label, opts, press] of [['settings-desktop', desktop, 'click'], ['settings-touch', iphone, 'tap']]) {
+    const { ctx, p } = await page(opts, '?seed=31', label);
+    const act = (sel) => p[press](sel);
+    const visible = (id) => p.evaluate((i) => !document.getElementById(i).classList.contains('hidden'), id);
+    const stored = () => p.evaluate(() => JSON.parse(localStorage.getItem('ace2ace.settings') || '{}'));
+    const pressed = () => p.evaluate(() => [...document.querySelectorAll('[data-flight-choice]')]
+      .filter((b) => b.getAttribute('aria-pressed') === 'true').map((b) => b.dataset.flightChoice));
+    await p.waitForFunction(() => window.__game && window.__game.mode === 'title');
+    assert.equal(await p.textContent('#currentFlightPreset'), 'ARCADE / EXPERT', `${label}: default preset`);
+    await act('#btnTitleSettings');
+    assert.ok(await visible('flightSettings'), `${label}: settings opens from title`);
+    assert.deepEqual(await pressed(), ['arcade:expert'], `${label}: exactly one preset selected`);
+    await act('[data-flight-choice="tactical:assisted"]');
+    assert.deepEqual(await pressed(), ['tactical:assisted'], `${label}: selection moves`);
+    await p.keyboard.press('Enter'); await sleep(200);
+    assert.equal(await p.evaluate(() => window.__game.mode), 'title', `${label}: Enter in settings must not launch`);
+    await act('#btnSettingsCancel');
+    assert.ok(await visible('title'), `${label}: cancel returns to title`);
+    assert.equal(await p.textContent('#currentFlightPreset'), 'ARCADE / EXPERT', `${label}: cancel discards draft`);
+    assert.equal((await stored()).flightMode, undefined, `${label}: cancel persists nothing`);
+    await act('#btnTitleSettings');
+    assert.deepEqual(await pressed(), ['arcade:expert'], `${label}: reopen shows committed preset`);
+    await act('[data-flight-choice="tactical:assisted"]');
+    await act('#btnSettingsApply');
+    assert.ok(await visible('title'), `${label}: apply from title returns to title`);
+    assert.equal(await p.textContent('#currentFlightPreset'), 'TACTICAL / ASSISTED');
+    assert.deepEqual([(await stored()).flightMode, (await stored()).controlMode], ['tactical', 'assisted']);
+    assert.match(p.url(), /mode=tactical/); assert.match(p.url(), /control=assisted/);
+    await p.reload();
+    await p.waitForFunction(() => window.__game && window.__game.mode === 'title');
+    assert.equal(await p.textContent('#currentFlightPreset'), 'TACTICAL / ASSISTED', `${label}: preset survives reload`);
+    await act('#btnStart');
+    await p.waitForFunction(() => window.__game.mode === 'playing');
+    const sortie = () => p.evaluate(() => {
+      const g = window.__game, m = g.match;
+      return { mode: g.mode, blue: m.blue.flightFeel, red: m.red.flightFeel, control: g.controlMode,
+        assist: g.player.settings.assist, invert: g.player.settings.invert, t: m.time,
+        seed: m.seed, spawn: { x: m.blue.pos.x, z: m.blue.pos.z } };
+    });
+    const first = await sortie();
+    assert.deepEqual([first.blue, first.red, first.assist], ['tactical', 'tactical', true], `${label}: both jets fly the chosen physics`);
+    await sleep(1200);
+    // Pitch-only change while paused: same sortie continues, new convention live.
+    await act('#pauseBtn');
+    assert.ok(await visible('pause'));
+    await sleep(500);
+    const camGap = () => p.evaluate(() => {
+      const g = window.__game, c = g.rend.camera.position, b = g.match.blue.pos;
+      return Math.hypot(c.x - b.x, c.y - b.y, c.z - b.z);
+    });
+    assert.ok(await camGap() < 150, `${label}: pause freezes the chase view instead of the title orbit`);
+    await act('#btnPauseSettings');
+    assert.match(await p.textContent('#btnSettingsApply'), /儲存並繼續/);
+    await act('#optInvert');
+    await act('#btnSettingsApply');
+    await sleep(400);
+    const resumed = await sortie();
+    assert.equal(resumed.mode, 'playing', `${label}: pitch-only change resumes`);
+    assert.ok(resumed.t > first.t + 0.5, `${label}: same sortie, not a restart`);
+    assert.equal(resumed.invert, true, `${label}: invert applies to the live PlayerController`);
+    const stick = await p.evaluate(() => {
+      const g = window.__game; g.input.stick.y = 0.5; const c = g.player.update(); g.input.stick.y = 0; return c.pitch;
+    });
+    assert.ok(stick > 0 || resumed.assist, `${label}: inverted stick-up now pulls`);
+    // Physics/control change while paused: same seed, fresh sortie.
+    await act('#pauseBtn');
+    await act('#btnPauseSettings');
+    await act('[data-flight-choice="arcade:expert"]');
+    assert.match(await p.textContent('#btnSettingsApply'), /套用並重新出擊/);
+    await act('#btnSettingsApply');
+    await sleep(300);
+    const restarted = await sortie();
+    assert.deepEqual([restarted.blue, restarted.red, restarted.control, restarted.assist],
+      ['arcade', 'arcade', 'expert', false], `${label}: pause apply switches both jets`);
+    assert.ok(restarted.t < 1, `${label}: physics change restarts the sortie`);
+    assert.equal(restarted.seed, first.seed, `${label}: restart keeps the seed`);
+    assert.ok(Math.hypot(restarted.spawn.x - first.spawn.x, restarted.spawn.z - first.spawn.z) < 250,
+      `${label}: restart keeps the seeded opening geometry`);
+    assert.equal(restarted.invert, true, `${label}: pitch convention carries over`);
+    // Cancel from pause leaves the fight untouched and returns to PAUSED.
+    await act('#pauseBtn');
+    await act('#btnPauseSettings');
+    await act('[data-flight-choice="tactical:expert"]');
+    await act('#btnSettingsCancel');
+    assert.ok(await visible('pause'), `${label}: cancel returns to pause`);
+    await act('#btnResume');
+    assert.ok(await camGap() < 150, `${label}: resume does not swoop the camera in from afar`);
+    assert.equal((await sortie()).blue, 'arcade', `${label}: cancel keeps current physics`);
+    await shot(p, `01-${label}-sortie`);
+    // Re-sortie after a finished match keeps the chosen preset.
+    await p.evaluate(() => { const m = window.__game.match; m.damage(m.red, 100, m.blue, 'gun'); });
+    await p.waitForFunction(() => window.__game.mode === 'result', null, { timeout: 15000 });
+    await act('#btnRematch');
+    await p.waitForFunction(() => window.__game.mode === 'playing');
+    const again = await sortie();
+    assert.deepEqual([again.blue, again.red, again.control], ['arcade', 'arcade', 'expert'], `${label}: rematch keeps preset`);
+    report.perf[label] = { passed: true };
+    await ctx.close();
+  }
 }
 if (scenario === 'all' || scenario === 'fight') {
   // automated player proxy so the fight actually happens

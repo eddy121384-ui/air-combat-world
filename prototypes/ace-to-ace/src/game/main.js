@@ -126,7 +126,12 @@ function applyFlightSettings() {
   syncTitle();
   if (settingsReturn === 'pause') {
     if (changed) start(kind); // Same seed and both AI/player get the new model.
-    else { mode = 'playing'; showScreen(null); last = performance.now(); }
+    else {
+      // The controller holds a per-sortie copy of settings: push the pitch
+      // convention into it so "save and continue" takes effect immediately.
+      if (player instanceof PlayerController) player.settings.invert = settings.invert;
+      mode = 'playing'; showScreen(null); last = performance.now();
+    }
   } else showScreen('title');
 }
 for (const b of document.querySelectorAll('[data-flight-choice]')) b.addEventListener('click', () => {
@@ -354,6 +359,12 @@ function frame(now) {
     let mw = false, mc = false;
     for (const m of match.missiles) if (m.alive && m.target === me && m.guided && !m.decoy) { mw = true; if (dist(m.pos, me.pos) < 1500) mc = true; }
     audio.frame({ throttle: me.thrustCur, ab: me.abCur, speed: me.speed, locking: L.timer > 0 && !L.locked, locked: L.locked, missileWarn: mw, missileClose: mc, lockWarn: me.lockedBy > 0, alive: me.alive && showHud && kind === 'pvai' }, now / 1000);
+  } else if (match && mode === 'paused') {
+    // Freeze the fight behind the pause/settings card. Moving the camera to the
+    // title orbit here made it swoop back from ~4 km away on resume.
+    rend.render();
+    hud.draw(match, view.ac, rend, 0, { minimal: true });
+    audio.frame({ throttle: 0, ab: 0, speed: 0, alive: false }, now / 1000);
   } else {
     // title backdrop: slow orbit over the sea
     const t = now / 1000;
@@ -400,6 +411,7 @@ function drawDebug() {
 // test hooks (Playwright)
 window.__game = {
   get match() { return match; }, get mode() { return mode; }, get enemyAI() { return enemyAI; }, get flightFeel() { return flightFeel; }, get controlMode() { return controlMode; },
+  get player() { return player; }, get rend() { return rend; },
   get experimentSeed() { return experimentSeed; }, settings, start, input, openFlightSettings,
   setTimeScale(s) { timeScale = s; },
 };
@@ -411,8 +423,10 @@ document.addEventListener('gesturestart', (e) => e.preventDefault());
 document.addEventListener('dblclick', (e) => e.preventDefault());
 
 // ?mode=arcade/tactical describes physics, not a request to skip the menu.
-// Preserve explicit QA auto-start plus the legacy ?mode=aivai observer URL.
-if (params.get('autostart') === '1' || params.get('mode') === 'aivai')
-  setTimeout(() => start(params.get('mode') === 'aivai' ? 'aivai' : 'pvai'), 50);
+// Explicit QA auto-start plus the legacy match-kind URLs (?mode=pvai, ?mode=aivai)
+// still launch directly; their physics then come from settings or ?feel.
+const legacyKind = ['pvai', 'aivai'].includes(params.get('mode')) ? params.get('mode') : null;
+if (params.get('autostart') === '1' || legacyKind)
+  setTimeout(() => start(legacyKind || 'pvai'), 50);
 else showScreen('title');
 requestAnimationFrame(frame);

@@ -29,6 +29,8 @@ jobs:
           node --check src/game/main.js
           node --check src/game/input.js
           node --check src/sim/aircraft.js
+          node --check src/game/render.js
+          node --check src/game/hud.js
       - name: Node flight and AI regression tests
         working-directory: prototypes/ace-to-ace
         run: |
@@ -42,3 +44,34 @@ jobs:
           node tools/aivai.mjs --n 3 --blue chaser --red veteran --feel arcade
           node tools/aivai.mjs --n 3 --blue chaser --red veteran --feel tactical
           node tools/aivai.mjs --n 3 --blue chaser --red veteran --feel B
+          node tools/aivai.mjs --n 3 --blue human --red veteran --feel arcade --control expert
+          node tools/aivai.mjs --n 3 --blue human --red veteran --feel tactical --control assisted
+          node tools/probe-flight-feel.mjs > /dev/null
+
+  browser:
+    # Real Chromium (SwiftShader WebGL): settings menu x4 modes, pause/resume,
+    # keyboard and iPhone-sized touch input. Not a substitute for iPhone Safari.
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install Playwright Chromium
+        working-directory: prototypes/ace-to-ace
+        run: |
+          npm install --no-save --no-package-lock playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Browser checks
+        working-directory: prototypes/ace-to-ace
+        run: |
+          node tools/browser-check.mjs --scenario settings
+          node tools/browser-check.mjs --scenario manual
+          node tools/browser-check.mjs --scenario touch
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ace-to-ace-browser-shots
+          path: prototypes/ace-to-ace/tools/out/shots
+          if-no-files-found: ignore

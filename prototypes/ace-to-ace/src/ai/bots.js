@@ -1,5 +1,5 @@
 // Simple scripted opponents used only as test baselines for the pilot AI.
-import { sub, norm, addScaled, scale, clamp, dist, toBody, angleBetween, DEG } from '../sim/math.js';
+import { sub, norm, addScaled, scale, cross, clamp, dist, toBody, angleBetween, DEG, UP } from '../sim/math.js';
 import { gunLead, gunError, missilePk } from '../sim/fire.js';
 import { PilotAI } from './pilot.js';
 
@@ -71,8 +71,8 @@ export class ChaserBot {
  * player can win and how long fights last. It is a model of a player, not a player.
  */
 export class HumanProxy {
-  constructor(ac, { level = 'average', seed = 9, PlayerController } = {}) {
-    this.ac = ac; this.mode = 'HUMAN';
+  constructor(ac, { level = 'average', seed = 9, PlayerController, control = 'assisted' } = {}) {
+    this.ac = ac; this.mode = 'HUMAN'; this.control = control;
     const L = level === 'good'
       ? { reaction: 0.25, noise: 0.1, think: 0.1, spam: 0.3, breakAt: 1700, flareAt: 1000, gunTol: 2.0 }
       : { reaction: 0.4, noise: 0.2, think: 0.16, spam: 0.6, breakAt: 1300, flareAt: 700, gunTol: 3.0 };
@@ -91,7 +91,7 @@ export class HumanProxy {
       boost: () => self.buttons.boost, brake: () => self.buttons.brake, gun: () => self.buttons.gun, look: () => false,
       consume: (n) => { const h = self.pressed.has(n); self.pressed.delete(n); return h; },
     };
-    this.pc = new PlayerController(ac, this.fakeInput, { assist: true, invert: false });
+    this.pc = new PlayerController(ac, this.fakeInput, { assist: control === 'assisted', invert: false });
   }
   update(dt, match) {
     this.helper.t += dt;
@@ -123,6 +123,22 @@ export class HumanProxy {
         if (inbound.d < L.flareAt && !this.flared.has(inbound.m.id) && me.flares > 0) { this.pressed.add('flare'); this.flared.add(inbound.m.id); }
       }
       if (me.pos.y < 700 && me.vel.y < -15) { x = 0; pull = 1; } // PULL UP
+      if (this.control === 'expert') {
+        // Expert thumb: decide WHERE the lift vector should point (delayed, like
+        // the Assisted proxy); the per-frame loop below rolls it there while
+        // watching the horizon, then pulls. Roll is closed-loop, not open-loop.
+        const breaking = inbound && inbound.d < L.breakAt;
+        let want = sub(aim, me.pos), pullCmd = clamp(ay / (12 * DEG), -0.4, 1), precise = true;
+        if (ahead < 0) { want = sub(tg.pos, me.pos); pullCmd = 1; precise = false; }
+        if (breaking) {
+          const away = sub(me.pos, inbound.m.pos);
+          want = addScaled(cross(away, UP), UP, 0); // beam the missile: lift across its line
+          if (toBody(me.q, want).x * toBody(me.q, sub(inbound.m.pos, me.pos)).x > 0) want = scale(want, -1);
+          pullCmd = 1; precise = false;
+        }
+        if (me.pos.y < 700 && me.vel.y < -15) { want = { ...UP }; pullCmd = 1; precise = false; }
+        this.expertGoal = { want, pull: pullCmd, precise };
+      }
       const a = L.think / 0.6; // ~0.6 s correlation time
       this.wobble.x += -this.wobble.x * a + this.rng.gauss() * L.noise * Math.sqrt(2 * a);
       this.wobble.y += -this.wobble.y * a + this.rng.gauss() * L.noise * Math.sqrt(2 * a);
@@ -140,6 +156,19 @@ export class HumanProxy {
         if (pk > 0.45 || this.rng() < L.spam * L.think) this.pressed.add('msl');
       }
       this.buttons.gun = R < 950 && ahead > 0 && gunError(me, gunLead(me, tg.pos, tg.vel).point) < L.gunTol * DEG;
+    }
+    if (this.control === 'expert' && this.expertGoal) {
+      const g = this.expertGoal, b = toBody(me.q, g.want);
+      const ahead = -b.z, lat = Math.hypot(b.x, b.y);
+      const rollErr = Math.atan2(b.x, b.y);
+      const off = Math.atan2(lat, Math.max(ahead, 1e-3));
+      // near the target, keep the wings still and fly it in with pitch
+      const fine = g.precise ? clamp(off / (4 * DEG), 0.1, 1) : 1;
+      const x = clamp(rollErr / (45 * DEG), -1, 1) * fine - me.rollRateCur * 0.06 + this.wobble.x * 0.25;
+      const aligned = Math.abs(rollErr) < 30 * DEG || (g.precise && off < 3 * DEG);
+      const pull = (aligned ? g.pull : 0.15) + this.wobble.y;
+      this.stick.x = clamp(x, -1, 1);
+      this.stick.y = clamp(-pull, -1, 1);
     }
     return this.pc.update(dt, match);
   }
