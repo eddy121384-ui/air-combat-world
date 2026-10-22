@@ -1,0 +1,87 @@
+{
+  "status": "PASS_FI_GRIDS",
+  "error": null,
+  "set": [
+    true,
+    true,
+    true,
+    true
+  ],
+  "now": {
+    "hash_class": "WorldPartitionRuntimeHashSet",
+    "partitions": [
+      {
+        "name": "MainGrid",
+        "class": "RuntimePartitionLHGrid",
+        "cell_size_cm": 100000,
+        "loading_range_cm": 390000,
+        "priority": 0,
+        "is_2d": false,
+        "origin": [
+          0,
+          0
+        ]
+      },
+      {
+        "name": "FI_B0",
+        "class": "RuntimePartitionLHGrid",
+        "cell_size_cm": 200000,
+        "loading_range_cm": 680000,
+        "priority": 0,
+        "is_2d": true,
+        "origin": [
+          54000,
+          0
+        ]
+      },
+      {
+        "name": "FI_B1",
+        "class": "RuntimePartitionLHGrid",
+        "cell_size_cm": 200000,
+        "loading_range_cm": 680000,
+        "priority": 0,
+        "is_2d": true,
+        "origin": [
+          54000,
+          0
+        ]
+      },
+      {
+        "name": "FI_B2",
+        "class": "RuntimePartitionLHGrid",
+        "cell_size_cm": 100000,
+        "loading_range_cm": 556130,
+        "priority": 0,
+        "is_2d": true,
+        "origin": [
+          54000,
+          0
+        ]
+      },
+      {
+        "name": "FI_B3",
+        "class": "RuntimePartitionLHGrid",
+        "cell_size_cm": 100000,
+        "loading_range_cm": 457964,
+        "priority": 0,
+        "is_2d": true,
+        "origin": [
+          54000,
+          0
+        ]
+      },
+      {
+        "name": "FI_ISO",
+        "class": "RuntimePartitionLHGrid",
+        "cell_size_cm": 100000,
+        "loading_range_cm": 360000,
+        "priority": 0,
+        "is_2d": true,
+        "origin": [
+          54000,
+          0
+        ]
+      }
+    ]
+  }
+}

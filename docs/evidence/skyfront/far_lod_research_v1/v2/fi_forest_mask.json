@@ -1,0 +1,13 @@
+{
+ "size": [
+  2048,
+  2048
+ ],
+ "origin_cm": [
+  -646000.0,
+  -4000000.0
+ ],
+ "extent_cm": 2646000.0,
+ "source": "T_NF_Mask1.png R (land cover: trees)",
+ "forest_fraction_gt_half": 0.4525113105773926
+}

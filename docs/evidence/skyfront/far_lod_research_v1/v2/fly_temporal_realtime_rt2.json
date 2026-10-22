@@ -1,0 +1,32 @@
+{
+ "high": {
+  "frames": 72,
+  "far_band_rows": [
+   288,
+   448
+  ],
+  "far_change_median": 0.354,
+  "far_change_p95": 13.653,
+  "far_pops": [
+   16
+  ],
+  "full_spikes": [
+   16
+  ]
+ },
+ "v6": {
+  "frames": 77,
+  "far_band_rows": [
+   288,
+   448
+  ],
+  "far_change_median": 0.35,
+  "far_change_p95": 14.447,
+  "far_pops": [
+   18
+  ],
+  "full_spikes": [
+   18
+  ]
+ }
+}

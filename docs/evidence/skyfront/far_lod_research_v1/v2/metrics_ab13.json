@@ -1,0 +1,62 @@
+{
+ "basin_edge": {
+  "high": {
+   "far_band_ssim_vs_high": 1.0
+  },
+  "pr58_v5": {
+   "far_band_ssim_vs_high": 0.9845
+  },
+  "v6": {
+   "far_band_ssim_vs_high": 0.9893
+  },
+  "ultra": {
+   "far_band_ssim_vs_high": 0.9893
+  }
+ },
+ "far_range": {
+  "high": {
+   "far_band_ssim_vs_high": 1.0,
+   "dark_dots_farmland": 261
+  },
+  "pr58_v5": {
+   "far_band_ssim_vs_high": 0.9176,
+   "dark_dots_farmland": 320
+  },
+  "v6": {
+   "far_band_ssim_vs_high": 0.9062,
+   "dark_dots_farmland": 318
+  },
+  "ultra": {
+   "far_band_ssim_vs_high": 0.9825,
+   "dark_dots_farmland": 322
+  }
+ },
+ "forest_layers": {
+  "high": {
+   "far_band_ssim_vs_high": 1.0
+  },
+  "pr58_v5": {
+   "far_band_ssim_vs_high": 0.9078
+  },
+  "v6": {
+   "far_band_ssim_vs_high": 0.9143
+  },
+  "ultra": {
+   "far_band_ssim_vs_high": 0.979
+  }
+ },
+ "mid_ridge": {
+  "high": {
+   "far_band_ssim_vs_high": 1.0
+  },
+  "pr58_v5": {
+   "far_band_ssim_vs_high": 0.9438
+  },
+  "v6": {
+   "far_band_ssim_vs_high": 0.9463
+  },
+  "ultra": {
+   "far_band_ssim_vs_high": 0.916
+  }
+ }
+}

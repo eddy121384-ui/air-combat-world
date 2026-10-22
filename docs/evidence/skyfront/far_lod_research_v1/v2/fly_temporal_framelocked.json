@@ -1,0 +1,39 @@
+{
+ "high": {
+  "frames": 361,
+  "far_band_rows": [
+   288,
+   448
+  ],
+  "far_change_median": 5.634,
+  "far_change_p95": 9.309,
+  "far_pops": [],
+  "full_spikes": [
+   359
+  ]
+ },
+ "v6": {
+  "frames": 361,
+  "far_band_rows": [
+   288,
+   448
+  ],
+  "far_change_median": 5.828,
+  "far_change_p95": 9.308,
+  "far_pops": [],
+  "full_spikes": []
+ },
+ "pr58_v5": {
+  "frames": 361,
+  "far_band_rows": [
+   288,
+   448
+  ],
+  "far_change_median": 5.834,
+  "far_change_p95": 9.299,
+  "far_pops": [],
+  "full_spikes": [
+   359
+  ]
+ }
+}

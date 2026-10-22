@@ -18,6 +18,8 @@
 
 **所有效能數字都是 Intel UHD 770 + ES3.1 行動渲染器預覽，只代表相對成本；沒有任何 S11 幀率宣稱。**
 
+**v2 更新（§10、§11）**：impostor 從「A/B 區域常駐 217 萬棵」改為「全圖 386 萬棵、World Partition 距離串流」，常駐 impostor 實例資料最壞 97 MB（最密林區）、一般 10–65 MB、關閉 ≤ 1.4 MB；5–7 km 山形與農田黑點兩個問題以全域規則修正；最終 A/B v6 比 PR #57 High 便宜 10–16 %（森林）、比 Ultra 便宜 47–53 %，300 m/s 0 個遠景 pop。另做了可與 0.2.0 並存的 S11 測試 APK（含平板上自動 A/B 的 BENCH 按鈕）。
+
 ## 2. 原型做了什麼（皆在既有 PR #57 世界上，不改 3D 樹／地形／材質）
 
 1. **烘焙** `adapters/unreal/ntwforest/fi_bake.py`：4 種樹形 × 10 個色調變體，用遊戲本身的網格（**LOD3**＝1.5 km 外實際畫出的團簇卡片）與世界材質，正交 SceneCapture 從半八面體 16×16 個方向拍 BaseColor／法線／深度（256 px 拍、4× 超取樣降到 64 px）。4,608 張，48–71 s。第一版用 LOD0 拍時，相思與柳杉的細葉卡在 128 px 下消失（覆蓋率 8 %），改 LOD3 才正確（`bake/fi_sheet.png`）。
@@ -178,15 +180,111 @@ UE 內容（`/Game/FarLOD`、地圖中的 `FI_Imp_*` actor）與 PR #57 的其�
 
 ### 10c. 記憶體預算（實測常駐，CPU 實例資料 = 64 B 轉換 + 4 B × 3 custom float）
 
-<!-- V2MEM -->
+| 視角（最終 grid，`v2/stats_ab13.json` / `skyfl_ab13.log.txt`） | impostor 常駐 actor | impostor 常駐實例 | impostor 資料 | 3D 樹常駐（PR #57，所有設定相同） |
+|---|---:|---:|---:|---:|
+| forest_layers | 544 | 870 k | **63 MB** | 661 k / 43 MB |
+| mid_ridge（最密的林區，最壞情況） | 632 | 1,342 k | **97 MB** | 814 k / 53 MB |
+| basin_edge | 196 | 145 k | **11 MB** | 36 k / 2 MB |
+| far_range | 338 | 533 k | **39 MB** | 294 k / 19 MB |
+| 300 m/s 12 km 即時飛行（rt2） | — | — | **63–77 MB** | — |
+| 關閉（FAR OFF） | 1–11 | ≤ 20 k | **≤ 1.4 MB** | — |
+
+- **預算：impostor 實例資料最壞情況 ≤ 100 MB**（目前 97 MB，在最密的林區）；一般 10–65 MB。距離由 grid 載入範圍決定，與地圖大小無關（全圖 386 萬棵，常駐的最多 134 萬）。
+- 迭代：常駐（v1，只有 A/B 區域）→ 兩層 grid（v2a）實測 115 MB（forest_layers，且有邊界升級問題）→ 修正後 4+1 個 band grid：63 MB（同一視角，−45 %）。離線模型（`fi_stream_budget.py`）的「理想值」（只載入可能看得見的樹）是 44 MB：剩下的差距是 World Partition 以整個圓盤載入 cell 的固有成本。
+- 遠層（`FI_B0`／`FI_B1`）用 2 km cell：在 300 m/s 下載入事件減半（即時飛行中 WP「Slow」從 26 s 降到 17 s），代價約 +9 MB。
+- 比較基準：3D 樹在 PR #57 的常駐實例資料（同一算法）是 19–53 MB；impostor 層大約是它的 1.5–2 倍。GPU scene 端另有每實例資料（約同量級，未單獨量測）。
+- **PR #57 的發現（未修改，以保留基準）**：(1) Tree distance 列的 World Partition 載入距離用的是 `wp.Runtime.OverrideRuntimeSpatialHashLoadingRange -grid=0`（舊 SpatialHash 的索引式指令），這張地圖是 RuntimeHashSet，需要用名稱式的 `wp.Runtime.OverrideRuntimeLoadingRange -grid=MainGrid`：實測三種預設的 3D 樹常駐量完全相同（661,298），也就是該列在 World Partition 上沒有作用。(2) `MainGrid` 是 3D grid、1 km cell，而每個 1 km 樹 tile 的邊界 > 1 km，同樣會被升級到更大的 cell（3D 樹實際載入範圍大於 3.9 km）。修好這兩點，候選配置（3D 樹 2.2 km）還能再省下約 20–40 % 的 3D 樹常駐記憶體——建議另開 PR 處理。
 
 ### 10d. 兩個畫面問題的修正
 
-**5–7 km 遠山輪廓被樹冠模糊**：根因是 v5 讓 impostor 一直畫到 7 km 並放大到 1.6 倍，蓋掉 PR #49 地形皮膚的稜線與溝谷明暗。v6：impostor 4.8→6.0 km 淡出（7 km 以外完全交回山形），放大上限 1.25，地形法線彎曲 2→5 km、最多 0.75。`ab/v2_crop_forest_layers.jpg`：上 PR #57 High、中 PR #58 v5、下 v6 —— 7 km 以外的山脊、溝谷明暗回來了，3–6 km 的樹冠立體感保留。
+**5–7 km 遠山輪廓被樹冠模糊**：根因是 v5 讓 impostor 一直畫到 7 km 並放大到 1.6 倍，蓋掉 PR #49 地形皮膚的稜線與溝谷明暗。v6：impostor 4.8→6.0 km 淡出（7 km 以外完全交回山形），放大上限 1.25，地形法線彎曲 2→5 km、最多 0.75。`v2/v2_crop_forest_layers.jpg`：上 PR #57 High、中 PR #58 v5、下 v6 —— 7 km 以外的山脊、溝谷明暗回來了，3–6 km 的樹冠立體感保留。
 
-**農田散生樹黑點**：根因有三。(1) v5 讓田間樹以放大 1.6 倍的 impostor 畫到 7 km；(2) 全域亮度校正來自密林（樹冠互相遮蔭），單株樹太暗；(3) 遠處稀疏化在**稀疏林**裡只留下零星幾棵 → 一顆顆點。v6 規則：一棵樹若「Landscape 在它底下不畫森林」（`T_NF_Mask1` R < 0.5）**或**「周圍 250 m 內的樹 < 550 棵」（森林中位數 686 的約 80 %，全圖 17.4 % 的樹），就歸為稀疏林：impostor 不放大、亮度 ×1.3、在 2.8 km（＝ 3D 田間樹在 High 的範圍）淡出，並放在自己的短距 grid（`FI_ISO`，3.6 km）。`ab/v2_crop_far_range.jpg`：4–6 km 谷底恢復成 PR #57 的乾淨農田；2.2–2.8 km 的田間樹仍在、色調接近 3D 樹。全部是全域規則，沒有逐棵、逐區修改。
+**農田散生樹黑點**：根因有三。(1) v5 讓田間樹以放大 1.6 倍的 impostor 畫到 7 km；(2) 全域亮度校正來自密林（樹冠互相遮蔭），單株樹太暗；(3) 遠處稀疏化在**稀疏林**裡只留下零星幾棵 → 一顆顆點。v6 規則：一棵樹若「Landscape 在它底下不畫森林」（`T_NF_Mask1` R < 0.5）**或**「周圍 250 m 內的樹 < 550 棵」（森林中位數 686 的約 80 %，全圖 17.4 % 的樹），就歸為稀疏林：impostor 不放大、亮度 ×1.3、在 2.8 km（＝ 3D 田間樹在 High 的範圍）淡出，並放在自己的短距 grid（`FI_ISO`，3.6 km）。`v2/v2_crop_far_range.jpg`：4–6 km 谷底恢復成 PR #57 的乾淨農田；2.2–2.8 km 的田間樹仍在、色調接近 3D 樹。全部是全域規則，沒有逐棵、逐區修改。
 
-<!-- V2RESULTS -->
+### 10e. A/B 結果（最終：`ab13`，ES3.1 預覽，2560×1600，UHD 770，同 session、兩個順序）
+
+| 視角 | PR #57 High | PR #58 v5 | **v6** | PR #57 Ultra | v6 vs High | v6 vs Ultra | draw call High → v6 |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| forest_layers | 142.4 | 127.4 | **125.0** | 239.1 | **−12 %** | **−48 %** | 2,052 → 2,076 |
+| mid_ridge | 196.8 | 178.2 | **176.7** | 374.6 | **−10 %** | **−53 %** | 1,414 → 1,569 |
+| basin_edge | 50.2 | 50.3 | **50.4** | 66.8 | ±0 % | −25 % | 927 → 1,008 |
+| far_range | 87.3 | 73.5 | **73.3** | 138.7 | **−16 %** | **−47 %** | 1,792 → 1,852 |
+
+（PR #58 v5 在這裡是 v5 參數跑在 v6 串流資料上；GPU ms。）
+
+**高速飛行（300 m/s）**
+
+| | PR #57 High | PR #58 v5 | **v6** |
+|---|---:|---:|---:|
+| 逐格鎖定 3.6 km（`fly3`）GPU 中位 / p95 / 最大 | 120.5 / 163.0 / 171.1 | 92.1 / 135.6 / 140.1 | **92.9 / 135.5 / 149.6** |
+| 遠景帶 pop（> 3× 局部中位） | 0 | 0 | **0** |
+| 遠景帶閃爍（逐格變化中位） | 5.63 | 5.83 | 5.83 |
+| 即時 12 km（`rt2`，1280×800）frame 中位 / GPU 中位 | 33.8 / 72.3 ms | — | **34.8 / 60.0 ms** |
+| 即時飛行中 impostor 常駐 | — | — | 63–77 MB |
+| 即時飛行 WP 串流狀態 | 2 s「Slow」 | — | 17 s「Slow」、無「Critical」 |
+| 即時飛行 frame p95（WP 載入卡頓） | 633 ms | — | 574 ms |
+
+- 即時飛行中兩個配置都有約 0.6 s 的 World Partition 載入卡頓（PR #57 本身就有，這台主機 CPU 被 PID 13716 佔一核）；impostor 層讓 WP 在 300 m/s 下處於「Slow」較久，但沒有可量到的遠景 pop（兩者都偵測到 1 次）。**S11 上需要再看一次**（CPU 不同）。
+
+**畫面**（`v2/triptych_<view>.jpg`：PR #57 High／PR #58 v5／v6／PR #57 Ultra，同一格）：
+- forest_layers：7 km 以外的稜線與溝谷明暗回到 PR #57 水準（v5 是一片朦朧樹冠紋理）；2–6 km 樹冠立體感保留。
+- far_range：4–6 km 谷底恢復乾淨農田（`v2/v2_crop_far_range.jpg`）。
+- 遠景帶結構相似度（1/4 解析度亮度 SSIM，畫面 30–46 % 高度，各自對同 session 的 PR #57 High；`farlod_metrics.py`）——PR #58 v5（提交的 `ab5`）→ v6（`ab13`）：forest_layers 0.893 → **0.914**、far_range 0.877 → **0.906**、basin_edge 0.961 → **0.989**、mid_ridge 0.949 → 0.946。（同 session 的「v5」這裡不當基準：它跑在 v6 資料上，6.2 km 外與稀疏林已被新的 grid 截斷。）「農田暗點」自動計數太吵（PR #57 High 自己就有 261 個），不作證據，以裁切圖為準。
+- mid_ridge、basin_edge：與 v5 幾乎相同（這兩個視角沒有上述兩個問題）。
+- 作廢的兩輪：`ab7`（舊 actor 沒刪，兩層 impostor 疊畫）、`ab9`（MPC GUID 不符，impostor 全部消失）——數據不採用，原因見 10b。
+
+## 11. S11 測試 APK（獨立安裝，不覆蓋 0.2.0）
+
+| | |
+|---|---|
+| 檔案 | `SkyfrontFarLODTest-0.3.0-farlod-dev-arm64.apk`，1,201,993,474 bytes（1,146 MB），SHA-256 `4180cf5d…60730112`（`v2/apk_manifest.json`） |
+| 位置 | `D:\Users\EDDY\SkyfrontBuilds\`（與 0.1.0、0.2.0 並列；0.2.0 未動） |
+| Package | `com.skyfront.homeland.farlodtest` 0.3.0-farlod（versionCode 3），arm64-v8a，minSdk 29 / targetSdk 34，Vulkan，ASTC，Development |
+| 簽章 | 與 0.1.0／0.2.0 同一個 debug 憑證；package name 不同 → **另外安裝，不會更新或覆蓋 0.2.0** |
+| 建置 | BuildCookRun exit 0，14 分鐘；cook 2,551 個 package、0 error、1 warning；比 0.2.0 大 395 MB（全圖 impostor 資料） |
+| 實機 | **未測**（這台主機沒有連接 S11） |
+
+**與 0.2.0 的差別**：package name `com.skyfront.homeland.farlodtest`（0.2.0 是 `com.skyfront.homeland.freeflight`）→ 兩個 app 可以同時安裝、互不覆蓋；圖示名稱「Skyfront FarLOD Test」、版本 0.3.0-farlod。遊戲、飛行、PR #57 的圖形設定全部一樣；impostor 層**預設關閉**（與 0.2.0 相同的畫面）。
+
+**新增兩個按鈕（GFX 面板標題列）**
+- **FAR OFF / FAR ON**：遠景 impostor 層開關（v6 參數）。開啟後串流載入，約 1–3 s 內補齊。若要看候選配置：選 High，再把「Tree distance」往左一格（2.2 km），然後 FAR ON。
+- **BENCH**：在平板上自動跑 A/B（約 8 分鐘，請勿觸碰）：4 個固定視角 × 5 個配置（Balanced、Balanced 3D 1.5 km + impostor、High、High 3D 2.2 km + impostor、Ultra），正反兩個順序。結束後畫面左側顯示 GPU ms 表與 forest_layers 的常駐記憶體（impostor／3D 樹／整個 process），同時寫入 app 的 `Saved/FarLodBench.txt`。跑完會恢復原本的設定。
+- 診斷 overlay 多一行：`FAR IMPOSTORS ON/OFF: near / far 常駐實例 (MB)、3D trees (MB)`。
+
+**S11 測試單（回報這些就夠）**
+1. 安裝後開 DIAG，確認裝置 profile 與 RHI 行（預期 Android_Mali_G9xx_Vulkan / Vulkan）。
+2. 按 BENCH，等它跑完，拍下結果表（5 個配置 × 4 個視角的 GPU ms ＋記憶體三行）。
+3. High：FAR OFF 與「High + Tree distance 2.2 km + FAR ON」各自自由飛 2–3 分鐘（240–400 km/h），看 overlay 的 FPS／frame／GPU ms 與「last change」；注意遠處是否有樹突然出現或閃爍。
+4. 10 分鐘溫度測試：High + 2.2 km + FAR ON 持續飛行，記 FPS 的變化。
+5. 主觀：2–6 km 森林的立體感、7 km 以外山形、農田遠處有沒有黑點。
+
+**不在這個 APK 裡**：PR #57 Tree distance 列對 World Partition 無效的修正（10c，保留基準）、城市 HLOD。
+
+## 12. v2 結論與建議
+
+| | |
+|---|---|
+| 串流 | 全圖 386 萬棵 impostor 用 5 個 2D World Partition grid 依距離載入；常駐最壞 97 MB（最密林區）、一般 10–65 MB、關閉 ≤ 1.4 MB；300 m/s 即時 12 km 無可量到的遠景 pop |
+| 畫面 | 7 km 外山形恢復、4–6 km 農田恢復乾淨；2–6 km 樹冠立體感保留 |
+| 成本 | v6 比 PR #57 High 便宜 10–16 %（森林）、比 Ultra 便宜 47–53 %；draw call 增加 ≤ 160 |
+| 下一步 | (1) S11 上跑 BENCH（§11 測試單）；(2) 另開 PR 修 PR #57 Tree distance 列的 World Partition 指令與 `MainGrid` 邊界升級（10c），候選配置還能省 3D 樹記憶體；(3) 若 S11 上 WP 串流在 300 m/s 長時間「Slow」，把 `FI_B2`／`FI_B3` 也改 2 km cell（代價約 +10 MB）；(4) 城市 HLOD 原型 |
+
+**PID 13716（只調查，未終止）**：仍存在。是 2026-10-16 17:50 一個舊 Claude Code session（`07d9068d…`）的背景指令：`Get-ChildItem -Path D:\out, …\air-combat-world\out\treegen, C:\Users\EDDY\out -Recurse -Filter "it1_front.png"`，跑超過 120 s 被移到背景後一直沒有結束。三個搜尋路徑現在都不存在，輸出檔是空的，但它持續佔用約一個 CPU 核心（5 s 內 4.95 CPU 秒，累計約 135 小時）。父程序是同一舊 session 的 `claude.exe`（PID 23816）。判斷：**無用的孤兒程序**，可以安全結束（`taskkill /PID 13716 /F`）；它會讓這台內顯的絕對效能數字在不同 session 間漂移。
+
+**v2 重現**
+```powershell
+python tools/ntw/forest_world/fi_terrain_normal.py <run> unreal/TreeLookdev/Saved/NorthForest/fi_pack/3
+python tools/ntw/forest_world/fi_forest_mask.py <run> unreal/TreeLookdev/Saved/NorthForest/fi_pack/3
+python tools/ntw/forest_world/fi_stream_budget.py <run>                       # offline residency of grid layouts
+$env:ACW_FI_PARTS='mpc,mat,actors'; $env:ACW_FI_CAMS='all'; tools\ntw\forest_world\run_nf.ps1 -Script fi_build.py -Name fi_build -Expect fi_build.report.json
+$env:ACW_FI_GRIDS='FI_B0:200000:680000,FI_B1:200000:680000'; tools\ntw\forest_world\run_nf.ps1 -Script fi_grids.py -Name fi_grids -Expect fi_grids.report.json
+tools\skyfront\run_farlod_ab.ps1 -Tag ab13 -Views 0,1,2,3                    # high / pr58_v5 / v6 / ultra, census in SKYFL lines
+tools\skyfront\run_farlod_ab.ps1 -Tag rt2 -Fly -Realtime -FlySeconds 40 -FlyCfgs 0,2 -ResX 1280 -ResY 800
+tools\skyfront\run_farlod_ab.ps1 -Tag fly3 -Fly -FlyCfgs 0,1,2 -ResX 1280 -ResY 800
+python tools/skyfront/farlod_metrics.py unreal/TreeLookdev/Saved/Skyfront/ab13
+# APK: move Plugins/XinyiLandscapeBridge out, then
+tools\skyfront\package_android.ps1 -ArchiveName android_archive_farlod     # then move the plugin back
+```
 
 ## 1. 文獻：業界已公開證實的做法 vs 我們的推論
 
