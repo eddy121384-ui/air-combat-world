@@ -1,0 +1,19 @@
+{
+ "size": [
+  2647,
+  2647
+ ],
+ "spacing_cm": 1000.0,
+ "origin_cm": [
+  -646000.0,
+  -4000000.0
+ ],
+ "sigma_m": 30.0,
+ "encoding": "int8 nx, ny * 127, row-major",
+ "orientation_check_median_abs_cm": 99.4,
+ "orientation_samples": 700,
+ "slope_deg_p50_p90": [
+  6.582769798907118,
+  24.60725844314255
+ ]
+}

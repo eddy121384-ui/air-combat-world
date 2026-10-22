@@ -1,0 +1,7500 @@
+{
+ "forest_layers": {
+  "high": {
+   "_n": 2,
+   "0:<root>": {
+    "ms": 290.564,
+    "draws": 4143,
+    "verts": 1885542
+   },
+   "1:BufferPoolCopyOps": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "1:TexturePoolCopyOps": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "1:Frame 158": {
+    "ms": 141.504,
+    "draws": 2054,
+    "verts": 728217
+   },
+   "2:WorldTick": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "2:SendAllEndOfFrameUpdates": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "2:SceneRender - ViewFamilies": {
+    "ms": 284.909,
+    "draws": 4143,
+    "verts": 1885542
+   },
+   "3:MobileSceneRender": {
+    "ms": 0.131,
+    "draws": 0,
+    "verts": 0
+   },
+   "4:\"DistanceFields\"": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "4:InitViews": {
+    "ms": 0.086,
+    "draws": 0,
+    "verts": 0
+   },
+   "4:RenderMobileShadowProjections": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "4:RenderMobileScreenSpaceShadows": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "3:RenderGraphExecute - /ViewFamilies": {
+    "ms": 284.76700000000005,
+    "draws": 4143,
+    "verts": 1885542
+   },
+   "4:FRDGBuilder::SubmitBufferUploads": {
+    "ms": 0.276,
+    "draws": 0,
+    "verts": 0
+   },
+   "4:MobileSceneRender": {
+    "ms": 284.486,
+    "draws": 4143,
+    "verts": 1885542
+   },
+   "5:ClearGPUMessageBuffer": {
+    "ms": 0.365,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:LandscapeCulling, SubsectionSizeQuads 63, Subsections 2, Vie": {
+    "ms": 0.10200000000000001,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:AccessModePass[Graphics] (Textures: 0, Buffers: 3)": {
+    "ms": 0.002,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:FXSystemPreRender": {
+    "ms": 0.002,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:GPUParticles_PreRender": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:GPUScene.UploadDynamicPrimitiveShaderDataForView": {
+    "ms": 0.041999999999999996,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:GPUScene::SetInstancePrimitiveIdCS": {
+    "ms": 0.019,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:UpdateGPUScene NumPrimitiveDataUploads 2": {
+    "ms": 0.016,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:ComputeLightGrid": {
+    "ms": 0.126,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:CullLights WxHx32 NumLights 0 NumCaptures 0": {
+    "ms": 0.123,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:SkyAtmosphereLUTs": {
+    "ms": 1.468,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:SkyAtmosphere::DistantSkyLightLut": {
+    "ms": 0.05,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:SkyAtmosphere::RealTimeCaptureSkyViewLut": {
+    "ms": 0.354,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:SkyAtmosphere::RealTimeCaptureCamera360VolumeLut": {
+    "ms": 0.323,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:SkyAtmosphere::SkyViewLut": {
+    "ms": 0.392,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:SkyAtmosphere::CameraVolumeLut": {
+    "ms": 0.34199999999999997,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:CaptureConvolveSkyEnvMap": {
+    "ms": 0.34600000000000003,
+    "draws": 12,
+    "verts": 36
+   },
+   "6:ConvolutionMip45": {
+    "ms": 0.317,
+    "draws": 12,
+    "verts": 36
+   },
+   "5:ShadowDepths": {
+    "ms": 0.819,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:BuildRenderingCommandsDeferred(Culling=On)": {
+    "ms": 0.575,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:Atlas0 WxH": {
+    "ms": 0.243,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:AccessModePass[Graphics] (Textures: 2, Buffers: 0)": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:BasePass": {
+    "ms": 226.841,
+    "draws": 3998,
+    "verts": 955588
+   },
+   "6:MobileBasePass": {
+    "ms": 223.648,
+    "draws": 1583,
+    "verts": 934236
+   },
+   "6:BeginOcclusionTests": {
+    "ms": 2.5940000000000003,
+    "draws": 2415,
+    "verts": 21352
+   },
+   "5:HZB": {
+    "ms": 0.8540000000000001,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:BuildHZB(ViewId=0)": {
+    "ms": 0.8540000000000001,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:AsyncGpuTraceHelper::PostRenderOpaque": {
+    "ms": 0.002,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:Niagara::PostRenderFinish": {
+    "ms": 0.002,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:MobileSSAO": {
+    "ms": 3.572,
+    "draws": 6,
+    "verts": 20
+   },
+   "6:ScreenSpace AO": {
+    "ms": 3.0300000000000002,
+    "draws": 2,
+    "verts": 6
+   },
+   "6:DepthBounds ClearQuad(ScreenSpaceAO)": {
+    "ms": 0.47,
+    "draws": 2,
+    "verts": 8
+   },
+   "6:UpsamplePS Quality 1": {
+    "ms": 0.07100000000000001,
+    "draws": 2,
+    "verts": 6
+   },
+   "5:ShadowProjection": {
+    "ms": 1.353,
+    "draws": 4,
+    "verts": 16
+   },
+   "6:RenderMobileShadowProjections": {
+    "ms": 1.353,
+    "draws": 4,
+    "verts": 16
+   },
+   "5:RenderMobileScreenSpaceShadows": {
+    "ms": 2.95,
+    "draws": 2,
+    "verts": 6
+   },
+   "6:ScreenSpaceShadows": {
+    "ms": 2.95,
+    "draws": 2,
+    "verts": 6
+   },
+   "5:LightingAndFog": {
+    "ms": 11.667,
+    "draws": 8,
+    "verts": 32
+   },
+   "6:Lighting": {
+    "ms": 8.963000000000001,
+    "draws": 6,
+    "verts": 24
+   },
+   "6:Fog": {
+    "ms": 2.7030000000000003,
+    "draws": 2,
+    "verts": 8
+   },
+   "5:RenderVelocities(Opaque)": {
+    "ms": 3.5869999999999997,
+    "draws": 85,
+    "verts": 929760
+   },
+   "6:Velocity": {
+    "ms": 3.5869999999999997,
+    "draws": 85,
+    "verts": 929760
+   },
+   "5:PostProcessing": {
+    "ms": 30.225,
+    "draws": 28,
+    "verts": 84
+   },
+   "6:BloomSetup WxH in WxH (PS)": {
+    "ms": 0.771,
+    "draws": 2,
+    "verts": 6
+   },
+   "6:BloomDown WxH in WxH RT (PS)": {
+    "ms": 0.3500000000000001,
+    "draws": 12,
+    "verts": 36
+   },
+   "6:BloomUp WxH in WxH RT (PS)": {
+    "ms": 0.40399999999999997,
+    "draws": 10,
+    "verts": 30
+   },
+   "6:SunMerge WxH (PS)": {
+    "ms": 0.548,
+    "draws": 2,
+    "verts": 6
+   },
+   "6:TAA": {
+    "ms": 23.387,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:Tonemap WxH (PS GammaOnly=0)": {
+    "ms": 4.761,
+    "draws": 2,
+    "verts": 6
+   },
+   "5:VirtualTextureUpdate": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:ExtractUniformBuffer": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:EnqueueCopy(GPUMessageManager.MessageBuffer)": {
+    "ms": 0.123,
+    "draws": 0,
+    "verts": 0
+   },
+   "2:RenderGraphExecute - Slate": {
+    "ms": 0.012,
+    "draws": 0,
+    "verts": 0
+   },
+   "3:FRDGBuilder::SubmitBufferUploads": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "1:Frame 704": {
+    "ms": 149.049,
+    "draws": 2089,
+    "verts": 1157325
+   },
+   "6:DiffuseIrradiance": {
+    "ms": 0.028,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:AccessModePass[Graphics] (Textures: 2, Buffers: 1)": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   }
+  },
+  "high_fi": {
+   "_n": 2,
+   "0:<root>": {
+    "ms": 308.27,
+    "draws": 4736,
+    "verts": 1894542
+   },
+   "1:BufferPoolCopyOps": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "1:TexturePoolCopyOps": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "1:Frame 226": {
+    "ms": 153.622,
+    "draws": 2326,
+    "verts": 734851
+   },
+   "2:WorldTick": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "2:SendAllEndOfFrameUpdates": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "2:SceneRender - ViewFamilies": {
+    "ms": 302.674,
+    "draws": 4736,
+    "verts": 1894542
+   },
+   "3:MobileSceneRender": {
+    "ms": 0.14,
+    "draws": 0,
+    "verts": 0
+   },
+   "4:\"DistanceFields\"": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "4:InitViews": {
+    "ms": 0.09,
+    "draws": 0,
+    "verts": 0
+   },
+   "4:RenderMobileShadowProjections": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "4:RenderMobileScreenSpaceShadows": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "3:RenderGraphExecute - /ViewFamilies": {
+    "ms": 302.524,
+    "draws": 4736,
+    "verts": 1894542
+   },
+   "4:FRDGBuilder::SubmitBufferUploads": {
+    "ms": 0.527,
+    "draws": 0,
+    "verts": 0
+   },
+   "4:MobileSceneRender": {
+    "ms": 301.99199999999996,
+    "draws": 4736,
+    "verts": 1894542
+   },
+   "5:ClearGPUMessageBuffer": {
+    "ms": 0.36,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:LandscapeCulling, SubsectionSizeQuads 63, Subsections 2, Vie": {
+    "ms": 0.112,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:AccessModePass[Graphics] (Textures: 0, Buffers: 3)": {
+    "ms": 0.002,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:FXSystemPreRender": {
+    "ms": 0.002,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:GPUParticles_PreRender": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:GPUScene.UploadDynamicPrimitiveShaderDataForView": {
+    "ms": 0.045,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:GPUScene::SetInstancePrimitiveIdCS": {
+    "ms": 0.019,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:UpdateGPUScene NumPrimitiveDataUploads 2": {
+    "ms": 0.018,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:BuildRenderingCommandsDeferred(Culling=On)": {
+    "ms": 0.015,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:ClearIndirectArgInstanceCount": {
+    "ms": 0.002,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:CullInstances(UnCulled). Bin 0": {
+    "ms": 0.011,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:CullInstances(Generic). Bin 1": {
+    "ms": 0.001,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:ComputeLightGrid": {
+    "ms": 0.136,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:CullLights WxHx32 NumLights 0 NumCaptures 0": {
+    "ms": 0.134,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:SkyAtmosphereLUTs": {
+    "ms": 1.458,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:SkyAtmosphere::DistantSkyLightLut": {
+    "ms": 0.051000000000000004,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:SkyAtmosphere::RealTimeCaptureSkyViewLut": {
+    "ms": 0.351,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:SkyAtmosphere::RealTimeCaptureCamera360VolumeLut": {
+    "ms": 0.323,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:SkyAtmosphere::SkyViewLut": {
+    "ms": 0.384,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:SkyAtmosphere::CameraVolumeLut": {
+    "ms": 0.341,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:CaptureConvolveSkyEnvMap": {
+    "ms": 0.26,
+    "draws": 46,
+    "verts": 4548
+   },
+   "6:RenderSky StartFace=2 EndFace=4": {
+    "ms": 0.12,
+    "draws": 4,
+    "verts": 4422
+   },
+   "5:ShadowDepths": {
+    "ms": 5.1690000000000005,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:BuildRenderingCommandsDeferred(Culling=On)": {
+    "ms": 4.91,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:Atlas0 WxH": {
+    "ms": 0.257,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:AccessModePass[Graphics] (Textures: 2, Buffers: 0)": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:BasePass": {
+    "ms": 241.435,
+    "draws": 4557,
+    "verts": 960076
+   },
+   "6:MobileBasePass": {
+    "ms": 237.868,
+    "draws": 1581,
+    "verts": 934236
+   },
+   "6:BeginOcclusionTests": {
+    "ms": 2.9699999999999998,
+    "draws": 2976,
+    "verts": 25840
+   },
+   "5:HZB": {
+    "ms": 0.753,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:BuildHZB(ViewId=0)": {
+    "ms": 0.753,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:AsyncGpuTraceHelper::PostRenderOpaque": {
+    "ms": 0.002,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:Niagara::PostRenderFinish": {
+    "ms": 0.002,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:MobileSSAO": {
+    "ms": 3.1959999999999997,
+    "draws": 6,
+    "verts": 20
+   },
+   "6:ScreenSpace AO": {
+    "ms": 2.653,
+    "draws": 2,
+    "verts": 6
+   },
+   "6:DepthBounds ClearQuad(ScreenSpaceAO)": {
+    "ms": 0.471,
+    "draws": 2,
+    "verts": 8
+   },
+   "6:UpsamplePS Quality 1": {
+    "ms": 0.07100000000000001,
+    "draws": 2,
+    "verts": 6
+   },
+   "5:ShadowProjection": {
+    "ms": 1.3170000000000002,
+    "draws": 4,
+    "verts": 16
+   },
+   "6:RenderMobileShadowProjections": {
+    "ms": 1.316,
+    "draws": 4,
+    "verts": 16
+   },
+   "5:RenderMobileScreenSpaceShadows": {
+    "ms": 2.795,
+    "draws": 2,
+    "verts": 6
+   },
+   "6:ScreenSpaceShadows": {
+    "ms": 2.795,
+    "draws": 2,
+    "verts": 6
+   },
+   "5:LightingAndFog": {
+    "ms": 12.375,
+    "draws": 8,
+    "verts": 32
+   },
+   "6:Lighting": {
+    "ms": 9.699,
+    "draws": 6,
+    "verts": 24
+   },
+   "6:Fog": {
+    "ms": 2.677,
+    "draws": 2,
+    "verts": 8
+   },
+   "5:RenderVelocities(Opaque)": {
+    "ms": 3.253,
+    "draws": 85,
+    "verts": 929760
+   },
+   "6:Velocity": {
+    "ms": 3.253,
+    "draws": 85,
+    "verts": 929760
+   },
+   "5:PostProcessing": {
+    "ms": 29.144,
+    "draws": 28,
+    "verts": 84
+   },
+   "6:BloomSetup WxH in WxH (PS)": {
+    "ms": 0.637,
+    "draws": 2,
+    "verts": 6
+   },
+   "6:BloomDown WxH in WxH RT (PS)": {
+    "ms": 0.3470000000000001,
+    "draws": 12,
+    "verts": 36
+   },
+   "6:BloomUp WxH in WxH RT (PS)": {
+    "ms": 0.39699999999999996,
+    "draws": 10,
+    "verts": 30
+   },
+   "6:SunMerge WxH (PS)": {
+    "ms": 0.546,
+    "draws": 2,
+    "verts": 6
+   },
+   "6:TAA": {
+    "ms": 22.427,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:Tonemap WxH (PS GammaOnly=0)": {
+    "ms": 4.789,
+    "draws": 2,
+    "verts": 6
+   },
+   "5:VirtualTextureUpdate": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:ExtractUniformBuffer": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:EnqueueCopy(GPUMessageManager.MessageBuffer)": {
+    "ms": 0.122,
+    "draws": 0,
+    "verts": 0
+   },
+   "2:RenderGraphExecute - Slate": {
+    "ms": 0.013000000000000001,
+    "draws": 0,
+    "verts": 0
+   },
+   "3:FRDGBuilder::SubmitBufferUploads": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "1:Frame 631": {
+    "ms": 154.64,
+    "draws": 2410,
+    "verts": 1159691
+   },
+   "6:GenCubeMips": {
+    "ms": 0.139,
+    "draws": 42,
+    "verts": 126
+   }
+  },
+  "high_t22_fi": {
+   "_n": 2,
+   "0:<root>": {
+    "ms": 258.231,
+    "draws": 4360,
+    "verts": 1498350
+   },
+   "1:BufferPoolCopyOps": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "1:TexturePoolCopyOps": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "1:Frame 306": {
+    "ms": 126.889,
+    "draws": 2180,
+    "verts": 734883
+   },
+   "2:WorldTick": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "2:SendAllEndOfFrameUpdates": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "2:SceneRender - ViewFamilies": {
+    "ms": 252.56,
+    "draws": 4360,
+    "verts": 1498350
+   },
+   "3:MobileSceneRender": {
+    "ms": 0.149,
+    "draws": 0,
+    "verts": 0
+   },
+   "4:\"DistanceFields\"": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "4:InitViews": {
+    "ms": 0.097,
+    "draws": 0,
+    "verts": 0
+   },
+   "4:RenderMobileShadowProjections": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "4:RenderMobileScreenSpaceShadows": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "3:RenderGraphExecute - /ViewFamilies": {
+    "ms": 252.402,
+    "draws": 4360,
+    "verts": 1498350
+   },
+   "4:FRDGBuilder::SubmitBufferUploads": {
+    "ms": 0.55,
+    "draws": 0,
+    "verts": 0
+   },
+   "4:MobileSceneRender": {
+    "ms": 251.848,
+    "draws": 4360,
+    "verts": 1498350
+   },
+   "5:ClearGPUMessageBuffer": {
+    "ms": 0.355,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:LandscapeCulling, SubsectionSizeQuads 63, Subsections 2, Vie": {
+    "ms": 0.108,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:AccessModePass[Graphics] (Textures: 0, Buffers: 3)": {
+    "ms": 0.002,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:FXSystemPreRender": {
+    "ms": 0.002,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:GPUParticles_PreRender": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:GPUScene.UploadDynamicPrimitiveShaderDataForView": {
+    "ms": 0.046,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:GPUScene::SetInstancePrimitiveIdCS": {
+    "ms": 0.02,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:UpdateGPUScene NumPrimitiveDataUploads 2": {
+    "ms": 0.018,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:BuildRenderingCommandsDeferred(Culling=On)": {
+    "ms": 0.031,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:ClearIndirectArgInstanceCount": {
+    "ms": 0.004,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:CullInstances(UnCulled). Bin 0": {
+    "ms": 0.022,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:CullInstances(Generic). Bin 1": {
+    "ms": 0.002,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:ComputeLightGrid": {
+    "ms": 0.145,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:CullLights WxHx32 NumLights 0 NumCaptures 0": {
+    "ms": 0.143,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:SkyAtmosphereLUTs": {
+    "ms": 1.456,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:SkyAtmosphere::DistantSkyLightLut": {
+    "ms": 0.051000000000000004,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:SkyAtmosphere::RealTimeCaptureSkyViewLut": {
+    "ms": 0.35,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:SkyAtmosphere::RealTimeCaptureCamera360VolumeLut": {
+    "ms": 0.322,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:SkyAtmosphere::SkyViewLut": {
+    "ms": 0.384,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:SkyAtmosphere::CameraVolumeLut": {
+    "ms": 0.34199999999999997,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:CaptureConvolveSkyEnvMap": {
+    "ms": 0.247,
+    "draws": 8,
+    "verts": 8844
+   },
+   "6:RenderSky StartFace=2 EndFace=4": {
+    "ms": 0.119,
+    "draws": 4,
+    "verts": 4422
+   },
+   "5:ShadowDepths": {
+    "ms": 4.731,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:BuildRenderingCommandsDeferred(Culling=On)": {
+    "ms": 4.471,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:Atlas0 WxH": {
+    "ms": 0.259,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:AccessModePass[Graphics] (Textures: 2, Buffers: 0)": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:BasePass": {
+    "ms": 190.37099999999998,
+    "draws": 4233,
+    "verts": 759844
+   },
+   "6:MobileBasePass": {
+    "ms": 186.757,
+    "draws": 1267,
+    "verts": 733980
+   },
+   "6:BeginOcclusionTests": {
+    "ms": 3.018,
+    "draws": 2966,
+    "verts": 25864
+   },
+   "5:HZB": {
+    "ms": 0.7849999999999999,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:BuildHZB(ViewId=0)": {
+    "ms": 0.784,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:AsyncGpuTraceHelper::PostRenderOpaque": {
+    "ms": 0.002,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:Niagara::PostRenderFinish": {
+    "ms": 0.002,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:MobileSSAO": {
+    "ms": 3.4509999999999996,
+    "draws": 6,
+    "verts": 20
+   },
+   "6:ScreenSpace AO": {
+    "ms": 2.915,
+    "draws": 2,
+    "verts": 6
+   },
+   "6:DepthBounds ClearQuad(ScreenSpaceAO)": {
+    "ms": 0.463,
+    "draws": 2,
+    "verts": 8
+   },
+   "6:UpsamplePS Quality 1": {
+    "ms": 0.07100000000000001,
+    "draws": 2,
+    "verts": 6
+   },
+   "5:ShadowProjection": {
+    "ms": 1.256,
+    "draws": 4,
+    "verts": 16
+   },
+   "6:RenderMobileShadowProjections": {
+    "ms": 1.255,
+    "draws": 4,
+    "verts": 16
+   },
+   "5:RenderMobileScreenSpaceShadows": {
+    "ms": 2.805,
+    "draws": 2,
+    "verts": 6
+   },
+   "6:ScreenSpaceShadows": {
+    "ms": 2.805,
+    "draws": 2,
+    "verts": 6
+   },
+   "5:LightingAndFog": {
+    "ms": 12.753,
+    "draws": 8,
+    "verts": 32
+   },
+   "6:Lighting": {
+    "ms": 9.974,
+    "draws": 6,
+    "verts": 24
+   },
+   "6:Fog": {
+    "ms": 2.779,
+    "draws": 2,
+    "verts": 8
+   },
+   "5:RenderVelocities(Opaque)": {
+    "ms": 3.074,
+    "draws": 71,
+    "verts": 729504
+   },
+   "6:Velocity": {
+    "ms": 3.074,
+    "draws": 71,
+    "verts": 729504
+   },
+   "5:PostProcessing": {
+    "ms": 30.067999999999998,
+    "draws": 28,
+    "verts": 84
+   },
+   "6:BloomSetup WxH in WxH (PS)": {
+    "ms": 0.732,
+    "draws": 2,
+    "verts": 6
+   },
+   "6:BloomDown WxH in WxH RT (PS)": {
+    "ms": 0.3460000000000001,
+    "draws": 12,
+    "verts": 36
+   },
+   "6:BloomUp WxH in WxH RT (PS)": {
+    "ms": 0.39999999999999997,
+    "draws": 10,
+    "verts": 30
+   },
+   "6:SunMerge WxH (PS)": {
+    "ms": 0.545,
+    "draws": 2,
+    "verts": 6
+   },
+   "6:TAA": {
+    "ms": 23.29,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:Tonemap WxH (PS GammaOnly=0)": {
+    "ms": 4.749,
+    "draws": 2,
+    "verts": 6
+   },
+   "5:VirtualTextureUpdate": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:ExtractUniformBuffer": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:EnqueueCopy(GPUMessageManager.MessageBuffer)": {
+    "ms": 0.11699999999999999,
+    "draws": 0,
+    "verts": 0
+   },
+   "2:RenderGraphExecute - Slate": {
+    "ms": 0.011,
+    "draws": 0,
+    "verts": 0
+   },
+   "3:FRDGBuilder::SubmitBufferUploads": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "1:Frame 563": {
+    "ms": 131.334,
+    "draws": 2180,
+    "verts": 763467
+   },
+   "6:RenderSky StartFace=4 EndFace=6": {
+    "ms": 0.128,
+    "draws": 4,
+    "verts": 4422
+   }
+  },
+  "ultra": {
+   "_n": 2,
+   "0:<root>": {
+    "ms": 488.31399999999996,
+    "draws": 6045,
+    "verts": 1891798
+   },
+   "1:BufferPoolCopyOps": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "1:TexturePoolCopyOps": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "1:Frame 354": {
+    "ms": 244.62,
+    "draws": 3003,
+    "verts": 948043
+   },
+   "2:WorldTick": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "2:SendAllEndOfFrameUpdates": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "2:SceneRender - ViewFamilies": {
+    "ms": 482.724,
+    "draws": 6045,
+    "verts": 1891798
+   },
+   "3:MobileSceneRender": {
+    "ms": 0.16899999999999998,
+    "draws": 0,
+    "verts": 0
+   },
+   "4:\"DistanceFields\"": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "4:InitViews": {
+    "ms": 0.125,
+    "draws": 0,
+    "verts": 0
+   },
+   "4:RenderMobileShadowProjections": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "4:RenderMobileScreenSpaceShadows": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "3:RenderGraphExecute - /ViewFamilies": {
+    "ms": 482.546,
+    "draws": 6045,
+    "verts": 1891798
+   },
+   "4:FRDGBuilder::SubmitBufferUploads": {
+    "ms": 0.371,
+    "draws": 0,
+    "verts": 0
+   },
+   "4:MobileSceneRender": {
+    "ms": 482.17,
+    "draws": 6045,
+    "verts": 1891798
+   },
+   "5:ClearGPUMessageBuffer": {
+    "ms": 0.525,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:LandscapeCulling, SubsectionSizeQuads 63, Subsections 2, Vie": {
+    "ms": 0.168,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:GPUScene.UploadDynamicPrimitiveShaderDataForView": {
+    "ms": 0.105,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:AccessModePass[Graphics] (Textures: 0, Buffers: 3)": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:GPUScene::SetInstancePrimitiveIdCS": {
+    "ms": 0.04000000000000001,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:UpdateGPUScene NumPrimitiveDataUploads 2": {
+    "ms": 0.049,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:FXSystemPreRender": {
+    "ms": 0.002,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:GPUParticles_PreRender": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:BuildRenderingCommandsDeferred(Culling=On)": {
+    "ms": 0.016,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:ClearIndirectArgInstanceCount": {
+    "ms": 0.002,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:CullInstances(UnCulled). Bin 0": {
+    "ms": 0.011,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:CullInstances(Generic). Bin 1": {
+    "ms": 0.001,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:ComputeLightGrid": {
+    "ms": 0.175,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:CullLights WxHx32 NumLights 0 NumCaptures 0": {
+    "ms": 0.174,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:SkyAtmosphereLUTs": {
+    "ms": 1.46,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:SkyAtmosphere::DistantSkyLightLut": {
+    "ms": 0.052,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:SkyAtmosphere::RealTimeCaptureSkyViewLut": {
+    "ms": 0.35,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:SkyAtmosphere::RealTimeCaptureCamera360VolumeLut": {
+    "ms": 0.326,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:SkyAtmosphere::SkyViewLut": {
+    "ms": 0.385,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:SkyAtmosphere::CameraVolumeLut": {
+    "ms": 0.341,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:CaptureConvolveSkyEnvMap": {
+    "ms": 0.264,
+    "draws": 46,
+    "verts": 4548
+   },
+   "6:RenderSky StartFace=2 EndFace=4": {
+    "ms": 0.121,
+    "draws": 4,
+    "verts": 4422
+   },
+   "5:ShadowDepths": {
+    "ms": 139.07999999999998,
+    "draws": 1774,
+    "verts": 716920
+   },
+   "6:BuildRenderingCommandsDeferred(Culling=On)": {
+    "ms": 0.971,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:Atlas0 WxH": {
+    "ms": 138.108,
+    "draws": 1774,
+    "verts": 716920
+   },
+   "5:AccessModePass[Graphics] (Textures: 2, Buffers: 0)": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:BasePass": {
+    "ms": 267.61400000000003,
+    "draws": 4105,
+    "verts": 598004
+   },
+   "6:MobileBasePass": {
+    "ms": 263.868,
+    "draws": 1702,
+    "verts": 576636
+   },
+   "6:BeginOcclusionTests": {
+    "ms": 2.932,
+    "draws": 2403,
+    "verts": 21368
+   },
+   "5:HZB": {
+    "ms": 1.808,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:BuildHZB(ViewId=0)": {
+    "ms": 1.808,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:AsyncGpuTraceHelper::PostRenderOpaque": {
+    "ms": 0.002,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:Niagara::PostRenderFinish": {
+    "ms": 0.002,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:MobileSSAO": {
+    "ms": 5.997,
+    "draws": 6,
+    "verts": 20
+   },
+   "6:ScreenSpace AO": {
+    "ms": 5.225,
+    "draws": 2,
+    "verts": 6
+   },
+   "6:DepthBounds ClearQuad(ScreenSpaceAO)": {
+    "ms": 0.665,
+    "draws": 2,
+    "verts": 8
+   },
+   "6:UpsamplePS Quality 1": {
+    "ms": 0.10600000000000001,
+    "draws": 2,
+    "verts": 6
+   },
+   "5:ShadowProjection": {
+    "ms": 2.402,
+    "draws": 6,
+    "verts": 24
+   },
+   "6:RenderMobileShadowProjections": {
+    "ms": 2.402,
+    "draws": 6,
+    "verts": 24
+   },
+   "5:RenderMobileScreenSpaceShadows": {
+    "ms": 5.221,
+    "draws": 2,
+    "verts": 6
+   },
+   "6:ScreenSpaceShadows": {
+    "ms": 5.221,
+    "draws": 2,
+    "verts": 6
+   },
+   "5:LightingAndFog": {
+    "ms": 18.310000000000002,
+    "draws": 8,
+    "verts": 32
+   },
+   "6:Lighting": {
+    "ms": 14.46,
+    "draws": 6,
+    "verts": 24
+   },
+   "6:Fog": {
+    "ms": 3.85,
+    "draws": 2,
+    "verts": 8
+   },
+   "5:RenderVelocities(Opaque)": {
+    "ms": 4.125,
+    "draws": 70,
+    "verts": 572160
+   },
+   "6:Velocity": {
+    "ms": 4.125,
+    "draws": 70,
+    "verts": 572160
+   },
+   "5:PostProcessing": {
+    "ms": 34.45099999999999,
+    "draws": 28,
+    "verts": 84
+   },
+   "6:BloomSetup WxH in WxH (PS)": {
+    "ms": 1.1480000000000001,
+    "draws": 2,
+    "verts": 6
+   },
+   "6:BloomDown WxH in WxH RT (PS)": {
+    "ms": 0.449,
+    "draws": 12,
+    "verts": 36
+   },
+   "6:BloomUp WxH in WxH RT (PS)": {
+    "ms": 0.488,
+    "draws": 10,
+    "verts": 30
+   },
+   "6:SunMerge WxH (PS)": {
+    "ms": 0.734,
+    "draws": 2,
+    "verts": 6
+   },
+   "6:TAA": {
+    "ms": 26.137,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:Tonemap WxH (PS GammaOnly=0)": {
+    "ms": 5.491,
+    "draws": 2,
+    "verts": 6
+   },
+   "5:VirtualTextureUpdate": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:ExtractUniformBuffer": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:EnqueueCopy(GPUMessageManager.MessageBuffer)": {
+    "ms": 0.403,
+    "draws": 0,
+    "verts": 0
+   },
+   "2:RenderGraphExecute - Slate": {
+    "ms": 0.009000000000000001,
+    "draws": 0,
+    "verts": 0
+   },
+   "3:FRDGBuilder::SubmitBufferUploads": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "1:Frame 487": {
+    "ms": 243.684,
+    "draws": 3042,
+    "verts": 943755
+   },
+   "6:GenCubeMips": {
+    "ms": 0.141,
+    "draws": 42,
+    "verts": 126
+   }
+  },
+  "ultra_fi": {
+   "_n": 2,
+   "0:<root>": {
+    "ms": 501.517,
+    "draws": 6567,
+    "verts": 1891802
+   },
+   "1:BufferPoolCopyOps": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "1:TexturePoolCopyOps": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "1:Frame 397": {
+    "ms": 250.748,
+    "draws": 3285,
+    "verts": 945903
+   },
+   "2:WorldTick": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "2:SendAllEndOfFrameUpdates": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "2:SceneRender - ViewFamilies": {
+    "ms": 495.949,
+    "draws": 6567,
+    "verts": 1891802
+   },
+   "3:MobileSceneRender": {
+    "ms": 0.198,
+    "draws": 0,
+    "verts": 0
+   },
+   "4:\"DistanceFields\"": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "4:InitViews": {
+    "ms": 0.153,
+    "draws": 0,
+    "verts": 0
+   },
+   "4:RenderMobileShadowProjections": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "4:RenderMobileScreenSpaceShadows": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "3:RenderGraphExecute - /ViewFamilies": {
+    "ms": 495.743,
+    "draws": 6567,
+    "verts": 1891802
+   },
+   "4:FRDGBuilder::SubmitBufferUploads": {
+    "ms": 0.62,
+    "draws": 0,
+    "verts": 0
+   },
+   "4:MobileSceneRender": {
+    "ms": 495.118,
+    "draws": 6567,
+    "verts": 1891802
+   },
+   "5:ClearGPUMessageBuffer": {
+    "ms": 0.456,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:LandscapeCulling, SubsectionSizeQuads 63, Subsections 2, Vie": {
+    "ms": 0.161,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:GPUScene.UploadDynamicPrimitiveShaderDataForView": {
+    "ms": 0.10099999999999999,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:AccessModePass[Graphics] (Textures: 0, Buffers: 3)": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:GPUScene::SetInstancePrimitiveIdCS": {
+    "ms": 0.04000000000000001,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:UpdateGPUScene NumPrimitiveDataUploads 2": {
+    "ms": 0.048,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:FXSystemPreRender": {
+    "ms": 0.002,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:GPUParticles_PreRender": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:ComputeLightGrid": {
+    "ms": 0.168,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:CullLights WxHx32 NumLights 0 NumCaptures 0": {
+    "ms": 0.166,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:SkyAtmosphereLUTs": {
+    "ms": 1.458,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:SkyAtmosphere::DistantSkyLightLut": {
+    "ms": 0.053,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:SkyAtmosphere::RealTimeCaptureSkyViewLut": {
+    "ms": 0.35,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:SkyAtmosphere::RealTimeCaptureCamera360VolumeLut": {
+    "ms": 0.323,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:SkyAtmosphere::SkyViewLut": {
+    "ms": 0.382,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:SkyAtmosphere::CameraVolumeLut": {
+    "ms": 0.34299999999999997,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:CaptureConvolveSkyEnvMap": {
+    "ms": 0.263,
+    "draws": 8,
+    "verts": 24
+   },
+   "6:ConvolutionMip3": {
+    "ms": 0.125,
+    "draws": 6,
+    "verts": 18
+   },
+   "5:ShadowDepths": {
+    "ms": 142.578,
+    "draws": 1774,
+    "verts": 716920
+   },
+   "6:BuildRenderingCommandsDeferred(Culling=On)": {
+    "ms": 5.072,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:Atlas0 WxH": {
+    "ms": 137.50400000000002,
+    "draws": 1774,
+    "verts": 716920
+   },
+   "5:AccessModePass[Graphics] (Textures: 2, Buffers: 0)": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:BasePass": {
+    "ms": 286.61800000000005,
+    "draws": 4665,
+    "verts": 602532
+   },
+   "6:MobileBasePass": {
+    "ms": 282.471,
+    "draws": 1696,
+    "verts": 576636
+   },
+   "6:BeginOcclusionTests": {
+    "ms": 3.322,
+    "draws": 2969,
+    "verts": 25896
+   },
+   "5:HZB": {
+    "ms": 1.3290000000000002,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:BuildHZB(ViewId=0)": {
+    "ms": 1.3290000000000002,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:AsyncGpuTraceHelper::PostRenderOpaque": {
+    "ms": 0.002,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:Niagara::PostRenderFinish": {
+    "ms": 0.002,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:MobileSSAO": {
+    "ms": 4.697,
+    "draws": 6,
+    "verts": 20
+   },
+   "6:ScreenSpace AO": {
+    "ms": 3.9050000000000002,
+    "draws": 2,
+    "verts": 6
+   },
+   "6:DepthBounds ClearQuad(ScreenSpaceAO)": {
+    "ms": 0.662,
+    "draws": 2,
+    "verts": 8
+   },
+   "6:UpsamplePS Quality 1": {
+    "ms": 0.128,
+    "draws": 2,
+    "verts": 6
+   },
+   "5:ShadowProjection": {
+    "ms": 2.363,
+    "draws": 6,
+    "verts": 24
+   },
+   "6:RenderMobileShadowProjections": {
+    "ms": 2.363,
+    "draws": 6,
+    "verts": 24
+   },
+   "5:RenderMobileScreenSpaceShadows": {
+    "ms": 4.132,
+    "draws": 2,
+    "verts": 6
+   },
+   "6:ScreenSpaceShadows": {
+    "ms": 4.132,
+    "draws": 2,
+    "verts": 6
+   },
+   "5:LightingAndFog": {
+    "ms": 16.987000000000002,
+    "draws": 8,
+    "verts": 32
+   },
+   "6:Lighting": {
+    "ms": 13.379,
+    "draws": 6,
+    "verts": 24
+   },
+   "6:Fog": {
+    "ms": 3.6079999999999997,
+    "draws": 2,
+    "verts": 8
+   },
+   "5:RenderVelocities(Opaque)": {
+    "ms": 3.748,
+    "draws": 70,
+    "verts": 572160
+   },
+   "6:Velocity": {
+    "ms": 3.748,
+    "draws": 70,
+    "verts": 572160
+   },
+   "5:PostProcessing": {
+    "ms": 29.905,
+    "draws": 28,
+    "verts": 84
+   },
+   "6:BloomSetup WxH in WxH (PS)": {
+    "ms": 1.069,
+    "draws": 2,
+    "verts": 6
+   },
+   "6:BloomDown WxH in WxH RT (PS)": {
+    "ms": 0.448,
+    "draws": 12,
+    "verts": 36
+   },
+   "6:BloomUp WxH in WxH RT (PS)": {
+    "ms": 0.494,
+    "draws": 10,
+    "verts": 30
+   },
+   "6:SunMerge WxH (PS)": {
+    "ms": 0.732,
+    "draws": 2,
+    "verts": 6
+   },
+   "6:TAA": {
+    "ms": 22.509999999999998,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:Tonemap WxH (PS GammaOnly=0)": {
+    "ms": 4.649,
+    "draws": 2,
+    "verts": 6
+   },
+   "5:VirtualTextureUpdate": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:ExtractUniformBuffer": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:EnqueueCopy(GPUMessageManager.MessageBuffer)": {
+    "ms": 0.11,
+    "draws": 0,
+    "verts": 0
+   },
+   "2:RenderGraphExecute - Slate": {
+    "ms": 0.012,
+    "draws": 0,
+    "verts": 0
+   },
+   "3:FRDGBuilder::SubmitBufferUploads": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "1:Frame 441": {
+    "ms": 250.758,
+    "draws": 3282,
+    "verts": 945899
+   },
+   "6:ConvolutionMip0Face23": {
+    "ms": 0.137,
+    "draws": 2,
+    "verts": 6
+   }
+  }
+ },
+ "mid_ridge": {
+  "high": {
+   "_n": 2,
+   "0:<root>": {
+    "ms": 630.149,
+    "draws": 2827,
+    "verts": 369534
+   },
+   "1:BufferPoolCopyOps": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "1:TexturePoolCopyOps": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "1:Frame 857": {
+    "ms": 306.927,
+    "draws": 1413,
+    "verts": 182563
+   },
+   "2:WorldTick": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "2:SendAllEndOfFrameUpdates": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "2:SceneRender - ViewFamilies": {
+    "ms": 624.534,
+    "draws": 2827,
+    "verts": 369534
+   },
+   "3:MobileSceneRender": {
+    "ms": 0.151,
+    "draws": 0,
+    "verts": 0
+   },
+   "4:\"DistanceFields\"": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "4:InitViews": {
+    "ms": 0.089,
+    "draws": 0,
+    "verts": 0
+   },
+   "4:RenderMobileShadowProjections": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "4:RenderMobileScreenSpaceShadows": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "3:RenderGraphExecute - /ViewFamilies": {
+    "ms": 624.373,
+    "draws": 2827,
+    "verts": 369534
+   },
+   "4:FRDGBuilder::SubmitBufferUploads": {
+    "ms": 0.385,
+    "draws": 0,
+    "verts": 0
+   },
+   "4:MobileSceneRender": {
+    "ms": 623.9839999999999,
+    "draws": 2827,
+    "verts": 369534
+   },
+   "5:ClearGPUMessageBuffer": {
+    "ms": 0.263,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:LandscapeCulling, SubsectionSizeQuads 63, Subsections 2, Vie": {
+    "ms": 0.10600000000000001,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:AccessModePass[Graphics] (Textures: 0, Buffers: 3)": {
+    "ms": 0.002,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:FXSystemPreRender": {
+    "ms": 0.003,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:GPUParticles_PreRender": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:GPUScene.UploadDynamicPrimitiveShaderDataForView": {
+    "ms": 0.049,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:GPUScene::SetInstancePrimitiveIdCS": {
+    "ms": 0.022,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:UpdateGPUScene NumPrimitiveDataUploads 2": {
+    "ms": 0.019,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:ComputeLightGrid": {
+    "ms": 0.158,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:CullLights WxHx32 NumLights 0 NumCaptures 0": {
+    "ms": 0.156,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:SkyAtmosphereLUTs": {
+    "ms": 1.491,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:SkyAtmosphere::DistantSkyLightLut": {
+    "ms": 0.06,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:SkyAtmosphere::RealTimeCaptureSkyViewLut": {
+    "ms": 0.354,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:SkyAtmosphere::RealTimeCaptureCamera360VolumeLut": {
+    "ms": 0.325,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:SkyAtmosphere::SkyViewLut": {
+    "ms": 0.404,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:SkyAtmosphere::CameraVolumeLut": {
+    "ms": 0.339,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:CaptureConvolveSkyEnvMap": {
+    "ms": 0.262,
+    "draws": 6,
+    "verts": 4428
+   },
+   "6:ConvolutionMip0Face23": {
+    "ms": 0.142,
+    "draws": 2,
+    "verts": 6
+   },
+   "5:ShadowDepths": {
+    "ms": 1.041,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:BuildRenderingCommandsDeferred(Culling=On)": {
+    "ms": 0.752,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:Atlas0 WxH": {
+    "ms": 0.28800000000000003,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:AccessModePass[Graphics] (Textures: 2, Buffers: 0)": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:BasePass": {
+    "ms": 526.52,
+    "draws": 2743,
+    "verts": 193300
+   },
+   "6:MobileBasePass": {
+    "ms": 523.891,
+    "draws": 906,
+    "verts": 176124
+   },
+   "6:BeginOcclusionTests": {
+    "ms": 2.0309999999999997,
+    "draws": 1837,
+    "verts": 17176
+   },
+   "5:HZB": {
+    "ms": 1.158,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:BuildHZB(ViewId=0)": {
+    "ms": 1.158,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:AsyncGpuTraceHelper::PostRenderOpaque": {
+    "ms": 0.002,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:Niagara::PostRenderFinish": {
+    "ms": 0.002,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:MobileSSAO": {
+    "ms": 3.79,
+    "draws": 6,
+    "verts": 20
+   },
+   "6:ScreenSpace AO": {
+    "ms": 3.246,
+    "draws": 2,
+    "verts": 6
+   },
+   "6:DepthBounds ClearQuad(ScreenSpaceAO)": {
+    "ms": 0.471,
+    "draws": 2,
+    "verts": 8
+   },
+   "6:UpsamplePS Quality 1": {
+    "ms": 0.072,
+    "draws": 2,
+    "verts": 6
+   },
+   "5:ShadowProjection": {
+    "ms": 2.4139999999999997,
+    "draws": 4,
+    "verts": 16
+   },
+   "6:RenderMobileShadowProjections": {
+    "ms": 2.4139999999999997,
+    "draws": 4,
+    "verts": 16
+   },
+   "5:RenderMobileScreenSpaceShadows": {
+    "ms": 3.2649999999999997,
+    "draws": 2,
+    "verts": 6
+   },
+   "6:ScreenSpaceShadows": {
+    "ms": 3.2649999999999997,
+    "draws": 2,
+    "verts": 6
+   },
+   "5:LightingAndFog": {
+    "ms": 14.812000000000001,
+    "draws": 8,
+    "verts": 32
+   },
+   "6:Lighting": {
+    "ms": 12.61,
+    "draws": 6,
+    "verts": 24
+   },
+   "6:Fog": {
+    "ms": 2.201,
+    "draws": 2,
+    "verts": 8
+   },
+   "5:RenderVelocities(Opaque)": {
+    "ms": 25.831000000000003,
+    "draws": 30,
+    "verts": 171648
+   },
+   "6:Velocity": {
+    "ms": 25.831000000000003,
+    "draws": 30,
+    "verts": 171648
+   },
+   "5:PostProcessing": {
+    "ms": 32.034,
+    "draws": 28,
+    "verts": 84
+   },
+   "6:BloomSetup WxH in WxH (PS)": {
+    "ms": 2.0069999999999997,
+    "draws": 2,
+    "verts": 6
+   },
+   "6:BloomDown WxH in WxH RT (PS)": {
+    "ms": 0.3500000000000001,
+    "draws": 12,
+    "verts": 36
+   },
+   "6:BloomUp WxH in WxH RT (PS)": {
+    "ms": 0.408,
+    "draws": 10,
+    "verts": 30
+   },
+   "6:SunMerge WxH (PS)": {
+    "ms": 0.549,
+    "draws": 2,
+    "verts": 6
+   },
+   "6:TAA": {
+    "ms": 23.036,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:Tonemap WxH (PS GammaOnly=0)": {
+    "ms": 5.682,
+    "draws": 2,
+    "verts": 6
+   },
+   "5:VirtualTextureUpdate": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:ExtractUniformBuffer": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:EnqueueCopy(GPUMessageManager.MessageBuffer)": {
+    "ms": 10.524,
+    "draws": 0,
+    "verts": 0
+   },
+   "2:RenderGraphExecute - Slate": {
+    "ms": 0.011,
+    "draws": 0,
+    "verts": 0
+   },
+   "3:FRDGBuilder::SubmitBufferUploads": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "1:Frame 1122": {
+    "ms": 323.212,
+    "draws": 1414,
+    "verts": 186971
+   },
+   "5:UpdateAllPrimitiveSceneInfos": {
+    "ms": 0.198,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:GPUSceneUpdate": {
+    "ms": 0.198,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:BuildRenderingCommandsDeferred(Culling=On)": {
+    "ms": 0.017,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:ClearIndirectArgInstanceCount": {
+    "ms": 0.002,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:CullInstances(UnCulled). Bin 0": {
+    "ms": 0.012,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:CullInstances(Generic). Bin 1": {
+    "ms": 0.001,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:RenderSky StartFace=2 EndFace=4": {
+    "ms": 0.12,
+    "draws": 4,
+    "verts": 4422
+   }
+  },
+  "high_fi": {
+   "_n": 2,
+   "0:<root>": {
+    "ms": 552.864,
+    "draws": 3214,
+    "verts": 368208
+   },
+   "1:BufferPoolCopyOps": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "1:TexturePoolCopyOps": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "1:Frame 892": {
+    "ms": 287.534,
+    "draws": 1604,
+    "verts": 184095
+   },
+   "2:WorldTick": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "2:SendAllEndOfFrameUpdates": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "2:SceneRender - ViewFamilies": {
+    "ms": 546.973,
+    "draws": 3214,
+    "verts": 368208
+   },
+   "3:MobileSceneRender": {
+    "ms": 0.138,
+    "draws": 0,
+    "verts": 0
+   },
+   "4:\"DistanceFields\"": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "4:InitViews": {
+    "ms": 0.084,
+    "draws": 0,
+    "verts": 0
+   },
+   "4:RenderMobileShadowProjections": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "4:RenderMobileScreenSpaceShadows": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "3:RenderGraphExecute - /ViewFamilies": {
+    "ms": 546.826,
+    "draws": 3214,
+    "verts": 368208
+   },
+   "4:FRDGBuilder::SubmitBufferUploads": {
+    "ms": 0.52,
+    "draws": 0,
+    "verts": 0
+   },
+   "4:MobileSceneRender": {
+    "ms": 546.302,
+    "draws": 3214,
+    "verts": 368208
+   },
+   "5:ClearGPUMessageBuffer": {
+    "ms": 0.17,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:LandscapeCulling, SubsectionSizeQuads 63, Subsections 2, Vie": {
+    "ms": 0.104,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:AccessModePass[Graphics] (Textures: 0, Buffers: 3)": {
+    "ms": 0.002,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:FXSystemPreRender": {
+    "ms": 0.003,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:GPUParticles_PreRender": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:GPUScene.UploadDynamicPrimitiveShaderDataForView": {
+    "ms": 0.044,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:GPUScene::SetInstancePrimitiveIdCS": {
+    "ms": 0.017,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:UpdateGPUScene NumPrimitiveDataUploads 2": {
+    "ms": 0.020999999999999998,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:ComputeLightGrid": {
+    "ms": 0.131,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:CullLights WxHx32 NumLights 0 NumCaptures 0": {
+    "ms": 0.129,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:SkyAtmosphereLUTs": {
+    "ms": 1.463,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:SkyAtmosphere::DistantSkyLightLut": {
+    "ms": 0.054,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:SkyAtmosphere::RealTimeCaptureSkyViewLut": {
+    "ms": 0.35,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:SkyAtmosphere::RealTimeCaptureCamera360VolumeLut": {
+    "ms": 0.327,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:SkyAtmosphere::SkyViewLut": {
+    "ms": 0.383,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:SkyAtmosphere::CameraVolumeLut": {
+    "ms": 0.34299999999999997,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:CaptureConvolveSkyEnvMap": {
+    "ms": 0.473,
+    "draws": 18,
+    "verts": 54
+   },
+   "6:ConvolutionMip2": {
+    "ms": 0.149,
+    "draws": 6,
+    "verts": 18
+   },
+   "5:ShadowDepths": {
+    "ms": 3.8209999999999997,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:BuildRenderingCommandsDeferred(Culling=On)": {
+    "ms": 3.574,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:Atlas0 WxH": {
+    "ms": 0.245,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:AccessModePass[Graphics] (Textures: 2, Buffers: 0)": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:BasePass": {
+    "ms": 483.139,
+    "draws": 3118,
+    "verts": 196348
+   },
+   "6:MobileBasePass": {
+    "ms": 480.23,
+    "draws": 900,
+    "verts": 176124
+   },
+   "6:BeginOcclusionTests": {
+    "ms": 2.312,
+    "draws": 2218,
+    "verts": 20224
+   },
+   "5:HZB": {
+    "ms": 0.983,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:BuildHZB(ViewId=0)": {
+    "ms": 0.981,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:AsyncGpuTraceHelper::PostRenderOpaque": {
+    "ms": 0.001,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:Niagara::PostRenderFinish": {
+    "ms": 0.002,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:MobileSSAO": {
+    "ms": 3.599,
+    "draws": 6,
+    "verts": 20
+   },
+   "6:ScreenSpace AO": {
+    "ms": 3.0469999999999997,
+    "draws": 2,
+    "verts": 6
+   },
+   "6:DepthBounds ClearQuad(ScreenSpaceAO)": {
+    "ms": 0.469,
+    "draws": 2,
+    "verts": 8
+   },
+   "6:UpsamplePS Quality 1": {
+    "ms": 0.081,
+    "draws": 2,
+    "verts": 6
+   },
+   "5:ShadowProjection": {
+    "ms": 2.463,
+    "draws": 4,
+    "verts": 16
+   },
+   "6:RenderMobileShadowProjections": {
+    "ms": 2.463,
+    "draws": 4,
+    "verts": 16
+   },
+   "5:RenderMobileScreenSpaceShadows": {
+    "ms": 3.335,
+    "draws": 2,
+    "verts": 6
+   },
+   "6:ScreenSpaceShadows": {
+    "ms": 3.335,
+    "draws": 2,
+    "verts": 6
+   },
+   "5:LightingAndFog": {
+    "ms": 13.154,
+    "draws": 8,
+    "verts": 32
+   },
+   "6:Lighting": {
+    "ms": 10.843,
+    "draws": 6,
+    "verts": 24
+   },
+   "6:Fog": {
+    "ms": 2.311,
+    "draws": 2,
+    "verts": 8
+   },
+   "5:RenderVelocities(Opaque)": {
+    "ms": 2.318,
+    "draws": 30,
+    "verts": 171648
+   },
+   "6:Velocity": {
+    "ms": 2.318,
+    "draws": 30,
+    "verts": 171648
+   },
+   "5:PostProcessing": {
+    "ms": 30.741,
+    "draws": 28,
+    "verts": 84
+   },
+   "6:BloomSetup WxH in WxH (PS)": {
+    "ms": 1.2109999999999999,
+    "draws": 2,
+    "verts": 6
+   },
+   "6:BloomDown WxH in WxH RT (PS)": {
+    "ms": 0.3610000000000001,
+    "draws": 12,
+    "verts": 36
+   },
+   "6:BloomUp WxH in WxH RT (PS)": {
+    "ms": 0.424,
+    "draws": 10,
+    "verts": 30
+   },
+   "6:SunMerge WxH (PS)": {
+    "ms": 0.5549999999999999,
+    "draws": 2,
+    "verts": 6
+   },
+   "6:TAA": {
+    "ms": 22.902,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:Tonemap WxH (PS GammaOnly=0)": {
+    "ms": 5.288,
+    "draws": 2,
+    "verts": 6
+   },
+   "5:VirtualTextureUpdate": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:ExtractUniformBuffer": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:EnqueueCopy(GPUMessageManager.MessageBuffer)": {
+    "ms": 0.12,
+    "draws": 0,
+    "verts": 0
+   },
+   "2:RenderGraphExecute - Slate": {
+    "ms": 0.009000000000000001,
+    "draws": 0,
+    "verts": 0
+   },
+   "3:FRDGBuilder::SubmitBufferUploads": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "1:Frame 1086": {
+    "ms": 265.322,
+    "draws": 1610,
+    "verts": 184113
+   },
+   "5:UpdateAllPrimitiveSceneInfos": {
+    "ms": 0.193,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:GPUSceneUpdate": {
+    "ms": 0.192,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:ConvolutionMip45": {
+    "ms": 0.322,
+    "draws": 12,
+    "verts": 36
+   }
+  },
+  "high_t22_fi": {
+   "_n": 2,
+   "0:<root>": {
+    "ms": 580.643,
+    "draws": 3126,
+    "verts": 372582
+   },
+   "1:BufferPoolCopyOps": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "1:TexturePoolCopyOps": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "1:Frame 930": {
+    "ms": 311.738,
+    "draws": 1564,
+    "verts": 188499
+   },
+   "2:WorldTick": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "2:SendAllEndOfFrameUpdates": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "2:SceneRender - ViewFamilies": {
+    "ms": 574.9200000000001,
+    "draws": 3126,
+    "verts": 372582
+   },
+   "3:MobileSceneRender": {
+    "ms": 0.14100000000000001,
+    "draws": 0,
+    "verts": 0
+   },
+   "4:\"DistanceFields\"": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "4:InitViews": {
+    "ms": 0.08499999999999999,
+    "draws": 0,
+    "verts": 0
+   },
+   "4:RenderMobileShadowProjections": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "4:RenderMobileScreenSpaceShadows": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "3:RenderGraphExecute - /ViewFamilies": {
+    "ms": 574.769,
+    "draws": 3126,
+    "verts": 372582
+   },
+   "4:FRDGBuilder::SubmitBufferUploads": {
+    "ms": 0.40700000000000003,
+    "draws": 0,
+    "verts": 0
+   },
+   "4:MobileSceneRender": {
+    "ms": 574.358,
+    "draws": 3126,
+    "verts": 372582
+   },
+   "5:ClearGPUMessageBuffer": {
+    "ms": 0.183,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:LandscapeCulling, SubsectionSizeQuads 63, Subsections 2, Vie": {
+    "ms": 0.108,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:AccessModePass[Graphics] (Textures: 0, Buffers: 3)": {
+    "ms": 0.002,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:FXSystemPreRender": {
+    "ms": 0.002,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:GPUParticles_PreRender": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:GPUScene.UploadDynamicPrimitiveShaderDataForView": {
+    "ms": 0.043,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:GPUScene::SetInstancePrimitiveIdCS": {
+    "ms": 0.018000000000000002,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:UpdateGPUScene NumPrimitiveDataUploads 2": {
+    "ms": 0.018,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:BuildRenderingCommandsDeferred(Culling=On)": {
+    "ms": 0.017,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:ClearIndirectArgInstanceCount": {
+    "ms": 0.002,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:CullInstances(UnCulled). Bin 0": {
+    "ms": 0.011,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:CullInstances(Generic). Bin 1": {
+    "ms": 0.001,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:ComputeLightGrid": {
+    "ms": 0.15,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:CullLights WxHx32 NumLights 0 NumCaptures 0": {
+    "ms": 0.148,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:SkyAtmosphereLUTs": {
+    "ms": 1.492,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:SkyAtmosphere::DistantSkyLightLut": {
+    "ms": 0.054,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:SkyAtmosphere::RealTimeCaptureSkyViewLut": {
+    "ms": 0.363,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:SkyAtmosphere::RealTimeCaptureCamera360VolumeLut": {
+    "ms": 0.329,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:SkyAtmosphere::SkyViewLut": {
+    "ms": 0.397,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:SkyAtmosphere::CameraVolumeLut": {
+    "ms": 0.341,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:CaptureConvolveSkyEnvMap": {
+    "ms": 0.264,
+    "draws": 6,
+    "verts": 4428
+   },
+   "6:RenderSky StartFace=2 EndFace=4": {
+    "ms": 0.119,
+    "draws": 4,
+    "verts": 4422
+   },
+   "5:ShadowDepths": {
+    "ms": 3.813,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:BuildRenderingCommandsDeferred(Culling=On)": {
+    "ms": 3.535,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:Atlas0 WxH": {
+    "ms": 0.277,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:AccessModePass[Graphics] (Textures: 2, Buffers: 0)": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:BasePass": {
+    "ms": 484.13,
+    "draws": 3042,
+    "verts": 196348
+   },
+   "6:MobileBasePass": {
+    "ms": 473.994,
+    "draws": 824,
+    "verts": 176124
+   },
+   "6:BeginOcclusionTests": {
+    "ms": 9.536999999999999,
+    "draws": 2218,
+    "verts": 20224
+   },
+   "5:HZB": {
+    "ms": 1.057,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:BuildHZB(ViewId=0)": {
+    "ms": 1.056,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:AsyncGpuTraceHelper::PostRenderOpaque": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:Niagara::PostRenderFinish": {
+    "ms": 0.002,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:MobileSSAO": {
+    "ms": 3.704,
+    "draws": 6,
+    "verts": 20
+   },
+   "6:ScreenSpace AO": {
+    "ms": 3.154,
+    "draws": 2,
+    "verts": 6
+   },
+   "6:DepthBounds ClearQuad(ScreenSpaceAO)": {
+    "ms": 0.473,
+    "draws": 2,
+    "verts": 8
+   },
+   "6:UpsamplePS Quality 1": {
+    "ms": 0.074,
+    "draws": 2,
+    "verts": 6
+   },
+   "5:ShadowProjection": {
+    "ms": 2.4189999999999996,
+    "draws": 4,
+    "verts": 16
+   },
+   "6:RenderMobileShadowProjections": {
+    "ms": 2.4189999999999996,
+    "draws": 4,
+    "verts": 16
+   },
+   "5:RenderMobileScreenSpaceShadows": {
+    "ms": 3.113,
+    "draws": 2,
+    "verts": 6
+   },
+   "6:ScreenSpaceShadows": {
+    "ms": 3.112,
+    "draws": 2,
+    "verts": 6
+   },
+   "5:LightingAndFog": {
+    "ms": 14.555,
+    "draws": 8,
+    "verts": 32
+   },
+   "6:Lighting": {
+    "ms": 12.303,
+    "draws": 6,
+    "verts": 24
+   },
+   "6:Fog": {
+    "ms": 2.252,
+    "draws": 2,
+    "verts": 8
+   },
+   "5:RenderVelocities(Opaque)": {
+    "ms": 27.343000000000004,
+    "draws": 30,
+    "verts": 171648
+   },
+   "6:Velocity": {
+    "ms": 27.343000000000004,
+    "draws": 30,
+    "verts": 171648
+   },
+   "5:PostProcessing": {
+    "ms": 31.612000000000002,
+    "draws": 28,
+    "verts": 84
+   },
+   "6:BloomSetup WxH in WxH (PS)": {
+    "ms": 1.7690000000000001,
+    "draws": 2,
+    "verts": 6
+   },
+   "6:BloomDown WxH in WxH RT (PS)": {
+    "ms": 0.3570000000000001,
+    "draws": 12,
+    "verts": 36
+   },
+   "6:BloomUp WxH in WxH RT (PS)": {
+    "ms": 0.447,
+    "draws": 10,
+    "verts": 30
+   },
+   "6:SunMerge WxH (PS)": {
+    "ms": 0.549,
+    "draws": 2,
+    "verts": 6
+   },
+   "6:TAA": {
+    "ms": 23.393,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:Tonemap WxH (PS GammaOnly=0)": {
+    "ms": 5.096,
+    "draws": 2,
+    "verts": 6
+   },
+   "5:VirtualTextureUpdate": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:ExtractUniformBuffer": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:EnqueueCopy(GPUMessageManager.MessageBuffer)": {
+    "ms": 0.11499999999999999,
+    "draws": 0,
+    "verts": 0
+   },
+   "2:RenderGraphExecute - Slate": {
+    "ms": 0.016,
+    "draws": 0,
+    "verts": 0
+   },
+   "3:FRDGBuilder::SubmitBufferUploads": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "1:Frame 1050": {
+    "ms": 268.897,
+    "draws": 1562,
+    "verts": 184083
+   },
+   "5:UpdateAllPrimitiveSceneInfos": {
+    "ms": 0.192,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:GPUSceneUpdate": {
+    "ms": 0.191,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:ConvolutionMip0Face45": {
+    "ms": 0.144,
+    "draws": 2,
+    "verts": 6
+   }
+  },
+  "ultra": {
+   "_n": 2,
+   "0:<root>": {
+    "ms": 1179.13,
+    "draws": 4174,
+    "verts": 1115310
+   },
+   "1:BufferPoolCopyOps": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "1:TexturePoolCopyOps": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "1:Frame 952": {
+    "ms": 608.312,
+    "draws": 2067,
+    "verts": 557595
+   },
+   "2:WorldTick": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "2:SendAllEndOfFrameUpdates": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "2:SceneRender - ViewFamilies": {
+    "ms": 1173.4969999999998,
+    "draws": 4174,
+    "verts": 1115310
+   },
+   "3:MobileSceneRender": {
+    "ms": 0.276,
+    "draws": 0,
+    "verts": 0
+   },
+   "4:\"DistanceFields\"": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "4:InitViews": {
+    "ms": 0.20600000000000002,
+    "draws": 0,
+    "verts": 0
+   },
+   "4:RenderMobileShadowProjections": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "4:RenderMobileScreenSpaceShadows": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "3:RenderGraphExecute - /ViewFamilies": {
+    "ms": 1173.2130000000002,
+    "draws": 4174,
+    "verts": 1115310
+   },
+   "4:FRDGBuilder::SubmitBufferUploads": {
+    "ms": 0.527,
+    "draws": 0,
+    "verts": 0
+   },
+   "4:MobileSceneRender": {
+    "ms": 1172.681,
+    "draws": 4174,
+    "verts": 1115310
+   },
+   "5:UpdateAllPrimitiveSceneInfos": {
+    "ms": 0.601,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:GPUSceneUpdate": {
+    "ms": 0.601,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:ClearGPUMessageBuffer": {
+    "ms": 0.004,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:LandscapeCulling, SubsectionSizeQuads 63, Subsections 2, Vie": {
+    "ms": 0.193,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:GPUScene.UploadDynamicPrimitiveShaderDataForView": {
+    "ms": 0.146,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:AccessModePass[Graphics] (Textures: 0, Buffers: 3)": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:GPUScene::SetInstancePrimitiveIdCS": {
+    "ms": 0.054,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:UpdateGPUScene NumPrimitiveDataUploads 2": {
+    "ms": 0.08,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:FXSystemPreRender": {
+    "ms": 0.002,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:GPUParticles_PreRender": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:ComputeLightGrid": {
+    "ms": 0.224,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:CullLights WxHx32 NumLights 0 NumCaptures 0": {
+    "ms": 0.222,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:SkyAtmosphereLUTs": {
+    "ms": 1.5150000000000001,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:SkyAtmosphere::DistantSkyLightLut": {
+    "ms": 0.077,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:SkyAtmosphere::RealTimeCaptureSkyViewLut": {
+    "ms": 0.355,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:SkyAtmosphere::RealTimeCaptureCamera360VolumeLut": {
+    "ms": 0.332,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:SkyAtmosphere::SkyViewLut": {
+    "ms": 0.399,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:SkyAtmosphere::CameraVolumeLut": {
+    "ms": 0.344,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:CaptureConvolveSkyEnvMap": {
+    "ms": 0.349,
+    "draws": 44,
+    "verts": 132
+   },
+   "6:ConvolutionMip0Face01": {
+    "ms": 0.149,
+    "draws": 2,
+    "verts": 6
+   },
+   "5:ShadowDepths": {
+    "ms": 462.972,
+    "draws": 1272,
+    "verts": 921720
+   },
+   "6:BuildRenderingCommandsDeferred(Culling=On)": {
+    "ms": 1.4060000000000001,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:Atlas0 WxH": {
+    "ms": 461.564,
+    "draws": 1272,
+    "verts": 921720
+   },
+   "5:AccessModePass[Graphics] (Textures: 2, Buffers: 0)": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:BasePass": {
+    "ms": 595.5799999999999,
+    "draws": 2778,
+    "verts": 107468
+   },
+   "6:MobileBasePass": {
+    "ms": 592.595,
+    "draws": 942,
+    "verts": 90300
+   },
+   "6:BeginOcclusionTests": {
+    "ms": 2.154,
+    "draws": 1836,
+    "verts": 17168
+   },
+   "5:HZB": {
+    "ms": 1.658,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:BuildHZB(ViewId=0)": {
+    "ms": 1.657,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:AsyncGpuTraceHelper::PostRenderOpaque": {
+    "ms": 0.001,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:Niagara::PostRenderFinish": {
+    "ms": 0.002,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:MobileSSAO": {
+    "ms": 5.267,
+    "draws": 6,
+    "verts": 20
+   },
+   "6:ScreenSpace AO": {
+    "ms": 4.494999999999999,
+    "draws": 2,
+    "verts": 6
+   },
+   "6:DepthBounds ClearQuad(ScreenSpaceAO)": {
+    "ms": 0.672,
+    "draws": 2,
+    "verts": 8
+   },
+   "6:UpsamplePS Quality 1": {
+    "ms": 0.098,
+    "draws": 2,
+    "verts": 6
+   },
+   "5:ShadowProjection": {
+    "ms": 3.32,
+    "draws": 6,
+    "verts": 24
+   },
+   "6:RenderMobileShadowProjections": {
+    "ms": 3.32,
+    "draws": 6,
+    "verts": 24
+   },
+   "5:RenderMobileScreenSpaceShadows": {
+    "ms": 18.938,
+    "draws": 2,
+    "verts": 6
+   },
+   "6:ScreenSpaceShadows": {
+    "ms": 18.938,
+    "draws": 2,
+    "verts": 6
+   },
+   "5:LightingAndFog": {
+    "ms": 20.465,
+    "draws": 8,
+    "verts": 32
+   },
+   "6:Lighting": {
+    "ms": 17.485,
+    "draws": 6,
+    "verts": 24
+   },
+   "6:Fog": {
+    "ms": 2.98,
+    "draws": 2,
+    "verts": 8
+   },
+   "5:RenderVelocities(Opaque)": {
+    "ms": 18.804,
+    "draws": 30,
+    "verts": 85824
+   },
+   "6:Velocity": {
+    "ms": 18.804,
+    "draws": 30,
+    "verts": 85824
+   },
+   "5:PostProcessing": {
+    "ms": 34.522999999999996,
+    "draws": 28,
+    "verts": 84
+   },
+   "6:BloomSetup WxH in WxH (PS)": {
+    "ms": 2.113,
+    "draws": 2,
+    "verts": 6
+   },
+   "6:BloomDown WxH in WxH RT (PS)": {
+    "ms": 0.524,
+    "draws": 12,
+    "verts": 36
+   },
+   "6:BloomUp WxH in WxH RT (PS)": {
+    "ms": 0.517,
+    "draws": 10,
+    "verts": 30
+   },
+   "6:SunMerge WxH (PS)": {
+    "ms": 0.756,
+    "draws": 2,
+    "verts": 6
+   },
+   "6:TAA": {
+    "ms": 24.791,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:Tonemap WxH (PS GammaOnly=0)": {
+    "ms": 5.821,
+    "draws": 2,
+    "verts": 6
+   },
+   "5:VirtualTextureUpdate": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:ExtractUniformBuffer": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:EnqueueCopy(GPUMessageManager.MessageBuffer)": {
+    "ms": 8.078000000000001,
+    "draws": 0,
+    "verts": 0
+   },
+   "2:RenderGraphExecute - Slate": {
+    "ms": 0.013000000000000001,
+    "draws": 0,
+    "verts": 0
+   },
+   "3:FRDGBuilder::SubmitBufferUploads": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "1:Frame 1015": {
+    "ms": 570.811,
+    "draws": 2107,
+    "verts": 557715
+   },
+   "6:GenCubeMips": {
+    "ms": 0.198,
+    "draws": 42,
+    "verts": 126
+   }
+  },
+  "ultra_fi": {
+   "_n": 2,
+   "0:<root>": {
+    "ms": 1138.491,
+    "draws": 4523,
+    "verts": 1122666
+   },
+   "1:BufferPoolCopyOps": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "1:TexturePoolCopyOps": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "1:Frame 973": {
+    "ms": 597.227,
+    "draws": 2262,
+    "verts": 559127
+   },
+   "2:WorldTick": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "2:SendAllEndOfFrameUpdates": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "2:SceneRender - ViewFamilies": {
+    "ms": 1132.876,
+    "draws": 4523,
+    "verts": 1122666
+   },
+   "3:MobileSceneRender": {
+    "ms": 0.194,
+    "draws": 0,
+    "verts": 0
+   },
+   "4:\"DistanceFields\"": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "4:InitViews": {
+    "ms": 0.148,
+    "draws": 0,
+    "verts": 0
+   },
+   "4:RenderMobileShadowProjections": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "4:RenderMobileScreenSpaceShadows": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "3:RenderGraphExecute - /ViewFamilies": {
+    "ms": 1132.673,
+    "draws": 4523,
+    "verts": 1122666
+   },
+   "4:FRDGBuilder::SubmitBufferUploads": {
+    "ms": 0.6659999999999999,
+    "draws": 0,
+    "verts": 0
+   },
+   "4:MobileSceneRender": {
+    "ms": 1132.0030000000002,
+    "draws": 4523,
+    "verts": 1122666
+   },
+   "5:UpdateAllPrimitiveSceneInfos": {
+    "ms": 0.575,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:GPUSceneUpdate": {
+    "ms": 0.574,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:ClearGPUMessageBuffer": {
+    "ms": 0.003,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:LandscapeCulling, SubsectionSizeQuads 63, Subsections 2, Vie": {
+    "ms": 0.181,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:GPUScene.UploadDynamicPrimitiveShaderDataForView": {
+    "ms": 0.096,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:AccessModePass[Graphics] (Textures: 0, Buffers: 3)": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:GPUScene::SetInstancePrimitiveIdCS": {
+    "ms": 0.035,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:UpdateGPUScene NumPrimitiveDataUploads 2": {
+    "ms": 0.049,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:FXSystemPreRender": {
+    "ms": 0.002,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:GPUParticles_PreRender": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:ComputeLightGrid": {
+    "ms": 0.179,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:CullLights WxHx32 NumLights 0 NumCaptures 0": {
+    "ms": 0.177,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:SkyAtmosphereLUTs": {
+    "ms": 1.4489999999999998,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:SkyAtmosphere::DistantSkyLightLut": {
+    "ms": 0.054,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:SkyAtmosphere::RealTimeCaptureSkyViewLut": {
+    "ms": 0.347,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:SkyAtmosphere::RealTimeCaptureCamera360VolumeLut": {
+    "ms": 0.324,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:SkyAtmosphere::SkyViewLut": {
+    "ms": 0.38,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:SkyAtmosphere::CameraVolumeLut": {
+    "ms": 0.339,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:CaptureConvolveSkyEnvMap": {
+    "ms": 0.247,
+    "draws": 10,
+    "verts": 4440
+   },
+   "6:ConvolutionMip3": {
+    "ms": 0.124,
+    "draws": 6,
+    "verts": 18
+   },
+   "5:ShadowDepths": {
+    "ms": 461.95500000000004,
+    "draws": 1272,
+    "verts": 921720
+   },
+   "6:BuildRenderingCommandsDeferred(Culling=On)": {
+    "ms": 4.04,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:Atlas0 WxH": {
+    "ms": 457.913,
+    "draws": 1272,
+    "verts": 921720
+   },
+   "5:AccessModePass[Graphics] (Textures: 2, Buffers: 0)": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:BasePass": {
+    "ms": 599.8820000000001,
+    "draws": 3161,
+    "verts": 110516
+   },
+   "6:MobileBasePass": {
+    "ms": 590.9079999999999,
+    "draws": 944,
+    "verts": 90300
+   },
+   "6:BeginOcclusionTests": {
+    "ms": 2.567,
+    "draws": 2217,
+    "verts": 20216
+   },
+   "5:HZB": {
+    "ms": 1.5750000000000002,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:BuildHZB(ViewId=0)": {
+    "ms": 1.5750000000000002,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:AsyncGpuTraceHelper::PostRenderOpaque": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:Niagara::PostRenderFinish": {
+    "ms": 0.002,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:MobileSSAO": {
+    "ms": 5.011,
+    "draws": 6,
+    "verts": 20
+   },
+   "6:ScreenSpace AO": {
+    "ms": 4.2490000000000006,
+    "draws": 2,
+    "verts": 6
+   },
+   "6:DepthBounds ClearQuad(ScreenSpaceAO)": {
+    "ms": 0.668,
+    "draws": 2,
+    "verts": 8
+   },
+   "6:UpsamplePS Quality 1": {
+    "ms": 0.092,
+    "draws": 2,
+    "verts": 6
+   },
+   "5:ShadowProjection": {
+    "ms": 3.168,
+    "draws": 6,
+    "verts": 24
+   },
+   "6:RenderMobileShadowProjections": {
+    "ms": 3.168,
+    "draws": 6,
+    "verts": 24
+   },
+   "5:RenderMobileScreenSpaceShadows": {
+    "ms": 4.208,
+    "draws": 2,
+    "verts": 6
+   },
+   "6:ScreenSpaceShadows": {
+    "ms": 4.208,
+    "draws": 2,
+    "verts": 6
+   },
+   "5:LightingAndFog": {
+    "ms": 18.869,
+    "draws": 8,
+    "verts": 32
+   },
+   "6:Lighting": {
+    "ms": 15.909,
+    "draws": 6,
+    "verts": 24
+   },
+   "6:Fog": {
+    "ms": 2.96,
+    "draws": 2,
+    "verts": 8
+   },
+   "5:RenderVelocities(Opaque)": {
+    "ms": 2.719,
+    "draws": 30,
+    "verts": 85824
+   },
+   "6:Velocity": {
+    "ms": 2.719,
+    "draws": 30,
+    "verts": 85824
+   },
+   "5:PostProcessing": {
+    "ms": 31.715,
+    "draws": 28,
+    "verts": 84
+   },
+   "6:BloomSetup WxH in WxH (PS)": {
+    "ms": 1.822,
+    "draws": 2,
+    "verts": 6
+   },
+   "6:BloomDown WxH in WxH RT (PS)": {
+    "ms": 0.455,
+    "draws": 12,
+    "verts": 36
+   },
+   "6:BloomUp WxH in WxH RT (PS)": {
+    "ms": 0.492,
+    "draws": 10,
+    "verts": 30
+   },
+   "6:SunMerge WxH (PS)": {
+    "ms": 0.735,
+    "draws": 2,
+    "verts": 6
+   },
+   "6:TAA": {
+    "ms": 23.094,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:Tonemap WxH (PS GammaOnly=0)": {
+    "ms": 5.114,
+    "draws": 2,
+    "verts": 6
+   },
+   "5:VirtualTextureUpdate": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:ExtractUniformBuffer": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:EnqueueCopy(GPUMessageManager.MessageBuffer)": {
+    "ms": 0.11,
+    "draws": 0,
+    "verts": 0
+   },
+   "2:RenderGraphExecute - Slate": {
+    "ms": 0.01,
+    "draws": 0,
+    "verts": 0
+   },
+   "3:FRDGBuilder::SubmitBufferUploads": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "1:Frame 994": {
+    "ms": 541.256,
+    "draws": 2261,
+    "verts": 563539
+   },
+   "5:BuildRenderingCommandsDeferred(Culling=On)": {
+    "ms": 0.016,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:ClearIndirectArgInstanceCount": {
+    "ms": 0.002,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:CullInstances(UnCulled). Bin 0": {
+    "ms": 0.011,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:CullInstances(Generic). Bin 1": {
+    "ms": 0.001,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:RenderSky StartFace=2 EndFace=4": {
+    "ms": 0.122,
+    "draws": 4,
+    "verts": 4422
+   }
+  }
+ },
+ "basin_edge": {
+  "high": {
+   "_n": 2,
+   "0:<root>": {
+    "ms": 175.19400000000002,
+    "draws": 1859,
+    "verts": 4483180
+   },
+   "1:BufferPoolCopyOps": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "1:TexturePoolCopyOps": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "1:Frame 1231": {
+    "ms": 95.092,
+    "draws": 935,
+    "verts": 2239409
+   },
+   "2:WorldTick": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "2:SendAllEndOfFrameUpdates": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "2:SceneRender - ViewFamilies": {
+    "ms": 169.25799999999998,
+    "draws": 1859,
+    "verts": 4483180
+   },
+   "3:MobileSceneRender": {
+    "ms": 0.164,
+    "draws": 0,
+    "verts": 0
+   },
+   "4:\"DistanceFields\"": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "4:InitViews": {
+    "ms": 0.091,
+    "draws": 0,
+    "verts": 0
+   },
+   "4:RenderMobileShadowProjections": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "4:RenderMobileScreenSpaceShadows": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "3:RenderGraphExecute - /ViewFamilies": {
+    "ms": 169.083,
+    "draws": 1859,
+    "verts": 4483180
+   },
+   "4:FRDGBuilder::SubmitBufferUploads": {
+    "ms": 0.377,
+    "draws": 0,
+    "verts": 0
+   },
+   "4:MobileSceneRender": {
+    "ms": 168.7,
+    "draws": 1859,
+    "verts": 4483180
+   },
+   "5:UpdateAllPrimitiveSceneInfos": {
+    "ms": 0.33099999999999996,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:GPUSceneUpdate": {
+    "ms": 0.32999999999999996,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:ClearGPUMessageBuffer": {
+    "ms": 0.004,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:LandscapeCulling, SubsectionSizeQuads 63, Subsections 2, Vie": {
+    "ms": 0.07100000000000001,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:AccessModePass[Graphics] (Textures: 0, Buffers: 3)": {
+    "ms": 0.002,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:FXSystemPreRender": {
+    "ms": 0.003,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:GPUParticles_PreRender": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:GPUScene.UploadDynamicPrimitiveShaderDataForView": {
+    "ms": 0.045,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:GPUScene::SetInstancePrimitiveIdCS": {
+    "ms": 0.018000000000000002,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:UpdateGPUScene NumPrimitiveDataUploads 2": {
+    "ms": 0.023,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:ComputeLightGrid": {
+    "ms": 0.138,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:CullLights WxHx32 NumLights 0 NumCaptures 0": {
+    "ms": 0.136,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:SkyAtmosphereLUTs": {
+    "ms": 1.488,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:SkyAtmosphere::DistantSkyLightLut": {
+    "ms": 0.059,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:SkyAtmosphere::RealTimeCaptureSkyViewLut": {
+    "ms": 0.362,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:SkyAtmosphere::RealTimeCaptureCamera360VolumeLut": {
+    "ms": 0.328,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:SkyAtmosphere::SkyViewLut": {
+    "ms": 0.388,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:SkyAtmosphere::CameraVolumeLut": {
+    "ms": 0.344,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:CaptureConvolveSkyEnvMap": {
+    "ms": 0.41100000000000003,
+    "draws": 16,
+    "verts": 4458
+   },
+   "6:ConvolutionMip6Etc": {
+    "ms": 0.264,
+    "draws": 12,
+    "verts": 36
+   },
+   "5:ShadowDepths": {
+    "ms": 0.9079999999999999,
+    "draws": 4,
+    "verts": 0
+   },
+   "6:BuildRenderingCommandsDeferred(Culling=On)": {
+    "ms": 0.308,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:Atlas0 WxH": {
+    "ms": 0.599,
+    "draws": 4,
+    "verts": 0
+   },
+   "5:AccessModePass[Graphics] (Textures: 2, Buffers: 0)": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:BasePass": {
+    "ms": 62.337,
+    "draws": 1617,
+    "verts": 2247140
+   },
+   "6:MobileBasePass": {
+    "ms": 60.693,
+    "draws": 566,
+    "verts": 2235900
+   },
+   "6:BeginOcclusionTests": {
+    "ms": 0.998,
+    "draws": 1051,
+    "verts": 11240
+   },
+   "5:HZB": {
+    "ms": 0.974,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:BuildHZB(ViewId=0)": {
+    "ms": 0.974,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:AsyncGpuTraceHelper::PostRenderOpaque": {
+    "ms": 0.001,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:Niagara::PostRenderFinish": {
+    "ms": 0.002,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:MobileSSAO": {
+    "ms": 3.423,
+    "draws": 6,
+    "verts": 20
+   },
+   "6:ScreenSpace AO": {
+    "ms": 2.873,
+    "draws": 2,
+    "verts": 6
+   },
+   "6:DepthBounds ClearQuad(ScreenSpaceAO)": {
+    "ms": 0.473,
+    "draws": 2,
+    "verts": 8
+   },
+   "6:UpsamplePS Quality 1": {
+    "ms": 0.07500000000000001,
+    "draws": 2,
+    "verts": 6
+   },
+   "5:ShadowProjection": {
+    "ms": 1.1360000000000001,
+    "draws": 4,
+    "verts": 16
+   },
+   "6:RenderMobileShadowProjections": {
+    "ms": 1.1360000000000001,
+    "draws": 4,
+    "verts": 16
+   },
+   "5:RenderMobileScreenSpaceShadows": {
+    "ms": 3.285,
+    "draws": 2,
+    "verts": 6
+   },
+   "6:ScreenSpaceShadows": {
+    "ms": 3.285,
+    "draws": 2,
+    "verts": 6
+   },
+   "5:LightingAndFog": {
+    "ms": 11.286999999999999,
+    "draws": 8,
+    "verts": 32
+   },
+   "6:Lighting": {
+    "ms": 8.594999999999999,
+    "draws": 6,
+    "verts": 24
+   },
+   "6:Fog": {
+    "ms": 2.69,
+    "draws": 2,
+    "verts": 8
+   },
+   "5:RenderVelocities(Opaque)": {
+    "ms": 38.451,
+    "draws": 174,
+    "verts": 2231424
+   },
+   "6:Velocity": {
+    "ms": 38.451,
+    "draws": 174,
+    "verts": 2231424
+   },
+   "5:PostProcessing": {
+    "ms": 32.232,
+    "draws": 28,
+    "verts": 84
+   },
+   "6:BloomSetup WxH in WxH (PS)": {
+    "ms": 1.178,
+    "draws": 2,
+    "verts": 6
+   },
+   "6:BloomDown WxH in WxH RT (PS)": {
+    "ms": 0.3680000000000001,
+    "draws": 12,
+    "verts": 36
+   },
+   "6:BloomUp WxH in WxH RT (PS)": {
+    "ms": 0.413,
+    "draws": 10,
+    "verts": 30
+   },
+   "6:SunMerge WxH (PS)": {
+    "ms": 0.548,
+    "draws": 2,
+    "verts": 6
+   },
+   "6:TAA": {
+    "ms": 24.677,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:Tonemap WxH (PS GammaOnly=0)": {
+    "ms": 5.042,
+    "draws": 2,
+    "verts": 6
+   },
+   "5:VirtualTextureUpdate": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:ExtractUniformBuffer": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:EnqueueCopy(GPUMessageManager.MessageBuffer)": {
+    "ms": 12.110999999999999,
+    "draws": 0,
+    "verts": 0
+   },
+   "2:RenderGraphExecute - Slate": {
+    "ms": 0.008,
+    "draws": 0,
+    "verts": 0
+   },
+   "3:FRDGBuilder::SubmitBufferUploads": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "1:Frame 2115": {
+    "ms": 80.094,
+    "draws": 924,
+    "verts": 2243771
+   },
+   "5:BuildRenderingCommandsDeferred(Culling=On)": {
+    "ms": 0.019,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:ClearIndirectArgInstanceCount": {
+    "ms": 0.002,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:CullInstances(UnCulled). Bin 0": {
+    "ms": 0.013,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:CullInstances(Generic). Bin 1": {
+    "ms": 0.001,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:RenderSky StartFace=4 EndFace=6": {
+    "ms": 0.147,
+    "draws": 4,
+    "verts": 4422
+   }
+  },
+  "high_fi": {
+   "_n": 2,
+   "0:<root>": {
+    "ms": 168.438,
+    "draws": 2595,
+    "verts": 4931614
+   },
+   "1:BufferPoolCopyOps": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "1:TexturePoolCopyOps": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "1:Frame 1328": {
+    "ms": 82.644,
+    "draws": 1312,
+    "verts": 2689429
+   },
+   "2:WorldTick": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "2:SendAllEndOfFrameUpdates": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "2:SceneRender - ViewFamilies": {
+    "ms": 162.69299999999998,
+    "draws": 2595,
+    "verts": 4931614
+   },
+   "3:MobileSceneRender": {
+    "ms": 0.15100000000000002,
+    "draws": 0,
+    "verts": 0
+   },
+   "4:\"DistanceFields\"": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "4:InitViews": {
+    "ms": 0.091,
+    "draws": 0,
+    "verts": 0
+   },
+   "4:RenderMobileShadowProjections": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "4:RenderMobileScreenSpaceShadows": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "3:RenderGraphExecute - /ViewFamilies": {
+    "ms": 162.53,
+    "draws": 2595,
+    "verts": 4931614
+   },
+   "4:FRDGBuilder::SubmitBufferUploads": {
+    "ms": 0.44700000000000006,
+    "draws": 0,
+    "verts": 0
+   },
+   "4:MobileSceneRender": {
+    "ms": 162.07999999999998,
+    "draws": 2595,
+    "verts": 4931614
+   },
+   "5:UpdateAllPrimitiveSceneInfos": {
+    "ms": 0.379,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:GPUSceneUpdate": {
+    "ms": 0.379,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:ClearGPUMessageBuffer": {
+    "ms": 0.004,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:LandscapeCulling, SubsectionSizeQuads 63, Subsections 2, Vie": {
+    "ms": 0.065,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:AccessModePass[Graphics] (Textures: 0, Buffers: 3)": {
+    "ms": 0.002,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:FXSystemPreRender": {
+    "ms": 0.002,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:GPUParticles_PreRender": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:GPUScene.UploadDynamicPrimitiveShaderDataForView": {
+    "ms": 0.038,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:GPUScene::SetInstancePrimitiveIdCS": {
+    "ms": 0.015,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:UpdateGPUScene NumPrimitiveDataUploads 2": {
+    "ms": 0.019,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:ComputeLightGrid": {
+    "ms": 0.133,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:CullLights WxHx32 NumLights 0 NumCaptures 0": {
+    "ms": 0.131,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:SkyAtmosphereLUTs": {
+    "ms": 1.484,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:SkyAtmosphere::DistantSkyLightLut": {
+    "ms": 0.056,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:SkyAtmosphere::RealTimeCaptureSkyViewLut": {
+    "ms": 0.36,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:SkyAtmosphere::RealTimeCaptureCamera360VolumeLut": {
+    "ms": 0.324,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:SkyAtmosphere::SkyViewLut": {
+    "ms": 0.383,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:SkyAtmosphere::CameraVolumeLut": {
+    "ms": 0.352,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:CaptureConvolveSkyEnvMap": {
+    "ms": 0.358,
+    "draws": 12,
+    "verts": 36
+   },
+   "6:DiffuseIrradiance": {
+    "ms": 0.031,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:ShadowDepths": {
+    "ms": 7.869,
+    "draws": 4,
+    "verts": 0
+   },
+   "6:BuildRenderingCommandsDeferred(Culling=On)": {
+    "ms": 7.325,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:Atlas0 WxH": {
+    "ms": 0.541,
+    "draws": 4,
+    "verts": 0
+   },
+   "5:AccessModePass[Graphics] (Textures: 2, Buffers: 1)": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:BasePass": {
+    "ms": 69.931,
+    "draws": 2341,
+    "verts": 2476332
+   },
+   "6:MobileBasePass": {
+    "ms": 67.686,
+    "draws": 584,
+    "verts": 2459564
+   },
+   "6:BeginOcclusionTests": {
+    "ms": 1.6320000000000001,
+    "draws": 1757,
+    "verts": 16768
+   },
+   "5:HZB": {
+    "ms": 0.9830000000000001,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:BuildHZB(ViewId=0)": {
+    "ms": 0.982,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:AsyncGpuTraceHelper::PostRenderOpaque": {
+    "ms": 0.002,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:Niagara::PostRenderFinish": {
+    "ms": 0.002,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:MobileSSAO": {
+    "ms": 3.503,
+    "draws": 6,
+    "verts": 20
+   },
+   "6:ScreenSpace AO": {
+    "ms": 2.965,
+    "draws": 2,
+    "verts": 6
+   },
+   "6:DepthBounds ClearQuad(ScreenSpaceAO)": {
+    "ms": 0.466,
+    "draws": 2,
+    "verts": 8
+   },
+   "6:UpsamplePS Quality 1": {
+    "ms": 0.072,
+    "draws": 2,
+    "verts": 6
+   },
+   "5:ShadowProjection": {
+    "ms": 1.0230000000000001,
+    "draws": 4,
+    "verts": 16
+   },
+   "6:RenderMobileShadowProjections": {
+    "ms": 1.0230000000000001,
+    "draws": 4,
+    "verts": 16
+   },
+   "5:RenderMobileScreenSpaceShadows": {
+    "ms": 3.1399999999999997,
+    "draws": 2,
+    "verts": 6
+   },
+   "6:ScreenSpaceShadows": {
+    "ms": 3.1399999999999997,
+    "draws": 2,
+    "verts": 6
+   },
+   "5:LightingAndFog": {
+    "ms": 12.297,
+    "draws": 8,
+    "verts": 32
+   },
+   "6:Lighting": {
+    "ms": 9.536999999999999,
+    "draws": 6,
+    "verts": 24
+   },
+   "6:Fog": {
+    "ms": 2.76,
+    "draws": 2,
+    "verts": 8
+   },
+   "5:RenderVelocities(Opaque)": {
+    "ms": 16.279,
+    "draws": 190,
+    "verts": 2455088
+   },
+   "6:Velocity": {
+    "ms": 16.279,
+    "draws": 190,
+    "verts": 2455088
+   },
+   "5:PostProcessing": {
+    "ms": 44.412,
+    "draws": 28,
+    "verts": 84
+   },
+   "6:BloomSetup WxH in WxH (PS)": {
+    "ms": 1.0050000000000001,
+    "draws": 2,
+    "verts": 6
+   },
+   "6:BloomDown WxH in WxH RT (PS)": {
+    "ms": 0.3580000000000001,
+    "draws": 12,
+    "verts": 36
+   },
+   "6:BloomUp WxH in WxH RT (PS)": {
+    "ms": 0.407,
+    "draws": 10,
+    "verts": 30
+   },
+   "6:SunMerge WxH (PS)": {
+    "ms": 0.547,
+    "draws": 2,
+    "verts": 6
+   },
+   "6:TAA": {
+    "ms": 36.873999999999995,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:Tonemap WxH (PS GammaOnly=0)": {
+    "ms": 5.218,
+    "draws": 2,
+    "verts": 6
+   },
+   "5:VirtualTextureUpdate": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:ExtractUniformBuffer": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:EnqueueCopy(GPUMessageManager.MessageBuffer)": {
+    "ms": 0.133,
+    "draws": 0,
+    "verts": 0
+   },
+   "2:RenderGraphExecute - Slate": {
+    "ms": 0.009000000000000001,
+    "draws": 0,
+    "verts": 0
+   },
+   "3:FRDGBuilder::SubmitBufferUploads": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "1:Frame 1998": {
+    "ms": 85.787,
+    "draws": 1283,
+    "verts": 2242185
+   },
+   "6:ConvolutionMip45": {
+    "ms": 0.325,
+    "draws": 12,
+    "verts": 36
+   },
+   "5:AccessModePass[Graphics] (Textures: 2, Buffers: 0)": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   }
+  },
+  "high_t22_fi": {
+   "_n": 2,
+   "0:<root>": {
+    "ms": 161.55,
+    "draws": 2490,
+    "verts": 4488722
+   },
+   "1:BufferPoolCopyOps": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "1:TexturePoolCopyOps": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "1:Frame 1436": {
+    "ms": 82.967,
+    "draws": 1249,
+    "verts": 2242183
+   },
+   "2:WorldTick": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "2:SendAllEndOfFrameUpdates": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "2:SceneRender - ViewFamilies": {
+    "ms": 155.47199999999998,
+    "draws": 2490,
+    "verts": 4488722
+   },
+   "3:MobileSceneRender": {
+    "ms": 0.126,
+    "draws": 0,
+    "verts": 0
+   },
+   "4:\"DistanceFields\"": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "4:InitViews": {
+    "ms": 0.07200000000000001,
+    "draws": 0,
+    "verts": 0
+   },
+   "4:RenderMobileShadowProjections": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "4:RenderMobileScreenSpaceShadows": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "3:RenderGraphExecute - /ViewFamilies": {
+    "ms": 155.334,
+    "draws": 2490,
+    "verts": 4488722
+   },
+   "4:FRDGBuilder::SubmitBufferUploads": {
+    "ms": 0.529,
+    "draws": 0,
+    "verts": 0
+   },
+   "4:MobileSceneRender": {
+    "ms": 154.801,
+    "draws": 2490,
+    "verts": 4488722
+   },
+   "5:UpdateAllPrimitiveSceneInfos": {
+    "ms": 0.385,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:GPUSceneUpdate": {
+    "ms": 0.385,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:ClearGPUMessageBuffer": {
+    "ms": 0.002,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:LandscapeCulling, SubsectionSizeQuads 63, Subsections 2, Vie": {
+    "ms": 0.067,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:AccessModePass[Graphics] (Textures: 0, Buffers: 3)": {
+    "ms": 0.002,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:FXSystemPreRender": {
+    "ms": 0.002,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:GPUParticles_PreRender": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:GPUScene.UploadDynamicPrimitiveShaderDataForView": {
+    "ms": 0.036000000000000004,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:GPUScene::SetInstancePrimitiveIdCS": {
+    "ms": 0.016,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:UpdateGPUScene NumPrimitiveDataUploads 2": {
+    "ms": 0.018,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:ComputeLightGrid": {
+    "ms": 0.14200000000000002,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:CullLights WxHx32 NumLights 0 NumCaptures 0": {
+    "ms": 0.14,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:SkyAtmosphereLUTs": {
+    "ms": 1.452,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:SkyAtmosphere::DistantSkyLightLut": {
+    "ms": 0.053,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:SkyAtmosphere::RealTimeCaptureSkyViewLut": {
+    "ms": 0.345,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:SkyAtmosphere::RealTimeCaptureCamera360VolumeLut": {
+    "ms": 0.324,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:SkyAtmosphere::SkyViewLut": {
+    "ms": 0.386,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:SkyAtmosphere::CameraVolumeLut": {
+    "ms": 0.33899999999999997,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:CaptureConvolveSkyEnvMap": {
+    "ms": 0.28200000000000003,
+    "draws": 10,
+    "verts": 4440
+   },
+   "6:ConvolutionMip2": {
+    "ms": 0.148,
+    "draws": 6,
+    "verts": 18
+   },
+   "5:ShadowDepths": {
+    "ms": 7.147,
+    "draws": 4,
+    "verts": 0
+   },
+   "6:BuildRenderingCommandsDeferred(Culling=On)": {
+    "ms": 6.587,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:Atlas0 WxH": {
+    "ms": 0.558,
+    "draws": 4,
+    "verts": 0
+   },
+   "5:AccessModePass[Graphics] (Textures: 2, Buffers: 0)": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:BasePass": {
+    "ms": 63.157000000000004,
+    "draws": 2254,
+    "verts": 2252700
+   },
+   "6:MobileBasePass": {
+    "ms": 60.858,
+    "draws": 508,
+    "verts": 2235900
+   },
+   "6:BeginOcclusionTests": {
+    "ms": 1.6720000000000002,
+    "draws": 1746,
+    "verts": 16800
+   },
+   "5:HZB": {
+    "ms": 0.956,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:BuildHZB(ViewId=0)": {
+    "ms": 0.955,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:AsyncGpuTraceHelper::PostRenderOpaque": {
+    "ms": 0.002,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:Niagara::PostRenderFinish": {
+    "ms": 0.002,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:MobileSSAO": {
+    "ms": 3.387,
+    "draws": 6,
+    "verts": 20
+   },
+   "6:ScreenSpace AO": {
+    "ms": 2.843,
+    "draws": 2,
+    "verts": 6
+   },
+   "6:DepthBounds ClearQuad(ScreenSpaceAO)": {
+    "ms": 0.47,
+    "draws": 2,
+    "verts": 8
+   },
+   "6:UpsamplePS Quality 1": {
+    "ms": 0.074,
+    "draws": 2,
+    "verts": 6
+   },
+   "5:ShadowProjection": {
+    "ms": 1.021,
+    "draws": 4,
+    "verts": 16
+   },
+   "6:RenderMobileShadowProjections": {
+    "ms": 1.021,
+    "draws": 4,
+    "verts": 16
+   },
+   "5:RenderMobileScreenSpaceShadows": {
+    "ms": 3.057,
+    "draws": 2,
+    "verts": 6
+   },
+   "6:ScreenSpaceShadows": {
+    "ms": 3.057,
+    "draws": 2,
+    "verts": 6
+   },
+   "5:LightingAndFog": {
+    "ms": 12.112,
+    "draws": 8,
+    "verts": 32
+   },
+   "6:Lighting": {
+    "ms": 9.372,
+    "draws": 6,
+    "verts": 24
+   },
+   "6:Fog": {
+    "ms": 2.74,
+    "draws": 2,
+    "verts": 8
+   },
+   "5:RenderVelocities(Opaque)": {
+    "ms": 20.928,
+    "draws": 174,
+    "verts": 2231424
+   },
+   "6:Velocity": {
+    "ms": 20.928,
+    "draws": 174,
+    "verts": 2231424
+   },
+   "5:PostProcessing": {
+    "ms": 40.48,
+    "draws": 28,
+    "verts": 84
+   },
+   "6:BloomSetup WxH in WxH (PS)": {
+    "ms": 1.108,
+    "draws": 2,
+    "verts": 6
+   },
+   "6:BloomDown WxH in WxH RT (PS)": {
+    "ms": 0.373,
+    "draws": 12,
+    "verts": 36
+   },
+   "6:BloomUp WxH in WxH RT (PS)": {
+    "ms": 0.42100000000000004,
+    "draws": 10,
+    "verts": 30
+   },
+   "6:SunMerge WxH (PS)": {
+    "ms": 0.556,
+    "draws": 2,
+    "verts": 6
+   },
+   "6:TAA": {
+    "ms": 33.667,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:Tonemap WxH (PS GammaOnly=0)": {
+    "ms": 4.349,
+    "draws": 2,
+    "verts": 6
+   },
+   "5:VirtualTextureUpdate": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:ExtractUniformBuffer": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:EnqueueCopy(GPUMessageManager.MessageBuffer)": {
+    "ms": 0.126,
+    "draws": 0,
+    "verts": 0
+   },
+   "2:RenderGraphExecute - Slate": {
+    "ms": 0.012,
+    "draws": 0,
+    "verts": 0
+   },
+   "3:FRDGBuilder::SubmitBufferUploads": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "1:Frame 1891": {
+    "ms": 78.576,
+    "draws": 1241,
+    "verts": 2246539
+   },
+   "5:BuildRenderingCommandsDeferred(Culling=On)": {
+    "ms": 0.016,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:ClearIndirectArgInstanceCount": {
+    "ms": 0.002,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:CullInstances(UnCulled). Bin 0": {
+    "ms": 0.011,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:CullInstances(Generic). Bin 1": {
+    "ms": 0.001,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:RenderSky StartFace=4 EndFace=6": {
+    "ms": 0.132,
+    "draws": 4,
+    "verts": 4422
+   }
+  },
+  "ultra": {
+   "_n": 2,
+   "0:<root>": {
+    "ms": 215.132,
+    "draws": 2276,
+    "verts": 5048302
+   },
+   "1:BufferPoolCopyOps": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "1:TexturePoolCopyOps": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "1:Frame 1527": {
+    "ms": 99.579,
+    "draws": 1132,
+    "verts": 2295337
+   },
+   "2:WorldTick": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "2:SendAllEndOfFrameUpdates": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "2:SceneRender - ViewFamilies": {
+    "ms": 209.51100000000002,
+    "draws": 2276,
+    "verts": 5048302
+   },
+   "3:MobileSceneRender": {
+    "ms": 0.20900000000000002,
+    "draws": 0,
+    "verts": 0
+   },
+   "4:\"DistanceFields\"": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "4:InitViews": {
+    "ms": 0.16499999999999998,
+    "draws": 0,
+    "verts": 0
+   },
+   "4:RenderMobileShadowProjections": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "4:RenderMobileScreenSpaceShadows": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "3:RenderGraphExecute - /ViewFamilies": {
+    "ms": 209.292,
+    "draws": 2276,
+    "verts": 5048302
+   },
+   "4:FRDGBuilder::SubmitBufferUploads": {
+    "ms": 0.33599999999999997,
+    "draws": 0,
+    "verts": 0
+   },
+   "4:MobileSceneRender": {
+    "ms": 208.951,
+    "draws": 2276,
+    "verts": 5048302
+   },
+   "5:UpdateAllPrimitiveSceneInfos": {
+    "ms": 0.462,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:GPUSceneUpdate": {
+    "ms": 0.461,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:ClearGPUMessageBuffer": {
+    "ms": 0.002,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:LandscapeCulling, SubsectionSizeQuads 63, Subsections 2, Vie": {
+    "ms": 0.153,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:GPUScene.UploadDynamicPrimitiveShaderDataForView": {
+    "ms": 0.11499999999999999,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:AccessModePass[Graphics] (Textures: 0, Buffers: 3)": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:GPUScene::SetInstancePrimitiveIdCS": {
+    "ms": 0.04100000000000001,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:UpdateGPUScene NumPrimitiveDataUploads 2": {
+    "ms": 0.06,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:FXSystemPreRender": {
+    "ms": 0.002,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:GPUParticles_PreRender": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:ComputeLightGrid": {
+    "ms": 0.173,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:CullLights WxHx32 NumLights 0 NumCaptures 0": {
+    "ms": 0.17099999999999999,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:SkyAtmosphereLUTs": {
+    "ms": 1.458,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:SkyAtmosphere::DistantSkyLightLut": {
+    "ms": 0.052000000000000005,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:SkyAtmosphere::RealTimeCaptureSkyViewLut": {
+    "ms": 0.352,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:SkyAtmosphere::RealTimeCaptureCamera360VolumeLut": {
+    "ms": 0.325,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:SkyAtmosphere::SkyViewLut": {
+    "ms": 0.377,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:SkyAtmosphere::CameraVolumeLut": {
+    "ms": 0.346,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:CaptureConvolveSkyEnvMap": {
+    "ms": 0.29100000000000004,
+    "draws": 48,
+    "verts": 144
+   },
+   "6:GenCubeMips": {
+    "ms": 0.139,
+    "draws": 42,
+    "verts": 126
+   },
+   "5:ShadowDepths": {
+    "ms": 5.504,
+    "draws": 262,
+    "verts": 512180
+   },
+   "6:BuildRenderingCommandsDeferred(Culling=On)": {
+    "ms": 0.37,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:Atlas0 WxH": {
+    "ms": 5.133,
+    "draws": 262,
+    "verts": 512180
+   },
+   "5:AccessModePass[Graphics] (Textures: 2, Buffers: 0)": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:BasePass": {
+    "ms": 107.48400000000001,
+    "draws": 1726,
+    "verts": 2275780
+   },
+   "6:MobileBasePass": {
+    "ms": 105.47800000000001,
+    "draws": 656,
+    "verts": 2264508
+   },
+   "6:BeginOcclusionTests": {
+    "ms": 1.186,
+    "draws": 1070,
+    "verts": 11272
+   },
+   "5:HZB": {
+    "ms": 1.766,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:BuildHZB(ViewId=0)": {
+    "ms": 1.7650000000000001,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:AsyncGpuTraceHelper::PostRenderOpaque": {
+    "ms": 0.002,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:Niagara::PostRenderFinish": {
+    "ms": 0.002,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:MobileSSAO": {
+    "ms": 5.215,
+    "draws": 6,
+    "verts": 20
+   },
+   "6:ScreenSpace AO": {
+    "ms": 4.446,
+    "draws": 2,
+    "verts": 6
+   },
+   "6:DepthBounds ClearQuad(ScreenSpaceAO)": {
+    "ms": 0.664,
+    "draws": 2,
+    "verts": 8
+   },
+   "6:UpsamplePS Quality 1": {
+    "ms": 0.10400000000000001,
+    "draws": 2,
+    "verts": 6
+   },
+   "5:ShadowProjection": {
+    "ms": 1.98,
+    "draws": 6,
+    "verts": 24
+   },
+   "6:RenderMobileShadowProjections": {
+    "ms": 1.98,
+    "draws": 6,
+    "verts": 24
+   },
+   "5:RenderMobileScreenSpaceShadows": {
+    "ms": 4.509,
+    "draws": 2,
+    "verts": 6
+   },
+   "6:ScreenSpaceShadows": {
+    "ms": 4.509,
+    "draws": 2,
+    "verts": 6
+   },
+   "5:LightingAndFog": {
+    "ms": 27.433999999999997,
+    "draws": 8,
+    "verts": 32
+   },
+   "6:Lighting": {
+    "ms": 23.476,
+    "draws": 6,
+    "verts": 24
+   },
+   "6:Fog": {
+    "ms": 3.9570000000000003,
+    "draws": 2,
+    "verts": 8
+   },
+   "5:RenderVelocities(Opaque)": {
+    "ms": 6.603999999999999,
+    "draws": 190,
+    "verts": 2260032
+   },
+   "6:Velocity": {
+    "ms": 6.603999999999999,
+    "draws": 190,
+    "verts": 2260032
+   },
+   "5:PostProcessing": {
+    "ms": 45.634,
+    "draws": 28,
+    "verts": 84
+   },
+   "6:BloomSetup WxH in WxH (PS)": {
+    "ms": 1.2069999999999999,
+    "draws": 2,
+    "verts": 6
+   },
+   "6:BloomDown WxH in WxH RT (PS)": {
+    "ms": 0.449,
+    "draws": 12,
+    "verts": 36
+   },
+   "6:BloomUp WxH in WxH RT (PS)": {
+    "ms": 0.495,
+    "draws": 10,
+    "verts": 30
+   },
+   "6:SunMerge WxH (PS)": {
+    "ms": 0.734,
+    "draws": 2,
+    "verts": 6
+   },
+   "6:TAA": {
+    "ms": 38.456,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:Tonemap WxH (PS GammaOnly=0)": {
+    "ms": 4.289,
+    "draws": 2,
+    "verts": 6
+   },
+   "5:VirtualTextureUpdate": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:ExtractUniformBuffer": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:EnqueueCopy(GPUMessageManager.MessageBuffer)": {
+    "ms": 0.121,
+    "draws": 0,
+    "verts": 0
+   },
+   "2:RenderGraphExecute - Slate": {
+    "ms": 0.01,
+    "draws": 0,
+    "verts": 0
+   },
+   "3:FRDGBuilder::SubmitBufferUploads": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "1:Frame 1788": {
+    "ms": 115.545,
+    "draws": 1144,
+    "verts": 2752965
+   },
+   "6:ConvolutionMip2": {
+    "ms": 0.15,
+    "draws": 6,
+    "verts": 18
+   }
+  },
+  "ultra_fi": {
+   "_n": 2,
+   "0:<root>": {
+    "ms": 210.659,
+    "draws": 2935,
+    "verts": 4596176
+   },
+   "1:BufferPoolCopyOps": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "1:TexturePoolCopyOps": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "1:Frame 1607": {
+    "ms": 95.598,
+    "draws": 1486,
+    "verts": 2298161
+   },
+   "2:WorldTick": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "2:SendAllEndOfFrameUpdates": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "2:SceneRender - ViewFamilies": {
+    "ms": 203.84,
+    "draws": 2935,
+    "verts": 4596176
+   },
+   "3:MobileSceneRender": {
+    "ms": 0.21300000000000002,
+    "draws": 0,
+    "verts": 0
+   },
+   "4:\"DistanceFields\"": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "4:InitViews": {
+    "ms": 0.16899999999999998,
+    "draws": 0,
+    "verts": 0
+   },
+   "4:RenderMobileShadowProjections": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "4:RenderMobileScreenSpaceShadows": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "3:RenderGraphExecute - /ViewFamilies": {
+    "ms": 203.61700000000002,
+    "draws": 2935,
+    "verts": 4596176
+   },
+   "4:FRDGBuilder::SubmitBufferUploads": {
+    "ms": 0.729,
+    "draws": 0,
+    "verts": 0
+   },
+   "4:MobileSceneRender": {
+    "ms": 202.88400000000001,
+    "draws": 2935,
+    "verts": 4596176
+   },
+   "5:UpdateAllPrimitiveSceneInfos": {
+    "ms": 0.491,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:GPUSceneUpdate": {
+    "ms": 0.49,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:ClearGPUMessageBuffer": {
+    "ms": 0.003,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:LandscapeCulling, SubsectionSizeQuads 63, Subsections 2, Vie": {
+    "ms": 0.153,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:GPUScene.UploadDynamicPrimitiveShaderDataForView": {
+    "ms": 0.11499999999999999,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:AccessModePass[Graphics] (Textures: 0, Buffers: 3)": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:GPUScene::SetInstancePrimitiveIdCS": {
+    "ms": 0.03900000000000001,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:UpdateGPUScene NumPrimitiveDataUploads 2": {
+    "ms": 0.063,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:FXSystemPreRender": {
+    "ms": 0.002,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:GPUParticles_PreRender": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:ComputeLightGrid": {
+    "ms": 0.172,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:CullLights WxHx32 NumLights 0 NumCaptures 0": {
+    "ms": 0.17,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:SkyAtmosphereLUTs": {
+    "ms": 1.4729999999999999,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:SkyAtmosphere::DistantSkyLightLut": {
+    "ms": 0.052,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:SkyAtmosphere::RealTimeCaptureSkyViewLut": {
+    "ms": 0.367,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:SkyAtmosphere::RealTimeCaptureCamera360VolumeLut": {
+    "ms": 0.323,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:SkyAtmosphere::SkyViewLut": {
+    "ms": 0.383,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:SkyAtmosphere::CameraVolumeLut": {
+    "ms": 0.34,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:CaptureConvolveSkyEnvMap": {
+    "ms": 0.41400000000000003,
+    "draws": 54,
+    "verts": 162
+   },
+   "6:GenCubeMips": {
+    "ms": 0.143,
+    "draws": 42,
+    "verts": 126
+   },
+   "5:ShadowDepths": {
+    "ms": 12.683,
+    "draws": 262,
+    "verts": 512180
+   },
+   "6:BuildRenderingCommandsDeferred(Culling=On)": {
+    "ms": 7.711,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:Atlas0 WxH": {
+    "ms": 4.971,
+    "draws": 262,
+    "verts": 512180
+   },
+   "5:AccessModePass[Graphics] (Textures: 2, Buffers: 0)": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:BasePass": {
+    "ms": 96.024,
+    "draws": 2395,
+    "verts": 2052500
+   },
+   "6:MobileBasePass": {
+    "ms": 85.668,
+    "draws": 642,
+    "verts": 2035644
+   },
+   "6:BeginOcclusionTests": {
+    "ms": 9.475999999999999,
+    "draws": 1753,
+    "verts": 16856
+   },
+   "5:HZB": {
+    "ms": 1.623,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:BuildHZB(ViewId=0)": {
+    "ms": 1.623,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:AsyncGpuTraceHelper::PostRenderOpaque": {
+    "ms": 0.002,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:Niagara::PostRenderFinish": {
+    "ms": 0.002,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:MobileSSAO": {
+    "ms": 5.382,
+    "draws": 6,
+    "verts": 20
+   },
+   "6:ScreenSpace AO": {
+    "ms": 4.587,
+    "draws": 2,
+    "verts": 6
+   },
+   "6:DepthBounds ClearQuad(ScreenSpaceAO)": {
+    "ms": 0.685,
+    "draws": 2,
+    "verts": 8
+   },
+   "6:UpsamplePS Quality 1": {
+    "ms": 0.108,
+    "draws": 2,
+    "verts": 6
+   },
+   "5:ShadowProjection": {
+    "ms": 1.901,
+    "draws": 6,
+    "verts": 24
+   },
+   "6:RenderMobileShadowProjections": {
+    "ms": 1.901,
+    "draws": 6,
+    "verts": 24
+   },
+   "5:RenderMobileScreenSpaceShadows": {
+    "ms": 4.46,
+    "draws": 2,
+    "verts": 6
+   },
+   "6:ScreenSpaceShadows": {
+    "ms": 4.46,
+    "draws": 2,
+    "verts": 6
+   },
+   "5:LightingAndFog": {
+    "ms": 16.061,
+    "draws": 8,
+    "verts": 32
+   },
+   "6:Lighting": {
+    "ms": 12.342,
+    "draws": 6,
+    "verts": 24
+   },
+   "6:Fog": {
+    "ms": 3.7190000000000003,
+    "draws": 2,
+    "verts": 8
+   },
+   "5:RenderVelocities(Opaque)": {
+    "ms": 30.747,
+    "draws": 174,
+    "verts": 2031168
+   },
+   "6:Velocity": {
+    "ms": 30.747,
+    "draws": 174,
+    "verts": 2031168
+   },
+   "5:PostProcessing": {
+    "ms": 30.997999999999998,
+    "draws": 28,
+    "verts": 84
+   },
+   "6:BloomSetup WxH in WxH (PS)": {
+    "ms": 1.354,
+    "draws": 2,
+    "verts": 6
+   },
+   "6:BloomDown WxH in WxH RT (PS)": {
+    "ms": 0.451,
+    "draws": 12,
+    "verts": 36
+   },
+   "6:BloomUp WxH in WxH RT (PS)": {
+    "ms": 0.513,
+    "draws": 10,
+    "verts": 30
+   },
+   "6:SunMerge WxH (PS)": {
+    "ms": 0.737,
+    "draws": 2,
+    "verts": 6
+   },
+   "6:TAA": {
+    "ms": 23.322000000000003,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:Tonemap WxH (PS GammaOnly=0)": {
+    "ms": 4.618,
+    "draws": 2,
+    "verts": 6
+   },
+   "5:VirtualTextureUpdate": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:ExtractUniformBuffer": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:EnqueueCopy(GPUMessageManager.MessageBuffer)": {
+    "ms": 0.139,
+    "draws": 0,
+    "verts": 0
+   },
+   "2:RenderGraphExecute - Slate": {
+    "ms": 0.009000000000000001,
+    "draws": 0,
+    "verts": 0
+   },
+   "3:FRDGBuilder::SubmitBufferUploads": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "1:Frame 1695": {
+    "ms": 115.054,
+    "draws": 1449,
+    "verts": 2298015
+   },
+   "6:ConvolutionMip6Etc": {
+    "ms": 0.27,
+    "draws": 12,
+    "verts": 36
+   }
+  }
+ },
+ "far_range": {
+  "high": {
+   "_n": 2,
+   "0:<root>": {
+    "ms": 300.53999999999996,
+    "draws": 3593,
+    "verts": 3345260
+   },
+   "1:BufferPoolCopyOps": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "1:TexturePoolCopyOps": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "1:Frame 2232": {
+    "ms": 147.918,
+    "draws": 1794,
+    "verts": 1672635
+   },
+   "2:WorldTick": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "2:SendAllEndOfFrameUpdates": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "2:SceneRender - ViewFamilies": {
+    "ms": 294.95799999999997,
+    "draws": 3593,
+    "verts": 3345260
+   },
+   "3:MobileSceneRender": {
+    "ms": 0.186,
+    "draws": 0,
+    "verts": 0
+   },
+   "4:\"DistanceFields\"": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "4:InitViews": {
+    "ms": 0.12,
+    "draws": 0,
+    "verts": 0
+   },
+   "4:RenderMobileShadowProjections": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "4:RenderMobileScreenSpaceShadows": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "3:RenderGraphExecute - /ViewFamilies": {
+    "ms": 294.76300000000003,
+    "draws": 3593,
+    "verts": 3345260
+   },
+   "4:FRDGBuilder::SubmitBufferUploads": {
+    "ms": 0.362,
+    "draws": 0,
+    "verts": 0
+   },
+   "4:MobileSceneRender": {
+    "ms": 294.39599999999996,
+    "draws": 3593,
+    "verts": 3345260
+   },
+   "5:UpdateAllPrimitiveSceneInfos": {
+    "ms": 0.395,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:GPUSceneUpdate": {
+    "ms": 0.394,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:ClearGPUMessageBuffer": {
+    "ms": 0.003,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:LandscapeCulling, SubsectionSizeQuads 63, Subsections 2, Vie": {
+    "ms": 0.093,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:AccessModePass[Graphics] (Textures: 0, Buffers: 3)": {
+    "ms": 0.002,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:FXSystemPreRender": {
+    "ms": 0.003,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:GPUParticles_PreRender": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:GPUScene.UploadDynamicPrimitiveShaderDataForView": {
+    "ms": 0.055,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:GPUScene::SetInstancePrimitiveIdCS": {
+    "ms": 0.027000000000000003,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:UpdateGPUScene NumPrimitiveDataUploads 2": {
+    "ms": 0.025,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:ComputeLightGrid": {
+    "ms": 0.15200000000000002,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:CullLights WxHx32 NumLights 0 NumCaptures 0": {
+    "ms": 0.15000000000000002,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:SkyAtmosphereLUTs": {
+    "ms": 1.476,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:SkyAtmosphere::DistantSkyLightLut": {
+    "ms": 0.061,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:SkyAtmosphere::RealTimeCaptureSkyViewLut": {
+    "ms": 0.353,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:SkyAtmosphere::RealTimeCaptureCamera360VolumeLut": {
+    "ms": 0.326,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:SkyAtmosphere::SkyViewLut": {
+    "ms": 0.383,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:SkyAtmosphere::CameraVolumeLut": {
+    "ms": 0.344,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:CaptureConvolveSkyEnvMap": {
+    "ms": 0.473,
+    "draws": 14,
+    "verts": 42
+   },
+   "6:ConvolutionMip0Face01": {
+    "ms": 0.148,
+    "draws": 2,
+    "verts": 6
+   },
+   "5:ShadowDepths": {
+    "ms": 0.8640000000000001,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:BuildRenderingCommandsDeferred(Culling=On)": {
+    "ms": 0.41600000000000004,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:Atlas0 WxH": {
+    "ms": 0.447,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:AccessModePass[Graphics] (Textures: 2, Buffers: 0)": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:BasePass": {
+    "ms": 182.051,
+    "draws": 3393,
+    "verts": 1685796
+   },
+   "6:MobileBasePass": {
+    "ms": 178.829,
+    "draws": 1066,
+    "verts": 1663740
+   },
+   "6:BeginOcclusionTests": {
+    "ms": 2.562,
+    "draws": 2327,
+    "verts": 22056
+   },
+   "5:HZB": {
+    "ms": 0.869,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:BuildHZB(ViewId=0)": {
+    "ms": 0.868,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:AsyncGpuTraceHelper::PostRenderOpaque": {
+    "ms": 0.002,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:Niagara::PostRenderFinish": {
+    "ms": 0.002,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:MobileSSAO": {
+    "ms": 15.488000000000001,
+    "draws": 6,
+    "verts": 20
+   },
+   "6:ScreenSpace AO": {
+    "ms": 2.747,
+    "draws": 2,
+    "verts": 6
+   },
+   "6:DepthBounds ClearQuad(ScreenSpaceAO)": {
+    "ms": 0.471,
+    "draws": 2,
+    "verts": 8
+   },
+   "6:UpsamplePS Quality 1": {
+    "ms": 12.269,
+    "draws": 2,
+    "verts": 6
+   },
+   "5:ShadowProjection": {
+    "ms": 1.224,
+    "draws": 4,
+    "verts": 16
+   },
+   "6:RenderMobileShadowProjections": {
+    "ms": 1.224,
+    "draws": 4,
+    "verts": 16
+   },
+   "5:RenderMobileScreenSpaceShadows": {
+    "ms": 3.6159999999999997,
+    "draws": 2,
+    "verts": 6
+   },
+   "6:ScreenSpaceShadows": {
+    "ms": 3.6159999999999997,
+    "draws": 2,
+    "verts": 6
+   },
+   "5:LightingAndFog": {
+    "ms": 12.149999999999999,
+    "draws": 8,
+    "verts": 32
+   },
+   "6:Lighting": {
+    "ms": 9.466,
+    "draws": 6,
+    "verts": 24
+   },
+   "6:Fog": {
+    "ms": 2.684,
+    "draws": 2,
+    "verts": 8
+   },
+   "5:RenderVelocities(Opaque)": {
+    "ms": 14.790999999999999,
+    "draws": 138,
+    "verts": 1659264
+   },
+   "6:Velocity": {
+    "ms": 14.790999999999999,
+    "draws": 138,
+    "verts": 1659264
+   },
+   "5:PostProcessing": {
+    "ms": 44.478,
+    "draws": 28,
+    "verts": 84
+   },
+   "6:BloomSetup WxH in WxH (PS)": {
+    "ms": 0.98,
+    "draws": 2,
+    "verts": 6
+   },
+   "6:BloomDown WxH in WxH RT (PS)": {
+    "ms": 0.3520000000000001,
+    "draws": 12,
+    "verts": 36
+   },
+   "6:BloomUp WxH in WxH RT (PS)": {
+    "ms": 0.415,
+    "draws": 10,
+    "verts": 30
+   },
+   "6:SunMerge WxH (PS)": {
+    "ms": 0.548,
+    "draws": 2,
+    "verts": 6
+   },
+   "6:TAA": {
+    "ms": 37.792,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:Tonemap WxH (PS GammaOnly=0)": {
+    "ms": 4.388999999999999,
+    "draws": 2,
+    "verts": 6
+   },
+   "5:VirtualTextureUpdate": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:ExtractUniformBuffer": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:EnqueueCopy(GPUMessageManager.MessageBuffer)": {
+    "ms": 16.161,
+    "draws": 0,
+    "verts": 0
+   },
+   "2:RenderGraphExecute - Slate": {
+    "ms": 0.01,
+    "draws": 0,
+    "verts": 0
+   },
+   "3:FRDGBuilder::SubmitBufferUploads": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "1:Frame 2766": {
+    "ms": 152.614,
+    "draws": 1799,
+    "verts": 1672625
+   },
+   "6:ConvolutionMip45": {
+    "ms": 0.324,
+    "draws": 12,
+    "verts": 36
+   }
+  },
+  "high_fi": {
+   "_n": 2,
+   "0:<root>": {
+    "ms": 337.473,
+    "draws": 4270,
+    "verts": 3350710
+   },
+   "1:BufferPoolCopyOps": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "1:TexturePoolCopyOps": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "1:Frame 2293": {
+    "ms": 168.289,
+    "draws": 2136,
+    "verts": 1675363
+   },
+   "2:WorldTick": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "2:SendAllEndOfFrameUpdates": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "2:SceneRender - ViewFamilies": {
+    "ms": 331.903,
+    "draws": 4270,
+    "verts": 3350710
+   },
+   "3:MobileSceneRender": {
+    "ms": 0.176,
+    "draws": 0,
+    "verts": 0
+   },
+   "4:\"DistanceFields\"": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "4:InitViews": {
+    "ms": 0.11299999999999999,
+    "draws": 0,
+    "verts": 0
+   },
+   "4:RenderMobileShadowProjections": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "4:RenderMobileScreenSpaceShadows": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "3:RenderGraphExecute - /ViewFamilies": {
+    "ms": 331.716,
+    "draws": 4270,
+    "verts": 3350710
+   },
+   "4:FRDGBuilder::SubmitBufferUploads": {
+    "ms": 0.665,
+    "draws": 0,
+    "verts": 0
+   },
+   "4:MobileSceneRender": {
+    "ms": 331.047,
+    "draws": 4270,
+    "verts": 3350710
+   },
+   "5:ClearGPUMessageBuffer": {
+    "ms": 0.40900000000000003,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:LandscapeCulling, SubsectionSizeQuads 63, Subsections 2, Vie": {
+    "ms": 0.083,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:AccessModePass[Graphics] (Textures: 0, Buffers: 3)": {
+    "ms": 0.002,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:FXSystemPreRender": {
+    "ms": 0.003,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:GPUParticles_PreRender": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:GPUScene.UploadDynamicPrimitiveShaderDataForView": {
+    "ms": 0.053000000000000005,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:GPUScene::SetInstancePrimitiveIdCS": {
+    "ms": 0.024,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:UpdateGPUScene NumPrimitiveDataUploads 2": {
+    "ms": 0.020999999999999998,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:ComputeLightGrid": {
+    "ms": 0.14600000000000002,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:CullLights WxHx32 NumLights 0 NumCaptures 0": {
+    "ms": 0.14400000000000002,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:SkyAtmosphereLUTs": {
+    "ms": 1.478,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:SkyAtmosphere::DistantSkyLightLut": {
+    "ms": 0.055,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:SkyAtmosphere::RealTimeCaptureSkyViewLut": {
+    "ms": 0.356,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:SkyAtmosphere::RealTimeCaptureCamera360VolumeLut": {
+    "ms": 0.325,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:SkyAtmosphere::SkyViewLut": {
+    "ms": 0.388,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:SkyAtmosphere::CameraVolumeLut": {
+    "ms": 0.348,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:CaptureConvolveSkyEnvMap": {
+    "ms": 0.066,
+    "draws": 4,
+    "verts": 12
+   },
+   "6:RenderCloud StartFace=2 EndFace=4": {
+    "ms": 0.039,
+    "draws": 2,
+    "verts": 6
+   },
+   "5:ShadowDepths": {
+    "ms": 9.031,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:BuildRenderingCommandsDeferred(Culling=On)": {
+    "ms": 8.682,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:Atlas0 WxH": {
+    "ms": 0.347,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:AccessModePass[Graphics] (Textures: 2, Buffers: 0)": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:BasePass": {
+    "ms": 241.51999999999998,
+    "draws": 4080,
+    "verts": 1691276
+   },
+   "6:MobileBasePass": {
+    "ms": 228.208,
+    "draws": 1068,
+    "verts": 1663740
+   },
+   "6:BeginOcclusionTests": {
+    "ms": 12.664,
+    "draws": 3012,
+    "verts": 27536
+   },
+   "5:HZB": {
+    "ms": 0.89,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:BuildHZB(ViewId=0)": {
+    "ms": 0.89,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:AsyncGpuTraceHelper::PostRenderOpaque": {
+    "ms": 0.002,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:Niagara::PostRenderFinish": {
+    "ms": 0.002,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:MobileSSAO": {
+    "ms": 3.412,
+    "draws": 6,
+    "verts": 20
+   },
+   "6:ScreenSpace AO": {
+    "ms": 2.865,
+    "draws": 2,
+    "verts": 6
+   },
+   "6:DepthBounds ClearQuad(ScreenSpaceAO)": {
+    "ms": 0.473,
+    "draws": 2,
+    "verts": 8
+   },
+   "6:UpsamplePS Quality 1": {
+    "ms": 0.07200000000000001,
+    "draws": 2,
+    "verts": 6
+   },
+   "5:ShadowProjection": {
+    "ms": 1.025,
+    "draws": 4,
+    "verts": 16
+   },
+   "6:RenderMobileShadowProjections": {
+    "ms": 1.024,
+    "draws": 4,
+    "verts": 16
+   },
+   "5:RenderMobileScreenSpaceShadows": {
+    "ms": 3.021,
+    "draws": 2,
+    "verts": 6
+   },
+   "6:ScreenSpaceShadows": {
+    "ms": 3.021,
+    "draws": 2,
+    "verts": 6
+   },
+   "5:LightingAndFog": {
+    "ms": 11.762,
+    "draws": 8,
+    "verts": 32
+   },
+   "6:Lighting": {
+    "ms": 9.067,
+    "draws": 6,
+    "verts": 24
+   },
+   "6:Fog": {
+    "ms": 2.6959999999999997,
+    "draws": 2,
+    "verts": 8
+   },
+   "5:RenderVelocities(Opaque)": {
+    "ms": 20.516000000000002,
+    "draws": 138,
+    "verts": 1659264
+   },
+   "6:Velocity": {
+    "ms": 20.516000000000002,
+    "draws": 138,
+    "verts": 1659264
+   },
+   "5:PostProcessing": {
+    "ms": 37.461,
+    "draws": 28,
+    "verts": 84
+   },
+   "6:BloomSetup WxH in WxH (PS)": {
+    "ms": 1.108,
+    "draws": 2,
+    "verts": 6
+   },
+   "6:BloomDown WxH in WxH RT (PS)": {
+    "ms": 0.3590000000000001,
+    "draws": 12,
+    "verts": 36
+   },
+   "6:BloomUp WxH in WxH RT (PS)": {
+    "ms": 0.417,
+    "draws": 10,
+    "verts": 30
+   },
+   "6:SunMerge WxH (PS)": {
+    "ms": 0.55,
+    "draws": 2,
+    "verts": 6
+   },
+   "6:TAA": {
+    "ms": 30.604,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:Tonemap WxH (PS GammaOnly=0)": {
+    "ms": 4.4190000000000005,
+    "draws": 2,
+    "verts": 6
+   },
+   "5:VirtualTextureUpdate": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:ExtractUniformBuffer": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:EnqueueCopy(GPUMessageManager.MessageBuffer)": {
+    "ms": 0.124,
+    "draws": 0,
+    "verts": 0
+   },
+   "2:RenderGraphExecute - Slate": {
+    "ms": 0.01,
+    "draws": 0,
+    "verts": 0
+   },
+   "3:FRDGBuilder::SubmitBufferUploads": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "1:Frame 2692": {
+    "ms": 169.176,
+    "draws": 2134,
+    "verts": 1675347
+   },
+   "6:RenderCloud StartFace=0 EndFace=2": {
+    "ms": 0.026,
+    "draws": 2,
+    "verts": 6
+   }
+  },
+  "high_t22_fi": {
+   "_n": 2,
+   "0:<root>": {
+    "ms": 250.78,
+    "draws": 4086,
+    "verts": 3355174
+   },
+   "1:BufferPoolCopyOps": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "1:TexturePoolCopyOps": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "1:Frame 2370": {
+    "ms": 120.573,
+    "draws": 2045,
+    "verts": 1679803
+   },
+   "2:WorldTick": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "2:SendAllEndOfFrameUpdates": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "2:SceneRender - ViewFamilies": {
+    "ms": 245.07600000000002,
+    "draws": 4086,
+    "verts": 3355174
+   },
+   "3:MobileSceneRender": {
+    "ms": 0.159,
+    "draws": 0,
+    "verts": 0
+   },
+   "4:\"DistanceFields\"": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "4:InitViews": {
+    "ms": 0.10300000000000001,
+    "draws": 0,
+    "verts": 0
+   },
+   "4:RenderMobileShadowProjections": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "4:RenderMobileScreenSpaceShadows": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "3:RenderGraphExecute - /ViewFamilies": {
+    "ms": 244.904,
+    "draws": 4086,
+    "verts": 3355174
+   },
+   "4:FRDGBuilder::SubmitBufferUploads": {
+    "ms": 0.8049999999999999,
+    "draws": 0,
+    "verts": 0
+   },
+   "4:MobileSceneRender": {
+    "ms": 244.09500000000003,
+    "draws": 4086,
+    "verts": 3355174
+   },
+   "5:ClearGPUMessageBuffer": {
+    "ms": 0.382,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:LandscapeCulling, SubsectionSizeQuads 63, Subsections 2, Vie": {
+    "ms": 0.086,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:AccessModePass[Graphics] (Textures: 0, Buffers: 3)": {
+    "ms": 0.002,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:FXSystemPreRender": {
+    "ms": 0.003,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:GPUParticles_PreRender": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:GPUScene.UploadDynamicPrimitiveShaderDataForView": {
+    "ms": 0.047,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:GPUScene::SetInstancePrimitiveIdCS": {
+    "ms": 0.019999999999999997,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:UpdateGPUScene NumPrimitiveDataUploads 2": {
+    "ms": 0.018,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:BuildRenderingCommandsDeferred(Culling=On)": {
+    "ms": 0.016,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:ClearIndirectArgInstanceCount": {
+    "ms": 0.002,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:CullInstances(UnCulled). Bin 0": {
+    "ms": 0.011,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:CullInstances(Generic). Bin 1": {
+    "ms": 0.001,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:ComputeLightGrid": {
+    "ms": 0.149,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:CullLights WxHx32 NumLights 0 NumCaptures 0": {
+    "ms": 0.147,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:SkyAtmosphereLUTs": {
+    "ms": 1.46,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:SkyAtmosphere::DistantSkyLightLut": {
+    "ms": 0.06,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:SkyAtmosphere::RealTimeCaptureSkyViewLut": {
+    "ms": 0.349,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:SkyAtmosphere::RealTimeCaptureCamera360VolumeLut": {
+    "ms": 0.322,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:SkyAtmosphere::SkyViewLut": {
+    "ms": 0.382,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:SkyAtmosphere::CameraVolumeLut": {
+    "ms": 0.34,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:CaptureConvolveSkyEnvMap": {
+    "ms": 0.154,
+    "draws": 6,
+    "verts": 4428
+   },
+   "6:RenderSky StartFace=2 EndFace=4": {
+    "ms": 0.121,
+    "draws": 4,
+    "verts": 4422
+   },
+   "5:ShadowDepths": {
+    "ms": 7.998,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:BuildRenderingCommandsDeferred(Culling=On)": {
+    "ms": 7.7410000000000005,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:Atlas0 WxH": {
+    "ms": 0.255,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:AccessModePass[Graphics] (Textures: 2, Buffers: 0)": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:BasePass": {
+    "ms": 160.168,
+    "draws": 3894,
+    "verts": 1691324
+   },
+   "6:MobileBasePass": {
+    "ms": 156.079,
+    "draws": 876,
+    "verts": 1663740
+   },
+   "6:BeginOcclusionTests": {
+    "ms": 3.484,
+    "draws": 3018,
+    "verts": 27584
+   },
+   "5:HZB": {
+    "ms": 0.9199999999999999,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:BuildHZB(ViewId=0)": {
+    "ms": 0.919,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:AsyncGpuTraceHelper::PostRenderOpaque": {
+    "ms": 0.002,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:Niagara::PostRenderFinish": {
+    "ms": 0.002,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:MobileSSAO": {
+    "ms": 3.836,
+    "draws": 6,
+    "verts": 20
+   },
+   "6:ScreenSpace AO": {
+    "ms": 3.2720000000000002,
+    "draws": 2,
+    "verts": 6
+   },
+   "6:DepthBounds ClearQuad(ScreenSpaceAO)": {
+    "ms": 0.475,
+    "draws": 2,
+    "verts": 8
+   },
+   "6:UpsamplePS Quality 1": {
+    "ms": 0.088,
+    "draws": 2,
+    "verts": 6
+   },
+   "5:ShadowProjection": {
+    "ms": 1.113,
+    "draws": 4,
+    "verts": 16
+   },
+   "6:RenderMobileShadowProjections": {
+    "ms": 1.113,
+    "draws": 4,
+    "verts": 16
+   },
+   "5:RenderMobileScreenSpaceShadows": {
+    "ms": 3.4610000000000003,
+    "draws": 2,
+    "verts": 6
+   },
+   "6:ScreenSpaceShadows": {
+    "ms": 3.4610000000000003,
+    "draws": 2,
+    "verts": 6
+   },
+   "5:LightingAndFog": {
+    "ms": 14.046,
+    "draws": 8,
+    "verts": 32
+   },
+   "6:Lighting": {
+    "ms": 11.174,
+    "draws": 6,
+    "verts": 24
+   },
+   "6:Fog": {
+    "ms": 2.872,
+    "draws": 2,
+    "verts": 8
+   },
+   "5:RenderVelocities(Opaque)": {
+    "ms": 5.036,
+    "draws": 138,
+    "verts": 1659264
+   },
+   "6:Velocity": {
+    "ms": 5.036,
+    "draws": 138,
+    "verts": 1659264
+   },
+   "5:PostProcessing": {
+    "ms": 45.027,
+    "draws": 28,
+    "verts": 84
+   },
+   "6:BloomSetup WxH in WxH (PS)": {
+    "ms": 1.21,
+    "draws": 2,
+    "verts": 6
+   },
+   "6:BloomDown WxH in WxH RT (PS)": {
+    "ms": 0.3480000000000001,
+    "draws": 12,
+    "verts": 36
+   },
+   "6:BloomUp WxH in WxH RT (PS)": {
+    "ms": 0.421,
+    "draws": 10,
+    "verts": 30
+   },
+   "6:SunMerge WxH (PS)": {
+    "ms": 0.547,
+    "draws": 2,
+    "verts": 6
+   },
+   "6:TAA": {
+    "ms": 36.039,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:Tonemap WxH (PS GammaOnly=0)": {
+    "ms": 6.46,
+    "draws": 2,
+    "verts": 6
+   },
+   "5:VirtualTextureUpdate": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:ExtractUniformBuffer": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:EnqueueCopy(GPUMessageManager.MessageBuffer)": {
+    "ms": 0.14800000000000002,
+    "draws": 0,
+    "verts": 0
+   },
+   "2:RenderGraphExecute - Slate": {
+    "ms": 0.011,
+    "draws": 0,
+    "verts": 0
+   },
+   "3:FRDGBuilder::SubmitBufferUploads": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "1:Frame 2629": {
+    "ms": 130.2,
+    "draws": 2041,
+    "verts": 1675371
+   },
+   "6:RenderCloud StartFace=2 EndFace=4": {
+    "ms": 0.031,
+    "draws": 2,
+    "verts": 6
+   }
+  },
+  "ultra": {
+   "_n": 2,
+   "0:<root>": {
+    "ms": 466.637,
+    "draws": 4479,
+    "verts": 3723274
+   },
+   "1:BufferPoolCopyOps": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "1:TexturePoolCopyOps": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "1:Frame 2419": {
+    "ms": 253.52,
+    "draws": 2238,
+    "verts": 1863835
+   },
+   "2:WorldTick": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "2:SendAllEndOfFrameUpdates": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "2:SceneRender - ViewFamilies": {
+    "ms": 460.976,
+    "draws": 4479,
+    "verts": 3723274
+   },
+   "3:MobileSceneRender": {
+    "ms": 0.224,
+    "draws": 0,
+    "verts": 0
+   },
+   "4:\"DistanceFields\"": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "4:InitViews": {
+    "ms": 0.173,
+    "draws": 0,
+    "verts": 0
+   },
+   "4:RenderMobileShadowProjections": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "4:RenderMobileScreenSpaceShadows": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "3:RenderGraphExecute - /ViewFamilies": {
+    "ms": 460.741,
+    "draws": 4479,
+    "verts": 3723274
+   },
+   "4:FRDGBuilder::SubmitBufferUploads": {
+    "ms": 0.42000000000000004,
+    "draws": 0,
+    "verts": 0
+   },
+   "4:MobileSceneRender": {
+    "ms": 460.31600000000003,
+    "draws": 4479,
+    "verts": 3723274
+   },
+   "5:UpdateAllPrimitiveSceneInfos": {
+    "ms": 0.571,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:GPUSceneUpdate": {
+    "ms": 0.571,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:ClearGPUMessageBuffer": {
+    "ms": 0.003,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:LandscapeCulling, SubsectionSizeQuads 63, Subsections 2, Vie": {
+    "ms": 0.14500000000000002,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:GPUScene.UploadDynamicPrimitiveShaderDataForView": {
+    "ms": 0.10099999999999999,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:AccessModePass[Graphics] (Textures: 0, Buffers: 3)": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:GPUScene::SetInstancePrimitiveIdCS": {
+    "ms": 0.037,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:UpdateGPUScene NumPrimitiveDataUploads 2": {
+    "ms": 0.053,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:FXSystemPreRender": {
+    "ms": 0.002,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:GPUParticles_PreRender": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:BuildRenderingCommandsDeferred(Culling=On)": {
+    "ms": 0.02,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:ClearIndirectArgInstanceCount": {
+    "ms": 0.003,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:CullInstances(UnCulled). Bin 0": {
+    "ms": 0.015,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:CullInstances(Generic). Bin 1": {
+    "ms": 0.001,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:ComputeLightGrid": {
+    "ms": 0.191,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:CullLights WxHx32 NumLights 0 NumCaptures 0": {
+    "ms": 0.189,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:SkyAtmosphereLUTs": {
+    "ms": 1.468,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:SkyAtmosphere::DistantSkyLightLut": {
+    "ms": 0.057999999999999996,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:SkyAtmosphere::RealTimeCaptureSkyViewLut": {
+    "ms": 0.358,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:SkyAtmosphere::RealTimeCaptureCamera360VolumeLut": {
+    "ms": 0.322,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:SkyAtmosphere::SkyViewLut": {
+    "ms": 0.382,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:SkyAtmosphere::CameraVolumeLut": {
+    "ms": 0.34099999999999997,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:CaptureConvolveSkyEnvMap": {
+    "ms": 0.29000000000000004,
+    "draws": 10,
+    "verts": 4440
+   },
+   "6:RenderSky StartFace=4 EndFace=6": {
+    "ms": 0.139,
+    "draws": 4,
+    "verts": 4422
+   },
+   "5:ShadowDepths": {
+    "ms": 93.11099999999999,
+    "draws": 810,
+    "verts": 716920
+   },
+   "6:BuildRenderingCommandsDeferred(Culling=On)": {
+    "ms": 0.608,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:Atlas0 WxH": {
+    "ms": 92.50200000000001,
+    "draws": 810,
+    "verts": 716920
+   },
+   "5:AccessModePass[Graphics] (Textures: 2, Buffers: 0)": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:BasePass": {
+    "ms": 247.748,
+    "draws": 3473,
+    "verts": 1514132
+   },
+   "6:MobileBasePass": {
+    "ms": 243.974,
+    "draws": 1150,
+    "verts": 1492092
+   },
+   "6:BeginOcclusionTests": {
+    "ms": 2.909,
+    "draws": 2323,
+    "verts": 22040
+   },
+   "5:HZB": {
+    "ms": 1.39,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:BuildHZB(ViewId=0)": {
+    "ms": 1.3889999999999998,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:AsyncGpuTraceHelper::PostRenderOpaque": {
+    "ms": 0.002,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:Niagara::PostRenderFinish": {
+    "ms": 0.002,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:MobileSSAO": {
+    "ms": 4.891,
+    "draws": 6,
+    "verts": 20
+   },
+   "6:ScreenSpace AO": {
+    "ms": 4.133,
+    "draws": 2,
+    "verts": 6
+   },
+   "6:DepthBounds ClearQuad(ScreenSpaceAO)": {
+    "ms": 0.662,
+    "draws": 2,
+    "verts": 8
+   },
+   "6:UpsamplePS Quality 1": {
+    "ms": 0.095,
+    "draws": 2,
+    "verts": 6
+   },
+   "5:ShadowProjection": {
+    "ms": 1.891,
+    "draws": 6,
+    "verts": 24
+   },
+   "6:RenderMobileShadowProjections": {
+    "ms": 1.891,
+    "draws": 6,
+    "verts": 24
+   },
+   "5:RenderMobileScreenSpaceShadows": {
+    "ms": 4.406000000000001,
+    "draws": 2,
+    "verts": 6
+   },
+   "6:ScreenSpaceShadows": {
+    "ms": 4.406000000000001,
+    "draws": 2,
+    "verts": 6
+   },
+   "5:LightingAndFog": {
+    "ms": 16.043,
+    "draws": 8,
+    "verts": 32
+   },
+   "6:Lighting": {
+    "ms": 12.436,
+    "draws": 6,
+    "verts": 24
+   },
+   "6:Fog": {
+    "ms": 3.6079999999999997,
+    "draws": 2,
+    "verts": 8
+   },
+   "5:RenderVelocities(Opaque)": {
+    "ms": 27.926000000000002,
+    "draws": 136,
+    "verts": 1487616
+   },
+   "6:Velocity": {
+    "ms": 27.926000000000002,
+    "draws": 136,
+    "verts": 1487616
+   },
+   "5:PostProcessing": {
+    "ms": 59.906000000000006,
+    "draws": 28,
+    "verts": 84
+   },
+   "6:BloomSetup WxH in WxH (PS)": {
+    "ms": 1.8559999999999999,
+    "draws": 2,
+    "verts": 6
+   },
+   "6:BloomDown WxH in WxH RT (PS)": {
+    "ms": 0.53,
+    "draws": 12,
+    "verts": 36
+   },
+   "6:BloomUp WxH in WxH RT (PS)": {
+    "ms": 0.518,
+    "draws": 10,
+    "verts": 30
+   },
+   "6:SunMerge WxH (PS)": {
+    "ms": 0.764,
+    "draws": 2,
+    "verts": 6
+   },
+   "6:TAA": {
+    "ms": 50.204,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:Tonemap WxH (PS GammaOnly=0)": {
+    "ms": 6.032,
+    "draws": 2,
+    "verts": 6
+   },
+   "5:VirtualTextureUpdate": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:ExtractUniformBuffer": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:EnqueueCopy(GPUMessageManager.MessageBuffer)": {
+    "ms": 0.16799999999999998,
+    "draws": 0,
+    "verts": 0
+   },
+   "2:RenderGraphExecute - Slate": {
+    "ms": 0.009000000000000001,
+    "draws": 0,
+    "verts": 0
+   },
+   "3:FRDGBuilder::SubmitBufferUploads": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "1:Frame 2555": {
+    "ms": 213.109,
+    "draws": 2241,
+    "verts": 1859439
+   },
+   "6:ConvolutionMip1": {
+    "ms": 0.15,
+    "draws": 6,
+    "verts": 18
+   }
+  },
+  "ultra_fi": {
+   "_n": 2,
+   "0:<root>": {
+    "ms": 439.06100000000004,
+    "draws": 5183,
+    "verts": 3781608
+   },
+   "1:BufferPoolCopyOps": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "1:TexturePoolCopyOps": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "1:Frame 2462": {
+    "ms": 229.069,
+    "draws": 2592,
+    "verts": 1890793
+   },
+   "2:WorldTick": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "2:SendAllEndOfFrameUpdates": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "2:SceneRender - ViewFamilies": {
+    "ms": 433.48900000000003,
+    "draws": 5183,
+    "verts": 3781608
+   },
+   "3:MobileSceneRender": {
+    "ms": 0.249,
+    "draws": 0,
+    "verts": 0
+   },
+   "4:\"DistanceFields\"": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "4:InitViews": {
+    "ms": 0.194,
+    "draws": 0,
+    "verts": 0
+   },
+   "4:RenderMobileShadowProjections": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "4:RenderMobileScreenSpaceShadows": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "3:RenderGraphExecute - /ViewFamilies": {
+    "ms": 433.23,
+    "draws": 5183,
+    "verts": 3781608
+   },
+   "4:FRDGBuilder::SubmitBufferUploads": {
+    "ms": 0.6419999999999999,
+    "draws": 0,
+    "verts": 0
+   },
+   "4:MobileSceneRender": {
+    "ms": 432.58299999999997,
+    "draws": 5183,
+    "verts": 3781608
+   },
+   "5:ClearGPUMessageBuffer": {
+    "ms": 0.509,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:LandscapeCulling, SubsectionSizeQuads 63, Subsections 2, Vie": {
+    "ms": 0.139,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:GPUScene.UploadDynamicPrimitiveShaderDataForView": {
+    "ms": 0.10599999999999998,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:AccessModePass[Graphics] (Textures: 0, Buffers: 3)": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:GPUScene::SetInstancePrimitiveIdCS": {
+    "ms": 0.03900000000000001,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:UpdateGPUScene NumPrimitiveDataUploads 2": {
+    "ms": 0.049999999999999996,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:FXSystemPreRender": {
+    "ms": 0.002,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:GPUParticles_PreRender": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:ComputeLightGrid": {
+    "ms": 0.177,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:CullLights WxHx32 NumLights 0 NumCaptures 0": {
+    "ms": 0.175,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:SkyAtmosphereLUTs": {
+    "ms": 1.468,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:SkyAtmosphere::DistantSkyLightLut": {
+    "ms": 0.060000000000000005,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:SkyAtmosphere::RealTimeCaptureSkyViewLut": {
+    "ms": 0.346,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:SkyAtmosphere::RealTimeCaptureCamera360VolumeLut": {
+    "ms": 0.326,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:SkyAtmosphere::SkyViewLut": {
+    "ms": 0.384,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:SkyAtmosphere::CameraVolumeLut": {
+    "ms": 0.344,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:CaptureConvolveSkyEnvMap": {
+    "ms": 0.493,
+    "draws": 18,
+    "verts": 54
+   },
+   "6:ConvolutionMip45": {
+    "ms": 0.336,
+    "draws": 12,
+    "verts": 36
+   },
+   "5:ShadowDepths": {
+    "ms": 80.529,
+    "draws": 810,
+    "verts": 716920
+   },
+   "6:BuildRenderingCommandsDeferred(Culling=On)": {
+    "ms": 7.864000000000001,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:Atlas0 WxH": {
+    "ms": 72.66300000000001,
+    "draws": 810,
+    "verts": 716920
+   },
+   "5:AccessModePass[Graphics] (Textures: 2, Buffers: 0)": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:BasePass": {
+    "ms": 244.048,
+    "draws": 4167,
+    "verts": 1548244
+   },
+   "6:MobileBasePass": {
+    "ms": 216.827,
+    "draws": 1154,
+    "verts": 1520700
+   },
+   "6:BeginOcclusionTests": {
+    "ms": 11.473,
+    "draws": 3013,
+    "verts": 27544
+   },
+   "5:HZB": {
+    "ms": 1.445,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:BuildHZB(ViewId=0)": {
+    "ms": 1.444,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:AsyncGpuTraceHelper::PostRenderOpaque": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:Niagara::PostRenderFinish": {
+    "ms": 0.002,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:MobileSSAO": {
+    "ms": 4.737,
+    "draws": 6,
+    "verts": 20
+   },
+   "6:ScreenSpace AO": {
+    "ms": 3.966,
+    "draws": 2,
+    "verts": 6
+   },
+   "6:DepthBounds ClearQuad(ScreenSpaceAO)": {
+    "ms": 0.674,
+    "draws": 2,
+    "verts": 8
+   },
+   "6:UpsamplePS Quality 1": {
+    "ms": 0.095,
+    "draws": 2,
+    "verts": 6
+   },
+   "5:ShadowProjection": {
+    "ms": 1.828,
+    "draws": 6,
+    "verts": 24
+   },
+   "6:RenderMobileShadowProjections": {
+    "ms": 1.828,
+    "draws": 6,
+    "verts": 24
+   },
+   "5:RenderMobileScreenSpaceShadows": {
+    "ms": 4.797000000000001,
+    "draws": 2,
+    "verts": 6
+   },
+   "6:ScreenSpaceShadows": {
+    "ms": 4.797000000000001,
+    "draws": 2,
+    "verts": 6
+   },
+   "5:LightingAndFog": {
+    "ms": 25.311,
+    "draws": 8,
+    "verts": 32
+   },
+   "6:Lighting": {
+    "ms": 21.668,
+    "draws": 6,
+    "verts": 24
+   },
+   "6:Fog": {
+    "ms": 3.641,
+    "draws": 2,
+    "verts": 8
+   },
+   "5:RenderVelocities(Opaque)": {
+    "ms": 20.989,
+    "draws": 138,
+    "verts": 1516224
+   },
+   "6:Velocity": {
+    "ms": 20.988,
+    "draws": 138,
+    "verts": 1516224
+   },
+   "5:PostProcessing": {
+    "ms": 45.83,
+    "draws": 28,
+    "verts": 84
+   },
+   "6:BloomSetup WxH in WxH (PS)": {
+    "ms": 1.385,
+    "draws": 2,
+    "verts": 6
+   },
+   "6:BloomDown WxH in WxH RT (PS)": {
+    "ms": 0.451,
+    "draws": 12,
+    "verts": 36
+   },
+   "6:BloomUp WxH in WxH RT (PS)": {
+    "ms": 0.498,
+    "draws": 10,
+    "verts": 30
+   },
+   "6:SunMerge WxH (PS)": {
+    "ms": 0.733,
+    "draws": 2,
+    "verts": 6
+   },
+   "6:TAA": {
+    "ms": 38.244,
+    "draws": 0,
+    "verts": 0
+   },
+   "6:Tonemap WxH (PS GammaOnly=0)": {
+    "ms": 4.5169999999999995,
+    "draws": 2,
+    "verts": 6
+   },
+   "5:VirtualTextureUpdate": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:ExtractUniformBuffer": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "5:EnqueueCopy(GPUMessageManager.MessageBuffer)": {
+    "ms": 0.131,
+    "draws": 0,
+    "verts": 0
+   },
+   "2:RenderGraphExecute - Slate": {
+    "ms": 0.011,
+    "draws": 0,
+    "verts": 0
+   },
+   "3:FRDGBuilder::SubmitBufferUploads": {
+    "ms": 0.0,
+    "draws": 0,
+    "verts": 0
+   },
+   "1:Frame 2507": {
+    "ms": 209.984,
+    "draws": 2591,
+    "verts": 1890815
+   },
+   "6:ConvolutionMip1": {
+    "ms": 0.157,
+    "draws": 6,
+    "verts": 18
+   }
+  }
+ }
+}

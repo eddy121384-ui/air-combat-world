@@ -1,0 +1,28 @@
+{
+  "status": "PASS_FI_BUILD",
+  "parts": [
+    "mat"
+  ],
+  "error": null,
+  "warnings": [],
+  "mat": {
+    "path": "/Game/FarLOD/Materials/M_FI_Impostor",
+    "ism": true,
+    "vs_hlsl": "\nconst float N = 16.0;\nfloat4 FD[4] = { float4(-3.003, -33.317, 715.315, 854.412), float4(178.388, -17.553, 606.569, 924.828), float4(57.679, -12.372, 671.751, 823.454), float4(25.531, -45.192, 1265.758, 1303.778) };\nfloat2 FE[4] = { float2(832.5, 742.0), float2(917.1, 629.5), float2(771.9, 705.9), float2(555.6, 1314.2) };   // horizontal crown radius, vertical half extent (mesh bounds box)\nfloat slice = floor(CD + 1e-4);\nfloat r = saturate(CD - slice);\nint f = slice < 2.5 ? 0 : (slice < 4.5 ? 1 : (slice < 7.5 ? 2 : 3));\nfloat3 C = FD[f].xyz;\nfloat R = FD[f].w;\nfloat rr = saturate(r);\n#if SHADING_PATH_MOBILE\nNear = NearM; End = EndM; Width = WidthM; Gamma = GammaM; rr = saturate(r / max(KeepM, 0.01));\n#endif\nfloat T = Near + (End - Near) * pow(rr, Gamma);\nfloat h = frac(r * 157.31 + 0.137);\nfloat k = clamp(S * S / max(Dist * Dist, 1.0), Kmin, 1.0);\nfloat fade = saturate((k - h) / 0.03) * saturate((End2 - Dist) / (End2 - End1));\nfloat sc = clamp(Dist / S, 1.0, ScMax);\nfloat3 vn = Vl / max(length(Vl), 1e-3);\nfloat3 hv = vn;\nhv.z = max(hv.z, 0.0);\nhv /= (abs(hv.x) + abs(hv.y) + hv.z);\nfloat2 g = (float2(hv.x + hv.y, hv.x - hv.y) * 0.5 + 0.5) * (N - 1.0);\nfloat2 b = clamp(floor(g), 0.0, N - 2.0);\nfloat2 fr = g - b;\nfloat2 fs[3];\nfloat3 w;\nif (fr.x + fr.y <= 1.0) { fs[0] = b; fs[1] = b + float2(1, 0); fs[2] = b + float2(0, 1); w = float3(1.0 - fr.x - fr.y, fr.x, fr.y); }\nelse { fs[0] = b + float2(1, 1); fs[1] = b + float2(0, 1); fs[2] = b + float2(1, 0); w = float3(fr.x + fr.y - 1.0, 1.0 - fr.x, 1.0 - fr.y); }\nfloat3 hint = abs(vn.z) < 0.999 ? float3(0, 0, 1) : float3(1, 0, 0);\nfloat3 cr = normalize(cross(hint, vn));\nfloat3 cu = cross(vn, cr);\n// card fitted to the silhouette at this view elevation (not the bounding sphere): thin conifers cost ~45 % less masked area\nfloat2 hs = float2(min(FE[f].x, R), min(R, FE[f].y * sqrt(saturate(1.0 - vn.z * vn.z)) + FE[f].x * abs(vn.z)));\nfloat2 q2 = (UV - 0.5) * float2(2.0, -2.0) * hs;\nfloat3 q = cr * q2.x + cu * q2.y;\nfloat2 uvs[3];\nfor (int i = 0; i < 3; i++)\n{\n    float2 ee = fs[i] / (N - 1.0) * 2.0 - 1.0;\n    float2 t = float2(ee.x + ee.y, ee.x - ee.y) * 0.5;\n    float3 d = normalize(float3(t.x, t.y, 1.0 - abs(t.x) - abs(t.y)));\n    float3 h2 = abs(d.z) < 0.999 ? float3(0, 0, 1) : float3(1, 0, 0);\n    float3 ra = normalize(cross(h2, d));\n    float3 ua = cross(d, ra);\n    uvs[i] = float2(0.5 + -1.0 * dot(q, ra) / (2.0 * R), 0.5 - 1.0 * dot(q, ua) / (2.0 * R));\n}\nUVA = uvs[0]; UVB = uvs[1]; UVC = uvs[2];\nIAB = float2(fs[0].x + fs[0].y * N, fs[1].x + fs[1].y * N);\nICS = float2(fs[2].x + fs[2].y * N, slice);\nWAB = w.xy;\nTF = float2(T, fade);\nbool hidden = (Dist < T - Width - 3000.0) || (fade <= 0.0);\nreturn hidden ? float3(0, 0, 0) : (C + q) * sc;\n",
+    "s_cm": 300000.0,
+    "kmin": 0.15,
+    "scmax": 1.6,
+    "tint": [
+      0.66,
+      0.69,
+      0.86
+    ],
+    "stats": {
+      "num_vertex_shader_instructions": "686",
+      "num_pixel_shader_instructions": "272",
+      "num_samplers": "3",
+      "num_vertex_texture_samples": "0",
+      "num_pixel_texture_samples": "3"
+    }
+  }
+}

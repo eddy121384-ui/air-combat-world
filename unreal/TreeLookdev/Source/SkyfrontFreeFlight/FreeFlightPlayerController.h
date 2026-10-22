@@ -61,6 +61,8 @@ private:
 	void ApplyGraphics();
 	bool HandleMenuPress(const FVector2D& P);
 	void GfxTestTick(float DeltaTime);
+	void FarLodTestTick();                 // FreeFlightFarLodTest.cpp
+	void SetFarImpostors(bool bOn);
 	static float Shape(float V) { return 0.35f * V + 0.65f * V * V * V; }   // fine control near centre, full rate at the edge
 
 	FLayout Layout;
@@ -92,4 +94,19 @@ private:
 	int32 GfxShotFrames = 0;
 	float GfxStreamDoneAt = -1.f;
 	TArray<float> GfxFrameMs, GfxGpuMs;
+	// -fffarlodtest / -fffarlodfly: far-LOD research A/B (FreeFlightFarLodTest.cpp)
+	bool bFarLodTest = false;
+	bool bFarLodFly = false;
+	bool bFlProfile = false;
+	bool bFlProfiled = false;
+	TArray<FIntPoint> FlSteps;             // (view, config)
+	int32 FlStep = -1;
+	float FlStepTime = 0.f;
+	float FlReadyAt = -1.f;
+	float FlStreamDoneAt = -1.f;
+	int32 FlShotFrames = 0;
+	int32 FlFlyFrame = 0;
+	int32 FlFlyFrames = 360;
+	int32 FarImpostorActors = 0;
+	TArray<float> FlFrameMs, FlGpuMs, FlDraws, FlPrims;
 };

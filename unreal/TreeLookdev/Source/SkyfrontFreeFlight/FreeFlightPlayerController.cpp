@@ -22,6 +22,8 @@ AFreeFlightPlayerController::AFreeFlightPlayerController()
 	bAutoTest = FParse::Param(FCommandLine::Get(), TEXT("ffautotest"));
 	bCrashTest = FParse::Param(FCommandLine::Get(), TEXT("ffcrash"));
 	bGfxTest = FParse::Param(FCommandLine::Get(), TEXT("ffgfxtest"));
+	bFarLodFly = FParse::Param(FCommandLine::Get(), TEXT("fffarlodfly"));
+	bFarLodTest = bFarLodFly || FParse::Param(FCommandLine::Get(), TEXT("fffarlodtest"));
 }
 
 void AFreeFlightPlayerController::BeginPlay()
@@ -243,6 +245,10 @@ void AFreeFlightPlayerController::PlayerTick(float DeltaTime)
 	if (bGfxTest)
 	{
 		GfxTestTick(DeltaTime);
+	}
+	if (bFarLodTest)
+	{
+		FarLodTestTick();
 	}
 	if (WasInputKeyJustPressed(EKeys::G))
 	{

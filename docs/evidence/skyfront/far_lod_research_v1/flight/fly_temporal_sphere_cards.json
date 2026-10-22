@@ -1,0 +1,26 @@
+{
+ "high": {
+  "frames": 361,
+  "far_band_rows": [
+   288,
+   448
+  ],
+  "far_change_median": 5.637,
+  "far_change_p95": 9.325,
+  "far_pops": [],
+  "full_spikes": [
+   359
+  ]
+ },
+ "high_t22_fi": {
+  "frames": 361,
+  "far_band_rows": [
+   288,
+   448
+  ],
+  "far_change_median": 5.837,
+  "far_change_p95": 9.286,
+  "far_pops": [],
+  "full_spikes": []
+ }
+}

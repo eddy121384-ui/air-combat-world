@@ -255,6 +255,10 @@ void AFreeFlightHUD::DrawDiagnostics(const AFreeFlightPlayerController* PC, floa
 				++BuildingComps;
 				continue;
 			}
+			if (Mat && Mat->GetName().Contains(TEXT("FI_Impostor")))
+			{
+				continue;   // far-impostor layer (research), not a 3D tree band
+			}
 			++TreeComps;
 			TreeInst += C->GetInstanceCount();
 			if (C->DetailMode <= DetailMode)
