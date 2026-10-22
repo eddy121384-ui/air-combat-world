@@ -3,6 +3,8 @@ import { sub, norm, addScaled, forwardOf, DEG, angleBetween, dist } from '../sim
 import { LOCK, GUN } from '../sim/weapons.js';
 import { gunLead, missilePk } from '../sim/fire.js';
 import { attitudeOf } from './attitude.js';
+import { bestTurn, instantTurnRate } from '../sim/aircraft.js';
+import { pullUpWarning } from '../sim/warnings.js';
 
 const GREEN = '#7dffb0', RED = '#ff4d5e', AMBER = '#ffc04d', WHITE = '#f4fbff', CYAN = '#7fe3ff';
 
@@ -143,8 +145,8 @@ export class Hud {
         if (Math.floor(this.t * 2) % 2 === 0) this.banner('WARNING · LOCKED', AMBER, h * 0.24, S * 0.8);
       }
       // ground / stall warnings
-      const sink = -me.vel.y;
-      if (me.pos.y < 600 && sink > 20 || me.pos.y < 250) {
+      // Energy-aware: a 400 m/s dive needs far more room than a gentle descent.
+      if (pullUpWarning(me)) {
         if (Math.floor(this.t * 5) % 2 === 0) this.banner('PULL UP', RED, h * 0.66, S);
       } else if (me.speed < 95) this.banner('STALL', AMBER, h * 0.66, S * 0.8);
       if (me.oob > 0) this.banner(`RETURN TO COMBAT AREA ${Math.max(0, 12 - me.oob).toFixed(0)}`, AMBER, h * 0.32, S * 0.75);
@@ -154,6 +156,7 @@ export class Hud {
       g.fillStyle = WHITE;
       const kmh = Math.round(me.speed * 3.6);
       this.box(w * 0.5 - 150 * S, h * 0.5, `${kmh}`, 'SPD km/h', S, me.abCur > 0.3 ? AMBER : WHITE);
+      this.energyCues(me, w * 0.5 - 150 * S, h * 0.5, dt, S);
       this.box(w * 0.5 + 150 * S, h * 0.5, `${Math.round(me.pos.y)}`, 'ALT m', S, me.pos.y < 600 ? RED : WHITE);
       g.textAlign = 'right'; g.fillStyle = me.nCur > 7 ? AMBER : WHITE;
       g.fillText(`${me.nCur.toFixed(1)}G`, w * 0.5 - 150 * S + 4 * S, h * 0.5 + 26 * S);
@@ -449,6 +452,33 @@ export class Hud {
     g.fillText(valueText, x, y);
     g.restore();
     g.font = `600 ${Math.round(12 * S)}px ui-monospace, Menlo, monospace`;
+  }
+  /** Speed-trend bar and best-turn-speed diamond beside the speed box. Both read
+   *  the shared flight model; nothing here changes what the aircraft can do. */
+  energyCues(me, x, y, dt, S) {
+    const g = this.g;
+    if (dt > 0) {
+      if (this.trendAc !== me) { this.trendAc = me; this.prevSpeed = me.speed; this.accel = 0; }
+      const a = (me.speed - this.prevSpeed) / dt;
+      this.prevSpeed = me.speed;
+      this.accel += (a - this.accel) * Math.min(1, dt / 0.35);
+    }
+    const bx = x - 40 * S, len = Math.max(-1, Math.min(1, this.accel / 12)) * 16 * S;
+    g.save();
+    g.strokeStyle = this.accel < -4 ? AMBER : GREEN;
+    g.lineWidth = Math.max(2, 2.2 * S);
+    g.beginPath(); g.moveTo(bx - 4 * S, y); g.lineTo(bx + 4 * S, y); g.stroke();
+    if (Math.abs(len) > 1) {
+      g.beginPath(); g.moveTo(bx, y); g.lineTo(bx, y - len); g.stroke();
+      g.beginPath(); g.moveTo(bx - 3 * S, y - len + Math.sign(len) * 3 * S); g.lineTo(bx, y - len); g.lineTo(bx + 3 * S, y - len + Math.sign(len) * 3 * S); g.stroke();
+    }
+    const best = bestTurn(me);
+    if (instantTurnRate(me) >= best.rate * 0.92) {
+      g.fillStyle = GREEN;
+      const dx = x - 40 * S, dy = y + 15 * S, r = 4 * S;
+      g.beginPath(); g.moveTo(dx, dy - r); g.lineTo(dx + r, dy); g.lineTo(dx, dy + r); g.lineTo(dx - r, dy); g.closePath(); g.fill();
+    }
+    g.restore();
   }
   hpBar(x, y, w, k, label, color, S) {
     const g = this.g;

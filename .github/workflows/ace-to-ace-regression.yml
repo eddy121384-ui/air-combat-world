@@ -54,7 +54,7 @@ jobs:
     # Real Chromium (SwiftShader WebGL): settings menu x4 modes, pause/resume,
     # keyboard and iPhone-sized touch input. Not a substitute for iPhone Safari.
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -71,6 +71,7 @@ jobs:
           node tools/browser-check.mjs --scenario settings
           node tools/browser-check.mjs --scenario manual
           node tools/browser-check.mjs --scenario touch
+          node tools/browser-check.mjs --scenario modes
       - uses: actions/upload-artifact@v4
         if: always()
         with:

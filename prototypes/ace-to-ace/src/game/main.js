@@ -77,10 +77,10 @@ function saveModeQuery() {
 const formatFlight = (flight, control) =>
   (flight === 'A' ? 'LEGACY' : flight.toUpperCase()) + ' / ' + control.toUpperCase();
 const flightChoiceNotes = {
-  'arcade:assisted': '爽快轉彎、速度更寬容；由飛控協調滾轉與拉桿，適合快速上手。',
-  'arcade:expert': '爽快飛行物理，自行控制滾轉與俯仰，適合追求 AC 式操作自由的玩家。',
-  'tactical:assisted': '高 G 急轉會顯著流失速度；飛控幫你協調轉向，專心管理能量。',
-  'tactical:expert': '高 G 與低速升力限制更明顯，親自控制機體，重視能量管理。'
+  'arcade:assisted': '搖桿推向哪就轉向哪，飛控協調滾轉與拉桿。AB 衝刺；收油或 BRK 轉得更急。速度旁的綠色菱形＝最佳轉彎速度。',
+  'arcade:expert': 'AC 式手動操控：左右滾轉、拉桿轉彎，沒有自動改平，滾轉停得乾淨。AB 快而寬，收油／BRK 慢而急。',
+  'tactical:assisted': '飛控幫你協調轉向，但物理照算：滿桿急轉每秒掉速 10 m/s 以上。看速度旁的趨勢條，守在綠色菱形附近。',
+  'tactical:expert': '速度、高度與拉桿量都是資源：適度拉桿可以持續，滿桿換來瞬間機頭指向。會管能量的人贏。'
 };
 const settingsVisible = () => !$('#flightSettings').classList.contains('hidden');
 function syncFlightSettings() {

@@ -4,7 +4,7 @@
 // iPhone: headless Chromium renders WebGL in software (SwiftShader), so FPS here is pessimistic
 // for GPU cost and says nothing about Safari/WebKit specifics.
 //
-//   node tools/browser-check.mjs [--out tools/out/shots] [--scenario all|lookdev|title|settings|fight|manual|touch|aivai|result]
+//   node tools/browser-check.mjs [--out tools/out/shots] [--scenario all|lookdev|title|settings|modes|fight|manual|touch|aivai|result]
 import http from 'node:http';
 import { readFile, mkdir, writeFile } from 'node:fs/promises';
 import assert from 'node:assert/strict';
@@ -214,6 +214,90 @@ if (scenario === 'all' || scenario === 'settings') {
     const again = await sortie();
     assert.deepEqual([again.blue, again.red, again.control], ['arcade', 'arcade', 'expert'], `${label}: rematch keeps preset`);
     report.perf[label] = { passed: true };
+    await ctx.close();
+  }
+}
+if (scenario === 'all' || scenario === 'modes') {
+  // Each of the four combinations on the iPhone-sized touch layout, driven by real
+  // CDP touches on the floating stick. Checks the control interpretation in the
+  // live game (Expert: x = roll rate, no auto-level; Assisted: x = level turn,
+  // centred stick rolls out) and that AB/BRK/throttle stay the player's.
+  report.perf.modes = {};
+  for (const combo of ['arcade:assisted', 'arcade:expert', 'tactical:assisted', 'tactical:expert']) {
+    const [flight, control] = combo.split(':');
+    const label = `mode-${flight}-${control}`;
+    const { ctx, p } = await page(iphone, `?mode=${flight}&control=${control}&seed=41&autostart=1`, label);
+    await p.waitForFunction(() => window.__game?.mode === 'playing');
+    const cdp = await ctx.newCDPSession(p);
+    const touch = (type, pts) => cdp.send('Input.dispatchTouchEvent', { type, touchPoints: pts });
+    const probe = () => p.evaluate(() => {
+      const b = window.__game.match.blue, u = { x: 0, y: 1, z: 0 };
+      const q = b.q, rot = (v) => { // body right/up in world, via three-free math
+        const { x, y, z, w } = q, ix = w * v.x + y * v.z - z * v.y, iy = w * v.y + z * v.x - x * v.z,
+          iz = w * v.z + x * v.y - y * v.x, iw = -x * v.x - y * v.y - z * v.z;
+        return { x: ix * w + iw * -x + iy * -z - iz * -y, y: iy * w + iw * -y + iz * -x - ix * -z, z: iz * w + iw * -z + ix * -y - iy * -x };
+      };
+      const r = rot({ x: 1, y: 0, z: 0 }), up = rot(u), f = rot({ x: 0, y: 0, z: -1 });
+      return { t: window.__game.match.time, bank: Math.atan2(-r.y, up.y) * 180 / Math.PI,
+        hdg: Math.atan2(f.x, -f.z) * 180 / Math.PI, g: b.nCur, v: b.speed, boost: b.controls.boost,
+        brake: b.controls.brake, throttle: b.controls.throttle, flight: b.flightFeel, red: window.__game.match.red.flightFeel };
+    });
+    const s0 = await probe();
+    assert.deepEqual([s0.flight, s0.red], [flight, flight], `${label}: both jets fly ${flight}`);
+    // right stick, ~55% deflection, then lift the finger (stick stays latched)
+    await touch('touchStart', [{ x: 150, y: 260, id: 1 }]);
+    for (let i = 1; i <= 6; i++) { await touch('touchMove', [{ x: 150 + i * 6, y: 260, id: 1 }]); await sleep(30); }
+    await touch('touchEnd', []);
+    await sleep(1200);
+    const s1 = await probe();
+    if (control === 'expert') assert.ok(Math.abs(s1.bank) > 60, `${label}: held right stick keeps rolling (bank ${s1.bank.toFixed(0)})`);
+    else {
+      assert.ok(s1.bank > 30 && s1.bank < 95, `${label}: assisted right stick banks into a level turn (bank ${s1.bank.toFixed(0)})`);
+      const dh = Math.abs(((s1.hdg - s0.hdg + 540) % 360) - 180);
+      assert.ok(dh > 3, `${label}: assisted right stick turns the jet (${dh.toFixed(1)} deg)`);
+    }
+    // centre the stick: Assisted rolls out, Expert holds whatever bank it has
+    await touch('touchStart', [{ x: 300, y: 260, id: 2 }]);
+    await touch('touchMove', [{ x: 300 - 36, y: 260, id: 2 }]);
+    await touch('touchEnd', []);
+    const stick = await p.evaluate(() => ({ ...window.__game.input.stick }));
+    assert.ok(Math.abs(stick.x) < 1e-9, `${label}: dragging back to the anchor centres the stick`);
+    const s2a = await probe(); await sleep(1500); const s2 = await probe();
+    if (control === 'assisted') assert.ok(Math.abs(s2.bank) < 15, `${label}: centred assisted stick rolls wings level (${s2.bank.toFixed(0)})`);
+    else assert.ok(Math.abs(s2.bank - s2a.bank) < 12, `${label}: centred expert stick holds bank (no auto-level)`);
+    // pull while banked (Expert) / pull straight (Assisted): G must rise, capped by the model
+    await touch('touchStart', [{ x: 300, y: 260, id: 3 }]);
+    for (let i = 1; i <= 6; i++) { await touch('touchMove', [{ x: 300, y: 260 + i * 9, id: 3 }]); await sleep(30); }
+    await sleep(700);
+    const s3 = await probe();
+    assert.ok(s3.g > 2.5, `${label}: aft stick pulls G (${s3.g.toFixed(1)})`);
+    await shot(p, `14-${label}-pull`);
+    await touch('touchEnd', []);
+    // player-owned power: AB toggle and momentary BRK, throttle untouched by any mode
+    await p.tap('[data-btn="boost"]'); await sleep(250);
+    const s4 = await probe();
+    assert.equal(s4.boost, true, `${label}: AB toggles on`);
+    assert.ok(Math.abs(s4.throttle - 0.72) < 1e-9, `${label}: throttle stays at the player's 72%`);
+    await p.tap('[data-btn="boost"]'); await sleep(250);
+    assert.equal((await probe()).boost, false, `${label}: AB toggles off; Assisted never re-lights it`);
+    report.perf.modes[combo] = { s1: { bank: +s1.bank.toFixed(1) }, s2: { bank: +s2.bank.toFixed(1) }, pullG: +s3.g.toFixed(1),
+      fps: await p.evaluate(() => +window.__perf.fps.toFixed(1)) };
+    await ctx.close();
+  }
+  // One complete 1v1 per physics profile, to the result screen and a rematch.
+  for (const flight of ['arcade', 'tactical']) {
+    const label = `match-${flight}`;
+    const { ctx, p } = await page(desktop, `?mode=${flight}&control=expert&autostart=1&autopilot=chaser&seed=21`, label);
+    await p.waitForFunction(() => window.__game?.mode === 'playing');
+    await p.evaluate(() => window.__game.setTimeScale(6));
+    let st;
+    for (let i = 0; i < 420; i++) { await sleep(1000); st = await state(p); if (st.mode === 'result') break; }
+    assert.equal(st.mode, 'result', `${label}: full match reaches the result screen`);
+    await shot(p, `15-${label}-result`);
+    await p.keyboard.press('Enter'); await sleep(1200);
+    const again = await p.evaluate(() => ({ mode: window.__game.mode, b: window.__game.match.blue.flightFeel, r: window.__game.match.red.flightFeel }));
+    assert.deepEqual(again, { mode: 'playing', b: flight, r: flight }, `${label}: rematch keeps ${flight} for both jets`);
+    report.perf.modes[label] = { result: st.result };
     await ctx.close();
   }
 }
