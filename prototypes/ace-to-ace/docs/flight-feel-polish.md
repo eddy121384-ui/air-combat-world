@@ -153,7 +153,7 @@ How to read it:
   dragged *everyone* into a slow knife fight (AI below 150 m/s 27 % of the time, 28 % of
   it defending), where an always-AB pursuit happened to work. Now the AI holds its
   speed near corner and the always-AB average proxy sits at ~258 m/s and loses; the gap
-  between average and good proxy (one energy habit) grew from +32 to +59 points vs
+  between average and good proxy (one energy habit) grew from +22 to +59 points vs
   Veteran in Tactical × Expert. Veteran and Ace are harder in Tactical; Rookie remains
   beatable with Assisted (82 %).
 - **Known open item:** in Arcade a bot that holds a max-G AB level turn forever is
