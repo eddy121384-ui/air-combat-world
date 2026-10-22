@@ -184,3 +184,44 @@ h2.win { color: var(--go); } h2.lose { color: var(--red); }
   .settings-intro { margin: 3px 0 6px; }
 }
 @media (max-width: 450px) { .mode-summary { flex-wrap: wrap; } .mode-summary .settings-shortcut { flex: 1 1 100%; } }
+
+/* ---------- Ace Flight Academy ---------- */
+.row button.academy-entry { background: rgba(255, 210, 120, 0.16); border-color: #ffd28a; color: #ffe8bd; }
+.academy-card { width: min(760px, 100%); }
+.academy-head { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.academy-head h2 { margin: 0; }
+.academy-mode { font-size: 12px; color: var(--dim); }
+.academy-mode strong { color: #7fe3ff; }
+.academy-head .settings-shortcut { margin-left: auto; min-height: 34px; padding: 4px 12px; border-radius: 9px; border: 1px solid var(--edge); background: rgba(255,255,255,0.08); font-weight: 700; }
+.lesson-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin: 10px 0 4px; }
+.lesson-card {
+  display: flex; flex-direction: column; align-items: flex-start; gap: 2px; text-align: left; min-height: 74px;
+  padding: 8px 9px; border-radius: 10px; border: 1px solid var(--edge); background: rgba(255,255,255,0.06);
+}
+.lesson-card .no { font: 800 11px ui-monospace, Menlo, monospace; color: var(--dim); }
+.lesson-card .t { font-weight: 800; font-size: 13px; line-height: 1.25; }
+.lesson-card .st { margin-top: auto; font-size: 11px; color: var(--dim); }
+.lesson-card.cleared { border-color: rgba(125, 255, 176, 0.6); }
+.lesson-card.cleared .st { color: var(--go); font-weight: 700; }
+.lesson-card.next { border-color: #ffd28a; box-shadow: 0 0 0 1px rgba(255, 210, 138, 0.4) inset; }
+.lesson-card.final { background: rgba(255, 106, 106, 0.1); }
+.lesson-card.locked { opacity: 0.45; }
+.brief-card { width: min(620px, 100%); }
+.brief-principle { margin: 6px 0; font-size: 15px; font-weight: 700; line-height: 1.45; }
+.brief-goals { margin: 4px 0 6px 0; padding-left: 20px; font-size: 13px; line-height: 1.55; }
+.brief-real, .brief-model { margin: 2px 0; font-size: 11.5px; }
+.deb-card { width: min(680px, 100%); }
+.deb-stats { grid-template-columns: repeat(4, 1fr); }
+.deb-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; font-size: 12.5px; line-height: 1.5; }
+.deb-cols ul { margin: 4px 0; padding-left: 18px; }
+.deb-good { color: var(--go); } .deb-improve { color: #ffd28a; }
+#debTitle.win { color: var(--go); } #debTitle.lose { color: var(--red); }
+@media (max-height: 420px) {
+  .lesson-grid { gap: 6px; margin: 6px 0 2px; }
+  .lesson-card { min-height: 62px; padding: 6px 7px; }
+  .lesson-card .t { font-size: 12px; }
+  .brief-principle { font-size: 13px; margin: 4px 0; }
+  .brief-goals { font-size: 12px; line-height: 1.4; }
+  .deb-stats { grid-template-columns: repeat(4, 1fr); }
+  .deb-cols { font-size: 11.5px; line-height: 1.4; }
+}

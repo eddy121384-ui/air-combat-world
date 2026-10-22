@@ -323,6 +323,8 @@ export class Renderer {
       if (!pl) continue;
       if (!ac.alive) continue;
       const g = pl.group;
+      g.visible = !ac.dormant;
+      if (ac.dormant) continue;
       g.position.set(ac.pos.x, ac.pos.y, ac.pos.z);
       g.quaternion.set(ac.q.x, ac.q.y, ac.q.z, ac.q.w);
       const ab = ac.abCur, thr = ac.thrustCur;

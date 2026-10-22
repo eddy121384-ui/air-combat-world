@@ -54,6 +54,7 @@
     </div>
     <div class="row">
       <button id="btnStart" class="primary">出擊 SORTIE</button>
+      <button id="btnAcademy" class="academy-entry">飛行學院 ACADEMY</button>
       <button id="btnWatch">AI vs AI 觀戰</button>
     </div>
     <div id="keysHelp" class="help">
@@ -70,7 +71,7 @@
     <h2>PAUSED</h2>
     <div id="pauseFlightPreset" class="help mode-current">目前：ARCADE / EXPERT</div>
     <div class="row"><button id="btnResume" class="primary">繼續</button><button id="btnPauseSettings">⚙ 飛行設定</button></div>
-    <div class="row"><button id="btnQuit">回到標題</button></div>
+    <div class="row"><button id="btnPauseRetry" class="hidden">重新開始本課</button><button id="btnQuit">回到標題</button></div>
   </div>
 </div>
 
@@ -107,6 +108,45 @@
       <button id="btnSettingsCancel" type="button">取消</button>
       <button id="btnSettingsApply" type="button" class="primary">儲存設定</button>
     </div>
+  </div>
+</div>
+
+<div id="academy" class="screen hidden">
+  <div class="card academy-card">
+    <div class="kicker">ACE FLIGHT ACADEMY · 教官 KITE</div>
+    <div class="academy-head">
+      <h2>飛行學院</h2>
+      <span class="academy-mode">機體設定 <strong id="academyMode">ARCADE / EXPERT</strong></span>
+      <button id="btnAcademySettings" class="settings-shortcut" type="button">⚙ 飛行設定</button>
+    </div>
+    <div id="lessonGrid" class="lesson-grid" role="list"></div>
+    <div class="row"><button id="btnAcademyBack" type="button">返回標題</button></div>
+  </div>
+</div>
+
+<div id="briefing" class="screen hidden" role="dialog" aria-labelledby="briefTitle">
+  <div class="card brief-card">
+    <div class="kicker" id="briefKicker">LESSON 01</div>
+    <h2 id="briefTitle"></h2>
+    <p class="brief-principle" id="briefPrinciple"></p>
+    <ol class="brief-goals" id="briefGoals"></ol>
+    <p class="help brief-real" id="briefReal"></p>
+    <p class="help brief-model" id="briefModel"></p>
+    <div class="row"><button id="btnBriefBack" type="button">學院</button><button id="btnBriefGo" class="primary" type="button">出擊 TAKE OFF</button></div>
+  </div>
+</div>
+
+<div id="debrief" class="screen hidden" role="dialog" aria-labelledby="debTitle">
+  <div class="card deb-card">
+    <div class="kicker" id="debKicker"></div>
+    <h2 id="debTitle"></h2>
+    <div class="sub" id="debSub"></div>
+    <div class="stats deb-stats" id="debStats"></div>
+    <div class="deb-cols">
+      <div><b class="deb-good">做得好</b><ul id="debGood"></ul></div>
+      <div><b class="deb-improve">下一次</b><ul id="debImprove"></ul></div>
+    </div>
+    <div class="row"><button id="btnDebAcademy" type="button">學院</button><button id="btnDebRetry" type="button">重試</button><button id="btnDebNext" class="primary" type="button">下一課</button></div>
   </div>
 </div>
 

@@ -4,7 +4,7 @@
 // iPhone: headless Chromium renders WebGL in software (SwiftShader), so FPS here is pessimistic
 // for GPU cost and says nothing about Safari/WebKit specifics.
 //
-//   node tools/browser-check.mjs [--out tools/out/shots] [--scenario all|lookdev|title|settings|modes|fight|manual|touch|aivai|result]
+//   node tools/browser-check.mjs [--out tools/out/shots] [--scenario all|lookdev|title|settings|modes|academy|fight|manual|touch|aivai|result]
 import http from 'node:http';
 import { readFile, mkdir, writeFile } from 'node:fs/promises';
 import assert from 'node:assert/strict';
@@ -300,6 +300,79 @@ if (scenario === 'all' || scenario === 'modes') {
     report.perf.modes[label] = { result: st.result };
     await ctx.close();
   }
+}
+if (scenario === 'all' || scenario === 'academy') {
+  // Ace Flight Academy through the real menus on the iPhone-sized touch layout.
+  // The automated student drives the game's own Input object (stick values,
+  // throttle strip, AB toggle, BRK) before every simulation step, i.e. the same
+  // PlayerController path as a thumb. Flow: title -> academy -> briefing ->
+  // sortie -> causal failure -> retry -> clear -> progress saved -> reload.
+  const { ctx, p } = await page(iphone, '?seed=3', 'academy');
+  const hook = (bad = null) => p.evaluate(async (badKey) => {
+    const S = await import('/tools/academy-student.mjs');
+    const g = window.__game, m = g.match, ctl = m.controllers.get(m.blue);
+    const st = S.makeStudentInput();
+    const plan = badKey ? S.BAD[badKey] : S.PLANS[g.lessonId];
+    const orig = ctl.update;
+    ctl.update = (dt, mm) => {
+      plan(g.lesson, st, g.controlMode);
+      g.input.stick.x = st.stick.x; g.input.stick.y = st.stick.y;
+      if (Math.abs(g.input.throttle() - st.thr) > 1e-3) g.input.setThrottle(st.thr);
+      g.input.boostToggle = st.ab; g.input.btn.brake = st.brk;
+      if (st.presses.size) { for (const k of st.presses) g.input.pressed.add(k); st.presses.clear(); }
+      if (st.gun !== undefined) g.input.btn.gun = !!st.gun;
+      return orig(dt, mm);
+    };
+    g.setTimeScale(4);
+  }, bad);
+  const waitDebrief = () => p.waitForFunction(() => window.__game.mode === 'debrief', null, { timeout: 240000 });
+  const lessonIds = await p.evaluate(async () => (await import('/src/academy/lessons.js')).LESSONS.map((l) => l.id));
+  await p.waitForFunction(() => window.__game?.mode === 'title');
+  await p.tap('#btnAcademy');
+  assert.equal(await p.locator('#lessonGrid .lesson-card').count(), lessonIds.length, 'academy lists every lesson');
+  await shot(p, '16-academy-grid');
+  // L03 power: a student who dives for speed must fail with the causal reason
+  await p.tap('[data-lesson="L03"]');
+  await shot(p, '17-academy-briefing');
+  await p.tap('#btnBriefGo');
+  await p.waitForFunction(() => window.__game.mode === 'playing');
+  await hook('L03:dive');
+  await waitDebrief();
+  const fail = await p.evaluate(() => window.__lastLesson);
+  assert.equal(fail.success, false, 'diving student fails L03');
+  assert.match(await p.textContent('#debSub'), /第五課/, 'failure explains WHY (thrust lesson, not a dive)');
+  await shot(p, '18-academy-fail');
+  // Retry the same lesson with a correct student
+  await p.tap('#btnDebRetry');
+  await p.waitForFunction(() => window.__game.mode === 'playing' && window.__game.lesson && !window.__game.lesson.result);
+  await hook();
+  await sleep(1500); await shot(p, '19-academy-flying');
+  await waitDebrief();
+  const clear = await p.evaluate(() => window.__lastLesson);
+  assert.equal(clear.success, true, 'student clears L03 on retry');
+  await shot(p, '20-academy-clear');
+  const saved = await p.evaluate(() => JSON.parse(localStorage.getItem('ace2ace.academy.v1')));
+  assert.equal(saved.lessons.L03.cleared, true); assert.equal(saved.lessons.L03.attempts, 2);
+  // Every lesson clears in the browser in the current mode via Next / grid
+  for (const id of lessonIds) {
+    if (id === 'L03') continue;
+    await p.evaluate((lid) => window.__game.openBriefing(lid), id);
+    await p.tap('#btnBriefGo');
+    await p.waitForFunction(() => window.__game.mode === 'playing' && window.__game.lesson && !window.__game.lesson.result);
+    await hook();
+    await waitDebrief();
+    const res = await p.evaluate(() => window.__lastLesson);
+    assert.equal(res.success, true, `${id} clears in the browser (${res.reason || ''})`);
+    report.perf[`academy-${id}`] = { grade: res.grade, t: Math.round(res.time) };
+  }
+  await p.reload();
+  await p.waitForFunction(() => window.__game?.mode === 'title');
+  await p.tap('#btnAcademy');
+  const cleared = await p.locator('#lessonGrid .lesson-card.cleared').count();
+  assert.equal(cleared, lessonIds.length, 'progress survives a reload');
+  await shot(p, '21-academy-progress');
+  report.perf.academy = { passed: true, lessons: lessonIds.length };
+  await ctx.close();
 }
 if (scenario === 'all' || scenario === 'fight') {
   // automated player proxy so the fight actually happens

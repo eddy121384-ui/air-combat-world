@@ -8,6 +8,9 @@ import { Renderer } from './render.js';
 import { Hud } from './hud.js';
 import { Input, PlayerController } from './input.js';
 import { Audio } from './audio.js';
+import { LESSONS, lessonById } from '../academy/lessons.js';
+import { createLessonSession } from '../academy/session.js';
+import { loadProgress, recordAttempt, saveProgress } from '../academy/progress.js';
 
 const $ = (s) => document.querySelector(s);
 const params = new URLSearchParams(location.search);
@@ -47,6 +50,9 @@ let view = { mode: 'chase', ac: null };
 let resultTimer = -1;
 let spectateTarget = 'blue';
 let matchCount = 0;
+// Ace Flight Academy: a lesson is a normal Match plus a LessonRunner on top.
+let lessonRun = null, lessonId = null, debriefTimer = -1, briefId = null;
+let academyProgress = loadProgress();
 const perf = { frames: 0, t: 0, fps: 0, ms: 0, worst: 0, samples: [] };
 window.__perf = perf;
 
@@ -97,7 +103,7 @@ function syncFlightSettings() {
   $('#settingsApplyNote').textContent = inFight
     ? changed ? '套用後將重新開始本局（相同起始條件），不會在空中突然變更物理。'
       : '只修改音效／俯仰方向不會重開本局。'
-    : '儲存後回到主選單，下次出擊使用新設定。';
+    : settingsReturn === 'academy' ? '儲存後回到飛行學院，下一堂課使用新設定。' : '儲存後回到主選單，下次出擊使用新設定。';
   $('#btnSettingsApply').textContent = inFight
     ? changed ? '套用並重新出擊' : '儲存並繼續'
     : '儲存設定';
@@ -125,14 +131,15 @@ function applyFlightSettings() {
   saveModeQuery();
   syncTitle();
   if (settingsReturn === 'pause') {
-    if (changed) start(kind); // Same seed and both AI/player get the new model.
+    if (changed) { if (kind === 'lesson') startLesson(lessonId); else start(kind); } // same seed, both jets switch
     else {
       // The controller holds a per-sortie copy of settings: push the pitch
       // convention into it so "save and continue" takes effect immediately.
       if (player instanceof PlayerController) player.settings.invert = settings.invert;
       mode = 'playing'; showScreen(null); last = performance.now();
     }
-  } else showScreen('title');
+  } else if (settingsReturn === 'academy') { renderAcademy(); showScreen('academy'); }
+  else showScreen('title');
 }
 for (const b of document.querySelectorAll('[data-flight-choice]')) b.addEventListener('click', () => {
   [draftFlight, draftControl] = b.dataset.flightChoice.split(':');
@@ -150,7 +157,16 @@ $('#btnWatch').addEventListener('click', () => start('aivai'));
 $('#btnRematch').addEventListener('click', () => start(kind));
 $('#btnTitle').addEventListener('click', toTitle);
 $('#btnResume').addEventListener('click', () => setPaused(false));
-$('#btnQuit').addEventListener('click', toTitle);
+$('#btnQuit').addEventListener('click', () => (kind === 'lesson' ? openAcademy() : toTitle()));
+$('#btnPauseRetry').addEventListener('click', () => startLesson(lessonId));
+$('#btnAcademy').addEventListener('click', () => { audio.unlock(); audio.ui(); openAcademy(); });
+$('#btnAcademySettings').addEventListener('click', () => openFlightSettings('academy'));
+$('#btnAcademyBack').addEventListener('click', toTitle);
+$('#btnBriefBack').addEventListener('click', openAcademy);
+$('#btnBriefGo').addEventListener('click', () => startLesson(briefId));
+$('#btnDebAcademy').addEventListener('click', openAcademy);
+$('#btnDebRetry').addEventListener('click', () => startLesson(lessonId));
+$('#btnDebNext').addEventListener('click', () => { const n = nextLesson(lessonId); if (n) openBriefing(n.id); else openAcademy(); });
 $('#pauseBtn').addEventListener('click', () => { if (settingsVisible()) closeFlightSettings(); else setPaused(mode !== 'paused'); });
 $('#dbgBtn').addEventListener('click', () => { debugOn = !debugOn; });
 syncTitle();
@@ -161,7 +177,9 @@ function toTitle() {
   $('#pauseBtn').classList.add('hidden');
 }
 function setPaused(p) {
-  if (mode === 'title' || mode === 'result') return;
+  if (mode !== 'playing' && mode !== 'paused') return;
+  $('#btnPauseRetry').classList.toggle('hidden', kind !== 'lesson');
+  $('#btnQuit').textContent = kind === 'lesson' ? '回到學院' : '回到標題';
   mode = p ? 'paused' : 'playing';
   showScreen(p ? 'pause' : null);
   last = performance.now();
@@ -171,6 +189,7 @@ function setPaused(p) {
 function start(k) {
   audio.unlock();
   kind = k;
+  lessonRun = null; debriefTimer = -1;
   matchCount += 1;
   const seed = experimentSeed;
   rend.reset();
@@ -220,11 +239,104 @@ function start(k) {
   last = performance.now();
 }
 
+// ------------------------------------------------------------------ academy
+const modeKey = () => `${flightFeel === 'A' ? 'arcade' : flightFeel}:${controlMode}`;
+function nextLesson(id) {
+  const i = LESSONS.findIndex((l) => l.id === id);
+  return LESSONS[i + 1] || null;
+}
+function renderAcademy() {
+  $('#academyMode').textContent = formatFlight(flightFeel, controlMode);
+  const grid = $('#lessonGrid');
+  const firstOpen = LESSONS.find((l) => !academyProgress.lessons[l.id]?.cleared);
+  grid.innerHTML = '';
+  for (const l of LESSONS) {
+    const p = academyProgress.lessons[l.id];
+    const b = document.createElement('button');
+    b.type = 'button'; b.setAttribute('role', 'listitem');
+    b.className = 'lesson-card' + (p?.cleared ? ' cleared' : '') + (l === firstOpen ? ' next' : '') + (l.final ? ' final' : '');
+    b.dataset.lesson = l.id;
+    const st = p?.cleared ? `✓ ${p.best}${p.bestTime ? ` · ${p.bestTime}s` : ''}` : l === firstOpen ? '建議下一課' : p?.attempts ? `嘗試 ${p.attempts} 次` : '未完成';
+    b.innerHTML = `<span class="no">${String(l.no).padStart(2, '0')} ${l.en}</span><span class="t">${l.title}</span><span class="st">${st}</span>`;
+    b.addEventListener('click', () => { audio.ui(); openBriefing(l.id); });
+    grid.appendChild(b);
+  }
+}
+function openAcademy() {
+  mode = 'academy'; kind = 'menu'; lessonRun = null; debriefTimer = -1;
+  renderAcademy();
+  showScreen('academy');
+  $('#touch').classList.add('hidden');
+  $('#pauseBtn').classList.add('hidden');
+}
+function openBriefing(id) {
+  const l = lessonById(id);
+  if (!l) return openAcademy();
+  briefId = id; mode = 'academy';
+  $('#briefKicker').textContent = `LESSON ${String(l.no).padStart(2, '0')} · ${l.en} · ${formatFlight(flightFeel, controlMode)}`;
+  $('#briefTitle').textContent = l.title;
+  $('#briefPrinciple').textContent = l.principle;
+  $('#briefGoals').innerHTML = l.goals.map((g) => `<li>${g}</li>`).join('');
+  $('#briefReal').textContent = l.real || '';
+  $('#briefModel').textContent = l.model || '';
+  showScreen('briefing');
+  $('#touch').classList.add('hidden');
+  $('#pauseBtn').classList.add('hidden');
+}
+function startLesson(id) {
+  const lesson = lessonById(id);
+  if (!lesson) return;
+  audio.unlock();
+  kind = 'lesson'; lessonId = id; debriefTimer = -1;
+  rend.reset();
+  const [flight, control] = modeKey().split(':');
+  const session = createLessonSession(lesson, { flight, control, input, settings });
+  match = session.match; lessonRun = session.runner; player = session.player;
+  enemyAI = session.foeAI || null; blueAI = null;
+  lessonRun.onSay = (text) => { hud.say('KITE', text, Math.min(5, 2.4 + text.length * 0.07)); audio.radio(); };
+  lessonRun.onFlash = (text, color) => hud.flash(text, color, 1.8);
+  rend.addAircraft(match.blue); rend.addAircraft(match.red);
+  match.on(onEvent);
+  view = { mode: 'chase', ac: match.blue, target: match.red };
+  acc = 0; timeScale = 1; slowT = 0; resultTimer = -1;
+  mode = 'playing';
+  showScreen(null);
+  $('#touch').classList.toggle('hidden', !isTouch);
+  $('#pauseBtn').classList.remove('hidden');
+  input.resetStick(); input.resetPower(); input.clearPresses();
+  hud.msgs = [];
+  hud.flash(`LESSON ${String(lesson.no).padStart(2, '0')}`, '#ffe2a3', 2.0, true);
+  hud.flash(lesson.title, '#f4fbff', 2.2);
+  last = performance.now();
+}
+function showDebrief() {
+  const r = lessonRun.result, l = lessonById(lessonId);
+  mode = 'debrief';
+  recordAttempt(academyProgress, lessonId, { success: r.success, grade: r.grade, time: r.time, mode: modeKey() });
+  saveProgress(academyProgress);
+  $('#debKicker').textContent = `LESSON ${String(l.no).padStart(2, '0')} · ${l.title} · ${formatFlight(flightFeel, controlMode)}`;
+  const title = $('#debTitle');
+  title.textContent = r.success ? (l.final ? `ACE RATING ${r.grade}` : `CLEAR · ${r.grade}`) : 'NOT YET · 未通過';
+  title.className = r.success ? 'win' : 'lose';
+  $('#debSub').textContent = r.success ? `用時 ${Math.round(r.time)} 秒` : (r.reason || '');
+  $('#debStats').innerHTML = r.stats.map(([k, v]) => `<div><b>${v}</b><span>${k}</span></div>`).join('');
+  const li = (a, empty) => (a.length ? a : [empty]).map((x) => `<li>${x}</li>`).join('');
+  $('#debGood').innerHTML = li(r.good, r.success ? '完成了每一個步驟。' : '—');
+  $('#debImprove').innerHTML = li(r.improve, r.success ? '保持這個節奏。' : '照著教官的提示再飛一次。');
+  const next = nextLesson(lessonId);
+  $('#btnDebNext').classList.toggle('hidden', !next);
+  $('#btnDebNext').textContent = r.success ? '下一課' : '跳到下一課';
+  showScreen('debrief');
+  $('#touch').classList.add('hidden');
+  $('#pauseBtn').classList.add('hidden');
+  window.__lastLesson = { id: lessonId, ...r, mode: modeKey() };
+}
+
 function onEvent(ev) {
   const me = view.ac;
   switch (ev.type) {
     case 'missileLaunch': {
-      const own = ev.ac === match.blue && kind === 'pvai';
+      const own = ev.ac === match.blue && (kind === 'pvai' || kind === 'lesson');
       audio.missileLaunch(own);
       if (own) hud.flash(ev.guided ? 'FOX 2' : 'FOX 2 (NO LOCK)', ev.guided ? '#f4fbff' : '#ffc04d', 0.9);
       break;
@@ -239,7 +351,7 @@ function onEvent(ev) {
     case 'missileMiss':
       if (ev.missile.owner === match.blue && kind === 'pvai') {
         hud.flash(ev.decoyed ? 'MISS — 熱焰彈誘餌' : 'MISS', '#ffc04d', 1.1);
-        if (Math.random() < 0.5) enemyAI.say('dodged', match);
+        if (enemyAI && Math.random() < 0.5) enemyAI.say('dodged', match);
       } else if (ev.missile.target === me) hud.flash('閃過飛彈', '#7fe3ff', 1.0);
       break;
     case 'gunFire': audio.gun(ev.ac === me); break;
@@ -268,7 +380,7 @@ function onEvent(ev) {
       break;
     }
     case 'suddenDeath': hud.flash('SUDDEN DEATH — 下一擊定勝負', '#ff4d5e', 3, true); break;
-    case 'matchOver': resultTimer = ev.reason === 'timeDecision' || ev.reason === 'draw' ? 1.5 : 3.2; break;
+    case 'matchOver': if (kind !== 'lesson') resultTimer = ev.reason === 'timeDecision' || ev.reason === 'draw' ? 1.5 : 3.2; break;
     default: break;
   }
 }
@@ -334,6 +446,7 @@ function frame(now) {
   // Otherwise an Enter tap can unexpectedly launch a sortie after Cancel.
   const restart = input.consume('restart');
   if (mode === 'result' && restart) start(kind);
+  if (mode === 'debrief' && restart) startLesson(lessonId);
   if (mode === 'title' && !settingsVisible() && restart) start('pvai');
   if (input.consume('camera') && kind === 'aivai' && match) {
     spectateTarget = spectateTarget === 'blue' ? 'red' : 'blue';
@@ -341,12 +454,14 @@ function frame(now) {
     view.target = spectateTarget === 'blue' ? match.red : match.blue;
   }
 
-  if (match && (mode === 'playing' || mode === 'result')) {
+  if (match && (mode === 'playing' || mode === 'result' || mode === 'debrief')) {
     if (slowT > 0) { slowT -= realDt; if (slowT <= 0) timeScale = 1; }
     acc += realDt * timeScale;
     let steps = 0;
-    while (acc >= RULES.dt && steps < 8) { match.step(RULES.dt); acc -= RULES.dt; steps++; }
+    while (acc >= RULES.dt && steps < 8) { match.step(RULES.dt); lessonRun?.step(RULES.dt); acc -= RULES.dt; steps++; }
     if (steps === 8) acc = 0;
+    if (lessonRun?.result && debriefTimer < 0 && mode === 'playing') debriefTimer = lessonRun.result.success ? 3.0 : 2.4;
+    if (debriefTimer > 0 && mode === 'playing') { debriefTimer -= realDt; if (debriefTimer <= 0) showDebrief(); }
     if (resultTimer > 0 && mode === 'playing') { resultTimer -= realDt; if (resultTimer <= 0) showResult(); }
     if (view.mode !== 'kill') view.mode = input.look() && kind === 'pvai' ? 'look' : 'chase';
     rend.update(match, view, realDt * timeScale);
@@ -354,11 +469,12 @@ function frame(now) {
     rend.render();
     const me = view.ac;
     const showHud = mode === 'playing';
-    hud.draw(match, showHud ? me : null, rend, realDt, { minimal: view.mode === 'kill', debugText: debugOn ? aiLabel(me === match.blue ? enemyAI : blueAI) : null });
+    hud.draw(match, showHud ? me : null, rend, realDt, { minimal: view.mode === 'kill', debugText: debugOn ? aiLabel(me === match.blue ? enemyAI : blueAI) : null,
+      academy: kind === 'lesson' && lessonRun ? lessonRun.view() : null });
     const L = me.lock;
     let mw = false, mc = false;
     for (const m of match.missiles) if (m.alive && m.target === me && m.guided && !m.decoy) { mw = true; if (dist(m.pos, me.pos) < 1500) mc = true; }
-    audio.frame({ throttle: me.thrustCur, ab: me.abCur, speed: me.speed, locking: L.timer > 0 && !L.locked, locked: L.locked, missileWarn: mw, missileClose: mc, lockWarn: me.lockedBy > 0, alive: me.alive && showHud && kind === 'pvai' }, now / 1000);
+    audio.frame({ throttle: me.thrustCur, ab: me.abCur, speed: me.speed, locking: L.timer > 0 && !L.locked, locked: L.locked, missileWarn: mw, missileClose: mc, lockWarn: me.lockedBy > 0, alive: me.alive && showHud && (kind === 'pvai' || kind === 'lesson') }, now / 1000);
   } else if (match && mode === 'paused') {
     // Freeze the fight behind the pause/settings card. Moving the camera to the
     // title orbit here made it swoop back from ~4 km away on resume.
@@ -412,6 +528,8 @@ function drawDebug() {
 window.__game = {
   get match() { return match; }, get mode() { return mode; }, get enemyAI() { return enemyAI; }, get flightFeel() { return flightFeel; }, get controlMode() { return controlMode; },
   get player() { return player; }, get rend() { return rend; },
+  get lesson() { return lessonRun; }, get lessonId() { return lessonId; }, get academyProgress() { return academyProgress; },
+  startLesson, openAcademy, openBriefing,
   get experimentSeed() { return experimentSeed; }, settings, start, input, openFlightSettings,
   setTimeScale(s) { timeScale = s; },
 };
@@ -426,7 +544,11 @@ document.addEventListener('dblclick', (e) => e.preventDefault());
 // Explicit QA auto-start plus the legacy match-kind URLs (?mode=pvai, ?mode=aivai)
 // still launch directly; their physics then come from settings or ?feel.
 const legacyKind = ['pvai', 'aivai'].includes(params.get('mode')) ? params.get('mode') : null;
-if (params.get('autostart') === '1' || legacyKind)
+if (lessonById(params.get('lesson') || '')) {
+  // QA / share link straight to a lesson briefing (or the lesson with autostart=1)
+  const id = params.get('lesson');
+  setTimeout(() => (params.get('autostart') === '1' ? startLesson(id) : openBriefing(id)), 50);
+} else if (params.get('autostart') === '1' || legacyKind)
   setTimeout(() => start(legacyKind || 'pvai'), 50);
 else showScreen('title');
 requestAnimationFrame(frame);
