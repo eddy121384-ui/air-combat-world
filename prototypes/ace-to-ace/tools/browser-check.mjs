@@ -357,13 +357,25 @@ if (scenario === 'all' || scenario === 'academy') {
   for (const id of lessonIds) {
     if (id === 'L03') continue;
     await p.evaluate((lid) => window.__game.openBriefing(lid), id);
+    if (id === 'L08' || id === 'L10') await shot(p, `22-academy-brief-${id}`);
     await p.tap('#btnBriefGo');
-    await p.waitForFunction(() => window.__game.mode === 'playing' && window.__game.lesson && !window.__game.lesson.result);
-    await hook();
-    await waitDebrief();
-    const res = await p.evaluate(() => window.__lastLesson);
+    // The final checkride is a real 1v1 vs VETERAN (headless: the proxy wins 5-11 of
+    // 12 openings per mode). In the browser it may take a retry; a loss must still
+    // come with a concrete reason.
+    let res, attempts = 0;
+    do {
+      if (attempts) await p.tap('#btnDebRetry');
+      attempts++;
+      await p.waitForFunction(() => window.__game.mode === 'playing' && window.__game.lesson && !window.__game.lesson.result);
+      await hook();
+      if (id === 'L07' || id === 'L09') { await sleep(2500); await shot(p, `23-academy-fly-${id}`); }
+      await waitDebrief();
+      res = await p.evaluate(() => window.__lastLesson);
+      if (!res.success) assert.ok((res.reason || '').length > 4, `${id}: a failure explains why`);
+    } while (!res.success && id === 'L10' && attempts < 3);
     assert.equal(res.success, true, `${id} clears in the browser (${res.reason || ''})`);
-    report.perf[`academy-${id}`] = { grade: res.grade, t: Math.round(res.time) };
+    if (id === 'L10') { assert.match(await p.textContent('#debTitle'), /ACE RATING [SAB]/); await shot(p, '24-academy-ace-rating'); }
+    report.perf[`academy-${id}`] = { grade: res.grade, t: Math.round(res.time), attempts };
   }
   await p.reload();
   await p.waitForFunction(() => window.__game?.mode === 'title');

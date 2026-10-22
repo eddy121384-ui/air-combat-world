@@ -183,7 +183,7 @@ export class LessonRunner {
       const text = this.queue.shift();
       this.spoken.push({ t: this.t, text });
       this.onSay?.(text);
-      this.nextLineT = Math.min(4.2, 1.6 + text.length * 0.07);
+      this.nextLineT = Math.min(6.5, 1.6 + text.length * 0.075);
     }
   }
 

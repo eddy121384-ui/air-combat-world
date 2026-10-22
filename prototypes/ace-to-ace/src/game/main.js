@@ -293,7 +293,7 @@ function startLesson(id) {
   const session = createLessonSession(lesson, { flight, control, input, settings });
   match = session.match; lessonRun = session.runner; player = session.player;
   enemyAI = session.foeAI || null; blueAI = null;
-  lessonRun.onSay = (text) => { hud.say('KITE', text, Math.min(5, 2.4 + text.length * 0.07)); audio.radio(); };
+  lessonRun.onSay = (text) => { hud.say('KITE', text, Math.min(7, 2.4 + text.length * 0.075)); audio.radio(); };
   lessonRun.onFlash = (text, color) => hud.flash(text, color, 1.8);
   rend.addAircraft(match.blue); rend.addAircraft(match.red);
   match.on(onEvent);
@@ -308,6 +308,15 @@ function startLesson(id) {
   hud.flash(`LESSON ${String(lesson.no).padStart(2, '0')}`, '#ffe2a3', 2.0, true);
   hud.flash(lesson.title, '#f4fbff', 2.2);
   last = performance.now();
+}
+/** Show lesson power rules on the touch strip (locked throttle, AB unavailable). */
+function syncLessonPower(rules) {
+  if (rules.throttle != null && Math.abs(input.throttle() - rules.throttle) > 1e-3) input.setThrottle(rules.throttle);
+  if (rules.ab === false && input.boostToggle) {
+    input.boostToggle = false;
+    const b = document.querySelector('[data-btn="boost"]');
+    b?.classList.remove('lit'); b?.setAttribute('aria-pressed', 'false');
+  }
 }
 function showDebrief() {
   const r = lessonRun.result, l = lessonById(lessonId);
@@ -460,6 +469,7 @@ function frame(now) {
     let steps = 0;
     while (acc >= RULES.dt && steps < 8) { match.step(RULES.dt); lessonRun?.step(RULES.dt); acc -= RULES.dt; steps++; }
     if (steps === 8) acc = 0;
+    if (lessonRun && mode === 'playing') syncLessonPower(lessonRun.rules);
     if (lessonRun?.result && debriefTimer < 0 && mode === 'playing') debriefTimer = lessonRun.result.success ? 3.0 : 2.4;
     if (debriefTimer > 0 && mode === 'playing') { debriefTimer -= realDt; if (debriefTimer <= 0) showDebrief(); }
     if (resultTimer > 0 && mode === 'playing') { resultTimer -= realDt; if (resultTimer <= 0) showResult(); }

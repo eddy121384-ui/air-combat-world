@@ -8,6 +8,26 @@ import { pullUpWarning } from '../sim/warnings.js';
 
 const GREEN = '#7dffb0', RED = '#ff4d5e', AMBER = '#ffc04d', WHITE = '#f4fbff', CYAN = '#7fe3ff';
 
+/** Wrap text (CJK-aware: breaks anywhere, prefers spaces) into at most maxLines lines. */
+function wrapText(g, text, maxW, maxLines) {
+  // split after spaces / CJK punctuation (no regex lookbehind: older iOS Safari lacks it)
+  const tokens = [];
+  let tok = '';
+  for (const ch of text) { tok += ch; if (' \t　，。；：！？、'.includes(ch)) { tokens.push(tok); tok = ''; } }
+  if (tok) tokens.push(tok);
+  const lines = [''];
+  for (const tok of tokens) {
+    for (const piece of g.measureText(tok).width > maxW ? Array.from(tok) : [tok]) {
+      const cur = lines[lines.length - 1] + piece;
+      if (g.measureText(cur).width > maxW && lines[lines.length - 1]) {
+        if (lines.length === maxLines) { lines[lines.length - 1] = lines[lines.length - 1].replace(/.$/, '…'); return lines; }
+        lines.push(piece.trimStart());
+      } else lines[lines.length - 1] = cur;
+    }
+  }
+  return lines;
+}
+
 export class Hud {
   constructor(canvas) {
     this.c = canvas;
@@ -213,13 +233,7 @@ export class Hud {
     g.fillText(`${v.lesson}  ${v.step}`, x + 7 * S, y + 10 * S);
     g.fillStyle = WHITE;
     g.font = `600 ${Math.round(11 * S)}px ui-sans-serif, system-ui, "PingFang TC", sans-serif`;
-    // wrap the objective into at most two lines
-    const words = Array.from(v.text || ''), lines = [''];
-    for (const ch of words) {
-      const cur = lines[lines.length - 1] + ch;
-      if (g.measureText(cur).width > pw - 14 * S && lines.length < 2) lines.push(ch); else lines[lines.length - 1] = cur;
-    }
-    lines.forEach((ln, i) => g.fillText(ln, x + 7 * S, y + (24 + i * 13) * S));
+    wrapText(g, v.text || '', pw - 14 * S, 2).forEach((ln, i) => g.fillText(ln, x + 7 * S, y + (24 + i * 13) * S));
     if (v.progress != null) {
       g.fillStyle = 'rgba(244,251,255,0.18)'; g.fillRect(x + 7 * S, y + 48 * S, pw - 14 * S, 3 * S);
       g.fillStyle = GREEN; g.fillRect(x + 7 * S, y + 48 * S, (pw - 14 * S) * v.progress, 3 * S);
@@ -252,12 +266,17 @@ export class Hud {
         g.globalAlpha = Math.min(1, (life - this.radio.t) * 2);
         g.font = `600 ${Math.round(13 * S)}px ui-sans-serif, system-ui, "PingFang TC", "Noto Sans TC", sans-serif`;
         const txt = `${this.radio.who} ▸ ${this.radio.text}`;
-        const tw = g.measureText(txt).width;
-        g.fillStyle = 'rgba(10,20,35,0.55)';
-        g.fillRect(w * 0.5 - tw / 2 - 10 * S, h * 0.78 - 12 * S, tw + 20 * S, 24 * S);
+        // Wrap between the thumb zones (stick left, weapons right) and keep it above the radar.
+        const maxW = Math.min(w * 0.54, 560 * S);
+        const lines = wrapText(g, txt, maxW, 3);
+        const tw = Math.max(...lines.map((l) => g.measureText(l).width));
+        const lh = 17 * S, bottom = Math.min(h * 0.78 + 12 * S, h - 92 * S);
+        const top = bottom - lines.length * lh - 6 * S;
+        g.fillStyle = 'rgba(10,20,35,0.6)';
+        g.fillRect(w * 0.5 - tw / 2 - 10 * S, top, tw + 20 * S, bottom - top);
         g.fillStyle = this.radio.who === 'J-16' ? '#ffb3b3' : this.radio.who === 'KITE' ? '#ffe2a3' : '#bfe8ff';
         g.textAlign = 'center';
-        g.fillText(txt, w * 0.5, h * 0.78);
+        lines.forEach((l, i) => g.fillText(l, w * 0.5, top + 3 * S + lh * (i + 0.5)));
         g.globalAlpha = 1;
       }
     }
