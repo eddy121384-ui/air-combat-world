@@ -2,6 +2,7 @@
 // The assist layer only shapes stick input; the aircraft still flies the shared flight model.
 import { clamp, smoothstep, DEG, G } from '../sim/math.js';
 import { bankAngle, pitchAngle, pitchForG, neutralG, availableG, MIN_SPEED } from '../sim/aircraft.js';
+import { LevelAssist } from './level-assist.js';
 
 export class Input {
   constructor(root) {
@@ -17,6 +18,7 @@ export class Input {
     this.root = root;
     this.stickTouch = null;
     this.buttonHolds = new Map();
+    this.levelAssist = new LevelAssist();
     this.bindKeyboard();
     this.bindTouch();
     window.addEventListener('blur', () => this.releaseHeld());
@@ -37,6 +39,7 @@ export class Input {
       if (k === 'Backquote' || k === 'Tab') { this.pressed.add('debug'); e.preventDefault(); }
       if (k === 'Escape' || k === 'KeyP') this.pressed.add('pause');
       if (k === 'KeyC') this.pressed.add('camera');
+      if (k === 'KeyL') this.levelAssist.toggle();
       if (['Space', 'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(k)) e.preventDefault();
     };
     window.addEventListener('keydown', down);
@@ -136,6 +139,7 @@ export class Input {
         else holds.add('mouse');
         if (wasHeld) return;
         el.classList.add('down');
+        if (name === 'level') { this.levelAssist.toggle(); return; }
         if (name === 'boost') {
           this.boostToggle = !this.boostToggle;
           el.classList.toggle('lit', this.boostToggle);
@@ -208,6 +212,7 @@ export class Input {
 
   /** Cancel transient input on pause/focus loss; power latches remain the pilot's. */
   releaseHeld() {
+    this.levelAssist.cancel();
     this.resetStick();
     this.keys.clear(); this.pressed.clear();
     for (const key of Object.keys(this.btn)) this.btn[key] = false;
@@ -251,8 +256,9 @@ export class Input {
 export class PlayerController {
   constructor(ac, input, settings) {
     this.ac = ac; this.input = input; this.settings = settings;
+    this.level = input.levelAssist || new LevelAssist();
   }
-  update() {
+  update(dt=1/60) {
     const ac = this.ac, s = this.settings, inp = this.input;
     const { x, y: yRaw, yaw } = inp.axes();
     const y = s.invert ? yRaw : -yRaw; // default: stick up = nose down (flight convention)
@@ -302,6 +308,6 @@ export class PlayerController {
       c.roll = x;
       c.pitch = y;
     }
-    return c;
+    return this.level.update(ac,{x,y:yRaw},c,dt);
   }
 }

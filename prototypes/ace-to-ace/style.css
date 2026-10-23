@@ -239,3 +239,9 @@ h2.win { color: var(--go); } h2.lose { color: var(--red); }
   .deb-stats { grid-template-columns: repeat(4, 1fr); }
   .deb-cols { font-size: 11.5px; line-height: 1.4; }
 }
+
+/* Explicit recovery command, outside the weapon thumb cluster. */
+#btns .b-level { position: fixed; left: calc(56px + var(--sal)); top: calc(8px + var(--sat));
+  width: 42px; height: 42px; border-radius: 9px; font-size: 11px; z-index: 5; }
+
+#dbgBtn { left: auto; right: calc(10px + var(--sar)); }

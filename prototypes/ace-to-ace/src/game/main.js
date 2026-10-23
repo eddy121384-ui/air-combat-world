@@ -177,6 +177,7 @@ $('#dbgBtn').addEventListener('click', () => { debugOn = !debugOn; });
 syncTitle();
 
 function toTitle() {
+  input.releaseHeld();
   mode = 'title'; showScreen('title');
   $('#touch').classList.add('hidden');
   $('#pauseBtn').classList.add('hidden');
@@ -269,6 +270,7 @@ function renderAcademy() {
   }
 }
 function openAcademy() {
+  input.releaseHeld();
   mode = 'academy'; kind = 'menu'; lessonRun = null; debriefTimer = -1;
   renderAcademy();
   showScreen('academy');
@@ -329,6 +331,7 @@ function syncLessonPower(rules) {
   }
 }
 function showDebrief() {
+  input.releaseHeld();
   const r = lessonRun.result, l = lessonById(lessonId);
   mode = 'debrief';
   recordAttempt(academyProgress, lessonId, { success: r.success, grade: r.grade, time: r.time, mode: modeKey() });
@@ -411,6 +414,7 @@ function onEvent(ev) {
 }
 
 function showResult() {
+  input.releaseHeld();
   mode = 'result';
   const r = match.result;
   const me = match.blue, foe = match.red;
@@ -442,6 +446,7 @@ function showResult() {
 const fmtTime = (t) => `${Math.floor(t / 60)}:${String(Math.floor(t % 60)).padStart(2, '0')}`;
 
 // ------------------------------------------------------------------ loop
+let levelVersion=0;
 function frame(now) {
   requestAnimationFrame(frame);
   const realDt = Math.min(0.1, (now - last) / 1000);
@@ -521,6 +526,13 @@ function frame(now) {
     rend.seaMat.uniforms.time.value = t;
     rend.render();
     hud.draw(match || { missiles: [], timeLimit: 0, time: 0, phase: '' }, null, rend, realDt);
+  }
+  const level=input.levelAssist, levelButton=$('[data-btn="level"]');
+  levelButton.classList.toggle('lit',level.active);
+  levelButton.setAttribute('aria-pressed',String(level.active));
+  if(level.version!==levelVersion) {
+    levelVersion=level.version;
+    if(mode==='playing' && level.message)hud.say('FLIGHT',level.message,2.8);
   }
   drawDebug();
   input.pressed.delete('msl'); input.pressed.delete('flare');
