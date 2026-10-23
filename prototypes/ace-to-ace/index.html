@@ -117,6 +117,7 @@
     <div class="academy-head">
       <h2>飛行學院</h2>
       <span class="academy-mode">機體設定 <strong id="academyMode">ARCADE / EXPERT</strong></span>
+      <span class="academy-grad" id="academyGrad"></span>
       <button id="btnAcademySettings" class="settings-shortcut" type="button">⚙ 飛行設定</button>
     </div>
     <div id="lessonGrid" class="lesson-grid" role="list"></div>
@@ -128,8 +129,10 @@
   <div class="card brief-card">
     <div class="kicker" id="briefKicker">LESSON 01</div>
     <h2 id="briefTitle"></h2>
+    <p class="brief-hook" id="briefHook"></p>
     <p class="brief-principle" id="briefPrinciple"></p>
     <ol class="brief-goals" id="briefGoals"></ol>
+    <p class="brief-s" id="briefS"></p>
     <p class="help brief-real" id="briefReal"></p>
     <p class="help brief-model" id="briefModel"></p>
     <div class="row"><button id="btnBriefBack" type="button">學院</button><button id="btnBriefGo" class="primary" type="button">出擊 TAKE OFF</button></div>
@@ -146,7 +149,8 @@
       <div><b class="deb-good">做得好</b><ul id="debGood"></ul></div>
       <div><b class="deb-improve">下一次</b><ul id="debImprove"></ul></div>
     </div>
-    <div class="row"><button id="btnDebAcademy" type="button">學院</button><button id="btnDebRetry" type="button">重試</button><button id="btnDebNext" class="primary" type="button">下一課</button></div>
+    <p class="deb-s" id="debS"></p>
+    <div class="row"><button id="btnDebAcademy" type="button">學院</button><button id="btnDebRetry" type="button">重試</button><button id="btnDebCheckpoint" class="hidden" type="button">從此段重試</button><button id="btnDebNext" class="primary" type="button">下一課</button></div>
   </div>
 </div>
 

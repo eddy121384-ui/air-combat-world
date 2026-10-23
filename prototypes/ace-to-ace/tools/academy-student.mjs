@@ -32,6 +32,7 @@ export const dirFor = (headingDeg, climbDeg = 0) => {
  * Stick for flying toward `dir` (world). pullLimit caps aft stick (0..1): a
  * "moderate" thumb uses ~0.5, a hard break uses 1.
  */
+const BREAK_SIDE = new WeakMap(); // committed break direction per aircraft (Assisted, target behind)
 export function stickToward(ac, dir, control, { pullLimit = 1, gain = 1, ff = { x: 0, y: 0 } } = {}) {
   const b = toBody(ac.q, dir);
   const ahead = Math.max(-b.z, 1e-3);
@@ -41,7 +42,14 @@ export function stickToward(ac, dir, control, { pullLimit = 1, gain = 1, ff = { 
   if (control === 'assisted') {
     x = clamp(ax / (14 * DEG) * gain, -1, 1);
     pull = clamp(ay / (5 * DEG) * gain, -0.6, pullLimit);
-    if (b.z > 0) { x = Math.sign(b.x || 1); pull = 0; } // target behind: full turn request
+    if (b.z > 0) {
+      // target behind: full turn request. Near dead astern the side is ambiguous;
+      // like a thumb, commit to one side instead of flip-flopping every frame.
+      const keep = BREAK_SIDE.get(ac);
+      x = Math.abs(b.x) > 0.25 * b.z || !keep ? Math.sign(b.x || 1) : keep;
+      BREAK_SIDE.set(ac, x);
+      pull = 0;
+    }
   } else if (off < 12 * DEG && b.z < 0) {
     // precision: a lift-vector thumb. Turn rate proportional to the error; bank to
     // tilt the lift, and pull exactly the G a banked turn needs (n = 1/cos bank),
@@ -125,7 +133,7 @@ Object.assign(PLANS, {
       return;
     }
     s.thr = 1; s.ab = true; s.brk = false;
-    if (id === 'sustain' && !r.d.armed) { Object.assign(s.stick, holdHeadingAlt(r.me, hdgDeg(r.me), 3000, c, { pullLimit: 0.5 })); return; }
+    if (id === 'sustain' && !r.d.armed) { Object.assign(s.stick, holdHeadingAlt(r.me, hdgDeg(r.me), 3000, c, { pullLimit: 0.5 })); speedControl(s, r.me, 775); return; }
     // MIL 360: spend speed down to a floor just above the requirement, then hold it
     const pull = id === 'sustain' ? clamp((r.kmh - (r.tune.sustainV + 25)) / 40 + 0.35, 0.1, 1) : 1;
     turnHard(r, s, c, { pull });
@@ -271,6 +279,8 @@ export const BAD = {
   // Breaks hard as soon as it sees the missile (too early) and never drops flares.
   'L09:early'(r, s, c) { globalThis.__L09 = { flare: 0, brk: 2600 }; PLANS.L09(r, s, c); globalThis.__L09 = null; },
   // Ignores the missile warning: no flares, no break.
+  // Defends the missiles correctly, then tries to outrun the bandit in a straight line.
+  'L09:straight'(r, s, c) { if (r.phase?.id === 'missiles') { PLANS.L09(r, s, c); return; } Object.assign(s.stick, holdHeadingAlt(r.me, hdgDeg(r.me), 3200, c, { pullLimit: 0.5 })); s.thr = 1; s.ab = true; s.brk = false; },
   'L09:ignore'(r, s, c) { Object.assign(s.stick, holdHeadingAlt(r.me, hdgDeg(r.me), 3200, c, { pullLimit: 0.5 })); s.thr = 1; s.ab = true; },
   // Keeps pulling during the stall instead of unloading.
   'L06:stallPull'(r, s, c) { PLANS.L06(r, s, c); if (r.phase?.id === 'stall') { s.stick.x = 0; s.stick.y = -1; s.thr = 0.72; s.ab = false; } },

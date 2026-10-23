@@ -244,27 +244,37 @@ if (scenario === 'all' || scenario === 'modes') {
     });
     const s0 = await probe();
     assert.deepEqual([s0.flight, s0.red], [flight, flight], `${label}: both jets fly ${flight}`);
-    // right stick, ~55% deflection, then lift the finger (stick stays latched)
+    // Real CDP touch: right stick ~55% deflection, hold until the jet is banked
+    // ~60 deg, then lift the finger. The stick springs to centre; Expert keeps
+    // the bank (no auto-level), Assisted's flight control rolls out.
+    const stickNow = () => p.evaluate(() => ({ ...window.__game.input.stick, knob: document.querySelector('#stickKnob').style.transform }));
     await touch('touchStart', [{ x: 150, y: 260, id: 1 }]);
-    for (let i = 1; i <= 6; i++) { await touch('touchMove', [{ x: 150 + i * 6, y: 260, id: 1 }]); await sleep(30); }
-    await touch('touchEnd', []);
-    await sleep(1200);
-    const s1 = await probe();
-    if (control === 'expert') assert.ok(Math.abs(s1.bank) > 60, `${label}: held right stick keeps rolling (bank ${s1.bank.toFixed(0)})`);
-    else {
-      assert.ok(s1.bank > 30 && s1.bank < 95, `${label}: assisted right stick banks into a level turn (bank ${s1.bank.toFixed(0)})`);
-      const dh = Math.abs(((s1.hdg - s0.hdg + 540) % 360) - 180);
-      assert.ok(dh > 3, `${label}: assisted right stick turns the jet (${dh.toFixed(1)} deg)`);
+    let held = null;
+    for (let i = 1; i <= 120; i++) {
+      await touch('touchMove', [{ x: 150 + Math.min(5, i) * 6, y: 260, id: 1 }]);
+      held = await probe();
+      if (Math.abs(held.bank) >= 50) break;
+      await sleep(25);
     }
-    // centre the stick: Assisted rolls out, Expert holds whatever bank it has
-    await touch('touchStart', [{ x: 300, y: 260, id: 2 }]);
-    await touch('touchMove', [{ x: 300 - 36, y: 260, id: 2 }]);
+    const dhHeld = Math.abs(((held.hdg - s0.hdg + 540) % 360) - 180);
+    if (control === 'assisted') assert.ok(dhHeld > 1, `${label}: assisted right stick turns the jet (${dhHeld.toFixed(1)} deg)`);
+    assert.ok(Math.abs(held.bank) >= 50 && Math.abs(held.bank) < 100, `${label}: held stick banks ~60 deg (${held.bank.toFixed(0)})`);
     await touch('touchEnd', []);
-    const stick = await p.evaluate(() => ({ ...window.__game.input.stick }));
-    assert.ok(Math.abs(stick.x) < 1e-9, `${label}: dragging back to the anchor centres the stick`);
-    const s2a = await probe(); await sleep(1500); const s2 = await probe();
-    if (control === 'assisted') assert.ok(Math.abs(s2.bank) < 15, `${label}: centred assisted stick rolls wings level (${s2.bank.toFixed(0)})`);
-    else assert.ok(Math.abs(s2.bank - s2a.bank) < 12, `${label}: centred expert stick holds bank (no auto-level)`);
+    const st0 = await stickNow();
+    assert.deepEqual([st0.x, st0.y, st0.knob], [0, 0, 'translate(0px, 0px)'], `${label}: release centres stick command and knob`);
+    const r0 = await probe(); await sleep(400); const r1 = await probe(); await sleep(1100); const s1 = await probe();
+    if (control === 'expert') {
+      assert.ok(Math.abs(r1.bank - r0.bank) < 15, `${label}: roll stops after release (${r0.bank.toFixed(0)} -> ${r1.bank.toFixed(0)})`);
+      // reference = bank just after the release reached the page (the probe round-trip lags the finger)
+      assert.ok(Math.abs(r0.bank) > 40 && Math.abs(s1.bank - r0.bank) < 20, `${label}: Expert keeps the bank, no auto-level (${r0.bank.toFixed(0)} -> ${s1.bank.toFixed(0)})`);
+    } else {
+      assert.ok(Math.abs(s1.bank) < 15, `${label}: Assisted rolls wings level after release (${held.bank.toFixed(0)} -> ${s1.bank.toFixed(0)})`);
+    }
+    // the next touch starts from neutral even far from the old anchor
+    await touch('touchStart', [{ x: 300, y: 230, id: 2 }]);
+    const st1 = await stickNow();
+    assert.deepEqual([st1.x, st1.y], [0, 0], `${label}: a new touch starts at neutral`);
+    await touch('touchEnd', []);
     // pull while banked (Expert) / pull straight (Assisted): G must rise, capped by the model
     await touch('touchStart', [{ x: 300, y: 260, id: 3 }]);
     for (let i = 1; i <= 6; i++) { await touch('touchMove', [{ x: 300, y: 260 + i * 9, id: 3 }]); await sleep(30); }
@@ -280,7 +290,7 @@ if (scenario === 'all' || scenario === 'modes') {
     assert.ok(Math.abs(s4.throttle - 0.72) < 1e-9, `${label}: throttle stays at the player's 72%`);
     await p.tap('[data-btn="boost"]'); await sleep(250);
     assert.equal((await probe()).boost, false, `${label}: AB toggles off; Assisted never re-lights it`);
-    report.perf.modes[combo] = { s1: { bank: +s1.bank.toFixed(1) }, s2: { bank: +s2.bank.toFixed(1) }, pullG: +s3.g.toFixed(1),
+    report.perf.modes[combo] = { heldBank: +held.bank.toFixed(1), bankAtRelease: +r0.bank.toFixed(1), bank1_5sAfterRelease: +s1.bank.toFixed(1), pullG: +s3.g.toFixed(1),
       fps: await p.evaluate(() => +window.__perf.fps.toFixed(1)) };
     await ctx.close();
   }
@@ -370,6 +380,28 @@ if (scenario === 'all' || scenario === 'academy') {
   await shot(p, '20-academy-clear');
   const saved = await p.evaluate(() => JSON.parse(localStorage.getItem('ace2ace.academy.v1')));
   assert.equal(saved.lessons.L03.cleared, true); assert.equal(saved.lessons.L03.attempts, 2);
+  // Retry skips the intro: the first KITE line of the retry is a short retry call.
+  assert.ok(await p.evaluate(() => !window.__game.lesson.spoken.some((l) => l.text.startsWith('動力是你的錢包'))), 'retry does not replay the intro');
+  // L06: fail the last phase (late dive pull) -> "retry from this phase" -> clear without re-flying 1-2.
+  await p.evaluate(() => window.__game.openBriefing('L06'));
+  assert.match(await p.textContent('#briefHook'), /活著出來/, 'briefing shows the mission hook');
+  assert.match(await p.textContent('#briefS'), /^S：/, 'briefing shows the S criteria');
+  await shot(p, '25-academy-brief-hook');
+  await hook('L06:late');
+  await p.tap('#btnBriefGo');
+  await waitDebrief();
+  assert.equal((await p.evaluate(() => window.__lastLesson)).phase, 'dive');
+  assert.ok(await p.isVisible('#btnDebCheckpoint'), 'a checkpoint phase offers "retry from here"');
+  assert.match(await p.textContent('#btnDebCheckpoint'), /俯衝改出/);
+  await shot(p, '26-academy-checkpoint-offer');
+  await hook();
+  await p.tap('#btnDebCheckpoint');
+  await p.waitForFunction(() => window.__game.mode === 'playing' && window.__game.lesson?.phase?.id === 'dive');
+  await sleep(1200); await shot(p, '27-academy-coach-subtitle');
+  await waitDebrief();
+  const cp = await p.evaluate(() => window.__lastLesson);
+  assert.deepEqual([cp.success, cp.checkpoint, cp.grade !== 'S'], [true, true, true], 'checkpoint clear (capped at A)');
+  assert.match(await p.textContent('#debSub'), /從段落重試/);
   // Every lesson clears in the browser in the current mode via Next / grid
   for (const id of lessonIds) {
     if (id === 'L03') continue;
@@ -406,7 +438,10 @@ if (scenario === 'all' || scenario === 'academy') {
         Object.assign(res, win);
       }
       assert.equal(res.success, true, 'the checkride is cleared in at least one preset');
-      assert.match(await p.textContent('#debTitle'), /ACE RATING [SAB]/); await shot(p, '24-academy-ace-rating');
+      assert.match(await p.textContent('#debTitle'), /ACE RATING [SAB]/);
+      assert.match(await p.textContent('#debKicker'), /GRADUATION/);
+      assert.match(await p.textContent('#debSub'), /TAC NAME「[A-Z]+」/, 'graduation awards a TAC NAME');
+      await sleep(2500); await shot(p, '24-academy-ace-rating');
     } else assert.equal(res.success, true, `${id} clears in the browser (${res.reason || ''})`);
     report.perf[`academy-${id}`] = { grade: res.grade, t: Math.round(res.time), mode: res.mode };
   }
@@ -415,6 +450,7 @@ if (scenario === 'all' || scenario === 'academy') {
   await p.tap('#btnAcademy');
   const cleared = await p.locator('#lessonGrid .lesson-card.cleared').count();
   assert.equal(cleared, lessonIds.length, 'progress survives a reload');
+  assert.match(await p.textContent('#academyGrad'), /已結業 · ACE [SAB] · [A-Z]+/, 'academy shows the graduation badge');
   await shot(p, '21-academy-progress');
   report.perf.academy = { passed: true, lessons: lessonIds.length };
   await ctx.close();
@@ -463,20 +499,33 @@ if (scenario === 'all' || scenario === 'touch') {
   await touch('touchEnd', []);
   const afterRelease = await p.evaluate(() => ({ ...window.__game.input.stick }));
   const equalStick = (a, b) => Math.abs(a.x - b.x) < 1e-8 && Math.abs(a.y - b.y) < 1e-8;
-  if (Math.hypot(beforeRelease.x, beforeRelease.y) < 0.1 || !equalStick(beforeRelease, afterRelease))
-    throw new Error('Touch release must hold the last joystick command (not auto-center)');
+  const ZERO = { x: 0, y: 0 };
+  assert.ok(Math.hypot(beforeRelease.x, beforeRelease.y) > 0.1, 'drag deflects the stick');
+  assert.ok(equalStick(afterRelease, ZERO), 'touch release springs the stick to neutral');
+  assert.equal(await p.evaluate(() => document.querySelector('#stickKnob').style.transform), 'translate(0px, 0px)', 'knob returns to centre');
   await touch('touchStart', [{ x: 150, y: 260, id: 2 }]);
-  const afterRetouch = await p.evaluate(() => ({ ...window.__game.input.stick }));
-  if (!equalStick(afterRelease, afterRetouch))
-    throw new Error('Re-touch must not jump the joystick back to neutral');
+  assert.ok(equalStick(await p.evaluate(() => ({ ...window.__game.input.stick })), ZERO), 're-touch starts from neutral');
   await touch('touchMove', [{ x: 160, y: 255, id: 2 }]);
   const adjusted = await p.evaluate(() => ({ ...window.__game.input.stick }));
-  if (equalStick(adjusted, afterRetouch))
-    throw new Error('A new drag should adjust the held joystick command');
+  assert.ok(adjusted.x > 0 && adjusted.y > 0, 'a new drag is measured from the new anchor');
+  // second finger lands in the stick zone and lifts: the stick finger keeps control
+  await touch('touchStart', [{ x: 160, y: 255, id: 2 }, { x: 120, y: 300, id: 9 }]);
+  await touch('touchMove', [{ x: 160, y: 255, id: 2 }, { x: 60, y: 330, id: 9 }]);
+  assert.ok(equalStick(adjusted, await p.evaluate(() => ({ ...window.__game.input.stick }))), 'a second finger does not steer');
+  await touch('touchEnd', [{ x: 60, y: 330, id: 9 }]); // CDP: touchEnd lists the point(s) that lift
+  assert.ok(equalStick(adjusted, await p.evaluate(() => ({ ...window.__game.input.stick }))), 'lifting the other finger keeps the stick');
   await touch('touchEnd', []);
-  const afterSecondRelease = await p.evaluate(() => ({ ...window.__game.input.stick }));
-  if (!equalStick(adjusted, afterSecondRelease))
-    throw new Error('Second touch release must also hold the adjusted command');
+  assert.ok(equalStick(await p.evaluate(() => ({ ...window.__game.input.stick })), ZERO), 'second release also centres');
+  // system cancel (incoming call / gesture) and app switch leave no ghost input
+  await touch('touchStart', [{ x: 150, y: 260, id: 10 }]);
+  await touch('touchMove', [{ x: 185, y: 260, id: 10 }]);
+  await touch('touchCancel', []);
+  assert.ok(equalStick(await p.evaluate(() => ({ ...window.__game.input.stick })), ZERO), 'touchcancel centres the stick');
+  await touch('touchStart', [{ x: 150, y: 260, id: 11 }]);
+  await touch('touchMove', [{ x: 185, y: 260, id: 11 }]);
+  await p.evaluate(() => window.dispatchEvent(new Event('blur')));
+  assert.ok(equalStick(await p.evaluate(() => ({ ...window.__game.input.stick })), ZERO), 'focus loss centres the stick');
+  await touch('touchEnd', []);
   // Real CDP touches, including simultaneous stick + throttle. The style pass
   // must leave latched throttle, AB toggle and momentary BRK independent.
   const track = await p.locator('#throttleTrack').boundingBox();
@@ -489,7 +538,8 @@ if (scenario === 'all' || scenario === 'touch') {
   await touch('touchEnd', []);
   const powerState = () => p.evaluate(() => ({ throttle: window.__game.input.throttle(), boost: window.__game.input.boost(), brake: window.__game.input.brake() }));
   assert.ok(heldPower.throttle > 0.1 && heldPower.throttle < 0.6, 'touch drag changes throttle');
-  assert.ok(equalStick(heldPower.stick, await p.evaluate(() => ({ ...window.__game.input.stick }))), 'throttle touch leaves stick latched');
+  assert.ok(Math.hypot(heldPower.stick.x, heldPower.stick.y) > 0.1, 'stick and throttle work together (two fingers)');
+  assert.ok(equalStick(await p.evaluate(() => ({ ...window.__game.input.stick })), ZERO), 'releasing both fingers centres the stick');
   assert.equal((await powerState()).throttle, heldPower.throttle, 'release holds throttle');
   await p.tap('[data-btn="boost"]');
   assert.equal((await powerState()).boost, true, 'AB toggles on');

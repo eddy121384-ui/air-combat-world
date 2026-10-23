@@ -183,6 +183,9 @@ How to read it:
   too little (SwiftShader renders ~10–20 fps; screenshots cannot show motion feel).
 - Expert roll on the latched touch stick: is re-centring precise enough, or does a
   slightly off-centre release leave an annoying slow roll? (Touch dead zone unchanged.)
+  *Superseded:* the stick now springs to centre on release, so a sloppy release can no
+  longer leave a residual roll; the question for the device test becomes whether
+  holding a bank by letting go feels natural.*
 - Assisted light-stick corrections for gun tracking with a real thumb.
 - Legibility of the speed-trend bar and best-turn diamond at phone size, in sunlight.
 - Whether Arcade × Assisted is now winnable and fun for a newcomer against Rookie /
