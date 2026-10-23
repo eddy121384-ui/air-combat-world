@@ -10,6 +10,7 @@ import { Input, PlayerController } from './input.js';
 import { Audio } from './audio.js';
 import { LESSONS, lessonById } from '../academy/lessons.js';
 import { createLessonSession } from '../academy/session.js';
+import { resolveTune } from '../academy/runner.js';
 import { loadProgress, recordAttempt, saveProgress } from '../academy/progress.js';
 
 const $ = (s) => document.querySelector(s);
@@ -52,6 +53,7 @@ let spectateTarget = 'blue';
 let matchCount = 0;
 // Ace Flight Academy: a lesson is a normal Match plus a LessonRunner on top.
 let lessonRun = null, lessonId = null, debriefTimer = -1, briefId = null;
+let lessonTries = 0, lessonResume = null; // retries this sitting (skip the intro) / checkpoint snapshot
 let academyProgress = loadProgress();
 const perf = { frames: 0, t: 0, fps: 0, ms: 0, worst: 0, samples: [] };
 window.__perf = perf;
@@ -158,14 +160,15 @@ $('#btnRematch').addEventListener('click', () => start(kind));
 $('#btnTitle').addEventListener('click', toTitle);
 $('#btnResume').addEventListener('click', () => setPaused(false));
 $('#btnQuit').addEventListener('click', () => (kind === 'lesson' ? openAcademy() : toTitle()));
-$('#btnPauseRetry').addEventListener('click', () => startLesson(lessonId));
+$('#btnPauseRetry').addEventListener('click', () => startLesson(lessonId, { retry: true }));
 $('#btnAcademy').addEventListener('click', () => { audio.unlock(); audio.ui(); openAcademy(); });
 $('#btnAcademySettings').addEventListener('click', () => openFlightSettings('academy'));
 $('#btnAcademyBack').addEventListener('click', toTitle);
 $('#btnBriefBack').addEventListener('click', openAcademy);
-$('#btnBriefGo').addEventListener('click', () => startLesson(briefId));
+$('#btnBriefGo').addEventListener('click', () => { lessonTries = 0; startLesson(briefId); });
 $('#btnDebAcademy').addEventListener('click', openAcademy);
-$('#btnDebRetry').addEventListener('click', () => startLesson(lessonId));
+$('#btnDebRetry').addEventListener('click', () => startLesson(lessonId, { retry: true }));
+$('#btnDebCheckpoint').addEventListener('click', () => startLesson(lessonId, { retry: true, resume: lessonResume }));
 $('#btnDebNext').addEventListener('click', () => { const n = nextLesson(lessonId); if (n) openBriefing(n.id); else openAcademy(); });
 $('#pauseBtn').addEventListener('click', () => { if (settingsVisible()) closeFlightSettings(); else setPaused(mode !== 'paused'); });
 $('#dbgBtn').addEventListener('click', () => { debugOn = !debugOn; });
@@ -181,6 +184,8 @@ function setPaused(p) {
   $('#btnPauseRetry').classList.toggle('hidden', kind !== 'lesson');
   $('#btnQuit').textContent = kind === 'lesson' ? '回到學院' : '回到標題';
   mode = p ? 'paused' : 'playing';
+  // The pause menu takes over the screen: resume from a neutral stick, BRK/GUN up.
+  if (p) { input.releaseStick(); input.releaseHeld(); }
   showScreen(p ? 'pause' : null);
   last = performance.now();
 }
@@ -247,6 +252,8 @@ function nextLesson(id) {
 }
 function renderAcademy() {
   $('#academyMode').textContent = formatFlight(flightFeel, controlMode);
+  const fin = academyProgress.lessons[LESSONS[LESSONS.length - 1].id];
+  $('#academyGrad').textContent = fin?.cleared ? `✈ 已結業 · ACE ${fin.best}${fin.tac ? ` · ${fin.tac}` : ''}` : '';
   const grid = $('#lessonGrid');
   const firstOpen = LESSONS.find((l) => !academyProgress.lessons[l.id]?.cleared);
   grid.innerHTML = '';
@@ -275,22 +282,29 @@ function openBriefing(id) {
   briefId = id; mode = 'academy';
   $('#briefKicker').textContent = `LESSON ${String(l.no).padStart(2, '0')} · ${l.en} · ${formatFlight(flightFeel, controlMode)}`;
   $('#briefTitle').textContent = l.title;
+  $('#briefHook').textContent = l.hook || '';
   $('#briefPrinciple').textContent = l.principle;
   $('#briefGoals').innerHTML = l.goals.map((g) => `<li>${g}</li>`).join('');
+  const [bf, bc] = modeKey().split(':');
+  const sHint = typeof l.sHint === 'function' ? l.sHint(resolveTune(l, bf, bc)) : l.sHint;
+  $('#briefS').textContent = sHint || '';
   $('#briefReal').textContent = l.real || '';
   $('#briefModel').textContent = l.model || '';
   showScreen('briefing');
   $('#touch').classList.add('hidden');
   $('#pauseBtn').classList.add('hidden');
 }
-function startLesson(id) {
+function startLesson(id, { retry = false, resume = null } = {}) {
   const lesson = lessonById(id);
   if (!lesson) return;
   audio.unlock();
+  if (id !== lessonId) lessonTries = 0;
+  if (retry) lessonTries += 1; else lessonTries = 0;
   kind = 'lesson'; lessonId = id; debriefTimer = -1;
   rend.reset();
   const [flight, control] = modeKey().split(':');
-  const session = createLessonSession(lesson, { flight, control, input, settings });
+  // a retry skips the intro radio; a checkpoint retry restarts at the failed phase
+  const session = createLessonSession(lesson, { flight, control, input, settings, retry: lessonTries, resume });
   match = session.match; lessonRun = session.runner; player = session.player;
   enemyAI = session.foeAI || null; blueAI = null;
   lessonRun.onSay = (text) => { hud.say('KITE', text, Math.min(7, 2.4 + text.length * 0.075)); audio.radio(); };
@@ -305,8 +319,9 @@ function startLesson(id) {
   $('#pauseBtn').classList.remove('hidden');
   input.resetStick(); input.resetPower(); input.clearPresses();
   hud.msgs = [];
-  hud.flash(`LESSON ${String(lesson.no).padStart(2, '0')}`, '#ffe2a3', 2.0, true);
-  hud.flash(lesson.title, '#f4fbff', 2.2);
+  // the big title card only on a first sortie; a retry goes straight back to flying
+  if (!retry) { hud.flash(`LESSON ${String(lesson.no).padStart(2, '0')}`, '#ffe2a3', 2.0, true); hud.flash(lesson.title, '#f4fbff', 2.2); }
+  else hud.flash(resume ? `RETRY · ${lesson.phases[resume.from]?.name || ''}` : 'RETRY', '#ffe2a3', 1.2);
   last = performance.now();
   window.__game?.onLessonStart?.(); // test hook: runs before the first simulation step
 }
@@ -326,9 +341,20 @@ function showDebrief() {
   saveProgress(academyProgress);
   $('#debKicker').textContent = `LESSON ${String(l.no).padStart(2, '0')} · ${l.title} · ${formatFlight(flightFeel, controlMode)}`;
   const title = $('#debTitle');
+  const grad = r.success && l.final;
+  if (grad) $('#debKicker').textContent = `GRADUATION · 結業 · ${formatFlight(flightFeel, controlMode)}`;
   title.textContent = r.success ? (l.final ? `ACE RATING ${r.grade}` : `CLEAR · ${r.grade}`) : 'NOT YET · 未通過';
   title.className = r.success ? 'win' : 'lose';
-  $('#debSub').textContent = r.success ? `用時 ${Math.round(r.time)} 秒` : (r.reason || '');
+  $('#debSub').textContent = grad && r.extra ? `TAC NAME「${r.extra.name}」— ${r.extra.why}　用時 ${Math.round(r.time)} 秒`
+    : r.success ? `用時 ${Math.round(r.time)} 秒${r.checkpoint ? '（從段落重試：最高 A，S 需要一次飛完）' : ''}` : (r.reason || '');
+  const [df, dc] = modeKey().split(':');
+  const sHint = typeof l.sHint === 'function' ? l.sHint(resolveTune(l, df, dc)) : l.sHint;
+  $('#debS').textContent = r.success && r.grade !== 'S' && sHint ? sHint : '';
+  lessonResume = !r.success ? r.resume : null;
+  const cpPhase = lessonResume ? l.phases[lessonResume.from] : null;
+  $('#btnDebCheckpoint').classList.toggle('hidden', !cpPhase);
+  if (cpPhase) $('#btnDebCheckpoint').textContent = `從「${cpPhase.name}」重試`;
+  if (grad && r.extra) { const p = academyProgress.lessons[l.id]; if (p) { p.tac = r.extra.name; saveProgress(academyProgress); } }
   $('#debStats').innerHTML = r.stats.map(([k, v]) => `<div><b>${v}</b><span>${k}</span></div>`).join('');
   const li = (a, empty) => (a.length ? a : [empty]).map((x) => `<li>${x}</li>`).join('');
   $('#debGood').innerHTML = li(r.good, r.success ? '完成了每一個步驟。' : '—');
@@ -459,7 +485,7 @@ function frame(now) {
   // Otherwise an Enter tap can unexpectedly launch a sortie after Cancel.
   const restart = input.consume('restart');
   if (mode === 'result' && restart) start(kind);
-  if (mode === 'debrief' && restart) startLesson(lessonId);
+  if (mode === 'debrief' && restart) startLesson(lessonId, { retry: true });
   if (mode === 'title' && !settingsVisible() && restart) start('pvai');
   if (input.consume('camera') && kind === 'aivai' && match) {
     spectateTarget = spectateTarget === 'blue' ? 'red' : 'blue';

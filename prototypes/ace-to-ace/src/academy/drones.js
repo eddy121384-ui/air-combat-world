@@ -3,7 +3,7 @@
 // their intent is scripted. No special physics, no hidden advantages.
 import { PilotAI } from '../ai/pilot.js';
 import { launchMissile } from '../sim/weapons.js';
-import { clamp, DEG } from '../sim/math.js';
+import { clamp, DEG, sub, len, dot, norm, addScaled, forwardOf, angleBetween } from '../sim/math.js';
 import { headingOf } from '../sim/aircraft.js';
 
 function holdSpeed(c, ac, v) {
@@ -49,6 +49,38 @@ export class TurnDrone {
     const climb = clamp((this.alt - this.ac.pos.y) / 300, -0.2, 0.2);
     const dir = { x: Math.sin(look), y: climb, z: -Math.cos(look) };
     return holdSpeed(this.helper.steer(dir, 0.9), this.ac, this.speed);
+  }
+}
+
+/**
+ * Scripted attacker for the reversal drill. It chases `target` from behind with a
+ * capped G (a predictable, beatable attacker) and matches speed at gun range, so
+ * flying straight never makes it overshoot. A hard break (+ BRK) turns tighter than
+ * it can follow and it is forced past; after that it flies a steady, reversing turn
+ * so the student can practise converting. Same flight model; it only fires guns for
+ * pressure (the student's jet takes no damage in this drill).
+ */
+export class BanditDrone {
+  constructor(ac, target, { speed = 260, gFrac = 0.45, rate = 8, reverseEvery = 12 } = {}) {
+    this.ac = ac; this.target = target; this.speed = speed; this.gFrac = gFrac;
+    this.rate = rate; this.reverseEvery = reverseEvery; this.overshot = false; this.turn = null;
+    this.helper = new PilotAI(ac, { skill: 'veteran', seed: 3 });
+  }
+  update(dt) {
+    const ac = this.ac, tg = this.target;
+    if (this.turn) return this.turn.update(dt);
+    const rel = sub(tg.pos, ac.pos), R = len(rel);
+    if (R < 650 && dot(forwardOf(ac.q), rel) < 0) {
+      // forced past the target: now it is the one being hunted
+      const side = Math.sign(dot(rel, { x: Math.cos(Math.atan2(ac.vel.x, -ac.vel.z)), y: 0, z: Math.sin(Math.atan2(ac.vel.x, -ac.vel.z)) })) || 1;
+      this.overshot = true;
+      this.turn = new TurnDrone(ac, { speed: ac.speed, rate: this.rate, reverseEvery: this.reverseEvery, side });
+      return this.turn.update(dt);
+    }
+    const dir = norm(sub(addScaled(tg.pos, tg.vel, 0.4), ac.pos));
+    const c = holdSpeed(this.helper.steer(dir, this.gFrac), ac, Math.min(this.speed, tg.speed + clamp((R - 400) / 4, -40, 70)));
+    c.fireGun = R < 900 && angleBetween(forwardOf(ac.q), rel) < 4 * DEG;
+    return c;
   }
 }
 

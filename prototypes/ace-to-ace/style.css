@@ -215,6 +215,11 @@ h2.win { color: var(--go); } h2.lose { color: var(--red); }
 .deb-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; font-size: 12.5px; line-height: 1.5; }
 .deb-cols ul { margin: 4px 0; padding-left: 18px; }
 .deb-good { color: var(--go); } .deb-improve { color: #ffd28a; }
+.brief-hook { margin: 2px 0 4px; font-size: 13px; font-style: italic; color: #ffe2a3; }
+.brief-hook:empty, .brief-s:empty, .deb-s:empty, .academy-grad:empty { display: none; }
+.brief-s, .deb-s { margin: 4px 0; font-size: 12px; color: #7fe3ff; }
+.academy-grad { font-size: 12px; font-weight: 800; color: #ffe2a3; letter-spacing: 0.04em; }
+.deb-card .row button { min-width: 0; }
 #debTitle.win { color: var(--go); } #debTitle.lose { color: var(--red); }
 @media (max-height: 420px) {
   .lesson-grid { gap: 6px; margin: 6px 0 2px; }
