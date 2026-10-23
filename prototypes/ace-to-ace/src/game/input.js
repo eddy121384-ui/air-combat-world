@@ -129,7 +129,8 @@ export class Input {
       const holds = new Set();
       this.buttonHolds.set(name, holds);
       const on = (e) => {
-        e.preventDefault(); this.touchActive = true;
+        if (e.cancelable) e.preventDefault(); // touchcancel is never cancelable
+        this.touchActive = true;
         const wasHeld = holds.size > 0;
         if (e.changedTouches) for (const t of e.changedTouches) holds.add(t.identifier);
         else holds.add('mouse');
@@ -146,7 +147,7 @@ export class Input {
         // BRK is momentary; do not change the pilot's latched AB setting.
       };
       const off = (e) => {
-        e.preventDefault();
+        if (e.cancelable) e.preventDefault();
         if (e.changedTouches) for (const t of e.changedTouches) holds.delete(t.identifier);
         else holds.delete('mouse');
         if (holds.size) return; // a second finger still owns this held button
