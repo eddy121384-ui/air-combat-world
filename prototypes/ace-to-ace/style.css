@@ -309,3 +309,5 @@ h2.win { color: var(--go); } h2.lose { color: var(--red); }
 #hudEditor.folded .hud-edit-head strong, #hudEditor.folded .hud-toolbar > .hud-edit-row { display:none; }
 #hudEditor.folded #hudFold { min-width:48px; min-height:40px; }
 #hudEditor.folded .hud-handle span { visibility:hidden; }
+/* A custom menu position must remain usable even over AI/debug or weapons. */
+#pauseBtn { z-index:8; }

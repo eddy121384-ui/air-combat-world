@@ -1,7 +1,8 @@
 import assert from 'node:assert/strict';
-export async function checkHudEditor({page,iphone,shot,report}) {
+export async function checkHudEditor({page,iphone,shot,report,only}) {
   report.perf.hudEditor=[];
   for(const width of [812,667])for(const flight of ['arcade','tactical'])for(const control of ['assisted','expert']) {
+    if(only&&`${width}:${flight}:${control}`!==only)continue;
     const {ctx,p}=await page({...iphone,viewport:{width,height:375}},`?mode=${flight}&control=${control}&seed=41&autostart=1`,'hud-editor');
     await p.waitForFunction(()=>window.__game?.mode==='playing');
     await p.evaluate(()=>{
@@ -56,6 +57,7 @@ export async function checkHudEditor({page,iphone,shot,report}) {
     await p.tap('#hudFold');await drag('boost',25,10);await p.tap('#hudFold');
     assert.equal((await inputs()).boost,false,'dragging AB never toggles it');
     await p.locator('#hudSelection').selectOption('pause');await p.locator('#hudSize').fill('65');await p.locator('#hudOpacity').fill('20');
+    await p.tap('#hudFold');await drag('pause',width-128,0);await p.tap('#hudFold');
     const pause=await rect('#pauseBtn');assert.ok(pause.width>=40&&pause.height>=40,'menu keeps minimum usable target');
     assert.equal(await p.locator('#pauseBtn').evaluate(el=>Number(getComputedStyle(el).opacity)),.6,'menu opacity floor');
     if(width===667&&flight==='arcade'&&control==='expert')await shot(p,'29-hud-editor-safe-area');

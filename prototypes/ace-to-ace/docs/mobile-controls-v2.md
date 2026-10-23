@@ -172,3 +172,9 @@ the new neutral sample, rather than assuming CDP's acknowledgement is delivery.
 
 ![Actual editor, 667px CSS with safe areas](screens/mobile-controls-v2/hud-editor-667-safe.png)
 ![Left-hand preview with collapsed tools](screens/mobile-controls-v2/hud-left-667-safe.png)
+
+Menu guard: the pause key renders above AI/debug and weapon controls. The browser
+matrix drags it onto the AI key, applies 65% requested size/20% requested opacity,
+and still operates Pause after save/reload (actual minimum 40px/60%). A focused
+667px Expert rerun passed this guard plus native range drags, desktop restoration
+and storage fallback. CI runs the complete unfiltered eight-case matrix.
