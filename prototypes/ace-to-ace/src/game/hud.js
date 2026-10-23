@@ -8,6 +8,26 @@ import { pullUpWarning } from '../sim/warnings.js';
 
 const GREEN = '#7dffb0', RED = '#ff4d5e', AMBER = '#ffc04d', WHITE = '#f4fbff', CYAN = '#7fe3ff';
 
+/** Wrap text (CJK-aware: breaks anywhere, prefers spaces) into at most maxLines lines. */
+function wrapText(g, text, maxW, maxLines) {
+  // split after spaces / CJK punctuation (no regex lookbehind: older iOS Safari lacks it)
+  const tokens = [];
+  let tok = '';
+  for (const ch of text) { tok += ch; if (' \t　，。；：！？、'.includes(ch)) { tokens.push(tok); tok = ''; } }
+  if (tok) tokens.push(tok);
+  const lines = [''];
+  for (const tok of tokens) {
+    for (const piece of g.measureText(tok).width > maxW ? Array.from(tok) : [tok]) {
+      const cur = lines[lines.length - 1] + piece;
+      if (g.measureText(cur).width > maxW && lines[lines.length - 1]) {
+        if (lines.length === maxLines) { lines[lines.length - 1] = lines[lines.length - 1].replace(/.$/, '…'); return lines; }
+        lines.push(piece.trimStart());
+      } else lines[lines.length - 1] = cur;
+    }
+  }
+  return lines;
+}
+
 export class Hud {
   constructor(canvas) {
     this.c = canvas;
@@ -25,7 +45,7 @@ export class Hud {
     this.c.style.width = this.w + 'px'; this.c.style.height = this.h + 'px';
   }
   flash(text, color = WHITE, life = 1.6, big = false) { this.msgs.push({ text, color, t: 0, life, big }); }
-  say(who, text) { this.radio = { who, text, t: 0 }; }
+  say(who, text, life = 3.2) { this.radio = { who, text, t: 0, life }; }
 
   draw(match, me, rend, dt, opts = {}) {
     const g = this.g, w = this.w, h = this.h;
@@ -35,7 +55,7 @@ export class Hud {
     if (!me) return;
     if (opts.minimal) { this.overlay(dt, Math.min(w, h) / 400); return; } // kill cam: banner + radio only
     const S = Math.min(w, h) / 400; // UI scale
-    const tg = me.enemy;
+    const tg = me.enemy && !me.enemy.dormant ? me.enemy : null;
     g.lineWidth = Math.max(1.5, 1.6 * S);
     g.font = `600 ${Math.round(12 * S)}px ui-monospace, Menlo, monospace`;
     g.textBaseline = 'middle';
@@ -92,7 +112,7 @@ export class Hud {
           g.textAlign = 'left';
           g.fillText(`${(R / 1000).toFixed(1)}km`, p.x + s + 6, p.y - s * 0.5);
           g.fillText(tg.name, p.x + s + 6, p.y + s * 0.5);
-          if (L.locked) { g.textAlign = 'center'; g.fillText('LOCK', p.x, p.y + s * 1.25 + 12 * S); }
+          if (L.locked) { g.textAlign = 'center'; g.fillText(opts.academy && !opts.academy.weapons ? 'TRACK' : 'LOCK', p.x, p.y + s * 1.25 + 12 * S); }
           // gun lead pipper
           if (R < GUN.range * 1.3) {
             const lead = gunLead(me, tg.pos, tg.vel);
@@ -105,7 +125,7 @@ export class Hud {
             }
           }
           // shoot cue: good missile shot
-          if (L.locked) {
+          if (L.locked && (!opts.academy || opts.academy.weapons)) {
             const los = norm(sub(tg.pos, me.pos));
             const aspect = Math.PI - angleBetween(forwardOf(tg.q), { x: -los.x, y: -los.y, z: -los.z });
             const pk = missilePk({ R, ata: L.ata, aspect, mySpeed: me.speed, tgSpeed: tg.speed, tgG: tg.nCur });
@@ -141,7 +161,7 @@ export class Hud {
       if (inbound) {
         const blink = Math.floor(this.t * (closest < 1500 ? 8 : 4)) % 2 === 0;
         if (blink) this.banner('MISSILE', RED, h * 0.24, S);
-      } else if (me.lockedBy > 0) {
+      } else if (me.lockedBy > 0 && (!opts.academy || opts.academy.enemyWeapons)) {
         if (Math.floor(this.t * 2) % 2 === 0) this.banner('WARNING · LOCKED', AMBER, h * 0.24, S * 0.8);
       }
       // ground / stall warnings
@@ -174,20 +194,66 @@ export class Hud {
       g.fillText(`GUN ${me.gunRounds}`, w * 0.5 - 46 * S, h - 26 * S);
     }
     // top: timer + both HP bars
-    const t = Math.max(0, match.timeLimit - match.time);
+    const t = Math.max(0, opts.academy?.timer ?? match.timeLimit - match.time);
     g.textAlign = 'center'; g.fillStyle = match.phase === 'sudden' ? RED : WHITE;
     g.font = `700 ${Math.round(16 * S)}px ui-monospace, Menlo, monospace`;
-    g.fillText(match.phase === 'sudden' ? 'SUDDEN DEATH' : `${Math.floor(t / 60)}:${String(Math.floor(t % 60)).padStart(2, '0')}`, w * 0.5, 16 * S);
+    const clock = `${Math.floor(t / 60)}:${String(Math.floor(t % 60)).padStart(2, '0')}`;
+    g.fillText(match.phase === 'sudden' ? 'SUDDEN DEATH' : opts.academy && opts.academy.timer == null && match.timeLimit > 1e8 ? 'TRAINING' : clock, w * 0.5, 16 * S);
     g.font = `600 ${Math.round(11 * S)}px ui-monospace, Menlo, monospace`;
     this.hpBar(w * 0.5 - 175 * S, 14 * S, 120 * S, me.hp / me.type.hp, `${me.name}`, CYAN, S);
     if (tg) this.hpBar(w * 0.5 + 55 * S, 14 * S, 120 * S, tg.hp / tg.type.hp, `${tg.name}`, RED, S);
 
+    if (opts.academy && me.alive) this.academy(opts.academy, me, rend, S);
     this.overlay(dt, S);
+  }
+
+  /** Academy objective panel (top-left, below the pause button) and world markers. */
+  academy(v, me, rend, S) {
+    const g = this.g, w = this.w, h = this.h;
+    for (const m of v.markers || []) {
+      const p = rend.project(m.pos);
+      const d = dist(me.pos, m.pos);
+      const on = !p.behind && p.x > 0 && p.x < w && p.y > 0 && p.y < h;
+      const color = m.color || CYAN;
+      if (on) {
+        const r = m.kind === 'reference' ? 4*S : Math.max(9 * S, Math.min(70 * S, (m.radius || 200) * 700 / Math.max(d, 1) * S));
+        g.strokeStyle = color; g.lineWidth = Math.max(2, 2 * S);
+        g.beginPath(); g.arc(p.x, p.y, r, 0, Math.PI * 2); g.stroke();
+        g.beginPath(); g.arc(p.x, p.y, 2 * S, 0, Math.PI * 2); g.stroke();
+        g.fillStyle = color; g.textAlign = 'left';
+        g.fillText(`${m.label} ${(d / 1000).toFixed(1)}km`, p.x + r + 5 * S, p.y+(m.labelOffsetY||0)*S);
+      } else this.edgeArrow(p, color, `${m.label}`, S, true);
+    }
+    const x = 12 + (this.safeLeft || 0), y = 52 * Math.max(1, S * 0.9), pw = Math.min(310, w * 0.38);
+    g.save();
+    const fontPx = Math.max(12, Math.round(11*S)), lineH = fontPx+3;
+    g.font = `600 ${fontPx}px ui-sans-serif, system-ui, "PingFang TC", sans-serif`;
+    const hint = v.guidance;
+    const rows = hint ? [
+      ...wrapText(g, hint.goal, pw-16, 1).map(text => ({ text, color: WHITE })),
+      ...wrapText(g, hint.readout, pw-16, 2).map(text => ({ text, color: CYAN })),
+      ...wrapText(g, hint.tip, pw-16, 2).map(text => ({ text, color: hint.state === 'good' ? GREEN : hint.state === 'warn' ? AMBER : WHITE })),
+    ] : wrapText(g, v.text || '', pw-16, 3).map(text => ({text,color:WHITE}));
+    const ph = 25 + rows.length*lineH;
+    g.fillStyle = 'rgba(8,22,40,0.55)';
+    g.fillRect(x, y, pw, ph);
+    g.fillStyle = CYAN; g.textAlign = 'left';
+    g.font = `700 ${Math.max(11, Math.round(10*S))}px ui-sans-serif, system-ui, "PingFang TC", sans-serif`;
+    g.fillText(`${v.lesson}  ${v.step}`, x+8, y+10);
+    g.font = `600 ${fontPx}px ui-sans-serif, system-ui, "PingFang TC", sans-serif`;
+    rows.forEach((row,i) => { g.fillStyle=row.color; g.fillText(row.text,x+8,y+25+i*lineH); });
+    if (v.progress != null) {
+      g.fillStyle = 'rgba(244,251,255,0.18)'; g.fillRect(x+8,y+ph-5,pw-16,3);
+      g.fillStyle = GREEN; g.fillRect(x+8,y+ph-5,(pw-16)*v.progress,3);
+    }
+    this.academyLayout = { x, y, width: pw, height: ph, fontPx, lines: rows.map(row=>row.text) };
+    g.restore();
   }
 
   /** Floating banners and the radio subtitle (also shown during the kill cam). */
   overlay(dt, S) {
     const g = this.g, w = this.w, h = this.h;
+    this.radioLayout = null;
     g.textBaseline = 'middle';
     // floating messages
     this.msgs = this.msgs.filter((m) => (m.t += dt) < m.life);
@@ -204,17 +270,25 @@ export class Hud {
     // radio subtitle
     if (this.radio) {
       this.radio.t += dt;
-      if (this.radio.t > 3.2) this.radio = null;
+      const life = this.radio.life || 3.2;
+      if (this.radio.t > life) this.radio = null;
       else {
-        g.globalAlpha = Math.min(1, (3.2 - this.radio.t) * 2);
-        g.font = `600 ${Math.round(13 * S)}px ui-sans-serif, system-ui, "PingFang TC", "Noto Sans TC", sans-serif`;
+        g.globalAlpha = Math.min(1, (life - this.radio.t) * 2);
+        const fontPx = Math.max(this.radio.who === 'KITE' ? 14 : 0, Math.round(13*S));
+        g.font = `600 ${fontPx}px ui-sans-serif, system-ui, "PingFang TC", "Noto Sans TC", sans-serif`;
         const txt = `${this.radio.who} ▸ ${this.radio.text}`;
-        const tw = g.measureText(txt).width;
-        g.fillStyle = 'rgba(10,20,35,0.55)';
-        g.fillRect(w * 0.5 - tw / 2 - 10 * S, h * 0.78 - 12 * S, tw + 20 * S, 24 * S);
-        g.fillStyle = this.radio.who === 'J-16' ? '#ffb3b3' : '#bfe8ff';
+        // Wrap between the thumb zones (stick left, weapons right) and keep it above the radar.
+        const maxW = Math.min(w * 0.54, 560 * S);
+        const lines = wrapText(g, txt, maxW, this.radio.who === 'KITE' ? 2 : 3);
+        const tw = Math.max(...lines.map((l) => g.measureText(l).width));
+        const lh = Math.max(17*S, fontPx+4), bottom = Math.min(h * 0.78 + 12 * S, h - 92 * S);
+        const top = bottom - lines.length * lh - 6 * S;
+        g.fillStyle = 'rgba(10,20,35,0.6)';
+        g.fillRect(w * 0.5 - tw / 2 - 10 * S, top, tw + 20 * S, bottom - top);
+        g.fillStyle = this.radio.who === 'J-16' ? '#ffb3b3' : this.radio.who === 'KITE' ? '#ffe2a3' : '#bfe8ff';
         g.textAlign = 'center';
-        g.fillText(txt, w * 0.5, h * 0.78);
+        lines.forEach((l, i) => g.fillText(l, w * 0.5, top + 3 * S + lh * (i + 0.5)));
+        this.radioLayout = { x:w*0.5-tw/2-10*S, y:top, width:tw+20*S, height:bottom-top, fontPx, lines };
         g.globalAlpha = 1;
       }
     }
@@ -512,7 +586,7 @@ export class Hud {
     const toCenter = Math.hypot(me.pos.x, me.pos.z);
     if (toCenter > 7000) plot({ x: 0, y: 0, z: 0 }, 'rgba(127,227,255,0.6)', 3 * S);
     for (const m of match.missiles) if (m.alive) plot(m.pos, m.owner === me ? WHITE : RED, 2.5 * S);
-    if (me.enemy && me.enemy.alive) plot(me.enemy.pos, RED, 5 * S);
+    if (me.enemy && me.enemy.alive && !me.enemy.dormant) plot(me.enemy.pos, RED, 5 * S);
     g.fillStyle = CYAN;
     g.beginPath(); g.moveTo(cx, cy - 5 * S); g.lineTo(cx + 4 * S, cy + 4 * S); g.lineTo(cx - 4 * S, cy + 4 * S); g.closePath(); g.fill();
   }

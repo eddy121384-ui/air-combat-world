@@ -56,6 +56,15 @@ iPhone 上**手指放開保持最後搖桿量，不會自動回中**；重新觸
 
 **俯仰方向**：在「⚙ 飛行設定」切換（預設搖桿式：上推＝俯衝）；暫停中只改俯仰方向會立即套用到本局、不重開。
 
+## 王牌飛行學院（Ace Flight Academy）
+
+標題畫面「飛行學院 ACADEMY」：10 堂 1–3 分鐘的可玩短課，由教官 KITE 以無線電引導——
+天空與地平線、飛機如何轉彎、動力控制、G 力的代價、能量交易、危險飛行狀態、空戰追蹤、武器控制、防守與反擊，
+最後是對 VETERAN AI 的 **ACE QUALIFICATION** 畢業考（S／A／B 評等）。每課都判讀真實模擬狀態，失敗時依你的實際數據
+說明原因（例如「平均 9.6G，速度從 751 被燒掉了」），支援全部四種飛行／操控組合，進度只存在本機 localStorage。
+自由對戰不需要先完成學院。課程設計、真實航空／遊戲模型／遊戲規則的區分與驗收數據見
+[`docs/academy-curriculum.md`](docs/academy-curriculum.md)。QA 連結：`?lesson=L05`（簡報）、`?lesson=L05&autostart=1`（直接出擊）。
+
 ## 規則（為街機節奏調整，非真實性能）
 
 - HP 100；飛彈 50–75 傷害（兩發必死）、機砲 4/發；熱焰彈 2 組，25 秒回充 1 組。
@@ -122,6 +131,8 @@ node tools/browser-check.mjs --scenario settings                          # 四�
 node tools/browser-check.mjs --scenario modes                             # 四種組合的 iPhone 尺寸觸控操作 + 兩套物理各一場完整 1v1
 node tools/probe-flight-feel.mjs                                          # 四種組合的手感量測（滾轉停止、轉彎、能量、追蹤）
 node tools/aivai.mjs --n 40 --blue human --red veteran --feel tactical --control expert   # human proxy 走 Expert 操控
+node tools/test-academy.mjs                                               # 學院 10 課 × 4 模式 + 錯誤示範的因果失敗
+node tools/browser-check.mjs --scenario academy                           # 學院選單→出擊→失敗→重試→通關→進度保存
 ```
 
 - **AI vs AI**：同一套 AI 對打（正面開局 / 隨機幾何 / 交換機型）、ACE vs ROOKIE 技術梯度、

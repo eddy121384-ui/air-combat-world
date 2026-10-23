@@ -100,10 +100,12 @@ export class Match {
     }
     this.tick += 1;
     for (const ac of this.aircraft) ac.lockedBy = 0;
-    for (const ac of this.aircraft) updateLock(ac, ac.enemy, dt);
+    // A dormant aircraft (Academy lessons without an opponent) is parked: not
+    // simulated, not lockable, no rules. Free-play matches never set it.
+    for (const ac of this.aircraft) updateLock(ac, ac.enemy?.dormant ? null : ac.enemy, dt);
 
     for (const ac of this.aircraft) {
-      if (!ac.alive) continue;
+      if (!ac.alive || ac.dormant) continue;
       const ctrl = this.controllers.get(ac);
       if (ctrl) {
         const c = ctrl.update(dt, this);

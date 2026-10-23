@@ -97,11 +97,27 @@ for (const mode of ['arcade','tactical']) {
   assert.notDeepEqual([expert.roll,expert.pitch],[assisted.roll,assisted.pitch]);
   assert.equal(assisted.boost, false, 'Assisted must not secretly enable AB');
   assert.equal(assisted.throttle, .72);
+  // Manual rudder does not create a second flight model or change power.
+  for (const assist of [false, true]) {
+    for (const yaw of [-1, 0, 1]) {
+      const neutral = { ...stub(), axes: () => ({ x: 0, y: 0, yaw }) };
+      const cmd = new PlayerController(craft(mode), neutral, { invert: false, assist }).update();
+      assert.ok(Math.abs(cmd.yaw - yaw * 0.9) < 1e-9, mode + '/' + assist + ': manual yaw '+yaw);
+      assert.equal(cmd.boost, false, 'rudder must not toggle AB');
+      assert.equal(cmd.throttle, .72, 'rudder must not change throttle');
+    }
+  }
 }
 
 // UI selection is now reachable from both the title and the in-fight PAUSE menu.
 const html = readFileSync(new URL('../index.html',import.meta.url),'utf8');
 const main = readFileSync(new URL('../src/game/main.js',import.meta.url),'utf8');
+const inputSource = readFileSync(new URL('../src/game/input.js',import.meta.url),'utf8');
+for (const yaw of ['yawLeft','yawRight']) {
+  assert.ok(html.includes('data-btn="'+yaw+'"'), yaw+' mobile rudder button required');
+  assert.ok(inputSource.includes('this.btn.'+yaw), yaw+' must feed existing Input axes');
+}
+assert.ok(!html.includes('放手保留桿量'), 'touch help must not describe the removed stick latch');
 for (const flight of ['arcade','tactical']) {
   for (const ctrl of ['assisted','expert']) {
     assert.ok(html.includes('data-flight-choice="'+flight+':'+ctrl+'"'),
@@ -114,8 +130,10 @@ for (const id of ['flightSettings', 'btnTitleSettings', 'btnPauseSettings',
 }
 assert.ok(main.includes("assist: controlMode === 'assisted'"));
 assert.ok(main.includes('new Match({ seed, flightFeel'));
-assert.ok(main.includes('if (changed) start(kind)'),
+assert.ok(/if \(changed\)[^\n]*start\(kind\)/.test(main),
   'physics change must restart same sortie, not switch in flight');
+assert.ok(/if \(changed\)[^\n]*startLesson\(lessonId\)/.test(main),
+  'in an Academy lesson the same lesson restarts with the new model');
 assert.ok(main.includes('settings.flightMode = draftFlight'), 'flight selection must persist');
 assert.ok(main.includes('settings.controlMode = draftControl'), 'control selection must persist');
 assert.ok(main.includes("params.get('autostart') === '1'"), 'mode=arcade must not auto-start');
