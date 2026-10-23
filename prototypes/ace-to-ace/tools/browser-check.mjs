@@ -84,6 +84,9 @@ const state = (p) => p.evaluate(() => {
 const desktop = { viewport: { width: 1280, height: 720 }, deviceScaleFactor: 1 };
 const iphone = { ...devices['iPhone 13 Mini'], viewport: { width: 812, height: 375 }, isMobile: true, hasTouch: true };
 
+if(scenario==='all'||scenario==='hud-editor')await (await import('./browser-hud-editor.mjs')).checkHudEditor({page,iphone,shot,report,only:args['hud-only']});
+if(scenario==='all'||scenario==='tilt')await (await import('./browser-tilt.mjs')).checkTilt({page,iphone,shot,report});
+
 if (scenario === 'all' || scenario === 'level') {
   report.perf.level=[];
   for(const width of [812,667])for(const flight of ['arcade','tactical'])for(const control of ['assisted','expert']) {

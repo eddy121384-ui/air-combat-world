@@ -39,6 +39,9 @@ jobs:
           node tools/test-airbrake-throttle.mjs
           node tools/test-power-strip.mjs
           node tools/test-level-assist.mjs
+          node tools/test-hud-layout.mjs
+          node tools/test-tilt-input.mjs
+          node tools/test-tilt-academy.mjs
           node tools/test-brake-trap.mjs
           node tools/test-flight-path.mjs
           node tools/test-hud-attitude.mjs
@@ -73,6 +76,8 @@ jobs:
       - name: Browser checks
         working-directory: prototypes/ace-to-ace
         run: |
+          node tools/browser-check.mjs --scenario hud-editor
+          node tools/browser-check.mjs --scenario tilt
           node tools/browser-check.mjs --scenario level
           node tools/browser-check.mjs --scenario settings
           node tools/browser-check.mjs --scenario manual
