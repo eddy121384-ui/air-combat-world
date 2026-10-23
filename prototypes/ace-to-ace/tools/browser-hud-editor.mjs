@@ -100,6 +100,8 @@ export async function checkHudEditor({page,iphone,shot,report,only}) {
     });
     for(const {key,r} of bounds.nodes)if(!['pause','level','calibrate'].includes(key))assert.ok(r.x>=bounds.safe.x-.1&&r.y>=bounds.safe.y-.1&&r.right<=bounds.safe.x+bounds.safe.width+.1&&r.bottom<=bounds.safe.y+bounds.safe.height+.1,`${key} stays in safe bounds`);
     const centres=await p.evaluate(()=>[...window.__game.hudEditor.nodes].filter(([key])=>!['stick','power'].includes(key)).map(([key,n])=>{const r=n.getBoundingClientRect();return {key,x:r.x+r.width/2,y:r.y+r.height/2};}));
+    const pedalL=centres.find(c=>c.key==='yawLeft'),pedalR=centres.find(c=>c.key==='yawRight');
+    assert.ok(pedalL.x<pedalR.x&&pedalL.y<260&&pedalR.y<260,'left-hand pedals keep intuitive direction order and clear the bottom ammo/radar band');
     for(const a of centres)for(const b of centres)if(a.key!==b.key)assert.ok(Math.hypot(a.x-b.x,a.y-b.y)>38,`left preset thumb targets ${a.key}/${b.key} need space`);
     // Real stick-zone drag; no flight command despite moving its interaction area.
     await drag('stick',-25,-10);assert.deepEqual((await inputs()).axes,{x:0,y:0,yaw:0});

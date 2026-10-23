@@ -126,6 +126,8 @@ export class HudEditor {
         if(key==='power'){e.x=.07;e.y=.43;e.scale=.9;}
         if(key==='flare'){e.x=.26;e.y=.39;}
         if(key==='look'){e.x=.36;e.y=.39;}
+        if(key==='yawLeft'){e.x=.30;e.y=.66;}
+        if(key==='yawRight'){e.x=.40;e.y=.66;}
         this.draft.items[key]=e;
       }
     }

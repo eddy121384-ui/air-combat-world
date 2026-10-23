@@ -180,3 +180,5 @@ and still operates Pause after save/reload (actual minimum 40px/60%). A focused
 and storage fallback. CI runs the complete unfiltered eight-case matrix.
 The throttle opacity check includes its track/readout and frame colors, while
 independently configured AB/BRK keep their own opacity instead of multiplying it.
+The left-hand preset keeps YAW's left/right spatial order and places both pedals
+above the bottom ammo/radar band; this is asserted and checked in the preview.
