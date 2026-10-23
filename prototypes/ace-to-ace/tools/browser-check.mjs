@@ -391,8 +391,12 @@ if (scenario === 'all' || scenario === 'modes') {
     assert.ok((await readYaw()).x>0,label+': remaining stick stays active');
     await touch('touchEnd',[joyMove]);
     assert.equal((await readYaw()).x,0,label+': joystick release neutral');
+    await p.evaluate(()=>{window.__yawCancelSeen=false;window.addEventListener('touchcancel',()=>{window.__yawCancelSeen=true;},{once:true});});
     await touch('touchStart',[rightP]);
     await touch('touchCancel',[]);
+    // CDP acknowledges dispatch before the renderer necessarily delivers cancel.
+    // Wait for the real event, then require exact neutral (no synthetic cleanup).
+    await p.waitForFunction(()=>window.__yawCancelSeen,{},{timeout:2000});
     const cancelled=await readYaw();
     assert.equal(cancelled.yaw,0,label+': yaw touchcancel');
     assert.ok(Math.abs(cancelled.throttle-.72)<1e-9 && !cancelled.boost && !cancelled.brake,

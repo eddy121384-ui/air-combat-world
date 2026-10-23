@@ -35,3 +35,9 @@ Zero browser errors. Existing browser scenarios remain in CI.
 
 Chromium touch emulation is not iPhone Safari acceptance. Real-device checks
 remain: safe-area placement, multi-finger LVL handover and interrupted touches.
+
+Local full Chromium regression: all seven scenarios passed, including ten lessons
+and 50 phase/viewport readability checks. The first remote run exposed a YAW
+cancel assertion racing CDP event delivery; the test now waits for the actual
+DOM touchcancel before checking exact zero. It does not synthesize release or
+change flight outcomes, seeds or tolerances.
