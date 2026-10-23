@@ -167,7 +167,11 @@ $('#btnBriefGo').addEventListener('click', () => startLesson(briefId));
 $('#btnDebAcademy').addEventListener('click', openAcademy);
 $('#btnDebRetry').addEventListener('click', () => startLesson(lessonId));
 $('#btnDebNext').addEventListener('click', () => { const n = nextLesson(lessonId); if (n) openBriefing(n.id); else openAcademy(); });
-$('#pauseBtn').addEventListener('click', () => { if (settingsVisible()) closeFlightSettings(); else setPaused(mode !== 'paused'); });
+const togglePause = () => { if (settingsVisible()) closeFlightSettings(); else setPaused(mode !== 'paused'); };
+$('#pauseBtn').addEventListener('click', togglePause);
+// A multi-touch gesture does not reliably synthesize a click while the other
+// thumb is still down. Pause immediately and suppress the compatibility click.
+$('#pauseBtn').addEventListener('touchstart', (e) => { e.preventDefault(); togglePause(); }, { passive: false });
 $('#dbgBtn').addEventListener('click', () => { debugOn = !debugOn; });
 syncTitle();
 
@@ -178,6 +182,7 @@ function toTitle() {
 }
 function setPaused(p) {
   if (mode !== 'playing' && mode !== 'paused') return;
+  input.releaseHeld();
   $('#btnPauseRetry').classList.toggle('hidden', kind !== 'lesson');
   $('#btnQuit').textContent = kind === 'lesson' ? '回到學院' : '回到標題';
   mode = p ? 'paused' : 'playing';
@@ -229,7 +234,7 @@ function start(k) {
   showScreen(null);
   $('#touch').classList.toggle('hidden', !(isTouch && k === 'pvai'));
   $('#pauseBtn').classList.remove('hidden');
-  input.resetStick();
+  input.releaseHeld();
   input.resetPower();
   input.clearPresses();
   hud.msgs = [];
@@ -303,7 +308,7 @@ function startLesson(id) {
   showScreen(null);
   $('#touch').classList.toggle('hidden', !isTouch);
   $('#pauseBtn').classList.remove('hidden');
-  input.resetStick(); input.resetPower(); input.clearPresses();
+  input.releaseHeld(); input.resetPower(); input.clearPresses();
   hud.msgs = [];
   hud.flash(`LESSON ${String(lesson.no).padStart(2, '0')}`, '#ffe2a3', 2.0, true);
   hud.flash(lesson.title, '#f4fbff', 2.2);
@@ -550,6 +555,7 @@ window.__game = {
 
 window.addEventListener('orientationchange', () => setTimeout(() => { rend.resize(); hud.resize(); }, 300));
 document.addEventListener('visibilitychange', () => { if (document.hidden && mode === 'playing') setPaused(true); });
+window.addEventListener('blur', () => { if (mode === 'playing') setPaused(true); });
 // iOS: prevent pinch zoom / double-tap zoom
 document.addEventListener('gesturestart', (e) => e.preventDefault());
 document.addEventListener('dblclick', (e) => e.preventDefault());
