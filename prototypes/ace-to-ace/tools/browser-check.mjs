@@ -486,16 +486,24 @@ if (scenario === 'all' || scenario === 'academy-ui') {
           if(r.result || r.phaseIdx!==target)throw new Error('student did not reach the requested visual phase');
           g.hud.msgs=[];
         });
-        await p.evaluate(()=>window.__game.lesson.tickRadio(0));
-        await p.waitForTimeout(90);
+        await p.evaluate(()=>{
+          const g=window.__game;
+          g.hud.academyLayout=null;g.hud.radioLayout=null;
+          g.lesson.tickRadio(0);
+        });
+        // Measure a newly drawn frame, never a guessed 90ms software-GPU delay.
+        await p.waitForFunction(()=>{
+          const hud=window.__game.hud;
+          return hud.academyLayout && hud.radioLayout;
+        });
         const layout=await p.evaluate(()=>{
           const g=window.__game;
           return {objective:g.hud.academyLayout,radio:g.hud.radioLayout,id:g.lesson.phase.id,
-            cue:g.lesson.view().guidance,radioText:g.hud.radio?.text};
+            cue:g.lesson.view().guidance,radioText:g.hud.radio?.text,viewport:{width:innerWidth,height:innerHeight}};
         });
         const inBounds=b=>b&&b.x>=0&&b.y>=0&&b.x+b.width<=width&&b.y+b.height<=375;
         const coversReticle=b=>b.x<width/2+35&&b.x+b.width>width/2-35&&b.y<375/2+25&&b.y+b.height>375/2-25;
-        assert.ok(inBounds(layout.objective),`${width}/${id}/${phase}: objective stays on-screen`);
+        assert.ok(inBounds(layout.objective),`${width}/${id}/${phase}: objective stays on-screen: ${JSON.stringify({objective:layout.objective,viewport:layout.viewport})}`);
         assert.ok(layout.objective.fontPx>=12, 'objective minimum 12 CSS pixels');
         assert.ok(!coversReticle(layout.objective),'objective does not cover attitude/FPM centre');
         assert.ok(layout.cue && !layout.objective.lines.join('').includes('…'),'action and telemetry fit without clipping');
