@@ -8,6 +8,7 @@ import {
   sub, norm, len, dot, clamp, angleBetween, forwardOf, qLook, qMul, qAxisAngle, qNormalize, DEG, G, UP,
 } from '../sim/math.js';
 import { headingOf, bankAngle, pitchAngle, specificEnergy, availableG, instantTurnRate, bestTurn, MIN_SPEED } from '../sim/aircraft.js';
+import { controlText } from './control-text.js';
 import { pullUpWarning } from '../sim/warnings.js';
 
 export const KMH = 3.6;
@@ -74,9 +75,9 @@ export class LessonRunner {
    * @param {Match} match     the live match (already constructed by the caller)
    * @param {object} o        { flight: 'arcade'|'tactical', control: 'assisted'|'expert' }
    */
-  constructor(lesson, match, { flight = 'arcade', control = 'expert' } = {}) {
+  constructor(lesson, match, { flight = 'arcade', control = 'expert', inputDevice = () => 'stick' } = {}) {
     this.lesson = lesson; this.match = match;
-    this.flight = flight; this.control = control;
+    this.flight = flight; this.control = control; this.inputDevice = inputDevice;
     this.me = match.blue; this.foe = match.red;
     this.tune = { ...(lesson.tune?.all || {}), ...(lesson.tune?.[flight] || {}), ...(lesson.tune?.[`${flight}:${control}`] || {}) };
     this.rules = { weapons: false };
@@ -216,7 +217,8 @@ export class LessonRunner {
   tickRadio(dt) {
     this.nextLineT -= dt;
     if (this.nextLineT <= 0 && this.queue.length) {
-      const text = this.queue.shift();
+      const chunks=radioChunks(controlText(this.queue.shift(),this.inputDevice()));
+      const text=chunks.shift();this.queue.unshift(...chunks);
       this.spoken.push({ t: this.t, text });
       this.onSay?.(text);
       this.nextLineT = radioDuration(text) + 0.15;
@@ -227,6 +229,8 @@ export class LessonRunner {
   view() {
     const ph = this.phase;
     const limit = this.tune.timeLimit ?? this.lesson.timeLimit;
+    const guidance=this.lesson.guidance?.(this) || null;
+    if(guidance)guidance.tip=controlText(guidance.tip,this.inputDevice());
     return {
       lesson: `${String(this.lesson.no).padStart(2, '0')} ${this.lesson.title}`,
       step: ph ? `${this.phaseIdx + 1}/${this.lesson.phases.length}` : '',
@@ -235,7 +239,7 @@ export class LessonRunner {
       timer: limit ? Math.max(0, limit - this.t) : null,
       markers: ph?.markers ? ph.markers(this) : [],
       done: !!this.result,
-      guidance: this.lesson.guidance?.(this) || null,
+      guidance,
       weapons: !!this.rules.weapons,
       enemyWeapons: this.lesson.id !== 'L07',
     };

@@ -430,7 +430,7 @@ const L06 = {
   crashReason: (r) => (r.phase?.id === 'dive'
     ? (r.tel.pullUpReact != null && r.tel.pullUpReact > 0.6 ? `墜海。PULL UP 亮起後 ${r.tel.pullUpReact.toFixed(1)} 秒才拉滿——在這個速度，半秒就是幾十公尺。` : '墜海。拉起太晚，或沒收油、沒用 BRK：速度越快，拉起半徑越大（r = V²/(g(n−1))）。')
     : '墜海。'),
-  intro: ['今天練的是活下來。這三種狀況，真正的飛行員都在模擬機裡練到反射。'],
+  intro: ['今天練的是活下來。LVL 只幫你改平，不是失速或低空救援；本課先學會自己改出。'],
   phases: [
     {
       id: 'slowturn',

@@ -2,9 +2,11 @@
 // The assist layer only shapes stick input; the aircraft still flies the shared flight model.
 import { clamp, smoothstep, DEG, G } from '../sim/math.js';
 import { bankAngle, pitchAngle, pitchForG, neutralG, availableG, MIN_SPEED } from '../sim/aircraft.js';
+import { LevelAssist } from './level-assist.js';
 
 export class Input {
   constructor(root) {
+    this.enabled = true;
     this.stick = { x: 0, y: 0 };        // x: right +, y: up + (screen)
     this.stickOffset = { x: 0, y: 0 }; // visual deflection; springs to neutral on release
     this.keys = new Set();
@@ -17,6 +19,7 @@ export class Input {
     this.root = root;
     this.stickTouch = null;
     this.buttonHolds = new Map();
+    this.levelAssist = new LevelAssist();
     this.bindKeyboard();
     this.bindTouch();
     window.addEventListener('blur', () => this.releaseHeld());
@@ -28,7 +31,7 @@ export class Input {
 
   bindKeyboard() {
     const down = (e) => {
-      if (e.repeat) return;
+      if (!this.enabled || e.repeat) return;
       const k = e.code;
       this.keys.add(k);
       if (k === 'Space') this.pressed.add('msl');
@@ -37,6 +40,7 @@ export class Input {
       if (k === 'Backquote' || k === 'Tab') { this.pressed.add('debug'); e.preventDefault(); }
       if (k === 'Escape' || k === 'KeyP') this.pressed.add('pause');
       if (k === 'KeyC') this.pressed.add('camera');
+      if (k === 'KeyL') this.levelAssist.toggle();
       if (['Space', 'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(k)) e.preventDefault();
     };
     window.addEventListener('keydown', down);
@@ -47,9 +51,10 @@ export class Input {
     const zone = this.root.querySelector('#stickZone');
     const base = this.root.querySelector('#stickBase');
     const knob = this.root.querySelector('#stickKnob');
-    const R = 62;
+    const radius = () => 62 * (this.stickScale || 1);
     const setKnob = (dx, dy) => { knob.style.transform = `translate(${dx}px, ${dy}px)`; };
     zone.addEventListener('touchstart', (e) => {
+      if(!this.enabled)return;
       e.preventDefault();
       this.touchActive = true;
       if (this.stickTouch != null) return;
@@ -62,6 +67,8 @@ export class Input {
       setKnob(this.stickOffset.x, this.stickOffset.y);
     }, { passive: false });
     const move = (e) => {
+      if(!this.enabled)return;
+      const R=radius();
       for (const t of e.changedTouches) {
         if (t.identifier !== this.stickTouch) continue;
         e.preventDefault();
@@ -94,18 +101,19 @@ export class Input {
     if (track) {
       const drag = (y) => {
         const rect = track.getBoundingClientRect();
-        const travel = Math.max(1, rect.height - 18);
-        this.setThrottle(1 - (y - rect.top - 9) / travel);
+        const handle=18*(this.throttleScale||1);
+        const travel = Math.max(1, rect.height - handle);
+        this.setThrottle(1 - (y - rect.top - handle/2) / travel);
       };
       track.addEventListener('pointerdown', (e) => {
-        if (this.powerPointer !== null) return;
+        if (!this.enabled || this.powerPointer !== null) return;
         e.preventDefault(); this.touchActive = true;
         this.powerPointer = e.pointerId;
         track.setPointerCapture?.(e.pointerId);
         drag(e.clientY);
       });
       track.addEventListener('pointermove', (e) => {
-        if (e.pointerId === this.powerPointer) { e.preventDefault(); drag(e.clientY); }
+        if (this.enabled && e.pointerId === this.powerPointer) { e.preventDefault(); drag(e.clientY); }
       });
       const endPower = (e) => {
         if (e.pointerId === this.powerPointer) this.powerPointer = null;
@@ -114,6 +122,7 @@ export class Input {
       track.addEventListener('pointercancel', endPower);
       track.addEventListener('lostpointercapture', endPower);
       track.addEventListener('keydown', (e) => {
+        if(!this.enabled)return;
         const steps = { ArrowUp: 0.05, ArrowDown: -0.05, PageUp: 0.2, PageDown: -0.2 };
         if (e.code in steps) { e.preventDefault(); this.setThrottle(this.throttleValue + steps[e.code]); }
         else if (e.code === 'Home' || e.code === 'End') {
@@ -129,6 +138,7 @@ export class Input {
       const holds = new Set();
       this.buttonHolds.set(name, holds);
       const on = (e) => {
+        if(!this.enabled)return;
         if (e.cancelable) e.preventDefault(); // touchcancel is never cancelable
         this.touchActive = true;
         const wasHeld = holds.size > 0;
@@ -136,6 +146,7 @@ export class Input {
         else holds.add('mouse');
         if (wasHeld) return;
         el.classList.add('down');
+        if (name === 'level') { this.levelAssist.toggle(); return; }
         if (name === 'boost') {
           this.boostToggle = !this.boostToggle;
           el.classList.toggle('lit', this.boostToggle);
@@ -172,7 +183,7 @@ export class Input {
     const readout = this.root.querySelector('#throttleValue');
     if (handle) {
       const inverse = 1 - this.throttleValue;
-      handle.style.top = `calc(${inverse * 100}% - ${inverse * 18}px)`;
+      handle.style.top = `calc(${inverse * 100}% - ${inverse * 18 * (this.throttleScale||1)}px)`;
     }
     if (fill) fill.style.height = `${Math.round(this.throttleValue * 100)}%`;
     if (readout) readout.textContent = `${Math.round(this.throttleValue * 100)}%`;
@@ -208,6 +219,8 @@ export class Input {
 
   /** Cancel transient input on pause/focus loss; power latches remain the pilot's. */
   releaseHeld() {
+    this.levelAssist.cancel();
+    this.onRelease?.();
     this.resetStick();
     this.keys.clear(); this.pressed.clear();
     for (const key of Object.keys(this.btn)) this.btn[key] = false;
@@ -223,8 +236,10 @@ export class Input {
 
   /** Combined stick from keyboard + touch. */
   axes() {
+    if(!this.enabled)return {x:0,y:0,yaw:0};
     const k = this.keys;
-    let x = this.stick.x, y = this.stick.y;
+    const source = this.axisSource?.() || this.stick;
+    let x = source.x, y = source.y;
     if (k.has('ArrowLeft')) x = -1;
     if (k.has('ArrowRight')) x = 1;
     if (k.has('ArrowUp')) y = 1;
@@ -238,7 +253,7 @@ export class Input {
   throttle() { return this.throttleValue; }
   boost() { return this.keys.has('KeyW') || this.boostToggle; }
   brake() { return this.keys.has('KeyS') || this.btn.brake; }
-  gun() { return this.keys.has('ShiftLeft') || this.keys.has('ShiftRight') || this.keys.has('KeyF') || this.btn.gun; }
+  gun() { if(!this.enabled)return false;return this.keys.has('ShiftLeft') || this.keys.has('ShiftRight') || this.keys.has('KeyF') || this.btn.gun; }
   look() { return this.keys.has('KeyE') || this.btn.look; }
 }
 
@@ -251,8 +266,9 @@ export class Input {
 export class PlayerController {
   constructor(ac, input, settings) {
     this.ac = ac; this.input = input; this.settings = settings;
+    this.level = input.levelAssist || new LevelAssist();
   }
-  update() {
+  update(dt=1/60) {
     const ac = this.ac, s = this.settings, inp = this.input;
     const { x, y: yRaw, yaw } = inp.axes();
     const y = s.invert ? yRaw : -yRaw; // default: stick up = nose down (flight convention)
@@ -302,6 +318,6 @@ export class PlayerController {
       c.roll = x;
       c.pitch = y;
     }
-    return c;
+    return this.level.update(ac,{x,y:yRaw},c,dt);
   }
 }

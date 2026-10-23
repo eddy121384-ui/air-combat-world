@@ -84,6 +84,53 @@ const state = (p) => p.evaluate(() => {
 const desktop = { viewport: { width: 1280, height: 720 }, deviceScaleFactor: 1 };
 const iphone = { ...devices['iPhone 13 Mini'], viewport: { width: 812, height: 375 }, isMobile: true, hasTouch: true };
 
+if(scenario==='all'||scenario==='hud-editor')await (await import('./browser-hud-editor.mjs')).checkHudEditor({page,iphone,shot,report,only:args['hud-only']});
+if(scenario==='all'||scenario==='tilt')await (await import('./browser-tilt.mjs')).checkTilt({page,iphone,shot,report});
+
+if (scenario === 'all' || scenario === 'level') {
+  report.perf.level=[];
+  for(const width of [812,667])for(const flight of ['arcade','tactical'])for(const control of ['assisted','expert']) {
+    const {ctx,p}=await page({...iphone,viewport:{width,height:375}},`?mode=${flight}&control=${control}&seed=41&autostart=1`,'level');
+    await p.waitForFunction(()=>window.__game?.mode==='playing');
+    await p.evaluate(()=>{
+      const g=window.__game;g.setTimeScale(0);
+      for(const [k,v] of Object.entries({'--sal':'34px','--sar':'34px','--sab':'21px'}))document.documentElement.style.setProperty(k,v);
+    });
+    if(width===667&&flight==='arcade'&&control==='expert')await p.waitForTimeout(2600);
+    const cdp=await ctx.newCDPSession(p);
+    const touch=(type,points)=>cdp.send('Input.dispatchTouchEvent',{type,touchPoints:points});
+    const probe=()=>p.evaluate(async()=>{
+      const g=window.__game,b=g.match.blue,A=await import('/src/sim/aircraft.js');
+      return {bank:A.bankAngle(b)*180/Math.PI,gamma:Math.asin(b.vel.y/b.speed)*180/Math.PI,
+        active:g.input.levelAssist.active,power:[g.input.throttle(),g.input.boost(),g.input.brake()],
+        pose:JSON.stringify([b.q,b.pos,b.vel,b.speed])};
+    });
+    const step=(n)=>p.evaluate(n=>{for(let i=0;i<n;i++)window.__game.match.step(1/60);},n);
+    const box=await p.locator('[data-btn="level"]').boundingBox();
+    assert.ok(box.width>=40&&box.width<=44&&box.height>=40&&box.x>=34&&box.y>=0,'LVL size and safe area');
+    await touch('touchStart',[{x:150,y:260,id:1}]);await touch('touchMove',[{x:212,y:260,id:1}]);
+    for(let i=0;i<120;i++){await step(1);if((await probe()).bank>58)break;}
+    await touch('touchEnd',[]);
+    const before=await probe();assert.ok(before.bank>=58&&before.bank<67);
+    await p.tap('[data-btn="level"]');const armed=await probe();
+    assert.ok(armed.active);assert.equal(armed.pose,before.pose,'button does not teleport state');
+    await p.waitForFunction(()=>document.querySelector('[data-btn="level"]').getAttribute('aria-pressed')==='true');
+    if(width===667&&flight==='arcade'&&control==='expert')await shot(p,'26-level-active-safe-area');
+    for(let i=0;i<600;i++){await step(1);if(!(await probe()).active)break;}
+    const recovered=await probe();
+    assert.ok(!recovered.active&&Math.abs(recovered.bank)<3.5&&Math.abs(recovered.gamma)<1.7,'natural flight recovery completes');
+    assert.deepEqual(recovered.power,before.power,'LVL preserves pilot power settings');
+    await p.tap('[data-btn="level"]');await p.tap('[data-btn="level"]');assert.equal((await probe()).active,false,'second tap cancels');
+    await p.tap('[data-btn="level"]');
+    await touch('touchStart',[{x:150,y:260,id:2}]);await touch('touchMove',[{x:185,y:260,id:2}]);
+    await step(1);assert.equal((await probe()).active,false,'actual stick immediately overrides');await touch('touchCancel',[]);
+    await p.tap('[data-btn="level"]');await p.tap('#pauseBtn');
+    assert.equal(await p.evaluate(()=>window.__game.mode),'paused');assert.equal((await probe()).active,false,'pause cancels LEVEL');
+    report.perf.level.push({width,flight,control,bank:recovered.bank,gamma:recovered.gamma,passed:true});
+    await ctx.close();
+  }
+}
+
 if (scenario === 'all' || scenario === 'lookdev') {
   report.perf.lookdev = {};
   for (const view of ['chase', 'bank', 'cloud', 'ocean', 'dive', 'seam', 'zenith']) {
@@ -347,8 +394,12 @@ if (scenario === 'all' || scenario === 'modes') {
     assert.ok((await readYaw()).x>0,label+': remaining stick stays active');
     await touch('touchEnd',[joyMove]);
     assert.equal((await readYaw()).x,0,label+': joystick release neutral');
+    await p.evaluate(()=>{window.__yawCancelSeen=false;window.addEventListener('touchcancel',()=>{window.__yawCancelSeen=true;},{once:true});});
     await touch('touchStart',[rightP]);
     await touch('touchCancel',[]);
+    // CDP acknowledges dispatch before the renderer necessarily delivers cancel.
+    // Wait for the real event, then require exact neutral (no synthetic cleanup).
+    await p.waitForFunction(()=>window.__yawCancelSeen,{},{timeout:2000});
     const cancelled=await readYaw();
     assert.equal(cancelled.yaw,0,label+': yaw touchcancel');
     assert.ok(Math.abs(cancelled.throttle-.72)<1e-9 && !cancelled.boost && !cancelled.brake,
