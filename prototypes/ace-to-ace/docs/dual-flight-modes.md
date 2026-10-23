@@ -29,8 +29,11 @@ stores or high-fidelity flight-control laws.
 Input choice does not change plane physics. Expert: x=roll, y=pitch, no
 auto-level. Assisted: x commands heading-turn through roll+pull, neutral x
 autolevels; manual pitch and yaw remain. Assisted never secretly turns on AB;
-throttle, AB and BRK stay player-controlled. The existing iPhone virtual stick
-and throttle remain **latched on release** by design.
+throttle, AB and BRK stay player-controlled. The throttle stays **latched on
+release**. The iPhone virtual stick was originally latched too; since the
+Academy v1.1 change it **springs to centre on release** (the command, not the
+aircraft: Expert keeps its bank, Assisted rolls out) — see the README and
+`tools/test-stick-recenter.mjs`.
 
 ## Checks and release gate
 

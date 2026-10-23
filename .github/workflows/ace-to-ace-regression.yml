@@ -38,6 +38,7 @@ jobs:
         run: |
           node tools/test-airbrake-throttle.mjs
           node tools/test-power-strip.mjs
+          node tools/test-stick-recenter.mjs
           node tools/test-brake-trap.mjs
           node tools/test-flight-path.mjs
           node tools/test-hud-attitude.mjs

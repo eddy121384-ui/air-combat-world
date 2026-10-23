@@ -6,7 +6,7 @@ import { bankAngle, pitchAngle, pitchForG, neutralG, availableG, MIN_SPEED } fro
 export class Input {
   constructor(root) {
     this.stick = { x: 0, y: 0 };        // x: right +, y: up + (screen)
-    this.stickOffset = { x: 0, y: 0 }; // visual stick deflection persists after touch release
+    this.stickOffset = { x: 0, y: 0 }; // visual knob deflection (px); springs to 0 on release
     this.keys = new Set();
     this.btn = { msl: false, gun: false, brake: false, flare: false, look: false, boost: false };
     this.pressed = new Set();           // one-shot presses this frame
@@ -35,7 +35,12 @@ export class Input {
     };
     window.addEventListener('keydown', down);
     window.addEventListener('keyup', (e) => this.keys.delete(e.code));
-    window.addEventListener('blur', () => this.keys.clear());
+    // Losing focus / backgrounding the app: no ghost input. Held keys, the stick
+    // and hold-type buttons release; latched settings (throttle, AB) stay.
+    const releaseAll = () => { this.keys.clear(); this.releaseStick(); this.releaseHeld(); };
+    window.addEventListener('blur', releaseAll);
+    window.addEventListener('pagehide', releaseAll);
+    if (typeof document !== 'undefined') document.addEventListener('visibilitychange', () => { if (document.hidden) releaseAll(); });
   }
 
   bindTouch() {
@@ -50,12 +55,12 @@ export class Input {
       if (this.stickTouch != null) return;
       const t = e.changedTouches[0];
       this.stickTouch = t.identifier;
-      // Keep the last stick deflection. Re-anchor the floating base so a new
-      // touch continues from that value instead of snapping to neutral.
-      this.origin = { x: t.clientX - this.stickOffset.x, y: t.clientY - this.stickOffset.y };
+      // Floating stick: every touch starts at neutral under the finger.
+      this.origin = { x: t.clientX, y: t.clientY };
+      this.stick.x = 0; this.stick.y = 0; this.stickOffset.x = 0; this.stickOffset.y = 0;
       base.style.left = `${this.origin.x}px`; base.style.top = `${this.origin.y}px`;
       base.classList.add('on');
-      setKnob(this.stickOffset.x, this.stickOffset.y);
+      setKnob(0, 0);
     }, { passive: false });
     const move = (e) => {
       for (const t of e.changedTouches) {
@@ -72,13 +77,12 @@ export class Input {
       }
     };
     const end = (e) => {
-      for (const t of e.changedTouches) {
-        if (t.identifier !== this.stickTouch) continue;
-        // A lifted finger is NOT a neutral-stick command: maintain the
-        // player's chosen turn / pitch until the next drag or a new match.
-        this.stickTouch = null;
-        base.classList.remove('on');
-      }
+      // Spring-centred stick: a lifted (or cancelled) stick finger returns the
+      // command to neutral. The aircraft keeps its attitude; only Assisted's
+      // flight control rolls out. A missed end event for the stick finger is
+      // caught by checking which touches are still down.
+      const stillDown = [...(e.touches || [])].some((t) => t.identifier === this.stickTouch);
+      if (this.stickTouch != null && !stillDown) this.releaseStick();
     };
     zone.addEventListener('touchmove', move, { passive: false });
     zone.addEventListener('touchend', end);
@@ -173,15 +177,28 @@ export class Input {
     brake?.classList.remove('down');
   }
 
-  resetStick() {
-    // Explicit neutral only at the start of a fresh match.
+  /** Stick finger lifted / cancelled: command and knob return to neutral. */
+  releaseStick() {
     this.stickTouch = null;
     this.stick.x = 0; this.stick.y = 0;
     this.stickOffset.x = 0; this.stickOffset.y = 0;
+    this.root.querySelector('#stickBase')?.classList.remove('on');
+    const knob = this.root.querySelector('#stickKnob');
+    if (knob) knob.style.transform = 'translate(0px, 0px)';
+  }
+
+  /** Release hold-type buttons (BRK, GUN, LOOK) and the throttle drag. AB is a toggle and stays. */
+  releaseHeld() {
+    for (const k of ['brake', 'gun', 'look', 'msl', 'flare']) this.btn[k] = false;
+    this.powerPointer = null;
+    for (const el of this.root.querySelectorAll('[data-btn].down')) el.classList.remove('down');
+  }
+
+  resetStick() {
+    // Fresh match: neutral stick, floating base back to its rest position.
+    this.releaseStick();
     const base = this.root.querySelector('#stickBase');
-    base.style.left = ''; base.style.top = '';
-    base.classList.remove('on');
-    this.root.querySelector('#stickKnob').style.transform = 'translate(0px, 0px)';
+    if (base) { base.style.left = ''; base.style.top = ''; }
   }
 
   consume(name) { const had = this.pressed.has(name); this.pressed.delete(name); return had; }
@@ -210,7 +227,7 @@ export class Input {
 /**
  * Player pilot: converts Input into the same controls structure the AI produces.
  * settings.assist: stick-x banks to an angle and the turn is held level automatically;
- * neutral input rolls wings-level, but releasing touch holds the last stick setting.
+ * neutral input (including a released touch stick, which springs to centre) rolls wings-level.
  * settings.invert: stick-up = climb.
  */
 export class PlayerController {

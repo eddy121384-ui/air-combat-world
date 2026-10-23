@@ -80,15 +80,16 @@ try {
   assert.equal(input.throttle(), 0);
   el.track.fire('pointercancel', { pointerId: 3 });
 
-  // Expert joystick: lifting a finger keeps the selected deflection; new
-  // touch resumes from it. Do not convert this to auto-center in A or B.
+  // Joystick springs to centre on release (the aircraft keeps its attitude;
+  // see test-stick-recenter.mjs). The latched throttle is unaffected.
   const t = { identifier: 10, clientX: 120, clientY: 120 };
-  el.zone.fire('touchstart', { changedTouches: [t] });
+  el.zone.fire('touchstart', { changedTouches: [t], touches: [t] });
   el.zone.fire('touchmove', { changedTouches: [{ ...t, clientX: 158 }] });
   const heldRoll = input.axes().x;
   assert.ok(heldRoll > 0.05, 'touch drag must command roll');
-  el.zone.fire('touchend', { changedTouches: [t] });
-  assert.equal(input.axes().x, heldRoll, 'release must preserve roll bias');
+  el.zone.fire('touchend', { changedTouches: [t], touches: [] });
+  assert.equal(input.axes().x, 0, 'release returns the roll command to neutral');
+  assert.equal(input.throttle(), 0, 'stick release leaves the throttle where it was');
   input.resetStick();
   assert.equal(input.axes().x, 0, 'fresh sortie may explicitly neutralize the stick');
 
