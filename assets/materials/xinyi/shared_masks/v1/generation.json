@@ -1,0 +1,17 @@
+{
+  "capability": "image_gen.imagegen",
+  "generation_date": "2026-10-23",
+  "model": null,
+  "seed": null,
+  "attempts": 1,
+  "independent_outputs": 1,
+  "panels_per_output": 4,
+  "output": "sources/roof_macro_sheet.png",
+  "prompt": "Create ONE square technical source-art sheet containing exactly FOUR equal square grayscale material masks in a precise 2 by 2 arrangement, edge-to-edge with absolutely no gutters, frames, text or labels. This is not a scene, photograph or mood board. Each quadrant is an independent flat seamless texture mask. Requested overall canvas 2048 x 2048 or higher, with equal square quadrants. TOP LEFT: subtropical Taipei flat-roof waterproof membrane macro patchiness, interlocking irregular rounded coating areas 2 to 6 meters across, quiet mid-gray field with a few subtly darker damp-edged islands. TOP RIGHT: sparse human-made rooftop recoat/repair zones, four to six isolated irregular rectangular brush-applied patches of varied proportions and stepped edges, a few overlapping repair margins, mostly untouched gray background; no dense checkerboard. BOTTOM LEFT: broad localized drainage/oxidation bleed patterns, several unequal tapered elongated fan-shaped stains, directional flow downward with curved branching ends, no actual drains, equipment or shadows. BOTTOM RIGHT: small isolated clusters of chunky paint-chip/aggregate-shaped islands, each island 0.5 to 1 meter across in a 32m tile, with generous quiet background; absolutely no fine granular noise or pinprick speckles. All four masks share the same restrained flat hand-painted game-art language and a neutral mid-gray background near 128/255. Use only about 6 grayscale value steps from 96 to 160; do NOT use black and white extremes. Deliberate legible macro shapes, not clouds or procedural noise. Features predominantly 1 to 8 meters on a 32m square. Strict orthographic flat scalar mask, no perspective, no baked lighting, no bevels, no shadows, no highlights, no ambient occlusion, no reflections. No roof outlines, grids, seams, bricks, tiles, cracks, windows, objects, plants, text, arrows or logos. Keep every quadrant seamlessly repeatable on both axes with matching edge behavior. Occupied and maintained Taipei apartment/huaxia roof character, not ruined industrial texture. No color cast at all.",
+  "notes": [
+    "No referenced images or third-party downloads.",
+    "Native output kept byte-identical; model ID and seed are not exposed.",
+    "Four coordinated source panels, not four independent generation calls.",
+    "SVG repair B is separately authored vector art, not an AI image or noise field."
+  ]
+}

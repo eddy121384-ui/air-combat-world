@@ -3,6 +3,10 @@
 Status: **doc-only spec.** Nothing here is built, generated or approved. No shader, Unreal asset, image or runtime change.
 Branch `feat/opus55-xinyi-visual-quality`, on top of `e17b35e` (blank side-wall v0B).
 
+**Implementation follow-on (2026-10-23):** [Shared masks v1](../assets/materials/xinyi/shared_masks/v1/README.md)
+now supplies the first offline `T_XinyiFacadeAge` / `T_XinyiRoofSurface` packs, reusing PR #14 source art.
+That batch remains pending art review; this historical design document is not an engine-acceptance claim.
+
 Builds on, and does not replace: `docs/xinyi-facade-material-pilot-v0.md` (the facade-ageing mask pilot and its
 texel-density table), `docs/xinyi-facade-grammar-v0a.md`, `docs/xinyi-roofscape-v2-material-pilot.md`,
 `docs/xinyi-wall-ads-v0-result.md`, `docs/xinyi-blank-side-wall-v0b-result.md`,

@@ -1,0 +1,28 @@
+name: Xinyi shared material masks
+on:
+  pull_request:
+    paths:
+      - 'assets/materials/xinyi/shared_masks/**'
+      - 'assets/materials/xinyi/imagegen/batch1/**'
+      - 'tools/materials/**'
+      - 'requirements-xinyi-material-masks.txt'
+      - '.github/workflows/xinyi-material-masks.yml'
+permissions:
+  contents: read
+jobs:
+  offline-mask-contract:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Offline build dependencies
+        run: python -m pip install -r requirements-xinyi-material-masks.txt
+      - name: Parent source preservation and derivative contract
+        run: |
+          python assets/materials/xinyi/imagegen/batch1/build_revision_r2.py --validate
+          python tools/materials/build_xinyi_shared_masks.py --validate --reproduce
+          python tools/materials/test_xinyi_shared_masks.py
+          git diff --exit-code
