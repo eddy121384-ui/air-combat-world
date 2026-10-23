@@ -1,5 +1,5 @@
 import {HUD_ITEMS,emptyLayout,validLayout,loadLayout,saveLayout,safeBounds,layoutRect,relativeEntry} from './hud-layout.js';
-const managed=['position','left','top','right','bottom','width','height','opacity','margin','--power-scale'];
+const managed=['position','left','top','right','bottom','width','height','opacity','margin','background-color','border-color','--power-scale'];
 const copy=x=>JSON.parse(JSON.stringify(x));
 export class HudEditor {
   constructor({input,onClose=()=>{}}) {
@@ -58,6 +58,9 @@ export class HudEditor {
       if(key==='power') {
         const scale=Math.min(e.scale,r.width/this.base.get(key).width,r.height/this.base.get(key).height);
         node.style.setProperty('--power-scale',scale);this.input.throttleScale=scale;
+        // Fade the strip's frame too, without multiplying independent AB/BRK opacity.
+        node.style.backgroundColor=`rgba(9,31,51,${.46*e.opacity})`;
+        node.style.borderColor=`rgba(155,203,222,${.52*e.opacity})`;
         for(const s of ['#throttleTrack','#throttleValue'])document.querySelector(s).style.opacity=e.opacity;
         for(const btn of ['boost','brake'])if(!layout.items[btn])this.nodes.get(btn).style.opacity=e.opacity;
       } else if(key==='stick') {

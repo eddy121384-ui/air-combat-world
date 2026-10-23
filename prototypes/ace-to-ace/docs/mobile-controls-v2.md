@@ -178,3 +178,5 @@ matrix drags it onto the AI key, applies 65% requested size/20% requested opacit
 and still operates Pause after save/reload (actual minimum 40px/60%). A focused
 667px Expert rerun passed this guard plus native range drags, desktop restoration
 and storage fallback. CI runs the complete unfiltered eight-case matrix.
+The throttle opacity check includes its track/readout and frame colors, while
+independently configured AB/BRK keep their own opacity instead of multiplying it.

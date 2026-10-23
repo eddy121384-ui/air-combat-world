@@ -52,7 +52,9 @@ export async function checkHudEditor({page,iphone,shot,report,only}) {
     await p.locator('#hudSize').fill('130');await p.locator('#hudOpacity').fill('40');
     // Move the full strip, then scale it. AB/BRK retain their default relative slots.
     await p.tap('#hudFold');await drag('power',-10,35);await p.tap('#hudFold');
-    await p.locator('#hudSelection').selectOption('power');await p.locator('#hudSize').fill('110');
+    await p.locator('#hudSelection').selectOption('power');await p.locator('#hudSize').fill('110');await p.locator('#hudOpacity').fill('40');
+    const stripAlpha=await p.locator('#powerControl').evaluate(el=>({background:getComputedStyle(el).backgroundColor,border:getComputedStyle(el).borderColor,track:getComputedStyle(document.querySelector('#throttleTrack')).opacity}));
+    assert.equal(stripAlpha.track,'0.4');assert.match(stripAlpha.background,/0\.184/);assert.match(stripAlpha.border,/0\.208/);
     const power=await rect('#powerControl');assert.ok(Math.abs(power.height-247.5)<1);
     await p.tap('#hudFold');await drag('boost',25,10);await p.tap('#hudFold');
     assert.equal((await inputs()).boost,false,'dragging AB never toggles it');
