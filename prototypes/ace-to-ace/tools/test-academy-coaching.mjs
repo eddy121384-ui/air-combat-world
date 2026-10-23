@@ -35,6 +35,13 @@ const after=[];
 for(const mode of modes) {
   const orientation=session('L01',mode), firstInstruction=orientation.phase.say(orientation);
   assert.match(firstInstruction,mode.endsWith('assisted')?/飛控替你改平/:/機翼不會自己改平/);
+  orientation.next();
+  assert.match(orientation.view().guidance.tip,/拉桿爬升/,'climb guidance must not prematurely command level flight');
+  orientation.next();
+  assert.match(orientation.view().guidance.tip,/推桿下降/,'descent guidance follows altitude error');
+  const slow=session('L06',mode);
+  assert.match(slow.view().guidance.goal,/420/,'initial slow-turn task first asks for deceleration');
+  slow.d.armed=true;assert.match(slow.view().guidance.goal,/300/);
   const turnIntro=session('L02',mode);
   const explanation=turnIntro.lesson.intro.map(line=>typeof line==='function'?line(turnIntro):line).join('');
   assert.match(explanation,mode.endsWith('assisted')?/放手.*飛控會改平/:/放手不會改平/);
@@ -66,6 +73,8 @@ for(const mode of modes) {
   assert.equal(steady.phase.id,'level');
 
   const turn=session('L02',mode);turn.next();turn.next();
+  assert.match(turn.view().guidance.goal,/14 秒/);
+  assert.match(turn.view().guidance.readout,/200m/,'altitude constraint visible before failure');
   turn.me.pos.y+=201;turn.step(1/60);
   assert.equal(turn.result.success,false);assert.match(turn.result.reason,/上限 200/);
 

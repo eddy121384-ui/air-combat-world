@@ -912,17 +912,18 @@ export function lessonGuidance(r) {
   const cue=(goal,readout,tip,state='neutral')=>({goal,readout,tip,state});
   switch(r.lesson.id) {
     case 'L01': {
-      const target=id==='level'?null:r.d.target;
+      const target=id==='level'?null:r.d.target, error=target==null?0:target-r.alt;
+      const transit=target!=null && Math.abs(error)>=120;
       const ok=Math.abs(r.gamma)<(target?3:2.5) && (target?Math.abs(r.alt-target)<120:Math.abs(r.bank)<10);
       return cue(target?`${id==='climb'?'爬升':'下降'}至 ${fmt(target)} m 並穩住`:'連續平飛 5 秒',
         `γ ${r.gamma.toFixed(1)}° · 坡度 ${bank}° · ${fmt(r.alt)}m`,
-        ok?'FPM 穩住了；小幅修正就好':Math.abs(r.bank)>10?r.pick('放手讓飛控改平','反向滾轉修平；放手不會改平'):'先讓 FPM 回 0°，別只看機頭',ok?'good':'warn');
+        Math.abs(r.bank)>10?r.pick('放手讓飛控改平','反向滾轉修平；放手不會改平'):transit?(error>0?'拉桿爬升；接近目標再把 FPM 放回 0°':'推桿下降；接近目標再把 FPM 放回 0°'):ok?'FPM 穩住了；小幅修正就好':'先讓 FPM 回 0°，別只看機頭',ok?'good':'warn');
     }
     case 'L02': {
       const target={h090:90,h300:300,h015:15}[id]??0, err=wrapDeg(target-r.heading);
       const close=Math.abs(err)<20;
-      return cue(`轉至 ${hdg3(target)}°，提早改平`,
-        `${hdg3(r.heading)}° · 坡度 ${bank}° · ${g}G`,
+      return cue(id==='h015'?'14 秒內轉 015° ±4°':`轉至 ${hdg3(target)}°，提早改平`,
+        id==='h015'?`${hdg3(r.heading)}° · 高度偏差 ${fmt(r.d.altDev||0)}/200m`:`${hdg3(r.heading)}° · 坡度 ${bank}° · ${g}G`,
         Math.abs(r.bank)>40 && r.g<1.4?'有坡度、缺升力：拉桿撐住高度':close?r.pick('接近航向，放手讓飛控改平','接近航向，反向滾轉改平'):r.pick('側推協調轉彎，注意高度','滾到坡度後橫向回中，持續拉桿'),close?'good':'neutral');
     }
     case 'L03': return cue(id==='accel'?'平飛加速至 1000 km/h':id==='decel'?'減速至 650 km/h':'連續定速 600–700 六秒',
@@ -938,9 +939,9 @@ export function lessonGuidance(r) {
     case 'L05': return cue(id==='dive'?'高度換速度：950 km/h':'速度換高度：保留 400 km/h',
       `高度 ${fmt(r.alt)} + 動能 ${fmt(r.energyHeight-r.alt)} = ${fmt(r.energyHeight)}m`,
       id==='dive'?'兩種餘額互換；2200m 是安全底線':`${g}G · 目標 ${fmt(r.d.target)}m；平順拉起`,r.g>6.5?'warn':'neutral');
-    case 'L06': return cue(id==='slowturn'?'低速轉彎：守住 300 km/h':id==='stall'?'卸載、加速，再改平':'立即俯衝改出',
+    case 'L06': return cue(id==='slowturn'?(r.d.armed?'低速轉彎：守住 300 km/h':'先減速至 420 km/h 以下'):id==='stall'?'卸載、加速，再改平':'立即俯衝改出',
       `${v}km/h · 可用 ${r.availG.toFixed(1)}G · ${fmt(r.alt)}m`,
-      id==='dive'?'收油、BRK、拉滿；別等字幕':id==='stall'?'先推桿卸載；速度回來再拉':'淺坡度、輕拉，別把速度拉光',id==='dive'||r.kmh<350?'warn':'neutral');
+      id==='dive'?'收油、BRK、拉滿；別等字幕':id==='stall'?'先推桿卸載；速度回來再拉':!r.d.armed?'先收油、BRK，進入低速再轉':'淺坡度、輕拉，別把速度拉光',id==='dive'||r.kmh<350?'warn':'neutral');
     case 'L07': {
       const geo=geometry(r.me,r.foe), type=pursuitType(r.me,r.foe).toUpperCase();
       const rush=geo.R<1500 && geo.closure>35 && geo.R/geo.closure<7;
