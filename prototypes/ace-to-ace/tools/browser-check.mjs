@@ -329,7 +329,9 @@ if (scenario === 'all' || scenario === 'modes') {
     assert.ok((await readYaw()).command < -.5,label+': nose-left command');
     await touch('touchStart',[leftP,rightP]);
     assert.equal((await readYaw()).yaw,0,label+': opposing yaw neutral');
-    await touch('touchEnd',[rightP]);
+    // Chromium CDP in this runner treats a nonempty touchEnd touchPoints list as
+    // the touch IDs BEING released (not the still-active fingers).
+    await touch('touchEnd',[leftP]);
     assert.equal((await readYaw()).yaw,1,label+': right yaw after left release');
     await touch('touchEnd',[]);
     assert.equal((await readYaw()).yaw,0,label+': yaw springs neutral');
@@ -340,10 +342,10 @@ if (scenario === 'all' || scenario === 'modes') {
     const combined=await readYaw();
     assert.ok(combined.x>0 && combined.yaw===-1,label+': stick+rudder independent');
     assert.ok(combined.command<0,label+': manual left yaw works in Assisted');
-    await touch('touchEnd',[joyMove]);
+    await touch('touchEnd',[leftP]);
     assert.equal((await readYaw()).yaw,0,label+': pedal release while stick held');
     assert.ok((await readYaw()).x>0,label+': remaining stick stays active');
-    await touch('touchEnd',[]);
+    await touch('touchEnd',[joyMove]);
     assert.equal((await readYaw()).x,0,label+': joystick release neutral');
     await touch('touchStart',[rightP]);
     await touch('touchCancel',[]);
