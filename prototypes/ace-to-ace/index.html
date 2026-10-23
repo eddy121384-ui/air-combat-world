@@ -18,7 +18,11 @@
 <div id="touch" class="hidden">
   <div id="stickZone"></div>
   <div id="stickBase"><div id="stickKnob"></div></div>
+  <button id="tiltCalibrate" class="hidden" type="button" aria-label="以目前握姿重新校準">CAL</button>
   <div id="btns">
+    <button data-btn="level" class="b-level" type="button" aria-label="恢復水平飛行，再按取消" aria-pressed="false">LVL</button>
+    <button data-btn="yawLeft" class="yaw-key yaw-left" type="button" aria-label="左方向舵，按住向左偏航">◀ YAW</button>
+    <button data-btn="yawRight" class="yaw-key yaw-right" type="button" aria-label="右方向舵，按住向右偏航">YAW ▶</button>
     <button data-btn="flare" class="sm b-flare">FLR</button>
     <button data-btn="look" class="sm b-look">LOOK</button>
     <div id="powerControl" aria-label="動力控制">
@@ -32,6 +36,23 @@
     <button data-btn="gun" class="lg b-gun">GUN</button>
     <button data-btn="msl" class="lg b-msl">MSL</button>
   </div>
+</div>
+<div id="hudSafeArea" aria-hidden="true"></div>
+<div id="hudEditor" class="hidden" aria-label="操作介面編輯">
+  <div id="hudHandles"></div>
+  <section class="hud-toolbar" role="dialog" aria-label="操作介面編輯工具">
+    <div class="hud-edit-head"><strong>HUD EDITOR</strong><button id="hudFold" type="button">收合</button></div>
+    <div class="hud-edit-options">
+      <label>選擇操作區 <select id="hudSelection" aria-label="選擇操作區"></select></label>
+      <p id="hudSelectionNote"></p>
+      <label>大小 <output id="hudSizeValue">100%</output><input id="hudSize" type="range" min="65" max="160" value="100"></label>
+      <label>透明度 <output id="hudOpacityValue">100%</output><input id="hudOpacity" type="range" min="20" max="100" value="100"></label>
+      <div class="hud-edit-row"><button id="hudLeft" type="button">左手布局</button><button id="hudRight" type="button">右手布局</button><button id="hudReset" type="button">預設</button></div>
+      <label class="hud-border-option"><input id="hudBorders" type="checkbox" checked>顯示區域邊框</label>
+      <p id="hudWarning" role="status"></p>
+    </div>
+    <div class="hud-edit-row"><button id="hudCancel" type="button">取消</button><button id="hudSave" type="button">儲存</button></div>
+  </section>
 </div>
 <button id="pauseBtn" class="hidden" aria-label="pause">II</button>
 <button id="dbgBtn" aria-label="AI debug">AI</button>
@@ -47,22 +68,23 @@
       <button data-diff="rookie">ROOKIE</button><button data-diff="veteran">VETERAN</button><button data-diff="ace">ACE</button>
     </div>
     <div id="diffDesc" class="help"></div>
-    <div class="row seg" role="group" aria-label="Expert 飛行手感 A/B">
-      <button data-feel="A" aria-pressed="false">A · LEGACY EXPERT</button><button data-feel="B" aria-pressed="true">B · ARCADE EXPERT</button>
-    </div>
-    <div id="feelDesc" class="help"></div>
-    <div class="row opts">
-      <button id="optAssist"></button><button id="optInvert"></button><button id="optSound"></button>
+    <div class="mode-summary">
+      <span>目前飛行設定</span>
+      <strong id="currentFlightPreset">ARCADE / EXPERT</strong>
+      <button id="btnTitleHud" class="settings-shortcut" type="button">操作介面編輯</button>
+      <button id="btnTitleSettings" class="settings-shortcut" type="button">⚙ 飛行設定</button>
     </div>
     <div class="row">
       <button id="btnStart" class="primary">出擊 SORTIE</button>
+      <button id="btnAcademy" class="academy-entry">飛行學院 ACADEMY</button>
       <button id="btnWatch">AI vs AI 觀戰</button>
     </div>
     <div id="keysHelp" class="help">
-      方向鍵 俯仰/滾轉 · W 後燃器 · S 減速板 · A/D 方向舵 · Space 飛彈 · Shift/F 機砲 · Q 熱焰彈 · E 看向敵機 · Tab AI 狀態 · Esc 暫停
+      Expert：方向鍵 俯仰/滾轉；Assisted：左右轉向、上下俯仰 · W 後燃器 · S 減速板 · A/D 方向舵 · Space 飛彈 · Shift/F 機砲 · Q 熱焰彈 · E 看向敵機 · Tab AI 狀態 · Esc 暫停
     </div>
+    <p id="titleHudStatus" class="help" role="status"></p>
     <div id="touchHelp" class="help hidden">
-      左半螢幕：虛擬搖桿（放手保留桿量）· 右側：動力條上下滑調整 0–100% 油門（放手保留）；頂端 AB 點按切換；底端 BRK 按住減速（不改變油門）；MSL 飛彈 / GUN 機砲 / FLR 熱焰彈 / LOOK 看向敵機
+      左半螢幕：虛擬搖桿（放手自動回中；Expert 不會自動改平）· LVL 點按改平／再按取消，推桿立即接手 · 右側：◀ YAW／YAW ▶ 按住微調偏航；動力條上下滑調整 0–100% 油門（放手保留）；AB 點按切換、BRK 按住減速；MSL 飛彈／GUN 機砲／FLR 熱焰彈／LOOK 看向敵機
     </div>
   </div>
 </div>
@@ -70,7 +92,107 @@
 <div id="pause" class="screen hidden">
   <div class="card small">
     <h2>PAUSED</h2>
-    <div class="row"><button id="btnResume" class="primary">繼續</button><button id="btnQuit">回到標題</button></div>
+    <p id="hudSaveStatus" class="help" role="status"></p>
+    <div id="pauseFlightPreset" class="help mode-current">目前：ARCADE / EXPERT</div>
+    <div class="row"><button id="btnResume" class="primary">繼續</button><button id="btnPauseSettings">⚙ 飛行設定</button><button id="btnPauseHud" type="button">操作介面編輯</button></div>
+    <div class="row"><button id="btnPauseRetry" class="hidden">重新開始本課</button><button id="btnQuit">回到標題</button></div>
+  </div>
+</div>
+
+<div id="flightSettings" class="screen hidden" role="dialog" aria-modal="true" aria-labelledby="flightSettingsTitle">
+  <div class="card flight-settings-card">
+    <div class="kicker">ACE TO ACE · CONFIGURATION</div>
+    <h2 id="flightSettingsTitle">飛行設定</h2>
+    <p class="help settings-intro">選擇你想要的空戰手感。四種模式共用相同任務與敵機 AI。</p>
+    <div class="flight-choice-grid" role="group" aria-label="選擇飛行模式">
+      <button type="button" class="flight-choice" data-flight-choice="arcade:assisted" aria-pressed="false">
+        <span class="flight-choice-title">ARCADE × ASSISTED</span>
+        <span class="flight-choice-desc">爽快機動 · 輔助轉向</span>
+      </button>
+      <button type="button" class="flight-choice" data-flight-choice="arcade:expert" aria-pressed="true">
+        <span class="flight-choice-title">ARCADE × EXPERT</span>
+        <span class="flight-choice-desc">爽快機動 · 手動滾轉</span>
+      </button>
+      <button type="button" class="flight-choice" data-flight-choice="tactical:assisted" aria-pressed="false">
+        <span class="flight-choice-title">TACTICAL × ASSISTED</span>
+        <span class="flight-choice-desc">能量戰 · 輔助轉向</span>
+      </button>
+      <button type="button" class="flight-choice" data-flight-choice="tactical:expert" aria-pressed="false">
+        <span class="flight-choice-title">TACTICAL × EXPERT</span>
+        <span class="flight-choice-desc">能量戰 · 手動滾轉</span>
+      </button>
+    </div>
+    <div id="settingsChoiceDescription" class="help settings-choice-description"></div>
+    <div class="input-settings">
+      <p class="help">輸入設備獨立於飛行模式；可隨時切換，不重開本局。</p>
+      <div class="row input-device" role="group" aria-label="輸入設備（不改變飛行模式）">
+        <button type="button" data-input-device="stick">VIRTUAL STICK</button>
+        <button type="button" data-input-device="tilt">TILT 體感</button>
+      </div>
+      <div id="tiltOptions" class="hidden">
+        <p class="help">保持舒服的橫向握姿再啟用，不必把手機放平。左右傾斜＝X；前後傾斜＝Y。中立不等於 Expert 自動改平。</p>
+        <div class="row"><button id="btnTiltEnable" type="button">啟用體感操縱</button><button id="btnTiltCalibrate" type="button">重新校準握姿</button></div>
+        <p id="tiltStatus" class="help" role="status"></p><output id="tiltReadout">X 0.00 · Y 0.00</output>
+        <div class="tilt-ranges">
+          <label>靈敏度 <output id="tiltSensitivityValue"></output><input id="tiltSensitivity" type="range" min="0.5" max="2" step="0.1"></label>
+          <label>死區 <output id="tiltDeadzoneValue"></output><input id="tiltDeadzone" type="range" min="0" max="6" step="0.5"></label>
+          <label>平滑度 <output id="tiltSmoothingValue"></output><input id="tiltSmoothing" type="range" min="0" max="60" step="10"></label>
+        </div>
+        <div class="row"><button id="tiltInvertX" type="button">反轉 X：關</button><button id="tiltInvertY" type="button">反轉 Y：關</button></div>
+        <p class="help">需要 HTTPS 與授權。預設以死區與 Expo 抑制雜訊；增加平滑會延遲微調。無資料時暫用搖桿，重載後需再啟用。</p>
+      </div>
+    </div>
+    <div class="row opts">
+      <button id="optInvert" type="button">俯仰方向</button>
+      <button id="optSound" type="button">音效</button>
+    </div>
+    <p class="help settings-apply-note" id="settingsApplyNote"></p>
+    <div class="row settings-footer">
+      <button id="btnSettingsCancel" type="button">取消</button>
+      <button id="btnSettingsApply" type="button" class="primary">儲存設定</button>
+    </div>
+  </div>
+</div>
+
+<div id="academy" class="screen hidden">
+  <div class="card academy-card">
+    <div class="kicker">ACE FLIGHT ACADEMY · 教官 KITE</div>
+    <div class="academy-head">
+      <h2>飛行學院</h2>
+      <span class="academy-mode">機體設定 <strong id="academyMode">ARCADE / EXPERT</strong></span>
+      <button id="btnAcademySettings" class="settings-shortcut" type="button">⚙ 飛行設定</button>
+    </div>
+    <div id="lessonGrid" class="lesson-grid" role="list"></div>
+    <div class="row"><button id="btnAcademyBack" type="button">返回標題</button></div>
+  </div>
+</div>
+
+<div id="briefing" class="screen hidden" role="dialog" aria-labelledby="briefTitle">
+  <div class="card brief-card">
+    <div class="kicker" id="briefKicker">LESSON 01</div>
+    <h2 id="briefTitle"></h2>
+    <p class="kite-line" id="briefHook"></p>
+    <p class="brief-principle" id="briefPrinciple"></p>
+    <ol class="brief-goals" id="briefGoals"></ol>
+    <p class="help brief-real" id="briefReal"></p>
+    <p class="help brief-model" id="briefModel"></p>
+    <div class="row"><button id="btnBriefBack" type="button">學院</button><button id="btnBriefGo" class="primary" type="button">出擊 TAKE OFF</button></div>
+  </div>
+</div>
+
+<div id="debrief" class="screen hidden" role="dialog" aria-labelledby="debTitle">
+  <div class="card deb-card">
+    <div class="kicker" id="debKicker"></div>
+    <h2 id="debTitle"></h2>
+    <div id="debBadge" class="ace-badge hidden"></div>
+    <p class="kite-line" id="debCitation"></p>
+    <div class="sub" id="debSub"></div>
+    <div class="stats deb-stats" id="debStats"></div>
+    <div class="deb-cols">
+      <div><b class="deb-good">做得好</b><ul id="debGood"></ul></div>
+      <div><b class="deb-improve">下一次</b><ul id="debImprove"></ul></div>
+    </div>
+    <div class="row"><button id="btnDebAcademy" type="button">學院</button><button id="btnDebRetry" type="button">重試</button><button id="btnDebNext" class="primary" type="button">下一課</button></div>
   </div>
 </div>
 
