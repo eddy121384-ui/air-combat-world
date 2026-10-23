@@ -8,7 +8,7 @@ export class Input {
     this.stick = { x: 0, y: 0 };        // x: right +, y: up + (screen)
     this.stickOffset = { x: 0, y: 0 }; // visual deflection; springs to neutral on release
     this.keys = new Set();
-    this.btn = { msl: false, gun: false, brake: false, flare: false, look: false, boost: false };
+    this.btn = { msl: false, gun: false, brake: false, flare: false, look: false, boost: false, yawLeft: false, yawRight: false };
     this.pressed = new Set();           // one-shot presses this frame
     this.boostToggle = false;
     this.throttleValue = 0.72;  // latched 0..1, independent of AB and airbrake
@@ -228,9 +228,10 @@ export class Input {
     if (k.has('ArrowRight')) x = 1;
     if (k.has('ArrowUp')) y = 1;
     if (k.has('ArrowDown')) y = -1;
-    let yaw = 0;
-    if (k.has('KeyA')) yaw -= 1;
-    if (k.has('KeyD')) yaw += 1;
+    // Mobile rudder pedals share the same neutral-centred axis as keyboard A/D.
+    // Opposing inputs cancel. Releasing a pedal cannot leave yaw latched.
+    const yaw = clamp(Number(k.has('KeyD')) - Number(k.has('KeyA'))
+      + Number(this.btn.yawRight) - Number(this.btn.yawLeft), -1, 1);
     return { x, y, yaw };
   }
   throttle() { return this.throttleValue; }

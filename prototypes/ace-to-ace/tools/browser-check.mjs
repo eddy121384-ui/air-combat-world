@@ -297,6 +297,60 @@ if (scenario === 'all' || scenario === 'modes') {
     await touch('touchCancel', []);
     assert.deepEqual((await probe()).stick, { x: 0, y: 0 }, `${label}: touchcancel centres axes`);
     const s2 = await probe();
+    // Rudder via real CDP touch events, with bounds and overlapping hit targets.
+    const pedals = await p.evaluate(() => {
+      const rect = name => {
+        const el = document.querySelector('[data-btn="'+name+'"]');
+        const r = el.getBoundingClientRect();
+        const x = r.x + r.width/2, y = r.y + r.height/2;
+        return { x, y, width:r.width, height:r.height,
+          hit: document.elementFromPoint(x,y)?.closest?.('[data-btn]')?.dataset.btn };
+      };
+      return { left:rect('yawLeft'), right:rect('yawRight'),
+        gun:rect('gun'), stickEnd:innerWidth*.48 };
+    });
+    for (const [key,button] of [['yawLeft',pedals.left],['yawRight',pedals.right]]) {
+      assert.ok(button.width >= 48 && button.height >= 48, label+': '+key+' minimum touch target');
+      assert.equal(button.hit,key,label+': '+key+' touch hit-testing');
+      assert.ok(button.x-button.width/2 >= pedals.stickEnd+5, label+': '+key+' outside joystick zone');
+      assert.ok(button.y-button.height/2 > 235, label+': '+key+' away from central reticle');
+      assert.ok(button.x+button.width/2 < pedals.gun.x-pedals.gun.width/2-5,
+        label+': '+key+' must not overlap GUN');
+    }
+    const readYaw = () => p.evaluate(() => {
+      const g=window.__game, a=g.input.axes(), c=g.player.update();
+      return { yaw:a.yaw, x:a.x, command:c.yaw, throttle:g.input.throttle(),
+        boost:g.input.boost(), brake:g.input.brake() };
+    });
+    const leftP={ x:pedals.left.x, y:pedals.left.y, id:41 };
+    const rightP={ x:pedals.right.x, y:pedals.right.y, id:42 };
+    await touch('touchStart',[leftP]);
+    assert.equal((await readYaw()).yaw,-1,label+': left yaw');
+    assert.ok((await readYaw()).command < -.5,label+': nose-left command');
+    await touch('touchStart',[leftP,rightP]);
+    assert.equal((await readYaw()).yaw,0,label+': opposing yaw neutral');
+    await touch('touchEnd',[rightP]);
+    assert.equal((await readYaw()).yaw,1,label+': right yaw after left release');
+    await touch('touchEnd',[]);
+    assert.equal((await readYaw()).yaw,0,label+': yaw springs neutral');
+    const joyP={ x:145,y:255,id:43 }, joyMove={ x:173,y:245,id:43 };
+    await touch('touchStart',[joyP]);
+    await touch('touchMove',[joyMove]);
+    await touch('touchStart',[joyMove,leftP]);
+    const combined=await readYaw();
+    assert.ok(combined.x>0 && combined.yaw===-1,label+': stick+rudder independent');
+    assert.ok(combined.command<0,label+': manual left yaw works in Assisted');
+    await touch('touchEnd',[joyMove]);
+    assert.equal((await readYaw()).yaw,0,label+': pedal release while stick held');
+    assert.ok((await readYaw()).x>0,label+': remaining stick stays active');
+    await touch('touchEnd',[]);
+    assert.equal((await readYaw()).x,0,label+': joystick release neutral');
+    await touch('touchStart',[rightP]);
+    await touch('touchCancel',[]);
+    const cancelled=await readYaw();
+    assert.equal(cancelled.yaw,0,label+': yaw touchcancel');
+    assert.ok(Math.abs(cancelled.throttle-.72)<1e-9 && !cancelled.boost && !cancelled.brake,
+      label+': rudder never changes throttle/AB/BRK');
     // pull while banked (Expert) / pull straight (Assisted): G must rise, capped by the model
     await touch('touchStart', [{ x: 300, y: 260, id: 3 }]);
     await touch('touchMove', [{ x: 300, y: 314, id: 3 }]);

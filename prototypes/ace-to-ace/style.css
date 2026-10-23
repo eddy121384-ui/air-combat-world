@@ -48,6 +48,17 @@ button { font: inherit; color: inherit; cursor: pointer; }
 #btns .b-gun { right: 94px; bottom: 0; }
 #btns .b-flare { right: 58px; bottom: 155px; }
 #btns .b-look { right: 0; bottom: 155px; }
+/* Rudder pedals just left of GUN, beyond the left stick's 48% zone.
+   On 667px landscape the pair occupies x≈337..451; GUN begins near x=475. */
+#btns .yaw-key {
+  width: 54px; height: 52px; bottom: 8px; z-index: 2;
+  border-radius: 12px; font-size: 10px; letter-spacing: 0;
+  border-color: rgba(127, 227, 255, .72);
+  background: rgba(8, 40, 66, .48);
+}
+#btns .yaw-key.down { background: rgba(80, 178, 221, .6); border-color: #b9f3ff; }
+#btns .yaw-left { left: -86px; }
+#btns .yaw-right { left: -26px; }
 
 /* One compact power strip: AB toggle, latched throttle, momentary brake.
    Weapon controls keep their existing large touch targets. */
