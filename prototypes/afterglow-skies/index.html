@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
+<title>蒼穹ノ残光 — AFTERGLOW SKIES · Mobile</title>
+<style>
+html,body{margin:0;height:100%;overflow:hidden;background:#0b1830;font-family:"Noto Sans TC","Microsoft JhengHei","PingFang TC",sans-serif;user-select:none;-webkit-user-select:none}
+#gl,#hud{position:fixed;inset:0;width:100%;height:100%;display:block}
+#hud{pointer-events:none}
+.ov{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;transition:opacity .9s ease}
+.hidden{opacity:0;pointer-events:none}
+#title{background:linear-gradient(180deg,rgba(8,26,64,.35) 0%,rgba(8,26,64,0) 38%,rgba(8,26,64,0) 55%,rgba(6,16,40,.65) 100%)}
+#title .jp{font-family:"Noto Serif JP","Yu Mincho","Hiragino Mincho ProN","Noto Serif TC",serif;font-weight:600;font-size:min(10vw,112px);letter-spacing:.2em;margin:0;padding-left:.2em;
+  background:linear-gradient(180deg,#fff 30%,#ffe2b8 75%,#ffb978);-webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 0 22px rgba(255,200,140,.55)) drop-shadow(0 3px 0 rgba(20,40,90,.35))}
+#title .en{letter-spacing:.75em;font-size:13px;opacity:.92;margin-top:4px;padding-left:.75em}
+#title .tag{margin-top:16px;font-size:14px;opacity:.85;letter-spacing:.22em}
+.btn{margin-top:34px;padding:14px 60px;border:1px solid rgba(255,255,255,.85);color:#fff;background:rgba(255,255,255,.08);backdrop-filter:blur(6px);
+  letter-spacing:.5em;font-size:15px;cursor:pointer;border-radius:2px;transition:.25s;pointer-events:auto}
+.btn:hover{background:rgba(255,214,160,.28);box-shadow:0 0 34px rgba(255,205,150,.6)}
+.keys{margin-top:30px;display:grid;grid-template-columns:auto auto auto auto;gap:7px 22px;font-size:13px;background:rgba(8,22,52,.38);padding:16px 26px;border-radius:6px;backdrop-filter:blur(5px);border:1px solid rgba(255,255,255,.15)}
+.keys b{color:#ffd9a0;font-weight:600;font-family:Consolas,"SF Mono",monospace}
+#over{background:radial-gradient(ellipse at center,rgba(10,20,45,.25),rgba(5,10,25,.75))}
+#over h2{font-family:"Noto Serif JP","Yu Mincho",serif;font-size:min(8vw,76px);letter-spacing:.25em;margin:0;font-weight:600;text-shadow:0 0 28px rgba(255,120,120,.6)}
+#over .s{margin-top:14px;font-size:16px;letter-spacing:.2em;opacity:.9;text-align:center;line-height:1.9}
+#pause{font-size:28px;letter-spacing:.6em;background:rgba(5,15,35,.35)}
+#loading{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;color:#cfe3ff;letter-spacing:.5em;font-size:14px;background:#0b1830;transition:opacity .8s}
+
+/* Mobile flight controls: independent of the original visual shaders and flight model. */
+html,body{overscroll-behavior:none;touch-action:none;-webkit-tap-highlight-color:transparent}
+#gl,#hud{touch-action:none}
+#title,#over,#pause{z-index:9}
+#loading{z-index:12}
+#pause{pointer-events:none}
+.touch-controls{display:none;position:fixed;inset:0;z-index:7;pointer-events:none;touch-action:none;color:white;font-family:system-ui,-apple-system,sans-serif}
+.touch-controls.active{display:block}
+.touch-controls button,.touch-controls .stick-zone{pointer-events:auto;touch-action:none;-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent}
+.touch-controls button{appearance:none;outline:0;border:1px solid rgba(218,247,255,.72);background:rgba(9,29,54,.47);backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px);color:#f4fcff;font-weight:750;letter-spacing:.04em;display:flex;align-items:center;justify-content:center;line-height:1;box-shadow:0 2px 13px #081c3860}
+.touch-controls button:active,.touch-controls button.pressed{background:rgba(96,184,211,.45);border-color:#fff;box-shadow:0 0 16px #a7e7f799}
+.stick-zone{position:absolute;width:138px;height:138px;left:max(12px,env(safe-area-inset-left));bottom:max(15px,env(safe-area-inset-bottom));border:1px solid #c4e7f266;border-radius:50%;background:radial-gradient(circle,#27537a44 0,#0a315361 65%,#0a31531a 100%);box-shadow:inset 0 0 32px #78cbe51b}
+.stick-zone:before{content:'';position:absolute;left:50%;top:50%;width:64%;height:64%;border:1px dashed #bbecf64f;border-radius:50%;transform:translate(-50%,-50%)}
+.stick-cap{width:62px;height:62px;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);border:2px solid #d4f4f2bf;border-radius:50%;background:radial-gradient(circle at 35% 35%,#acdcef88,#2d7ba877 68%,#15395e99);box-shadow:0 0 18px #6ccdef5f;pointer-events:none}
+.stick-text{position:absolute;top:-20px;left:50%;transform:translateX(-50%);white-space:nowrap;font-size:10px;font-weight:700;letter-spacing:.16em;text-shadow:0 1px 3px #001}
+.stick-zero{position:absolute;left:115px;top:-10px;width:38px;height:27px;border-radius:7px;font-size:9px}
+.mobile-actions{position:absolute;bottom:max(19px,env(safe-area-inset-bottom));right:max(12px,env(safe-area-inset-right));display:grid;grid-template-columns:repeat(3,54px);grid-template-rows:repeat(3,45px);gap:6px;align-items:center}
+.mobile-actions button{width:54px;height:45px;border-radius:13px;font-size:11px}
+.mobile-actions button.major{height:58px;border-radius:18px;font-size:13px}
+.mobile-actions .missile{border-color:#ffd8af;color:#ffe6c5;background:#4a352f9c}
+.mobile-actions .gun{border-color:#b7f1e2;color:#e9fff8;background:#193d3a9c}
+.mobile-actions .ab.on{color:#ffdfa0;border-color:#ffc46b;background:#9d591666;box-shadow:0 0 16px #ffb34155}
+.mobile-actions .small{font-size:10px}
+.mobile-top{position:absolute;top:max(9px,env(safe-area-inset-top));right:max(12px,env(safe-area-inset-right));display:flex;gap:7px}
+.mobile-top button{height:31px;min-width:48px;padding:0 9px;border-radius:9px;font-size:10px}
+.mobile-top .quality{min-width:57px}
+.mobile-hint{position:absolute;bottom:7px;left:50%;transform:translateX(-50%);white-space:nowrap;font-size:10px;color:#eefafaab;text-shadow:0 1px 4px #001;pointer-events:none}
+.rotate-prompt{display:none;position:fixed;inset:0;z-index:19;background:linear-gradient(145deg,#102b52,#172c4b);color:#f4faff;align-items:center;justify-content:center;flex-direction:column;gap:14px;text-align:center;padding:20px;font:600 17px system-ui}
+.rotate-prompt .phone{font-size:58px;transform:rotate(90deg)}
+.rotate-prompt small{font-size:13px;opacity:.76;font-weight:400}
+@media (pointer:coarse){#title .keys{display:none} #title .jp{font-size:min(8vw,54px)}#title .en{font-size:10px;letter-spacing:.36em}#title .tag{font-size:11px;margin-top:11px}#title .btn{margin-top:22px;padding:13px 48px}#over h2{font-size:32px}#over .s{font-size:12px}}
+@media (pointer:coarse) and (orientation:portrait){.rotate-prompt{display:flex}}
+@media (max-height:345px) and (orientation:landscape){.stick-zone{width:112px;height:112px;bottom:10px}.stick-cap{width:50px;height:50px}.stick-zero{left:95px}.mobile-actions{grid-template-columns:repeat(3,46px);grid-template-rows:repeat(3,38px);gap:4px;bottom:10px}.mobile-actions button{width:46px;height:38px;font-size:10px}.mobile-actions button.major{height:44px}}
+
+#loading{z-index:30;display:flex;flex-direction:column;text-align:center;padding:18px;box-sizing:border-box;gap:9px}
+#loading.boot-failed{background:#0b1935ee;align-items:center;justify-content:center;letter-spacing:0;opacity:1!important;pointer-events:auto!important;font:14px -apple-system,BlinkMacSystemFont,system-ui,sans-serif}
+#loading.boot-failed strong{font-size:22px;color:#fff}
+#loading.boot-failed p{max-width:480px;line-height:1.5;margin:0;font-size:13px;color:#dfedff}
+#loading.boot-failed pre{font:11px/1.5 ui-monospace,monospace;text-align:left;white-space:pre-wrap;overflow-wrap:anywhere;max-width:min(90vw,540px);max-height:26vh;overflow:auto;background:#0006;border:1px solid #7895ba55;border-radius:8px;padding:9px;color:#d3e5ff}
+#loading .boot-actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+#loading button{appearance:none;background:#326896;border:1px solid #c9e8ff88;color:#fff;border-radius:9px;padding:12px 14px;letter-spacing:0;font-weight:600;cursor:pointer}
+</style>
+</head>
+<body>
+<canvas id="gl"></canvas>
+<canvas id="hud"></canvas>
+
+<div id="title" class="ov hidden">
+  <div class="jp">蒼穹ノ残光</div>
+  <div class="en">AFTERGLOW SKIES · ACE STRIKE</div>
+  <div class="tag">F-16 VIPER ／ 迎擊 J-16 編隊</div>
+  <div class="btn" id="startBtn">TAKE OFF</div>
+  <div class="keys">
+    <div><b>W / S</b></div><div>俯衝 ／ 拉升</div><div><b>A / D</b></div><div>翻滾</div>
+    <div><b>Q / E</b></div><div>方向舵</div><div><b>Shift</b></div><div>後燃器加速</div>
+    <div><b>C</b></div><div>減速 (急迴轉)</div><div><b>Space / 右鍵</b></div><div>飛彈</div>
+    <div><b>J / 左鍵</b></div><div>機砲</div><div><b>X</b></div><div>熱焰彈</div>
+    <div><b>R</b></div><div>切換目標</div><div><b>I ／ P</b></div><div>反轉俯仰 ／ 暫停</div>
+  </div>
+</div>
+
+<div id="over" class="ov hidden">
+  <h2 id="overT">MISSION FAILED</h2>
+  <div class="s" id="overS"></div>
+  <div class="btn" id="retryBtn">RETRY</div>
+</div>
+<div id="pause" class="ov hidden">PAUSED</div>
+<div id="loading">LOADING SKY ...</div>
+
+<div id="rotatePrompt" class="rotate-prompt" aria-label="請橫向持握手機"><div class="phone">▣</div><div>請將 iPhone 轉成橫向</div><small>橫向觸控操縱 · Safari 建議關閉直向鎖定</small></div>
+<div id="touchControls" class="touch-controls" aria-label="手機飛行操作">
+  <div id="flightStick" class="stick-zone" aria-label="飛行搖桿：上下 Pitch 左右 Roll"><div class="stick-text">PITCH / ROLL · HOLD</div><div id="stickCap" class="stick-cap"></div><button id="stickZero" class="stick-zero" type="button" aria-label="搖桿回中">CTR</button></div>
+  <div class="mobile-top"><button id="qualityBtn" class="quality" type="button">ECO</button><button id="pauseBtn" type="button">PAUSE</button></div>
+  <div class="mobile-actions">
+    <button id="targetBtn" class="small" type="button" style="grid-column:1;grid-row:1">TARGET</button>
+    <button id="flareBtn" class="small" type="button" style="grid-column:2;grid-row:1">FLR</button>
+    <button id="missileBtn" class="major missile" type="button" style="grid-column:3;grid-row:1 / span 2">MSL</button>
+    <button id="abBtn" class="ab" type="button" style="grid-column:1;grid-row:2">AB</button>
+    <button id="brkBtn" type="button" style="grid-column:2;grid-row:2">BRK</button>
+    <button id="pitchBtn" class="small" type="button" style="grid-column:1;grid-row:3">INV</button>
+    <button id="gunBtn" class="major gun" type="button" style="grid-column:2 / span 2;grid-row:3;width:114px">GUN · HOLD</button>
+  </div>
+  <div class="mobile-hint">STICK 保持最後位置 · CTR 回中</div>
+</div>
+
+
+<script>
+(function () {
+  'use strict';
+  const splash = document.getElementById('loading');
+  let failed = false, finished = false, current = '正在讀取 3D 引擎…';
+  const report = {
+    stage(label) { if (failed || finished) return; current = String(label); splash.textContent = current; },
+    ready() { if (failed || finished) return; finished = true; splash.style.opacity = '0'; splash.style.pointerEvents='none'; setTimeout(() => { if (splash.parentNode) splash.remove(); }, 850); },
+    fail(problem) {
+      if (failed || finished) return;
+      failed = true;
+      const detail = String(problem && (problem.stack || problem.message) || problem || 'Unknown error').slice(0, 750);
+      splash.textContent = '';
+      splash.classList.add('boot-failed');
+      const h = document.createElement('strong'); h.textContent='遊戲未能啟動';
+      const p = document.createElement('p'); p.textContent='不是你按錯了。手機可能無法完成 3D 引擎或雲層初始化。';
+      const d = document.createElement('pre'); d.textContent='階段：'+current+'\n'+detail;
+      const row = document.createElement('div'); row.className='boot-actions';
+      const safe = document.createElement('button');safe.textContent='低負載模式重試';
+      safe.onclick=() => {const u=new URL(location.href);u.searchParams.set('safe','1');location.href=u.href;};
+      const copy = document.createElement('button');copy.textContent='複製錯誤訊息';
+      copy.onclick=() => {const msg=d.textContent; if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(msg).then(()=>copy.textContent='已複製').catch(()=>{copy.textContent='請截圖傳給我';}); else copy.textContent='請截圖傳給我';};
+      row.append(safe,copy);splash.append(h,p,d,row);
+      const rotate=document.getElementById('rotatePrompt');if(rotate) rotate.style.display='none';
+      console.error('AfterglowSkies boot failed:',detail);
+    }
+  };
+  window.__aceBoot = report;
+  window.addEventListener('error', (event) => {
+    if (finished || failed) return;
+    const msg = event.error || event.message || (event.target && event.target.src ? '無法讀取 '+event.target.src : '無法載入遊戲程式');
+    report.fail(msg);
+  }, true);
+  window.addEventListener('unhandledrejection', event => { if(!finished&&!failed) report.fail(event.reason); });
+  setTimeout(() => { if (!finished && !failed) report.fail('等待時間超過 30 秒，最後執行階段：'+current); },30000);
+})();
+</script>
+<script type="module" src="./game.js"></script>
+</body>
+</html>
