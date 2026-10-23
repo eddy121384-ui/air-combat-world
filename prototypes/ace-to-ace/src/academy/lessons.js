@@ -142,7 +142,7 @@ const L02 = {
   id: 'L02', no: 2, title: '飛機如何轉彎', en: 'BANK TO TURN',
   principle: '升力垂直於機翼。滾轉傾斜升力、產生轉向分量；要維持高度還得增加升力。協調水平轉彎需要 n = 1/cos(坡度) 的負載因子。',
   real: '真實航空：坡度轉彎靠升力水平分量；坡度越大，維持高度所需負載因子越高（60° 坡度約 2G）——FAA 飛行手冊。',
-  model: '本遊戲：同樣的升力向量轉彎，Assisted 由飛控代你協調滾轉與拉桿，但用的是同一架飛機、同樣的 G 上限。',
+  model: '本遊戲：同樣的升力向量轉彎，Assisted 由飛控代你協調滾轉與拉桿。左右 YAW 是方向舵，可微調機頭，不是讓戰機橫向平移，也不能取代主要坡度轉彎。',
   goals: ['右轉到 090° 並改平', '左轉 150° 到 300°', '精準轉到 015°（±4°），14 秒內，高度變化 < 200 m'],
   timeLimit: 150,
   setup: (r) => soloSetup(r),
@@ -430,7 +430,7 @@ const L06 = {
   crashReason: (r) => (r.phase?.id === 'dive'
     ? (r.tel.pullUpReact != null && r.tel.pullUpReact > 0.6 ? `墜海。PULL UP 亮起後 ${r.tel.pullUpReact.toFixed(1)} 秒才拉滿——在這個速度，半秒就是幾十公尺。` : '墜海。拉起太晚，或沒收油、沒用 BRK：速度越快，拉起半徑越大（r = V²/(g(n−1))）。')
     : '墜海。'),
-  intro: ['今天練的是活下來。這三種狀況，真正的飛行員都在模擬機裡練到反射。'],
+  intro: ['今天練的是活下來。LVL 只幫你改平，不是失速或低空救援；本課先學會自己改出。'],
   phases: [
     {
       id: 'slowturn',
@@ -685,7 +685,7 @@ const L08 = {
         r.d.gunHits = 0; r.d.fired = 0; r.d.atTarget = 0; r.d.goodAim = 0;
         r.flash('目標轉彎中', '#7fe3ff');
       },
-      say: '機頭 W 對準橘色提前量圈，再短按 GUN。別把圈追到目標身上：圈是子彈要去的位置。',
+      say: '大角度追蹤用滾轉拉桿，最後可短按 YAW 微調機頭。機頭 W 對準橘色提前量圈，再短按 GUN。',
       text: (r) => `機砲命中 ${r.d.gunHits}/12（45 秒內）　${fmt(geometry(r.me, r.foe).R)} m`,
       progress: (r) => r.d.gunHits / 12,
       update(r, dt) {
