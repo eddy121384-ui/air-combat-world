@@ -1,0 +1,332 @@
+{
+  "head": "49a007d9c19058cd1c39c6c5e5cc73649c01f0cf",
+  "wrongStudentCases": 48,
+  "cases": [
+    {
+      "lesson": "L01",
+      "mode": "arcade:assisted",
+      "success": true,
+      "grade": "S",
+      "time": 55.02,
+      "reason": null
+    },
+    {
+      "lesson": "L01",
+      "mode": "arcade:expert",
+      "success": true,
+      "grade": "S",
+      "time": 57.28,
+      "reason": null
+    },
+    {
+      "lesson": "L01",
+      "mode": "tactical:assisted",
+      "success": true,
+      "grade": "S",
+      "time": 56.15,
+      "reason": null
+    },
+    {
+      "lesson": "L01",
+      "mode": "tactical:expert",
+      "success": true,
+      "grade": "S",
+      "time": 58.3,
+      "reason": null
+    },
+    {
+      "lesson": "L02",
+      "mode": "arcade:assisted",
+      "success": true,
+      "grade": "S",
+      "time": 21.03,
+      "reason": null
+    },
+    {
+      "lesson": "L02",
+      "mode": "arcade:expert",
+      "success": true,
+      "grade": "S",
+      "time": 31.1,
+      "reason": null
+    },
+    {
+      "lesson": "L02",
+      "mode": "tactical:assisted",
+      "success": true,
+      "grade": "S",
+      "time": 22.75,
+      "reason": null
+    },
+    {
+      "lesson": "L02",
+      "mode": "tactical:expert",
+      "success": true,
+      "grade": "S",
+      "time": 32.15,
+      "reason": null
+    },
+    {
+      "lesson": "L03",
+      "mode": "arcade:assisted",
+      "success": true,
+      "grade": "S",
+      "time": 26.9,
+      "reason": null
+    },
+    {
+      "lesson": "L03",
+      "mode": "arcade:expert",
+      "success": true,
+      "grade": "S",
+      "time": 26.9,
+      "reason": null
+    },
+    {
+      "lesson": "L03",
+      "mode": "tactical:assisted",
+      "success": true,
+      "grade": "S",
+      "time": 27.52,
+      "reason": null
+    },
+    {
+      "lesson": "L03",
+      "mode": "tactical:expert",
+      "success": true,
+      "grade": "S",
+      "time": 27.52,
+      "reason": null
+    },
+    {
+      "lesson": "L04",
+      "mode": "arcade:assisted",
+      "success": true,
+      "grade": "A",
+      "time": 49.53,
+      "reason": null
+    },
+    {
+      "lesson": "L04",
+      "mode": "arcade:expert",
+      "success": true,
+      "grade": "A",
+      "time": 46.18,
+      "reason": null
+    },
+    {
+      "lesson": "L04",
+      "mode": "tactical:assisted",
+      "success": true,
+      "grade": "A",
+      "time": 56.47,
+      "reason": null
+    },
+    {
+      "lesson": "L04",
+      "mode": "tactical:expert",
+      "success": true,
+      "grade": "A",
+      "time": 52.82,
+      "reason": null
+    },
+    {
+      "lesson": "L05",
+      "mode": "arcade:assisted",
+      "success": true,
+      "grade": "S",
+      "time": 46.83,
+      "reason": null
+    },
+    {
+      "lesson": "L05",
+      "mode": "arcade:expert",
+      "success": true,
+      "grade": "S",
+      "time": 47.85,
+      "reason": null
+    },
+    {
+      "lesson": "L05",
+      "mode": "tactical:assisted",
+      "success": true,
+      "grade": "S",
+      "time": 49.47,
+      "reason": null
+    },
+    {
+      "lesson": "L05",
+      "mode": "tactical:expert",
+      "success": true,
+      "grade": "S",
+      "time": 50.7,
+      "reason": null
+    },
+    {
+      "lesson": "L06",
+      "mode": "arcade:assisted",
+      "success": true,
+      "grade": "S",
+      "time": 31.83,
+      "reason": null
+    },
+    {
+      "lesson": "L06",
+      "mode": "arcade:expert",
+      "success": true,
+      "grade": "S",
+      "time": 32.62,
+      "reason": null
+    },
+    {
+      "lesson": "L06",
+      "mode": "tactical:assisted",
+      "success": true,
+      "grade": "S",
+      "time": 38.82,
+      "reason": null
+    },
+    {
+      "lesson": "L06",
+      "mode": "tactical:expert",
+      "success": true,
+      "grade": "S",
+      "time": 38.52,
+      "reason": null
+    },
+    {
+      "lesson": "L07",
+      "mode": "arcade:assisted",
+      "success": true,
+      "grade": "S",
+      "time": 25.72,
+      "reason": null
+    },
+    {
+      "lesson": "L07",
+      "mode": "arcade:expert",
+      "success": true,
+      "grade": "S",
+      "time": 25.68,
+      "reason": null
+    },
+    {
+      "lesson": "L07",
+      "mode": "tactical:assisted",
+      "success": true,
+      "grade": "S",
+      "time": 26.43,
+      "reason": null
+    },
+    {
+      "lesson": "L07",
+      "mode": "tactical:expert",
+      "success": true,
+      "grade": "S",
+      "time": 26.18,
+      "reason": null
+    },
+    {
+      "lesson": "L08",
+      "mode": "arcade:assisted",
+      "success": true,
+      "grade": "A",
+      "time": 28.08,
+      "reason": null
+    },
+    {
+      "lesson": "L08",
+      "mode": "arcade:expert",
+      "success": true,
+      "grade": "A",
+      "time": 30.72,
+      "reason": null
+    },
+    {
+      "lesson": "L08",
+      "mode": "tactical:assisted",
+      "success": true,
+      "grade": "A",
+      "time": 29.97,
+      "reason": null
+    },
+    {
+      "lesson": "L08",
+      "mode": "tactical:expert",
+      "success": true,
+      "grade": "A",
+      "time": 34.17,
+      "reason": null
+    },
+    {
+      "lesson": "L09",
+      "mode": "arcade:assisted",
+      "success": true,
+      "grade": "A",
+      "time": 93.02,
+      "reason": null
+    },
+    {
+      "lesson": "L09",
+      "mode": "arcade:expert",
+      "success": true,
+      "grade": "S",
+      "time": 69.67,
+      "reason": null
+    },
+    {
+      "lesson": "L09",
+      "mode": "tactical:assisted",
+      "success": true,
+      "grade": "A",
+      "time": 97.65,
+      "reason": null
+    },
+    {
+      "lesson": "L09",
+      "mode": "tactical:expert",
+      "success": true,
+      "grade": "A",
+      "time": 75.78,
+      "reason": null
+    },
+    {
+      "lesson": "L10",
+      "mode": "arcade:assisted",
+      "success": true,
+      "grade": "S",
+      "time": 117.23,
+      "reason": null
+    },
+    {
+      "lesson": "L10",
+      "mode": "arcade:expert",
+      "success": false,
+      "grade": null,
+      "time": 107.72,
+      "reason": "你被擊落了。"
+    },
+    {
+      "lesson": "L10",
+      "mode": "tactical:assisted",
+      "success": true,
+      "grade": "A",
+      "time": 244,
+      "reason": null
+    },
+    {
+      "lesson": "L10",
+      "mode": "tactical:expert",
+      "success": true,
+      "grade": "B",
+      "time": 111.38,
+      "reason": null
+    }
+  ],
+  "checkrideWinsOver12Seeds": {
+    "arcade:assisted": 8,
+    "arcade:expert": 6,
+    "tactical:assisted": 6,
+    "tactical:expert": 12
+  }
+}

@@ -1,0 +1,171 @@
+{
+  "experiment": "Ace to Ace small anime film 2D-look / NPR lookdev",
+  "recordedAtUTC": "2026-10-18T04:04:38.387051+00:00",
+  "baselineCommit": "918a28ee565aa78ad9da3e088d3c11fa861df006",
+  "scope": "prototypes/ace-to-ace only",
+  "regressions": {
+    "node tools/test-airbrake-throttle.mjs": "PASS (exit 0)",
+    "node tools/test-power-strip.mjs": "PASS (exit 0)",
+    "node tools/test-brake-trap.mjs": "PASS (exit 0)",
+    "node tools/test-flight-path.mjs": "PASS (exit 0)",
+    "node tools/test-hud-attitude.mjs": "PASS (exit 0)"
+  },
+  "fullBrowser": {
+    "command": "node tools/browser-check.mjs --scenario all --out tools/out/lookdev-after",
+    "exitCode": 0,
+    "errors": [],
+    "scenarios": [
+      "fixed art cameras",
+      "model views",
+      "title",
+      "autopilot combat",
+      "keyboard flight/weapons/LOOK",
+      "touch joystick latch/retouch",
+      "two-finger stick/throttle",
+      "latched throttle",
+      "AB toggle",
+      "independent momentary BRK",
+      "AI spectator",
+      "result",
+      "Enter rematch"
+    ],
+    "powerStrip": {
+      "passed": true,
+      "throttle": 0.31666659131462194
+    },
+    "result": {
+      "mode": "result",
+      "reason": "timeDecision"
+    },
+    "rematchMode": "playing",
+    "combatSamples": [
+      {
+        "simSeconds": 1.5,
+        "fps": 42.4,
+        "ms": 23.6,
+        "calls": 20,
+        "tris": 4896,
+        "dpr": 1
+      },
+      {
+        "simSeconds": 9.1,
+        "fps": 24.6,
+        "ms": 41.5,
+        "calls": 20,
+        "tris": 4896,
+        "dpr": 1
+      },
+      {
+        "simSeconds": 15,
+        "fps": 24,
+        "ms": 40.3,
+        "calls": 33,
+        "tris": 6120,
+        "dpr": 1
+      },
+      {
+        "simSeconds": 21.6,
+        "fps": 20.7,
+        "ms": 43.6,
+        "calls": 22,
+        "tris": 5720,
+        "dpr": 1
+      },
+      {
+        "simSeconds": 29.1,
+        "fps": 21.3,
+        "ms": 46.8,
+        "calls": 20,
+        "tris": 4532,
+        "dpr": 1
+      },
+      {
+        "simSeconds": 38.5,
+        "fps": 22,
+        "ms": 46.1,
+        "calls": 17,
+        "tris": 3698,
+        "dpr": 1
+      }
+    ],
+    "touchSample": {
+      "fps": 54.2,
+      "ms": 20,
+      "calls": 17,
+      "tris": 3698,
+      "dpr": 1
+    }
+  },
+  "finalArtBrowser": {
+    "command": "node tools/browser-check.mjs --scenario lookdev --out tools/out/lookdev-final-art",
+    "exitCode": 0,
+    "errors": [],
+    "views": {
+      "chase": {
+        "ready": true,
+        "calls": 16,
+        "triangles": 3420,
+        "clouds": 100,
+        "textureWidth": 1024,
+        "msaa": true,
+        "shaderProgramsRunnable": true
+      },
+      "bank": {
+        "ready": true,
+        "calls": 16,
+        "triangles": 3420,
+        "clouds": 100,
+        "textureWidth": 1024,
+        "msaa": true,
+        "shaderProgramsRunnable": true
+      },
+      "cloud": {
+        "ready": true,
+        "calls": 13,
+        "triangles": 2266,
+        "clouds": 100,
+        "textureWidth": 1024,
+        "msaa": true,
+        "shaderProgramsRunnable": true
+      },
+      "ocean": {
+        "ready": true,
+        "calls": 13,
+        "triangles": 2266,
+        "clouds": 100,
+        "textureWidth": 1024,
+        "msaa": true,
+        "shaderProgramsRunnable": true
+      },
+      "dive": {
+        "ready": true,
+        "calls": 20,
+        "triangles": 4896,
+        "clouds": 100,
+        "textureWidth": 1024,
+        "msaa": true,
+        "shaderProgramsRunnable": true
+      }
+    },
+    "wreck": {
+      "controlledDestruction": true
+    }
+  },
+  "asset": {
+    "file": "assets/lookdev/cloud-atlas.png",
+    "bytes": 189577,
+    "sha256": "952f5e91e038abd78f68b642c60a3a1d66b8c58ea25e0a156033cf63761b3190"
+  },
+  "screenshots": [
+    "docs/screens/lookdev-before-touch.jpg",
+    "docs/screens/lookdev-after-touch.jpg",
+    "docs/screens/lookdev-art-chase.jpg",
+    "docs/screens/lookdev-art-bank.jpg"
+  ],
+  "limits": [
+    "Chromium SwiftShader, not real iPhone Safari or GPU performance acceptance",
+    "Fixed art cameras are author-review views, not a changed gameplay camera",
+    "Wreck shader smoke uses controlled sim damage, not an AI win-rate claim",
+    "Baseline and after frame budgets are different scene/time samples, not a controlled FPS benchmark"
+  ]
+}

@@ -1,0 +1,3 @@
+# regenerable test output (screenshots, per-match AI reports)
+tools/out/
+/debug.log

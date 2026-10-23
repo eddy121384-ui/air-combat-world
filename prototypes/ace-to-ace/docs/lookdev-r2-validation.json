@@ -1,0 +1,238 @@
+{
+  "experiment": "Ace to Ace anime film NPR lookdev round 2; independent prototype experiment",
+  "recordedAtUTC": "2026-10-18T05:17:19.087073+00:00",
+  "baselineCommit": "2678c34449c4f15579a089bad90bd27696fd0d61",
+  "scope": "prototypes/ace-to-ace/",
+  "protectedGameplayFilesUnchanged": true,
+  "regressions": {
+    "node tools/test-airbrake-throttle.mjs": "PASS (exit 0)",
+    "node tools/test-power-strip.mjs": "PASS (exit 0)",
+    "node tools/test-brake-trap.mjs": "PASS (exit 0)",
+    "node tools/test-flight-path.mjs": "PASS (exit 0)",
+    "node tools/test-hud-attitude.mjs": "PASS (exit 0)"
+  },
+  "assetExport": {
+    "command": "python tools/prepare-lookdev-r2-assets.py",
+    "deterministicReexport": "PASS; both runtime SHA256 hashes unchanged",
+    "method": "Pillow/NumPy packing of committed original ImageGen paintings"
+  },
+  "fullBrowser": {
+    "command": "node tools/browser-check.mjs --scenario all --out tools/out/lookdev-r2-full",
+    "exitCode": 0,
+    "errors": [],
+    "screenshotCount": 27,
+    "powerStrip": {
+      "passed": true,
+      "throttle": 0.31666659131462194
+    },
+    "result": {
+      "mode": "result",
+      "reason": "gun"
+    },
+    "rematchMode": "playing",
+    "combatSamples": [
+      {
+        "simSeconds": 1,
+        "fps": 41.4,
+        "ms": 24.1,
+        "calls": 20,
+        "tris": 4712,
+        "dpr": 1
+      },
+      {
+        "simSeconds": 7.9,
+        "fps": 16.7,
+        "ms": 51.9,
+        "calls": 20,
+        "tris": 4712,
+        "dpr": 1
+      },
+      {
+        "simSeconds": 14.3,
+        "fps": 16.9,
+        "ms": 56.7,
+        "calls": 30,
+        "tris": 5632,
+        "dpr": 1
+      },
+      {
+        "simSeconds": 20.8,
+        "fps": 15,
+        "ms": 61,
+        "calls": 25,
+        "tris": 5572,
+        "dpr": 1
+      },
+      {
+        "simSeconds": 28.5,
+        "fps": 15,
+        "ms": 71.7,
+        "calls": 21,
+        "tris": 4626,
+        "dpr": 1
+      },
+      {
+        "simSeconds": 38.2,
+        "fps": 12.8,
+        "ms": 75.4,
+        "calls": 17,
+        "tris": 3514,
+        "dpr": 1
+      }
+    ],
+    "touchSample": {
+      "fps": 32.5,
+      "ms": 24.9,
+      "calls": 17,
+      "tris": 3514,
+      "dpr": 1
+    },
+    "note": "Completed before final wrap-seam-only clear-air adjustment; all final shader views rechecked below."
+  },
+  "finalVisual": {
+    "command": "node tools/browser-check.mjs --scenario lookdev --out tools/out/lookdev-r2-after",
+    "exitCode": 0,
+    "errors": [],
+    "screenshotCount": 9,
+    "views": {
+      "chase": {
+        "ready": true,
+        "calls": 16,
+        "triangles": 3236,
+        "clouds": 8,
+        "textureWidth": 1024,
+        "skyWidth": 1536,
+        "msaa": true,
+        "shaderProgramsRunnable": true
+      },
+      "bank": {
+        "ready": true,
+        "calls": 16,
+        "triangles": 3236,
+        "clouds": 8,
+        "textureWidth": 1024,
+        "skyWidth": 1536,
+        "msaa": true,
+        "shaderProgramsRunnable": true
+      },
+      "cloud": {
+        "ready": true,
+        "calls": 13,
+        "triangles": 2082,
+        "clouds": 8,
+        "textureWidth": 1024,
+        "skyWidth": 1536,
+        "msaa": true,
+        "shaderProgramsRunnable": true
+      },
+      "ocean": {
+        "ready": true,
+        "calls": 13,
+        "triangles": 2082,
+        "clouds": 8,
+        "textureWidth": 1024,
+        "skyWidth": 1536,
+        "msaa": true,
+        "shaderProgramsRunnable": true
+      },
+      "dive": {
+        "ready": true,
+        "calls": 20,
+        "triangles": 4712,
+        "clouds": 8,
+        "textureWidth": 1024,
+        "skyWidth": 1536,
+        "msaa": true,
+        "shaderProgramsRunnable": true
+      },
+      "seam": {
+        "ready": true,
+        "calls": 13,
+        "triangles": 2082,
+        "clouds": 8,
+        "textureWidth": 1024,
+        "skyWidth": 1536,
+        "msaa": true,
+        "shaderProgramsRunnable": true
+      },
+      "zenith": {
+        "ready": true,
+        "calls": 13,
+        "triangles": 2082,
+        "clouds": 8,
+        "textureWidth": 1024,
+        "skyWidth": 1536,
+        "msaa": true,
+        "shaderProgramsRunnable": true
+      }
+    },
+    "wreck": {
+      "controlledDestruction": true
+    }
+  },
+  "sameCameraComparison": {
+    "views": [
+      "chase",
+      "bank",
+      "ocean"
+    ],
+    "sameWorldAndCamera": true,
+    "beforeChase": {
+      "ready": true,
+      "calls": 16,
+      "triangles": 3420,
+      "clouds": 100,
+      "textureWidth": 1024,
+      "msaa": true
+    },
+    "afterChase": {
+      "ready": true,
+      "calls": 16,
+      "triangles": 3236,
+      "clouds": 8,
+      "textureWidth": 1024,
+      "skyWidth": 1536,
+      "msaa": true
+    },
+    "screenshots": [
+      "docs/screens/lookdev-r2-before-chase.jpg",
+      "docs/screens/lookdev-r2-after-chase.jpg",
+      "docs/screens/lookdev-r2-before-bank.jpg",
+      "docs/screens/lookdev-r2-after-bank.jpg",
+      "docs/screens/lookdev-r2-before-ocean.jpg",
+      "docs/screens/lookdev-r2-after-ocean.jpg",
+      "docs/screens/lookdev-r2-touch.jpg"
+    ]
+  },
+  "assets": {
+    "assets/lookdev/sky-painting-r2.jpg": {
+      "bytes": 355817,
+      "sha256": "26a8ffbb01a862f007f73e509163315f6df4a1521ce0342bd8a85d2c89762211"
+    },
+    "assets/lookdev/cloud-paintings-r2.png": {
+      "bytes": 358372,
+      "sha256": "5aea176917554e61c757e15645545be28419be72279e8f05d5592e1272acc1b7"
+    },
+    "assets/lookdev/source/r2-sky.png": {
+      "bytes": 2016425,
+      "sha256": "db77b913c54004564822a9595739263ef40772ef1e5a7ca7cbddef8a61168eb9"
+    },
+    "assets/lookdev/source/r2-clouds.png": {
+      "bytes": 1894858,
+      "sha256": "39c2e0cb27b3f3dd7e43a62c5da3442ac98953df5c763f5605a2bce06bdfc87b"
+    }
+  },
+  "estimatedBudget": {
+    "runtimeBytes": 714189,
+    "rgba8WithMipMiB": 8.67,
+    "midCloudDrawCalls": 1,
+    "midCloudInstances": 8,
+    "midCloudTriangles": 16
+  },
+  "limits": [
+    "Chromium/SwiftShader with iPhone-sized touch emulation; no real iPhone Safari performance acceptance",
+    "Painted panorama and translucent 2.5D clouds, not volumetric clouds",
+    "Wreck art smoke uses controlled damage; full browser match separately reached a gun-kill result",
+    "Software FPS samples are not a controlled hardware benchmark"
+  ]
+}

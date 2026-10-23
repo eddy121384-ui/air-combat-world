@@ -1,0 +1,390 @@
+{
+ "generated": "tools/probe-flight-feel.mjs",
+ "note": "F-16V, 60 Hz, deterministic; not real aircraft data",
+ "modes": {
+  "arcade": {
+   "roll": {
+    "capture90": {
+     "t90": 0.38,
+     "overshootDeg": 3.54,
+     "stopSec": 0.03,
+     "peakRateDps": 229.18
+    },
+    "tap100msDeg": 18.92,
+    "halfTap200msDeg": 15.7
+   },
+   "pitch": {
+    "full230": {
+     "gT63": 0.05,
+     "gT90": 0.12,
+     "peakG": 10.5,
+     "noseDeg": {
+      "0.25s": 4.96,
+      "0.5s": 10.84,
+      "1s": 22.86
+     },
+     "aoaVisDeg": 1.39
+    },
+    "half230": {
+     "gT63": 0.05,
+     "gT90": 0.08,
+     "peakG": 5.75,
+     "noseDeg": {
+      "0.25s": 2.47,
+      "0.5s": 5.38,
+      "1s": 11.23
+     },
+     "aoaVisDeg": 0.67
+    },
+    "full140": {
+     "gT63": 0.05,
+     "gT90": 0.12,
+     "peakG": 8.26,
+     "noseDeg": {
+      "0.25s": 6.31,
+      "0.5s": 13.7,
+      "1s": 28.39
+     },
+     "aoaVisDeg": 1.67
+    }
+   },
+   "engine": {
+    "ab150to250s": 8.97,
+    "mil150to250s": 23.82,
+    "ab100toCornerS": 6.78,
+    "topSpeedAB": 363.94,
+    "topSpeedMil": 308.63
+   }
+  },
+  "arcade:assisted": {
+   "fullTurnAB": {
+    "t180": 8.82,
+    "t360": null,
+    "sustainedDps": 19.27,
+    "endSpeed": 266.28,
+    "minSpeed": 230,
+    "endG": 9.07,
+    "peakG": 9.07,
+    "gOverAvail": 0,
+    "radiusM": 791.56,
+    "altDeltaM": 87.66,
+    "energyLossM": -1005.36
+   },
+   "fullTurnMil": {
+    "t180": 7.8,
+    "t360": null,
+    "sustainedDps": 28.11,
+    "endSpeed": 174.84,
+    "minSpeed": 174.84,
+    "endG": 9.07,
+    "peakG": 9.07,
+    "gOverAvail": 0,
+    "radiusM": 356.42,
+    "altDeltaM": 71.38,
+    "energyLossM": 1066.85
+   },
+   "moderateTurn": {
+    "t180": null,
+    "t360": null,
+    "sustainedDps": 12.13,
+    "endSpeed": 229.96,
+    "minSpeed": 229.96,
+    "endG": 5.06,
+    "peakG": 5.06,
+    "gOverAvail": 0,
+    "radiusM": 1086.51,
+    "altDeltaM": 44.83,
+    "energyLossM": -43.85
+   },
+   "lowSpeed110": {
+    "sustainedDps": 27.49,
+    "endSpeed": 123.9,
+    "altDeltaM": 12.05,
+    "gAvail110": 6.13
+   },
+   "tracking12dps": {
+    "meanAtaDeg": 1.69,
+    "within2": 1,
+    "within5": 1,
+    "rollWorkDegPerS": 42.17
+   },
+   "tracking20dps": {
+    "meanAtaDeg": 2.71,
+    "within2": 0,
+    "within5": 1,
+    "rollWorkDegPerS": 28.86
+   },
+   "entry": {
+    "t30": 1.55,
+    "t90": 4.08,
+    "peakBankDeg": 83.75
+   },
+   "halfEntry": {
+    "t30": 2.92,
+    "t90": null,
+    "peakBankDeg": 77.52
+   },
+   "lightEntry15": {
+    "t30": null,
+    "t90": null,
+    "peakBankDeg": 53.52
+   },
+   "rollout": {
+    "bankHeldDeg": 83.75,
+    "levelSec": 0.43,
+    "overshootDeg": 0
+   }
+  },
+  "arcade:expert": {
+   "fullTurnAB": {
+    "t180": 7.7,
+    "t360": null,
+    "sustainedDps": 23.64,
+    "endSpeed": 247.36,
+    "minSpeed": 230,
+    "endG": 10.4,
+    "peakG": 10.4,
+    "gOverAvail": 0,
+    "radiusM": 599.59,
+    "altDeltaM": 21.67,
+    "energyLossM": -444.15
+   },
+   "fullTurnMil": {
+    "t180": 6.88,
+    "t360": null,
+    "sustainedDps": 34.14,
+    "endSpeed": 143.2,
+    "minSpeed": 143.2,
+    "endG": 8.62,
+    "peakG": 10.39,
+    "gOverAvail": 0,
+    "radiusM": 240.33,
+    "altDeltaM": 17.24,
+    "energyLossM": 1633.76
+   },
+   "moderateTurn": {
+    "t180": null,
+    "t360": null,
+    "sustainedDps": 15.23,
+    "endSpeed": 222.97,
+    "minSpeed": 222.97,
+    "endG": 6.15,
+    "peakG": 6.15,
+    "gOverAvail": 0,
+    "radiusM": 839.07,
+    "altDeltaM": -6.01,
+    "energyLossM": 168.41
+   },
+   "lowSpeed110": {
+    "sustainedDps": 30.55,
+    "endSpeed": 120.49,
+    "altDeltaM": 3.63,
+    "gAvail110": 6.13
+   },
+   "tracking12dps": {
+    "meanAtaDeg": 2.51,
+    "within2": 0.45,
+    "within5": 0.95,
+    "rollWorkDegPerS": 145.86
+   },
+   "tracking20dps": {
+    "meanAtaDeg": 5.4,
+    "within2": 0.03,
+    "within5": 0.66,
+    "rollWorkDegPerS": 153.9
+   }
+  },
+  "tactical": {
+   "roll": {
+    "capture90": {
+     "t90": 0.42,
+     "overshootDeg": 5.13,
+     "stopSec": 0.08,
+     "peakRateDps": 229.18
+    },
+    "tap100msDeg": 17.76,
+    "halfTap200msDeg": 14.57
+   },
+   "pitch": {
+    "full230": {
+     "gT63": 0.07,
+     "gT90": 0.15,
+     "peakG": 9,
+     "noseDeg": {
+      "0.25s": 3.93,
+      "0.5s": 8.9,
+      "1s": 19.17
+     },
+     "aoaVisDeg": 1.4
+    },
+    "half230": {
+     "gT63": 0.05,
+     "gT90": 0.1,
+     "peakG": 5,
+     "noseDeg": {
+      "0.25s": 1.96,
+      "0.5s": 4.41,
+      "1s": 9.36
+     },
+     "aoaVisDeg": 0.67
+    },
+    "full140": {
+     "gT63": 0.07,
+     "gT90": 0.15,
+     "peakG": 5.07,
+     "noseDeg": {
+      "0.25s": 3.34,
+      "0.5s": 7.45,
+      "1s": 15.51
+     },
+     "aoaVisDeg": 1.07
+    }
+   },
+   "engine": {
+    "ab150to250s": 10.25,
+    "mil150to250s": 31.62,
+    "ab100toCornerS": 7.57,
+    "topSpeedAB": 360.9,
+    "topSpeedMil": 284.54
+   }
+  },
+  "tactical:assisted": {
+   "fullTurnAB": {
+    "t180": 9.38,
+    "t360": null,
+    "sustainedDps": 20.83,
+    "endSpeed": 206.57,
+    "minSpeed": 206.57,
+    "endG": 7.8,
+    "peakG": 7.8,
+    "gOverAvail": 0,
+    "radiusM": 568.31,
+    "altDeltaM": 65.91,
+    "energyLossM": 455.46
+   },
+   "fullTurnMil": {
+    "t180": 8.7,
+    "t360": null,
+    "sustainedDps": 18.9,
+    "endSpeed": 145.04,
+    "minSpeed": 145.04,
+    "endG": 4.87,
+    "peakG": 7.8,
+    "gOverAvail": 0,
+    "radiusM": 439.62,
+    "altDeltaM": 53.72,
+    "energyLossM": 1570.29
+   },
+   "moderateTurn": {
+    "t180": null,
+    "t360": null,
+    "sustainedDps": 11.32,
+    "endSpeed": 209.76,
+    "minSpeed": 209.76,
+    "endG": 4.37,
+    "peakG": 4.37,
+    "gOverAvail": 0,
+    "radiusM": 1062.08,
+    "altDeltaM": 35.83,
+    "energyLossM": 417.74
+   },
+   "lowSpeed110": {
+    "sustainedDps": 15.29,
+    "endSpeed": 129.16,
+    "altDeltaM": 5.74,
+    "gAvail110": 3.18
+   },
+   "tracking12dps": {
+    "meanAtaDeg": 1.59,
+    "within2": 1,
+    "within5": 1,
+    "rollWorkDegPerS": 43.3
+   },
+   "tracking20dps": {
+    "meanAtaDeg": 2.65,
+    "within2": 0,
+    "within5": 1,
+    "rollWorkDegPerS": 27.31
+   },
+   "entry": {
+    "t30": 1.77,
+    "t90": 4.52,
+    "peakBankDeg": 82.7
+   },
+   "halfEntry": {
+    "t30": 3.35,
+    "t90": null,
+    "peakBankDeg": 75.52
+   },
+   "lightEntry15": {
+    "t30": null,
+    "t90": null,
+    "peakBankDeg": 49.24
+   },
+   "rollout": {
+    "bankHeldDeg": 82.69,
+    "levelSec": 0.45,
+    "overshootDeg": 0
+   }
+  },
+  "tactical:expert": {
+   "fullTurnAB": {
+    "t180": 8,
+    "t360": null,
+    "sustainedDps": 24.83,
+    "endSpeed": 166.04,
+    "minSpeed": 166.04,
+    "endG": 7.24,
+    "peakG": 8.91,
+    "gOverAvail": 0,
+    "radiusM": 383.19,
+    "altDeltaM": 14.51,
+    "energyLossM": 1276.57
+   },
+   "fullTurnMil": {
+    "t180": 7.9,
+    "t360": null,
+    "sustainedDps": 19.56,
+    "endSpeed": 132.22,
+    "minSpeed": 132.22,
+    "endG": 4.6,
+    "peakG": 8.81,
+    "gOverAvail": 0,
+    "radiusM": 387.24,
+    "altDeltaM": 11.75,
+    "energyLossM": 1793.51
+   },
+   "moderateTurn": {
+    "t180": null,
+    "t360": null,
+    "sustainedDps": 14.82,
+    "endSpeed": 195.53,
+    "minSpeed": 195.53,
+    "endG": 5.35,
+    "peakG": 5.35,
+    "gOverAvail": 0,
+    "radiusM": 755.87,
+    "altDeltaM": -10.33,
+    "energyLossM": 757.85
+   },
+   "lowSpeed110": {
+    "sustainedDps": 17.04,
+    "endSpeed": 126.9,
+    "altDeltaM": 1.15,
+    "gAvail110": 3.18
+   },
+   "tracking12dps": {
+    "meanAtaDeg": 2.77,
+    "within2": 0.44,
+    "within5": 0.91,
+    "rollWorkDegPerS": 148.2
+   },
+   "tracking20dps": {
+    "meanAtaDeg": 3.41,
+    "within2": 0,
+    "within5": 0.99,
+    "rollWorkDegPerS": 125.21
+   }
+  }
+ }
+}
