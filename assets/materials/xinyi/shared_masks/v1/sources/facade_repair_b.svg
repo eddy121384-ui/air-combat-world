@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 32 32">
+  <title>Facade repair B — staggered render and repaint repairs, 32 metre repeat</title>
+  <desc>Original project-authored scalar mask. Stepped hand-maintenance patches, no noise,
+  windows, joints or lighting. Side-crossing repairs are continued on the opposite edge.
+  Neutral 128; darker/lighter repairs are signed palette variation, not opacity.</desc>
+  <rect x="0" y="0" width="32" height="32" fill="#808080"/>
+  <polygon points="3,6 7.6,6 7.6,6.4 9,6.4 9,8.2 8.3,8.2 8.3,9 3,9" fill="#909090"/>
+  <polygon points="16,3 20,3 20,5.3 19.3,5.3 19.3,6 16,6" fill="#787878"/>
+  <polygon points="11,18 15.4,18 15.4,18.35 17.5,18.35 17.5,20.2 12,20.2 12,19.8 11,19.8" fill="#888888"/>
+  <polygon points="23,25 25.6,25 25.6,25.6 26.5,25.6 26.5,29.5 23.4,29.5 23.4,28.7 23,28.7" fill="#707070"/>
+  <polygon points="30,12 34,12 34,14.5 31.1,14.5 31.1,14.1 30,14.1" fill="#888888"/>
+  <polygon points="-2,12 2,12 2,14.5 -0.9,14.5 -0.9,14.1 -2,14.1" fill="#888888"/>
+  <polygon points="8,-1 11.5,-1 11.5,1.5 10.8,1.5 10.8,2 8,2" fill="#787878"/>
+  <polygon points="8,31 11.5,31 11.5,33.5 10.8,33.5 10.8,34 8,34" fill="#787878"/>
+</svg>

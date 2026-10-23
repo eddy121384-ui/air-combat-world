@@ -1,0 +1,113 @@
+{
+  "base_commit": "6c2feb1611a3d07436c8222c3b67246a9b1ad8cd",
+  "preserve_parent_package": true,
+  "files": [
+    {
+      "id": "inherited_manifest",
+      "path": "assets/materials/xinyi/imagegen/batch1/manifest.json",
+      "sha256": "00ae73419ec21790eb880623afcfbe18996aba8140eb25082b0982e56bb84e98",
+      "kind": "provenance"
+    },
+    {
+      "id": "A1_input",
+      "path": "assets/materials/xinyi/imagegen/batch1/processed/b1_taipei_weathering_field_candidate.png",
+      "sha256": "aef4446c20a6c2c80a6c578f22a089fd260c86e929f6105a64b396b312bd081a",
+      "kind": "PR14 AI derivative"
+    },
+    {
+      "id": "A2_input",
+      "path": "assets/materials/xinyi/imagegen/batch1/processed/b2_taipei_sparse_repairs_r2_candidate.png",
+      "sha256": "7280aad4227ed7784986c76f8245682dabc4581cdde16e4f76da33eebb59277c",
+      "kind": "PR14 AI derivative"
+    },
+    {
+      "id": "A3_input",
+      "path": "assets/materials/xinyi/imagegen/batch1/processed/b3_taipei_rain_run_candidate.png",
+      "sha256": "f9f838f969717d6582c690ada0a6f35ce1b7faa30f152b2f871d7588c236686d",
+      "kind": "PR14 AI derivative"
+    },
+    {
+      "id": "A1_original",
+      "path": "assets/materials/xinyi/imagegen/batch1/sources/b1_taipei_weathering_field.png",
+      "sha256": "27d9d702f85335996e38956baa03571e2592d50e85ed4bf9a828f7320913f84b",
+      "kind": "PR14 preserved native AI output"
+    },
+    {
+      "id": "A2_original",
+      "path": "assets/materials/xinyi/imagegen/batch1/sources/b2_taipei_sparse_repairs_r2.png",
+      "sha256": "6666385f39e6dbedc0924479ef5ae73b3a1928cd4c89d4550da453d47fb5edec",
+      "kind": "PR14 preserved native AI output"
+    },
+    {
+      "id": "A3_original",
+      "path": "assets/materials/xinyi/imagegen/batch1/sources/b3_taipei_rain_run.png",
+      "sha256": "406b7776d96e926e370324d1d650ef59f94780015e70dabae81b640fe67ba82f",
+      "kind": "PR14 preserved native AI output"
+    },
+    {
+      "id": "A4_original",
+      "path": "assets/materials/xinyi/shared_masks/v1/sources/facade_repair_b.svg",
+      "sha256": "2feafb197a983d8f35e8b9e7c1b8ae887f92d45cb7542eed21ab434dd6dc8686",
+      "kind": "Original project-authored vector art"
+    },
+    {
+      "id": "R1_R4_original",
+      "path": "assets/materials/xinyi/shared_masks/v1/sources/roof_macro_sheet.png",
+      "sha256": "5bea700af265d65bf4febef4db7e80b85ba1794d3dbdf16c3d7749486e807089",
+      "kind": "One new native AI output, four panels"
+    },
+    {
+      "id": "new_generation_record",
+      "path": "assets/materials/xinyi/shared_masks/v1/generation.json",
+      "sha256": "045add81467762999a87dcbd2449ec9928c39e26604e6751fa2f0812c66cd83d",
+      "kind": "Prompt and provenance"
+    }
+  ],
+  "channel_inputs": {
+    "A1_stain": "A1_input",
+    "A2_repair_a": "A2_input",
+    "A3_rain_run": "A3_input",
+    "A4_repair_b": "A4_original",
+    "R1_membrane": {
+      "input": "R1_R4_original",
+      "quadrant": [
+        0,
+        0
+      ]
+    },
+    "R2_recoat": {
+      "input": "R1_R4_original",
+      "quadrant": [
+        1,
+        0
+      ]
+    },
+    "R3_drainage": {
+      "input": "R1_R4_original",
+      "quadrant": [
+        0,
+        1
+      ]
+    },
+    "R4_aggregate": {
+      "input": "R1_R4_original",
+      "quadrant": [
+        1,
+        1
+      ]
+    }
+  },
+  "native_roof_sheet_size": [
+    1254,
+    1254
+  ],
+  "native_roof_panel_size": [
+    627,
+    627
+  ],
+  "crop_inset_px": 2,
+  "cropped_panel_size": [
+    623,
+    623
+  ]
+}

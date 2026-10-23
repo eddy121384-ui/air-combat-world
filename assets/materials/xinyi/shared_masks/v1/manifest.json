@@ -1,0 +1,453 @@
+{
+  "schema": "acw.material_pack/0",
+  "pack": "xinyi-shared-masks-v1",
+  "status": "offline candidate; pending art approval",
+  "base_commit": "6c2feb1611a3d07436c8222c3b67246a9b1ad8cd",
+  "parent_pr": 14,
+  "source_audit": {
+    "base_commit": "6c2feb1611a3d07436c8222c3b67246a9b1ad8cd",
+    "preserve_parent_package": true,
+    "files": [
+      {
+        "id": "inherited_manifest",
+        "path": "assets/materials/xinyi/imagegen/batch1/manifest.json",
+        "sha256": "00ae73419ec21790eb880623afcfbe18996aba8140eb25082b0982e56bb84e98",
+        "kind": "provenance"
+      },
+      {
+        "id": "A1_input",
+        "path": "assets/materials/xinyi/imagegen/batch1/processed/b1_taipei_weathering_field_candidate.png",
+        "sha256": "aef4446c20a6c2c80a6c578f22a089fd260c86e929f6105a64b396b312bd081a",
+        "kind": "PR14 AI derivative"
+      },
+      {
+        "id": "A2_input",
+        "path": "assets/materials/xinyi/imagegen/batch1/processed/b2_taipei_sparse_repairs_r2_candidate.png",
+        "sha256": "7280aad4227ed7784986c76f8245682dabc4581cdde16e4f76da33eebb59277c",
+        "kind": "PR14 AI derivative"
+      },
+      {
+        "id": "A3_input",
+        "path": "assets/materials/xinyi/imagegen/batch1/processed/b3_taipei_rain_run_candidate.png",
+        "sha256": "f9f838f969717d6582c690ada0a6f35ce1b7faa30f152b2f871d7588c236686d",
+        "kind": "PR14 AI derivative"
+      },
+      {
+        "id": "A1_original",
+        "path": "assets/materials/xinyi/imagegen/batch1/sources/b1_taipei_weathering_field.png",
+        "sha256": "27d9d702f85335996e38956baa03571e2592d50e85ed4bf9a828f7320913f84b",
+        "kind": "PR14 preserved native AI output"
+      },
+      {
+        "id": "A2_original",
+        "path": "assets/materials/xinyi/imagegen/batch1/sources/b2_taipei_sparse_repairs_r2.png",
+        "sha256": "6666385f39e6dbedc0924479ef5ae73b3a1928cd4c89d4550da453d47fb5edec",
+        "kind": "PR14 preserved native AI output"
+      },
+      {
+        "id": "A3_original",
+        "path": "assets/materials/xinyi/imagegen/batch1/sources/b3_taipei_rain_run.png",
+        "sha256": "406b7776d96e926e370324d1d650ef59f94780015e70dabae81b640fe67ba82f",
+        "kind": "PR14 preserved native AI output"
+      },
+      {
+        "id": "A4_original",
+        "path": "assets/materials/xinyi/shared_masks/v1/sources/facade_repair_b.svg",
+        "sha256": "2feafb197a983d8f35e8b9e7c1b8ae887f92d45cb7542eed21ab434dd6dc8686",
+        "kind": "Original project-authored vector art"
+      },
+      {
+        "id": "R1_R4_original",
+        "path": "assets/materials/xinyi/shared_masks/v1/sources/roof_macro_sheet.png",
+        "sha256": "5bea700af265d65bf4febef4db7e80b85ba1794d3dbdf16c3d7749486e807089",
+        "kind": "One new native AI output, four panels"
+      },
+      {
+        "id": "new_generation_record",
+        "path": "assets/materials/xinyi/shared_masks/v1/generation.json",
+        "sha256": "045add81467762999a87dcbd2449ec9928c39e26604e6751fa2f0812c66cd83d",
+        "kind": "Prompt and provenance"
+      }
+    ],
+    "channel_inputs": {
+      "A1_stain": "A1_input",
+      "A2_repair_a": "A2_input",
+      "A3_rain_run": "A3_input",
+      "A4_repair_b": "A4_original",
+      "R1_membrane": {
+        "input": "R1_R4_original",
+        "quadrant": [
+          0,
+          0
+        ]
+      },
+      "R2_recoat": {
+        "input": "R1_R4_original",
+        "quadrant": [
+          1,
+          0
+        ]
+      },
+      "R3_drainage": {
+        "input": "R1_R4_original",
+        "quadrant": [
+          0,
+          1
+        ]
+      },
+      "R4_aggregate": {
+        "input": "R1_R4_original",
+        "quadrant": [
+          1,
+          1
+        ]
+      }
+    },
+    "native_roof_sheet_size": [
+      1254,
+      1254
+    ],
+    "native_roof_panel_size": [
+      627,
+      627
+    ],
+    "crop_inset_px": 2,
+    "cropped_panel_size": [
+      623,
+      623
+    ]
+  },
+  "generation_record": "generation.json",
+  "span_metres": [
+    32,
+    32
+  ],
+  "independent_new_ai_outputs": 1,
+  "new_ai_panels": 4,
+  "reused_ai_planes": 3,
+  "original_vector_planes": 1,
+  "source_planes": 8,
+  "runtime_textures": 2,
+  "imported_into_unreal": false,
+  "processing": [
+    "strict grayscale L; recenter non-vector median to 128; clamp 104..152",
+    "wrapped Gaussian sigma 0.16m to remove micro-grain",
+    "1m opposing-edge smoothstep correction",
+    "7 authored value levels 104,112,120,128,136,144,152; close both boundary samples",
+    "facade BOX-downsample 1024 to 512; recouple opposing mobile edges without dropping alpha"
+  ],
+  "textures": {
+    "T_XinyiFacadeAge": {
+      "file": "textures/T_XinyiFacadeAge.png",
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "bit_depth": 8,
+      "channels": {
+        "R": "A1_stain",
+        "G": "A2_repair_a",
+        "B": "A3_rain_run",
+        "A": "A4_repair_b"
+      },
+      "srgb": false,
+      "address_u": "wrap",
+      "address_v": "wrap",
+      "compression_intent": "Masks; ASTC 6x6 candidate; preserve alpha",
+      "alpha_is_opacity": false
+    },
+    "T_XinyiRoofSurface": {
+      "file": "textures/T_XinyiRoofSurface.png",
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "bit_depth": 8,
+      "channels": {
+        "R": "R1_membrane",
+        "G": "R2_recoat",
+        "B": "R3_drainage",
+        "A": "R4_aggregate"
+      },
+      "srgb": false,
+      "address_u": "wrap",
+      "address_v": "wrap",
+      "compression_intent": "Masks; ASTC 6x6 candidate; preserve alpha",
+      "alpha_is_opacity": false
+    }
+  },
+  "memory_estimate": {
+    "two_512_astc_6x6_full_mips_bytes": 316864,
+    "measured_gpu_memory": false
+  },
+  "metrics": {
+    "A1_stain": {
+      "mean_255": 126.0096,
+      "std_255": 6.4225,
+      "min": 104,
+      "max": 136,
+      "distinct_values": 5,
+      "wrap_x_max_255": 0,
+      "wrap_y_max_255": 0,
+      "seam_slope_x_max_255": 16,
+      "seam_slope_y_max_255": 16,
+      "adjacent_gradient_p99_255": 8.0,
+      "coarse_8_std_255": 6.2812,
+      "coarse_16_std_255": 6.1331
+    },
+    "A2_repair_a": {
+      "mean_255": 128.8825,
+      "std_255": 5.0691,
+      "min": 112,
+      "max": 144,
+      "distinct_values": 5,
+      "wrap_x_max_255": 0,
+      "wrap_y_max_255": 0,
+      "seam_slope_x_max_255": 0,
+      "seam_slope_y_max_255": 0,
+      "adjacent_gradient_p99_255": 0.0,
+      "coarse_8_std_255": 5.0261,
+      "coarse_16_std_255": 4.9825
+    },
+    "A3_rain_run": {
+      "mean_255": 125.8543,
+      "std_255": 5.5847,
+      "min": 104,
+      "max": 136,
+      "distinct_values": 5,
+      "wrap_x_max_255": 0,
+      "wrap_y_max_255": 0,
+      "seam_slope_x_max_255": 16,
+      "seam_slope_y_max_255": 16,
+      "adjacent_gradient_p99_255": 8.0,
+      "coarse_8_std_255": 5.3813,
+      "coarse_16_std_255": 5.1595
+    },
+    "A4_repair_b": {
+      "mean_255": 128.0387,
+      "std_255": 3.2037,
+      "min": 112,
+      "max": 144,
+      "distinct_values": 5,
+      "wrap_x_max_255": 0,
+      "wrap_y_max_255": 0,
+      "seam_slope_x_max_255": 0,
+      "seam_slope_y_max_255": 0,
+      "adjacent_gradient_p99_255": 0.0,
+      "coarse_8_std_255": 3.1571,
+      "coarse_16_std_255": 3.1333
+    },
+    "R1_membrane": {
+      "mean_255": 127.4289,
+      "std_255": 7.1474,
+      "min": 112,
+      "max": 144,
+      "distinct_values": 5,
+      "wrap_x_max_255": 0,
+      "wrap_y_max_255": 0,
+      "seam_slope_x_max_255": 16,
+      "seam_slope_y_max_255": 16,
+      "adjacent_gradient_p99_255": 8.0,
+      "coarse_8_std_255": 6.7271,
+      "coarse_16_std_255": 6.3313
+    },
+    "R2_recoat": {
+      "mean_255": 125.0286,
+      "std_255": 7.3937,
+      "min": 104,
+      "max": 144,
+      "distinct_values": 6,
+      "wrap_x_max_255": 0,
+      "wrap_y_max_255": 0,
+      "seam_slope_x_max_255": 8,
+      "seam_slope_y_max_255": 16,
+      "adjacent_gradient_p99_255": 8.0,
+      "coarse_8_std_255": 7.1871,
+      "coarse_16_std_255": 6.8818
+    },
+    "R3_drainage": {
+      "mean_255": 124.1418,
+      "std_255": 6.1421,
+      "min": 104,
+      "max": 136,
+      "distinct_values": 5,
+      "wrap_x_max_255": 0,
+      "wrap_y_max_255": 0,
+      "seam_slope_x_max_255": 16,
+      "seam_slope_y_max_255": 16,
+      "adjacent_gradient_p99_255": 8.0,
+      "coarse_8_std_255": 5.8243,
+      "coarse_16_std_255": 5.4912
+    },
+    "R4_aggregate": {
+      "mean_255": 126.228,
+      "std_255": 5.8349,
+      "min": 104,
+      "max": 136,
+      "distinct_values": 5,
+      "wrap_x_max_255": 0,
+      "wrap_y_max_255": 0,
+      "seam_slope_x_max_255": 16,
+      "seam_slope_y_max_255": 16,
+      "adjacent_gradient_p99_255": 8.0,
+      "coarse_8_std_255": 5.4629,
+      "coarse_16_std_255": 4.9084
+    },
+    "repair_a_b_correlation": -0.018131
+  },
+  "limits": [
+    "Numeric tiling PASS is not an art, engine, motion or compression acceptance.",
+    "Native generated metre scale is approximate; broad shapes can repeat within a 32m wall.",
+    "Facade rain-run +V points down in the PNG; verify wall-height-to-V sign, do not rotate/flip vertically.",
+    "PNG derivatives are reproducible; the native image-generation seed/model ID is not exposed.",
+    "UE automatic mips / ASTC / distance captures / performance remain downstream review gates."
+  ],
+  "outputs": [
+    {
+      "path": "authoring/T_XinyiFacadeAge_1024.png",
+      "sha256": "83cfff1417c2bbb60a78921e04163c8fe3b36157b0fec30611e7fd4944619127",
+      "mode": "RGBA",
+      "size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "path": "planes/A1_stain.png",
+      "sha256": "f1701409de9ff3dd834a34576c020716e914adede9cfd3f10633bc3d5586fe2e",
+      "mode": "L",
+      "size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "path": "planes/A2_repair_a.png",
+      "sha256": "0921169246d33b56fa0783a0b79a3e91c5b6d5bc91951395ebfb2862c79cd54f",
+      "mode": "L",
+      "size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "path": "planes/A3_rain_run.png",
+      "sha256": "3495202cb31283764fe3cefdfbbb046eb7c1ebaf5e390781801806047c64911a",
+      "mode": "L",
+      "size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "path": "planes/A4_repair_b.png",
+      "sha256": "37f6c63f6c2d0afd2bc8eda27c7577a6d7a637928c9d3346cc3d967ccb954f40",
+      "mode": "L",
+      "size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "path": "planes/R1_membrane.png",
+      "sha256": "7b771056793e41c03b9e8a35397a7dd34bb6190eba094afaf3d7f0cc4ea8fb20",
+      "mode": "L",
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "path": "planes/R2_recoat.png",
+      "sha256": "55371540e26fcfd7b86aa2c484c7a26d5dc9d28f968492a785a2a743239df7c5",
+      "mode": "L",
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "path": "planes/R3_drainage.png",
+      "sha256": "f30835c7c6db96d1c6b7956dea73c77887b2123fd46c66386693c26564b1ac2b",
+      "mode": "L",
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "path": "planes/R4_aggregate.png",
+      "sha256": "db909f89331341482200d473a1b8d21b09a788c33f9ea54f504f5bad9879443b",
+      "mode": "L",
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "path": "review/channels.png",
+      "sha256": "d30ebc64e75f5628bcf2ba6ba80899a1bf87adb64292e981c3edf64845431ffe",
+      "mode": "RGB",
+      "size": [
+        1360,
+        900
+      ]
+    },
+    {
+      "path": "review/distance.png",
+      "sha256": "eec319f7cf3adc3fab7b0ea0f8770be4a587cd17155d116a4a566a31d23adfdc",
+      "mode": "RGB",
+      "size": [
+        1400,
+        720
+      ]
+    },
+    {
+      "path": "review/packed.png",
+      "sha256": "09918997438d83bad6a21daf173a0edc3b96cf8e1e78d17bab8a9bb22ea26ea7",
+      "mode": "RGB",
+      "size": [
+        1260,
+        570
+      ]
+    },
+    {
+      "path": "review/surfaces.png",
+      "sha256": "3e37a9e9487593365bae85521a7104f348ffdfc24e3709d841e10291d1ec1415",
+      "mode": "RGB",
+      "size": [
+        1330,
+        830
+      ]
+    },
+    {
+      "path": "review/tiling.png",
+      "sha256": "03c56d492d047d3014b73e4a1c183e82d04d2e0dedb6b5131930a6c5a0eec206",
+      "mode": "RGB",
+      "size": [
+        1360,
+        880
+      ]
+    },
+    {
+      "path": "textures/T_XinyiFacadeAge.png",
+      "sha256": "48366fa2960438f02ae86d0a1ed003e0e5dfcc359108b0c73f84ee8c3705ed67",
+      "mode": "RGBA",
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "path": "textures/T_XinyiRoofSurface.png",
+      "sha256": "b3db5a50494ffc73bdda9a2ec13986a7856186cdbf0f6cd085ada1edaef85140",
+      "mode": "RGBA",
+      "size": [
+        512,
+        512
+      ]
+    }
+  ]
+}
