@@ -213,6 +213,7 @@ export class Input {
   /** Cancel transient input on pause/focus loss; power latches remain the pilot's. */
   releaseHeld() {
     this.levelAssist.cancel();
+    this.onRelease?.();
     this.resetStick();
     this.keys.clear(); this.pressed.clear();
     for (const key of Object.keys(this.btn)) this.btn[key] = false;
@@ -229,7 +230,8 @@ export class Input {
   /** Combined stick from keyboard + touch. */
   axes() {
     const k = this.keys;
-    let x = this.stick.x, y = this.stick.y;
+    const source = this.axisSource?.() || this.stick;
+    let x = source.x, y = source.y;
     if (k.has('ArrowLeft')) x = -1;
     if (k.has('ArrowRight')) x = 1;
     if (k.has('ArrowUp')) y = 1;

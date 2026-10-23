@@ -18,6 +18,7 @@
 <div id="touch" class="hidden">
   <div id="stickZone"></div>
   <div id="stickBase"><div id="stickKnob"></div></div>
+  <button id="tiltCalibrate" class="hidden" type="button" aria-label="以目前握姿重新校準">CAL</button>
   <div id="btns">
     <button data-btn="level" class="b-level" type="button" aria-label="恢復水平飛行，再按取消" aria-pressed="false">LVL</button>
     <button data-btn="yawLeft" class="yaw-key yaw-left" type="button" aria-label="左方向舵，按住向左偏航">◀ YAW</button>
@@ -102,6 +103,25 @@
       </button>
     </div>
     <div id="settingsChoiceDescription" class="help settings-choice-description"></div>
+    <div class="input-settings">
+      <p class="help">輸入設備獨立於飛行模式；可隨時切換，不重開本局。</p>
+      <div class="row input-device" role="group" aria-label="輸入設備（不改變飛行模式）">
+        <button type="button" data-input-device="stick">VIRTUAL STICK</button>
+        <button type="button" data-input-device="tilt">TILT 體感</button>
+      </div>
+      <div id="tiltOptions" class="hidden">
+        <p class="help">保持舒服的橫向握姿再啟用，不必把手機放平。左右傾斜＝X；前後傾斜＝Y。中立不等於 Expert 自動改平。</p>
+        <div class="row"><button id="btnTiltEnable" type="button">啟用體感操縱</button><button id="btnTiltCalibrate" type="button">重新校準握姿</button></div>
+        <p id="tiltStatus" class="help" role="status"></p><output id="tiltReadout">X 0.00 · Y 0.00</output>
+        <div class="tilt-ranges">
+          <label>靈敏度 <output id="tiltSensitivityValue"></output><input id="tiltSensitivity" type="range" min="0.5" max="2" step="0.1"></label>
+          <label>死區 <output id="tiltDeadzoneValue"></output><input id="tiltDeadzone" type="range" min="0" max="6" step="0.5"></label>
+          <label>平滑度 <output id="tiltSmoothingValue"></output><input id="tiltSmoothing" type="range" min="0" max="60" step="10"></label>
+        </div>
+        <div class="row"><button id="tiltInvertX" type="button">反轉 X：關</button><button id="tiltInvertY" type="button">反轉 Y：關</button></div>
+        <p class="help">需要 HTTPS 與授權。預設以死區與 Expo 抑制雜訊；增加平滑會延遲微調。無資料時暫用搖桿，重載後需再啟用。</p>
+      </div>
+    </div>
     <div class="row opts">
       <button id="optInvert" type="button">俯仰方向</button>
       <button id="optSound" type="button">音效</button>
