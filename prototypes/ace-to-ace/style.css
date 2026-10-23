@@ -257,3 +257,55 @@ h2.win { color: var(--go); } h2.lose { color: var(--red); }
 #flightSettings { padding: max(10px,var(--sat)) max(16px,var(--sar)) max(10px,var(--sab)) max(16px,var(--sal)); }
 #tiltCalibrate { position:fixed; left:calc(14px + var(--sal)); bottom:calc(14px + var(--sab));
   width:48px; height:42px; border:1px solid var(--edge); border-radius:9px; background:rgba(8,30,48,.6); font-size:12px; z-index:4; }
+
+/* Shared scale variables preserve the legacy layout when no custom data exists. */
+#powerControl { --power-scale:1; }
+#btns #powerControl button { left:calc(5px * var(--power-scale)); width:calc(54px * var(--power-scale)); }
+#powerControl .p-ab { top:calc(5px * var(--power-scale)); height:calc(39px * var(--power-scale)); }
+#powerControl .p-brake { bottom:calc(5px * var(--power-scale)); height:calc(46px * var(--power-scale)); }
+#throttleTrack { left:calc(6px * var(--power-scale)); top:calc(52px * var(--power-scale)); width:calc(48px * var(--power-scale)); height:calc(99px * var(--power-scale)); }
+#throttleHandle { height:calc(18px * var(--power-scale)); }
+#throttleValue { top:calc(154px * var(--power-scale)); }
+#stickBase { left:var(--stick-home-x,calc(110px + var(--sal))); top:var(--stick-home-y,calc(100% - 120px - var(--sab)));
+  width:calc(132px * var(--stick-size,1)); height:calc(132px * var(--stick-size,1)); margin:calc(-66px * var(--stick-size,1)); }
+#stickKnob { width:calc(56px * var(--stick-size,1)); height:calc(56px * var(--stick-size,1)); margin:calc(-28px * var(--stick-size,1)); }
+#hudSafeArea { position:fixed; inset:var(--sat) var(--sar) var(--sab) var(--sal); pointer-events:none; visibility:hidden; }
+#hudEditor { position:fixed; inset:0; z-index:12; pointer-events:none; }
+.hud-editing #touch, .hud-editing #stickZone, .hud-editing #stickBase, .hud-editing #tiltCalibrate, .hud-editing #pauseBtn { display:block !important; }
+.hud-editing #touch, .hud-editing #pauseBtn { pointer-events:none; }
+.hud-handle { position:fixed; border:1px dashed #8bd3e4; border-radius:9px; pointer-events:auto; touch-action:none; background:rgba(29,90,110,.07); }
+.hud-handle span { position:absolute; left:3px; top:2px; max-width:100%; padding:1px 3px; border-radius:3px; font:10px system-ui,sans-serif; color:#fff; background:#173b53; pointer-events:none; }
+.hud-handle[data-edit="stick"] { background:rgba(10,90,150,.05); }
+.hud-handle.selected { outline:2px solid #ffcd84; border-color:#fff; background:rgba(255,190,85,.1); }
+#hudEditor.no-borders .hud-handle:not(.selected) { border-color:transparent; background:transparent; }
+#hudEditor.no-borders .hud-handle:not(.selected) span { visibility:hidden; }
+.hud-toolbar { position:fixed; z-index:2; top:calc(56px + var(--sat)); left:calc(8px + var(--sal)); width:238px;
+  max-height:calc(100% - 64px - var(--sat) - var(--sab)); overflow:auto; padding:9px; border:1px solid #8bd3e4;
+  border-radius:12px; background:rgba(9,29,47,.94); pointer-events:auto; font-size:12px; touch-action:pan-y; }
+.hud-edit-head { display:flex; justify-content:space-between; align-items:center; gap:4px; }
+.hud-edit-head strong { font:800 12px system-ui,sans-serif; letter-spacing:.06em; color:#ffcd84; }
+.hud-toolbar button { min-height:32px; padding:4px 8px; border:1px solid var(--edge); border-radius:7px; background:#203e55; font-size:12px; }
+.hud-toolbar #hudSave { background:#ffb347; color:#1d1206; border-color:#ffd28a; font-weight:800; }
+.hud-toolbar label { display:block; margin:5px 0; }
+.hud-toolbar select { width:100%; min-height:30px; margin-top:3px; color:#fff; background:#203e55; border:1px solid var(--edge); font-size:12px; }
+.hud-toolbar input[type="range"] { display:block; width:100%; height:25px; margin:0; touch-action:pan-x; }
+.hud-toolbar .hud-border-option { display:flex; align-items:center; gap:5px; }
+.hud-toolbar input[type="checkbox"] { margin:0; }
+.hud-edit-row { display:flex; gap:5px; margin-top:5px; }
+.hud-edit-row button { flex:1; }
+#hudWarning { font-size:11px; line-height:1.4; color:#ffd28a; margin:4px 0; }
+#hudEditor.folded .hud-edit-options { display:none; }
+
+/* Keep exit/save reachable while the small landscape toolbox scrolls. */
+.hud-edit-head { position:sticky; top:0; z-index:2; background:#102b40; padding-bottom:4px; }
+.hud-toolbar > .hud-edit-row { position:sticky; bottom:0; z-index:2; background:#102b40; padding:5px 0 0; }
+
+#hudSelectionNote { font-size:12px; line-height:1.4; margin:5px 0; color:#bbdbea; }
+#hudWarning { font-size:12px; }
+
+/* Collapsed preview keeps one reachable edit entry and exposes both thumb zones. */
+#hudEditor.folded .hud-toolbar { left:auto; right:calc(12px + var(--sar)); top:calc(58px + var(--sat)); width:auto; padding:5px; }
+#hudEditor.folded .hud-edit-head { padding:0; }
+#hudEditor.folded .hud-edit-head strong, #hudEditor.folded .hud-toolbar > .hud-edit-row { display:none; }
+#hudEditor.folded #hudFold { min-width:48px; min-height:40px; }
+#hudEditor.folded .hud-handle span { visibility:hidden; }

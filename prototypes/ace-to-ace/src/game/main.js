@@ -8,6 +8,7 @@ import { Renderer } from './render.js';
 import { Hud } from './hud.js';
 import { Input, PlayerController } from './input.js';
 import { Audio } from './audio.js';
+import { HudEditor } from './hud-editor.js';
 import { TiltInput, tiltSettings } from './tilt-input.js';
 import { LESSONS, lessonById } from '../academy/lessons.js';
 import { createLessonSession } from '../academy/session.js';
@@ -48,6 +49,8 @@ const input = new Input(document.body);
 const tilt = new TiltInput({onChange:syncTiltUI});
 input.axisSource = () => tilt.axes();
 input.onRelease = () => tilt.stop();
+let hudEditorReturn='title', editorHud=null, editorTouchHidden=true;
+const hudEditor = new HudEditor({input,onClose:finishHudEditor});
 const audio = new Audio();
 audio.setMuted(settings.muted);
 
@@ -200,6 +203,8 @@ for(const [key,id] of [['sensitivity','Sensitivity'],['deadzone','Deadzone'],['s
 for(const key of ['X','Y'])$('#tiltInvert'+key).addEventListener('click',()=>{
   draftTilt['invert'+key]=!draftTilt['invert'+key];tilt.configure(draftTilt);syncFlightSettings();
 });
+$('#btnTitleHud').addEventListener('click',()=>openHudEditor('title'));
+$('#btnPauseHud').addEventListener('click',()=>openHudEditor('pause'));
 $('#btnTitleSettings').addEventListener('click', () => openFlightSettings('title'));
 $('#btnPauseSettings').addEventListener('click', () => openFlightSettings('pause'));
 $('#btnSettingsCancel').addEventListener('click', closeFlightSettings);
@@ -222,7 +227,7 @@ $('#btnBriefGo').addEventListener('click', () => startLesson(briefId));
 $('#btnDebAcademy').addEventListener('click', openAcademy);
 $('#btnDebRetry').addEventListener('click', () => startLesson(lessonId));
 $('#btnDebNext').addEventListener('click', () => { const n = nextLesson(lessonId); if (n) openBriefing(n.id); else openAcademy(); });
-const togglePause = () => { if (settingsVisible()) closeFlightSettings(); else setPaused(mode !== 'paused'); };
+const togglePause = () => { if(hudEditor.active){hudEditor.close(false);return;} if (settingsVisible()) closeFlightSettings(); else setPaused(mode !== 'paused'); };
 $('#pauseBtn').addEventListener('click', togglePause);
 // A multi-touch gesture does not reliably synthesize a click while the other
 // thumb is still down. Pause immediately and suppress the compatibility click.
@@ -245,6 +250,23 @@ function setPaused(p) {
   showScreen(p ? 'pause' : null);
   if(!p)resumeTilt();
   last = performance.now();
+}
+
+function openHudEditor(from) {
+  hudEditorReturn=from;editorTouchHidden=$('#touch').classList.contains('hidden');
+  if(from==='title')start('pvai');
+  editorHud={msgs:hud.msgs,radio:hud.radio};hud.msgs=[];hud.radio=null;
+  input.releaseHeld();mode='editing';showScreen(null);
+  $('#touch').classList.remove('hidden');$('#pauseBtn').classList.remove('hidden');
+  hudEditor.open();last=performance.now();
+}
+function finishHudEditor({save,stored}) {
+  if(hudEditorReturn==='pause'&&editorHud){hud.msgs=editorHud.msgs;hud.radio=editorHud.radio;}editorHud=null;
+  mode=hudEditorReturn==='title'?'title':'paused';showScreen(mode==='paused'?'pause':'title');
+  $('#touch').classList.toggle('hidden',mode==='title'||editorTouchHidden);$('#pauseBtn').classList.toggle('hidden',mode==='title');
+  const message=save&&!stored?'瀏覽器無法保存；目前配置僅在本頁有效。':'';
+  $('#hudSaveStatus').textContent=message;$('#titleHudStatus').textContent=message;
+  last=performance.now();
 }
 
 // ------------------------------------------------------------------ match setup
@@ -567,11 +589,12 @@ function frame(now) {
     for (const m of match.missiles) if (m.alive && m.target === me && m.guided && !m.decoy) { mw = true; if (dist(m.pos, me.pos) < 1500) mc = true; }
     const weaponCues = kind !== 'lesson' || lessonRun.rules.weapons;
     audio.frame({ throttle: me.thrustCur, ab: me.abCur, speed: me.speed, locking: weaponCues && L.timer > 0 && !L.locked, locked: weaponCues && L.locked, missileWarn: mw, missileClose: mc, lockWarn: me.lockedBy > 0 && (kind !== 'lesson' || lessonRun.lesson.id !== 'L07'), alive: me.alive && showHud && (kind === 'pvai' || kind === 'lesson') }, now / 1000);
-  } else if (match && mode === 'paused') {
+  } else if (match && (mode === 'paused' || mode === 'editing')) {
     // Freeze the fight behind the pause/settings card. Moving the camera to the
     // title orbit here made it swoop back from ~4 km away on resume.
+    if(mode==='editing'){rend.update(match,view,0);rend.updateCamera(view,realDt);}
     rend.render();
-    hud.draw(match, view.ac, rend, 0, { minimal: true });
+    hud.draw(match, view.ac, rend, 0, { minimal: mode!=='editing', academy:kind==='lesson'&&lessonRun?lessonRun.view():null });
     audio.frame({ throttle: 0, ab: 0, speed: 0, alive: false }, now / 1000);
   } else {
     // title backdrop: slow orbit over the sea
@@ -630,11 +653,14 @@ window.__game = {
   get hud() { return hud; },
   get lesson() { return lessonRun; }, get lessonId() { return lessonId; }, get academyProgress() { return academyProgress; },
   startLesson, openAcademy, openBriefing,
-  get experimentSeed() { return experimentSeed; }, settings, start, input, tilt, openFlightSettings,
+  get experimentSeed() { return experimentSeed; }, settings, start, input, tilt, hudEditor, openHudEditor, openFlightSettings,
   setTimeScale(s) { timeScale = s; },
 };
 
-window.addEventListener('resize',()=>{if(innerHeight>innerWidth && mode==='playing')setPaused(true);});
+window.addEventListener('resize',()=>{
+  if(mode!=='playing')return;
+  if(innerHeight>innerWidth)setPaused(true);else resumeTilt(); // fresh neutral after safe-area/landscape resize
+});
 window.addEventListener('orientationchange', () => setTimeout(() => { rend.resize(); hud.resize(); }, 300));
 document.addEventListener('visibilitychange', () => { if (document.hidden && mode === 'playing') setPaused(true); });
 window.addEventListener('blur', () => { if (mode === 'playing') setPaused(true); });

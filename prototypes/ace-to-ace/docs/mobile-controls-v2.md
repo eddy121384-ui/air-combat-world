@@ -104,3 +104,71 @@ multitouch weapons with TILT, and subjective jitter/latency at 0–60ms.
 
 ![Actual TILT flight in Chromium](screens/mobile-controls-v2/tilt-667-safe.png)
 ![Actual scrolled TILT settings in Chromium](screens/mobile-controls-v2/tilt-settings-667-safe.png)
+
+## HUD EDITOR
+
+Open **操作介面編輯** from the title or pause menu. The real rendered fight/HUD is
+frozen; title entry creates a disposable preview without recording academy
+progress. Drag an outlined region, or choose it in the selector, then adjust size
+and opacity. Collapse the toolbox for a wider preview. Save/Cancel remain pinned
+while the toolbox scrolls; Escape cancels. Reset/right-hand layout restore the
+legacy arrangement. The left-hand preset swaps thumb jobs and separately places
+power, FLR/LOOK and CAL to preserve viewing/operating space.
+
+Editable: GUN/MSL/FLR/LOOK, both YAW keys, LVL, AB, BRK, the whole throttle strip,
+stick interaction area, pause and CAL. Moving/scaling the throttle strip carries
+AB/BRK until either is independently positioned; such overrides remain separate.
+Thumb travel uses the scaled throttle geometry, so top/bottom still mean 100/0%.
+Stick area size also scales its throw and visual base; its deadzone/Expo and
+flight-controller response are unchanged.
+
+Data: `ace2ace.hud.v1`, `{version:1, items:{id:{x,y,scale,opacity}}}`. Centres are
+relative to the **safe area**, never raw pixels. CSS env() notch/home insets are
+resolved before clamping. Size is 65–160%, opacity 20–100%; custom pause always
+keeps at least 40×40px and 60% visibility above the other controls. Unknown
+versions, malformed/missing entries and unavailable storage fall back safely.
+No saved overrides means the original CSS layout. Storage failure explicitly
+reports that the layout is only valid for this page. TILT hides the live stick
+without deleting its layout; the editor exposes it for editing.
+
+Input is disabled and contacts/queued weapons cleared while editing. Dragging a
+button cannot activate it. Closing returns to pause/title, with the prior desktop
+vs touch presentation preserved. Existing radio is temporarily hidden for the
+preview and restored on return. Landscape/safe-area resize clears old contacts;
+if TILT was enabled it awaits a fresh neutral sample rather than losing its
+selection or applying old axes.
+
+Validation: 20 Node commands pass, including `test-hud-layout.mjs` for version/
+numeric validation, denied/broken storage, normalized-coordinate round trips,
+notch/home bounds over phone/desktop sizes, and protected menu access. No flight,
+AI, weapon, seed, judge or saved-progress migration changes.
+
+`browser-check.mjs --scenario hud-editor` exercises eight four-mode/mobile-size
+combinations using **real CDP touch drags**: move, 130% size/40% opacity, cancel,
+save/reload, scaled throttle endpoints/latching, independent AB placement, custom
+GUN + BRK finger ownership, left/right/reset, stick movement, TILT hide/edit/
+restore, safe-area resize and malformed data. 130% is verified after reload;
+that deliberately crowded test arrangement is then reduced to 90% before the
+independent-button test (the editor warns about its overlap). It also checks
+keyboard/weapon suppression and that title preview cannot write academy progress.
+An extra desktop case checks restoration of the non-touch presentation.
+
+Spacing warnings are advisory: a player can still deliberately overlap controls.
+Pause stays accessible and Reset is available. Presets and geometric checks are
+starting points; physical-device thumb reach, grip and accidental taps still need
+human acceptance. Chromium screenshots/tests are not iPhone Safari certification.
+
+Prior stack CI: LEVEL `a81e817` passed
+[run 40002100750](https://github.com/eddy121384-ui/air-combat-world/actions/runs/40002100750);
+TILT `831d68e` passed
+[run 40003162805](https://github.com/eddy121384-ui/air-combat-world/actions/runs/40003162805).
+
+The phone editor test also drags the **native** size/opacity sliders by CDP touch,
+then checks the rendered result. Final local existing-browser regressions passed:
+settings, keyboard/manual, touch/power, four-mode free combat, all academy lessons
+and 50 phase/viewport readability checks. The added TILT resize matrix passes at
+both sizes in all four modes; it waits for the real resize event before supplying
+the new neutral sample, rather than assuming CDP's acknowledgement is delivery.
+
+![Actual editor, 667px CSS with safe areas](screens/mobile-controls-v2/hud-editor-667-safe.png)
+![Left-hand preview with collapsed tools](screens/mobile-controls-v2/hud-left-667-safe.png)

@@ -47,9 +47,15 @@ export async function checkTilt({page,iphone,shot,report}) {
     assert.equal((await probe()).state,'waiting');await emit(0,40);await emit(-12,52,15);
     assert.ok((await probe()).axes.x>.35&&(await probe()).axes.y>.35);
     await p.evaluate(()=>{window.__sensorAngle=90;screen.orientation.dispatchEvent(new Event('change'));});await emit(0,-40);
+    await p.setViewportSize({width:width===812?667:812,height:375});
+    await p.waitForFunction(()=>window.__game.tilt.state==='waiting');
+    assert.equal((await probe()).state,'waiting','landscape resize suspends old axes and restarts a fresh reference');
+    assert.deepEqual((await probe()).axes,{x:0,y:0,yaw:0});await emit(0,-40);
+    assert.equal((await probe()).source,'tilt','resizing does not silently abandon an enabled sensor');
+    await p.setViewportSize({width,height:375});await p.waitForFunction(()=>window.__game.tilt.state==='waiting');await emit(0,-40);
     // Full authority -> real flight, then neutral: Expert stays banked, Assisted rolls out.
     for(let n=0;n<100;n++){await emit(20,-40,1,true);if((await probe()).bank>=58)break;}
-    const banked=await probe();assert.ok(banked.bank>=58&&banked.bank<70);
+    const banked=await probe();assert.ok(banked.bank>=58&&banked.bank<70,JSON.stringify({width,flight,control,banked}));
     await emit(0,-40,30,true);const neutral=await probe();
     assert.deepEqual(neutral.axes,{x:0,y:0,yaw:0});
     if(control==='expert')assert.ok(Math.abs(neutral.bank-banked.bank)<10,'Expert neutral is not auto-level');
