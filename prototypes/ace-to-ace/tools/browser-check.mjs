@@ -4,7 +4,7 @@
 // iPhone: headless Chromium renders WebGL in software (SwiftShader), so FPS here is pessimistic
 // for GPU cost and says nothing about Safari/WebKit specifics.
 //
-//   node tools/browser-check.mjs [--out tools/out/shots] [--scenario all|lookdev|title|settings|modes|academy|fight|manual|touch|aivai|result]
+//   node tools/browser-check.mjs [--out tools/out/shots] [--scenario all|lookdev|title|settings|modes|academy|academy-ui|fight|manual|touch|aivai|result]
 import http from 'node:http';
 import { readFile, mkdir, writeFile } from 'node:fs/promises';
 import assert from 'node:assert/strict';
@@ -17,6 +17,15 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const args = Object.fromEntries(process.argv.slice(2).map((a, i, arr) => a.startsWith('--') ? [a.slice(2), arr[i + 1] && !arr[i + 1].startsWith('--') ? arr[i + 1] : true] : null).filter(Boolean));
 const OUT = resolve(ROOT, args.out || 'tools/out/shots');
 const scenario = args.scenario || 'all';
+
+// Preserve the failing assertion in the check annotations as well as the job log.
+// uncaughtExceptionMonitor observes failures without changing Node's exit behavior.
+function ciError(message) {
+  if (process.env.GITHUB_ACTIONS !== 'true') return;
+  const escaped = String(message).replace(/%/g, '%25').replace(/\r/g, '%0D').replace(/\n/g, '%0A');
+  console.error(`::error title=Chromium ${scenario}::${escaped}`);
+}
+process.on('uncaughtExceptionMonitor', error => ciError(error.stack || error.message));
 
 function loadPlaywright() {
   const req = createRequire(import.meta.url);
@@ -665,4 +674,7 @@ await browser.close();
 server.close();
 await writeFile(join(OUT, 'report.json'), JSON.stringify(report, null, 2) + '\n');
 console.log(JSON.stringify(report, null, 1));
-if (report.errors.length) process.exitCode = 1;
+if (report.errors.length) {
+  report.errors.forEach(ciError);
+  process.exitCode = 1;
+}
