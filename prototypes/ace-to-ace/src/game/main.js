@@ -8,8 +8,11 @@ import { Renderer } from './render.js';
 import { Hud } from './hud.js';
 import { Input, PlayerController } from './input.js';
 import { Audio } from './audio.js';
+import { HudEditor } from './hud-editor.js';
+import { TiltInput, tiltSettings } from './tilt-input.js';
 import { LESSONS, lessonById } from '../academy/lessons.js';
 import { createLessonSession } from '../academy/session.js';
+import { radioDuration } from '../academy/runner.js';
 import { loadProgress, recordAttempt, saveProgress } from '../academy/progress.js';
 
 const $ = (s) => document.querySelector(s);
@@ -22,6 +25,8 @@ const experimentSeed = Number.isFinite(Number(params.get('seed'))) && params.has
 const settings = Object.assign({ difficulty: 'veteran', assist: true, invert: false,
     muted: false, flightMode: 'arcade', controlMode: 'expert' },
   (() => { try { return JSON.parse(localStorage.getItem('ace2ace.settings') || '{}'); } catch { return {}; } })());
+settings.inputDevice = settings.inputDevice === 'tilt' ? 'tilt' : 'stick';
+settings.tilt = tiltSettings(settings.tilt);
 const saveSettings = () => { try { localStorage.setItem('ace2ace.settings', JSON.stringify(settings)); } catch { /* private mode */ } };
 // URL overrides persisted selections for shareable QA links. Legacy A/B remain
 // available to headless tests but do not appear as player-facing presets.
@@ -36,9 +41,16 @@ let settingsReturn = 'title';
 let draftFlight = flightFeel === 'A' ? 'arcade' : flightFeel;
 let draftControl = controlMode, draftInvert = !!settings.invert, draftMuted = !!settings.muted;
 
+let draftDevice = settings.inputDevice, draftTilt = {...settings.tilt};
+
 const rend = new Renderer($('#gl'));
 const hud = new Hud($('#hud'));
 const input = new Input(document.body);
+const tilt = new TiltInput({onChange:syncTiltUI});
+input.axisSource = () => tilt.axes();
+input.onRelease = () => tilt.stop();
+let hudEditorReturn='title', editorHud=null, editorTouchHidden=true;
+const hudEditor = new HudEditor({input,onClose:finishHudEditor});
 const audio = new Audio();
 audio.setMuted(settings.muted);
 
@@ -98,17 +110,26 @@ function syncFlightSettings() {
   $('#settingsChoiceDescription').textContent = flightChoiceNotes[key];
   $('#optInvert').textContent = draftInvert ? '俯仰：上推＝爬升' : '俯仰：上推＝俯衝';
   $('#optSound').textContent = draftMuted ? '音效：關' : '音效：開';
+  for(const b of document.querySelectorAll('[data-input-device]')) b.setAttribute('aria-pressed',String(b.dataset.inputDevice===draftDevice));
+  $('#tiltOptions').classList.toggle('hidden',draftDevice!=='tilt');
+  for(const [key,id,unit] of [['sensitivity','Sensitivity','×'],['deadzone','Deadzone','°'],['smoothing','Smoothing','ms']]) {
+    $('#tilt'+id).value=draftTilt[key];$('#tilt'+id+'Value').textContent=draftTilt[key]+unit;
+  }
+  for(const key of ['X','Y']) {$('#tiltInvert'+key).textContent='反轉 '+key+'：'+(draftTilt['invert'+key]?'開':'關');$('#tiltInvert'+key).setAttribute('aria-pressed',String(draftTilt['invert'+key]));}
+  syncTiltUI();
   const changed = flightFeel !== draftFlight || controlMode !== draftControl;
   const inFight = settingsReturn === 'pause';
   $('#settingsApplyNote').textContent = inFight
     ? changed ? '套用後將重新開始本局（相同起始條件），不會在空中突然變更物理。'
-      : '只修改音效／俯仰方向不會重開本局。'
+      : '只修改輸入設備、體感、音效或俯仰方向會繼續本局。'
     : settingsReturn === 'academy' ? '儲存後回到飛行學院，下一堂課使用新設定。' : '儲存後回到主選單，下次出擊使用新設定。';
   $('#btnSettingsApply').textContent = inFight
     ? changed ? '套用並重新出擊' : '儲存並繼續'
     : '儲存設定';
 }
 function openFlightSettings(from) {
+  input.releaseHeld();
+  draftDevice=settings.inputDevice;draftTilt={...settings.tilt};tilt.configure(draftTilt);
   settingsReturn = from;
   draftFlight = flightFeel === 'A' ? 'arcade' : flightFeel;
   draftControl = controlMode;
@@ -116,12 +137,16 @@ function openFlightSettings(from) {
   draftMuted = !!settings.muted;
   syncFlightSettings();
   showScreen('flightSettings');
+  $('.flight-settings-card').scrollTop=0;
 }
 function closeFlightSettings() {
+  input.releaseHeld();tilt.configure(settings.tilt);
   showScreen(settingsReturn);
   last = performance.now();
 }
 function applyFlightSettings() {
+  input.releaseHeld();
+  settings.inputDevice=draftDevice;settings.tilt=tiltSettings(draftTilt);tilt.configure(settings.tilt);
   const changed = flightFeel !== draftFlight || controlMode !== draftControl;
   flightFeel = draftFlight; controlMode = draftControl;
   settings.flightMode = draftFlight; settings.controlMode = draftControl;
@@ -136,7 +161,7 @@ function applyFlightSettings() {
       // The controller holds a per-sortie copy of settings: push the pitch
       // convention into it so "save and continue" takes effect immediately.
       if (player instanceof PlayerController) player.settings.invert = settings.invert;
-      mode = 'playing'; showScreen(null); last = performance.now();
+      mode = 'playing'; showScreen(null); resumeTilt(); last = performance.now();
     }
   } else if (settingsReturn === 'academy') { renderAcademy(); showScreen('academy'); }
   else showScreen('title');
@@ -145,6 +170,41 @@ for (const b of document.querySelectorAll('[data-flight-choice]')) b.addEventLis
   [draftFlight, draftControl] = b.dataset.flightChoice.split(':');
   syncFlightSettings(); audio.ui();
 });
+const tiltMessages = {
+  idle:'尚未啟用；暫用虛擬搖桿。', requesting:'等待感測器授權…', waiting:'保持握姿，等待有效資料校準。',
+  ready:'已校準目前握姿；回到此姿勢即為中立。', denied:'授權未允許；暫用虛擬搖桿，可重新啟用。',
+  insecure:'需要 HTTPS；暫用虛擬搖桿。', unavailable:'無有效姿態感測器；暫用虛擬搖桿。',
+  stale:'感測資料中斷，已回中；暫用虛擬搖桿，請重新啟用。'
+};
+let tiltWasReady=false;
+function syncTiltUI() {
+  const ready=mode==='playing' && settings.inputDevice==='tilt' && tilt.state==='ready';
+  if(ready!==tiltWasReady){input.resetStick();tiltWasReady=ready;}
+  input.inputDevice=ready?'tilt':'stick';
+  $('#stickZone').classList.toggle('hidden',ready);$('#stickBase').classList.toggle('hidden',ready);
+  $('#tiltCalibrate').classList.toggle('hidden',!ready);
+  $('#tiltStatus').textContent=tiltMessages[tilt.state] || '';
+  $('#btnTiltCalibrate').disabled=tilt.state!=='ready';
+  if(mode==='playing' && settings.inputDevice==='tilt' && ['stale','unavailable','denied'].includes(tilt.state))hud.say('FLIGHT',tiltMessages[tilt.state],4);
+}
+function resumeTilt() {
+  if(settings.inputDevice==='tilt' && (kind==='pvai'||kind==='lesson') && tilt.allowed){tilt.configure(settings.tilt);tilt.start();}
+  syncTiltUI();
+}
+for(const b of document.querySelectorAll('[data-input-device]'))b.addEventListener('click',()=>{
+  input.releaseHeld();draftDevice=b.dataset.inputDevice;syncFlightSettings();
+});
+$('#btnTiltEnable').addEventListener('click',()=>{tilt.configure(draftTilt);void tilt.enable();});
+$('#btnTiltCalibrate').addEventListener('click',()=>tilt.calibrate());
+$('#tiltCalibrate').addEventListener('click',()=>{input.levelAssist.cancel();tilt.calibrate();});
+for(const [key,id] of [['sensitivity','Sensitivity'],['deadzone','Deadzone'],['smoothing','Smoothing']])$('#tilt'+id).addEventListener('input',e=>{
+  draftTilt[key]=Number(e.target.value);tilt.configure(draftTilt);syncFlightSettings();
+});
+for(const key of ['X','Y'])$('#tiltInvert'+key).addEventListener('click',()=>{
+  draftTilt['invert'+key]=!draftTilt['invert'+key];tilt.configure(draftTilt);syncFlightSettings();
+});
+$('#btnTitleHud').addEventListener('click',()=>openHudEditor('title'));
+$('#btnPauseHud').addEventListener('click',()=>openHudEditor('pause'));
 $('#btnTitleSettings').addEventListener('click', () => openFlightSettings('title'));
 $('#btnPauseSettings').addEventListener('click', () => openFlightSettings('pause'));
 $('#btnSettingsCancel').addEventListener('click', closeFlightSettings);
@@ -167,22 +227,46 @@ $('#btnBriefGo').addEventListener('click', () => startLesson(briefId));
 $('#btnDebAcademy').addEventListener('click', openAcademy);
 $('#btnDebRetry').addEventListener('click', () => startLesson(lessonId));
 $('#btnDebNext').addEventListener('click', () => { const n = nextLesson(lessonId); if (n) openBriefing(n.id); else openAcademy(); });
-$('#pauseBtn').addEventListener('click', () => { if (settingsVisible()) closeFlightSettings(); else setPaused(mode !== 'paused'); });
+const togglePause = () => { if(hudEditor.active){hudEditor.close(false);return;} if (settingsVisible()) closeFlightSettings(); else setPaused(mode !== 'paused'); };
+$('#pauseBtn').addEventListener('click', togglePause);
+// A multi-touch gesture does not reliably synthesize a click while the other
+// thumb is still down. Pause immediately and suppress the compatibility click.
+$('#pauseBtn').addEventListener('touchstart', (e) => { e.preventDefault(); togglePause(); }, { passive: false });
 $('#dbgBtn').addEventListener('click', () => { debugOn = !debugOn; });
 syncTitle();
 
 function toTitle() {
+  input.releaseHeld();
   mode = 'title'; showScreen('title');
   $('#touch').classList.add('hidden');
   $('#pauseBtn').classList.add('hidden');
 }
 function setPaused(p) {
   if (mode !== 'playing' && mode !== 'paused') return;
+  input.releaseHeld();
   $('#btnPauseRetry').classList.toggle('hidden', kind !== 'lesson');
   $('#btnQuit').textContent = kind === 'lesson' ? '回到學院' : '回到標題';
   mode = p ? 'paused' : 'playing';
   showScreen(p ? 'pause' : null);
+  if(!p)resumeTilt();
   last = performance.now();
+}
+
+function openHudEditor(from) {
+  hudEditorReturn=from;editorTouchHidden=$('#touch').classList.contains('hidden');
+  if(from==='title')start('pvai');
+  editorHud={msgs:hud.msgs,radio:hud.radio};hud.msgs=[];hud.radio=null;
+  input.releaseHeld();mode='editing';showScreen(null);
+  $('#touch').classList.remove('hidden');$('#pauseBtn').classList.remove('hidden');
+  hudEditor.open();last=performance.now();
+}
+function finishHudEditor({save,stored}) {
+  if(hudEditorReturn==='pause'&&editorHud){hud.msgs=editorHud.msgs;hud.radio=editorHud.radio;}editorHud=null;
+  mode=hudEditorReturn==='title'?'title':'paused';showScreen(mode==='paused'?'pause':'title');
+  $('#touch').classList.toggle('hidden',mode==='title'||editorTouchHidden);$('#pauseBtn').classList.toggle('hidden',mode==='title');
+  const message=save&&!stored?'瀏覽器無法保存；目前配置僅在本頁有效。':'';
+  $('#hudSaveStatus').textContent=message;$('#titleHudStatus').textContent=message;
+  last=performance.now();
 }
 
 // ------------------------------------------------------------------ match setup
@@ -229,9 +313,10 @@ function start(k) {
   showScreen(null);
   $('#touch').classList.toggle('hidden', !(isTouch && k === 'pvai'));
   $('#pauseBtn').classList.remove('hidden');
-  input.resetStick();
+  input.releaseHeld();
   input.resetPower();
   input.clearPresses();
+  resumeTilt();
   hud.msgs = [];
   hud.flash(k === 'aivai' ? 'AI vs AI — 觀戰模式' : 'ENGAGE', '#7dffb0', 2.2, true);
   if (k === 'pvai') hud.flash('J-16 從正前方接近', '#f4fbff', 2.4);
@@ -263,6 +348,7 @@ function renderAcademy() {
   }
 }
 function openAcademy() {
+  input.releaseHeld();
   mode = 'academy'; kind = 'menu'; lessonRun = null; debriefTimer = -1;
   renderAcademy();
   showScreen('academy');
@@ -275,6 +361,9 @@ function openBriefing(id) {
   briefId = id; mode = 'academy';
   $('#briefKicker').textContent = `LESSON ${String(l.no).padStart(2, '0')} · ${l.en} · ${formatFlight(flightFeel, controlMode)}`;
   $('#briefTitle').textContent = l.title;
+  const context = { pick: (a, e) => controlMode === 'assisted' ? a : e };
+  $('#briefHook').textContent = 'KITE ▸ ' + (l.intro || []).map(line => typeof line === 'function' ? line(context) : line).join(' ');
+  if(['L01','L02'].includes(id))$('#briefHook').textContent+=' VIRTUAL STICK 放手回中；TILT 回到校準握姿回中。Expert 回中不會自動改平。';
   $('#briefPrinciple').textContent = l.principle;
   $('#briefGoals').innerHTML = l.goals.map((g) => `<li>${g}</li>`).join('');
   $('#briefReal').textContent = l.real || '';
@@ -293,7 +382,7 @@ function startLesson(id) {
   const session = createLessonSession(lesson, { flight, control, input, settings });
   match = session.match; lessonRun = session.runner; player = session.player;
   enemyAI = session.foeAI || null; blueAI = null;
-  lessonRun.onSay = (text) => { hud.say('KITE', text, Math.min(7, 2.4 + text.length * 0.075)); audio.radio(); };
+  lessonRun.onSay = (text) => { hud.say('KITE', text, radioDuration(text)); audio.radio(); };
   lessonRun.onFlash = (text, color) => hud.flash(text, color, 1.8);
   rend.addAircraft(match.blue); rend.addAircraft(match.red);
   match.on(onEvent);
@@ -303,8 +392,10 @@ function startLesson(id) {
   showScreen(null);
   $('#touch').classList.toggle('hidden', !isTouch);
   $('#pauseBtn').classList.remove('hidden');
-  input.resetStick(); input.resetPower(); input.clearPresses();
+  input.releaseHeld(); input.resetPower(); input.clearPresses();
+  resumeTilt();
   hud.msgs = [];
+  hud.radio = null;
   hud.flash(`LESSON ${String(lesson.no).padStart(2, '0')}`, '#ffe2a3', 2.0, true);
   hud.flash(lesson.title, '#f4fbff', 2.2);
   last = performance.now();
@@ -320,6 +411,7 @@ function syncLessonPower(rules) {
   }
 }
 function showDebrief() {
+  input.releaseHeld();
   const r = lessonRun.result, l = lessonById(lessonId);
   mode = 'debrief';
   recordAttempt(academyProgress, lessonId, { success: r.success, grade: r.grade, time: r.time, mode: modeKey() });
@@ -328,6 +420,9 @@ function showDebrief() {
   const title = $('#debTitle');
   title.textContent = r.success ? (l.final ? `ACE RATING ${r.grade}` : `CLEAR · ${r.grade}`) : 'NOT YET · 未通過';
   title.className = r.success ? 'win' : 'lose';
+  $('#debCitation').textContent = `KITE ▸ ${r.citation}`;
+  $('#debBadge').classList.toggle('hidden', !(l.final && r.success));
+  $('#debBadge').textContent = `ACE QUALIFIED · ${r.grade}`;
   $('#debSub').textContent = r.success ? `用時 ${Math.round(r.time)} 秒` : (r.reason || '');
   $('#debStats').innerHTML = r.stats.map(([k, v]) => `<div><b>${v}</b><span>${k}</span></div>`).join('');
   const li = (a, empty) => (a.length ? a : [empty]).map((x) => `<li>${x}</li>`).join('');
@@ -399,6 +494,7 @@ function onEvent(ev) {
 }
 
 function showResult() {
+  input.releaseHeld();
   mode = 'result';
   const r = match.result;
   const me = match.blue, foe = match.red;
@@ -430,10 +526,13 @@ function showResult() {
 const fmtTime = (t) => `${Math.floor(t / 60)}:${String(Math.floor(t % 60)).padStart(2, '0')}`;
 
 // ------------------------------------------------------------------ loop
+let levelVersion=0;
 function frame(now) {
   requestAnimationFrame(frame);
   const realDt = Math.min(0.1, (now - last) / 1000);
   last = now;
+  tilt.tick();
+  if(settingsVisible() && tilt.active){const a=tilt.axes()||{x:0,y:0};$('#tiltReadout').textContent=`X ${a.x.toFixed(2)} · Y ${a.y.toFixed(2)}`;}
   // perf / adaptive resolution
   perf.frames++; perf.t += realDt; perf.samples.push(realDt);
   if (perf.samples.length > 120) perf.samples.shift();
@@ -474,7 +573,7 @@ function frame(now) {
     while (acc >= RULES.dt && steps < 8) { match.step(RULES.dt); lessonRun?.step(RULES.dt); acc -= RULES.dt; steps++; }
     if (steps === 8) acc = 0;
     if (lessonRun && mode === 'playing') syncLessonPower(lessonRun.rules);
-    if (lessonRun?.result && debriefTimer < 0 && mode === 'playing') debriefTimer = lessonRun.result.success ? 3.0 : 2.4;
+    if (lessonRun?.result && debriefTimer < 0 && mode === 'playing') debriefTimer = lessonRun.result.success ? 3.0 : 0.8;
     if (debriefTimer > 0 && mode === 'playing') { debriefTimer -= realDt; if (debriefTimer <= 0) showDebrief(); }
     if (resultTimer > 0 && mode === 'playing') { resultTimer -= realDt; if (resultTimer <= 0) showResult(); }
     if (view.mode !== 'kill') view.mode = input.look() && kind === 'pvai' ? 'look' : 'chase';
@@ -488,12 +587,14 @@ function frame(now) {
     const L = me.lock;
     let mw = false, mc = false;
     for (const m of match.missiles) if (m.alive && m.target === me && m.guided && !m.decoy) { mw = true; if (dist(m.pos, me.pos) < 1500) mc = true; }
-    audio.frame({ throttle: me.thrustCur, ab: me.abCur, speed: me.speed, locking: L.timer > 0 && !L.locked, locked: L.locked, missileWarn: mw, missileClose: mc, lockWarn: me.lockedBy > 0, alive: me.alive && showHud && (kind === 'pvai' || kind === 'lesson') }, now / 1000);
-  } else if (match && mode === 'paused') {
+    const weaponCues = kind !== 'lesson' || lessonRun.rules.weapons;
+    audio.frame({ throttle: me.thrustCur, ab: me.abCur, speed: me.speed, locking: weaponCues && L.timer > 0 && !L.locked, locked: weaponCues && L.locked, missileWarn: mw, missileClose: mc, lockWarn: me.lockedBy > 0 && (kind !== 'lesson' || lessonRun.lesson.id !== 'L07'), alive: me.alive && showHud && (kind === 'pvai' || kind === 'lesson') }, now / 1000);
+  } else if (match && (mode === 'paused' || mode === 'editing')) {
     // Freeze the fight behind the pause/settings card. Moving the camera to the
     // title orbit here made it swoop back from ~4 km away on resume.
+    if(mode==='editing'){rend.update(match,view,0);rend.updateCamera(view,realDt);}
     rend.render();
-    hud.draw(match, view.ac, rend, 0, { minimal: true });
+    hud.draw(match, view.ac, rend, 0, { minimal: mode!=='editing', academy:kind==='lesson'&&lessonRun?lessonRun.view():null });
     audio.frame({ throttle: 0, ab: 0, speed: 0, alive: false }, now / 1000);
   } else {
     // title backdrop: slow orbit over the sea
@@ -508,6 +609,13 @@ function frame(now) {
     rend.seaMat.uniforms.time.value = t;
     rend.render();
     hud.draw(match || { missiles: [], timeLimit: 0, time: 0, phase: '' }, null, rend, realDt);
+  }
+  const level=input.levelAssist, levelButton=$('[data-btn="level"]');
+  levelButton.classList.toggle('lit',level.active);
+  levelButton.setAttribute('aria-pressed',String(level.active));
+  if(level.version!==levelVersion) {
+    levelVersion=level.version;
+    if(mode==='playing' && level.message)hud.say('FLIGHT',level.message,2.8);
   }
   drawDebug();
   input.pressed.delete('msl'); input.pressed.delete('flare');
@@ -542,14 +650,20 @@ function drawDebug() {
 window.__game = {
   get match() { return match; }, get mode() { return mode; }, get enemyAI() { return enemyAI; }, get flightFeel() { return flightFeel; }, get controlMode() { return controlMode; },
   get player() { return player; }, get rend() { return rend; },
+  get hud() { return hud; },
   get lesson() { return lessonRun; }, get lessonId() { return lessonId; }, get academyProgress() { return academyProgress; },
   startLesson, openAcademy, openBriefing,
-  get experimentSeed() { return experimentSeed; }, settings, start, input, openFlightSettings,
+  get experimentSeed() { return experimentSeed; }, settings, start, input, tilt, hudEditor, openHudEditor, openFlightSettings,
   setTimeScale(s) { timeScale = s; },
 };
 
+window.addEventListener('resize',()=>{
+  if(mode!=='playing')return;
+  if(innerHeight>innerWidth)setPaused(true);else resumeTilt(); // fresh neutral after safe-area/landscape resize
+});
 window.addEventListener('orientationchange', () => setTimeout(() => { rend.resize(); hud.resize(); }, 300));
 document.addEventListener('visibilitychange', () => { if (document.hidden && mode === 'playing') setPaused(true); });
+window.addEventListener('blur', () => { if (mode === 'playing') setPaused(true); });
 // iOS: prevent pinch zoom / double-tap zoom
 document.addEventListener('gesturestart', (e) => e.preventDefault());
 document.addEventListener('dblclick', (e) => e.preventDefault());

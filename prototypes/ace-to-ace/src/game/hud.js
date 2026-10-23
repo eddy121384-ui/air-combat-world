@@ -112,7 +112,7 @@ export class Hud {
           g.textAlign = 'left';
           g.fillText(`${(R / 1000).toFixed(1)}km`, p.x + s + 6, p.y - s * 0.5);
           g.fillText(tg.name, p.x + s + 6, p.y + s * 0.5);
-          if (L.locked) { g.textAlign = 'center'; g.fillText('LOCK', p.x, p.y + s * 1.25 + 12 * S); }
+          if (L.locked) { g.textAlign = 'center'; g.fillText(opts.academy && !opts.academy.weapons ? 'TRACK' : 'LOCK', p.x, p.y + s * 1.25 + 12 * S); }
           // gun lead pipper
           if (R < GUN.range * 1.3) {
             const lead = gunLead(me, tg.pos, tg.vel);
@@ -125,7 +125,7 @@ export class Hud {
             }
           }
           // shoot cue: good missile shot
-          if (L.locked) {
+          if (L.locked && (!opts.academy || opts.academy.weapons)) {
             const los = norm(sub(tg.pos, me.pos));
             const aspect = Math.PI - angleBetween(forwardOf(tg.q), { x: -los.x, y: -los.y, z: -los.z });
             const pk = missilePk({ R, ata: L.ata, aspect, mySpeed: me.speed, tgSpeed: tg.speed, tgG: tg.nCur });
@@ -161,7 +161,7 @@ export class Hud {
       if (inbound) {
         const blink = Math.floor(this.t * (closest < 1500 ? 8 : 4)) % 2 === 0;
         if (blink) this.banner('MISSILE', RED, h * 0.24, S);
-      } else if (me.lockedBy > 0) {
+      } else if (me.lockedBy > 0 && (!opts.academy || opts.academy.enemyWeapons)) {
         if (Math.floor(this.t * 2) % 2 === 0) this.banner('WARNING · LOCKED', AMBER, h * 0.24, S * 0.8);
       }
       // ground / stall warnings
@@ -216,34 +216,44 @@ export class Hud {
       const on = !p.behind && p.x > 0 && p.x < w && p.y > 0 && p.y < h;
       const color = m.color || CYAN;
       if (on) {
-        const r = Math.max(9 * S, Math.min(70 * S, (m.radius || 200) * 700 / Math.max(d, 1) * S));
+        const r = m.kind === 'reference' ? 4*S : Math.max(9 * S, Math.min(70 * S, (m.radius || 200) * 700 / Math.max(d, 1) * S));
         g.strokeStyle = color; g.lineWidth = Math.max(2, 2 * S);
         g.beginPath(); g.arc(p.x, p.y, r, 0, Math.PI * 2); g.stroke();
         g.beginPath(); g.arc(p.x, p.y, 2 * S, 0, Math.PI * 2); g.stroke();
         g.fillStyle = color; g.textAlign = 'left';
-        g.fillText(`${m.label} ${(d / 1000).toFixed(1)}km`, p.x + r + 5 * S, p.y);
+        g.fillText(`${m.label} ${(d / 1000).toFixed(1)}km`, p.x + r + 5 * S, p.y+(m.labelOffsetY||0)*S);
       } else this.edgeArrow(p, color, `${m.label}`, S, true);
     }
-    const x = 12 + (this.safeLeft || 0), y = 52 * Math.max(1, S * 0.9), pw = Math.min(250, w * 0.3);
+    const x = 12 + (this.safeLeft || 0), y = 52 * Math.max(1, S * 0.9), pw = Math.min(310, w * 0.38);
     g.save();
+    const fontPx = Math.max(12, Math.round(11*S)), lineH = fontPx+3;
+    g.font = `600 ${fontPx}px ui-sans-serif, system-ui, "PingFang TC", sans-serif`;
+    const hint = v.guidance;
+    const rows = hint ? [
+      ...wrapText(g, hint.goal, pw-16, 1).map(text => ({ text, color: WHITE })),
+      ...wrapText(g, hint.readout, pw-16, 2).map(text => ({ text, color: CYAN })),
+      ...wrapText(g, hint.tip, pw-16, 2).map(text => ({ text, color: hint.state === 'good' ? GREEN : hint.state === 'warn' ? AMBER : WHITE })),
+    ] : wrapText(g, v.text || '', pw-16, 3).map(text => ({text,color:WHITE}));
+    const ph = 25 + rows.length*lineH;
     g.fillStyle = 'rgba(8,22,40,0.55)';
-    g.fillRect(x, y, pw, 54 * S);
+    g.fillRect(x, y, pw, ph);
     g.fillStyle = CYAN; g.textAlign = 'left';
-    g.font = `700 ${Math.round(10 * S)}px ui-sans-serif, system-ui, "PingFang TC", sans-serif`;
-    g.fillText(`${v.lesson}  ${v.step}`, x + 7 * S, y + 10 * S);
-    g.fillStyle = WHITE;
-    g.font = `600 ${Math.round(11 * S)}px ui-sans-serif, system-ui, "PingFang TC", sans-serif`;
-    wrapText(g, v.text || '', pw - 14 * S, 2).forEach((ln, i) => g.fillText(ln, x + 7 * S, y + (24 + i * 13) * S));
+    g.font = `700 ${Math.max(11, Math.round(10*S))}px ui-sans-serif, system-ui, "PingFang TC", sans-serif`;
+    g.fillText(`${v.lesson}  ${v.step}`, x+8, y+10);
+    g.font = `600 ${fontPx}px ui-sans-serif, system-ui, "PingFang TC", sans-serif`;
+    rows.forEach((row,i) => { g.fillStyle=row.color; g.fillText(row.text,x+8,y+25+i*lineH); });
     if (v.progress != null) {
-      g.fillStyle = 'rgba(244,251,255,0.18)'; g.fillRect(x + 7 * S, y + 48 * S, pw - 14 * S, 3 * S);
-      g.fillStyle = GREEN; g.fillRect(x + 7 * S, y + 48 * S, (pw - 14 * S) * v.progress, 3 * S);
+      g.fillStyle = 'rgba(244,251,255,0.18)'; g.fillRect(x+8,y+ph-5,pw-16,3);
+      g.fillStyle = GREEN; g.fillRect(x+8,y+ph-5,(pw-16)*v.progress,3);
     }
+    this.academyLayout = { x, y, width: pw, height: ph, fontPx, lines: rows.map(row=>row.text) };
     g.restore();
   }
 
   /** Floating banners and the radio subtitle (also shown during the kill cam). */
   overlay(dt, S) {
     const g = this.g, w = this.w, h = this.h;
+    this.radioLayout = null;
     g.textBaseline = 'middle';
     // floating messages
     this.msgs = this.msgs.filter((m) => (m.t += dt) < m.life);
@@ -264,19 +274,21 @@ export class Hud {
       if (this.radio.t > life) this.radio = null;
       else {
         g.globalAlpha = Math.min(1, (life - this.radio.t) * 2);
-        g.font = `600 ${Math.round(13 * S)}px ui-sans-serif, system-ui, "PingFang TC", "Noto Sans TC", sans-serif`;
+        const fontPx = Math.max(this.radio.who === 'KITE' ? 14 : 0, Math.round(13*S));
+        g.font = `600 ${fontPx}px ui-sans-serif, system-ui, "PingFang TC", "Noto Sans TC", sans-serif`;
         const txt = `${this.radio.who} ▸ ${this.radio.text}`;
         // Wrap between the thumb zones (stick left, weapons right) and keep it above the radar.
         const maxW = Math.min(w * 0.54, 560 * S);
-        const lines = wrapText(g, txt, maxW, 3);
+        const lines = wrapText(g, txt, maxW, this.radio.who === 'KITE' ? 2 : 3);
         const tw = Math.max(...lines.map((l) => g.measureText(l).width));
-        const lh = 17 * S, bottom = Math.min(h * 0.78 + 12 * S, h - 92 * S);
+        const lh = Math.max(17*S, fontPx+4), bottom = Math.min(h * 0.78 + 12 * S, h - 92 * S);
         const top = bottom - lines.length * lh - 6 * S;
         g.fillStyle = 'rgba(10,20,35,0.6)';
         g.fillRect(w * 0.5 - tw / 2 - 10 * S, top, tw + 20 * S, bottom - top);
         g.fillStyle = this.radio.who === 'J-16' ? '#ffb3b3' : this.radio.who === 'KITE' ? '#ffe2a3' : '#bfe8ff';
         g.textAlign = 'center';
         lines.forEach((l, i) => g.fillText(l, w * 0.5, top + 3 * S + lh * (i + 0.5)));
+        this.radioLayout = { x:w*0.5-tw/2-10*S, y:top, width:tw+20*S, height:bottom-top, fontPx, lines };
         g.globalAlpha = 1;
       }
     }

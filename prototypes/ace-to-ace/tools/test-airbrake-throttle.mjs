@@ -77,6 +77,7 @@ try {
   globalThis.window = { addEventListener() {} };
   const input = new Input(root);
   boostButton.fire('touchstart');
+  boostButton.fire('touchend'); // a tap ends before the next tap starts
   assert.equal(input.boost(), true);
   brakeButton.fire('touchstart');
   assert.equal(input.brake(), true);

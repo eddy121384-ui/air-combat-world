@@ -18,7 +18,7 @@ export function createLessonSession(lesson, { flight, control, input, settings =
     red: { type: 'J16', name: lesson.foeName || 'J-16' },
   });
   const player = new PlayerController(match.blue, input, { ...settings, assist: control === 'assisted' });
-  const runner = new LessonRunner(lesson, match, { flight, control });
+  const runner = new LessonRunner(lesson, match, { flight, control, inputDevice:()=>input.inputDevice || 'stick' });
   // Lesson rules filter the player's commands (e.g. "engine at idle"); the
   // aircraft itself is the unmodified shared flight model.
   match.setController(match.blue, { player, update: (dt, m) => runner.filter(player.update(dt, m)) });

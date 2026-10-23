@@ -8,6 +8,7 @@ import {
   sub, norm, len, dot, clamp, angleBetween, forwardOf, qLook, qMul, qAxisAngle, qNormalize, DEG, G, UP,
 } from '../sim/math.js';
 import { headingOf, bankAngle, pitchAngle, specificEnergy, availableG, instantTurnRate, bestTurn, MIN_SPEED } from '../sim/aircraft.js';
+import { controlText } from './control-text.js';
 import { pullUpWarning } from '../sim/warnings.js';
 
 export const KMH = 3.6;
@@ -15,6 +16,28 @@ export const wrapDeg = (a) => ((a % 360) + 540) % 360 - 180;
 export const hdgDeg = (ac) => (headingOf(ac) / DEG + 360) % 360;
 export const gammaDeg = (ac) => Math.asin(clamp(ac.vel.y / Math.max(ac.speed, 1), -1, 1)) / DEG;
 export const bankDeg = (ac) => bankAngle(ac) / DEG;
+
+// One clock and short, complete subtitle chunks: no clipped mobile instructions.
+export const RADIO_CHARS = 28;
+export const radioDuration = (text) => 2.2 + Array.from(text).length * 0.075;
+export function radioChunks(text) {
+  const chars = Array.from(text || ''), chunks = [];
+  while (chars.length) {
+    let count = Math.min(RADIO_CHARS, chars.length);
+    if (chars.length > count) {
+      // Prefer a completed sentence, then a clause, then a word boundary.
+      // A late space must not override an earlier complete instruction.
+      for (const stops of ['。！？；','，：',' ']) {
+        let cut=-1;
+        for (let i=count-1;i>=5;i--)if(stops.includes(chars[i])){cut=i+1;break;}
+        if(cut>0){count=cut;break;}
+      }
+    }
+    const chunk = chars.splice(0, count).join('').trim();
+    if (chunk) chunks.push(chunk);
+  }
+  return chunks;
+}
 
 /** Put a jet into an exact scenario state (lesson start or a "situation" reset). */
 export function placeJet(ac, { pos, alt, speed, heading = 0, pitch = 0, bank = 0, throttle } = {}) {
@@ -52,9 +75,9 @@ export class LessonRunner {
    * @param {Match} match     the live match (already constructed by the caller)
    * @param {object} o        { flight: 'arcade'|'tactical', control: 'assisted'|'expert' }
    */
-  constructor(lesson, match, { flight = 'arcade', control = 'expert' } = {}) {
+  constructor(lesson, match, { flight = 'arcade', control = 'expert', inputDevice = () => 'stick' } = {}) {
     this.lesson = lesson; this.match = match;
-    this.flight = flight; this.control = control;
+    this.flight = flight; this.control = control; this.inputDevice = inputDevice;
     this.me = match.blue; this.foe = match.red;
     this.tune = { ...(lesson.tune?.all || {}), ...(lesson.tune?.[flight] || {}), ...(lesson.tune?.[`${flight}:${control}`] || {}) };
     this.rules = { weapons: false };
@@ -62,10 +85,11 @@ export class LessonRunner {
     this.lines = []; this.queue = []; this.nextLineT = 0; this.spoken = [];
     this.result = null; this.notes = {}; this.flashes = [];
     this.onSay = null; this.onFlash = null; // UI hooks (browser)
+    this.coached = new Set(); this.lastCoachT = -10;
     lesson.setup?.(this);
     this.tel = newTelemetry(this.me);
     match.on((ev) => this.onEvent(ev));
-    for (const line of lesson.intro || []) this.say(typeof line === 'function' ? line(this) : line);
+    // Narrative belongs in the briefing. The first airborne line must be the task.
     this.next();
   }
 
@@ -85,7 +109,16 @@ export class LessonRunner {
   get tactical() { return this.flight === 'tactical'; }
   /** Text variant by control mode: pick(assistedText, expertText). */
   pick(a, e) { return this.assisted ? a : e; }
-  say(text) { if (text) this.queue.push(text); }
+  say(text, { urgent = false } = {}) {
+    if (urgent) { this.queue.length = 0; this.nextLineT = 0; }
+    this.queue.push(...radioChunks(text));
+  }
+  coachOnce(key, text, { urgent = false } = {}) {
+    const id = `${this.phaseIdx}:${key}`;
+    if (this.coached.has(id) || (!urgent && this.t-this.lastCoachT < 7)) return;
+    this.coached.add(id); this.lastCoachT = this.t;
+    this.say(text, { urgent });
+  }
   flash(text, color = '#7fe3ff') { this.flashes.push({ text, color }); this.onFlash?.(text, color); }
   note(key, value) { this.notes[key] = value; }
 
@@ -102,7 +135,9 @@ export class LessonRunner {
 
   // ---------------- phases ----------------
   next() {
+    if (this.phase) this.flash(`CHECK ${this.phaseIdx+1}/${this.lesson.phases.length}`, '#7dffb0');
     if (this.phase?.exit) this.phase.exit(this);
+    this.queue.length = 0; this.nextLineT = 0; // never issue a previous phase's command
     this.phaseIdx += 1;
     this.phase = this.lesson.phases[this.phaseIdx] || null;
     this.phaseT = 0; this.d = {};
@@ -118,13 +153,15 @@ export class LessonRunner {
     if (this.result) return;
     const fb = this.lesson.debrief ? this.lesson.debrief(this, success) : {};
     const grade = success ? (this.lesson.grade ? this.lesson.grade(this) : 'B') : null;
+    const citation = success ? (fb.closing || this.lesson.closing || '漂亮。回場。')
+      : this.lesson.final ? fb.closing : '先修正結算中的一個動作，再飛同一個開局。我還在你的頻道上。';
     this.result = {
       success, reason, grade, time: this.t,
       good: fb.good || [], improve: fb.improve || [], stats: fb.stats || [],
       phase: this.phase?.id || null,
+      citation,
     };
-    if (success) this.say(fb.closing || this.lesson.closing || '漂亮。回場。');
-    else if (reason) this.say(reason);
+    this.say(success ? this.result.citation : reason, { urgent: true });
   }
 
   fail(reason) { this.finish(false, reason); }
@@ -180,10 +217,11 @@ export class LessonRunner {
   tickRadio(dt) {
     this.nextLineT -= dt;
     if (this.nextLineT <= 0 && this.queue.length) {
-      const text = this.queue.shift();
+      const chunks=radioChunks(controlText(this.queue.shift(),this.inputDevice()));
+      const text=chunks.shift();this.queue.unshift(...chunks);
       this.spoken.push({ t: this.t, text });
       this.onSay?.(text);
-      this.nextLineT = Math.min(6.5, 1.6 + text.length * 0.075);
+      this.nextLineT = radioDuration(text) + 0.15;
     }
   }
 
@@ -191,6 +229,8 @@ export class LessonRunner {
   view() {
     const ph = this.phase;
     const limit = this.tune.timeLimit ?? this.lesson.timeLimit;
+    const guidance=this.lesson.guidance?.(this) || null;
+    if(guidance)guidance.tip=controlText(guidance.tip,this.inputDevice());
     return {
       lesson: `${String(this.lesson.no).padStart(2, '0')} ${this.lesson.title}`,
       step: ph ? `${this.phaseIdx + 1}/${this.lesson.phases.length}` : '',
@@ -199,6 +239,9 @@ export class LessonRunner {
       timer: limit ? Math.max(0, limit - this.t) : null,
       markers: ph?.markers ? ph.markers(this) : [],
       done: !!this.result,
+      guidance,
+      weapons: !!this.rules.weapons,
+      enemyWeapons: this.lesson.id !== 'L07',
     };
   }
 }

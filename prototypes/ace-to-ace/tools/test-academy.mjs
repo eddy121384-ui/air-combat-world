@@ -66,19 +66,23 @@ const EXPECT = {
   'L06:late': { modes: MODES, match: /墜海|最低/ },
   'L07:pure': { modes: MODES, match: /衝過頭|lead|提前量/ },
   'L08:spray': { modes: MODES, match: /Pk|鎖定/ },
+  'L08:bodyAim': { modes: MODES, match: /瞄著它本身|提前量/ },
   'L09:ignore': { modes: MODES, match: /沒放熱焰彈/ },
   'L09:early': { modes: MODES, match: /太早/ },
 };
+let wrongChecks=0;
 for (const [key, exp] of Object.entries(EXPECT)) {
   const [id] = key.split(':');
   if (only && id !== only) continue;
   for (const mode of exp.modes) {
     const r = fly(lessonById(id), mode, BAD[key], { maxT: 400 });
+    wrongChecks++;
     const ok = r.result && !r.result.success && exp.match.test(r.result.reason || '');
     table.push({ lesson: key, mode, ok, grade: 'fail-expected', t: +r.t.toFixed(1), reason: r.result?.reason ?? '(no result)' });
     if (!ok) { failures++; console.log(`${key} ${mode}: expected causal failure ${exp.match}, got ${JSON.stringify(r.result?.reason)} success=${r.result?.success}`); }
   }
 }
+if(!only)assert.equal(wrongChecks,52,'48 original cases plus 4 body-aim failures');
 
 // The final checkride is a real 1v1 vs VETERAN: completable, not guaranteed. The
 // HUD-only "good" human proxy must win a fair share over 12 openings in every mode.
