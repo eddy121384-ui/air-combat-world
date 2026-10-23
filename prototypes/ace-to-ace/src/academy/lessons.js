@@ -316,12 +316,11 @@ const L04 = {
           return { fail: `轉率 ${res.dps.toFixed(1)}°/s，只比高速時快 ${Math.round((res.dps / fast.dps - 1) * 100)}%。轉彎時速度跑到 ${fmt(res.v0)}，離菱形區太遠，或沒有拉滿。` };
         }
         r.flash(`轉率 +${Math.round((res.dps/fast.dps-1)*100)}%`, '#7dffb0');
-        r.coachOnce('corner-gain', `同樣滿桿，轉率多了 ${Math.round((res.dps/fast.dps-1)*100)}%。速度對了，G 才買得到好位置。`);
         return undefined;
       } }),
     turnPhase({ id: 'sustain', deg: 360,
       armKmh: 750, armedRules: { ab: false },
-      say: (r) => `先回到 750，計時後 AB 停用。MIL 轉一圈，${r.tune.sustainT} 秒內，保留 ${r.tune.sustainV}。第二圈還想飛，就別把速度全花光。`,
+      say: (r) => `先回到 750，計時後 AB 停用。同樣滿桿，上一圈轉率多了 ${Math.round((r.notes.corner.dps/r.notes.fast.dps-1)*100)}%。MIL 轉一圈，${r.tune.sustainT} 秒內，保留 ${r.tune.sustainV}。第二圈還想飛，就別把速度全花光。`,
       text: (r) => `MIL 轉 360°（AB 停用）　${Math.round(r.d.turned)}°　${r.tune.sustainT}s 內　${fmt(r.kmh)} km/h（≥${r.tune.sustainV}）`,
       check: (r, res) => {
         if (res.t > r.tune.sustainT) return { fail: `轉完 360° 用了 ${res.t.toFixed(1)} 秒（要 ${r.tune.sustainT} 秒內）：太保守了，拉多一點，讓 G 留在菱形區給你的轉率。` };
@@ -586,7 +585,7 @@ const L07 = {
         if (!r.d.armed && g.R > 800) r.d.armed = true;
         if (r.d.over >= 3) {
           const m = r.d.mix, tot = m.lead + m.pure + m.lag;
-          return { fail: `第 3 次衝過頭（最後一次接近率 ${fmt(r.d.lastClose)} km/h）。你 ${pct(m.lead + m.pure, tot)}% 的時間用 lead／pure 直衝——在轉彎戰裡那只會把你送到它前面。近距離改 lag：機頭放在它後方、速度跟它一樣。` };
+          return { fail: `第 3 次衝過頭（本段最高接近率 ${fmt(r.d.lastClose)} km/h）。你 ${pct(m.lead + m.pure, tot)}% 的時間用 lead／pure 直衝——在轉彎戰裡那只會把你送到它前面。近距離改 lag：機頭放在它後方、速度跟它一樣。` };
         }
         if (r.d.held >= 12) { r.note('mix', { ...r.d.mix }); r.note('over', r.d.over); r.note('maxClose', r.d.maxClose); return 'done'; }
         if (r.phaseT > 100) return { fail: `100 秒只在控制區待了 ${r.d.held.toFixed(1)} 秒。${g.R > 1400 ? '你一直離太遠：遠距離用 lead（機頭放在它前方）切內圈追上去。' : '你常常偏到它側面：跟著它的轉彎圈內側飛，別在外側繞。'}` };

@@ -48,6 +48,9 @@ for(const mode of modes) {
         'no combat/physics/AI/seed changes hidden behind teaching changes');
       if(r.result.success)assert.match(r.result.citation,/資格通過/);
     }
+    if(lesson.id==='L04') {
+      assert.ok(r.spoken.some(line=>line.text.includes('上一圈轉率多了')),'measured corner feedback survives the phase transition and is actually spoken');
+    }
     if(lesson.id==='L05') {
       const drop=Math.round(4500-r.notes.diveAlt).toLocaleString('en-US');
       assert.ok(r.result.good.some(line=>line.includes(`實際減少 ${drop}`)),'energy debrief uses actual altitude');
