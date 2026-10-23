@@ -8,6 +8,7 @@
 //
 // Flags: --n matches, --seed base seed, --blue/--red skill (rookie|veteran|ace|chaser|straight|circle),
 //        --spawn default|random, --swap (J-16 on blue side), --verbose (print transitions of match 1)
+//        --feel A|B|arcade|tactical (flight physics, both sides), --control assisted|expert (human proxies)
 import { writeFileSync, mkdirSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -22,28 +23,31 @@ const HERE = dirname(fileURLToPath(import.meta.url));
 const args = Object.fromEntries(process.argv.slice(2).map((a, i, arr) => a.startsWith('--')
   ? [a.slice(2), arr[i + 1] && !arr[i + 1].startsWith('--') ? arr[i + 1] : true] : null).filter(Boolean));
 
-function makeCtrl(kind, ac, seed) {
+const FEEL = ['A', 'B', 'arcade', 'tactical'].includes(args.feel) ? args.feel : 'A';
+const CONTROL = args.control === 'expert' ? 'expert' : 'assisted';
+
+function makeCtrl(kind, ac, seed, control = CONTROL) {
   if (kind === 'straight') return new StraightBot(ac);
   if (kind === 'circle') return new CircleBot(ac);
   if (kind === 'chaser') return new ChaserBot(ac, { seed });
   if (kind === 'chaser-perfect') return new ChaserBot(ac, { perfect: true, seed });
-  if (kind === 'human') return new HumanProxy(ac, { level: 'average', seed, PlayerController });
-  if (kind === 'human-good') return new HumanProxy(ac, { level: 'good', seed, PlayerController });
+  if (kind === 'human') return new HumanProxy(ac, { level: 'average', seed, PlayerController, control });
+  if (kind === 'human-good') return new HumanProxy(ac, { level: 'good', seed, PlayerController, control });
   return new PilotAI(ac, { skill: kind, seed });
 }
 
-export function runMatch({ seed, blue = 'veteran', red = 'veteran', spawn = 'default', swap = false, timeLimit }) {
+export function runMatch({ seed, blue = 'veteran', red = 'veteran', spawn = 'default', swap = false, timeLimit, flightFeel = 'A', control = CONTROL }) {
   const rng = makeRng(seed * 7919 + 13);
   const sp = spawn === 'random' ? randomSpawn(rng) : defaultSpawn(rng);
   // a human-proxy "player" gets the player's difficulty damage rule, like in the game
   const humanBlue = String(blue).startsWith('human');
   const m = new Match({
-    seed, timeLimit,
+    seed, timeLimit, flightFeel,
     blue: { type: swap ? 'J16' : 'F16V', name: 'BLUE', damageScale: humanBlue ? PLAYER_DAMAGE_SCALE[red] ?? 1 : 1 },
     red: { type: swap ? 'F16V' : 'J16', name: 'RED' }, spawn: sp,
   });
-  const cb = makeCtrl(blue, m.blue, seed * 3 + 1);
-  const cr = makeCtrl(red, m.red, seed * 3 + 2);
+  const cb = makeCtrl(blue, m.blue, seed * 3 + 1, control);
+  const cr = makeCtrl(red, m.red, seed * 3 + 2, control);
   m.setController(m.blue, cb); m.setController(m.red, cr);
 
   const st = {
@@ -198,13 +202,13 @@ if (isMain) {
   ] : [{ label: `${args.blue || 'veteran'} vs ${args.red || 'veteran'} (${args.spawn || 'default'})`, blue: args.blue || 'veteran', red: args.red || 'veteran', spawn: args.spawn || 'default', swap: !!args.swap }];
   const report = [];
   for (const s of suites) {
-    const rs = runBatch({ ...s, n, seed: +(args.seed || 1) });
+    const rs = runBatch({ ...s, n, seed: +(args.seed || 1), flightFeel: FEEL });
     const sum = summarize(s.label, rs);
     printSummary(sum);
     report.push({ ...sum, matches: rs.map(({ modesBlue, modesRed, ...r }) => r) });
   }
   if (args.verbose) {
-    const r = runMatch({ seed: +(args.seed || 1), blue: args.blue || 'veteran', red: args.red || 'veteran', spawn: args.spawn || 'default' });
+    const r = runMatch({ seed: +(args.seed || 1), blue: args.blue || 'veteran', red: args.red || 'veteran', spawn: args.spawn || 'default', flightFeel: FEEL });
     console.log(`\nmatch seed ${r.seed}: winner ${r.winner} by ${r.reason} at ${r.time}s`);
     for (const [name, c] of [['BLUE', r._ctrl.cb], ['RED', r._ctrl.cr]]) {
       if (!c.transitions) continue;
@@ -219,7 +223,7 @@ if (isMain) {
     // committed report keeps the summaries only (per-match rows stay in tools/out)
     const slim = args.write ? report.map(({ matches, ...sum }) => sum) : report;
     writeFileSync(outPath, JSON.stringify(slim, null, 1));
-    console.log(`\nwrote ${outPath}`);
+    console.log(`\nwrote ${outPath} (feel ${FEEL}, human control ${CONTROL})`);
   }
   console.log(`\n(${((Date.now() - t0) / 1000).toFixed(1)}s)`);
 }

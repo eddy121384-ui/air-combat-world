@@ -40,6 +40,23 @@ export const MAX_ROT_RATE = 1.3; // rad/s, hard sanity cap on flight-path rotati
 // same kinematics apply to AI and player. 0.09s provides modest separation at high G.
 export const FLIGHT_PATH_LAG = 0.09; // seconds, not a free HUD-only animation
 
+// Same integrator, different arcade-tuned performance envelopes. Not aircraft data.
+// Flight-feel polish (Oct 2026, docs/flight-feel-polish.md): both profiles gained a
+// transonic drag rise so top speed is set by drag instead of the MAX_SPEED clamp;
+// Arcade hard turns now cost a little energy; Tactical keeps its corner-speed peak
+// but sheds the excess drag that made MIL unable to sustain more than ~3.4G; the
+// roll stop is crisper in both. Historical values are in the baseline JSON.
+export const WAVE_DRAG_SPEED = 300; // m/s, ~M0.9 at the fight altitude
+export const STALL_PITCH_RATE = 0.9; // rad/s nose drop at the speed floor (profile.stall = onset speed)
+export const FLIGHT_PROFILES = Object.freeze({
+  arcade: Object.freeze({ engine: 1.12, parasite: 0.65, induced: 0.42, wave: 0.0011, stall: 62,
+    spool: 0.70, abSpool: 0.85, gOnset: 0.45,
+    roll: 1.16, rollOnset: 0.55, rollStop: 0.2, pathLag: 0.065 }),
+  tactical: Object.freeze({ engine: 1.05, parasite: 0.72, induced: 0.82, wave: 0.0007, stall: 75,
+    spool: 0.78, abSpool: 1.0, gOnset: 0.56,
+    roll: 1.08, rollOnset: 0.64, rollStop: 0.28, pathLag: 0.075 }),
+});
+
 export function makeControls() {
   // pitch: +1 pull (nose up in body frame), roll: +1 roll right, yaw: +1 nose right
   // throttle 0..1 (1 = military power), boost = afterburner, brake = airbrake
@@ -75,6 +92,20 @@ export const specificEnergy = (ac) => ac.pos.y + (ac.speed * ac.speed) / (2 * G)
 /** Max load factor available at the current speed (lift-limited below corner speed). */
 export function availableG(ac, speed = ac.speed) {
   const t = ac.type;
+  if (ac.flightFeel === 'arcade') {
+    // Wider corner-speed band and gentler low-speed loss of turning authority than
+    // Tactical. Exponent > 1 keeps the turn-RATE peak at corner speed: the former
+    // 0.25*maxG floor made the jet turn fastest (~47 deg/s) at the 45 m/s clamp,
+    // so braking to a crawl beat every other tactic. Slow now tightens the radius
+    // (an AC-style brake turn) but no longer adds turn rate.
+    const r = Math.max(speed, MIN_SPEED) / (t.cornerSpeed * 0.90);
+    return Math.max(0.35, t.maxG * 1.05 * Math.min(1, Math.pow(r, 1.3)));
+  }
+  if (ac.flightFeel === 'tactical' || ac.flightFeel === 'B') {
+    // RB-inspired speed-squared lift limit. No real AoA/stall computation yet.
+    const r = Math.max(speed, MIN_SPEED) / t.cornerSpeed;
+    return Math.max(0.35, Math.min(t.maxG, 9) * Math.min(1, r * r));
+  }
   const r = speed / t.cornerSpeed;
   return Math.max(0.35, t.maxG * Math.min(1, r * r));
 }
@@ -82,7 +113,28 @@ export function availableG(ac, speed = ac.speed) {
 /** Rough sustained/instantaneous turn rate (rad/s) at a given G and speed. */
 export const turnRate = (n, speed) => (n * G) / Math.max(speed, MIN_SPEED);
 
-export function stepAircraft(ac, dt) {
+/** Level-turn rate (rad/s) the airframe can pull right now at `speed`. */
+export function instantTurnRate(ac, speed = ac.speed) {
+  const n = availableG(ac, speed);
+  return Math.sqrt(Math.max(0, n * n - 1)) * G / Math.max(speed, MIN_SPEED);
+}
+const bestTurnCache = new Map();
+/** Best instantaneous level-turn rate over the speed range, and the speed band
+ *  where at least `share` of it is available (HUD "best turn speed" cue). */
+export function bestTurn(ac, share = 0.92) {
+  const key = `${ac.type.id}:${ac.flightFeel}:${share}`;
+  if (!bestTurnCache.has(key)) {
+    let best = 0;
+    const rates = [];
+    for (let v = MIN_SPEED; v <= MAX_SPEED; v += 2) { const w = instantTurnRate(ac, v); rates.push([v, w]); best = Math.max(best, w); }
+    const band = rates.filter(([, w]) => w >= best * share).map(([v]) => v);
+    bestTurnCache.set(key, { rate: best, lo: band[0], hi: band[band.length - 1] });
+  }
+  return bestTurnCache.get(key);
+}
+
+
+function stepLegacyAircraft(ac, dt) {
   if (!ac.alive) return;
   const t = ac.type;
   const c = ac.controls;
@@ -190,3 +242,83 @@ export function headingOf(ac) {
 }
 
 export { add, v3 };
+
+
+// Flight-feel experiment: A routes through the original, byte-for-byte legacy integration
+// above. B is a separate integration, applied identically to the player and both AI aircraft.
+// No orientation teleport, arbitrary nose steering, or HUD-only FPM substitution.
+export function stepAircraft(ac, dt) {
+  return ['arcade', 'tactical', 'B'].includes(ac.flightFeel)
+    ? stepModeAircraft(ac, dt) : stepLegacyAircraft(ac, dt);
+}
+function stepModeAircraft(ac, dt) {
+  if (!ac.alive) return;
+  const t = ac.type, c = ac.controls;
+  const profile = ac.flightFeel === 'arcade' ? FLIGHT_PROFILES.arcade : FLIGHT_PROFILES.tactical;
+  const fwd = forwardOf(ac.q);
+  // AB, throttle and brake remain independent in both physics profiles.
+  const thrCmd = clamp(c.boost ? 1 : c.throttle, 0, 1);
+  ac.thrustCur += (thrCmd - ac.thrustCur) * Math.min(1, dt / (t.spool * profile.spool));
+  ac.abCur += ((c.boost ? 1 : 0) - ac.abCur) * Math.min(1, dt / (t.spool * profile.abSpool));
+  const altitude = clamp(1 - ac.pos.y / 16000, 0.35, 1);
+  const thrust = (ac.thrustCur * t.thrustMil + ac.abCur * t.thrustAB)
+    * profile.engine * altitude;
+
+  const pitchIn = clamp(c.pitch, -1, 1), nAvail = availableG(ac);
+  // Near the speed floor the auto-trim gives up holding the flight path (see stall below).
+  const stall = clamp((profile.stall - ac.speed) / (profile.stall - MIN_SPEED), 0, 1);
+  const nMin = t.minG * Math.min(1, nAvail / t.maxG), n0 = neutralG(ac) * (1 - stall);
+  // Stick directly requests the G currently available from the airframe.
+  // No brake-triggered G unlock: at low speed, full pull is still lift-limited.
+  const nCmd = pitchIn >= 0
+    ? n0 + pitchIn * (nAvail - n0)
+    : n0 + pitchIn * (n0 - nMin);
+  // Faster G onset and more decisive roll stop without snapping orientation.
+  ac.nCur += (nCmd - ac.nCur) * Math.min(1, dt / (t.gOnset * profile.gOnset));
+
+  const v = ac.speed;
+  // Induced drag grows ~G squared: instant nose authority costs energy.
+  // BRK is independent parasite drag, not a source of extra lift or turn G.
+  const drag = t.dragK * profile.parasite * v * v * (c.brake ? 2.6 : 1)
+    + t.inducedK * profile.induced * ac.nCur * ac.nCur
+      * (200 / Math.max(v, MIN_SPEED)) ** 1.5
+    + profile.wave * Math.max(0, v - WAVE_DRAG_SPEED) ** 2
+    + Math.abs(c.yaw) * 1.2;
+  ac.speed = clamp(v + (thrust - drag - G * fwd.y) * dt, MIN_SPEED, MAX_SPEED);
+
+  const rollCmd = clamp(c.roll, -1, 1);
+  const rollOnset = t.rollOnset * (rollCmd === 0 ? profile.rollStop : profile.rollOnset);
+  ac.rollRateCur += (rollCmd * t.rollRate * profile.roll - ac.rollRateCur)
+    * Math.min(1, dt / rollOnset);
+  let q = qMul(ac.q, qAxisAngle({ x: 0, y: 0, z: -1 }, ac.rollRateCur * dt));
+  const up = upOf(q), f = forwardOf(q);
+  const gPerp = perp({ x: 0, y: -G, z: 0 }, f);
+  const acceleration = addScaled(gPerp, up, ac.nCur * G);
+  const aMag = len(acceleration);
+  if (aMag > 1e-4) {
+    const rate = Math.min(aMag / Math.max(ac.speed, MIN_SPEED), MAX_ROT_RATE);
+    q = qMul(qAxisAngle(norm(cross(f, acceleration)), rate * dt), q);
+  }
+  const yawRate = clamp(c.yaw, -1, 1) * t.yawRate * clamp(ac.speed / 120, 0.3, 1);
+  q = qMul(q, qAxisAngle({ x: 0, y: -1, z: 0 }, yawRate * dt));
+  // Stall: near the speed floor the wing can no longer hold the nose up, so it
+  // falls toward the ground. Without this the MIN_SPEED clamp was free energy: a
+  // vertical climb hung at 45 m/s forever (and out through the ceiling).
+  if (stall > 0) {
+    const nose = forwardOf(q);
+    let fall = perp({ x: 0, y: -1, z: 0 }, nose);
+    if (len(fall) < 0.2) fall = scale(upOf(q), -1); // vertical: push over
+    q = qMul(qAxisAngle(norm(cross(nose, norm(fall))), STALL_PITCH_RATE * stall * dt), q);
+  }
+  ac.q = qNormalize(q);
+
+  // The true world-space velocity follows the nose over a short finite lag;
+  // FPM continues to report the direction of actual displacement.
+  const nose = forwardOf(ac.q), path = norm(ac.vel);
+  const response = 1 - Math.exp(-dt / profile.pathLag);
+  const travel = norm(addScaled(path, sub(nose, path), response));
+  ac.vel = scale(travel, ac.speed);
+  ac.pos = addScaled(ac.pos, ac.vel, dt);
+  ac.aoaVisual = Math.acos(clamp(dot(nose, travel), -1, 1));
+  ac.gLoad = ac.nCur;
+}

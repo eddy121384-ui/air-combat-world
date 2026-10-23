@@ -2,12 +2,17 @@
 import * as THREE from 'three';
 import { makeAircraftMesh, outlineMaterial } from './models.js';
 import { makeRng } from '../sim/math.js';
+import { availableG } from '../sim/aircraft.js';
 
 import { SKY_HORIZON, FOG_HEX, SUN_VECTOR, INK_HEX, INK_WIDTH,
   SKY_VS, SKY_FS, SEA_VS, SEA_FS, CLOUD_VS, CLOUD_FS } from './lookdev.js';
 
 const SUN_DIR = new THREE.Vector3(...SUN_VECTOR).normalize();
 const v3 = (a) => new THREE.Vector3(a.x, a.y, a.z);
+// Chase-camera attitude lag (s): direction (pitch/yaw) and roll. 0.2 s roll matches
+// the previous up-vector smoothing; the direction lag is new (flight-feel polish).
+const CHASE_DIR_LAG = 0.15;
+const CHASE_UP_LAG = 0.2;
 
 // ------------------------------------------------------------------ shaders
 const RIBBON_VS = `
@@ -318,6 +323,8 @@ export class Renderer {
       if (!pl) continue;
       if (!ac.alive) continue;
       const g = pl.group;
+      g.visible = !ac.dormant;
+      if (ac.dormant) continue;
       g.position.set(ac.pos.x, ac.pos.y, ac.pos.z);
       g.quaternion.set(ac.q.x, ac.q.y, ac.q.z, ac.q.w);
       const ab = ac.abCur, thr = ac.thrustCur;
@@ -464,17 +471,37 @@ export class Renderer {
         wantLook = pos.clone().addScaledVector(dir, Math.min(toT.length() * 0.5, 600));
         wantUp = new THREE.Vector3(0, 1, 0).lerp(up, 0.3).normalize();
       } else {
+        // The camera frame trails the jet's attitude by a short time constant, so in
+        // a pull the nose visibly leads the view and the jet carves across the
+        // screen instead of sitting glued to the centre. Straight and level framing
+        // is unchanged; it is presentation only (sim, aim and HUD projection untouched).
+        if (!this.camState || !this.camFwd) { this.camFwd = fwd.clone(); this.camUp = up.clone(); }
+        this.camFwd.lerp(fwd, 1 - Math.exp(-dt / CHASE_DIR_LAG)).normalize();
+        this.camUp.lerp(up, 1 - Math.exp(-dt / CHASE_UP_LAG));
+        this.camUp.addScaledVector(this.camFwd, -this.camUp.dot(this.camFwd)).normalize();
         const speedK = Math.min(1, ac.speed / 350);
-        wantPos = pos.clone().addScaledVector(fwd, -34 - speedK * 6).addScaledVector(up, 9);
-        wantLook = pos.clone().addScaledVector(fwd, 70).addScaledVector(up, 3);
-        wantUp = up;
+        const gK = Math.min(1, Math.max(0, ((ac.nCur || 1) - 1.5) / 7.5));
+        wantPos = pos.clone().addScaledVector(this.camFwd, -34 - speedK * 6 - gK * 5).addScaledVector(this.camUp, 9 + gK * 2);
+        wantLook = pos.clone().addScaledVector(this.camFwd, 70).addScaledVector(this.camUp, 3);
+        wantUp = this.camUp;
+        // Edge-of-envelope buffet: pulling (nearly) all the lift available is felt,
+        // a mild pull is not. Same rule in Arcade and Tactical; amplitude is small.
+        const nAv = availableG(ac);
+        const edge = Math.min(1, Math.max(0, (ac.nCur / Math.max(nAv, 1) - 0.82) / 0.18))
+          * Math.min(1, Math.max(0, (ac.nCur - 3) / 3));
+        this.buffet = edge;
       }
       if (!this.camState) { cam.position.copy(wantPos); cam.up.copy(wantUp); }
       this.camState = true;
       // follow tightly in position (plane is fast) and smooth the roll
       cam.position.lerp(wantPos, 1 - Math.exp(-dt * 12));
-      cam.up.lerp(wantUp, 1 - Math.exp(-dt * 5)).normalize();
+      if (view.mode === 'look') cam.up.lerp(wantUp, 1 - Math.exp(-dt * 5)).normalize();
+      else { cam.up.copy(wantUp); this.camUp.copy(cam.up); } // chase roll lag lives in camUp
       cam.lookAt(wantLook);
+      if (view.mode !== 'look' && this.buffet > 0) {
+        const b = this.buffet * 0.22, tt = performance.now() / 1000;
+        cam.position.addScaledVector(cam.up, Math.sin(tt * 47) * b).x += Math.sin(tt * 61) * b * 0.6;
+      }
     }
     if (this.shake > 0) {
       this.shake = Math.max(0, this.shake - dt * 2.5);

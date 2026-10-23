@@ -23,8 +23,11 @@ python3 -m http.server 8080        # 或 npx serve .
 # iPhone：同一個 Wi-Fi 下開 http://<電腦的區網 IP>:8080 （Safari，橫向）
 ```
 
-URL 參數（開發用）：`?debug`（AI 狀態面板）、`?mode=aivai`（直接觀戰）、`?mode=pvai`、
-`?skill=rookie|veteran|ace`、`?seed=N`（可重現的開局）、`?autopilot=chaser`（自動駕駛玩家機，煙霧測試用）。
+URL 參數（開發用）：
+- `?mode=arcade|tactical&control=assisted|expert`：預選飛行物理與操控方式（仍停在標題畫面，不自動出擊）。
+- `?autostart=1`：直接出擊；`?mode=pvai`（舊網址，直接出擊，物理沿用已儲存設定或 `?feel`）；`?mode=aivai`（直接觀戰）。
+- `?feel=A|B`：歷史 A/B 測試用的舊飛行積分器（僅供回歸比較，不在選單中）。
+- `?debug`（AI 狀態面板）、`?skill=rookie|veteran|ace`、`?seed=N`（可重現的開局）、`?autopilot=chaser`（自動駕駛玩家機，煙霧測試用）。
 
 ## 操作
 
@@ -40,12 +43,27 @@ URL 參數（開發用）：`?debug`（AI 狀態面板）、`?mode=aivai`（直�
 | AI 狀態面板 | `AI` | `Tab` / `` ` `` |
 | 暫停 / 再戰 | `II` / 結算畫面按鈕 | `Esc` / `Enter` |
 
-**ASSIST（預設）**：搖桿左右＝要求「轉彎 G」，坡度由 G 自動解出（bank = acos(1/n)），所以
-全力轉彎會維持水平、不會變成爬升迴圈把自己拉到失速；先滾轉再拉；**手指放開保持最後搖桿量，不會自動回中**；重新觸碰可接續微調，手動將搖桿回中才自動改平；
-低速自動後燃器。搖桿置中時上下就是純俯仰（翻筋斗、俯衝都還是你的）。
-**HUD 姿態參考（AC7 LookDev v2）**：依 AC7 實際駕駛艙 HUD 截圖，使用細薄的左右開口導框、頂部航向刻度帶、中央小型 **W 形 Waterline／Whiskey Mark**（機頭方向）和可隨坡度旋轉的每 5° 俯仰梯（向下為虛線）；去除前版完整方框與 HDG／PITCH／BANK 大字組，速度／高度改成綠色小箭頭框。保留第三人稱下讀取姿態的能力，不動觸控、操控、物理與 AI。不新增按鈕。 既有小圓機頭準星現已改為 W，不會兩個機頭符號重疊；近距機砲 lead pipper 原樣保留。現在 W 與飛行路徑標記（Flight Path Marker／FPM，帶翅膀的小圓圈）**同時顯示**：W 從機頭方向投影，FPM 從飛機實際速度向量（即位移方向）投影。高速平飛會重合；拉 G、拉升、改變航向時會出現幾度的偏差。為此在玩家和 AI **共用的**簡化飛行模型加入 0.09 秒的速度方向慣性響應：這會輕微改變實際航跡／飛彈攔截幾何，但**不改搖桿、最大 G、推力、阻力或武器機制**；這是街機近似，不是完整 AoA／側滑 CFD 模擬。
+**飛行設定（四種組合）**：標題畫面或暫停選單的「⚙ 飛行設定」選擇 **Arcade / Tactical 物理** × **Assisted / Expert 操控**，
+預設 **Arcade × Expert**。物理對玩家與 AI 完全相同；操控方式只改變搖桿如何被解讀，不改變飛機性能。詳見
+[`docs/dual-flight-modes.md`](docs/dual-flight-modes.md) 與 [`docs/flight-feel-polish.md`](docs/flight-feel-polish.md)。
 
-**MANUAL**：搖桿直接是滾轉率與俯仰。俯仰方向可在標題畫面切換（預設搖桿式：上推＝俯衝）。
+**Expert（預設）**：左右＝滾轉、上下＝俯仰，必須先滾轉再拉桿才能轉彎；沒有自動改平。
+**Assisted**：搖桿左右＝要求轉彎，飛控自動解出水平轉彎所需坡度並協調拉桿；搖桿回中自動改平；
+置中時上下就是純俯仰（翻筋斗、俯衝都還是你的）。Assisted **不會**自動開後燃器、不會提供額外 G 或推力；油門、AB、BRK 全由玩家控制。
+iPhone 上**手指放開保持最後搖桿量，不會自動回中**；重新觸碰可接續微調。
+
+**HUD 姿態參考（AC7 LookDev v2）**：依 AC7 實際駕駛艙 HUD 截圖，使用細薄的左右開口導框、頂部航向刻度帶、中央小型 **W 形 Waterline／Whiskey Mark**（機頭方向）和可隨坡度旋轉的每 5° 俯仰梯（向下為虛線）；去除前版完整方框與 HDG／PITCH／BANK 大字組，速度／高度改成綠色小箭頭框。保留第三人稱下讀取姿態的能力，不動觸控、操控、物理與 AI。不新增按鈕。 既有小圓機頭準星現已改為 W，不會兩個機頭符號重疊；近距機砲 lead pipper 原樣保留。現在 W 與飛行路徑標記（Flight Path Marker／FPM，帶翅膀的小圓圈）**同時顯示**：W 從機頭方向投影，FPM 從飛機實際速度向量（即位移方向）投影。高速平飛會重合；拉 G、拉升、改變航向時會出現幾度的偏差。為此在玩家和 AI **共用的**簡化飛行模型加入短暫的速度方向慣性響應（舊版 0.09 秒；Arcade／Tactical 各自設定）：這會輕微改變實際航跡／飛彈攔截幾何，但**不改搖桿、最大 G、推力、阻力或武器機制**；這是街機近似，不是完整 AoA／側滑 CFD 模擬。
+
+**俯仰方向**：在「⚙ 飛行設定」切換（預設搖桿式：上推＝俯衝）；暫停中只改俯仰方向會立即套用到本局、不重開。
+
+## 王牌飛行學院（Ace Flight Academy）
+
+標題畫面「飛行學院 ACADEMY」：10 堂 1–3 分鐘的可玩短課，由教官 KITE 以無線電引導——
+天空與地平線、飛機如何轉彎、動力控制、G 力的代價、能量交易、危險飛行狀態、空戰追蹤、武器控制、防守與反擊，
+最後是對 VETERAN AI 的 **ACE QUALIFICATION** 畢業考（S／A／B 評等）。每課都判讀真實模擬狀態，失敗時依你的實際數據
+說明原因（例如「平均 9.6G，速度從 751 被燒掉了」），支援全部四種飛行／操控組合，進度只存在本機 localStorage。
+自由對戰不需要先完成學院。課程設計、真實航空／遊戲模型／遊戲規則的區分與驗收數據見
+[`docs/academy-curriculum.md`](docs/academy-curriculum.md)。QA 連結：`?lesson=L05`（簡報）、`?lesson=L05&autostart=1`（直接出擊）。
 
 ## 規則（為街機節奏調整，非真實性能）
 
@@ -109,6 +127,12 @@ node tools/aivai.mjs --suite --n 100 --write docs/aivai-report.json   # 無頭�
 node tools/aivai.mjs --n 40 --blue human --red veteran --verbose        # 單一組合 + 決策紀錄
 node tools/browser-check.mjs                                             # Chromium 實際啟動遊戲並截圖
 node tools/browser-check.mjs --scenario lookdev                           # 固定追機 / 側傾 / 近雲 / 海面 / 俯衝 / 雙機型
+node tools/browser-check.mjs --scenario settings                          # 四模式設定選單：選擇/取消/儲存/重整/暫停切換/再戰
+node tools/browser-check.mjs --scenario modes                             # 四種組合的 iPhone 尺寸觸控操作 + 兩套物理各一場完整 1v1
+node tools/probe-flight-feel.mjs                                          # 四種組合的手感量測（滾轉停止、轉彎、能量、追蹤）
+node tools/aivai.mjs --n 40 --blue human --red veteran --feel tactical --control expert   # human proxy 走 Expert 操控
+node tools/test-academy.mjs                                               # 學院 10 課 × 4 模式 + 錯誤示範的因果失敗
+node tools/browser-check.mjs --scenario academy                           # 學院選單→出擊→失敗→重試→通關→進度保存
 ```
 
 - **AI vs AI**：同一套 AI 對打（正面開局 / 隨機幾何 / 交換機型）、ACE vs ROOKIE 技術梯度、

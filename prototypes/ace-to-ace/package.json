@@ -2,10 +2,10 @@
   "name": "ace-to-ace",
   "private": true,
   "type": "module",
-  "description": "Skyfront Homeland — Ace to Ace 1v1 arcade air-combat AI lab (browser prototype)",
+  "description": "Skyfront Homeland \u2014 Ace to Ace 1v1 arcade air-combat AI lab (browser prototype)",
   "scripts": {
     "start": "python3 -m http.server 8080",
     "aivai": "node tools/aivai.mjs --suite --n 60",
-    "test": "node tools/test-brake-trap.mjs && node tools/test-hud-attitude.mjs && node tools/test-flight-path.mjs"
+    "test": "node tools/test-brake-trap.mjs && node tools/test-hud-attitude.mjs && node tools/test-flight-path.mjs && node tools/test-flight-feel-ab.mjs && node tools/test-dual-flight-modes.mjs && node tools/test-flight-feel-polish.mjs"
   }
 }

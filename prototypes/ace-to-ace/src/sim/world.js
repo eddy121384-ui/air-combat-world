@@ -41,6 +41,10 @@ export class Match {
     const sp = o.spawn || defaultSpawn(this.rng);
     this.blue = createAircraft(o.blue.type, 'blue', sp.blue.pos, sp.blue.fwd, sp.blue.speed);
     this.red = createAircraft(o.red.type, 'red', sp.red.pos, sp.red.fwd, sp.red.speed);
+    // Legacy A remains the regression default; modes apply to both AI and human.
+    const feel = ['arcade', 'tactical', 'B', 'A'].includes(o.flightFeel) ? o.flightFeel : 'A';
+    this.blue.flightFeel = feel;
+    this.red.flightFeel = feel;
     this.blue.callsign = o.blue.name || 'BLUE';
     this.red.callsign = o.red.name || 'RED';
     this.blue.enemy = this.red; this.red.enemy = this.blue;
@@ -96,10 +100,12 @@ export class Match {
     }
     this.tick += 1;
     for (const ac of this.aircraft) ac.lockedBy = 0;
-    for (const ac of this.aircraft) updateLock(ac, ac.enemy, dt);
+    // A dormant aircraft (Academy lessons without an opponent) is parked: not
+    // simulated, not lockable, no rules. Free-play matches never set it.
+    for (const ac of this.aircraft) updateLock(ac, ac.enemy?.dormant ? null : ac.enemy, dt);
 
     for (const ac of this.aircraft) {
-      if (!ac.alive) continue;
+      if (!ac.alive || ac.dormant) continue;
       const ctrl = this.controllers.get(ac);
       if (ctrl) {
         const c = ctrl.update(dt, this);
