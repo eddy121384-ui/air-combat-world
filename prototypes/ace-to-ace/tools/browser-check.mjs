@@ -442,6 +442,68 @@ if (scenario === 'all' || scenario === 'academy') {
   report.perf.academy = { passed: true, lessons: lessonIds.length };
   await ctx.close();
 }
+if (scenario === 'all' || scenario === 'academy-ui') {
+  // Fly to each phase through the real controller, then freeze for legibility.
+  // Full completion is also verified by scenario=academy and the x4 Node students.
+  report.perf.academyReadability=[];
+  for (const width of [812,667]) {
+    const {ctx,p}=await page({...iphone,viewport:{width,height:375}},'?seed=3',`academy-ui-${width}`);
+    await p.waitForFunction(()=>window.__game?.mode==='title');
+    await p.evaluate(async()=>{
+      const S=await import('/tools/academy-student.mjs');
+      window.__game.onLessonStart=()=>{
+        const g=window.__game, st=S.makeStudentInput(), ctl=g.match.controllers.get(g.match.blue), update=ctl.update;
+        ctl.update=(dt,m)=>{
+          S.PLANS[g.lessonId](g.lesson,st,g.controlMode);
+          Object.assign(g.input.stick,st.stick);g.input.setThrottle(st.thr);
+          g.input.boostToggle=st.ab;g.input.btn.brake=st.brk;g.input.btn.gun=st.gunOn;
+          for(const key of st.presses)g.input.pressed.add(key);st.presses.clear();
+          return update(dt,m);
+        };
+        g.setTimeScale(0);
+      };
+    });
+    const ids=await p.evaluate(async()=>(await import('/src/academy/lessons.js')).LESSONS.map(l=>l.id));
+    for (const id of ids) {
+      await p.evaluate(id=>window.__game.openBriefing(id),id);
+      assert.match(await p.textContent('#briefHook'),/KITE/);
+      await p.tap('#btnBriefGo');
+      await p.evaluate(()=>window.__game.setTimeScale(0));
+      const count=await p.evaluate(()=>window.__game.lesson.lesson.phases.length);
+      for(let phase=0;phase<count;phase++) {
+        if(phase)await p.evaluate(()=>{
+          const g=window.__game, r=g.lesson, target=r.phaseIdx+1;
+          for(let i=0;i<200*60 && !r.result && r.phaseIdx<target;i++){g.match.step(1/60);r.step(1/60);}
+          if(r.result || r.phaseIdx!==target)throw new Error('student did not reach the requested visual phase');
+          g.hud.msgs=[];
+        });
+        await p.evaluate(()=>window.__game.lesson.tickRadio(0));
+        await p.waitForTimeout(90);
+        const layout=await p.evaluate(()=>{
+          const g=window.__game;
+          return {objective:g.hud.academyLayout,radio:g.hud.radioLayout,id:g.lesson.phase.id,
+            cue:g.lesson.view().guidance,radioText:g.hud.radio?.text};
+        });
+        const inBounds=b=>b&&b.x>=0&&b.y>=0&&b.x+b.width<=width&&b.y+b.height<=375;
+        const coversReticle=b=>b.x<width/2+35&&b.x+b.width>width/2-35&&b.y<375/2+25&&b.y+b.height>375/2-25;
+        assert.ok(inBounds(layout.objective),`${width}/${id}/${phase}: objective stays on-screen`);
+        assert.ok(layout.objective.fontPx>=12, 'objective minimum 12 CSS pixels');
+        assert.ok(!coversReticle(layout.objective),'objective does not cover attitude/FPM centre');
+        assert.ok(layout.cue && !layout.objective.lines.join('').includes('…'),'action and telemetry fit without clipping');
+        if(layout.radio) {
+          assert.ok(inBounds(layout.radio),'subtitle stays on screen');
+          assert.ok(layout.radio.fontPx>=14&&layout.radio.lines.length<=2,'short readable radio, at least 14px');
+          assert.ok(!coversReticle(layout.radio),'radio does not cover attitude/FPM centre');
+          assert.ok(!layout.radio.lines.join('').includes('…'),'no ellipsized flight command');
+        }
+        report.perf.academyReadability.push({width,id,phase:layout.id,fontPx:layout.objective.fontPx,radioFontPx:layout.radio?.fontPx});
+        if(width===812 && ['L04:corner','L05:zoom','L07:cone','L08:guns'].includes(`${id}:${layout.id}`))await shot(p,`25-coaching-${id}-${layout.id}`);
+      }
+      await p.evaluate(()=>window.__game.openAcademy());
+    }
+    await ctx.close();
+  }
+}
 if (scenario === 'all' || scenario === 'fight') {
   // automated player proxy so the fight actually happens
   const { ctx, p } = await page(desktop, '?mode=pvai&autopilot=chaser&seed=3&debug', 'fight');

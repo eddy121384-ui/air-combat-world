@@ -10,6 +10,7 @@ import { Input, PlayerController } from './input.js';
 import { Audio } from './audio.js';
 import { LESSONS, lessonById } from '../academy/lessons.js';
 import { createLessonSession } from '../academy/session.js';
+import { radioDuration } from '../academy/runner.js';
 import { loadProgress, recordAttempt, saveProgress } from '../academy/progress.js';
 
 const $ = (s) => document.querySelector(s);
@@ -280,6 +281,8 @@ function openBriefing(id) {
   briefId = id; mode = 'academy';
   $('#briefKicker').textContent = `LESSON ${String(l.no).padStart(2, '0')} · ${l.en} · ${formatFlight(flightFeel, controlMode)}`;
   $('#briefTitle').textContent = l.title;
+  const context = { pick: (a, e) => controlMode === 'assisted' ? a : e };
+  $('#briefHook').textContent = 'KITE ▸ ' + (l.intro || []).map(line => typeof line === 'function' ? line(context) : line).join(' ');
   $('#briefPrinciple').textContent = l.principle;
   $('#briefGoals').innerHTML = l.goals.map((g) => `<li>${g}</li>`).join('');
   $('#briefReal').textContent = l.real || '';
@@ -298,7 +301,7 @@ function startLesson(id) {
   const session = createLessonSession(lesson, { flight, control, input, settings });
   match = session.match; lessonRun = session.runner; player = session.player;
   enemyAI = session.foeAI || null; blueAI = null;
-  lessonRun.onSay = (text) => { hud.say('KITE', text, Math.min(7, 2.4 + text.length * 0.075)); audio.radio(); };
+  lessonRun.onSay = (text) => { hud.say('KITE', text, radioDuration(text)); audio.radio(); };
   lessonRun.onFlash = (text, color) => hud.flash(text, color, 1.8);
   rend.addAircraft(match.blue); rend.addAircraft(match.red);
   match.on(onEvent);
@@ -310,6 +313,7 @@ function startLesson(id) {
   $('#pauseBtn').classList.remove('hidden');
   input.releaseHeld(); input.resetPower(); input.clearPresses();
   hud.msgs = [];
+  hud.radio = null;
   hud.flash(`LESSON ${String(lesson.no).padStart(2, '0')}`, '#ffe2a3', 2.0, true);
   hud.flash(lesson.title, '#f4fbff', 2.2);
   last = performance.now();
@@ -333,6 +337,9 @@ function showDebrief() {
   const title = $('#debTitle');
   title.textContent = r.success ? (l.final ? `ACE RATING ${r.grade}` : `CLEAR · ${r.grade}`) : 'NOT YET · 未通過';
   title.className = r.success ? 'win' : 'lose';
+  $('#debCitation').textContent = `KITE ▸ ${r.citation}`;
+  $('#debBadge').classList.toggle('hidden', !(l.final && r.success));
+  $('#debBadge').textContent = `ACE QUALIFIED · ${r.grade}`;
   $('#debSub').textContent = r.success ? `用時 ${Math.round(r.time)} 秒` : (r.reason || '');
   $('#debStats').innerHTML = r.stats.map(([k, v]) => `<div><b>${v}</b><span>${k}</span></div>`).join('');
   const li = (a, empty) => (a.length ? a : [empty]).map((x) => `<li>${x}</li>`).join('');
@@ -479,7 +486,7 @@ function frame(now) {
     while (acc >= RULES.dt && steps < 8) { match.step(RULES.dt); lessonRun?.step(RULES.dt); acc -= RULES.dt; steps++; }
     if (steps === 8) acc = 0;
     if (lessonRun && mode === 'playing') syncLessonPower(lessonRun.rules);
-    if (lessonRun?.result && debriefTimer < 0 && mode === 'playing') debriefTimer = lessonRun.result.success ? 3.0 : 2.4;
+    if (lessonRun?.result && debriefTimer < 0 && mode === 'playing') debriefTimer = lessonRun.result.success ? 3.0 : 0.8;
     if (debriefTimer > 0 && mode === 'playing') { debriefTimer -= realDt; if (debriefTimer <= 0) showDebrief(); }
     if (resultTimer > 0 && mode === 'playing') { resultTimer -= realDt; if (resultTimer <= 0) showResult(); }
     if (view.mode !== 'kill') view.mode = input.look() && kind === 'pvai' ? 'look' : 'chase';
@@ -493,7 +500,8 @@ function frame(now) {
     const L = me.lock;
     let mw = false, mc = false;
     for (const m of match.missiles) if (m.alive && m.target === me && m.guided && !m.decoy) { mw = true; if (dist(m.pos, me.pos) < 1500) mc = true; }
-    audio.frame({ throttle: me.thrustCur, ab: me.abCur, speed: me.speed, locking: L.timer > 0 && !L.locked, locked: L.locked, missileWarn: mw, missileClose: mc, lockWarn: me.lockedBy > 0, alive: me.alive && showHud && (kind === 'pvai' || kind === 'lesson') }, now / 1000);
+    const weaponCues = kind !== 'lesson' || lessonRun.rules.weapons;
+    audio.frame({ throttle: me.thrustCur, ab: me.abCur, speed: me.speed, locking: weaponCues && L.timer > 0 && !L.locked, locked: weaponCues && L.locked, missileWarn: mw, missileClose: mc, lockWarn: me.lockedBy > 0 && (kind !== 'lesson' || lessonRun.lesson.id !== 'L07'), alive: me.alive && showHud && (kind === 'pvai' || kind === 'lesson') }, now / 1000);
   } else if (match && mode === 'paused') {
     // Freeze the fight behind the pause/settings card. Moving the camera to the
     // title orbit here made it swoop back from ~4 km away on resume.
@@ -547,6 +555,7 @@ function drawDebug() {
 window.__game = {
   get match() { return match; }, get mode() { return mode; }, get enemyAI() { return enemyAI; }, get flightFeel() { return flightFeel; }, get controlMode() { return controlMode; },
   get player() { return player; }, get rend() { return rend; },
+  get hud() { return hud; },
   get lesson() { return lessonRun; }, get lessonId() { return lessonId; }, get academyProgress() { return academyProgress; },
   startLesson, openAcademy, openBriefing,
   get experimentSeed() { return experimentSeed; }, settings, start, input, openFlightSettings,

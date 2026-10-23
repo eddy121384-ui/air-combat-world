@@ -45,6 +45,7 @@ jobs:
           node tools/test-dual-flight-modes.mjs
           node tools/test-flight-feel-polish.mjs
           node tools/test-academy.mjs
+          node tools/test-academy-coaching.mjs
           node tools/aivai.mjs --n 3 --blue chaser --red veteran --feel arcade
           node tools/aivai.mjs --n 3 --blue chaser --red veteran --feel tactical
           node tools/aivai.mjs --n 3 --blue chaser --red veteran --feel B
@@ -76,6 +77,7 @@ jobs:
           node tools/browser-check.mjs --scenario touch
           node tools/browser-check.mjs --scenario modes
           node tools/browser-check.mjs --scenario academy
+          node tools/browser-check.mjs --scenario academy-ui
       - uses: actions/upload-artifact@v4
         if: always()
         with:

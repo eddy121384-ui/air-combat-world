@@ -33,13 +33,12 @@ const L01 = {
   timeoutHint: '先讓 FPM 停住，再決定要往哪裡修。',
   setup: (r) => soloSetup(r),
   intro: [
-    '這裡是教官 KITE。今天不打仗，先學會「看」。',
-    'W 是機頭，帶翅膀的小圓是 FPM——你真正飛去的方向。',
+    'KITE 呼叫學員：先飛穩，再飛帥。今天把一條爬升與下降航線交給你。',
   ],
   phases: [
     holdPhase({
-      id: 'level', need: 5,
-      say: (r) => r.pick('搖桿放中間，飛控會自動把機翼改平。讓 FPM 貼著 0° 線。', '左右修平機翼，上下讓 FPM 貼著 0° 線。不會有人幫你改平。'),
+      id: 'level', need: 5, strict: true,
+      say: (r) => r.pick('放手，搖桿回中，飛控替你改平機翼。小幅修正，讓 FPM 貼 0° 線。', '放手只讓搖桿回中，機翼不會自己改平。反向修平坡度，再看 FPM。'),
       text: (r) => `平飛：FPM 貼 0° 線、機翼水平　γ ${r.gamma.toFixed(1)}°　坡度 ${Math.round(r.bank)}°`,
       cond: (r) => Math.abs(r.gamma) < 2.5 && Math.abs(r.bank) < 10,
       why: (r, dt) => { if (Math.abs(r.bank) >= 10) r.d.bankOut = (r.d.bankOut || 0) + dt; else r.d.gammaOut = (r.d.gammaOut || 0) + dt; },
@@ -56,7 +55,7 @@ const L01 = {
       update(r, dt) {
         const err = r.alt - r.d.target;
         r.d.over = Math.max(r.d.over || 0, err);
-        if (Math.abs(err) < 120 && Math.abs(r.gamma) < 3) r.d.held = (r.d.held || 0) + dt;
+        if (Math.abs(err) < 120 && Math.abs(r.gamma) < 3) r.d.held = (r.d.held || 0) + dt; else r.d.held = 0;
         if (r.d.over > 250 && !r.d.warned) { r.d.warned = true; r.say(`衝過頭 ${Math.round(r.d.over)} m 了。接近目標前就要開始把 FPM 放回地平線。`); }
         if ((r.d.held || 0) >= 4) { r.note('climbOvershoot', Math.max(0, r.d.over - 120)); return 'done'; }
         return undefined;
@@ -72,7 +71,7 @@ const L01 = {
         const err = r.alt - r.d.target;
         r.d.under = Math.max(r.d.under || 0, -err);
         r.d.vmax = Math.max(r.d.vmax || 0, r.kmh);
-        if (Math.abs(err) < 120 && Math.abs(r.gamma) < 3) r.d.held = (r.d.held || 0) + dt;
+        if (Math.abs(err) < 120 && Math.abs(r.gamma) < 3) r.d.held = (r.d.held || 0) + dt; else r.d.held = 0;
         if ((r.d.held || 0) >= 4) { r.note('descendOvershoot', Math.max(0, r.d.under - 120)); r.note('descendVmax', r.d.vmax); return 'done'; }
         return undefined;
       },
@@ -121,10 +120,11 @@ function headingPhase({ id, target, need = 2.5, tol = 8, say, limit, precise = f
           : `掉了 ${Math.round(r.d.alt0 - r.alt)} m：坡度越大，越要多拉桿撐住高度（n = 1/cos 坡度）。` };
       }
       if (Math.abs(err) < tol && Math.abs(r.bank) < 12) r.d.held = (r.d.held || 0) + dt; else if (precise) r.d.held = 0;
+      if (precise && r.d.altDev > 200) return { fail: `高度偏離 ${Math.round(r.d.altDev)} m（上限 200）：坡度與拉桿要一起協調，別用掉高換航向。` };
       if (limit && r.phaseT > limit) {
         const slow = r.tel.rollNoPullSec > 1.5 && r.control === 'expert';
         return { fail: slow
-          ? `超過 ${limit} 秒。你有滾轉卻沒拉桿——升力方向斜了，但沒有足夠的升力把航跡拉過去。`
+          ? `超過 ${limit} 秒。你有滾轉卻沒拉桿——升力方向斜了，但升力不足以維持轉彎高度。`
           : (r.d.over || 0) > tol ? `超過 ${limit} 秒。你衝過目標 ${Math.round(r.d.over)}° 又修回來：改平要提早。`
             : `超過 ${limit} 秒。坡度要夠大、拉桿要果斷，轉完立刻改平。` };
       }
@@ -140,18 +140,18 @@ function headingPhase({ id, target, need = 2.5, tol = 8, say, limit, precise = f
 }
 const L02 = {
   id: 'L02', no: 2, title: '飛機如何轉彎', en: 'BANK TO TURN',
-  principle: '升力垂直於機翼。滾轉把升力斜過去，拉桿才把航跡拉彎；水平轉彎需要 n = 1/cos(坡度) 的負載因子。',
+  principle: '升力垂直於機翼。滾轉傾斜升力、產生轉向分量；要維持高度還得增加升力。協調水平轉彎需要 n = 1/cos(坡度) 的負載因子。',
   real: '真實航空：坡度轉彎靠升力水平分量；坡度越大，維持高度所需負載因子越高（60° 坡度約 2G）——FAA 飛行手冊。',
   model: '本遊戲：同樣的升力向量轉彎，Assisted 由飛控代你協調滾轉與拉桿，但用的是同一架飛機、同樣的 G 上限。',
   goals: ['右轉到 090° 並改平', '左轉 150° 到 300°', '精準轉到 015°（±4°），14 秒內，高度變化 < 200 m'],
   timeLimit: 150,
   setup: (r) => soloSetup(r),
   intro: [(r) => r.pick(
-    'Assisted：搖桿往哪推，飛控就往哪轉——它會替你滾轉再拉桿。看懂它在做什麼。',
-    'Expert：左右只會滾轉。機翼斜了還不夠，要拉桿，飛機才會轉。')],
+    '領隊要三個新航向。Assisted 替你協調轉彎；到航向前放手，飛控會改平。',
+    '領隊要三個新航向。Expert 先滾轉、再拉桿；放手不會改平，改平要反向滾轉。')],
   phases: [
     headingPhase({ id: 'h090', target: 90, limit: 40,
-      say: (r) => r.pick('右轉到 090°。看機翼怎麼斜下去——那是飛控在幫你傾斜升力。', '向右滾 60° 左右，然後拉桿。到 090° 前提早改平。') }),
+      say: (r) => r.pick('右轉 090°。接近目標就放手，讓飛控改平。', '右滾約 60°，橫向回中後拉桿轉彎。接近 090° 時反向滾轉改平。') }),
     headingPhase({ id: 'h300', target: 300, limit: 45,
       say: (r) => r.pick('左轉到 300°，一口氣轉 150°。搖桿推越多，轉得越急。', '左轉到 300°。這次坡度大一點、拉多一點：你會看到 G 值上去。') }),
     headingPhase({ id: 'h015', target: 15, tol: 4, need: 3, limit: 14, precise: true,
@@ -168,7 +168,7 @@ const L02 = {
     if (r.notes.h090Over != null) (over < 8 ? good : improve).push(over < 8 ? '改平時機準確，幾乎沒有衝過目標航向。' : `最多衝過目標 ${over}°：坡度 60° 時，大約提前 20° 開始改平。`);
     const alt = Math.max(r.notes.h090Alt || 0, r.notes.h300Alt || 0, r.notes.h015Alt || 0);
     if (r.notes.h090Alt != null) (alt < 200 ? good : improve).push(alt < 200 ? `轉彎中高度只偏了 ${alt} m。` : `轉彎中高度偏了 ${alt} m：坡度越大，越要多拉一點桿來撐住高度。`);
-    if (r.control === 'expert' && r.tel.rollNoPullSec > 2) improve.push(`有 ${r.tel.rollNoPullSec.toFixed(1)} 秒在大坡度卻沒拉桿：只滾轉不會轉彎。`);
+    if (r.control === 'expert' && r.tel.rollNoPullSec > 2) improve.push(`有 ${r.tel.rollNoPullSec.toFixed(1)} 秒在大坡度卻沒拉桿：只滾轉不會自動維持轉彎高度。`);
     if (r.tel.pullNoRollSec > 2) improve.push(`有 ${r.tel.pullNoRollSec.toFixed(1)} 秒機翼水平卻猛拉：那只會爬升，不會轉向。`);
     return { good, improve,
       stats: [['最大 G', `${r.tel.maxG.toFixed(1)} G`], ['精準轉彎', r.notes.h015T ? `${r.notes.h015T.toFixed(1)} 秒` : '—']],
@@ -225,8 +225,8 @@ const L03 = {
       },
     },
     holdPhase({
-      id: 'hold', need: 6,
-      say: '穩住 600 到 700。油門放在哪裡，飛機最後就會停在哪個速度。',
+      id: 'hold', need: 6, strict: true,
+      say: '連續穩住 600 到 700。先小幅調油門，再看速度趨勢；別追著數字來回推。',
       text: (r) => `速度穩在 600–700 km/h　目前 ${fmt(r.kmh)}　油門 ${Math.round(r.me.controls.throttle * 100)}%`,
       cond: (r) => r.kmh >= 600 && r.kmh <= 700 && Math.abs(r.alt - r.notes.alt0) < 400,
       why: (r) => { if (r.kmh > 700) r.d.fast = true; else r.d.slow = true; },
@@ -239,8 +239,8 @@ const L03 = {
     const good = [], improve = [];
     if (r.notes.accelT) good.push(`AB 加速 600→1000 km/h 用了 ${r.notes.accelT.toFixed(1)} 秒。`);
     if (r.notes.decelT) (r.notes.decelBrake > 0.5 ? good : improve).push(r.notes.decelBrake > 0.5
-      ? `收油＋BRK，${r.notes.decelT.toFixed(1)} 秒減掉 350 km/h。` : `減速花了 ${r.notes.decelT.toFixed(1)} 秒：BRK 能讓它快一倍。`);
-    improve.push(r.tactical ? 'Tactical：AB 是你重建能量的唯一快捷方式，但它不能讓急轉免費。' : 'Arcade：AB 快而寬，收油／BRK 慢而急——第四課會看到差別。');
+      ? `收油＋BRK，${r.notes.decelT.toFixed(1)} 秒減掉 350 km/h。` : `減速花了 ${r.notes.decelT.toFixed(1)} 秒：BRK 能增加阻力、加快減速。`);
+    improve.push(r.tactical ? 'Tactical：MIL 也能加速，AB 能更快重建能量；兩者都不能讓急轉免費。' : 'Arcade：AB 快而寬，收油／BRK 慢而急——第四課會看到差別。');
     return { good, improve,
       stats: [['最高速', `${fmt(r.tel.maxSpeed * KMH)} km/h`], ['AB 使用', `${r.tel.abSec.toFixed(0)} 秒`], ['BRK 使用', `${r.tel.brakeSec.toFixed(1)} 秒`]],
       closing: '油門、AB、BRK——三個開關，三種錢。下一課看 G 力要你付多少。' };
@@ -304,7 +304,7 @@ const L04 = {
     turnPhase({ id: 'fast', deg: 180, limit: 30,
       say: (r) => r.pick('油門推滿、開 AB。搖桿推到底，轉 180°。看轉率和速度。', '油門推滿、開 AB。滾到 80° 以上、拉滿桿，轉 180°。') }),
     holdPhase({ id: 'band', need: 2,
-      say: (r) => { const [lo, hi] = r.bestBandKmh; return `看到了嗎？太快，G 到頂了也轉不快。收油、BRK，降到 ${lo}–${hi} km/h，等綠色菱形亮。`; },
+      say: (r) => { const [lo, hi] = r.bestBandKmh; return `高速基準 ${r.notes.fast.dps.toFixed(1)} 度每秒。收油、BRK 到 ${lo}–${hi}。下一次用同樣滿桿比較。`; },
       text: (r) => { const [lo, hi] = r.bestBandKmh; return `減速到最佳轉彎速度 ${lo}–${hi} km/h　目前 ${fmt(r.kmh)}　${r.inBestBand ? '◆ 保持' : ''}`; },
       cond: (r) => r.inBestBand,
       timeout: (r) => (r.kmh > r.bestBandKmh[1] ? '還是太快。收油到底、按住 BRK，速度才會掉進菱形區。' : '太慢了。推油門、開 AB，把速度帶回菱形區。') }),
@@ -315,11 +315,13 @@ const L04 = {
         if (res.dps < fast.dps * 1.15) {
           return { fail: `轉率 ${res.dps.toFixed(1)}°/s，只比高速時快 ${Math.round((res.dps / fast.dps - 1) * 100)}%。轉彎時速度跑到 ${fmt(res.v0)}，離菱形區太遠，或沒有拉滿。` };
         }
+        r.flash(`轉率 +${Math.round((res.dps/fast.dps-1)*100)}%`, '#7dffb0');
+        r.coachOnce('corner-gain', `同樣滿桿，轉率多了 ${Math.round((res.dps/fast.dps-1)*100)}%。速度對了，G 才買得到好位置。`);
         return undefined;
       } }),
     turnPhase({ id: 'sustain', deg: 360,
       armKmh: 750, armedRules: { ab: false },
-      say: (r) => `最後一題：先加速到 750 km/h。計時一開始 AB 就停用——用 MIL 推力轉 360°，${r.tune.sustainT} 秒內轉完，結束時還要有 ${r.tune.sustainV} km/h。${r.pick('搖桿推越多轉越急，也越燒速度。', '看趨勢條：一路滿桿會把速度燒光。')}`,
+      say: (r) => `先回到 750，計時後 AB 停用。MIL 轉一圈，${r.tune.sustainT} 秒內，保留 ${r.tune.sustainV}。第二圈還想飛，就別把速度全花光。`,
       text: (r) => `MIL 轉 360°（AB 停用）　${Math.round(r.d.turned)}°　${r.tune.sustainT}s 內　${fmt(r.kmh)} km/h（≥${r.tune.sustainV}）`,
       check: (r, res) => {
         if (res.t > r.tune.sustainT) return { fail: `轉完 360° 用了 ${res.t.toFixed(1)} 秒（要 ${r.tune.sustainT} 秒內）：太保守了，拉多一點，讓 G 留在菱形區給你的轉率。` };
@@ -352,13 +354,13 @@ const L05 = {
   principle: '總能量 E = 高度 + 速度²/2g（能量高度）。俯衝把高度換成速度，躍升把速度換回高度；猛拉桿的誘導阻力隨 G² 增加，是最貴的手續費。',
   real: '真實航空：比能量與比剩餘功率 Ps = V(T−D)/W 是能量機動理論（Boyd、Christie）的核心；推力等於阻力時，能量只在高度與速度之間流動。',
   model: '本課規則（純遊戲化）：油門鎖在「巡航推力」（推力約等於阻力，依物理模式換算）、AB 停用，讓 HUD 面板上的能量高度幾乎只受你的拉桿影響。阻力模型為簡化近似。',
-  goals: ['俯衝：把高度換成速度，在 2,200 m 以上達到 950 km/h', '躍升：把速度換回高度——爬到「你的能量高度 − 300 m」，同時保有 400 km/h', '看懂 HUD 面板的「能量高度」：平順時幾乎不變，猛拉時往下掉'],
+  goals: ['俯衝：把高度換成速度，在 2,200 m 以上達到 950 km/h', '躍升：保留 400 km/h 的動能及 300 m 損耗預算，其餘換成目標高度', '比較高度＋動能高度＝能量高度；推力與阻力仍會改變總額'],
   timeLimit: 120,
   // Cruise throttle: thrust ~ drag at ~900 km/h for each physics profile (game rule).
   tune: { arcade: { cruise: 0.63 }, tactical: { cruise: 0.76 }, all: { budget: 300, keepKmh: 400 } },
   rules: (r) => ({ throttle: r.tune.cruise, ab: false }),
   setup: (r) => { soloSetup(r, { alt: 4500, kmh: 650 }); r.me.pos.z = 7000; r.note('E0', r.energyHeight); },
-  intro: ['今天油門被我鎖在巡航推力，AB 也關了。你手上只有高度和速度——看好面板上的「能量高度」。'],
+  intro: ['這趟試飛只准用巡航推力，AB 停用。把高度換成速度，再換回來；我收的是數據，不是你的高度。'],
   phases: [
     {
       id: 'dive',
@@ -366,7 +368,7 @@ const L05 = {
       text: (r) => `俯衝到 950 km/h（高度 ≥ 2,200）　${fmt(r.kmh)} km/h　${fmt(r.alt)} m　能量高度 ${fmt(r.energyHeight)} m`,
       progress: (r) => (r.kmh - 650) / 300,
       update(r) {
-        if (r.kmh >= 950 && r.alt >= 2200) { r.note('E1', r.energyHeight); r.note('v1', r.kmh); return 'done'; }
+        if (r.kmh >= 950 && r.alt >= 2200) { r.note('E1', r.energyHeight); r.note('v1', r.kmh); r.note('diveAlt', r.alt); return 'done'; }
         if (r.alt < 2200) return { fail: `掉到 ${fmt(r.alt)} m 還只有 ${fmt(r.kmh)} km/h：俯衝角太淺、拖太久，或拉了 BRK——高度沒有轉成速度，被阻力吃掉了。俯衝要果斷，30° 左右。` };
         if (r.phaseT > 45) return { fail: '45 秒還沒到 950 km/h：機頭再往下壓一點，高度才會變成速度。' };
         return undefined;
@@ -380,7 +382,7 @@ const L05 = {
         r.d.target = Math.round((r.d.E - keep - r.tune.budget) / 50) * 50;
         r.note('zoomTarget', r.d.target);
       },
-      say: (r) => `你的能量高度 ${fmt(r.d.E)} m。平順地拉起，應該能在保有 ${r.tune.keepKmh} km/h 時爬到 ${fmt(r.d.target)} m。猛拉的話……你自己看帳單。`,
+      say: (r) => `平順拉起，別猛拉。目標 ${fmt(r.d.target)} m，保留 ${r.tune.keepKmh} km/h。看兩種餘額互換，別把總額花在阻力上。`,
       text: (r) => `躍升到 ${fmt(r.d.target)} m（保有 ≥${r.tune.keepKmh} km/h）　${fmt(r.alt)} m　${fmt(r.kmh)} km/h　能量高度 ${fmt(r.energyHeight)} m`,
       progress: (r) => (r.alt - (r.d.target - 2500)) / 2500,
       update(r) {
@@ -405,12 +407,12 @@ const L05 = {
   },
   debrief(r) {
     const n = r.notes, good = [], improve = [];
-    if (n.E1 != null) good.push(`俯衝：能量高度 ${fmt(n.E0)} → ${fmt(n.E1)} m，你把 ${fmt(4500 - 2200)} m 左右的高度換成了 ${fmt(n.v1)} km/h。`);
+    if (n.E1 != null) good.push(`俯衝：高度實際減少 ${fmt(4500 - n.diveAlt)} m，速度到 ${fmt(n.v1)} km/h；能量高度 ${fmt(n.E0)} → ${fmt(n.E1)} m。`);
     if (n.E2 != null) (n.peakG < 5 ? good : improve).push(`躍升最大 ${n.peakG.toFixed(1)}G，能量高度${n.zoomLoss > 0 ? `損失 ${fmt(n.zoomLoss)}` : `還多了 ${fmt(-n.zoomLoss)}`} m（巡航推力在低速時略大於阻力）。`);
     improve.push('空戰裡道理一樣：高度是存款，速度是現金，G 是手續費。手續費付在換到東西的時候。');
     return { good, improve,
       stats: [['起點 E', `${fmt(n.E0 || 0)} m`], ['俯衝後 E', n.E1 ? `${fmt(n.E1)} m` : '—'], ['躍升目標', n.zoomTarget ? `${fmt(n.zoomTarget)} m` : '—'], ['拉起 G', n.peakG ? n.peakG.toFixed(1) : '—']],
-      closing: '能量守恆不是口號。你剛剛親手驗證了。' };
+      closing: '高度與速度可以互換；引擎在存錢，阻力在收費。現在你看得懂這本帳了。' };
   },
 };
 
@@ -419,7 +421,7 @@ const L05 = {
 // =====================================================================
 const L06 = {
   id: 'L06', no: 6, title: '危險飛行狀態', en: 'STALL & DIVE RECOVERY',
-  principle: '升力 ∝ V²：速度一半，可用升力只剩四分之一。低速猛拉只會更慢；失速時先卸載（推桿）、加油門。俯衝越快，拉起需要的高度越多。',
+  principle: '密度、升力係數等條件相同時，升力 ∝ V²。低速猛拉增加阻力；本遊戲失速近似先卸載（推桿）、加油門。俯衝越快，拉起需要的高度越多。',
   real: '真實航空：升力方程 L = ½ρV²SC_L（NASA）；負載因子增加時失速速度按 √n 上升（FAA）。真實失速取決於攻角。',
   model: '本遊戲沒有攻角模型：低速時可用 G 降低，速度低於失速門檻時自動配平失效、機頭下垂——這是「失速近似」，不是真實氣動。',
   goals: ['低速轉彎：減速到 420 km/h 以下，轉 90°，速度不得低於 300 km/h', '失速改出：機頭過高、速度不足——恢復到 500 km/h 並平飛', '俯衝改出：75° 俯衝、1,150 km/h、1,500 m——安全拉起'],
@@ -464,7 +466,7 @@ const L06 = {
         if (r.d.alt0 - r.alt > r.tune.stallLoss || r.phaseT > r.tune.stallLimit) {
           const lost = Math.max(0, r.d.alt0 - r.alt);
           const head = r.phaseT > r.tune.stallLimit ? `${r.tune.stallLimit} 秒還沒改出` : `掉了 ${fmt(lost)} m`;
-          return { fail: r.d.pullSec > 1 ? `${head}。失速時你還拉了 ${r.d.pullSec.toFixed(1)} 秒桿——機翼沒有升力可給，拉桿只會讓它反覆失速。先推桿、讓速度回來。`
+          return { fail: r.d.pullSec > 1 ? `${head}。失速時你還拉了 ${r.d.pullSec.toFixed(1)} 秒桿——可用升力不足以繼續抬頭，持續拉桿又增加阻力。先推桿、讓速度回來。`
             : r.phaseT > r.tune.stallLimit ? `${r.tune.stallLimit} 秒還沒改出：機頭要先朝下讓速度長回來，到 500 km/h 再把 FPM 拉回地平線。`
               : `掉了 ${fmt(r.d.alt0 - r.alt)} m 才改出。速度回到 500 km/h 後要立刻把 FPM 拉回地平線。` };
         }
@@ -543,7 +545,7 @@ const L07 = {
   principle: 'Lead（機頭在目標前方）縮短距離、機砲要用；Pure（機頭對準）最直覺但在轉彎戰會被甩到外側；Lag（機頭在目標後方）控制接近率、避免衝過頭。',
   real: '依據：公開的基本戰鬥機動（BFM）教學慣例，非 FAA／NASA 規範。真實空戰還涉及轉彎圈、能量與武器包絡。',
   model: '本遊戲：無人機以同一套物理做等速轉彎並定時反轉；追擊型態由「機頭指向目標的未來／過去位置」簡化判定。本課不給武器。',
-  goals: ['在目標尾後控制區（450–1400 m、45° 錐內、機頭大致對著它）累積 12 秒', '衝過頭（Overshoot）超過 3 次就失敗', '最後：把機頭放在機砲提前量上 1.5 秒（900 m 內）'],
+  goals: ['在目標尾後控制區（450–1400 m、45° 錐內、機頭大致對著它）累積 12 秒', '第三次衝過頭（Overshoot）即叫停，最多容許兩次', '最後：把機頭放在機砲提前量上 1.5 秒（900 m 內）'],
   timeLimit: 150,
   setup: (r) => duoSetup(r, {
     me: { pos: { x: 0, y: 3000, z: 4000 }, speed: 900 / KMH, heading: 0 },
@@ -556,7 +558,19 @@ const L07 = {
     {
       id: 'cone',
       enter: (r) => { r.d.held = 0; r.d.over = 0; r.d.armed = true; r.d.mix = { lead: 0, pure: 0, lag: 0 }; r.d.maxClose = 0; },
-      say: (r) => `跟上那架 J-16。它會轉彎、會反轉。待在它尾後 450 到 1,400 m。${r.pick('', '先滾轉把它放到座艙罩上方，再拉。')}接近太快就收油、把機頭放到它後面——那叫 lag。`,
+      say: (r) => `跟到尾後 450–1,400 m。青色 LEAD 收距、白色 PURE 指目標、金色 LAG 控接近。${r.pick('放手會改平，追蹤時要持續修正。', '滾轉後拉桿；放手不會替你改平。')}`,
+      markers: (r) => {
+        const ahead=addScaled(r.foe.pos,r.foe.vel,2), behind=addScaled(r.foe.pos,r.foe.vel,-2);
+        const los=sub(r.foe.pos,r.me.pos);
+        // On a straight tail chase the three points share one sightline. Drawing
+        // three stacked rings teaches nothing; reveal the comparison as it turns.
+        if(Math.max(angleBetween(sub(ahead,r.me.pos),los),angleBetween(sub(behind,r.me.pos),los))<3*DEG)return [];
+        return [
+          {pos:ahead,label:'LEAD 前方',kind:'reference',labelOffsetY:-18,color:'#7fe3ff'},
+          {pos:r.foe.pos,label:'PURE 目標',kind:'reference',labelOffsetY:0,color:'#f4fbff'},
+          {pos:behind,label:'LAG 後方',kind:'reference',labelOffsetY:18,color:'#ffc04d'},
+        ];
+      },
       text: (r) => { const g = geometry(r.me, r.foe); return `尾後控制區 ${(r.d.held).toFixed(1)}/12s　${fmt(g.R)} m　偏離機尾 ${Math.round(g.aot)}°　${{ lead: 'LEAD', pure: 'PURE', lag: 'LAG' }[pursuitType(r.me, r.foe)]}　衝過頭 ${r.d.over}/3`; },
       progress: (r) => r.d.held / 12,
       update(r, dt) {
@@ -566,8 +580,8 @@ const L07 = {
         if (g.R < 1500) r.d.maxClose = Math.max(r.d.maxClose, g.closure * KMH);
         if (r.d.armed && g.R < 500 && g.aot > 80) {
           r.d.over += 1; r.d.armed = false;
-          r.d.lastClose = g.closure * KMH;
-          r.say(r.d.over < 3 ? `衝過頭了！接近率 ${fmt(g.closure * KMH)} km/h。收油、BRK，機頭放到它後面。` : '');
+          r.d.lastClose = r.d.maxClose;
+          r.say(r.d.over < 3 ? `衝過頭了！先前最高接近率 ${fmt(r.d.maxClose)} km/h。收油、BRK，改追 LAG。` : '', { urgent: true });
         }
         if (!r.d.armed && g.R > 800) r.d.armed = true;
         if (r.d.over >= 3) {
@@ -597,13 +611,16 @@ const L07 = {
   ],
   grade(r) { const o = r.notes.over || 0; return o === 0 && r.t < 70 ? 'S' : o <= 1 ? 'A' : 'B'; },
   debrief(r) {
-    const m = r.notes.mix || { lead: 0, pure: 0, lag: 0 }, tot = m.lead + m.pure + m.lag;
+    const m = r.notes.mix || r.d.mix || { lead: 0, pure: 0, lag: 0 }, tot = m.lead + m.pure + m.lag;
+    const over=r.notes.over ?? (r.phase?.id==='cone'?r.d.over:0), held=r.notes.mix?12:(r.phase?.id==='cone'?r.d.held:0);
     const good = [], improve = [];
     good.push(`追擊型態：Lead ${pct(m.lead, tot)}%、Pure ${pct(m.pure, tot)}%、Lag ${pct(m.lag, tot)}%。`);
-    (r.notes.over ? improve : good).push(r.notes.over ? `衝過頭 ${r.notes.over} 次：近距離時讓機頭落在它後方，接近率才控制得住。` : '沒有衝過頭——接近率控制得很好。');
+    if(over)improve.push(`衝過頭 ${over} 次：近距離改 LAG，提早控制接近率。`);
+    else if(held>=12)good.push('控制區滿 12 秒且沒有衝過頭，接近率控制得很好。');
+    else improve.push(`控制區僅 ${Number(held||0).toFixed(1)} 秒；先取得穩定尾後位置。`);
     if (r.notes.maxClose > 250) improve.push(`最高接近率 ${fmt(r.notes.maxClose)} km/h：1.5 km 內超過 200 km/h 就要開始減速。`);
     return { good, improve,
-      stats: [['控制區', '12 秒'], ['衝過頭', `${r.notes.over ?? 0} 次`], ['Lag 比例', `${pct(m.lag, tot)}%`], ['提前量', r.notes.leadT ? `${r.notes.leadT.toFixed(1)} s` : '—']],
+      stats: [['控制區', `${Number(held||0).toFixed(1)} 秒`], ['衝過頭', `${over??0} 次`], ['Lag 比例', `${pct(m.lag, tot)}%`], ['提前量', r.notes.leadT ? `${r.notes.leadT.toFixed(1)} s` : '—']],
       closing: '位置比火力重要。下一課，給你火力。' };
   },
 };
@@ -624,7 +641,7 @@ const L08 = {
     foe: { pos: { x: 0, y: 3000, z: 1800 }, speed: 230, heading: 0 },
     foeCtl: (rr) => new StraightDrone(rr.foe, { speed: 230 }),
   }),
-  intro: ['今天開火。目標不會還手——所以每一發沒中，都是你的問題。'],
+  intro: ['武器測試開始。目標不還手，你可以專心把準備做對；飛彈不是拿來代替轉彎的。'],
   onEvent(r, ev) {
     if (ev.type === 'missileLaunch' && ev.ac === r.me) {
       const g = geometry(r.me, r.foe);
@@ -669,21 +686,24 @@ const L08 = {
         r.d.gunHits = 0; r.d.fired = 0; r.d.atTarget = 0; r.d.goodAim = 0;
         r.flash('目標轉彎中', '#7fe3ff');
       },
-      say: '機砲。它在轉彎——把橘色提前量圈疊在它身上，不是瞄它本身。按住 GUN，短連射。',
+      say: '機頭 W 對準橘色提前量圈，再短按 GUN。別把圈追到目標身上：圈是子彈要去的位置。',
       text: (r) => `機砲命中 ${r.d.gunHits}/12（45 秒內）　${fmt(geometry(r.me, r.foe).R)} m`,
       progress: (r) => r.d.gunHits / 12,
-      update(r) {
+      update(r, dt) {
         if (r.me.controls.fireGun) {
           r.d.fired += 1;
           const lead = gunLead(r.me, r.foe.pos, r.foe.vel).point;
           const eLead = gunError(r.me, lead) / DEG, eTgt = angleBetween(forwardOf(r.me.q), sub(r.foe.pos, r.me.pos)) / DEG;
           if (eLead < 2) r.d.goodAim += 1; else if (eTgt < eLead) r.d.atTarget += 1;
+          if (eTgt < eLead && eLead > 2) r.d.bodyAimSec = (r.d.bodyAimSec || 0)+dt;
         }
+        if (r.d.bodyAimSec > 0.6) r.coachOnce('aim-body', '你在追它現在的位置。把機頭 W 移到橘圈，讓子彈提早到。', {urgent:true});
+        if (r.d.gunHits >= 3) r.coachOnce('gun-connect', `已有 ${r.d.gunHits} 發命中。提前量對了，保持短連射。`);
         if (r.d.gunHits >= 12) { r.note('gunHits', r.d.gunHits); r.note('gunAim', pct(r.d.goodAim, r.d.fired)); return 'done'; }
         if (r.phaseT > 45) {
-          return { fail: r.d.fired < 30 ? `只命中 ${r.d.gunHits} 發：幾乎沒開火。距離 1 km 內、提前量圈疊上目標就按住 GUN。`
+          return { fail: r.d.fired < 30 ? `只命中 ${r.d.gunHits} 發：幾乎沒開火。距離 1 km 內、機頭 W 對準提前量圈再開火。`
             : r.d.atTarget > r.d.goodAim ? `只命中 ${r.d.gunHits} 發：${pct(r.d.atTarget, r.d.fired)}% 的子彈是瞄著它本身打的——它在轉彎，子彈到的時候它已經不在那裡。瞄橘色圈。`
-              : `只命中 ${r.d.gunHits} 發：距離太遠或追蹤不穩。拉近到 600 m，讓提前量圈停在它身上再開火。` };
+              : `只命中 ${r.d.gunHits} 發：距離太遠或追蹤不穩。拉近到 600 m，機頭 W 對準橘圈再開火。` };
         }
         return undefined;
       },
@@ -692,10 +712,10 @@ const L08 = {
   grade(r) { const s = (r.notes.shots || []).length; return s <= 1 && (r.notes.gunAim || 0) > 50 ? 'S' : s <= 2 ? 'A' : 'B'; },
   debrief(r) {
     const shots = r.notes.shots || [], good = [], improve = [];
-    if (shots.length) (shots.length === 1 ? good : improve).push(shots.length === 1 ? `一發命中：發射時 ${fmt(shots[0].R)} m、Pk ${shots[0].pk.toFixed(2)}。` : `用了 ${shots.length} 發飛彈。第一發 Pk ${shots[0].pk.toFixed(2)}、${fmt(shots[0].R)} m。`);
+    if (shots.length) (shots.length === 1 && r.notes.mslHit ? good : improve).push(shots.length === 1 && r.notes.mslHit ? `一發命中：發射時 ${fmt(shots[0].R)} m、Pk ${shots[0].pk.toFixed(2)}。` : `發射 ${shots.length} 枚、命中 ${r.notes.mslHit||0} 枚。第一發 Pk ${shots[0].pk.toFixed(2)}、${fmt(shots[0].R)} m。`);
     if (r.notes.gunAim != null) (r.notes.gunAim > 40 ? good : improve).push(`機砲開火時，有 ${r.notes.gunAim}% 的時間機頭在提前量上。`);
     return { good, improve,
-      stats: [['飛彈', `${r.notes.mslHit ? 1 : 0}/${shots.length}`], ['機砲命中', `${r.notes.gunHits ?? 0}`], ['提前量瞄準', `${r.notes.gunAim ?? 0}%`], ['用時', `${Math.round(r.t)} s`]],
+      stats: [['飛彈', `${r.notes.mslHit ? 1 : 0}/${shots.length}`], ['機砲命中', `${r.notes.gunHits ?? (r.phase?.id==='guns'?r.d.gunHits:0)}`], ['提前量瞄準', `${r.notes.gunAim ?? (r.phase?.id==='guns'?pct(r.d.goodAim,r.d.fired):0)}%`], ['用時', `${Math.round(r.t)} s`]],
       closing: '武器只是最後一步。前面七課，都是為了讓這一步變簡單。' };
   },
 };
@@ -703,7 +723,7 @@ function shotWhy(s) {
   if (!s.locked) return `那發沒有鎖定就發射——飛彈不知道要追誰。等紅色菱形。`;
   if (s.R < 450) return `那發太近了（${fmt(s.R)} m）：飛彈來不及解除保險、轉不過來。拉開到 800 m 以上。`;
   if (s.pk < 0.3) return `那發 Pk 只有 ${s.pk.toFixed(2)}（${fmt(s.R)} m、偏離機尾 ${Math.round(s.aot)}°）：太遠或角度太差。靠近、繞到它正後方再打。`;
-  return `那發 Pk ${s.pk.toFixed(2)}，運氣不好或目標正好轉向。下一發等 SHOOT 穩定再按。`;
+  return `那發 Pk ${s.pk.toFixed(2)}，仍不保證命中。保持好位置，下一發等 SHOOT 穩定再按。`;
 }
 
 // =====================================================================
@@ -716,6 +736,7 @@ const L09 = {
   model: '本遊戲規則：飛彈有 0.4 秒自動駕駛延遲與 G 上限；熱焰彈只在 2.6 km 內、每枚飛彈一次 40–55% 機率被誘騙；熱焰彈 2 組，25 秒回充。實測：熱焰彈＋剩 0.5 km 急轉 0/18 被命中，太早（1.6 km）急轉 7/18，不防守 12/18。飛彈段 AB 停用（遊戲規則）；本課機體不會損毀。',
   goals: ['教官連發 3 枚飛彈：最多被命中 1 枚', '熱焰彈只有 2 組——第 3 枚只能靠急轉', '被 J-16 咬尾：逼它衝過頭，反咬到它尾後 3 秒'],
   timeLimit: 170,
+  tune: { all: { launchRanges:[1900,1900,1900], launchIntervals:[3,11,11] } },
   rules: { weapons: false, playerDamage: 0 },
   setup: (r) => {
     duoSetup(r, {
@@ -727,10 +748,11 @@ const L09 = {
   },
   intro: ['今天換你被打。慌是正常的，慌了還照程序做，才叫飛行員。'],
   onEvent(r, ev) {
-    if (ev.type === 'missileHit' && ev.target === r.me) { r.d.hits = (r.d.hits || 0) + 1; r.say(missileWhy(r, ev.missile, true)); }
+    if (ev.type === 'missileHit' && ev.target === r.me) { r.d.hits = (r.d.hits || 0) + 1; r.say(missileWhy(r, ev.missile, true), {urgent:true}); }
     if ((ev.type === 'missileMiss' || ev.type === 'missileExpire') && ev.missile.target === r.me && !ev.missile.reported) {
       ev.missile.reported = true; r.d.misses = (r.d.misses || 0) + 1;
-      r.say(ev.missile.decoy ? '躲掉了——熱焰彈把它騙走了。' : `躲掉了！最後關頭你拉到 ${(ev.missile.defG || 0).toFixed(1)}G。`);
+      r.say(ev.missile.decoy ? '誘餌奏效，這枚被騙走了。別停止掃描。' : (ev.missile.defG||0)>=5
+        ? `這枚失去威脅，近距機動記錄 ${ev.missile.defG.toFixed(1)}G。保持高度。` : '這枚失去威脅。保持高度，繼續看來襲警告。');
     }
     if (ev.type === 'flares' && ev.ac === r.me) {
       for (const m of r.match.missiles) if (m.alive && m.target === r.me) m.flareAt ??= len(sub(m.pos, r.me.pos));
@@ -740,8 +762,8 @@ const L09 = {
     {
       id: 'missiles',
       rules: { ab: false },
-      enter: (r) => { r.d.hits = 0; r.d.misses = 0; r.d.launched = 0; r.d.next = 3; },
-      say: (r) => `飛彈從後方來，AB 故障用不了，跑不掉。2 公里左右放熱焰彈（${r.pick('FLR', 'FLR／Q')}）；剩 0.5 公里——不到一秒——往側面${r.pick('推滿', '滾轉拉滿')}。太早轉，它還來得及修正。`,
+      enter: (r) => { r.d.hits = 0; r.d.misses = 0; r.d.launched = 0; r.d.next = r.tune.launchIntervals[0]; },
+      say: (r) => `AB 本段停用。看來襲距離與接近時間，別背倒數。約 2 km 放 FLR，約 0.5 km 側向${r.pick('推滿', '滾轉拉滿')}。這是本遊戲模型的練習窗口。`,
       text: (r) => {
         const m = r.match.missiles.find((x) => x.alive && x.target === r.me);
         return `飛彈防禦 ${r.d.launched}/3　被命中 ${r.d.hits}（最多 1）　熱焰彈 ${r.me.flares}${m ? `　來襲 ${(len(sub(m.pos, r.me.pos)) / 1000).toFixed(1)} km` : ''}`;
@@ -759,13 +781,14 @@ const L09 = {
           // 150 deg off the nose, 1.9 km, AB unavailable: running away is not a defence,
           // and (measured, docs/academy-curriculum.md) flares + a last-second break are.
           const side = r.d.launched % 2 ? -1 : 1, bearing = (r.heading + side * 150) * DEG;
-          const dist = 1900;
+          const dist = r.tune.launchRanges[r.d.launched];
           const lp = { x: r.me.pos.x + Math.sin(bearing) * dist, y: r.me.pos.y + 150, z: r.me.pos.z - Math.cos(bearing) * dist };
           const toMe = Math.atan2(r.me.pos.x - lp.x, -(r.me.pos.z - lp.z)) / DEG;
           placeJet(r.foe, { pos: lp, speed: 280, heading: toMe });
           r.match.setController(r.foe, new StraightDrone(r.foe, { speed: 260 }));
           scriptedLaunch(r.match, r.foe, r.me);
-          r.d.launched += 1; r.d.next = r.phaseT + 11;
+          (r.notes.launches ||= []).push({ t:r.phaseT, distance:dist });
+          r.d.launched += 1; r.d.next = r.phaseT + (r.tune.launchIntervals[r.d.launched]??11);
           r.flash(`MISSILE ${r.d.launched}/3`, '#ff6a6a');
         }
         if (r.d.hits >= 2) return { fail: `被命中 ${r.d.hits} 枚。${r.d.why || ''}` };
@@ -806,11 +829,14 @@ const L09 = {
   grade(r) { return r.notes.mslHits === 0 && r.notes.revT < 40 ? 'S' : r.notes.mslHits === 0 || r.notes.revT < 40 ? 'A' : 'B'; },
   debrief(r) {
     const good = [], improve = [];
-    (r.notes.mslHits ? improve : good).push(r.notes.mslHits ? `3 枚飛彈被命中 ${r.notes.mslHits} 枚。` : '3 枚飛彈全部躲掉。');
+    const hits=r.notes.mslHits ?? (r.phase?.id==='missiles'?r.d.hits:0);
+    const launched=r.notes.mslHits!=null?3:(r.phase?.id==='missiles'?r.d.launched:0);
+    if(launched===3 && hits===0)good.push('3 枚飛彈全部躲掉。');
+    else improve.push(`已發射 ${launched} 枚，被命中 ${hits} 枚；看來襲距離與接近時間修正。`);
     if (r.notes.revT != null) good.push(`反咬用了 ${Math.round(r.notes.revT)} 秒，逼它衝過頭 ${r.notes.overshoots} 次${r.notes.revBrake > 0.5 ? `，BRK ${r.notes.revBrake.toFixed(1)} 秒` : ''}。`);
     improve.push('真實戰場不會有教官暫停：先看 MISSILE、再看距離、最後拉桿——順序要變成反射。');
     return { good, improve,
-      stats: [['飛彈命中', `${r.notes.mslHits ?? 0}/3`], ['熱焰彈', `${r.me.stats.flaresUsed}`], ['Overshoot', `${r.notes.overshoots ?? 0}`], ['反咬', r.notes.revT ? `${Math.round(r.notes.revT)} s` : '—']],
+      stats: [['飛彈命中', `${hits}/${launched}`], ['熱焰彈', `${r.me.stats.flaresUsed}`], ['Overshoot', `${r.notes.overshoots ?? 0}`], ['反咬', r.notes.revT ? `${Math.round(r.notes.revT)} s` : '—']],
       closing: '活下來，然後反咬。這就是戰鬥機飛行員。' };
   },
 };
@@ -820,7 +846,7 @@ function missileWhy(r, m, hit) {
   else if (m.flareAt > FLARE.decoyRange) parts.push(`熱焰彈在 ${(m.flareAt / 1000).toFixed(1)} km 就放了（2.6 km 外無效）`);
   if (m.breakAt != null && m.breakAt > 1200) parts.push(`你在 ${(m.breakAt / 1000).toFixed(1)} km 就開始急轉，太早了，它修正得過來`);
   else if ((m.defG || 0) < 5) parts.push(`最後 1.5 km 只拉了 ${(m.defG || 0).toFixed(1)}G`);
-  const why = parts.length ? `命中！${parts.join('、')}。` : '命中！這枚運氣好——時機都對，下一枚照做。';
+  const why = parts.length ? `命中！${parts.join('、')}。` : '命中。操作接近窗口，但誘餌不是保證；下一枚仍看來襲距離與方向。';
   r.d.why = parts.length ? `${parts.join('、')}。2 km 放熱焰彈，剩 0.5 km 往側面拉滿。` : '';
   return why;
 }
@@ -842,12 +868,12 @@ const L10 = {
     r.foeAI = new PilotAI(r.foe, { skill: 'veteran', seed: r.match.seed + 7 });
     r.match.setController(r.foe, r.foeAI);
   },
-  intro: ['這是畢業考。我不會再提示你了——除非你快死了。', '祝好運，菜鳥。'],
+  intro: ['考核空域已清空，對手 VETERAN。不再逐步提示：把速度花在位置，把武器用在機會。KITE 在這裡等你回報。'],
   crashReason: () => '墜海。高度也是武器——別在海面上跟它纏鬥。',
   phases: [
     {
       id: 'fight',
-      say: '',
+      say: 'KITE 在頻道上。考核開始，自主決策。',
       text: (r) => { const g = geometry(r.me, r.foe); return `擊落 J-16　我 HP ${Math.round(r.me.hp)}　敵 HP ${Math.round(r.foe.hp)}　${fmt(g.R)} m`; },
       progress: (r) => 1 - r.foe.hp / r.foe.type.hp,
       update(r) {
@@ -873,12 +899,83 @@ const L10 = {
     const taken = 100 - Math.max(0, r.me.hp);
     if (taken > 0) improve.push(`受到 ${Math.round(taken)} 點傷害${r.foe.stats.missileHits ? `（被飛彈命中 ${r.foe.stats.missileHits} 次）` : ''}。`);
     if (r.tel.gHighSec > 25) improve.push(`超過 7G 的時間累積 ${Math.round(r.tel.gHighSec)} 秒：能量燒太多。`);
+    if (success && r.lesson.grade(r) !== 'S') improve.push(`下一個目標 S：保留至少 70 耐久，150 秒內完成。這次 ${Math.round(r.me.hp)} 耐久／${Math.round(r.t)} 秒。`);
     return { good, improve,
       stats: [['剩餘耐久', `${Math.round(Math.max(0, r.me.hp))}`], ['時間', `${Math.round(r.t)} s`], ['飛彈', `${st.missileHits}/${st.missilesFired}`], ['最佳轉彎區', `${band}%`]],
-      closing: success ? '恭喜。從今天起，你是王牌——至少在這片海上。' : '再來一次。王牌也是從被擊落學起的。' };
+      closing: success ? `確認，ACE ${r.lesson.grade(r)} 級資格通過。${Math.round(Math.max(0,r.me.hp))} 耐久帶回來了。這次由你領航。` : '先修正結算裡的一個決策，再飛同一個開局。我還在你的頻道上。' };
   },
 };
 
+// Small, pure HUD readouts: action + measured evidence + next correction.
+// These never drive controls, alter an AI decision, consume RNG or award a pass.
+export function lessonGuidance(r) {
+  const id=r.phase?.id, v=fmt(r.kmh), bank=Math.round(r.bank), g=r.g.toFixed(1);
+  const cue=(goal,readout,tip,state='neutral')=>({goal,readout,tip,state});
+  switch(r.lesson.id) {
+    case 'L01': {
+      const target=id==='level'?null:r.d.target;
+      const ok=Math.abs(r.gamma)<(target?3:2.5) && (target?Math.abs(r.alt-target)<120:Math.abs(r.bank)<10);
+      return cue(target?`${id==='climb'?'爬升':'下降'}至 ${fmt(target)} m 並穩住`:'連續平飛 5 秒',
+        `γ ${r.gamma.toFixed(1)}° · 坡度 ${bank}° · ${fmt(r.alt)}m`,
+        ok?'FPM 穩住了；小幅修正就好':Math.abs(r.bank)>10?r.pick('放手讓飛控改平','反向滾轉修平；放手不會改平'):'先讓 FPM 回 0°，別只看機頭',ok?'good':'warn');
+    }
+    case 'L02': {
+      const target={h090:90,h300:300,h015:15}[id]??0, err=wrapDeg(target-r.heading);
+      const close=Math.abs(err)<20;
+      return cue(`轉至 ${hdg3(target)}°，提早改平`,
+        `${hdg3(r.heading)}° · 坡度 ${bank}° · ${g}G`,
+        Math.abs(r.bank)>40 && r.g<1.4?'有坡度、缺升力：拉桿撐住高度':close?r.pick('接近航向，放手讓飛控改平','接近航向，反向滾轉改平'):r.pick('側推協調轉彎，注意高度','滾到坡度後橫向回中，持續拉桿'),close?'good':'neutral');
+    }
+    case 'L03': return cue(id==='accel'?'平飛加速至 1000 km/h':id==='decel'?'減速至 650 km/h':'連續定速 600–700 六秒',
+      `${v}km/h · 油門 ${Math.round(r.me.controls.throttle*100)}% · ${r.me.controls.boost?'AB':'MIL'}`,
+      id==='accel'?'滿油門＋AB；高度不能拿來換速度':id==='decel'?'關 AB、收油、按住 BRK':'看速度趨勢，小幅調油門',id==='hold' && r.kmh>=600 && r.kmh<=700?'good':'neutral');
+    case 'L04': {
+      const elapsed=Math.max(0.1,r.phaseT-(r.d.t0||0)), rate=(r.d.turned||0)/elapsed;
+      const base=r.notes.fast;
+      return cue(id==='band'?'調到綠菱形轉彎速度':id==='sustain'?`MIL 一圈 · 保留 ${r.tune.sustainV}km/h`:'滿桿 180°：比較轉率',
+        `${v}km/h · ${g}G · ${rate.toFixed(1)}°/s`,
+        id==='sustain'?(r.d.armed?'速度接近底線就減 G，別清空帳戶':'先加速至 750，現在 AB 可用'):base?`高速基準 ${base.dps.toFixed(1)}°/s；比較這一圈`:'先測高速基準，G 大不等於轉得快',r.inBestBand?'good':'neutral');
+    }
+    case 'L05': return cue(id==='dive'?'高度換速度：950 km/h':'速度換高度：保留 400 km/h',
+      `高度 ${fmt(r.alt)} + 動能 ${fmt(r.energyHeight-r.alt)} = ${fmt(r.energyHeight)}m`,
+      id==='dive'?'兩種餘額互換；2200m 是安全底線':`${g}G · 目標 ${fmt(r.d.target)}m；平順拉起`,r.g>6.5?'warn':'neutral');
+    case 'L06': return cue(id==='slowturn'?'低速轉彎：守住 300 km/h':id==='stall'?'卸載、加速，再改平':'立即俯衝改出',
+      `${v}km/h · 可用 ${r.availG.toFixed(1)}G · ${fmt(r.alt)}m`,
+      id==='dive'?'收油、BRK、拉滿；別等字幕':id==='stall'?'先推桿卸載；速度回來再拉':'淺坡度、輕拉，別把速度拉光',id==='dive'||r.kmh<350?'warn':'neutral');
+    case 'L07': {
+      const geo=geometry(r.me,r.foe), type=pursuitType(r.me,r.foe).toUpperCase();
+      const rush=geo.R<1500 && geo.closure>35 && geo.R/geo.closure<7;
+      return cue(id==='lead'?'機頭 W 對橘圈，保持 1.5 秒':'留在尾後控制區 12 秒',
+        `${type} · ${fmt(geo.R)}m · 接近 ${Math.round(geo.closure*KMH)}km/h`,
+        rush?'接近太快：收油、BRK、改 LAG':id==='lead'?'橘圈是提前量，不是目標本體':geo.R>1400?'遠了用 LEAD 收距；近了再控接近率':'PURE 可跟隨；別一直追它現在的位置',rush?'warn':geo.R>=450&&geo.R<=1400&&geo.aot<45?'good':'neutral');
+    }
+    case 'L08': {
+      const geo=geometry(r.me,r.foe);
+      if(id==='guns') {
+        const e=gunError(r.me,gunLead(r.me,r.foe.pos,r.foe.vel).point)/DEG;
+        return cue('機砲 12 發命中 · 45 秒',`${r.d.gunHits}/12 · ${fmt(geo.R)}m · 提前量誤差 ${e.toFixed(1)}°`,
+          e<2&&geo.R<850?'提前量到位：短按 GUN':'機頭 W 對橘圈；別瞄目標本體',e<2&&geo.R<850?'good':'warn');
+      }
+      const aspect=Math.PI-angleBetween(forwardOf(r.foe.q),scale(norm(sub(r.foe.pos,r.me.pos)),-1));
+      const pk=r.me.lock.locked?missilePk({R:geo.R,ata:geo.ata*DEG,aspect,mySpeed:r.me.speed,tgSpeed:r.foe.speed,tgG:r.foe.nCur}):0;
+      return cue('飛彈命中一次',`${fmt(geo.R)}m · ${r.me.lock.locked?'LOCK':'未鎖定'} · Pk ${pk.toFixed(2)}`,
+        pk>0.45?'SHOOT 窗口已到：按 MSL':geo.R<450?'太近，先拉開再發射':'機頭對準目標，等 LOCK 與 SHOOT',pk>0.45?'good':'neutral');
+    }
+    case 'L09': {
+      if(id==='reverse') {const geo=geometry(r.me,r.foe);return cue('逼過頭，再咬尾 3 秒',`${fmt(geo.R)}m · 尾後 ${r.d.held.toFixed(1)}/3s`,
+        geo.ata>90?'朝追兵急轉；必要時 BRK 控接近率':'它到前面了：反轉追 LEAD');}
+      const missile=r.match.missiles.find(m=>m.alive&&m.target===r.me);
+      if(!missile)return cue('三枚來襲：讀距離，不背倒數',`已發射 ${r.d.launched}/3 · 命中 ${r.d.hits}/1`,'保持速度與高度，掃描 MISSILE 警告');
+      const rel=sub(missile.pos,r.me.pos), distance=len(rel), closing=-dot(sub(missile.vel,r.me.vel),norm(rel));
+      return cue('飛彈防禦 · 本遊戲模型窗口',`${(distance/1000).toFixed(1)}km · 接近估計 ${closing>1?(distance/closing).toFixed(1)+'s':'拉開中'} · FLR ${r.me.flares}`,
+        distance<550?r.pick('近了！向側面推滿','近了！側向滾轉、拉滿'):distance<2600&&r.me.flares?'可投 FLR；同時準備側向機動':'看來襲方向，保留最後的機動',distance<550?'warn':'neutral');
+    }
+    case 'L10': return cue('ACE 考核：擊落或耐久判勝',`我 HP ${Math.round(r.me.hp)} · 敵 HP ${Math.round(r.foe.hp)}`,'S 目標：耐久 ≥70、150 秒內；自主決策');
+    default:return null;
+  }
+}
+
 export const LESSONS = [L01, L02, L03, L04, L05, L06, L07, L08, L09, L10];
+for (const lesson of LESSONS) lesson.guidance=lessonGuidance;
 export const lessonById = (id) => LESSONS.find((l) => l.id === id);
 export { gatePhase, pointAhead };

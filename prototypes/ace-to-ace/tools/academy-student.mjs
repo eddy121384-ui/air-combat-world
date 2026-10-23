@@ -268,6 +268,12 @@ export const BAD = {
   'L07:pure'(r, s, c) { Object.assign(s.stick, stickToward(r.me, norm(sub(r.foe.pos, r.me.pos)), c, { pullLimit: 1 })); s.thr = 1; s.ab = true; s.brk = false; },
   // Fires missiles as soon as it can, locked or not, from far away.
   'L08:spray'(r, s, c) { PLANS.L08(r, s, c); if (r.phase?.id === 'missile') { s.presses.clear(); if (r.t - (r.lastShotT ?? -9) > 2.5) { s.presses.add('msl'); r.lastShotT = r.t; } } },
+  // Tracks the target's current position accurately but ignores bullet travel time.
+  'L08:bodyAim'(r,s,c) {
+    if(r.phase?.id!=='guns') {PLANS.L08(r,s,c);return;}
+    const geo=chase(r,s,c,r.foe.pos,500,3);
+    s.gunOn=geo.R<850;
+  },
   // Breaks hard as soon as it sees the missile (too early) and never drops flares.
   'L09:early'(r, s, c) { globalThis.__L09 = { flare: 0, brk: 2600 }; PLANS.L09(r, s, c); globalThis.__L09 = null; },
   // Ignores the missile warning: no flares, no break.
