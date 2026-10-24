@@ -2,6 +2,8 @@
 
 2026-10-24：完成 **7 組同鏡位 A/B、14 張原始 UE PNG**，另保留第一張基準測試圖。場景已在隔離環境恢復；美術驗收仍待審。本輪沒有完整 Cook、城市幾何／地形重建或 PR merge，也沒有手機效能驗證。
 
+審圖入口：[三張手機用左右 A/B JPEG 與三組 1:1 無損細節裁切](evidence/xinyi-material-ue58-round1/review/README.md)。左為 Baseline、右為 New Materials，兩側全幅同為 40% 顯示比例；JPEG 分別約 189／147／302 KB。細節裁切保留原始像素、不縮放、不強化。這次預覽整理沒有啟動 UE 或修改材質，全部 14 張 A/B 原始 PNG 與首張基準 PNG 均逐位元組不變；[來源、座標及核對紀錄](evidence/xinyi-material-ue58-round1/review/manifest.json)可供重查。
+
 執行環境是 Windows 本機 UE **5.8.0 / CL 55116800**、D3D12、Intel UHD Graphics 770（驅動 31.0.101.4502）。隔離 worktree 位於 `C:\Users\EDDY\Desktop\M1A2\xinyi-material-ue58-round1`，分支 `test/xinyi-shared-masks-ue58-round1`，以視覺分支 `ede7960d8ec05b2aa521b1e4c65b5bbd667c456d` 為基礎。
 
 **原始 D 槽專案確實可恢復。** 只讀調查 `D:\Users\EDDY\Documents\GitHub\air-combat-world` 後，確認 `Content/XinyiV2` 有 32 個檔案，包含 Contract、WP 地圖與 25 個 Runtime Tile meshes；`__ExternalActors__` 有 32 個 WP 外部 Actor 檔案。正式 `Content/XinyiLook` 目錄已缺失，`__ExternalObjects__` 不存在。`Saved/XinyiLook` 約 832 MiB，仍有 Look GLB、樹木／屋頂配置與舊 PASS receipts；`Saved/XinyiHostGates` 亦保留先前的 streaming／collision／source-immutability 紀錄。舊 PASS 只作歷史證據，本輪另外啟動 UE 檢查複本：成功載入 25 個 Runtime Tiles 和 25 個 Landscape components，未存檔；該 NullRHI 依賴檢查沒有產生截圖。
@@ -20,9 +22,9 @@ PR #62 固定在 `b0e00f2256bfe67ba76798d73450fa3c5412930f`，其 PR #14 基底�
 
 | 對象 | Baseline | New Materials |
 |---|---|---|
-| 老公寓 `tp_building_height.269873` | ![老公寓 Baseline](evidence/xinyi-material-ue58-round1/captures/baseline/walkup__day.png) | ![老公寓 New Materials](evidence/xinyi-material-ue58-round1/captures/candidate/walkup__day.png) |
-| 華廈 `tp_building_height.270894` | ![華廈 Baseline](evidence/xinyi-material-ue58-round1/captures/baseline/huaxia__day.png) | ![華廈 New Materials](evidence/xinyi-material-ue58-round1/captures/candidate/huaxia__day.png) |
-| 吳興屋頂，沿用既有鏡位 | ![屋頂 Baseline](evidence/xinyi-material-ue58-round1/captures/baseline/wuxing_roofs__day.png) | ![屋頂 New Materials](evidence/xinyi-material-ue58-round1/captures/candidate/wuxing_roofs__day.png) |
+| 老公寓 `tp_building_height.269873` | [老公寓 Baseline 原始 PNG](evidence/xinyi-material-ue58-round1/captures/baseline/walkup__day.png) | [老公寓 New Materials 原始 PNG](evidence/xinyi-material-ue58-round1/captures/candidate/walkup__day.png) |
+| 華廈 `tp_building_height.270894` | [華廈 Baseline 原始 PNG](evidence/xinyi-material-ue58-round1/captures/baseline/huaxia__day.png) | [華廈 New Materials 原始 PNG](evidence/xinyi-material-ue58-round1/captures/candidate/huaxia__day.png) |
+| 吳興屋頂，沿用既有鏡位 | [屋頂 Baseline 原始 PNG](evidence/xinyi-material-ue58-round1/captures/baseline/wuxing_roofs__day.png) | [屋頂 New Materials 原始 PNG](evidence/xinyi-material-ue58-round1/captures/candidate/wuxing_roofs__day.png) |
 
 近景立面增加柔和的濕斑、修補明暗與粗糙度變化，窗格及招牌輪廓保留；改善幅度克制，尚不能把本輪稱為顯著整體畫質提升。吳興廣角場景以學校和設備為主，受本次遮罩影響的區域有限，遠景屋頂收益偏弱。兩張立面圖的平均 RGB 絕對差約 1.34／1.19（0–255），屋頂廣角約 0.084；這些數字只證明影像有改變，不是美術評分。
 

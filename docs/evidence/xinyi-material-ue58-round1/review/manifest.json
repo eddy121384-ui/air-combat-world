@@ -1,0 +1,268 @@
+{
+  "source_commit": "0b220f6fed7849ab8fe6bd8a0eede1891ec2a878",
+  "method": "Offline layout/crop/compression of committed UE screenshots only",
+  "pillow_version": "12.3.0",
+  "fonts_sha256": {
+    "NotoSansTC-VF.ttf": "c6481c5d93420aeac11087367dae56ae7492eb1989ce42f4ca5d5aa5e2db3116",
+    "segoeuib.ttf": "b169e636719880976a97e94e3b1cb3dbe5f4a38eabc037bf9f2a9165154c3ad2",
+    "segoeui.ttf": "704eada12961a27fd271f7d3b09e2066520e758390c1776744eff430fee30f6e"
+  },
+  "left": "baseline",
+  "right": "candidate (New Materials)",
+  "matched_capture_metadata_keys": [
+    "resolution",
+    "time_of_day",
+    "clouds",
+    "camera_specs",
+    "requested_console_settings",
+    "observed_console_settings",
+    "look_level_sha256",
+    "baseline_city_material_sha256"
+  ],
+  "source_files_sha256": {
+    "docs/evidence/xinyi-material-ue58-round1/captures/baseline/huaxia__day.png": "6989eca8affedfd768b65a973749acd54b6b8d050bcd7d670d527b6f1c496dfe",
+    "docs/evidence/xinyi-material-ue58-round1/captures/baseline/metadata.json": "9b5585c065c3122c361b08655c84beffd9d1f63898f2dfde33690ff115e7bcf5",
+    "docs/evidence/xinyi-material-ue58-round1/captures/baseline/walkup__day.png": "93a0a2dc6362bf72840164fa08ba5ed57cb2b5f458533f83a3e11a113f425cdf",
+    "docs/evidence/xinyi-material-ue58-round1/captures/baseline/wuxing_move_00__day.png": "f70fbe17bfa8b54b2ec95977bee525952278aec94c34a0865e0cc47cba2eac2b",
+    "docs/evidence/xinyi-material-ue58-round1/captures/baseline/wuxing_move_01__day.png": "4ad2cdb52e4a38b54bcd3b94203359e45486ba98a742496313c97be5feb48b8d",
+    "docs/evidence/xinyi-material-ue58-round1/captures/baseline/wuxing_move_02__day.png": "137390304fdce01a909b9ea02d2531eb944284e8afb5b640dd01eda81964f7ed",
+    "docs/evidence/xinyi-material-ue58-round1/captures/baseline/wuxing_move_03__day.png": "be4d4dfee2a6204e9594c094121bf1a5d07f29427c7e9abced885eb80e74c501",
+    "docs/evidence/xinyi-material-ue58-round1/captures/baseline/wuxing_roofs__day.png": "c230604e4bae0b064246fdb7f5aafde703d38e63688f647262a4d90908653aef",
+    "docs/evidence/xinyi-material-ue58-round1/captures/baseline-smoke.png": "7bfb01cac6d9e9ca94724095bb534506ba53318d32bb543b6152566f017a058a",
+    "docs/evidence/xinyi-material-ue58-round1/captures/candidate/huaxia__day.png": "847aa139bfafca32fc75b0c0bddc3d370ef27b185a8ec455243da993ae5073c2",
+    "docs/evidence/xinyi-material-ue58-round1/captures/candidate/metadata.json": "8bfb3e34d59d42f540b7dfc4fdb17ab95eccebf49ee8d17b8fc36a17502a3b95",
+    "docs/evidence/xinyi-material-ue58-round1/captures/candidate/walkup__day.png": "1b4a2a2a735b65990046e1375292003d5302751681ae3e460bbad589c387fd25",
+    "docs/evidence/xinyi-material-ue58-round1/captures/candidate/wuxing_move_00__day.png": "ffb3acf5419c417fe934bd28945d477dbcc5b78759a9df5058d62024230a5378",
+    "docs/evidence/xinyi-material-ue58-round1/captures/candidate/wuxing_move_01__day.png": "d1fb8db72ee9b8312a52b5415008542caee07753e900fe2a9891b7ca5d2be8e7",
+    "docs/evidence/xinyi-material-ue58-round1/captures/candidate/wuxing_move_02__day.png": "a551a1e58c2999908fca4d3ec08434c4185d1fc15f67e26946816e29bc1324ce",
+    "docs/evidence/xinyi-material-ue58-round1/captures/candidate/wuxing_move_03__day.png": "0460b9b4c67ad382b2d7b01ab7930763751efa9af1de54cf6d99d4de41be2df3",
+    "docs/evidence/xinyi-material-ue58-round1/captures/candidate/wuxing_roofs__day.png": "f97c21be3a81efbcee51ed9d82bae4033703715558fd96bd620982597c0cf414"
+  },
+  "source_commit_blobs_sha256": {
+    "docs/evidence/xinyi-material-ue58-round1/captures/baseline/huaxia__day.png": "6989eca8affedfd768b65a973749acd54b6b8d050bcd7d670d527b6f1c496dfe",
+    "docs/evidence/xinyi-material-ue58-round1/captures/baseline/metadata.json": "223df41dafbbc2b5b66ace374824c08716b83aee1413441e1876a5472413aac0",
+    "docs/evidence/xinyi-material-ue58-round1/captures/baseline/walkup__day.png": "93a0a2dc6362bf72840164fa08ba5ed57cb2b5f458533f83a3e11a113f425cdf",
+    "docs/evidence/xinyi-material-ue58-round1/captures/baseline/wuxing_move_00__day.png": "f70fbe17bfa8b54b2ec95977bee525952278aec94c34a0865e0cc47cba2eac2b",
+    "docs/evidence/xinyi-material-ue58-round1/captures/baseline/wuxing_move_01__day.png": "4ad2cdb52e4a38b54bcd3b94203359e45486ba98a742496313c97be5feb48b8d",
+    "docs/evidence/xinyi-material-ue58-round1/captures/baseline/wuxing_move_02__day.png": "137390304fdce01a909b9ea02d2531eb944284e8afb5b640dd01eda81964f7ed",
+    "docs/evidence/xinyi-material-ue58-round1/captures/baseline/wuxing_move_03__day.png": "be4d4dfee2a6204e9594c094121bf1a5d07f29427c7e9abced885eb80e74c501",
+    "docs/evidence/xinyi-material-ue58-round1/captures/baseline/wuxing_roofs__day.png": "c230604e4bae0b064246fdb7f5aafde703d38e63688f647262a4d90908653aef",
+    "docs/evidence/xinyi-material-ue58-round1/captures/baseline-smoke.png": "7bfb01cac6d9e9ca94724095bb534506ba53318d32bb543b6152566f017a058a",
+    "docs/evidence/xinyi-material-ue58-round1/captures/candidate/huaxia__day.png": "847aa139bfafca32fc75b0c0bddc3d370ef27b185a8ec455243da993ae5073c2",
+    "docs/evidence/xinyi-material-ue58-round1/captures/candidate/metadata.json": "d9770568468462f5a67d5a75d9a6aa0df674d83cc6f12291d4aa46c65f052811",
+    "docs/evidence/xinyi-material-ue58-round1/captures/candidate/walkup__day.png": "1b4a2a2a735b65990046e1375292003d5302751681ae3e460bbad589c387fd25",
+    "docs/evidence/xinyi-material-ue58-round1/captures/candidate/wuxing_move_00__day.png": "ffb3acf5419c417fe934bd28945d477dbcc5b78759a9df5058d62024230a5378",
+    "docs/evidence/xinyi-material-ue58-round1/captures/candidate/wuxing_move_01__day.png": "d1fb8db72ee9b8312a52b5415008542caee07753e900fe2a9891b7ca5d2be8e7",
+    "docs/evidence/xinyi-material-ue58-round1/captures/candidate/wuxing_move_02__day.png": "a551a1e58c2999908fca4d3ec08434c4185d1fc15f67e26946816e29bc1324ce",
+    "docs/evidence/xinyi-material-ue58-round1/captures/candidate/wuxing_move_03__day.png": "0460b9b4c67ad382b2d7b01ab7930763751efa9af1de54cf6d99d4de41be2df3",
+    "docs/evidence/xinyi-material-ue58-round1/captures/candidate/wuxing_roofs__day.png": "f97c21be3a81efbcee51ed9d82bae4033703715558fd96bd620982597c0cf414"
+  },
+  "source_commit_comparison": "PNG bytes exact; JSON text exact after CRLF/LF normalization",
+  "suite_original_png_count": 14,
+  "additional_smoke_png_preserved": true,
+  "color_processing": "Same stored RGB samples; no color, exposure, gamma, contrast, saturation or sharpness adjustments; no ICC conversion",
+  "full_frame_transform": {
+    "source_px": [
+      1920,
+      1080
+    ],
+    "panel_px": [
+      768,
+      432
+    ],
+    "both_sides_scale": 0.4,
+    "resampling": "Pillow LANCZOS (identical both sides)"
+  },
+  "jpeg": {
+    "quality": 90,
+    "subsampling": "4:4:4",
+    "progressive": true,
+    "optimize": true,
+    "max_bytes": 1000000
+  },
+  "details": "Lossless RGB PNG; same xyxy crop on both sides; one source pixel per output panel pixel; no resizing or enhancement",
+  "crop_coordinates": "Source pixels, top-left origin; right/bottom exclusive",
+  "pairs": [
+    {
+      "subject": "walkup",
+      "inputs_left_right": [
+        "docs/evidence/xinyi-material-ue58-round1/captures/baseline/walkup__day.png",
+        "docs/evidence/xinyi-material-ue58-round1/captures/candidate/walkup__day.png"
+      ],
+      "source_crop_xyxy": [
+        640,
+        250,
+        1152,
+        762
+      ],
+      "full_frame_jpeg": {
+        "path": "docs/evidence/xinyi-material-ue58-round1/review/walkup-ab.jpg",
+        "bytes": 189050,
+        "sha256": "4c05597831c0a3601f1286e65446a0668a9b7f280dd289ad919e8427b1600d9e",
+        "dimensions_px": [
+          1584,
+          592
+        ],
+        "panel_boxes_xyxy": [
+          [
+            16,
+            112,
+            784,
+            544
+          ],
+          [
+            800,
+            112,
+            1568,
+            544
+          ]
+        ]
+      },
+      "detail_png": {
+        "path": "docs/evidence/xinyi-material-ue58-round1/review/walkup-detail-1to1.png",
+        "bytes": 393876,
+        "sha256": "9fff8b93003340394756bf122113d18d3dc1ed4b83697a726d72866aee13329d",
+        "dimensions_px": [
+          1072,
+          672
+        ],
+        "panel_boxes_xyxy": [
+          [
+            16,
+            112,
+            528,
+            624
+          ],
+          [
+            544,
+            112,
+            1056,
+            624
+          ]
+        ]
+      },
+      "detail_rgb_pixels_exact": true
+    },
+    {
+      "subject": "huaxia",
+      "inputs_left_right": [
+        "docs/evidence/xinyi-material-ue58-round1/captures/baseline/huaxia__day.png",
+        "docs/evidence/xinyi-material-ue58-round1/captures/candidate/huaxia__day.png"
+      ],
+      "source_crop_xyxy": [
+        520,
+        370,
+        1032,
+        882
+      ],
+      "full_frame_jpeg": {
+        "path": "docs/evidence/xinyi-material-ue58-round1/review/huaxia-ab.jpg",
+        "bytes": 147228,
+        "sha256": "f9f493584d4ee2ae6112bef49c10f7ecdc1d84c0331615a654b01878b975e584",
+        "dimensions_px": [
+          1584,
+          592
+        ],
+        "panel_boxes_xyxy": [
+          [
+            16,
+            112,
+            784,
+            544
+          ],
+          [
+            800,
+            112,
+            1568,
+            544
+          ]
+        ]
+      },
+      "detail_png": {
+        "path": "docs/evidence/xinyi-material-ue58-round1/review/huaxia-detail-1to1.png",
+        "bytes": 381530,
+        "sha256": "db44f7a7860c5e1bc8302460840978941c1a886cc00b92ecc3c9744efcdd3e76",
+        "dimensions_px": [
+          1072,
+          672
+        ],
+        "panel_boxes_xyxy": [
+          [
+            16,
+            112,
+            528,
+            624
+          ],
+          [
+            544,
+            112,
+            1056,
+            624
+          ]
+        ]
+      },
+      "detail_rgb_pixels_exact": true
+    },
+    {
+      "subject": "wuxing_roofs",
+      "inputs_left_right": [
+        "docs/evidence/xinyi-material-ue58-round1/captures/baseline/wuxing_roofs__day.png",
+        "docs/evidence/xinyi-material-ue58-round1/captures/candidate/wuxing_roofs__day.png"
+      ],
+      "source_crop_xyxy": [
+        0,
+        760,
+        512,
+        1080
+      ],
+      "full_frame_jpeg": {
+        "path": "docs/evidence/xinyi-material-ue58-round1/review/wuxing_roofs-ab.jpg",
+        "bytes": 302063,
+        "sha256": "4a12db90a133ca84e3f87bc2bd59f89819789fd94fe07e72cf18eaf94bcb22ef",
+        "dimensions_px": [
+          1584,
+          592
+        ],
+        "panel_boxes_xyxy": [
+          [
+            16,
+            112,
+            784,
+            544
+          ],
+          [
+            800,
+            112,
+            1568,
+            544
+          ]
+        ]
+      },
+      "detail_png": {
+        "path": "docs/evidence/xinyi-material-ue58-round1/review/wuxing_roofs-detail-1to1.png",
+        "bytes": 275617,
+        "sha256": "b9c71037bdcac82d2b935629b7768c34f6bd0a456b6ec269c7a97264b78cbe84",
+        "dimensions_px": [
+          1072,
+          480
+        ],
+        "panel_boxes_xyxy": [
+          [
+            16,
+            112,
+            528,
+            432
+          ],
+          [
+            544,
+            112,
+            1056,
+            432
+          ]
+        ]
+      },
+      "detail_rgb_pixels_exact": true
+    }
+  ],
+  "all_original_capture_files_unchanged": true
+}
