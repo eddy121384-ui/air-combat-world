@@ -1,0 +1,92 @@
+{
+  "status": "PASS_MATERIAL_AB_BUILD",
+  "asset_scope": "/Game/XinyiMaterialAB",
+  "level_saved": false,
+  "baseline_assets_written": false,
+  "textures": [
+    {
+      "asset": "/Game/XinyiMaterialAB/Textures/T_XinyiFacadeAge.T_XinyiFacadeAge",
+      "source_sha256": "48366fa2960438f02ae86d0a1ed003e0e5dfcc359108b0c73f84ee8c3705ed67",
+      "size": [
+        512,
+        512
+      ],
+      "source_mode": "RGBA8",
+      "settings": {
+        "srgb": "False",
+        "compression_settings": "<TextureCompressionSettings.TC_MASKS: 2>",
+        "compression_no_alpha": "False",
+        "mip_gen_settings": "<TextureMipGenSettings.TMGS_SIMPLE_AVERAGE: 1>",
+        "address_x": "<TextureAddress.TA_WRAP: 0>",
+        "address_y": "<TextureAddress.TA_WRAP: 0>",
+        "lod_bias": "0"
+      },
+      "channel_min": [
+        104,
+        112,
+        104,
+        112
+      ],
+      "channel_max": [
+        136,
+        144,
+        136,
+        144
+      ],
+      "alpha_is_data": true
+    },
+    {
+      "asset": "/Game/XinyiMaterialAB/Textures/T_XinyiRoofSurface.T_XinyiRoofSurface",
+      "source_sha256": "b3db5a50494ffc73bdda9a2ec13986a7856186cdbf0f6cd085ada1edaef85140",
+      "size": [
+        512,
+        512
+      ],
+      "source_mode": "RGBA8",
+      "settings": {
+        "srgb": "False",
+        "compression_settings": "<TextureCompressionSettings.TC_MASKS: 2>",
+        "compression_no_alpha": "False",
+        "mip_gen_settings": "<TextureMipGenSettings.TMGS_SIMPLE_AVERAGE: 1>",
+        "address_x": "<TextureAddress.TA_WRAP: 0>",
+        "address_y": "<TextureAddress.TA_WRAP: 0>",
+        "lod_bias": "0"
+      },
+      "channel_min": [
+        112,
+        104,
+        104,
+        104
+      ],
+      "channel_max": [
+        144,
+        144,
+        136,
+        136
+      ],
+      "alpha_is_data": true
+    }
+  ],
+  "statistics": {
+    "baseline": {
+      "num_pixel_shader_instructions": 4410,
+      "num_vertex_shader_instructions": 146,
+      "num_samplers": 4,
+      "num_pixel_texture_samples": 0,
+      "num_vertex_texture_samples": 3
+    },
+    "candidate": {
+      "num_pixel_shader_instructions": 4515,
+      "num_vertex_shader_instructions": 146,
+      "num_samplers": 6,
+      "num_pixel_texture_samples": 0,
+      "num_vertex_texture_samples": 3
+    }
+  },
+  "material": "/Game/XinyiMaterialAB/Materials/M_XinyiCity_Masks",
+  "generated_custom_source_sha256": "7bd5a0c5b84de29f929c43f8918eda70d8982196543523a75e9cc4d3a6155e09",
+  "baseline_hlsl_sha256": "4da6a34875e3c893e36d1bc5285b31ccf53464d39a48b5444c0685cf56c1ed9a",
+  "period_metres": 32,
+  "facade_v": "negative height; U mirrors only",
+  "sample_policy": "one full RGBA SampleGrad for each eligible facade/roof surface; no decal"
+}

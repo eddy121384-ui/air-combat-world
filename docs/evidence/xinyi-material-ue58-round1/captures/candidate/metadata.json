@@ -1,0 +1,209 @@
+{
+  "variant": "candidate",
+  "backend": "existing xinyi_look_capture.py; SceneCapture2D FINAL_COLOR_LDR",
+  "resolution": [
+    1920,
+    1080
+  ],
+  "time_of_day": "day",
+  "clouds": "off",
+  "requested_console_settings": {
+    "sg.ViewDistanceQuality": 2,
+    "sg.AntiAliasingQuality": 2,
+    "sg.ShadowQuality": 2,
+    "sg.GlobalIlluminationQuality": 2,
+    "sg.ReflectionQuality": 2,
+    "sg.PostProcessQuality": 2,
+    "sg.TextureQuality": 2,
+    "sg.EffectsQuality": 2,
+    "sg.FoliageQuality": 2,
+    "sg.ShadingQuality": 2,
+    "r.ScreenPercentage": 100,
+    "r.MotionBlurQuality": 0,
+    "r.RayTracing": 0
+  },
+  "observed_console_settings": {
+    "sg.ViewDistanceQuality": 2,
+    "sg.AntiAliasingQuality": 2,
+    "sg.ShadowQuality": 2,
+    "sg.GlobalIlluminationQuality": 2,
+    "sg.ReflectionQuality": 2,
+    "sg.PostProcessQuality": 2,
+    "sg.TextureQuality": 2,
+    "sg.EffectsQuality": 2,
+    "sg.FoliageQuality": 2,
+    "sg.ShadingQuality": 2,
+    "r.ScreenPercentage": 100,
+    "r.MotionBlurQuality": 0,
+    "r.RayTracing": 0
+  },
+  "camera_specs": {
+    "walkup": {
+      "eye": [
+        -368.0789743851815,
+        -310.0394933614678,
+        19.701
+      ],
+      "target": [
+        -362.105,
+        -305.505,
+        18.701
+      ],
+      "fov": 80,
+      "building_id": "tp_building_height.269873",
+      "archetype": 1,
+      "facade_generation": "legacy",
+      "edge_length_m": 17.16,
+      "normal_deg": 217.2,
+      "height_m": 15.95,
+      "surveyed_ground_m": 9.45
+    },
+    "huaxia": {
+      "eye": [
+        -388.0451500521843,
+        -283.1857107175654,
+        22.345799999999997
+      ],
+      "target": [
+        -382.095,
+        -278.62,
+        21.345799999999997
+      ],
+      "fov": 80,
+      "building_id": "tp_building_height.270894",
+      "archetype": 2,
+      "facade_generation": "huaxia",
+      "edge_length_m": 49.84,
+      "normal_deg": 217.5,
+      "height_m": 20.51,
+      "surveyed_ground_m": 9.45
+    },
+    "wuxing_roofs": {
+      "eye": [
+        -420,
+        -380,
+        95
+      ],
+      "target": [
+        -150,
+        -80,
+        20
+      ],
+      "fov": 55,
+      "shadowCenter": [
+        -250,
+        -200,
+        20
+      ],
+      "shadowRadius": 500
+    },
+    "wuxing_move_00": {
+      "eye": [
+        -432,
+        -380,
+        95
+      ],
+      "target": [
+        -162,
+        -80,
+        20
+      ],
+      "fov": 55,
+      "shadowCenter": [
+        -250,
+        -200,
+        20
+      ],
+      "shadowRadius": 500
+    },
+    "wuxing_move_01": {
+      "eye": [
+        -426,
+        -380,
+        95
+      ],
+      "target": [
+        -156,
+        -80,
+        20
+      ],
+      "fov": 55,
+      "shadowCenter": [
+        -250,
+        -200,
+        20
+      ],
+      "shadowRadius": 500
+    },
+    "wuxing_move_02": {
+      "eye": [
+        -414,
+        -380,
+        95
+      ],
+      "target": [
+        -144,
+        -80,
+        20
+      ],
+      "fov": 55,
+      "shadowCenter": [
+        -250,
+        -200,
+        20
+      ],
+      "shadowRadius": 500
+    },
+    "wuxing_move_03": {
+      "eye": [
+        -408,
+        -380,
+        95
+      ],
+      "target": [
+        -138,
+        -80,
+        20
+      ],
+      "fov": 55,
+      "shadowCenter": [
+        -250,
+        -200,
+        20
+      ],
+      "shadowRadius": 500
+    }
+  },
+  "transient_material_overrides": [
+    "XinyiRuntimeTile_m003_m002",
+    "XinyiRuntimeTile_m003_m001",
+    "XinyiRuntimeTile_m003_p000",
+    "XinyiRuntimeTile_m003_p001",
+    "XinyiRuntimeTile_m003_p002",
+    "XinyiRuntimeTile_m002_m002",
+    "XinyiRuntimeTile_m002_m001",
+    "XinyiRuntimeTile_m002_p000",
+    "XinyiRuntimeTile_m002_p001",
+    "XinyiRuntimeTile_m002_p002",
+    "XinyiRuntimeTile_m001_m002",
+    "XinyiRuntimeTile_m001_m001",
+    "XinyiRuntimeTile_m001_p000",
+    "XinyiRuntimeTile_m001_p001",
+    "XinyiRuntimeTile_m001_p002",
+    "XinyiRuntimeTile_p000_m002",
+    "XinyiRuntimeTile_p000_m001",
+    "XinyiRuntimeTile_p000_p000",
+    "XinyiRuntimeTile_p000_p001",
+    "XinyiRuntimeTile_p000_p002",
+    "XinyiRuntimeTile_p001_m002",
+    "XinyiRuntimeTile_p001_m001",
+    "XinyiRuntimeTile_p001_p000",
+    "XinyiRuntimeTile_p001_p001",
+    "XinyiRuntimeTile_p001_p002"
+  ],
+  "level_saved": false,
+  "look_level_sha256": "ad6b07b49f44372c35647c2056e25ca46aa1a53816026cf25fa3847994e7eb37",
+  "baseline_city_material_sha256": "fda52bee9abf71899b1f4d37fc9fd920e75490816ce9c9460eca6717818e2591",
+  "motion_limit": "discrete camera translations at 6 m intervals; continuous-flight flicker not certified",
+  "performance_limit": "Windows GPU-synchronised SceneCapture wall time including submit/readback overhead; no mobile claim"
+}

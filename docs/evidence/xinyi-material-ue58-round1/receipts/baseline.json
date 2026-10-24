@@ -1,0 +1,90 @@
+{
+  "status": "PASS_LOOK_CAPTURE",
+  "reopen": {
+    "look_tiles": 25,
+    "hero": true,
+    "backdrop": true,
+    "paint": true,
+    "trees": 16082,
+    "landscape_material": "/Game/XinyiLook/Materials/M_XinyiGround.M_XinyiGround"
+  },
+  "reopen_ok": true,
+  "backend": "SceneCapture2D -> RTF_RGBA8 -> SCS_FINAL_COLOR_LDR -> export_render_target",
+  "tods": [
+    "day"
+  ],
+  "shots": [
+    "walkup",
+    "huaxia",
+    "wuxing_roofs",
+    "wuxing_move_00",
+    "wuxing_move_01",
+    "wuxing_move_02",
+    "wuxing_move_03"
+  ],
+  "captures": [
+    {
+      "name": "walkup__day",
+      "path": "C:\\Users\\EDDY\\Desktop\\M1A2\\xinyi-material-ue58-round1\\unreal\\Saved\\XinyiLook\\unreal\\material_ab_captures\\baseline\\walkup__day.png",
+      "bytes": 3090912
+    },
+    {
+      "name": "huaxia__day",
+      "path": "C:\\Users\\EDDY\\Desktop\\M1A2\\xinyi-material-ue58-round1\\unreal\\Saved\\XinyiLook\\unreal\\material_ab_captures\\baseline\\huaxia__day.png",
+      "bytes": 2244875
+    },
+    {
+      "name": "wuxing_roofs__day",
+      "path": "C:\\Users\\EDDY\\Desktop\\M1A2\\xinyi-material-ue58-round1\\unreal\\Saved\\XinyiLook\\unreal\\material_ab_captures\\baseline\\wuxing_roofs__day.png",
+      "bytes": 4252804
+    },
+    {
+      "name": "wuxing_move_00__day",
+      "path": "C:\\Users\\EDDY\\Desktop\\M1A2\\xinyi-material-ue58-round1\\unreal\\Saved\\XinyiLook\\unreal\\material_ab_captures\\baseline\\wuxing_move_00__day.png",
+      "bytes": 4252804
+    },
+    {
+      "name": "wuxing_move_01__day",
+      "path": "C:\\Users\\EDDY\\Desktop\\M1A2\\xinyi-material-ue58-round1\\unreal\\Saved\\XinyiLook\\unreal\\material_ab_captures\\baseline\\wuxing_move_01__day.png",
+      "bytes": 4252804
+    },
+    {
+      "name": "wuxing_move_02__day",
+      "path": "C:\\Users\\EDDY\\Desktop\\M1A2\\xinyi-material-ue58-round1\\unreal\\Saved\\XinyiLook\\unreal\\material_ab_captures\\baseline\\wuxing_move_02__day.png",
+      "bytes": 4252804
+    },
+    {
+      "name": "wuxing_move_03__day",
+      "path": "C:\\Users\\EDDY\\Desktop\\M1A2\\xinyi-material-ue58-round1\\unreal\\Saved\\XinyiLook\\unreal\\material_ab_captures\\baseline\\wuxing_move_03__day.png",
+      "bytes": 4252804
+    }
+  ],
+  "clouds": {
+    "quality": "absent"
+  },
+  "perf": {
+    "method": "SceneCapture2D 1920x1080 FINAL_COLOR_LDR, capture_scene + 1px readback per sample (GPU-synchronised wall time; includes a fixed readback / submit overhead)",
+    "gpu": null,
+    "clouds": "off",
+    "tod": "day",
+    "shots": {
+      "walkup": {
+        "n": 40,
+        "median_ms": 62.54,
+        "p10_ms": 60.98,
+        "p90_ms": 65.32,
+        "min_ms": 59.72
+      },
+      "wuxing_roofs": {
+        "n": 40,
+        "median_ms": 65.84,
+        "p10_ms": 64.41,
+        "p90_ms": 70.17,
+        "min_ms": 63.78
+      }
+    }
+  },
+  "error": null,
+  "level_saved": false,
+  "elapsed_seconds": 20.969000000040978
+}

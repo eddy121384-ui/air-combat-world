@@ -1,0 +1,439 @@
+{
+  "status": "PASS_WINDOWS_UE58_MATERIAL_AB",
+  "screenshots": [
+    {
+      "name": "walkup__day",
+      "baseline": {
+        "sha256": "93a0a2dc6362bf72840164fa08ba5ed57cb2b5f458533f83a3e11a113f425cdf",
+        "bytes": 3090912
+      },
+      "candidate": {
+        "sha256": "1b4a2a2a735b65990046e1375292003d5302751681ae3e460bbad589c387fd25",
+        "bytes": 3090912
+      },
+      "mean_abs_rgb_255": 1.3428,
+      "pixels_changed_over_1_percent": 38.063
+    },
+    {
+      "name": "huaxia__day",
+      "baseline": {
+        "sha256": "6989eca8affedfd768b65a973749acd54b6b8d050bcd7d670d527b6f1c496dfe",
+        "bytes": 2244875
+      },
+      "candidate": {
+        "sha256": "847aa139bfafca32fc75b0c0bddc3d370ef27b185a8ec455243da993ae5073c2",
+        "bytes": 2244875
+      },
+      "mean_abs_rgb_255": 1.1895,
+      "pixels_changed_over_1_percent": 40.814
+    },
+    {
+      "name": "wuxing_roofs__day",
+      "baseline": {
+        "sha256": "c230604e4bae0b064246fdb7f5aafde703d38e63688f647262a4d90908653aef",
+        "bytes": 4252804
+      },
+      "candidate": {
+        "sha256": "f97c21be3a81efbcee51ed9d82bae4033703715558fd96bd620982597c0cf414",
+        "bytes": 4252804
+      },
+      "mean_abs_rgb_255": 0.0841,
+      "pixels_changed_over_1_percent": 2.618
+    },
+    {
+      "name": "wuxing_move_00__day",
+      "baseline": {
+        "sha256": "f70fbe17bfa8b54b2ec95977bee525952278aec94c34a0865e0cc47cba2eac2b",
+        "bytes": 4252804
+      },
+      "candidate": {
+        "sha256": "ffb3acf5419c417fe934bd28945d477dbcc5b78759a9df5058d62024230a5378",
+        "bytes": 4252804
+      },
+      "mean_abs_rgb_255": 0.0987,
+      "pixels_changed_over_1_percent": 3.003
+    },
+    {
+      "name": "wuxing_move_01__day",
+      "baseline": {
+        "sha256": "4ad2cdb52e4a38b54bcd3b94203359e45486ba98a742496313c97be5feb48b8d",
+        "bytes": 4252804
+      },
+      "candidate": {
+        "sha256": "d1fb8db72ee9b8312a52b5415008542caee07753e900fe2a9891b7ca5d2be8e7",
+        "bytes": 4252804
+      },
+      "mean_abs_rgb_255": 0.0954,
+      "pixels_changed_over_1_percent": 2.874
+    },
+    {
+      "name": "wuxing_move_02__day",
+      "baseline": {
+        "sha256": "137390304fdce01a909b9ea02d2531eb944284e8afb5b640dd01eda81964f7ed",
+        "bytes": 4252804
+      },
+      "candidate": {
+        "sha256": "a551a1e58c2999908fca4d3ec08434c4185d1fc15f67e26946816e29bc1324ce",
+        "bytes": 4252804
+      },
+      "mean_abs_rgb_255": 0.0806,
+      "pixels_changed_over_1_percent": 2.564
+    },
+    {
+      "name": "wuxing_move_03__day",
+      "baseline": {
+        "sha256": "be4d4dfee2a6204e9594c094121bf1a5d07f29427c7e9abced885eb80e74c501",
+        "bytes": 4252804
+      },
+      "candidate": {
+        "sha256": "0460b9b4c67ad382b2d7b01ab7930763751efa9af1de54cf6d99d4de41be2df3",
+        "bytes": 4252804
+      },
+      "mean_abs_rgb_255": 0.0743,
+      "pixels_changed_over_1_percent": 2.411
+    }
+  ],
+  "matched_settings": {
+    "variant": "baseline",
+    "backend": "existing xinyi_look_capture.py; SceneCapture2D FINAL_COLOR_LDR",
+    "resolution": [
+      1920,
+      1080
+    ],
+    "time_of_day": "day",
+    "clouds": "off",
+    "requested_console_settings": {
+      "sg.ViewDistanceQuality": 2,
+      "sg.AntiAliasingQuality": 2,
+      "sg.ShadowQuality": 2,
+      "sg.GlobalIlluminationQuality": 2,
+      "sg.ReflectionQuality": 2,
+      "sg.PostProcessQuality": 2,
+      "sg.TextureQuality": 2,
+      "sg.EffectsQuality": 2,
+      "sg.FoliageQuality": 2,
+      "sg.ShadingQuality": 2,
+      "r.ScreenPercentage": 100,
+      "r.MotionBlurQuality": 0,
+      "r.RayTracing": 0
+    },
+    "observed_console_settings": {
+      "sg.ViewDistanceQuality": 2,
+      "sg.AntiAliasingQuality": 2,
+      "sg.ShadowQuality": 2,
+      "sg.GlobalIlluminationQuality": 2,
+      "sg.ReflectionQuality": 2,
+      "sg.PostProcessQuality": 2,
+      "sg.TextureQuality": 2,
+      "sg.EffectsQuality": 2,
+      "sg.FoliageQuality": 2,
+      "sg.ShadingQuality": 2,
+      "r.ScreenPercentage": 100,
+      "r.MotionBlurQuality": 0,
+      "r.RayTracing": 0
+    },
+    "camera_specs": {
+      "walkup": {
+        "eye": [
+          -368.0789743851815,
+          -310.0394933614678,
+          19.701
+        ],
+        "target": [
+          -362.105,
+          -305.505,
+          18.701
+        ],
+        "fov": 80,
+        "building_id": "tp_building_height.269873",
+        "archetype": 1,
+        "facade_generation": "legacy",
+        "edge_length_m": 17.16,
+        "normal_deg": 217.2,
+        "height_m": 15.95,
+        "surveyed_ground_m": 9.45
+      },
+      "huaxia": {
+        "eye": [
+          -388.0451500521843,
+          -283.1857107175654,
+          22.345799999999997
+        ],
+        "target": [
+          -382.095,
+          -278.62,
+          21.345799999999997
+        ],
+        "fov": 80,
+        "building_id": "tp_building_height.270894",
+        "archetype": 2,
+        "facade_generation": "huaxia",
+        "edge_length_m": 49.84,
+        "normal_deg": 217.5,
+        "height_m": 20.51,
+        "surveyed_ground_m": 9.45
+      },
+      "wuxing_roofs": {
+        "eye": [
+          -420,
+          -380,
+          95
+        ],
+        "target": [
+          -150,
+          -80,
+          20
+        ],
+        "fov": 55,
+        "shadowCenter": [
+          -250,
+          -200,
+          20
+        ],
+        "shadowRadius": 500
+      },
+      "wuxing_move_00": {
+        "eye": [
+          -432,
+          -380,
+          95
+        ],
+        "target": [
+          -162,
+          -80,
+          20
+        ],
+        "fov": 55,
+        "shadowCenter": [
+          -250,
+          -200,
+          20
+        ],
+        "shadowRadius": 500
+      },
+      "wuxing_move_01": {
+        "eye": [
+          -426,
+          -380,
+          95
+        ],
+        "target": [
+          -156,
+          -80,
+          20
+        ],
+        "fov": 55,
+        "shadowCenter": [
+          -250,
+          -200,
+          20
+        ],
+        "shadowRadius": 500
+      },
+      "wuxing_move_02": {
+        "eye": [
+          -414,
+          -380,
+          95
+        ],
+        "target": [
+          -144,
+          -80,
+          20
+        ],
+        "fov": 55,
+        "shadowCenter": [
+          -250,
+          -200,
+          20
+        ],
+        "shadowRadius": 500
+      },
+      "wuxing_move_03": {
+        "eye": [
+          -408,
+          -380,
+          95
+        ],
+        "target": [
+          -138,
+          -80,
+          20
+        ],
+        "fov": 55,
+        "shadowCenter": [
+          -250,
+          -200,
+          20
+        ],
+        "shadowRadius": 500
+      }
+    },
+    "transient_material_overrides": [],
+    "level_saved": false,
+    "look_level_sha256": "ad6b07b49f44372c35647c2056e25ca46aa1a53816026cf25fa3847994e7eb37",
+    "baseline_city_material_sha256": "fda52bee9abf71899b1f4d37fc9fd920e75490816ce9c9460eca6717818e2591",
+    "motion_limit": "discrete camera translations at 6 m intervals; continuous-flight flicker not certified",
+    "performance_limit": "Windows GPU-synchronised SceneCapture wall time including submit/readback overhead; no mobile claim"
+  },
+  "material_build": {
+    "status": "PASS_MATERIAL_AB_BUILD",
+    "asset_scope": "/Game/XinyiMaterialAB",
+    "level_saved": false,
+    "baseline_assets_written": false,
+    "textures": [
+      {
+        "asset": "/Game/XinyiMaterialAB/Textures/T_XinyiFacadeAge.T_XinyiFacadeAge",
+        "source_sha256": "48366fa2960438f02ae86d0a1ed003e0e5dfcc359108b0c73f84ee8c3705ed67",
+        "size": [
+          512,
+          512
+        ],
+        "source_mode": "RGBA8",
+        "settings": {
+          "srgb": "False",
+          "compression_settings": "<TextureCompressionSettings.TC_MASKS: 2>",
+          "compression_no_alpha": "False",
+          "mip_gen_settings": "<TextureMipGenSettings.TMGS_SIMPLE_AVERAGE: 1>",
+          "address_x": "<TextureAddress.TA_WRAP: 0>",
+          "address_y": "<TextureAddress.TA_WRAP: 0>",
+          "lod_bias": "0"
+        },
+        "channel_min": [
+          104,
+          112,
+          104,
+          112
+        ],
+        "channel_max": [
+          136,
+          144,
+          136,
+          144
+        ],
+        "alpha_is_data": true
+      },
+      {
+        "asset": "/Game/XinyiMaterialAB/Textures/T_XinyiRoofSurface.T_XinyiRoofSurface",
+        "source_sha256": "b3db5a50494ffc73bdda9a2ec13986a7856186cdbf0f6cd085ada1edaef85140",
+        "size": [
+          512,
+          512
+        ],
+        "source_mode": "RGBA8",
+        "settings": {
+          "srgb": "False",
+          "compression_settings": "<TextureCompressionSettings.TC_MASKS: 2>",
+          "compression_no_alpha": "False",
+          "mip_gen_settings": "<TextureMipGenSettings.TMGS_SIMPLE_AVERAGE: 1>",
+          "address_x": "<TextureAddress.TA_WRAP: 0>",
+          "address_y": "<TextureAddress.TA_WRAP: 0>",
+          "lod_bias": "0"
+        },
+        "channel_min": [
+          112,
+          104,
+          104,
+          104
+        ],
+        "channel_max": [
+          144,
+          144,
+          136,
+          136
+        ],
+        "alpha_is_data": true
+      }
+    ],
+    "statistics": {
+      "baseline": {
+        "num_pixel_shader_instructions": 4410,
+        "num_vertex_shader_instructions": 146,
+        "num_samplers": 4,
+        "num_pixel_texture_samples": 0,
+        "num_vertex_texture_samples": 3
+      },
+      "candidate": {
+        "num_pixel_shader_instructions": 4515,
+        "num_vertex_shader_instructions": 146,
+        "num_samplers": 6,
+        "num_pixel_texture_samples": 0,
+        "num_vertex_texture_samples": 3
+      }
+    },
+    "material": "/Game/XinyiMaterialAB/Materials/M_XinyiCity_Masks",
+    "generated_custom_source_sha256": "7bd5a0c5b84de29f929c43f8918eda70d8982196543523a75e9cc4d3a6155e09",
+    "baseline_hlsl_sha256": "4da6a34875e3c893e36d1bc5285b31ccf53464d39a48b5444c0685cf56c1ed9a",
+    "period_metres": 32,
+    "facade_v": "negative height; U mirrors only",
+    "sample_policy": "one full RGBA SampleGrad for each eligible facade/roof surface; no decal"
+  },
+  "performance": {
+    "walkup": {
+      "baseline": {
+        "n": 40,
+        "median_ms": 62.54,
+        "p10_ms": 60.98,
+        "p90_ms": 65.32,
+        "min_ms": 59.72
+      },
+      "candidate": {
+        "n": 40,
+        "median_ms": 62.84,
+        "p10_ms": 61.15,
+        "p90_ms": 65.72,
+        "min_ms": 60.73
+      },
+      "median_delta_ms": 0.3,
+      "median_delta_percent": 0.48
+    },
+    "wuxing_roofs": {
+      "baseline": {
+        "n": 40,
+        "median_ms": 65.84,
+        "p10_ms": 64.41,
+        "p90_ms": 70.17,
+        "min_ms": 63.78
+      },
+      "candidate": {
+        "n": 40,
+        "median_ms": 67.15,
+        "p10_ms": 65.53,
+        "p90_ms": 71.13,
+        "min_ms": 63.4
+      },
+      "median_delta_ms": 1.31,
+      "median_delta_percent": 1.99
+    }
+  },
+  "source_immutability": {
+    "status": "PASS_SOURCE_IMMUTABILITY",
+    "recorded_at_utc": "2026-10-24T07:46:10.2020245Z",
+    "source_root": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world",
+    "compared_files": 243,
+    "source_changed": [],
+    "staged_input_copies_changed": [],
+    "disks": [
+      {
+        "DeviceID": "C:",
+        "FreeSpace": 37039407104
+      },
+      {
+        "DeviceID": "D:",
+        "FreeSpace": 47430725632
+      }
+    ]
+  },
+  "artistic_acceptance": "PENDING",
+  "mobile_validation": false,
+  "continuous_motion_flicker_validation": false,
+  "performance_method": "SceneCapture2D 1920x1080 FINAL_COLOR_LDR, capture_scene + 1px readback per sample (GPU-synchronised wall time; includes a fixed readback / submit overhead)",
+  "material_statistics_limit": "Custom-node texture operations are not reflected reliably in num_pixel_texture_samples; do not interpret its zero as zero texture fetches.",
+  "limits": [
+    "Windows SceneCapture synchronised wall-time proxy; includes CPU/submit/readback overhead.",
+    "One final A/B batch, 40 samples per view; no significance or FPS claim.",
+    "Five translated stills cover 24 m; continuous flight and temporal flicker are not certified.",
+    "ASTC, mobile device, Cook and packaged gameplay performance are untested.",
+    "32 m repeat, directional rain and contrast remain subject to artistic review."
+  ]
+}

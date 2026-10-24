@@ -1,0 +1,96 @@
+{
+  "status": "PASS_TEXTURE_RECOVERY",
+  "geometry_generation": false,
+  "clouds": "off; cloud assets not rebuilt",
+  "textures": [
+    {
+      "path": "farcity/far_city_1024.png",
+      "sha256": "9133e132ec9b1fbce9ec682bdc8d0453001de9c01265edca52ae4bc9a15cd2c9",
+      "size": [
+        1024,
+        1024
+      ],
+      "mode": "RGBA",
+      "historical_sha256": null,
+      "historical_hash_matches": null
+    },
+    {
+      "path": "ground/xinyi_campus_2048.png",
+      "sha256": "f72a3cf08976f1ca2df1f6f79a808a158fd0e4f5fb083f1b088bd08ca5f7bf4d",
+      "size": [
+        2048,
+        2048
+      ],
+      "mode": "RGBA",
+      "historical_sha256": null,
+      "historical_hash_matches": null
+    },
+    {
+      "path": "ground/xinyi_ground_2048.png",
+      "sha256": "23227f055be956f80de776410f6f915d8a9bf74698984bac1f650a0a530b4515",
+      "size": [
+        2048,
+        2048
+      ],
+      "mode": "RGBA",
+      "historical_sha256": null,
+      "historical_hash_matches": null
+    },
+    {
+      "path": "ground/xinyi_ground_light_1024.png",
+      "sha256": "bdd9a9cf83fc851bc2f448d816b054237935100adb7b897c9368b3214644fe46",
+      "size": [
+        1024,
+        1024
+      ],
+      "mode": "L",
+      "historical_sha256": null,
+      "historical_hash_matches": null
+    },
+    {
+      "path": "street/shop_atlas.png",
+      "sha256": "0e7de34131ae18862e427c0ebaf3c6f81002cd203bcc1995117998d927b357b7",
+      "size": [
+        2048,
+        2048
+      ],
+      "mode": "RGBA",
+      "historical_sha256": "0e7de34131ae18862e427c0ebaf3c6f81002cd203bcc1995117998d927b357b7",
+      "historical_hash_matches": true
+    },
+    {
+      "path": "street/sign_atlas.png",
+      "sha256": "4f982cef23790d80d5d055836acf61dfba750c9b18b29b387994a0f5950250f8",
+      "size": [
+        2048,
+        2048
+      ],
+      "mode": "RGBA",
+      "historical_sha256": "4f982cef23790d80d5d055836acf61dfba750c9b18b29b387994a0f5950250f8",
+      "historical_hash_matches": true
+    },
+    {
+      "path": "street/storefront_plan_2048.png",
+      "sha256": "daddd4e6bc3995338e6141cdfd4580907b3085b37c8f9f66cc10e535829cdf9b",
+      "size": [
+        2048,
+        2048
+      ],
+      "mode": "L",
+      "historical_sha256": "daddd4e6bc3995338e6141cdfd4580907b3085b37c8f9f66cc10e535829cdf9b",
+      "historical_hash_matches": true
+    },
+    {
+      "path": "wall_ads/wall_ad_atlas.png",
+      "sha256": "1fee329764950a8fd500a1658e1048c63e2707c3fd12f65a0a976cc7894ee2af",
+      "size": [
+        2048,
+        2048
+      ],
+      "mode": "RGBA",
+      "historical_sha256": "1fee329764950a8fd500a1658e1048c63e2707c3fd12f65a0a976cc7894ee2af",
+      "historical_hash_matches": true
+    }
+  ],
+  "changed_staged_inputs": []
+}

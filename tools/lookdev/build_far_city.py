@@ -163,7 +163,7 @@ class Chunk:
         return ue_local_bounds_cm(game), len(self.idx)
 
 
-def main():
+def main(texture_only=False):
     OUT.mkdir(parents=True, exist_ok=True)
     d = np.load(SRC)
     cell = float(d["cell_m"])
@@ -205,6 +205,8 @@ def main():
         img[..., ch] = np.where(nz, img[..., ch], blur * 1.2)
     img[..., 3] = np.maximum(img[..., 3], ndimage.uniform_filter(img[..., 3], 3) > 0.3)
     Image.fromarray((np.clip(img, 0, 1) * 255 + 0.5).astype(np.uint8), "RGBA").save(OUT / "far_city_1024.png", optimize=True)
+    if texture_only:
+        return
 
     # ---- massing geometry ------------------------------------------------------
     chunks = {}

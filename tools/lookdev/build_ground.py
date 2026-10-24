@@ -312,21 +312,10 @@ class Paint:
         return game, np.asarray(self.c, np.uint8), np.asarray(self.f, np.uint32)
 
 
-def main():
+def main(texture_only=False):
     OUT.mkdir(parents=True, exist_ok=True)
-    hf = Heightfield()
     ways, greens, waters, osm_trees, special = load_osm()
     extent = box(E0, N0, E1, N1)
-
-    # buildings (for tree rejection + paint clipping)
-    wm = build_worldmodel(SOURCE, CITY, source_crs="EPSG:3826")
-    bpolys = []
-    for b in wm["buildings"]:
-        for p in b["polygons"]:
-            q = Polygon(p["footprint_enu"])
-            if q.is_valid and q.area > 1:
-                bpolys.append(q)
-    btree = STRtree(bpolys)
 
     # junction detection: node ids shared by >= 2 drivable ways (not skipped)
     for w in ways:
@@ -413,6 +402,19 @@ def main():
 
     rgba = np.stack([R, G, B, A], axis=-1)
     Image.fromarray((rgba * 255 + 0.5).astype(np.uint8), "RGBA").save(OUT / "xinyi_ground_2048.png", optimize=True)
+    if texture_only:
+        return
+
+    hf = Heightfield()
+    # buildings (for tree rejection + paint clipping)
+    wm = build_worldmodel(SOURCE, CITY, source_crs="EPSG:3826")
+    bpolys = []
+    for b in wm["buildings"]:
+        for p in b["polygons"]:
+            q = Polygon(p["footprint_enu"])
+            if q.is_valid and q.area > 1:
+                bpolys.append(q)
+    btree = STRtree(bpolys)
 
     # ----------------------------------------------------------- trees --------
     rng = np.random.default_rng(20260929)
@@ -846,7 +848,7 @@ def plan_markings(rec):
     return {"mode": "boundary", "reason": "sport not tagged" if not rec["sport"] else "no standard markings for %s" % sport}
 
 
-def build_campus_layer(hf, wfs_polys, ped_alpha):
+def build_campus_layer(hf, wfs_polys, ped_alpha, texture_only=False):
     """Grade-A campus yard / court data texture + court marking paint (see module docstring); alpha = the
     v0C road-edge pedestrian class (curb_zone.py)."""
     lon0, lat0 = enu_origin_from_city_yaml(CITY)
@@ -892,6 +894,8 @@ def build_campus_layer(hf, wfs_polys, ped_alpha):
             img[j0:j1, i0:i1, 2] = np.where(inside, sid * 32, img[j0:j1, i0:i1, 2])
     img[:, :, 3] = ped_alpha
     Image.fromarray(img, "RGBA").save(OUT / "xinyi_campus_2048.png", optimize=True)
+    if texture_only:
+        return
 
     # court markings as paint geometry, laid on the real pitch rectangle
     paint = Paint(hf)

@@ -1,0 +1,13 @@
+{
+  "executable": "C:\\Users\\EDDY\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+  "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+  "packages": {
+    "numpy": "2.3.5",
+    "PIL": "12.3.0",
+    "scipy": "1.16.3",
+    "shapely": "2.1.2",
+    "pyproj": "3.7.2",
+    "yaml": "6.0.3"
+  },
+  "isolation_target": "C:\\Users\\EDDY\\Desktop\\M1A2\\xinyi-material-ue58-round1\\.capture-python"
+}

@@ -1,0 +1,142 @@
+{
+  "units": "ENU metres",
+  "lighting": "existing day preset; clouds off",
+  "motion": "five camera positions at 6 m intervals including wuxing_roofs; static samples only",
+  "shots": {
+    "walkup": {
+      "eye": [
+        -368.0789743851815,
+        -310.0394933614678,
+        19.701
+      ],
+      "target": [
+        -362.105,
+        -305.505,
+        18.701
+      ],
+      "fov": 80,
+      "building_id": "tp_building_height.269873",
+      "archetype": 1,
+      "facade_generation": "legacy",
+      "edge_length_m": 17.16,
+      "normal_deg": 217.2,
+      "height_m": 15.95,
+      "surveyed_ground_m": 9.45
+    },
+    "huaxia": {
+      "eye": [
+        -388.0451500521843,
+        -283.1857107175654,
+        22.345799999999997
+      ],
+      "target": [
+        -382.095,
+        -278.62,
+        21.345799999999997
+      ],
+      "fov": 80,
+      "building_id": "tp_building_height.270894",
+      "archetype": 2,
+      "facade_generation": "huaxia",
+      "edge_length_m": 49.84,
+      "normal_deg": 217.5,
+      "height_m": 20.51,
+      "surveyed_ground_m": 9.45
+    },
+    "wuxing_roofs": {
+      "eye": [
+        -420,
+        -380,
+        95
+      ],
+      "target": [
+        -150,
+        -80,
+        20
+      ],
+      "fov": 55,
+      "shadowCenter": [
+        -250,
+        -200,
+        20
+      ],
+      "shadowRadius": 500
+    },
+    "wuxing_move_00": {
+      "eye": [
+        -432,
+        -380,
+        95
+      ],
+      "target": [
+        -162,
+        -80,
+        20
+      ],
+      "fov": 55,
+      "shadowCenter": [
+        -250,
+        -200,
+        20
+      ],
+      "shadowRadius": 500
+    },
+    "wuxing_move_01": {
+      "eye": [
+        -426,
+        -380,
+        95
+      ],
+      "target": [
+        -156,
+        -80,
+        20
+      ],
+      "fov": 55,
+      "shadowCenter": [
+        -250,
+        -200,
+        20
+      ],
+      "shadowRadius": 500
+    },
+    "wuxing_move_02": {
+      "eye": [
+        -414,
+        -380,
+        95
+      ],
+      "target": [
+        -144,
+        -80,
+        20
+      ],
+      "fov": 55,
+      "shadowCenter": [
+        -250,
+        -200,
+        20
+      ],
+      "shadowRadius": 500
+    },
+    "wuxing_move_03": {
+      "eye": [
+        -408,
+        -380,
+        95
+      ],
+      "target": [
+        -138,
+        -80,
+        20
+      ],
+      "fov": 55,
+      "shadowCenter": [
+        -250,
+        -200,
+        20
+      ],
+      "shadowRadius": 500
+    }
+  }
+}

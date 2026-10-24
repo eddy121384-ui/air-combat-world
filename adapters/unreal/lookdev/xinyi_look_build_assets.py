@@ -833,4 +833,5 @@ def main():
         raise RuntimeError("XinyiLook asset stage failed: %s" % json.dumps(failures)[:2000])
 
 
-main()
+if __name__ == "__main__":
+    main()

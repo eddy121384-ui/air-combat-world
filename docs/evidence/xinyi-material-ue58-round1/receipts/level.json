@@ -1,0 +1,272 @@
+{
+  "status": "PASS_LOOK_LEVEL",
+  "source_level": "/Game/XinyiV2/L_XinyiV2_Contract",
+  "look_level": "/Game/XinyiLook/L_XinyiLook_Hero",
+  "tiles_swapped": [
+    {
+      "tile": "-003_-002",
+      "asset": "/Game/XinyiLook/Meshes/Tiles/m003_m002/xinyi_look_-003_-002/StaticMeshes/xinyi_look_-003_-002",
+      "location_cm": [
+        -149999.9990234375,
+        99999.99955749512,
+        8.58306884765625e-05
+      ]
+    },
+    {
+      "tile": "-003_-001",
+      "asset": "/Game/XinyiLook/Meshes/Tiles/m003_m001/xinyi_look_-003_-001/StaticMeshes/xinyi_look_-003_-001",
+      "location_cm": [
+        -149999.99926757812,
+        50000.000606536865,
+        7.62939453125e-06
+      ]
+    },
+    {
+      "tile": "-003_+000",
+      "asset": "/Game/XinyiLook/Meshes/Tiles/m003_p000/xinyi_look_-003_+000/StaticMeshes/xinyi_look_-003_+000",
+      "location_cm": [
+        -149999.99969482422,
+        -0.0005950927734375,
+        -3.62396240234375e-05
+      ]
+    },
+    {
+      "tile": "-003_+001",
+      "asset": "/Game/XinyiLook/Meshes/Tiles/m003_p001/xinyi_look_-003_+001/StaticMeshes/xinyi_look_-003_+001",
+      "location_cm": [
+        -149999.99865722656,
+        -50000.00045776367,
+        -1.1444091796875e-05
+      ]
+    },
+    {
+      "tile": "-003_+002",
+      "asset": "/Game/XinyiLook/Meshes/Tiles/m003_p002/xinyi_look_-003_+002/StaticMeshes/xinyi_look_-003_+002",
+      "location_cm": [
+        -150000.0009765625,
+        -99999.99988651276,
+        -4.863739013671875e-05
+      ]
+    },
+    {
+      "tile": "-002_-002",
+      "asset": "/Game/XinyiLook/Meshes/Tiles/m002_m002/xinyi_look_-002_-002/StaticMeshes/xinyi_look_-002_-002",
+      "location_cm": [
+        -99999.99950790405,
+        100000.00050354004,
+        -3.814697265625e-05
+      ]
+    },
+    {
+      "tile": "-002_-001",
+      "asset": "/Game/XinyiLook/Meshes/Tiles/m002_m001/xinyi_look_-002_-001/StaticMeshes/xinyi_look_-002_-001",
+      "location_cm": [
+        -100000.0006942749,
+        49999.999687194824,
+        -0.0002231597900390625
+      ]
+    },
+    {
+      "tile": "-002_+000",
+      "asset": "/Game/XinyiLook/Meshes/Tiles/m002_p000/xinyi_look_-002_+000/StaticMeshes/xinyi_look_-002_+000",
+      "location_cm": [
+        -99999.99912261963,
+        -0.000850677490234375,
+        -0.00010013580322265625
+      ]
+    },
+    {
+      "tile": "-002_+001",
+      "asset": "/Game/XinyiLook/Meshes/Tiles/m002_p001/xinyi_look_-002_+001/StaticMeshes/xinyi_look_-002_+001",
+      "location_cm": [
+        -100000.00074005127,
+        -49999.99988555908,
+        -2.86102294921875e-06
+      ]
+    },
+    {
+      "tile": "-002_+002",
+      "asset": "/Game/XinyiLook/Meshes/Tiles/m002_p002/xinyi_look_-002_+002/StaticMeshes/xinyi_look_-002_+002",
+      "location_cm": [
+        -99999.99951076508,
+        -100000.00035095215,
+        0.00011348724365234375
+      ]
+    },
+    {
+      "tile": "-001_-002",
+      "asset": "/Game/XinyiLook/Meshes/Tiles/m001_m002/xinyi_look_-001_-002/StaticMeshes/xinyi_look_-001_-002",
+      "location_cm": [
+        -50000.00012207031,
+        99999.99969100952,
+        -0.00022029876708984375
+      ]
+    },
+    {
+      "tile": "-001_-001",
+      "asset": "/Game/XinyiLook/Meshes/Tiles/m001_m001/xinyi_look_-001_-001/StaticMeshes/xinyi_look_-001_-001",
+      "location_cm": [
+        -50000.00041770935,
+        50000.00002861023,
+        -0.000217437744140625
+      ]
+    },
+    {
+      "tile": "-001_+000",
+      "asset": "/Game/XinyiLook/Meshes/Tiles/m001_p000/xinyi_look_-001_+000/StaticMeshes/xinyi_look_-001_+000",
+      "location_cm": [
+        -49999.99915122986,
+        0.000141143798828125,
+        -2.47955322265625e-05
+      ]
+    },
+    {
+      "tile": "-001_+001",
+      "asset": "/Game/XinyiLook/Meshes/Tiles/m001_p001/xinyi_look_-001_+001/StaticMeshes/xinyi_look_-001_+001",
+      "location_cm": [
+        -50000.00067138672,
+        -50000.00096130371,
+        -0.000171661376953125
+      ]
+    },
+    {
+      "tile": "-001_+002",
+      "asset": "/Game/XinyiLook/Meshes/Tiles/m001_p002/xinyi_look_-001_+002/StaticMeshes/xinyi_look_-001_+002",
+      "location_cm": [
+        -49999.99949645996,
+        -100000.00019836426,
+        8.392333984375e-05
+      ]
+    },
+    {
+      "tile": "+000_-002",
+      "asset": "/Game/XinyiLook/Meshes/Tiles/p000_m002/xinyi_look_+000_-002/StaticMeshes/xinyi_look_+000_-002",
+      "location_cm": [
+        0.0001068115234375,
+        100000.0004196167,
+        8.58306884765625e-05
+      ]
+    },
+    {
+      "tile": "+000_-001",
+      "asset": "/Game/XinyiLook/Meshes/Tiles/p000_m001/xinyi_look_+000_-001/StaticMeshes/xinyi_look_+000_-001",
+      "location_cm": [
+        0.00072479248046875,
+        49999.99981403351,
+        4.76837158203125e-05
+      ]
+    },
+    {
+      "tile": "+000_+000",
+      "asset": "/Game/XinyiLook/Meshes/Tiles/p000_p000/xinyi_look_+000_+000/StaticMeshes/xinyi_look_+000_+000",
+      "location_cm": [
+        -0.00054931640625,
+        -0.000492095947265625,
+        -0.00036334991455078125
+      ]
+    },
+    {
+      "tile": "+000_+001",
+      "asset": "/Game/XinyiLook/Meshes/Tiles/p000_p001/xinyi_look_+000_+001/StaticMeshes/xinyi_look_+000_+001",
+      "location_cm": [
+        -0.00061798095703125,
+        -49999.99934005737,
+        0.000225067138671875
+      ]
+    },
+    {
+      "tile": "+000_+002",
+      "asset": "/Game/XinyiLook/Meshes/Tiles/p000_p002/xinyi_look_+000_+002/StaticMeshes/xinyi_look_+000_+002",
+      "location_cm": [
+        -0.0009899139404296875,
+        -99999.99990844727,
+        7.534027099609375e-05
+      ]
+    },
+    {
+      "tile": "+001_-002",
+      "asset": "/Game/XinyiLook/Meshes/Tiles/p001_m002/xinyi_look_+001_-002/StaticMeshes/xinyi_look_+001_-002",
+      "location_cm": [
+        50000.00015258789,
+        100000.00035858154,
+        4.9591064453125e-05
+      ]
+    },
+    {
+      "tile": "+001_-001",
+      "asset": "/Game/XinyiLook/Meshes/Tiles/p001_m001/xinyi_look_+001_-001/StaticMeshes/xinyi_look_+001_-001",
+      "location_cm": [
+        50000.00091743469,
+        49999.99930381775,
+        -0.0001277923583984375
+      ]
+    },
+    {
+      "tile": "+001_+000",
+      "asset": "/Game/XinyiLook/Meshes/Tiles/p001_p000/xinyi_look_+001_+000/StaticMeshes/xinyi_look_+001_+000",
+      "location_cm": [
+        49999.99945449829,
+        0.0002307891845703125,
+        0.0001430511474609375
+      ]
+    },
+    {
+      "tile": "+001_+001",
+      "asset": "/Game/XinyiLook/Meshes/Tiles/p001_p001/xinyi_look_+001_+001/StaticMeshes/xinyi_look_+001_+001",
+      "location_cm": [
+        50000.0007019043,
+        -49999.99962711334,
+        0.0001506805419921875
+      ]
+    },
+    {
+      "tile": "+001_+002",
+      "asset": "/Game/XinyiLook/Meshes/Tiles/p001_p002/xinyi_look_+001_+002/StaticMeshes/xinyi_look_+001_+002",
+      "location_cm": [
+        49999.999212265015,
+        -100000.00021362305,
+        -2.765655517578125e-05
+      ]
+    }
+  ],
+  "hero_location_cm": [
+    -5957.822062263801,
+    -7439.543391629382,
+    494.0
+  ],
+  "tree_instances": 16082,
+  "ground_instances": {
+    "tree": 16082,
+    "forest": 1190,
+    "lamp": 4913
+  },
+  "rooftop_instances": {
+    "shed": 1617,
+    "tank": 8907,
+    "solar": 917,
+    "antenna": 2631,
+    "ac": 8696,
+    "cooling": 507,
+    "machine": 896,
+    "bmu": 35,
+    "avlight": 471,
+    "addition": 2980,
+    "barrel": 950,
+    "leanto": 726,
+    "bulkhead": 1108
+  },
+  "street_instances": {
+    "sign": 1702,
+    "box": 817,
+    "awning": 2407,
+    "scooter_a": 2062,
+    "scooter_b": 676,
+    "scooter_c": 1104,
+    "scooter_d": 671
+  },
+  "wall_ad_instances": 27,
+  "far_city_chunks": 43,
+  "clouds": null,
+  "failures": [],
+  "contract_level_saved": false
+}

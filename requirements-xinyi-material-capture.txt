@@ -1,0 +1,7 @@
+# Offline restoration only; Unreal capture uses the engine's Python.
+numpy==2.3.5
+Pillow==12.3.0
+scipy==1.16.3
+shapely==2.1.2
+pyproj==3.7.2
+PyYAML==6.0.3
