@@ -6,7 +6,7 @@ import {advancedStudent} from './advanced-student.mjs';
 import {loadProgress,recordAttempt,saveProgress} from '../src/academy/progress.js';
 import {TiltInput} from '../src/game/tilt-input.js';
 import {writeFile} from 'node:fs/promises';
-export function flyAdvanced(lesson,mode,{mistake=null,mistakeStage='guided',seed=52031,device='stick'}={}) {
+export function flyAdvanced(lesson,mode,{mistake=null,mistakeStage='guided',seed=52031,device='stick',gunHeld=false}={}) {
  const [flight,control]=mode.split(':'),input=makeStudentInput();
  let now=0,tilt=null;
  if(device==='tilt'){
@@ -24,6 +24,7 @@ export function flyAdvanced(lesson,mode,{mistake=null,mistakeStage='guided',seed
  };
  ctl.update=(dt,m)=>{
   advancedStudent(r,input,control,{mistake:r.phase?.id===mistakeStage?mistake:null});
+  if(gunHeld)input.gunOn=true;
   if(tilt){
    const degrees=v=>Math.abs(v)<1e-9?0:Math.sign(v)*(2+18*(-.35+Math.sqrt(.35*.35+2.6*Math.min(1,Math.abs(v))))/1.3);
    now+=dt*1000;tilt.receive({beta:degrees(input.stick.x),gamma:-40-degrees(input.stick.y)});tilt.tick();
@@ -69,6 +70,11 @@ if(import.meta.url===`file://${process.argv[1]}`){
   assert.ok(r.result?.success,`${l.id}/${mode}: synthetic TILT input can complete the same challenge`);
  }
  // The same incorrect inputs must also fail without guided hints in Challenge.
+ for(const mode of ['arcade:expert','tactical:expert']){
+  const r=flyAdvanced(ADVANCED_LESSONS[0],mode,{gunHeld:true});
+  assert.ok(r.result.success,'incidental weapon contact cannot fail an aerobatics-only lesson');
+  assert.equal(r.me.stats.roundsFired,0,'A01 filters weapon commands rather than judging firing discipline');
+ }
  for(const l of ADVANCED_LESSONS)for(const mode of ['arcade:assisted','arcade:expert','tactical:assisted','tactical:expert']){
   if(advancedSupport(l,mode.split(':')[1]))continue;
   const mistake=l.id==='A01'?'noRoll':l.id==='T01'?'shoot':'noReverse';

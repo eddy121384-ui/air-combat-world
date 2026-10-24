@@ -377,7 +377,7 @@ function openBriefing(id) {
   $('#briefPrinciple').textContent = l.principle;
   $('#briefGoals').innerHTML = l.goals.map((g) => `<li>${g}</li>`).join('');
   $('#briefReal').textContent = l.real || '';
-  $('#briefModel').textContent = (l.model || '')+(l.advanced?' 本課不評命中，飛彈停用；機砲只做開火時機回饋。':'');
+  $('#briefModel').textContent = (l.model || '')+(l.id==='A01'?' 本課武器停用。':l.advanced?' 本課不評命中，飛彈停用；機砲只做開火時機回饋。':'');
   const blocked=l.advanced&&advancedSupport(l,controlMode);
   $('#briefSupport').textContent=blocked|| (l.advanced?`流程：示範 → 引導練習 → 自主挑戰 → 數據結算。每段操作 ${l.attemptLimit} 秒；交棒時暫停並明確重置情境。`:'');
   $('#btnBriefGo').disabled=!!blocked;

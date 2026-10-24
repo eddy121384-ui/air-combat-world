@@ -156,6 +156,7 @@ const common={advanced:true,setup,crashReason:r=>`墜海。${advancedFailure(r)}
   grade(r){const m=r.notes.challenge;return m.minSpeed>130&&m.fullG<3?'S':m.minSpeed>100?'A':'B';}};
 export const ADVANCED_LESSONS=[{
   ...common,id:'A01',no:'A01',title:'殷麥曼轉彎',en:'IMMELMANN',attemptLimit:45,
+  rules:{weapons:false,playerDamage:0},
   principle:'半筋斗先反向並換取高度，倒飛後卸載、半滾轉恢復正飛。不是爬升中直接水平轉頭。',
   real:'真實原理：進場能量、垂直面拉起與頂點滾轉共同決定結果。這是機動概念教學，不是真機特技操作檢查單。',
   model:'模型：共用 G／阻力／速度與四元數姿態，可近似過頂與倒飛；無完整攻角、尾旋或倒飛供油。規則：3000m／1008km/h 起始、訓練不受武器損傷；只有 Expert 開放。',
