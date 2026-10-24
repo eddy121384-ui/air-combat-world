@@ -379,7 +379,7 @@ function openBriefing(id) {
   $('#briefReal').textContent = l.real || '';
   $('#briefModel').textContent = (l.model || '')+(l.advanced?' 本課不評命中，飛彈停用；機砲只做開火時機回饋。':'');
   const blocked=l.advanced&&advancedSupport(l,controlMode);
-  $('#briefSupport').textContent=blocked|| (l.advanced?'流程：示範 → 引導練習 → 自主挑戰 → 數據結算。每段交棒會明確重置情境。':'');
+  $('#briefSupport').textContent=blocked|| (l.advanced?`流程：示範 → 引導練習 → 自主挑戰 → 數據結算。每段操作 ${l.attemptLimit} 秒；交棒時暫停並明確重置情境。`:'');
   $('#btnBriefGo').disabled=!!blocked;
   $('#btnBriefGo').textContent=l.advanced?'觀看示範 DEMO':'出擊 TAKE OFF';
   $('#btnBriefExpert').classList.toggle('hidden',!blocked);

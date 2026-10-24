@@ -15,6 +15,7 @@ export function flyAdvanced(lesson,mode,{mistake=null,mistakeStage='guided',seed
   input.axes=()=>({...tilt.axes(),yaw:0});input.inputDevice='tilt';
  }
  const {match,runner:r}=createLessonSession(lesson,{flight,control,input,seed});
+ assert.equal(r.view().timer,lesson.attemptLimit,'the per-attempt time limit is visible before flying');
  const ctl=match.controllers.get(match.blue),update=ctl.update;
  r.onSay=text=>{
   if(text.includes('已倒飛反向'))assert.ok(r.d.m.inverted,'inversion hint has observed evidence');

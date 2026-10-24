@@ -236,7 +236,8 @@ export class LessonRunner {
       step: ph ? `${this.phaseIdx + 1}/${this.lesson.phases.length}` : '',
       text: ph?.text ? ph.text(this) : '',
       progress: ph?.progress ? clamp(ph.progress(this), 0, 1) : null,
-      timer: limit ? Math.max(0, limit - this.t) : null,
+      timer: this.lesson.advanced ? (this.result?null:Math.max(0,this.lesson.attemptLimit-this.phaseT))
+        : limit ? Math.max(0, limit - this.t) : null,
       markers: ph?.markers ? ph.markers(this) : [],
       done: !!this.result,
       guidance,
