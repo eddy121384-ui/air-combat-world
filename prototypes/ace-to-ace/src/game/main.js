@@ -610,7 +610,8 @@ function frame(now) {
     if (lessonRun?.result && debriefTimer < 0 && mode === 'playing') debriefTimer = lessonRun.result.success ? 3.0 : 0.8;
     if (debriefTimer > 0 && mode === 'playing') { debriefTimer -= realDt; if (debriefTimer <= 0) showDebrief(); }
     if (resultTimer > 0 && mode === 'playing') { resultTimer -= realDt; if (resultTimer <= 0) showResult(); }
-    if (view.mode !== 'kill') view.mode = input.look() && kind === 'pvai' ? 'look' : 'chase';
+    const trainingLook=kind==='lesson'&&lessonRun.lesson.advanced&&!match.red.dormant&&lessonRun.phase?.id!=='demonstration'&&!lessonRun.waiting;
+    if (view.mode !== 'kill') view.mode = input.look() && (kind === 'pvai'||trainingLook) ? 'look' : 'chase';
     rend.update(match, view, realDt * timeScale);
     rend.updateCamera(view, realDt);
     rend.render();
@@ -685,6 +686,7 @@ window.__game = {
   get match() { return match; }, get mode() { return mode; }, get enemyAI() { return enemyAI; }, get flightFeel() { return flightFeel; }, get controlMode() { return controlMode; },
   get player() { return player; }, get rend() { return rend; },
   get hud() { return hud; },
+  get viewMode() { return view.mode; },
   get lesson() { return lessonRun; }, get lessonId() { return lessonId; }, get academyProgress() { return academyProgress; },
   startLesson, openAcademy, openBriefing,
   get experimentSeed() { return experimentSeed; }, settings, start, input, tilt, hudEditor, openHudEditor, openFlightSettings,

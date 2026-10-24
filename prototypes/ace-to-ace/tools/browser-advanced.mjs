@@ -66,6 +66,16 @@ export async function checkAdvanced({page,iphone,shot,report,quick=false}) {
    assert.equal(await p.evaluate(()=>window.__game.match.time),frozen,'handoff freezes the situation');
    await p.tap('#btnAdvance');
    await p.waitForFunction(()=>window.__game.lesson.phase.id==='guided');
+   if(l.id==='T02'){
+    // Human defenders need the existing LOOK control to see a pursuer behind them.
+    await p.evaluate(()=>window.__game.setTimeScale(0));
+    const cdp=await ctx.newCDPSession(p),box=await p.locator('[data-btn="look"]').boundingBox();
+    await cdp.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{id:51,x:box.x+box.width/2,y:box.y+box.height/2}]});
+    await p.waitForFunction(()=>window.__game.viewMode==='look');
+    await cdp.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});
+    await p.waitForFunction(()=>window.__game.viewMode==='chase'&&!window.__game.input.look());
+    await p.evaluate(()=>window.__game.setTimeScale(8));
+   }
    if(width===667&&l.id==='A01'){
     // Pause, resume and real touch through the live student's normal Input route.
     await p.evaluate(()=>{window.__manualAdvanced=true;window.__game.setTimeScale(0);});

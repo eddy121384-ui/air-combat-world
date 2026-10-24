@@ -107,7 +107,7 @@ function cue(r) {
   if(r.me.speed<100)tip='速度低：卸載、加速，別再拉緊';
   else if(id==='A01')tip=!m.vertical?'機翼水平，約 4–5G 拉起':!m.inverted?'持續半筋斗，倒飛反向後再滾轉':m.halfRoll<140?'卸載，半滾轉；橫向回中停止滾轉':'機翼朝上，小幅修 FPM 至 0°';
   else if(id==='T01')tip=m.maxHeight<250?'接近太快：先以約 3G 拉起爬升':g.ata>35?r.pick('側推協調轉彎；前推降低航跡','滾向目標後方，再拉回尾後'):g.closure>35?'收油，別讓接近率再增加':'窗口看位置與接近率，不只看機頭';
-  else tip=m.reversals<2?r.pick('交替側推；看追兵再反轉，別只按 BRK','反向滾轉再拉；看追兵，別只按 BRK'):!m.overshoot?'保持交替反轉，提早管理接近率':'它過去了：追尾後，或帶速度安全脫離';
+  else tip=m.reversals<2?r.pick('按住 LOOK 看追兵，再交替側推反轉','LOOK 看追兵；反向滾轉再拉'):!m.overshoot?'保持交替反轉，提早管理接近率':'它過去了：追尾後，或帶速度安全脫離';
   return {goal:`${r.phase.id==='demonstration'?'KITE 示範 · 勿操縱':'引導練習 · 由你操縱'}`,readout:id==='A01'?`+${Math.round(m.maxHeight)}m · ${Math.round(r.kmh)}km/h · ${r.g.toFixed(1)}G`:id==='T01'?`${Math.round(g.range)}m · ${Math.round(g.closure*3.6)}km/h · ${r.g.toFixed(1)}G`:`${Math.round(g.range)}m · ${Math.round(g.closure*3.6)}km/h · 反轉 ${m.reversals}`,tip,state:r.me.speed<100?'warn':'neutral'};
 }
 function phase(id) {
