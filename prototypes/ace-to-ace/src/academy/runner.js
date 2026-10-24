@@ -236,12 +236,17 @@ export class LessonRunner {
       step: ph ? `${this.phaseIdx + 1}/${this.lesson.phases.length}` : '',
       text: ph?.text ? ph.text(this) : '',
       progress: ph?.progress ? clamp(ph.progress(this), 0, 1) : null,
-      timer: limit ? Math.max(0, limit - this.t) : null,
+      timer: this.lesson.advanced ? (this.result?null:Math.max(0,this.lesson.attemptLimit-this.phaseT))
+        : limit ? Math.max(0, limit - this.t) : null,
       markers: ph?.markers ? ph.markers(this) : [],
       done: !!this.result,
       guidance,
-      weapons: !!this.rules.weapons,
+      // Advanced training observes trigger discipline but never advertises a
+      // combat SHOOT/LOCK cue as permission to bypass its position exercise.
+      weapons: !!this.rules.weapons && !this.lesson.advanced,
       enemyWeapons: this.lesson.id !== 'L07',
+      trace: this.lesson.advanced ? this.d.m?.trace : null,
+      traceKind: this.lesson.id === 'A01' ? 'vertical' : 'plan',
     };
   }
 }

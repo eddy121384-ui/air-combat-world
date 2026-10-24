@@ -8,6 +8,7 @@ import { PilotAI } from '../ai/pilot.js';
 import { sub, len, dot, norm, scale, cross, angleBetween, forwardOf, addScaled, UP, DEG } from '../sim/math.js';
 import { gunLead, gunError, missilePk } from '../sim/fire.js';
 import { FLARE, GUN } from '../sim/weapons.js';
+import { ADVANCED_LESSONS } from './advanced.js';
 
 const fmt = (n) => Math.round(n).toLocaleString('en-US');
 const hdg3 = (h) => String(Math.round((h + 360) % 360)).padStart(3, '0');
@@ -977,5 +978,6 @@ export function lessonGuidance(r) {
 
 export const LESSONS = [L01, L02, L03, L04, L05, L06, L07, L08, L09, L10];
 for (const lesson of LESSONS) lesson.guidance=lessonGuidance;
-export const lessonById = (id) => LESSONS.find((l) => l.id === id);
+export const ALL_LESSONS = [...LESSONS, ...ADVANCED_LESSONS];
+export const lessonById = (id) => ALL_LESSONS.find((l) => l.id === id);
 export { gatePhase, pointAhead };

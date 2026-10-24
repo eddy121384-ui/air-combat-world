@@ -3,6 +3,7 @@
 import { Match } from '../sim/world.js';
 import { PlayerController } from '../game/input.js';
 import { LessonRunner } from './runner.js';
+import { advancedSupport } from './advanced.js';
 
 export const ACADEMY_SEED = 52031;
 
@@ -12,6 +13,8 @@ export const ACADEMY_SEED = 52031;
  * @returns {{ match, runner, player }}
  */
 export function createLessonSession(lesson, { flight, control, input, settings = {}, seed = lesson.seed ?? ACADEMY_SEED }) {
+  const blocked=lesson.advanced && advancedSupport(lesson,control);
+  if(blocked)throw new Error(blocked);
   const match = new Match({
     seed, flightFeel: flight,
     blue: { type: 'F16V', name: 'F-16V', damageScale: lesson.rules?.playerDamage ?? 1 },
@@ -21,6 +24,6 @@ export function createLessonSession(lesson, { flight, control, input, settings =
   const runner = new LessonRunner(lesson, match, { flight, control, inputDevice:()=>input.inputDevice || 'stick' });
   // Lesson rules filter the player's commands (e.g. "engine at idle"); the
   // aircraft itself is the unmodified shared flight model.
-  match.setController(match.blue, { player, update: (dt, m) => runner.filter(player.update(dt, m)) });
+  match.setController(match.blue, { player, update: (dt, m) => runner.filter((runner.demoController || player).update(dt, m)) });
   return { match, runner, player, foeAI: runner.foeAI || null };
 }

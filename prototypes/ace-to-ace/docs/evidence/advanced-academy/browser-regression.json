@@ -1,0 +1,38 @@
+[
+  {
+    "command": "node tools/browser-check.mjs --scenario hud-editor --out /tmp/ace-advanced/regression/hud-editor",
+    "exit": 0
+  },
+  {
+    "command": "node tools/browser-check.mjs --scenario tilt --out /tmp/ace-advanced/regression/tilt",
+    "exit": 0
+  },
+  {
+    "command": "node tools/browser-check.mjs --scenario level --out /tmp/ace-advanced/regression/level",
+    "exit": 0
+  },
+  {
+    "command": "node tools/browser-check.mjs --scenario settings --out /tmp/ace-advanced/regression/settings",
+    "exit": 0
+  },
+  {
+    "command": "node tools/browser-check.mjs --scenario manual --out /tmp/ace-advanced/regression/manual",
+    "exit": 0
+  },
+  {
+    "command": "node tools/browser-check.mjs --scenario touch --out /tmp/ace-advanced/regression/touch",
+    "exit": 0
+  },
+  {
+    "command": "node tools/browser-check.mjs --scenario modes --out /tmp/ace-advanced/regression/modes",
+    "exit": 0
+  },
+  {
+    "command": "node tools/browser-check.mjs --scenario academy --out /tmp/ace-advanced/regression/academy",
+    "exit": 0
+  },
+  {
+    "command": "node tools/browser-check.mjs --scenario academy-ui --out /tmp/ace-advanced/regression/academy-ui",
+    "exit": 0
+  }
+]
