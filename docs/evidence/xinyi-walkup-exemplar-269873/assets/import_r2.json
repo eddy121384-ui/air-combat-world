@@ -1,0 +1,33 @@
+{
+  "status": "PASS_EXEMPLAR_IMPORT",
+  "revision": "r2",
+  "level_saved": false,
+  "scope": "/Game/XinyiExemplar/Walkup269873",
+  "mesh": "/Game/XinyiExemplar/Walkup269873/r2/Mesh/walkup_kit_r2/StaticMeshes/walkup_kit_r2",
+  "material": "/Game/XinyiExemplar/Walkup269873/M_WalkupKit",
+  "triangles": 2940,
+  "sections": 1,
+  "actual_bounds_origin_cm": [
+    -603.1568984985352,
+    388.4851379394531,
+    1161.8312377929688
+  ],
+  "actual_bounds_extent_cm": [
+    683.2456893920898,
+    890.0995788574219,
+    376.39373779296875
+  ],
+  "nanite": false,
+  "material_statistics": {
+    "num_pixel_shader_instructions": 267,
+    "num_vertex_shader_instructions": 144,
+    "num_samplers": 3,
+    "num_pixel_texture_samples": 0
+  },
+  "asset_paths": [
+    "/Game/XinyiExemplar/Walkup269873/M_WalkupKit.M_WalkupKit",
+    "/Game/XinyiExemplar/Walkup269873/r1/Mesh/walkup_kit_r1/StaticMeshes/walkup_kit_r1.walkup_kit_r1",
+    "/Game/XinyiExemplar/Walkup269873/r2/Mesh/walkup_kit_r2/Materials/WalkupKit.WalkupKit",
+    "/Game/XinyiExemplar/Walkup269873/r2/Mesh/walkup_kit_r2/StaticMeshes/walkup_kit_r2.walkup_kit_r2"
+  ]
+}

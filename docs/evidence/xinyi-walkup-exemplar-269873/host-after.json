@@ -1,0 +1,23 @@
+{
+  "recorded_at_utc": "2026-10-24T12:19:56.7389820Z",
+  "ue_version": "5.8.0 CL 55116800",
+  "graphics": [
+    {
+      "Name": "Intel(R) UHD Graphics 770",
+      "DriverVersion": "31.0.101.4502"
+    }
+  ],
+  "disks": [
+    {
+      "Name": "C",
+      "Free": 37716312064
+    },
+    {
+      "Name": "D",
+      "Free": 47430725632
+    }
+  ],
+  "unreal_processes": [],
+  "new_worktree_created": false,
+  "full_cook": false
+}

@@ -1,0 +1,73 @@
+{
+  "status": "PASS_LOOK_CAPTURE",
+  "reopen": {
+    "look_tiles": 25,
+    "hero": true,
+    "backdrop": true,
+    "paint": true,
+    "trees": 16082,
+    "landscape_material": "/Game/XinyiLook/Materials/M_XinyiGround.M_XinyiGround"
+  },
+  "reopen_ok": true,
+  "backend": "SceneCapture2D -> RTF_RGBA8 -> SCS_FINAL_COLOR_LDR -> export_render_target",
+  "tods": [
+    "day"
+  ],
+  "shots": [
+    "distance_050m",
+    "distance_150m",
+    "distance_300m"
+  ],
+  "captures": [
+    {
+      "name": "distance_050m__day",
+      "path": "C:\\Users\\EDDY\\Desktop\\M1A2\\xinyi-material-ue58-round1\\unreal\\Saved\\XinyiExemplar\\Walkup269873\\captures\\before\\distance_050m__day.png",
+      "bytes": 3090912
+    },
+    {
+      "name": "distance_150m__day",
+      "path": "C:\\Users\\EDDY\\Desktop\\M1A2\\xinyi-material-ue58-round1\\unreal\\Saved\\XinyiExemplar\\Walkup269873\\captures\\before\\distance_150m__day.png",
+      "bytes": 4252804
+    },
+    {
+      "name": "distance_300m__day",
+      "path": "C:\\Users\\EDDY\\Desktop\\M1A2\\xinyi-material-ue58-round1\\unreal\\Saved\\XinyiExemplar\\Walkup269873\\captures\\before\\distance_300m__day.png",
+      "bytes": 4252804
+    }
+  ],
+  "clouds": {
+    "quality": "absent"
+  },
+  "perf": {
+    "method": "SceneCapture2D 1920x1080 FINAL_COLOR_LDR, capture_scene + 1px readback per sample (GPU-synchronised wall time; includes a fixed readback / submit overhead)",
+    "gpu": null,
+    "clouds": "off",
+    "tod": "day",
+    "shots": {
+      "distance_050m": {
+        "n": 40,
+        "median_ms": 62.8,
+        "p10_ms": 60.35,
+        "p90_ms": 67.33,
+        "min_ms": 59.03
+      },
+      "distance_150m": {
+        "n": 40,
+        "median_ms": 61.85,
+        "p10_ms": 59.91,
+        "p90_ms": 64.94,
+        "min_ms": 58.84
+      },
+      "distance_300m": {
+        "n": 40,
+        "median_ms": 65.05,
+        "p10_ms": 63.24,
+        "p90_ms": 68.35,
+        "min_ms": 62.68
+      }
+    }
+  },
+  "error": null,
+  "level_saved": false,
+  "elapsed_seconds": 21.42200000002049
+}

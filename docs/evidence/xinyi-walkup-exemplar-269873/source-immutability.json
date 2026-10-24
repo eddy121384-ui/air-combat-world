@@ -1,0 +1,10 @@
+{
+  "status": "PASS_PROTECTED",
+  "frozen_files_checked": 254,
+  "source_inputs_checked_per_location": 243,
+  "retained_investigation_files_checked": 40,
+  "locations": 2,
+  "changes": [],
+  "pr68_branch": "a6b0d3536ac00e12214e78665750c9994518dd44",
+  "read_only_D_drive": true
+}

@@ -1,0 +1,10 @@
+{
+  "iteration_limit": "r1 plus one targeted revision r2; no additional art iteration",
+  "r1_observation": "50m depth is visible, but uniform green backing reads like new replacement windows; CPU seed is packed/255 while xc_city uses packed/256+0.00123, misaligning some bay and service choices. Fine cage bars lose hierarchy at 150-300m.",
+  "r2_changes": [
+    "Match xc_city seed normalisation; retain r1 generator branch for exact reproduction",
+    "Remove new glass backing; retain original varied shader glazing and curtains",
+    "Increase cage projection 0.52 to 0.82m, bars 0.035 to 0.055m, spacing 0.25 to 0.34m; mute clean trim colour"
+  ],
+  "unchanged": "same two feature families, source triangles, footprint, building placement, camera poses, FOV, lighting and quality; no roof or new feature"
+}

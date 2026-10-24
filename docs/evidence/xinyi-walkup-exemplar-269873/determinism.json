@@ -1,0 +1,14 @@
+[
+  {
+    "revision": "r1",
+    "GLB_sha256": "84aedd68c00260f15dcfbb5a4f5f25f2cca9cc58e12f0a57a455508ddad92779",
+    "regenerated_in_separate_QA_folder": true,
+    "byte_exact": true
+  },
+  {
+    "revision": "r2",
+    "GLB_sha256": "df4a3212b2e783675ec02a2943bf64832a6f2573854673ca6fa914204726049e",
+    "regenerated_in_separate_QA_folder": true,
+    "byte_exact": true
+  }
+]
