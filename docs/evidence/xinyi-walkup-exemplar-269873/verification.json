@@ -1,0 +1,16 @@
+{
+  "status": "PASS_OFFLINE_QA_AND_SCOPE",
+  "offline_tests_passed": 4,
+  "Python_AST": "PASS",
+  "PowerShell_parse": "PASS",
+  "document_links_checked": 39,
+  "broken_links": 0,
+  "staged_changes_all_new_exemplar_paths": true,
+  "staged_files_before_this_receipt": 54,
+  "binary_blobs_byte_exact": 21,
+  "GLB_determinism": "r1 and r2 byte-exact on separate regeneration",
+  "new_UE_assets": 3,
+  "art_iteration_count": 2,
+  "extra_art_iterations": 0,
+  "art_acceptance": "PARTIAL; 300m not conclusively passed"
+}

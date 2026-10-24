@@ -1,0 +1,9 @@
+[2026.10.24-11.50.50:192][  0]LogD3D12RHI: Found D3D12 adapter 0: Intel(R) UHD Graphics 770 (VendorId: 8086, DeviceId: 4680, SubSysId: 15911025, Revision: 000c
+[2026.10.24-11.50.50:195][  0]LogD3D12RHI: Found D3D12 adapter 1: Microsoft Basic Render Driver (VendorId: 1414, DeviceId: 008c, SubSysId: 0000, Revision: 0000
+[2026.10.24-11.50.50:195][  0]LogD3D12RHI: Chosen D3D12 Adapter Id = 0
+[2026.10.24-11.53.32:756][980]LogPython: EXEMPLAR_IMPORT PASS_EXEMPLAR_IMPORT
+[2026.10.24-11.53.33:835][982]LogExit: Preparing to exit.
+[2026.10.24-11.53.37:230][982]LogExit: Editor shut down
+[2026.10.24-11.53.37:251][982]LogExit: Transaction tracking system shut down
+[2026.10.24-11.53.38:828][982]LogExit: Object subsystem successfully closed.
+[2026.10.24-11.53.42:201][982]LogExit: Exiting.

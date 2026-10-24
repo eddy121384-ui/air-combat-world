@@ -1,0 +1,1276 @@
+{
+  "commit": "a6b0d3536ac00e12214e78665750c9994518dd44",
+  "scope": "Existing evidence and existing content must not be overwritten by Exemplar work",
+  "files": [
+    {
+      "path": "assets/materials/xinyi/ue58_round1/PR62_SOURCES.md",
+      "sha256": "e399f71d05cc217528255a390ee26b16828552b022d42e959d7e6e10fb2dd463",
+      "bytes": 2371
+    },
+    {
+      "path": "assets/materials/xinyi/ue58_round1/README.md",
+      "sha256": "f66850026abe08ca3e6fc41950605673c5afb8a1e37aa25a63e01f6ecf6ed81e",
+      "bytes": 1917
+    },
+    {
+      "path": "assets/materials/xinyi/ue58_round1/T_XinyiFacadeAge.png",
+      "sha256": "48366fa2960438f02ae86d0a1ed003e0e5dfcc359108b0c73f84ee8c3705ed67",
+      "bytes": 44466
+    },
+    {
+      "path": "assets/materials/xinyi/ue58_round1/T_XinyiRoofSurface.png",
+      "sha256": "b3db5a50494ffc73bdda9a2ec13986a7856186cdbf0f6cd085ada1edaef85140",
+      "bytes": 40945
+    },
+    {
+      "path": "assets/materials/xinyi/ue58_round1/source.json",
+      "sha256": "5b7b4136062bdc1690d96fd7800618f9aa91156ffefb456f5b18f651eccf040e",
+      "bytes": 1902
+    },
+    {
+      "path": "docs/evidence/xinyi-material-ue58-round1/captures/baseline-smoke.png",
+      "sha256": "7bfb01cac6d9e9ca94724095bb534506ba53318d32bb543b6152566f017a058a",
+      "bytes": 4252804
+    },
+    {
+      "path": "docs/evidence/xinyi-material-ue58-round1/captures/baseline/huaxia__day.png",
+      "sha256": "6989eca8affedfd768b65a973749acd54b6b8d050bcd7d670d527b6f1c496dfe",
+      "bytes": 2244875
+    },
+    {
+      "path": "docs/evidence/xinyi-material-ue58-round1/captures/baseline/metadata.json",
+      "sha256": "9b5585c065c3122c361b08655c84beffd9d1f63898f2dfde33690ff115e7bcf5",
+      "bytes": 4009
+    },
+    {
+      "path": "docs/evidence/xinyi-material-ue58-round1/captures/baseline/walkup__day.png",
+      "sha256": "93a0a2dc6362bf72840164fa08ba5ed57cb2b5f458533f83a3e11a113f425cdf",
+      "bytes": 3090912
+    },
+    {
+      "path": "docs/evidence/xinyi-material-ue58-round1/captures/baseline/wuxing_move_00__day.png",
+      "sha256": "f70fbe17bfa8b54b2ec95977bee525952278aec94c34a0865e0cc47cba2eac2b",
+      "bytes": 4252804
+    },
+    {
+      "path": "docs/evidence/xinyi-material-ue58-round1/captures/baseline/wuxing_move_01__day.png",
+      "sha256": "4ad2cdb52e4a38b54bcd3b94203359e45486ba98a742496313c97be5feb48b8d",
+      "bytes": 4252804
+    },
+    {
+      "path": "docs/evidence/xinyi-material-ue58-round1/captures/baseline/wuxing_move_02__day.png",
+      "sha256": "137390304fdce01a909b9ea02d2531eb944284e8afb5b640dd01eda81964f7ed",
+      "bytes": 4252804
+    },
+    {
+      "path": "docs/evidence/xinyi-material-ue58-round1/captures/baseline/wuxing_move_03__day.png",
+      "sha256": "be4d4dfee2a6204e9594c094121bf1a5d07f29427c7e9abced885eb80e74c501",
+      "bytes": 4252804
+    },
+    {
+      "path": "docs/evidence/xinyi-material-ue58-round1/captures/baseline/wuxing_roofs__day.png",
+      "sha256": "c230604e4bae0b064246fdb7f5aafde703d38e63688f647262a4d90908653aef",
+      "bytes": 4252804
+    },
+    {
+      "path": "docs/evidence/xinyi-material-ue58-round1/captures/candidate/huaxia__day.png",
+      "sha256": "847aa139bfafca32fc75b0c0bddc3d370ef27b185a8ec455243da993ae5073c2",
+      "bytes": 2244875
+    },
+    {
+      "path": "docs/evidence/xinyi-material-ue58-round1/captures/candidate/metadata.json",
+      "sha256": "8bfb3e34d59d42f540b7dfc4fdb17ab95eccebf49ee8d17b8fc36a17502a3b95",
+      "bytes": 4888
+    },
+    {
+      "path": "docs/evidence/xinyi-material-ue58-round1/captures/candidate/walkup__day.png",
+      "sha256": "1b4a2a2a735b65990046e1375292003d5302751681ae3e460bbad589c387fd25",
+      "bytes": 3090912
+    },
+    {
+      "path": "docs/evidence/xinyi-material-ue58-round1/captures/candidate/wuxing_move_00__day.png",
+      "sha256": "ffb3acf5419c417fe934bd28945d477dbcc5b78759a9df5058d62024230a5378",
+      "bytes": 4252804
+    },
+    {
+      "path": "docs/evidence/xinyi-material-ue58-round1/captures/candidate/wuxing_move_01__day.png",
+      "sha256": "d1fb8db72ee9b8312a52b5415008542caee07753e900fe2a9891b7ca5d2be8e7",
+      "bytes": 4252804
+    },
+    {
+      "path": "docs/evidence/xinyi-material-ue58-round1/captures/candidate/wuxing_move_02__day.png",
+      "sha256": "a551a1e58c2999908fca4d3ec08434c4185d1fc15f67e26946816e29bc1324ce",
+      "bytes": 4252804
+    },
+    {
+      "path": "docs/evidence/xinyi-material-ue58-round1/captures/candidate/wuxing_move_03__day.png",
+      "sha256": "0460b9b4c67ad382b2d7b01ab7930763751efa9af1de54cf6d99d4de41be2df3",
+      "bytes": 4252804
+    },
+    {
+      "path": "docs/evidence/xinyi-material-ue58-round1/captures/candidate/wuxing_roofs__day.png",
+      "sha256": "f97c21be3a81efbcee51ed9d82bae4033703715558fd96bd620982597c0cf414",
+      "bytes": 4252804
+    },
+    {
+      "path": "docs/evidence/xinyi-material-ue58-round1/logs/assets-20261024T065706Z.log",
+      "sha256": "653be52ea1413d0646101f171987e5bc4f61e974a66e7fa4110f49283aa78633",
+      "bytes": 6288
+    },
+    {
+      "path": "docs/evidence/xinyi-material-ue58-round1/logs/baseline-20261024T071359Z.log",
+      "sha256": "082e337517bd969cde4ca3d392b5b864df03cd634f3fa52b30a71915ca8c7f70",
+      "bytes": 5954
+    },
+    {
+      "path": "docs/evidence/xinyi-material-ue58-round1/logs/baseline-20261024T071759Z.log",
+      "sha256": "1cc5a09ea4dfaa1a3d91d0bfd4a4b7de95d9128c90442a7160e5c8eb90039b48",
+      "bytes": 6039
+    },
+    {
+      "path": "docs/evidence/xinyi-material-ue58-round1/logs/candidate-20261024T074216Z.log",
+      "sha256": "4b61d9dcf8999abd7ccc270856957bcdfc72c03b55560d7cf18c182815c438d4",
+      "bytes": 6210
+    },
+    {
+      "path": "docs/evidence/xinyi-material-ue58-round1/logs/candidate-build-20261024T073145Z.log",
+      "sha256": "a9f09d32a43b9c4b3bdb5e71dabb2c828d468b39b3e1dd2099d2175b193f8233",
+      "bytes": 7752
+    },
+    {
+      "path": "docs/evidence/xinyi-material-ue58-round1/logs/candidate-build-20261024T073752Z.log",
+      "sha256": "2f824933a559ee8e05d557ceb3cb24e7d383b9cf47ef6ee19721f84c61ef0ca7",
+      "bytes": 10606
+    },
+    {
+      "path": "docs/evidence/xinyi-material-ue58-round1/logs/contract-dependency-probe.log",
+      "sha256": "9ff78dbc28ed304914f0f01e1539937137f1bd3f661b35d729cc64e4228127e9",
+      "bytes": 455
+    },
+    {
+      "path": "docs/evidence/xinyi-material-ue58-round1/logs/level-20261024T070802Z.log",
+      "sha256": "f1d87924cedb185e3dbade6edaa93a9fb942e2357c4ea03b683697b93ea13f17",
+      "bytes": 6029
+    },
+    {
+      "path": "docs/evidence/xinyi-material-ue58-round1/logs/smoke-20261024T070956Z.log",
+      "sha256": "3a81f7778a62117cca99f22d81595df217b34ac05088bdbb2a75bd933069cd13",
+      "bytes": 5944
+    },
+    {
+      "path": "docs/evidence/xinyi-material-ue58-round1/receipts/assets.json",
+      "sha256": "7cd223ffc76f131c96ac50f77d340d0afe47f05d7d0bcc6daa49ffc594afbe9d",
+      "bytes": 64173
+    },
+    {
+      "path": "docs/evidence/xinyi-material-ue58-round1/receipts/baseline.json",
+      "sha256": "f7d13d3c89c043b8b95d286f16f6d91c5a96215fbf064529417880faec34ed12",
+      "bytes": 2973
+    },
+    {
+      "path": "docs/evidence/xinyi-material-ue58-round1/receipts/candidate-build-shutdown-failed.report.json",
+      "sha256": "7476ac67b2e2a1cacb58a354b5e03875218c9477d8e518bb81ff8d88cfc7dcb1",
+      "bytes": 2822
+    },
+    {
+      "path": "docs/evidence/xinyi-material-ue58-round1/receipts/candidate-build-shutdown-failure.json",
+      "sha256": "3ac1be8dd0b5523657b15420c9347031cc01628f698dcbed523a13d7a39a8695",
+      "bytes": 325
+    },
+    {
+      "path": "docs/evidence/xinyi-material-ue58-round1/receipts/candidate-build.json",
+      "sha256": "7476ac67b2e2a1cacb58a354b5e03875218c9477d8e518bb81ff8d88cfc7dcb1",
+      "bytes": 2822
+    },
+    {
+      "path": "docs/evidence/xinyi-material-ue58-round1/receipts/candidate.json",
+      "sha256": "07edf3a85682ab601b75f9fdb9f8453ec0df89f3a80dcd6850bd1b83c0fa2742",
+      "bytes": 2978
+    },
+    {
+      "path": "docs/evidence/xinyi-material-ue58-round1/receipts/contract-dependency-probe.json",
+      "sha256": "640828834960d918638f246cd50a1b5ca4c33874476b60c38ab3213b77b5a010",
+      "bytes": 8017
+    },
+    {
+      "path": "docs/evidence/xinyi-material-ue58-round1/receipts/host-before-candidate-capture.json",
+      "sha256": "14daede17247dbc0c9df2e7f6d6e6835b3b668f94759b1ec4b58a8adc6b5ebc9",
+      "bytes": 56788
+    },
+    {
+      "path": "docs/evidence/xinyi-material-ue58-round1/receipts/level.json",
+      "sha256": "95cb5e7d39bd4db01b031eb40f6ea62771c2a719ccf9618c08c205328085889f",
+      "bytes": 7940
+    },
+    {
+      "path": "docs/evidence/xinyi-material-ue58-round1/receipts/python-environment.json",
+      "sha256": "b58354e9d4198442e54c2819c1e41dfdeb4eb285b86bee7c58ff57c478496169",
+      "bytes": 468
+    },
+    {
+      "path": "docs/evidence/xinyi-material-ue58-round1/receipts/smoke.json",
+      "sha256": "0b1afd5f4bb8ed258d85f0875ec10c10a261adf21d1d3f607716741d616cd4db",
+      "bytes": 836
+    },
+    {
+      "path": "docs/evidence/xinyi-material-ue58-round1/receipts/source-immutability.json",
+      "sha256": "c9fb3717132f7e2de808b251162421b05b108cf8da237d8d7448d42b9c6fff44",
+      "bytes": 426
+    },
+    {
+      "path": "docs/evidence/xinyi-material-ue58-round1/receipts/staged-inputs.json",
+      "sha256": "e32584933a9fd8dd7c57b943df4ee9f6e57aec39c09f4037d8af426412429d4e",
+      "bytes": 68876
+    },
+    {
+      "path": "docs/evidence/xinyi-material-ue58-round1/receipts/texture-recovery.attempt1.json",
+      "sha256": "c44cd093202fb28faa45ec25bb4b35408e3fa8b5f0b9d129ea2dd6851db49b53",
+      "bytes": 600
+    },
+    {
+      "path": "docs/evidence/xinyi-material-ue58-round1/receipts/texture-recovery.json",
+      "sha256": "adcbd123a8913090c661f4712df09b9c03735829f95e92a5c46fd9e2620de9a9",
+      "bytes": 2800
+    },
+    {
+      "path": "docs/evidence/xinyi-material-ue58-round1/review/README.md",
+      "sha256": "635c25da8f648128163700a32dfbf6df2f445bd2f4a7c6a935343efcbaca41d3",
+      "bytes": 3700
+    },
+    {
+      "path": "docs/evidence/xinyi-material-ue58-round1/review/huaxia-ab.jpg",
+      "sha256": "f9f493584d4ee2ae6112bef49c10f7ecdc1d84c0331615a654b01878b975e584",
+      "bytes": 147228
+    },
+    {
+      "path": "docs/evidence/xinyi-material-ue58-round1/review/huaxia-detail-1to1.png",
+      "sha256": "db44f7a7860c5e1bc8302460840978941c1a886cc00b92ecc3c9744efcdd3e76",
+      "bytes": 381530
+    },
+    {
+      "path": "docs/evidence/xinyi-material-ue58-round1/review/manifest.json",
+      "sha256": "5c960d588e03b9a3585539f9f399b282243625fee9f1f3a06a84b593d86ff6ff",
+      "bytes": 11581
+    },
+    {
+      "path": "docs/evidence/xinyi-material-ue58-round1/review/walkup-ab.jpg",
+      "sha256": "4c05597831c0a3601f1286e65446a0668a9b7f280dd289ad919e8427b1600d9e",
+      "bytes": 189050
+    },
+    {
+      "path": "docs/evidence/xinyi-material-ue58-round1/review/walkup-detail-1to1.png",
+      "sha256": "9fff8b93003340394756bf122113d18d3dc1ed4b83697a726d72866aee13329d",
+      "bytes": 393876
+    },
+    {
+      "path": "docs/evidence/xinyi-material-ue58-round1/review/wuxing_roofs-ab.jpg",
+      "sha256": "4a12db90a133ca84e3f87bc2bd59f89819789fd94fe07e72cf18eaf94bcb22ef",
+      "bytes": 302063
+    },
+    {
+      "path": "docs/evidence/xinyi-material-ue58-round1/review/wuxing_roofs-detail-1to1.png",
+      "sha256": "b9c71037bdcac82d2b935629b7768c34f6bd0a456b6ec269c7a97264b78cbe84",
+      "bytes": 275617
+    },
+    {
+      "path": "docs/evidence/xinyi-material-ue58-round1/summary.json",
+      "sha256": "8e7eca132fafccbdfbdc72f01382c7477327729c005b96c727475f494de08652",
+      "bytes": 12708
+    },
+    {
+      "path": "docs/xinyi-material-ue58-round1-result.md",
+      "sha256": "3dcf7ed7624b2942a3fc660c3dc48169143273870ff90cf1bc5a7f4cb06f1f4f",
+      "bytes": 9842
+    },
+    {
+      "path": "tools/lookdev/material_round1_shots.json",
+      "sha256": "dc6f54eb3ab059725dc31f60ff16f192d7841ce2947455863cb64259e550b0ba",
+      "bytes": 2597
+    },
+    {
+      "path": "unreal/Content/Taipei/L_TaipeiGreybox.umap",
+      "sha256": "86db8ec7d1cd0850f4b4e6d7adb29177765a19c46927a275a484a533bd9040f7",
+      "bytes": 23902
+    },
+    {
+      "path": "unreal/Content/Taipei/L_TaipeiGreybox_Clean.umap",
+      "sha256": "d54614ab6a2c9a068e96a3f065c4a55d4b9e9ca4933a4892be288ea6381d03ae",
+      "bytes": 32398
+    },
+    {
+      "path": "unreal/Content/Taipei/XinyiGreybox/xinyi_tile_2km_greybox/Materials/ground_plane_mat.uasset",
+      "sha256": "0f56b3b438679189dfa78938bb90bbb836ddbd530e82890ebc870bb84c010cc2",
+      "bytes": 64922
+    },
+    {
+      "path": "unreal/Content/Taipei/XinyiGreybox/xinyi_tile_2km_greybox/Materials/hero_taipei101_placeholder_mat.uasset",
+      "sha256": "2472ac266b630579e666e4b577cd7701fe0b3dc028e17c61a0690f38eb101980",
+      "bytes": 65090
+    },
+    {
+      "path": "unreal/Content/Taipei/XinyiGreybox/xinyi_tile_2km_greybox/Materials/layerA_high_mat.uasset",
+      "sha256": "4c156dba361fb8168e2affbf27ecd938ed125111a3ed86c9c87af2ca5c8fb770",
+      "bytes": 64910
+    },
+    {
+      "path": "unreal/Content/Taipei/XinyiGreybox/xinyi_tile_2km_greybox/Materials/layerA_low_mat.uasset",
+      "sha256": "e62eceb6a4c77f4344bb0bfb2521685f4bc6cd9d9162f970ad8e4cec8f7cacd2",
+      "bytes": 68680
+    },
+    {
+      "path": "unreal/Content/Taipei/XinyiGreybox/xinyi_tile_2km_greybox/Materials/layerA_mid_mat.uasset",
+      "sha256": "ed201be75e28d374b109001615c6ea323ac69e20e4055ec6eca2cb3915093a3d",
+      "bytes": 64898
+    },
+    {
+      "path": "unreal/Content/Taipei/XinyiGreybox/xinyi_tile_2km_greybox/StaticMeshes/ground_plane.uasset",
+      "sha256": "db68cecf34ba23a321166e3a9c79445d3e6cda019503cdbfb3bae65a9ec4bb89",
+      "bytes": 80175
+    },
+    {
+      "path": "unreal/Content/Taipei/XinyiGreybox/xinyi_tile_2km_greybox/StaticMeshes/hero_taipei101_placeholder.uasset",
+      "sha256": "0df38f7ebb9e8189a02726fe8b8654e49c9a3ea4a887e9bdafdbba638cbadc5c",
+      "bytes": 81639
+    },
+    {
+      "path": "unreal/Content/Taipei/XinyiGreybox/xinyi_tile_2km_greybox/StaticMeshes/layerA_high.uasset",
+      "sha256": "691893216f18061160152213683bf8f0b6f3ca3887ecdd3272b2ec9a00647931",
+      "bytes": 133742
+    },
+    {
+      "path": "unreal/Content/Taipei/XinyiGreybox/xinyi_tile_2km_greybox/StaticMeshes/layerA_low.uasset",
+      "sha256": "8e280ac92e2a5d59f563ff5794bba4bc131e1d5d28b452f1f2085b6f9784aa61",
+      "bytes": 586688
+    },
+    {
+      "path": "unreal/Content/Taipei/XinyiGreybox/xinyi_tile_2km_greybox/StaticMeshes/layerA_mid.uasset",
+      "sha256": "2ab4484c489a3aac8d15ae9d8d497d11afffc6fae00ce3bd76644b9e962d35e0",
+      "bytes": 442566
+    },
+    {
+      "path": "unreal/Content/Taipei/xinyi_tile_2km/Materials/massing_grey.uasset",
+      "sha256": "df8e3cf12da4d2a3c65edfa8cfb59a2a6b30e0ba658021ffcc5dc630a361197a",
+      "bytes": 68482
+    },
+    {
+      "path": "unreal/Content/Taipei/xinyi_tile_2km/StaticMeshes/hero_taipei101_placeholder.uasset",
+      "sha256": "401615adf1beb62e2c2eaabe5782fa6c89971249d01eacbb8d0ce8fa254b34d2",
+      "bytes": 81553
+    },
+    {
+      "path": "unreal/Content/Taipei/xinyi_tile_2km/StaticMeshes/layerA_city_massing.uasset",
+      "sha256": "01d1ad6aec2d9eb5145fd8b0520a831ad46acafed8bbfe2826faeb0743511a42",
+      "bytes": 915355
+    },
+    {
+      "path": "unreal/Content/XinyiLook/L_XinyiLook_Hero.umap",
+      "sha256": "ad6b07b49f44372c35647c2056e25ca46aa1a53816026cf25fa3847994e7eb37",
+      "bytes": 10988494
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Materials/MPC_XinyiLook.uasset",
+      "sha256": "9feea12a49283ffed58b6f8b7476c78a08568a8fbaf849e658e8a058a91fcb46",
+      "bytes": 1958
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Materials/M_Taipei101.uasset",
+      "sha256": "a2358d072e8b75ebf1978ef0e7ee0fe790731c0a31c10f9c3c1e7f447b4d4533",
+      "bytes": 250090
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Materials/M_XinyiBackdrop.uasset",
+      "sha256": "716886a27f9e65ed23e959df4192efd0713aaac2f703c986de6c40887c7fac28",
+      "bytes": 247248
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Materials/M_XinyiCity.uasset",
+      "sha256": "fda52bee9abf71899b1f4d37fc9fd920e75490816ce9c9460eca6717818e2591",
+      "bytes": 249915
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Materials/M_XinyiFoliage.uasset",
+      "sha256": "390d18a79bb1a8954296153576e5790cd56321e12e8ecf58edf5c4bb618c5001",
+      "bytes": 245733
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Materials/M_XinyiGround.uasset",
+      "sha256": "bcdf5a3250eea8a2e77b41a66a11b50d98a1d65adcdebfdfd8ecc96d972f2f6d",
+      "bytes": 248736
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Materials/M_XinyiProps.uasset",
+      "sha256": "c145df4cdb3f42259b3f9e066182aa44b0ce2c7360325a3367243d7a68d79809",
+      "bytes": 245218
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Materials/M_XinyiRoadPaint.uasset",
+      "sha256": "f5fc88bbbd6163336dadfd2dfff7ed1a26330c53df444f656f8efe779c6bd115",
+      "bytes": 247984
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Materials/M_XinyiStreet.uasset",
+      "sha256": "eefae0f580842872b2408001874542c19065c02624a480acf4883b23aa8ed28f",
+      "bytes": 478850
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Materials/M_XinyiWallAds.uasset",
+      "sha256": "2076565a09318bc7f0716c3561cc154f9bc769877b624cbbd1f14c9fe48d5832",
+      "bytes": 23190
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Meshes/Backdrop/taipei_basin_backdrop/StaticMeshes/taipei_basin_backdrop.uasset",
+      "sha256": "cb03dbd8f8b57dab850b4d864dccac44095e9d72b40cb49302232e1b901df73e",
+      "bytes": 2921394
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Meshes/CampusPaint/xinyi_campus_paint/StaticMeshes/xinyi_campus_paint.uasset",
+      "sha256": "f7984a815387da2e2036abc67856faaffa2a028a68e08e340cacbb1dfdc8fb72",
+      "bytes": 114185
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Meshes/FarCity/cm01_m01/farcity_-01_-01/StaticMeshes/farcity_-01_-01.uasset",
+      "sha256": "a19bfc70f7545f086331a251f3572cf91b09d6cb9cd9e812566deb63261df361",
+      "bytes": 271013
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Meshes/FarCity/cm01_m02/farcity_-01_-02/StaticMeshes/farcity_-01_-02.uasset",
+      "sha256": "0810fc24b40cf18a0c998dd6d7d3ea1e6d94d3515beb4ab87fd052d7a286dd27",
+      "bytes": 268793
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Meshes/FarCity/cm01_m03/farcity_-01_-03/StaticMeshes/farcity_-01_-03.uasset",
+      "sha256": "34554caf3f6723460ffe242ed7e4fadb214fab3a9a691dea65bdf49f1d306154",
+      "bytes": 153582
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Meshes/FarCity/cm01_p00/farcity_-01_+00/StaticMeshes/farcity_-01_+00.uasset",
+      "sha256": "ff15e3170a35011c2c7082ec07e41f7646b8dfa264901daa4c9af77891674c3b",
+      "bytes": 468113
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Meshes/FarCity/cm01_p01/farcity_-01_+01/StaticMeshes/farcity_-01_+01.uasset",
+      "sha256": "cef7ded650245853cc651a197229297f54a1bf6e44cac5885b56042502924ed2",
+      "bytes": 220069
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Meshes/FarCity/cm01_p02/farcity_-01_+02/StaticMeshes/farcity_-01_+02.uasset",
+      "sha256": "0b55c4ce73433b4f2a0536f42de245f2c0c462772537ed939ef985144734024f",
+      "bytes": 222956
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Meshes/FarCity/cm01_p03/farcity_-01_+03/StaticMeshes/farcity_-01_+03.uasset",
+      "sha256": "52aa166a9c1578ac4e88caaa655d242f7c444196721b835d5c9ae6d37df9a5b9",
+      "bytes": 83240
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Meshes/FarCity/cm01_p04/farcity_-01_+04/StaticMeshes/farcity_-01_+04.uasset",
+      "sha256": "e3289774bfafb723609483567cb1f7bac87d7e3a643ddaf8c699170860607c75",
+      "bytes": 83214
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Meshes/FarCity/cm02_m01/farcity_-02_-01/StaticMeshes/farcity_-02_-01.uasset",
+      "sha256": "f16110a8b111d5d697361cf5c526bffee1a00be4f40455932b366390830df9d5",
+      "bytes": 371708
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Meshes/FarCity/cm02_m02/farcity_-02_-02/StaticMeshes/farcity_-02_-02.uasset",
+      "sha256": "c280d423d6f665aaf24765db38cf63d2dd7d53c7bd2b119e147f957758d12b58",
+      "bytes": 137133
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Meshes/FarCity/cm02_m03/farcity_-02_-03/StaticMeshes/farcity_-02_-03.uasset",
+      "sha256": "a9785efb920071dd6259081222d8fddcc2b11542ea07be38598160502eb0c025",
+      "bytes": 83258
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Meshes/FarCity/cm02_p00/farcity_-02_+00/StaticMeshes/farcity_-02_+00.uasset",
+      "sha256": "b2ce1205fdbb0504f51316593832cb90a3127a49d3ce9036e9dbf62316bc9467",
+      "bytes": 453149
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Meshes/FarCity/cm02_p01/farcity_-02_+01/StaticMeshes/farcity_-02_+01.uasset",
+      "sha256": "31c0679116d8d765e29c47f948eead79b0b0fb1cfa3f61653e7c5d526a91cbdc",
+      "bytes": 322052
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Meshes/FarCity/cm02_p02/farcity_-02_+02/StaticMeshes/farcity_-02_+02.uasset",
+      "sha256": "e453da20f88ea0e64c4edd04a83b3434057e9f8a3e18d1d87c12a824f6ce0e76",
+      "bytes": 188853
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Meshes/FarCity/cm02_p03/farcity_-02_+03/StaticMeshes/farcity_-02_+03.uasset",
+      "sha256": "f9c8ba66c86c9901e0f607bb15fd9aa3b37368524dd7129387bd606b85c4e41c",
+      "bytes": 298459
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Meshes/FarCity/cm02_p04/farcity_-02_+04/StaticMeshes/farcity_-02_+04.uasset",
+      "sha256": "6691754c899858d03c8a38d2b344730ac03cadbc4c504613abe6472c7dc92c8a",
+      "bytes": 108205
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Meshes/FarCity/cm03_m01/farcity_-03_-01/StaticMeshes/farcity_-03_-01.uasset",
+      "sha256": "90f1d3a26baa1d69b9f29d7e5d1590f016497e970d25d32a4f6266cc61c5a625",
+      "bytes": 198004
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Meshes/FarCity/cm03_p00/farcity_-03_+00/StaticMeshes/farcity_-03_+00.uasset",
+      "sha256": "ff0154a71fa631a46609f2ed2aba89331da73e4fe9b567f5bebb77519ebcf047",
+      "bytes": 317202
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Meshes/FarCity/cm03_p01/farcity_-03_+01/StaticMeshes/farcity_-03_+01.uasset",
+      "sha256": "41813571b0bd5b2c929090db082446894211f6915cc5433a4433c2904287a3f9",
+      "bytes": 162291
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Meshes/FarCity/cm03_p02/farcity_-03_+02/StaticMeshes/farcity_-03_+02.uasset",
+      "sha256": "7a85c044c17b2581a5f3445d10b5d8bc50fbd636ef25554caf59a9a47ea38561",
+      "bytes": 125593
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Meshes/FarCity/cm03_p03/farcity_-03_+03/StaticMeshes/farcity_-03_+03.uasset",
+      "sha256": "af1c9a7c5c43daa59fbc7901b417b7bdf8cdaacea013208bde4701335a3e224c",
+      "bytes": 133564
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Meshes/FarCity/cm03_p04/farcity_-03_+04/StaticMeshes/farcity_-03_+04.uasset",
+      "sha256": "0bb748eb9453fb13b760a74a9286ce70b8314990cee09bbaba22120f29537728",
+      "bytes": 86244
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Meshes/FarCity/cm04_m01/farcity_-04_-01/StaticMeshes/farcity_-04_-01.uasset",
+      "sha256": "55f1d0b05b45162fb96c5f08812b3356300accf86b11f3e7c20b08b3e0800d39",
+      "bytes": 82826
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Meshes/FarCity/cm04_p00/farcity_-04_+00/StaticMeshes/farcity_-04_+00.uasset",
+      "sha256": "df6acdbd948f740320fe1d9c3c40ad36123d63bf2775ee1840f33d87fbf5cb7c",
+      "bytes": 85535
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Meshes/FarCity/cm04_p03/farcity_-04_+03/StaticMeshes/farcity_-04_+03.uasset",
+      "sha256": "a33fef00e319ebb9a207fe5107a9e5e24e0d6d12355ea720d5c380a167dcb51a",
+      "bytes": 93706
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Meshes/FarCity/cm04_p04/farcity_-04_+04/StaticMeshes/farcity_-04_+04.uasset",
+      "sha256": "f215efdeb687e490bf144cca7e114e17e5fa46003564dd86acb9841eea6bd6f1",
+      "bytes": 91368
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Meshes/FarCity/cm05_p03/farcity_-05_+03/StaticMeshes/farcity_-05_+03.uasset",
+      "sha256": "7f97e81d90acedd1f3e1e582cb30beab28533f2910ab36a34672e67e618a079e",
+      "bytes": 86475
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Meshes/FarCity/cm05_p04/farcity_-05_+04/StaticMeshes/farcity_-05_+04.uasset",
+      "sha256": "ba3af1db935a54058f1e55cfbc2aa0490022f5f4c1af2cfb4e62e985301611df",
+      "bytes": 82080
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Meshes/FarCity/cp00_m01/farcity_+00_-01/StaticMeshes/farcity_+00_-01.uasset",
+      "sha256": "936f2e3bebf63d14323e167dfe4da212dc8e6bf5453d7fcef4f4b0fb9f9fe39c",
+      "bytes": 112322
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Meshes/FarCity/cp00_m02/farcity_+00_-02/StaticMeshes/farcity_+00_-02.uasset",
+      "sha256": "426bfe4b2b8c45655f2c300c5ea0030e4cae374cc8dbc3ff6c38464072fd38de",
+      "bytes": 174287
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Meshes/FarCity/cp00_m03/farcity_+00_-03/StaticMeshes/farcity_+00_-03.uasset",
+      "sha256": "7a59e3eadf79a473c481076b49125259bdd392cfc5cc3ac7234b45ae8f83cb38",
+      "bytes": 131313
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Meshes/FarCity/cp00_p00/farcity_+00_+00/StaticMeshes/farcity_+00_+00.uasset",
+      "sha256": "aada30584a2f193755aa51affb282949096cdd72966acabb85de12a94bc02dd8",
+      "bytes": 286139
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Meshes/FarCity/cp00_p01/farcity_+00_+01/StaticMeshes/farcity_+00_+01.uasset",
+      "sha256": "1ec01a0697b3fd1a93492c5afc796883be37cf9826a73b985f35d97bfb62185a",
+      "bytes": 245630
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Meshes/FarCity/cp00_p02/farcity_+00_+02/StaticMeshes/farcity_+00_+02.uasset",
+      "sha256": "0031743233a7bcbb110ae505d461354919fb9859d5500b53f6357e13370a1d51",
+      "bytes": 200112
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Meshes/FarCity/cp00_p03/farcity_+00_+03/StaticMeshes/farcity_+00_+03.uasset",
+      "sha256": "597cf2a0eca7db21c4279332b38a43caedafc0f87acc61e7140b548643904aee",
+      "bytes": 85032
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Meshes/FarCity/cp01_m01/farcity_+01_-01/StaticMeshes/farcity_+01_-01.uasset",
+      "sha256": "d214e1e667ec7dc88b258f778e2ec079bb70fa4adf194317bf8e38e9083bbbb8",
+      "bytes": 82529
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Meshes/FarCity/cp01_m02/farcity_+01_-02/StaticMeshes/farcity_+01_-02.uasset",
+      "sha256": "522609f65d10071e37b0be444bc972c834690e35c9c966970ee4bd2d5cbec6c2",
+      "bytes": 85127
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Meshes/FarCity/cp01_p00/farcity_+01_+00/StaticMeshes/farcity_+01_+00.uasset",
+      "sha256": "b9c2d84e97eacfc8cc5a1e6c54b767588bd24dd907addeb2f7696db89f084474",
+      "bytes": 155372
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Meshes/FarCity/cp01_p01/farcity_+01_+01/StaticMeshes/farcity_+01_+01.uasset",
+      "sha256": "fad16a649a8e16866fb1e680be1d3c46c4a27eecbc91ac4914e198bb04c59bab",
+      "bytes": 283956
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Meshes/FarCity/cp01_p02/farcity_+01_+02/StaticMeshes/farcity_+01_+02.uasset",
+      "sha256": "09466d8f094641d42245c03bbe2a580e2cab90eecc9f59b7bef0b5dcf26b65c1",
+      "bytes": 176198
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Meshes/FarCity/cp02_m01/farcity_+02_-01/StaticMeshes/farcity_+02_-01.uasset",
+      "sha256": "b3fc949aa5c5e32bcea8a9556ddc89e464d0892edfd8ee5689c9150a80bdbf0c",
+      "bytes": 83190
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Meshes/FarCity/cp02_p00/farcity_+02_+00/StaticMeshes/farcity_+02_+00.uasset",
+      "sha256": "8932e3b3baff3336a7f30a59c725d64dff29b63c915e1f6f8128faf4a08aa385",
+      "bytes": 111710
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Meshes/FarCity/cp02_p01/farcity_+02_+01/StaticMeshes/farcity_+02_+01.uasset",
+      "sha256": "9f2d78ba58be50d7b9b791f2c94e6969fd07a84f588294c69b897f8d5055b6df",
+      "bytes": 141747
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Meshes/Forest/xinyi_forest_clump/StaticMeshes/xinyi_forest_clump.uasset",
+      "sha256": "5c345c0a51d0317dbaa146fce38065535af85d383c412c795716fd148deace9e",
+      "bytes": 86456
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Meshes/Hero/taipei101/StaticMeshes/taipei101.uasset",
+      "sha256": "dab0c594f995dd4b4428efedf4d1a8aa525faa2abb808becedab820cc260e0bf",
+      "bytes": 127237
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Meshes/Lamp/xinyi_lamp/StaticMeshes/xinyi_lamp.uasset",
+      "sha256": "093d1cc36864a2fecb184177f299d532a51d541e1d9a8ee4a86e48fad3ab6bc0",
+      "bytes": 83305
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Meshes/Landmarks/landmark_roofs/StaticMeshes/landmark_roofs.uasset",
+      "sha256": "10715ffc6f72c24728f484025e93b5dfb649495aa35f7a6351e35d0347300fd4",
+      "bytes": 81137
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Meshes/RoadPaint/xinyi_road_paint/StaticMeshes/xinyi_road_paint.uasset",
+      "sha256": "27c59d39e72d7a91b38a42ebc5dfb197409277591d2171b59d9c0f83ef1ef28b",
+      "bytes": 2673473
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Meshes/Roof/ac/props_ac/StaticMeshes/props_ac.uasset",
+      "sha256": "001a1d88e537c934277cd067d96ad5c61e4031fe5bcf7194e8b89a47a4b20238",
+      "bytes": 80283
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Meshes/Roof/addition/props_addition/StaticMeshes/props_addition.uasset",
+      "sha256": "b70d44fff5769f5fa13b03e76a275bb827242de229fdc152bf2c792208b7dbf8",
+      "bytes": 81313
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Meshes/Roof/antenna/props_antenna/StaticMeshes/props_antenna.uasset",
+      "sha256": "87c73b826ab03c2941b23a320c82257c0f2bbc6e153a0283bf99a8b9d985cf80",
+      "bytes": 83959
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Meshes/Roof/avlight/props_avlight/StaticMeshes/props_avlight.uasset",
+      "sha256": "5c4a390e792385d887b2cef904c7b8c32fbb4699546af56aec220516de701d0d",
+      "bytes": 82848
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Meshes/Roof/barrel/props_barrel/StaticMeshes/props_barrel.uasset",
+      "sha256": "be5194306902a5b5a7da1f7f9206ff0d4881033fc4aaf945313f8d3526803c53",
+      "bytes": 84047
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Meshes/Roof/bmu/props_bmu/StaticMeshes/props_bmu.uasset",
+      "sha256": "568386493041d95c3c3f331561bce40e265d01a8aeeeb814cd608ecf756082cd",
+      "bytes": 83523
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Meshes/Roof/bulkhead/props_bulkhead/StaticMeshes/props_bulkhead.uasset",
+      "sha256": "dce276ebfa5d2960ce7f130bd3025d8d4545f1a64ee10af59e47a583476dffce",
+      "bytes": 83208
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Meshes/Roof/cooling/props_cooling/StaticMeshes/props_cooling.uasset",
+      "sha256": "379281f737ba002585a8b54674946d34a90fc0b03f1653c18c411bc5ae5bee79",
+      "bytes": 84792
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Meshes/Roof/leanto/props_leanto/StaticMeshes/props_leanto.uasset",
+      "sha256": "e45903c96550c8b212d1d68d9f5998c682983674024eee5f046105ec368cbd9d",
+      "bytes": 83414
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Meshes/Roof/machine/props_machine/StaticMeshes/props_machine.uasset",
+      "sha256": "bd4237c9d376b31d384a75e4ee248b653b71ba48c0bea828727b52ca36de1781",
+      "bytes": 82837
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Meshes/Roof/shed/props_shed/StaticMeshes/props_shed.uasset",
+      "sha256": "6159bfff4c6d321711730590cb7839ecfe972ed168710fc6ca15a968797c1415",
+      "bytes": 80732
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Meshes/Roof/solar/props_solar/StaticMeshes/props_solar.uasset",
+      "sha256": "51263fa5c487f9fac9c74236dc9322843e2097d5d4fd6779ee2b972bd116087e",
+      "bytes": 83384
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Meshes/Roof/tank/props_tank/StaticMeshes/props_tank.uasset",
+      "sha256": "b9be7915a66c3448b7d9d7c007bca79f581a9c443219590862ec4a872db8a262",
+      "bytes": 83748
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Meshes/Street/awning/street_awning/StaticMeshes/street_awning.uasset",
+      "sha256": "91e4e1d408d7922fb7ad3c2b05bdfd94e28317662ffecd9e7ae7c98e365d03fe",
+      "bytes": 80234
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Meshes/Street/scooter_a/street_scooter_a/StaticMeshes/street_scooter_a.uasset",
+      "sha256": "cdf492b5a804938bba0fc30beed00df199e3a954e024ca0e48af9384bd7de843",
+      "bytes": 81998
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Meshes/Street/scooter_b/street_scooter_b/StaticMeshes/street_scooter_b.uasset",
+      "sha256": "93965d48069f6e73e50f56d628db56af721abafb6d13d0818236a5322fb6f848",
+      "bytes": 82336
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Meshes/Street/scooter_c/street_scooter_c/StaticMeshes/street_scooter_c.uasset",
+      "sha256": "989695b507930cffdb0c86b7daf916c833d6bf33dbb0302d188324582098664a",
+      "bytes": 82473
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Meshes/Street/scooter_d/street_scooter_d/StaticMeshes/street_scooter_d.uasset",
+      "sha256": "4ebf74675f3938b9774d13d700f8bcd0cbb2664e729fa9c36b3e283cb6b4376a",
+      "bytes": 82036
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Meshes/Street/sign/street_sign/StaticMeshes/street_sign.uasset",
+      "sha256": "c94e2857ee171406d7d097fdafff0fb7cd8df685946bd5b44ac8074cc652c1ea",
+      "bytes": 81115
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Meshes/Tiles/m001_m001/xinyi_look_-001_-001/StaticMeshes/xinyi_look_-001_-001.uasset",
+      "sha256": "23bd5d67d6d0d2095b8f64b58ff5989344c79c14e7711cedefd1c679a2b0bf46",
+      "bytes": 831189
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Meshes/Tiles/m001_m002/xinyi_look_-001_-002/StaticMeshes/xinyi_look_-001_-002.uasset",
+      "sha256": "a3d2ddda52ae06d9018d3aac717c6bc527c85e4229962a59c7d06bfdf0ca8e66",
+      "bytes": 801434
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Meshes/Tiles/m001_p000/xinyi_look_-001_+000/StaticMeshes/xinyi_look_-001_+000.uasset",
+      "sha256": "a9e89e390128ceec6edfaef51d25d36f559633046f1188d8da44dfbebff1ca49",
+      "bytes": 405810
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Meshes/Tiles/m001_p001/xinyi_look_-001_+001/StaticMeshes/xinyi_look_-001_+001.uasset",
+      "sha256": "72b56f8d3361af97745abe77296ec7e0baf24372791c102cdc07a8f08d7450de",
+      "bytes": 401764
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Meshes/Tiles/m001_p002/xinyi_look_-001_+002/StaticMeshes/xinyi_look_-001_+002.uasset",
+      "sha256": "59ebf877aa925a693da8e2fa5aae6d857aa75206130dec63f8570e8a392a5af8",
+      "bytes": 199502
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Meshes/Tiles/m002_m001/xinyi_look_-002_-001/StaticMeshes/xinyi_look_-002_-001.uasset",
+      "sha256": "7ca5771d5ef876780a8474b562edf51fb02ff9b1f73b5f4e986731de1ec9b61d",
+      "bytes": 1055117
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Meshes/Tiles/m002_m002/xinyi_look_-002_-002/StaticMeshes/xinyi_look_-002_-002.uasset",
+      "sha256": "74b11a3f753464b3945ef584cf80b05e892c6613e1d3f8778b510dd5b4e7dd91",
+      "bytes": 604899
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Meshes/Tiles/m002_p000/xinyi_look_-002_+000/StaticMeshes/xinyi_look_-002_+000.uasset",
+      "sha256": "ec6c1845aa3466b91078ecd4229589a5d245a12bcf91608e0062e14458384901",
+      "bytes": 863966
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Meshes/Tiles/m002_p001/xinyi_look_-002_+001/StaticMeshes/xinyi_look_-002_+001.uasset",
+      "sha256": "cb0e2414c693101d2367ef19a2383b5906d92d61462a303b3f50550050ff4394",
+      "bytes": 478847
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Meshes/Tiles/m002_p002/xinyi_look_-002_+002/StaticMeshes/xinyi_look_-002_+002.uasset",
+      "sha256": "4cfcc129c81f12fc319ebdb07572d9b80cc40180de5590c1c738c383249056b3",
+      "bytes": 160384
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Meshes/Tiles/m003_m001/xinyi_look_-003_-001/StaticMeshes/xinyi_look_-003_-001.uasset",
+      "sha256": "343b23de1f7d6c2ad0a0674f222623b3924fda4d8ad441e3ee5fb52555128e45",
+      "bytes": 357455
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Meshes/Tiles/m003_m002/xinyi_look_-003_-002/StaticMeshes/xinyi_look_-003_-002.uasset",
+      "sha256": "c13b94f6aab2364d7ae1cadb48bb37863fc2cf5b49bb6ea0b8fc11abbf852b46",
+      "bytes": 291412
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Meshes/Tiles/m003_p000/xinyi_look_-003_+000/StaticMeshes/xinyi_look_-003_+000.uasset",
+      "sha256": "0eae0f1cf08e88ca04a0047be7879d116e0610bc9938e0e99789b8e99ac6dfc8",
+      "bytes": 276927
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Meshes/Tiles/m003_p001/xinyi_look_-003_+001/StaticMeshes/xinyi_look_-003_+001.uasset",
+      "sha256": "d989774aaeaea7ac8e9bacad8f82d3e3cb4ea3157e5734d09c819de6ce21c7da",
+      "bytes": 282030
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Meshes/Tiles/m003_p002/xinyi_look_-003_+002/StaticMeshes/xinyi_look_-003_+002.uasset",
+      "sha256": "993e80667ee7d1aad2a569ea6fc9a98d794821efa6fce0726470253699062dd8",
+      "bytes": 142416
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Meshes/Tiles/p000_m001/xinyi_look_+000_-001/StaticMeshes/xinyi_look_+000_-001.uasset",
+      "sha256": "78c5ac148da14c978b9501d1c619bb6bf521a59419d7109e2cfee77a53c12426",
+      "bytes": 456754
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Meshes/Tiles/p000_m002/xinyi_look_+000_-002/StaticMeshes/xinyi_look_+000_-002.uasset",
+      "sha256": "73d94191bb6919446f26add2beb6c4074c3dc46af121c271d48c97c90d1ade22",
+      "bytes": 785182
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Meshes/Tiles/p000_p000/xinyi_look_+000_+000/StaticMeshes/xinyi_look_+000_+000.uasset",
+      "sha256": "ddc54cb1641da9c8e53563cbdb4748e431407b91de5739f5bf4df29344a1359b",
+      "bytes": 341545
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Meshes/Tiles/p000_p001/xinyi_look_+000_+001/StaticMeshes/xinyi_look_+000_+001.uasset",
+      "sha256": "d13ef63374947a13e31b222d20f5b6b525352f01d14373dcc400ce6564339880",
+      "bytes": 466178
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Meshes/Tiles/p000_p002/xinyi_look_+000_+002/StaticMeshes/xinyi_look_+000_+002.uasset",
+      "sha256": "a0175d466cad3262d6138b9510e57dc8cf1e2ca3975b1c9a1dc37bfd40689d9f",
+      "bytes": 293041
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Meshes/Tiles/p001_m001/xinyi_look_+001_-001/StaticMeshes/xinyi_look_+001_-001.uasset",
+      "sha256": "0766b87fc9077c5c7ea04709aa4263d939487c0aa2ff0d3356ac9d388c061b6c",
+      "bytes": 141172
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Meshes/Tiles/p001_m002/xinyi_look_+001_-002/StaticMeshes/xinyi_look_+001_-002.uasset",
+      "sha256": "f6841ccba2b40a99805c8a044ef2bcda88c28bf8446125b6db2890132ed5fd05",
+      "bytes": 298334
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Meshes/Tiles/p001_p000/xinyi_look_+001_+000/StaticMeshes/xinyi_look_+001_+000.uasset",
+      "sha256": "fdc311fa3da95464f491f0f53ca8d995524a12adb42eafa95434018d567fe77b",
+      "bytes": 623551
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Meshes/Tiles/p001_p001/xinyi_look_+001_+001/StaticMeshes/xinyi_look_+001_+001.uasset",
+      "sha256": "35aeb5e4d177b76462979a5968734ef0007015a2422402ef1dca81a367d0e555",
+      "bytes": 637852
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Meshes/Tiles/p001_p002/xinyi_look_+001_+002/StaticMeshes/xinyi_look_+001_+002.uasset",
+      "sha256": "c721dd8e0ff7783912a416887d762c749f881f441c98e24b15d2f71284049eb8",
+      "bytes": 205131
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Meshes/Tree/xinyi_tree/StaticMeshes/xinyi_tree.uasset",
+      "sha256": "bd7ca6d9d6773f038925f32980a527eed509bdbb314d8fa08e98b09000ffe3c2",
+      "bytes": 83991
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Meshes/WallAds/wall_ad_plane/StaticMeshes/wall_ad_plane.uasset",
+      "sha256": "71af9bbd942b1741878de53a0ac9720dd51b614967a4c8d62cc136430350376e",
+      "bytes": 79488
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Textures/T_TaipeiFarCity.uasset",
+      "sha256": "46f31003c4baf6517ddc1590a43c324e9daa672cdf36b1739ebd589e000d3765",
+      "bytes": 254901
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Textures/T_XinyiCampus.uasset",
+      "sha256": "65fdcdba553457ee3e6d9deb59537dbefbb1829cab266144e915a73019ebff41",
+      "bytes": 247037
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Textures/T_XinyiGround.uasset",
+      "sha256": "b23202e7f318c3ef3cac1ce1ae84c73450a71667f2fd9b8eed5107b4804a262a",
+      "bytes": 1223141
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Textures/T_XinyiGroundLight.uasset",
+      "sha256": "00e98c97366fc84ff66bf0debfdaa58642062f395e2834927e28cd61d5fa9d7d",
+      "bytes": 333704
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Textures/T_XinyiShopAtlas.uasset",
+      "sha256": "7165847960cd41a7fefa7cdb063d74ba13f437bb0a03a7ffc7776b82a96f0e36",
+      "bytes": 1168406
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Textures/T_XinyiSignAtlas.uasset",
+      "sha256": "dd28df0dfb5a32cfd37521b859c269c4a9a0ab6858a1f92cda67df507366b7db",
+      "bytes": 1471914
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Textures/T_XinyiStorefrontPlan.uasset",
+      "sha256": "e05ff5c1f57604cb95f39812ba64cd21c17ee384225a39b94a34229145ce6a4f",
+      "bytes": 122320
+    },
+    {
+      "path": "unreal/Content/XinyiLook/Textures/T_XinyiWallAdAtlas.uasset",
+      "sha256": "d2adb0e7f4b456e24429cc4291e2b7e77c42ef89ac90ac653db805f0d323af96",
+      "bytes": 1265573
+    },
+    {
+      "path": "unreal/Content/XinyiMaterialAB/Materials/M_XinyiCity_Masks.uasset",
+      "sha256": "97a1dae4c43ab33e30818bf4e14a2996e0a8e3b38c00a2abd577cf6031332585",
+      "bytes": 494852
+    },
+    {
+      "path": "unreal/Content/XinyiMaterialAB/Textures/T_XinyiFacadeAge.uasset",
+      "sha256": "41870bc790999edb1f7256ae8b82c63153eac9055caf6345eb0df10567749805",
+      "bytes": 56776
+    },
+    {
+      "path": "unreal/Content/XinyiMaterialAB/Textures/T_XinyiRoofSurface.uasset",
+      "sha256": "780286dcebd1f44035f0bda059eef43c66f68115bd9f7d2e98fca957bf9d04cb",
+      "bytes": 55650
+    },
+    {
+      "path": "unreal/Content/XinyiV2/L_XinyiV2_Contract.ini",
+      "sha256": "416700332ebe73cb66006fd92a17b8e509375715cd7a97c3464ec55e7830c1d9",
+      "bytes": 760
+    },
+    {
+      "path": "unreal/Content/XinyiV2/L_XinyiV2_Contract.umap",
+      "sha256": "7592f40b655cba7dd48a5b3bd8443dfb0ef04bba6244c2620b944b46d387459f",
+      "bytes": 1987039
+    },
+    {
+      "path": "unreal/Content/XinyiV2/L_XinyiV2_Contract_HLODLayer_Instanced.uasset",
+      "sha256": "ccc239c107f2d697ed84cccb66256745580d7c4e4933ee9215c2865889c68f76",
+      "bytes": 1772
+    },
+    {
+      "path": "unreal/Content/XinyiV2/L_XinyiV2_Contract_HLODLayer_Merged.uasset",
+      "sha256": "476833cfd79c3e165d91f675f80f3372eafb7e1d1456fb13b6ef76ed0c393b88",
+      "bytes": 3078
+    },
+    {
+      "path": "unreal/Content/XinyiV2/L_XinyiV2_Contract_WP.umap",
+      "sha256": "d86c86eb7c7377e8256cf7f7f65d6cf82ef2f328a9cbfbe9814fcd238a8dd632",
+      "bytes": 13295
+    },
+    {
+      "path": "unreal/Content/XinyiV2/QA/M_XinyiV2_BuildingWhitebox.uasset",
+      "sha256": "001c780195bfd72d905897397e5165816b48ebee6c0a9b14e61527adb3bf850a",
+      "bytes": 9195
+    },
+    {
+      "path": "unreal/Content/XinyiV2/QA/M_XinyiV2_TerrainWhitebox.uasset",
+      "sha256": "d34453d99296408f7c601c4e6984d9420f32e46652881d99ef4483812a5fa4f6",
+      "bytes": 9412
+    },
+    {
+      "path": "unreal/Content/XinyiV2/RuntimeBuildings/m001_m001/xinyi_runtime_-001_-001/StaticMeshes/xinyi_runtime_-001_-001.uasset",
+      "sha256": "0ece86aba35992db1cddcbc8f305f273c81335b3444ff0fdec99df8accca47b2",
+      "bytes": 488460
+    },
+    {
+      "path": "unreal/Content/XinyiV2/RuntimeBuildings/m001_m002/xinyi_runtime_-001_-002/StaticMeshes/xinyi_runtime_-001_-002.uasset",
+      "sha256": "8e7f6c2260fdaf30b9899109e4dc5eac015742e4f06b94a27712cef6dd500326",
+      "bytes": 498939
+    },
+    {
+      "path": "unreal/Content/XinyiV2/RuntimeBuildings/m001_p000/xinyi_runtime_-001_+000/StaticMeshes/xinyi_runtime_-001_+000.uasset",
+      "sha256": "8dde3872ac160874079e1c88e1e7194c5c143d1c741083b20c1ba96732759f5f",
+      "bytes": 263502
+    },
+    {
+      "path": "unreal/Content/XinyiV2/RuntimeBuildings/m001_p001/xinyi_runtime_-001_+001/StaticMeshes/xinyi_runtime_-001_+001.uasset",
+      "sha256": "4effecf143f1b9ca79c28d6037110ec3275f25dab41c83e49cca05ceec3a1657",
+      "bytes": 247288
+    },
+    {
+      "path": "unreal/Content/XinyiV2/RuntimeBuildings/m001_p002/xinyi_runtime_-001_+002/StaticMeshes/xinyi_runtime_-001_+002.uasset",
+      "sha256": "1c63b866961e47545ace3cd4807647056430d2b6055f3163728cc8091c22cd2a",
+      "bytes": 140808
+    },
+    {
+      "path": "unreal/Content/XinyiV2/RuntimeBuildings/m002_m001/xinyi_runtime_-002_-001/StaticMeshes/xinyi_runtime_-002_-001.uasset",
+      "sha256": "168e0a2bfe79bb3a35d3580e80495cbf0f547908d1cf2b9ca5624882c4f8678b",
+      "bytes": 675012
+    },
+    {
+      "path": "unreal/Content/XinyiV2/RuntimeBuildings/m002_m002/xinyi_runtime_-002_-002/StaticMeshes/xinyi_runtime_-002_-002.uasset",
+      "sha256": "ebec9890e61b1a5f47838f8321529ad9d44b4f6fe6cfced0c8dfa25045d04267",
+      "bytes": 437627
+    },
+    {
+      "path": "unreal/Content/XinyiV2/RuntimeBuildings/m002_p000/xinyi_runtime_-002_+000/StaticMeshes/xinyi_runtime_-002_+000.uasset",
+      "sha256": "e7f97a572300abea16c10d125366f90970382b5ebc3c81b1b586079eb25ce97b",
+      "bytes": 599590
+    },
+    {
+      "path": "unreal/Content/XinyiV2/RuntimeBuildings/m002_p001/xinyi_runtime_-002_+001/StaticMeshes/xinyi_runtime_-002_+001.uasset",
+      "sha256": "11b63bad55dc61ea21245e1ed15e410aa3befbb8fcfb26832ca35eef2b65ba7b",
+      "bytes": 264055
+    },
+    {
+      "path": "unreal/Content/XinyiV2/RuntimeBuildings/m002_p002/xinyi_runtime_-002_+002/StaticMeshes/xinyi_runtime_-002_+002.uasset",
+      "sha256": "4d3e0238ccec8cdfc27144a4d1021c9a399d277aad8db95710f555ae75f42833",
+      "bytes": 136528
+    },
+    {
+      "path": "unreal/Content/XinyiV2/RuntimeBuildings/m003_m001/xinyi_runtime_-003_-001/StaticMeshes/xinyi_runtime_-003_-001.uasset",
+      "sha256": "3e3f28bf4af2d13384a76a8bc8e083a9c4525dc1b6d3d3d34339da96fbde7c3f",
+      "bytes": 338649
+    },
+    {
+      "path": "unreal/Content/XinyiV2/RuntimeBuildings/m003_m002/xinyi_runtime_-003_-002/StaticMeshes/xinyi_runtime_-003_-002.uasset",
+      "sha256": "c973ab9c3db152760dab687ed1075196e7791600cd3a2d5357429880f87fa708",
+      "bytes": 204508
+    },
+    {
+      "path": "unreal/Content/XinyiV2/RuntimeBuildings/m003_p000/xinyi_runtime_-003_+000/StaticMeshes/xinyi_runtime_-003_+000.uasset",
+      "sha256": "5217132457b6cf79382ee04c6811d3946a2ffa271f4d329cd26ba6f1a136ea4d",
+      "bytes": 224510
+    },
+    {
+      "path": "unreal/Content/XinyiV2/RuntimeBuildings/m003_p001/xinyi_runtime_-003_+001/StaticMeshes/xinyi_runtime_-003_+001.uasset",
+      "sha256": "350d125b2d176318d08b54975dee5b16177c31d237ba42e9be2f5f6ff36bc8b6",
+      "bytes": 216282
+    },
+    {
+      "path": "unreal/Content/XinyiV2/RuntimeBuildings/m003_p002/xinyi_runtime_-003_+002/StaticMeshes/xinyi_runtime_-003_+002.uasset",
+      "sha256": "8a53ffc34fd93b436b7246c185b302fe84b489474f887b7603a1aba994b4e1f9",
+      "bytes": 116861
+    },
+    {
+      "path": "unreal/Content/XinyiV2/RuntimeBuildings/p000_m001/xinyi_runtime_+000_-001/StaticMeshes/xinyi_runtime_+000_-001.uasset",
+      "sha256": "d56b93d2652cbcb8185811ef3573a2d91695ee3f83bd256f27baf3f63ece8323",
+      "bytes": 334648
+    },
+    {
+      "path": "unreal/Content/XinyiV2/RuntimeBuildings/p000_m002/xinyi_runtime_+000_-002/StaticMeshes/xinyi_runtime_+000_-002.uasset",
+      "sha256": "6ed23293871b1ff7ce61b9542301d07f4036d5dbf5c3341c02efdb8bb46994fe",
+      "bytes": 524121
+    },
+    {
+      "path": "unreal/Content/XinyiV2/RuntimeBuildings/p000_p000/xinyi_runtime_+000_+000/StaticMeshes/xinyi_runtime_+000_+000.uasset",
+      "sha256": "75348cb1520d7444076aac06b242a942362282807d0b5bb2c1d4bfbfde9f10f5",
+      "bytes": 229755
+    },
+    {
+      "path": "unreal/Content/XinyiV2/RuntimeBuildings/p000_p001/xinyi_runtime_+000_+001/StaticMeshes/xinyi_runtime_+000_+001.uasset",
+      "sha256": "9d7e1594b5f1fbf0a999d1e7733ee0ba1319045d2df48ff7355887daab1bdca2",
+      "bytes": 320306
+    },
+    {
+      "path": "unreal/Content/XinyiV2/RuntimeBuildings/p000_p002/xinyi_runtime_+000_+002/StaticMeshes/xinyi_runtime_+000_+002.uasset",
+      "sha256": "2845d955d2b9325f4a502b5616e0ef8a2e64134fe01a429b7d8ad920e93b6d53",
+      "bytes": 244068
+    },
+    {
+      "path": "unreal/Content/XinyiV2/RuntimeBuildings/p001_m001/xinyi_runtime_+001_-001/StaticMeshes/xinyi_runtime_+001_-001.uasset",
+      "sha256": "96da1b79b3f3946234ce8942f5401caa6d00cc5a9513bca16ea0565dd15ca395",
+      "bytes": 120104
+    },
+    {
+      "path": "unreal/Content/XinyiV2/RuntimeBuildings/p001_m002/xinyi_runtime_+001_-002/StaticMeshes/xinyi_runtime_+001_-002.uasset",
+      "sha256": "a5ba0dff97d02485d6321279865f8221438a1201bbba28445f33f87badc7271a",
+      "bytes": 239951
+    },
+    {
+      "path": "unreal/Content/XinyiV2/RuntimeBuildings/p001_p000/xinyi_runtime_+001_+000/StaticMeshes/xinyi_runtime_+001_+000.uasset",
+      "sha256": "9543ff7063c06c7ce720dbc72d540d96aa7dae5b9526ea3d674341e370b55ca1",
+      "bytes": 378495
+    },
+    {
+      "path": "unreal/Content/XinyiV2/RuntimeBuildings/p001_p001/xinyi_runtime_+001_+001/StaticMeshes/xinyi_runtime_+001_+001.uasset",
+      "sha256": "d04f1563d61c518dd45fcd5bc394d32a9fc9407bf8c62d3b596b466ae4355c61",
+      "bytes": 478380
+    },
+    {
+      "path": "unreal/Content/XinyiV2/RuntimeBuildings/p001_p002/xinyi_runtime_+001_+002/StaticMeshes/xinyi_runtime_+001_+002.uasset",
+      "sha256": "aa90b5fb620cc477f6c5428456d11aad9fc75cdf1e2bcce6b1f5c519de28887a",
+      "bytes": 168478
+    },
+    {
+      "path": "unreal/Content/__ExternalActors__/XinyiV2/L_XinyiV2_Contract_WP/1/QX/AAO905R7ABF43SHPNX1YS0.uasset",
+      "sha256": "a6d5f706e68a0ad2977ddc6a30ed6e0815300b99d629f3941ceff2ae6b3555c1",
+      "bytes": 3947
+    },
+    {
+      "path": "unreal/Content/__ExternalActors__/XinyiV2/L_XinyiV2_Contract_WP/1/R9/9VUXFWIV4Q31SKXXKLSW7H.uasset",
+      "sha256": "3b53e00d58585e4d13872c496e9d82c4407193d9bb361a5e0d68aafa15274079",
+      "bytes": 4768
+    },
+    {
+      "path": "unreal/Content/__ExternalActors__/XinyiV2/L_XinyiV2_Contract_WP/1/X3/RFQ977QGE9AYK9JYFFSZDR.uasset",
+      "sha256": "8e225b5df76777a19389ee04785f2743212487f671755b5154ce30debfdc4a89",
+      "bytes": 3947
+    },
+    {
+      "path": "unreal/Content/__ExternalActors__/XinyiV2/L_XinyiV2_Contract_WP/1/YX/NBGK23HDY18VOZ953VSYHG.uasset",
+      "sha256": "2bdadf76b26129d82d825d99d13595da1307c25bb0b022b910fc59bc486e811b",
+      "bytes": 3947
+    },
+    {
+      "path": "unreal/Content/__ExternalActors__/XinyiV2/L_XinyiV2_Contract_WP/2/6S/655T55YL0AYKGYJ02GRI8G.uasset",
+      "sha256": "c7cc5c66a18574b3fac044e8697b7c7f2d30be794af7c331ad04562a31ad4f42",
+      "bytes": 3946
+    },
+    {
+      "path": "unreal/Content/__ExternalActors__/XinyiV2/L_XinyiV2_Contract_WP/2/73/BAQEXC3KIKHUF0YRFDB7IS.uasset",
+      "sha256": "ea607e83411ec75a12deb97ec18daa0d2ea3397fe316699e628b83fd85031967",
+      "bytes": 3947
+    },
+    {
+      "path": "unreal/Content/__ExternalActors__/XinyiV2/L_XinyiV2_Contract_WP/2/M6/CU4OFB6NECFR3L2F55ZVKR.uasset",
+      "sha256": "0af8944cc3ac5a4ef44a81329309f54095572414ded758eb8eb60f2ed2d036a0",
+      "bytes": 3946
+    },
+    {
+      "path": "unreal/Content/__ExternalActors__/XinyiV2/L_XinyiV2_Contract_WP/2/MT/8Y886FDP3LQLHILWGPC59H.uasset",
+      "sha256": "4820e7689f153737678db617dcf5d0c129915264f60696fec94b513392856f5a",
+      "bytes": 3946
+    },
+    {
+      "path": "unreal/Content/__ExternalActors__/XinyiV2/L_XinyiV2_Contract_WP/2/VQ/M3YJDVA74O5NS9YRTQ6QVR.uasset",
+      "sha256": "79d09a3e378abe046a04d8ac8a65803fe0447f3d1903bead5848887423ff63a2",
+      "bytes": 2264
+    },
+    {
+      "path": "unreal/Content/__ExternalActors__/XinyiV2/L_XinyiV2_Contract_WP/3/3B/AFDPMTI8M7D0ZZ65YR8DHO.uasset",
+      "sha256": "b85e071600add301daccc99941928bc83ff04c163b0f36b23869b715b654fd9c",
+      "bytes": 879605
+    },
+    {
+      "path": "unreal/Content/__ExternalActors__/XinyiV2/L_XinyiV2_Contract_WP/3/6J/0ERPVK1PY909SAWHVZBYOD.uasset",
+      "sha256": "70140e3766551db2d97b78c6f0a612df86725ee561730168c4f87e2635414f47",
+      "bytes": 3947
+    },
+    {
+      "path": "unreal/Content/__ExternalActors__/XinyiV2/L_XinyiV2_Contract_WP/3/Q9/BL2U1ESJRI42XLGK2S9XE1.uasset",
+      "sha256": "cc30d8923d8024e83049e04ef45e2e32a91e1e255f6b98e724647e440ff22275",
+      "bytes": 3946
+    },
+    {
+      "path": "unreal/Content/__ExternalActors__/XinyiV2/L_XinyiV2_Contract_WP/3/RA/UFAUUW2G91XOC4LSCNZODD.uasset",
+      "sha256": "638a59009fd3befcfbe652786c568bcb1184e292392844c70c75258d085f7023",
+      "bytes": 3946
+    },
+    {
+      "path": "unreal/Content/__ExternalActors__/XinyiV2/L_XinyiV2_Contract_WP/4/MS/YTNLO7X17PDZC5E91AH73B.uasset",
+      "sha256": "3e372fa97909ab84c4246a22aca4f02b046757771626ccd5bad84b74a44d4c90",
+      "bytes": 3947
+    },
+    {
+      "path": "unreal/Content/__ExternalActors__/XinyiV2/L_XinyiV2_Contract_WP/4/UL/HU6ACAC93UEWVKGF5I1TA1.uasset",
+      "sha256": "ec748cccec514b1d01ac449127e5935c6e62faebc613e2d2218a8e38c9f6d39f",
+      "bytes": 235942
+    },
+    {
+      "path": "unreal/Content/__ExternalActors__/XinyiV2/L_XinyiV2_Contract_WP/6/6C/95B0Y6HOIWJJPCCD7XG6ID.uasset",
+      "sha256": "dc59adcc09a275bcb13448af316db50c8f59baec60fc46c2964bc784b78d0d6a",
+      "bytes": 81144
+    },
+    {
+      "path": "unreal/Content/__ExternalActors__/XinyiV2/L_XinyiV2_Contract_WP/6/G0/K53XLUOGIW6DCD4PDTN1ZR.uasset",
+      "sha256": "5f7f0f8f18b5247eb717857d4af260ae264b0334bf56e5c6cce7d3a582f0577a",
+      "bytes": 241981
+    },
+    {
+      "path": "unreal/Content/__ExternalActors__/XinyiV2/L_XinyiV2_Contract_WP/6/JJ/TW5B7D2A7DGSD08MBNKIS2.uasset",
+      "sha256": "a130432780d659ddb677d5343a25c9ac61123f4550de1b8bb0698fab25fc8157",
+      "bytes": 3947
+    },
+    {
+      "path": "unreal/Content/__ExternalActors__/XinyiV2/L_XinyiV2_Contract_WP/7/QR/EFWCYQI5XWLTR7NKVR3DVT.uasset",
+      "sha256": "5824a628ec9949fb4ad44f051d76e40f3d86ad1779c5b36c882f77415d351ae9",
+      "bytes": 3947
+    },
+    {
+      "path": "unreal/Content/__ExternalActors__/XinyiV2/L_XinyiV2_Contract_WP/7/WJ/KD7TM52K3EYLKJK1FU1K31.uasset",
+      "sha256": "a9273eb87e9e0c12f97c46a70a32790c8cd65903d6ff08cc3b69bd286d9e3fbd",
+      "bytes": 3947
+    },
+    {
+      "path": "unreal/Content/__ExternalActors__/XinyiV2/L_XinyiV2_Contract_WP/8/3N/FHVCOJ254WTSVYN4WWFQ3K.uasset",
+      "sha256": "80581af4e15fc54bdbc74d585c382a136973b14a4a7446c3d9a2e49e6e87dea6",
+      "bytes": 2286
+    },
+    {
+      "path": "unreal/Content/__ExternalActors__/XinyiV2/L_XinyiV2_Contract_WP/8/74/57G4V04ZCGROKN1IH4ALGQ.uasset",
+      "sha256": "73ff1df067a5e3c1bb5f702d8641dc30aeac712c09ecf3ad653a0b4c76701cac",
+      "bytes": 3947
+    },
+    {
+      "path": "unreal/Content/__ExternalActors__/XinyiV2/L_XinyiV2_Contract_WP/9/GY/CDVDVLJFYDHFW167T2B5NS.uasset",
+      "sha256": "c1f025ed80ccd802defb2d19f78d9e0201c5040ed769caebe7afc358e6c3eec3",
+      "bytes": 3946
+    },
+    {
+      "path": "unreal/Content/__ExternalActors__/XinyiV2/L_XinyiV2_Contract_WP/A/IH/UHJ09FD4DR162CZMZTRRGC.uasset",
+      "sha256": "e2f66ccaf52318fcdec48d1d42a1dcfa56fb2e342adea2b3dc7d17fa3177e978",
+      "bytes": 3947
+    },
+    {
+      "path": "unreal/Content/__ExternalActors__/XinyiV2/L_XinyiV2_Contract_WP/C/D5/A5MHNQ9VWPDQOU8VZJ16SR.uasset",
+      "sha256": "6025bf170cfe4a7ef78227c31e89c4777f127761a4e2a875de34a283e29630d3",
+      "bytes": 3946
+    },
+    {
+      "path": "unreal/Content/__ExternalActors__/XinyiV2/L_XinyiV2_Contract_WP/C/OC/T6843XQBXXMQPY6P68AONO.uasset",
+      "sha256": "ebab0b7957f5be63cbc6556bcb59deae86ec29b6358347adf317769347e18f93",
+      "bytes": 3947
+    },
+    {
+      "path": "unreal/Content/__ExternalActors__/XinyiV2/L_XinyiV2_Contract_WP/C/UU/AL4S3JNYZU4LNFQQVFR00M.uasset",
+      "sha256": "37728ab38b17af8ab5896a046d52728396d16beaedd6a6f7e52012b94725de2e",
+      "bytes": 3947
+    },
+    {
+      "path": "unreal/Content/__ExternalActors__/XinyiV2/L_XinyiV2_Contract_WP/D/UJ/5CUJ5SZMCHSFLA42DHQYT3.uasset",
+      "sha256": "ac61a16bb7805c81e4968ab81edf3c4734bbc4691585215c87599614f5468b5b",
+      "bytes": 3946
+    },
+    {
+      "path": "unreal/Content/__ExternalActors__/XinyiV2/L_XinyiV2_Contract_WP/E/1K/7VRCB54LQNP38PQ8AVE56P.uasset",
+      "sha256": "2091d9ece34ac7fef3fe9556dd51f80c7e1b774ad944cb834ac1d4c14ef66440",
+      "bytes": 3947
+    },
+    {
+      "path": "unreal/Content/__ExternalActors__/XinyiV2/L_XinyiV2_Contract_WP/E/CL/FQBOBU5BTJBQS4H67XS73C.uasset",
+      "sha256": "eb90502573bbc2a2feecb695eab13f3e16d13dee72091b573c849a285281630e",
+      "bytes": 3947
+    },
+    {
+      "path": "unreal/Content/__ExternalActors__/XinyiV2/L_XinyiV2_Contract_WP/E/FR/N95AMXT2XH2E4XFCRTAQOX.uasset",
+      "sha256": "912269797507ffbd6b0250963ffa8594b428d4ce71b92778ebd826d71ad87345",
+      "bytes": 3946
+    },
+    {
+      "path": "unreal/Content/__ExternalActors__/XinyiV2/L_XinyiV2_Contract_WP/E/P3/LCAB4OO7CGS2TAEI2RMOGT.uasset",
+      "sha256": "2f249033b08f8d82b4dcac75908e6efd0202d9429a4a5f25ac9caae07dec3067",
+      "bytes": 3946
+    }
+  ]
+}

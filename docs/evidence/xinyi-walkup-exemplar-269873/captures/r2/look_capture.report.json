@@ -1,0 +1,73 @@
+{
+  "status": "PASS_LOOK_CAPTURE",
+  "reopen": {
+    "look_tiles": 25,
+    "hero": true,
+    "backdrop": true,
+    "paint": true,
+    "trees": 16082,
+    "landscape_material": "/Game/XinyiLook/Materials/M_XinyiGround.M_XinyiGround"
+  },
+  "reopen_ok": true,
+  "backend": "SceneCapture2D -> RTF_RGBA8 -> SCS_FINAL_COLOR_LDR -> export_render_target",
+  "tods": [
+    "day"
+  ],
+  "shots": [
+    "distance_050m",
+    "distance_150m",
+    "distance_300m"
+  ],
+  "captures": [
+    {
+      "name": "distance_050m__day",
+      "path": "C:\\Users\\EDDY\\Desktop\\M1A2\\xinyi-material-ue58-round1\\unreal\\Saved\\XinyiExemplar\\Walkup269873\\captures\\r2\\distance_050m__day.png",
+      "bytes": 3090912
+    },
+    {
+      "name": "distance_150m__day",
+      "path": "C:\\Users\\EDDY\\Desktop\\M1A2\\xinyi-material-ue58-round1\\unreal\\Saved\\XinyiExemplar\\Walkup269873\\captures\\r2\\distance_150m__day.png",
+      "bytes": 4252804
+    },
+    {
+      "name": "distance_300m__day",
+      "path": "C:\\Users\\EDDY\\Desktop\\M1A2\\xinyi-material-ue58-round1\\unreal\\Saved\\XinyiExemplar\\Walkup269873\\captures\\r2\\distance_300m__day.png",
+      "bytes": 4252804
+    }
+  ],
+  "clouds": {
+    "quality": "absent"
+  },
+  "perf": {
+    "method": "SceneCapture2D 1920x1080 FINAL_COLOR_LDR, capture_scene + 1px readback per sample (GPU-synchronised wall time; includes a fixed readback / submit overhead)",
+    "gpu": null,
+    "clouds": "off",
+    "tod": "day",
+    "shots": {
+      "distance_050m": {
+        "n": 40,
+        "median_ms": 61.07,
+        "p10_ms": 59.52,
+        "p90_ms": 64.33,
+        "min_ms": 58.31
+      },
+      "distance_150m": {
+        "n": 40,
+        "median_ms": 61.25,
+        "p10_ms": 59.81,
+        "p90_ms": 64.86,
+        "min_ms": 58.46
+      },
+      "distance_300m": {
+        "n": 40,
+        "median_ms": 64.68,
+        "p10_ms": 63.05,
+        "p90_ms": 68.71,
+        "min_ms": 62.35
+      }
+    }
+  },
+  "error": null,
+  "level_saved": false,
+  "elapsed_seconds": 18.75
+}

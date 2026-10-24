@@ -1,0 +1,650 @@
+{
+  "status": "PASS_EXEMPLAR_CAPTURE_COLLECTION",
+  "variants": {
+    "before": {
+      "performance": {
+        "method": "SceneCapture2D 1920x1080 FINAL_COLOR_LDR, capture_scene + 1px readback per sample (GPU-synchronised wall time; includes a fixed readback / submit overhead)",
+        "gpu": null,
+        "clouds": "off",
+        "tod": "day",
+        "shots": {
+          "distance_050m": {
+            "n": 40,
+            "median_ms": 62.8,
+            "p10_ms": 60.35,
+            "p90_ms": 67.33,
+            "min_ms": 59.03
+          },
+          "distance_150m": {
+            "n": 40,
+            "median_ms": 61.85,
+            "p10_ms": 59.91,
+            "p90_ms": 64.94,
+            "min_ms": 58.84
+          },
+          "distance_300m": {
+            "n": 40,
+            "median_ms": 65.05,
+            "p10_ms": 63.24,
+            "p90_ms": 68.35,
+            "min_ms": 62.68
+          }
+        }
+      },
+      "metadata": {
+        "variant": "before",
+        "building_id": "tp_building_height.269873",
+        "shots": {
+          "distance_050m": {
+            "eye": [
+              -390.9651276783819,
+              -334.56731597007683,
+              48.01782162681744
+            ],
+            "target": [
+              -362.105,
+              -305.505,
+              19.338999809265136
+            ],
+            "fov": 50,
+            "distance_m": 50
+          },
+          "distance_150m": {
+            "eye": [
+              -448.68538303514566,
+              -392.69194791023045,
+              105.37546526192205
+            ],
+            "target": [
+              -362.105,
+              -305.505,
+              19.338999809265136
+            ],
+            "fov": 50,
+            "distance_m": 150
+          },
+          "distance_300m": {
+            "eye": [
+              -535.2657660702913,
+              -479.8788958204609,
+              191.41193071457897
+            ],
+            "target": [
+              -362.105,
+              -305.505,
+              19.338999809265136
+            ],
+            "fov": 50,
+            "distance_m": 300
+          }
+        },
+        "resolution": [
+          1920,
+          1080
+        ],
+        "lighting": "day",
+        "clouds": "off",
+        "observed_settings": {
+          "sg.ViewDistanceQuality": 2,
+          "sg.AntiAliasingQuality": 2,
+          "sg.ShadowQuality": 2,
+          "sg.GlobalIlluminationQuality": 2,
+          "sg.ReflectionQuality": 2,
+          "sg.PostProcessQuality": 2,
+          "sg.TextureQuality": 2,
+          "sg.EffectsQuality": 2,
+          "sg.FoliageQuality": 2,
+          "sg.ShadingQuality": 2,
+          "r.ScreenPercentage": 100,
+          "r.MotionBlurQuality": 0,
+          "r.RayTracing": 0
+        },
+        "level_sha256": "ad6b07b49f44372c35647c2056e25ca46aa1a53816026cf25fa3847994e7eb37",
+        "base_material_sha256": "fda52bee9abf71899b1f4d37fc9fd920e75490816ce9c9460eca6717818e2591",
+        "overlay_actors_added": 0,
+        "overlay_placement_ue_cm": null,
+        "level_saved": false,
+        "draw_call_limit": "One extra mesh section: +1 draw per visible raster pass; shadow/depth passes additional. Scene-wide RHI draw calls not measured.",
+        "gpu_limit": "GPU-synchronised SceneCapture wall time includes CPU submit/readback, not pure GPU or mobile FPS"
+      },
+      "raw_PNGs": [
+        {
+          "name": "distance_050m__day.png",
+          "sha256": "bc8d8fb75c57f9fb7cc7a228bdb7a52a243eacdc27ac0e1da85d86dcca9e2842",
+          "bytes": 3090912
+        },
+        {
+          "name": "distance_150m__day.png",
+          "sha256": "60b4969a460ff75d68adcfa5b0b08551f1795f65246d95ca1401241003dc512c",
+          "bytes": 4252804
+        },
+        {
+          "name": "distance_300m__day.png",
+          "sha256": "1793cbe8334981251da61162898ca3c5ae79692a12bfb2c4e679f1f5c84e358d",
+          "bytes": 4252804
+        }
+      ]
+    },
+    "r1": {
+      "performance": {
+        "method": "SceneCapture2D 1920x1080 FINAL_COLOR_LDR, capture_scene + 1px readback per sample (GPU-synchronised wall time; includes a fixed readback / submit overhead)",
+        "gpu": null,
+        "clouds": "off",
+        "tod": "day",
+        "shots": {
+          "distance_050m": {
+            "n": 40,
+            "median_ms": 60.77,
+            "p10_ms": 59.27,
+            "p90_ms": 64.22,
+            "min_ms": 57.91
+          },
+          "distance_150m": {
+            "n": 40,
+            "median_ms": 61.89,
+            "p10_ms": 59.9,
+            "p90_ms": 64.75,
+            "min_ms": 59.19
+          },
+          "distance_300m": {
+            "n": 40,
+            "median_ms": 65.02,
+            "p10_ms": 63.45,
+            "p90_ms": 69.01,
+            "min_ms": 62.39
+          }
+        }
+      },
+      "metadata": {
+        "variant": "r1",
+        "building_id": "tp_building_height.269873",
+        "shots": {
+          "distance_050m": {
+            "eye": [
+              -390.9651276783819,
+              -334.56731597007683,
+              48.01782162681744
+            ],
+            "target": [
+              -362.105,
+              -305.505,
+              19.338999809265136
+            ],
+            "fov": 50,
+            "distance_m": 50
+          },
+          "distance_150m": {
+            "eye": [
+              -448.68538303514566,
+              -392.69194791023045,
+              105.37546526192205
+            ],
+            "target": [
+              -362.105,
+              -305.505,
+              19.338999809265136
+            ],
+            "fov": 50,
+            "distance_m": 150
+          },
+          "distance_300m": {
+            "eye": [
+              -535.2657660702913,
+              -479.8788958204609,
+              191.41193071457897
+            ],
+            "target": [
+              -362.105,
+              -305.505,
+              19.338999809265136
+            ],
+            "fov": 50,
+            "distance_m": 300
+          }
+        },
+        "resolution": [
+          1920,
+          1080
+        ],
+        "lighting": "day",
+        "clouds": "off",
+        "observed_settings": {
+          "sg.ViewDistanceQuality": 2,
+          "sg.AntiAliasingQuality": 2,
+          "sg.ShadowQuality": 2,
+          "sg.GlobalIlluminationQuality": 2,
+          "sg.ReflectionQuality": 2,
+          "sg.PostProcessQuality": 2,
+          "sg.TextureQuality": 2,
+          "sg.EffectsQuality": 2,
+          "sg.FoliageQuality": 2,
+          "sg.ShadingQuality": 2,
+          "r.ScreenPercentage": 100,
+          "r.MotionBlurQuality": 0,
+          "r.RayTracing": 0
+        },
+        "level_sha256": "ad6b07b49f44372c35647c2056e25ca46aa1a53816026cf25fa3847994e7eb37",
+        "base_material_sha256": "fda52bee9abf71899b1f4d37fc9fd920e75490816ce9c9460eca6717818e2591",
+        "overlay_actors_added": 1,
+        "overlay_placement_ue_cm": [
+          -35460.26614165306,
+          30370.67567539215,
+          944.999979019165
+        ],
+        "level_saved": false,
+        "draw_call_limit": "One extra mesh section: +1 draw per visible raster pass; shadow/depth passes additional. Scene-wide RHI draw calls not measured.",
+        "gpu_limit": "GPU-synchronised SceneCapture wall time includes CPU submit/readback, not pure GPU or mobile FPS"
+      },
+      "raw_PNGs": [
+        {
+          "name": "distance_050m__day.png",
+          "sha256": "057b107931219873a7bc5b02c987c606c751a60953c34a74e63159f8f4f34848",
+          "bytes": 3090912
+        },
+        {
+          "name": "distance_150m__day.png",
+          "sha256": "160617cf41058e8c1834317bec141ed27d2b8a47b4f86f0cb3b2b676fdbf9bfe",
+          "bytes": 4252804
+        },
+        {
+          "name": "distance_300m__day.png",
+          "sha256": "c71fc086865eaa9d51b4487c6843892d8e8cff8046e03af38a4c9d4561feac76",
+          "bytes": 4252804
+        }
+      ],
+      "mesh_import": {
+        "status": "PASS_EXEMPLAR_IMPORT",
+        "revision": "r1",
+        "level_saved": false,
+        "scope": "/Game/XinyiExemplar/Walkup269873",
+        "mesh": "/Game/XinyiExemplar/Walkup269873/r1/Mesh/walkup_kit_r1/StaticMeshes/walkup_kit_r1",
+        "material": "/Game/XinyiExemplar/Walkup269873/M_WalkupKit",
+        "triangles": 3744,
+        "sections": 1,
+        "actual_bounds_origin_cm": [
+          -611.9060173034668,
+          387.6211242675781,
+          1161.8312377929688
+        ],
+        "actual_bounds_extent_cm": [
+          704.7807502746582,
+          889.2355651855469,
+          376.39373779296875
+        ],
+        "nanite": false,
+        "material_statistics": {
+          "num_pixel_shader_instructions": 267,
+          "num_vertex_shader_instructions": 144,
+          "num_samplers": 3,
+          "num_pixel_texture_samples": 0
+        },
+        "asset_paths": [
+          "/Game/XinyiExemplar/Walkup269873/M_WalkupKit.M_WalkupKit",
+          "/Game/XinyiExemplar/Walkup269873/r1/Mesh/walkup_kit_r1/Materials/WalkupKit.WalkupKit",
+          "/Game/XinyiExemplar/Walkup269873/r1/Mesh/walkup_kit_r1/StaticMeshes/walkup_kit_r1.walkup_kit_r1"
+        ]
+      }
+    },
+    "r2": {
+      "performance": {
+        "method": "SceneCapture2D 1920x1080 FINAL_COLOR_LDR, capture_scene + 1px readback per sample (GPU-synchronised wall time; includes a fixed readback / submit overhead)",
+        "gpu": null,
+        "clouds": "off",
+        "tod": "day",
+        "shots": {
+          "distance_050m": {
+            "n": 40,
+            "median_ms": 61.07,
+            "p10_ms": 59.52,
+            "p90_ms": 64.33,
+            "min_ms": 58.31
+          },
+          "distance_150m": {
+            "n": 40,
+            "median_ms": 61.25,
+            "p10_ms": 59.81,
+            "p90_ms": 64.86,
+            "min_ms": 58.46
+          },
+          "distance_300m": {
+            "n": 40,
+            "median_ms": 64.68,
+            "p10_ms": 63.05,
+            "p90_ms": 68.71,
+            "min_ms": 62.35
+          }
+        }
+      },
+      "metadata": {
+        "variant": "r2",
+        "building_id": "tp_building_height.269873",
+        "shots": {
+          "distance_050m": {
+            "eye": [
+              -390.9651276783819,
+              -334.56731597007683,
+              48.01782162681744
+            ],
+            "target": [
+              -362.105,
+              -305.505,
+              19.338999809265136
+            ],
+            "fov": 50,
+            "distance_m": 50
+          },
+          "distance_150m": {
+            "eye": [
+              -448.68538303514566,
+              -392.69194791023045,
+              105.37546526192205
+            ],
+            "target": [
+              -362.105,
+              -305.505,
+              19.338999809265136
+            ],
+            "fov": 50,
+            "distance_m": 150
+          },
+          "distance_300m": {
+            "eye": [
+              -535.2657660702913,
+              -479.8788958204609,
+              191.41193071457897
+            ],
+            "target": [
+              -362.105,
+              -305.505,
+              19.338999809265136
+            ],
+            "fov": 50,
+            "distance_m": 300
+          }
+        },
+        "resolution": [
+          1920,
+          1080
+        ],
+        "lighting": "day",
+        "clouds": "off",
+        "observed_settings": {
+          "sg.ViewDistanceQuality": 2,
+          "sg.AntiAliasingQuality": 2,
+          "sg.ShadowQuality": 2,
+          "sg.GlobalIlluminationQuality": 2,
+          "sg.ReflectionQuality": 2,
+          "sg.PostProcessQuality": 2,
+          "sg.TextureQuality": 2,
+          "sg.EffectsQuality": 2,
+          "sg.FoliageQuality": 2,
+          "sg.ShadingQuality": 2,
+          "r.ScreenPercentage": 100,
+          "r.MotionBlurQuality": 0,
+          "r.RayTracing": 0
+        },
+        "level_sha256": "ad6b07b49f44372c35647c2056e25ca46aa1a53816026cf25fa3847994e7eb37",
+        "base_material_sha256": "fda52bee9abf71899b1f4d37fc9fd920e75490816ce9c9460eca6717818e2591",
+        "overlay_actors_added": 1,
+        "overlay_placement_ue_cm": [
+          -35460.26612114906,
+          30370.675642967224,
+          944.999979019165
+        ],
+        "level_saved": false,
+        "draw_call_limit": "One extra mesh section: +1 draw per visible raster pass; shadow/depth passes additional. Scene-wide RHI draw calls not measured.",
+        "gpu_limit": "GPU-synchronised SceneCapture wall time includes CPU submit/readback, not pure GPU or mobile FPS"
+      },
+      "raw_PNGs": [
+        {
+          "name": "distance_050m__day.png",
+          "sha256": "f31e14b84d5938b9e2ac8a294f76c2627f6a280f59fe79a9d72838b08ddd48b2",
+          "bytes": 3090912
+        },
+        {
+          "name": "distance_150m__day.png",
+          "sha256": "fe17d2b6ae5c918b830c4fe797949cc3ab2e26a6753f9a2cc5634bfae4536231",
+          "bytes": 4252804
+        },
+        {
+          "name": "distance_300m__day.png",
+          "sha256": "027e16f689328d8506932a0cc792b100e4ecbe2ddf023de2959322139a5915f8",
+          "bytes": 4252804
+        }
+      ],
+      "mesh_import": {
+        "status": "PASS_EXEMPLAR_IMPORT",
+        "revision": "r2",
+        "level_saved": false,
+        "scope": "/Game/XinyiExemplar/Walkup269873",
+        "mesh": "/Game/XinyiExemplar/Walkup269873/r2/Mesh/walkup_kit_r2/StaticMeshes/walkup_kit_r2",
+        "material": "/Game/XinyiExemplar/Walkup269873/M_WalkupKit",
+        "triangles": 2940,
+        "sections": 1,
+        "actual_bounds_origin_cm": [
+          -603.1568984985352,
+          388.4851379394531,
+          1161.8312377929688
+        ],
+        "actual_bounds_extent_cm": [
+          683.2456893920898,
+          890.0995788574219,
+          376.39373779296875
+        ],
+        "nanite": false,
+        "material_statistics": {
+          "num_pixel_shader_instructions": 267,
+          "num_vertex_shader_instructions": 144,
+          "num_samplers": 3,
+          "num_pixel_texture_samples": 0
+        },
+        "asset_paths": [
+          "/Game/XinyiExemplar/Walkup269873/M_WalkupKit.M_WalkupKit",
+          "/Game/XinyiExemplar/Walkup269873/r1/Mesh/walkup_kit_r1/StaticMeshes/walkup_kit_r1.walkup_kit_r1",
+          "/Game/XinyiExemplar/Walkup269873/r2/Mesh/walkup_kit_r2/Materials/WalkupKit.WalkupKit",
+          "/Game/XinyiExemplar/Walkup269873/r2/Mesh/walkup_kit_r2/StaticMeshes/walkup_kit_r2.walkup_kit_r2"
+        ]
+      }
+    }
+  },
+  "comparisons": [
+    {
+      "distance_m": 50,
+      "inputs": [
+        {
+          "path": "captures/before/distance_050m__day.png",
+          "sha256": "bc8d8fb75c57f9fb7cc7a228bdb7a52a243eacdc27ac0e1da85d86dcca9e2842"
+        },
+        {
+          "path": "captures/r2/distance_050m__day.png",
+          "sha256": "f31e14b84d5938b9e2ac8a294f76c2627f6a280f59fe79a9d72838b08ddd48b2"
+        }
+      ],
+      "crop_xyxy": [
+        576,
+        280,
+        1664,
+        896
+      ],
+      "full_jpeg": {
+        "path": "review/050m-full-ab.jpg",
+        "bytes": 243100,
+        "sha256": "4219f316ab46ec4623124a9475feebd7e2a103697072e086ad024a80d2336198",
+        "dimensions": [
+          1584,
+          592
+        ]
+      },
+      "detail_jpeg": {
+        "path": "review/050m-detail-ab.jpg",
+        "bytes": 403123,
+        "sha256": "d0e84271ec0b3a4ddbce755276c3f606e604647dc94a40a2a325ece0ed2642b2",
+        "dimensions": [
+          2224,
+          776
+        ]
+      },
+      "mean_abs_RGB_delta": 2.4960202867798356,
+      "changed_pixels_above_3": 115861,
+      "changed_pixels_in_crop": 109608,
+      "change_bbox_xyxy": [
+        0,
+        0,
+        1920,
+        1078
+      ]
+    },
+    {
+      "distance_m": 150,
+      "inputs": [
+        {
+          "path": "captures/before/distance_150m__day.png",
+          "sha256": "60b4969a460ff75d68adcfa5b0b08551f1795f65246d95ca1401241003dc512c"
+        },
+        {
+          "path": "captures/r2/distance_150m__day.png",
+          "sha256": "fe17d2b6ae5c918b830c4fe797949cc3ab2e26a6753f9a2cc5634bfae4536231"
+        }
+      ],
+      "crop_xyxy": [
+        800,
+        400,
+        1248,
+        704
+      ],
+      "full_jpeg": {
+        "path": "review/150m-full-ab.jpg",
+        "bytes": 297308,
+        "sha256": "45802fe90aed8920ee8ebea9c08b748e4cb2c6e7f019d06422af6ef690e98267",
+        "dimensions": [
+          1584,
+          592
+        ]
+      },
+      "detail_jpeg": {
+        "path": "review/150m-detail-ab.jpg",
+        "bytes": 107183,
+        "sha256": "382449db7ab2b6d7034cd3d62c81d8145b6709af0f8037214b1ce4d6243a44b6",
+        "dimensions": [
+          944,
+          464
+        ]
+      },
+      "mean_abs_RGB_delta": 0.6479872363683128,
+      "changed_pixels_above_3": 21772,
+      "changed_pixels_in_crop": 12451,
+      "change_bbox_xyxy": [
+        0,
+        0,
+        1920,
+        1080
+      ]
+    },
+    {
+      "distance_m": 300,
+      "inputs": [
+        {
+          "path": "captures/before/distance_300m__day.png",
+          "sha256": "1793cbe8334981251da61162898ca3c5ae79692a12bfb2c4e679f1f5c84e358d"
+        },
+        {
+          "path": "captures/r2/distance_300m__day.png",
+          "sha256": "027e16f689328d8506932a0cc792b100e4ecbe2ddf023de2959322139a5915f8"
+        }
+      ],
+      "crop_xyxy": [
+        864,
+        448,
+        1120,
+        640
+      ],
+      "full_jpeg": {
+        "path": "review/300m-full-ab.jpg",
+        "bytes": 349979,
+        "sha256": "2dc7837c0f30ed7319d3f3fbb9b6972bee76722e174907175ad99aaafb0c6513",
+        "dimensions": [
+          1584,
+          592
+        ]
+      },
+      "detail_jpeg": {
+        "path": "review/300m-detail-ab.jpg",
+        "bytes": 51013,
+        "sha256": "3920bba8e824567f0a48cdfc460ba7291b8848d32ef189712afafd149b08af21",
+        "dimensions": [
+          560,
+          352
+        ]
+      },
+      "mean_abs_RGB_delta": 0.530669849537037,
+      "changed_pixels_above_3": 17144,
+      "changed_pixels_in_crop": 2304,
+      "change_bbox_xyxy": [
+        0,
+        0,
+        1920,
+        1080
+      ]
+    }
+  ],
+  "iteration_limit": "r1 and one targeted r2 only",
+  "mobile_validation": false,
+  "actual_RHI_draw_calls_measured": false,
+  "draw_submission_estimate": "+1 section per visible raster pass; additional depth/shadow passes",
+  "raw_images_unmodified": true,
+  "performance": "GPU-synchronised capture + readback wall time, n=40 per pose; not pure GPU or gameplay FPS",
+  "art_assessment": {
+    "50m": "clear depth / shadow improvement",
+    "150m": "visible cage / sill and AC layering improvement",
+    "300m": "subtle in full frame; stronger identification criterion not conclusively met",
+    "overall": "PARTIAL_VISUAL_SUCCESS; pending human art review",
+    "next": "Review and resolve 300m hierarchy / residual flat features before starting huaxia"
+  },
+  "execution": [
+    {
+      "stage": "import",
+      "variant": "r1",
+      "full_local_log": "C:\\Users\\EDDY\\Desktop\\M1A2\\xinyi-material-ue58-round1\\unreal\\Saved\\XinyiExemplar\\Walkup269873\\import-r1-20261024T195025.log",
+      "full_log_sha256": "05fb82c4638b6056fda5777366888561400b4ef719c7ffdf0ec567052c2186cd",
+      "normal_exit_log": true,
+      "observed_driver_exit_code": 0,
+      "exit_code_source": "driver console output; r2 also has native process receipt"
+    },
+    {
+      "stage": "capture",
+      "variant": "before",
+      "full_local_log": "C:\\Users\\EDDY\\Desktop\\M1A2\\xinyi-material-ue58-round1\\unreal\\Saved\\XinyiExemplar\\Walkup269873\\capture-before-20261024T195431.log",
+      "full_log_sha256": "9e6e653b2d4fbd6b5b3e373efa67f155054c97a92b2b6f6088a5659ee4386ff8",
+      "normal_exit_log": true,
+      "observed_driver_exit_code": 0,
+      "exit_code_source": "driver console output; r2 also has native process receipt"
+    },
+    {
+      "stage": "capture",
+      "variant": "r1",
+      "full_local_log": "C:\\Users\\EDDY\\Desktop\\M1A2\\xinyi-material-ue58-round1\\unreal\\Saved\\XinyiExemplar\\Walkup269873\\capture-r1-20261024T195609.log",
+      "full_log_sha256": "55d68fa4cc3b8542c49c1e886b4f1ccee8a890e664154dc3a123f1ff7a2ea5d8",
+      "normal_exit_log": true,
+      "observed_driver_exit_code": 0,
+      "exit_code_source": "driver console output; r2 also has native process receipt"
+    },
+    {
+      "stage": "import",
+      "variant": "r2",
+      "full_local_log": "C:\\Users\\EDDY\\Desktop\\M1A2\\xinyi-material-ue58-round1\\unreal\\Saved\\XinyiExemplar\\Walkup269873\\import-r2-20261024T200125.log",
+      "full_log_sha256": "42065b32deea50c4409e11614d36687e8f67233dbd845b00ecd0fc2c64091de9",
+      "normal_exit_log": true,
+      "observed_driver_exit_code": 0,
+      "exit_code_source": "driver console output; r2 also has native process receipt"
+    },
+    {
+      "stage": "capture",
+      "variant": "r2",
+      "full_local_log": "C:\\Users\\EDDY\\Desktop\\M1A2\\xinyi-material-ue58-round1\\unreal\\Saved\\XinyiExemplar\\Walkup269873\\capture-r2-20261024T200208.log",
+      "full_log_sha256": "d926953e74f2fb49cb96c668dd4a37c028f61ec6567a9b4d387622363060d2c3",
+      "normal_exit_log": true,
+      "observed_driver_exit_code": 0,
+      "exit_code_source": "driver console output; r2 also has native process receipt"
+    }
+  ]
+}

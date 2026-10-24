@@ -1,0 +1,80 @@
+{
+  "variant": "r1",
+  "building_id": "tp_building_height.269873",
+  "shots": {
+    "distance_050m": {
+      "eye": [
+        -390.9651276783819,
+        -334.56731597007683,
+        48.01782162681744
+      ],
+      "target": [
+        -362.105,
+        -305.505,
+        19.338999809265136
+      ],
+      "fov": 50,
+      "distance_m": 50
+    },
+    "distance_150m": {
+      "eye": [
+        -448.68538303514566,
+        -392.69194791023045,
+        105.37546526192205
+      ],
+      "target": [
+        -362.105,
+        -305.505,
+        19.338999809265136
+      ],
+      "fov": 50,
+      "distance_m": 150
+    },
+    "distance_300m": {
+      "eye": [
+        -535.2657660702913,
+        -479.8788958204609,
+        191.41193071457897
+      ],
+      "target": [
+        -362.105,
+        -305.505,
+        19.338999809265136
+      ],
+      "fov": 50,
+      "distance_m": 300
+    }
+  },
+  "resolution": [
+    1920,
+    1080
+  ],
+  "lighting": "day",
+  "clouds": "off",
+  "observed_settings": {
+    "sg.ViewDistanceQuality": 2,
+    "sg.AntiAliasingQuality": 2,
+    "sg.ShadowQuality": 2,
+    "sg.GlobalIlluminationQuality": 2,
+    "sg.ReflectionQuality": 2,
+    "sg.PostProcessQuality": 2,
+    "sg.TextureQuality": 2,
+    "sg.EffectsQuality": 2,
+    "sg.FoliageQuality": 2,
+    "sg.ShadingQuality": 2,
+    "r.ScreenPercentage": 100,
+    "r.MotionBlurQuality": 0,
+    "r.RayTracing": 0
+  },
+  "level_sha256": "ad6b07b49f44372c35647c2056e25ca46aa1a53816026cf25fa3847994e7eb37",
+  "base_material_sha256": "fda52bee9abf71899b1f4d37fc9fd920e75490816ce9c9460eca6717818e2591",
+  "overlay_actors_added": 1,
+  "overlay_placement_ue_cm": [
+    -35460.26614165306,
+    30370.67567539215,
+    944.999979019165
+  ],
+  "level_saved": false,
+  "draw_call_limit": "One extra mesh section: +1 draw per visible raster pass; shadow/depth passes additional. Scene-wide RHI draw calls not measured.",
+  "gpu_limit": "GPU-synchronised SceneCapture wall time includes CPU submit/readback, not pure GPU or mobile FPS"
+}

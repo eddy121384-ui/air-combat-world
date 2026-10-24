@@ -1,0 +1,316 @@
+{
+  "building_id": "tp_building_height.269873",
+  "revision": "r2",
+  "pivot_enu_m": [
+    -354.6026611328125,
+    -303.7067565917969,
+    9.449999809265137
+  ],
+  "ground_m": 9.449999809265137,
+  "height_m": 15.949999809265137,
+  "source_tile": "-001_-001",
+  "source_glb": "unreal\\Saved\\XinyiLook\\tiles\\xinyi_look_-001_-001.glb",
+  "source_glb_sha256": "5c339a52212a3d5eca5509c814c9ef0e9222a66f4ede35580cb6c28c1faba306",
+  "source_payload": 39672,
+  "scope": "Two street-facing walls, above existing storefront, one building only; overlay toggle",
+  "grammar": {
+    "floor_height_m": 3.9875,
+    "bay_width_m": 3.899489364624024,
+    "period": 4
+  },
+  "faces": [
+    {
+      "origin": [
+        -367.2894287109375,
+        -298.66754150390625,
+        9.449999809265137
+      ],
+      "tangent": [
+        0.6040402392072665,
+        -0.7969538188743613,
+        0.0
+      ],
+      "normal": [
+        -0.7969525214796868,
+        -0.604041950949741,
+        0.0
+      ],
+      "length": 17.16014398986427,
+      "u0": 39.76898956298828,
+      "u1": 56.929134368896484
+    },
+    {
+      "origin": [
+        -356.69415283203125,
+        -312.1590576171875,
+        9.449999809265137
+      ],
+      "tangent": [
+        0.6105058727664162,
+        -0.7920117292803918,
+        0.0
+      ],
+      "normal": [
+        -0.7920090966124845,
+        -0.6105092881218729,
+        0.0
+      ],
+      "length": 6.4209266488648495,
+      "u0": 57.22378158569336,
+      "u1": 63.64472961425781
+    }
+  ],
+  "modules": [
+    {
+      "face": 0,
+      "bay": 10,
+      "floor": 2,
+      "balcony": false,
+      "caged": false,
+      "window": [
+        0.08,
+        2.657454724121095,
+        9.171249999999999,
+        11.244749999999998
+      ],
+      "projection_m": 0.16
+    },
+    {
+      "face": 0,
+      "bay": 10,
+      "floor": 3,
+      "balcony": false,
+      "caged": false,
+      "window": [
+        0.08,
+        2.657454724121095,
+        13.158749999999998,
+        15.232249999999999
+      ],
+      "projection_m": 0.16
+    },
+    {
+      "face": 0,
+      "bay": 11,
+      "floor": 2,
+      "balcony": false,
+      "caged": false,
+      "window": [
+        3.5933321716308626,
+        6.556944088745119,
+        9.171249999999999,
+        11.244749999999998
+      ],
+      "projection_m": 0.16
+    },
+    {
+      "face": 0,
+      "bay": 11,
+      "floor": 3,
+      "balcony": false,
+      "caged": true,
+      "window": [
+        3.5933321716308626,
+        6.556944088745119,
+        13.158749999999998,
+        15.232249999999999
+      ],
+      "projection_m": 0.82
+    },
+    {
+      "face": 0,
+      "bay": 12,
+      "floor": 2,
+      "balcony": false,
+      "caged": true,
+      "window": [
+        8.428698983764654,
+        9.520556005859376,
+        9.809249999999999,
+        11.244749999999998
+      ],
+      "projection_m": 0.82
+    },
+    {
+      "face": 0,
+      "bay": 12,
+      "floor": 3,
+      "balcony": false,
+      "caged": false,
+      "window": [
+        8.428698983764654,
+        9.520556005859376,
+        13.79675,
+        15.232249999999999
+      ],
+      "projection_m": 0.16
+    },
+    {
+      "face": 0,
+      "bay": 13,
+      "floor": 2,
+      "balcony": false,
+      "caged": true,
+      "window": [
+        11.392310900878911,
+        14.355922817993168,
+        9.171249999999999,
+        11.244749999999998
+      ],
+      "projection_m": 0.82
+    },
+    {
+      "face": 0,
+      "bay": 13,
+      "floor": 3,
+      "balcony": false,
+      "caged": true,
+      "window": [
+        11.392310900878911,
+        14.355922817993168,
+        13.158749999999998,
+        15.232249999999999
+      ],
+      "projection_m": 0.82
+    },
+    {
+      "face": 0,
+      "bay": 14,
+      "floor": 2,
+      "balcony": false,
+      "caged": false,
+      "window": [
+        15.291800265502935,
+        17.080143989864272,
+        9.171249999999999,
+        11.244749999999998
+      ],
+      "projection_m": 0.16
+    },
+    {
+      "face": 0,
+      "bay": 14,
+      "floor": 3,
+      "balcony": false,
+      "caged": false,
+      "window": [
+        15.291800265502935,
+        17.080143989864272,
+        13.158749999999998,
+        15.232249999999999
+      ],
+      "projection_m": 0.16
+    },
+    {
+      "face": 1,
+      "bay": 15,
+      "floor": 2,
+      "balcony": false,
+      "caged": false,
+      "window": [
+        1.7364976074218816,
+        4.700109524536138,
+        9.171249999999999,
+        11.244749999999998
+      ],
+      "projection_m": 0.16
+    },
+    {
+      "face": 1,
+      "bay": 15,
+      "floor": 3,
+      "balcony": false,
+      "caged": true,
+      "window": [
+        1.7364976074218816,
+        4.700109524536138,
+        13.158749999999998,
+        15.232249999999999
+      ],
+      "projection_m": 0.82
+    }
+  ],
+  "parts": {
+    "window_reveal": 48,
+    "window_mullion": 12,
+    "projecting_sill": 12,
+    "ac_body": 7,
+    "ac_grille": 7,
+    "ac_fins": 42,
+    "ac_bracket": 28,
+    "cage_canopy": 5,
+    "cage_side": 10,
+    "cage_vertical": 39,
+    "cage_horizontal": 15,
+    "cage_side_return": 20
+  },
+  "triangles": 2940,
+  "vertices": 5880,
+  "material_sections": 1,
+  "texture_samples": 0,
+  "nanite": false,
+  "shadows": true,
+  "glb": "walkup_kit_r2.glb",
+  "glb_sha256": "df4a3212b2e783675ec02a2943bf64832a6f2573854673ca6fa914204726049e",
+  "expected_local_bounds": {
+    "origin_cm": [
+      -603.1569063663483,
+      388.48512172698975,
+      1161.8312358856201
+    ],
+    "extent_cm": [
+      683.2457005977631,
+      890.0995492935181,
+      376.3937473297119
+    ]
+  },
+  "qa": {
+    "roundtrip_exact": true,
+    "min_triangle_area_m2": 0.0001649948098929599,
+    "finite": true
+  },
+  "shots": {
+    "distance_050m": {
+      "eye": [
+        -390.9651276783819,
+        -334.56731597007683,
+        48.01782162681744
+      ],
+      "target": [
+        -362.105,
+        -305.505,
+        19.338999809265136
+      ],
+      "fov": 50,
+      "distance_m": 50
+    },
+    "distance_150m": {
+      "eye": [
+        -448.68538303514566,
+        -392.69194791023045,
+        105.37546526192205
+      ],
+      "target": [
+        -362.105,
+        -305.505,
+        19.338999809265136
+      ],
+      "fov": 50,
+      "distance_m": 150
+    },
+    "distance_300m": {
+      "eye": [
+        -535.2657660702913,
+        -479.8788958204609,
+        191.41193071457897
+      ],
+      "target": [
+        -362.105,
+        -305.505,
+        19.338999809265136
+      ],
+      "fov": 50,
+      "distance_m": 300
+    }
+  }
+}
