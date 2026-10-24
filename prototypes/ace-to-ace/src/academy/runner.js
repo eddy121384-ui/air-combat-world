@@ -240,8 +240,12 @@ export class LessonRunner {
       markers: ph?.markers ? ph.markers(this) : [],
       done: !!this.result,
       guidance,
-      weapons: !!this.rules.weapons,
+      // Advanced training observes trigger discipline but never advertises a
+      // combat SHOOT/LOCK cue as permission to bypass its position exercise.
+      weapons: !!this.rules.weapons && !this.lesson.advanced,
       enemyWeapons: this.lesson.id !== 'L07',
+      trace: this.lesson.advanced ? this.d.m?.trace : null,
+      traceKind: this.lesson.id === 'A01' ? 'vertical' : 'plan',
     };
   }
 }

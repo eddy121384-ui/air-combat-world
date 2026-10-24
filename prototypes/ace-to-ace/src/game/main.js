@@ -10,7 +10,9 @@ import { Input, PlayerController } from './input.js';
 import { Audio } from './audio.js';
 import { HudEditor } from './hud-editor.js';
 import { TiltInput, tiltSettings } from './tilt-input.js';
-import { LESSONS, lessonById } from '../academy/lessons.js';
+import { ALL_LESSONS, lessonById } from '../academy/lessons.js';
+import { advancedSupport } from '../academy/advanced.js';
+import { drawFlightTrace } from '../academy/trace.js';
 import { createLessonSession } from '../academy/session.js';
 import { radioDuration } from '../academy/runner.js';
 import { loadProgress, recordAttempt, saveProgress } from '../academy/progress.js';
@@ -70,6 +72,7 @@ window.__perf = perf;
 
 // ------------------------------------------------------------------ screens
 function showScreen(id) {
+  $('#advancedActions')?.classList.add('hidden');
   for (const el of document.querySelectorAll('.screen')) el.classList.toggle('hidden', el.id !== id);
 }
 function syncTitle() {
@@ -224,6 +227,11 @@ $('#btnAcademySettings').addEventListener('click', () => openFlightSettings('aca
 $('#btnAcademyBack').addEventListener('click', toTitle);
 $('#btnBriefBack').addEventListener('click', openAcademy);
 $('#btnBriefGo').addEventListener('click', () => startLesson(briefId));
+$('#btnBriefExpert').addEventListener('click', () => {
+  controlMode='expert';settings.controlMode='expert';saveSettings();saveModeQuery();syncTitle();openBriefing(briefId);
+});
+$('#btnAdvance').addEventListener('click', () => lessonRun?.requestAdvance?.());
+$('#btnReplayDemo').addEventListener('click', () => lessonRun?.replayDemo?.());
 $('#btnDebAcademy').addEventListener('click', openAcademy);
 $('#btnDebRetry').addEventListener('click', () => startLesson(lessonId));
 $('#btnDebNext').addEventListener('click', () => { const n = nextLesson(lessonId); if (n) openBriefing(n.id); else openAcademy(); });
@@ -327,15 +335,16 @@ function start(k) {
 // ------------------------------------------------------------------ academy
 const modeKey = () => `${flightFeel === 'A' ? 'arcade' : flightFeel}:${controlMode}`;
 function nextLesson(id) {
-  const i = LESSONS.findIndex((l) => l.id === id);
-  return LESSONS[i + 1] || null;
+  const i = ALL_LESSONS.findIndex((l) => l.id === id);
+  return ALL_LESSONS[i + 1] || null;
 }
 function renderAcademy() {
   $('#academyMode').textContent = formatFlight(flightFeel, controlMode);
   const grid = $('#lessonGrid');
-  const firstOpen = LESSONS.find((l) => !academyProgress.lessons[l.id]?.cleared);
+  const firstOpen = ALL_LESSONS.find((l) => !academyProgress.lessons[l.id]?.cleared);
   grid.innerHTML = '';
-  for (const l of LESSONS) {
+  $('#advancedGrid').innerHTML='';
+  for (const l of ALL_LESSONS) {
     const p = academyProgress.lessons[l.id];
     const b = document.createElement('button');
     b.type = 'button'; b.setAttribute('role', 'listitem');
@@ -344,7 +353,7 @@ function renderAcademy() {
     const st = p?.cleared ? `✓ ${p.best}${p.bestTime ? ` · ${p.bestTime}s` : ''}` : l === firstOpen ? '建議下一課' : p?.attempts ? `嘗試 ${p.attempts} 次` : '未完成';
     b.innerHTML = `<span class="no">${String(l.no).padStart(2, '0')} ${l.en}</span><span class="t">${l.title}</span><span class="st">${st}</span>`;
     b.addEventListener('click', () => { audio.ui(); openBriefing(l.id); });
-    grid.appendChild(b);
+    (l.advanced?$('#advancedGrid'):grid).appendChild(b);
   }
 }
 function openAcademy() {
@@ -358,6 +367,7 @@ function openAcademy() {
 function openBriefing(id) {
   const l = lessonById(id);
   if (!l) return openAcademy();
+  input.releaseHeld();
   briefId = id; mode = 'academy';
   $('#briefKicker').textContent = `LESSON ${String(l.no).padStart(2, '0')} · ${l.en} · ${formatFlight(flightFeel, controlMode)}`;
   $('#briefTitle').textContent = l.title;
@@ -367,7 +377,12 @@ function openBriefing(id) {
   $('#briefPrinciple').textContent = l.principle;
   $('#briefGoals').innerHTML = l.goals.map((g) => `<li>${g}</li>`).join('');
   $('#briefReal').textContent = l.real || '';
-  $('#briefModel').textContent = l.model || '';
+  $('#briefModel').textContent = (l.model || '')+(l.advanced?' 本課不評命中，飛彈停用；機砲只做開火時機回饋。':'');
+  const blocked=l.advanced&&advancedSupport(l,controlMode);
+  $('#briefSupport').textContent=blocked|| (l.advanced?'流程：示範 → 引導練習 → 自主挑戰 → 數據結算。每段交棒會明確重置情境。':'');
+  $('#btnBriefGo').disabled=!!blocked;
+  $('#btnBriefGo').textContent=l.advanced?'觀看示範 DEMO':'出擊 TAKE OFF';
+  $('#btnBriefExpert').classList.toggle('hidden',!blocked);
   showScreen('briefing');
   $('#touch').classList.add('hidden');
   $('#pauseBtn').classList.add('hidden');
@@ -375,6 +390,7 @@ function openBriefing(id) {
 function startLesson(id) {
   const lesson = lessonById(id);
   if (!lesson) return;
+  if(lesson.advanced&&advancedSupport(lesson,controlMode))return openBriefing(id);
   audio.unlock();
   kind = 'lesson'; lessonId = id; debriefTimer = -1;
   rend.reset();
@@ -410,6 +426,20 @@ function syncLessonPower(rules) {
     b?.classList.remove('lit'); b?.setAttribute('aria-pressed', 'false');
   }
 }
+function syncAdvancedUI() {
+  const active=kind==='lesson'&&lessonRun?.lesson.advanced&&mode==='playing';
+  const waiting=active&&lessonRun.waiting;
+  $('#advancedActions').classList.toggle('hidden',!waiting);
+  $('#touch').classList.toggle('observing',!!active&&(waiting||lessonRun.phase?.id==='demonstration'));
+  if(!active)return;
+  $('#btnAdvance').textContent=lessonRun.phase?.id==='demonstration'?'開始練習 · 重置情境':'開始挑戰 · 重置情境';
+  if(lessonRun.inputReset){
+    input.releaseHeld();input.resetPower();lessonRun.inputReset=false;
+    if(lessonRun.phase?.id!=='demonstration')resumeTilt();
+  }
+  if(waiting&&!lessonRun.uiWaiting)input.releaseHeld();
+  lessonRun.uiWaiting=!!waiting;
+}
 function showDebrief() {
   input.releaseHeld();
   const r = lessonRun.result, l = lessonById(lessonId);
@@ -425,6 +455,8 @@ function showDebrief() {
   $('#debBadge').textContent = `ACE QUALIFIED · ${r.grade}`;
   $('#debSub').textContent = r.success ? `用時 ${Math.round(r.time)} 秒` : (r.reason || '');
   $('#debStats').innerHTML = r.stats.map(([k, v]) => `<div><b>${v}</b><span>${k}</span></div>`).join('');
+  $('#debTraceFigure').classList.toggle('hidden',!l.advanced);
+  if(l.advanced){const c=$('#debTrace');drawFlightTrace(c.getContext('2d'),c.width,c.height,lessonRun.notes.challenge?.trace||lessonRun.d.m.trace,l.id==='A01'?'vertical':'plan');}
   const li = (a, empty) => (a.length ? a : [empty]).map((x) => `<li>${x}</li>`).join('');
   $('#debGood').innerHTML = li(r.good, r.success ? '完成了每一個步驟。' : '—');
   $('#debImprove').innerHTML = li(r.improve, r.success ? '保持這個節奏。' : '照著教官的提示再飛一次。');
@@ -568,9 +600,11 @@ function frame(now) {
 
   if (match && (mode === 'playing' || mode === 'result' || mode === 'debrief')) {
     if (slowT > 0) { slowT -= realDt; if (slowT <= 0) timeScale = 1; }
-    acc += realDt * timeScale;
+    syncAdvancedUI();
+    acc = lessonRun?.waiting ? 0 : acc + realDt * timeScale;
     let steps = 0;
-    while (acc >= RULES.dt && steps < 8) { match.step(RULES.dt); lessonRun?.step(RULES.dt); acc -= RULES.dt; steps++; }
+    while (acc >= RULES.dt && steps < 8 && !lessonRun?.waiting) { match.step(RULES.dt); lessonRun?.step(RULES.dt); acc -= RULES.dt; steps++; }
+    syncAdvancedUI();
     if (steps === 8) acc = 0;
     if (lessonRun && mode === 'playing') syncLessonPower(lessonRun.rules);
     if (lessonRun?.result && debriefTimer < 0 && mode === 'playing') debriefTimer = lessonRun.result.success ? 3.0 : 0.8;
@@ -587,7 +621,7 @@ function frame(now) {
     const L = me.lock;
     let mw = false, mc = false;
     for (const m of match.missiles) if (m.alive && m.target === me && m.guided && !m.decoy) { mw = true; if (dist(m.pos, me.pos) < 1500) mc = true; }
-    const weaponCues = kind !== 'lesson' || lessonRun.rules.weapons;
+    const weaponCues = kind !== 'lesson' || (!lessonRun.lesson.advanced && lessonRun.rules.weapons);
     audio.frame({ throttle: me.thrustCur, ab: me.abCur, speed: me.speed, locking: weaponCues && L.timer > 0 && !L.locked, locked: weaponCues && L.locked, missileWarn: mw, missileClose: mc, lockWarn: me.lockedBy > 0 && (kind !== 'lesson' || lessonRun.lesson.id !== 'L07'), alive: me.alive && showHud && (kind === 'pvai' || kind === 'lesson') }, now / 1000);
   } else if (match && (mode === 'paused' || mode === 'editing')) {
     // Freeze the fight behind the pause/settings card. Moving the camera to the
@@ -622,7 +656,7 @@ function frame(now) {
 }
 
 function aiLabel(ai) {
-  if (!ai || !ai.debug.mode) return null;
+  if (!ai?.debug?.mode) return null;
   return `${ai.debug.mode} · ${ai.debug.maneuver}`;
 }
 
@@ -632,7 +666,7 @@ function drawDebug() {
   if (!debugOn || !match) return;
   const block = (name, ai) => {
     if (!ai) return '';
-    const d = ai.debug;
+    const d = ai.debug || {};
     if (!d.mode) return '';
     const tr = ai.transitions.slice(-6).reverse().map((t) => `<div class="dim">${fmtTime(t.t)} ${t.from}→${t.to} ${t.why}</div>`).join('');
     return `<div class="dbgblk"><b>${name}</b> <span class="m">${d.mode}</span> ${d.maneuver}<br>

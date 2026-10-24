@@ -311,3 +311,19 @@ h2.win { color: var(--go); } h2.lose { color: var(--red); }
 #hudEditor.folded .hud-handle span { visibility:hidden; }
 /* A custom menu position must remain usable even over AI/debug or weapons. */
 #pauseBtn { z-index:8; }
+
+/* Advanced Academy keeps the familiar flight HUD and thumb spaces. */
+.advanced-grid { grid-template-columns: repeat(3, 1fr); }
+#advancedActions { position:fixed; z-index:6; left:50%; bottom:calc(8px + var(--sab)); transform:translateX(-50%); display:flex; gap:6px; }
+#advancedActions button { min-height:44px; padding:8px 12px; font-size:13px; white-space:nowrap; }
+#briefSupport { color:var(--go); }
+#btnBriefExpert { min-height:44px; }
+#debTraceFigure { margin:8px 0; }
+#debTrace { display:block; width:100%; height:150px; border:1px solid var(--edge); border-radius:6px; }
+#briefing .row { position:sticky; bottom:0; background:#18324c; padding:8px 0; z-index:1; }
+#briefing button { min-height:44px; }
+#touch.observing { opacity:.5; }
+#advancedActions { padding:5px; border-radius:12px; background:rgba(12,34,52,.94); }
+#advancedActions button, #btnBriefExpert { border:1px solid var(--edge); border-radius:9px; color:#f4fbff; background:#25465f; }
+#advancedActions button.primary { background:linear-gradient(180deg,#ffb347,#ff7a2e); border-color:#ffd28a; color:#1d1206; font-weight:800; }
+#btnBriefExpert { padding:8px 14px; }

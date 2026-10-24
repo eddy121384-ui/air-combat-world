@@ -1,3 +1,4 @@
+import { drawFlightTrace } from '../academy/trace.js';
 // Minimal arcade HUD drawn on a 2D canvas over the WebGL view.
 import { sub, norm, addScaled, forwardOf, DEG, angleBetween, dist } from '../sim/math.js';
 import { LOCK, GUN } from '../sim/weapons.js';
@@ -39,6 +40,9 @@ export class Hud {
     window.addEventListener('resize', () => this.resize());
   }
   resize() {
+    const safe=globalThis.getComputedStyle?.(globalThis.document?.documentElement);
+    this.safeLeft=parseFloat(safe?.getPropertyValue('--sal'))||0;
+    this.safeRight=parseFloat(safe?.getPropertyValue('--sar'))||0;
     this.dpr = Math.min(window.devicePixelRatio || 1, 2);
     this.w = window.innerWidth; this.h = window.innerHeight;
     this.c.width = this.w * this.dpr; this.c.height = this.h * this.dpr;
@@ -225,6 +229,11 @@ export class Hud {
       } else this.edgeArrow(p, color, `${m.label}`, S, true);
     }
     const x = 12 + (this.safeLeft || 0), y = 52 * Math.max(1, S * 0.9), pw = Math.min(310, w * 0.38);
+    if(v.trace){
+      const tw=Math.min(140,w*.18),th=90,tx=x+pw+8;
+      g.save();g.translate(tx,50);drawFlightTrace(g,tw,th,v.trace,v.traceKind);g.restore();
+      this.traceLayout={x:tx,y:50,width:tw,height:th};
+    }else this.traceLayout=null;
     g.save();
     const fontPx = Math.max(12, Math.round(11*S)), lineH = fontPx+3;
     g.font = `600 ${fontPx}px ui-sans-serif, system-ui, "PingFang TC", sans-serif`;

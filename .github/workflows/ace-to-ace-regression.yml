@@ -50,6 +50,7 @@ jobs:
           node tools/test-flight-feel-polish.mjs
           node tools/test-academy.mjs
           node tools/test-academy-coaching.mjs
+          node tools/test-advanced-academy.mjs
           node tools/aivai.mjs --n 3 --blue chaser --red veteran --feel arcade
           node tools/aivai.mjs --n 3 --blue chaser --red veteran --feel tactical
           node tools/aivai.mjs --n 3 --blue chaser --red veteran --feel B
@@ -89,5 +90,28 @@ jobs:
         if: always()
         with:
           name: ace-to-ace-browser-shots
+          path: prototypes/ace-to-ace/tools/out/shots
+          if-no-files-found: ignore
+
+  advanced-browser:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install Playwright Chromium
+        working-directory: prototypes/ace-to-ace
+        run: |
+          npm install --no-save --no-package-lock playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Advanced Academy mobile courses and touch
+        working-directory: prototypes/ace-to-ace
+        run: node tools/browser-check.mjs --scenario advanced
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ace-advanced-academy-browser
           path: prototypes/ace-to-ace/tools/out/shots
           if-no-files-found: ignore

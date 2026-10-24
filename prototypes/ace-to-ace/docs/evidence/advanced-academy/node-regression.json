@@ -1,0 +1,171 @@
+{
+  "baseline": "3368c55",
+  "baselineResults": [
+    {
+      "command": "node tools/test-airbrake-throttle.mjs",
+      "exit": 0
+    },
+    {
+      "command": "node tools/test-power-strip.mjs",
+      "exit": 0
+    },
+    {
+      "command": "node tools/test-level-assist.mjs",
+      "exit": 0
+    },
+    {
+      "command": "node tools/test-hud-layout.mjs",
+      "exit": 0
+    },
+    {
+      "command": "node tools/test-tilt-input.mjs",
+      "exit": 0
+    },
+    {
+      "command": "node tools/test-tilt-academy.mjs",
+      "exit": 0
+    },
+    {
+      "command": "node tools/test-brake-trap.mjs",
+      "exit": 0
+    },
+    {
+      "command": "node tools/test-flight-path.mjs",
+      "exit": 0
+    },
+    {
+      "command": "node tools/test-hud-attitude.mjs",
+      "exit": 0
+    },
+    {
+      "command": "node tools/test-flight-feel-ab.mjs",
+      "exit": 0
+    },
+    {
+      "command": "node tools/test-dual-flight-modes.mjs",
+      "exit": 0
+    },
+    {
+      "command": "node tools/test-flight-feel-polish.mjs",
+      "exit": 0
+    },
+    {
+      "command": "node tools/test-academy.mjs",
+      "exit": 0
+    },
+    {
+      "command": "node tools/test-academy-coaching.mjs",
+      "exit": 0
+    },
+    {
+      "command": "node tools/aivai.mjs --n 3 --blue chaser --red veteran --feel arcade",
+      "exit": 0
+    },
+    {
+      "command": "node tools/aivai.mjs --n 3 --blue chaser --red veteran --feel tactical",
+      "exit": 0
+    },
+    {
+      "command": "node tools/aivai.mjs --n 3 --blue chaser --red veteran --feel B",
+      "exit": 0
+    },
+    {
+      "command": "node tools/aivai.mjs --n 3 --blue human --red veteran --feel arcade --control expert",
+      "exit": 0
+    },
+    {
+      "command": "node tools/aivai.mjs --n 3 --blue human --red veteran --feel tactical --control assisted",
+      "exit": 0
+    },
+    {
+      "command": "node tools/probe-flight-feel.mjs > /dev/null",
+      "exit": 0
+    }
+  ],
+  "finalResults": [
+    {
+      "command": "node tools/test-airbrake-throttle.mjs",
+      "exit": 0
+    },
+    {
+      "command": "node tools/test-power-strip.mjs",
+      "exit": 0
+    },
+    {
+      "command": "node tools/test-level-assist.mjs",
+      "exit": 0
+    },
+    {
+      "command": "node tools/test-hud-layout.mjs",
+      "exit": 0
+    },
+    {
+      "command": "node tools/test-tilt-input.mjs",
+      "exit": 0
+    },
+    {
+      "command": "node tools/test-tilt-academy.mjs",
+      "exit": 0
+    },
+    {
+      "command": "node tools/test-brake-trap.mjs",
+      "exit": 0
+    },
+    {
+      "command": "node tools/test-flight-path.mjs",
+      "exit": 0
+    },
+    {
+      "command": "node tools/test-hud-attitude.mjs",
+      "exit": 0
+    },
+    {
+      "command": "node tools/test-flight-feel-ab.mjs",
+      "exit": 0
+    },
+    {
+      "command": "node tools/test-dual-flight-modes.mjs",
+      "exit": 0
+    },
+    {
+      "command": "node tools/test-flight-feel-polish.mjs",
+      "exit": 0
+    },
+    {
+      "command": "node tools/test-academy.mjs",
+      "exit": 0
+    },
+    {
+      "command": "node tools/test-academy-coaching.mjs",
+      "exit": 0
+    },
+    {
+      "command": "node tools/test-advanced-academy.mjs",
+      "exit": 0
+    },
+    {
+      "command": "node tools/aivai.mjs --n 3 --blue chaser --red veteran --feel arcade",
+      "exit": 0
+    },
+    {
+      "command": "node tools/aivai.mjs --n 3 --blue chaser --red veteran --feel tactical",
+      "exit": 0
+    },
+    {
+      "command": "node tools/aivai.mjs --n 3 --blue chaser --red veteran --feel B",
+      "exit": 0
+    },
+    {
+      "command": "node tools/aivai.mjs --n 3 --blue human --red veteran --feel arcade --control expert",
+      "exit": 0
+    },
+    {
+      "command": "node tools/aivai.mjs --n 3 --blue human --red veteran --feel tactical --control assisted",
+      "exit": 0
+    },
+    {
+      "command": "node tools/probe-flight-feel.mjs > /dev/null",
+      "exit": 0
+    }
+  ]
+}

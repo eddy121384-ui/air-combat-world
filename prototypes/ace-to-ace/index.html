@@ -154,6 +154,8 @@
   </div>
 </div>
 
+<div id="advancedActions" class="hidden"><button id="btnAdvance" type="button" class="primary">開始練習</button><button id="btnReplayDemo" type="button">重看示範</button></div>
+
 <div id="academy" class="screen hidden">
   <div class="card academy-card">
     <div class="kicker">ACE FLIGHT ACADEMY · 教官 KITE</div>
@@ -163,6 +165,8 @@
       <button id="btnAcademySettings" class="settings-shortcut" type="button">⚙ 飛行設定</button>
     </div>
     <div id="lessonGrid" class="lesson-grid" role="list"></div>
+    <p class="help">進階訓練 · 先看示範，再親手做；A01 需要 Expert。</p>
+    <div id="advancedGrid" class="lesson-grid advanced-grid" role="list" aria-label="進階飛行與戰術"></div>
     <div class="row"><button id="btnAcademyBack" type="button">返回標題</button></div>
   </div>
 </div>
@@ -176,6 +180,8 @@
     <ol class="brief-goals" id="briefGoals"></ol>
     <p class="help brief-real" id="briefReal"></p>
     <p class="help brief-model" id="briefModel"></p>
+    <p id="briefSupport" class="help" role="status"></p>
+    <button id="btnBriefExpert" type="button" class="hidden">切換為 Expert，檢視簡報</button>
     <div class="row"><button id="btnBriefBack" type="button">學院</button><button id="btnBriefGo" class="primary" type="button">出擊 TAKE OFF</button></div>
   </div>
 </div>
@@ -188,6 +194,7 @@
     <p class="kite-line" id="debCitation"></p>
     <div class="sub" id="debSub"></div>
     <div class="stats deb-stats" id="debStats"></div>
+    <figure id="debTraceFigure" class="hidden"><canvas id="debTrace" width="620" height="170" aria-label="本次機動實際航跡"></canvas><figcaption class="help">實際航跡摘要；不是可拖曳的 Tactical Replay。</figcaption></figure>
     <div class="deb-cols">
       <div><b class="deb-good">做得好</b><ul id="debGood"></ul></div>
       <div><b class="deb-improve">下一次</b><ul id="debImprove"></ul></div>
