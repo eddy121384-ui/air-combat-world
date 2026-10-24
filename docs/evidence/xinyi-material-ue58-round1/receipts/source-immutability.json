@@ -1,0 +1,18 @@
+{
+  "status": "PASS_SOURCE_IMMUTABILITY",
+  "recorded_at_utc": "2026-10-24T07:46:10.2020245Z",
+  "source_root": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world",
+  "compared_files": 243,
+  "source_changed": [],
+  "staged_input_copies_changed": [],
+  "disks": [
+    {
+      "DeviceID": "C:",
+      "FreeSpace": 37039407104
+    },
+    {
+      "DeviceID": "D:",
+      "FreeSpace": 47430725632
+    }
+  ]
+}

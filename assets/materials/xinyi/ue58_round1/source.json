@@ -1,0 +1,68 @@
+{
+  "source_pr": 62,
+  "source_commit": "b0e00f2256bfe67ba76798d73450fa3c5412930f",
+  "source_base_pr": 14,
+  "source_base_commit": "6c2feb1611a3d07436c8222c3b67246a9b1ad8cd",
+  "scene_base_commit": "ede7960d8ec05b2aa521b1e4c65b5bbd667c456d",
+  "source_manifest_sha256": "8edb3610f477ef364190fea870415f957250630e8fbb0ce8ae684797925c7630",
+  "source_manifest_url": "https://github.com/eddy121384-ui/air-combat-world/blob/b0e00f2256bfe67ba76798d73450fa3c5412930f/assets/materials/xinyi/shared_masks/v1/manifest.json",
+  "scope": "Two packed PNGs and provenance only; no PR merge or unrelated changes.",
+  "textures": [
+    {
+      "name": "T_XinyiFacadeAge",
+      "sha256": "48366fa2960438f02ae86d0a1ed003e0e5dfcc359108b0c73f84ee8c3705ed67",
+      "source_path": "assets/materials/xinyi/shared_masks/v1/textures/T_XinyiFacadeAge.png",
+      "mode": "RGBA8",
+      "size": [
+        512,
+        512
+      ],
+      "channel_min": [
+        104,
+        112,
+        104,
+        112
+      ],
+      "channel_max": [
+        136,
+        144,
+        136,
+        144
+      ],
+      "channel_mean": [
+        126.00958251953125,
+        128.8825225830078,
+        125.85426330566406,
+        128.0387420654297
+      ]
+    },
+    {
+      "name": "T_XinyiRoofSurface",
+      "sha256": "b3db5a50494ffc73bdda9a2ec13986a7856186cdbf0f6cd085ada1edaef85140",
+      "source_path": "assets/materials/xinyi/shared_masks/v1/textures/T_XinyiRoofSurface.png",
+      "mode": "RGBA8",
+      "size": [
+        512,
+        512
+      ],
+      "channel_min": [
+        112,
+        104,
+        104,
+        104
+      ],
+      "channel_max": [
+        144,
+        144,
+        136,
+        136
+      ],
+      "channel_mean": [
+        127.42886352539062,
+        125.028564453125,
+        124.14181518554688,
+        126.22796630859375
+      ]
+    }
+  ]
+}

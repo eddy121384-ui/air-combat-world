@@ -1,0 +1,1062 @@
+{
+  "schema_version": 1,
+  "recorded_at_utc": "2026-10-24T07:34:22.4689101Z",
+  "status": "SCENE_FILE_FOUND",
+  "unreal_launched_by_this_script": false,
+  "ue_screenshots_generated_by_this_script": 0,
+  "engine_root": "C:\\Program Files\\Epic Games\\UE_5.8",
+  "engine_version": {
+    "MajorVersion": 5,
+    "MinorVersion": 8,
+    "PatchVersion": 0,
+    "Changelist": 55116800,
+    "CompatibleChangelist": 0,
+    "IsLicenseeVersion": 0,
+    "IsPromotedBuild": 1,
+    "BranchName": "++UE5+Release-5.8"
+  },
+  "unreal_cmd_exists": true,
+  "unreal_editor_exists": true,
+  "disks": [
+    {
+      "DeviceID": "C:",
+      "Size": 381144788992,
+      "FreeSpace": 36970397696
+    },
+    {
+      "DeviceID": "D:",
+      "Size": 128974843904,
+      "FreeSpace": 47430725632
+    }
+  ],
+  "graphics": [
+    {
+      "Name": "Intel(R) UHD Graphics 770",
+      "DriverVersion": "31.0.101.4502"
+    }
+  ],
+  "unreal_related_processes": [
+    {
+      "ProcessId": 37852,
+      "Name": "UnrealEditor-Cmd.exe",
+      "CommandLine": "\"C:\\Program Files\\Epic Games\\UE_5.8\\Engine\\Binaries\\Win64\\UnrealEditor-Cmd.exe\" C:\\Users\\EDDY\\Desktop\\M1A2\\xinyi-material-ue58-round1\\unreal\\AirCombatWorld.uproject -ExecutePythonScript=C:\\Users\\EDDY\\Desktop\\M1A2\\xinyi-material-ue58-round1\\adapters\\unreal\\lookdev\\xinyi_material_ab_build.py -unattended -nopause -nosound -nop4 -abslog=C:\\Users\\EDDY\\Desktop\\M1A2\\xinyi-material-ue58-round1\\investigation\\candidate-build-20261024T073145Z.log"
+    },
+    {
+      "ProcessId": 23720,
+      "Name": "CrashReportClientEditor.exe",
+      "CommandLine": "\"C:\\Program Files\\Epic Games\\UE_5.8\\Engine\\Binaries\\Win64\\CrashReportClientEditor.exe\" \"../../../Engine/Binaries/Win64/CrashReportClientEditor.exe\"  -READ=692 -WRITE=704 -MONITOR=37852 -ProcessGroupId=44CF60A141A5838BDF40F2808B5297BD -unattended -ConcertServer=\"6D86172049DF73FD46EE9BA9DFBA8AFC\" -RespawnedInstance"
+    },
+    {
+      "ProcessId": 19624,
+      "Name": "UnrealTraceServer.exe",
+      "CommandLine": "UnrealTraceServer.exe daemon -d  --sponsor 37852"
+    },
+    {
+      "ProcessId": 35572,
+      "Name": "ShaderCompileWorker.exe",
+      "CommandLine": "\"C:/Program Files/Epic Games/UE_5.8/Engine/Binaries/Win64/ShaderCompileWorker.exe\" \"C:/Users/EDDY/AppData/Local/Temp/UnrealShaderWorkingDir/6DE144BC4724A464AFF22B93402DD812/0/\" 37852 0 WorkerInputOnly.in WorkerOutputOnly.out -communicatethroughfile  -TimeToLive=20.000000 -Multiprocess -nothreading"
+    }
+  ],
+  "worktree_registries": [
+    {
+      "repository": "C:\\Users\\EDDY\\Desktop\\M1A2\\air-combat-world",
+      "listing": [
+        "worktree C:/Users/EDDY/Desktop/M1A2/air-combat-world",
+        "HEAD 0db84b5953eaffd75c3256ad0579f3c098dd0147",
+        "branch refs/heads/claude/vibrant-dirac-kmsuin",
+        "",
+        "worktree C:/Users/EDDY/Desktop/M1A2/ace-cloud-commercial-npr",
+        "HEAD 17809724a7278ccd817dd882fb783b3a06b66d35",
+        "branch refs/heads/research/ace-cloud-commercial-npr",
+        "",
+        "worktree C:/Users/EDDY/Desktop/M1A2/ace-cloud-engine-b0",
+        "HEAD a75ea74fcadcf73464c9aea42164dcb96b57509a",
+        "branch refs/heads/spike/ace-cloud-engine-b0",
+        "",
+        "worktree C:/Users/EDDY/Desktop/M1A2/ace-cloud-engine-b1",
+        "HEAD 996329258379383f6ed1d8bdb4ea992589be6c14",
+        "branch refs/heads/spike/ace-cloud-engine-b1",
+        "",
+        "worktree C:/Users/EDDY/Desktop/M1A2/ace-cloud-engine-b1-animfix",
+        "HEAD abab83a84212c20406494784e7a3ea5ab4342630",
+        "branch refs/heads/spike/ace-cloud-engine-b1-animfix",
+        "",
+        "worktree C:/Users/EDDY/Desktop/M1A2/ace-cloud-engine-b2-hybrid",
+        "HEAD 75db0dc3189cc9501210b4580521815d57b7a9cb",
+        "branch refs/heads/spike/ace-cloud-engine-b2-hybrid",
+        "",
+        "worktree C:/Users/EDDY/Desktop/M1A2/xinyi-material-ue58-round1",
+        "HEAD ede7960d8ec05b2aa521b1e4c65b5bbd667c456d",
+        "branch refs/heads/test/xinyi-shared-masks-ue58-round1",
+        ""
+      ]
+    },
+    {
+      "repository": "C:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world",
+      "listing": [
+        "worktree C:/Users/EDDY/Documents/GitHub/air-combat-world",
+        "HEAD ff6e29c908bc8491eaf05f795d6492ac0e7811de",
+        "branch refs/heads/feat/taipei-volume-integrity-audit",
+        ""
+      ]
+    },
+    {
+      "repository": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world",
+      "listing": [
+        "worktree D:/Users/EDDY/Documents/GitHub/air-combat-world",
+        "HEAD bda62a352ada641d598106f5dd03bd99333bea6e",
+        "branch refs/heads/codex/issue8-host-gate-tooling",
+        "",
+        "worktree D:/Users/EDDY/Documents/GitHub/air-combat-world-acacia",
+        "HEAD 5f30274211cf1937024ddd29a2b467b695caaa4c",
+        "branch refs/heads/lookdev/taiwan-acacia-confusa-v1",
+        "",
+        "worktree D:/Users/EDDY/Documents/GitHub/air-combat-world-cryptomeria",
+        "HEAD c56b546b57da15dfd366a7d70fc3739286d519a9",
+        "branch refs/heads/lookdev/taiwan-cryptomeria-japonica-v1",
+        "",
+        "worktree D:/Users/EDDY/Documents/GitHub/air-combat-world-cryptounreal",
+        "HEAD d319d43203e1a103f2ceac00a3b634e8e8d1f6fb",
+        "branch refs/heads/lookdev/taiwan-cryptomeria-unreal-v1",
+        "",
+        "worktree D:/Users/EDDY/Documents/GitHub/air-combat-world-farlod",
+        "HEAD 099d757ddc551dde8e59c8abcfa28899a5beed3d",
+        "branch refs/heads/research/mobile-far-lod-v1",
+        "",
+        "worktree D:/Users/EDDY/Documents/GitHub/air-combat-world-forest-budget",
+        "HEAD 52df3d55619749401911eae844238463c0ded182",
+        "branch refs/heads/research/forest-tree-lod-budget-v1",
+        "",
+        "worktree D:/Users/EDDY/Documents/GitHub/air-combat-world-forest-lookdev",
+        "HEAD a3aaed53e8e63f289d5fbd484065326853be6f70",
+        "branch refs/heads/lookdev/forest-assets-v1",
+        "",
+        "worktree D:/Users/EDDY/Documents/GitHub/air-combat-world-freeflight",
+        "HEAD 015c8f55cec4c0fb43130b97ceb3a513f9752866",
+        "branch refs/heads/feat/android-free-flight-v1",
+        "",
+        "worktree D:/Users/EDDY/Documents/GitHub/air-combat-world-gfx",
+        "HEAD 495658419a43874e10863a2de9a3bbcef3f56d22",
+        "branch refs/heads/feat/graphics-settings-v1",
+        "",
+        "worktree D:/Users/EDDY/Documents/GitHub/air-combat-world-hillside-forest",
+        "HEAD b1da16df760da03775a8c22e5a0031371bd94659",
+        "branch refs/heads/lookdev/taiwan-hillside-forest-v1",
+        "",
+        "worktree D:/Users/EDDY/Documents/GitHub/air-combat-world-ntw",
+        "HEAD e310675a6b390b1853e1cae0adde4b68388ea53b",
+        "branch refs/heads/feat/ntw-phase2b-seam-lod-closure",
+        "",
+        "worktree D:/Users/EDDY/Documents/GitHub/air-combat-world-ntwforest",
+        "HEAD 81669a378744c75e3b198a93873ffde36c410149",
+        "branch refs/heads/feat/ntw-forest-integration-v1",
+        "",
+        "worktree D:/Users/EDDY/Documents/GitHub/air-combat-world-ntwforest-dl",
+        "HEAD 7d4058cc424f454c4be60905d4cae3bbda223ee9",
+        "branch refs/heads/feat/ntw-forest-distance-layer-lookdev-v1",
+        "",
+        "worktree D:/Users/EDDY/Documents/GitHub/air-combat-world-ntwforest-gate",
+        "HEAD 8d0e14dcfea4458d2ad3f1739c736269693dbc11",
+        "branch refs/heads/gate/ntw-forest-runtime",
+        "",
+        "worktree D:/Users/EDDY/Documents/GitHub/air-combat-world-ntwforest-mobile",
+        "HEAD aa414f50f7cb4936a2025761f9c326a17ebe5f3e",
+        "branch refs/heads/feat/ntw-forest-mobile-profile-v1",
+        "",
+        "worktree D:/Users/EDDY/Documents/GitHub/air-combat-world-ntwforest-perf",
+        "HEAD 7578b9627ae71c79e5f81df2a4baf4526b650daa",
+        "branch refs/heads/perf/ntw-forest-distance-optimization",
+        ""
+      ]
+    }
+  ],
+  "worktrees": [
+    {
+      "root": "C:\\Users\\EDDY\\Desktop\\M1A2\\air-combat-world",
+      "head": "0db84b5953eaffd75c3256ad0579f3c098dd0147",
+      "status": [
+        "## claude/vibrant-dirac-kmsuin"
+      ],
+      "xinyi_look_directory_exists": false,
+      "required_scene": "C:\\Users\\EDDY\\Desktop\\M1A2\\air-combat-world\\unreal\\Content\\XinyiLook\\L_XinyiLook_Hero.umap",
+      "required_scene_exists": false,
+      "landscape_bridge_binary_exists": false
+    },
+    {
+      "root": "C:\\Users\\EDDY\\Desktop\\M1A2\\ace-cloud-commercial-npr",
+      "head": "17809724a7278ccd817dd882fb783b3a06b66d35",
+      "status": [
+        "## research/ace-cloud-commercial-npr"
+      ],
+      "xinyi_look_directory_exists": false,
+      "required_scene": "C:\\Users\\EDDY\\Desktop\\M1A2\\ace-cloud-commercial-npr\\unreal\\Content\\XinyiLook\\L_XinyiLook_Hero.umap",
+      "required_scene_exists": false,
+      "landscape_bridge_binary_exists": false
+    },
+    {
+      "root": "C:\\Users\\EDDY\\Desktop\\M1A2\\ace-cloud-engine-b0",
+      "head": "a75ea74fcadcf73464c9aea42164dcb96b57509a",
+      "status": [
+        "## spike/ace-cloud-engine-b0"
+      ],
+      "xinyi_look_directory_exists": false,
+      "required_scene": "C:\\Users\\EDDY\\Desktop\\M1A2\\ace-cloud-engine-b0\\unreal\\Content\\XinyiLook\\L_XinyiLook_Hero.umap",
+      "required_scene_exists": false,
+      "landscape_bridge_binary_exists": false
+    },
+    {
+      "root": "C:\\Users\\EDDY\\Desktop\\M1A2\\ace-cloud-engine-b1",
+      "head": "996329258379383f6ed1d8bdb4ea992589be6c14",
+      "status": [
+        "## spike/ace-cloud-engine-b1"
+      ],
+      "xinyi_look_directory_exists": false,
+      "required_scene": "C:\\Users\\EDDY\\Desktop\\M1A2\\ace-cloud-engine-b1\\unreal\\Content\\XinyiLook\\L_XinyiLook_Hero.umap",
+      "required_scene_exists": false,
+      "landscape_bridge_binary_exists": false
+    },
+    {
+      "root": "C:\\Users\\EDDY\\Desktop\\M1A2\\ace-cloud-engine-b1-animfix",
+      "head": "abab83a84212c20406494784e7a3ea5ab4342630",
+      "status": [
+        "## spike/ace-cloud-engine-b1-animfix"
+      ],
+      "xinyi_look_directory_exists": false,
+      "required_scene": "C:\\Users\\EDDY\\Desktop\\M1A2\\ace-cloud-engine-b1-animfix\\unreal\\Content\\XinyiLook\\L_XinyiLook_Hero.umap",
+      "required_scene_exists": false,
+      "landscape_bridge_binary_exists": false
+    },
+    {
+      "root": "C:\\Users\\EDDY\\Desktop\\M1A2\\ace-cloud-engine-b2-hybrid",
+      "head": "75db0dc3189cc9501210b4580521815d57b7a9cb",
+      "status": [
+        "## spike/ace-cloud-engine-b2-hybrid"
+      ],
+      "xinyi_look_directory_exists": false,
+      "required_scene": "C:\\Users\\EDDY\\Desktop\\M1A2\\ace-cloud-engine-b2-hybrid\\unreal\\Content\\XinyiLook\\L_XinyiLook_Hero.umap",
+      "required_scene_exists": false,
+      "landscape_bridge_binary_exists": false
+    },
+    {
+      "root": "C:\\Users\\EDDY\\Desktop\\M1A2\\xinyi-material-ue58-round1",
+      "head": "ede7960d8ec05b2aa521b1e4c65b5bbd667c456d",
+      "status": [
+        "## test/xinyi-shared-masks-ue58-round1",
+        " M .gitignore",
+        " M adapters/unreal/lookdev/xinyi_look_build_assets.py",
+        " M tools/lookdev/build_far_city.py",
+        " M tools/lookdev/build_ground.py",
+        "?? adapters/unreal/lookdev/xinyi_material_ab_build.py",
+        "?? adapters/unreal/lookdev/xinyi_material_ab_capture.py",
+        "?? adapters/unreal/lookdev/xinyi_material_contract_probe.py",
+        "?? assets/",
+        "?? investigation/",
+        "?? tools/lookdev/check_xinyi_material_capture_host.ps1",
+        "?? tools/lookdev/extract_pr62_material_inputs.py",
+        "?? tools/lookdev/material_round1_shader.py",
+        "?? tools/lookdev/material_round1_shots.json",
+        "?? tools/lookdev/restore_xinyi_look_textures.py",
+        "?? tools/lookdev/run_xinyi_material_round1.ps1",
+        "?? tools/lookdev/stage_xinyi_capture_inputs.ps1",
+        "?? unreal/Content/XinyiLook/",
+        "?? unreal/Content/XinyiMaterialAB/",
+        "?? unreal/Content/XinyiV2/",
+        "?? unreal/Content/__ExternalActors__/"
+      ],
+      "xinyi_look_directory_exists": true,
+      "required_scene": "C:\\Users\\EDDY\\Desktop\\M1A2\\xinyi-material-ue58-round1\\unreal\\Content\\XinyiLook\\L_XinyiLook_Hero.umap",
+      "required_scene_exists": true,
+      "landscape_bridge_binary_exists": true
+    },
+    {
+      "root": "C:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world",
+      "head": "ff6e29c908bc8491eaf05f795d6492ac0e7811de",
+      "status": [
+        "## feat/taipei-volume-integrity-audit",
+        " M unreal/Content/Taipei/L_TaipeiGreybox_Clean.umap",
+        " M unreal/Content/Taipei/XinyiGreybox/xinyi_tile_2km_greybox/StaticMeshes/ground_plane.uasset",
+        " M unreal/Content/Taipei/XinyiGreybox/xinyi_tile_2km_greybox/StaticMeshes/hero_taipei101_placeholder.uasset",
+        " M unreal/Content/Taipei/XinyiGreybox/xinyi_tile_2km_greybox/StaticMeshes/layerA_high.uasset",
+        " M unreal/Content/Taipei/XinyiGreybox/xinyi_tile_2km_greybox/StaticMeshes/layerA_low.uasset",
+        " M unreal/Content/Taipei/XinyiGreybox/xinyi_tile_2km_greybox/StaticMeshes/layerA_mid.uasset",
+        "?? adapters/unreal/experiment_nanite.py",
+        "?? adapters/unreal/experiment_nanite2.py",
+        "?? adapters/unreal/experiment_nanite3.py",
+        "?? adapters/unreal/experiment_nanite4.py",
+        "?? adapters/unreal/probe_actor_state.py",
+        "?? adapters/unreal/probe_light_state.py",
+        "?? adapters/unreal/probe_materials.py",
+        "?? adapters/unreal/probe_tris.py",
+        "?? docs/evidence/greybox_heights_small.png",
+        "?? docs/evidence/greybox_topdown_small.png",
+        "?? unreal/.mcp.json"
+      ],
+      "xinyi_look_directory_exists": false,
+      "required_scene": "C:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\Content\\XinyiLook\\L_XinyiLook_Hero.umap",
+      "required_scene_exists": false,
+      "landscape_bridge_binary_exists": false
+    },
+    {
+      "root": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world",
+      "head": "bda62a352ada641d598106f5dd03bd99333bea6e",
+      "status": [
+        "## codex/issue8-host-gate-tooling...origin/codex/issue8-host-gate-tooling",
+        "?? data/generated/taipei/terrain/",
+        "?? unreal/Build/",
+        "?? unreal/Content/XinyiV2/",
+        "?? unreal/Content/__ExternalActors__/",
+        "?? unreal/ForestSpike/"
+      ],
+      "xinyi_look_directory_exists": false,
+      "required_scene": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\Content\\XinyiLook\\L_XinyiLook_Hero.umap",
+      "required_scene_exists": false,
+      "landscape_bridge_binary_exists": true
+    },
+    {
+      "root": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world-acacia",
+      "head": "5f30274211cf1937024ddd29a2b467b695caaa4c",
+      "status": [
+        "## lookdev/taiwan-acacia-confusa-v1...origin/lookdev/taiwan-acacia-confusa-v1"
+      ],
+      "xinyi_look_directory_exists": false,
+      "required_scene": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world-acacia\\unreal\\Content\\XinyiLook\\L_XinyiLook_Hero.umap",
+      "required_scene_exists": false,
+      "landscape_bridge_binary_exists": false
+    },
+    {
+      "root": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world-cryptomeria",
+      "head": "c56b546b57da15dfd366a7d70fc3739286d519a9",
+      "status": [
+        "## lookdev/taiwan-cryptomeria-japonica-v1...origin/lookdev/taiwan-cryptomeria-japonica-v1"
+      ],
+      "xinyi_look_directory_exists": false,
+      "required_scene": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world-cryptomeria\\unreal\\Content\\XinyiLook\\L_XinyiLook_Hero.umap",
+      "required_scene_exists": false,
+      "landscape_bridge_binary_exists": false
+    },
+    {
+      "root": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world-cryptounreal",
+      "head": "d319d43203e1a103f2ceac00a3b634e8e8d1f6fb",
+      "status": [
+        "## lookdev/taiwan-cryptomeria-unreal-v1...origin/lookdev/taiwan-cryptomeria-unreal-v1"
+      ],
+      "xinyi_look_directory_exists": false,
+      "required_scene": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world-cryptounreal\\unreal\\Content\\XinyiLook\\L_XinyiLook_Hero.umap",
+      "required_scene_exists": false,
+      "landscape_bridge_binary_exists": false
+    },
+    {
+      "root": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world-farlod",
+      "head": "099d757ddc551dde8e59c8abcfa28899a5beed3d",
+      "status": [
+        "## research/mobile-far-lod-v1...origin/research/mobile-far-lod-v1"
+      ],
+      "xinyi_look_directory_exists": false,
+      "required_scene": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world-farlod\\unreal\\Content\\XinyiLook\\L_XinyiLook_Hero.umap",
+      "required_scene_exists": false,
+      "landscape_bridge_binary_exists": false
+    },
+    {
+      "root": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world-forest-budget",
+      "head": "52df3d55619749401911eae844238463c0ded182",
+      "status": [
+        "## research/forest-tree-lod-budget-v1...origin/research/forest-tree-lod-budget-v1"
+      ],
+      "xinyi_look_directory_exists": false,
+      "required_scene": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world-forest-budget\\unreal\\Content\\XinyiLook\\L_XinyiLook_Hero.umap",
+      "required_scene_exists": false,
+      "landscape_bridge_binary_exists": false
+    },
+    {
+      "root": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world-forest-lookdev",
+      "head": "a3aaed53e8e63f289d5fbd484065326853be6f70",
+      "status": [
+        "## lookdev/forest-assets-v1...origin/lookdev/forest-assets-v1"
+      ],
+      "xinyi_look_directory_exists": false,
+      "required_scene": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world-forest-lookdev\\unreal\\Content\\XinyiLook\\L_XinyiLook_Hero.umap",
+      "required_scene_exists": false,
+      "landscape_bridge_binary_exists": false
+    },
+    {
+      "root": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world-freeflight",
+      "head": "015c8f55cec4c0fb43130b97ceb3a513f9752866",
+      "status": [
+        "## feat/android-free-flight-v1...origin/feat/android-free-flight-v1"
+      ],
+      "xinyi_look_directory_exists": false,
+      "required_scene": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world-freeflight\\unreal\\Content\\XinyiLook\\L_XinyiLook_Hero.umap",
+      "required_scene_exists": false,
+      "landscape_bridge_binary_exists": false
+    },
+    {
+      "root": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world-gfx",
+      "head": "495658419a43874e10863a2de9a3bbcef3f56d22",
+      "status": [
+        "## feat/graphics-settings-v1...origin/feat/graphics-settings-v1"
+      ],
+      "xinyi_look_directory_exists": false,
+      "required_scene": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world-gfx\\unreal\\Content\\XinyiLook\\L_XinyiLook_Hero.umap",
+      "required_scene_exists": false,
+      "landscape_bridge_binary_exists": false
+    },
+    {
+      "root": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world-hillside-forest",
+      "head": "b1da16df760da03775a8c22e5a0031371bd94659",
+      "status": [
+        "## lookdev/taiwan-hillside-forest-v1...origin/lookdev/taiwan-hillside-forest-v1"
+      ],
+      "xinyi_look_directory_exists": false,
+      "required_scene": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world-hillside-forest\\unreal\\Content\\XinyiLook\\L_XinyiLook_Hero.umap",
+      "required_scene_exists": false,
+      "landscape_bridge_binary_exists": false
+    },
+    {
+      "root": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world-ntw",
+      "head": "e310675a6b390b1853e1cae0adde4b68388ea53b",
+      "status": [
+        "## feat/ntw-phase2b-seam-lod-closure...origin/feat/ntw-phase2b-seam-lod-closure"
+      ],
+      "xinyi_look_directory_exists": false,
+      "required_scene": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world-ntw\\unreal\\Content\\XinyiLook\\L_XinyiLook_Hero.umap",
+      "required_scene_exists": false,
+      "landscape_bridge_binary_exists": false
+    },
+    {
+      "root": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world-ntwforest",
+      "head": "81669a378744c75e3b198a93873ffde36c410149",
+      "status": [
+        "## feat/ntw-forest-integration-v1...origin/feat/ntw-forest-integration-v1"
+      ],
+      "xinyi_look_directory_exists": false,
+      "required_scene": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world-ntwforest\\unreal\\Content\\XinyiLook\\L_XinyiLook_Hero.umap",
+      "required_scene_exists": false,
+      "landscape_bridge_binary_exists": false
+    },
+    {
+      "root": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world-ntwforest-dl",
+      "head": "7d4058cc424f454c4be60905d4cae3bbda223ee9",
+      "status": [
+        "## feat/ntw-forest-distance-layer-lookdev-v1...origin/feat/ntw-forest-distance-layer-lookdev-v1"
+      ],
+      "xinyi_look_directory_exists": false,
+      "required_scene": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world-ntwforest-dl\\unreal\\Content\\XinyiLook\\L_XinyiLook_Hero.umap",
+      "required_scene_exists": false,
+      "landscape_bridge_binary_exists": false
+    },
+    {
+      "root": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world-ntwforest-gate",
+      "head": "8d0e14dcfea4458d2ad3f1739c736269693dbc11",
+      "status": [
+        "## gate/ntw-forest-runtime...origin/gate/ntw-forest-runtime"
+      ],
+      "xinyi_look_directory_exists": false,
+      "required_scene": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world-ntwforest-gate\\unreal\\Content\\XinyiLook\\L_XinyiLook_Hero.umap",
+      "required_scene_exists": false,
+      "landscape_bridge_binary_exists": false
+    },
+    {
+      "root": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world-ntwforest-mobile",
+      "head": "aa414f50f7cb4936a2025761f9c326a17ebe5f3e",
+      "status": [
+        "## feat/ntw-forest-mobile-profile-v1...origin/feat/ntw-forest-mobile-profile-v1"
+      ],
+      "xinyi_look_directory_exists": false,
+      "required_scene": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world-ntwforest-mobile\\unreal\\Content\\XinyiLook\\L_XinyiLook_Hero.umap",
+      "required_scene_exists": false,
+      "landscape_bridge_binary_exists": false
+    },
+    {
+      "root": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world-ntwforest-perf",
+      "head": "7578b9627ae71c79e5f81df2a4baf4526b650daa",
+      "status": [
+        "## perf/ntw-forest-distance-optimization...origin/perf/ntw-forest-distance-optimization"
+      ],
+      "xinyi_look_directory_exists": false,
+      "required_scene": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world-ntwforest-perf\\unreal\\Content\\XinyiLook\\L_XinyiLook_Hero.umap",
+      "required_scene_exists": false,
+      "landscape_bridge_binary_exists": false
+    }
+  ],
+  "protected_content_hashes": [
+    {
+      "path": "C:\\Users\\EDDY\\Desktop\\M1A2\\air-combat-world\\unreal\\Content\\Taipei\\L_TaipeiGreybox_Clean.umap",
+      "bytes": 32398,
+      "sha256": "d54614ab6a2c9a068e96a3f065c4a55d4b9e9ca4933a4892be288ea6381d03ae"
+    },
+    {
+      "path": "C:\\Users\\EDDY\\Desktop\\M1A2\\air-combat-world\\unreal\\Content\\Taipei\\L_TaipeiGreybox.umap",
+      "bytes": 23902,
+      "sha256": "86db8ec7d1cd0850f4b4e6d7adb29177765a19c46927a275a484a533bd9040f7"
+    },
+    {
+      "path": "C:\\Users\\EDDY\\Desktop\\M1A2\\air-combat-world\\unreal\\Content\\Taipei\\xinyi_tile_2km\\Materials\\massing_grey.uasset",
+      "bytes": 68482,
+      "sha256": "df8e3cf12da4d2a3c65edfa8cfb59a2a6b30e0ba658021ffcc5dc630a361197a"
+    },
+    {
+      "path": "C:\\Users\\EDDY\\Desktop\\M1A2\\air-combat-world\\unreal\\Content\\Taipei\\xinyi_tile_2km\\StaticMeshes\\hero_taipei101_placeholder.uasset",
+      "bytes": 81553,
+      "sha256": "401615adf1beb62e2c2eaabe5782fa6c89971249d01eacbb8d0ce8fa254b34d2"
+    },
+    {
+      "path": "C:\\Users\\EDDY\\Desktop\\M1A2\\air-combat-world\\unreal\\Content\\Taipei\\xinyi_tile_2km\\StaticMeshes\\layerA_city_massing.uasset",
+      "bytes": 915355,
+      "sha256": "01d1ad6aec2d9eb5145fd8b0520a831ad46acafed8bbfe2826faeb0743511a42"
+    },
+    {
+      "path": "C:\\Users\\EDDY\\Desktop\\M1A2\\air-combat-world\\unreal\\Content\\Taipei\\XinyiGreybox\\xinyi_tile_2km_greybox\\Materials\\ground_plane_mat.uasset",
+      "bytes": 64922,
+      "sha256": "0f56b3b438679189dfa78938bb90bbb836ddbd530e82890ebc870bb84c010cc2"
+    },
+    {
+      "path": "C:\\Users\\EDDY\\Desktop\\M1A2\\air-combat-world\\unreal\\Content\\Taipei\\XinyiGreybox\\xinyi_tile_2km_greybox\\Materials\\hero_taipei101_placeholder_mat.uasset",
+      "bytes": 65090,
+      "sha256": "2472ac266b630579e666e4b577cd7701fe0b3dc028e17c61a0690f38eb101980"
+    },
+    {
+      "path": "C:\\Users\\EDDY\\Desktop\\M1A2\\air-combat-world\\unreal\\Content\\Taipei\\XinyiGreybox\\xinyi_tile_2km_greybox\\Materials\\layerA_high_mat.uasset",
+      "bytes": 64910,
+      "sha256": "4c156dba361fb8168e2affbf27ecd938ed125111a3ed86c9c87af2ca5c8fb770"
+    },
+    {
+      "path": "C:\\Users\\EDDY\\Desktop\\M1A2\\air-combat-world\\unreal\\Content\\Taipei\\XinyiGreybox\\xinyi_tile_2km_greybox\\Materials\\layerA_low_mat.uasset",
+      "bytes": 68680,
+      "sha256": "e62eceb6a4c77f4344bb0bfb2521685f4bc6cd9d9162f970ad8e4cec8f7cacd2"
+    },
+    {
+      "path": "C:\\Users\\EDDY\\Desktop\\M1A2\\air-combat-world\\unreal\\Content\\Taipei\\XinyiGreybox\\xinyi_tile_2km_greybox\\Materials\\layerA_mid_mat.uasset",
+      "bytes": 64898,
+      "sha256": "ed201be75e28d374b109001615c6ea323ac69e20e4055ec6eca2cb3915093a3d"
+    },
+    {
+      "path": "C:\\Users\\EDDY\\Desktop\\M1A2\\air-combat-world\\unreal\\Content\\Taipei\\XinyiGreybox\\xinyi_tile_2km_greybox\\StaticMeshes\\ground_plane.uasset",
+      "bytes": 80175,
+      "sha256": "db68cecf34ba23a321166e3a9c79445d3e6cda019503cdbfb3bae65a9ec4bb89"
+    },
+    {
+      "path": "C:\\Users\\EDDY\\Desktop\\M1A2\\air-combat-world\\unreal\\Content\\Taipei\\XinyiGreybox\\xinyi_tile_2km_greybox\\StaticMeshes\\hero_taipei101_placeholder.uasset",
+      "bytes": 81639,
+      "sha256": "0df38f7ebb9e8189a02726fe8b8654e49c9a3ea4a887e9bdafdbba638cbadc5c"
+    },
+    {
+      "path": "C:\\Users\\EDDY\\Desktop\\M1A2\\air-combat-world\\unreal\\Content\\Taipei\\XinyiGreybox\\xinyi_tile_2km_greybox\\StaticMeshes\\layerA_high.uasset",
+      "bytes": 133742,
+      "sha256": "691893216f18061160152213683bf8f0b6f3ca3887ecdd3272b2ec9a00647931"
+    },
+    {
+      "path": "C:\\Users\\EDDY\\Desktop\\M1A2\\air-combat-world\\unreal\\Content\\Taipei\\XinyiGreybox\\xinyi_tile_2km_greybox\\StaticMeshes\\layerA_low.uasset",
+      "bytes": 586688,
+      "sha256": "8e280ac92e2a5d59f563ff5794bba4bc131e1d5d28b452f1f2085b6f9784aa61"
+    },
+    {
+      "path": "C:\\Users\\EDDY\\Desktop\\M1A2\\air-combat-world\\unreal\\Content\\Taipei\\XinyiGreybox\\xinyi_tile_2km_greybox\\StaticMeshes\\layerA_mid.uasset",
+      "bytes": 442566,
+      "sha256": "2ab4484c489a3aac8d15ae9d8d497d11afffc6fae00ce3bd76644b9e962d35e0"
+    },
+    {
+      "path": "C:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\Content\\Taipei\\L_TaipeiGreybox_Clean.umap",
+      "bytes": 31909,
+      "sha256": "759966e58cb1e9c77f94aa86216b6a324c770eaec2e1e4277d8af5f33b1b55fe"
+    },
+    {
+      "path": "C:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\Content\\Taipei\\L_TaipeiGreybox.umap",
+      "bytes": 23902,
+      "sha256": "86db8ec7d1cd0850f4b4e6d7adb29177765a19c46927a275a484a533bd9040f7"
+    },
+    {
+      "path": "C:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\Content\\Taipei\\xinyi_tile_2km\\Materials\\massing_grey.uasset",
+      "bytes": 68482,
+      "sha256": "df8e3cf12da4d2a3c65edfa8cfb59a2a6b30e0ba658021ffcc5dc630a361197a"
+    },
+    {
+      "path": "C:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\Content\\Taipei\\xinyi_tile_2km\\StaticMeshes\\hero_taipei101_placeholder.uasset",
+      "bytes": 81553,
+      "sha256": "401615adf1beb62e2c2eaabe5782fa6c89971249d01eacbb8d0ce8fa254b34d2"
+    },
+    {
+      "path": "C:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\Content\\Taipei\\xinyi_tile_2km\\StaticMeshes\\layerA_city_massing.uasset",
+      "bytes": 915355,
+      "sha256": "01d1ad6aec2d9eb5145fd8b0520a831ad46acafed8bbfe2826faeb0743511a42"
+    },
+    {
+      "path": "C:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\Content\\Taipei\\XinyiGreybox\\xinyi_tile_2km_greybox\\Materials\\ground_plane_mat.uasset",
+      "bytes": 64922,
+      "sha256": "0f56b3b438679189dfa78938bb90bbb836ddbd530e82890ebc870bb84c010cc2"
+    },
+    {
+      "path": "C:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\Content\\Taipei\\XinyiGreybox\\xinyi_tile_2km_greybox\\Materials\\hero_taipei101_placeholder_mat.uasset",
+      "bytes": 65090,
+      "sha256": "2472ac266b630579e666e4b577cd7701fe0b3dc028e17c61a0690f38eb101980"
+    },
+    {
+      "path": "C:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\Content\\Taipei\\XinyiGreybox\\xinyi_tile_2km_greybox\\Materials\\layerA_high_mat.uasset",
+      "bytes": 64910,
+      "sha256": "4c156dba361fb8168e2affbf27ecd938ed125111a3ed86c9c87af2ca5c8fb770"
+    },
+    {
+      "path": "C:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\Content\\Taipei\\XinyiGreybox\\xinyi_tile_2km_greybox\\Materials\\layerA_low_mat.uasset",
+      "bytes": 68680,
+      "sha256": "e62eceb6a4c77f4344bb0bfb2521685f4bc6cd9d9162f970ad8e4cec8f7cacd2"
+    },
+    {
+      "path": "C:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\Content\\Taipei\\XinyiGreybox\\xinyi_tile_2km_greybox\\Materials\\layerA_mid_mat.uasset",
+      "bytes": 64898,
+      "sha256": "ed201be75e28d374b109001615c6ea323ac69e20e4055ec6eca2cb3915093a3d"
+    },
+    {
+      "path": "C:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\Content\\Taipei\\XinyiGreybox\\xinyi_tile_2km_greybox\\StaticMeshes\\ground_plane.uasset",
+      "bytes": 80175,
+      "sha256": "2e60837a95dca87434e57d325ecbaacfda2967509b8a1fadba0a93f9cb24acbe"
+    },
+    {
+      "path": "C:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\Content\\Taipei\\XinyiGreybox\\xinyi_tile_2km_greybox\\StaticMeshes\\hero_taipei101_placeholder.uasset",
+      "bytes": 81639,
+      "sha256": "44171f1e852ff264a27cae41b0fb6e3bdd9160157034a88c7f58a0224a21df01"
+    },
+    {
+      "path": "C:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\Content\\Taipei\\XinyiGreybox\\xinyi_tile_2km_greybox\\StaticMeshes\\layerA_high.uasset",
+      "bytes": 132269,
+      "sha256": "a69208bcad980a39792e8a843a525462d260c56ecbaa95ad67a87c9d03efea81"
+    },
+    {
+      "path": "C:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\Content\\Taipei\\XinyiGreybox\\xinyi_tile_2km_greybox\\StaticMeshes\\layerA_low.uasset",
+      "bytes": 583461,
+      "sha256": "f27376fda429f3acaa8c6504e88ae6c8f8ba9c13b919ff3ea896d6bd3ffbd196"
+    },
+    {
+      "path": "C:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\Content\\Taipei\\XinyiGreybox\\xinyi_tile_2km_greybox\\StaticMeshes\\layerA_mid.uasset",
+      "bytes": 439736,
+      "sha256": "58ba66c2ab0699b165d2ce553fd17dc6fec4bb5b1b6e560344ddb2a5768b1d52"
+    },
+    {
+      "path": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\Content\\__ExternalActors__\\XinyiV2\\L_XinyiV2_Contract_WP\\1\\QX\\AAO905R7ABF43SHPNX1YS0.uasset",
+      "bytes": 3947,
+      "sha256": "a6d5f706e68a0ad2977ddc6a30ed6e0815300b99d629f3941ceff2ae6b3555c1"
+    },
+    {
+      "path": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\Content\\__ExternalActors__\\XinyiV2\\L_XinyiV2_Contract_WP\\1\\R9\\9VUXFWIV4Q31SKXXKLSW7H.uasset",
+      "bytes": 4768,
+      "sha256": "3b53e00d58585e4d13872c496e9d82c4407193d9bb361a5e0d68aafa15274079"
+    },
+    {
+      "path": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\Content\\__ExternalActors__\\XinyiV2\\L_XinyiV2_Contract_WP\\1\\X3\\RFQ977QGE9AYK9JYFFSZDR.uasset",
+      "bytes": 3947,
+      "sha256": "8e225b5df76777a19389ee04785f2743212487f671755b5154ce30debfdc4a89"
+    },
+    {
+      "path": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\Content\\__ExternalActors__\\XinyiV2\\L_XinyiV2_Contract_WP\\1\\YX\\NBGK23HDY18VOZ953VSYHG.uasset",
+      "bytes": 3947,
+      "sha256": "2bdadf76b26129d82d825d99d13595da1307c25bb0b022b910fc59bc486e811b"
+    },
+    {
+      "path": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\Content\\__ExternalActors__\\XinyiV2\\L_XinyiV2_Contract_WP\\2\\6S\\655T55YL0AYKGYJ02GRI8G.uasset",
+      "bytes": 3946,
+      "sha256": "c7cc5c66a18574b3fac044e8697b7c7f2d30be794af7c331ad04562a31ad4f42"
+    },
+    {
+      "path": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\Content\\__ExternalActors__\\XinyiV2\\L_XinyiV2_Contract_WP\\2\\73\\BAQEXC3KIKHUF0YRFDB7IS.uasset",
+      "bytes": 3947,
+      "sha256": "ea607e83411ec75a12deb97ec18daa0d2ea3397fe316699e628b83fd85031967"
+    },
+    {
+      "path": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\Content\\__ExternalActors__\\XinyiV2\\L_XinyiV2_Contract_WP\\2\\M6\\CU4OFB6NECFR3L2F55ZVKR.uasset",
+      "bytes": 3946,
+      "sha256": "0af8944cc3ac5a4ef44a81329309f54095572414ded758eb8eb60f2ed2d036a0"
+    },
+    {
+      "path": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\Content\\__ExternalActors__\\XinyiV2\\L_XinyiV2_Contract_WP\\2\\MT\\8Y886FDP3LQLHILWGPC59H.uasset",
+      "bytes": 3946,
+      "sha256": "4820e7689f153737678db617dcf5d0c129915264f60696fec94b513392856f5a"
+    },
+    {
+      "path": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\Content\\__ExternalActors__\\XinyiV2\\L_XinyiV2_Contract_WP\\2\\VQ\\M3YJDVA74O5NS9YRTQ6QVR.uasset",
+      "bytes": 2264,
+      "sha256": "79d09a3e378abe046a04d8ac8a65803fe0447f3d1903bead5848887423ff63a2"
+    },
+    {
+      "path": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\Content\\__ExternalActors__\\XinyiV2\\L_XinyiV2_Contract_WP\\3\\3B\\AFDPMTI8M7D0ZZ65YR8DHO.uasset",
+      "bytes": 879605,
+      "sha256": "b85e071600add301daccc99941928bc83ff04c163b0f36b23869b715b654fd9c"
+    },
+    {
+      "path": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\Content\\__ExternalActors__\\XinyiV2\\L_XinyiV2_Contract_WP\\3\\6J\\0ERPVK1PY909SAWHVZBYOD.uasset",
+      "bytes": 3947,
+      "sha256": "70140e3766551db2d97b78c6f0a612df86725ee561730168c4f87e2635414f47"
+    },
+    {
+      "path": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\Content\\__ExternalActors__\\XinyiV2\\L_XinyiV2_Contract_WP\\3\\Q9\\BL2U1ESJRI42XLGK2S9XE1.uasset",
+      "bytes": 3946,
+      "sha256": "cc30d8923d8024e83049e04ef45e2e32a91e1e255f6b98e724647e440ff22275"
+    },
+    {
+      "path": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\Content\\__ExternalActors__\\XinyiV2\\L_XinyiV2_Contract_WP\\3\\RA\\UFAUUW2G91XOC4LSCNZODD.uasset",
+      "bytes": 3946,
+      "sha256": "638a59009fd3befcfbe652786c568bcb1184e292392844c70c75258d085f7023"
+    },
+    {
+      "path": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\Content\\__ExternalActors__\\XinyiV2\\L_XinyiV2_Contract_WP\\4\\MS\\YTNLO7X17PDZC5E91AH73B.uasset",
+      "bytes": 3947,
+      "sha256": "3e372fa97909ab84c4246a22aca4f02b046757771626ccd5bad84b74a44d4c90"
+    },
+    {
+      "path": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\Content\\__ExternalActors__\\XinyiV2\\L_XinyiV2_Contract_WP\\4\\UL\\HU6ACAC93UEWVKGF5I1TA1.uasset",
+      "bytes": 235942,
+      "sha256": "ec748cccec514b1d01ac449127e5935c6e62faebc613e2d2218a8e38c9f6d39f"
+    },
+    {
+      "path": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\Content\\__ExternalActors__\\XinyiV2\\L_XinyiV2_Contract_WP\\6\\6C\\95B0Y6HOIWJJPCCD7XG6ID.uasset",
+      "bytes": 81144,
+      "sha256": "dc59adcc09a275bcb13448af316db50c8f59baec60fc46c2964bc784b78d0d6a"
+    },
+    {
+      "path": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\Content\\__ExternalActors__\\XinyiV2\\L_XinyiV2_Contract_WP\\6\\G0\\K53XLUOGIW6DCD4PDTN1ZR.uasset",
+      "bytes": 241981,
+      "sha256": "5f7f0f8f18b5247eb717857d4af260ae264b0334bf56e5c6cce7d3a582f0577a"
+    },
+    {
+      "path": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\Content\\__ExternalActors__\\XinyiV2\\L_XinyiV2_Contract_WP\\6\\JJ\\TW5B7D2A7DGSD08MBNKIS2.uasset",
+      "bytes": 3947,
+      "sha256": "a130432780d659ddb677d5343a25c9ac61123f4550de1b8bb0698fab25fc8157"
+    },
+    {
+      "path": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\Content\\__ExternalActors__\\XinyiV2\\L_XinyiV2_Contract_WP\\7\\QR\\EFWCYQI5XWLTR7NKVR3DVT.uasset",
+      "bytes": 3947,
+      "sha256": "5824a628ec9949fb4ad44f051d76e40f3d86ad1779c5b36c882f77415d351ae9"
+    },
+    {
+      "path": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\Content\\__ExternalActors__\\XinyiV2\\L_XinyiV2_Contract_WP\\7\\WJ\\KD7TM52K3EYLKJK1FU1K31.uasset",
+      "bytes": 3947,
+      "sha256": "a9273eb87e9e0c12f97c46a70a32790c8cd65903d6ff08cc3b69bd286d9e3fbd"
+    },
+    {
+      "path": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\Content\\__ExternalActors__\\XinyiV2\\L_XinyiV2_Contract_WP\\8\\3N\\FHVCOJ254WTSVYN4WWFQ3K.uasset",
+      "bytes": 2286,
+      "sha256": "80581af4e15fc54bdbc74d585c382a136973b14a4a7446c3d9a2e49e6e87dea6"
+    },
+    {
+      "path": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\Content\\__ExternalActors__\\XinyiV2\\L_XinyiV2_Contract_WP\\8\\74\\57G4V04ZCGROKN1IH4ALGQ.uasset",
+      "bytes": 3947,
+      "sha256": "73ff1df067a5e3c1bb5f702d8641dc30aeac712c09ecf3ad653a0b4c76701cac"
+    },
+    {
+      "path": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\Content\\__ExternalActors__\\XinyiV2\\L_XinyiV2_Contract_WP\\9\\GY\\CDVDVLJFYDHFW167T2B5NS.uasset",
+      "bytes": 3946,
+      "sha256": "c1f025ed80ccd802defb2d19f78d9e0201c5040ed769caebe7afc358e6c3eec3"
+    },
+    {
+      "path": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\Content\\__ExternalActors__\\XinyiV2\\L_XinyiV2_Contract_WP\\A\\IH\\UHJ09FD4DR162CZMZTRRGC.uasset",
+      "bytes": 3947,
+      "sha256": "e2f66ccaf52318fcdec48d1d42a1dcfa56fb2e342adea2b3dc7d17fa3177e978"
+    },
+    {
+      "path": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\Content\\__ExternalActors__\\XinyiV2\\L_XinyiV2_Contract_WP\\C\\D5\\A5MHNQ9VWPDQOU8VZJ16SR.uasset",
+      "bytes": 3946,
+      "sha256": "6025bf170cfe4a7ef78227c31e89c4777f127761a4e2a875de34a283e29630d3"
+    },
+    {
+      "path": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\Content\\__ExternalActors__\\XinyiV2\\L_XinyiV2_Contract_WP\\C\\OC\\T6843XQBXXMQPY6P68AONO.uasset",
+      "bytes": 3947,
+      "sha256": "ebab0b7957f5be63cbc6556bcb59deae86ec29b6358347adf317769347e18f93"
+    },
+    {
+      "path": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\Content\\__ExternalActors__\\XinyiV2\\L_XinyiV2_Contract_WP\\C\\UU\\AL4S3JNYZU4LNFQQVFR00M.uasset",
+      "bytes": 3947,
+      "sha256": "37728ab38b17af8ab5896a046d52728396d16beaedd6a6f7e52012b94725de2e"
+    },
+    {
+      "path": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\Content\\__ExternalActors__\\XinyiV2\\L_XinyiV2_Contract_WP\\D\\UJ\\5CUJ5SZMCHSFLA42DHQYT3.uasset",
+      "bytes": 3946,
+      "sha256": "ac61a16bb7805c81e4968ab81edf3c4734bbc4691585215c87599614f5468b5b"
+    },
+    {
+      "path": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\Content\\__ExternalActors__\\XinyiV2\\L_XinyiV2_Contract_WP\\E\\1K\\7VRCB54LQNP38PQ8AVE56P.uasset",
+      "bytes": 3947,
+      "sha256": "2091d9ece34ac7fef3fe9556dd51f80c7e1b774ad944cb834ac1d4c14ef66440"
+    },
+    {
+      "path": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\Content\\__ExternalActors__\\XinyiV2\\L_XinyiV2_Contract_WP\\E\\CL\\FQBOBU5BTJBQS4H67XS73C.uasset",
+      "bytes": 3947,
+      "sha256": "eb90502573bbc2a2feecb695eab13f3e16d13dee72091b573c849a285281630e"
+    },
+    {
+      "path": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\Content\\__ExternalActors__\\XinyiV2\\L_XinyiV2_Contract_WP\\E\\FR\\N95AMXT2XH2E4XFCRTAQOX.uasset",
+      "bytes": 3946,
+      "sha256": "912269797507ffbd6b0250963ffa8594b428d4ce71b92778ebd826d71ad87345"
+    },
+    {
+      "path": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\Content\\__ExternalActors__\\XinyiV2\\L_XinyiV2_Contract_WP\\E\\P3\\LCAB4OO7CGS2TAEI2RMOGT.uasset",
+      "bytes": 3946,
+      "sha256": "2f249033b08f8d82b4dcac75908e6efd0202d9429a4a5f25ac9caae07dec3067"
+    },
+    {
+      "path": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\Content\\Taipei\\L_TaipeiGreybox_Clean.umap",
+      "bytes": 32398,
+      "sha256": "d54614ab6a2c9a068e96a3f065c4a55d4b9e9ca4933a4892be288ea6381d03ae"
+    },
+    {
+      "path": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\Content\\Taipei\\L_TaipeiGreybox.umap",
+      "bytes": 23902,
+      "sha256": "86db8ec7d1cd0850f4b4e6d7adb29177765a19c46927a275a484a533bd9040f7"
+    },
+    {
+      "path": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\Content\\Taipei\\xinyi_tile_2km\\Materials\\massing_grey.uasset",
+      "bytes": 68482,
+      "sha256": "df8e3cf12da4d2a3c65edfa8cfb59a2a6b30e0ba658021ffcc5dc630a361197a"
+    },
+    {
+      "path": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\Content\\Taipei\\xinyi_tile_2km\\StaticMeshes\\hero_taipei101_placeholder.uasset",
+      "bytes": 81553,
+      "sha256": "401615adf1beb62e2c2eaabe5782fa6c89971249d01eacbb8d0ce8fa254b34d2"
+    },
+    {
+      "path": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\Content\\Taipei\\xinyi_tile_2km\\StaticMeshes\\layerA_city_massing.uasset",
+      "bytes": 915355,
+      "sha256": "01d1ad6aec2d9eb5145fd8b0520a831ad46acafed8bbfe2826faeb0743511a42"
+    },
+    {
+      "path": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\Content\\Taipei\\XinyiGreybox\\xinyi_tile_2km_greybox\\Materials\\ground_plane_mat.uasset",
+      "bytes": 64922,
+      "sha256": "0f56b3b438679189dfa78938bb90bbb836ddbd530e82890ebc870bb84c010cc2"
+    },
+    {
+      "path": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\Content\\Taipei\\XinyiGreybox\\xinyi_tile_2km_greybox\\Materials\\hero_taipei101_placeholder_mat.uasset",
+      "bytes": 65090,
+      "sha256": "2472ac266b630579e666e4b577cd7701fe0b3dc028e17c61a0690f38eb101980"
+    },
+    {
+      "path": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\Content\\Taipei\\XinyiGreybox\\xinyi_tile_2km_greybox\\Materials\\layerA_high_mat.uasset",
+      "bytes": 64910,
+      "sha256": "4c156dba361fb8168e2affbf27ecd938ed125111a3ed86c9c87af2ca5c8fb770"
+    },
+    {
+      "path": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\Content\\Taipei\\XinyiGreybox\\xinyi_tile_2km_greybox\\Materials\\layerA_low_mat.uasset",
+      "bytes": 68680,
+      "sha256": "e62eceb6a4c77f4344bb0bfb2521685f4bc6cd9d9162f970ad8e4cec8f7cacd2"
+    },
+    {
+      "path": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\Content\\Taipei\\XinyiGreybox\\xinyi_tile_2km_greybox\\Materials\\layerA_mid_mat.uasset",
+      "bytes": 64898,
+      "sha256": "ed201be75e28d374b109001615c6ea323ac69e20e4055ec6eca2cb3915093a3d"
+    },
+    {
+      "path": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\Content\\Taipei\\XinyiGreybox\\xinyi_tile_2km_greybox\\StaticMeshes\\ground_plane.uasset",
+      "bytes": 80175,
+      "sha256": "db68cecf34ba23a321166e3a9c79445d3e6cda019503cdbfb3bae65a9ec4bb89"
+    },
+    {
+      "path": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\Content\\Taipei\\XinyiGreybox\\xinyi_tile_2km_greybox\\StaticMeshes\\hero_taipei101_placeholder.uasset",
+      "bytes": 81639,
+      "sha256": "0df38f7ebb9e8189a02726fe8b8654e49c9a3ea4a887e9bdafdbba638cbadc5c"
+    },
+    {
+      "path": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\Content\\Taipei\\XinyiGreybox\\xinyi_tile_2km_greybox\\StaticMeshes\\layerA_high.uasset",
+      "bytes": 133742,
+      "sha256": "691893216f18061160152213683bf8f0b6f3ca3887ecdd3272b2ec9a00647931"
+    },
+    {
+      "path": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\Content\\Taipei\\XinyiGreybox\\xinyi_tile_2km_greybox\\StaticMeshes\\layerA_low.uasset",
+      "bytes": 586688,
+      "sha256": "8e280ac92e2a5d59f563ff5794bba4bc131e1d5d28b452f1f2085b6f9784aa61"
+    },
+    {
+      "path": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\Content\\Taipei\\XinyiGreybox\\xinyi_tile_2km_greybox\\StaticMeshes\\layerA_mid.uasset",
+      "bytes": 442566,
+      "sha256": "2ab4484c489a3aac8d15ae9d8d497d11afffc6fae00ce3bd76644b9e962d35e0"
+    },
+    {
+      "path": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\Content\\XinyiV2\\L_XinyiV2_Contract_HLODLayer_Instanced.uasset",
+      "bytes": 1772,
+      "sha256": "ccc239c107f2d697ed84cccb66256745580d7c4e4933ee9215c2865889c68f76"
+    },
+    {
+      "path": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\Content\\XinyiV2\\L_XinyiV2_Contract_HLODLayer_Merged.uasset",
+      "bytes": 3078,
+      "sha256": "476833cfd79c3e165d91f675f80f3372eafb7e1d1456fb13b6ef76ed0c393b88"
+    },
+    {
+      "path": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\Content\\XinyiV2\\L_XinyiV2_Contract_WP.umap",
+      "bytes": 13295,
+      "sha256": "d86c86eb7c7377e8256cf7f7f65d6cf82ef2f328a9cbfbe9814fcd238a8dd632"
+    },
+    {
+      "path": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\Content\\XinyiV2\\L_XinyiV2_Contract.ini",
+      "bytes": 760,
+      "sha256": "416700332ebe73cb66006fd92a17b8e509375715cd7a97c3464ec55e7830c1d9"
+    },
+    {
+      "path": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\Content\\XinyiV2\\L_XinyiV2_Contract.umap",
+      "bytes": 1987039,
+      "sha256": "7592f40b655cba7dd48a5b3bd8443dfb0ef04bba6244c2620b944b46d387459f"
+    },
+    {
+      "path": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\Content\\XinyiV2\\QA\\M_XinyiV2_BuildingWhitebox.uasset",
+      "bytes": 9195,
+      "sha256": "001c780195bfd72d905897397e5165816b48ebee6c0a9b14e61527adb3bf850a"
+    },
+    {
+      "path": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\Content\\XinyiV2\\QA\\M_XinyiV2_TerrainWhitebox.uasset",
+      "bytes": 9412,
+      "sha256": "d34453d99296408f7c601c4e6984d9420f32e46652881d99ef4483812a5fa4f6"
+    },
+    {
+      "path": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\Content\\XinyiV2\\RuntimeBuildings\\m001_m001\\xinyi_runtime_-001_-001\\StaticMeshes\\xinyi_runtime_-001_-001.uasset",
+      "bytes": 488460,
+      "sha256": "0ece86aba35992db1cddcbc8f305f273c81335b3444ff0fdec99df8accca47b2"
+    },
+    {
+      "path": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\Content\\XinyiV2\\RuntimeBuildings\\m001_m002\\xinyi_runtime_-001_-002\\StaticMeshes\\xinyi_runtime_-001_-002.uasset",
+      "bytes": 498939,
+      "sha256": "8e7f6c2260fdaf30b9899109e4dc5eac015742e4f06b94a27712cef6dd500326"
+    },
+    {
+      "path": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\Content\\XinyiV2\\RuntimeBuildings\\m001_p000\\xinyi_runtime_-001_+000\\StaticMeshes\\xinyi_runtime_-001_+000.uasset",
+      "bytes": 263502,
+      "sha256": "8dde3872ac160874079e1c88e1e7194c5c143d1c741083b20c1ba96732759f5f"
+    },
+    {
+      "path": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\Content\\XinyiV2\\RuntimeBuildings\\m001_p001\\xinyi_runtime_-001_+001\\StaticMeshes\\xinyi_runtime_-001_+001.uasset",
+      "bytes": 247288,
+      "sha256": "4effecf143f1b9ca79c28d6037110ec3275f25dab41c83e49cca05ceec3a1657"
+    },
+    {
+      "path": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\Content\\XinyiV2\\RuntimeBuildings\\m001_p002\\xinyi_runtime_-001_+002\\StaticMeshes\\xinyi_runtime_-001_+002.uasset",
+      "bytes": 140808,
+      "sha256": "1c63b866961e47545ace3cd4807647056430d2b6055f3163728cc8091c22cd2a"
+    },
+    {
+      "path": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\Content\\XinyiV2\\RuntimeBuildings\\m002_m001\\xinyi_runtime_-002_-001\\StaticMeshes\\xinyi_runtime_-002_-001.uasset",
+      "bytes": 675012,
+      "sha256": "168e0a2bfe79bb3a35d3580e80495cbf0f547908d1cf2b9ca5624882c4f8678b"
+    },
+    {
+      "path": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\Content\\XinyiV2\\RuntimeBuildings\\m002_m002\\xinyi_runtime_-002_-002\\StaticMeshes\\xinyi_runtime_-002_-002.uasset",
+      "bytes": 437627,
+      "sha256": "ebec9890e61b1a5f47838f8321529ad9d44b4f6fe6cfced0c8dfa25045d04267"
+    },
+    {
+      "path": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\Content\\XinyiV2\\RuntimeBuildings\\m002_p000\\xinyi_runtime_-002_+000\\StaticMeshes\\xinyi_runtime_-002_+000.uasset",
+      "bytes": 599590,
+      "sha256": "e7f97a572300abea16c10d125366f90970382b5ebc3c81b1b586079eb25ce97b"
+    },
+    {
+      "path": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\Content\\XinyiV2\\RuntimeBuildings\\m002_p001\\xinyi_runtime_-002_+001\\StaticMeshes\\xinyi_runtime_-002_+001.uasset",
+      "bytes": 264055,
+      "sha256": "11b63bad55dc61ea21245e1ed15e410aa3befbb8fcfb26832ca35eef2b65ba7b"
+    },
+    {
+      "path": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\Content\\XinyiV2\\RuntimeBuildings\\m002_p002\\xinyi_runtime_-002_+002\\StaticMeshes\\xinyi_runtime_-002_+002.uasset",
+      "bytes": 136528,
+      "sha256": "4d3e0238ccec8cdfc27144a4d1021c9a399d277aad8db95710f555ae75f42833"
+    },
+    {
+      "path": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\Content\\XinyiV2\\RuntimeBuildings\\m003_m001\\xinyi_runtime_-003_-001\\StaticMeshes\\xinyi_runtime_-003_-001.uasset",
+      "bytes": 338649,
+      "sha256": "3e3f28bf4af2d13384a76a8bc8e083a9c4525dc1b6d3d3d34339da96fbde7c3f"
+    },
+    {
+      "path": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\Content\\XinyiV2\\RuntimeBuildings\\m003_m002\\xinyi_runtime_-003_-002\\StaticMeshes\\xinyi_runtime_-003_-002.uasset",
+      "bytes": 204508,
+      "sha256": "c973ab9c3db152760dab687ed1075196e7791600cd3a2d5357429880f87fa708"
+    },
+    {
+      "path": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\Content\\XinyiV2\\RuntimeBuildings\\m003_p000\\xinyi_runtime_-003_+000\\StaticMeshes\\xinyi_runtime_-003_+000.uasset",
+      "bytes": 224510,
+      "sha256": "5217132457b6cf79382ee04c6811d3946a2ffa271f4d329cd26ba6f1a136ea4d"
+    },
+    {
+      "path": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\Content\\XinyiV2\\RuntimeBuildings\\m003_p001\\xinyi_runtime_-003_+001\\StaticMeshes\\xinyi_runtime_-003_+001.uasset",
+      "bytes": 216282,
+      "sha256": "350d125b2d176318d08b54975dee5b16177c31d237ba42e9be2f5f6ff36bc8b6"
+    },
+    {
+      "path": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\Content\\XinyiV2\\RuntimeBuildings\\m003_p002\\xinyi_runtime_-003_+002\\StaticMeshes\\xinyi_runtime_-003_+002.uasset",
+      "bytes": 116861,
+      "sha256": "8a53ffc34fd93b436b7246c185b302fe84b489474f887b7603a1aba994b4e1f9"
+    },
+    {
+      "path": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\Content\\XinyiV2\\RuntimeBuildings\\p000_m001\\xinyi_runtime_+000_-001\\StaticMeshes\\xinyi_runtime_+000_-001.uasset",
+      "bytes": 334648,
+      "sha256": "d56b93d2652cbcb8185811ef3573a2d91695ee3f83bd256f27baf3f63ece8323"
+    },
+    {
+      "path": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\Content\\XinyiV2\\RuntimeBuildings\\p000_m002\\xinyi_runtime_+000_-002\\StaticMeshes\\xinyi_runtime_+000_-002.uasset",
+      "bytes": 524121,
+      "sha256": "6ed23293871b1ff7ce61b9542301d07f4036d5dbf5c3341c02efdb8bb46994fe"
+    },
+    {
+      "path": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\Content\\XinyiV2\\RuntimeBuildings\\p000_p000\\xinyi_runtime_+000_+000\\StaticMeshes\\xinyi_runtime_+000_+000.uasset",
+      "bytes": 229755,
+      "sha256": "75348cb1520d7444076aac06b242a942362282807d0b5bb2c1d4bfbfde9f10f5"
+    },
+    {
+      "path": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\Content\\XinyiV2\\RuntimeBuildings\\p000_p001\\xinyi_runtime_+000_+001\\StaticMeshes\\xinyi_runtime_+000_+001.uasset",
+      "bytes": 320306,
+      "sha256": "9d7e1594b5f1fbf0a999d1e7733ee0ba1319045d2df48ff7355887daab1bdca2"
+    },
+    {
+      "path": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\Content\\XinyiV2\\RuntimeBuildings\\p000_p002\\xinyi_runtime_+000_+002\\StaticMeshes\\xinyi_runtime_+000_+002.uasset",
+      "bytes": 244068,
+      "sha256": "2845d955d2b9325f4a502b5616e0ef8a2e64134fe01a429b7d8ad920e93b6d53"
+    },
+    {
+      "path": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\Content\\XinyiV2\\RuntimeBuildings\\p001_m001\\xinyi_runtime_+001_-001\\StaticMeshes\\xinyi_runtime_+001_-001.uasset",
+      "bytes": 120104,
+      "sha256": "96da1b79b3f3946234ce8942f5401caa6d00cc5a9513bca16ea0565dd15ca395"
+    },
+    {
+      "path": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\Content\\XinyiV2\\RuntimeBuildings\\p001_m002\\xinyi_runtime_+001_-002\\StaticMeshes\\xinyi_runtime_+001_-002.uasset",
+      "bytes": 239951,
+      "sha256": "a5ba0dff97d02485d6321279865f8221438a1201bbba28445f33f87badc7271a"
+    },
+    {
+      "path": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\Content\\XinyiV2\\RuntimeBuildings\\p001_p000\\xinyi_runtime_+001_+000\\StaticMeshes\\xinyi_runtime_+001_+000.uasset",
+      "bytes": 378495,
+      "sha256": "9543ff7063c06c7ce720dbc72d540d96aa7dae5b9526ea3d674341e370b55ca1"
+    },
+    {
+      "path": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\Content\\XinyiV2\\RuntimeBuildings\\p001_p001\\xinyi_runtime_+001_+001\\StaticMeshes\\xinyi_runtime_+001_+001.uasset",
+      "bytes": 478380,
+      "sha256": "d04f1563d61c518dd45fcd5bc394d32a9fc9407bf8c62d3b596b466ae4355c61"
+    },
+    {
+      "path": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\Content\\XinyiV2\\RuntimeBuildings\\p001_p002\\xinyi_runtime_+001_+002\\StaticMeshes\\xinyi_runtime_+001_+002.uasset",
+      "bytes": 168478,
+      "sha256": "aa90b5fb620cc477f6c5428456d11aad9fc75cdf1e2bcce6b1f5c519de28887a"
+    }
+  ],
+  "historical_files_not_used": [
+    {
+      "path": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\Saved\\Autosaves\\Game\\XinyiLook\\L_XinyiLook_Hero_Auto1.umap",
+      "bytes": 11660994,
+      "last_write_time_utc": "2026-10-02T13:32:34.6003446Z",
+      "sha256": "146b052e9be06bb2b3e16767e43e0dd8bd7eff4a59053c63a64de124d0858a15",
+      "used_for_this_capture": false
+    },
+    {
+      "path": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\Saved\\Autosaves\\Game\\XinyiLook\\L_XinyiLook_Hero_Auto2.umap",
+      "bytes": 11471663,
+      "last_write_time_utc": "2026-10-02T08:43:22.2573340Z",
+      "sha256": "0d7aa36754edf340733c02dc8b612217493c43b78f991e5b6da20cff29c2f2f9",
+      "used_for_this_capture": false
+    },
+    {
+      "path": "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world\\unreal\\Saved\\XinyiLook\\unreal\\look_capture.report.json",
+      "bytes": 2572,
+      "last_write_time_utc": "2026-10-02T19:42:27.8254244Z",
+      "sha256": "2741862e03668cd57b5bd2d35edbe65bbeac8e11a7d068d3a499c75ba7f8dafb",
+      "used_for_this_capture": false
+    }
+  ],
+  "source_roots": [
+    "C:\\Users\\EDDY\\Desktop\\M1A2\\air-combat-world",
+    "C:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world",
+    "D:\\Users\\EDDY\\Documents\\GitHub\\air-combat-world"
+  ],
+  "notes": [
+    "Required map must exist with its complete dependency closure before UE capture.",
+    "Finding a map alone does not prove its dependencies or plugin compatibility.",
+    "This inspector does not recover autosaves, rebuild, import, Cook, or launch Unreal.",
+    "No image or historical capture is an output of this inspector."
+  ]
+}

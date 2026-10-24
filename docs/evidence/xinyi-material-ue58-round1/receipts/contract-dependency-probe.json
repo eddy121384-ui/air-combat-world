@@ -1,0 +1,191 @@
+{
+  "status": "PASS_CONTRACT_DEPENDENCIES",
+  "map_saved": false,
+  "screenshot_count": 0,
+  "mode": "NullRHI dependency inspection only",
+  "level": "/Game/XinyiV2/L_XinyiV2_Contract",
+  "actors": 26,
+  "runtime_tiles": [
+    {
+      "label": "XinyiRuntimeTile_m003_m002",
+      "mesh": "/Game/XinyiV2/RuntimeBuildings/m003_m002/xinyi_runtime_-003_-002/StaticMeshes/xinyi_runtime_-003_-002.xinyi_runtime_-003_-002",
+      "materials": [
+        "/Engine/EngineMaterials/WorldGridMaterial.WorldGridMaterial"
+      ]
+    },
+    {
+      "label": "XinyiRuntimeTile_m003_m001",
+      "mesh": "/Game/XinyiV2/RuntimeBuildings/m003_m001/xinyi_runtime_-003_-001/StaticMeshes/xinyi_runtime_-003_-001.xinyi_runtime_-003_-001",
+      "materials": [
+        "/Engine/EngineMaterials/WorldGridMaterial.WorldGridMaterial"
+      ]
+    },
+    {
+      "label": "XinyiRuntimeTile_m003_p000",
+      "mesh": "/Game/XinyiV2/RuntimeBuildings/m003_p000/xinyi_runtime_-003_+000/StaticMeshes/xinyi_runtime_-003_+000.xinyi_runtime_-003_+000",
+      "materials": [
+        "/Engine/EngineMaterials/WorldGridMaterial.WorldGridMaterial"
+      ]
+    },
+    {
+      "label": "XinyiRuntimeTile_m003_p001",
+      "mesh": "/Game/XinyiV2/RuntimeBuildings/m003_p001/xinyi_runtime_-003_+001/StaticMeshes/xinyi_runtime_-003_+001.xinyi_runtime_-003_+001",
+      "materials": [
+        "/Engine/EngineMaterials/WorldGridMaterial.WorldGridMaterial"
+      ]
+    },
+    {
+      "label": "XinyiRuntimeTile_m003_p002",
+      "mesh": "/Game/XinyiV2/RuntimeBuildings/m003_p002/xinyi_runtime_-003_+002/StaticMeshes/xinyi_runtime_-003_+002.xinyi_runtime_-003_+002",
+      "materials": [
+        "/Engine/EngineMaterials/WorldGridMaterial.WorldGridMaterial"
+      ]
+    },
+    {
+      "label": "XinyiRuntimeTile_m002_m002",
+      "mesh": "/Game/XinyiV2/RuntimeBuildings/m002_m002/xinyi_runtime_-002_-002/StaticMeshes/xinyi_runtime_-002_-002.xinyi_runtime_-002_-002",
+      "materials": [
+        "/Engine/EngineMaterials/WorldGridMaterial.WorldGridMaterial"
+      ]
+    },
+    {
+      "label": "XinyiRuntimeTile_m002_m001",
+      "mesh": "/Game/XinyiV2/RuntimeBuildings/m002_m001/xinyi_runtime_-002_-001/StaticMeshes/xinyi_runtime_-002_-001.xinyi_runtime_-002_-001",
+      "materials": [
+        "/Engine/EngineMaterials/WorldGridMaterial.WorldGridMaterial"
+      ]
+    },
+    {
+      "label": "XinyiRuntimeTile_m002_p000",
+      "mesh": "/Game/XinyiV2/RuntimeBuildings/m002_p000/xinyi_runtime_-002_+000/StaticMeshes/xinyi_runtime_-002_+000.xinyi_runtime_-002_+000",
+      "materials": [
+        "/Engine/EngineMaterials/WorldGridMaterial.WorldGridMaterial"
+      ]
+    },
+    {
+      "label": "XinyiRuntimeTile_m002_p001",
+      "mesh": "/Game/XinyiV2/RuntimeBuildings/m002_p001/xinyi_runtime_-002_+001/StaticMeshes/xinyi_runtime_-002_+001.xinyi_runtime_-002_+001",
+      "materials": [
+        "/Engine/EngineMaterials/WorldGridMaterial.WorldGridMaterial"
+      ]
+    },
+    {
+      "label": "XinyiRuntimeTile_m002_p002",
+      "mesh": "/Game/XinyiV2/RuntimeBuildings/m002_p002/xinyi_runtime_-002_+002/StaticMeshes/xinyi_runtime_-002_+002.xinyi_runtime_-002_+002",
+      "materials": [
+        "/Engine/EngineMaterials/WorldGridMaterial.WorldGridMaterial"
+      ]
+    },
+    {
+      "label": "XinyiRuntimeTile_m001_m002",
+      "mesh": "/Game/XinyiV2/RuntimeBuildings/m001_m002/xinyi_runtime_-001_-002/StaticMeshes/xinyi_runtime_-001_-002.xinyi_runtime_-001_-002",
+      "materials": [
+        "/Engine/EngineMaterials/WorldGridMaterial.WorldGridMaterial"
+      ]
+    },
+    {
+      "label": "XinyiRuntimeTile_m001_m001",
+      "mesh": "/Game/XinyiV2/RuntimeBuildings/m001_m001/xinyi_runtime_-001_-001/StaticMeshes/xinyi_runtime_-001_-001.xinyi_runtime_-001_-001",
+      "materials": [
+        "/Engine/EngineMaterials/WorldGridMaterial.WorldGridMaterial"
+      ]
+    },
+    {
+      "label": "XinyiRuntimeTile_m001_p000",
+      "mesh": "/Game/XinyiV2/RuntimeBuildings/m001_p000/xinyi_runtime_-001_+000/StaticMeshes/xinyi_runtime_-001_+000.xinyi_runtime_-001_+000",
+      "materials": [
+        "/Engine/EngineMaterials/WorldGridMaterial.WorldGridMaterial"
+      ]
+    },
+    {
+      "label": "XinyiRuntimeTile_m001_p001",
+      "mesh": "/Game/XinyiV2/RuntimeBuildings/m001_p001/xinyi_runtime_-001_+001/StaticMeshes/xinyi_runtime_-001_+001.xinyi_runtime_-001_+001",
+      "materials": [
+        "/Engine/EngineMaterials/WorldGridMaterial.WorldGridMaterial"
+      ]
+    },
+    {
+      "label": "XinyiRuntimeTile_m001_p002",
+      "mesh": "/Game/XinyiV2/RuntimeBuildings/m001_p002/xinyi_runtime_-001_+002/StaticMeshes/xinyi_runtime_-001_+002.xinyi_runtime_-001_+002",
+      "materials": [
+        "/Engine/EngineMaterials/WorldGridMaterial.WorldGridMaterial"
+      ]
+    },
+    {
+      "label": "XinyiRuntimeTile_p000_m002",
+      "mesh": "/Game/XinyiV2/RuntimeBuildings/p000_m002/xinyi_runtime_+000_-002/StaticMeshes/xinyi_runtime_+000_-002.xinyi_runtime_+000_-002",
+      "materials": [
+        "/Engine/EngineMaterials/WorldGridMaterial.WorldGridMaterial"
+      ]
+    },
+    {
+      "label": "XinyiRuntimeTile_p000_m001",
+      "mesh": "/Game/XinyiV2/RuntimeBuildings/p000_m001/xinyi_runtime_+000_-001/StaticMeshes/xinyi_runtime_+000_-001.xinyi_runtime_+000_-001",
+      "materials": [
+        "/Engine/EngineMaterials/WorldGridMaterial.WorldGridMaterial"
+      ]
+    },
+    {
+      "label": "XinyiRuntimeTile_p000_p000",
+      "mesh": "/Game/XinyiV2/RuntimeBuildings/p000_p000/xinyi_runtime_+000_+000/StaticMeshes/xinyi_runtime_+000_+000.xinyi_runtime_+000_+000",
+      "materials": [
+        "/Engine/EngineMaterials/WorldGridMaterial.WorldGridMaterial"
+      ]
+    },
+    {
+      "label": "XinyiRuntimeTile_p000_p001",
+      "mesh": "/Game/XinyiV2/RuntimeBuildings/p000_p001/xinyi_runtime_+000_+001/StaticMeshes/xinyi_runtime_+000_+001.xinyi_runtime_+000_+001",
+      "materials": [
+        "/Engine/EngineMaterials/WorldGridMaterial.WorldGridMaterial"
+      ]
+    },
+    {
+      "label": "XinyiRuntimeTile_p000_p002",
+      "mesh": "/Game/XinyiV2/RuntimeBuildings/p000_p002/xinyi_runtime_+000_+002/StaticMeshes/xinyi_runtime_+000_+002.xinyi_runtime_+000_+002",
+      "materials": [
+        "/Engine/EngineMaterials/WorldGridMaterial.WorldGridMaterial"
+      ]
+    },
+    {
+      "label": "XinyiRuntimeTile_p001_m002",
+      "mesh": "/Game/XinyiV2/RuntimeBuildings/p001_m002/xinyi_runtime_+001_-002/StaticMeshes/xinyi_runtime_+001_-002.xinyi_runtime_+001_-002",
+      "materials": [
+        "/Engine/EngineMaterials/WorldGridMaterial.WorldGridMaterial"
+      ]
+    },
+    {
+      "label": "XinyiRuntimeTile_p001_m001",
+      "mesh": "/Game/XinyiV2/RuntimeBuildings/p001_m001/xinyi_runtime_+001_-001/StaticMeshes/xinyi_runtime_+001_-001.xinyi_runtime_+001_-001",
+      "materials": [
+        "/Engine/EngineMaterials/WorldGridMaterial.WorldGridMaterial"
+      ]
+    },
+    {
+      "label": "XinyiRuntimeTile_p001_p000",
+      "mesh": "/Game/XinyiV2/RuntimeBuildings/p001_p000/xinyi_runtime_+001_+000/StaticMeshes/xinyi_runtime_+001_+000.xinyi_runtime_+001_+000",
+      "materials": [
+        "/Engine/EngineMaterials/WorldGridMaterial.WorldGridMaterial"
+      ]
+    },
+    {
+      "label": "XinyiRuntimeTile_p001_p001",
+      "mesh": "/Game/XinyiV2/RuntimeBuildings/p001_p001/xinyi_runtime_+001_+001/StaticMeshes/xinyi_runtime_+001_+001.xinyi_runtime_+001_+001",
+      "materials": [
+        "/Engine/EngineMaterials/WorldGridMaterial.WorldGridMaterial"
+      ]
+    },
+    {
+      "label": "XinyiRuntimeTile_p001_p002",
+      "mesh": "/Game/XinyiV2/RuntimeBuildings/p001_p002/xinyi_runtime_+001_+002/StaticMeshes/xinyi_runtime_+001_+002.xinyi_runtime_+001_+002",
+      "materials": [
+        "/Engine/EngineMaterials/WorldGridMaterial.WorldGridMaterial"
+      ]
+    }
+  ],
+  "landscapes": [
+    {
+      "label": "Terrain_Xinyi_MOI2025",
+      "components": 25
+    }
+  ]
+}

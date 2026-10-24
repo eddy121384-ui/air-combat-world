@@ -1,0 +1,2180 @@
+{
+  "status": "PASS_LOOK_ASSETS",
+  "materials": {
+    "city": "M_XinyiCity",
+    "hero": "M_Taipei101",
+    "ground": "M_XinyiGround",
+    "paint": "M_XinyiRoadPaint",
+    "backdrop": "M_XinyiBackdrop",
+    "foliage": "M_XinyiFoliage",
+    "props": "M_XinyiProps",
+    "clouds": null,
+    "mpc": "/Game/XinyiLook/Materials/MPC_XinyiLook"
+  },
+  "shader_source": "C:\\Users\\EDDY\\Desktop\\M1A2\\xinyi-material-ue58-round1\\tools\\lookdev\\shaders\\xinyi_city.hlsl",
+  "tiles": [
+    {
+      "tile": "-003_-002",
+      "asset_path": "/Game/XinyiLook/Meshes/Tiles/m003_m002/xinyi_look_-003_-002/StaticMeshes/xinyi_look_-003_-002",
+      "triangles": 9556,
+      "blank_walls": true,
+      "imported_bounds_origin_cm": [
+        43029.90625,
+        -27697.376953125,
+        3722.5
+      ],
+      "imported_bounds_extent_cm": [
+        7800.1953125,
+        23463.361328125,
+        2935.5
+      ],
+      "expected_local_bounds_origin_cm": [
+        43029.9072265625,
+        -27697.377395629883,
+        3722.5000858306885
+      ],
+      "tile_world_translation_cm": [
+        -150000.0,
+        100000.0,
+        0.0
+      ],
+      "extent_error_cm": 0.0004119873046875
+    },
+    {
+      "tile": "-003_-001",
+      "asset_path": "/Game/XinyiLook/Meshes/Tiles/m003_m001/xinyi_look_-003_-001/StaticMeshes/xinyi_look_-003_-001",
+      "triangles": 15832,
+      "blank_walls": false,
+      "imported_bounds_origin_cm": [
+        44136.443359375,
+        -24435.252319335938,
+        3429.5
+      ],
+      "imported_bounds_extent_cm": [
+        6473.677734375,
+        25229.317993164062,
+        2720.5
+      ],
+      "expected_local_bounds_origin_cm": [
+        44136.444091796875,
+        -24435.251712799072,
+        3429.5000076293945
+      ],
+      "tile_world_translation_cm": [
+        -150000.0,
+        50000.0,
+        0.0
+      ],
+      "extent_error_cm": 0.0008544921875
+    },
+    {
+      "tile": "-003_+000",
+      "asset_path": "/Game/XinyiLook/Meshes/Tiles/m003_p000/xinyi_look_-003_+000/StaticMeshes/xinyi_look_-003_+000",
+      "triangles": 10840,
+      "blank_walls": true,
+      "imported_bounds_origin_cm": [
+        44571.6015625,
+        -26623.22900390625,
+        3557.000244140625
+      ],
+      "imported_bounds_extent_cm": [
+        6697.3359375,
+        23172.84521484375,
+        2877.000244140625
+      ],
+      "expected_local_bounds_origin_cm": [
+        44571.60186767578,
+        -26623.229598999023,
+        3557.000207901001
+      ],
+      "tile_world_translation_cm": [
+        -150000.0,
+        -0.0,
+        0.0
+      ],
+      "extent_error_cm": 0.00140380859375
+    },
+    {
+      "tile": "-003_+001",
+      "asset_path": "/Game/XinyiLook/Meshes/Tiles/m003_p001/xinyi_look_-003_+001/StaticMeshes/xinyi_look_-003_+001",
+      "triangles": 9464,
+      "blank_walls": true,
+      "imported_bounds_origin_cm": [
+        44849.080078125,
+        -27931.56005859375,
+        3980.499755859375
+      ],
+      "imported_bounds_extent_cm": [
+        8730.533203125,
+        22190.01806640625,
+        3256.499755859375
+      ],
+      "expected_local_bounds_origin_cm": [
+        44849.08142089844,
+        -27931.560516357422,
+        3980.499744415283
+      ],
+      "tile_world_translation_cm": [
+        -150000.0,
+        -50000.0,
+        0.0
+      ],
+      "extent_error_cm": 0.000396728515625
+    },
+    {
+      "tile": "-003_+002",
+      "asset_path": "/Game/XinyiLook/Meshes/Tiles/m003_p002/xinyi_look_-003_+002/StaticMeshes/xinyi_look_-003_+002",
+      "triangles": 2680,
+      "blank_walls": false,
+      "imported_bounds_origin_cm": [
+        45373.951171875,
+        -5029.488128662109,
+        2048.0001220703125
+      ],
+      "imported_bounds_extent_cm": [
+        5430.517578125,
+        4372.319488525391,
+        1301.0001220703125
+      ],
+      "expected_local_bounds_origin_cm": [
+        45373.9501953125,
+        -5029.488015174866,
+        2048.0000734329224
+      ],
+      "tile_world_translation_cm": [
+        -150000.0,
+        -100000.0,
+        0.0
+      ],
+      "extent_error_cm": 0.00010013580322265625
+    },
+    {
+      "tile": "-002_-002",
+      "asset_path": "/Game/XinyiLook/Meshes/Tiles/m002_m002/xinyi_look_-002_-002/StaticMeshes/xinyi_look_-002_-002",
+      "triangles": 27008,
+      "blank_walls": true,
+      "imported_bounds_origin_cm": [
+        25456.33428955078,
+        -28857.04052734375,
+        3940.0
+      ],
+      "imported_bounds_extent_cm": [
+        26626.59930419922,
+        23094.44384765625,
+        3124.0
+      ],
+      "expected_local_bounds_origin_cm": [
+        25456.33478164673,
+        -28857.04002380371,
+        3939.9999618530273
+      ],
+      "tile_world_translation_cm": [
+        -100000.0,
+        100000.0,
+        0.0
+      ],
+      "extent_error_cm": 0.0007171630859375
+    },
+    {
+      "tile": "-002_-001",
+      "asset_path": "/Game/XinyiLook/Meshes/Tiles/m002_m001/xinyi_look_-002_-001/StaticMeshes/xinyi_look_-002_-001",
+      "triangles": 55300,
+      "blank_walls": true,
+      "imported_bounds_origin_cm": [
+        24515.542724609375,
+        -23792.654296875,
+        6147.00048828125
+      ],
+      "imported_bounds_extent_cm": [
+        27009.422119140625,
+        25537.462890625,
+        5459.00048828125
+      ],
+      "expected_local_bounds_origin_cm": [
+        24515.542030334473,
+        -23792.654609680176,
+        6147.00026512146
+      ],
+      "tile_world_translation_cm": [
+        -100000.0,
+        50000.0,
+        0.0
+      ],
+      "extent_error_cm": 0.00077056884765625
+    },
+    {
+      "tile": "-002_+000",
+      "asset_path": "/Game/XinyiLook/Meshes/Tiles/m002_p000/xinyi_look_-002_+000/StaticMeshes/xinyi_look_-002_+000",
+      "triangles": 43444,
+      "blank_walls": true,
+      "imported_bounds_origin_cm": [
+        25793.702392578125,
+        -25998.237426757812,
+        3817.5
+      ],
+      "imported_bounds_extent_cm": [
+        26898.281982421875,
+        23490.231323242188,
+        3099.5
+      ],
+      "expected_local_bounds_origin_cm": [
+        25793.703269958496,
+        -25998.238277435303,
+        3817.499899864197
+      ],
+      "tile_world_translation_cm": [
+        -100000.0,
+        -0.0,
+        0.0
+      ],
+      "extent_error_cm": 0.000858306884765625
+    },
+    {
+      "tile": "-002_+001",
+      "asset_path": "/Game/XinyiLook/Meshes/Tiles/m002_p001/xinyi_look_-002_+001/StaticMeshes/xinyi_look_-002_+001",
+      "triangles": 18136,
+      "blank_walls": false,
+      "imported_bounds_origin_cm": [
+        25893.825317382812,
+        -27782.896728515625,
+        3765.5
+      ],
+      "imported_bounds_extent_cm": [
+        28205.358276367188,
+        22546.177490234375,
+        3059.5
+      ],
+      "expected_local_bounds_origin_cm": [
+        25893.824577331543,
+        -27782.896614074707,
+        3765.499997138977
+      ],
+      "tile_world_translation_cm": [
+        -100000.0,
+        -50000.0,
+        0.0
+      ],
+      "extent_error_cm": 0.00072479248046875
+    },
+    {
+      "tile": "-002_+002",
+      "asset_path": "/Game/XinyiLook/Meshes/Tiles/m002_p002/xinyi_look_-002_+002/StaticMeshes/xinyi_look_-002_+002",
+      "triangles": 3608,
+      "blank_walls": false,
+      "imported_bounds_origin_cm": [
+        26055.827438354492,
+        -6485.6346435546875,
+        3868.5
+      ],
+      "imported_bounds_extent_cm": [
+        26524.664749145508,
+        10474.455200195312,
+        3125.5
+      ],
+      "expected_local_bounds_origin_cm": [
+        26055.827927589417,
+        -6485.634994506836,
+        3868.5001134872437
+      ],
+      "tile_world_translation_cm": [
+        -100000.0,
+        -100000.0,
+        0.0
+      ],
+      "extent_error_cm": 0.00048732757568359375
+    },
+    {
+      "tile": "-001_-002",
+      "asset_path": "/Game/XinyiLook/Meshes/Tiles/m001_m002/xinyi_look_-001_-002/StaticMeshes/xinyi_look_-001_-002",
+      "triangles": 37440,
+      "blank_walls": true,
+      "imported_bounds_origin_cm": [
+        25606.579711914062,
+        -27285.58251953125,
+        4556.0
+      ],
+      "imported_bounds_extent_cm": [
+        26411.920288085938,
+        24230.89013671875,
+        3942.0
+      ],
+      "expected_local_bounds_origin_cm": [
+        25606.57958984375,
+        -27285.58282852173,
+        4555.999779701233
+      ],
+      "tile_world_translation_cm": [
+        -50000.0,
+        100000.0,
+        0.0
+      ],
+      "extent_error_cm": 0.000423431396484375
+    },
+    {
+      "tile": "-001_-001",
+      "asset_path": "/Game/XinyiLook/Meshes/Tiles/m001_m001/xinyi_look_-001_-001/StaticMeshes/xinyi_look_-001_-001",
+      "triangles": 40448,
+      "blank_walls": true,
+      "imported_bounds_origin_cm": [
+        24762.453735351562,
+        -23668.087463378906,
+        4940.5
+      ],
+      "imported_bounds_extent_cm": [
+        25652.100952148438,
+        24840.896911621094,
+        4057.5
+      ],
+      "expected_local_bounds_origin_cm": [
+        24762.453317642212,
+        -23668.087434768677,
+        4940.499782562256
+      ],
+      "tile_world_translation_cm": [
+        -50000.0,
+        50000.0,
+        0.0
+      ],
+      "extent_error_cm": 0.0004367828369140625
+    },
+    {
+      "tile": "-001_+000",
+      "asset_path": "/Game/XinyiLook/Meshes/Tiles/m001_p000/xinyi_look_-001_+000/StaticMeshes/xinyi_look_-001_+000",
+      "triangles": 15056,
+      "blank_walls": false,
+      "imported_bounds_origin_cm": [
+        23883.85025024414,
+        -25507.9365234375,
+        7791.999984741211
+      ],
+      "imported_bounds_extent_cm": [
+        24568.58334350586,
+        24021.5986328125,
+        7347.000015258789
+      ],
+      "expected_local_bounds_origin_cm": [
+        23883.851099014282,
+        -25507.9363822937,
+        7791.999959945679
+      ],
+      "tile_world_translation_cm": [
+        -50000.0,
+        -0.0,
+        0.0
+      ],
+      "extent_error_cm": 0.0008602142333984375
+    },
+    {
+      "tile": "-001_+001",
+      "asset_path": "/Game/XinyiLook/Meshes/Tiles/m001_p001/xinyi_look_-001_+001/StaticMeshes/xinyi_look_-001_+001",
+      "triangles": 15180,
+      "blank_walls": true,
+      "imported_bounds_origin_cm": [
+        31410.005859375,
+        -20725.09326171875,
+        8842.5
+      ],
+      "imported_bounds_extent_cm": [
+        23606.615234375,
+        30327.18798828125,
+        8316.5
+      ],
+      "expected_local_bounds_origin_cm": [
+        31410.00518798828,
+        -20725.09422302246,
+        8842.499828338623
+      ],
+      "tile_world_translation_cm": [
+        -50000.0,
+        -50000.0,
+        0.0
+      ],
+      "extent_error_cm": 0.00054931640625
+    },
+    {
+      "tile": "-001_+002",
+      "asset_path": "/Game/XinyiLook/Meshes/Tiles/m001_p002/xinyi_look_-001_+002/StaticMeshes/xinyi_look_-001_+002",
+      "triangles": 5512,
+      "blank_walls": false,
+      "imported_bounds_origin_cm": [
+        28093.6064453125,
+        -5249.513427734375,
+        5887.0
+      ],
+      "imported_bounds_extent_cm": [
+        20681.8076171875,
+        6540.234619140625,
+        5346.0
+      ],
+      "expected_local_bounds_origin_cm": [
+        28093.60694885254,
+        -5249.513626098633,
+        5887.00008392334
+      ],
+      "tile_world_translation_cm": [
+        -50000.0,
+        -100000.0,
+        0.0
+      ],
+      "extent_error_cm": 0.0004730224609375
+    },
+    {
+      "tile": "+000_-002",
+      "asset_path": "/Game/XinyiLook/Meshes/Tiles/p000_m002/xinyi_look_+000_-002/StaticMeshes/xinyi_look_+000_-002",
+      "triangles": 38288,
+      "blank_walls": true,
+      "imported_bounds_origin_cm": [
+        23086.895263671875,
+        -27864.1455078125,
+        4122.5
+      ],
+      "imported_bounds_extent_cm": [
+        27787.182861328125,
+        22284.8115234375,
+        3192.5
+      ],
+      "expected_local_bounds_origin_cm": [
+        23086.8953704834,
+        -27864.1450881958,
+        4122.5000858306885
+      ],
+      "tile_world_translation_cm": [
+        0.0,
+        100000.0,
+        0.0
+      ],
+      "extent_error_cm": 0.00031280517578125
+    },
+    {
+      "tile": "+000_-001",
+      "asset_path": "/Game/XinyiLook/Meshes/Tiles/p000_m001/xinyi_look_+000_-001/StaticMeshes/xinyi_look_+000_-001",
+      "triangles": 19692,
+      "blank_walls": false,
+      "imported_bounds_origin_cm": [
+        24419.591369628906,
+        -24707.11067199707,
+        5900.0
+      ],
+      "imported_bounds_extent_cm": [
+        25863.158630371094,
+        25219.04557800293,
+        5154.0
+      ],
+      "expected_local_bounds_origin_cm": [
+        24419.592094421387,
+        -24707.110857963562,
+        5900.000047683716
+      ],
+      "tile_world_translation_cm": [
+        0.0,
+        50000.0,
+        0.0
+      ],
+      "extent_error_cm": 0.00074005126953125
+    },
+    {
+      "tile": "+000_+000",
+      "asset_path": "/Game/XinyiLook/Meshes/Tiles/p000_p000/xinyi_look_+000_+000/StaticMeshes/xinyi_look_+000_+000",
+      "triangles": 13708,
+      "blank_walls": true,
+      "imported_bounds_origin_cm": [
+        26829.631591796875,
+        -25156.049713134766,
+        14267.4990234375
+      ],
+      "imported_bounds_extent_cm": [
+        23413.579345703125,
+        24272.001068115234,
+        13498.4990234375
+      ],
+      "expected_local_bounds_origin_cm": [
+        26829.63104248047,
+        -25156.050205230713,
+        14267.498660087585
+      ],
+      "tile_world_translation_cm": [
+        0.0,
+        -0.0,
+        0.0
+      ],
+      "extent_error_cm": 0.00054931640625
+    },
+    {
+      "tile": "+000_+001",
+      "asset_path": "/Game/XinyiLook/Meshes/Tiles/p000_p001/xinyi_look_+000_+001/StaticMeshes/xinyi_look_+000_+001",
+      "triangles": 18436,
+      "blank_walls": true,
+      "imported_bounds_origin_cm": [
+        24088.643310546875,
+        -24816.173736572266,
+        11201.5
+      ],
+      "imported_bounds_extent_cm": [
+        26669.063720703125,
+        25387.431732177734,
+        10575.5
+      ],
+      "expected_local_bounds_origin_cm": [
+        24088.642692565918,
+        -24816.17307662964,
+        11201.500225067139
+      ],
+      "tile_world_translation_cm": [
+        0.0,
+        -50000.0,
+        0.0
+      ],
+      "extent_error_cm": 0.00072479248046875
+    },
+    {
+      "tile": "+000_+002",
+      "asset_path": "/Game/XinyiLook/Meshes/Tiles/p000_p002/xinyi_look_+000_+002/StaticMeshes/xinyi_look_+000_+002",
+      "triangles": 10308,
+      "blank_walls": false,
+      "imported_bounds_origin_cm": [
+        24588.616455078125,
+        -6876.99250793457,
+        3208.5
+      ],
+      "imported_bounds_extent_cm": [
+        25953.914794921875,
+        7088.98210144043,
+        2556.5
+      ],
+      "expected_local_bounds_origin_cm": [
+        24588.615465164185,
+        -6876.992416381836,
+        3208.500075340271
+      ],
+      "tile_world_translation_cm": [
+        0.0,
+        -100000.0,
+        0.0
+      ],
+      "extent_error_cm": 0.0009632110595703125
+    },
+    {
+      "tile": "+001_-002",
+      "asset_path": "/Game/XinyiLook/Meshes/Tiles/p001_m002/xinyi_look_+001_-002/StaticMeshes/xinyi_look_+001_-002",
+      "triangles": 10652,
+      "blank_walls": false,
+      "imported_bounds_origin_cm": [
+        12525.952758789062,
+        -27253.120971679688,
+        7385.5
+      ],
+      "imported_bounds_extent_cm": [
+        15596.758178710938,
+        24827.183715820312,
+        6225.5
+      ],
+      "expected_local_bounds_origin_cm": [
+        12525.952911376953,
+        -27253.120613098145,
+        7385.500049591064
+      ],
+      "tile_world_translation_cm": [
+        50000.0,
+        100000.0,
+        0.0
+      ],
+      "extent_error_cm": 0.00037384033203125
+    },
+    {
+      "tile": "+001_-001",
+      "asset_path": "/Game/XinyiLook/Meshes/Tiles/p001_m001/xinyi_look_+001_-001/StaticMeshes/xinyi_look_+001_-001",
+      "triangles": 2636,
+      "blank_walls": false,
+      "imported_bounds_origin_cm": [
+        21450.060546875,
+        -24552.51190185547,
+        5290.999969482422
+      ],
+      "imported_bounds_extent_cm": [
+        21915.193359375,
+        23399.44903564453,
+        4472.000030517578
+      ],
+      "expected_local_bounds_origin_cm": [
+        21450.061464309692,
+        -24552.51259803772,
+        5290.9998416900635
+      ],
+      "tile_world_translation_cm": [
+        50000.0,
+        50000.0,
+        0.0
+      ],
+      "extent_error_cm": 0.0009136199951171875
+    },
+    {
+      "tile": "+001_+000",
+      "asset_path": "/Game/XinyiLook/Meshes/Tiles/p001_p000/xinyi_look_+001_+000/StaticMeshes/xinyi_look_+001_+000",
+      "triangles": 27412,
+      "blank_walls": true,
+      "imported_bounds_origin_cm": [
+        21191.464111328125,
+        -25201.273529052734,
+        8550.0
+      ],
+      "imported_bounds_extent_cm": [
+        22831.141357421875,
+        25994.320220947266,
+        7805.0
+      ],
+      "expected_local_bounds_origin_cm": [
+        21191.463565826416,
+        -25201.27329826355,
+        8550.000143051147
+      ],
+      "tile_world_translation_cm": [
+        50000.0,
+        -0.0,
+        0.0
+      ],
+      "extent_error_cm": 0.000553131103515625
+    },
+    {
+      "tile": "+001_+001",
+      "asset_path": "/Game/XinyiLook/Meshes/Tiles/p001_p001/xinyi_look_+001_+001/StaticMeshes/xinyi_look_+001_+001",
+      "triangles": 29652,
+      "blank_walls": true,
+      "imported_bounds_origin_cm": [
+        20524.919189453125,
+        -24931.160369873047,
+        5342.0
+      ],
+      "imported_bounds_extent_cm": [
+        24136.123779296875,
+        25425.706817626953,
+        4638.0
+      ],
+      "expected_local_bounds_origin_cm": [
+        20524.919891357422,
+        -24931.15999698639,
+        5342.000150680542
+      ],
+      "tile_world_translation_cm": [
+        50000.0,
+        -50000.0,
+        0.0
+      ],
+      "extent_error_cm": 0.000640869140625
+    },
+    {
+      "tile": "+001_+002",
+      "asset_path": "/Game/XinyiLook/Meshes/Tiles/p001_p002/xinyi_look_+001_+002/StaticMeshes/xinyi_look_+001_+002",
+      "triangles": 5648,
+      "blank_walls": false,
+      "imported_bounds_origin_cm": [
+        21034.728790283203,
+        -2915.36767578125,
+        2154.0
+      ],
+      "imported_bounds_extent_cm": [
+        21845.091522216797,
+        6420.05908203125,
+        1476.0
+      ],
+      "expected_local_bounds_origin_cm": [
+        21034.728002548218,
+        -2915.367889404297,
+        2153.999972343445
+      ],
+      "tile_world_translation_cm": [
+        50000.0,
+        -100000.0,
+        0.0
+      ],
+      "extent_error_cm": 0.0007991790771484375
+    }
+  ],
+  "singles": {
+    "hero": {
+      "asset_path": "/Game/XinyiLook/Meshes/Hero/taipei101/StaticMeshes/taipei101",
+      "imported_bounds_origin_cm": [
+        0.0,
+        0.0,
+        25400.0
+      ],
+      "expected_bounds_origin_cm": [
+        0.0,
+        0.0,
+        25400.0
+      ],
+      "extent_error_cm": 6.103515625e-05
+    },
+    "landmarks": {
+      "asset_path": "/Game/XinyiLook/Meshes/Landmarks/landmark_roofs/StaticMeshes/landmark_roofs",
+      "imported_bounds_origin_cm": [
+        -51495.74609375,
+        -77935.328125,
+        2871.4999389648438
+      ],
+      "expected_bounds_origin_cm": [
+        -51495.74737548828,
+        -77935.3271484375,
+        2871.500015258789
+      ],
+      "extent_error_cm": 0.001953125
+    },
+    "backdrop": {
+      "asset_path": "/Game/XinyiLook/Meshes/Backdrop/taipei_basin_backdrop/StaticMeshes/taipei_basin_backdrop",
+      "imported_bounds_origin_cm": [
+        90410.25,
+        -587846.0,
+        54707.19140625
+      ],
+      "expected_bounds_origin_cm": [
+        90410.30187199335,
+        -587845.9905886187,
+        54707.18994140625
+      ],
+      "extent_error_cm": 0.07361150905489922
+    },
+    "paint": {
+      "asset_path": "/Game/XinyiLook/Meshes/RoadPaint/xinyi_road_paint/StaticMeshes/xinyi_road_paint",
+      "imported_bounds_origin_cm": [
+        -4252.875,
+        30296.234375,
+        2874.1826171875
+      ],
+      "expected_bounds_origin_cm": [
+        -4252.880859375,
+        30296.234130859375,
+        2874.1825461387634
+      ],
+      "extent_error_cm": 0.005615234375
+    },
+    "campus_paint": {
+      "asset_path": "/Game/XinyiLook/Meshes/CampusPaint/xinyi_campus_paint/StaticMeshes/xinyi_campus_paint",
+      "imported_bounds_origin_cm": [
+        44495.80859375,
+        29308.509765625,
+        1024.8179626464844
+      ],
+      "expected_bounds_origin_cm": [
+        44495.809173583984,
+        29308.511352539062,
+        1024.8179912567139
+      ],
+      "extent_error_cm": 0.000885009765625
+    },
+    "tree": {
+      "asset_path": "/Game/XinyiLook/Meshes/Tree/xinyi_tree/StaticMeshes/xinyi_tree",
+      "imported_bounds_origin_cm": [
+        16.1376953125,
+        1.709197998046875,
+        421.809326171875
+      ],
+      "expected_bounds_origin_cm": [
+        16.137707233428955,
+        1.7091989517211914,
+        421.80933952331543
+      ],
+      "extent_error_cm": 1.33514404296875e-05
+    },
+    "forest": {
+      "asset_path": "/Game/XinyiLook/Meshes/Forest/xinyi_forest_clump/StaticMeshes/xinyi_forest_clump",
+      "imported_bounds_origin_cm": [
+        -188.1561279296875,
+        102.41781616210938,
+        620.0891876220703
+      ],
+      "expected_bounds_origin_cm": [
+        -188.1561279296875,
+        102.41782665252686,
+        620.0892090797424
+      ],
+      "extent_error_cm": 9.059906005859375e-06
+    },
+    "lamp": {
+      "asset_path": "/Game/XinyiLook/Meshes/Lamp/xinyi_lamp/StaticMeshes/xinyi_lamp",
+      "imported_bounds_origin_cm": [
+        118.0,
+        0.0,
+        450.0
+      ],
+      "expected_bounds_origin_cm": [
+        118.00000220537186,
+        0.0,
+        450.0
+      ],
+      "extent_error_cm": 2.562999725341797e-06
+    }
+  },
+  "rooftop_props": {
+    "shed": {
+      "asset_path": "/Game/XinyiLook/Meshes/Roof/shed/props_shed/StaticMeshes/props_shed",
+      "imported_bounds_origin_cm": [
+        0.0,
+        0.0,
+        56.0
+      ],
+      "expected_bounds_origin_cm": [
+        0.0,
+        0.0,
+        56.00000023841858
+      ],
+      "instances": 1617
+    },
+    "tank": {
+      "asset_path": "/Game/XinyiLook/Meshes/Roof/tank/props_tank/StaticMeshes/props_tank",
+      "imported_bounds_origin_cm": [
+        0.0,
+        0.0,
+        135.0
+      ],
+      "expected_bounds_origin_cm": [
+        0.0,
+        0.0,
+        135.0000023841858
+      ],
+      "instances": 8907
+    },
+    "solar": {
+      "asset_path": "/Game/XinyiLook/Meshes/Roof/solar/props_solar/StaticMeshes/props_solar",
+      "imported_bounds_origin_cm": [
+        0.0,
+        -2.25,
+        77.5
+      ],
+      "expected_bounds_origin_cm": [
+        0.0,
+        -2.250000834465027,
+        77.49999761581421
+      ],
+      "instances": 917
+    },
+    "antenna": {
+      "asset_path": "/Game/XinyiLook/Meshes/Roof/antenna/props_antenna/StaticMeshes/props_antenna",
+      "imported_bounds_origin_cm": [
+        0.0,
+        0.0,
+        200.0
+      ],
+      "expected_bounds_origin_cm": [
+        0.0,
+        0.0,
+        200.0
+      ],
+      "instances": 2631
+    },
+    "ac": {
+      "asset_path": "/Game/XinyiLook/Meshes/Roof/ac/props_ac/StaticMeshes/props_ac",
+      "imported_bounds_origin_cm": [
+        0.0,
+        0.05000019073486328,
+        35.0
+      ],
+      "expected_bounds_origin_cm": [
+        0.0,
+        0.05000010132789612,
+        34.99999940395355
+      ],
+      "instances": 8696
+    },
+    "cooling": {
+      "asset_path": "/Game/XinyiLook/Meshes/Roof/cooling/props_cooling/StaticMeshes/props_cooling",
+      "imported_bounds_origin_cm": [
+        0.0,
+        0.0,
+        165.0
+      ],
+      "expected_bounds_origin_cm": [
+        0.0,
+        0.0,
+        164.9999976158142
+      ],
+      "instances": 507
+    },
+    "machine": {
+      "asset_path": "/Game/XinyiLook/Meshes/Roof/machine/props_machine/StaticMeshes/props_machine",
+      "imported_bounds_origin_cm": [
+        0.0,
+        0.0,
+        52.0
+      ],
+      "expected_bounds_origin_cm": [
+        0.0,
+        0.0,
+        51.99999809265137
+      ],
+      "instances": 896
+    },
+    "bmu": {
+      "asset_path": "/Game/XinyiLook/Meshes/Roof/bmu/props_bmu/StaticMeshes/props_bmu",
+      "imported_bounds_origin_cm": [
+        294.99999809265137,
+        0.0,
+        122.5
+      ],
+      "expected_bounds_origin_cm": [
+        294.9999988079071,
+        0.0,
+        122.50000238418579
+      ],
+      "instances": 35
+    },
+    "avlight": {
+      "asset_path": "/Game/XinyiLook/Meshes/Roof/avlight/props_avlight/StaticMeshes/props_avlight",
+      "imported_bounds_origin_cm": [
+        0.0,
+        0.0,
+        77.5
+      ],
+      "expected_bounds_origin_cm": [
+        0.0,
+        0.0,
+        77.49999761581421
+      ],
+      "instances": 471
+    },
+    "addition": {
+      "asset_path": "/Game/XinyiLook/Meshes/Roof/addition/props_addition/StaticMeshes/props_addition",
+      "imported_bounds_origin_cm": [
+        0.0,
+        0.0,
+        58.0
+      ],
+      "expected_bounds_origin_cm": [
+        0.0,
+        0.0,
+        57.999998331069946
+      ],
+      "instances": 2980
+    },
+    "barrel": {
+      "asset_path": "/Game/XinyiLook/Meshes/Roof/barrel/props_barrel/StaticMeshes/props_barrel",
+      "imported_bounds_origin_cm": [
+        0.0,
+        0.0,
+        61.0
+      ],
+      "expected_bounds_origin_cm": [
+        0.0,
+        0.0,
+        61.000001430511475
+      ],
+      "instances": 950
+    },
+    "leanto": {
+      "asset_path": "/Game/XinyiLook/Meshes/Roof/leanto/props_leanto/StaticMeshes/props_leanto",
+      "imported_bounds_origin_cm": [
+        0.0,
+        0.0,
+        50.0
+      ],
+      "expected_bounds_origin_cm": [
+        0.0,
+        0.0,
+        50.0
+      ],
+      "instances": 726
+    },
+    "bulkhead": {
+      "asset_path": "/Game/XinyiLook/Meshes/Roof/bulkhead/props_bulkhead/StaticMeshes/props_bulkhead",
+      "imported_bounds_origin_cm": [
+        0.0,
+        0.0,
+        53.500003814697266
+      ],
+      "expected_bounds_origin_cm": [
+        0.0,
+        0.0,
+        53.50000262260437
+      ],
+      "instances": 1108
+    }
+  },
+  "street_props": {
+    "sign": {
+      "asset_path": "/Game/XinyiLook/Meshes/Street/sign/street_sign/StaticMeshes/street_sign",
+      "imported_bounds_origin_cm": [
+        62.5,
+        0.0,
+        50.0
+      ],
+      "expected_bounds_origin_cm": [
+        62.5,
+        0.0,
+        50.0
+      ],
+      "used_by": [
+        "sign",
+        "box"
+      ],
+      "triangles": 36
+    },
+    "awning": {
+      "asset_path": "/Game/XinyiLook/Meshes/Street/awning/street_awning/StaticMeshes/street_awning",
+      "imported_bounds_origin_cm": [
+        50.0,
+        0.0,
+        -38.5
+      ],
+      "expected_bounds_origin_cm": [
+        50.0,
+        0.0,
+        -38.499999046325684
+      ],
+      "used_by": [
+        "awning"
+      ],
+      "triangles": 14
+    },
+    "scooter_a": {
+      "asset_path": "/Game/XinyiLook/Meshes/Street/scooter_a/street_scooter_a/StaticMeshes/street_scooter_a",
+      "imported_bounds_origin_cm": [
+        -2.5,
+        0.0,
+        53.40673327445984
+      ],
+      "expected_bounds_origin_cm": [
+        -2.5000005960464478,
+        0.0,
+        53.40673131868243
+      ],
+      "used_by": [
+        "scooter_a"
+      ],
+      "triangles": 40
+    },
+    "scooter_b": {
+      "asset_path": "/Game/XinyiLook/Meshes/Street/scooter_b/street_scooter_b/StaticMeshes/street_scooter_b",
+      "imported_bounds_origin_cm": [
+        -3.5,
+        0.0,
+        66.54070794582367
+      ],
+      "expected_bounds_origin_cm": [
+        -3.4999996423721313,
+        0.0,
+        66.54070550575852
+      ],
+      "used_by": [
+        "scooter_b"
+      ],
+      "triangles": 42
+    },
+    "scooter_c": {
+      "asset_path": "/Game/XinyiLook/Meshes/Street/scooter_c/street_scooter_c/StaticMeshes/street_scooter_c",
+      "imported_bounds_origin_cm": [
+        -3.5,
+        0.0,
+        57.40673327445984
+      ],
+      "expected_bounds_origin_cm": [
+        -3.4999996423721313,
+        0.0,
+        57.406733464449644
+      ],
+      "used_by": [
+        "scooter_c"
+      ],
+      "triangles": 50
+    },
+    "scooter_d": {
+      "asset_path": "/Game/XinyiLook/Meshes/Street/scooter_d/street_scooter_d/StaticMeshes/street_scooter_d",
+      "imported_bounds_origin_cm": [
+        -2.0,
+        0.0,
+        53.8397421836853
+      ],
+      "expected_bounds_origin_cm": [
+        -1.9999980926513672,
+        0.0,
+        53.83974360302091
+      ],
+      "used_by": [
+        "scooter_d"
+      ],
+      "triangles": 40
+    }
+  },
+  "wall_ads": {
+    "asset_path": "/Game/XinyiLook/Meshes/WallAds/wall_ad_plane/StaticMeshes/wall_ad_plane",
+    "imported_bounds_origin_cm": [
+      0.0,
+      0.0,
+      50.0
+    ],
+    "expected_bounds_origin_cm": [
+      0.0,
+      0.0,
+      50.0
+    ],
+    "triangles": 2,
+    "material": "M_XinyiWallAds",
+    "atlas": "T_XinyiWallAdAtlas",
+    "atlas_sha256": "1fee329764950a8fd500a1658e1048c63e2707c3fd12f65a0a976cc7894ee2af",
+    "instances_sha256": "7e1f08c4c5ee74150a4d1c3c51450dd7b32d14da3404da508e3661cbc6d47d2d"
+  },
+  "far_city_chunks": [
+    {
+      "chunk": [
+        -5,
+        3
+      ],
+      "asset_path": "/Game/XinyiLook/Meshes/FarCity/cm05_p03/farcity_-05_+03/StaticMeshes/farcity_-05_+03",
+      "imported_bounds_origin_cm": [
+        69066.1748046875,
+        -44038.25390625,
+        4171.720310211182
+      ],
+      "expected_bounds_origin_cm": [
+        69066.17660522461,
+        -44038.255310058594,
+        4171.720385551453
+      ],
+      "ue_actor_location_cm": [
+        -1125000.0,
+        -875000.0,
+        0.0
+      ]
+    },
+    {
+      "chunk": [
+        -5,
+        4
+      ],
+      "asset_path": "/Game/XinyiLook/Meshes/FarCity/cm05_p04/farcity_-05_+04/StaticMeshes/farcity_-05_+04",
+      "imported_bounds_origin_cm": [
+        111185.5078125,
+        112250.08984375,
+        3787.367904663086
+      ],
+      "expected_bounds_origin_cm": [
+        111185.51025390625,
+        112250.08850097656,
+        3787.367868423462
+      ],
+      "ue_actor_location_cm": [
+        -1125000.0,
+        -1125000.0,
+        0.0
+      ]
+    },
+    {
+      "chunk": [
+        -4,
+        -1
+      ],
+      "asset_path": "/Game/XinyiLook/Meshes/FarCity/cm04_m01/farcity_-04_-01/StaticMeshes/farcity_-04_-01",
+      "imported_bounds_origin_cm": [
+        112132.9765625,
+        -78175.375,
+        1708.366226196289
+      ],
+      "expected_bounds_origin_cm": [
+        112132.97729492188,
+        -78175.37384033203,
+        1708.3662152290344
+      ],
+      "ue_actor_location_cm": [
+        -875000.0,
+        125000.0,
+        0.0
+      ]
+    },
+    {
+      "chunk": [
+        -4,
+        0
+      ],
+      "asset_path": "/Game/XinyiLook/Meshes/FarCity/cm04_p00/farcity_-04_+00/StaticMeshes/farcity_-04_+00",
+      "imported_bounds_origin_cm": [
+        117377.97265625,
+        112257.12109375,
+        2882.654640197754
+      ],
+      "expected_bounds_origin_cm": [
+        117377.97241210938,
+        112257.12280273438,
+        2882.65460729599
+      ],
+      "ue_actor_location_cm": [
+        -875000.0,
+        -125000.0,
+        0.0
+      ]
+    },
+    {
+      "chunk": [
+        -4,
+        3
+      ],
+      "asset_path": "/Game/XinyiLook/Meshes/FarCity/cm04_p03/farcity_-04_+03/StaticMeshes/farcity_-04_+03",
+      "imported_bounds_origin_cm": [
+        -17310.625,
+        -16219.9140625,
+        5183.120628356934
+      ],
+      "expected_bounds_origin_cm": [
+        -17310.623168945312,
+        -16219.912719726562,
+        5183.12075138092
+      ],
+      "ue_actor_location_cm": [
+        -875000.0,
+        -875000.0,
+        0.0
+      ]
+    },
+    {
+      "chunk": [
+        -4,
+        4
+      ],
+      "asset_path": "/Game/XinyiLook/Meshes/FarCity/cm04_p04/farcity_-04_+04/StaticMeshes/farcity_-04_+04",
+      "imported_bounds_origin_cm": [
+        -91653.78515625,
+        111303.046875,
+        3885.500244140625
+      ],
+      "expected_bounds_origin_cm": [
+        -91653.7841796875,
+        111303.04870605469,
+        3885.500168800354
+      ],
+      "ue_actor_location_cm": [
+        -875000.0,
+        -1125000.0,
+        0.0
+      ]
+    },
+    {
+      "chunk": [
+        -3,
+        -1
+      ],
+      "asset_path": "/Game/XinyiLook/Meshes/FarCity/cm03_m01/farcity_-03_-01/StaticMeshes/farcity_-03_-01",
+      "imported_bounds_origin_cm": [
+        -603.32421875,
+        -36973.294921875,
+        5172.63232421875
+      ],
+      "expected_bounds_origin_cm": [
+        -603.326416015625,
+        -36973.29406738281,
+        5172.632384300232
+      ],
+      "ue_actor_location_cm": [
+        -625000.0,
+        125000.0,
+        0.0
+      ]
+    },
+    {
+      "chunk": [
+        -3,
+        0
+      ],
+      "asset_path": "/Game/XinyiLook/Meshes/FarCity/cm03_p00/farcity_-03_+00/StaticMeshes/farcity_-03_+00",
+      "imported_bounds_origin_cm": [
+        763.19140625,
+        1398.15625,
+        11974.643173217773
+      ],
+      "expected_bounds_origin_cm": [
+        763.189697265625,
+        1398.15673828125,
+        11974.643421173096
+      ],
+      "ue_actor_location_cm": [
+        -625000.0,
+        -125000.0,
+        0.0
+      ]
+    },
+    {
+      "chunk": [
+        -3,
+        1
+      ],
+      "asset_path": "/Game/XinyiLook/Meshes/FarCity/cm03_p01/farcity_-03_+01/StaticMeshes/farcity_-03_+01",
+      "imported_bounds_origin_cm": [
+        86452.4375,
+        1305.12109375,
+        4217.164276123047
+      ],
+      "expected_bounds_origin_cm": [
+        86452.43682861328,
+        1305.120849609375,
+        4217.164158821106
+      ],
+      "ue_actor_location_cm": [
+        -625000.0,
+        -375000.0,
+        0.0
+      ]
+    },
+    {
+      "chunk": [
+        -3,
+        2
+      ],
+      "asset_path": "/Game/XinyiLook/Meshes/FarCity/cm03_p02/farcity_-03_+02/StaticMeshes/farcity_-03_+02",
+      "imported_bounds_origin_cm": [
+        37086.662109375,
+        -5058.1796875,
+        3236.543411254883
+      ],
+      "expected_bounds_origin_cm": [
+        37086.663818359375,
+        -5058.1787109375,
+        3236.5434885025024
+      ],
+      "ue_actor_location_cm": [
+        -625000.0,
+        -625000.0,
+        0.0
+      ]
+    },
+    {
+      "chunk": [
+        -3,
+        3
+      ],
+      "asset_path": "/Game/XinyiLook/Meshes/FarCity/cm03_p03/farcity_-03_+03/StaticMeshes/farcity_-03_+03",
+      "imported_bounds_origin_cm": [
+        40553.1796875,
+        -1720.6484375,
+        4570.852210998535
+      ],
+      "expected_bounds_origin_cm": [
+        40553.17840576172,
+        -1720.648193359375,
+        4570.85235118866
+      ],
+      "ue_actor_location_cm": [
+        -625000.0,
+        -875000.0,
+        0.0
+      ]
+    },
+    {
+      "chunk": [
+        -3,
+        4
+      ],
+      "asset_path": "/Game/XinyiLook/Meshes/FarCity/cm03_p04/farcity_-03_+04/StaticMeshes/farcity_-03_+04",
+      "imported_bounds_origin_cm": [
+        23529.732421875,
+        109426.3359375,
+        4821.134582519531
+      ],
+      "expected_bounds_origin_cm": [
+        23529.73175048828,
+        109426.33361816406,
+        4821.134614944458
+      ],
+      "ue_actor_location_cm": [
+        -625000.0,
+        -1125000.0,
+        0.0
+      ]
+    },
+    {
+      "chunk": [
+        -2,
+        -3
+      ],
+      "asset_path": "/Game/XinyiLook/Meshes/FarCity/cm02_m03/farcity_-02_-03/StaticMeshes/farcity_-02_-03",
+      "imported_bounds_origin_cm": [
+        112814.9140625,
+        -114622.7734375,
+        3477.8821716308594
+      ],
+      "expected_bounds_origin_cm": [
+        112814.91088867188,
+        -114622.77221679688,
+        3477.8822898864746
+      ],
+      "ue_actor_location_cm": [
+        -375000.0,
+        625000.0,
+        0.0
+      ]
+    },
+    {
+      "chunk": [
+        -2,
+        -2
+      ],
+      "asset_path": "/Game/XinyiLook/Meshes/FarCity/cm02_m02/farcity_-02_-02/StaticMeshes/farcity_-02_-02",
+      "imported_bounds_origin_cm": [
+        93310.6640625,
+        278.40234375,
+        7142.264617919922
+      ],
+      "expected_bounds_origin_cm": [
+        93310.66589355469,
+        278.399658203125,
+        7142.264437675476
+      ],
+      "ue_actor_location_cm": [
+        -375000.0,
+        375000.0,
+        0.0
+      ]
+    },
+    {
+      "chunk": [
+        -2,
+        -1
+      ],
+      "asset_path": "/Game/XinyiLook/Meshes/FarCity/cm02_m01/farcity_-02_-01/StaticMeshes/farcity_-02_-01",
+      "imported_bounds_origin_cm": [
+        -511.50390625,
+        -1352.88671875,
+        7953.0
+      ],
+      "expected_bounds_origin_cm": [
+        -511.505126953125,
+        -1352.886962890625,
+        7952.999818325043
+      ],
+      "ue_actor_location_cm": [
+        -375000.0,
+        125000.0,
+        0.0
+      ]
+    },
+    {
+      "chunk": [
+        -2,
+        0
+      ],
+      "asset_path": "/Game/XinyiLook/Meshes/FarCity/cm02_p00/farcity_-02_+00/StaticMeshes/farcity_-02_+00",
+      "imported_bounds_origin_cm": [
+        -251.44140625,
+        -705.3828125,
+        5928.2629318237305
+      ],
+      "expected_bounds_origin_cm": [
+        -251.4404296875,
+        -705.38330078125,
+        5928.262889385223
+      ],
+      "ue_actor_location_cm": [
+        -375000.0,
+        -125000.0,
+        0.0
+      ]
+    },
+    {
+      "chunk": [
+        -2,
+        1
+      ],
+      "asset_path": "/Game/XinyiLook/Meshes/FarCity/cm02_p01/farcity_-02_+01/StaticMeshes/farcity_-02_+01",
+      "imported_bounds_origin_cm": [
+        721.49609375,
+        2381.6953125,
+        4720.584136962891
+      ],
+      "expected_bounds_origin_cm": [
+        721.49658203125,
+        2381.695556640625,
+        4720.5841064453125
+      ],
+      "ue_actor_location_cm": [
+        -375000.0,
+        -375000.0,
+        0.0
+      ]
+    },
+    {
+      "chunk": [
+        -2,
+        2
+      ],
+      "asset_path": "/Game/XinyiLook/Meshes/FarCity/cm02_p02/farcity_-02_+02/StaticMeshes/farcity_-02_+02",
+      "imported_bounds_origin_cm": [
+        577.20703125,
+        -302.93359375,
+        7823.941940307617
+      ],
+      "expected_bounds_origin_cm": [
+        577.20947265625,
+        -302.935791015625,
+        7823.941910266876
+      ],
+      "ue_actor_location_cm": [
+        -375000.0,
+        -625000.0,
+        0.0
+      ]
+    },
+    {
+      "chunk": [
+        -2,
+        3
+      ],
+      "asset_path": "/Game/XinyiLook/Meshes/FarCity/cm02_p03/farcity_-02_+03/StaticMeshes/farcity_-02_+03",
+      "imported_bounds_origin_cm": [
+        -2455.5546875,
+        -645.4921875,
+        8439.542854309082
+      ],
+      "expected_bounds_origin_cm": [
+        -2455.55419921875,
+        -645.49560546875,
+        8439.54291343689
+      ],
+      "ue_actor_location_cm": [
+        -375000.0,
+        -875000.0,
+        0.0
+      ]
+    },
+    {
+      "chunk": [
+        -2,
+        4
+      ],
+      "asset_path": "/Game/XinyiLook/Meshes/FarCity/cm02_p04/farcity_-02_+04/StaticMeshes/farcity_-02_+04",
+      "imported_bounds_origin_cm": [
+        -24107.42578125,
+        112190.8515625,
+        6862.024230957031
+      ],
+      "expected_bounds_origin_cm": [
+        -24107.424926757812,
+        112190.85083007812,
+        6862.024307250977
+      ],
+      "ue_actor_location_cm": [
+        -375000.0,
+        -1125000.0,
+        0.0
+      ]
+    },
+    {
+      "chunk": [
+        -1,
+        -3
+      ],
+      "asset_path": "/Game/XinyiLook/Meshes/FarCity/cm01_m03/farcity_-01_-03/StaticMeshes/farcity_-01_-03",
+      "imported_bounds_origin_cm": [
+        13043.546875,
+        -57250.25927734375,
+        6599.402893066406
+      ],
+      "expected_bounds_origin_cm": [
+        13043.548583984375,
+        -57250.26092529297,
+        6599.4030475616455
+      ],
+      "ue_actor_location_cm": [
+        -125000.0,
+        625000.0,
+        0.0
+      ]
+    },
+    {
+      "chunk": [
+        -1,
+        -2
+      ],
+      "asset_path": "/Game/XinyiLook/Meshes/FarCity/cm01_m02/farcity_-01_-02/StaticMeshes/farcity_-01_-02",
+      "imported_bounds_origin_cm": [
+        -381.7265625,
+        1853.9609375,
+        8517.294952392578
+      ],
+      "expected_bounds_origin_cm": [
+        -381.72607421875,
+        1853.961181640625,
+        8517.294955253601
+      ],
+      "ue_actor_location_cm": [
+        -125000.0,
+        375000.0,
+        0.0
+      ]
+    },
+    {
+      "chunk": [
+        -1,
+        -1
+      ],
+      "asset_path": "/Game/XinyiLook/Meshes/FarCity/cm01_m01/farcity_-01_-01/StaticMeshes/farcity_-01_-01",
+      "imported_bounds_origin_cm": [
+        -6508.26171875,
+        -5749.55859375,
+        8839.332061767578
+      ],
+      "expected_bounds_origin_cm": [
+        -6508.26416015625,
+        -5749.560546875,
+        8839.331936836243
+      ],
+      "ue_actor_location_cm": [
+        -125000.0,
+        125000.0,
+        0.0
+      ]
+    },
+    {
+      "chunk": [
+        -1,
+        0
+      ],
+      "asset_path": "/Game/XinyiLook/Meshes/FarCity/cm01_p00/farcity_-01_+00/StaticMeshes/farcity_-01_+00",
+      "imported_bounds_origin_cm": [
+        -373.04296875,
+        -627.48046875,
+        6920.241666793823
+      ],
+      "expected_bounds_origin_cm": [
+        -373.040771484375,
+        -627.47802734375,
+        6920.241728425026
+      ],
+      "ue_actor_location_cm": [
+        -125000.0,
+        -125000.0,
+        0.0
+      ]
+    },
+    {
+      "chunk": [
+        -1,
+        1
+      ],
+      "asset_path": "/Game/XinyiLook/Meshes/FarCity/cm01_p01/farcity_-01_+01/StaticMeshes/farcity_-01_+01",
+      "imported_bounds_origin_cm": [
+        1081.7265625,
+        656.08984375,
+        3524.590072631836
+      ],
+      "expected_bounds_origin_cm": [
+        1081.72607421875,
+        656.09130859375,
+        3524.5901942253113
+      ],
+      "ue_actor_location_cm": [
+        -125000.0,
+        -375000.0,
+        0.0
+      ]
+    },
+    {
+      "chunk": [
+        -1,
+        2
+      ],
+      "asset_path": "/Game/XinyiLook/Meshes/FarCity/cm01_p02/farcity_-01_+02/StaticMeshes/farcity_-01_+02",
+      "imported_bounds_origin_cm": [
+        9356.53125,
+        1864.26953125,
+        8303.280792236328
+      ],
+      "expected_bounds_origin_cm": [
+        9356.53076171875,
+        1864.27001953125,
+        8303.28106880188
+      ],
+      "ue_actor_location_cm": [
+        -125000.0,
+        -625000.0,
+        0.0
+      ]
+    },
+    {
+      "chunk": [
+        -1,
+        3
+      ],
+      "asset_path": "/Game/XinyiLook/Meshes/FarCity/cm01_p03/farcity_-01_+03/StaticMeshes/farcity_-01_+03",
+      "imported_bounds_origin_cm": [
+        7011.078125,
+        13652.08203125,
+        17871.168090820312
+      ],
+      "expected_bounds_origin_cm": [
+        7011.0809326171875,
+        13652.084350585938,
+        17871.16746902466
+      ],
+      "ue_actor_location_cm": [
+        -125000.0,
+        -875000.0,
+        0.0
+      ]
+    },
+    {
+      "chunk": [
+        -1,
+        4
+      ],
+      "asset_path": "/Game/XinyiLook/Meshes/FarCity/cm01_p04/farcity_-01_+04/StaticMeshes/farcity_-01_+04",
+      "imported_bounds_origin_cm": [
+        60116.107421875,
+        122340.19921875,
+        35935.486328125
+      ],
+      "expected_bounds_origin_cm": [
+        60116.107177734375,
+        122340.19775390625,
+        35935.48583984375
+      ],
+      "ue_actor_location_cm": [
+        -125000.0,
+        -1125000.0,
+        0.0
+      ]
+    },
+    {
+      "chunk": [
+        0,
+        -3
+      ],
+      "asset_path": "/Game/XinyiLook/Meshes/FarCity/cp00_m03/farcity_+00_-03/StaticMeshes/farcity_+00_-03",
+      "imported_bounds_origin_cm": [
+        -4983.78515625,
+        -74284.3662109375,
+        10971.709777832031
+      ],
+      "expected_bounds_origin_cm": [
+        -4983.782958984375,
+        -74284.36737060547,
+        10971.70991897583
+      ],
+      "ue_actor_location_cm": [
+        125000.0,
+        625000.0,
+        0.0
+      ]
+    },
+    {
+      "chunk": [
+        0,
+        -2
+      ],
+      "asset_path": "/Game/XinyiLook/Meshes/FarCity/cp00_m02/farcity_+00_-02/StaticMeshes/farcity_+00_-02",
+      "imported_bounds_origin_cm": [
+        -9241.37890625,
+        21493.2578125,
+        7801.0423583984375
+      ],
+      "expected_bounds_origin_cm": [
+        -9241.375732421875,
+        21493.258666992188,
+        7801.042366027832
+      ],
+      "ue_actor_location_cm": [
+        125000.0,
+        375000.0,
+        0.0
+      ]
+    },
+    {
+      "chunk": [
+        0,
+        -1
+      ],
+      "asset_path": "/Game/XinyiLook/Meshes/FarCity/cp00_m01/farcity_+00_-01/StaticMeshes/farcity_+00_-01",
+      "imported_bounds_origin_cm": [
+        -46107.826171875,
+        -8614.12890625,
+        11104.690933227539
+      ],
+      "expected_bounds_origin_cm": [
+        -46107.82775878906,
+        -8614.129638671875,
+        11104.690933227539
+      ],
+      "ue_actor_location_cm": [
+        125000.0,
+        125000.0,
+        0.0
+      ]
+    },
+    {
+      "chunk": [
+        0,
+        0
+      ],
+      "asset_path": "/Game/XinyiLook/Meshes/FarCity/cp00_p00/farcity_+00_+00/StaticMeshes/farcity_+00_+00",
+      "imported_bounds_origin_cm": [
+        -49.7890625,
+        -386.71484375,
+        5901.290168762207
+      ],
+      "expected_bounds_origin_cm": [
+        -49.786376953125,
+        -386.712646484375,
+        5901.289999485016
+      ],
+      "ue_actor_location_cm": [
+        125000.0,
+        -125000.0,
+        0.0
+      ]
+    },
+    {
+      "chunk": [
+        0,
+        1
+      ],
+      "asset_path": "/Game/XinyiLook/Meshes/FarCity/cp00_p01/farcity_+00_+01/StaticMeshes/farcity_+00_+01",
+      "imported_bounds_origin_cm": [
+        692.18359375,
+        -712.06640625,
+        5711.981628417969
+      ],
+      "expected_bounds_origin_cm": [
+        692.181396484375,
+        -712.066650390625,
+        5711.981719732285
+      ],
+      "ue_actor_location_cm": [
+        125000.0,
+        -375000.0,
+        0.0
+      ]
+    },
+    {
+      "chunk": [
+        0,
+        2
+      ],
+      "asset_path": "/Game/XinyiLook/Meshes/FarCity/cp00_p02/farcity_+00_+02/StaticMeshes/farcity_+00_+02",
+      "imported_bounds_origin_cm": [
+        812.57421875,
+        18354.4765625,
+        14280.071281433105
+      ],
+      "expected_bounds_origin_cm": [
+        812.5732421875,
+        18354.476928710938,
+        14280.071157217026
+      ],
+      "ue_actor_location_cm": [
+        125000.0,
+        -625000.0,
+        0.0
+      ]
+    },
+    {
+      "chunk": [
+        0,
+        3
+      ],
+      "asset_path": "/Game/XinyiLook/Meshes/FarCity/cp00_p03/farcity_+00_+03/StaticMeshes/farcity_+00_+03",
+      "imported_bounds_origin_cm": [
+        -98654.96484375,
+        -21479.3525390625,
+        12620.72900390625
+      ],
+      "expected_bounds_origin_cm": [
+        -98654.96520996094,
+        -21479.352569580078,
+        12620.729064941406
+      ],
+      "ue_actor_location_cm": [
+        125000.0,
+        -875000.0,
+        0.0
+      ]
+    },
+    {
+      "chunk": [
+        1,
+        -2
+      ],
+      "asset_path": "/Game/XinyiLook/Meshes/FarCity/cp01_m02/farcity_+01_-02/StaticMeshes/farcity_+01_-02",
+      "imported_bounds_origin_cm": [
+        -45067.05078125,
+        -49441.5546875,
+        5849.572082519531
+      ],
+      "expected_bounds_origin_cm": [
+        -45067.05017089844,
+        -49441.55349731445,
+        5849.57218170166
+      ],
+      "ue_actor_location_cm": [
+        375000.0,
+        375000.0,
+        0.0
+      ]
+    },
+    {
+      "chunk": [
+        1,
+        -1
+      ],
+      "asset_path": "/Game/XinyiLook/Meshes/FarCity/cp01_m01/farcity_+01_-01/StaticMeshes/farcity_+01_-01",
+      "imported_bounds_origin_cm": [
+        74487.2578125,
+        -112999.03515625,
+        4763.5
+      ],
+      "expected_bounds_origin_cm": [
+        74487.25891113281,
+        -112999.03564453125,
+        4763.499927520752
+      ],
+      "ue_actor_location_cm": [
+        375000.0,
+        125000.0,
+        0.0
+      ]
+    },
+    {
+      "chunk": [
+        1,
+        0
+      ],
+      "asset_path": "/Game/XinyiLook/Meshes/FarCity/cp01_p00/farcity_+01_+00/StaticMeshes/farcity_+01_+00",
+      "imported_bounds_origin_cm": [
+        -73.33984375,
+        554.96484375,
+        7612.223083496094
+      ],
+      "expected_bounds_origin_cm": [
+        -73.33984375,
+        554.962158203125,
+        7612.223291397095
+      ],
+      "ue_actor_location_cm": [
+        375000.0,
+        -125000.0,
+        0.0
+      ]
+    },
+    {
+      "chunk": [
+        1,
+        1
+      ],
+      "asset_path": "/Game/XinyiLook/Meshes/FarCity/cp01_p01/farcity_+01_+01/StaticMeshes/farcity_+01_+01",
+      "imported_bounds_origin_cm": [
+        1027.1875,
+        -220.5234375,
+        5349.0
+      ],
+      "expected_bounds_origin_cm": [
+        1027.18505859375,
+        -220.526123046875,
+        5349.000000953674
+      ],
+      "ue_actor_location_cm": [
+        375000.0,
+        -375000.0,
+        0.0
+      ]
+    },
+    {
+      "chunk": [
+        1,
+        2
+      ],
+      "asset_path": "/Game/XinyiLook/Meshes/FarCity/cp01_p02/farcity_+01_+02/StaticMeshes/farcity_+01_+02",
+      "imported_bounds_origin_cm": [
+        -51932.0078125,
+        54715.6962890625,
+        6355.310028076172
+      ],
+      "expected_bounds_origin_cm": [
+        -51932.00988769531,
+        54715.6982421875,
+        6355.3099155426025
+      ],
+      "ue_actor_location_cm": [
+        375000.0,
+        -625000.0,
+        0.0
+      ]
+    },
+    {
+      "chunk": [
+        2,
+        -1
+      ],
+      "asset_path": "/Game/XinyiLook/Meshes/FarCity/cp02_m01/farcity_+02_-01/StaticMeshes/farcity_+02_-01",
+      "imported_bounds_origin_cm": [
+        -117043.42578125,
+        24678.560546875,
+        31215.3037109375
+      ],
+      "expected_bounds_origin_cm": [
+        -117043.42651367188,
+        24678.560638427734,
+        31215.304565429688
+      ],
+      "ue_actor_location_cm": [
+        625000.0,
+        125000.0,
+        0.0
+      ]
+    },
+    {
+      "chunk": [
+        2,
+        0
+      ],
+      "asset_path": "/Game/XinyiLook/Meshes/FarCity/cp02_p00/farcity_+02_+00/StaticMeshes/farcity_+02_+00",
+      "imported_bounds_origin_cm": [
+        -60818.8955078125,
+        -10750.34375,
+        4593.337249755859
+      ],
+      "expected_bounds_origin_cm": [
+        -60818.89705657959,
+        -10750.344848632812,
+        4593.337380886078
+      ],
+      "ue_actor_location_cm": [
+        625000.0,
+        -125000.0,
+        0.0
+      ]
+    },
+    {
+      "chunk": [
+        2,
+        1
+      ],
+      "asset_path": "/Game/XinyiLook/Meshes/FarCity/cp02_p01/farcity_+02_+01/StaticMeshes/farcity_+02_+01",
+      "imported_bounds_origin_cm": [
+        -73262.994140625,
+        528.7734375,
+        7597.022003173828
+      ],
+      "expected_bounds_origin_cm": [
+        -73262.99514770508,
+        528.77197265625,
+        7597.021847963333
+      ],
+      "ue_actor_location_cm": [
+        625000.0,
+        -375000.0,
+        0.0
+      ]
+    }
+  ],
+  "created": {
+    "/Game/XinyiLook/Materials/MPC_XinyiLook": "MaterialParameterCollection",
+    "/Game/XinyiLook/Textures/T_XinyiGround": "Texture2D",
+    "/Game/XinyiLook/Textures/T_XinyiGroundLight": "Texture2D",
+    "/Game/XinyiLook/Textures/T_XinyiShopAtlas": "Texture2D",
+    "/Game/XinyiLook/Textures/T_XinyiStorefrontPlan": "Texture2D",
+    "/Game/XinyiLook/Materials/M_XinyiCity": "Material",
+    "/Game/XinyiLook/Materials/M_Taipei101": "Material",
+    "/Game/XinyiLook/Textures/T_XinyiCampus": "Texture2D",
+    "/Game/XinyiLook/Materials/M_XinyiGround": "Material",
+    "/Game/XinyiLook/Materials/M_XinyiRoadPaint": "Material",
+    "/Game/XinyiLook/Textures/T_TaipeiFarCity": "Texture2D",
+    "/Game/XinyiLook/Materials/M_XinyiBackdrop": "Material",
+    "/Game/XinyiLook/Materials/M_XinyiFoliage": "Material",
+    "/Game/XinyiLook/Materials/M_XinyiProps": "Material",
+    "/Game/XinyiLook/Meshes/Tiles/m003_m002/xinyi_look_-003_-002/StaticMeshes/xinyi_look_-003_-002": "StaticMesh",
+    "/Game/XinyiLook/Meshes/Tiles/m003_m001/xinyi_look_-003_-001/StaticMeshes/xinyi_look_-003_-001": "StaticMesh",
+    "/Game/XinyiLook/Meshes/Tiles/m003_p000/xinyi_look_-003_+000/StaticMeshes/xinyi_look_-003_+000": "StaticMesh",
+    "/Game/XinyiLook/Meshes/Tiles/m003_p001/xinyi_look_-003_+001/StaticMeshes/xinyi_look_-003_+001": "StaticMesh",
+    "/Game/XinyiLook/Meshes/Tiles/m003_p002/xinyi_look_-003_+002/StaticMeshes/xinyi_look_-003_+002": "StaticMesh",
+    "/Game/XinyiLook/Meshes/Tiles/m002_m002/xinyi_look_-002_-002/StaticMeshes/xinyi_look_-002_-002": "StaticMesh",
+    "/Game/XinyiLook/Meshes/Tiles/m002_m001/xinyi_look_-002_-001/StaticMeshes/xinyi_look_-002_-001": "StaticMesh",
+    "/Game/XinyiLook/Meshes/Tiles/m002_p000/xinyi_look_-002_+000/StaticMeshes/xinyi_look_-002_+000": "StaticMesh",
+    "/Game/XinyiLook/Meshes/Tiles/m002_p001/xinyi_look_-002_+001/StaticMeshes/xinyi_look_-002_+001": "StaticMesh",
+    "/Game/XinyiLook/Meshes/Tiles/m002_p002/xinyi_look_-002_+002/StaticMeshes/xinyi_look_-002_+002": "StaticMesh",
+    "/Game/XinyiLook/Meshes/Tiles/m001_m002/xinyi_look_-001_-002/StaticMeshes/xinyi_look_-001_-002": "StaticMesh",
+    "/Game/XinyiLook/Meshes/Tiles/m001_m001/xinyi_look_-001_-001/StaticMeshes/xinyi_look_-001_-001": "StaticMesh",
+    "/Game/XinyiLook/Meshes/Tiles/m001_p000/xinyi_look_-001_+000/StaticMeshes/xinyi_look_-001_+000": "StaticMesh",
+    "/Game/XinyiLook/Meshes/Tiles/m001_p001/xinyi_look_-001_+001/StaticMeshes/xinyi_look_-001_+001": "StaticMesh",
+    "/Game/XinyiLook/Meshes/Tiles/m001_p002/xinyi_look_-001_+002/StaticMeshes/xinyi_look_-001_+002": "StaticMesh",
+    "/Game/XinyiLook/Meshes/Tiles/p000_m002/xinyi_look_+000_-002/StaticMeshes/xinyi_look_+000_-002": "StaticMesh",
+    "/Game/XinyiLook/Meshes/Tiles/p000_m001/xinyi_look_+000_-001/StaticMeshes/xinyi_look_+000_-001": "StaticMesh",
+    "/Game/XinyiLook/Meshes/Tiles/p000_p000/xinyi_look_+000_+000/StaticMeshes/xinyi_look_+000_+000": "StaticMesh",
+    "/Game/XinyiLook/Meshes/Tiles/p000_p001/xinyi_look_+000_+001/StaticMeshes/xinyi_look_+000_+001": "StaticMesh",
+    "/Game/XinyiLook/Meshes/Tiles/p000_p002/xinyi_look_+000_+002/StaticMeshes/xinyi_look_+000_+002": "StaticMesh",
+    "/Game/XinyiLook/Meshes/Tiles/p001_m002/xinyi_look_+001_-002/StaticMeshes/xinyi_look_+001_-002": "StaticMesh",
+    "/Game/XinyiLook/Meshes/Tiles/p001_m001/xinyi_look_+001_-001/StaticMeshes/xinyi_look_+001_-001": "StaticMesh",
+    "/Game/XinyiLook/Meshes/Tiles/p001_p000/xinyi_look_+001_+000/StaticMeshes/xinyi_look_+001_+000": "StaticMesh",
+    "/Game/XinyiLook/Meshes/Tiles/p001_p001/xinyi_look_+001_+001/StaticMeshes/xinyi_look_+001_+001": "StaticMesh",
+    "/Game/XinyiLook/Meshes/Tiles/p001_p002/xinyi_look_+001_+002/StaticMeshes/xinyi_look_+001_+002": "StaticMesh",
+    "/Game/XinyiLook/Meshes/Hero/taipei101/StaticMeshes/taipei101": "StaticMesh",
+    "/Game/XinyiLook/Meshes/Landmarks/landmark_roofs/StaticMeshes/landmark_roofs": "StaticMesh",
+    "/Game/XinyiLook/Meshes/Backdrop/taipei_basin_backdrop/StaticMeshes/taipei_basin_backdrop": "StaticMesh",
+    "/Game/XinyiLook/Meshes/RoadPaint/xinyi_road_paint/StaticMeshes/xinyi_road_paint": "StaticMesh",
+    "/Game/XinyiLook/Meshes/CampusPaint/xinyi_campus_paint/StaticMeshes/xinyi_campus_paint": "StaticMesh",
+    "/Game/XinyiLook/Meshes/Tree/xinyi_tree/StaticMeshes/xinyi_tree": "StaticMesh",
+    "/Game/XinyiLook/Meshes/Forest/xinyi_forest_clump/StaticMeshes/xinyi_forest_clump": "StaticMesh",
+    "/Game/XinyiLook/Meshes/Lamp/xinyi_lamp/StaticMeshes/xinyi_lamp": "StaticMesh",
+    "/Game/XinyiLook/Meshes/Roof/shed/props_shed/StaticMeshes/props_shed": "StaticMesh",
+    "/Game/XinyiLook/Meshes/Roof/tank/props_tank/StaticMeshes/props_tank": "StaticMesh",
+    "/Game/XinyiLook/Meshes/Roof/solar/props_solar/StaticMeshes/props_solar": "StaticMesh",
+    "/Game/XinyiLook/Meshes/Roof/antenna/props_antenna/StaticMeshes/props_antenna": "StaticMesh",
+    "/Game/XinyiLook/Meshes/Roof/ac/props_ac/StaticMeshes/props_ac": "StaticMesh",
+    "/Game/XinyiLook/Meshes/Roof/cooling/props_cooling/StaticMeshes/props_cooling": "StaticMesh",
+    "/Game/XinyiLook/Meshes/Roof/machine/props_machine/StaticMeshes/props_machine": "StaticMesh",
+    "/Game/XinyiLook/Meshes/Roof/bmu/props_bmu/StaticMeshes/props_bmu": "StaticMesh",
+    "/Game/XinyiLook/Meshes/Roof/avlight/props_avlight/StaticMeshes/props_avlight": "StaticMesh",
+    "/Game/XinyiLook/Meshes/Roof/addition/props_addition/StaticMeshes/props_addition": "StaticMesh",
+    "/Game/XinyiLook/Meshes/Roof/barrel/props_barrel/StaticMeshes/props_barrel": "StaticMesh",
+    "/Game/XinyiLook/Meshes/Roof/leanto/props_leanto/StaticMeshes/props_leanto": "StaticMesh",
+    "/Game/XinyiLook/Meshes/Roof/bulkhead/props_bulkhead/StaticMeshes/props_bulkhead": "StaticMesh",
+    "/Game/XinyiLook/Textures/T_XinyiSignAtlas": "Texture2D",
+    "/Game/XinyiLook/Materials/M_XinyiStreet": "Material",
+    "/Game/XinyiLook/Meshes/Street/sign/street_sign/StaticMeshes/street_sign": "StaticMesh",
+    "/Game/XinyiLook/Meshes/Street/awning/street_awning/StaticMeshes/street_awning": "StaticMesh",
+    "/Game/XinyiLook/Meshes/Street/scooter_a/street_scooter_a/StaticMeshes/street_scooter_a": "StaticMesh",
+    "/Game/XinyiLook/Meshes/Street/scooter_b/street_scooter_b/StaticMeshes/street_scooter_b": "StaticMesh",
+    "/Game/XinyiLook/Meshes/Street/scooter_c/street_scooter_c/StaticMeshes/street_scooter_c": "StaticMesh",
+    "/Game/XinyiLook/Meshes/Street/scooter_d/street_scooter_d/StaticMeshes/street_scooter_d": "StaticMesh",
+    "/Game/XinyiLook/Textures/T_XinyiWallAdAtlas": "Texture2D",
+    "/Game/XinyiLook/Materials/M_XinyiWallAds": "Material",
+    "/Game/XinyiLook/Meshes/WallAds/wall_ad_plane/StaticMeshes/wall_ad_plane": "StaticMesh",
+    "/Game/XinyiLook/Meshes/FarCity/cm05_p03/farcity_-05_+03/StaticMeshes/farcity_-05_+03": "StaticMesh",
+    "/Game/XinyiLook/Meshes/FarCity/cm05_p04/farcity_-05_+04/StaticMeshes/farcity_-05_+04": "StaticMesh",
+    "/Game/XinyiLook/Meshes/FarCity/cm04_m01/farcity_-04_-01/StaticMeshes/farcity_-04_-01": "StaticMesh",
+    "/Game/XinyiLook/Meshes/FarCity/cm04_p00/farcity_-04_+00/StaticMeshes/farcity_-04_+00": "StaticMesh",
+    "/Game/XinyiLook/Meshes/FarCity/cm04_p03/farcity_-04_+03/StaticMeshes/farcity_-04_+03": "StaticMesh",
+    "/Game/XinyiLook/Meshes/FarCity/cm04_p04/farcity_-04_+04/StaticMeshes/farcity_-04_+04": "StaticMesh",
+    "/Game/XinyiLook/Meshes/FarCity/cm03_m01/farcity_-03_-01/StaticMeshes/farcity_-03_-01": "StaticMesh",
+    "/Game/XinyiLook/Meshes/FarCity/cm03_p00/farcity_-03_+00/StaticMeshes/farcity_-03_+00": "StaticMesh",
+    "/Game/XinyiLook/Meshes/FarCity/cm03_p01/farcity_-03_+01/StaticMeshes/farcity_-03_+01": "StaticMesh",
+    "/Game/XinyiLook/Meshes/FarCity/cm03_p02/farcity_-03_+02/StaticMeshes/farcity_-03_+02": "StaticMesh",
+    "/Game/XinyiLook/Meshes/FarCity/cm03_p03/farcity_-03_+03/StaticMeshes/farcity_-03_+03": "StaticMesh",
+    "/Game/XinyiLook/Meshes/FarCity/cm03_p04/farcity_-03_+04/StaticMeshes/farcity_-03_+04": "StaticMesh",
+    "/Game/XinyiLook/Meshes/FarCity/cm02_m03/farcity_-02_-03/StaticMeshes/farcity_-02_-03": "StaticMesh",
+    "/Game/XinyiLook/Meshes/FarCity/cm02_m02/farcity_-02_-02/StaticMeshes/farcity_-02_-02": "StaticMesh",
+    "/Game/XinyiLook/Meshes/FarCity/cm02_m01/farcity_-02_-01/StaticMeshes/farcity_-02_-01": "StaticMesh",
+    "/Game/XinyiLook/Meshes/FarCity/cm02_p00/farcity_-02_+00/StaticMeshes/farcity_-02_+00": "StaticMesh",
+    "/Game/XinyiLook/Meshes/FarCity/cm02_p01/farcity_-02_+01/StaticMeshes/farcity_-02_+01": "StaticMesh",
+    "/Game/XinyiLook/Meshes/FarCity/cm02_p02/farcity_-02_+02/StaticMeshes/farcity_-02_+02": "StaticMesh",
+    "/Game/XinyiLook/Meshes/FarCity/cm02_p03/farcity_-02_+03/StaticMeshes/farcity_-02_+03": "StaticMesh",
+    "/Game/XinyiLook/Meshes/FarCity/cm02_p04/farcity_-02_+04/StaticMeshes/farcity_-02_+04": "StaticMesh",
+    "/Game/XinyiLook/Meshes/FarCity/cm01_m03/farcity_-01_-03/StaticMeshes/farcity_-01_-03": "StaticMesh",
+    "/Game/XinyiLook/Meshes/FarCity/cm01_m02/farcity_-01_-02/StaticMeshes/farcity_-01_-02": "StaticMesh",
+    "/Game/XinyiLook/Meshes/FarCity/cm01_m01/farcity_-01_-01/StaticMeshes/farcity_-01_-01": "StaticMesh",
+    "/Game/XinyiLook/Meshes/FarCity/cm01_p00/farcity_-01_+00/StaticMeshes/farcity_-01_+00": "StaticMesh",
+    "/Game/XinyiLook/Meshes/FarCity/cm01_p01/farcity_-01_+01/StaticMeshes/farcity_-01_+01": "StaticMesh",
+    "/Game/XinyiLook/Meshes/FarCity/cm01_p02/farcity_-01_+02/StaticMeshes/farcity_-01_+02": "StaticMesh",
+    "/Game/XinyiLook/Meshes/FarCity/cm01_p03/farcity_-01_+03/StaticMeshes/farcity_-01_+03": "StaticMesh",
+    "/Game/XinyiLook/Meshes/FarCity/cm01_p04/farcity_-01_+04/StaticMeshes/farcity_-01_+04": "StaticMesh",
+    "/Game/XinyiLook/Meshes/FarCity/cp00_m03/farcity_+00_-03/StaticMeshes/farcity_+00_-03": "StaticMesh",
+    "/Game/XinyiLook/Meshes/FarCity/cp00_m02/farcity_+00_-02/StaticMeshes/farcity_+00_-02": "StaticMesh",
+    "/Game/XinyiLook/Meshes/FarCity/cp00_m01/farcity_+00_-01/StaticMeshes/farcity_+00_-01": "StaticMesh",
+    "/Game/XinyiLook/Meshes/FarCity/cp00_p00/farcity_+00_+00/StaticMeshes/farcity_+00_+00": "StaticMesh",
+    "/Game/XinyiLook/Meshes/FarCity/cp00_p01/farcity_+00_+01/StaticMeshes/farcity_+00_+01": "StaticMesh",
+    "/Game/XinyiLook/Meshes/FarCity/cp00_p02/farcity_+00_+02/StaticMeshes/farcity_+00_+02": "StaticMesh",
+    "/Game/XinyiLook/Meshes/FarCity/cp00_p03/farcity_+00_+03/StaticMeshes/farcity_+00_+03": "StaticMesh",
+    "/Game/XinyiLook/Meshes/FarCity/cp01_m02/farcity_+01_-02/StaticMeshes/farcity_+01_-02": "StaticMesh",
+    "/Game/XinyiLook/Meshes/FarCity/cp01_m01/farcity_+01_-01/StaticMeshes/farcity_+01_-01": "StaticMesh",
+    "/Game/XinyiLook/Meshes/FarCity/cp01_p00/farcity_+01_+00/StaticMeshes/farcity_+01_+00": "StaticMesh",
+    "/Game/XinyiLook/Meshes/FarCity/cp01_p01/farcity_+01_+01/StaticMeshes/farcity_+01_+01": "StaticMesh",
+    "/Game/XinyiLook/Meshes/FarCity/cp01_p02/farcity_+01_+02/StaticMeshes/farcity_+01_+02": "StaticMesh",
+    "/Game/XinyiLook/Meshes/FarCity/cp02_m01/farcity_+02_-01/StaticMeshes/farcity_+02_-01": "StaticMesh",
+    "/Game/XinyiLook/Meshes/FarCity/cp02_p00/farcity_+02_+00/StaticMeshes/farcity_+02_+00": "StaticMesh",
+    "/Game/XinyiLook/Meshes/FarCity/cp02_p01/farcity_+02_+01/StaticMeshes/farcity_+02_+01": "StaticMesh"
+  },
+  "failures": [],
+  "elapsed_seconds": 514.485698100063,
+  "scope": "visual layer under /Game/XinyiLook only; /Game/XinyiV2 untouched"
+}

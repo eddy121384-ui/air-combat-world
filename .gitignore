@@ -15,6 +15,7 @@
 # Python noise
 __pycache__/
 *.pyc
+.capture-python/
 
 # UE regenerable junk (never commit)
 unreal/Saved/

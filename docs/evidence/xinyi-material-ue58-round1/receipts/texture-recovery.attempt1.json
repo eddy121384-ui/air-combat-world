@@ -1,0 +1,8 @@
+{
+  "status": "FAIL_TEXTURE_RECOVERY",
+  "geometry_generation": false,
+  "clouds": "off; cloud assets not rebuilt",
+  "textures": [],
+  "error": "Traceback (most recent call last):\n  File \"C:\\Users\\EDDY\\Desktop\\M1A2\\xinyi-material-ue58-round1\\tools\\lookdev\\restore_xinyi_look_textures.py\", line 58, in main\n    import build_ground as ground\n  File \"C:\\Users\\EDDY\\Desktop\\M1A2\\xinyi-material-ue58-round1\\tools\\lookdev\\build_ground.py\", line 60, in <module>\n    from scipy import ndimage\nModuleNotFoundError: No module named 'scipy'\n",
+  "changed_staged_inputs": []
+}

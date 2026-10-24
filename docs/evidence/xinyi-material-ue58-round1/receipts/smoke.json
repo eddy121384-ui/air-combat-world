@@ -1,0 +1,33 @@
+{
+  "status": "PASS_LOOK_CAPTURE",
+  "reopen": {
+    "look_tiles": 25,
+    "hero": true,
+    "backdrop": true,
+    "paint": true,
+    "trees": 16082,
+    "landscape_material": "/Game/XinyiLook/Materials/M_XinyiGround.M_XinyiGround"
+  },
+  "reopen_ok": true,
+  "backend": "SceneCapture2D -> RTF_RGBA8 -> SCS_FINAL_COLOR_LDR -> export_render_target",
+  "tods": [
+    "day"
+  ],
+  "shots": [
+    "f_rooftops_wuxing"
+  ],
+  "captures": [
+    {
+      "name": "f_rooftops_wuxing__day",
+      "path": "C:\\Users\\EDDY\\Desktop\\M1A2\\xinyi-material-ue58-round1\\unreal\\Saved\\XinyiLook\\unreal\\captures\\f_rooftops_wuxing__day.png",
+      "bytes": 4252804
+    }
+  ],
+  "clouds": {
+    "quality": "absent"
+  },
+  "perf": null,
+  "error": null,
+  "level_saved": false,
+  "elapsed_seconds": 6.234000000054948
+}

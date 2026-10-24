@@ -1,0 +1,71 @@
+LogInit: Command Line: -ExecutePythonScript=C:\Users\EDDY\Desktop\M1A2\xinyi-material-ue58-round1\adapters\unreal\lookdev\xinyi_material_ab_build.py -unattended -nopause -nosound -nop4 -abslog=C:\Users\EDDY\Desktop\M1A2\xinyi-material-ue58-round1\investigation\candidate-build-20261024T073752Z.log
+[2026.10.24-07.37.59:196][  0]LogD3D12RHI: Loading WinPixEventRuntime.dll for PIX profiling (from ../../../Engine/Binaries/ThirdParty/Windows/WinPixEventRuntime/x64).
+[2026.10.24-07.37.59:201][  0]LogD3D12RHI: Intel Extensions Framework not supported by driver. Please check if a driver update is available.
+[2026.10.24-07.37.59:201][  0]LogD3D12RHI: Found D3D12 adapter 0: Intel(R) UHD Graphics 770 (VendorId: 8086, DeviceId: 4680, SubSysId: 15911025, Revision: 000c
+[2026.10.24-07.37.59:201][  0]LogD3D12RHI:   Max supported Feature Level 12_1, shader model 6.7, binding tier 3, wave ops supported, atomic64 unsupported
+[2026.10.24-07.37.59:201][  0]LogD3D12RHI:   Adapter has 128MB of dedicated video memory, 0MB of dedicated system memory, and 8011MB of shared system memory, 2 output[s], TileBased:false UMA:true CacheCoherentUMA:true GPU Upload Heaps:true
+[2026.10.24-07.37.59:202][  0]LogD3D12RHI:   Driver Version: 31.0.101.4502 (internal:31.0.101.4502, unified:101.4502)
+[2026.10.24-07.37.59:202][  0]LogD3D12RHI:      Driver Date: 6-15-2023
+[2026.10.24-07.37.59:203][  0]LogD3D12RHI: Found D3D12 adapter 1: Microsoft Basic Render Driver (VendorId: 1414, DeviceId: 008c, SubSysId: 0000, Revision: 0000
+[2026.10.24-07.37.59:203][  0]LogD3D12RHI:   Max supported Feature Level 12_1, shader model 6.7, binding tier 3, wave ops supported, atomic64 supported
+[2026.10.24-07.37.59:203][  0]LogD3D12RHI:   Adapter has 0MB of dedicated video memory, 0MB of dedicated system memory, and 8011MB of shared system memory, 0 output[s], TileBased:false UMA:true CacheCoherentUMA:true GPU Upload Heaps:true
+[2026.10.24-07.37.59:203][  0]LogD3D12RHI:   D3D10Warp Version: 10.0.26100.9711
+[2026.10.24-07.37.59:203][  0]LogD3D12RHI: DirectX Agility SDK runtime found.
+[2026.10.24-07.37.59:203][  0]LogD3D12RHI: Chosen D3D12 Adapter Id = 0
+[2026.10.24-07.37.59:282][  0]LogD3D12RHI: Integrated GPU (iGPU): true
+[2026.10.24-07.37.59:282][  0]LogD3D12RHI: Display: Creating D3D12 RHI with Max Feature Level SM5
+[2026.10.24-07.37.59:286][  0]LogD3D12RHI:     GPU DeviceId: 0x4680 (for the marketing name, search the web for "GPU Device Id")
+[2026.10.24-07.37.59:286][  0]LogD3D12RHI: InitD3DDevice: -D3DDebug = off -D3D12GPUValidation = off
+[2026.10.24-07.37.59:286][  0]LogD3D12RHI: Emitting draw events for PIX profiling.
+[2026.10.24-07.38.00:538][  0]LogD3D12RHI: Intel Extensions Framework not supported by driver. Please check if a driver update is available.
+[2026.10.24-07.38.01:820][  0]LogD3D12RHI: ID3D12Device1 is supported.
+[2026.10.24-07.38.01:820][  0]LogD3D12RHI: ID3D12Device2 is supported.
+[2026.10.24-07.38.01:820][  0]LogD3D12RHI: ID3D12Device3 is supported.
+[2026.10.24-07.38.01:820][  0]LogD3D12RHI: ID3D12Device4 is supported.
+[2026.10.24-07.38.01:820][  0]LogD3D12RHI: ID3D12Device5 is supported.
+[2026.10.24-07.38.01:820][  0]LogD3D12RHI: ID3D12Device6 is supported.
+[2026.10.24-07.38.01:820][  0]LogD3D12RHI: ID3D12Device7 is supported.
+[2026.10.24-07.38.01:820][  0]LogD3D12RHI: ID3D12Device8 is supported.
+[2026.10.24-07.38.01:820][  0]LogD3D12RHI: ID3D12Device9 is supported.
+[2026.10.24-07.38.01:820][  0]LogD3D12RHI: ID3D12Device10 is supported.
+[2026.10.24-07.38.01:820][  0]LogD3D12RHI: ID3D12Device11 is supported.
+[2026.10.24-07.38.01:820][  0]LogD3D12RHI: ID3D12Device12 is supported.
+[2026.10.24-07.38.01:820][  0]LogD3D12RHI: Bindless is supported. MaxNonSamplerDescriptors: 1000000, MaxSamplerDescriptors: 2048
+[2026.10.24-07.38.01:820][  0]LogD3D12RHI: Stencil ref from pixel shader is supported
+[2026.10.24-07.38.01:820][  0]LogD3D12RHI: Raster order views are supported
+[2026.10.24-07.38.01:820][  0]LogD3D12RHI: Wave Operations are supported (wave size: min=16 max=16).
+[2026.10.24-07.38.01:820][  0]LogD3D12RHI:      Legacy Barriers Present in Build: Yes
+[2026.10.24-07.38.01:820][  0]LogD3D12RHI:    Enhanced Barriers Present in Build: Yes
+[2026.10.24-07.38.01:820][  0]LogD3D12RHI:      Enhanced Barriers Driver Support: No
+[2026.10.24-07.38.01:820][  0]LogD3D12RHI: Preferred Barrier Implementation Type: Legacy
+[2026.10.24-07.38.01:820][  0]LogD3D12RHI:         Chosen Barrier Implementation: D3D12LegacyBarriers
+[2026.10.24-07.38.01:820][  0]LogD3D12RHI: Shader Model 6.6 atomic64 is not supported
+[2026.10.24-07.38.01:824][  0]LogD3D12RHI: Intel Extensions Framework not supported by driver. Please check if a driver update is available.
+[2026.10.24-07.38.01:860][  0]LogD3D12RHI: [GPUBreadCrumb] Successfully setup breadcrumb resource for DiagnosticBuffer (Queue: 0x0000027EEB9F8400)
+[2026.10.24-07.38.01:861][  0]LogD3D12RHI: [GPUBreadCrumb] Successfully setup breadcrumb resource for DiagnosticBuffer (Queue: 0x0000027EEB9F86C0)
+[2026.10.24-07.38.01:861][  0]LogD3D12RHI: [GPUBreadCrumb] Successfully setup breadcrumb resource for DiagnosticBuffer (Queue: 0x0000027EEB9F8980)
+[2026.10.24-07.38.01:862][  0]LogD3D12RHI: Display: Not using pipeline state disk cache per r.D3D12.PSO.DiskCache=0
+[2026.10.24-07.38.01:862][  0]LogD3D12RHI: Display: Not using driver-optimized pipeline state disk cache per r.D3D12.PSO.DriverOptimizedDiskCache=0
+[2026.10.24-07.38.01:949][  0]LogD3D12RHI: Intel Extensions Framework not supported by driver. Please check if a driver update is available.
+[2026.10.24-07.38.01:949][  0]LogD3D12RHI: Async texture creation enabled
+[2026.10.24-07.38.01:949][  0]LogD3D12RHI: RHI does not have support for 64 bit atomics
+[2026.10.24-07.38.31:553][  2]LogMaterial: Warning: [AssetLog] C:\Users\EDDY\Desktop\M1A2\xinyi-material-ue58-round1\unreal\Content\XinyiMaterialAB\Materials\M_XinyiCity_Masks.uasset: Failed to compile Material for platform PCD3D_SM5, Default Material will be used in game.
+[2026.10.24-07.38.31:562][  2]LogMaterial: Warning: [AssetLog] C:\Users\EDDY\Desktop\M1A2\xinyi-material-ue58-round1\unreal\Content\XinyiMaterialAB\Materials\M_XinyiCity_Masks.uasset: Failed to compile Material for platform PCD3D_SM5, Default Material will be used in game.
+[2026.10.24-07.38.31:569][  2]LogMaterial: Warning: [AssetLog] C:\Users\EDDY\Desktop\M1A2\xinyi-material-ue58-round1\unreal\Content\XinyiMaterialAB\Materials\M_XinyiCity_Masks.uasset: Failed to compile Material for platform PCD3D_SM5, Default Material will be used in game.
+[2026.10.24-07.38.31:575][  2]LogMaterial: Warning: [AssetLog] C:\Users\EDDY\Desktop\M1A2\xinyi-material-ue58-round1\unreal\Content\XinyiMaterialAB\Materials\M_XinyiCity_Masks.uasset: Failed to compile Material for platform PCD3D_SM5, Default Material will be used in game.
+[2026.10.24-07.38.31:581][  2]LogMaterial: Warning: [AssetLog] C:\Users\EDDY\Desktop\M1A2\xinyi-material-ue58-round1\unreal\Content\XinyiMaterialAB\Materials\M_XinyiCity_Masks.uasset: Failed to compile Material for platform PCD3D_SM5, Default Material will be used in game.
+[2026.10.24-07.38.31:588][  2]LogMaterial: Warning: [AssetLog] C:\Users\EDDY\Desktop\M1A2\xinyi-material-ue58-round1\unreal\Content\XinyiMaterialAB\Materials\M_XinyiCity_Masks.uasset: Failed to compile Material for platform PCD3D_SM5, Default Material will be used in game.
+[2026.10.24-07.38.31:595][  2]LogMaterial: Warning: [AssetLog] C:\Users\EDDY\Desktop\M1A2\xinyi-material-ue58-round1\unreal\Content\XinyiMaterialAB\Materials\M_XinyiCity_Masks.uasset: Failed to compile Material for platform PCD3D_SM5, Default Material will be used in game.
+[2026.10.24-07.38.31:602][  2]LogMaterial: Warning: [AssetLog] C:\Users\EDDY\Desktop\M1A2\xinyi-material-ue58-round1\unreal\Content\XinyiMaterialAB\Materials\M_XinyiCity_Masks.uasset: Failed to compile Material for platform PCD3D_SM5, Default Material will be used in game.
+[2026.10.24-07.38.31:610][  2]LogMaterial: Warning: [AssetLog] C:\Users\EDDY\Desktop\M1A2\xinyi-material-ue58-round1\unreal\Content\XinyiMaterialAB\Materials\M_XinyiCity_Masks.uasset: Failed to compile Material for platform PCD3D_SM5, Default Material will be used in game.
+[2026.10.24-07.38.31:619][  2]LogMaterial: Warning: [AssetLog] C:\Users\EDDY\Desktop\M1A2\xinyi-material-ue58-round1\unreal\Content\XinyiMaterialAB\Materials\M_XinyiCity_Masks.uasset: Failed to compile Material for platform PCD3D_SM5, Default Material will be used in game.
+[2026.10.24-07.38.31:626][  2]LogMaterial: Warning: [AssetLog] C:\Users\EDDY\Desktop\M1A2\xinyi-material-ue58-round1\unreal\Content\XinyiMaterialAB\Materials\M_XinyiCity_Masks.uasset: Failed to compile Material for platform PCD3D_SM5, Default Material will be used in game.
+[2026.10.24-07.38.31:632][  2]LogMaterial: Warning: [AssetLog] C:\Users\EDDY\Desktop\M1A2\xinyi-material-ue58-round1\unreal\Content\XinyiMaterialAB\Materials\M_XinyiCity_Masks.uasset: Failed to compile Material for platform PCD3D_SM5, Default Material will be used in game.
+[2026.10.24-07.38.31:639][  2]LogMaterial: Warning: [AssetLog] C:\Users\EDDY\Desktop\M1A2\xinyi-material-ue58-round1\unreal\Content\XinyiMaterialAB\Materials\M_XinyiCity_Masks.uasset: Failed to compile Material for platform PCD3D_SM5, Default Material will be used in game.
+[2026.10.24-07.38.31:649][  2]LogMaterial: Warning: [AssetLog] C:\Users\EDDY\Desktop\M1A2\xinyi-material-ue58-round1\unreal\Content\XinyiMaterialAB\Materials\M_XinyiCity_Masks.uasset: Failed to compile Material for platform PCD3D_SM5, Default Material will be used in game.
+[2026.10.24-07.38.31:655][  2]LogMaterial: Warning: [AssetLog] C:\Users\EDDY\Desktop\M1A2\xinyi-material-ue58-round1\unreal\Content\XinyiMaterialAB\Materials\M_XinyiCity_Masks.uasset: Failed to compile Material for platform PCD3D_SM5, Default Material will be used in game.
+[2026.10.24-07.38.31:662][  2]LogMaterial: Warning: [AssetLog] C:\Users\EDDY\Desktop\M1A2\xinyi-material-ue58-round1\unreal\Content\XinyiMaterialAB\Materials\M_XinyiCity_Masks.uasset: Failed to compile Material for platform PCD3D_SM5, Default Material will be used in game.
+[2026.10.24-07.38.31:672][  2]LogMaterial: Warning: [AssetLog] C:\Users\EDDY\Desktop\M1A2\xinyi-material-ue58-round1\unreal\Content\XinyiMaterialAB\Materials\M_XinyiCity_Masks.uasset: Failed to compile Material for platform PCD3D_SM5, Default Material will be used in game.
+[2026.10.24-07.38.34:478][  2]LogPython: XINYI_MATERIAL_AB_BUILD PASS_MATERIAL_AB_BUILD
+[2026.10.24-07.38.38:616][  4]LogD3D12RHI: ~FD3D12DynamicRHI
+[2026.10.24-07.38.38:737][  4]LogExit: Exiting.

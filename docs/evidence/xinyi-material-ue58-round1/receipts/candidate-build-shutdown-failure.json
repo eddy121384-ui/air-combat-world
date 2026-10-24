@@ -1,0 +1,9 @@
+{
+  "stage": "candidate-build",
+  "overall_status": "FAIL_SHUTDOWN",
+  "process_exit_code": 3,
+  "asset_receipt_status": "PASS_MATERIAL_AB_BUILD",
+  "failure": "Object is not packaged: ModeManagerInteractiveToolsContext None",
+  "log": "candidate-build-20261024T073145Z.log",
+  "assets_saved_before_failure": true
+}
