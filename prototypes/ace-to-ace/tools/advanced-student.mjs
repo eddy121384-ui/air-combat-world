@@ -32,7 +32,7 @@ export function advancedStudent(r,s,c,{mistake=null}={}) {
     const f=forwardOf(ac.q);
     if(p.stage===0){s.stick.x=0;s.stick.y=-pitchForG(ac,5);if(f.z>.90&&f.y<.30)p.stage=1;}
     if(p.stage===1){s.stick.y=0;s.stick.x=mistake==='noRoll'?0:clamp(wrapDeg(-bankDeg(ac))*DEG*2.5-ac.rollRateCur*.12,-1,1);if(Math.abs(bankDeg(ac))<8)p.stage=2;}
-    if(p.stage===2)Object.assign(s.stick,stickToward(ac,dirFor(180,0),c,{pullLimit:.5}));
+    if(p.stage===2)Object.assign(s.stick,stickToward(ac,dirFor(180,mistake==='lowExit'&&ac.pos.y>3200?-50:0),c,{pullLimit:.5}));
   } else if(id==='T01'){
     if(p.stage===0){s.stick.x=0;s.stick.y=-pitchForG(ac,3.2);if(gammaDeg(ac)>28)p.stage=1;}
     else if(p.stage===1){Object.assign(s.stick,stickToward(ac,dirFor(hdgDeg(foe)-15,28),c,{pullLimit:.4}));if(ac.pos.y>3400||g.closure<5)p.stage=2;}

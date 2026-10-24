@@ -81,6 +81,25 @@
   },
   {
     "id": "A01",
+    "mode": "arcade:expert",
+    "mistake": "lowExit",
+    "ok": true,
+    "t": 68.7,
+    "phase": "guided",
+    "why": "機動末端只保留 -548m 高度收益：曾經爬高不等於完成高度交易。半滾轉後在高處改平，別再俯衝回起點。",
+    "maxHeight": 2081,
+    "minV": 619,
+    "rev": 1,
+    "overshoot": false,
+    "window": 0,
+    "challengeTime": null,
+    "maxG": 5.73,
+    "energyDelta": -634,
+    "endRange": 6285,
+    "endClosure": -455.2
+  },
+  {
+    "id": "A01",
     "mode": "tactical:assisted",
     "status": "blocked: Expert required"
   },
@@ -158,6 +177,25 @@
     "energyDelta": -3777,
     "endRange": 298,
     "endClosure": 113.82
+  },
+  {
+    "id": "A01",
+    "mode": "tactical:expert",
+    "mistake": "lowExit",
+    "ok": true,
+    "t": 67.53,
+    "phase": "guided",
+    "why": "機動末端只保留 -349m 高度收益：曾經爬高不等於完成高度交易。半滾轉後在高處改平，別再俯衝回起點。",
+    "maxHeight": 1778,
+    "minV": 518,
+    "rev": 1,
+    "overshoot": false,
+    "window": 0,
+    "challengeTime": null,
+    "maxG": 5,
+    "energyDelta": -1337,
+    "endRange": 5673,
+    "endClosure": -422.09
   },
   {
     "id": "T01",

@@ -46,9 +46,9 @@ if(import.meta.url===`file://${process.argv[1]}`){
  for(const l of ADVANCED_LESSONS)for(const f of ['arcade','tactical'])for(const c of ['assisted','expert']){
   const mode=`${f}:${c}`;
   if(advancedSupport(l,c)){assert.throws(()=>createLessonSession(l,{flight:f,control:c,input:makeStudentInput()}),/Expert/);rows.push({id:l.id,mode,status:'blocked: Expert required'});continue;}
-  for(const mistake of [null,...(l.id==='A01'?['flat','noRoll','noSpeed']:l.id==='T01'?['gOnly','noSpeed','shoot']:['gOnly','noReverse','noSpeed','shoot'])]){
+  for(const mistake of [null,...(l.id==='A01'?['flat','noRoll','noSpeed','lowExit']:l.id==='T01'?['gOnly','noSpeed','shoot']:['gOnly','noReverse','noSpeed','shoot'])]){
    const r=flyAdvanced(l,mode,{mistake}),m=r.notes.challenge||r.d.m;
-   const expected={flat:/平面轉彎/,noRoll:/半滾轉/,noSpeed:/低能量/,gOnly:/低能量|沒有把多餘速度換成高度|穩定射擊窗口|有效反轉/,noReverse:/有效反轉/,shoot:/尚未改善位置就開火/};
+   const expected={flat:/平面轉彎/,noRoll:/半滾轉/,noSpeed:/低能量/,lowExit:/末端.*高度收益/,gOnly:/低能量|沒有把多餘速度換成高度|穩定射擊窗口|有效反轉/,noReverse:/有效反轉/,shoot:/尚未改善位置就開火/};
    const ok=mistake?r.result&&!r.result.success&&r.phase?.id==='guided'&&expected[mistake].test(r.result.reason):r.result?.success;
    assert.ok(r.notes.demonstration,`${l.id}/${mode}: instructor actually completed the maneuver`);
    if(!mistake){assert.ok(r.notes.guided&&r.notes.challenge);assert.ok(m.trace.length>=20&&m.trace.length<=400);assert.ok(m.maxG<=10.51);}

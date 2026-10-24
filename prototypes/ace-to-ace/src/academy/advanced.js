@@ -75,6 +75,7 @@ export function advancedFailure(r) {
     if(!m.vertical)return '沒有經過向上垂直航跡：這是平面轉彎，不是半筋斗。先保持機翼水平，以約 4–5G 拉起。';
     if(!m.inverted)return '已爬升，但沒有倒飛反向：半筋斗尚未完成。越過頂點後仍須完成反向，再開始半滾轉。';
     if(m.halfRoll<140)return `倒飛後只滾轉 ${Math.round(m.halfRoll)}°：少了最後半滾轉。卸載、左右滾轉至機翼朝上，再看 FPM。`;
+    if(r.alt<3600)return `機動末端只保留 ${Math.round(r.alt-3000)}m 高度收益：曾經爬高不等於完成高度交易。半滾轉後在高處改平，別再俯衝回起點。`;
     return `已反向但未穩住：坡度 ${Math.round(r.bank)}°、航跡 ${Math.round(r.gamma)}°。先停滾轉，再小幅修 FPM。`;
   }
   if(m.badFire>.2)return `尚未改善位置就開火 ${m.badFire.toFixed(1)} 秒：窗口要求尾後位置、距離與接近率同時合適。先完成機動，再考慮射擊。`;
@@ -89,7 +90,7 @@ export function advancedFailure(r) {
 }
 function success(r,dt,{m,g}) {
   if(r.lesson.id==='A01') {
-    const stable=m.inverted&&m.halfRoll>=140&&m.maxHeight>=600&&Math.abs(wrapDeg(hdgDeg(r.me)-180))<15&&Math.abs(r.bank)<12&&Math.abs(r.gamma)<7&&r.me.speed>110;
+    const stable=m.inverted&&m.halfRoll>=140&&r.alt>=3600&&Math.abs(wrapDeg(hdgDeg(r.me)-180))<15&&Math.abs(r.bank)<12&&Math.abs(r.gamma)<7&&r.me.speed>110;
     m.window=stable?m.window+dt:0;m.bestWindow=Math.max(m.bestWindow,m.window);return m.window>=1;
   }
   if(r.lesson.id==='T01')return m.maxHeight>=250&&m.unload>=.5&&m.initialClosure>=60&&m.window>=1.2;
